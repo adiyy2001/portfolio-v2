@@ -7,8 +7,8 @@ Working state of the portfolio rebrand. Every session and every agent starts her
 - Phase 0 (recon): done.
 - Phase 1 (brand discovery): language decided (PL + EN with a switch). Three directions delivered and verified (workflow runs `wf_f0c88ef2-ed7`, `wf_5035fd06-003`, `wf_370d91e8-90a`). Adrian chose B "Na miarę" on 2026-10-02 and changed the concept: two editions of one site, one for a recruiter coming from LinkedIn, one for a B2B client; he is a freelance developer, Media Hunters is no longer a brand. B is rebuilt on that (`rebrand-explorations/b-na-miare/index.html`, three views) and has a logo sheet (`rebrand-explorations/b-na-miare/logo.html`, three candidates, "Igła nad ń" recommended). Adrian picked the logo "Igła nad ń", full version with the thread, confirmed the client copy with maintenance added, gave permission to use tailorcloth.com screenshots, pasted a new CV and asked for a portfolio split: TailorCloth as the real product, 6 sample websites for clients, 6 public repos for recruiters that cover every CV technology (see "Sample work"). Then he set the order: the 12 projects are designed only (briefs in `PROJECTS.md`, no code), and the main site is finished first with the split between the real TailorCloth case and the sample websites. The prototype now has that split ("Prawdziwe wdrożenie" tag, "Wzornik." with six designed sample sites). Adrian approved the split and the Wzornik and gave the OK for Phase 2 ("wzornik super, do dzieła"). Phase 1 is done.
 - Phase 2 (system in Gatsby): approved on 2026-10-02, not started. Start at "Resume here".
-- Hosting: GitHub Pages (Adrian, 2026-10-02). See the GitHub Pages item under "Proposed".
-- Branch: `rebrand-2026`. Everything up to the end of Phase 1 is committed locally ("add rebrand notes and phase 1 prototypes"). Push only after Adrian's explicit OK: the repo `adiyy2001/portfolio-v2` is public, so a push also publishes this file and `PROJECTS.md`.
+- Hosting: GitHub Pages at https://adiyy2001.github.io/portfolio-v2/ (Adrian: "po najprostszej linii oporu", decide the rest yourself). Pages is enabled with the "GitHub Actions" source; `.github/workflows/pages.yml` deploys on every push to `rebrand-2026` (the `github-pages` environment allows `main` and `rebrand-2026`). Until the Gatsby home page is ready it publishes the prototype `rebrand-explorations/b-na-miare` as a preview; then the workflow switches to the Gatsby build with `--prefix-paths`.
+- Branch: `rebrand-2026`. Pushed to the public repo `adiyy2001/portfolio-v2` with Adrian's OK ("wypychamy"), notes included. Push after each commit on this branch is fine from now on.
 
 ## Resume here
 
@@ -543,6 +543,8 @@ Phase 2.
 | Wzornik approved as designed | Adrian: "wzornik super" |
 | Phase 2 approved | Adrian: "do dzieła" |
 | Hosting on GitHub Pages; everything goes into git | Adrian: "wszystko na gita i potem GitHub Pages hostujemy" |
+| TailorCloth case gets "Dziś stronę utrzymuje inna agencja." / "Another agency maintains the site today." after the team line | Adrian: "4. tak, dodaj" |
+| Address: `adiyy2001.github.io/portfolio-v2/`, `siteUrl` https://adiyy2001.github.io with `pathPrefix` `/portfolio-v2` | Adrian: "po najprostszej linii oporu" |
 | Prototype screenshots stay local (ignored, 184 MB); prototypes, notes and verification scripts are committed | Keeps the public repo small; the folder is deleted in Phase 4 anyway |
 
 Proposed, to confirm at the relevant phase:
@@ -554,7 +556,7 @@ Proposed, to confirm at the relevant phase:
 - Edition routes: `/dla-rekrutera/` and `/dla-klienta/`, EN `/en/for-recruiters/` and `/en/for-clients/`.
 - `/resume.pdf` must survive: either a PDF printed from the recruiter edition at build time, or the new CV as a PDF. GitHub Pages has no server redirects, so a redirect to `/dla-rekrutera/` is out.
 - GitHub Pages: deploy from a GitHub Actions workflow (`actions/deploy-pages`) on Node 24, with Pages set to "GitHub Actions" in the repo settings. At `adiyy2001.github.io/portfolio-v2/` Gatsby needs `pathPrefix: '/portfolio-v2'` and `gatsby build --prefix-paths`; with a custom domain, `static/CNAME` and no prefix. Pages sets its own cache headers and allows no custom headers or redirects. The old Vercel deployment keeps serving the old site until Adrian removes it.
-- TailorCloth case: one plain line that another agency maintains the site today, so a client who opens tailorcloth.com and sees another agency in the footer is not confused. Wording to confirm with Adrian in Phase 3.
+- TailorCloth case: the line that another agency maintains the site today is in the prototype (Adrian OK); carry it into the case page in Phase 3.
 - Page mapping, to agree with Adrian before Phase 3: Home becomes the chooser; About becomes the recruiter edition; the client edition takes services, process and contact; Work (`/archive/`) lists projects (TailorCloth for now); Single project is TailorCloth at its own slug, linked from the client edition; Contact is the end of each edition, so no separate page unless Adrian wants one; 404 in both languages.
 
 ## Needs from Adrian
@@ -565,21 +567,20 @@ Answered later on 2026-10-02: direction (B, reworked into two editions), Media H
 
 Answered later still on 2026-10-02: logo ("Igła nad ń", full version with the thread), "Od wyceny do produkcji rozmawiasz ze mną" (yes, plus maintenance), TailorCloth screenshots (permission from the client), languages (new CV), new projects (replaced by the 6 plus 6 plan in "Sample work").
 
+Answered last on 2026-10-02: push (yes, notes included), address (the simplest one, `adiyy2001.github.io/portfolio-v2/`), TailorCloth order form (yes, his team's Odoo platform; the line "Dziś stronę utrzymuje inna agencja." is added).
+
 Answered at the end of 2026-10-02: Phase 2 (OK), sample websites (approved), TailorCloth (Odoo is right; another agency took over maintenance later), CV and LinkedIn conflicts (LinkedIn), hosting (GitHub Pages, everything in git).
 
 Open:
 
-1. Push: the repo is public, so pushing `rebrand-2026` publishes this file (the CV, the LinkedIn notes, point 10 below about PSE) and `PROJECTS.md`. Push as is, or keep the notes out of the public repo.
-2. Address: `adiyy2001.github.io/portfolio-v2/` (works now, needs the path prefix), a user site repo `adiyy2001.github.io` (no prefix, means a rename or a new repo), or a custom domain (best for SEO). `siteUrl` follows the choice.
-3. Analytics: a GA4 measurement ID (UA-45666519-2 is dead since 2023; Vercel Web Analytics is out with GitHub Pages).
-4. TailorCloth: confirm that the "TailorCloth Creators" order form in the screenshot is the platform his team built on Odoo (the image sits on today's site, which another agency maintains).
-5. Sample websites, later: live sites at their own addresses, or screenshots only.
-6. Recruiter repos (for later): whether the six are right; repo 4 needs a diagram library: a GoJS licence (GoJS without one shows an evaluation watermark) or a free library.
-7. Copy to confirm: "Kod i dostępy zostają u ciebie"; whether he works remotely for clients outside Wrocław.
-8. `/resume.pdf` is outdated. The new CV is newer: the PDF file of it, or the print of the recruiter edition, or drop the link.
-9. The photo is 400x400. A larger original of the same shot, if it exists, for any frame above about 300 px.
-10. Is "Oferty i zlecenia" fine to show publicly while employed at PSE Innowacje? Does he invoice B2B (own business) for contracts?
-11. The EAA sentence in "Pasuje na każdego.": keep it, or drop the legal angle.
+1. Analytics: a GA4 measurement ID (UA-45666519-2 is dead since 2023; Vercel Web Analytics is out with GitHub Pages).
+2. Sample websites, later: live sites at their own addresses, or screenshots only.
+3. Recruiter repos (for later): whether the six are right; repo 4 needs a diagram library: a GoJS licence (GoJS without one shows an evaluation watermark) or a free library.
+4. Copy to confirm: "Kod i dostępy zostają u ciebie"; whether he works remotely for clients outside Wrocław.
+5. `/resume.pdf` is outdated. The new CV is newer: the PDF file of it, or the print of the recruiter edition, or drop the link.
+6. The photo is 400x400. A larger original of the same shot, if it exists, for any frame above about 300 px.
+7. Is "Oferty i zlecenia" fine to show publicly while employed at PSE Innowacje? Does he invoice B2B (own business) for contracts?
+8. The EAA sentence in "Pasuje na każdego.": keep it, or drop the legal angle.
 
 ## Pages
 
