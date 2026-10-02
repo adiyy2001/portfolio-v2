@@ -3,10 +3,25 @@ import Case from '../../components/case';
 import Close from '../../components/close';
 import Fit from '../../components/fit';
 import Hero from '../../components/hero';
+import Magnet from '../../components/magnet';
 import Scene from '../../components/scene';
 import Seo from '../../components/seo';
 import Steps from '../../components/steps';
+import Tags from '../../components/tags';
 import Wzornik from '../../components/wzornik';
+import { tie } from '../../i18n';
+
+const mail = 'adrian.turbinski@gmail.com';
+
+const copy = {
+  title: 'From the first call | to production.',
+  lead: 'I build whole web apps for companies: front end, back end and deployment. Usable by everyone, keyboard and screen reader included.',
+  lead2:
+    'I take on contracts as a freelancer. From the quote through launch to maintenance, you talk to me.',
+  cta: 'Tell me about the project',
+  link: 'See the project for a tailor',
+  subject: 'Project',
+};
 
 export default function Client() {
   return (
@@ -14,19 +29,21 @@ export default function Client() {
       <Hero
         id="cli-h"
         sr="Adrian Turbiński, "
-        title="From the first call | to production."
-        size="cli">
+        title={copy.title}
+        size="cli"
+        aside={<Tags lang="en" />}>
         <p className="lead" data-rise style={{ '--r': 0 }}>
-          I build whole web apps for companies: front end, back end and deployment. Usable by
-          everyone, keyboard and screen reader included.
+          {tie(copy.lead)}
         </p>
         <p className="lead2" data-rise style={{ '--r': 1 }}>
-          I take on contracts as a freelancer. From the quote through launch to maintenance, you
-          talk to me.
+          {tie(copy.lead2)}
         </p>
         <div className="cta" data-rise style={{ '--r': 2 }}>
-          <a className="btn" href="mailto:adrian.turbinski@gmail.com?subject=Project">
-            Tell me about the project
+          <Magnet className="btn" href={`mailto:${mail}?subject=${copy.subject}`}>
+            {tie(copy.cta)}
+          </Magnet>
+          <a className="link" href="#tailorcloth">
+            {tie(copy.link)}
           </a>
         </div>
       </Hero>
