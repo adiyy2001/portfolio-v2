@@ -20,6 +20,9 @@ export const wrapRootElement = ({ element }) => (
   </LazyMotion>
 );
 
+const pagePath = ({ location, pageResources }) =>
+  pageResources?.page.path ?? (location.pathname.slice(prefix.length) || '/');
+
 export const wrapPageElement = ({ element, props }) => (
-  <Layout path={props.location.pathname.slice(prefix.length) || '/'}>{element}</Layout>
+  <Layout path={pagePath(props)}>{element}</Layout>
 );
