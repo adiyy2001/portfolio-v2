@@ -12,7 +12,7 @@ const labels = [
     who: 'recruiters',
     what: 'Experience, stack and a printable resume.',
     go: 'Open',
-    note: 'from LinkedIn?',
+    note: ['from', 'LinkedIn?'],
   },
   {
     to: routes.cli.en,
@@ -21,7 +21,7 @@ const labels = [
     who: 'clients',
     what: 'What I build, how I work, how to start.',
     go: 'Open',
-    note: 'got a project?',
+    note: ['got a', 'project?'],
   },
 ];
 

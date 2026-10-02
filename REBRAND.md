@@ -7,7 +7,7 @@ Working state of the portfolio rebrand. Every session and every agent starts her
 - Phase 0 (recon): done.
 - Phase 1 (brand discovery): language decided (PL + EN with a switch). Three directions delivered and verified (workflow runs `wf_f0c88ef2-ed7`, `wf_5035fd06-003`, `wf_370d91e8-90a`). Adrian chose B "Na miarę" on 2026-10-02 and changed the concept: two editions of one site, one for a recruiter coming from LinkedIn, one for a B2B client; he is a freelance developer, Media Hunters is no longer a brand. B is rebuilt on that (`rebrand-explorations/b-na-miare/index.html`, three views) and has a logo sheet (`rebrand-explorations/b-na-miare/logo.html`, three candidates, "Igła nad ń" recommended). Adrian picked the logo "Igła nad ń", full version with the thread, confirmed the client copy with maintenance added, gave permission to use tailorcloth.com screenshots, pasted a new CV and asked for a portfolio split: TailorCloth as the real product, 6 sample websites for clients, 6 public repos for recruiters that cover every CV technology (see "Sample work"). Then he set the order: the 12 projects are designed only (briefs in `PROJECTS.md`, no code), and the main site is finished first with the split between the real TailorCloth case and the sample websites. The prototype now has that split ("Prawdziwe wdrożenie" tag, "Wzornik." with six designed sample sites). Adrian approved the split and the Wzornik and gave the OK for Phase 2 ("wzornik super, do dzieła"). Phase 1 is done.
 - Phase 2 (system in Gatsby): built and verified on 2026-10-02, approved by Adrian ("wszystko wygląda okej, do dzieła"). Tokens, fonts, global styles, motion tokens, Lenis, layout shell, header with the edition and language switch, footer with the threaded logo and page transitions are ported from the prototype. Pages are stubs with the prototype hero copy; their content is Phase 3. Results are under "Tokens" and "Phase 2 verification".
-- Phase 3 (pages): Home is ported (the chooser with the two hanging labels), verified and committed; it waits for Adrian's OK before the recruiter edition. Results are under "Phase 3 verification".
+- Phase 3 (pages): Home is ported (the chooser with the two hanging labels), verified and committed; Adrian went on to the recruiter edition. The recruiter edition (About, PL and EN: hero with the measurement card, timeline, kit, close, print as the CV) is ported, verified and committed; it waits for Adrian's OK before the client edition. Results are under "Phase 3 verification".
 - Hosting: GitHub Pages at https://adiyy2001.github.io/portfolio-v2/ (Adrian: "po najprostszej linii oporu", decide the rest yourself). Pages is enabled with the "GitHub Actions" source; `.github/workflows/pages.yml` deploys on every push to `rebrand-2026` (the `github-pages` environment allows `main` and `rebrand-2026`). It publishes the prototype `rebrand-explorations/b-na-miare` until the Gatsby pages carry the prototype content (Phase 3). Then it switches to `yarn build --prefix-paths` and publishes `public/` (that version ran once on 2026-10-02 and works). The Gatsby shell is reviewed locally until then.
 - Branch: `rebrand-2026`. Pushed to the public repo `adiyy2001/portfolio-v2` with Adrian's OK ("wypychamy"), notes included. Push after each commit on this branch is fine from now on.
 
@@ -16,8 +16,8 @@ Working state of the portfolio rebrand. Every session and every agent starts her
 For a fresh session (Adrian resets the chat to keep the context small):
 
 1. `git checkout rebrand-2026`, then read this file, `PROJECTS.md` and `git log`.
-2. For reference, serve the prototype: `python3 -m http.server 8090 --bind 127.0.0.1 --directory /home/adrian/root/side_projects/portfolio-v2` as a background task with a long timeout (binding 0.0.0.0 is not allowed). Prototype: `rebrand-explorations/b-na-miare/index.html` with views `#/`, `#/dla-rekrutera`, `#/dla-klienta`; logo sheet: `rebrand-explorations/b-na-miare/logo.html`.
-3. Phase 3 is in progress, one page at a time, commit and push after each, then wait for Adrian. Home is done. Next is the recruiter edition (About), then the client edition, Work, Single project, 404. The page mapping under "Proposed" stands (Adrian: "do dzieła"); explain the `gatsby-node.js` edit before making it. Compare each page with the prototype view at 1440, 768 and 375 (`views.cjs` against the prototype, `site.cjs` screenshots against the Gatsby build).
+2. For reference, serve the prototype: `python3 -m http.server 8090 --bind 127.0.0.1 --directory /home/adrian/root/side_projects/portfolio-v2` (binding 0.0.0.0 is not allowed). Background tasks stop at the 2 hour limit and must not be restarted then; for long verification runs, start a short-lived server inside each command and kill it by PID. To serve the `--prefix-paths` build without Gatsby, make a folder with a `portfolio-v2` symlink to `public` and run `python3 -m http.server PORT --bind 127.0.0.1 -d <that folder>` (its 404 is plain, open `/portfolio-v2/404/` directly). Prototype: `rebrand-explorations/b-na-miare/index.html` with views `#/`, `#/dla-rekrutera`, `#/dla-klienta`; logo sheet: `rebrand-explorations/b-na-miare/logo.html`.
+3. Phase 3 is in progress. Home and the recruiter edition are done. Adrian, 2026-10-02: build all remaining pages in parallel with subagents and test once after they are written, not after every commit ("zacznij robić wszystkie strony równolegle subagentami [...] testy dopiero po napisaniu"). Remaining: the client edition (services, process, TailorCloth, the Wzornik, contact), Work, Single project, 404. The page mapping under "Proposed" stands (Adrian: "do dzieła"); explain the `gatsby-node.js` edit before making it. Compare each page with the prototype view at 1440, 768 and 375 (`views.cjs` against the prototype, `site.cjs` screenshots against the Gatsby build).
    Local check of the Gatsby site: `yarn gatsby clean && yarn build` (always clean first: an incremental build once inlined a stale stylesheet into the HTML), then `yarn gatsby serve -H 127.0.0.1 -p 9000` in the background (add `--prefix-paths` to both for the Pages layout). From `rebrand-explorations/tools`: `node site.cjs http://127.0.0.1:9000` (every route at 1440, 768 and 375, transitions, focus, back, skip link, reduced motion, console errors, horizontal scroll; prints a JSON report) and `node lcp.cjs /dla-rekrutera/ /` (LCP entries). Lighthouse: `CHROME_PATH=/usr/bin/google-chrome npx -y lighthouse@12 <url> --chrome-flags="--headless=new --no-sandbox"`, add `--preset=desktop` for desktop. `yarn lint` is `eslint .`.
 4. Verification scripts from Phase 1 are in `rebrand-explorations/tools/` (Playwright 1.63 on the system Chrome): `yarn --cwd rebrand-explorations/tools install` once, then run them from that folder, for example `node views.cjs http://127.0.0.1:8090/rebrand-explorations/b-na-miare/index.html out/views` (flags `--widths=1440,768,375`, `--views=home,rec,cli`, `--lang=en`, `--reduced`). Output goes to `tools/out/`, which is ignored. The Python venv with fonttools, brotli, uharfbuzz and Pillow lived in the session scratchpad; recreate it when fonts need subsetting.
 5. Prototype screenshots (184 MB) stay local and are ignored by `rebrand-explorations/.gitignore`.
@@ -419,7 +419,7 @@ Covers are `demo.png`, 689x934 and 689x936 portrait mockups cropped for the old 
 - Hex logo and animejs Loader (home renders only the Loader in SSR), GitHub stars and forks fetch from `bchiang7/v4`, "Designed & Built by" footer.
 - Pensieve post and tag templates and their `gatsby-node.js` page creation.
 - scrollreveal, react-transition-group, animejs, prismjs with remark-prismjs and remark-code-titles, react-helmet, lodash (only gatsby-node, post, tag), babel-plugin-styled-components (unused), gatsby-plugin-netlify (installed, not registered), gatsby-plugin-google-analytics (`UA-45666519-2`, Universal Analytics stopped in 2023), gatsby-plugin-offline.
-- `static/og.png` and `static/og@2x.png` show Brittany Chiang's name and hero: every share of the site shows her card. `static/slides/intro-to-webdev-workshop.pdf` is her 19 MB workshop deck. Favicons are her hex "B". Calibre (Klim, commercial) and SF Mono (Apple, proprietary) have no license in the repo.
+- `static/og.png` and `static/og@2x.png` show Brittany Chiang's name and hero: every share of the site shows her card. `static/slides/intro-to-webdev-workshop.pdf` is her 19 MB workshop deck (all three removed in Phase 3 with the recruiter edition; a new share card comes with the OG work in Phase 4). Favicons are her hex "B". Calibre (Klim, commercial) and SF Mono (Apple, proprietary) have no license in the repo.
 - `package.json` name "v4", description "Personal Website V4"; `html lang="en"` hardcoded in head.js.
 
 ## Body copy language
@@ -491,7 +491,8 @@ The portfolio splits in three. TailorCloth is the real product. Clients get 6 sa
 
 - Briefs for all 12: `PROJECTS.md` at the repo root, committed with this file.
 - Adrian approved the Wzornik, its six industries and names included ("wzornik super").
-- Recruiter repos: `poczekalnia`, `grafik`, `szafa-na-wymiar`, `obieg-faktur`, `rezerwacje`, `bundle-budget`. Two commits each, README with a made-up scenario as the reason, pushed only after Adrian's OK per repo. They go on the recruiter edition only when they exist.
+- Recruiter repos: `poczekalnia`, `grafik`, `szafa-na-wymiar`, `obieg-faktur`, `rezerwacje`, `bundle-budget`. Two commits each, README with a made-up scenario as the reason, pushed only after Adrian's OK per repo. They go on the recruiter edition only when they exist. Replaced later on 2026-10-02, see below.
+- Adrian, later on 2026-10-02: full briefs for six GitHub repos (`flagwire`, `signal-timeline`, `gridtwin`, `fieldline`, `coschema`, `eventhorizon`) replace the six recruiter concepts. They are saved for later sessions in `~/root/side_projects/briefs/` (outside this repo on purpose) and are not started. After the first six sample websites come three more: a partial shop, a real-estate agency and a hotel with a booking system (notes in `PROJECTS.md`). Order: the main site, then the client sample websites, then the GitHub repos ("narazie skończymy temat stron przykładowych dla klientów i dopiero potem do tego przejdźmy").
 - Sample websites (concepts for made-up businesses): Rozwaga (kancelaria radcy prawnego), Rubryka (biuro rachunkowe), Szkliwo (klinika stomatologiczna), Przystań (gabinet psychoterapii), Przędza (inwestycja mieszkaniowa), Kluska (bistro).
 - In the prototype: the client edition shows TailorCloth with a "Prawdziwe wdrożenie" tag, then "Wzornik.", a swatch book of the six sample websites. Each swatch is a strip in the site's own colours and typeface; it opens into a designed hero of that site, who it is for, what is inside, the cut, and "Projekt koncepcyjny. Wersja na żywo w przygotowaniu." The swatches are buttons with `aria-expanded`, closed panels are `inert`, the hero images are `role="img"` with a description in PL and EN. Fonts for the six (Bodoni Moda, Bricolage Grotesque, Outfit, Newsreader, Unbounded, Gloock, all OFL) load from Google Fonts in the prototype and get subset and self-hosted in production.
 
@@ -522,6 +523,16 @@ Local `--prefix-paths` build after `yarn gatsby clean`, served on 127.0.0.1:9000
 - Labels: hover sway works, keyboard focus ring is visible on the tilted label, Enter and click open the edition with focus on its `h1`. Reduced motion shows the labels at rest with the notes.
 - Lighthouse mobile, two runs each: PL 99/100/100/100, LCP 2.0 s; EN 99/100/100/100, LCP 2.0 s; CLS 0. Desktop: 100/100/100/100, LCP 0.5 s. The LCP element is still the title word. Mynerve is requested after hydration (about 110 to 160 ms into the trace).
 
+Recruiter edition (About), PL and EN, two verification rounds of three agents each plus the fix checks:
+
+- Reveals: SSR emits the hidden states of all 10 reveal groups and they open on scroll (direct load, hash, client navigation, language switch). Reduced motion and `scripting: none` show the final states from the first frame. With all JS blocked or the motion chunk blocked everything settles after 6 s, with no reload loop; normal loads never trigger the fallback.
+- Print: two A4 pages, contact line right after the h1, text identical to the prototype print, zero phone-pattern hits.
+- Navigation: scroll matrix 300 of 300 (normal and reduced, PL and EN, 1440, 375 and mobile), reload lands exactly on the saved position with no animation, hash entry lands on its target, focus moves to the new h1, axe 0 violations after hard loads and transitions.
+- Visual: matches the prototype at 375, 768, 1024 and 1440, normal and reduced; no horizontal scroll from 320 to 1920 px; card tilt peaks at 3.69 degrees; CLS 0 on load and full scroll.
+- Lighthouse 12 on `gatsby serve` (HTTP/1.1, uncompressed): desktop 100/100/100/100 on Home and both editions, LCP 0.4 to 0.5 s. Mobile before the paint-gated loader: Home 99 with LCP 2.0 s, recruiter 98 with LCP 2.3 s in three runs each; the final round re-measures it. `python3 -m http.server` speaks HTTP/1.0 without keep-alive and inflates simulated LCP to 3.1 to 3.4 s, so Lighthouse always runs on `gatsby serve`.
+- Accepted: Back or Forward to an entry with a hash other than `#main` lands on the hash target; reveals wait for the motion chunk that loads at hydration (about 0.3 s on slow 4G); late Bespoke Serif 500 or Mynerve shifts below budget (0.008 and 0.025 with artificial delays); the Roche label keeps 0.73 px at 320 px.
+- Baselines for later rounds: recruiter heights at 375 are 6870 (PL) and 6772 (EN); compare rects within 0.5 px and blurred diffs, the card grain matches the prototype statistically, not pixel for pixel.
+
 ## Decisions
 
 | Decision | Reason |
@@ -541,7 +552,7 @@ Local `--prefix-paths` build after `yarn gatsby clean`, served on 127.0.0.1:9000
 | Remove the home Loader | It is the only thing in the SSR HTML of `/` |
 | Delete the template author's assets and fonts | Her name on the share card, her slides, licensing of Calibre and SF Mono |
 | Spell the name "Adrian Turbiński" everywhere | Every source agrees except the typo in `gatsby-config.js` |
-| Write "BRAINODE sp. z o.o." | Correct Polish legal form, as already in about.js |
+| Write "BRAINODE sp. z o.o." (replaced in Phase 3, see below) | Correct Polish legal form, as already in about.js |
 | PL at `/`, EN at `/en/` | UI strings are Polish by the brief, so Polish is the primary version and existing `/` links keep working |
 | Prototypes load fonts from Google Fonts or Fontshare and motion from jsDelivr | Single-file explorations only; production self-hosts fonts and bundles motion |
 | Replace direction A after round one | The verifier found A and C were one idea; a fresh designer got a "taken territory" list instead of the other files, so it never saw B or C |
@@ -582,6 +593,31 @@ Local `--prefix-paths` build after `yarn gatsby clean`, served on 127.0.0.1:9000
 | Label sway on hover runs through WAAPI, mouse only, skipped with reduced motion | Same keyframes as the prototype, no Motion code on the home page |
 | Mynerve is not in `--hand` until `html.hand` is set; `onInitialClientRender` loads it on idle and then adds the class; the label notes fade in at that moment | With the notes above the fold, Mynerve loaded with the critical fonts and moved mobile LCP from 2.0 s to 2.2 to 2.3 s |
 | Mynerve subset again without `calt` (33.2 KB) | `calt` turned "LinkedIna" into "LinkedIma" |
+| Section components (`card`, `experience`, `kit`, `close`) own their copy as `copy = { shared facts, pl, en }` and take `lang`; page files keep the hero copy and `Head` | One file per section; facts shared by both languages are written once |
+| The measurement card values (`.card dd`) wait for `html.hand`, like the home label notes | They sit above the fold in Mynerve; same LCP reason |
+| The card photo is a plain `<picture>` built from `gatsbyImageData` (fixed 76 px, quality 90, no placeholder), not `StaticImage` | `StaticImage` pulled about 34 KB of gzipped gatsby-plugin-image code into the page before LCP for a 76 px photo |
+| The new LinkedIn photo replaces `src/images/me.jpg` | Adrian: new photo; the old 200x200 one is retired |
+| `--spring` holds the CSS `linear()` spring (stiffness 90, damping 8) for the hanging label and card entrance | One curve for both hanging elements |
+| The recruiter edition prints as the CV: the button calls `window.print()`, `@media print` resets everything under `main` and hides the screen-only parts | The prototype prints the same way; two A4 pages, no phone number |
+| Magnet only on the primary CTA ("Napisz do mnie"), through `Magnet` (spring 240/18, mouse only, off with reduced motion); card tilt 3.5 degrees per axis at the edge, spring 180/20 | Motion brief: magnet on primary CTAs only, tilt up to 4 degrees; damping 16 overshot to 4.2 degrees on a fast pass, 20 keeps the peak under 4 |
+| Section ids `doswiadczenie` and `experience` | Readable anchors in each language |
+| Company names on the site stay short (BRAINODE, PSE Innowacje), as in the prototype; legal forms stay in Facts | Replaces the Phase 0 decision to write "BRAINODE sp. z o.o.", made for the old about.js |
+| Media Hunters tech line: Angular, TypeScript, NgRx, RxJS, Node.js, Jest, Cypress | The CV entry names Angular, TypeScript, NgRx, RxJS and Node.js, LinkedIn adds Jest and Cypress; React had no source for this job and is gone from the line (the prototype too) |
+| Find-in-page matches single words in split headings, not phrases across words | Each word is an inline-block mask for the reveal; body text is unaffected; same as the prototype |
+| Scroll reveals start hidden in the SSR HTML (`AnimatePresence` without `initial={false}`); `@media (prefers-reduced-motion: reduce), (scripting: none)` forces the final state of every reveal target (`[data-reveal]`, timeline parts, footer thread and knot) and print already did | `initial={false}` turned off every `whileInView` reveal on a direct load, the main way a recruiter arrives; the CSS keeps everything visible with motion off or without JS, as in the prototype |
+| Reveals, the timeline and the footer thread use instant transitions under reduced motion | No running animations with reduced motion, also after a client-side navigation |
+| The card paper grain is an inline SVG (`svg.card__grain`, the `--grain-lite` filter) behind the card content, not a CSS background | As a background, also on a pseudo-element, the grain became the mobile LCP element on the EN page; an SVG rect with a filter is not an LCP candidate |
+| Gatsby's route announcer is silenced (`aria-live="off"`); moving focus to the new page's `h1` announces the page | With the cover transition the announcer read the old page's `h1`, in English, about a second before the new page existed |
+| Back and Forward restore the scroll position: a `popstate` flag, `history.scrollRestoration = 'manual'`, `lenis.resize()` before the scroll | `location.action` is undefined in `shouldUpdateScroll`, so Back always went to the top, and the browser scrolled the outgoing page under the panel |
+| Below 900 px the timeline segments keep only the top and bottom dashes | The side dashes crossed the first letter of every label |
+| Split headings keep a space before each line break | `textContent` and copied text read "frontend. Tech", not "frontend.Tech" |
+| Hidden reveal states settle through CSS animations after 6 s unless `html.motion` is set (it is set when the motion features load) | SSR now carries the hidden states, so a failed or blocked bundle left everything below the first screen blank |
+| Failed lazy chunks (motion features, Lenis) are caught | Gatsby reloads on "Loading chunk failed" without a guard; a permanently blocked chunk reloaded the page about every 100 ms |
+| Reload restores the saved position with `behavior: 'instant'` | `scrollRestoration = 'manual'` with `html { scroll-behavior: smooth }` animated every reload from the top |
+| `.job__win` is a block with `width: fit-content` | As an inline-block its line box grew 2 px until Mynerve arrived, so reload landed 6 px off |
+| The route announcer also gets `aria-hidden` | It kept the previous page's text and failed the axe region rule after every transition |
+| Label notes are split in two around the thread | The thread crossed a letter of the note at most widths under 540 px and at 900 to 1280 px |
+| Gatsby loads page data and page chunks after the first paint (`onClientEntry` waits for the paint entry, 300 ms cap) | Lighthouse's simulation counted the page chunks into LCP whenever they finished before the first frame: recruiter mobile LCP 2.3 s against 2.0 s on Home |
 
 Proposed, to confirm at the relevant phase:
 
@@ -610,20 +646,21 @@ Open:
 
 1. Analytics: a GA4 measurement ID (UA-45666519-2 is dead since 2023; Vercel Web Analytics is out with GitHub Pages).
 2. Sample websites, later: live sites at their own addresses, or screenshots only.
-3. Recruiter repos (for later): whether the six are right; repo 4 needs a diagram library: a GoJS licence (GoJS without one shows an evaluation watermark) or a free library.
-4. Copy to confirm: "Kod i dostępy zostają u ciebie"; whether he works remotely for clients outside Wrocław.
-5. `/resume.pdf` is outdated. The new CV is newer: the PDF file of it, or the print of the recruiter edition, or drop the link.
-6. The photo is 400x400. A larger original of the same shot, if it exists, for any frame above about 300 px.
-7. Is "Oferty i zlecenia" fine to show publicly while employed at PSE Innowacje? Does he invoice B2B (own business) for contracts?
-8. The EAA sentence in "Pasuje na każdego.": keep it, or drop the legal angle.
+3. Copy to confirm: "Kod i dostępy zostają u ciebie"; whether he works remotely for clients outside Wrocław.
+4. `/resume.pdf` is outdated. The new CV is newer: the PDF file of it, or the print of the recruiter edition, or drop the link. Blocker before Pages switches to the Gatsby build: `static/resume.pdf` holds a phone-like number (found by a pattern count, the number itself was not read), and the build copies it to `/portfolio-v2/resume.pdf`.
+5. The photo is 400x400. A larger original of the same shot, if it exists, for any frame above about 300 px.
+6. Is "Oferty i zlecenia" fine to show publicly while employed at PSE Innowacje? Does he invoice B2B (own business) for contracts?
+7. The EAA sentence in "Pasuje na każdego.": keep it, or drop the legal angle.
+
+The recruiter repos question (whether the six concepts are right, GoJS for repo 4) is closed: Adrian's six briefs replace them and allow only permissive dependencies, so no GoJS.
 
 ## Pages
 
-- [x] Phase 2 system (tokens, fonts, global styles, motion, Lenis, shell, nav, footer, transitions), waiting for Adrian's OK
-- [x] Home (chooser with the two labels), waiting for Adrian's OK
+- [x] Phase 2 system (tokens, fonts, global styles, motion, Lenis, shell, nav, footer, transitions), approved
+- [x] Home (chooser with the two labels)
 - [ ] Work index
 - [ ] Single project
-- [ ] About
+- [x] About (the recruiter edition, PL and EN), waiting for Adrian's OK
 - [ ] Contact
 - [ ] 404
 - [ ] Phase 4 audits, JSON-LD, llms.txt, OG images, final Lighthouse, delete `/rebrand-explorations`

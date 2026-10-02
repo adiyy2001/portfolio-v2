@@ -44,7 +44,7 @@ function Label({ label, n }) {
         </span>
       </Link>
       <span className="label__note" aria-hidden="true">
-        {label.note}
+        <span>{label.note[0]}</span> <span>{label.note[1]}</span>
       </span>
     </div>
   );

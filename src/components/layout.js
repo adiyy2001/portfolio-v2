@@ -39,9 +39,11 @@ export default function Layout({ path, children }) {
     still.current = Boolean(reduce);
     if (reduce) return undefined;
     let gone = false;
-    import('lenis').then(({ default: Lenis }) => {
-      if (!gone) lenis.current = new Lenis({ autoRaf: true });
-    });
+    import('lenis')
+      .then(({ default: Lenis }) => {
+        if (!gone) lenis.current = new Lenis({ autoRaf: true });
+      })
+      .catch(() => {});
     return () => {
       gone = true;
       lenis.current?.destroy();
@@ -90,10 +92,12 @@ export default function Layout({ path, children }) {
       await covered;
       const { hash } = window.location;
       const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
-      const y = saved ? saved[1] : target ? target.getBoundingClientRect().top + window.scrollY : 0;
+      const y = saved?.[1] ?? (target ? target.getBoundingClientRect().top + window.scrollY : 0);
       saved = null;
-      if (lenis.current) lenis.current.scrollTo(y, { immediate: true, force: true });
-      else window.scrollTo(0, y);
+      if (lenis.current) {
+        lenis.current.resize();
+        lenis.current.scrollTo(y, { immediate: true, force: true });
+      } else window.scrollTo(0, y);
       document.querySelector('#main h1')?.focus({ preventScroll: true });
       const panel = swap.current;
       if (!still.current) {
@@ -121,7 +125,7 @@ export default function Layout({ path, children }) {
       </a>
       <Header lang={lang} view={view} />
       <main id="main" tabIndex={-1}>
-        <AnimatePresence mode="wait" initial={false}>
+        <AnimatePresence mode="wait">
           <Page key={path}>{children}</Page>
         </AnimatePresence>
       </main>

@@ -10,6 +10,8 @@ Shared rules:
 
 ## Recruiter projects
 
+Replaced on 2026-10-02: Adrian sent full briefs for six GitHub repos (`flagwire`, `signal-timeline`, `gridtwin`, `fieldline`, `coschema`, `eventhorizon`). They are kept outside this repo, in `~/root/side_projects/briefs/`, and come after the client sample websites. The six concepts below stay only as a record.
+
 Every README follows the same outline: Why this exists (a scenario, written as one), What it does, Run it (`docker compose up`, seed data, demo login), Architecture (one diagram, the module map), Decisions (ADRs), Testing (what each layer covers and why), What is next. Badges for CI, coverage and the demo. Every repo has a GitHub Actions pipeline (lint, typecheck, unit, integration, e2e where there is UI, build, Docker image), Renovate or Dependabot, CODEOWNERS and a pull request template.
 
 ### 1. `poczekalnia`: a waiting room that tells you when you are next
@@ -140,3 +142,13 @@ All six: high UI and UX, no business logic (no accounts, no payments, no back-en
 - UX: the menu is text, never an image or a PDF; opening hours and the address are on every page.
 
 Alternatives if Adrian wants to swap one: fizjoterapia, medycyna estetyczna, pracownia architektury wnętrz, firma remontowa, pensjonat, warsztat samochodowy, szkoła językowa.
+
+### After the first six
+
+Adrian, 2026-10-02: once the six are built, three more sample websites follow. Notes only for now; names, look and scope get designed when their turn comes.
+
+- A shop. A partial version, only as an example for clients ("w takiej wersji niepełnej, tylko jako przykłady dla klientów").
+- A real-estate agency site.
+- A booking system, best as a hotel site with booking and extras ("strona hotelu i system rezerwacji i inne bajery").
+
+These three need more than the "no business logic" rule above allows (a cart, availability, a booking flow). Their scope gets agreed with Adrian before any design.

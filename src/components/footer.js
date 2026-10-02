@@ -1,13 +1,14 @@
 import React from 'react';
-import { m } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { ui } from '../i18n';
-import { duration, ease } from '../motion';
+import { duration, ease, instant } from '../motion';
 import { letters, needle, thread } from '../wordmark';
 
 const seen = { once: true, amount: 0.6 };
 
 export default function Footer({ lang }) {
   const t = ui[lang];
+  const reduce = useReducedMotion();
   return (
     <footer className="mini">
       <svg
@@ -23,7 +24,7 @@ export default function Footer({ lang }) {
           initial={{ pathLength: 0 }}
           whileInView={{ pathLength: 1 }}
           viewport={seen}
-          transition={{ duration: duration.thread, ease: ease.draw }}
+          transition={reduce ? instant : { duration: duration.thread, ease: ease.draw }}
         />
         <m.circle
           className="mini__knot"
@@ -33,7 +34,11 @@ export default function Footer({ lang }) {
           initial={{ opacity: 0, scale: 0 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={seen}
-          transition={{ duration: duration.knot, delay: duration.thread - 0.1, ease: ease.out }}
+          transition={
+            reduce
+              ? instant
+              : { duration: duration.knot, delay: duration.thread - 0.1, ease: ease.out }
+          }
         />
         <path fillRule="evenodd" d={needle} />
       </svg>

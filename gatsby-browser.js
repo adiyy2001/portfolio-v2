@@ -4,7 +4,23 @@ import { keepScroll } from './src/components/layout';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';
 
+let popped = false;
+
+export const onClientEntry = () => {
+  window.history.scrollRestoration = 'manual';
+  window.addEventListener('popstate', () => {
+    popped = true;
+  });
+  return new Promise(resolve => {
+    new PerformanceObserver(resolve).observe({ type: 'paint', buffered: true });
+    setTimeout(resolve, 300);
+  });
+};
+
 export const onInitialClientRender = () => {
+  const announcer = document.getElementById('gatsby-announcer');
+  announcer?.setAttribute('aria-live', 'off');
+  announcer?.setAttribute('aria-hidden', 'true');
   const idle = window.requestIdleCallback || window.setTimeout;
   const hand = () => document.documentElement.classList.add('hand');
   idle(() => document.fonts.load('400 1em Mynerve').then(hand, hand));
@@ -12,7 +28,14 @@ export const onInitialClientRender = () => {
 
 export const shouldUpdateScroll = ({ routerProps, prevRouterProps, getSavedScrollPosition }) => {
   const { location } = routerProps;
-  if (prevRouterProps && prevRouterProps.location.pathname === location.pathname) return true;
-  keepScroll(location.action === 'POP' ? getSavedScrollPosition(location) : null);
+  const back = popped;
+  popped = false;
+  if (!prevRouterProps) {
+    if (location.hash) return true;
+    window.scrollTo({ top: getSavedScrollPosition(location)[1], behavior: 'instant' });
+    return false;
+  }
+  if (prevRouterProps.location.pathname === location.pathname) return true;
+  keepScroll(back ? getSavedScrollPosition(location) : null);
   return false;
 };

@@ -3,7 +3,14 @@ import { withPrefix } from 'gatsby';
 import { LazyMotion, MotionConfig } from 'framer-motion';
 import Layout from './components/layout';
 
-const features = () => import('./features').then(module => module.default);
+const features = () =>
+  import('./features').then(
+    module => {
+      document.documentElement.classList.add('motion');
+      return module.default;
+    },
+    () => new Promise(() => {}),
+  );
 
 const prefix = withPrefix('/').slice(0, -1);
 

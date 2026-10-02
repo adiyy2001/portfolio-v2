@@ -148,7 +148,8 @@ linear-gradient(var(--chalk-blue),var(--chalk-blue)) 0 0/100% 1px no-repeat;opac
 .label__go{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px;padding-top:14px;border-top:1px solid rgba(20,24,31,.35);font:600 1rem/1 var(--text);color:var(--thread)}
 .label__go svg{width:28px;height:14px;transition:transform .35s var(--ease)}
 .label:hover .label__go svg{transform:translateX(6px)}
-.label__note{position:absolute;right:-6px;top:-30px;font:400 1.5rem/1 var(--hand);color:var(--chalk-blue);transform:rotate(-6deg);white-space:nowrap;pointer-events:none}
+.label__note{position:absolute;left:0;right:0;top:-30px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:14px;font:400 1.5rem/1 var(--hand);color:var(--chalk-blue);transform:rotate(-6deg);white-space:nowrap;pointer-events:none}
+.label__note>:first-child{justify-self:end}
 
 .card{grid-column:8/span 5;align-self:start;z-index:2;margin-top:calc(-12vw - 30px);justify-self:end;width:100%;max-width:480px;position:relative;background:var(--paper);background-image:var(--grain-lite);background-size:220px;color:var(--ink);padding:26px 28px 24px;box-shadow:0 1px 0 rgba(0,0,0,.35),0 22px 30px -18px rgba(0,0,0,.75);perspective:900px;transform-origin:50% 0}
 .card::after{content:"";position:absolute;inset:6px;border:1px dashed rgba(142,18,38,.8);pointer-events:none}
@@ -220,7 +221,7 @@ linear-gradient(90deg,rgba(20,24,31,.75) 0 1px,transparent 0) 0 0/1.0417% 7px re
 .job__when{margin-top:4px;font:500 .9375rem/1.35 var(--text);color:var(--thread)}
 .job__body{grid-column:6/span 7}
 .job__desc{font-size:1.0625rem;line-height:1.55;max-width:44em}
-.job__win{display:inline-block;margin-top:12px;font:400 1.375rem/1.15 var(--hand);color:var(--thread);transform:rotate(-1deg);transform-origin:left}
+.job__win{display:block;width:fit-content;margin-top:12px;font:400 1.375rem/1.15 var(--hand);color:var(--thread);transform:rotate(-1deg);transform-origin:left}
 .job__tech{margin-top:12px;font:500 .9375rem/1.4 var(--text);color:var(--ink-soft)}
 
 .kit{position:relative;padding:clamp(100px,11vw,170px) var(--pad) clamp(30px,4vw,60px)}
@@ -238,7 +239,7 @@ linear-gradient(90deg,rgba(20,24,31,.75) 0 1px,transparent 0) 0 0/1.0417% 7px re
 .close__hint{margin-top:14px;color:var(--chalk-dim);max-width:30em}
 .close__act .cta{margin-top:28px}
 .close__links{grid-column:9/span 4;display:flex;flex-direction:column;gap:6px}
-.close__links a{font:500 1.0625rem/1 var(--text);padding:10px 0;border-bottom:1px solid rgba(195,206,221,.4);text-decoration:none;display:flex;justify-content:space-between;transition:padding .3s var(--ease)}
+.close__links a{font:500 1.0625rem/1 var(--text);padding:10px 0;border-bottom:1px solid rgba(195,206,221,.4);text-decoration:none;display:flex;justify-content:space-between;gap:12px;transition:padding .3s var(--ease)}
 .close__links a:hover{padding-left:10px;border-bottom-color:var(--chalk)}
 .cross{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:clamp(64px,8vw,110px);padding:26px 0;border-top:1px dashed var(--chalk-blue);border-bottom:1px dashed var(--chalk-blue);font:500 clamp(1.25rem,2.1vw,1.9rem)/1.2 var(--display);text-decoration:none}
 .cross svg{flex:none;width:40px;height:18px;color:var(--chalk-blue);transition:transform .35s var(--ease)}
@@ -442,6 +443,7 @@ html.pre .hero [data-rise],html.pre .hero [data-swing],html.pre .wm,html.pre .ed
 html.pre .hero .hd{stroke-dasharray:1;stroke-dashoffset:1}
 
 @media (max-width:899px){
+.tl__seg::after{border-width:1px 0}
 .top{display:grid;grid-template-columns:1fr auto;padding-top:14px;gap:12px 16px}
 .ed{grid-column:1/-1;grid-row:2;justify-self:start;max-width:100%}
 .wm{height:21px}
@@ -461,7 +463,7 @@ html[lang=en] .title--cli{--ts:10vw}
 .label__who{font-size:1.6rem}
 .label__what{font-size:.875rem}
 .label__go{font-size:.875rem;margin-top:16px}
-.label__note{font-size:1.2rem;top:-28px;right:-2px}
+.label__note{font-size:1.2rem;top:-28px}
 .card{max-width:none;padding:22px 20px;margin-top:0}
 .card dl div{grid-template-columns:6.4em 1fr}
 .card dd{font-size:1.125rem}
@@ -595,7 +597,7 @@ a{text-decoration:none!important}
 <span class="label__go"><span data-t="l1Go">Otwórz</span><svg viewBox="0 0 28 14" aria-hidden="true"><path class="stroke" stroke-width="1.8" d="M1 7H26M20 1L26 7L20 13"/></svg></span>
 </span>
 </a>
-<span class="label__note" aria-hidden="true" data-t="l1Note">z LinkedIna?</span>
+<span class="label__note" aria-hidden="true"><span data-t="l1NoteA">z</span> <span data-t="l1NoteB">LinkedIna?</span></span>
 </div>
 <div class="hang">
 <svg class="hang__thread" viewBox="0 0 12 82" aria-hidden="true"><path class="stroke" stroke-width="1.6" d="M6 2C10 22 2 44 6 62C8 70 4 76 6 80"/></svg>
@@ -608,7 +610,7 @@ a{text-decoration:none!important}
 <span class="label__go"><span data-t="l2Go">Otwórz</span><svg viewBox="0 0 28 14" aria-hidden="true"><path class="stroke" stroke-width="1.8" d="M1 7H26M20 1L26 7L20 13"/></svg></span>
 </span>
 </a>
-<span class="label__note" aria-hidden="true" data-t="l2Note">masz projekt?</span>
+<span class="label__note" aria-hidden="true"><span data-t="l2NoteA">masz</span> <span data-t="l2NoteB">projekt?</span></span>
 </div>
 </div>
 </div>
@@ -678,7 +680,7 @@ a{text-decoration:none!important}
 </li>
 <li class="job" data-job="mh" data-reveal>
 <div class="job__main"><h3 class="job__name">Media Hunters</h3><p class="job__role">Tech Lead</p><p class="job__when" data-t="jMhWhen">od września 2023 do stycznia 2025, samozatrudnienie</p></div>
-<div class="job__body"><p class="job__desc" data-t="jMhDesc">Odpowiadałem za kilka długo rozwijanych aplikacji webowych, od kodu po decyzje architektoniczne. Zaprojektowałem i rozwijałem platformę SaaS dla wielu klientów naraz. Wprowadziłem CI i testy w Jest i Cypress. Interfejsy robiłem zgodnie z WCAG. Prowadziłem mały zespół i przeglądałem jego kod.</p><p class="job__win" data-t="jMhWin">projekty o 30% sprawniejsze dzięki Agile i DevOps</p><p class="job__tech">Angular, React, Node.js, Jest, Cypress</p></div>
+<div class="job__body"><p class="job__desc" data-t="jMhDesc">Odpowiadałem za kilka długo rozwijanych aplikacji webowych, od kodu po decyzje architektoniczne. Zaprojektowałem i rozwijałem platformę SaaS dla wielu klientów naraz. Wprowadziłem CI i testy w Jest i Cypress. Interfejsy robiłem zgodnie z WCAG. Prowadziłem mały zespół i przeglądałem jego kod.</p><p class="job__win" data-t="jMhWin">projekty o 30% sprawniejsze dzięki Agile i DevOps</p><p class="job__tech">Angular, TypeScript, NgRx, RxJS, Node.js, Jest, Cypress</p></div>
 </li>
 <li class="job" data-job="ttms" data-reveal>
 <div class="job__main"><h3 class="job__name">Transition Technologies MS</h3><p class="job__role">Software Engineer</p><p class="job__when" data-t="jTtmsWhen">od września 2022 do października 2023, samozatrudnienie, zdalnie</p></div>
@@ -710,7 +712,7 @@ a{text-decoration:none!important}
 <div data-reveal><dt>Back-end</dt><dd data-t="k3v">Node.js, Java i Quarkus, REST API, WebSockets, Oracle</dd></div>
 <div data-reveal><dt data-t="k4">Testy i wdrożenia</dt><dd>Jest, Karma, Jasmine, Cypress, Docker, GitHub Actions, CircleCI, Webpack, Git</dd></div>
 <div data-reveal><dt data-t="k5">Architektura</dt><dd data-t="k5v">architektura heksagonalna, DDD, monorepo Nx, feature flagi</dd></div>
-<div data-reveal><dt data-t="k6">Dostępność</dt><dd data-t="k6v">WCAG 2.1, ARIA, klawiatura, czytniki ekranu</dd></div>
+<div data-reveal><dt data-t="k6">Dostępność</dt><dd data-t="k6v">WCAG 2.1, klawiatura, czytniki ekranu, zarządzanie fokusem</dd></div>
 <div data-reveal><dt data-t="k7">Projekt UI</dt><dd>Figma, SCSS, Angular Material</dd></div>
 <div data-reveal><dt data-t="k8">Sposób pracy</dt><dd data-t="k8v">Scrum, code review, testy jednostkowe, integracyjne i e2e, optymalizacja wydajności</dd></div>
 <div data-reveal><dt data-t="k9">Języki</dt><dd data-t="k9v">polski ojczysty, angielski C1</dd></div>
@@ -1023,8 +1025,8 @@ skip:"Skip to content",markAria:"Adrian Turbiński, home",edAria:"Site editions"
 srHome:"Adrian Turbiński, front-end and full-stack developer. ",homeTitle:"Made to | measure.",
 homeLead:"Adrian Turbiński, front-end and full-stack developer from Wrocław. Building web apps since 2019, both as an employee and as a contractor.",
 ask:"Who's looking?",askSub:"This site comes in two cuts. Pick yours.",
-l1For:"Cut for",l1Who:"recruiters",l1What:"Experience, stack and a printable resume.",l1Go:"Open",l1Note:"from LinkedIn?",
-l2For:"Cut for",l2Who:"clients",l2What:"What I build, how I work, how to start.",l2Go:"Open",l2Note:"got a project?",
+l1For:"Cut for",l1Who:"recruiters",l1What:"Experience, stack and a printable resume.",l1Go:"Open",l1NoteA:"from",l1NoteB:"LinkedIn?",
+l2For:"Cut for",l2Who:"clients",l2What:"What I build, how I work, how to start.",l2Go:"Open",l2NoteA:"got a",l2NoteB:"project?",
 srRec:"Adrian Turbiński, ",recTitle:"Senior frontend. | Tech lead.",
 recLead:"Angular, TypeScript, RxJS and Node.js since 2019. At PSE Innowacje I'm building an app that models and visualizes high-voltage power lines.",
 recLead2:"I design frontend and backend architecture, I've led a small team, I onboard new engineers.",
@@ -1047,7 +1049,7 @@ jRocWhen:"September 2021 to June 2022, contract, remote",
 jRocDesc:"Internal apps where researchers analyze and validate clinical data. A regulated environment with little tolerance for errors. I made them faster with route-based lazy loading and leaner API usage.",
 jBraWhen:"August 2019 to July 2021, contract, hybrid",
 jBraDesc:"A high-end shop with real-time 3D product views, in Angular and Three.js. I helped build a custom WebGL rendering layer. I implemented real-time currency exchange over WebSockets that holds up on unstable networks.",
-kitTitle:"What I work with.",k2:"Diagrams and 3D",k3v:"Node.js, Java and Quarkus, REST API, WebSockets, Oracle",k4:"Testing and delivery",k5:"Architecture",k5v:"hexagonal architecture, DDD, Nx monorepo, feature flags",k6:"Accessibility",k6v:"WCAG 2.1, ARIA, keyboard, screen readers",k7:"UI design",k8:"How I work",k8v:"Scrum, code review, unit, integration and e2e tests, performance optimization",k9:"Languages",k9v:"Polish native, English C1",
+kitTitle:"What I work with.",k2:"Diagrams and 3D",k3v:"Node.js, Java and Quarkus, REST API, WebSockets, Oracle",k4:"Testing and delivery",k5:"Architecture",k5v:"hexagonal architecture, DDD, Nx monorepo, feature flags",k6:"Accessibility",k6v:"WCAG 2.1, keyboard, screen readers, focus management",k7:"UI design",k8:"How I work",k8v:"Scrum, code review, unit, integration and e2e tests, performance optimization",k9:"Languages",k9v:"Polish native, English C1",
 recCloseTitle:"Let's talk about the role.",recHint:"Tell me about the team, the product and the stack.",recMail2:"Write to me",recPrint2:"Printable resume",
 recCross:"Got a project to build? There's a client edition too.",
 srCli:"Adrian Turbiński, ",cliTitle:"From the first call | to production.",

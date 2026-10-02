@@ -21,6 +21,10 @@ export const stagger = {
 
 export const spring = {
   skew: { stiffness: 400, damping: 40 },
+  magnet: { stiffness: 240, damping: 18 },
+  tilt: { stiffness: 180, damping: 20 },
 };
+
+export const instant = { duration: 0 };
 
 export const enterAfterSwap = '0.2s';

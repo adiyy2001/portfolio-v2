@@ -12,7 +12,7 @@ const labels = [
     who: 'rekrutera',
     what: 'Doświadczenie, stack i CV do druku.',
     go: 'Otwórz',
-    note: 'z LinkedIna?',
+    note: ['z', 'LinkedIna?'],
   },
   {
     to: routes.cli.pl,
@@ -21,7 +21,7 @@ const labels = [
     who: 'klienta',
     what: 'Co zbuduję, jak pracuję i jak zacząć.',
     go: 'Otwórz',
-    note: 'masz projekt?',
+    note: ['masz', 'projekt?'],
   },
 ];
 

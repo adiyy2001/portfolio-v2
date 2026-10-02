@@ -17,9 +17,9 @@ export default function Split({ text, as = 'span', className, onView, ...rest })
   let index = 0;
   const words = parts.map((part, i) => {
     if (part === '|') return <br key={i} />;
-    const gap = i < parts.length - 1 && parts[i + 1] !== '|' ? ' ' : null;
+    const gap = i < parts.length - 1 ? ' ' : null;
     const inner = onView ? (
-      <m.span className="wi" variants={word}>
+      <m.span className="wi" variants={word} data-reveal>
         {part}
       </m.span>
     ) : (
