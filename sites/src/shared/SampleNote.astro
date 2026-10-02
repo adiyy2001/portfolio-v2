@@ -1,0 +1,27 @@
+---
+import { portfolio } from './link';
+
+interface Props {
+  name: string;
+  lang?: 'pl' | 'en';
+  class?: string;
+}
+
+const { name, lang = 'pl', class: className } = Astro.props;
+const back =
+  lang === 'pl' ? portfolio('/dla-klienta/#wzornik') : portfolio('/en/for-clients/#swatch-book');
+---
+
+<p class:list={['sample-note', className]} lang={lang}>
+  {lang === 'pl' ? (
+    <>
+      Strona przykładowa. {name} to zmyślona firma. Projekt i wykonanie:{' '}
+      <a href={back}>Adrian Turbiński</a>.
+    </>
+  ) : (
+    <>
+      Sample website. {name} is a made-up business. Designed and built by{' '}
+      <a href={back}>Adrian Turbiński</a>.
+    </>
+  )}
+</p>

@@ -1,0 +1,115 @@
+---
+import { link, portfolio } from '../shared/link';
+import { sites } from '../shared/sites';
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wzornik: strony przykładowe, Adrian Turbiński</title>
+    <meta
+      name="description"
+      content="Dziewięć stron przykładowych dla zmyślonych firm. Projekt i wykonanie: Adrian Turbiński."
+    />
+    <meta name="theme-color" content="#5a1424" />
+    <link rel="canonical" href={new URL(link('/'), Astro.site)} />
+  </head>
+  <body>
+    <main>
+      <h1>Wzornik.</h1>
+      <p class="lead">
+        Dziewięć stron dla zmyślonych firm. Każda ma własny krój, paletę i jeden znak rozpoznawczy,
+        tak jakby zrobiło je dziewięć różnych pracowni.
+      </p>
+      <ol>
+        {sites.map(site => (
+          <li>
+            <a href={link(`/${site.slug}/`)}>{site.name}</a>
+            <span>{site.trade}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="back">
+        <a href={portfolio('/dla-klienta/')}>Wróć do portfolio</a>
+      </p>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: light;
+    --wool: #5a1424;
+    --chalk: #e9eff6;
+    --ink: #14181f;
+  }
+
+  body {
+    margin: 0;
+    background: var(--chalk);
+    color: var(--ink);
+    font:
+      18px/1.5 system-ui,
+      'Segoe UI',
+      Arial,
+      sans-serif;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 16px 80px;
+  }
+
+  h1 {
+    margin: 0 0 16px;
+    color: var(--wool);
+    font:
+      700 clamp(48px, 10vw, 96px) / 1 Georgia,
+      serif;
+  }
+
+  .lead {
+    margin: 0 0 40px;
+    max-width: 34em;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid currentColor;
+  }
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-bottom: 1px solid currentColor;
+  }
+
+  li a {
+    color: var(--wool);
+    font:
+      700 28px/1.2 Georgia,
+      serif;
+  }
+
+  a:focus-visible {
+    outline: 3px solid var(--wool);
+    outline-offset: 3px;
+  }
+
+  .back {
+    margin: 40px 0 0;
+  }
+
+  .back a {
+    color: var(--ink);
+  }
+</style>

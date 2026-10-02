@@ -1,0 +1,5 @@
+dist
+.astro
+.astro-cache
+.vite-cache
+node_modules

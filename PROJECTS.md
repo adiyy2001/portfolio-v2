@@ -120,7 +120,7 @@ All six: high UI and UX, no business logic (no accounts, no payments, no back-en
 - Look: Outfit, white, coral, and a tooth shade guide from A1 to D2. Signature: the shade guide; a before and after slider that works with the keyboard.
 - UX: the price list is searchable; every treatment page answers "does it hurt, how long, how much".
 
-### Przystań, gabinet psychoterapii
+### Tafla, gabinet psychoterapii (was Przystań)
 
 - Who: a therapist who works alone and needs one calm page.
 - Page: one page with about, how I work, prices, first visit, contact.
@@ -134,7 +134,7 @@ All six: high UI and UX, no business logic (no accounts, no payments, no back-en
 - Look: Unbounded, concrete, brick, and the sawtooth roof of the old mill. Signature: the building elevation where every window is a flat; filter by rooms and floor on static data.
 - UX: the finder works as a list for keyboards and screen readers; every flat has its own address to share.
 
-### Kluska, bistro
+### Kminek, bistro (was Kluska)
 
 - Who: a restaurant that also gets tourists and changes its menu every week.
 - Pages: home, menu, events, about, booking through an external system, an English version.
@@ -143,12 +143,18 @@ All six: high UI and UX, no business logic (no accounts, no payments, no back-en
 
 Alternatives if Adrian wants to swap one: fizjoterapia, medycyna estetyczna, pracownia architektury wnętrz, firma remontowa, pensjonat, warsztat samochodowy, szkoła językowa.
 
-### After the first six
+### Names checked on 2026-10-02
 
-Adrian, 2026-10-02: once the six are built, three more sample websites follow. Notes only for now; names, look and scope get designed when their turn comes.
+Before building, every name was searched together with its trade and Wrocław. Two collided with real businesses and were renamed: Przystań (Ośrodek Psychoterapii Przystań runs three offices in Wrocław) became Tafla, and Kluska (Bistro Kluska, Racławicka 3/5) became Kminek. Rozwaga, Rubryka, Szkliwo and Przędza showed no business of the same trade in Wrocław (a dental practice called Szkliwo exists in Zbąszyń, outside the rule). The three new names, Trzask, Próg and Przęsło, are clear as well.
 
-- A shop. A partial version, only as an example for clients ("w takiej wersji niepełnej, tylko jako przykłady dla klientów").
-- A real-estate agency site.
-- A booking system, best as a hotel site with booking and extras ("strona hotelu i system rezerwacji i inne bajery").
+### The three that follow the first six
 
-These three need more than the "no business logic" rule above allows (a cart, availability, a booking flow). Their scope gets agreed with Adrian before any design.
+Adrian asked for a partial shop, a real estate agency and a hotel with booking and extras, and on 2026-10-02 left the scope to me. These three get front-end state (a cart, favourites, a booking) on top of the rules above; there is still no back end, no account and no payment.
+
+- Trzask, palarnia kawy ze sklepem. A small roastery that sells beans online: catalogue with filters, product pages, cart, a checkout that ends with "no order was placed", a subscription page. Signature: packaging labels generated from each coffee's data and the roast curve with the first crack marked.
+- Próg, biuro nieruchomości. Three agents, sale and rent: listings with filters kept in the URL, a drawn district map, offer pages with a floor plan, a mortgage calculator and a viewing slot picker, favourites, a valuation request. Signature: a facade drawn for each listing from its data, shown like listing sheets in the agency window.
+- Przęsło, hotel. A 24-room boutique hotel by the Oder, Polish and English: availability and nightly prices on a calendar, two rates, extras, guest details with a NIP check for invoices, a summary, a confirmation with an `.ics` file, managing the stored booking, packages and a gift voucher. Signature: the reception key board, where a free room hangs its key on a hook.
+
+### How they are built and where they live
+
+One Astro project in `sites/` builds all nine, each in its own folders, with no JavaScript unless a page needs it (Preact islands only in the last three). They are served from the portfolio at `/portfolio-v2/wzornik/<slug>/`, deployed by the same Pages workflow, so no new repositories or accounts are needed. There is no photography: every picture is drawn in SVG or CSS, and no stock or generated photos are used. Every page carries a footer note that the business is made up; e-mail addresses use the reserved `.example` domain and phone numbers an unassignable `+48 71 000 00 0N` pattern; there are no reviews or testimonials anywhere.

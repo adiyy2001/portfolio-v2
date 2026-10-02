@@ -6,7 +6,7 @@ const prettier = require('eslint-config-prettier');
 const globals = require('globals');
 
 module.exports = [
-  { ignores: ['public/', '.cache/', 'rebrand-explorations/', 'static/'] },
+  { ignores: ['public/', '.cache/', 'rebrand-explorations/', 'static/', 'sites/'] },
   js.configs.recommended,
   react.configs.flat.recommended,
   hooks.configs.flat.recommended,
