@@ -1,0 +1,239 @@
+.case {
+  position: relative;
+  padding: clamp(100px, 12vw, 170px) var(--pad) clamp(70px, 8vw, 120px);
+}
+
+.case__body {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  margin-top: clamp(40px, 6vw, 80px);
+  align-items: center;
+  row-gap: 36px;
+}
+
+.case__swatch {
+  grid-column: 1 / span 6;
+  width: min(100%, 560px);
+  perspective: 900px;
+}
+
+.case__in {
+  transform-style: preserve-3d;
+}
+
+.case__in picture {
+  display: block;
+}
+
+.case__swatch img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 880 / 595;
+  object-fit: cover;
+  filter: saturate(0.85) contrast(1.02);
+  -webkit-mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  -webkit-mask-composite: source-in;
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  mask-composite: intersect;
+}
+
+.case__swatch figcaption {
+  margin-top: 10px;
+  font-size: 0.875rem;
+  color: var(--chalk-dim);
+}
+
+.case__text {
+  grid-column: 7 / span 6;
+}
+
+.case .tag {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 9px 14px;
+  background-color: var(--paper);
+  background-image: var(--grain-lite);
+  background-size: 220px;
+  color: var(--ink);
+  font: 600 0.875rem / 1 var(--text);
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.35),
+    0 14px 22px -14px rgba(0, 0, 0, 0.7);
+  transform: rotate(-1.5deg);
+  transform-origin: 50% 0;
+}
+
+.case .tag::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px dashed rgba(142, 18, 38, 0.7);
+  pointer-events: none;
+}
+
+.case__name {
+  font: 700 clamp(3rem, 6vw, 6.4rem) / 0.95 var(--display);
+  letter-spacing: -0.025em;
+}
+
+.case__name a {
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 3px no-repeat;
+  transition: background-size 0.45s var(--ease);
+}
+
+.case__name a:hover {
+  background-size: 100% 3px;
+}
+
+.case__meta {
+  margin-top: 14px;
+  font: 600 1rem / 1.3 var(--text);
+  color: var(--chalk-blue);
+}
+
+.case__desc {
+  margin-top: 20px;
+  font-size: 1.125rem;
+  max-width: 34em;
+}
+
+.case__team {
+  margin-top: 12px;
+  color: var(--chalk-dim);
+  max-width: 34em;
+}
+
+.case__tech {
+  margin-top: 16px;
+  font-weight: 500;
+  color: var(--chalk-dim);
+}
+
+.case__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 30px;
+  margin-top: 22px;
+}
+
+.steps__list {
+  margin-top: clamp(40px, 6vw, 80px);
+  border-bottom: 1px dashed var(--thread);
+}
+
+.step {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  align-items: baseline;
+  padding: clamp(24px, 3vw, 40px) 0;
+  border-top: 1px dashed var(--thread);
+}
+
+.step__name {
+  grid-column: 1 / span 5;
+  font: 700 clamp(2.4rem, 5vw, 5rem) / 1 var(--display);
+  letter-spacing: -0.02em;
+}
+
+.step__text {
+  grid-column: 7 / span 5;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.steps .hand-note {
+  display: block;
+  margin-top: 22px;
+  text-align: right;
+  color: var(--thread);
+}
+
+.sign {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: clamp(48px, 7vw, 90px);
+  flex-wrap: wrap;
+}
+
+.sign__hand {
+  position: relative;
+  font: 400 clamp(3rem, 6vw, 5rem) / 1 var(--hand);
+  color: var(--chalk-blue);
+  padding-bottom: 18px;
+}
+
+.sign__hand svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 130%;
+  height: 22px;
+  color: var(--chalk-blue);
+  overflow: visible;
+}
+
+.sign__small {
+  color: var(--chalk-dim);
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 899px) {
+  .case .sec-head__side {
+    margin-top: 16px;
+  }
+
+  .case__body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .case__swatch {
+    width: 100%;
+  }
+
+  .case .tag {
+    padding: 16px;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sign {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .sign__hand svg {
+    width: 100%;
+  }
+}
+
+@keyframes settle-sign {
+  to {
+    stroke-dasharray: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (scripting: none), print {
+  .sign__stroke {
+    stroke-dasharray: none !important;
+    opacity: 1 !important;
+  }
+}
+
+html:not(.motion) .sign__stroke {
+  animation: settle-sign 0s 6s forwards;
+}
