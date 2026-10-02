@@ -1,0 +1,593 @@
+# REBRAND 2026
+
+Working state of the portfolio rebrand. Every session and every agent starts here: read this file and `git log` before doing anything else.
+
+## Status
+
+- Phase 0 (recon): done.
+- Phase 1 (brand discovery): language decided (PL + EN with a switch). Three directions delivered and verified (workflow runs `wf_f0c88ef2-ed7`, `wf_5035fd06-003`, `wf_370d91e8-90a`). Adrian chose B "Na miarę" on 2026-10-02 and changed the concept: two editions of one site, one for a recruiter coming from LinkedIn, one for a B2B client; he is a freelance developer, Media Hunters is no longer a brand. B is rebuilt on that (`rebrand-explorations/b-na-miare/index.html`, three views) and has a logo sheet (`rebrand-explorations/b-na-miare/logo.html`, three candidates, "Igła nad ń" recommended). Adrian picked the logo "Igła nad ń", full version with the thread, confirmed the client copy with maintenance added, gave permission to use tailorcloth.com screenshots, pasted a new CV and asked for a portfolio split: TailorCloth as the real product, 6 sample websites for clients, 6 public repos for recruiters that cover every CV technology (see "Sample work"). Then he set the order: the 12 projects are designed only (briefs in `PROJECTS.md`, no code), and the main site is finished first with the split between the real TailorCloth case and the sample websites. The prototype now has that split ("Prawdziwe wdrożenie" tag, "Wzornik." with six designed sample sites). Adrian approved the split and the Wzornik and gave the OK for Phase 2 ("wzornik super, do dzieła"). Phase 1 is done.
+- Phase 2 (system in Gatsby): approved on 2026-10-02, not started. Start at "Resume here".
+- Hosting: GitHub Pages (Adrian, 2026-10-02). See the GitHub Pages item under "Proposed".
+- Branch: `rebrand-2026`. Everything up to the end of Phase 1 is committed locally ("add rebrand notes and phase 1 prototypes"). Push only after Adrian's explicit OK: the repo `adiyy2001/portfolio-v2` is public, so a push also publishes this file and `PROJECTS.md`.
+
+## Resume here
+
+For a fresh session (Adrian resets the chat to keep the context small):
+
+1. `git checkout rebrand-2026`, then read this file, `PROJECTS.md` and `git log`.
+2. For reference, serve the prototype: `python3 -m http.server 8090 --bind 127.0.0.1 --directory /home/adrian/root/side_projects/portfolio-v2` as a background task with a long timeout (binding 0.0.0.0 is not allowed). Prototype: `rebrand-explorations/b-na-miare/index.html` with views `#/`, `#/dla-rekrutera`, `#/dla-klienta`; logo sheet: `rebrand-explorations/b-na-miare/logo.html`.
+3. Phase 2, in this order: the yarn.lock fix and `.nvmrc` with 24 (see "Baseline build and tooling"); `motion` and `lenis`; tokens, fonts (Bespoke Serif WOFF2 unmodified, Schibsted Grotesk and Mynerve subset) and global styles; layout shell, nav with the edition and language switch, footer with the threaded logo, page transitions. Port from the prototype, do not redesign it. Then verify, show Adrian, wait.
+4. Verification scripts from Phase 1 are in `rebrand-explorations/tools/` (Playwright 1.63 on the system Chrome): `yarn --cwd rebrand-explorations/tools install` once, then run them from that folder, for example `node views.cjs http://127.0.0.1:8090/rebrand-explorations/b-na-miare/index.html out/views` (flags `--widths=1440,768,375`, `--views=home,rec,cli`, `--lang=en`, `--reduced`). Output goes to `tools/out/`, which is ignored. The Python venv with fonttools, brotli, uharfbuzz and Pillow lived in the session scratchpad; recreate it when fonts need subsetting.
+5. Prototype screenshots (184 MB) stay local and are ignored by `rebrand-explorations/.gitignore`.
+
+## Goal
+
+A complete rebrand of the developer business-card site, not a reskin.
+
+1. Brand identity: positioning line, voice, wordmark or logotype (can be animated or "alive"), color system, type system.
+2. Design system in code: tokens, motion primitives, components.
+3. Rebuilt pages: Home, Work index, Single project (MDX template), About, Contact, 404.
+
+Bar: Awwwards Site of the Day. Distinctive, rich in motion, clean and fast. One signature motion moment per page, everything else is precise micro-interaction.
+
+## Constraints
+
+- Stay on Gatsby. No framework migration.
+- Keep the content schema, routes, slugs and frontmatter working. Existing content and links must survive the rebrand.
+- Touch `gatsby-node.js` only if strictly required, and explain why to Adrian before doing it.
+- Stack additions: `motion` (import from `motion/react`) as the single animation engine, `lenis` (with `lenis/react`) for smooth scroll. Nothing else without a one-line justification. No GSAP, no Three.js.
+- Remove dependencies that only served the old template once nothing uses them.
+- `/rebrand-explorations` stays out of the Gatsby build (repo root, never under `static/` or `src/pages/`) and is deleted at the end.
+
+## Avoid list (verbatim)
+
+You tend to converge on a few default styles, and a general "avoid the AI look" only swaps one default for another, so here are the specific patterns that are off the table:
+- cream, beige or off-white backgrounds; warm dark "editorial" with gold accent
+- italic accent words inside headlines
+- numbered section labels like 01 / 02 / 03
+- monospace labels and metadata as a decorative device
+- pill-shaped buttons
+- Inter, Space Grotesk, Instrument Serif, Geist, Fraunces
+- navy background with mint/teal accent (the current template look)
+- purple or blue gradients, glassmorphism, glowing blobs
+- three-card feature grids, default bento grids
+- typewriter hero text, particle backgrounds, cursor trails, "Hello, I'm X" hero opener
+- scroll-jacking that breaks native scroll, keyboard or find-in-page
+If you notice yourself reaching for something that feels like a portfolio template, stop and pick something more specific to me.
+
+## Rules (verbatim)
+
+- Output full files, not diffs.
+- No inline comments in code.
+- UI strings (nav, buttons, footer, 404, form labels) in Polish.
+- Use yarn. Work on a new branch "rebrand-2026", commit after each completed page with a clear message. Do not push.
+- Keep solutions minimal: no abstractions or config for hypothetical future needs.
+- Read a file before making claims about it.
+
+## Rules for the material about Adrian (verbatim)
+
+- Facts stay exact. Do not invent clients, metrics, numbers, awards or testimonials. If something would strengthen the story but is missing, add it to a short "Needs from Adrian" list instead of making it up.
+- The current site is built on a well-known open-source portfolio template (Brittany Chiang v4 style). Drop everything that comes from it: section names like "Where I've Worked", "Some Things I've Built", "What's Next?", the tabbed jobs list, the alternating featured-project layout, the "Designed & Built by" footer and the GitHub star counters. Nothing structural from the template should survive.
+- Rewrite all copy in a voice that sounds like a person, not a LinkedIn summary. Cut phrases like "passionate about", "cutting-edge", "human-centered digital solutions", "robust", "leverage". Short sentences, concrete claims, what I actually built and for whom.
+- Positioning: I am a software engineer who also runs his own studio (Media Hunters) and ships complete products for clients end to end. The brand should make that double role clear in one glance.
+
+Superseded by Adrian on 2026-10-02: the positioning bullet. He is a freelance developer with no studio brand, and the site has two editions, one for recruiters and one for B2B clients (see Direction).
+
+## Motion system (verbatim)
+
+- One motion tokens file: durations, easings, spring presets, stagger values. Every component uses these.
+- MotionConfig reducedMotion="user" at the root, and LazyMotion with the m component to keep the bundle small.
+- Variants with staggerChildren for text and list reveals; split headings into words or lines with mask reveals.
+- layoutId shared-element transitions: a project thumbnail in the Work list morphs into the project page header.
+- Page transitions with AnimatePresence (mode="wait"), short and confident.
+- useScroll + useTransform + useSpring for scroll-linked scenes: one pinned (position: sticky) signature scene on Home, parallax used sparingly.
+- useVelocity for subtle scroll-velocity response (e.g. slight skew or letter-spacing) on large type.
+- Physical hover: springs, magnetic pull on primary CTAs only, max 4deg tilt.
+- whileInView with once: true for reveals; never animate layout-shifting properties on load.
+- Reduced motion fallback: instant states, no fades, no pinning.
+- Mobile: no pinning or horizontal tracks; keep text reveals and micro-interactions.
+
+## Quality bar (verbatim)
+
+- Lighthouse desktop: Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95. Mobile Performance ≥ 80.
+- CLS < 0.05, LCP < 2.0s on desktop. Fonts self-hosted, subset, preloaded, font-display swap with metric-matched fallback.
+- Keyboard navigable, visible focus states, WCAG AA contrast, semantic landmarks, skip link kept.
+- No console errors or hydration warnings.
+- Raised by Adrian on 2026-10-02: SEO 100 ("full seo 100% i optymalizacja"), analytics must work.
+
+## Verification (verbatim)
+
+After each page, the verifier agent runs yarn build, serves the site, takes screenshots at 375, 768 and 1440 px (Playwright MCP if available), repeats them with prefers-reduced-motion, runs Lighthouse, and checks the result against the plan in REBRAND.md and the avoid list. It returns a findings list. You fix what is real, then report to me.
+
+## Process checkpoints
+
+- Phase 0: recon report. Then the language question.
+- Phase 1: three independent directions with prototypes in `/rebrand-explorations/<name>/index.html` and screenshots at 1440 and 375 px. Critique, recommend, wait for Adrian's choice.
+- Phase 2: tokens, fonts, global styles, motion tokens, Lenis, layout shell, nav, footer, page transitions. Verify, show, wait.
+- Phase 3: pages one at a time (Home, Work index, Single project, About, Contact, 404). After each: verify, commit, report, wait.
+- Phase 4: parallel audits (performance, accessibility, SEO and machine-readable layer), fixes, JSON-LD, llms.txt, OG images, final Lighthouse, delete `/rebrand-explorations`.
+
+## Facts (single source of truth)
+
+Sources: Adrian's LinkedIn profile (pasted by Adrian on 2026-10-02), `content/jobs`, `content/featured`, `src/config.js`, `src/components/sections/*.js`, `static/resume.pdf` (1 page, English, Canva, last changed 2024-10-24). Adrian: "kieruj się linkedinem", so LinkedIn wins for roles, dates and scope. Content was last edited 2024-10-15. Use these, nothing else.
+
+### Identity
+
+- Name: Adrian Turbiński (hero.js:63, about.js:138, resume). `gatsby-config.js` misspells it "Turbński" in title, description and manifest.
+- LinkedIn headline: "Senior Frontend and Fullstack Engineer, Tech Lead | Angular, TypeScript, RxJS, Node.js for teams shipping complex web apps with safer, more frequent releases".
+- Old one-liner (hero.js:64): "Software Engineer and Founder at Media Hunters".
+- Email: adrian.turbinski@gmail.com (`src/config.js:2`, resume).
+- GitHub: https://github.com/adiyy2001
+- LinkedIn: https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6
+- Resume: `/resume.pdf`. It links the portfolio as https://portfolio-v2-c19j.vercel.app/
+- Photo: new one confirmed by Adrian on 2026-10-02: `C:\Users\Adrian\Downloads\1772802747790.jpg` (also saved as "(1)"), 400x400, 18 KB, his LinkedIn photo: dark background, glasses, black shirt, low key light. Copy it into `src/images/` in Phase 2. Old `src/images/me.jpg` (200x200, formal, blazer) is retired.
+- Own mark: `src/images/logo.png` ("A" in a brush ring, mint on navy) is dropped. Adrian: "nie miałem pomysłu wtedy".
+- Hobbies listed in the resume: biking, traveling, hiking, photography, sports, coding.
+- Languages (new CV): English C1, Polish native.
+- Phone: in the new CV, never published on the site or copied into repo files.
+- Positioning (Adrian, 2026-10-02): freelance front-end and full-stack developer. Open to "Oferty i zlecenia" (job offers and contracts). Services for B2B clients: whole web apps and WCAG accessibility.
+
+### Roles (LinkedIn, newest first)
+
+| Company | Title | Range | Type, location | What LinkedIn says |
+| --- | --- | --- | --- | --- |
+| PSE Innowacje sp. z o.o. | Senior Software Engineer | Jan 2025 - Present | Full-time, Wrocław | Leads an early-stage proof of concept of a highly interactive web app to model and visualize high-voltage power line infrastructure; complex diagram-based UI in Angular and GoJS; works with domain analysts on evolving requirements; owned frontend architecture decisions in the initial phase; onboards new engineers, code reviews; continues on the production system |
+| Media Hunters | Tech Lead (Adrian, 2026-10-02; LinkedIn says "Senior Software Engineer / Technical Lead") | Sep 2023 - Jan 2025 | Self-employed, Wrocław | Independent contractor leading multiple long-lived web apps with end-to-end responsibility for code quality, architecture and technical decisions; designed and evolved a multi-tenant SaaS platform; introduced CI pipelines and automated tests (Jest, Cypress); accessible WCAG interfaces with designers and stakeholders; mentored and reviewed code for a small team of engineers, a team he managed (Adrian, 2026-10-02); skills include business development and project management |
+| Transition Technologies MS | Software Engineer | Sep 2022 - Oct 2023 | Self-employed, Wrocław, remote | Enterprise sandbox for electricians to design and validate complex electrical workflows; NgRx state for dynamic graph-based UI; tests in Jest, Karma, Cypress; WCAG 2.1 in a diagram-heavy interface (keyboard navigation, screen readers, focus management); worked with backend engineers, UX designers and domain experts |
+| Cobiro | Frontend Engineer | Sep 2021 - Sep 2022 | Self-employed, Warsaw area | Moved a legacy frontend toward clearer separation of concerns; architecture discussions on domain boundaries (hexagonal architecture); helped introduce automated CI pipelines; feature-flag experiments and gradual rollouts |
+| Roche | Frontend Engineer | Sep 2021 - Jun 2022 | Contract, Wrocław, remote | Internal medical research apps in Angular and TypeScript used to analyze and validate clinical data in a regulated environment; route-based lazy loading and API usage optimization; tests in Jest and Karma |
+| BRAINODE sp. z o.o. | Junior Frontend Developer | Aug 2019 - Jul 2021 | Contract, Wrocław, hybrid | High-end e-commerce platform with real-time 3D product visualization in Angular and Three.js; a custom WebGL rendering layer with senior engineers; real-time currency exchange over WebSockets; small Agile team |
+
+Superseded by LinkedIn: the content/jobs dates (BRAINODE from Aug 2020, Roche Jan to Sep 2021, Cobiro to Dec 2022, TTMS Dec 2022 to Dec 2023, Media Hunters "Founder / Main Engineer" Jan 2023 to Present) and the resume variants. Overlaps (Roche with Cobiro, TTMS with Media Hunters) are real parallel work as LinkedIn shows them.
+
+Resolved on 2026-10-02: Media Hunters is not a brand any more. Adrian: "już nie mediahunters tylko jako zwykły deweloper freelancer". It appears only as a past role (Tech Lead, a team he managed) and as the team behind TailorCloth.
+
+### LinkedIn experience (verbatim, pasted by Adrian on 2026-10-02)
+
+The table above is a summary. This is the full text and wins over the summary when wording is checked (one en dash replaced by a hyphen).
+
+```text
+PSE Innowacje sp. z o.o.
+Senior Software Engineer
+PSE Innowacje sp. z o.o. · Full-time
+Jan 2025 - Present · 1 yr 10 mos
+Wrocław, Dolnośląskie, Poland
+- Leading the development of an early-stage proof of concept for a highly interactive web application used to model and visualize high-voltage power line infrastructure
+- Designed and implemented complex, diagram-based UI solutions using Angular and GoJS, focusing on correctness, clarity of domain representation, and long-term extensibility
+- Worked closely with domain analysts to translate ambiguous, evolving requirements into concrete technical solutions and iteratively validate assumptions
+- Took ownership of frontend architecture decisions during the initial project phase, balancing rapid exploration with maintainability and future scalability
+- Actively onboarded and supported new engineers joining the project, providing technical guidance, architectural context, and code reviews to establish shared standards early on
+- Contributed to the ongoing development of the production system, refining the initial POC based on real project constraints and feedback
+Enhance with AI
+Media hunters
+Senior Software Engineer / Technical Lead
+Media hunters · Self-employed
+Sep 2023 - Jan 2025 · 1 yr 5 mos
+Wrocław, Dolnośląskie, Poland
+- Worked as an independent contractor leading and contributing to multiple long-lived web applications, taking end-to-end responsibility for code quality, architecture, and technical decision-making
+- Designed and evolved a multi-tenant SaaS platform with a focus on clear domain boundaries, testability, and safe iteration under changing requirements
+- Balanced architectural improvements with delivery constraints, making incremental refactors while keeping production systems stable and maintainable
+- Introduced CI pipelines and automated testing (Jest, Cypress) to reduce manual risk, enable safer deployments, and support continuous development
+- Built accessible, standards-compliant user interfaces (WCAG) in collaboration with designers and stakeholders, treating accessibility as a core engineering requirement rather than a visual concern
+- Mentored and reviewed code for a small team of engineers, maintaining a high bar for readability, reliability, and long-term maintainability
+ Rozwój biznesu, Zarządzanie projektami and +5 skills
+Transition Technologies MS
+Software Engineer
+Transition Technologies MS · Self-employed
+Sep 2022 - Oct 2023 · 1 yr 2 mos
+Wrocław, Dolnośląskie, Poland · Remote
+- Worked on an enterprise-grade sandbox application used by electricians to design and validate complex electrical workflows, with a strong focus on correctness, predictability, and error prevention
+- Designed and evolved state management solutions using NgRx to handle highly dynamic, graph-based UI state, prioritizing debuggability, traceability, and long-term maintainability
+- Built confidence in ongoing development by contributing to a robust testing setup (Jest, Karma, Cypress), focusing on regression prevention and safe refactoring in a growing codebase
+- Implemented WCAG 2.1 accessibility requirements in a highly interactive, diagram-heavy interface, addressing keyboard navigation, screen reader support, and non-trivial focus management
+- Worked closely with backend engineers, UX designers, and domain experts to balance domain complexity, usability constraints, and technical limitations in an enterprise environment
+ Rozwój aplikacji, GoJs and +3 skills
+Cobiro
+Frontend Engineer
+Cobiro · Self-employed
+Sep 2021 - Sep 2022 · 1 yr 1 mo
+Warsaw Metropolitan Area
+- Worked on evolving a legacy frontend codebase towards clearer separation of concerns, improving testability and long-term maintainability while keeping the system stable during incremental refactors
+- Participated in architectural discussions around introducing domain boundaries and decoupling UI logic from infrastructure concerns in an existing production system
+- Improved release reliability by helping introduce automated CI pipelines, reducing manual deployment steps and enabling smaller, safer production changes
+- Implemented feature flag-based experimentation and gradual rollout mechanisms, focusing on safe exposure of changes, fast rollback, and minimizing user-facing risk
+- Collaborated closely with product and backend teams to balance experimentation needs with system stability and technical constraints
+ Hexagonal Architecture, Feature Flags and +5 skills
+Roche
+Frontend Engineer 
+Roche · Contract
+Sep 2021 - Jun 2022 · 10 mos
+Wrocław, Dolnośląskie, Poland · Remote
+- Worked on internal medical research applications built with Angular and TypeScript, used by researchers to analyze and validate clinical data in a regulated environment
+- Focused on application reliability, data correctness, and predictable behavior under strict compliance and privacy requirements
+- Improved runtime performance through incremental changes such as route-based lazy loading and API usage optimization, validated via production monitoring and user feedback
+- Contributed to a strong testing culture using Jest and Karma, with emphasis on regression prevention and safe refactoring rather than raw coverage metrics
+- Collaborated closely with backend engineers and product stakeholders to deliver changes safely in a domain with low tolerance for errors
+ RxJS, angular and +3 skills
+BRAINODE sp. z o.o.
+Junior Frontend Developer
+BRAINODE sp. z o.o. · Contract
+Aug 2019 - Jul 2021 · 2 yrs
+Wrocław, Dolnośląskie, Poland · Hybrid
+- Worked on a high-end e-commerce platform with real-time 3D product visualization built in Angular and Three.js, focusing on performance, rendering stability, and cross-browser compatibility
+- Contributed to the development of a custom WebGL-based rendering layer, collaborating closely with senior engineers on rendering pipelines, scene optimization, and animation handling
+- Implemented real-time currency exchange functionality using WebSockets, ensuring data consistency and graceful fallback handling under unstable network conditions
+- Gained early experience in writing maintainable TypeScript code, debugging performance bottlenecks, and collaborating within a small, fast-moving Agile team
+ angular, TypeScript and +4 skills
+```
+
+### New CV (verbatim, pasted by Adrian on 2026-10-02, phone removed)
+
+```
+Adrian Turbiński
+Senior Frontend
+Engineer (Angular)
+“ People ignore design that
+ignore people. ”
+Frank Kimero
+Email
+adrian.turbinski@gmail.com
+Phone
+[removed, not for publication]
+Address
+Wrocław, Poland
+Socials
+Linkedin
+adrian-turbinski
+Languages
+English
+C1
+Polish
+Native
+Technologies & Frameworks
+Frontend Tools and testing
+• Angular
+• TypeScript
+• JavaScript
+• NgRx
+• SignalStore
+• RxJS
+• Signals
+• REST API
+• Webpack
+• Git
+• Docker
+• Jest
+• Karma
+• Cypress
+• GitHub Actions
+• Node.js
+Architecture & Development Practices
+Agile Code review
+Unit, integration and
+e2e tests
+Performance
+optimization
+Hexagonal
+architecture
+Domain-driven
+design
+Experience
+Jan 2025 - current Wrocław
+Senior Software Engineer
+PSE Innowacje
+Led fullstack architecture and development of a diagram-driven web app
+for high-voltage power grid infrastructure: Angular 19, TypeScript, RxJS
+and GoJS 3.x on the frontend, Java/Quarkus with Oracle DB on the
+backend
+•
+Drove GoJS 3.x migration and introduced modern Angular patterns
+(standalone components, signals, #private fields) to improve long-term
+maintainability
+•
+Onboarded and mentored new engineers in a 5-person team, setting
+shared architectural standards, code review practices and a testing
+strategy (Jest, Karma)
+•
+Designed a Quarkus (Java) backend layer with batch processing, Oracle
+DB performance tuning and REST API design within a hexagonal
+architecture
+•
+Translated ambiguous, evolving requirements from domain analysts into
+technical solutions in Scrum, taking part in sprint planning and backlog
+refinement
+•
+Sep 2023 - Jan 2025 Remote
+Senior Software Engineer /
+Technical Lead
+Media Hunters
+Led a cross-functional team and contributed to multiple long-lived
+fullstack web applications (Angular/TypeScript frontend, Node.js
+backend), owning end-to-end code quality, architecture, and technical
+decision-making
+•
+Designed and evolved a multi-tenant SaaS platform with clear domain
+boundaries using NgRx for state management, RxJS for reactive data
+flows, and Node.js-based API services with strong testability at every
+layer
+•
+Mar 2023 - Nov 2023 Remote
+Frontend Developer
+Transition Technologies MS
+Designed NgRx-based state management for highly dynamic, graphbased UI state with RxJS operators, prioritizing debuggability and
+maintainability
+•
+Developed an enterprise sandbox app for electricians to design and
+validate electrical workflows using Angular/TypeScript and Node.js,
+focused on correctness and error prevention
+•
+Contributed to a testing setup (Jest, Karma, Cypress) enabling safe
+refactoring across a growing codebase, focused on regression prevention
+•
+Worked within Agile/Scrum ceremonies: sprint reviews, retrospectives
+and cross-team architectural discussions
+•
+Sep 2021 - Sep 2022 Remote
+Frontend Engineer
+Cobiro
+Drove incremental refactoring of a legacy Angular/TypeScript frontend
+codebase in an e-commerce platform toward clearer domain separation,
+improving testability while keeping production systems stable
+•
+Implemented feature flag-based experimentation and gradual rollout
+mechanisms using RxJS reactive patterns, enabling fast rollback and
+minimal user-facing risk
+•
+Sep 2021 - Jun 2022 Remote
+Frontend Engineer
+Roche
+Improved runtime performance through lazy loading, RxJS-driven API
+optimizations and OnPush change detection, validated against
+production monitoring and user feedback
+•
+Worked on internal medical research apps in Angular and TypeScript
+used by researchers to analyze clinical data in a regulated, complianceheavy environment
+•
+Contributed to a testing culture (Jest, Karma) focused on regression
+prevention, working within strict quality gates required by healthcare
+compliance
+•
+Aug 2019 - Jul 2021 Wrocław
+Junior Frontend Developer
+Brainode sp z oo
+Built a high-end currency exchange platform with real-time 3D product
+visualization using Angular, TypeScript, and Three.js on the frontend,
+supported by Java and Node.js backend services, focusing on rendering
+stability and cross-browser performance
+•
+Contributed to backend API development (Java, Node.js) and a custom
+WebGL rendering layer, collaborating with senior engineers on scene
+optimization and animation pipelines
+•
+Skills
+```
+
+CV and LinkedIn disagree here. LinkedIn wins for dates, titles and scope (Adrian: "kieruj się linkedinem"); the CV adds technical detail where it does not conflict (PSE: Angular 19, GoJS 3.x migration, standalone components, signals, Java/Quarkus backend layer with batch processing, Oracle tuning, REST, hexagonal architecture, 5-person team, Scrum; Roche: OnPush; BRAINODE: Java and Node.js backends).
+
+- Transition Technologies MS: CV "Mar 2023 - Nov 2023, Frontend Developer", LinkedIn "Sep 2022 - Oct 2023, Software Engineer".
+- BRAINODE: CV "a high-end currency exchange platform with real-time 3D product visualization", LinkedIn "high-end e-commerce platform with real-time 3D product visualization" plus a currency exchange feature.
+- Media Hunters: CV "Remote", LinkedIn "Wrocław".
+- The CV quote is credited to "Frank Kimero"; the author is Frank Chimero. Fix it if the quote is ever used.
+
+### Featured projects (content/featured)
+
+Adrian, 2026-10-02: TailorCloth stays; HouseBarber and ZnajdzDotacje.com are out; new projects come later. The two rows below stay only as a record.
+
+TailorCloth is a real product Adrian delivered ("tailor cloth to prawdziwy produkt który realizowałem") and he has the client's permission to use screenshots of tailorcloth.com. Checked on 2026-10-02: tailorcloth.com runs on WordPress and its footer says "IMPLEMENTED BY: EPIC AGENCY"; the site shows the "TAILORCLOTH CREATORS" order platform in its "How we make the process easier?" section (`wp-content/uploads/2023/08/platform3-1.png`). The prototype uses a crop of that order form (`rebrand-explorations/b-na-miare/assets/tailorcloth-order.webp`, 880x595, 24 KB). What exactly his team built is in Needs.
+
+
+| Folder | Title | Date field | Link | Tech | What the file says |
+| --- | --- | --- | --- | --- | --- |
+| wear_store | TailorCloth Digital Transformation | 2024-01-01 | https://tailorcloth.com/ | Odoo, Python, JavaScript, PostgreSQL | Tailoring company from Krakow, "partnered with Media Hunters"; responsive website on Odoo, customized product management modules, secure platform for trusted users, local and international invoicing, automated warehouse processes, a no-price ordering system for tailored business offers |
+| house_barber | HouseBarber App | '4' | '#' (none) | Ionic, Angular, Node.js, PostgreSQL, PWA | PWA to book a barber to your home in the UK; geolocation real-time tracking, personalized booking, offers for students and budget-conscious clients; scheduling and route optimization |
+| donations | ZnajdzDotacje.com - Grant Search Engine | '5' | https://znajdzdotacje.com/ | Angular, Node.js, AI Integration, Google Search API, Stripe | EU grant search engine for entrepreneurs and organizations; AI-driven matching; filters by entity type, region and sector; real-time updates; Stripe payments; expert support |
+
+Covers are `demo.png`, 689x934 and 689x936 portrait mockups cropped for the old alternating layout. They show "Ready To Wear" (not TailorCloth), "houseBarbers" with lorem ipsum bullets, and "GrantsFinder.eu" (not ZnajdzDotacje.com). Only TailorCloth's text says who built it.
+
+### Tech
+
+- New CV: Angular, TypeScript, JavaScript, NgRx, SignalStore, RxJS, Signals, REST API, Webpack, Git, Docker, Jest, Karma, Cypress, GitHub Actions, Node.js; Java and Quarkus, Oracle DB, GoJS 3.x (PSE); practices: Agile, code review, unit, integration and e2e tests, performance optimization, hexagonal architecture, domain-driven design.
+- LinkedIn (primary): Angular, TypeScript, RxJS, Node.js, NgRx, GoJS, Three.js, WebGL, WebSockets, Jest, Karma, Cypress, CI pipelines, feature flags, hexagonal architecture, WCAG 2.1, multi-tenant SaaS.
+- Also evidenced in content and resume: JavaScript, React (resume), Jasmine (content/jobs Roche and Starry), PostgreSQL, Ionic, PWA, NX, CircleCI, Angular Material, SCSS, Bootstrap, Figma, DataDog Synthetics, Odoo, Python, Stripe, Google Search API.
+- `about.js:128` is the template default list (Eleventy, WordPress and the rest); not used.
+- Resume achievements, allowed by Adrian on 2026-10-02 ("yes"), quoted as the resume states them: "BOOSTED PROJECT EFFICIENCY BY 30%...", "IMPROVED ELECTRICIAN WORKFLOWS BY 25%...", "REDUCED CODE DUPLICATION BY 40%...". No baseline exists, so they are shown as his claims, never as audited metrics.
+
+## Content model and routes
+
+- Sourcing: `gatsby-source-filesystem` on `content/` and `src/images`, `gatsby-transformer-remark` with remark-images, external-links, code-titles, prismjs. Plain `.md`, no MDX installed.
+- Jobs: `content/jobs/<Folder>/index.md`, frontmatter `date` (ISO, sort DESC), `title`, `company`, `location` (queried, never rendered), `range` (free text), `url`; body is bullets plus a `**Skills:**` line. Folders `Upstatement` (Media Hunters) and `Starry` (BRAINODE) are template names.
+- Featured: `content/featured/<folder>/index.md`, frontmatter `date` (sort ASC; '4' and '5' are ordering hacks), `title`, `cover` (`./demo.png`), `external`, `tech[]`; body is one paragraph.
+- `gatsby-node.js` declares `slug`, `tags`, `showInProjects`, `draft`, `date @dateformat`, `description`, `ios`, `android`, `company`; creates post pages at `frontmatter.slug` (post.js) and `/pensieve/tags/<tag>/` (tag.js); none exist because no file has `slug` or `tags`. It also nulls scrollreveal, animejs and miniraf for SSR and defines `@components`, `@config`, `@fonts`, `@hooks`, `@images`, `@pages`, `@styles`, `@utils` aliases. Queries filter by `fileAbsolutePath` regex.
+- Routes today: `/` (anchors `#about`, `#jobs`, `#projects`, `#contact`), `/archive/` (table of every md file, linked from nowhere), `/404/`, static `/resume.pdf` (linked from nav and menu), `/og.png`, `/og@2x.png`, `/slides/intro-to-webdev-workshop.pdf`, plus sitemap, robots.txt, manifest, `sw.js`. No per-project page exists.
+- Routes that must survive: `/`, `/archive/` (as Work or an alias of it), `/404/`, `/resume.pdf`. Old anchors fall back to Home.
+- The SSR HTML of `/` contains only the loader: zero hits for the name, Cobiro or TailorCloth in `public/index.html`. Crawlers see an empty page today.
+
+## Baseline build and tooling
+
+- `yarn install --frozen-lockfile` works on Node 24.13.0. `yarn build` fails: `RangeError: "length" is outside of buffer bounds` from `ordered-binary` 1.5.2 (`utf8Write` with length `0xffffffff`) and `msgpackr` 1.11.0 under `lmdb` 2.5.x.
+- Fix verified in a scratch copy: refresh only the yarn.lock entries of `msgpackr` (1.11.0 to 1.12.1) and `ordered-binary` (1.5.2 to 1.6.2). Both are transitive and inside their declared ranges, `package.json` does not change. Build then passes in 54 s with 5 HTML pages. Apply as the first step of Phase 2.
+- Baseline JS (uncompressed): framework 140 KB, shared chunk 136 KB, app 104 KB, chunk 108 72 KB.
+- Build warnings: tracedSVG option removed, react-helmet superseded by the Gatsby Head API, deprecated sort syntax (6), "Skipping post creation due to missing slug" (8), manifest icon not square.
+- Latest versions: motion 13.5.0 (peer react ^18 || ^19), lenis 1.3.26 (peer react >=17), gatsby 5.16.1 (engines node >=18 <26).
+- Tooling: Playwright 1.63 via npx with cached Chromium, `/usr/bin/google-chrome`, Lighthouse 13.5 via npx, pdftotext. No ImageMagick and no PIL (use sharp from node_modules). ESLint does not run (ESLint 9 with legacy `.eslintrc` and `@upstatement/eslint-config` that needs ESLint 8). No typecheck (plain JS). `.husky/pre-commit` is empty.
+
+## Template leftovers to remove
+
+- Sections: "Where I've Worked" tabbed jobs, "Some Things I've Built" alternating featured, "Other Noteworthy Projects" grid (exported, not rendered), "What's Next?" contact, numbered headings (`0N.` counters in headings, nav and menu), side email and social rails, hamburger slide-in menu, archive table.
+- Hex logo and animejs Loader (home renders only the Loader in SSR), GitHub stars and forks fetch from `bchiang7/v4`, "Designed & Built by" footer.
+- Pensieve post and tag templates and their `gatsby-node.js` page creation.
+- scrollreveal, react-transition-group, animejs, prismjs with remark-prismjs and remark-code-titles, react-helmet, lodash (only gatsby-node, post, tag), babel-plugin-styled-components (unused), gatsby-plugin-netlify (installed, not registered), gatsby-plugin-google-analytics (`UA-45666519-2`, Universal Analytics stopped in 2023), gatsby-plugin-offline.
+- `static/og.png` and `static/og@2x.png` show Brittany Chiang's name and hero: every share of the site shows her card. `static/slides/intro-to-webdev-workshop.pdf` is her 19 MB workshop deck. Favicons are her hex "B". Calibre (Klim, commercial) and SF Mono (Apple, proprietary) have no license in the repo.
+- `package.json` name "v4", description "Personal Website V4"; `html lang="en"` hardcoded in head.js.
+
+## Body copy language
+
+PL + EN with a switch (Adrian, Phase 1).
+
+- Polish is the default at `/`, English lives under `/en/`, a visible PL/EN switch in the nav, `hreflang` alternates, `html lang` per version.
+- UI strings are Polish in the PL version and English in the EN version.
+- Both languages get a full copy set. How content files carry two languages is decided in Phase 2 (the current `index.md` files are English).
+- Polish copy is first person with masculine past forms (Adrian's brief refers to himself as "his").
+
+## Direction
+
+Chosen: B "Na miarę", reworked into two editions (Adrian, 2026-10-02). A and C stay below as a record. All prototypes live in `rebrand-explorations/` and are deleted in Phase 4.
+
+### B reworked: two editions (chosen)
+
+- Concept: one site cut twice. `/` asks "Kto patrzy?" and hangs two tailor's labels on a rail, "Szyte dla rekrutera" and "Szyte dla klienta". A paper label in the header ("Szyte dla: rekrutera / klienta") switches editions, and the end of each edition links to the other.
+- Recruiter edition: h1 "Senior frontend. Tech lead.", a "Karta miar" card with the photo and key fields, a tape timeline of the six employers since 2019 (segment widths are the LinkedIn date ranges), the job list with the resume percentages as handwritten notes, a stack list, and a print stylesheet that turns the page into a two-page A4 CV.
+- Client edition: h1 "Od pierwszej rozmowy do produkcji.", the pinned scene "Przód i tył szyję sam." (front-end and back-end as the two pattern pieces of one garment), "Pasuje na każdego." (WCAG 2.1 AA, the European Accessibility Act since 28 June 2025), the TailorCloth case "Na miarę, dosłownie.", the process "Jak to szyjemy." and contact.
+- Edition switch: a wool panel with pinked edges covers the page, the edition name is written in Mynerve, a thread line draws, the panel leaves; focus moves to the new h1. Instant under reduced motion.
+- Logo (`logo.html`): "Igła nad ń" (recommended; the acute of ń is a needle, a thread in large sizes, the favicon is the ń), "Metka" (woven label), "Cyrkiel i przykładnica" (AT monogram from dividers and a T-square). The letters are Bespoke Serif 700 outlines made with fonttools. The ITF Free Font License 2.0 (17 Aug 2026, `License/FFL.txt` in the Fontshare package) allows this: "You may use the Font Software to create logos, wordmarks, graphic elements, images, vector files" and "Logos and wordmarks created using the Font Software may be registered as trademarks."
+- Prototype routing uses hashes (`#/dla-rekrutera`, `#/dla-klienta`) only because it is one file.
+- Verified by a fresh agent (run `wf_5f328dc2-890`). Fixed after it: phone overflow on the recruiter edition (the card's entrance swing left a stale scroll width; `main{overflow-x:clip}`), hero text alignment at 768, the "dziś" label, timeline labels under 375, EN client h1 widow, EN pinned scene at 1366x768, the print name line, the slow-CDN replay, "Pracuję na swoim" (conflicts with the PSE job; now "Zlecenia biorę jako freelancer"), recruiter lead rewritten from the LinkedIn headline into what he builds at PSE, TailorCloth wording back to the source ("zrobiliśmy", "bezpieczna platforma", "procesy magazynowe"), "Zapytaj o dostępność" instead of an audit, a note that the percentages are his own estimates from the resume, Cobiro tech line. Its "invented fact" flags on BRAINODE, Roche and Cobiro were checked against the verbatim LinkedIn text and are sourced there.
+
+### A "Cała siatka" (`a-cala-siatka`)
+
+- Concept: one cell versus the whole grid. In other companies' teams he wrote the front-end of their products (one pine cell); in Media Hunters he takes the whole product (the pink field takes the whole grid). A 12-column grid drawn with 1px rules; motion rearranges the layout itself.
+- Positioning: "Piszę kod i prowadzę własne studio." / "I write code and run my own studio." "Piszę kod" sits in a pine cell, the rest on the pink field.
+- Palette: pink #FF8FC7 (studio field), pine #0F5C3F (engineer cell, footer), tomato #F2452D (contact), white #FFFFFF (ground), ink #0C1411 (text, rules). Ink on pink 8.9, white on pine 8.0, ink on tomato 5.04, ink on white 18.7.
+- Type: Funnel Display and Funnel Sans (Google Fonts, OFL, variable 300 to 800), one family for everything.
+- Wordmark: "Adrian Turbiński" in Funnel Display 600 beside a 2x2 grid mark; its filled cell moves between quadrants per section and turns tomato at contact.
+- Signature motion: pinned scene "Droga" (#zakres), four states driven by a scroll spring: one cell, four company cells whose widths are the time spent at each company (3/2/4/3 of 12), three stack cells "Od 2023 cały stos.", then the pink field takes the grid "Teraz biorę cały produkt.". Pin only at min-width 900 and min-height 760, otherwise a static stack.
+- Projects: three full-height columns, one open, closed ones with rotated titles; buttons in h3 with aria-expanded, inert closed bodies, arrow keys, instant under reduced motion; below 900px a plain list. In production the same layoutId grammar carries a column into the project header.
+- Round two fixes by the orchestrator: copy limited to sourced facts ("W czterech firmach pisałem front-end cudzych produktów", "Od 2023 cały stos" instead of "kawałek" and "Potem"), unequal company widths instead of four equal tiles, duplicate line removed, ArrowUp and ArrowDown left to the page, scroll spy on rAF, larger tile text.
+- Open: no in-page nav below 560px (the hero CTAs cover it; production nav is Phase 2).
+
+### B "Na miarę" (`b-na-miare`)
+
+- Concept: the site as a tailor's table; engineer and studio are two pattern pieces sewn into one product.
+- Positioning: "Inżynier z własnym studiem. Robię całe produkty dla klientów, na miarę."
+- Palette: wool #5A1424, wool deep #3B0D18, chalk #E9EFF6, chalk dim #C3CEDD, chalk blue #9DBBE0, paper #CBD3DA, ink #14181F, thread #8E1226.
+- Type: Bespoke Serif (Fontshare) display, Schibsted Grotesk text, Mynerve hand notes.
+- Signature motion: pinned "Zszywam to w jedno." (#dwa-fachy), pieces drawn by scroll and pulled together by a ladder stitch. Pin at min-width 900 and min-height 760.
+- Round two fixes: static seam note no longer hits the captions at 1280x600, "W tej ostatniej zbudowałem" (TTMS only), "ta sama osoba" instead of "jedna osoba" (not a headcount claim), Media Hunters link in the footer.
+- Open: closest of the three to the "warm dark editorial" bullet (dark burgundy with a large serif, no gold); the metaphor comes from a client (TailorCloth); the double role is not in the h1; three families plus a soft-light grain layer.
+
+### C "Wirnik" (`c-wirnik`)
+
+- Concept: one kinetic system with two states, line is the engineer, fill is the studio; the rotor mark comes from the surname (turbine).
+- Positioning: "Kod piszę jak inżynier. Produkty oddaję jak studio."
+- Palette: concrete #D5D9DC, ink #0E1114, signal #FFD200, ink 2 #343B41, footer grey #A9B0B5.
+- Type: Anybody (variable wdth and wght) display, Public Sans text.
+- Signature motion: pinned scene (#o-mnie, 440vh): the TTMS high-voltage tower draws by scroll, a yellow seam wipes with the rotor rolling on it, "PISZĘ KOD." becomes "ODDAJĘ CAŁOŚĆ.". Pin at (1200x600) or (1024x700) and up.
+- Round two fixes: nav order matches the page, Anybody on display=swap, Polish copy in the project lines, alt text on placeholder thumbnails.
+- Open: footer is ink with a yellow e-mail (cool, not the avoid bullet, but its shape); grain overlay and halftone portrait; hero copy hidden until the motion module loads (5s failsafe), fit-to-width hero is a CLS risk with a font swap.
+
+### Critique and recommendation
+
+- Divergence (verifier, round two): A differs from B and C on every axis. B and C still share a skeleton (hero, pinned two-state scene, project rows, big contact footer), a scene mechanic (line drawn by scroll, then a seam) and a device kit (skewX on velocity, grain overlay, treated portrait, tilt). They differ in color, type and metaphor.
+- Avoid list: all three pass. Nearest calls: B to "warm dark editorial", C's footer to "dark with one warm accent".
+- Recommendation: A. The double role reads in the h1 itself, in words a person says. Its motion grammar (cells that grow, split and hand over) is the production motion system (layout and layoutId from Work to the project header, page transitions as a cell hand-over), so one idea carries all six pages instead of one Home set piece. It is the cheapest to make fast and accessible: one font family, flat color, no texture or blend layers, no SVG drawing. Weakest point: the least human of the three (small photo, no hand-made detail) and a modest mark; Phase 2 should give the moving cell more presence and use a real photo when Adrian sends one.
+- After the LinkedIn facts (2026-10-02): the prototypes still carry the old dates, four employers and three projects; production uses the new facts whichever direction wins. The new facts strengthen C: high-voltage power infrastructure is now his domain at two employers (TTMS and his current role at PSE Innowacje), not a one-off motif. In A, "Teraz biorę cały produkt" and the company widths depend on the Media Hunters status and the new dates.
+- If Adrian wants the boldest first impression and the most ownable mark, C is the alternative, with grain, halftone and the CDN-gated hero dropped in production. B is the riskiest (avoid-list proximity, borrowed metaphor, heaviest page).
+
+## Sample work (2026-10-02)
+
+The portfolio splits in three. TailorCloth is the real product. Clients get 6 sample websites, recruiters get 6 public repos that cover every CV technology. Adrian, later the same day: the 12 projects are designed only, no code for now ("tylko zaprojektuj, do tego nie pisz kodu na razie"); the main site is finished first, with the split between the real TailorCloth case and the sample websites.
+
+- Briefs for all 12: `PROJECTS.md` at the repo root, committed with this file.
+- Adrian approved the Wzornik, its six industries and names included ("wzornik super").
+- Recruiter repos: `poczekalnia`, `grafik`, `szafa-na-wymiar`, `obieg-faktur`, `rezerwacje`, `bundle-budget`. Two commits each, README with a made-up scenario as the reason, pushed only after Adrian's OK per repo. They go on the recruiter edition only when they exist.
+- Sample websites (concepts for made-up businesses): Rozwaga (kancelaria radcy prawnego), Rubryka (biuro rachunkowe), Szkliwo (klinika stomatologiczna), Przystań (gabinet psychoterapii), Przędza (inwestycja mieszkaniowa), Kluska (bistro).
+- In the prototype: the client edition shows TailorCloth with a "Prawdziwe wdrożenie" tag, then "Wzornik.", a swatch book of the six sample websites. Each swatch is a strip in the site's own colours and typeface; it opens into a designed hero of that site, who it is for, what is inside, the cut, and "Projekt koncepcyjny. Wersja na żywo w przygotowaniu." The swatches are buttons with `aria-expanded`, closed panels are `inert`, the hero images are `role="img"` with a description in PL and EN. Fonts for the six (Bodoni Moda, Bricolage Grotesque, Outfit, Newsreader, Unbounded, Gloock, all OFL) load from Google Fonts in the prototype and get subset and self-hosted in production.
+
+## Tokens
+
+Phase 2.
+
+## Decisions
+
+| Decision | Reason |
+| --- | --- |
+| Work on branch `rebrand-2026` | Required by the brief, keeps `main` untouched |
+| Keep React 18.3.1, page transitions through AnimatePresence in `wrapPageElement` | React is below 19.3, so no AnimateView; Gatsby 5 is stable on 18 |
+| motion 13.5.0 and lenis 1.3.26 | Both support React 18 |
+| Fix Node 24 by refreshing two transitive lock entries | Smallest change that makes the build pass, verified in a scratch copy |
+| Update `.nvmrc` from 20.9.0 to 24 | The stack is Node 24 and Node 20 is not installed |
+| Remove the home Loader | It is the only thing in the SSR HTML of `/` |
+| Delete the template author's assets and fonts | Her name on the share card, her slides, licensing of Calibre and SF Mono |
+| Spell the name "Adrian Turbiński" everywhere | Every source agrees except the typo in `gatsby-config.js` |
+| Write "BRAINODE sp. z o.o." | Correct Polish legal form, as already in about.js |
+| PL at `/`, EN at `/en/` | UI strings are Polish by the brief, so Polish is the primary version and existing `/` links keep working |
+| Prototypes load fonts from Google Fonts or Fontshare and motion from jsDelivr | Single-file explorations only; production self-hosts fonts and bundles motion |
+| Replace direction A after round one | The verifier found A and C were one idea; a fresh designer got a "taken territory" list instead of the other files, so it never saw B or C |
+| Pinned scenes need a height guard (about 760px, C at 600 or 700 by width), else a static stack | Common laptop viewports (1366x657, 1280x600) clipped the pinned content |
+| Copy claims only what Facts support | "kawałek produktu", "Potem", "Tam zbudowałem", "jedna osoba" read as facts that are not in the sources |
+| The round-one A prototype is gone | It lived in a scratch folder that was wiped on restart; it was superseded and is not needed |
+| LinkedIn is the source for roles, dates and scope | Adrian: "kieruj się linkedinem" |
+| Only TailorCloth stays in Work until new projects arrive | Adrian, 2026-10-02 |
+| Host on Vercel, `siteUrl` = the Vercel deployment, remove the unused gatsby-plugin-netlify | Adrian left hosting to the orchestrator; the resume already links the Vercel deployment and netlify is unused |
+| Keep the Search Console meta, replace dead UA with GA4 or Vercel Web Analytics, load analytics after interaction or idle | Analytics must work without costing Performance; SEO target is 100 |
+| Direction B "Na miarę", reworked into two editions (recruiter and B2B client) | Adrian, 2026-10-02 |
+| `/` is a chooser that asks who is looking | Adrian picked "/ pyta, kto patrzy" |
+| Freelance developer, no studio brand; Media Hunters only as a past role and as the TailorCloth team | Adrian, 2026-10-02 |
+| Availability "Oferty i zlecenia"; B2B services: whole web apps and WCAG accessibility | Adrian, 2026-10-02 |
+| Mynerve stays for handwritten notes | Adrian, 2026-10-02 |
+| The recruiter edition prints as the CV | One CV source that never goes stale; the PDF was outdated (Needs 5) |
+| Wordmark as SVG outlines, not live text | No shift on font load, and the needle sits exactly over the n |
+| Logo "Igła nad ń", the full version with the thread | Adrian, 2026-10-02: "wełna, pełna wersja z nitką ten będzie git". At 25 px in the header the thread would be under 1 px, so the header keeps the outline without it; the footer (thread draws on scroll, then the knot) and the OG image use the version with the thread |
+| Client edition promises maintenance: "Od wyceny przez wdrożenie po utrzymanie rozmawiasz ze mną." and a fourth step "Poprawki." | Adrian confirmed "Od wyceny do produkcji rozmawiasz ze mną" and added "maintaing klienta również" |
+| TailorCloth screenshots come from tailorcloth.com | Adrian has the client's permission |
+| Portfolio split: TailorCloth as the real product, 6 sample websites for clients, 6 repos for recruiters | Adrian, 2026-10-02 |
+| The 12 sample projects are designed only for now; the main site is finished first | Adrian: "tylko zaprojektuj, do tego nie pisz kodu na razie, kończymy stronę główną" |
+| Client edition order: TailorCloth as "Prawdziwe wdrożenie", then "Wzornik." with the six sample websites marked as concepts | Adrian asked for the split between the sample sites and the real case; the real one comes first |
+| Websites join web apps and accessibility in the client offer (page title "aplikacje, strony i dostępność") | Adrian wants six sample websites for clients |
+| Recruiter repos have exactly two commits each | Adrian: "będą tylko dwa commity initial i commit końca" |
+| LinkedIn wins over the new CV for dates and titles; the CV adds technical detail | Adrian's earlier rule "kieruj się linkedinem"; the conflicts are listed under the new CV |
+| Recruiter edition updated from the CV: PSE description and tech, stack list (Signals, SignalStore, Java and Quarkus, REST, Oracle, Docker, GitHub Actions, Webpack, Git, DDD), "Sposób pracy", "Języki" | The CV is newer than the site copy and does not conflict there |
+| Bespoke Serif self-hosted from the official Fontshare WOFF2 files, unmodified (Medium 24.6 KB, Bold 24.8 KB); only the OFL fonts (Schibsted Grotesk, Mynerve) get subset | The FFL forbids "subsetting, format conversion" without ITF's consent but allows self-hosting through `@font-face` |
+| TailorCloth: his Media Hunters team built it on Odoo (website, custom modules, ordering platform); another agency took over maintenance later, which is why tailorcloth.com now runs on WordPress with "Implemented by: Epic Agency" | Adrian, 2026-10-02: "tailor cloth potem przejęła inna agencja na maintaining ale odoo się zgadza" |
+| CV and LinkedIn conflicts: the timeline comes from LinkedIn | Adrian: "timeline weź z LinkedIna" |
+| Wzornik approved as designed | Adrian: "wzornik super" |
+| Phase 2 approved | Adrian: "do dzieła" |
+| Hosting on GitHub Pages; everything goes into git | Adrian: "wszystko na gita i potem GitHub Pages hostujemy" |
+| Prototype screenshots stay local (ignored, 184 MB); prototypes, notes and verification scripts are committed | Keeps the public repo small; the folder is deleted in Phase 4 anyway |
+
+Proposed, to confirm at the relevant phase:
+
+- `gatsby-node.js` will need one edit in Phase 3 (Single project): remove the pensieve page creation (template, creates nothing, its templates and lodash go away) and add project pages. Explained to Adrian before the edit.
+- Project pages on `gatsby-transformer-remark`, not MDX, unless case studies need React components. Content is plain Markdown and MDX would be a new dependency.
+- Drop `gatsby-plugin-offline` and ship a one-time service worker cleanup so returning visitors do not stay on the old site.
+- Replace the ESLint setup with a minimal flat config so lint can run before each commit.
+- Edition routes: `/dla-rekrutera/` and `/dla-klienta/`, EN `/en/for-recruiters/` and `/en/for-clients/`.
+- `/resume.pdf` must survive: either a PDF printed from the recruiter edition at build time, or the new CV as a PDF. GitHub Pages has no server redirects, so a redirect to `/dla-rekrutera/` is out.
+- GitHub Pages: deploy from a GitHub Actions workflow (`actions/deploy-pages`) on Node 24, with Pages set to "GitHub Actions" in the repo settings. At `adiyy2001.github.io/portfolio-v2/` Gatsby needs `pathPrefix: '/portfolio-v2'` and `gatsby build --prefix-paths`; with a custom domain, `static/CNAME` and no prefix. Pages sets its own cache headers and allows no custom headers or redirects. The old Vercel deployment keeps serving the old site until Adrian removes it.
+- TailorCloth case: one plain line that another agency maintains the site today, so a client who opens tailorcloth.com and sees another agency in the footer is not confused. Wording to confirm with Adrian in Phase 3.
+- Page mapping, to agree with Adrian before Phase 3: Home becomes the chooser; About becomes the recruiter edition; the client edition takes services, process and contact; Work (`/archive/`) lists projects (TailorCloth for now); Single project is TailorCloth at its own slug, linked from the client edition; Contact is the end of each edition, so no separate page unless Adrian wants one; 404 in both languages.
+
+## Needs from Adrian
+
+Answered on 2026-10-02: hosting ("zrób, żeby było dobrze", so the orchestrator decides), Media Hunters title (Tech Lead), what changed after 2024 (LinkedIn), studio facts (LinkedIn), HouseBarber and ZnajdzDotacje (removed), project screenshots (later, with new projects), photo (new one), tech list (LinkedIn), resume percentages (allowed), overlaps (LinkedIn), analytics and Search Console (keep, must work, SEO 100), wording "front-end w firmach" and "od pierwszej rozmowy do produkcji" (fine, orchestrator words it), team (a team he managed), old logo (dropped), B handwriting and metaphor ("idk").
+
+Answered later on 2026-10-02: direction (B, reworked into two editions), Media Hunters (no longer a brand; he is a freelance developer), `/` (asks who is looking), availability ("Oferty i zlecenia"), B2B services (whole web apps, WCAG accessibility), handwriting (keep Mynerve), logo (to be designed).
+
+Answered later still on 2026-10-02: logo ("Igła nad ń", full version with the thread), "Od wyceny do produkcji rozmawiasz ze mną" (yes, plus maintenance), TailorCloth screenshots (permission from the client), languages (new CV), new projects (replaced by the 6 plus 6 plan in "Sample work").
+
+Answered at the end of 2026-10-02: Phase 2 (OK), sample websites (approved), TailorCloth (Odoo is right; another agency took over maintenance later), CV and LinkedIn conflicts (LinkedIn), hosting (GitHub Pages, everything in git).
+
+Open:
+
+1. Push: the repo is public, so pushing `rebrand-2026` publishes this file (the CV, the LinkedIn notes, point 10 below about PSE) and `PROJECTS.md`. Push as is, or keep the notes out of the public repo.
+2. Address: `adiyy2001.github.io/portfolio-v2/` (works now, needs the path prefix), a user site repo `adiyy2001.github.io` (no prefix, means a rename or a new repo), or a custom domain (best for SEO). `siteUrl` follows the choice.
+3. Analytics: a GA4 measurement ID (UA-45666519-2 is dead since 2023; Vercel Web Analytics is out with GitHub Pages).
+4. TailorCloth: confirm that the "TailorCloth Creators" order form in the screenshot is the platform his team built on Odoo (the image sits on today's site, which another agency maintains).
+5. Sample websites, later: live sites at their own addresses, or screenshots only.
+6. Recruiter repos (for later): whether the six are right; repo 4 needs a diagram library: a GoJS licence (GoJS without one shows an evaluation watermark) or a free library.
+7. Copy to confirm: "Kod i dostępy zostają u ciebie"; whether he works remotely for clients outside Wrocław.
+8. `/resume.pdf` is outdated. The new CV is newer: the PDF file of it, or the print of the recruiter edition, or drop the link.
+9. The photo is 400x400. A larger original of the same shot, if it exists, for any frame above about 300 px.
+10. Is "Oferty i zlecenia" fine to show publicly while employed at PSE Innowacje? Does he invoice B2B (own business) for contracts?
+11. The EAA sentence in "Pasuje na każdego.": keep it, or drop the legal angle.
+
+## Pages
+
+- [ ] Phase 2 system (tokens, fonts, global styles, motion, Lenis, shell, nav, footer, transitions)
+- [ ] Home
+- [ ] Work index
+- [ ] Single project
+- [ ] About
+- [ ] Contact
+- [ ] 404
+- [ ] Phase 4 audits, JSON-LD, llms.txt, OG images, final Lighthouse, delete `/rebrand-explorations`
