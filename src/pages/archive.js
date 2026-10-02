@@ -22,7 +22,7 @@ export default function Archive() {
 export const Head = () => (
   <Seo
     lang="pl"
-    path="/archive/"
+    view="work"
     title="Projekty, Adrian Turbiński"
     description="Projekty Adriana Turbińskiego."
   />

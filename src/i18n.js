@@ -2,6 +2,8 @@ export const routes = {
   home: { pl: '/', en: '/en/' },
   rec: { pl: '/dla-rekrutera/', en: '/en/for-recruiters/' },
   cli: { pl: '/dla-klienta/', en: '/en/for-clients/' },
+  work: { pl: '/archive/', en: '/en/archive/' },
+  case: { pl: '/archive/tailorcloth/', en: '/en/archive/tailorcloth/' },
 };
 
 export const ui = {
@@ -15,7 +17,13 @@ export const ui = {
     langAria: 'Język',
     footerName: 'Adrian Turbiński, Wrocław',
     footerMail: 'E-mail',
-    words: { home: 'Na miarę', rec: 'dla rekrutera', cli: 'dla klienta' },
+    words: {
+      home: 'Na miarę',
+      rec: 'dla rekrutera',
+      cli: 'dla klienta',
+      work: 'projekty',
+      case: 'TailorCloth',
+    },
   },
   en: {
     skip: 'Skip to content',
@@ -27,7 +35,13 @@ export const ui = {
     langAria: 'Language',
     footerName: 'Adrian Turbiński, Wrocław',
     footerMail: 'Email',
-    words: { home: 'Made to measure', rec: 'for recruiters', cli: 'for clients' },
+    words: {
+      home: 'Made to measure',
+      rec: 'for recruiters',
+      cli: 'for clients',
+      work: 'projects',
+      case: 'TailorCloth',
+    },
   },
 };
 

@@ -1,5 +1,10 @@
 import 'lenis/dist/lenis.css';
 import './src/styles/global.css';
+import './src/styles/client.css';
+import './src/styles/case.css';
+import './src/styles/wzornik.css';
+import './src/styles/work.css';
+import './src/styles/notfound.css';
 import { keepScroll } from './src/components/layout';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';
