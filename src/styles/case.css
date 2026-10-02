@@ -186,10 +186,6 @@
 }
 
 @media (max-width: 899px) {
-  .case .sec-head__side {
-    margin-top: 16px;
-  }
-
   .case__body {
     display: flex;
     flex-direction: column;

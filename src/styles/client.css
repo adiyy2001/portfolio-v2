@@ -469,10 +469,6 @@ html:not(.hand) .tags__pointer .note {
     font-size: 1.4rem;
   }
 
-  .scene .sec-head__side {
-    margin-top: 16px;
-  }
-
   .scene__table {
     grid-template-columns: 1fr;
     row-gap: 44px;

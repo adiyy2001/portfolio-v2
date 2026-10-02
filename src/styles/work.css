@@ -497,11 +497,6 @@ main[data-glide] + .mini {
     justify-content: space-between;
     margin: 6px 0 0;
   }
-
-  .work__swatches .sec-head__side,
-  .proj__team .sec-head__side {
-    margin-top: 14px;
-  }
 }
 
 @media (max-width: 599px) {

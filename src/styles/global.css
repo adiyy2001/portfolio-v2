@@ -1520,6 +1520,10 @@ html[lang='en'] .title--home {
     display: block;
   }
 
+  .sec-head__side {
+    margin-top: 16px;
+  }
+
   .hand-note {
     display: block;
     margin-top: 18px;
