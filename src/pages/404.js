@@ -1,74 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'gatsby';
-import { Helmet } from 'react-helmet';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { navDelay } from '@utils';
-import { Layout } from '@components';
-import { usePrefersReducedMotion } from '@hooks';
+import Hero from '../components/hero';
+import Seo from '../components/seo';
+import { routes } from '../i18n';
 
-const StyledMainContainer = styled.main`
-  ${({ theme }) => theme.mixins.flexCenter};
-  flex-direction: column;
-`;
-const StyledTitle = styled.h1`
-  color: var(--green);
-  font-family: var(--font-mono);
-  font-size: clamp(100px, 25vw, 200px);
-  line-height: 1;
-`;
-const StyledSubtitle = styled.h2`
-  font-size: clamp(30px, 5vw, 50px);
-  font-weight: 400;
-`;
-const StyledHomeButton = styled(Link)`
-  ${({ theme }) => theme.mixins.bigButton};
-  margin-top: 40px;
-`;
-
-const NotFoundPage = ({ location }) => {
-  const [isMounted, setIsMounted] = useState(false);
-  const prefersReducedMotion = usePrefersReducedMotion();
-
-  useEffect(() => {
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    const timeout = setTimeout(() => setIsMounted(true), navDelay);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  const content = (
-    <StyledMainContainer className="fillHeight">
-      <StyledTitle>404</StyledTitle>
-      <StyledSubtitle>Page Not Found</StyledSubtitle>
-      <StyledHomeButton to="/">Go Home</StyledHomeButton>
-    </StyledMainContainer>
-  );
-
+export default function NotFound() {
   return (
-    <Layout location={location}>
-      <Helmet title="Page Not Found" />
-
-      {prefersReducedMotion ? (
-        <>{content}</>
-      ) : (
-        <TransitionGroup component={null}>
-          {isMounted && (
-            <CSSTransition timeout={500} classNames="fadeup">
-              {content}
-            </CSSTransition>
-          )}
-        </TransitionGroup>
-      )}
-    </Layout>
+    <Hero id="nf-h" title="Nie ma takiej strony." size="rec">
+      <p className="lead" data-rise style={{ '--r': 0 }}>
+        Adres mógł się zmienić. Zacznij od strony głównej.
+      </p>
+      <p className="lead2" lang="en" data-rise style={{ '--r': 1 }}>
+        This page doesn&apos;t exist. The address may have changed.
+      </p>
+      <div className="cta" data-rise style={{ '--r': 2 }}>
+        <Link className="btn" to={routes.home.pl}>
+          Strona główna
+        </Link>
+        <Link className="link" to={routes.home.en} lang="en" hrefLang="en">
+          Home in English
+        </Link>
+      </div>
+    </Hero>
   );
-};
+}
 
-NotFoundPage.propTypes = {
-  location: PropTypes.object.isRequired,
-};
-
-export default NotFoundPage;
+export const Head = () => <Seo lang="pl" title="Nie ma takiej strony, Adrian Turbiński" noindex />;

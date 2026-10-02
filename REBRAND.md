@@ -6,8 +6,8 @@ Working state of the portfolio rebrand. Every session and every agent starts her
 
 - Phase 0 (recon): done.
 - Phase 1 (brand discovery): language decided (PL + EN with a switch). Three directions delivered and verified (workflow runs `wf_f0c88ef2-ed7`, `wf_5035fd06-003`, `wf_370d91e8-90a`). Adrian chose B "Na miarę" on 2026-10-02 and changed the concept: two editions of one site, one for a recruiter coming from LinkedIn, one for a B2B client; he is a freelance developer, Media Hunters is no longer a brand. B is rebuilt on that (`rebrand-explorations/b-na-miare/index.html`, three views) and has a logo sheet (`rebrand-explorations/b-na-miare/logo.html`, three candidates, "Igła nad ń" recommended). Adrian picked the logo "Igła nad ń", full version with the thread, confirmed the client copy with maintenance added, gave permission to use tailorcloth.com screenshots, pasted a new CV and asked for a portfolio split: TailorCloth as the real product, 6 sample websites for clients, 6 public repos for recruiters that cover every CV technology (see "Sample work"). Then he set the order: the 12 projects are designed only (briefs in `PROJECTS.md`, no code), and the main site is finished first with the split between the real TailorCloth case and the sample websites. The prototype now has that split ("Prawdziwe wdrożenie" tag, "Wzornik." with six designed sample sites). Adrian approved the split and the Wzornik and gave the OK for Phase 2 ("wzornik super, do dzieła"). Phase 1 is done.
-- Phase 2 (system in Gatsby): approved on 2026-10-02, not started. Start at "Resume here".
-- Hosting: GitHub Pages at https://adiyy2001.github.io/portfolio-v2/ (Adrian: "po najprostszej linii oporu", decide the rest yourself). Pages is enabled with the "GitHub Actions" source; `.github/workflows/pages.yml` deploys on every push to `rebrand-2026` (the `github-pages` environment allows `main` and `rebrand-2026`). Until the Gatsby home page is ready it publishes the prototype `rebrand-explorations/b-na-miare` as a preview; then the workflow switches to the Gatsby build with `--prefix-paths`.
+- Phase 2 (system in Gatsby): built and verified on 2026-10-02, waiting for Adrian's OK before Phase 3. Tokens, fonts, global styles, motion tokens, Lenis, layout shell, header with the edition and language switch, footer with the threaded logo and page transitions are ported from the prototype. Pages are stubs with the prototype hero copy; their content is Phase 3. Results are under "Tokens" and "Phase 2 verification".
+- Hosting: GitHub Pages at https://adiyy2001.github.io/portfolio-v2/ (Adrian: "po najprostszej linii oporu", decide the rest yourself). Pages is enabled with the "GitHub Actions" source; `.github/workflows/pages.yml` deploys on every push to `rebrand-2026` (the `github-pages` environment allows `main` and `rebrand-2026`). Since Phase 2 it runs `yarn build --prefix-paths` and publishes `public/`, with the prototype copied to `/portfolio-v2/prototyp/` for reference until Phase 4.
 - Branch: `rebrand-2026`. Pushed to the public repo `adiyy2001/portfolio-v2` with Adrian's OK ("wypychamy"), notes included. Push after each commit on this branch is fine from now on.
 
 ## Resume here
@@ -16,7 +16,8 @@ For a fresh session (Adrian resets the chat to keep the context small):
 
 1. `git checkout rebrand-2026`, then read this file, `PROJECTS.md` and `git log`.
 2. For reference, serve the prototype: `python3 -m http.server 8090 --bind 127.0.0.1 --directory /home/adrian/root/side_projects/portfolio-v2` as a background task with a long timeout (binding 0.0.0.0 is not allowed). Prototype: `rebrand-explorations/b-na-miare/index.html` with views `#/`, `#/dla-rekrutera`, `#/dla-klienta`; logo sheet: `rebrand-explorations/b-na-miare/logo.html`.
-3. Phase 2, in this order: the yarn.lock fix and `.nvmrc` with 24 (see "Baseline build and tooling"); `motion` and `lenis`; tokens, fonts (Bespoke Serif WOFF2 unmodified, Schibsted Grotesk and Mynerve subset) and global styles; layout shell, nav with the edition and language switch, footer with the threaded logo, page transitions. Port from the prototype, do not redesign it. Then verify, show Adrian, wait.
+3. Phase 2 is done and waits for Adrian's OK. Next is Phase 3, one page at a time, commit and push after each. Agree the page mapping first (see "Proposed"), and explain the `gatsby-node.js` edit before making it.
+   Local check of the Gatsby site: `yarn gatsby clean && yarn build` (always clean first: an incremental build once inlined a stale stylesheet into the HTML), then `yarn gatsby serve -H 127.0.0.1 -p 9000` in the background (add `--prefix-paths` to both for the Pages layout). From `rebrand-explorations/tools`: `node site.cjs http://127.0.0.1:9000` (every route at 1440, 768 and 375, transitions, focus, back, skip link, reduced motion, console errors, horizontal scroll; prints a JSON report) and `node lcp.cjs /dla-rekrutera/ /` (LCP entries). Lighthouse: `CHROME_PATH=/usr/bin/google-chrome npx -y lighthouse@12 <url> --chrome-flags="--headless=new --no-sandbox"`, add `--preset=desktop` for desktop. `yarn lint` is `eslint .`.
 4. Verification scripts from Phase 1 are in `rebrand-explorations/tools/` (Playwright 1.63 on the system Chrome): `yarn --cwd rebrand-explorations/tools install` once, then run them from that folder, for example `node views.cjs http://127.0.0.1:8090/rebrand-explorations/b-na-miare/index.html out/views` (flags `--widths=1440,768,375`, `--views=home,rec,cli`, `--lang=en`, `--reduced`). Output goes to `tools/out/`, which is ignored. The Python venv with fonttools, brotli, uharfbuzz and Pillow lived in the session scratchpad; recreate it when fonts need subsetting.
 5. Prototype screenshots (184 MB) stay local and are ignored by `rebrand-explorations/.gitignore`.
 
@@ -495,7 +496,22 @@ The portfolio splits in three. TailorCloth is the real product. Clients get 6 sa
 
 ## Tokens
 
-Phase 2.
+All in `src/styles/global.css` (`:root`) and `src/motion.js`, ported from the prototype without changes unless noted.
+
+- Colour: wool `#5a1424` (page), wool-deep `#3b0d18` (transition panel), chalk `#e9eff6` (text), chalk-dim `#c3cedd`, chalk-blue `#9dbbe0`, paper `#cbd3da` (edition tag, paper sections), ink `#14181f`, ink-soft `#2f3743`, thread `#8e1226`. Texture: `.cloth` grid and a fixed `.grain` overlay (feTurbulence SVG, soft-light, 0.16).
+- Type: display Bespoke Serif 500 and 700 (FFL, files unmodified), text Schibsted Grotesk variable 400 to 600 (OFL, instanced and subset to Basic Latin, Latin-1, Polish letters, punctuation, arrows, euro; features calt, liga, locl, kern, mark; 34 KB), hand Mynerve (OFL, subset, 66 KB). Self-hosted in `static/fonts` with licences, `@font-face` and preloads (Bespoke 700, Schibsted) from `gatsby-ssr.js` through `withPrefix`. Metric-matched fallback faces (`Bespoke Serif fallback` on Times New Roman or Liberation Serif, `Schibsted Grotesk fallback` on Arial or Liberation Sans) with size-adjust and ascent, descent and line-gap overrides computed with fonttools.
+- Layout: `--pad` clamp(16px, 4.4vw, 72px), 12 columns, 4 under 900px.
+- Motion: easings out `[.2,.8,.2,1]`, swap `[.76,0,.24,1]`, draw `[.4,0,.2,1]`; durations reveal .85, words .9, cover .48, word .35, stitch .4, uncover .58, thread 1.5, knot .35; word stagger .07; skew spring stiffness 400, damping 40; hero entrance delay `--enter` 0s on first load, 0.2s after a transition.
+
+## Phase 2 verification
+
+Run on 2026-10-02 against the production build on 127.0.0.1, with and without `--prefix-paths`.
+
+- Lint (`eslint .`, flat config with js, react, react-hooks 7, jsx-a11y, prettier) and Prettier: clean. No typecheck (plain JS).
+- Routes `/`, `/en/`, both editions in PL and EN, `/archive/` and 404 at 1440, 768 and 375: no console errors, no hydration errors, no horizontal scroll. The only 404 responses come from the deliberately missing test route.
+- Transitions: home to recruiter, PL to EN, recruiter to client, logo to home, browser back. Each one covers, swaps, uncovers, sets `lang` and title, scrolls to the top and focuses the page h1. Skip link is the first Tab stop and moves focus to `main`. Reduced motion: no panel, instant swap, focus still moves.
+- Lighthouse 12.8: desktop Perf 100 (archive 99), Accessibility, Best Practices and SEO 100 on every route, LCP about 0.5 s, CLS 0. Mobile Perf 98 to 99, the rest 100, CLS 0, TBT under 125 ms, FCP 0.9 s, LCP 2.01 to 2.06 s. Observed LCP is the first paint (about 50 ms); the simulated value comes from Lantern averaging a fonts-only graph with a fonts plus all-JS graph on slow 4G and a 4x CPU. Just above the 2.0 s target; revisit in the Phase 4 audit.
+- JS: app chunk 44 KB gzip (78.8 KB before the import fix), framework 45.6 KB, motion features 12 KB and Lenis 5.5 KB load after hydration.
 
 ## Decisions
 
@@ -503,7 +519,14 @@ Phase 2.
 | --- | --- |
 | Work on branch `rebrand-2026` | Required by the brief, keeps `main` untouched |
 | Keep React 18.3.1, page transitions through AnimatePresence in `wrapPageElement` | React is below 19.3, so no AnimateView; Gatsby 5 is stable on 18 |
-| motion 13.5.0 and lenis 1.3.26 | Both support React 18 |
+| Motion through `framer-motion` 13.5.0 (the React package of Motion) instead of `motion`, and lenis 1.3.26 | `motion/react` reads `fm.motion` at module level, which pulls the full `motion` component with drag and layout projection into the app chunk. Importing `framer-motion`, `framer-motion/mini` and async `domAnimation` cut the app chunk from 78.8 KB to 49 KB gzip. Same code and version |
+| Layout path from `location.pathname` minus the path prefix | In SSR Gatsby passes `props.path` as `/*`, which broke hydration of the edition-aware shell |
+| Reveal after the new page mounts, not on `onExitComplete` | `onExitComplete` fires before the next page is in the DOM, so focus fell to `body` |
+| Transition panel is `display: none` outside a transition, Mynerve is loaded on idle after hydration | A hidden but laid out panel made every page fetch Mynerve (67 KB) before the first paint |
+| Lenis loads with a dynamic import after hydration | Smooth scroll is not needed for the first paint |
+| Edition tag in the header has no fade and no own texture | Its delayed fade and its SVG noise background made it the late LCP element on edition pages; it still gets the grain from the global overlay |
+| ESLint flat config (`eslint.config.js`) and an inline Prettier config | The Upstatement configs were removed with the template; lint now runs |
+| Pages publishes the Gatsby build, the prototype stays at `/prototyp/` until Phase 4 | Adrian sees Phase 2 at the real address and can still compare with the prototype |
 | Fix Node 24 by refreshing two transitive lock entries | Smallest change that makes the build pass, verified in a scratch copy |
 | Update `.nvmrc` from 20.9.0 to 24 | The stack is Node 24 and Node 20 is not installed |
 | Remove the home Loader | It is the only thing in the SSR HTML of `/` |
@@ -552,7 +575,6 @@ Proposed, to confirm at the relevant phase:
 - `gatsby-node.js` will need one edit in Phase 3 (Single project): remove the pensieve page creation (template, creates nothing, its templates and lodash go away) and add project pages. Explained to Adrian before the edit.
 - Project pages on `gatsby-transformer-remark`, not MDX, unless case studies need React components. Content is plain Markdown and MDX would be a new dependency.
 - Drop `gatsby-plugin-offline` and ship a one-time service worker cleanup so returning visitors do not stay on the old site.
-- Replace the ESLint setup with a minimal flat config so lint can run before each commit.
 - Edition routes: `/dla-rekrutera/` and `/dla-klienta/`, EN `/en/for-recruiters/` and `/en/for-clients/`.
 - `/resume.pdf` must survive: either a PDF printed from the recruiter edition at build time, or the new CV as a PDF. GitHub Pages has no server redirects, so a redirect to `/dla-rekrutera/` is out.
 - GitHub Pages: deploy from a GitHub Actions workflow (`actions/deploy-pages`) on Node 24, with Pages set to "GitHub Actions" in the repo settings. At `adiyy2001.github.io/portfolio-v2/` Gatsby needs `pathPrefix: '/portfolio-v2'` and `gatsby build --prefix-paths`; with a custom domain, `static/CNAME` and no prefix. Pages sets its own cache headers and allows no custom headers or redirects. The old Vercel deployment keeps serving the old site until Adrian removes it.
@@ -584,7 +606,7 @@ Open:
 
 ## Pages
 
-- [ ] Phase 2 system (tokens, fonts, global styles, motion, Lenis, shell, nav, footer, transitions)
+- [x] Phase 2 system (tokens, fonts, global styles, motion, Lenis, shell, nav, footer, transitions), waiting for Adrian's OK
 - [ ] Home
 - [ ] Work index
 - [ ] Single project

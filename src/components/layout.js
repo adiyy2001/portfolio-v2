@@ -1,86 +1,143 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import styled, { ThemeProvider } from 'styled-components';
-import { Head, Loader, Nav, Social, Email, Footer } from '@components';
-import { GlobalStyle, theme } from '@styles';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import { AnimatePresence, usePresence, useReducedMotion } from 'framer-motion';
+import { useAnimate } from 'framer-motion/mini';
+import Header from './header';
+import Footer from './footer';
+import { locate, ui } from '../i18n';
+import { duration, ease, enterAfterSwap } from '../motion';
 
-const StyledContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`;
+let saved = null;
 
-const Layout = ({ children, location }) => {
-  const isHome = location.pathname === '/';
-  const [isLoading, setIsLoading] = useState(isHome);
+export function keepScroll(position) {
+  saved = position;
+}
 
-  // Sets target="_blank" rel="noopener noreferrer" on external links
-  const handleExternalLinks = () => {
-    const allLinks = Array.from(document.querySelectorAll('a'));
-    if (allLinks.length > 0) {
-      allLinks.forEach(link => {
-        if (link.host !== window.location.host) {
-          link.setAttribute('rel', 'noopener noreferrer');
-          link.setAttribute('target', '_blank');
-        }
-      });
-    }
-  };
+const Swap = createContext(null);
+
+function Page({ children }) {
+  const [isPresent, safeToRemove] = usePresence();
+  const { cover, reveal } = useContext(Swap);
+  useEffect(() => {
+    if (isPresent) reveal();
+    else cover().then(safeToRemove);
+  }, [isPresent, cover, reveal, safeToRemove]);
+  return children;
+}
+
+export default function Layout({ path, children }) {
+  const { lang, view } = locate(path);
+  const t = ui[lang];
+  const reduce = useReducedMotion();
+  const [, animate] = useAnimate();
+  const swap = useRef(null);
+  const lenis = useRef(null);
+  const still = useRef(false);
+  const pending = useRef(null);
+  const opening = useRef(null);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
+    still.current = Boolean(reduce);
+    if (reduce) return undefined;
+    let gone = false;
+    import('lenis').then(({ default: Lenis }) => {
+      if (!gone) lenis.current = new Lenis({ autoRaf: true });
+    });
+    return () => {
+      gone = true;
+      lenis.current?.destroy();
+      lenis.current = null;
+    };
+  }, [reduce]);
 
-    if (location.hash) {
-      const id = location.hash.substring(1); // location.hash without the '#'
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView();
-          el.focus();
-        }
-      }, 0);
-    }
+  const cover = useCallback(() => {
+    if (pending.current) return pending.current;
+    pending.current = (async () => {
+      await opening.current;
+      if (still.current) return;
+      lenis.current?.stop();
+      document.documentElement.style.setProperty('--enter', enterAfterSwap);
+      const panel = swap.current;
+      const word = panel.querySelector('.swap__word');
+      const stitch = panel.querySelector('.swap__stitch path');
+      panel.classList.add('on');
+      await animate(
+        panel,
+        { transform: ['translateY(102%)', 'translateY(0%)'] },
+        { duration: duration.cover, ease: ease.swap },
+      );
+      animate(
+        word,
+        {
+          opacity: [0, 1],
+          transform: ['translateY(10px) rotate(-3deg)', 'translateY(0px) rotate(-3deg)'],
+        },
+        { duration: duration.word, ease: ease.out },
+      );
+      await animate(
+        stitch,
+        { strokeDashoffset: [1, 0] },
+        { duration: duration.stitch, ease: 'ease-out' },
+      );
+    })();
+    return pending.current;
+  }, [animate]);
 
-    handleExternalLinks();
-  }, [isLoading]);
+  const reveal = useCallback(() => {
+    const covered = pending.current;
+    if (!covered) return;
+    pending.current = null;
+    opening.current = (async () => {
+      await covered;
+      const { hash } = window.location;
+      const target = hash && document.getElementById(decodeURIComponent(hash.slice(1)));
+      const y = saved ? saved[1] : target ? target.getBoundingClientRect().top + window.scrollY : 0;
+      saved = null;
+      if (lenis.current) lenis.current.scrollTo(y, { immediate: true, force: true });
+      else window.scrollTo(0, y);
+      document.querySelector('#main h1')?.focus({ preventScroll: true });
+      const panel = swap.current;
+      if (!still.current) {
+        await animate(
+          panel,
+          { transform: ['translateY(0%)', 'translateY(-102%)'] },
+          { duration: duration.uncover, ease: ease.swap },
+        );
+      }
+      panel.classList.remove('on');
+      panel.querySelector('.swap__word').style.opacity = '0';
+      panel.querySelector('.swap__stitch path').style.strokeDashoffset = '1';
+      lenis.current?.start();
+    })();
+  }, [animate]);
+
+  const flow = useMemo(() => ({ cover, reveal }), [cover, reveal]);
 
   return (
-    <>
-      <Head />
-
-      <div id="root">
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-
-          <a className="skip-to-content" href="#content">
-            Skip to Content
-          </a>
-
-          {isLoading && isHome ? (
-            <Loader finishLoading={() => setIsLoading(false)} />
-          ) : (
-            <StyledContent>
-              <Nav isHome={isHome} />
-              <Social isHome={isHome} />
-              <Email isHome={isHome} />
-
-              <div id="content">
-                {children}
-                <Footer />
-              </div>
-            </StyledContent>
-          )}
-        </ThemeProvider>
+    <Swap.Provider value={flow}>
+      <div className="cloth" aria-hidden="true" />
+      <div className="grain" aria-hidden="true" />
+      <a className="skip" href="#main">
+        {t.skip}
+      </a>
+      <Header lang={lang} view={view} />
+      <main id="main" tabIndex={-1}>
+        <AnimatePresence mode="wait" initial={false}>
+          <Page key={path}>{children}</Page>
+        </AnimatePresence>
+      </main>
+      <Footer lang={lang} />
+      <div className="swap" ref={swap} aria-hidden="true">
+        <p className="swap__word">{t.words[view] || t.words.home}</p>
+        <svg className="swap__stitch" viewBox="0 0 560 20" preserveAspectRatio="none">
+          <path
+            className="stroke"
+            pathLength="1"
+            strokeWidth="2.2"
+            d="M2 11C140 4 280 17 420 8S530 12 558 9"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
       </div>
-    </>
+    </Swap.Provider>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-  location: PropTypes.object.isRequired,
-};
-
-export default Layout;
+}
