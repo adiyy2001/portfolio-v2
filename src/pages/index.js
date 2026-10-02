@@ -1,8 +1,29 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import Hero from '../components/hero';
+import Rack from '../components/rack';
 import Seo from '../components/seo';
-import { routes } from '../i18n';
+import { routes, tie } from '../i18n';
+
+const labels = [
+  {
+    to: routes.rec.pl,
+    tilt: -3,
+    for: 'Szyte dla',
+    who: 'rekrutera',
+    what: 'Doświadczenie, stack i CV do druku.',
+    go: 'Otwórz',
+    note: 'z LinkedIna?',
+  },
+  {
+    to: routes.cli.pl,
+    tilt: 2.4,
+    for: 'Szyte dla',
+    who: 'klienta',
+    what: 'Co zbuduję, jak pracuję i jak zacząć.',
+    go: 'Otwórz',
+    note: 'masz projekt?',
+  },
+];
 
 export default function Home() {
   return (
@@ -10,19 +31,19 @@ export default function Home() {
       id="home-h"
       sr="Adrian Turbiński, programista front-end i full-stack. "
       title="Na miarę."
-      size="home">
+      size="home"
+      aside={<Rack labels={labels} />}>
       <p className="lead" data-rise style={{ '--r': 0 }}>
-        Adrian Turbiński, programista front-end i full-stack z Wrocławia. Od 2019 roku buduję
-        aplikacje webowe, na etacie i na zlecenie.
+        {tie(
+          'Adrian Turbiński, programista front-end i full-stack z Wrocławia. Od 2019 roku buduję aplikacje webowe, na etacie i na zlecenie.',
+        )}
       </p>
-      <div className="cta" data-rise style={{ '--r': 1 }}>
-        <Link className="btn" to={routes.rec.pl}>
-          Szyte dla rekrutera
-        </Link>
-        <Link className="btn btn--line" to={routes.cli.pl}>
-          Szyte dla klienta
-        </Link>
-      </div>
+      <h2 className="ask" data-rise style={{ '--r': 1 }}>
+        Kto patrzy?
+      </h2>
+      <p className="ask__sub" data-rise style={{ '--r': 2 }}>
+        Ta strona ma dwa kroje. Wybierz swój.
+      </p>
     </Hero>
   );
 }

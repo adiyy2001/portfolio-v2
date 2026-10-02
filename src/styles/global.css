@@ -13,7 +13,7 @@
   --display: 'Bespoke Serif', 'Bespoke Serif fallback', Georgia, serif;
   --text: 'Schibsted Grotesk', 'Schibsted Grotesk fallback', system-ui, 'Segoe UI', Arial,
     sans-serif;
-  --hand: 'Mynerve', 'Bradley Hand', 'Segoe Script', cursive;
+  --hand: 'Bradley Hand', 'Segoe Script', cursive;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --enter: 0s;
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http:%2F%2Fwww.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 .9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -22,6 +22,10 @@
   --tooth-down: url("data:image/svg+xml,%3Csvg xmlns='http:%2F%2Fwww.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M0 0H16L8 8z' fill='%23cbd3da'/%3E%3C/svg%3E");
   --tooth-up-deep: url("data:image/svg+xml,%3Csvg xmlns='http:%2F%2Fwww.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M0 8 8 0 16 8z' fill='%233b0d18'/%3E%3C/svg%3E");
   --tooth-down-deep: url("data:image/svg+xml,%3Csvg xmlns='http:%2F%2Fwww.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M0 0H16L8 8z' fill='%233b0d18'/%3E%3C/svg%3E");
+}
+
+.hand {
+  --hand: 'Mynerve', 'Bradley Hand', 'Segoe Script', cursive;
 }
 
 @media (max-width: 899px) {
@@ -358,6 +362,178 @@ html[lang='en'] .title--home {
   font-size: 1.0625rem;
 }
 
+.hero--home .hero__body {
+  flex: none;
+  margin-top: auto;
+  padding-top: 44px;
+  align-items: end;
+}
+
+.hero--home .hero__text {
+  grid-column: 1 / span 5;
+  padding-right: 24px;
+  align-self: auto;
+}
+
+.hero--home .lead {
+  font-size: clamp(1.25rem, 1.7vw, 1.75rem);
+}
+
+.ask {
+  font: 700 clamp(2.4rem, 4vw, 4.2rem) / 0.95 var(--display);
+  letter-spacing: -0.02em;
+  margin-top: 34px;
+}
+
+.ask__sub {
+  margin-top: 12px;
+  color: var(--chalk-dim);
+}
+
+.rack {
+  grid-column: 7 / span 6;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  gap: clamp(16px, 2.4vw, 36px);
+  padding-top: 64px;
+}
+
+.rack__rail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 4px;
+  width: 100%;
+  height: 18px;
+  overflow: visible;
+  color: var(--chalk-dim);
+}
+
+.hang {
+  position: relative;
+  flex: 1;
+  max-width: 300px;
+  min-width: 0;
+}
+
+.hang__thread {
+  position: absolute;
+  left: 50%;
+  top: -52px;
+  width: 12px;
+  height: 82px;
+  margin-left: -6px;
+  color: var(--chalk-blue);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.label {
+  display: block;
+  text-decoration: none;
+  color: var(--ink);
+  transform: rotate(var(--tilt));
+  transform-origin: 50% 26px;
+}
+
+.label__card {
+  position: relative;
+  display: block;
+  background: var(--paper);
+  padding: 50px 24px 24px;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.35),
+    0 18px 26px -16px rgba(0, 0, 0, 0.75);
+  transition: background-color 0.3s;
+}
+
+.label__card::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(142, 18, 38, 0.8);
+  pointer-events: none;
+}
+
+.label:hover .label__card {
+  background-color: #d6dde3;
+}
+
+.label__hole {
+  position: absolute;
+  top: 19px;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: var(--wool-deep);
+  box-shadow:
+    0 0 0 3px #aab6c2,
+    inset 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.label__for {
+  display: block;
+  font: 600 0.875rem/1 var(--text);
+  color: var(--ink-soft);
+}
+
+.label__who {
+  display: block;
+  font: 700 clamp(2.1rem, 3.2vw, 3.3rem) / 0.95 var(--display);
+  letter-spacing: -0.02em;
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+}
+
+.label__what {
+  display: block;
+  margin-top: 14px;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.label__go {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(20, 24, 31, 0.35);
+  font: 600 1rem/1 var(--text);
+  color: var(--thread);
+}
+
+.label__go svg {
+  width: 28px;
+  height: 14px;
+  transition: transform 0.35s var(--ease);
+}
+
+.label:hover .label__go svg {
+  transform: translateX(6px);
+}
+
+.label__note {
+  position: absolute;
+  right: -6px;
+  top: -30px;
+  font: 400 1.5rem/1 var(--hand);
+  color: var(--chalk-blue);
+  transform: rotate(-6deg);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease);
+}
+
+.hand .label__note {
+  opacity: 1;
+}
+
 .cta {
   display: flex;
   flex-wrap: wrap;
@@ -666,6 +842,12 @@ html[lang='en'] .title--home {
   }
 }
 
+@keyframes hang {
+  from {
+    transform: rotate(calc(var(--tilt) * 4));
+  }
+}
+
 .top .wm,
 .top .lang {
   animation: fade 0.6s var(--ease) both;
@@ -694,6 +876,51 @@ html[lang='en'] .title--home {
   animation-delay: calc(var(--enter) + 0.6s + var(--r, 0) * 0.1s);
 }
 
+.hero .label {
+  animation: hang 1.4s
+    linear(
+      0,
+      0.061,
+      0.214,
+      0.417,
+      0.633,
+      0.834,
+      1.001,
+      1.122,
+      1.197,
+      1.23,
+      1.227,
+      1.198,
+      1.154,
+      1.105,
+      1.056,
+      1.014,
+      0.981,
+      0.96,
+      0.949,
+      0.946,
+      0.951,
+      0.96,
+      0.971,
+      0.983,
+      0.993,
+      1.002,
+      1.008,
+      1.011,
+      1.012,
+      1.012,
+      1.01,
+      1.008,
+      1.005,
+      1.002,
+      1,
+      0.999,
+      1
+    )
+    both;
+  animation-delay: calc(var(--enter) + 0.5s + var(--n) * 0.16s);
+}
+
 @media (max-width: 899px) {
   .top {
     display: grid;
@@ -718,6 +945,10 @@ html[lang='en'] .title--home {
     padding-bottom: 40px;
   }
 
+  .hero--home {
+    padding-top: 100px;
+  }
+
   .title--home {
     --ts: 28vw;
   }
@@ -738,20 +969,55 @@ html[lang='en'] .title--home {
     --ts: 10vw;
   }
 
-  .hero__body {
+  .hero__body,
+  .hero--home .hero__body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 44px;
   }
 
-  .hero__text {
+  .hero__text,
+  .hero--home .hero__text {
     padding-right: 0;
     align-self: stretch;
   }
 
   .lead {
     font-size: 1.4rem;
+  }
+
+  .ask {
+    margin-top: 26px;
+  }
+
+  .rack {
+    padding-top: 58px;
+    gap: 12px;
+    justify-content: space-between;
+  }
+
+  .label__card {
+    padding: 44px 14px 16px;
+  }
+
+  .label__who {
+    font-size: 1.6rem;
+  }
+
+  .label__what {
+    font-size: 0.875rem;
+  }
+
+  .label__go {
+    font-size: 0.875rem;
+    margin-top: 16px;
+  }
+
+  .label__note {
+    font-size: 1.2rem;
+    top: -28px;
+    right: -2px;
   }
 }
 

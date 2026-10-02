@@ -2,9 +2,9 @@ import React from 'react';
 import Skew from './skew';
 import Split from './split';
 
-export default function Hero({ id, sr, title, size, children }) {
+export default function Hero({ id, sr, title, size, aside, children }) {
   return (
-    <section className="hero" aria-labelledby={id}>
+    <section className={`hero hero--${size}`} aria-labelledby={id}>
       <h1 id={id} tabIndex={-1}>
         {sr && <span className="sr">{sr}</span>}
         <Skew>
@@ -14,6 +14,7 @@ export default function Hero({ id, sr, title, size, children }) {
       <div className="ruler" aria-hidden="true" />
       <div className="hero__body">
         <div className="hero__text">{children}</div>
+        {aside}
       </div>
     </section>
   );

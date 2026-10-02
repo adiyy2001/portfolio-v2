@@ -1,8 +1,29 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import Hero from '../../components/hero';
+import Rack from '../../components/rack';
 import Seo from '../../components/seo';
-import { routes } from '../../i18n';
+import { routes, tie } from '../../i18n';
+
+const labels = [
+  {
+    to: routes.rec.en,
+    tilt: -3,
+    for: 'Cut for',
+    who: 'recruiters',
+    what: 'Experience, stack and a printable resume.',
+    go: 'Open',
+    note: 'from LinkedIn?',
+  },
+  {
+    to: routes.cli.en,
+    tilt: 2.4,
+    for: 'Cut for',
+    who: 'clients',
+    what: 'What I build, how I work, how to start.',
+    go: 'Open',
+    note: 'got a project?',
+  },
+];
 
 export default function Home() {
   return (
@@ -10,19 +31,19 @@ export default function Home() {
       id="home-h"
       sr="Adrian Turbiński, front-end and full-stack developer. "
       title="Made to | measure."
-      size="home">
+      size="home"
+      aside={<Rack labels={labels} />}>
       <p className="lead" data-rise style={{ '--r': 0 }}>
-        Adrian Turbiński, front-end and full-stack developer from Wrocław. Building web apps since
-        2019, both as an employee and as a contractor.
+        {tie(
+          'Adrian Turbiński, front-end and full-stack developer from Wrocław. Building web apps since 2019, both as an employee and as a contractor.',
+        )}
       </p>
-      <div className="cta" data-rise style={{ '--r': 1 }}>
-        <Link className="btn" to={routes.rec.en}>
-          Cut for recruiters
-        </Link>
-        <Link className="btn btn--line" to={routes.cli.en}>
-          Cut for clients
-        </Link>
-      </div>
+      <h2 className="ask" data-rise style={{ '--r': 1 }}>
+        Who&apos;s looking?
+      </h2>
+      <p className="ask__sub" data-rise style={{ '--r': 2 }}>
+        This site comes in two cuts. Pick yours.
+      </p>
     </Hero>
   );
 }

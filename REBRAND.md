@@ -6,7 +6,8 @@ Working state of the portfolio rebrand. Every session and every agent starts her
 
 - Phase 0 (recon): done.
 - Phase 1 (brand discovery): language decided (PL + EN with a switch). Three directions delivered and verified (workflow runs `wf_f0c88ef2-ed7`, `wf_5035fd06-003`, `wf_370d91e8-90a`). Adrian chose B "Na miarę" on 2026-10-02 and changed the concept: two editions of one site, one for a recruiter coming from LinkedIn, one for a B2B client; he is a freelance developer, Media Hunters is no longer a brand. B is rebuilt on that (`rebrand-explorations/b-na-miare/index.html`, three views) and has a logo sheet (`rebrand-explorations/b-na-miare/logo.html`, three candidates, "Igła nad ń" recommended). Adrian picked the logo "Igła nad ń", full version with the thread, confirmed the client copy with maintenance added, gave permission to use tailorcloth.com screenshots, pasted a new CV and asked for a portfolio split: TailorCloth as the real product, 6 sample websites for clients, 6 public repos for recruiters that cover every CV technology (see "Sample work"). Then he set the order: the 12 projects are designed only (briefs in `PROJECTS.md`, no code), and the main site is finished first with the split between the real TailorCloth case and the sample websites. The prototype now has that split ("Prawdziwe wdrożenie" tag, "Wzornik." with six designed sample sites). Adrian approved the split and the Wzornik and gave the OK for Phase 2 ("wzornik super, do dzieła"). Phase 1 is done.
-- Phase 2 (system in Gatsby): built and verified on 2026-10-02, waiting for Adrian's OK before Phase 3. Tokens, fonts, global styles, motion tokens, Lenis, layout shell, header with the edition and language switch, footer with the threaded logo and page transitions are ported from the prototype. Pages are stubs with the prototype hero copy; their content is Phase 3. Results are under "Tokens" and "Phase 2 verification".
+- Phase 2 (system in Gatsby): built and verified on 2026-10-02, approved by Adrian ("wszystko wygląda okej, do dzieła"). Tokens, fonts, global styles, motion tokens, Lenis, layout shell, header with the edition and language switch, footer with the threaded logo and page transitions are ported from the prototype. Pages are stubs with the prototype hero copy; their content is Phase 3. Results are under "Tokens" and "Phase 2 verification".
+- Phase 3 (pages): Home is ported (the chooser with the two hanging labels), verified and committed; it waits for Adrian's OK before the recruiter edition. Results are under "Phase 3 verification".
 - Hosting: GitHub Pages at https://adiyy2001.github.io/portfolio-v2/ (Adrian: "po najprostszej linii oporu", decide the rest yourself). Pages is enabled with the "GitHub Actions" source; `.github/workflows/pages.yml` deploys on every push to `rebrand-2026` (the `github-pages` environment allows `main` and `rebrand-2026`). It publishes the prototype `rebrand-explorations/b-na-miare` until the Gatsby pages carry the prototype content (Phase 3). Then it switches to `yarn build --prefix-paths` and publishes `public/` (that version ran once on 2026-10-02 and works). The Gatsby shell is reviewed locally until then.
 - Branch: `rebrand-2026`. Pushed to the public repo `adiyy2001/portfolio-v2` with Adrian's OK ("wypychamy"), notes included. Push after each commit on this branch is fine from now on.
 
@@ -16,7 +17,7 @@ For a fresh session (Adrian resets the chat to keep the context small):
 
 1. `git checkout rebrand-2026`, then read this file, `PROJECTS.md` and `git log`.
 2. For reference, serve the prototype: `python3 -m http.server 8090 --bind 127.0.0.1 --directory /home/adrian/root/side_projects/portfolio-v2` as a background task with a long timeout (binding 0.0.0.0 is not allowed). Prototype: `rebrand-explorations/b-na-miare/index.html` with views `#/`, `#/dla-rekrutera`, `#/dla-klienta`; logo sheet: `rebrand-explorations/b-na-miare/logo.html`.
-3. Phase 2 is done and waits for Adrian's OK. Next is Phase 3, one page at a time, commit and push after each. Agree the page mapping first (see "Proposed"), and explain the `gatsby-node.js` edit before making it.
+3. Phase 3 is in progress, one page at a time, commit and push after each, then wait for Adrian. Home is done. Next is the recruiter edition (About), then the client edition, Work, Single project, 404. The page mapping under "Proposed" stands (Adrian: "do dzieła"); explain the `gatsby-node.js` edit before making it. Compare each page with the prototype view at 1440, 768 and 375 (`views.cjs` against the prototype, `site.cjs` screenshots against the Gatsby build).
    Local check of the Gatsby site: `yarn gatsby clean && yarn build` (always clean first: an incremental build once inlined a stale stylesheet into the HTML), then `yarn gatsby serve -H 127.0.0.1 -p 9000` in the background (add `--prefix-paths` to both for the Pages layout). From `rebrand-explorations/tools`: `node site.cjs http://127.0.0.1:9000` (every route at 1440, 768 and 375, transitions, focus, back, skip link, reduced motion, console errors, horizontal scroll; prints a JSON report) and `node lcp.cjs /dla-rekrutera/ /` (LCP entries). Lighthouse: `CHROME_PATH=/usr/bin/google-chrome npx -y lighthouse@12 <url> --chrome-flags="--headless=new --no-sandbox"`, add `--preset=desktop` for desktop. `yarn lint` is `eslint .`.
 4. Verification scripts from Phase 1 are in `rebrand-explorations/tools/` (Playwright 1.63 on the system Chrome): `yarn --cwd rebrand-explorations/tools install` once, then run them from that folder, for example `node views.cjs http://127.0.0.1:8090/rebrand-explorations/b-na-miare/index.html out/views` (flags `--widths=1440,768,375`, `--views=home,rec,cli`, `--lang=en`, `--reduced`). Output goes to `tools/out/`, which is ignored. The Python venv with fonttools, brotli, uharfbuzz and Pillow lived in the session scratchpad; recreate it when fonts need subsetting.
 5. Prototype screenshots (184 MB) stay local and are ignored by `rebrand-explorations/.gitignore`.
@@ -513,6 +514,14 @@ Run on 2026-10-02 against the production build on 127.0.0.1, with and without `-
 - Lighthouse 12.8: desktop Perf 100 (archive 99), Accessibility, Best Practices and SEO 100 on every route, LCP about 0.5 s, CLS 0. Mobile Perf 98 to 99, the rest 100, CLS 0, TBT under 125 ms, FCP 0.9 s, LCP 2.01 to 2.06 s. Observed LCP is the first paint (about 50 ms); the simulated value comes from Lantern averaging a fonts-only graph with a fonts plus all-JS graph on slow 4G and a 4x CPU. Locally `gatsby serve` sends uncompressed files; on the live Pages site (compressed) mobile is Perf 99 to 100 with LCP 1.90 to 1.94 s and desktop Perf 100 with LCP 0.42 s, so the target holds there. Recheck in the Phase 4 audit.
 - JS: app chunk 44 KB gzip (78.8 KB before the import fix), framework 45.6 KB, motion features 12 KB and Lenis 5.5 KB load after hydration.
 
+## Phase 3 verification
+
+Local `--prefix-paths` build after `yarn gatsby clean`, served on 127.0.0.1:9000.
+
+- Home, PL and EN: screenshots at 1440, 768 and 375 match the prototype home; the only intended difference is the card without grain. No horizontal scroll. No console errors or hydration warnings on any route (the 404 responses come from the `/nie-ma/` check).
+- Labels: hover sway works, keyboard focus ring is visible on the tilted label, Enter and click open the edition with focus on its `h1`. Reduced motion shows the labels at rest with the notes.
+- Lighthouse mobile, two runs each: PL 99/100/100/100, LCP 2.0 s; EN 99/100/100/100, LCP 2.0 s; CLS 0. Desktop: 100/100/100/100, LCP 0.5 s. The LCP element is still the title word. Mynerve is requested after hydration (about 110 to 160 ms into the trace).
+
 ## Decisions
 
 | Decision | Reason |
@@ -569,6 +578,10 @@ Run on 2026-10-02 against the production build on 127.0.0.1, with and without `-
 | TailorCloth case gets "Dziś stronę utrzymuje inna agencja." / "Another agency maintains the site today." after the team line | Adrian: "4. tak, dodaj" |
 | Address: `adiyy2001.github.io/portfolio-v2/`, `siteUrl` https://adiyy2001.github.io with `pathPrefix` `/portfolio-v2` | Adrian: "po najprostszej linii oporu" |
 | Prototype screenshots stay local (ignored, 184 MB); prototypes, notes and verification scripts are committed | Keeps the public repo small; the folder is deleted in Phase 4 anyway |
+| Home labels keep the prototype look but rest visible from the first frame: the entrance is rotation only (CSS keyframes on the spring `linear()` curve), no fade, no grain on the card | Large on mobile; a fade from 0 or a late data URI background made them a late LCP candidate in Phase 2 tests |
+| Label sway on hover runs through WAAPI, mouse only, skipped with reduced motion | Same keyframes as the prototype, no Motion code on the home page |
+| Mynerve is not in `--hand` until `html.hand` is set; `onInitialClientRender` loads it on idle and then adds the class; the label notes fade in at that moment | With the notes above the fold, Mynerve loaded with the critical fonts and moved mobile LCP from 2.0 s to 2.2 to 2.3 s |
+| Mynerve subset again without `calt` (33.2 KB) | `calt` turned "LinkedIna" into "LinkedIma" |
 
 Proposed, to confirm at the relevant phase:
 
@@ -607,7 +620,7 @@ Open:
 ## Pages
 
 - [x] Phase 2 system (tokens, fonts, global styles, motion, Lenis, shell, nav, footer, transitions), waiting for Adrian's OK
-- [ ] Home
+- [x] Home (chooser with the two labels), waiting for Adrian's OK
 - [ ] Work index
 - [ ] Single project
 - [ ] About

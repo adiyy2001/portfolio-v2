@@ -6,7 +6,8 @@ export { wrapRootElement, wrapPageElement } from './src/wrap';
 
 export const onInitialClientRender = () => {
   const idle = window.requestIdleCallback || window.setTimeout;
-  idle(() => document.fonts.load('400 1em Mynerve'));
+  const hand = () => document.documentElement.classList.add('hand');
+  idle(() => document.fonts.load('400 1em Mynerve').then(hand, hand));
 };
 
 export const shouldUpdateScroll = ({ routerProps, prevRouterProps, getSavedScrollPosition }) => {
