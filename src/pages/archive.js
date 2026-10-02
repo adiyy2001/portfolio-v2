@@ -1,21 +1,22 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import Hero from '../components/hero';
 import Seo from '../components/seo';
-import { routes } from '../i18n';
+import Work from '../components/work';
+import { tie } from '../i18n';
 
 export default function Archive() {
   return (
-    <Hero id="work-h" title="Projekty." size="rec">
-      <p className="lead" data-rise style={{ '--r': 0 }}>
-        Wdrożenie dla TailorCloth i przykładowe strony są w wersji dla klienta.
-      </p>
-      <div className="cta" data-rise style={{ '--r': 1 }}>
-        <Link className="btn" to={routes.cli.pl}>
-          Szyte dla klienta
-        </Link>
-      </div>
-    </Hero>
+    <>
+      <Hero id="work-h" sr="Projekty, " title="Z warsztatu." size="work">
+        <p className="lead" data-rise style={{ '--r': 0 }}>
+          {tie('Jedno prawdziwe wdrożenie i sześć stron koncepcyjnych.')}
+        </p>
+        <p className="lead2" data-rise style={{ '--r': 1 }}>
+          {tie('Pierwsze zrobiłem z zespołem. Pozostałe to moje projekty dla wymyślonych firm.')}
+        </p>
+      </Hero>
+      <Work lang="pl" />
+    </>
   );
 }
 
@@ -24,6 +25,6 @@ export const Head = () => (
     lang="pl"
     view="work"
     title="Projekty, Adrian Turbiński"
-    description="Projekty Adriana Turbińskiego."
+    description="Jedno prawdziwe wdrożenie dla firmy krawieckiej i sześć stron koncepcyjnych dla wymyślonych firm."
   />
 );

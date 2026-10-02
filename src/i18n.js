@@ -17,6 +17,7 @@ export const ui = {
     langAria: 'Język',
     footerName: 'Adrian Turbiński, Wrocław',
     footerMail: 'E-mail',
+    footerWork: 'Projekty',
     words: {
       home: 'Na miarę',
       rec: 'dla rekrutera',
@@ -35,6 +36,7 @@ export const ui = {
     langAria: 'Language',
     footerName: 'Adrian Turbiński, Wrocław',
     footerMail: 'Email',
+    footerWork: 'Projects',
     words: {
       home: 'Made to measure',
       rec: 'for recruiters',

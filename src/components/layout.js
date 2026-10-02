@@ -1,4 +1,13 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { AnimatePresence, usePresence, useReducedMotion } from 'framer-motion';
 import { useAnimate } from 'framer-motion/mini';
 import Header from './header';
@@ -6,22 +15,64 @@ import Footer from './footer';
 import { locate, ui } from '../i18n';
 import { duration, ease, enterAfterSwap } from '../motion';
 
+const useSyncEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
+
+export const glideTransition = { duration: duration.reveal - 0.05, ease: ease.swap };
+
+const glideFloor = 600;
+const glideCeiling = 1800;
+
 let saved = null;
 
 export function keepScroll(position) {
   saved = position;
+  document
+    .querySelector('#main > .page[data-glide="in"]')
+    ?.style.setProperty('--shift', `${-(position?.[1] ?? 0)}px`);
 }
 
-const Swap = createContext(null);
+function canGlide(from, to) {
+  if (!from.view || !to.view || from.lang !== to.lang) return false;
+  if ([from.view, to.view].sort().join() !== 'case,work') return false;
+  if (!document.documentElement.classList.contains('motion')) return false;
+  if (document.getElementById('main')?.hasAttribute('data-glide')) return false;
+  const frame = document.querySelector('#main [data-shared]');
+  if (!frame) return false;
+  const { top, bottom, height } = frame.getBoundingClientRect();
+  const shown = Math.min(bottom, window.innerHeight) - Math.max(top, 0);
+  return shown >= height * 0.5;
+}
+
+const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+export const Swap = createContext(null);
 
 function Page({ children }) {
   const [isPresent, safeToRemove] = usePresence();
-  const { cover, reveal } = useContext(Swap);
+  const { cover, reveal, glide, gliding } = useContext(Swap);
+  const node = useRef(null);
+  const acted = useRef(null);
+
+  useSyncEffect(() => {
+    if (gliding) node.current.dataset.glide = isPresent ? 'in' : 'out';
+  }, [isPresent, gliding]);
+
   useEffect(() => {
-    if (isPresent) reveal();
+    const state = isPresent ? 'in' : 'out';
+    if (acted.current === state) return;
+    acted.current = state;
+    if (gliding) {
+      const run = glide();
+      if (!isPresent) run.then(safeToRemove);
+    } else if (isPresent) reveal();
     else cover().then(safeToRemove);
-  }, [isPresent, cover, reveal, safeToRemove]);
-  return children;
+  }, [isPresent, gliding, glide, cover, reveal, safeToRemove]);
+
+  return (
+    <div className="page" ref={node}>
+      {children}
+    </div>
+  );
 }
 
 export default function Layout({ path, children }) {
@@ -30,10 +81,23 @@ export default function Layout({ path, children }) {
   const reduce = useReducedMotion();
   const [, animate] = useAnimate();
   const swap = useRef(null);
+  const main = useRef(null);
   const lenis = useRef(null);
   const still = useRef(false);
   const pending = useRef(null);
   const opening = useRef(null);
+  const stage = useRef(null);
+  const [trail, setTrail] = useState({ path, gliding: false });
+
+  let { gliding } = trail;
+  if (trail.path !== path) {
+    gliding = !reduce && canGlide(locate(trail.path), { lang, view });
+    setTrail({ path, gliding });
+  }
+
+  useEffect(() => {
+    if (!gliding) stage.current?.settle(true);
+  }, [path, gliding]);
 
   useEffect(() => {
     still.current = Boolean(reduce);
@@ -114,7 +178,63 @@ export default function Layout({ path, children }) {
     })();
   }, [animate]);
 
-  const flow = useMemo(() => ({ cover, reveal }), [cover, reveal]);
+  const glide = useCallback(() => {
+    if (stage.current) return stage.current.done;
+    const root = main.current;
+    const out = root.querySelector(':scope > .page[data-glide="out"]');
+    const inn = root.querySelector(':scope > .page[data-glide="in"]');
+    if (!out || !inn) return Promise.resolve();
+    const run = { settled: false };
+    const landed = new Promise(resolve => {
+      run.land = resolve;
+    });
+    run.done = new Promise(resolve => {
+      run.over = resolve;
+    });
+    run.settle = abort => {
+      if (run.settled) return;
+      run.settled = true;
+      stage.current = null;
+      try {
+        out.dataset.glide = 'gone';
+        inn.removeAttribute('data-glide');
+        inn.style.removeProperty('--shift');
+        delete root.dataset.glide;
+        if (!abort) {
+          const y = saved?.[1] ?? 0;
+          saved = null;
+          if (lenis.current) {
+            lenis.current.resize();
+            lenis.current.scrollTo(y, { immediate: true, force: true });
+          } else window.scrollTo({ top: y, behavior: 'instant' });
+          inn.querySelector('h1')?.focus({ preventScroll: true });
+        }
+      } finally {
+        if (!abort) lenis.current?.start();
+        run.over();
+      }
+    };
+    stage.current = run;
+    lenis.current?.stop();
+    window.scrollTo({ top: window.scrollY, behavior: 'instant' });
+    document.documentElement.style.setProperty('--enter', enterAfterSwap);
+    root.dataset.glide = '';
+    Promise.all([Promise.race([landed, pause(glideCeiling)]), pause(glideFloor)]).then(() =>
+      run.settle(false),
+    );
+    return run.done;
+  }, []);
+
+  const land = useCallback(() => stage.current?.land(), []);
+
+  useSyncEffect(() => {
+    if (gliding) glide();
+  }, [path, gliding, glide]);
+
+  const flow = useMemo(
+    () => ({ cover, reveal, glide, land, gliding }),
+    [cover, reveal, glide, land, gliding],
+  );
 
   return (
     <Swap.Provider value={flow}>
@@ -124,8 +244,8 @@ export default function Layout({ path, children }) {
         {t.skip}
       </a>
       <Header lang={lang} view={view} />
-      <main id="main" tabIndex={-1}>
-        <AnimatePresence mode="wait">
+      <main id="main" tabIndex={-1} ref={main}>
+        <AnimatePresence mode={gliding ? 'sync' : 'wait'}>
           <Page key={path}>{children}</Page>
         </AnimatePresence>
       </main>

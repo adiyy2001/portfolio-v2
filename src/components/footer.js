@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
-import { ui } from '../i18n';
+import { routes, ui } from '../i18n';
 import { duration, ease, instant } from '../motion';
 import { letters, needle, thread } from '../wordmark';
 
@@ -44,6 +45,7 @@ export default function Footer({ lang }) {
       </svg>
       <p>{t.footerName}</p>
       <p className="mini__links">
+        <Link to={routes.work[lang]}>{t.footerWork}</Link>
         <a href="mailto:adrian.turbinski@gmail.com">{t.footerMail}</a>
         <a href="https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6" rel="noopener">
           LinkedIn
