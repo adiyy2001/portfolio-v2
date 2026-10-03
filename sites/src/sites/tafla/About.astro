@@ -1,0 +1,68 @@
+---
+import { credentials, site } from './data';
+import Rings from './Rings.astro';
+import Section from './Section.astro';
+---
+
+<Section id="o-mnie" title="O mnie">
+  <div slot="head" class="monogram" aria-hidden="true">
+    <Rings count={6} gap={18} ratio={1} class="monogram__rings" />
+    <span class="monogram__letters">{site.initials}</span>
+  </div>
+  <div class="prose">
+    <p class="lead">
+      Jestem {site.therapist}, psycholożka i psychoterapeutka. Pracuję z dorosłymi, w gabinecie we
+      Wrocławiu i online.
+    </p>
+    <p>
+      Nie dam Ci gotowej rady na życie. Pomogę Ci zobaczyć, co się z Tobą dzieje i skąd się to
+      bierze, a potem razem sprawdzimy, co możesz z tym zrobić.
+    </p>
+    <p>
+      Uczyłam się w nurcie psychodynamicznym, ale nie trzymam się jednej szkoły. Czasem rozmawiamy o
+      dzieciństwie, częściej o tym, co wydarzyło się w tym tygodniu. Nie ma jednego scenariusza.
+    </p>
+    <p>
+      Mówię po ludzku, bez żargonu. Jeśli użyję słowa, którego nie rozumiesz, zapytaj. Jeśli czegoś
+      nie chcesz opowiadać, nie musisz.
+    </p>
+  </div>
+  <dl class="rows rows--terms">
+    {credentials.map(item => (
+      <div>
+        <dt>{item.term}</dt>
+        <dd>{item.detail}</dd>
+      </div>
+    ))}
+  </dl>
+</Section>
+
+<style>
+  .monogram {
+    --size: clamp(128px, 15vw, 208px);
+    position: relative;
+    width: var(--size);
+    aspect-ratio: 1;
+    color: var(--pine);
+  }
+
+  .monogram :global(.monogram__rings) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .monogram__letters {
+    position: absolute;
+    inset: 19%;
+    border-radius: 50%;
+    background: var(--sage);
+    display: grid;
+    place-items: center;
+    color: var(--ink);
+    font: 350 calc(var(--size) * 0.3) / 1 var(--font-display);
+    letter-spacing: 0.14em;
+    text-indent: 0.14em;
+  }
+</style>

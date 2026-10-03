@@ -1,0 +1,185 @@
+---
+import { link } from '../../shared/link';
+import { prices, site } from './data';
+import { formatPrice } from './format';
+import Water from './Water.astro';
+
+const facts = [prices.consultation, prices.session];
+---
+
+<section class="hero" aria-labelledby="hero-title" data-water-surface>
+  <Water />
+  <div class="container hero__inner" data-water-empty>
+    <h1 id="hero-title" class="hero__title">
+      Możesz zacząć od&nbsp;jednej rozmowy.
+    </h1>
+    <div class="hero__intro">
+      <p class="lead">
+        Psychoterapia indywidualna dla dorosłych. Gabinet we Wrocławiu i spotkania online.
+      </p>
+      <a class="button" href="#kontakt">
+        Napisz wiadomość
+      </a>
+    </div>
+    <dl class="hero__facts">
+      {facts.map(fact => (
+        <div class="hero__fact">
+          <dt>{fact.name}</dt>
+          <dd class="hero__time">{fact.minutes} minut</dd>
+          <dd class="hero__price">{formatPrice(fact.amount)}</dd>
+        </div>
+      ))}
+    </dl>
+    <div class="hero__crisis">
+      <p>W nagłym kryzysie zadzwoń, całą dobę:</p>
+      <p class="hero__crisis-links">
+        <a href="tel:112">112</a>
+        <a href="tel:800702222">800 70 2222</a>
+        <a href={link(site.crisis)}>więcej numerów</a>
+      </p>
+    </div>
+  </div>
+  <button class="button button--small water-toggle" type="button" data-water-toggle>
+    Zatrzymaj fale
+  </button>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: min(calc(100dvh - var(--header-height)), 920px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: clamp(24px, 3vw, 40px);
+    padding-block: clamp(36px, 5vw, 80px) clamp(28px, 4vw, 56px);
+  }
+
+  .hero__title,
+  .hero__intro,
+  .hero__facts,
+  .hero__crisis {
+    grid-column: 1 / -1;
+  }
+
+  .hero__intro {
+    display: grid;
+    justify-items: start;
+    gap: clamp(20px, 2.4vw, 32px);
+  }
+
+  .hero__intro .lead {
+    max-width: 30em;
+  }
+
+  .hero__facts {
+    display: grid;
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .hero__fact {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 20px;
+    align-items: center;
+    padding-block: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero__fact dt {
+    font-weight: 560;
+  }
+
+  .hero__time {
+    grid-column: 1;
+    color: var(--ink-soft);
+  }
+
+  .hero__price {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    font: 350 var(--text-figure) / 1 var(--font-display);
+  }
+
+  .hero__crisis {
+    max-width: 34em;
+    font-size: var(--text-small);
+    color: var(--ink-soft);
+  }
+
+  .hero__crisis-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+  }
+
+  .hero__crisis a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .water-toggle {
+    position: absolute;
+    right: var(--margin);
+    top: 12px;
+    z-index: 2;
+    display: none;
+    background-color: var(--sage);
+  }
+
+  :global(.js) .water-toggle {
+    display: inline-flex;
+  }
+
+  @media (min-width: 900px) {
+    .hero__title {
+      grid-column: 1 / span 10;
+    }
+
+    .hero__intro,
+    .hero__facts,
+    .hero__crisis {
+      grid-column: 1 / span 6;
+    }
+
+    .water-toggle {
+      top: auto;
+      bottom: 24px;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .hero__fact {
+      grid-template-columns: 1fr auto auto;
+    }
+
+    .hero__time {
+      grid-column: auto;
+      text-align: right;
+    }
+
+    .hero__price {
+      grid-column: auto;
+      grid-row: auto;
+      min-width: 4.2em;
+      text-align: right;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.js) .water-toggle {
+      display: none;
+    }
+  }
+</style>

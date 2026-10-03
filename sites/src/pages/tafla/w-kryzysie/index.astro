@@ -1,0 +1,73 @@
+---
+import Layout from '../../../sites/tafla/Layout.astro';
+import Helplines from '../../../sites/tafla/Helplines.astro';
+import PageHead from '../../../sites/tafla/PageHead.astro';
+import Section from '../../../sites/tafla/Section.astro';
+import { mainHelplines, otherHelplines } from '../../../sites/tafla/data';
+---
+
+<Layout
+  title="Pomoc w kryzysie | Tafla"
+  description="Numery telefonów, pod które możesz zadzwonić w kryzysie psychicznym o każdej porze: 112, 800 70 2222, 116 123, 116 111. Sprawdzone w październiku 2026."
+  path="/tafla/w-kryzysie/"
+  current="crisis">
+  <PageHead
+    title="Pomoc w kryzysie"
+    lead="Jeśli ktoś jest w niebezpieczeństwie albo myślisz o odebraniu sobie życia, zadzwoń pod 112 lub 800 70 2222. Nie czekaj na odpowiedź ode mnie."
+  />
+  <Section id="zadzwon" title="Zadzwoń teraz" inNav={false}>
+    <p slot="head" class="stamp">
+      Stan na październik 2026
+    </p>
+    <p class="lead">
+      Te numery działają całą dobę, także w święta. Rozmowa jest bezpłatna. Nie musisz wiedzieć, co
+      powiedzieć, wystarczy, że powiesz, jak się czujesz.
+    </p>
+    <Helplines items={mainHelplines} />
+  </Section>
+  <Section id="pierwsze-minuty" title="Zanim ktoś odbierze" tone="deep" inNav={false}>
+    <ul class="rows steps">
+      <li>
+        <h3>Nie zostawaj z tym sam lub sama</h3>
+        <p>Napisz albo zadzwoń do kogoś bliskiego i powiedz wprost, że jest Ci bardzo źle.</p>
+      </li>
+      <li>
+        <h3>Oddal od siebie to, czym możesz sobie zrobić krzywdę</h3>
+        <p>Tabletki, ostre przedmioty, alkohol. Poproś kogoś, żeby je zabrał, albo wyjdź z domu.</p>
+      </li>
+      <li>
+        <h3>Gdy ktoś inny jest w niebezpieczeństwie</h3>
+        <p>
+          Zostań przy nim, mów spokojnie, nie obiecuj, że zachowasz to w tajemnicy, i zadzwoń pod
+          112.
+        </p>
+      </li>
+    </ul>
+  </Section>
+  <Section id="poza-kryzysem" title="Pomoc, która nie czeka na termin" inNav={false}>
+    <div class="prose">
+      <p>
+        Centrum Zdrowia Psychicznego przyjmuje dorosłych bezpłatnie, w ramach NFZ, bez skierowania.
+        Adres najbliższego centrum podpowie Telefoniczna Informacja Pacjenta.
+      </p>
+      <p>
+        W ostrym kryzysie możesz też pojechać na szpitalny oddział ratunkowy w szpitalu z oddziałem
+        psychiatrycznym.
+      </p>
+    </div>
+    <Helplines items={otherHelplines} />
+  </Section>
+  <Section id="moja-praca" title="Czym jest moja praca" tone="deep" inNav={false}>
+    <div class="prose">
+      <p>
+        Prowadzę psychoterapię w umówionych terminach. Nie jestem służbą ratunkową, nie odbieram
+        telefonu w czasie spotkań, a na wiadomości odpowiadam w ciągu dwóch dni roboczych. Dlatego w
+        nagłej sytuacji pierwszym adresem są numery wyżej.
+      </p>
+      <p>
+        Numery sprawdziłam w październiku 2026 w oficjalnych źródłach: gov.pl i na stronach
+        organizacji, które je prowadzą.
+      </p>
+    </div>
+  </Section>
+</Layout>

@@ -1,0 +1,67 @@
+---
+import Rings from './Rings.astro';
+
+interface Props {
+  title: string;
+  lead: string;
+}
+
+const { title, lead } = Astro.props;
+---
+
+<header class="page-head">
+  <Rings count={8} gap={96} class="page-head__rings" />
+  <div class="container page-head__inner">
+    <h1>{title}</h1>
+    <p class="lead">{lead}</p>
+  </div>
+</header>
+
+<style>
+  .page-head {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(48px, 7vw, 112px) clamp(48px, 6vw, 96px);
+  }
+
+  .page-head :global(.page-head__rings) {
+    position: absolute;
+    right: -14%;
+    bottom: -30%;
+    width: min(1100px, 120%);
+    color: var(--pine);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .page-head__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: clamp(20px, 3vw, 36px);
+  }
+
+  .page-head h1,
+  .page-head .lead {
+    grid-column: 1 / -1;
+  }
+
+  .page-head h1 {
+    font-size: clamp(2.5rem, 1.2rem + 5.4vw, 6rem);
+  }
+
+  .page-head .lead {
+    max-width: 34em;
+  }
+
+  @media (min-width: 900px) {
+    .page-head h1 {
+      grid-column: 1 / span 9;
+    }
+
+    .page-head .lead {
+      grid-column: 1 / span 6;
+    }
+  }
+</style>

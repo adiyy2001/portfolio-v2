@@ -1,0 +1,90 @@
+---
+import Layout from '../../../sites/tafla/Layout.astro';
+import PageHead from '../../../sites/tafla/PageHead.astro';
+import Section from '../../../sites/tafla/Section.astro';
+import { site } from '../../../sites/tafla/data';
+---
+
+<Layout
+  title="Notka o prywatności | Tafla"
+  description="Jakie dane zbieram w formularzu, po co, jak długo je trzymam i jak możesz je sprawdzić albo usunąć. Strona nie używa ciasteczek ani analityki."
+  path="/tafla/prywatnosc/"
+  current="privacy">
+  <PageHead
+    title="Notka o prywatności"
+    lead="Krótko i bez prawniczego języka: co się dzieje z Twoją wiadomością i z tym, co powiesz w gabinecie."
+  />
+  <Section id="dane" title="Wiadomość z formularza" inNav={false}>
+    <div class="prose">
+      <p>
+        Administratorką danych jest {site.therapist}, prowadząca gabinet Tafla, {site.street},{' '}
+        {site.postalCity}. Piszesz do mnie na <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+      <p>
+        W formularzu pytam o imię lub pseudonim, adres e-mail, o to, czy wolisz gabinet czy
+        spotkanie online, i o kilka zdań o tym, z czym przychodzisz. Nie pytam o nazwisko, telefon,
+        wiek ani o diagnozę. Jeśli napiszesz coś więcej, zobaczę to, ale nie musisz.
+      </p>
+      <p>
+        Używam tych danych tylko po to, żeby Ci odpowiedzieć i zaproponować termin. Podstawą jest
+        Twoja zgoda (art. 6 ust. 1 lit. a RODO), którą wycofasz w każdej chwili, pisząc na ten sam
+        adres. Wycofanie zgody nie zmienia tego, co zrobiłam wcześniej.
+      </p>
+      <p>
+        Jeśli napiszesz o swoim zdrowiu, ta zgoda obejmuje także te informacje (art. 9 ust. 2 lit. a
+        RODO).
+      </p>
+      <p>
+        Wiadomości, po których nie dochodzi do spotkania, usuwam po trzech miesiącach. Nie
+        przekazuję ich nikomu i nie wysyłam żadnych ofert ani przypomnień, o które nie prosisz.
+      </p>
+    </div>
+  </Section>
+  <Section id="gabinet" title="Co mówisz w gabinecie" tone="deep" inNav={false}>
+    <div class="prose">
+      <p>
+        Obowiązuje mnie tajemnica zawodowa. To, co usłyszę na spotkaniach, zostaje między nami.
+        Wyjątki wyznacza prawo, na przykład bezpośrednie zagrożenie życia albo obowiązek wobec sądu.
+        Na konsultacji powiem, jakie to sytuacje, żebyś wiedział lub wiedziała o tym od początku.
+      </p>
+      <p>
+        Notatki prowadzę w najmniejszym zakresie, jaki jest mi potrzebny do pracy, i przechowuję je
+        tak długo, jak wymagają przepisy. Zasady przetwarzania danych o zdrowiu dostajesz na piśmie
+        przed pierwszą sesją, razem z możliwością zadania pytań.
+      </p>
+      <p>
+        Moją pracę omawiam co miesiąc z superwizorką. Robię to bez imion, nazwisk i danych, po
+        których można Cię rozpoznać.
+      </p>
+    </div>
+  </Section>
+  <Section id="strona" title="Ta strona" inNav={false}>
+    <div class="prose">
+      <p>
+        Strona nie używa ciasteczek, analityki, reklam, osadzonych map ani czcionek z cudzych
+        serwerów. Wszystko ładuje się z jednego miejsca.
+      </p>
+      <p>
+        W Twojej przeglądarce zapamiętuję jedną rzecz: że zatrzymałeś lub zatrzymałaś fale na
+        stronie głównej. Ten wybór zostaje tylko na Twoim urządzeniu i niczego nie wysyła.
+      </p>
+      <p>
+        Ta strona jest przykładowa, a formularz niczego nie wysyła. W prawdziwym gabinecie wiadomość
+        trafiłaby na skrzynkę, o której pisałam wyżej.
+      </p>
+    </div>
+  </Section>
+  <Section id="prawa" title="Twoje prawa" tone="deep" inNav={false}>
+    <div class="prose">
+      <p>
+        Możesz poprosić o kopię swoich danych, ich poprawienie, usunięcie, ograniczenie
+        przetwarzania albo przeniesienie. Możesz też sprzeciwić się przetwarzaniu. Napisz, a
+        odpowiem w ciągu miesiąca.
+      </p>
+      <p>
+        Jeśli uważasz, że robię coś nie tak, masz prawo złożyć skargę do Prezesa Urzędu Ochrony
+        Danych Osobowych (uodo.gov.pl).
+      </p>
+    </div>
+  </Section>
+</Layout>

@@ -1,0 +1,111 @@
+---
+import { link } from '../../shared/link';
+import { monthlyCost, paymentNotes, prices, site } from './data';
+import { formatPrice } from './format';
+import Section from './Section.astro';
+
+const rows = [prices.consultation, prices.session, prices.reduced];
+---
+
+<Section id="cennik" title="Cennik" tone="deep">
+  <div slot="aside" class="month">
+    <p>Przy stałych spotkaniach raz w tygodniu miesiąc kosztuje:</p>
+    <dl class="month__sums">
+      <div>
+        <dt>cztery spotkania</dt>
+        <dd>{formatPrice(monthlyCost.fourSessions)}</dd>
+      </div>
+      <div>
+        <dt>pięć spotkań</dt>
+        <dd>{formatPrice(monthlyCost.fiveSessions)}</dd>
+      </div>
+    </dl>
+  </div>
+  <div class="prose">
+    <p class="lead">Płacisz za spotkanie, nie za pakiet. Nie ma&nbsp;opłat dodatkowych.</p>
+  </div>
+  <ul class="rows prices">
+    {rows.map(row => (
+      <li>
+        <div>
+          <h3>{row.name}</h3>
+          <p class="prices__description">{row.description}</p>
+          <p class="prices__time">{row.minutes} minut</p>
+        </div>
+        <p class="prices__amount">{formatPrice(row.amount)}</p>
+      </li>
+    ))}
+  </ul>
+  <dl class="rows rows--terms">
+    {paymentNotes.map(note => (
+      <div>
+        <dt>{note.title}</dt>
+        <dd>{note.text}</dd>
+      </div>
+    ))}
+    <div>
+      <dt>NFZ</dt>
+      <dd>
+        Spotkania nie są refundowane. Bezpłatną pomoc dla dorosłych, bez skierowania, znajdziesz w
+        Centrach Zdrowia Psychicznego. Więcej:{' '}
+        <a href={link(site.crisis)}>pomoc w kryzysie i poza nim</a>.
+      </dd>
+    </div>
+  </dl>
+</Section>
+
+<style>
+  .prices > li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 8px 24px;
+    padding-block: 20px;
+  }
+
+  .prices__description {
+    margin-top: 2px;
+    color: var(--ink-soft);
+    font-size: var(--text-small);
+    line-height: 1.45;
+  }
+
+  .prices__time {
+    margin-top: 6px;
+    font-size: var(--text-small);
+    font-weight: 560;
+  }
+
+  .month {
+    display: grid;
+    gap: 12px;
+    max-width: 24rem;
+    color: var(--ink-soft);
+    font-size: var(--text-small);
+  }
+
+  .month__sums {
+    display: grid;
+    border-top: 1.5px solid var(--ink);
+    color: var(--ink);
+  }
+
+  .month__sums > div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .month__sums dd {
+    font: 350 var(--text-figure) / 1 var(--font-display);
+    white-space: nowrap;
+  }
+
+  .prices__amount {
+    font: 350 var(--text-figure) / 1 var(--font-display);
+    white-space: nowrap;
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+interface Props {
+  count: number;
+  gap: number;
+  ratio?: number;
+  class?: string;
+}
+
+const { count, gap, ratio = 0.42, class: className } = Astro.props;
+const width = 2 * count * gap;
+const height = Number((width * ratio).toFixed(2));
+const rings = Array.from({ length: count }, (_, index) => {
+  const rx = (index + 1) * gap - 0.75;
+  const fade = count > 1 ? index / (count - 1) : 0;
+  return { rx, ry: Number((rx * ratio).toFixed(2)), opacity: (1 - fade * 0.7).toFixed(2) };
+});
+---
+
+<svg
+  class:list={['rings', className]}
+  width={width}
+  height={height}
+  viewBox={`0 0 ${width} ${height}`}
+  fill="none"
+  stroke="currentColor"
+  aria-hidden="true"
+  focusable="false">
+  {rings.map(ring => (
+    <ellipse
+      cx={width / 2}
+      cy={height / 2}
+      rx={ring.rx}
+      ry={ring.ry}
+      stroke-opacity={ring.opacity}
+      vector-effect="non-scaling-stroke"
+    />
+  ))}
+</svg>
+
+<style>
+  .rings {
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .rings ellipse {
+    stroke-width: 1.25px;
+  }
+</style>

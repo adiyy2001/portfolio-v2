@@ -1,0 +1,85 @@
+---
+import { link } from '../../shared/link';
+import { mainHelplines, site } from './data';
+import Helplines from './Helplines.astro';
+import Rings from './Rings.astro';
+---
+
+<section class="help" id="pomoc-teraz" aria-labelledby="help-title">
+  <Rings count={9} gap={86} class="help__rings" />
+  <div class="container help__inner">
+    <div class="help__head">
+      <h2 id="help-title">Jeśli potrzebujesz pomocy teraz</h2>
+      <p class="lead">
+        Nie jestem służbą ratunkową i nie odbieram telefonów w czasie spotkań. W nagłej sytuacji nie
+        czekaj na odpowiedź ode mnie. Zadzwoń tutaj.
+      </p>
+      <a class="help__more" href={link(site.crisis)}>
+        Wszystkie numery i informacje
+      </a>
+    </div>
+    <Helplines items={mainHelplines} tone="dark" />
+  </div>
+</section>
+
+<style>
+  .help {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--section-space);
+    background: var(--ink);
+    color: var(--sage);
+  }
+
+  .help :global(.help__rings) {
+    position: absolute;
+    left: 50%;
+    bottom: -34%;
+    width: min(1500px, 140%);
+    color: var(--pine-soft);
+    opacity: 0.22;
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+
+  .help__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: clamp(28px, 4vw, 48px);
+  }
+
+  .help__head,
+  .help__inner > :global(.helplines) {
+    grid-column: 1 / -1;
+  }
+
+  .help__head {
+    display: grid;
+    justify-items: start;
+    gap: 24px;
+    align-content: start;
+  }
+
+  .help__more {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    color: var(--sage);
+  }
+
+  .help :focus-visible {
+    outline-color: var(--sage);
+  }
+
+  @media (min-width: 900px) {
+    .help__head {
+      grid-column: 1 / span 5;
+    }
+
+    .help__inner > :global(.helplines) {
+      grid-column: 6 / span 7;
+    }
+  }
+</style>

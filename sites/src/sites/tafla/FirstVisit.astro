@@ -1,0 +1,75 @@
+---
+import { firstVisitSteps, places } from './data';
+import Rings from './Rings.astro';
+import Section from './Section.astro';
+---
+
+<Section id="pierwsza-wizyta" title="Pierwsza wizyta">
+  <div slot="aside" class="places">
+    {places.map(place => (
+      <div>
+        <h3>{place.title}</h3>
+        <p>{place.text}</p>
+      </div>
+    ))}
+  </div>
+  <div class="prose">
+    <p class="lead">
+      Pierwsze spotkanie to rozmowa, nie egzamin. Nie musisz się przygotowywać ani przynosić
+      skierowania.
+    </p>
+  </div>
+  <ol class="rows steps">
+    {firstVisitSteps.map((step, index) => (
+      <li>
+        <Rings count={index + 1} gap={9} ratio={0.5} class="steps__marker" />
+        <div>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</Section>
+
+<style>
+  .steps > li {
+    display: grid;
+    gap: 14px 20px;
+    padding-block: 22px;
+  }
+
+  .steps :global(.steps__marker) {
+    color: var(--pine);
+  }
+
+  @media (min-width: 640px) {
+    .steps > li {
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+    }
+
+    .steps :global(.steps__marker) {
+      margin-top: 0.55em;
+    }
+  }
+
+  .places {
+    display: grid;
+    gap: 28px;
+    max-width: 26rem;
+  }
+
+  .places h3 {
+    margin-bottom: 6px;
+    font-size: var(--text-body);
+  }
+
+  .places p {
+    font-size: var(--text-small);
+    line-height: 1.5;
+  }
+
+  .steps h3 {
+    margin-bottom: 6px;
+  }
+</style>

@@ -1,0 +1,137 @@
+---
+import SampleNote from '../../shared/SampleNote.astro';
+import { link } from '../../shared/link';
+import { site } from './data';
+import Rings from './Rings.astro';
+---
+
+<footer class="site-footer">
+  <Rings count={8} gap={70} class="site-footer__rings" />
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <p class="site-footer__name">{site.name}</p>
+      <p>Gabinet psychoterapii</p>
+    </div>
+    <address class="site-footer__address">
+      {site.street}
+      <br />
+      {site.postalCity}
+      <br />
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </address>
+    <nav class="site-footer__links" aria-label="Informacje">
+      <ul>
+        <li>
+          <a href={link(site.privacy)}>Notka o prywatności</a>
+        </li>
+        <li>
+          <a href={link(site.crisis)}>Pomoc w kryzysie</a>
+        </li>
+        <li>
+          <a href="#main">Wróć na górę</a>
+        </li>
+      </ul>
+    </nav>
+    <SampleNote name={site.name} lang="pl" />
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(48px, 6vw, 88px);
+    background: var(--ink);
+    color: var(--sage);
+    border-top: 1px solid var(--line-light);
+  }
+
+  .site-footer :global(.site-footer__rings) {
+    position: absolute;
+    right: -12%;
+    bottom: -38%;
+    width: 52%;
+    min-width: 520px;
+    color: var(--pine-soft);
+    opacity: 0.32;
+    pointer-events: none;
+  }
+
+  .site-footer__inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+    row-gap: 32px;
+  }
+
+  .site-footer__brand,
+  .site-footer__address,
+  .site-footer__links {
+    grid-column: 1 / -1;
+  }
+
+  .site-footer__name {
+    font: 350 2.25rem / 1 var(--font-display);
+  }
+
+  .site-footer__address {
+    font-style: normal;
+  }
+
+  .site-footer ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .site-footer a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    color: var(--sage);
+  }
+
+  .site-footer :focus-visible {
+    outline-color: var(--sage);
+  }
+
+  .site-footer :global(.sample-note) {
+    grid-column: 1 / -1;
+    max-width: 52ch;
+    padding-top: 24px;
+    border-top: 1px solid var(--line-light);
+    color: var(--sage);
+    font-size: var(--text-small);
+    line-height: 1.5;
+  }
+
+  .site-footer :global(.sample-note a) {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    color: var(--sage);
+  }
+
+  .site-footer :global(.sample-note a:focus-visible) {
+    outline-color: var(--sage);
+  }
+
+  @media (min-width: 900px) {
+    .site-footer__brand {
+      grid-column: 1 / span 4;
+    }
+
+    .site-footer__address {
+      grid-column: 6 / span 3;
+    }
+
+    .site-footer__links {
+      grid-column: 9 / span 4;
+    }
+
+    .site-footer :global(.sample-note) {
+      grid-column: 6 / span 7;
+    }
+  }
+</style>

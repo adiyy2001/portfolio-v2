@@ -1,0 +1,93 @@
+---
+import type { Helpline } from './data';
+
+interface Props {
+  items: readonly Helpline[];
+  tone?: 'light' | 'dark';
+}
+
+const { items, tone = 'light' } = Astro.props;
+---
+
+<ul class:list={['helplines', `helplines--${tone}`]}>
+  {items.map(item => (
+    <li class="helpline">
+      <a class="helpline__number" href={`tel:${item.dial}`}>
+        {item.number}
+      </a>
+      <div>
+        <p class="helpline__name">{item.name}</p>
+        <p class="helpline__detail">{item.detail}</p>
+        <p class="helpline__hours">{item.hours}</p>
+      </div>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .helplines {
+    --rule: var(--line);
+    padding: 0;
+    list-style: none;
+    border-top: 1.5px solid currentColor;
+  }
+
+  .helplines--dark {
+    --rule: var(--line-light);
+    color: var(--sage);
+  }
+
+  .helpline {
+    display: grid;
+    gap: 6px 28px;
+    padding-block: 22px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .helpline__number {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-self: start;
+    color: var(--pine);
+    font: 350 var(--text-figure) / 1.05 var(--font-display);
+    text-decoration: none;
+  }
+
+  .helplines--dark .helpline__number {
+    color: var(--sage);
+  }
+
+  .helpline__number:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+  }
+
+  .helpline__name {
+    font-weight: 560;
+  }
+
+  .helpline__detail,
+  .helpline__hours {
+    font-size: var(--text-small);
+  }
+
+  .helpline__hours {
+    margin-top: 2px;
+    opacity: 0.85;
+  }
+
+  @media (min-width: 640px) {
+    .helplines {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      column-gap: 28px;
+    }
+
+    .helpline {
+      grid-column: 1 / -1;
+      grid-template-columns: subgrid;
+      align-items: baseline;
+    }
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+import { notDoing, sessionPhases, themes } from './data';
+import { capitalize } from './format';
+import Section from './Section.astro';
+import { ARRIVAL_END, CLOSING_START, minuteToX, wavePath, wavePoints } from './wave';
+
+const WIDTH = 1000;
+const HEIGHT = 260;
+const mainWave = wavePath(wavePoints(WIDTH, HEIGHT, 240));
+const echoWave = wavePath(wavePoints(WIDTH, HEIGHT, 240, Math.PI * 0.6));
+const boundaries = [minuteToX(ARRIVAL_END, WIDTH), minuteToX(CLOSING_START, WIDTH)];
+---
+
+<Section id="jak-pracuje" title="Jak pracuję">
+  <div class="prose">
+    <p class="lead">
+      Spotykamy się raz w tygodniu, w tym samym dniu i o tej samej godzinie. Jedno spotkanie trwa 50
+      minut.
+    </p>
+    <p>
+      Regularność ma znaczenie. Zmiany, o które Ci chodzi, zwykle widać po kilku miesiącach, a nie
+      po kilku spotkaniach. Dlatego nie obiecuję szybkich efektów.
+    </p>
+  </div>
+  <figure class="session">
+    <svg
+      class="session__wave"
+      viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+      fill="none"
+      stroke="currentColor"
+      aria-hidden="true"
+      focusable="false">
+      <line x1="0" y1={HEIGHT / 2} x2={WIDTH} y2={HEIGHT / 2} class="session__baseline"></line>
+      {boundaries.map(x => (
+        <line x1={x} y1="0" x2={x} y2={HEIGHT} class="session__boundary"></line>
+      ))}
+      <path d={echoWave} class="session__echo" vector-effect="non-scaling-stroke"></path>
+      <path d={mainWave} class="session__main" vector-effect="non-scaling-stroke"></path>
+    </svg>
+    <figcaption class="session__caption">
+      Jedno spotkanie, 50 minut. Pionowe linie to 10. i 45. minuta: wejście, rozmowa, domknięcie.
+    </figcaption>
+    <ol class="rows rows--terms phases">
+      {sessionPhases.map(phase => (
+        <li>
+          <div>
+            <h3>{phase.name}</h3>
+            <p class="phases__span">{phase.span}</p>
+          </div>
+          <p>{phase.text}</p>
+        </li>
+      ))}
+    </ol>
+  </figure>
+  <div class="prose">
+    <p>
+      Nie ustalam z góry, ile potrwa terapia. Co kilka miesięcy robimy przerwę na podsumowanie: czy
+      to, co robimy, Ci pomaga i czy chcesz to kontynuować. Możesz skończyć w każdej chwili,
+      wystarczy, że powiesz o tym na spotkaniu.
+    </p>
+  </div>
+  <div class="topics">
+    <h3>Z czym do mnie przychodzą</h3>
+    <ul class="rows">
+      {themes.map(theme => (
+        <li>{capitalize(theme)}</li>
+      ))}
+    </ul>
+  </div>
+  <div slot="aside" class="topics">
+    <h3>Czego nie robię</h3>
+    <ul class="rows">
+      {notDoing.map(item => (
+        <li>{capitalize(item)}</li>
+      ))}
+    </ul>
+  </div>
+</Section>
+
+<style>
+  .session {
+    display: grid;
+    gap: 24px;
+  }
+
+  .session__wave {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    color: var(--pine);
+  }
+
+  .session__baseline,
+  .session__boundary {
+    stroke: var(--line);
+    stroke-width: 1px;
+    vector-effect: non-scaling-stroke;
+  }
+
+  .session__main {
+    stroke-width: 2px;
+    stroke-linejoin: round;
+  }
+
+  .session__echo {
+    stroke-width: 1.25px;
+    opacity: 0.4;
+  }
+
+  .session__caption {
+    color: var(--ink-soft);
+    font-size: var(--text-small);
+  }
+
+  .phases__span {
+    color: var(--ink-soft);
+    font-size: var(--text-small);
+  }
+
+  .topics h3 {
+    margin-bottom: 16px;
+  }
+</style>

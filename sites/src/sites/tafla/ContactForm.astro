@@ -1,0 +1,386 @@
+---
+import { link } from '../../shared/link';
+import { defaultMeetingPlace, meetingPlaces, site } from './data';
+import Rings from './Rings.astro';
+---
+
+<form class="form" method="post" action="#kontakt" novalidate data-form>
+  <p class="form__status" role="status" data-form-status></p>
+
+  <div class="field">
+    <label class="field__label" for="contact-name">
+      Imię albo pseudonim
+    </label>
+    <input
+      id="contact-name"
+      name="name"
+      type="text"
+      autocomplete="given-name"
+      required
+      aria-describedby="contact-name-error"
+      data-field="name"
+    />
+    <p class="field__error" id="contact-name-error" data-error="name" hidden></p>
+  </div>
+
+  <div class="field">
+    <label class="field__label" for="contact-email">
+      E-mail
+    </label>
+    <input
+      id="contact-email"
+      name="email"
+      type="email"
+      autocomplete="email"
+      inputmode="email"
+      spellcheck="false"
+      required
+      aria-describedby="contact-email-hint contact-email-error"
+      data-field="email"
+    />
+    <p class="field__hint" id="contact-email-hint">
+      Na ten adres odpowiem.
+    </p>
+    <p class="field__error" id="contact-email-error" data-error="email" hidden></p>
+  </div>
+
+  <fieldset class="field">
+    <legend class="field__label">Gdzie wolisz się spotkać?</legend>
+    <div class="choices">
+      {meetingPlaces.map(place => (
+        <label class="choice">
+          <input
+            type="radio"
+            name="place"
+            value={place.value}
+            checked={place.value === defaultMeetingPlace}
+          />
+          <span class="choice__mark" aria-hidden="true">
+            <Rings count={2} gap={7} ratio={0.5} />
+          </span>
+          <span>{place.label}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <div class="field">
+    <label class="field__label" for="contact-message">
+      Kilka zdań o tym, z czym przychodzisz
+    </label>
+    <textarea
+      id="contact-message"
+      name="message"
+      rows="5"
+      required
+      aria-describedby="contact-message-hint contact-message-error"
+      data-field="message"></textarea>
+    <p class="field__hint" id="contact-message-hint">
+      Nie musisz opisywać wszystkiego. Resztę zostawmy na spotkanie.
+    </p>
+    <p class="field__error" id="contact-message-error" data-error="message" hidden></p>
+  </div>
+
+  <div class="field">
+    <label class="check" for="contact-consent">
+      <input
+        id="contact-consent"
+        name="consent"
+        type="checkbox"
+        required
+        aria-describedby="contact-consent-error"
+        data-field="consent"
+      />
+      <span class="check__box" aria-hidden="true"></span>
+      <span>
+        Zgadzam się na przetwarzanie moich danych, także tych o zdrowiu, jeśli o nich napiszę, żeby{' '}
+        {site.therapist} mogła odpowiedzieć na tę wiadomość.{' '}
+        <a href={link(site.privacy)} target="_blank" rel="noopener">
+          Notka o prywatności<span class="visually-hidden"> (otwiera się w nowej karcie)</span>
+        </a>
+      </span>
+    </label>
+    <p class="field__error" id="contact-consent-error" data-error="consent" hidden></p>
+  </div>
+
+  <button class="button" type="submit">
+    Wyślij wiadomość
+  </button>
+</form>
+
+<div class="sent" tabindex="-1" hidden data-form-success>
+  <Rings count={4} gap={20} ratio={0.42} class="sent__rings ripple-in" />
+  <h3>Wiadomość jest gotowa, ale nie została wysłana</h3>
+  <p>To strona przykładowa, więc nic nie zostało wysłane.</p>
+  <p>W prawdziwym gabinecie odpowiedziałabym w ciągu dwóch dni roboczych.</p>
+  <button class="button" type="button" data-form-reset>
+    Wypełnij formularz ponownie
+  </button>
+</div>
+
+<script>
+  import { initForm } from './form';
+
+  initForm();
+</script>
+
+<style>
+  .form {
+    display: grid;
+    gap: 28px;
+  }
+
+  .form__status {
+    color: var(--brick);
+    font-weight: 560;
+  }
+
+  .form__status:empty {
+    display: none;
+  }
+
+  .field {
+    display: grid;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    gap: 8px;
+  }
+
+  .field__label {
+    padding: 0;
+    font-weight: 560;
+  }
+
+  .field input[type='text'],
+  .field input[type='email'],
+  .field textarea {
+    width: 100%;
+    min-height: 52px;
+    padding: 12px 14px;
+    border: 0;
+    border-bottom: 1.5px solid var(--ink);
+    border-radius: 0;
+    background: rgb(255 255 255 / 0.38);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .field textarea {
+    min-height: 9.5rem;
+    resize: vertical;
+  }
+
+  .field [aria-invalid='true'] {
+    border-bottom: 3px solid var(--brick);
+  }
+
+  .field__hint {
+    color: var(--ink-soft);
+    font-size: var(--text-small);
+  }
+
+  .field__error {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    color: var(--brick);
+    font-size: var(--text-small);
+    font-weight: 560;
+  }
+
+  .field__error::before {
+    content: '!';
+    content: '!' / '';
+    display: inline-grid;
+    flex: none;
+    width: 1.35em;
+    height: 1.35em;
+    place-items: center;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    font-size: 0.85em;
+    line-height: 1;
+    transform: translateY(0.1em);
+  }
+
+  .choices {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+    gap: 12px;
+  }
+
+  .choice {
+    position: relative;
+    display: flex;
+    min-height: 56px;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
+    border: 1.5px solid var(--ink);
+    font-weight: 400;
+    cursor: pointer;
+    transition:
+      background-color 0.4s var(--ease),
+      color 0.4s var(--ease);
+  }
+
+  .choice input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .choice__mark {
+    position: relative;
+    flex: none;
+    width: 30px;
+    color: var(--pine);
+  }
+
+  .choice__mark::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 7px;
+    height: 3.5px;
+    border-radius: 50%;
+    background: currentColor;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.4s var(--ease);
+  }
+
+  .choice:has(input:checked) {
+    background: var(--ink);
+    color: var(--sage);
+  }
+
+  .choice:has(input:checked) .choice__mark {
+    color: var(--sage);
+  }
+
+  .choice:has(input:checked) .choice__mark::after {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .choice:has(input:focus-visible) {
+    outline: 2px solid var(--pine);
+    outline-offset: 3px;
+  }
+
+  .check {
+    position: relative;
+    display: grid;
+    min-height: 44px;
+    grid-template-columns: 28px minmax(0, 1fr);
+    align-items: start;
+    gap: 14px;
+    font-size: var(--text-small);
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  .check a {
+    display: inline-block;
+    padding-block: 10px;
+    margin-block: -10px;
+  }
+
+  .check input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .check__box {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border: 1.5px solid var(--ink);
+    background: rgb(255 255 255 / 0.38);
+  }
+
+  .check__box::after {
+    content: '';
+    width: 14px;
+    height: 8px;
+    border-bottom: 2px solid var(--sage);
+    border-left: 2px solid var(--sage);
+    opacity: 0;
+    transform: translate(1px, -2px) rotate(-45deg);
+  }
+
+  .check input:checked + .check__box {
+    background: var(--ink);
+  }
+
+  .check input:checked + .check__box::after {
+    opacity: 1;
+  }
+
+  .check:has(input:focus-visible) .check__box {
+    outline: 2px solid var(--pine);
+    outline-offset: 3px;
+  }
+
+  .form .button {
+    justify-self: start;
+  }
+
+  .sent {
+    position: relative;
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+    overflow: hidden;
+    padding: clamp(24px, 4vw, 40px);
+    border: 1.5px solid var(--ink);
+  }
+
+  .sent:focus {
+    outline: none;
+  }
+
+  .sent:focus-visible {
+    outline: 2px solid var(--pine);
+    outline-offset: 3px;
+  }
+
+  .sent > :global(*) {
+    position: relative;
+  }
+
+  @media (max-width: 639px) {
+    .sent > :global(.sent__rings) {
+      display: none;
+    }
+  }
+
+  .sent > :global(.sent__rings) {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    width: min(60%, 220px);
+    color: var(--pine);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .choice {
+      transition: none;
+    }
+  }
+</style>

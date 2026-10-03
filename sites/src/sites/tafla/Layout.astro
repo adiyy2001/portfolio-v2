@@ -1,0 +1,60 @@
+---
+import './global.css';
+import { link } from '../../shared/link';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import { displayFontUrl, fontFaceCss, textFontUrl } from './fonts';
+import { tieHtml } from './format';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: 'crisis' | 'privacy';
+}
+
+const { title, description, path, current } = Astro.props;
+const canonical = new URL(link(path), Astro.site).href;
+const image = new URL(link('/tafla/og.png'), Astro.site).href;
+const imageAlt =
+  'Tafla, gabinet psychoterapii: słowa "Możesz zacząć od jednej rozmowy" i kręgi na wodzie';
+const content = tieHtml(await Astro.slots.render('default'));
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#dfe8e1" />
+    <link rel="icon" href={link('/tafla/favicon.svg')} type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Tafla" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href={displayFontUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={textFontUrl} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaceCss}></style>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Przejdź do treści
+    </a>
+    <Header current={current} />
+    <main id="main" tabindex="-1" set:html={content} />
+    <Footer />
+  </body>
+</html>

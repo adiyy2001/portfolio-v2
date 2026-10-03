@@ -1,0 +1,82 @@
+---
+import { hours, site } from './data';
+import ContactForm from './ContactForm.astro';
+import Section from './Section.astro';
+---
+
+<Section id="kontakt" title="Napisz do mnie" asideFirst>
+  <div slot="head" class="prose">
+    <p>Odpowiadam w ciągu dwóch dni roboczych.</p>
+    <p>
+      Nie podaję numeru telefonu. W czasie spotkań nie odbieram, a wiadomość możesz napisać wtedy,
+      gdy masz na to siłę.
+    </p>
+  </div>
+  <ContactForm />
+  <div slot="aside" class="visit">
+    <div>
+      <h3>Gabinet</h3>
+      <address>
+        {site.street}
+        <br />
+        {site.postalCity}
+        <br />
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </address>
+    </div>
+    <div>
+      <h3>Godziny pracy</h3>
+      <dl class="hours">
+        {hours.map(item => (
+          <div>
+            <dt>{item.days}</dt>
+            <dd>{item.time}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="hours__note">Soboty i niedziele: bez spotkań.</p>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .visit {
+    display: grid;
+    gap: 28px;
+  }
+
+  .visit h3 {
+    margin-bottom: 8px;
+  }
+
+  .visit address {
+    font-style: normal;
+  }
+
+  .visit address a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .hours {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    gap: 4px 24px;
+  }
+
+  .hours > div {
+    display: contents;
+  }
+
+  .hours dt {
+    font-weight: 400;
+  }
+
+  .hours__note {
+    margin-top: 6px;
+    color: var(--ink-soft);
+    font-size: var(--text-small);
+  }
+</style>

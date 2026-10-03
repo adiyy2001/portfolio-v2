@@ -1,0 +1,32 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  tone?: 'plain' | 'deep';
+  inNav?: boolean;
+  asideFirst?: boolean;
+}
+
+const { id, title, tone = 'plain', inNav = true, asideFirst = false } = Astro.props;
+---
+
+<section
+  class:list={['section', `section--${tone}`, { 'section--aside-first': asideFirst }]}
+  id={id}
+  aria-labelledby={`${id}-title`}
+  data-section={inNav ? '' : undefined}>
+  <div class="container section__inner">
+    <div class="section__head">
+      <h2 id={`${id}-title`}>{title}</h2>
+      <slot name="head" />
+      {Astro.slots.has('aside') && (
+        <div class="section__aside">
+          <slot name="aside" />
+        </div>
+      )}
+    </div>
+    <div class="section__body flow">
+      <slot />
+    </div>
+  </div>
+</section>
