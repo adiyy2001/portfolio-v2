@@ -1,9 +1,9 @@
 ---
-date: '2021-01-01'
+date: '2021-09-01'
 title: 'Junior Front-End Developer'
 company: 'Roche'
 location: 'Wrocław, Polska'
-range: 'January 2021 - September 2021'
+range: 'September 2021 - January 2022'
 url: 'https://www.roche.com'
 ---
 

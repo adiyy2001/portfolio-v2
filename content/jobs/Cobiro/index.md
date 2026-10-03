@@ -1,9 +1,9 @@
 ---
-date: '2021-09-01'
+date: '2022-02-01'
 title: 'Mid Front-End Developer'
 company: 'Cobiro'
 location: 'Warszawa, Polska'
-range: 'September 2021 - December 2022'
+range: 'February 2022 - August 2022'
 url: 'https://www.cobiro.com'
 ---
 

@@ -1,9 +1,9 @@
 ---
-date: '2022-12-01'
+date: '2022-09-01'
 title: 'Software Developer'
 company: 'Transition Technologies MS'
 location: 'Wrocław, Woj. Dolnośląskie, Polska (Remote)'
-range: 'December 2022 - December 2023'
+range: 'September 2022 - August 2023'
 url: 'https://ttms.pl'
 ---
 

@@ -1,9 +1,9 @@
 ---
-date: '2023-01-01'
+date: '2023-09-01'
 title: 'Founder / Main Engineer'
 company: 'Media Hunters'
 location: 'Wrocław, Polska'
-range: 'January 2023 - Present'
+range: 'September 2023 - December 2024'
 url: 'https://www.mediahunters.pl'
 ---
 

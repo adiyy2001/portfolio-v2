@@ -1,9 +1,9 @@
 ---
-date: '2020-08-01'
+date: '2019-08-01'
 title: 'Junior Front-End Developer'
 company: 'BRAINODE sp. z.o.o.'
 location: 'Wrocław, Polska'
-range: 'August 2020 - July 2021'
+range: 'August 2019 - July 2021'
 url: 'https://brainode.pl/'
 ---
 
