@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
 
 export default defineConfig({
-  site: 'https://adiyy2001.github.io',
-  base: '/portfolio-v2/wzornik',
+  site: 'https://adrianturbinski.pl',
+  base: '/wzornik',
   trailingSlash: 'always',
   cacheDir: './.astro-cache',
   devToolbar: { enabled: false },

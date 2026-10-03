@@ -26,10 +26,10 @@ describe('fallbackFaceCss', () => {
 });
 
 describe('fontFacesCss', () => {
-  const css = fontFacesCss('/portfolio-v2/wzornik/rozwaga/fonts/BodoniModa.woff2');
+  const css = fontFacesCss('/wzornik/rozwaga/fonts/BodoniModa.woff2');
 
   it('declares the variable face with swap', () => {
-    expect(css).toContain('url(/portfolio-v2/wzornik/rozwaga/fonts/BodoniModa.woff2) format');
+    expect(css).toContain('url(/wzornik/rozwaga/fonts/BodoniModa.woff2) format');
     expect(css).toContain('font-weight:400 700');
     expect(css).toContain('font-display:swap');
   });

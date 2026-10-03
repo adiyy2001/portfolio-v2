@@ -1,9 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: 'Adrian Turbiński',
-    siteUrl: 'https://adiyy2001.github.io',
+    siteUrl: 'https://adrianturbinski.pl',
   },
-  pathPrefix: '/portfolio-v2',
   plugins: [
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',

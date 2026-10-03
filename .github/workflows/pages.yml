@@ -34,7 +34,7 @@ jobs:
             sites/yarn.lock
       - run: yarn install --frozen-lockfile
       - run: yarn --cwd sites install --frozen-lockfile
-      - run: yarn build --prefix-paths
+      - run: yarn build
       - run: yarn --cwd sites build
       - run: cp -r sites/dist public/wzornik
       - uses: actions/upload-pages-artifact@v5

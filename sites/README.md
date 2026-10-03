@@ -32,4 +32,4 @@ One Astro project, nine sites. Each site keeps its pages in `src/pages/<slug>/`,
 
 There is no back end. Forms validate in the browser and end with a message that nothing was sent. Carts and bookings live in `localStorage`.
 
-The build is served from the portfolio at `/portfolio-v2/wzornik/`.
+The build is served from the portfolio at `/wzornik/`.
