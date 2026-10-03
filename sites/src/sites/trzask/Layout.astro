@@ -16,10 +16,9 @@ interface Props {
   path: string;
   current?: NavKey;
   bundles?: StyleBundle[];
-  noindex?: boolean;
 }
 
-const { title, description, path, current, bundles = [], noindex = false } = Astro.props;
+const { title, description, path, current, bundles = [] } = Astro.props;
 const canonical = new URL(link(path), Astro.site).href;
 const ogImage = new URL(link('/trzask/og.png'), Astro.site).href;
 const fullTitle = path === '/trzask/' ? title : `${title} | Trzask`;
@@ -32,10 +31,10 @@ const cartNeedsPage = current === 'koszyk' || current === 'kasa';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0e110f" />
-    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={link('/trzask/favicon.svg')} />
     <meta property="og:type" content="website" />
