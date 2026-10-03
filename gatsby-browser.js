@@ -16,6 +16,15 @@ export const onClientEntry = () => {
   window.addEventListener('popstate', () => {
     popped = true;
   });
+  document.addEventListener(
+    'click',
+    event => {
+      if (event.target.closest?.('a[href^="#"]')) {
+        window.history.replaceState({ ...window.history.state, y: window.scrollY }, '');
+      }
+    },
+    true,
+  );
   return new Promise(resolve => {
     new PerformanceObserver(resolve).observe({ type: 'paint', buffered: true });
     setTimeout(resolve, 300);
@@ -40,7 +49,11 @@ export const shouldUpdateScroll = ({ routerProps, prevRouterProps, getSavedScrol
     window.scrollTo({ top: getSavedScrollPosition(location)[1], behavior: 'instant' });
     return false;
   }
-  if (prevRouterProps.location.pathname === location.pathname) return true;
+  if (prevRouterProps.location.pathname === location.pathname) {
+    if (location.hash || !back) return true;
+    window.scrollTo({ top: window.history.state?.y ?? 0, behavior: 'instant' });
+    return false;
+  }
   keepScroll(back ? getSavedScrollPosition(location) : null);
   return false;
 };

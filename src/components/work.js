@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
 import Reveal from './reveal';
 import Shot from './shot';
 import Split from './split';
+import useFaces from './wzornik/fonts';
 import { routes, tie } from '../i18n';
 import { instant } from '../motion';
 
@@ -12,12 +13,48 @@ const copy = {
   tech: 'Odoo, Python, JavaScript, PostgreSQL',
   sizes: '(min-width: 900px) 46vw, 92vw',
   swatches: [
-    { name: 'Rozwaga', bg: '#121212', fg: '#ffffff', chips: ['#121212', '#ffffff', '#b3122a'] },
-    { name: 'Rubryka', bg: '#f3f6fb', fg: '#0f1f3d', chips: ['#0f1f3d', '#f3f6fb', '#ff5b24'] },
-    { name: 'Szkliwo', bg: '#ff6f5b', fg: '#1b1f2a', chips: ['#1b1f2a', '#ffffff', '#ff6f5b'] },
-    { name: 'Tafla', bg: '#dfe8e1', fg: '#1f2d26', chips: ['#1f2d26', '#dfe8e1', '#2f5d50'] },
-    { name: 'Przędza', bg: '#b4462e', fg: '#ffffff', chips: ['#161616', '#d7d8d3', '#b4462e'] },
-    { name: 'Kminek', bg: '#ffcf3a', fg: '#2b1408', chips: ['#2b1408', '#ffcf3a', '#d93a1f'] },
+    {
+      id: 'law',
+      name: 'Rozwaga',
+      bg: '#121212',
+      fg: '#ffffff',
+      chips: ['#121212', '#ffffff', '#b3122a'],
+    },
+    {
+      id: 'acc',
+      name: 'Rubryka',
+      bg: '#f3f6fb',
+      fg: '#0f1f3d',
+      chips: ['#0f1f3d', '#f3f6fb', '#ff5b24'],
+    },
+    {
+      id: 'den',
+      name: 'Szkliwo',
+      bg: '#ff6f5b',
+      fg: '#1b1f2a',
+      chips: ['#1b1f2a', '#ffffff', '#ff6f5b'],
+    },
+    {
+      id: 'psy',
+      name: 'Tafla',
+      bg: '#dfe8e1',
+      fg: '#1f2d26',
+      chips: ['#1f2d26', '#dfe8e1', '#2f5d50'],
+    },
+    {
+      id: 'est',
+      name: 'Przędza',
+      bg: '#b4462e',
+      fg: '#ffffff',
+      chips: ['#161616', '#d7d8d3', '#b4462e'],
+    },
+    {
+      id: 'bis',
+      name: 'Kminek',
+      bg: '#ffcf3a',
+      fg: '#2b1408',
+      chips: ['#2b1408', '#ffcf3a', '#d93a1f'],
+    },
   ],
   pl: {
     anchor: 'wzornik',
@@ -90,7 +127,9 @@ const arrow = (
 export default function Work({ lang }) {
   const t = copy[lang];
   const reduce = useReducedMotion();
+  const list = useRef(null);
   const wzornik = `${routes.cli[lang]}#${t.anchor}`;
+  useFaces(list);
 
   return (
     <>
@@ -130,11 +169,11 @@ export default function Work({ lang }) {
           transition={reduce ? instant : { duration: 0.7, delay: 0.3 }}>
           {tie(t.swNote)}
         </m.p>
-        <ul className="work__list">
+        <ul className="work__list" ref={list}>
           {copy.swatches.map((swatch, i) => (
             <Reveal as="li" key={swatch.name} className="work__item" style={{ '--i': i }}>
               <Link
-                className="ws"
+                className={`ws ws--${swatch.id}`}
                 to={wzornik}
                 style={{
                   '--sb': swatch.bg,

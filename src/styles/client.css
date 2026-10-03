@@ -289,6 +289,14 @@ html:not(.hand) .tags__pointer .note {
     padding: 0;
   }
 
+  html:not(.motion) .scene {
+    animation: unpin 0s 6s forwards;
+  }
+
+  html:not(.motion) .scene__stage {
+    animation: unstick 0s 6s forwards;
+  }
+
   .scene__stage {
     position: sticky;
     top: 0;
@@ -517,11 +525,36 @@ html:not(.motion) .fit__stroke {
   animation: settle-thread 0s 6s forwards;
 }
 
+@keyframes unpin {
+  to {
+    height: auto;
+  }
+}
+
+@keyframes unstick {
+  to {
+    position: static;
+    height: auto;
+  }
+}
+
 @media print {
   .tags__grain,
   .scene__seam,
   .scene__tape {
     display: none !important;
+  }
+
+  :is(.scene, .case, .steps, .fit, .wz) :is(.sec-head, h2, h3) {
+    break-after: avoid;
+  }
+
+  .scene__col,
+  .step,
+  .steps__list > li,
+  .care__list li,
+  .sw {
+    break-inside: avoid;
   }
 
   .fit__stroke {

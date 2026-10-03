@@ -109,7 +109,7 @@
 .nf-hand small {
   display: block;
   margin-top: 4px;
-  font-size: max(0.62em, 0.7rem);
+  font-size: max(0.7em, 0.8rem);
   color: var(--chalk-dim);
 }
 

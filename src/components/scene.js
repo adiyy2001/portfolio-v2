@@ -225,6 +225,7 @@ export default function Scene({ lang }) {
         geometry.set(apart);
         return;
       }
+      if ([table, frameA, frameB, edgeA, edgeB].some(ref => !ref.current)) return;
       const box = table.current.getBoundingClientRect();
       const a = sample(edgeA.current, frameA.current, box);
       const b = sample(edgeB.current, frameB.current, box);

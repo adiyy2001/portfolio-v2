@@ -61,7 +61,7 @@ export const Head = () => (
   <Seo
     lang="en"
     view="cli"
-    title="Adrian Turbiński for clients: web apps, websites and accessibility"
+    title="Adrian Turbiński for clients: web apps, sites, accessibility"
     description="Web apps and websites for companies, from the quote to maintenance. Front end, back end, deployment and WCAG accessibility."
   />
 );

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import React, { useRef, useState, useSyncExternalStore } from 'react';
 import { m, useReducedMotion } from 'framer-motion';
 import { tie } from '../i18n';
 import { instant } from '../motion';
@@ -8,7 +8,7 @@ import Acc from './wzornik/acc';
 import Bis from './wzornik/bis';
 import Den from './wzornik/den';
 import Est from './wzornik/est';
-import loadFaces from './wzornik/fonts';
+import useFaces from './wzornik/fonts';
 import Law from './wzornik/law';
 import Psy from './wzornik/psy';
 
@@ -156,23 +156,7 @@ export default function Wzornik({ lang }) {
   );
   const [open, setOpen] = useState({ law: true });
 
-  useEffect(() => {
-    if (!('IntersectionObserver' in window)) {
-      loadFaces();
-      return undefined;
-    }
-    const watcher = new IntersectionObserver(
-      entries => {
-        if (entries.some(entry => entry.isIntersecting)) {
-          watcher.disconnect();
-          loadFaces();
-        }
-      },
-      { rootMargin: '150% 0px' },
-    );
-    watcher.observe(section.current);
-    return () => watcher.disconnect();
-  }, []);
+  useFaces(section);
 
   const toggle = id => setOpen(state => ({ ...state, [id]: !state[id] }));
 

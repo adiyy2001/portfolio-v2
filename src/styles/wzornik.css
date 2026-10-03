@@ -1,10 +1,14 @@
-.wz {
+.wz,
+.work__list {
   --wz-bodoni: 'Bodoni Moda', Georgia, serif;
   --wz-bricolage: 'Bricolage Grotesque', system-ui, sans-serif;
   --wz-outfit: 'Outfit', system-ui, sans-serif;
   --wz-newsreader: 'Newsreader', Georgia, serif;
   --wz-unbounded: 'Unbounded', system-ui, sans-serif;
   --wz-gloock: 'Gloock', Georgia, serif;
+}
+
+.wz {
   position: relative;
   padding: clamp(40px, 5vw, 80px) var(--pad) clamp(110px, 12vw, 180px);
 }

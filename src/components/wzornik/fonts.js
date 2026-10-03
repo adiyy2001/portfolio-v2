@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { withPrefix } from 'gatsby';
 
 const faces = [
@@ -11,7 +12,7 @@ const faces = [
 
 let requested = false;
 
-export default function loadFaces() {
+function loadFaces() {
   if (requested || typeof FontFace === 'undefined' || !document.fonts) return;
   requested = true;
   faces.forEach(([family, file, weight]) => {
@@ -23,4 +24,24 @@ export default function loadFaces() {
     document.fonts.add(face);
     face.load().catch(() => {});
   });
+}
+
+export default function useFaces(near) {
+  useEffect(() => {
+    if (!('IntersectionObserver' in window)) {
+      loadFaces();
+      return undefined;
+    }
+    const watcher = new IntersectionObserver(
+      entries => {
+        if (entries.some(entry => entry.isIntersecting)) {
+          watcher.disconnect();
+          loadFaces();
+        }
+      },
+      { rootMargin: '150% 0px' },
+    );
+    watcher.observe(near.current);
+    return () => watcher.disconnect();
+  }, [near]);
 }

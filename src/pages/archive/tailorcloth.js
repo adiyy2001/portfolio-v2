@@ -31,7 +31,11 @@ export default function Case() {
           {tie('Strona na Odoo i własne moduły do zarządzania produktami.')}
         </p>
         <div className="cta" data-rise style={{ '--r': 4 }}>
-          <a className="link" href="https://tailorcloth.com/" rel="noopener">
+          <a
+            className="link"
+            href="https://tailorcloth.com/"
+            target="_blank"
+            rel="noopener noreferrer">
             tailorcloth.com
           </a>
         </div>
