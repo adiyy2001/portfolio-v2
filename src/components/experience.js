@@ -10,10 +10,10 @@ const copy = {
   nowAt: '97.917%',
   bars: [
     { id: 'brainode', l: '7.292%', w: '25%', lane: 0, full: 'BRAINODE', short: 'BRAINODE' },
-    { id: 'cobiro', l: '33.333%', w: '13.542%', lane: 0, full: 'Cobiro', short: 'Cobiro' },
-    { id: 'roche', l: '33.333%', w: '10.417%', lane: 1, full: 'Roche', short: 'Roche' },
-    { id: 'ttms', l: '45.833%', w: '14.583%', lane: 1, full: 'TTMS', short: 'TTMS' },
-    { id: 'mh', l: '58.333%', w: '17.708%', lane: 0, full: 'Media Hunters', short: 'MH' },
+    { id: 'cobiro', l: '38.542%', w: '7.292%', lane: 0, full: 'Cobiro', short: 'Cobiro' },
+    { id: 'roche', l: '33.333%', w: '5.208%', lane: 1, full: 'Roche', short: 'Roche' },
+    { id: 'ttms', l: '45.833%', w: '12.5%', lane: 1, full: 'TTMS', short: 'TTMS' },
+    { id: 'mh', l: '58.333%', w: '16.667%', lane: 0, full: 'Media Hunters', short: 'MH' },
     { id: 'pse', l: '75%', w: '22.917%', lane: 1, full: 'PSE Innowacje', short: 'PSE' },
   ],
   jobs: [
@@ -66,22 +66,22 @@ const copy = {
         desc: 'Poprowadziłem proof of concept aplikacji do modelowania i wizualizacji linii wysokiego napięcia, a teraz rozwijamy z niej system produkcyjny. Prowadzę architekturę całości, frontu i back-endu. Front to Angular 19 i GoJS, prowadziłem migrację na GoJS 3. Back-end zaprojektowałem w Quarkusie: przetwarzanie wsadowe, REST API, architektura heksagonalna, strojenie Oracle. W pięcioosobowym zespole wdrażam nowych inżynierów, ustalam standardy i strategię testów, robię code review.',
       },
       mh: {
-        when: 'od września 2023 do stycznia 2025, samozatrudnienie',
+        when: 'od września 2023 do grudnia 2024, samozatrudnienie',
         desc: 'Odpowiadałem za kilka długo rozwijanych aplikacji webowych, od kodu po decyzje architektoniczne. Zaprojektowałem i rozwijałem platformę SaaS dla wielu klientów naraz. Wprowadziłem CI i testy w Jest i Cypress. Interfejsy robiłem zgodnie z WCAG. Prowadziłem mały zespół i przeglądałem jego kod.',
         win: 'projekty o 30% sprawniejsze dzięki Agile i DevOps',
       },
       ttms: {
-        when: 'od września 2022 do października 2023, samozatrudnienie, zdalnie',
+        when: 'od września 2022 do sierpnia 2023, samozatrudnienie, zdalnie',
         desc: 'Piaskownica, w której elektrycy projektują i sprawdzają złożone schematy, między innymi wież wysokiego napięcia. Grafowy stan interfejsu trzymałem w NgRx. Wdrożyłem WCAG 2.1 w interfejsie pełnym diagramów: klawiatura, czytniki ekranu i zarządzanie fokusem.',
         win: 'praca elektryków usprawniona o 25%',
       },
       cobiro: {
-        when: 'od września 2021 do września 2022, samozatrudnienie',
+        when: 'od lutego 2022 do sierpnia 2022, samozatrudnienie',
         desc: 'Przebudowywałem stary front w stronę architektury heksagonalnej, małymi krokami, przy stabilnej produkcji. Pomogłem wprowadzić CI. Robiłem feature flagi do eksperymentów i stopniowych wdrożeń z szybkim wycofaniem.',
         win: 'o 40% mniej zduplikowanego kodu po przejściu na monorepo Nx',
       },
       roche: {
-        when: 'od września 2021 do czerwca 2022, kontrakt, zdalnie',
+        when: 'od września 2021 do stycznia 2022, kontrakt, zdalnie',
         desc: 'Wewnętrzne aplikacje, w których badacze analizują i walidują dane kliniczne. Środowisko regulowane, mała tolerancja na błędy. Przyspieszyłem je lazy loadingiem tras i oszczędniejszym użyciem API.',
       },
       brainode: {
@@ -103,22 +103,22 @@ const copy = {
         desc: 'I led the proof of concept of an app that models and visualizes high-voltage power lines, and now we are growing it into the production system. I lead the architecture of the whole thing, frontend and backend. The frontend is Angular 19 and GoJS, and I drove the migration to GoJS 3. I designed the backend layer in Quarkus: batch processing, REST API, hexagonal architecture, Oracle tuning. In a team of five I onboard new engineers, set standards and the testing strategy, and review code.',
       },
       mh: {
-        when: 'September 2023 to January 2025, self-employed',
+        when: 'September 2023 to December 2024, self-employed',
         desc: 'I was responsible for several long-lived web apps, from the code to the architecture decisions. I designed and evolved a multi-tenant SaaS platform. I introduced CI and tests in Jest and Cypress. I built the interfaces to WCAG. I led a small team and reviewed its code.',
         win: 'projects 30% more efficient through Agile and DevOps',
       },
       ttms: {
-        when: 'September 2022 to October 2023, self-employed, remote',
+        when: 'September 2022 to August 2023, self-employed, remote',
         desc: 'A sandbox where electricians design and validate complex diagrams, high-voltage towers among them. I kept the graph-shaped UI state in NgRx. I implemented WCAG 2.1 in a diagram-heavy interface: keyboard, screen readers and focus management.',
         win: "electricians' workflows improved by 25%",
       },
       cobiro: {
-        when: 'September 2021 to September 2022, self-employed',
+        when: 'February 2022 to August 2022, self-employed',
         desc: 'I moved a legacy frontend towards hexagonal architecture in small steps, keeping production stable. I helped introduce CI. I built feature flags for experiments and gradual rollouts with fast rollback.',
         win: '40% less duplicated code after the move to an Nx monorepo',
       },
       roche: {
-        when: 'September 2021 to June 2022, contract, remote',
+        when: 'September 2021 to January 2022, contract, remote',
         desc: 'Internal apps where researchers analyze and validate clinical data. A regulated environment with little tolerance for errors. I made them faster with route-based lazy loading and leaner API usage.',
       },
       brainode: {
