@@ -1,0 +1,79 @@
+---
+import type { Lang } from '../data/lang';
+import { langs } from '../data/lang';
+import type { PageId } from '../data/routes';
+import { otherLang, paths } from '../data/routes';
+import { shellCopy } from '../copy/shell';
+import { link } from '../../../shared/link';
+import Slip from './Slip.astro';
+import Wordmark from './Wordmark.astro';
+
+interface Props {
+  lang: Lang;
+  page: PageId;
+}
+
+const { lang, page } = Astro.props;
+const copy = shellCopy[lang];
+const navPages = ['home', 'menu', 'events', 'about'] as const;
+const target = otherLang(lang);
+---
+
+<header class="rail" data-rail>
+  <div class="rail__bar">
+    <a class="rail__brand" href={link(paths[lang].home)} aria-label={copy.homeLabel}>
+      <Wordmark />
+    </a>
+    <div class="rail__lang" role="group" aria-label={copy.language}>
+      {langs.map(code =>
+        code === lang ? (
+          <span class="lang-link" lang={code} aria-current="true">
+            <span aria-hidden="true">{code.toUpperCase()}</span>
+            <span class="sr-only">{copy.languageNames[code]}</span>
+          </span>
+        ) : (
+          <a
+            class="lang-link"
+            lang={code}
+            hreflang={code}
+            href={link(paths[target][page])}
+            aria-label={copy.languageNames[code]}>
+            {code.toUpperCase()}
+          </a>
+        ),
+      )}
+    </div>
+    <button
+      class="rail__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="rail-panel"
+      data-rail-toggle>
+      {copy.menuButton}
+    </button>
+  </div>
+  <div class="rail__panel" id="rail-panel" data-rail-panel>
+    <nav aria-label={copy.mainNav}>
+      <ul class="rail__nav">
+        {navPages.map(id => (
+          <li>
+            <a
+              class="rail__link"
+              href={link(paths[lang][id])}
+              aria-current={page === id ? 'page' : undefined}>
+              <span class="seed" aria-hidden="true" />
+              <span>{copy.nav[id]}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a
+      class="btn btn--on-dark btn--block"
+      href={link(paths[lang].booking)}
+      aria-current={page === 'booking' ? 'page' : undefined}>
+      {copy.reserve}
+    </a>
+    <Slip lang={lang} />
+  </div>
+</header>

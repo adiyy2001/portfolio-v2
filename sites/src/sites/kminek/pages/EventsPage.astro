@@ -1,0 +1,67 @@
+---
+import type { Lang } from '../data/lang';
+import { events } from '../data/events';
+import { paths } from '../data/routes';
+import { place } from '../data/place';
+import { eventsCopy } from '../copy/events';
+import { warsawMoment } from '../logic/schedule';
+import { tie } from '../logic/typography';
+import { link } from '../../../shared/link';
+import EndBand from '../components/EndBand.astro';
+import EventFull from '../components/EventFull.astro';
+import Layout from '../components/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = eventsCopy[lang];
+const now = warsawMoment(new Date());
+const mail = `mailto:${place.email}?subject=${encodeURIComponent(copy.hire.mailSubject)}`;
+---
+
+<Layout lang={lang} page="events" title={copy.meta.title} description={copy.meta.description}>
+  <PageHead title={copy.head.title} lead={copy.head.lead} />
+
+  <div class="shows band band--seeds">
+    <div class="band__inner shows__inner">
+      {events.map(event => (
+        <EventFull event={event} lang={lang} now={now} />
+      ))}
+    </div>
+  </div>
+
+  <section class="hire band band--ink" aria-labelledby="hire-title">
+    <div class="band__inner hire__inner">
+      <div class="hire__text">
+        <h2 id="hire-title">{tie(copy.hire.title)}</h2>
+        <p>{tie(copy.hire.text)}</p>
+        <div class="hire__actions">
+          <a class="btn btn--on-dark" href={mail}>
+            {copy.hire.action}
+          </a>
+          <p class="hire__phone">
+            <a href={`tel:${place.phone.href}`}>{place.phone.display}</a>
+            <span>{copy.hire.phoneHint}</span>
+          </p>
+        </div>
+      </div>
+      <dl class="rows rows--spec hire__rows">
+        {copy.hire.rows.map(row => (
+          <div>
+            <dt>{row.label}</dt>
+            <dd>{tie(row.value)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <EndBand title={copy.end.title} text={copy.end.text}>
+    <a class="btn btn--on-tomato" href={link(paths[lang].booking)}>
+      {copy.end.button}
+    </a>
+  </EndBand>
+</Layout>

@@ -1,0 +1,41 @@
+---
+import type { Lang } from '../data/lang';
+import type { EventItem } from '../data/events';
+import type { Moment } from '../logic/schedule';
+import {
+  describeRecurrence,
+  nextLabel,
+  nextShowing,
+  serializeRecurrence,
+  toIso,
+} from '../logic/schedule';
+import { homeCopy } from '../copy/home';
+import { tie } from '../logic/typography';
+
+interface Props {
+  event: EventItem;
+  lang: Lang;
+  now: Moment;
+}
+
+const { event, lang, now } = Astro.props;
+const next = nextShowing(event.rule, now, event.endsAt);
+const cadence = describeRecurrence(event.rule, lang);
+const cadenceText = cadence.charAt(0).toUpperCase() + cadence.slice(1);
+---
+
+<li class="event">
+  <div class="event__line">
+    <h3 class="event__title">{tie(event.title[lang])}</h3>
+    <p class="event__next">
+      <span class="event__label">{homeCopy[lang].events.next}</span>
+      <time
+        datetime={toIso(next)}
+        data-rule={serializeRecurrence(event.rule)}
+        data-ends-at={event.endsAt}>
+        {tie(nextLabel(next, now.date, lang))}
+      </time>
+    </p>
+  </div>
+  <p class="event__meta">{tie(`${cadenceText}, ${event.time[lang]}. ${event.price[lang]}.`)}</p>
+</li>

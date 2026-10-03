@@ -1,0 +1,86 @@
+---
+import type { Lang } from '../data/lang';
+import { allergens } from '../data/allergens';
+import { dishes } from '../data/menu';
+import { menuCopy } from '../copy/menu';
+import { countByAllergen } from '../logic/menu-filter';
+import { tie } from '../logic/typography';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = menuCopy[lang];
+const filter = copy.filter;
+const counts = countByAllergen(dishes);
+const dietOptions = ['any', 'vegetarian', 'vegan'] as const;
+---
+
+<div class="filters" data-filters role="group" aria-labelledby="filters-title">
+  <button
+    class="filters__toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="filters-panel"
+    data-filters-toggle>
+    <span>{filter.title}</span>
+    <span class="filters__active" data-active-count></span>
+  </button>
+  <form class="filters__panel" id="filters-panel" data-filters-panel>
+    <h2 class="filters__title" id="filters-title">
+      {filter.title}
+    </h2>
+    <p class="filters__intro">{tie(filter.intro)}</p>
+    <fieldset class="filters__group">
+      <legend>{filter.dietLegend}</legend>
+      <div class="diet">
+        {dietOptions.map(option => (
+          <label class="diet__option">
+            <input type="radio" name="diet" value={option} checked={option === 'any'} />
+            <span>{filter.diets[option]}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+    <fieldset class="filters__group">
+      <legend>{filter.withoutLegend}</legend>
+      <p class="filters__hint">{filter.withoutHint}</p>
+      <ul class="without">
+        {allergens.map(allergen => (
+          <li>
+            <label
+              class:list={[
+                'without__option',
+                { 'without__option--absent': counts[allergen.id] === 0 },
+              ]}>
+              <input
+                type="checkbox"
+                name="without"
+                value={allergen.id}
+                disabled={counts[allergen.id] === 0}
+              />
+              <span class="without__code">{allergen.code[lang]}</span>
+              <span class="without__name">
+                {allergen.name[lang]}
+                {counts[allergen.id] === 0 && <span class="without__absent">{filter.absent}</span>}
+              </span>
+              {counts[allergen.id] > 0 && (
+                <>
+                  <span class="without__count" aria-hidden="true">
+                    {counts[allergen.id]}
+                  </span>
+                  <span class="sr-only">{`, ${counts[allergen.id]} ${filter.dishesIn}`}</span>
+                </>
+              )}
+            </label>
+          </li>
+        ))}
+      </ul>
+    </fieldset>
+    <p class="filters__count" role="status" aria-live="polite" data-count></p>
+    <button class="filters__reset" type="reset" data-reset hidden>
+      {filter.reset}
+    </button>
+  </form>
+</div>

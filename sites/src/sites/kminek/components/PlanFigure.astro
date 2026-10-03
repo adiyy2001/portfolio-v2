@@ -1,0 +1,86 @@
+---
+import type { Lang } from '../data/lang';
+import { barStools, planTables } from '../data/plan';
+import { bookingCopy } from '../copy/booking';
+import { seatPositions } from '../logic/plan';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const plan = bookingCopy[lang].plan;
+const stools = Array.from({ length: barStools }, (_, index) => 265 + index * 65);
+const sharedSeats = [200, 280, 360, 440, 520];
+const tableSize = { four: { width: 64, height: 56 }, two: { width: 48, height: 40 } } as const;
+---
+
+<figure class="plan">
+  <svg viewBox="0 0 640 520" role="img" aria-label={plan.label}>
+    <rect class="plan__floor" x="20" y="20" width="600" height="430" />
+    <path class="plan__wall" d="M20 300V450H620V20H20V240" />
+    <rect class="plan__dark" x="20" y="20" width="180" height="110" />
+    <text class="plan__text plan__text--on-dark" x="36" y="84">
+      {plan.labels.kitchen}
+    </text>
+    <rect class="plan__dark" x="230" y="44" width="370" height="36" />
+    <text class="plan__text plan__text--on-dark" x="246" y="70">
+      {plan.labels.bar}
+    </text>
+    {stools.map(x => (
+      <circle class="plan__seat" cx={x} cy="104" r="11" />
+    ))}
+    {planTables.map(table => {
+      const size = tableSize[table.kind];
+      return (
+        <g>
+          <rect
+            class="plan__table"
+            x={table.x - size.width / 2}
+            y={table.y - size.height / 2}
+            width={size.width}
+            height={size.height}
+          />
+          {seatPositions(table).map(seat => (
+            <circle class="plan__seat" cx={seat.x} cy={seat.y} r="10" />
+          ))}
+        </g>
+      );
+    })}
+    <rect class="plan__table" x="160" y="375" width="400" height="30" />
+    {sharedSeats.map(x => (
+      <circle class="plan__seat" cx={x} cy="358" r="10" />
+    ))}
+    {sharedSeats.map(x => (
+      <circle class="plan__seat" cx={x} cy="422" r="10" />
+    ))}
+    <path class="plan__window" d="M140 450H580" />
+    <text class="plan__text plan__text--center" x="360" y="488">
+      {plan.labels.window}
+    </text>
+    <path class="plan__arrow" d="M36 272H92M80 260L94 272L80 284" />
+    <text class="plan__text plan__text--halo" x="36" y="246">
+      {plan.labels.entry}
+    </text>
+  </svg>
+  <figcaption>
+    <ul class="plan__legend">
+      <li>
+        <span class="key key--bar" aria-hidden="true"></span>
+        {plan.legend.bar}
+      </li>
+      <li>
+        <span class="key key--shared" aria-hidden="true"></span>
+        {plan.legend.shared}
+      </li>
+      <li>
+        <span class="key key--four" aria-hidden="true"></span>
+        {plan.legend.four}
+      </li>
+      <li>
+        <span class="key key--two" aria-hidden="true"></span>
+        {plan.legend.two}
+      </li>
+    </ul>
+  </figcaption>
+</figure>

@@ -1,0 +1,27 @@
+---
+import { wordmark } from '../data/wordmark';
+
+interface Props {
+  define?: boolean;
+}
+
+const { define = false } = Astro.props;
+const [, , width, height] = wordmark.viewBox.split(' ');
+---
+
+{define ? (
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="kminek-wordmark" viewBox={wordmark.viewBox}>
+      <path d={wordmark.letters} fill="currentColor" />
+      <path
+        d={wordmark.seed.path}
+        transform={wordmark.seed.transform}
+        style="fill:var(--wordmark-seed,#d93a1f)"
+      />
+    </symbol>
+  </svg>
+) : (
+  <svg class="wordmark" viewBox={`0 0 ${width} ${height}`} aria-hidden="true" focusable="false">
+    <use href="#kminek-wordmark" />
+  </svg>
+)}

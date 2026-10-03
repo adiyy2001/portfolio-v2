@@ -1,0 +1,58 @@
+---
+import type { Lang } from '../data/lang';
+import type { EventItem } from '../data/events';
+import type { Moment } from '../logic/schedule';
+import {
+  describeRecurrence,
+  nextLabel,
+  nextShowing,
+  serializeRecurrence,
+  toIso,
+} from '../logic/schedule';
+import { paths } from '../data/routes';
+import { eventsCopy } from '../copy/events';
+import { tie } from '../logic/typography';
+import { link } from '../../../shared/link';
+
+interface Props {
+  event: EventItem;
+  lang: Lang;
+  now: Moment;
+}
+
+const { event, lang, now } = Astro.props;
+const copy = eventsCopy[lang].show;
+const next = nextShowing(event.rule, now, event.endsAt);
+const cadence = describeRecurrence(event.rule, lang);
+const cadenceText = cadence.charAt(0).toUpperCase() + cadence.slice(1);
+---
+
+<article class="show" id={event.id} aria-labelledby={`${event.id}-title`}>
+  <div class="show__lead">
+    <h2 id={`${event.id}-title`}>{tie(event.title[lang])}</h2>
+    <p class="show__when">{tie(`${cadenceText}, ${event.time[lang]}`)}</p>
+    <p class="show__stamp">
+      <span class="show__label">{copy.next}</span>
+      <time
+        datetime={toIso(next)}
+        data-rule={serializeRecurrence(event.rule)}
+        data-ends-at={event.endsAt}>
+        {tie(nextLabel(next, now.date, lang))}
+      </time>
+    </p>
+  </div>
+  <div class="show__body">
+    <p class="show__summary">{tie(event.summary[lang])}</p>
+    <dl class="rows show__facts">
+      {event.facts.map(fact => (
+        <div>
+          <dt>{fact.label[lang]}</dt>
+          <dd>{tie(fact.value[lang])}</dd>
+        </div>
+      ))}
+    </dl>
+    <a class="btn btn--ink" href={link(paths[lang].booking)}>
+      {copy.book}
+    </a>
+  </div>
+</article>

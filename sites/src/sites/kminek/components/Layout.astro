@@ -1,0 +1,130 @@
+---
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/ui.css';
+import '../styles/shell.css';
+import '../styles/card.css';
+import '../styles/home.css';
+import '../styles/page.css';
+import '../styles/karta.css';
+import '../styles/events.css';
+import '../styles/about.css';
+import '../styles/booking.css';
+import type { Lang } from '../data/lang';
+import { langs } from '../data/lang';
+import type { PageId } from '../data/routes';
+import { paths } from '../data/routes';
+import { shellCopy } from '../copy/shell';
+import { link } from '../../../shared/link';
+import Rail from './Rail.astro';
+import SiteFooter from './SiteFooter.astro';
+import Wordmark from './Wordmark.astro';
+
+interface Props {
+  lang: Lang;
+  page: PageId;
+  title: string;
+  description: string;
+}
+
+const { lang, page, title, description } = Astro.props;
+const copy = shellCopy[lang];
+const absolute = (path: string) => new URL(link(path), Astro.site).href;
+const canonical = absolute(paths[lang][page]);
+const alternates = langs.map(code => ({ code, href: absolute(paths[code][page]) }));
+const defaultHref = absolute(paths.pl[page]);
+const ogImage = absolute(lang === 'pl' ? '/kminek/og.png' : '/kminek/og-en.png');
+const locales = { pl: 'pl_PL', en: 'en_GB' } as const;
+const alternateLocale = lang === 'pl' ? locales.en : locales.pl;
+const gloockUrl = link('/kminek/fonts/gloock.woff2');
+const cabinUrl = link('/kminek/fonts/cabin.woff2');
+
+const webFace = (family: string, url: string, weight: string) =>
+  `@font-face{font-family:'${family}';font-style:normal;font-weight:${weight};font-display:swap;src:url(${url}) format('woff2')}`;
+
+const fallbackFace = (
+  family: string,
+  weight: string,
+  sources: readonly string[],
+  size: number,
+  ascent: number,
+  descent: number,
+) =>
+  `@font-face{font-family:'${family}';font-weight:${weight};src:${sources.map(name => `local('${name}')`).join(',')};size-adjust:${size}%;ascent-override:${ascent}%;descent-override:${descent}%;line-gap-override:0%}`;
+
+const inlineCss = [
+  webFace('Gloock', gloockUrl, '400'),
+  webFace('Cabin', cabinUrl, '400 700'),
+  fallbackFace(
+    'Gloock Fallback',
+    '400',
+    ['Times New Roman', 'Liberation Serif', 'Tinos'],
+    113.63,
+    85.8,
+    19.8,
+  ),
+  fallbackFace('Cabin Fallback', '400', ['Arial', 'Liberation Sans', 'Arimo'], 93.27, 103.46, 26.8),
+  fallbackFace(
+    'Cabin Fallback',
+    '700',
+    ['Arial Bold', 'Arial-BoldMT', 'Liberation Sans Bold', 'Arimo Bold'],
+    89.96,
+    107.26,
+    27.79,
+  ),
+  `:root{--seeds-mustard:url(${link('/kminek/seeds-mustard.svg')});--seeds-ink:url(${link('/kminek/seeds-ink.svg')});--seeds-tomato:url(${link('/kminek/seeds-tomato.svg')})}`,
+].join('');
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#ffcf3a" />
+    <link rel="canonical" href={canonical} />
+    {alternates.map(item => (
+      <link rel="alternate" hreflang={item.code} href={item.href} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={defaultHref} />
+    <link rel="icon" type="image/svg+xml" href={link('/kminek/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kminek" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locales[lang]} />
+    <meta property="og:locale:alternate" content={alternateLocale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={copy.ogAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="preload" href={gloockUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={cabinUrl} as="font" type="font/woff2" crossorigin />
+    <style set:html={inlineCss}></style>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      {copy.skip}
+    </a>
+    <Wordmark define />
+    <div class="site">
+      <Rail lang={lang} page={page} />
+      <div class="page">
+        <main id="main" tabindex="-1">
+          <slot />
+        </main>
+        <SiteFooter lang={lang} compact={page === 'home'} />
+      </div>
+    </div>
+    <script>
+      import '../scripts/shell';
+    </script>
+  </body>
+</html>

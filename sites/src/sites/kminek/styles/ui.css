@@ -1,0 +1,206 @@
+@property --cut {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 14px;
+}
+
+.btn {
+  --cut: 14px;
+  --face: var(--tomato);
+  --label: #fff;
+  --flap: #8f2310;
+  --edge: calc(var(--cut) * 0.7071);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 30px 0 26px;
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(
+    225deg,
+    transparent calc(var(--edge) - 0.5px),
+    var(--face) calc(var(--edge) + 0.5px)
+  );
+  color: var(--label);
+  font: 700 1.0625rem/1.15 var(--font-text);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: --cut 0.18s ease-out;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--cut);
+  height: var(--cut);
+  background: linear-gradient(45deg, var(--flap) 50%, transparent 50%);
+  pointer-events: none;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  --cut: 24px;
+  text-decoration: none;
+}
+
+.btn--ink {
+  --face: var(--ink);
+  --label: var(--mustard);
+  --flap: var(--ink-soft);
+}
+
+.btn--on-dark {
+  --face: var(--mustard);
+  --label: var(--ink);
+  --flap: #c99a14;
+}
+
+.btn--on-tomato {
+  --face: #fff;
+  --label: var(--ink);
+  --flap: #d9d2c4;
+}
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+.btn::-webkit-details-marker {
+  display: none;
+}
+
+.fill {
+  flex: 1 1 24px;
+  min-width: 24px;
+  border-bottom: var(--dots);
+  opacity: 0.6;
+  transform: translateY(-0.28em);
+}
+
+.rows > div {
+  display: flex;
+  align-items: last baseline;
+  gap: 12px;
+}
+
+.rows dt {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: last baseline;
+  gap: 10px;
+}
+
+.rows dt::after {
+  content: '';
+  flex: 1 1 24px;
+  min-width: 24px;
+  border-bottom: var(--dots);
+  opacity: 0.6;
+  transform: translateY(-0.28em);
+}
+
+.rows dd {
+  flex: 0 1 auto;
+  text-align: right;
+}
+
+.rows--spec > div {
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+  gap: 4px 24px;
+  align-items: baseline;
+}
+
+.rows--spec dt::after {
+  display: none;
+}
+
+.rows--spec dd {
+  max-width: none;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+.seed {
+  display: inline-block;
+  flex: none;
+  width: 16px;
+  height: 9px;
+  background: currentColor;
+  border-radius: 100% 0 100% 0;
+  transform: rotate(-24deg);
+}
+
+.mark {
+  display: inline-grid;
+  place-items: center;
+  min-width: 32px;
+  height: 26px;
+  padding: 0 6px;
+  background: var(--ink);
+  color: var(--mustard);
+  font: 700 0.875rem/1 var(--font-text);
+  letter-spacing: 0.04em;
+}
+
+.mark--diet {
+  min-width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  letter-spacing: 0;
+}
+
+.mark--vegan {
+  background: var(--tomato);
+  border-color: var(--tomato);
+  color: #fff;
+}
+
+.band {
+  position: relative;
+  background: var(--mustard);
+  color: var(--ink);
+}
+
+.band--seeds {
+  background-image: var(--seeds-mustard);
+  background-size: 300px 300px;
+}
+
+.band--ink {
+  --ring: var(--mustard);
+  background-color: var(--ink);
+  background-image: var(--seeds-ink);
+  background-size: 300px 300px;
+  color: #fff;
+}
+
+.band--paper {
+  background: #fff;
+}
+
+.band--tomato {
+  --ring: #fff;
+  background-color: var(--tomato);
+  background-image: var(--seeds-tomato);
+  background-size: 300px 300px;
+  color: #fff;
+}
+
+.band__inner {
+  width: 100%;
+  max-width: var(--content);
+  margin-inline: auto;
+  padding: clamp(48px, 9cqi, 104px) var(--gutter);
+}

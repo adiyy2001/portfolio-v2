@@ -1,0 +1,40 @@
+---
+import type { Lang } from '../data/lang';
+import { regularDay, hoursRange } from '../data/hours';
+import { place } from '../data/place';
+import { shellCopy } from '../copy/shell';
+import { tie } from '../logic/typography';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = shellCopy[lang].slip;
+---
+
+<div class="slip" role="group" aria-label={copy.label}>
+  <p class="slip__status" data-status>
+    {tie(copy.statusFallback)}
+  </p>
+  <dl class="slip__hours rows">
+    <div>
+      <dt>{copy.openDays}</dt>
+      <dd>{hoursRange(regularDay)}</dd>
+    </div>
+    <div>
+      <dt>{copy.closedDay}</dt>
+      <dd>{copy.closed}</dd>
+    </div>
+  </dl>
+  <p class="slip__note">{tie(copy.kitchen)}</p>
+  <hr class="slip__tear" />
+  <address class="slip__address">
+    {tie(place.street)}
+    <br />
+    {place.postcode} {place.city}, {place.district}
+  </address>
+  <p>
+    <a href={`tel:${place.phone.href}`}>{place.phone.display}</a>
+  </p>
+</div>

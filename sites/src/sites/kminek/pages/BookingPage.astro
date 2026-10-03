@@ -1,0 +1,86 @@
+---
+import type { Lang } from '../data/lang';
+import { place } from '../data/place';
+import { bookingCopy } from '../copy/booking';
+import { tie } from '../logic/typography';
+import Layout from '../components/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+import PlanFigure from '../components/PlanFigure.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = bookingCopy[lang];
+---
+
+<Layout lang={lang} page="booking" title={copy.meta.title} description={copy.meta.description}>
+  <PageHead title={copy.head.title} lead={copy.head.lead} />
+
+  <section class="reserve band" aria-labelledby="widget-title">
+    <div class="band__inner reserve__inner">
+      <div class="widget">
+        <h2 id="widget-title">{copy.widget.title}</h2>
+        <details class="widget__details">
+          <summary class="btn btn--block">{copy.widget.button}</summary>
+          <div class="widget__panel">
+            <p class="widget__sample">{tie(copy.widget.sampleTitle)}</p>
+            <p>{tie(copy.widget.sampleText)}</p>
+            <h3>{copy.widget.seeTitle}</h3>
+            <ul class="widget__see">
+              {copy.widget.see.map(item => (
+                <li>
+                  <span class="seed" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </details>
+        <p class="widget__phone">
+          {copy.widget.phone}
+          <a href={`tel:${place.phone.href}`}>{place.phone.display}</a>
+        </p>
+      </div>
+      <div class="steps">
+        <h2>{copy.steps.title}</h2>
+        <ol class="steps__list">
+          {copy.steps.items.map(item => (
+            <li>
+              <span class="seed" aria-hidden="true" />
+              <div>
+                <h3>{item.title}</h3>
+                <p>{tie(item.text)}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="room-plan band band--paper" aria-labelledby="plan-title">
+    <div class="band__inner room-plan__inner">
+      <div class="room-plan__text">
+        <h2 id="plan-title">{copy.plan.title}</h2>
+        <p>{tie(copy.plan.text)}</p>
+      </div>
+      <PlanFigure lang={lang} />
+    </div>
+  </section>
+
+  <section class="house band band--ink" aria-labelledby="house-title">
+    <div class="band__inner house__inner">
+      <h2 id="house-title">{copy.rules.title}</h2>
+      <dl class="rows rows--spec house__rows">
+        {copy.rules.rows.map(row => (
+          <div>
+            <dt>{row.label}</dt>
+            <dd>{tie(row.value)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+</Layout>

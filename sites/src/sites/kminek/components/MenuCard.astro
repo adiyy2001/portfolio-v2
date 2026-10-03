@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  weekPrefix?: string;
+  week?: string;
+  tall?: boolean;
+}
+
+const { title, weekPrefix, week, tall = false } = Astro.props;
+---
+
+<div class:list={['menu-card', { 'menu-card--tall': tall }]} data-tilt-box>
+  <div class="menu-card__turn" data-tilt>
+    <div class="menu-card__sheet">
+      {weekPrefix && week && (
+        <p class="menu-card__kicker">
+          {weekPrefix} <span data-menu-week>{week}</span>
+        </p>
+      )}
+      <h2 class="menu-card__title">{title}</h2>
+      <slot />
+      <div class="menu-card__foot">
+        <slot name="foot" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import '../scripts/card';
+</script>

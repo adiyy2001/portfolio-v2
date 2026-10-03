@@ -1,0 +1,102 @@
+---
+import type { Lang } from '../data/lang';
+import { paths } from '../data/routes';
+import { place } from '../data/place';
+import { team } from '../data/team';
+import { aboutCopy } from '../copy/about';
+import { tie } from '../logic/typography';
+import { link } from '../../../shared/link';
+import EndBand from '../components/EndBand.astro';
+import Layout from '../components/Layout.astro';
+import PageHead from '../components/PageHead.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = aboutCopy[lang];
+---
+
+<Layout lang={lang} page="about" title={copy.meta.title} description={copy.meta.description}>
+  <PageHead title={copy.head.title} lead={copy.head.lead} />
+
+  <section class="story band" aria-labelledby="name-title">
+    <div class="band__inner story__inner">
+      <div class="story__text">
+        <h2 id="name-title">{copy.name.title}</h2>
+        {copy.name.text.map(paragraph => (
+          <p>{tie(paragraph)}</p>
+        ))}
+      </div>
+      <div class="rules" role="group" aria-labelledby="rules-title">
+        <h2 id="rules-title">{copy.rules.title}</h2>
+        <ul class="rules__list">
+          {copy.rules.items.map(item => (
+            <li>
+              <span class="seed" aria-hidden="true" />
+              <span>{tie(item)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="team band band--tomato" aria-labelledby="team-title">
+    <div class="band__inner team__inner">
+      <div class="team__head">
+        <h2 id="team-title">{copy.people.title}</h2>
+        <p>{tie(copy.people.note)}</p>
+      </div>
+      <ul class="team__list">
+        {team.map(person => (
+          <li class="member">
+            <span class="member__monogram" aria-hidden="true">
+              {person.monogram}
+            </span>
+            <h3 class="member__name">{person.name}</h3>
+            <p class="member__role">{person.role[lang]}</p>
+            <p class="member__line">{tie(person.line[lang])}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="suppliers band band--ink" aria-labelledby="suppliers-title">
+    <div class="band__inner suppliers__inner">
+      <div class="suppliers__text">
+        <h2 id="suppliers-title">{copy.suppliers.title}</h2>
+        <p>{tie(copy.suppliers.text)}</p>
+      </div>
+      <dl class="rows rows--spec suppliers__rows">
+        {copy.suppliers.rows.map(row => (
+          <div>
+            <dt>{row.label}</dt>
+            <dd>{tie(row.value)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="room band band--paper" aria-labelledby="room-title">
+    <div class="band__inner room__inner">
+      <h2 id="room-title">{copy.place.title}</h2>
+      <p>{tie(copy.place.text)}</p>
+      <address class="room__address">
+        {tie(place.street)}, {place.postcode} {place.city}, {place.district}
+      </address>
+    </div>
+  </section>
+
+  <EndBand title={copy.end.title} text={copy.end.text}>
+    <a class="btn btn--on-tomato" href={link(paths[lang].booking)}>
+      {copy.end.book}
+    </a>
+    <a class="btn btn--ink" href={link(paths[lang].menu)}>
+      {copy.end.menu}
+    </a>
+  </EndBand>
+</Layout>

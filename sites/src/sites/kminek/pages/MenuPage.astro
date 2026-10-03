@@ -1,0 +1,106 @@
+---
+import type { Lang } from '../data/lang';
+import { allergens } from '../data/allergens';
+import { dishesIn, sections } from '../data/menu';
+import { paths } from '../data/routes';
+import { menuCopy } from '../copy/menu';
+import { menuWeekLabel, menuWeekOf, warsawToday } from '../logic/schedule';
+import { tie } from '../logic/typography';
+import { link } from '../../../shared/link';
+import Dish from '../components/Dish.astro';
+import EndBand from '../components/EndBand.astro';
+import Filters from '../components/Filters.astro';
+import Layout from '../components/Layout.astro';
+import MenuCard from '../components/MenuCard.astro';
+import PageHead from '../components/PageHead.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = menuCopy[lang];
+const week = menuWeekLabel(menuWeekOf(warsawToday(new Date())), lang);
+---
+
+<Layout lang={lang} page="menu" title={copy.meta.title} description={copy.meta.description}>
+  <PageHead title={copy.head.title} lead={copy.head.lead} />
+
+  <section class="karta band band--seeds" aria-label={copy.card.title}>
+    <div class="band__inner karta__inner">
+      <Filters lang={lang} />
+      <div class="karta__card" data-menu>
+        <MenuCard title={copy.card.title} weekPrefix={copy.card.weekPrefix} week={tie(week)} tall>
+          {sections.map(section => (
+            <section class="menu-section" data-section aria-labelledby={`section-${section.id}`}>
+              <h3 class="menu-section__title" id={`section-${section.id}`}>
+                {section.title[lang]}
+              </h3>
+              <ul class="menu-card__list">
+                {dishesIn(section.id).map(dish => (
+                  <Dish dish={dish} lang={lang} />
+                ))}
+              </ul>
+            </section>
+          ))}
+          <div class="menu-card__empty" data-empty hidden>
+            <p>{copy.filter.emptyText}</p>
+          </div>
+          <Fragment slot="foot">
+            {copy.card.foot.map(line => (
+              <p>{tie(line)}</p>
+            ))}
+            <a class="menu-card__link" href="#legend-title">
+              {copy.card.legendLink}
+            </a>
+          </Fragment>
+        </MenuCard>
+      </div>
+    </div>
+  </section>
+
+  <section class="legend band band--paper" aria-labelledby="legend-title">
+    <div class="band__inner legend__inner">
+      <div class="legend__text">
+        <h2 id="legend-title">{copy.legend.title}</h2>
+        <ul class="legend__diets">
+          {copy.legend.diets.map(item => (
+            <li>
+              <span class:list={['mark', 'mark--diet', { 'mark--vegan': item.code === 'VG' }]}>
+                {item.code}
+              </span>
+              <span>{item.text}</span>
+            </li>
+          ))}
+        </ul>
+        <p>{tie(copy.legend.allergensNote)}</p>
+      </div>
+      <div class="legend__allergens">
+        <h3>{copy.legend.allergensTitle}</h3>
+        <dl class="allergen-list">
+          {allergens.map(allergen => (
+            <div>
+              <dt>
+                <span class="mark" aria-hidden="true">
+                  {allergen.code[lang]}
+                </span>
+                <span>{allergen.name[lang]}</span>
+              </dt>
+              <dd>{tie(allergen.detail[lang])}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <EndBand title={copy.end.title} text={copy.end.text}>
+    <a class="btn btn--on-tomato" href={link(paths[lang].booking)}>
+      {copy.end.button}
+    </a>
+  </EndBand>
+</Layout>
+
+<script>
+  import '../scripts/filter';
+</script>

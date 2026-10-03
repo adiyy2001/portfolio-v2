@@ -1,0 +1,46 @@
+---
+import type { Lang } from '../data/lang';
+import type { Dish } from '../data/menu';
+import { allergenById, allergenName } from '../data/allergens';
+import { menuCopy } from '../copy/menu';
+import { tie } from '../logic/typography';
+
+interface Props {
+  dish: Dish;
+  lang: Lang;
+}
+
+const { dish, lang } = Astro.props;
+const spoken = menuCopy[lang].spoken;
+const keepsPolishName = lang === 'en' && dish.keepsPolishName === true;
+const description = dish.description[lang];
+const hasMarks = dish.diet !== 'none' || dish.allergens.length > 0;
+const dietSentence =
+  dish.diet === 'vegan' ? spoken.vegan : dish.diet === 'vegetarian' ? spoken.vegetarian : '';
+const allergenSentence =
+  dish.allergens.length > 0
+    ? `${spoken.allergens}: ${dish.allergens.map(id => allergenName(id, lang).toLowerCase()).join(', ')}.`
+    : spoken.none;
+const sentence = [dietSentence, allergenSentence].filter(part => part !== '').join(' ');
+---
+
+<li class="dish" data-dish data-diet={dish.diet} data-allergens={dish.allergens.join(' ')}>
+  <p class="dish__line">
+    <span class="dish__name" lang={keepsPolishName ? 'pl' : undefined}>
+      {tie(dish.name[lang])}
+    </span>
+    <span class="fill" aria-hidden="true"></span>
+    <span class="dish__price">{tie(`${dish.price} zł`)}</span>
+  </p>
+  {description !== '' && <p class="dish__text">{tie(description)}</p>}
+  {hasMarks && (
+    <p class="dish__marks" aria-hidden="true">
+      {dish.diet === 'vegetarian' && <span class="mark mark--diet">V</span>}
+      {dish.diet === 'vegan' && <span class="mark mark--diet mark--vegan">VG</span>}
+      {dish.allergens.map(id => (
+        <span class="mark">{allergenById(id).code[lang]}</span>
+      ))}
+    </p>
+  )}
+  <p class="sr-only">{sentence}</p>
+</li>

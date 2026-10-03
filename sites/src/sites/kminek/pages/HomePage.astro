@@ -1,0 +1,148 @@
+---
+import type { Lang } from '../data/lang';
+import { dishById, featuredDishIds } from '../data/menu';
+import { eventById, homeEventIds } from '../data/events';
+import { team } from '../data/team';
+import { paths } from '../data/routes';
+import { place } from '../data/place';
+import { homeCopy } from '../copy/home';
+import { warsawMoment } from '../logic/schedule';
+import { tie } from '../logic/typography';
+import { link } from '../../../shared/link';
+import Dish from '../components/Dish.astro';
+import EventRow from '../components/EventRow.astro';
+import Layout from '../components/Layout.astro';
+import MenuCard from '../components/MenuCard.astro';
+import WeekBoard from '../components/WeekBoard.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = homeCopy[lang];
+const now = warsawMoment(new Date());
+const featured = featuredDishIds.map(dishById);
+const homeEvents = homeEventIds.map(eventById);
+const visitor = copy.visitor;
+const visitorHref = link(paths[visitor.lang].home);
+---
+
+<Layout lang={lang} page="home" title={copy.meta.title} description={copy.meta.description}>
+  <section class="hero band band--seeds" aria-labelledby="hero-title">
+    <div class="band__inner hero__inner">
+      <div class="hero__text">
+        <h1 id="hero-title">{copy.hero.title}</h1>
+        <p class="hero__lead">{tie(copy.hero.lead)}</p>
+        <div class="hero__actions">
+          <a class="btn" href={link(paths[lang].booking)}>
+            {copy.hero.reserve}
+          </a>
+          <a class="btn btn--ink" href={link(paths[lang].menu)}>
+            {copy.hero.menu}
+          </a>
+        </div>
+        <dl class="hero__facts rows">
+          <div>
+            <dt>{copy.hero.hoursLabel}</dt>
+            <dd>{tie(copy.hero.hours)}</dd>
+          </div>
+          <div>
+            <dt>{copy.hero.addressLabel}</dt>
+            <dd>{tie(`${place.street}, ${place.city}`)}</dd>
+          </div>
+        </dl>
+        <p class="hero__status" data-status></p>
+      </div>
+      <MenuCard title={copy.card.title}>
+        <ul class="menu-card__list">
+          {featured.map(dish => (
+            <Dish dish={dish} lang={lang} />
+          ))}
+        </ul>
+        <Fragment slot="foot">
+          <p>{tie(copy.card.note)}</p>
+          <a class="menu-card__link" href={link(paths[lang].menu)}>
+            {copy.card.link}
+          </a>
+        </Fragment>
+      </MenuCard>
+    </div>
+  </section>
+
+  <section class="week-band band band--ink" aria-labelledby="week-title">
+    <div class="band__inner week-band__inner">
+      <div class="week-band__text">
+        <h2 id="week-title">{tie(copy.week.title)}</h2>
+        <p>{tie(copy.week.text)}</p>
+      </div>
+      <WeekBoard lang={lang} full />
+    </div>
+  </section>
+
+  <section class="events-band band" aria-labelledby="events-title">
+    <div class="band__inner events-band__inner">
+      <div class="events-band__text">
+        <h2 id="events-title">{tie(copy.events.title)}</h2>
+        <p>{tie(copy.events.intro)}</p>
+        <a class="btn btn--ink" href={link(paths[lang].events)}>
+          {copy.events.all}
+        </a>
+      </div>
+      <ul class="events-list">
+        {homeEvents.map(event => (
+          <EventRow event={event} lang={lang} now={now} />
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="about-band band band--tomato" aria-labelledby="about-title">
+    <div class="band__inner about-band__inner">
+      <div class="about-band__text">
+        <h2 id="about-title">{tie(copy.about.title)}</h2>
+        <p>{tie(copy.about.text)}</p>
+        <a class="btn btn--on-tomato" href={link(paths[lang].about)}>
+          {copy.about.link}
+        </a>
+      </div>
+      <ul class="people">
+        {team.map(person => (
+          <li class="person">
+            <span class="person__monogram" aria-hidden="true">
+              {person.monogram}
+            </span>
+            <p class="person__name">{person.name}</p>
+            <p class="person__role">{person.role[lang]}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="know-band band band--seeds" aria-labelledby="know-title">
+    <div class="band__inner know-band__inner">
+      <h2 id="know-title">{copy.know.title}</h2>
+      <dl class="know-list">
+        {copy.know.rows.map(row => (
+          <div>
+            <dt>{row.label}</dt>
+            <dd>{tie(row.value)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="visitor band band--paper" lang={visitor.lang} aria-labelledby="visitor-title">
+    <div class="band__inner visitor__inner">
+      <div class="visitor__text">
+        <h2 id="visitor-title">{visitor.title}</h2>
+        <p>{visitor.text}</p>
+      </div>
+      <a class="btn" href={visitorHref} hreflang={visitor.lang}>
+        {visitor.link}
+      </a>
+    </div>
+  </section>
+</Layout>

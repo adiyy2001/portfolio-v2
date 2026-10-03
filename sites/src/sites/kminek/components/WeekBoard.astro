@@ -1,0 +1,26 @@
+---
+import type { Lang } from '../data/lang';
+import { regularDay, hoursRange, weekHours, weekdayOrder } from '../data/hours';
+import { homeCopy } from '../copy/home';
+import { shellCopy } from '../copy/shell';
+import { tie } from '../logic/typography';
+
+interface Props {
+  lang: Lang;
+  full?: boolean;
+}
+
+const { lang, full = false } = Astro.props;
+const home = homeCopy[lang].week;
+const shell = shellCopy[lang].footer;
+---
+
+<dl class:list={['week', { 'week--full': full }]} data-week>
+  {weekdayOrder.map(day => (
+    <div data-weekday={day}>
+      <dt>{shell.days[day]}</dt>
+      <dd class="week__hours">{weekHours[day] ? hoursRange(regularDay) : shell.closed}</dd>
+      {full && <dd class="week__note">{tie(home.notes[day])}</dd>}
+    </div>
+  ))}
+</dl>

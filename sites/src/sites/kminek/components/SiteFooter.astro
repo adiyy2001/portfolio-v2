@@ -1,0 +1,61 @@
+---
+import type { Lang } from '../data/lang';
+import { pageIds, paths } from '../data/routes';
+import { place } from '../data/place';
+import { homeCopy } from '../copy/home';
+import { shellCopy } from '../copy/shell';
+import { tie } from '../logic/typography';
+import { link } from '../../../shared/link';
+import SampleNote from '../../../shared/SampleNote.astro';
+import WeekBoard from './WeekBoard.astro';
+
+interface Props {
+  lang: Lang;
+  compact?: boolean;
+}
+
+const { lang, compact = false } = Astro.props;
+const copy = shellCopy[lang];
+const summary = `${homeCopy[lang].hero.hours}. ${copy.footer.kitchenNote} ${copy.footer.mondayNote}`;
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      <h2>{copy.footer.visit}</h2>
+      <div class="footer__address">
+        <address>
+          {tie(place.street)}
+          <br />
+          {place.postcode} {place.city}, {place.district}
+        </address>
+        <p>
+          <a href={`tel:${place.phone.href}`}>{place.phone.display}</a>
+        </p>
+        <p>
+          <a href={`mailto:${place.email}`}>{place.email}</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer__hours">
+      <h2>{copy.footer.hours}</h2>
+      {compact ? (
+        <p class="footer__summary">{tie(summary)}</p>
+      ) : (
+        <>
+          <WeekBoard lang={lang} />
+          <p class="footer__note">
+            {tie(copy.footer.kitchenNote)} {tie(copy.footer.mondayNote)}
+          </p>
+        </>
+      )}
+    </div>
+    <nav class="footer__links" aria-label={copy.footer.pages}>
+      <h2>{copy.footer.pages}</h2>
+      {pageIds.map(id => (
+        <a href={link(paths[lang][id])}>{id === 'booking' ? copy.reserve : copy.nav[id]}</a>
+      ))}
+    </nav>
+    <SampleNote name="Kminek" lang={lang} class="footer__sample" />
+  </div>
+</footer>
