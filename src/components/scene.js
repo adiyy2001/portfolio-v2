@@ -167,11 +167,11 @@ function Piece({ data, label, progress, shift, frame, edge }) {
   );
 }
 
-function Caption({ progress, range, title, text }) {
+function Caption({ progress, range, shift, title, text }) {
   const opacity = useTransform(progress, range, [0, 1]);
   const y = useTransform(progress, range, [18, 0]);
   return (
-    <m.div className="scene__cap" style={{ opacity, y }}>
+    <m.div className="scene__cap" style={{ opacity, y, x: shift }}>
       <h3>{title}</h3>
       <p>{tie(text)}</p>
     </m.div>
@@ -281,6 +281,7 @@ export default function Scene({ lang }) {
             <Caption
               progress={progress}
               range={pieces.front.windows.caption}
+              shift={shiftA}
               title={copy.frontEnd}
               text={t.frontCaption}
             />
@@ -297,6 +298,7 @@ export default function Scene({ lang }) {
             <Caption
               progress={progress}
               range={pieces.back.windows.caption}
+              shift={shiftB}
               title={copy.backEnd}
               text={t.backCaption}
             />
