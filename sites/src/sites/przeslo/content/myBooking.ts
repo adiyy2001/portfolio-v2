@@ -41,6 +41,7 @@ export interface MyBookingText {
   extrasLocked: string;
   packageToggle: string;
   packageHint: string;
+  packageUnavailable: string;
   extraChange: (difference: string) => string;
   extraNoChange: string;
   saveExtras: string;
@@ -126,6 +127,7 @@ const pl: MyBookingText = {
   extrasLocked: 'Dodatki można zmieniać do dnia przyjazdu, jeśli rezerwacja nie jest anulowana.',
   packageToggle: 'Pakiet weekendowy',
   packageHint: 'Dwie noce od piątku, śniadania, późne wymeldowanie i zestaw powitalny.',
+  packageUnavailable: 'Pakiet weekendowy dotyczy tylko dwóch nocy od piątku.',
   extraChange: difference => `Zmiana ceny: ${difference}`,
   extraNoChange: 'Cena bez zmian.',
   saveExtras: 'Zapisz zmiany',
@@ -210,6 +212,7 @@ const en: MyBookingText = {
   extrasLocked: 'Extras can be changed until the arrival day, unless the booking is cancelled.',
   packageToggle: 'Weekend package',
   packageHint: 'Two nights from Friday, breakfasts, late check-out and a welcome set.',
+  packageUnavailable: 'The weekend package covers only two nights from Friday.',
   extraChange: difference => `Price change: ${difference}`,
   extraNoChange: 'Price unchanged.',
   saveExtras: 'Save changes',
