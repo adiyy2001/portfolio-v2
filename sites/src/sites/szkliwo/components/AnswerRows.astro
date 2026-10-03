@@ -1,0 +1,89 @@
+---
+import type { Treatment } from '../data/treatments';
+
+interface Props {
+  treatment: Treatment;
+}
+
+const { treatment } = Astro.props;
+const answers = [
+  { question: 'Czy to boli?', ...treatment.pain },
+  { question: 'Ile to trwa?', ...treatment.duration },
+  { question: 'Ile to kosztuje?', ...treatment.cost },
+];
+---
+
+<div class="answers ruled">
+  {answers.map(item => (
+    <section class="answer">
+      <h2 class="answer__question">{item.question}</h2>
+      <p class="answer__value">{item.answer}</p>
+      <p class="answer__detail">{item.detail}</p>
+    </section>
+  ))}
+</div>
+
+<style>
+  .answer {
+    display: grid;
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    grid-template-areas:
+      'question detail'
+      'value detail';
+    column-gap: clamp(32px, 6vw, 96px);
+    align-content: start;
+    padding-block: clamp(24px, 3vw, 40px);
+    border-bottom: 1px solid var(--edge);
+  }
+
+  .answer__question {
+    grid-area: question;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--text-small);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+
+  .answer__question::before {
+    content: '';
+    width: 12px;
+    height: 18px;
+    border-radius: 2px 2px 7px 7px;
+    background: var(--coral);
+  }
+
+  .answer__value {
+    grid-area: value;
+    margin-top: 6px;
+    font-size: clamp(2.25rem, 1.3rem + 3.6vw, 4.5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
+
+  .answer__detail {
+    grid-area: detail;
+    align-self: end;
+    max-width: 36em;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 860px) {
+    .answer {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'question'
+        'value'
+        'detail';
+      row-gap: 14px;
+    }
+
+    .answer__detail {
+      margin-top: 4px;
+    }
+  }
+</style>

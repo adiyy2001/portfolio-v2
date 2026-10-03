@@ -1,0 +1,39 @@
+---
+import { bookingPath, clinic } from '../data/site';
+import { page } from '../lib/url';
+---
+
+<aside class="action-bar" aria-label="Szybkie działania">
+  <a class="btn btn--ghost" href={clinic.phoneHref}>
+    Zadzwoń
+  </a>
+  <a class="btn" href={page(bookingPath)}>
+    Umów wizytę
+  </a>
+</aside>
+
+<style>
+  .action-bar {
+    display: none;
+  }
+
+  @media (max-width: 720px) {
+    .action-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 40;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 12px;
+      padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom, 0px));
+      background: var(--paper);
+      border-top: 1px solid var(--rule);
+    }
+
+    :global(body:has(input:focus, textarea:focus, select:focus)) .action-bar {
+      display: none;
+    }
+  }
+</style>

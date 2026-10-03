@@ -1,0 +1,93 @@
+---
+import { bookingPath, clinic, hoursSummary } from '../data/site';
+import { page } from '../lib/url';
+
+interface Props {
+  title: string;
+  text: string;
+}
+
+const { title, text } = Astro.props;
+---
+
+<section class="cta section section--coral" aria-labelledby="cta-title">
+  <div class="container cta__grid">
+    <div>
+      <h2 id="cta-title">{title}</h2>
+      <p class="lead">{text}</p>
+      <div class="cta__actions">
+        <a class="btn" href={page(bookingPath)}>
+          Umów wizytę
+        </a>
+        <a class="btn btn--ghost" href={clinic.phoneHref}>
+          <span class="visually-hidden">Zadzwoń: </span>
+          {clinic.phoneDisplay}
+        </a>
+      </div>
+    </div>
+    <dl class="cta__hours">
+      {hoursSummary.map(row => (
+        <div>
+          <dt>{row.days}</dt>
+          <dd>{row.hours}</dd>
+        </div>
+      ))}
+      <div class="cta__where">
+        <dt>Adres</dt>
+        <dd>
+          {clinic.street}, {clinic.city}
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<style>
+  .cta__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 40px clamp(32px, 6vw, 96px);
+    align-items: end;
+  }
+
+  .cta h2 {
+    max-width: 13em;
+  }
+
+  .cta .lead {
+    margin-top: 20px;
+    max-width: 30em;
+  }
+
+  .cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    margin-top: 32px;
+  }
+
+  .cta__hours div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 12px;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  .cta__hours div:first-child {
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .cta__hours dd {
+    margin: 0;
+    font-weight: 600;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (max-width: 860px) {
+    .cta__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

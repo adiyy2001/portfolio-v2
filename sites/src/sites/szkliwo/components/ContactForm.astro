@@ -1,0 +1,350 @@
+---
+import { treatments } from '../data/treatments';
+
+const topics = [
+  ...treatments.map(treatment => ({ value: treatment.slug, label: treatment.name })),
+  { value: 'bol', label: 'Boli mnie ząb i potrzebuję szybkiej wizyty' },
+  { value: 'dziecko', label: 'Wizyta dziecka' },
+  { value: 'inne', label: 'Coś innego, opiszę niżej' },
+];
+
+const times = [
+  { value: 'any', label: 'Dowolna pora', hint: '8-20' },
+  { value: 'morning', label: 'Rano', hint: '8-12' },
+  { value: 'afternoon', label: 'Po południu', hint: '12-16' },
+  { value: 'evening', label: 'Wieczorem', hint: '16-20' },
+];
+---
+
+<div class="contact" data-contact>
+  <p class="contact__fallback">
+    Formularz działa z włączonym JavaScriptem. Bez niego zadzwoń: +48 71 000 00 03.
+  </p>
+
+  <form class="contact__form" novalidate data-contact-form aria-labelledby="contact-title">
+    <h3 id="contact-title" class="contact__title">
+      Zostaw numer, oddzwonimy
+    </h3>
+
+    <div
+      class="contact__summary error-summary"
+      role="alert"
+      tabindex="-1"
+      hidden
+      data-contact-summary>
+      <p class="error-summary__title">Popraw te pola, żeby wysłać formularz:</p>
+      <ul data-contact-summary-list></ul>
+    </div>
+
+    <div class="contact__grid">
+      <div class="field">
+        <label for="contact-name">Imię</label>
+        <input
+          id="contact-name"
+          class="input"
+          name="name"
+          type="text"
+          autocomplete="given-name"
+          required
+          aria-describedby="contact-name-error"
+        />
+        <p id="contact-name-error" class="error" hidden data-error-for="name"></p>
+      </div>
+
+      <div class="field">
+        <label for="contact-phone">Telefon</label>
+        <input
+          id="contact-phone"
+          class="input"
+          name="phone"
+          type="tel"
+          inputmode="tel"
+          autocomplete="tel"
+          required
+          aria-describedby="contact-phone-hint contact-phone-error"
+        />
+        <p id="contact-phone-hint" class="hint">
+          Dziewięć cyfr, na przykład 600 100 200.
+        </p>
+        <p id="contact-phone-error" class="error" hidden data-error-for="phone"></p>
+      </div>
+
+      <div class="field">
+        <label for="contact-email">E-mail (nieobowiązkowo)</label>
+        <input
+          id="contact-email"
+          class="input"
+          name="email"
+          type="email"
+          autocomplete="email"
+          aria-describedby="contact-email-error"
+        />
+        <p id="contact-email-error" class="error" hidden data-error-for="email"></p>
+      </div>
+
+      <div class="field">
+        <label for="contact-topic">Czego dotyczy wizyta</label>
+        <select
+          id="contact-topic"
+          class="select"
+          name="topic"
+          required
+          aria-describedby="contact-topic-error">
+          <option value="">Wybierz z listy</option>
+          {topics.map(topic => (
+            <option value={topic.value}>{topic.label}</option>
+          ))}
+        </select>
+        <p id="contact-topic-error" class="error" hidden data-error-for="topic"></p>
+      </div>
+    </div>
+
+    <fieldset class="field contact__times">
+      <legend>Kiedy oddzwonić</legend>
+      <div class="segments">
+        {times.map((time, index) => (
+          <label class="segment">
+            <input
+              type="radio"
+              name="time"
+              value={time.value}
+              checked={index === 0}
+              class="visually-hidden"
+            />
+            <span class="segment__label">{time.label}</span>
+            <span class="segment__hint">{time.hint}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label for="contact-message">Co jeszcze powinniśmy wiedzieć (nieobowiązkowo)</label>
+      <textarea
+        id="contact-message"
+        class="textarea"
+        name="message"
+        rows="4"
+        aria-describedby="contact-message-hint"></textarea>
+      <p id="contact-message-hint" class="hint">
+        Jeśli jesteś w ciąży, bierzesz leki na krzepliwość krwi albo masz alergię, napisz o tym.
+      </p>
+    </div>
+
+    <div class="field">
+      <label class="check">
+        <input
+          id="contact-consent"
+          type="checkbox"
+          name="consent"
+          aria-describedby="contact-consent-error"
+        />
+        <span>
+          Zgadzam się, żeby klinika zadzwoniła w sprawie wizyty. Numer posłuży tylko do umówienia
+          terminu.
+        </span>
+      </label>
+      <p id="contact-consent-error" class="error" hidden data-error-for="consent"></p>
+    </div>
+
+    <div class="contact__submit">
+      <button class="btn" type="submit">
+        Poproś o telefon
+      </button>
+      <p class="small muted">To strona przykładowa. Formularz niczego nie wysyła.</p>
+    </div>
+  </form>
+
+  <div class="contact__success" tabindex="-1" role="status" hidden data-contact-success>
+    <h3 class="contact__title" data-contact-success-title>
+      Dziękujemy
+    </h3>
+    <p class="lead" data-contact-success-text></p>
+    <p>
+      <strong>To strona przykładowa, więc nic nie zostało wysłane.</strong> W prawdziwej klinice
+      recepcja oddzwoniłaby w wybranej porze i zaproponowała termin.
+    </p>
+    <button class="btn btn--ghost" type="button" data-contact-reset>
+      Wypełnij ponownie
+    </button>
+  </div>
+</div>
+
+<script>
+  import '../scripts/contact-form';
+</script>
+
+<style>
+  .contact__fallback {
+    padding: 20px;
+    border: 1.5px solid var(--edge);
+    border-radius: 8px 8px 20px 20px;
+    font-weight: 500;
+  }
+
+  :global(.js) .contact__fallback {
+    display: none;
+  }
+
+  .contact__form,
+  .contact__success {
+    display: none;
+    gap: 24px;
+  }
+
+  :global(.js) .contact__form:not([hidden]) {
+    display: grid;
+  }
+
+  :global(.js) .contact__success:not([hidden]) {
+    display: grid;
+    justify-items: start;
+  }
+
+  .contact__title {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+    letter-spacing: -0.02em;
+  }
+
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .error-summary {
+    padding: 18px 20px;
+    border: 2px solid var(--coral-deep);
+    border-radius: 8px 8px 20px 20px;
+    background: #fff;
+  }
+
+  .error-summary__title {
+    font-weight: 600;
+  }
+
+  .error-summary ul {
+    margin-top: 8px;
+    display: grid;
+    gap: 2px;
+  }
+
+  .error-summary a {
+    display: inline-block;
+    padding-block: 8px;
+    color: var(--coral-deep);
+    font-weight: 600;
+  }
+
+  .contact__times {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  .contact__times legend {
+    padding: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .segments {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .segment {
+    display: grid;
+    align-content: center;
+    gap: 0;
+    min-height: 64px;
+    padding: 8px 12px 10px;
+    border: 1.5px solid var(--edge);
+    border-radius: var(--tab-radius);
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .segment__label {
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .segment__hint {
+    font-size: var(--text-small);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .segment:hover {
+    border-color: var(--ink);
+  }
+
+  .segment:has(input:checked) {
+    border: 3px solid var(--ink);
+    background: var(--coral);
+    padding: 7px 11px 9px;
+  }
+
+  .segment:has(input:checked) .segment__hint {
+    color: var(--ink);
+  }
+
+  .segment:has(input:focus-visible) {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  .check {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 14px;
+    align-items: start;
+    cursor: pointer;
+    font-weight: 400;
+  }
+
+  .check input {
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    margin: 0;
+    border: 2px solid var(--edge);
+    border-radius: 4px 4px 11px 11px;
+    background: #fff;
+    cursor: pointer;
+  }
+
+  .check input:checked {
+    border-color: var(--ink);
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231b1f2a' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E")
+        center / 20px 20px no-repeat,
+      var(--coral);
+  }
+
+  .check input[aria-invalid='true'] {
+    border-color: var(--coral-deep);
+    border-width: 3px;
+  }
+
+  .contact__submit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 24px;
+  }
+
+  @media (max-width: 720px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .segments {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

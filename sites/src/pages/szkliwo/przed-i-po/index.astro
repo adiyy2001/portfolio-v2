@@ -1,0 +1,334 @@
+---
+import BeforeAfter from '../../../sites/szkliwo/components/BeforeAfter.astro';
+import Cta from '../../../sites/szkliwo/components/Cta.astro';
+import Layout from '../../../sites/szkliwo/components/Layout.astro';
+import ShadeTabs from '../../../sites/szkliwo/components/ShadeTabs.astro';
+import SmileScene from '../../../sites/szkliwo/illustrations/SmileScene.astro';
+import { scenes, type SceneId } from '../../../sites/szkliwo/data/scenes';
+import { findTreatment, type TreatmentSlug } from '../../../sites/szkliwo/data/treatments';
+import { closeUpView } from '../../../sites/szkliwo/lib/smile';
+import { getShade, guideOrder, shadeRank } from '../../../sites/szkliwo/lib/shades';
+import { page } from '../../../sites/szkliwo/lib/url';
+
+interface SceneText {
+  id: SceneId;
+  slug: TreatmentSlug;
+  heading: string;
+  text: string;
+  facts: readonly string[];
+}
+
+const sceneTexts: readonly SceneText[] = [
+  {
+    id: 'whitening',
+    slug: 'wybielanie',
+    heading: 'Wybielanie: kilka stopni jaśniej',
+    text: 'Typowy wynik to od trzech do pięciu stopni w skali kolornika. Rysunek pokazuje cztery: z odcienia A3 do A2. Przed zabiegiem zapisujemy twój odcień, a po dwóch tygodniach go mierzymy.',
+    facts: [
+      'Wypełnienia, korony i licówki się nie wybielają.',
+      'Najlepiej reagują zęby żółtawe i brązowawe, słabiej szarawe.',
+      'Efekt trzyma się zwykle od roku do trzech lat.',
+    ],
+  },
+  {
+    id: 'aligners',
+    slug: 'ortodoncja-nakladkowa',
+    heading: 'Zęby w jednej linii',
+    text: 'Rysunek pokazuje stłoczone zęby przed leczeniem i po nim. Plan ruchu oglądasz na ekranie, zanim założysz pierwszą nakładkę, więc wiesz, dokąd zęby mają dojść.',
+    facts: [
+      'Leczenie trwa zwykle od 6 do 18 miesięcy.',
+      'Nakładki nosisz około 22 godzin na dobę.',
+      'Przy niektórych wadach lepszy jest aparat stały i powiemy to na konsultacji.',
+    ],
+  },
+  {
+    id: 'implant',
+    slug: 'implanty',
+    heading: 'Implant na miejscu brakującego zęba',
+    text: 'Rysunek pokazuje brak bocznego górnego siekacza i koronę na implancie w tym samym miejscu. Zęby obok zostają nietknięte, bo nie trzeba ich szlifować pod most.',
+    facts: [
+      'Całe leczenie trwa od trzech do sześciu miesięcy, bo implant musi zrosnąć się z kością.',
+      'Najpierw tomografia, potem cena całości w planie.',
+      'Korona na implancie jest w kolorze twoich zębów.',
+    ],
+  },
+];
+
+const startShade = 'A3';
+const goalShade = 'A2';
+---
+
+<Layout
+  title="Przed i po: rysunki typowych wyników leczenia | Szkliwo"
+  description="Suwaki przed i po dla wybielania, nakładek i implantu oraz kolornik A1-D2. To rysunki typowych wyników, nie zdjęcia pacjentów."
+  path="/przed-i-po/">
+  <div class="container page-head">
+    <nav aria-label="Okruszki">
+      <ol class="crumbs">
+        <li>
+          <a href={page('/')}>Strona główna</a>
+        </li>
+        <li aria-current="page">Przed i po</li>
+      </ol>
+    </nav>
+    <h1>Przed i po, narysowane uczciwie</h1>
+    <p class="lead">
+      Nie pokazujemy zdjęć pacjentów. Zamiast nich są rysunki typowych wyników, które możesz
+      porównać suwakiem: myszką, palcem albo klawiszami strzałek.
+    </p>
+  </div>
+
+  {sceneTexts.map((item, index) => {
+    const treatment = findTreatment(item.slug);
+    const dark = index === 1;
+    return (
+      <section
+        class:list={['section', { 'section--ink on-ink': dark }]}
+        aria-labelledby={`${item.id}-title`}>
+        <div class="container scene">
+          <div class="scene__text">
+            <h2 id={`${item.id}-title`}>{item.heading}</h2>
+            <p class:list={['lead', { muted: dark }]}>{item.text}</p>
+            <ul class="tick-list">
+              {item.facts.map(fact => (
+                <li>{fact}</li>
+              ))}
+            </ul>
+            <a class="btn btn--ghost" href={page(`/zabiegi/${item.slug}/`)}>
+              {treatment.name}: ból, czas i cena
+            </a>
+          </div>
+          <BeforeAfter scene={item.id} />
+        </div>
+      </section>
+    );
+  })}
+
+  <section class="section section--mist" aria-labelledby="picker-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="picker-title">Sprawdź swój cel na kolorniku</h2>
+        <p class="lead">
+          Wybierz odcień, który masz dziś, i ten, który chcesz mieć. Powiemy, czy to realny cel.
+        </p>
+      </div>
+
+      <div class="picker" data-picker>
+        <div class="picker__tabs">
+          <ShadeTabs
+            name="now"
+            idPrefix="now"
+            legend="Mój odcień dziś"
+            shades={guideOrder}
+            initial={startShade}
+          />
+          <ShadeTabs
+            name="goal"
+            idPrefix="goal"
+            legend="Chcę dojść do"
+            shades={guideOrder}
+            initial={goalShade}
+          />
+        </div>
+        <div class="picker__result">
+          <div class="picker__smiles">
+            <figure data-picker-now>
+              <div class="picker__smile">
+                <SmileScene idPrefix="picker-now" view={closeUpView} shade={startShade} />
+              </div>
+              <figcaption>
+                <strong>Dziś</strong>
+                <span data-picker-now-code>{startShade}</span>
+              </figcaption>
+            </figure>
+            <figure data-picker-goal>
+              <div class="picker__smile">
+                <SmileScene idPrefix="picker-goal" view={closeUpView} shade={goalShade} />
+              </div>
+              <figcaption>
+                <strong>Cel</strong>
+                <span data-picker-goal-code>{goalShade}</span>
+              </figcaption>
+            </figure>
+          </div>
+          <p class="picker__message" role="status" data-picker-result></p>
+          <p class="small muted">
+            Ekran nie odda koloru zęba dokładnie. Odcień oceniamy w gabinecie, przy świetle
+            dziennym, kolornikiem przyłożonym do zęba.
+          </p>
+        </div>
+      </div>
+
+      <div class="guide">
+        <h3>Cała skala, od najjaśniejszego odcienia</h3>
+        <ol class="guide__list">
+          {[...guideOrder]
+            .sort((first, second) => shadeRank(first) - shadeRank(second))
+            .map(shade => (
+              <li>
+                <span class="guide__swatch" style={`--shade:${getShade(shade).color}`}></span>
+                <span class="guide__code">{shade}</span>
+                <span class="muted small">{shadeRank(shade)}. z 16</span>
+              </li>
+            ))}
+        </ol>
+        <p class="small muted">
+          Litery to grupy: A brązowo-czerwonawe, B czerwono-żółtawe, C szare, D czerwono-szare.
+          Kolejność od najjaśniejszego do najciemniejszego to tak zwana skala jasności.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="why-title">
+    <div class="container split">
+      <div class="stack">
+        <h2 id="why-title">Dlaczego rysunki, a nie zdjęcia</h2>
+      </div>
+      <ul class="tick-list">
+        <li>
+          Zdjęcie jednego pacjenta pokazuje jeden przypadek. Rysunek typowego wyniku nie obiecuje,
+          że u ciebie będzie tak samo.
+        </li>
+        <li>
+          Zdjęcia po wybielaniu zależą od światła, aparatu i filtra. Kolornik mierzy odcień tak samo
+          za każdym razem.
+        </li>
+        <li>
+          Wynik leczenia opisujemy na planie i omawiamy z tobą na konsultacji, na twoich zębach, nie
+          na cudzych.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <Cta
+    title="Chcesz wiedzieć, jak to będzie u ciebie?"
+    text="Na przeglądzie zapiszemy twój odcień na kolorniku i powiemy, co jest realne."
+  />
+</Layout>
+
+<script>
+  import '../../../sites/szkliwo/scripts/shade-picker';
+</script>
+
+<style>
+  .scene {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 40px clamp(32px, 6vw, 96px);
+    align-items: center;
+  }
+
+  .scene__text {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .scene :global(.tick-list) {
+    width: 100%;
+  }
+
+  .scene :global(.tick-list li) {
+    border-bottom-color: rgb(125 131 148 / 0.4);
+  }
+
+  .picker {
+    display: none;
+  }
+
+  :global(.js) .picker {
+    display: grid;
+    gap: clamp(32px, 5vw, 56px);
+  }
+
+  .picker__tabs {
+    display: grid;
+    gap: 40px;
+  }
+
+  .picker__result {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 16px clamp(24px, 4vw, 64px);
+    align-items: center;
+  }
+
+  .picker__smiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    grid-row: span 2;
+  }
+
+  .picker__smile {
+    aspect-ratio: 700 / 360;
+    overflow: hidden;
+    border-radius: 8px 8px 28px 28px;
+  }
+
+  .picker figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  .picker__message {
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    align-self: end;
+  }
+
+  .guide {
+    display: grid;
+    gap: 16px;
+    margin-top: clamp(40px, 6vw, 72px);
+  }
+
+  :global(.js) .guide {
+    display: none;
+  }
+
+  .guide__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px 16px;
+  }
+
+  .guide__list li {
+    display: grid;
+    grid-template-columns: 36px auto 1fr;
+    align-items: center;
+    gap: 10px;
+    padding-block: 6px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .guide__swatch {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--edge);
+    border-radius: 4px 4px 14px 14px;
+    background: var(--shade);
+  }
+
+  .guide__code {
+    font-weight: 600;
+  }
+
+  @media (max-width: 960px) {
+    .scene,
+    .picker__result {
+      grid-template-columns: 1fr;
+    }
+
+    .picker__smiles {
+      grid-row: auto;
+    }
+  }
+</style>

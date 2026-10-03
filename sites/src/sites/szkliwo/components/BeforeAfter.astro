@@ -1,0 +1,220 @@
+---
+import { scenes, type SceneId } from '../data/scenes';
+import { getShade } from '../lib/shades';
+import { describeValue, initialValue, maximumValue, minimumValue } from '../lib/compare';
+import SmileScene from '../illustrations/SmileScene.astro';
+
+interface Props {
+  scene: SceneId;
+}
+
+const { scene: sceneId } = Astro.props;
+const scene = scenes[sceneId];
+const beforeCode = sceneId === 'whitening' ? ` ${scene.before.shade}` : '';
+const afterCode = sceneId === 'whitening' ? ` ${scene.after.shade}` : '';
+const labelId = `compare-${sceneId}-label`;
+const readoutId = `compare-${sceneId}-readout`;
+---
+
+<figure class="compare" data-compare>
+  <div class="compare__stage" style={`--split:${initialValue}%`}>
+    <div class="compare__layer compare__layer--after">
+      <SmileScene idPrefix={`${sceneId}-after`} view={scene.view} {...scene.after} />
+      <span class="compare__tag compare__tag--after">
+        {scene.afterLabel}
+        {afterCode}
+      </span>
+    </div>
+    <div class="compare__layer compare__layer--before">
+      <SmileScene idPrefix={`${sceneId}-before`} view={scene.view} {...scene.before} />
+      <span class="compare__tag compare__tag--before">
+        {scene.beforeLabel}
+        {beforeCode}
+      </span>
+    </div>
+    <div class="compare__line" aria-hidden="true">
+      <span class="compare__grip"></span>
+    </div>
+    <div
+      class="compare__handle"
+      role="slider"
+      tabindex="0"
+      aria-labelledby={labelId}
+      aria-valuemin={minimumValue}
+      aria-valuemax={maximumValue}
+      aria-valuenow={initialValue}
+      aria-valuetext={describeValue(initialValue)}
+      aria-orientation="horizontal"
+      data-compare-handle></div>
+  </div>
+  <p id={labelId} class="visually-hidden">
+    {scene.title}: suwak porównania rysunków przed i po. Strzałki zmieniają wartość o 1, Shift ze
+    strzałką o 10, Home pokazuje sam rysunek po, End sam rysunek przed.
+  </p>
+  <p class="compare__readout" id={readoutId} data-compare-readout>
+    {describeValue(initialValue)}
+  </p>
+  <figcaption class="small muted">{scene.caption}</figcaption>
+</figure>
+
+<script>
+  import '../scripts/compare';
+</script>
+
+<style>
+  .compare {
+    display: grid;
+    gap: 12px;
+  }
+
+  .compare__stage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .compare__layer {
+    position: relative;
+    aspect-ratio: 700 / 360;
+    overflow: hidden;
+    border-radius: 10px 10px 28px 28px;
+  }
+
+  .compare__layer--before {
+    order: -1;
+  }
+
+  .compare__tag {
+    position: absolute;
+    top: 12px;
+    padding: 0.35rem 0.8rem 0.45rem;
+    border-radius: 4px 4px 12px 12px;
+    background: var(--ink);
+    color: #fff;
+    font-size: var(--text-small);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .compare__tag--before {
+    left: 12px;
+  }
+
+  .compare__tag--after {
+    right: 12px;
+    background: var(--coral);
+    color: var(--ink);
+  }
+
+  .compare__line,
+  .compare__handle,
+  .compare__readout {
+    display: none;
+  }
+
+  :global(.js) .compare__stage {
+    position: relative;
+    display: block;
+    aspect-ratio: 700 / 360;
+    touch-action: pan-y;
+    user-select: none;
+    cursor: ew-resize;
+    border-radius: 10px 10px 28px 28px;
+    overflow: hidden;
+  }
+
+  :global(.js) .compare__layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+  }
+
+  :global(.js) .compare__layer--before {
+    clip-path: inset(0 calc(100% - var(--split)) 0 0);
+  }
+
+  :global(.js) .compare__line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--split);
+    display: block;
+    width: 4px;
+    margin-left: -2px;
+    background: #fff;
+    box-shadow: 0 0 0 1.5px var(--ink);
+    pointer-events: none;
+  }
+
+  :global(.js) .compare__grip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 56px;
+    margin: -28px 0 0 -22px;
+    border: 3px solid var(--ink);
+    border-radius: 6px 6px 20px 20px;
+    background: var(--coral);
+  }
+
+  :global(.js) .compare__grip::before,
+  :global(.js) .compare__grip::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    border-top: 3px solid var(--ink);
+    border-left: 3px solid var(--ink);
+  }
+
+  :global(.js) .compare__grip::before {
+    left: 7px;
+    transform: rotate(-45deg);
+  }
+
+  :global(.js) .compare__grip::after {
+    right: 7px;
+    transform: rotate(135deg);
+  }
+
+  :global(.js) .compare__handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--split) - 28px);
+    display: block;
+    width: 56px;
+    cursor: ew-resize;
+  }
+
+  :global(.js) .compare__handle:focus-visible {
+    outline: none;
+  }
+
+  :global(.js) .compare__stage:has(.compare__handle:focus-visible) {
+    outline: 3px solid var(--ink);
+    outline-offset: 4px;
+  }
+
+  :global(.js) .compare__stage:has(.compare__handle:focus-visible) .compare__grip {
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+  }
+
+  :global(.js) .compare__readout {
+    display: block;
+    font-size: 1.125rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  :global(.on-ink) .compare__readout {
+    color: #fff;
+  }
+
+  :global(.on-ink) .compare figcaption {
+    color: var(--on-ink);
+  }
+</style>

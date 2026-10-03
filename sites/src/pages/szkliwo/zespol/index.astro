@@ -1,0 +1,292 @@
+---
+import Cta from '../../../sites/szkliwo/components/Cta.astro';
+import Layout from '../../../sites/szkliwo/components/Layout.astro';
+import Portrait from '../../../sites/szkliwo/illustrations/Portrait.astro';
+import { team } from '../../../sites/szkliwo/data/team';
+import { parseDays, weekdayLabels } from '../../../sites/szkliwo/lib/schedule';
+import { page } from '../../../sites/szkliwo/lib/url';
+
+const schedule = team.map(member => ({ member, days: parseDays(member.days) }));
+---
+
+<Layout
+  title="Zespół: lekarze i higienistki | Szkliwo"
+  description="Trzech lekarzy dentystów i dwie higienistki. Kto leczy, kto robi implanty i ortodoncję i w jakie dni przyjmuje każda osoba z zespołu."
+  path="/zespol/">
+  <div class="container page-head">
+    <nav aria-label="Okruszki">
+      <ol class="crumbs">
+        <li>
+          <a href={page('/')}>Strona główna</a>
+        </li>
+        <li aria-current="page">Zespół</li>
+      </ol>
+    </nav>
+    <h1>Trzech lekarzy, dwie higienistki</h1>
+    <p class="lead">
+      Jeden lekarz prowadzi twoje leczenie od planu do kontroli, więc nie tłumaczysz historii zębów
+      od nowa. Zamiast zdjęć są rysunki: wolimy, żebyś poznał nas na wizycie.
+    </p>
+  </div>
+
+  <section class="container" aria-label="Osoby w zespole">
+    <ul class="ruled people">
+      {team.map(member => (
+        <li id={member.id}>
+          <article class="person">
+            <div class="person__portrait">
+              <Portrait portrait={member.portrait} />
+            </div>
+            <div class="person__text">
+              <h2>{member.name}</h2>
+              <p class="person__title">{member.title}</p>
+              <p class="person__role">{member.role}</p>
+              <p class="person__bio">{member.bio}</p>
+            </div>
+            <dl class="person__facts">
+              <div>
+                <dt>Zajmuje się</dt>
+                <dd>{member.focus}</dd>
+              </div>
+              <div>
+                <dt>Przyjmuje</dt>
+                <dd>{member.days}</dd>
+              </div>
+              <div>
+                <dt>Języki</dt>
+                <dd>{member.languages}</dd>
+              </div>
+            </dl>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="week-title">
+    <div class="container split">
+      <div class="stack">
+        <h2 id="week-title">Kto kiedy przyjmuje</h2>
+        <p class="lead">
+          Wybierz dzień, w którym jest lekarz, którego potrzebujesz. W niedzielę klinika jest
+          zamknięta.
+        </p>
+      </div>
+      <table class="week">
+        <caption class="visually-hidden">Dni przyjęć lekarzy i higienistek</caption>
+        <thead>
+          <tr>
+            <th scope="col">
+              <span class="visually-hidden">Osoba</span>
+            </th>
+            {weekdayLabels.map(label => (
+              <th scope="col">{label}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {schedule.map(({ member, days }) => (
+            <tr>
+              <th scope="row">
+                <a href={`#${member.id}`}>{member.name}</a>
+              </th>
+              {weekdayLabels.map((label, index) => (
+                <td>
+                  {days.includes(index + 1) ? (
+                    <span class="week__on">
+                      <span class="visually-hidden">przyjmuje</span>
+                    </span>
+                  ) : (
+                    <span class="week__off">
+                      <span class="visually-hidden">nie przyjmuje</span>
+                    </span>
+                  )}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section section--mist" aria-labelledby="rules-title">
+    <div class="container split">
+      <div class="stack">
+        <h2 id="rules-title">Jak pracujemy</h2>
+      </div>
+      <ul class="tick-list">
+        <li>Plan leczenia z ceną każdej pozycji dostajesz na piśmie, zanim cokolwiek zaczniemy.</li>
+        <li>
+          Zęby leczymy w koferdamie, czyli w gumowej osłonie, która utrzymuje je suche i chroni
+          przed połknięciem narzędzi.
+        </li>
+        <li>
+          Narzędzia są pakowane i sterylizowane w autoklawie, a otwieramy je dopiero przy tobie.
+        </li>
+        <li>
+          Gdy coś zaboli, podnosisz rękę i przerywamy. Dokładamy znieczulenia albo robimy przerwę.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <Cta
+    title="Wiesz, do kogo chcesz trafić?"
+    text="Przy rezerwacji napisz, do którego lekarza się umawiasz. Jeśli nie wiesz, dobierzemy go do twojej sprawy."
+  />
+</Layout>
+
+<style>
+  .people > li {
+    scroll-margin-top: calc(var(--header-height) + 16px);
+  }
+
+  .person {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr);
+    gap: 24px clamp(24px, 4vw, 64px);
+    align-items: start;
+    padding-block: clamp(28px, 4vw, 56px);
+  }
+
+  .person__portrait {
+    aspect-ratio: 200 / 240;
+    overflow: hidden;
+    border-radius: 8px 8px 56px 56px;
+  }
+
+  .person__text {
+    display: grid;
+    gap: 10px;
+  }
+
+  .person__title {
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .person__role {
+    font-size: var(--text-lead);
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .person__bio {
+    max-width: 34em;
+    margin-top: 6px;
+    line-height: 1.6;
+  }
+
+  .person__facts {
+    display: grid;
+    gap: 0;
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .person__facts div {
+    display: grid;
+    gap: 2px;
+    padding-block: 14px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .person__facts dt {
+    font-size: var(--text-small);
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .person__facts dd {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .week {
+    border-top: 2px solid var(--ink);
+  }
+
+  .week th,
+  .week td {
+    padding: 14px 6px;
+    text-align: center;
+    border-bottom: 1px solid var(--edge);
+    font-weight: 600;
+  }
+
+  .week thead th {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+
+  .week tbody th {
+    padding-left: 0;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .week tbody th a {
+    display: block;
+    padding-block: 14px;
+    margin-block: -14px;
+    text-decoration: none;
+  }
+
+  .week tbody th a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--coral);
+    text-decoration-thickness: 2px;
+  }
+
+  .week__on,
+  .week__off {
+    display: block;
+    margin-inline: auto;
+  }
+
+  .week__on {
+    width: 18px;
+    height: 26px;
+    border-radius: 3px 3px 10px 10px;
+    background: var(--coral);
+    border: 2px solid var(--ink);
+  }
+
+  .week__off {
+    width: 14px;
+    height: 0;
+    border-top: 2.5px solid var(--edge);
+  }
+
+  @media (max-width: 960px) {
+    .person {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    }
+
+    .person__facts {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .person {
+      grid-template-columns: 1fr;
+    }
+
+    .person__portrait {
+      max-width: 220px;
+    }
+
+    .week th,
+    .week td {
+      padding-inline: 2px;
+    }
+
+    .week tbody th {
+      font-size: var(--text-small);
+      line-height: 1.2;
+      padding-right: 6px;
+    }
+  }
+</style>

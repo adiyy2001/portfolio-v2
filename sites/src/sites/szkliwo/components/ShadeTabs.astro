@@ -1,0 +1,128 @@
+---
+import { getShade, type ShadeName } from '../lib/shades';
+
+interface Props {
+  name: string;
+  idPrefix: string;
+  legend: string;
+  shades: readonly ShadeName[];
+  initial: ShadeName;
+  columns?: number;
+}
+
+const { name, idPrefix, legend, shades, initial, columns = shades.length } = Astro.props;
+const slug = (shade: ShadeName) => shade.replace('.', '-');
+---
+
+<fieldset class="shade-tabs" style={`--columns:${columns}`}>
+  <legend class="eyebrow">{legend}</legend>
+  <div class="shade-tabs__row">
+    {shades.map(shade => (
+      <label class="tab" style={`--shade:${getShade(shade).color}`}>
+        <input
+          id={`${idPrefix}-${slug(shade)}`}
+          type="radio"
+          name={name}
+          value={shade}
+          checked={shade === initial}
+          class="visually-hidden"
+        />
+        <span class="tab__handle">{shade}</span>
+        <span class="tab__tooth"></span>
+      </label>
+    ))}
+  </div>
+</fieldset>
+
+<style>
+  .shade-tabs {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+  }
+
+  .shade-tabs legend {
+    padding: 0;
+    margin-bottom: 18px;
+  }
+
+  .shade-tabs__row {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+    gap: 8px;
+    padding-top: 16px;
+  }
+
+  .tab {
+    position: relative;
+    display: grid;
+    grid-template-rows: 34px 1fr;
+    height: 98px;
+    border: 1.5px solid var(--edge);
+    border-radius: var(--tab-radius);
+    background: #fff;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .tab__handle {
+    display: grid;
+    place-items: center;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .tab__tooth {
+    background: var(--shade);
+    border-top: 1.5px solid var(--edge);
+  }
+
+  .tab:hover {
+    border-color: var(--ink);
+  }
+
+  .tab:has(input:checked) {
+    border: 3px solid var(--ink);
+    transform: translateY(-16px);
+  }
+
+  .tab:has(input:checked) .tab__handle {
+    background: var(--coral);
+  }
+
+  .tab:has(input:focus-visible) {
+    outline: 3px solid var(--ink);
+    outline-offset: 4px;
+    overflow: visible;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .tab {
+      transition: transform 280ms var(--ease);
+    }
+
+    .tab__handle {
+      transition: background-color 200ms;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .shade-tabs__row {
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      row-gap: 28px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .shade-tabs__row {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      row-gap: 28px;
+    }
+
+    .tab:has(input:checked) {
+      transform: translateY(-10px);
+    }
+  }
+</style>

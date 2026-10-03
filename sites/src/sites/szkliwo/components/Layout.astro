@@ -1,0 +1,62 @@
+---
+import '../styles/base.css';
+import '../styles/patterns.css';
+import ActionBar from './ActionBar.astro';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import { fontFaceCss, outfitPreloadHref } from '../lib/fonts';
+import { asset, page } from '../lib/url';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, path, jsonLd } = Astro.props;
+const canonical = new URL(page(path), Astro.site).href;
+const ogImage = new URL(asset('og.png'), Astro.site).href;
+const ogImageAlt = 'Szkliwo, klinika stomatologiczna: Uśmiech bez pośpiechu. Strona przykładowa.';
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Szkliwo" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href={outfitPreloadHref()} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaceCss()}></style>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Przejdź do treści
+    </a>
+    <Header current={path} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <ActionBar />
+  </body>
+</html>

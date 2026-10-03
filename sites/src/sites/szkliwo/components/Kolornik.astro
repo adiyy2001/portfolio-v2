@@ -1,0 +1,201 @@
+---
+import {
+  describeShade,
+  getShade,
+  heroShades,
+  lightnessLabel,
+  shadeCount,
+  shadeRank,
+  valueOrder,
+  type ShadeName,
+} from '../lib/shades';
+import ShadeTabs from './ShadeTabs.astro';
+
+const initial: ShadeName = 'A2';
+const slug = (name: ShadeName) => name.replace('.', '-');
+const views = heroShades.map(name => ({
+  name,
+  slug: slug(name),
+  color: getShade(name).color,
+  rank: shadeRank(name),
+  description: describeShade(name),
+  lightness: lightnessLabel(shadeRank(name)),
+}));
+const switchRules = views
+  .map(
+    view =>
+      `.kolornik:has(#shade-${view.slug}:checked){--tooth:${view.color}}.kolornik:has(#shade-${view.slug}:checked) [data-shade="${view.name}"]{display:grid}`,
+  )
+  .join('');
+---
+
+<div class="kolornik" style={`--tooth:${getShade(initial).color}`}>
+  <p class="kolornik__cap">Kolor dobieramy do twoich zębów, nie do katalogu.</p>
+
+  <div class="kolornik__stage">
+    <svg class="kolornik__tooth" viewBox="0 0 240 300" aria-hidden="true" focusable="false">
+      <path
+        d="M58,46 C58,16 90,8 120,8 C150,8 182,16 182,46 C188,112 178,162 168,212 C162,252 148,286 132,286 C119,286 124,246 120,236 C116,246 121,286 108,286 C92,286 78,252 72,212 C62,162 52,112 58,46 Z"
+        fill="var(--tooth)"
+        stroke="#1b1f2a"
+        stroke-width="3.5"
+        stroke-linejoin="round"></path>
+      <path
+        d="M78,50 C76,34 92,26 108,26"
+        fill="none"
+        stroke="#ffffff"
+        stroke-opacity="0.85"
+        stroke-width="9"
+        stroke-linecap="round"></path>
+      <path
+        d="M72,76 C70,110 72,150 78,184"
+        fill="none"
+        stroke="#ffffff"
+        stroke-opacity="0.5"
+        stroke-width="6"
+        stroke-linecap="round"></path>
+    </svg>
+
+    <div class="kolornik__views" aria-live="polite">
+      {views.map(view => (
+        <div class="kolornik__view" data-shade={view.name}>
+          <p class="kolornik__code">{view.name}</p>
+          <p class="kolornik__description">{view.description}</p>
+          <div class="kolornik__scale">
+            <ol class="kolornik__meter" aria-hidden="true">
+              {valueOrder.map(name => (
+                <li
+                  style={`--swatch:${getShade(name).color}`}
+                  data-current={name === view.name ? '' : undefined}></li>
+              ))}
+            </ol>
+            <p class="small muted">
+              {view.lightness}: {view.rank} z {shadeCount} w skali jasności, gdzie 1 to
+              najjaśniejszy.
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <ShadeTabs
+    name="shade"
+    idPrefix="shade"
+    legend="Wybierz odcień na kolorniku"
+    shades={heroShades}
+    initial={initial}
+  />
+</div>
+
+<style is:inline set:html={switchRules}></style>
+
+<style>
+  .kolornik {
+    display: grid;
+    gap: clamp(20px, 3vw, 36px);
+    width: 100%;
+  }
+
+  .kolornik__cap {
+    font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.625rem);
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    max-width: 17em;
+  }
+
+  .kolornik__stage {
+    display: grid;
+    grid-template-columns: minmax(96px, 1fr) minmax(0, 1.3fr);
+    align-items: center;
+    gap: clamp(16px, 3vw, 40px);
+  }
+
+  .kolornik__tooth {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+  }
+
+  .kolornik__views {
+    display: grid;
+    min-height: 15rem;
+    align-content: center;
+  }
+
+  .kolornik__view {
+    display: none;
+    gap: 14px;
+  }
+
+  @supports not selector(:has(*)) {
+    .kolornik__view:first-child {
+      display: grid;
+    }
+  }
+
+  .kolornik__code {
+    font-size: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+    font-weight: 500;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .kolornik__description {
+    font-size: 1.0625rem;
+    line-height: 1.4;
+    max-width: 22em;
+  }
+
+  .kolornik__scale {
+    display: grid;
+    gap: 8px;
+  }
+
+  .kolornik__meter {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 2px;
+    align-items: end;
+    height: 38px;
+  }
+
+  .kolornik__meter li {
+    height: 56%;
+    background: var(--swatch);
+    border: 1px solid var(--edge);
+    border-radius: 2px 2px 6px 6px;
+  }
+
+  .kolornik__meter li[data-current] {
+    height: 100%;
+    border: 2.5px solid var(--ink);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .kolornik__meter li {
+      transition: height 280ms var(--ease);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .kolornik__stage {
+      grid-template-columns: 76px minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .kolornik__tooth {
+      max-width: 76px;
+    }
+
+    .kolornik__code {
+      font-size: 4rem;
+    }
+
+    .kolornik__views {
+      min-height: 0;
+    }
+  }
+</style>

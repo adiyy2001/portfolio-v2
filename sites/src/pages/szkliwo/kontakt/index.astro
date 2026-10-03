@@ -1,0 +1,344 @@
+---
+import ContactForm from '../../../sites/szkliwo/components/ContactForm.astro';
+import Layout from '../../../sites/szkliwo/components/Layout.astro';
+import ClinicPlan from '../../../sites/szkliwo/illustrations/ClinicPlan.astro';
+import { openingHours } from '../../../sites/szkliwo/data/hours';
+import { clinic } from '../../../sites/szkliwo/data/site';
+import { formatMinutes } from '../../../sites/szkliwo/lib/format';
+import { page } from '../../../sites/szkliwo/lib/url';
+---
+
+<Layout
+  title="Kontakt i umówienie wizyty | Szkliwo"
+  description="Adres, godziny, telefon i formularz zwrotnego telefonu kliniki Szkliwo przy ul. Pułaskiego we Wrocławiu. Co robić, gdy ząb wypadnie."
+  path="/kontakt/">
+  <div class="container page-head">
+    <nav aria-label="Okruszki">
+      <ol class="crumbs">
+        <li>
+          <a href={page('/')}>Strona główna</a>
+        </li>
+        <li aria-current="page">Kontakt</li>
+      </ol>
+    </nav>
+    <h1>Umów wizytę albo zapytaj, zanim przyjdziesz</h1>
+    <p class="lead">
+      Najszybciej zadzwoń. Jeśli wolisz, zostaw numer, a recepcja oddzwoni w porze, którą wskażesz.
+    </p>
+  </div>
+
+  <section class="container" aria-labelledby="where-title">
+    <div class="where">
+      <div class="where__text stack">
+        <h2 id="where-title">Gdzie jesteśmy</h2>
+        <address class="where__address">
+          <strong>
+            {clinic.name}, {clinic.trade}
+          </strong>
+          <br />
+          {clinic.street}
+          <br />
+          {clinic.postalCode} {clinic.city}
+        </address>
+        <ul class="tick-list">
+          <li>Wejście od ulicy, bez schodów, z drzwiami otwieranymi automatycznie.</li>
+          <li>Dwa przystanki tramwajowe i parking przy kamienicy, cztery minuty pieszo.</li>
+          <li>Gabinety i toaleta są dostępne dla wózka.</li>
+        </ul>
+        <dl class="where__contact">
+          <div>
+            <dt>Telefon</dt>
+            <dd>
+              <a class="link" href={clinic.phoneHref}>
+                {clinic.phoneDisplay}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>E-mail</dt>
+            <dd>
+              <a class="link" href={`mailto:${clinic.email}`}>
+                {clinic.email}
+              </a>
+            </dd>
+          </div>
+        </dl>
+      </div>
+      <div class="where__plan">
+        <ClinicPlan />
+        <p class="small muted">Rysunek poglądowy rozkładu kliniki, bez skali.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="hours-title">
+    <div class="container split">
+      <div class="stack">
+        <h2 id="hours-title">Godziny przyjęć</h2>
+        <p class="lead">
+          W niedziele i święta klinika jest zamknięta. Bolący ząb w sobotę po 14:00 zgłoś
+          telefonicznie.
+        </p>
+        <p class="status" data-open-status hidden></p>
+      </div>
+      <table class="hours">
+        <caption class="visually-hidden">
+          Godziny otwarcia kliniki w poszczególne dni tygodnia
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Dzień</th>
+            <th scope="col">Godziny</th>
+          </tr>
+        </thead>
+        <tbody>
+          {openingHours.map(day => (
+            <tr data-day={day.day}>
+              <th scope="row">
+                {day.name}
+                <span class="hours__today" data-today-marker hidden>
+                  dziś
+                </span>
+              </th>
+              <td>
+                {day.opens === null || day.closes === null
+                  ? 'nieczynne'
+                  : `${formatMinutes(day.opens)} do ${formatMinutes(day.closes)}`}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="umow-wizyte" class="section section--mist" aria-labelledby="book-title">
+    <div class="container">
+      <div class="stack book__head">
+        <h2 id="book-title">Umów wizytę</h2>
+        <p class="lead">Są trzy drogi. Wybierz tę, która jest dla ciebie najwygodniejsza.</p>
+      </div>
+
+      <div class="book">
+        <div class="book__option">
+          <h3>Zadzwoń</h3>
+          <p>Recepcja umówi termin od ręki i podpowie, ile potrwa wizyta.</p>
+          <a class="btn" href={clinic.phoneHref}>
+            <span class="visually-hidden">Zadzwoń: </span>
+            {clinic.phoneDisplay}
+          </a>
+        </div>
+
+        <div class="book__option">
+          <h3>Wybierz termin w kalendarzu</h3>
+          <p>Kalendarz rezerwacji online pokaże wolne godziny u wybranego lekarza.</p>
+          <button
+            class="btn btn--ghost"
+            type="button"
+            aria-expanded="false"
+            aria-controls="calendar-panel"
+            data-calendar-toggle>
+            Pokaż kalendarz
+          </button>
+          <div id="calendar-panel" class="book__calendar" hidden data-calendar-panel>
+            <p>
+              <strong>Tu wstawilibyśmy zewnętrzny kalendarz rezerwacji.</strong> To strona
+              przykładowa, więc nie ma żadnego systemu, który mógłby przyjąć zapis, i niczego nie
+              zarezerwujesz.
+            </p>
+            <p class="small muted">
+              Prawdziwa klinika osadziłaby tu widżet swojego dostawcy rezerwacji.
+            </p>
+          </div>
+        </div>
+
+        <div class="book__option book__option--form">
+          <h3 class="visually-hidden">Poproś o telefon</h3>
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--ink on-ink" aria-labelledby="urgent-title">
+    <div class="container split">
+      <div class="stack">
+        <h2 id="urgent-title">Pilne: co zrobić od razu</h2>
+        <p class="lead">Zadzwoń do nas, gdy tylko możesz. Do tego czasu pomogą te zasady.</p>
+      </div>
+      <ul class="ruled urgent">
+        <li>
+          <h3>Ząb wypadł po urazie</h3>
+          <p>
+            Chwyć go za koronę, nie za korzeń. Jeśli jest brudny, opłucz go krótko mlekiem lub solą
+            fizjologiczną. Włóż go z powrotem do zębodołu albo do mleka i zadzwoń od razu, bo liczą
+            się minuty. Nie szoruj korzenia i nie wkładaj zęba do suchej chusteczki.
+          </p>
+        </li>
+        <li>
+          <h3>Silny ból zęba</h3>
+          <p>
+            Zadzwoń rano w dniu przyjęć, a znajdziemy ci miejsce jeszcze tego dnia. Do tego czasu
+            możesz przyjąć zwykły lek przeciwbólowy zgodnie z ulotką.
+          </p>
+        </li>
+        <li>
+          <h3>Obrzęk twarzy lub kłopot z oddychaniem</h3>
+          <p>
+            Dzwoń pod numer{' '}
+            <a class="link" href="tel:112">
+              112
+            </a>
+            . Narastający obrzęk szyi, gorączka albo trudność z przełykaniem wymagają szpitala, nie
+            fotela dentystycznego.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    import '../../../sites/szkliwo/scripts/contact-page';
+  </script>
+</Layout>
+
+<style>
+  .where {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .where__address {
+    font-style: normal;
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .where__contact {
+    display: grid;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .where__contact dt {
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+
+  .where__contact dd {
+    margin: 0;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
+  .where__plan {
+    display: grid;
+    gap: 8px;
+  }
+
+  .hours {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hours th,
+  .hours td {
+    padding: 14px 12px;
+    border-bottom: 1.5px solid var(--rule);
+    text-align: left;
+  }
+
+  .hours thead th {
+    font-size: var(--text-small);
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .hours tbody th {
+    font-weight: 600;
+  }
+
+  .hours tr[data-today='true'] {
+    background: var(--coral);
+  }
+
+  .hours tr[data-today='true'] th,
+  .hours tr[data-today='true'] td {
+    border-bottom-color: var(--ink);
+    font-weight: 700;
+  }
+
+  .hours__today {
+    margin-left: 10px;
+    padding: 2px 10px 4px;
+    border-radius: 3px 3px 10px 10px;
+    background: var(--ink);
+    color: var(--on-ink);
+    font-size: var(--text-small);
+    font-weight: 600;
+  }
+
+  .status {
+    font-weight: 600;
+  }
+
+  .book__head {
+    margin-bottom: 40px;
+  }
+
+  .book {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .book__option {
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+    padding: clamp(20px, 3vw, 32px);
+    background: #fff;
+    border: 1.5px solid var(--edge);
+    border-radius: 8px 8px 28px 28px;
+  }
+
+  .book__option--form {
+    grid-column: 1 / -1;
+  }
+
+  .book__option--form > :global(.contact) {
+    width: 100%;
+  }
+
+  .book__calendar {
+    padding: 16px 18px;
+    border: 2px dashed var(--ink);
+    border-radius: 6px 6px 18px 18px;
+    background: var(--mist);
+    display: grid;
+    gap: 8px;
+  }
+
+  .urgent > li {
+    padding-block: 20px 22px;
+  }
+
+  .urgent h3 {
+    font-size: 1.25rem;
+  }
+
+  .urgent p {
+    margin-top: 8px;
+  }
+
+  @media (max-width: 860px) {
+    .where,
+    .book {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

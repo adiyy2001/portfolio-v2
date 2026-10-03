@@ -1,0 +1,288 @@
+---
+import type { DiagramKind } from '../data/treatments';
+import { diagramLabels } from '../data/diagrams';
+
+interface Props {
+  kind: DiagramKind;
+  label: string;
+  labelled?: boolean;
+}
+
+const { kind, label, labelled = true } = Astro.props;
+const id = (name: string) => `${kind}-${name}`;
+const labels = diagramLabels[kind];
+const croppedViewBox = kind === 'aligner' ? '40 20 300 360' : '86 20 210 360';
+const viewBox = labelled ? '0 0 460 380' : croppedViewBox;
+
+const outline =
+  'M-58,178 C-68,140 -72,92 -52,58 C-40,44 -20,40 0,40 C20,40 40,44 52,58 C72,92 68,140 58,178 C58,230 40,300 15,332 Q0,345 -15,332 C-40,300 -58,230 -58,178 Z';
+const dentin =
+  'M-46,178 C-56,140 -58,96 -42,68 C-32,58 -16,54 0,54 C16,54 32,58 42,68 C58,96 56,140 46,178 C46,228 30,290 8,322 Q0,332 -8,322 C-30,290 -46,228 -46,178 Z';
+const pulp =
+  'M-26,150 C-28,105 -20,80 0,76 C20,80 28,105 26,150 C26,175 16,215 6,300 L0,318 L-6,300 C-16,215 -26,175 -26,150 Z';
+const crownOnly =
+  'M-58,178 C-68,140 -72,92 -52,58 C-40,44 -20,40 0,40 C20,40 40,44 52,58 C72,92 68,140 58,178 L48,190 L-48,190 Z';
+const aligners = [
+  { x: -108, tilt: -9, width: 96 },
+  { x: 0, tilt: 4, width: 108 },
+  { x: 108, tilt: 10, width: 96 },
+] as const;
+---
+
+<svg class="tooth-diagram" viewBox={viewBox} role="img" aria-label={label} focusable="false">
+  <defs>
+    <clipPath id={id('crown')}>
+      <path d={outline}></path>
+    </clipPath>
+    <clipPath id={id('upper')}>
+      <rect x="-200" y="-10" width="400" height="188"></rect>
+    </clipPath>
+  </defs>
+
+  {kind !== 'aligner' && (
+    <g transform="translate(190 0)">
+      <rect x="-190" y="222" width="460" height="160" fill="#e3e7ed"></rect>
+      <g fill="none" stroke="#c4c9d4" stroke-width="2" stroke-linecap="round">
+        <path d="M-170,262 q10,-6 20,0 M-130,300 q10,-6 20,0 M-160,340 q10,-6 20,0 M110,260 q10,-6 20,0 M140,312 q10,-6 20,0 M100,350 q10,-6 20,0 M-100,360 q10,-6 20,0 M200,360 q10,-6 20,0"></path>
+      </g>
+      <path
+        d="M-190,166 C-130,166 -90,166 -60,158 L-58,178 L-58,240 L-190,240 Z"
+        fill="#f4a498"></path>
+      <path d="M270,166 C210,166 90,166 60,158 L58,178 L58,240 L270,240 Z" fill="#f4a498"></path>
+      <path
+        d="M-58,236 C-100,228 -150,226 -190,222 L-190,240 L-58,240 Z M58,236 C100,228 150,226 270,222 L270,240 L58,240 Z"
+        fill="#e3e7ed"></path>
+    </g>
+  )}
+
+  {(kind === 'cleaning' || kind === 'filling' || kind === 'canal' || kind === 'whitening') && (
+    <g transform="translate(190 0)">
+      <path
+        d={outline}
+        fill="#e9d5a8"
+        stroke="#1b1f2a"
+        stroke-opacity="0.3"
+        stroke-width="2.5"></path>
+      <g clip-path={`url(#${id('crown')})`}>
+        <rect x="-90" y="20" width="180" height="158" fill="#ffffff"></rect>
+      </g>
+      <path d={dentin} fill="#ecd8ac"></path>
+      <path
+        d={outline}
+        fill="none"
+        stroke="#1b1f2a"
+        stroke-opacity="0.35"
+        stroke-width="2.5"></path>
+      {kind !== 'canal' && <path d={pulp} fill="#ff9a8b"></path>}
+      <path
+        d="M-48,100 C-50,76 -36,62 -22,58"
+        fill="none"
+        stroke="#ffffff"
+        stroke-width="6"
+        stroke-linecap="round"
+        opacity="0.9"></path>
+    </g>
+  )}
+
+  {kind === 'cleaning' && (
+    <g transform="translate(190 0)">
+      <path
+        d="M-62,166 C-74,168 -76,184 -68,190 C-62,194 -56,186 -56,178 Z M62,166 C74,168 76,184 68,190 C62,194 56,186 56,178 Z"
+        fill="#a58f58"
+        stroke="#1b1f2a"
+        stroke-opacity="0.5"
+        stroke-width="1.5"></path>
+      <path
+        d="M-54,176 C-58,184 -50,196 -44,190 M54,176 C58,184 50,196 44,190"
+        fill="none"
+        stroke="#a58f58"
+        stroke-width="4"
+        stroke-linecap="round"></path>
+    </g>
+  )}
+
+  {kind === 'filling' && (
+    <g transform="translate(190 0)">
+      <path
+        d="M38,66 C62,72 68,108 58,134 C48,140 36,128 34,106 C32,88 34,76 38,66 Z"
+        fill="#ffffff"
+        stroke="#ff6f5b"
+        stroke-width="3.5"
+        stroke-linejoin="round"></path>
+      <path
+        d="M44,86 C50,92 52,104 50,116"
+        fill="none"
+        stroke="#e3e7ed"
+        stroke-width="4"
+        stroke-linecap="round"></path>
+    </g>
+  )}
+
+  {kind === 'canal' && (
+    <g transform="translate(190 0)">
+      <path
+        d="M-26,150 C-28,105 -20,80 0,76 C20,80 28,105 26,150 L22,160 L-22,160 Z"
+        fill="#ffffff"
+        stroke="#ff6f5b"
+        stroke-width="3.5"
+        stroke-linejoin="round"></path>
+      <path
+        d="M-14,160 L14,160 C12,200 8,260 3,316 L0,324 L-3,316 C-8,260 -12,200 -14,160 Z"
+        fill="#7b8394"
+        stroke="#1b1f2a"
+        stroke-opacity="0.6"
+        stroke-width="2"
+        stroke-linejoin="round"></path>
+      <path
+        d="M-6,170 C-4,220 -2,270 0,310"
+        fill="none"
+        stroke="#c4c9d4"
+        stroke-width="3"
+        stroke-linecap="round"></path>
+    </g>
+  )}
+
+  {kind === 'whitening' && (
+    <g transform="translate(190 0)">
+      <g clip-path={`url(#${id('upper')})`}>
+        <path
+          d="M-68,178 C-74,108 -62,44 0,38 C62,44 74,108 68,178"
+          fill="none"
+          stroke="#ff6f5b"
+          stroke-width="9"
+          stroke-linecap="round"
+          opacity="0.55"></path>
+      </g>
+      <path
+        transform="translate(-92 70)"
+        d="M0,-9 L2.4,-2.4 L9,0 L2.4,2.4 L0,9 L-2.4,2.4 L-9,0 L-2.4,-2.4 Z"
+        fill="#1b1f2a"></path>
+      <path
+        transform="translate(96 44) scale(0.7)"
+        d="M0,-9 L2.4,-2.4 L9,0 L2.4,2.4 L0,9 L-2.4,2.4 L-9,0 L-2.4,-2.4 Z"
+        fill="#1b1f2a"></path>
+    </g>
+  )}
+
+  {kind === 'implant' && (
+    <g transform="translate(190 0)">
+      <path
+        d="M-22,196 L22,196 L22,326 Q0,346 -22,326 Z"
+        fill="#c4c9d4"
+        stroke="#1b1f2a"
+        stroke-width="2.5"
+        stroke-linejoin="round"></path>
+      <path
+        d="M-22,214 L22,222 M-22,236 L22,244 M-22,258 L22,266 M-22,280 L22,288 M-22,302 L22,310"
+        stroke="#1b1f2a"
+        stroke-opacity="0.55"
+        stroke-width="2.5"></path>
+      <path
+        d="M-16,172 L16,172 L22,196 L-22,196 Z"
+        fill="#7b8394"
+        stroke="#1b1f2a"
+        stroke-width="2.5"
+        stroke-linejoin="round"></path>
+      <path
+        d={crownOnly}
+        fill="#ffffff"
+        stroke="#1b1f2a"
+        stroke-opacity="0.45"
+        stroke-width="2.5"
+        stroke-linejoin="round"></path>
+      <path
+        d="M-48,100 C-50,76 -36,62 -22,58"
+        fill="none"
+        stroke="#e3e7ed"
+        stroke-width="6"
+        stroke-linecap="round"></path>
+      <path d="M-58,178 L58,178" stroke="#ff6f5b" stroke-width="3" stroke-linecap="round"></path>
+    </g>
+  )}
+
+  {kind === 'aligner' && (
+    <g transform="translate(190 0)">
+      <rect x="-190" y="232" width="460" height="150" fill="#f4a498"></rect>
+      <path
+        d="M-190,232 C-150,214 -120,214 -100,226 C-70,214 -40,214 -20,226 L190,226 C230,214 250,214 270,232 Z"
+        fill="#f4a498"></path>
+      {aligners.map(({ x, tilt, width }) => (
+        <g transform={`translate(${x} 0) rotate(${tilt} 0 232)`}>
+          <path
+            d={`M${-width / 2},236 L${-width / 2},120 C${-width / 2},84 ${-width / 3},70 0,70 C${width / 3},70 ${width / 2},84 ${width / 2},120 L${width / 2},236 Z`}
+            fill="#ffffff"
+            stroke="#1b1f2a"
+            stroke-opacity="0.45"
+            stroke-width="2.5"
+            stroke-linejoin="round"></path>
+          <path
+            d={`M${-width / 2 + 12},128 C${-width / 2 + 12},106 ${-width / 4},94 0,92`}
+            fill="none"
+            stroke="#e3e7ed"
+            stroke-width="6"
+            stroke-linecap="round"></path>
+        </g>
+      ))}
+      {aligners.map(({ x, width }) => (
+        <path
+          d={`M${x - width / 2 - 8},236 L${x - width / 2 - 8},116 C${x - width / 2 - 8},76 ${x - width / 3},60 ${x},60 C${x + width / 3},60 ${x + width / 2 + 8},76 ${x + width / 2 + 8},116 L${x + width / 2 + 8},236`}
+          fill="#ff6f5b"
+          fill-opacity="0.12"
+          stroke="#ff6f5b"
+          stroke-width="4.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      ))}
+    </g>
+  )}
+
+  {labelled && (
+    <g class="tooth-diagram__labels" font-size="15" font-weight="500" fill="#1b1f2a">
+      {labels.map(entry => (
+        <g>
+          <path
+            d={`M${entry.from[0]},${entry.from[1]} L${entry.to[0] - 8},${entry.to[1]}`}
+            fill="none"
+            stroke="#1b1f2a"
+            stroke-width="1.5"></path>
+          <circle cx={entry.from[0]} cy={entry.from[1]} r="3.5" fill="#1b1f2a"></circle>
+          <text x={entry.to[0]} y={entry.to[1] + 5}>
+            {entry.text}
+          </text>
+        </g>
+      ))}
+    </g>
+  )}
+</svg>
+
+<style>
+  .tooth-diagram {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .tooth-diagram__labels text {
+    paint-order: stroke;
+    stroke: #fff;
+    stroke-opacity: 0.85;
+    stroke-width: 4px;
+    stroke-linejoin: round;
+  }
+
+  @media (min-width: 961px) and (max-width: 1200px) {
+    .tooth-diagram__labels {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .tooth-diagram__labels {
+      font-size: 23px;
+    }
+
+    .tooth-diagram__labels text {
+      stroke-width: 6px;
+    }
+  }
+</style>

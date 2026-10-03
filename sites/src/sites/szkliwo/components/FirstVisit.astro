@@ -1,0 +1,150 @@
+---
+import { findPrice } from '../data/prices';
+import { findTreatment } from '../data/treatments';
+import { formatZloty } from '../lib/format';
+import { page } from '../lib/url';
+
+interface Props {
+  headingId: string;
+}
+
+const { headingId } = Astro.props;
+const steps = findTreatment('przeglad-i-higienizacja').steps.filter(
+  step => step.group === 'Przegląd',
+);
+const total = steps.reduce((sum, step) => sum + (step.minutes ?? 0), 0);
+---
+
+<div class="visit">
+  <div class="visit__intro">
+    <h2 id={headingId}>Pierwsza wizyta trwa {total} minut</h2>
+    <p class="lead">
+      Zaczynamy od rozmowy, nie od fotela. Na końcu dostajesz plan leczenia na piśmie, z ceną każdej
+      pozycji. Możesz go zabrać do domu i zdecydować bez nas.
+    </p>
+    <p class="visit__price">
+      <span class="visit__amount">{formatZloty(findPrice('przeglad').price)}</span>
+      <span class="muted">przegląd z planem leczenia</span>
+    </p>
+    <a class="link link--block" href={page('/zabiegi/przeglad-i-higienizacja/')}>
+      Jak wygląda przegląd
+    </a>
+  </div>
+
+  <div class="visit__timeline">
+    <div
+      class="visit__bar"
+      aria-hidden="true"
+      style={`grid-template-columns:${steps.map(step => `minmax(4.5rem, ${step.minutes}fr)`).join(' ')}`}>
+      {steps.map(step => (
+        <span class="visit__segment">{step.minutes} min</span>
+      ))}
+    </div>
+    <ol class="visit__steps">
+      {steps.map(step => (
+        <li>
+          <span class="visit__time">{step.minutes} min</span>
+          <strong class="visit__title">{step.title}</strong>
+          <span class="visit__text">{step.text}</span>
+        </li>
+      ))}
+    </ol>
+  </div>
+</div>
+
+<style>
+  .visit {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 40px clamp(32px, 7vw, 112px);
+    align-items: start;
+  }
+
+  .visit__intro {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .visit__price {
+    display: grid;
+    gap: 2px;
+  }
+
+  .visit__amount {
+    font-size: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .visit__bar {
+    display: grid;
+    gap: 4px;
+  }
+
+  .visit__segment {
+    display: grid;
+    align-items: end;
+    height: 84px;
+    padding: 0 0 10px 10px;
+    border: 2px solid var(--ink);
+    border-radius: 5px 5px 22px 22px;
+    background: #fff;
+    font-size: var(--text-small);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .visit__segment:nth-child(2) {
+    background: var(--coral);
+  }
+
+  .visit__steps {
+    margin-top: 28px;
+    border-top: 2px solid var(--ink);
+  }
+
+  .visit__steps li {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 9rem) minmax(0, 1fr);
+    gap: 4px 20px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--edge);
+  }
+
+  .visit__time {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted);
+  }
+
+  .visit__title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .visit__text {
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  @media (max-width: 960px) {
+    .visit {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .visit__steps li {
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+    }
+
+    .visit__text {
+      grid-column: 2;
+    }
+  }
+</style>

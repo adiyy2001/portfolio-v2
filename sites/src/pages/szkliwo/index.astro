@@ -1,0 +1,442 @@
+---
+import BeforeAfter from '../../sites/szkliwo/components/BeforeAfter.astro';
+import Cta from '../../sites/szkliwo/components/Cta.astro';
+import FirstVisit from '../../sites/szkliwo/components/FirstVisit.astro';
+import Kolornik from '../../sites/szkliwo/components/Kolornik.astro';
+import Layout from '../../sites/szkliwo/components/Layout.astro';
+import Portrait from '../../sites/szkliwo/illustrations/Portrait.astro';
+import { bookingPath, hoursSummary } from '../../sites/szkliwo/data/site';
+import { findPrice } from '../../sites/szkliwo/data/prices';
+import { team } from '../../sites/szkliwo/data/team';
+import { treatments } from '../../sites/szkliwo/data/treatments';
+import { formatZloty } from '../../sites/szkliwo/lib/format';
+import { page } from '../../sites/szkliwo/lib/url';
+
+const popularIds = [
+  'przeglad',
+  'higienizacja',
+  'wypelnienie-sredni',
+  'kanalowe-1',
+  'wybielanie-nakladkowe',
+  'usuniecie-proste',
+  'nakladki-lekki',
+  'implant',
+] as const;
+const popular = popularIds.map(findPrice);
+---
+
+<Layout
+  title="Szkliwo, klinika stomatologiczna we Wrocławiu"
+  description="Prywatna klinika stomatologiczna we Wrocławiu: leczenie, implanty, wybielanie i nakładki. Cennik online i plan leczenia z ceną przed zabiegiem."
+  path="/">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__text">
+      <p class="eyebrow">Klinika stomatologiczna we Wrocławiu</p>
+      <h1 id="hero-title">
+        Uśmiech
+        <br />
+        bez pośpiechu.
+      </h1>
+      <p class="lead">Leczenie, implanty i ortodoncja. Plan leczenia z ceną, zanim zaczniemy.</p>
+      <div class="hero__actions">
+        <a class="btn" href={page(bookingPath)}>
+          Umów wizytę
+        </a>
+        <a class="btn btn--ghost" href={page('/cennik/')}>
+          Zobacz cennik
+        </a>
+      </div>
+      <p class="hero__hours small muted">
+        Pon-pt 8:00-20:00, sob 9:00-14:00.
+        <span class="hero__status" data-open-status></span>
+      </p>
+    </div>
+    <div class="hero__panel">
+      <Kolornik />
+    </div>
+  </section>
+
+  <section class="section treatments" aria-labelledby="treatments-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="treatments-title" class="questions">
+          <span>Czy to boli?</span>
+          <span>Ile to trwa?</span>
+          <span>Ile to kosztuje?</span>
+        </h2>
+        <p class="lead">
+          Na stronie każdego zabiegu odpowiadamy na te trzy pytania od razu, w tej kolejności.
+          Dopiero potem opisujemy, jak to wygląda.
+        </p>
+      </div>
+      <ul class="rows">
+        {treatments.map(treatment => (
+          <li>
+            <a class="row" href={page(`/zabiegi/${treatment.slug}/`)}>
+              <span class="row__name">{treatment.name}</span>
+              <span class="row__summary">{treatment.summary}</span>
+              <span class="row__facts">
+                <span>{treatment.pain.answer}</span>
+                <span>{treatment.duration.answer}</span>
+                <span class="row__price">{treatment.cost.answer}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p class="treatments__more">
+        <a class="link link--block" href={page('/zabiegi/')}>
+          Wszystkie zabiegi w jednej tabeli
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--mist" aria-labelledby="visit-title">
+    <div class="container">
+      <FirstVisit headingId="visit-title" />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="prices-title">
+    <div class="container prices">
+      <div class="prices__intro">
+        <h2 id="prices-title">Ceny widać od razu</h2>
+        <p class="lead">
+          Cały cennik jest na stronie i da się go przeszukać. Poniżej to, o co pytacie najczęściej.
+        </p>
+        <a class="btn btn--ghost" href={page('/cennik/')}>
+          Otwórz cały cennik
+        </a>
+      </div>
+      <ul class="price-lines">
+        {popular.map(item => (
+          <li>
+            <span class="price-lines__name">
+              {item.name}
+              {item.unit && <span class="muted small"> ({item.unit})</span>}
+            </span>
+            <span class="price-lines__price">
+              {item.from ? 'od ' : ''}
+              {formatZloty(item.price)}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--ink on-ink" aria-labelledby="compare-title">
+    <div class="container showcase">
+      <div class="showcase__text">
+        <h2 id="compare-title">Zobacz, co zmienia wybielanie</h2>
+        <p class="lead muted">
+          Przesuń suwak albo użyj strzałek. To rysunek typowego wyniku, bo zdjęć pacjentów nie
+          publikujemy.
+        </p>
+        <a class="btn btn--ghost" href={page('/przed-i-po/')}>
+          Więcej rysunków przed i po
+        </a>
+      </div>
+      <BeforeAfter scene="whitening" />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="team-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="team-title">Pięć osób, jedna kolejność działań</h2>
+        <p class="lead">
+          Jeden lekarz prowadzi twoje leczenie od planu do kontroli. Higienistki zajmują się tym, co
+          robi się najczęściej: czyszczeniem i nauką, jak dbać o zęby.
+        </p>
+      </div>
+      <ul class="people">
+        {team.map(member => (
+          <li>
+            <a href={page(`/zespol/#${member.id}`)}>
+              <span class="people__portrait">
+                <Portrait portrait={member.portrait} />
+              </span>
+              <span class="people__name">{member.name}</span>
+              <span class="people__role muted small">{member.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Cta
+    title="Umów przegląd. Cenę usłyszysz, zanim usiądziesz w fotelu."
+    text="Zadzwoń albo zostaw numer, a oddzwonimy w wybranej porze. Przyjmujemy też wieczorem i w soboty."
+  />
+</Layout>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 59fr) minmax(0, 41fr);
+    min-height: clamp(640px, calc(100svh - var(--header-height)), 820px);
+  }
+
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: clamp(16px, 2vw, 28px);
+    padding-block: clamp(40px, 6vw, 88px);
+    padding-left: max(var(--gutter), calc((100vw - var(--container)) / 2));
+    padding-right: clamp(24px, 4vw, 64px);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.9rem, 1.1rem + 6.4vw, 6rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    margin-top: 8px;
+  }
+
+  .hero__hours {
+    max-width: 26em;
+  }
+
+  .hero__status {
+    display: block;
+    min-height: 1.5em;
+  }
+
+  :global(html:not(.js)) .hero__status {
+    min-height: 0;
+  }
+
+  .questions span {
+    display: block;
+  }
+
+  .hero__panel {
+    display: flex;
+    align-items: center;
+    padding: clamp(28px, 4vw, 56px) max(var(--gutter), calc((100vw - var(--container)) / 2))
+      clamp(28px, 4vw, 56px) clamp(24px, 3.5vw, 56px);
+    background: var(--mist);
+  }
+
+  .rows {
+    border-top: 2px solid var(--ink);
+  }
+
+  .row {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 4fr);
+    gap: 8px clamp(24px, 4vw, 56px);
+    align-items: start;
+    padding: clamp(20px, 2.4vw, 32px) 0;
+    border-bottom: 1px solid var(--edge);
+    text-decoration: none;
+  }
+
+  .row::before {
+    content: '';
+    position: absolute;
+    left: calc(-1 * var(--gutter));
+    top: 0;
+    width: 10px;
+    height: 0;
+    border-radius: 0 0 8px 8px;
+    background: var(--coral);
+  }
+
+  .row:hover::before,
+  .row:focus-visible::before {
+    height: 56px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .row::before {
+      transition: height 280ms var(--ease);
+    }
+  }
+
+  .row__name {
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2.125rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  .row:hover .row__name {
+    text-decoration: underline;
+    text-decoration-color: var(--coral);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.18em;
+  }
+
+  .row__summary {
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .row__facts {
+    display: grid;
+    gap: 2px;
+    font-weight: 500;
+  }
+
+  .row__price {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .treatments__more {
+    margin-top: 28px;
+    font-weight: 600;
+  }
+
+  .prices {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 40px clamp(32px, 7vw, 112px);
+    align-items: start;
+  }
+
+  .prices__intro {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .price-lines {
+    border-top: 2px solid var(--ink);
+  }
+
+  .price-lines li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--edge);
+  }
+
+  .price-lines__name {
+    font-size: 1.125rem;
+    line-height: 1.3;
+  }
+
+  .price-lines__price {
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+    font-weight: 600;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .showcase {
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    gap: 40px clamp(32px, 6vw, 96px);
+    align-items: center;
+  }
+
+  .showcase__text {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .people {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(12px, 2vw, 28px);
+  }
+
+  .people a {
+    display: grid;
+    gap: 4px;
+    text-decoration: none;
+  }
+
+  .people__portrait {
+    display: block;
+    aspect-ratio: 200 / 240;
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: 8px 8px 40px 40px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .people__portrait {
+      transition: transform 280ms var(--ease);
+    }
+
+    .people a:hover .people__portrait {
+      transform: translateY(-8px);
+    }
+  }
+
+  .people__name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .people a:hover .people__name {
+    text-decoration: underline;
+    text-decoration-color: var(--coral);
+    text-decoration-thickness: 3px;
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+
+    .hero__text {
+      padding: 40px var(--gutter) 48px;
+    }
+
+    .hero__panel {
+      padding: 36px var(--gutter) 40px;
+    }
+
+    .prices,
+    .showcase {
+      grid-template-columns: 1fr;
+    }
+
+    .row {
+      grid-template-columns: 1fr;
+    }
+
+    .row::before {
+      display: none;
+    }
+
+    .people {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      row-gap: 28px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .people {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .people li:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc(50% - 6px);
+    }
+  }
+</style>

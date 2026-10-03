@@ -1,0 +1,51 @@
+---
+interface Props {
+  steps: readonly { title: string; minutes?: number }[];
+}
+
+const { steps } = Astro.props;
+const longest = Math.max(...steps.map(step => step.minutes ?? 0));
+const columns = steps.map(step => `minmax(1.75rem, ${step.minutes ?? 0}fr)`).join(' ');
+---
+
+<div class="step-bar" aria-hidden="true" style={`grid-template-columns:${columns}`}>
+  {steps.map(step => (
+    <span
+      class:list={[
+        'step-bar__segment',
+        { 'step-bar__segment--longest': step.minutes === longest },
+      ]}>
+      {step.minutes}
+    </span>
+  ))}
+</div>
+<p class="step-bar__caption small muted">Każdy segment to jeden krok, a liczba to minuty.</p>
+
+<style>
+  .step-bar {
+    display: grid;
+    gap: 4px;
+  }
+
+  .step-bar__segment {
+    display: grid;
+    align-items: end;
+    height: 72px;
+    padding: 0 0 8px 8px;
+    border: 2px solid var(--ink);
+    border-radius: 4px 4px 18px 18px;
+    background: #fff;
+    font-size: var(--text-small);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;
+  }
+
+  .step-bar__segment--longest {
+    background: var(--coral);
+  }
+
+  .step-bar__caption {
+    margin-top: 10px;
+  }
+</style>

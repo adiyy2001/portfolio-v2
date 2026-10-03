@@ -1,0 +1,502 @@
+---
+import AnswerRows from '../../../sites/szkliwo/components/AnswerRows.astro';
+import Cta from '../../../sites/szkliwo/components/Cta.astro';
+import Layout from '../../../sites/szkliwo/components/Layout.astro';
+import StepBar from '../../../sites/szkliwo/components/StepBar.astro';
+import PriceTable from '../../../sites/szkliwo/components/PriceTable.astro';
+import Portrait from '../../../sites/szkliwo/illustrations/Portrait.astro';
+import ToothDiagram from '../../../sites/szkliwo/illustrations/ToothDiagram.astro';
+import { diagramCaptions } from '../../../sites/szkliwo/data/diagrams';
+import { findPrice, priceCategories } from '../../../sites/szkliwo/data/prices';
+import { findMember } from '../../../sites/szkliwo/data/team';
+import {
+  treatmentDescription,
+  treatments,
+  type Treatment,
+} from '../../../sites/szkliwo/data/treatments';
+import { page } from '../../../sites/szkliwo/lib/url';
+
+export function getStaticPaths() {
+  return treatments.map((treatment, index) => ({
+    params: { slug: treatment.slug },
+    props: {
+      treatment,
+      previous: treatments[(index + treatments.length - 1) % treatments.length],
+      next: treatments[(index + 1) % treatments.length],
+    },
+  }));
+}
+
+interface Props {
+  treatment: Treatment;
+  previous: Treatment;
+  next: Treatment;
+}
+
+const { treatment, previous, next } = Astro.props;
+const doctors = treatment.doctorIds.map(findMember);
+const prices = treatment.priceIds.map(findPrice);
+const timed = treatment.steps.every(step => step.minutes !== undefined);
+const groups = treatment.steps.reduce<{ name?: string; steps: Treatment['steps'][number][] }[]>(
+  (result, step) => {
+    const last = result[result.length - 1];
+    if (last && last.name === step.group) last.steps.push(step);
+    else result.push({ name: step.group, steps: [step] });
+    return result;
+  },
+  [],
+);
+const minutesOf = (steps: readonly { minutes?: number }[]) =>
+  steps.reduce((sum, step) => sum + (step.minutes ?? 0), 0);
+const priceCategory = priceCategories.find(category => category.treatment === treatment.slug);
+---
+
+<Layout
+  title={`${treatment.name}: ból, czas i cena | Szkliwo`}
+  description={treatmentDescription(treatment)}
+  path={`/zabiegi/${treatment.slug}/`}>
+  <div class="container page-head">
+    <nav aria-label="Okruszki">
+      <ol class="crumbs">
+        <li>
+          <a href={page('/')}>Strona główna</a>
+        </li>
+        <li>
+          <a href={page('/zabiegi/')}>Zabiegi</a>
+        </li>
+        <li aria-current="page">{treatment.name}</li>
+      </ol>
+    </nav>
+    <h1>{treatment.name}</h1>
+    <p class="lead">{treatment.lead}</p>
+    <p class="visits small">
+      <span class="tab-mark" aria-hidden="true"></span>
+      <span>Wizyty: {treatment.visits}</span>
+    </p>
+  </div>
+
+  <section class="container answers-section" aria-label="Trzy najważniejsze odpowiedzi">
+    <AnswerRows treatment={treatment} />
+  </section>
+
+  <section class="section" aria-labelledby="for-whom">
+    <div class="container split">
+      <div class="stack">
+        <h2 id="for-whom">Dla kogo to jest</h2>
+        <ul class="tick-list">
+          {treatment.forWhom.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+      <figure class="diagram">
+        <ToothDiagram
+          kind={treatment.diagram}
+          label={`Rysunek. ${diagramCaptions[treatment.diagram]}`}
+        />
+        <figcaption class="small muted">{diagramCaptions[treatment.diagram]}</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  {treatment.limits && (
+    <section class="container limits-section" aria-labelledby="limits">
+      <div class="callout">
+        <h2 id="limits" class="callout__title">
+          {treatment.limits.title}
+        </h2>
+        <ul class="callout__list">
+          {treatment.limits.items.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--mist" aria-labelledby="steps">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="steps">Jak to przebiega</h2>
+        {timed && <p class="lead">Razem około {minutesOf(treatment.steps)} minut w fotelu.</p>}
+      </div>
+      {timed && <StepBar steps={treatment.steps} />}
+      <div class:list={['phases', { 'phases--paired': groups.length > 1 }]}>
+        {groups.map(group => (
+          <div class="phase">
+            {group.name && (
+              <h3 class="phase__title">
+                {group.name}
+                {timed && <span class="muted"> · {minutesOf(group.steps)} min</span>}
+              </h3>
+            )}
+            <ol class="steps">
+              {group.steps.map(step => (
+                <li>
+                  <span class="steps__marker" aria-hidden="true"></span>
+                  <div>
+                    <h3 class="steps__title">{step.title}</h3>
+                    <p>{step.text}</p>
+                  </div>
+                  {step.minutes !== undefined && (
+                    <span class="steps__time">{step.minutes} min</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="prices">
+    <div class="container split">
+      <div class="stack">
+        <h2 id="prices">Ile kosztuje, pozycja po pozycji</h2>
+        <p class="lead">
+          Dokładna kwota trafia do planu leczenia po badaniu. Poniżej ceny z naszego cennika.
+        </p>
+        <a
+          class="link link--block"
+          href={page(priceCategory ? `/cennik/#${priceCategory.id}` : '/cennik/')}>
+          Zobacz w cenniku
+        </a>
+      </div>
+      <PriceTable
+        items={prices}
+        categoryName={treatment.name}
+        caption={`Ceny: ${treatment.name}`}
+      />
+    </div>
+  </section>
+
+  <section class="section section--mist" aria-labelledby="aftercare">
+    <div class="container aftercare-faq">
+      <div class="stack">
+        <h2 id="aftercare">Po zabiegu</h2>
+        <ul class="tick-list">
+          {treatment.aftercare.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="stack">
+        <h2 id="faq">Pytania, które padają najczęściej</h2>
+        <div class="faq ruled">
+          {treatment.questions.map(item => (
+            <details>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="doctors">
+    <div class="container split">
+      <div class="stack">
+        <h2 id="doctors">Kto się tym zajmuje</h2>
+        <p class="lead">Rysunki zamiast zdjęć, bo wolimy, żebyś poznał nas na wizycie.</p>
+      </div>
+      <ul class="doctors">
+        {doctors.map(member => (
+          <li>
+            <a href={page(`/zespol/#${member.id}`)}>
+              <span class="doctors__portrait">
+                <Portrait portrait={member.portrait} />
+              </span>
+              <span class="doctors__text">
+                <span class="doctors__name">{member.name}</span>
+                <span class="small muted">{member.title}</span>
+                <span class="small">{member.role}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Cta
+    title="Umów wizytę i poznaj cenę przed zabiegiem"
+    text="Zadzwoń albo zostaw numer. Termin i cenę podamy przed wizytą, a plan leczenia dostaniesz na piśmie."
+  />
+
+  <nav class="container neighbours" aria-label="Inne zabiegi">
+    <a class="neighbours__link" href={page(`/zabiegi/${previous.slug}/`)} rel="prev">
+      <span class="small muted">Poprzedni zabieg</span>
+      <span class="neighbours__name">{previous.name}</span>
+    </a>
+    <a
+      class="neighbours__link neighbours__link--next"
+      href={page(`/zabiegi/${next.slug}/`)}
+      rel="next">
+      <span class="small muted">Następny zabieg</span>
+      <span class="neighbours__name">{next.name}</span>
+    </a>
+  </nav>
+</Layout>
+
+<style>
+  .visits {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 24px;
+    font-weight: 600;
+  }
+
+  .answers-section {
+    padding-bottom: 0;
+  }
+
+  .diagram {
+    display: grid;
+    gap: 14px;
+    padding: clamp(16px, 2vw, 28px);
+    border: 1.5px solid var(--edge);
+    border-radius: 10px 10px 40px 40px;
+    background: #fff;
+  }
+
+  .limits-section {
+    padding-top: clamp(8px, 2vw, 24px);
+  }
+
+  .callout {
+    display: grid;
+    gap: 24px;
+    padding: clamp(24px, 4vw, 48px);
+    border-left: 10px solid var(--coral);
+    border-radius: 4px 32px 32px 4px;
+    background: var(--mist);
+  }
+
+  .callout__title {
+    font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  }
+
+  .callout__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px clamp(24px, 4vw, 56px);
+  }
+
+  .callout__list li {
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  .phases {
+    display: grid;
+    gap: 32px clamp(32px, 6vw, 96px);
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+
+  .phases--paired {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(32px, 6vw, 96px);
+    border-top: 2px solid var(--ink);
+  }
+
+  .phases--paired .steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .steps li {
+    border-bottom: 1px solid var(--edge);
+  }
+
+  .aftercare-faq .stack {
+    justify-items: stretch;
+  }
+
+  .aftercare-faq {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 48px clamp(32px, 7vw, 112px);
+    align-items: start;
+  }
+
+  .phase__title {
+    margin-bottom: 12px;
+    font-size: 1.25rem;
+  }
+
+  .steps li {
+    display: grid;
+    grid-template-columns: 20px minmax(0, 1fr) auto;
+    gap: 6px 20px;
+    padding-block: 20px;
+  }
+
+  .steps__marker {
+    width: 14px;
+    height: 22px;
+    margin-top: 4px;
+    border-radius: 3px 3px 9px 9px;
+    background: var(--coral);
+  }
+
+  .steps__title {
+    margin-bottom: 4px;
+    font-size: 1.25rem;
+  }
+
+  .steps p {
+    max-width: 38em;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .steps__time {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .doctors {
+    display: grid;
+    gap: 20px;
+  }
+
+  .doctors a {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 20px;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .doctors__text {
+    display: grid;
+    gap: 2px;
+  }
+
+  .doctors__portrait {
+    display: block;
+    aspect-ratio: 200 / 240;
+    overflow: hidden;
+    border-radius: 6px 6px 28px 28px;
+  }
+
+  .doctors__name {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .doctors a:hover .doctors__name {
+    text-decoration: underline;
+    text-decoration-color: var(--coral);
+    text-decoration-thickness: 3px;
+  }
+
+  .faq details {
+    border-bottom: 1px solid var(--edge);
+  }
+
+  .faq summary {
+    position: relative;
+    display: block;
+    padding: 22px 56px 22px 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq summary::after {
+    content: '';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    margin-top: -10px;
+    border-right: 3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
+    transform: rotate(45deg);
+  }
+
+  .faq details[open] summary::after {
+    margin-top: -4px;
+    transform: rotate(225deg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .faq summary::after {
+      transition:
+        transform 280ms var(--ease),
+        margin 280ms var(--ease);
+    }
+  }
+
+  .faq details p {
+    max-width: 38em;
+    padding-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .neighbours {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding-block: clamp(32px, 4vw, 56px);
+  }
+
+  .neighbours__link {
+    display: grid;
+    gap: 2px;
+    padding-block: 12px;
+    text-decoration: none;
+  }
+
+  .neighbours__link--next {
+    text-align: right;
+  }
+
+  .neighbours__name {
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.75rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .neighbours__link:hover .neighbours__name {
+    text-decoration: underline;
+    text-decoration-color: var(--coral);
+    text-decoration-thickness: 3px;
+  }
+
+  @media (max-width: 960px) {
+    .phases--paired,
+    .steps,
+    .callout__list,
+    .aftercare-faq {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .steps li {
+      grid-template-columns: 20px minmax(0, 1fr);
+    }
+
+    .steps__time {
+      grid-column: 2;
+    }
+  }
+</style>

@@ -1,0 +1,285 @@
+---
+import Cta from '../../../sites/szkliwo/components/Cta.astro';
+import Layout from '../../../sites/szkliwo/components/Layout.astro';
+import PriceTable from '../../../sites/szkliwo/components/PriceTable.astro';
+import { priceCategories, priceItems } from '../../../sites/szkliwo/data/prices';
+import { page } from '../../../sites/szkliwo/lib/url';
+
+const groups = priceCategories.map(category => ({
+  category,
+  items: priceItems.filter(item => item.category === category.id),
+}));
+---
+
+<Layout
+  title="Cennik zabiegów stomatologicznych | Szkliwo"
+  description={`Pełny cennik kliniki Szkliwo we Wrocławiu: ${priceItems.length} pozycji od przeglądu po implanty. Wyszukiwarka filtruje listę w trakcie pisania.`}
+  path="/cennik/">
+  <div class="container page-head">
+    <nav aria-label="Okruszki">
+      <ol class="crumbs">
+        <li>
+          <a href={page('/')}>Strona główna</a>
+        </li>
+        <li aria-current="page">Cennik</li>
+      </ol>
+    </nav>
+    <h1>Cennik</h1>
+    <p class="lead">
+      Ceny w złotych, obowiązują od 1 października 2026. Plan leczenia z ceną każdej pozycji
+      dostajesz po przeglądzie i nic nie dopłacasz bez pytania.
+    </p>
+  </div>
+
+  <div class="finder" data-price-finder>
+    <div class="container finder__bar">
+      <form class="finder__form" role="search" data-price-form>
+        <label class="finder__label" for="price-search">
+          Szukaj w cenniku
+        </label>
+        <div class="finder__field">
+          <input
+            id="price-search"
+            class="input"
+            type="search"
+            name="q"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Ząb, implant, dziecko"
+            data-price-input
+          />
+          <button class="finder__clear" type="button" data-price-clear hidden>
+            Wyczyść
+          </button>
+        </div>
+      </form>
+      <p class="finder__status" role="status" data-price-status>
+        Wszystkie pozycje: {priceItems.length}.
+      </p>
+    </div>
+  </div>
+
+  <div class="container">
+    <nav aria-label="Kategorie cennika" data-price-jumps>
+      <p class="jump__label">Przejdź do kategorii</p>
+      <ul class="jump">
+        {groups.map(({ category }) => (
+          <li data-price-jump={category.id}>
+            <a href={`#${category.id}`}>{category.name}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container price-groups">
+    {groups.map(({ category, items }) => (
+      <section
+        class="split price-group"
+        id={category.id}
+        data-price-category
+        aria-labelledby={`${category.id}-title`}>
+        <div class="stack">
+          <h2 id={`${category.id}-title`}>{category.name}</h2>
+          <p class="muted">{category.lead}</p>
+          {category.treatment && (
+            <a class="link link--block" href={page(`/zabiegi/${category.treatment}/`)}>
+              Jak wygląda ten zabieg
+            </a>
+          )}
+        </div>
+        <PriceTable
+          items={items}
+          categoryName={category.name}
+          caption={`Cennik: ${category.name}`}
+          searchable
+        />
+      </section>
+    ))}
+    <p class="empty" data-price-empty hidden>
+      Nie ma takiej pozycji w cenniku. Spróbuj krótszego słowa albo zadzwoń: +48 71 000 00 03.
+    </p>
+  </div>
+
+  <section class="section" aria-labelledby="included-title">
+    <div class="container split">
+      <div class="stack">
+        <h2 id="included-title">Co warto wiedzieć o cenach</h2>
+      </div>
+      <ul class="tick-list">
+        <li>
+          Cena z cennika jest ceną za zabieg razem ze znieczuleniem, jeśli przy kategorii nie
+          napisano inaczej.
+        </li>
+        <li>
+          Pozycje oznaczone „od” zależą od trudności przypadku. Dokładną kwotę wpisujemy do planu
+          leczenia po badaniu.
+        </li>
+        <li>
+          Jeśli w trakcie leczenia okaże się, że trzeba zrobić coś więcej, najpierw mówimy ci o tym
+          i podajemy cenę. Dopiero potem to robimy.
+        </li>
+        <li>Płacisz w gabinecie kartą, BLIK-iem albo gotówką. Wystawiamy fakturę na życzenie.</li>
+        <li>Nie mamy kontraktu z NFZ, więc wszystkie zabiegi są płatne.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Cta
+    title="Chcesz poznać cenę swojego leczenia?"
+    text="Cennik pokazuje widełki. Dokładną kwotę dostaniesz na piśmie po przeglądzie, zanim cokolwiek zaczniemy."
+  />
+</Layout>
+
+<script>
+  import '../../../sites/szkliwo/scripts/price-search';
+</script>
+
+<style>
+  .finder {
+    position: sticky;
+    top: var(--header-height);
+    z-index: 30;
+    background: var(--paper);
+    border-block: 1px solid var(--rule);
+  }
+
+  :global(html:not(.js)) .finder__bar {
+    padding: 0;
+  }
+
+  .finder__bar {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 8px clamp(24px, 4vw, 64px);
+    align-items: center;
+    padding-block: 14px;
+  }
+
+  :global(html:not(.js)) .finder__status {
+    display: none;
+  }
+
+  :global(html:not(.js)) .finder__form {
+    display: none;
+  }
+
+  .finder__form {
+    display: grid;
+    gap: 6px;
+  }
+
+  .finder__label {
+    font-size: var(--text-small);
+    font-weight: 600;
+  }
+
+  .finder__field {
+    position: relative;
+  }
+
+  .finder__field .input {
+    padding-right: 6.5rem;
+  }
+
+  .finder__clear {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    min-height: 44px;
+    margin-top: -22px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 4px 4px 12px 12px;
+    background: var(--mist);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .finder__status {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .jump__label {
+    padding-top: 28px;
+    font-size: var(--text-small);
+    font-weight: 600;
+  }
+
+  .jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-block: 8px;
+  }
+
+  .jump li[hidden] {
+    display: none;
+  }
+
+  .jump a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1.5px solid var(--edge);
+    border-radius: 5px 5px 18px 18px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .jump a:hover {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: #fff;
+  }
+
+  .price-group {
+    padding-block: clamp(36px, 5vw, 72px);
+    scroll-margin-top: calc(var(--header-height) + 100px);
+  }
+
+  .price-group + .price-group {
+    border-top: 1px solid var(--rule);
+  }
+
+  .price-group .stack {
+    position: sticky;
+    top: calc(var(--header-height) + 110px);
+  }
+
+  .empty {
+    padding-block: 48px;
+    font-size: var(--text-lead);
+    font-weight: 500;
+  }
+
+  @media (max-width: 960px) {
+    .finder__bar {
+      grid-template-columns: 1fr;
+      padding-block: 10px;
+    }
+
+    .finder__label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .price-group .stack {
+      position: static;
+    }
+  }
+
+  @media print {
+    .finder,
+    .jump,
+    .jump__label {
+      display: none;
+    }
+  }
+</style>

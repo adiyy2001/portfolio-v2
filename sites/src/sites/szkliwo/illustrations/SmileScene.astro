@@ -1,0 +1,117 @@
+---
+import { getShade, type ShadeName } from '../lib/shades';
+import {
+  buildLowerTeeth,
+  buildUpperTeeth,
+  gumPath,
+  openingPath,
+  type SmileTooth,
+  type ToothAdjustments,
+} from '../lib/smile';
+
+interface Props {
+  idPrefix: string;
+  view: string;
+  shade: ShadeName;
+  upper?: ToothAdjustments;
+  lower?: ToothAdjustments;
+  missing?: readonly number[];
+  highlight?: readonly number[];
+}
+
+const { idPrefix, view, shade, upper, lower, missing = [], highlight = [] } = Astro.props;
+
+const upperTeeth = buildUpperTeeth({ adjustments: upper, missing });
+const lowerTeeth = buildLowerTeeth({ adjustments: lower });
+const highlighted = upperTeeth.filter(tooth => highlight.includes(tooth.position));
+
+const turn = (tooth: SmileTooth) =>
+  tooth.rotate ? `rotate(${tooth.rotate} ${tooth.x} ${(tooth.top + tooth.bottom) / 2})` : undefined;
+
+const id = (name: string) => `${idPrefix}-${name}`;
+---
+
+<svg
+  class="smile-scene"
+  viewBox={view}
+  preserveAspectRatio="xMidYMid slice"
+  style={`--tooth:${getShade(shade).color}`}
+  aria-hidden="true"
+  focusable="false">
+  <defs>
+    <clipPath id={id('opening')}>
+      <path d={openingPath()}></path>
+    </clipPath>
+    <linearGradient id={id('volume')} x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"></stop>
+      <stop offset="0.38" stop-color="#ffffff" stop-opacity="0"></stop>
+      <stop offset="0.72" stop-color="#1b1f2a" stop-opacity="0"></stop>
+      <stop offset="1" stop-color="#1b1f2a" stop-opacity="0.1"></stop>
+    </linearGradient>
+    <linearGradient id={id('roof')} x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#1b1f2a" stop-opacity="0.2"></stop>
+      <stop offset="1" stop-color="#1b1f2a" stop-opacity="0"></stop>
+    </linearGradient>
+  </defs>
+  <rect x="-200" y="-200" width="1200" height="900" fill="var(--mist)"></rect>
+  <path
+    d="M108,235 C170,190 300,150 400,160 C500,150 630,190 692,235 C650,330 520,372 400,366 C280,372 150,330 108,235 Z"
+    fill="#e39b90"></path>
+  <path
+    d="M330,349 Q400,357 470,349"
+    fill="none"
+    stroke="#ffffff"
+    stroke-opacity="0.35"
+    stroke-width="5"
+    stroke-linecap="round"></path>
+  <path d={openingPath()} fill="#331f27"></path>
+  <g clip-path={`url(#${id('opening')})`}>
+    {lowerTeeth.map(tooth => (
+      <g transform={turn(tooth)}>
+        <path
+          d={tooth.path}
+          fill="var(--tooth)"
+          stroke="#1b1f2a"
+          stroke-opacity="0.18"
+          stroke-width="1.5"
+        />
+        <path d={tooth.path} fill="#1b1f2a" fill-opacity="0.12" />
+        <path d={tooth.path} fill={`url(#${id('volume')})`} />
+      </g>
+    ))}
+    {upperTeeth.map(tooth => (
+      <g transform={turn(tooth)}>
+        <path
+          d={tooth.path}
+          fill="var(--tooth)"
+          stroke="#1b1f2a"
+          stroke-opacity="0.2"
+          stroke-width="1.5"
+        />
+        <path d={tooth.path} fill={`url(#${id('volume')})`} />
+        {tooth.depth > 0 && (
+          <path d={tooth.path} fill="#1b1f2a" fill-opacity={(tooth.depth * 0.24).toFixed(2)} />
+        )}
+      </g>
+    ))}
+    <path d={gumPath(missing)} fill="#f2b3a8"></path>
+    <rect x="140" y="180" width="520" height="36" fill={`url(#${id('roof')})`}></rect>
+    {highlighted.map(tooth => (
+      <path
+        d={tooth.path}
+        fill="none"
+        stroke="#ff6f5b"
+        stroke-width="5"
+        stroke-linejoin="round"
+        transform={turn(tooth)}
+      />
+    ))}
+  </g>
+</svg>
+
+<style>
+  .smile-scene {
+    width: 100%;
+    height: 100%;
+  }
+</style>
