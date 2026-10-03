@@ -136,11 +136,11 @@ Sources: Adrian's LinkedIn profile (pasted by Adrian on 2026-10-02), `content/jo
 | Company | Title | Range | Type, location | What LinkedIn says |
 | --- | --- | --- | --- | --- |
 | PSE Innowacje sp. z o.o. | Senior Software Engineer | Jan 2025 - Present | Full-time, Wrocław | Leads an early-stage proof of concept of a highly interactive web app to model and visualize high-voltage power line infrastructure; complex diagram-based UI in Angular and GoJS; works with domain analysts on evolving requirements; owned frontend architecture decisions in the initial phase; onboards new engineers, code reviews; continues on the production system |
-| Media Hunters | Tech Lead (Adrian, 2026-10-02; LinkedIn says "Senior Software Engineer / Technical Lead") | Sep 2023 - Jan 2025 | Self-employed, Wrocław | Independent contractor leading multiple long-lived web apps with end-to-end responsibility for code quality, architecture and technical decisions; designed and evolved a multi-tenant SaaS platform; introduced CI pipelines and automated tests (Jest, Cypress); accessible WCAG interfaces with designers and stakeholders; mentored and reviewed code for a small team of engineers, a team he managed (Adrian, 2026-10-02); skills include business development and project management |
-| Transition Technologies MS | Software Engineer | Sep 2022 - Oct 2023 | Self-employed, Wrocław, remote | Enterprise sandbox for electricians to design and validate complex electrical workflows; NgRx state for dynamic graph-based UI; tests in Jest, Karma, Cypress; WCAG 2.1 in a diagram-heavy interface (keyboard navigation, screen readers, focus management); worked with backend engineers, UX designers and domain experts |
-| Cobiro | Frontend Engineer | Sep 2021 - Sep 2022 | Self-employed, Warsaw area | Moved a legacy frontend toward clearer separation of concerns; architecture discussions on domain boundaries (hexagonal architecture); helped introduce automated CI pipelines; feature-flag experiments and gradual rollouts |
-| Roche | Frontend Engineer | Sep 2021 - Jun 2022 | Contract, Wrocław, remote | Internal medical research apps in Angular and TypeScript used to analyze and validate clinical data in a regulated environment; route-based lazy loading and API usage optimization; tests in Jest and Karma |
-| BRAINODE sp. z o.o. | Junior Frontend Developer | Aug 2019 - Jul 2021 | Contract, Wrocław, hybrid | High-end e-commerce platform with real-time 3D product visualization in Angular and Three.js; a custom WebGL rendering layer with senior engineers; real-time currency exchange over WebSockets; small Agile team |
+| Media Hunters | Tech Lead (Adrian, 2026-10-02; LinkedIn says "Senior Software Engineer / Technical Lead") | Sep 2023 - Dec 2024 | Self-employed, Wrocław | Independent contractor leading multiple long-lived web apps with end-to-end responsibility for code quality, architecture and technical decisions; designed and evolved a multi-tenant SaaS platform; introduced CI pipelines and automated tests (Jest, Cypress); accessible WCAG interfaces with designers and stakeholders; mentored and reviewed code for a small team of engineers, a team he managed (Adrian, 2026-10-02); skills include business development and project management |
+| Transition Technologies MS | Software Engineer | Sep 2022 - Aug 2023 | Self-employed, Wrocław, remote | Enterprise sandbox for electricians to design and validate complex electrical workflows; NgRx state for dynamic graph-based UI; tests in Jest, Karma, Cypress; WCAG 2.1 in a diagram-heavy interface (keyboard navigation, screen readers, focus management); worked with backend engineers, UX designers and domain experts |
+| Cobiro | Frontend Engineer | Feb 2022 - Aug 2022 | Self-employed, Warsaw area | Moved a legacy frontend toward clearer separation of concerns; architecture discussions on domain boundaries (hexagonal architecture); helped introduce automated CI pipelines; feature-flag experiments and gradual rollouts |
+| Roche | Frontend Engineer | Jan 2021 - Jan 2022 | Contract, Wrocław, remote | Internal medical research apps in Angular and TypeScript used to analyze and validate clinical data in a regulated environment; route-based lazy loading and API usage optimization; tests in Jest and Karma |
+| BRAINODE sp. z o.o. | Junior Frontend Developer | Aug 2019 - Dec 2020 | Contract, Wrocław, hybrid | High-end e-commerce platform with real-time 3D product visualization in Angular and Three.js; a custom WebGL rendering layer with senior engineers; real-time currency exchange over WebSockets; small Agile team |
 
 Superseded by LinkedIn: the content/jobs dates (BRAINODE from Aug 2020, Roche Jan to Sep 2021, Cobiro to Dec 2022, TTMS Dec 2022 to Dec 2023, Media Hunters "Founder / Main Engineer" Jan 2023 to Present) and the resume variants. Overlaps (Roche with Cobiro, TTMS with Media Hunters) are real parallel work as LinkedIn shows them.
 
@@ -166,7 +166,7 @@ Enhance with AI
 Media hunters
 Senior Software Engineer / Technical Lead
 Media hunters · Self-employed
-Sep 2023 - Jan 2025 · 1 yr 5 mos
+Sep 2023 - Dec 2024 · 1 yr 4 mos
 Wrocław, Dolnośląskie, Poland
 - Worked as an independent contractor leading and contributing to multiple long-lived web applications, taking end-to-end responsibility for code quality, architecture, and technical decision-making
 - Designed and evolved a multi-tenant SaaS platform with a focus on clear domain boundaries, testability, and safe iteration under changing requirements
@@ -178,7 +178,7 @@ Wrocław, Dolnośląskie, Poland
 Transition Technologies MS
 Software Engineer
 Transition Technologies MS · Self-employed
-Sep 2022 - Oct 2023 · 1 yr 2 mos
+Sep 2022 - Aug 2023 · 1 yr
 Wrocław, Dolnośląskie, Poland · Remote
 - Worked on an enterprise-grade sandbox application used by electricians to design and validate complex electrical workflows, with a strong focus on correctness, predictability, and error prevention
 - Designed and evolved state management solutions using NgRx to handle highly dynamic, graph-based UI state, prioritizing debuggability, traceability, and long-term maintainability
@@ -189,7 +189,7 @@ Wrocław, Dolnośląskie, Poland · Remote
 Cobiro
 Frontend Engineer
 Cobiro · Self-employed
-Sep 2021 - Sep 2022 · 1 yr 1 mo
+Feb 2022 - Aug 2022 · 7 mos
 Warsaw Metropolitan Area
 - Worked on evolving a legacy frontend codebase towards clearer separation of concerns, improving testability and long-term maintainability while keeping the system stable during incremental refactors
 - Participated in architectural discussions around introducing domain boundaries and decoupling UI logic from infrastructure concerns in an existing production system
@@ -200,7 +200,7 @@ Warsaw Metropolitan Area
 Roche
 Frontend Engineer 
 Roche · Contract
-Sep 2021 - Jun 2022 · 10 mos
+Jan 2021 - Jan 2022 · 1 yr 1 mo
 Wrocław, Dolnośląskie, Poland · Remote
 - Worked on internal medical research applications built with Angular and TypeScript, used by researchers to analyze and validate clinical data in a regulated environment
 - Focused on application reliability, data correctness, and predictable behavior under strict compliance and privacy requirements
@@ -211,7 +211,7 @@ Wrocław, Dolnośląskie, Poland · Remote
 BRAINODE sp. z o.o.
 Junior Frontend Developer
 BRAINODE sp. z o.o. · Contract
-Aug 2019 - Jul 2021 · 2 yrs
+Aug 2019 - Dec 2020 · 1 yr 5 mos
 Wrocław, Dolnośląskie, Poland · Hybrid
 - Worked on a high-end e-commerce platform with real-time 3D product visualization built in Angular and Three.js, focusing on performance, rendering stability, and cross-browser compatibility
 - Contributed to the development of a custom WebGL-based rendering layer, collaborating closely with senior engineers on rendering pipelines, scene optimization, and animation handling
@@ -296,7 +296,7 @@ Translated ambiguous, evolving requirements from domain analysts into
 technical solutions in Scrum, taking part in sprint planning and backlog
 refinement
 •
-Sep 2023 - Jan 2025 Remote
+Sep 2023 - Dec 2024 Remote
 Senior Software Engineer /
 Technical Lead
 Media Hunters
@@ -326,7 +326,7 @@ refactoring across a growing codebase, focused on regression prevention
 Worked within Agile/Scrum ceremonies: sprint reviews, retrospectives
 and cross-team architectural discussions
 •
-Sep 2021 - Sep 2022 Remote
+Feb 2022 - Aug 2022 Remote
 Frontend Engineer
 Cobiro
 Drove incremental refactoring of a legacy Angular/TypeScript frontend
@@ -337,7 +337,7 @@ Implemented feature flag-based experimentation and gradual rollout
 mechanisms using RxJS reactive patterns, enabling fast rollback and
 minimal user-facing risk
 •
-Sep 2021 - Jun 2022 Remote
+Jan 2021 - Jan 2022 Remote
 Frontend Engineer
 Roche
 Improved runtime performance through lazy loading, RxJS-driven API
@@ -351,7 +351,7 @@ Contributed to a testing culture (Jest, Karma) focused on regression
 prevention, working within strict quality gates required by healthcare
 compliance
 •
-Aug 2019 - Jul 2021 Wrocław
+Aug 2019 - Dec 2020 Wrocław
 Junior Frontend Developer
 Brainode sp z oo
 Built a high-end currency exchange platform with real-time 3D product
