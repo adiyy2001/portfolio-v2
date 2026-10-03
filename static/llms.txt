@@ -1,0 +1,24 @@
+# Adrian Turbiński
+
+> Front-end and full-stack developer from Wrocław, Poland. He has built web applications since 2019, employed and freelance, mostly in Angular, TypeScript, RxJS and Node.js. The site has two editions, one for recruiters and one for clients, each in Polish and English.
+
+- Senior frontend developer and tech lead. At PSE Innowacje he builds an app that models and visualizes high-voltage power lines. He designs front-end and back-end architecture, has led a small team and onboards new engineers.
+- As a freelancer he builds complete web apps for companies: front end, back end and deployment, usable with a keyboard and a screen reader. From the quote through deployment to maintenance, clients talk to him directly.
+- Contact: adrian.turbinski@gmail.com, [LinkedIn](https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6), [GitHub](https://github.com/adiyy2001).
+
+## For recruiters
+
+- [For recruiters](https://adiyy2001.github.io/portfolio-v2/en/for-recruiters/): experience since 2019, stack, printable resume
+- [Dla rekrutera](https://adiyy2001.github.io/portfolio-v2/dla-rekrutera/): the same in Polish
+- [Resume](https://adiyy2001.github.io/portfolio-v2/resume.pdf): the English recruiter page as a PDF
+
+## For clients
+
+- [For clients](https://adiyy2001.github.io/portfolio-v2/en/for-clients/): web apps and websites for companies, how the work goes, accessibility
+- [Dla klienta](https://adiyy2001.github.io/portfolio-v2/dla-klienta/): the same in Polish
+
+## Work
+
+- [TailorCloth](https://adiyy2001.github.io/portfolio-v2/en/archive/tailorcloth/): a website on Odoo with custom product management modules for a tailoring company from Kraków, built with the team he led at Media Hunters; another agency maintains it today
+- [Sample websites](https://adiyy2001.github.io/portfolio-v2/wzornik/): nine websites for made-up businesses, each with its own typeface, palette and signature element; every page says the business is made up; in Polish, Kminek and Przęsło also in English
+- [Projects](https://adiyy2001.github.io/portfolio-v2/en/archive/): the index of the work above
