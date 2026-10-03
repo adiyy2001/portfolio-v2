@@ -1,0 +1,42 @@
+---
+import Layout from '../../../sites/trzask/Layout.astro';
+import ShopList from '../../../sites/trzask/islands/ShopList';
+import { ProductTile } from '../../../sites/trzask/components/ProductTile';
+import { accessories } from '../../../sites/trzask/data/catalog';
+---
+
+<Layout
+  title="Sklep z kawą palona we Wrocławiu"
+  description="Dwanaście kaw w ziarnach i cztery akcesoria do parzenia. Filtruj po paleniu, sposobie parzenia, kraju i obróbce. Palimy we wtorki i czwartki."
+  path="/trzask/sklep/"
+  current="sklep"
+  bundles={['shop']}>
+  <div class="wrap shop-head">
+    <h1>Kawy z&nbsp;naszej palarni</h1>
+    <p class="lead">
+      Dwanaście kaw w&nbsp;ziarnach, każda z&nbsp;własną krzywą palenia. Palimy we wtorki
+      i&nbsp;czwartki, więc paczka, którą dostajesz, jest świeża. Do każdej kawy dopisaliśmy
+      przepis.
+    </p>
+    <p class="shop-head__slot" data-roast="sentence">
+      Zamów do 12:00 dzień przed paleniem. Wyślemy następnego dnia roboczego po paleniu.
+    </p>
+  </div>
+  <div class="wrap">
+    <ShopList client:load />
+  </div>
+  <section class="wrap gear" aria-labelledby="gear-title">
+    <h2 id="gear-title">Akcesoria</h2>
+    <p>
+      Cztery rzeczy, których sami używamy w&nbsp;palarni i&nbsp;w&nbsp;domu. Nic więcej nie
+      potrzebujesz.
+    </p>
+    <ul class="wall wall--gear">
+      {accessories.map(accessory => (
+        <li>
+          <ProductTile product={accessory} />
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

@@ -1,0 +1,195 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/trzask/Layout.astro';
+import { business, deliveryMethods, freeDeliveryFromGr } from '../../../sites/trzask/data/site';
+import { formatPln } from '../../../sites/trzask/lib/money';
+
+const schedule = [
+  ['od środy 12:00 do poniedziałku 12:00', 'wtorek', 'środa'],
+  ['od poniedziałku 12:00 do środy 12:00', 'czwartek', 'piątek'],
+];
+---
+
+<Layout
+  title="Dostawa i zwroty"
+  description="Koszty i czas dostawy kawy z palarni Trzask, odbiór osobisty, odstąpienie od umowy w 14 dni i reklamacje. Stan na październik 2026."
+  path="/trzask/dostawa-i-zwroty/"
+  current="dostawa"
+  bundles={['info']}>
+  <div class="wrap page-head">
+    <h1>Dostawa, zwroty i&nbsp;reklamacje</h1>
+    <p class="lead">
+      Napisaliśmy to tak, żeby dało się przeczytać przed zakupem. Opis zasad jest ogólny
+      i&nbsp;dotyczy konsumentów, stan na październik 2026.
+    </p>
+  </div>
+
+  <div class="wrap doc">
+    <section class="doc__block" aria-labelledby="cost-title">
+      <h2 id="cost-title">Koszt dostawy</h2>
+      <div class="doc__body">
+        <table class="table">
+          <caption class="sr-only">Sposoby dostawy, ceny i&nbsp;czas</caption>
+          <thead>
+            <tr>
+              <th scope="col">Sposób</th>
+              <th scope="col">Cena</th>
+              <th scope="col">Czas</th>
+            </tr>
+          </thead>
+          <tbody>
+            {deliveryMethods.map(method => (
+              <tr>
+                <th scope="row">{method.name}</th>
+                <td>{method.priceGr === 0 ? 'gratis' : formatPln(method.priceGr)}</td>
+                <td>{method.time}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p>
+          Przy zamówieniu od <strong>{formatPln(freeDeliveryFromGr, true)}</strong>, liczonym po
+          odjęciu kodu rabatowego, paczkomat i&nbsp;kurier są za darmo. Pasek w&nbsp;koszyku
+          pokazuje, ile brakuje. Wysyłamy tylko na terenie Polski. Ceny zawierają 23% VAT, także
+          cena dostawy.
+        </p>
+      </div>
+    </section>
+
+    <section class="doc__block" aria-labelledby="when-title">
+      <h2 id="when-title">Kiedy wyślemy</h2>
+      <div class="doc__body">
+        <p>
+          Kawę palimy dopiero po zamówieniu, we wtorki i&nbsp;czwartki. Paczkę nadajemy następnego
+          dnia roboczego po paleniu.
+        </p>
+        <table class="table">
+          <caption class="sr-only">Kiedy zamówienie trafia do palenia i&nbsp;wysyłki</caption>
+          <thead>
+            <tr>
+              <th scope="col">Zamówienie złożone</th>
+              <th scope="col">Palimy</th>
+              <th scope="col">Wysyłamy</th>
+            </tr>
+          </thead>
+          <tbody>
+            {schedule.map(([ordered, roast, ship]) => (
+              <tr>
+                <th scope="row">{ordered}</th>
+                <td>{roast}</td>
+                <td>{ship}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p>
+          Zamówienie z&nbsp;akcesoriami wysyłamy razem z&nbsp;kawą. W&nbsp;tygodniu ze świętem
+          termin może się przesunąć o&nbsp;jeden dzień, damy znać mailem. Dokładną datę najbliższego
+          palenia widzisz zawsze na górze strony.
+        </p>
+      </div>
+    </section>
+
+    <section class="doc__block" aria-labelledby="pickup-title">
+      <h2 id="pickup-title">Odbiór w&nbsp;palarni</h2>
+      <div class="doc__body">
+        <p>
+          {business.street}, {business.city}. Zadzwonimy albo napiszemy, gdy paczka będzie gotowa,
+          zwykle dzień po paleniu. Płacisz online albo na miejscu, gotówką lub kartą.
+        </p>
+        <dl class="ledger">
+          {business.pickupHours.map(([day, hours]) => (
+            <div>
+              <dt>{day}</dt>
+              <dd>{hours}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="doc__block" aria-labelledby="return-title">
+      <h2 id="return-title">Odstąpienie od umowy w&nbsp;14 dni</h2>
+      <div class="doc__body">
+        <p>
+          Jako konsument możesz odstąpić od umowy zawartej na odległość w&nbsp;ciągu 14 dni od dnia,
+          w którym paczka trafiła do ciebie, bez podawania powodu. Wystarczy mail na{' '}
+          <a href={`mailto:${business.email}`}>{business.email}</a> albo list z&nbsp;jasnym
+          oświadczeniem. Możesz też użyć wzoru formularza z&nbsp;ustawy o&nbsp;prawach konsumenta.
+        </p>
+        <ul class="doc__list">
+          <li>
+            Odeślij towar najpóźniej w&nbsp;ciągu 14 dni od oświadczenia. Koszt odesłania ponosisz
+            ty.
+          </li>
+          <li>
+            Pieniądze zwrócimy w&nbsp;ciągu 14 dni od oświadczenia, tą samą metodą, którą
+            zapłaciłeś. Zwrot obejmuje też koszt dostawy w&nbsp;najtańszej oferowanej wersji. Możemy
+            poczekać z wypłatą, aż towar do nas wróci.
+          </li>
+          <li>Akcesoria, których nie używałeś, przyjmujemy w&nbsp;oryginalnym stanie.</li>
+        </ul>
+        <h3>Czego nie można zwrócić</h3>
+        <p>
+          Prawo odstąpienia nie przysługuje w&nbsp;kilku sytuacjach, które dotyczą także kawy (art.
+          38 ustawy o&nbsp;prawach konsumenta):
+        </p>
+        <ul class="doc__list">
+          <li>
+            kawa zmielona na twoje życzenie, bo to rzecz przygotowana według twojej specyfikacji,
+            więc wybierasz mielenie świadomie,
+          </li>
+          <li>
+            kawa w&nbsp;zapieczętowanym opakowaniu, które otworzyłeś po dostarczeniu, bo ze względów
+            higienicznych nie da się jej zwrócić.
+          </li>
+        </ul>
+        <p>
+          Dlatego, jeśli chcesz mieć wybór, zamów całe ziarna. W&nbsp;nieotwartej paczce zwrócisz je
+          bez żadnych problemów.
+        </p>
+      </div>
+    </section>
+
+    <section class="doc__block" aria-labelledby="claim-title">
+      <h2 id="claim-title">Reklamacje</h2>
+      <div class="doc__body">
+        <p>
+          Sprzedajemy towar zgodny z&nbsp;opisem. Jeśli paczka dotarła uszkodzona, kawa smakuje
+          inaczej, niż napisaliśmy, albo akcesorium nie działa, masz prawo do reklamacji
+          z&nbsp;tytułu braku zgodności towaru z&nbsp;umową przez dwa lata od dostarczenia.
+        </p>
+        <ul class="doc__list">
+          <li>
+            Napisz na {business.email}. Opisz problem i&nbsp;dołącz zdjęcie. Numer zamówienia ułatwi
+            sprawę, ale nie jest wymagany.
+          </li>
+          <li>Odpowiemy w&nbsp;ciągu 14 dni.</li>
+          <li>
+            Możesz zażądać naprawy albo wymiany. Jeśli to niemożliwe albo zbyt kosztowne,
+            przysługuje ci obniżenie ceny albo odstąpienie od umowy.
+          </li>
+        </ul>
+        <p>
+          Jeśli się nie dogadamy, możesz zwrócić się do miejskiego albo powiatowego rzecznika
+          konsumentów, do Inspekcji Handlowej albo do mediacji.
+        </p>
+      </div>
+    </section>
+
+    <section class="doc__block" aria-labelledby="seller-title">
+      <h2 id="seller-title">Kto sprzedaje</h2>
+      <div class="doc__body">
+        <p>
+          Palarnia Trzask, {business.street}, {business.city}. Kontakt:{' '}
+          {`${business.email}, ${business.phone}`}. To firma przykładowa, więc nie ma tu numeru NIP
+          ani wpisu do rejestru. W&nbsp;prawdziwym sklepie znajdziesz je tutaj.
+        </p>
+        <p>
+          Pytania, które nie mieszczą się w&nbsp;tej stronie, wyślij przez{' '}
+          <a href={link('/trzask/kontakt/')}>formularz</a>.
+        </p>
+      </div>
+    </section>
+  </div>
+</Layout>

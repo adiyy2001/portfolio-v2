@@ -1,0 +1,174 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/trzask/Layout.astro';
+import { Label } from '../../../sites/trzask/components/Label';
+import { getCoffee } from '../../../sites/trzask/data/catalog';
+
+const coffee = getCoffee('etiopia-gedeb');
+if (!coffee) throw new Error('Missing coffee');
+
+const day = [
+  ['6:30', 'Rozgrzewamy bęben do 200 °C i ważymy zielone ziarno na pierwsze partie.'],
+  [
+    '7:00',
+    'Pierwsza partia. Dziesięć kilogramów zielonego ziarna daje po paleniu około 8,5 kg kawy.',
+  ],
+  [
+    '7:00 do 12:00',
+    'Cztery albo pięć partii. Każda trwa od 9 do 12 minut, potem cztery minuty chłodzenia.',
+  ],
+  ['12:30', 'Kubkowanie. Z każdej partii parzymy próbkę i zapisujemy ją w dzienniku palenia.'],
+  ['14:00', 'Kawa odgazowuje w workach z zaworem, a my pakujemy zamówienia na następny dzień.'],
+  ['16:00', 'Czyścimy bęben i odpowiadamy na maile, które przyszły podczas palenia.'],
+];
+
+const labelParts = [
+  [
+    'Pasek na górze',
+    'Nazwa palarni, numer partii i zawór odgazowujący. E26-14 to rok 2026 i czternasta partia zielonego ziarna.',
+  ],
+  [
+    'Krzywa',
+    'Temperatura ziarna w bębnie w czasie, od załadunku do wysypania. Dla każdej partii rysujemy ją z dziennika palenia.',
+  ],
+  [
+    'Okrąg na krzywej',
+    'Pierwszy trzask: moment, w którym ziarno pęka. Obok jest czas od załadunku.',
+  ],
+  [
+    'Nuty',
+    'Trzy rzeczy, które czuliśmy przy kubkowaniu. Nie lista wszystkiego, co da się wymyślić.',
+  ],
+  ['Trzy kratki', 'Stopień palenia: jedna zamalowana to jasne, dwie to średnie, trzy to ciemne.'],
+  ['Stopka', 'Poziom palenia, obróbka i gramatura paczki.'],
+];
+
+const rest = [
+  ['Filtr, jasne palenie', 'od 5 do 21 dnia po paleniu'],
+  ['Espresso, średnie i ciemne', 'od 8 do 30 dnia po paleniu'],
+  ['Kawiarka i French press', 'od 4 do 28 dnia po paleniu'],
+];
+---
+
+<Layout
+  title="O palarni"
+  description="Jak i kiedy palimy kawę w Trzasku: dzień palenia godzina po godzinie, jak czytać etykietę z krzywą palenia i skąd bierzemy zielone ziarno."
+  path="/trzask/o-palarni/"
+  current="o-palarni"
+  bundles={['product', 'info']}>
+  <div class="wrap page-head">
+    <h1>Dwa dni palenia, pięć dni pakowania i&nbsp;pisania maili</h1>
+    <p class="lead">
+      Trzask to trzy osoby i&nbsp;jeden bęben na dwanaście kilogramów, w&nbsp;podwórkowej hali przy
+      ulicy Drukarskiej. Palimy we wtorki i&nbsp;czwartki, a&nbsp;resztę tygodnia zajmuje to, co
+      wokół palenia.
+    </p>
+  </div>
+
+  <section class="sec sec--tight" aria-labelledby="day-title">
+    <div class="wrap split">
+      <h2 id="day-title">Dzień palenia</h2>
+      <ol class="timeline">
+        {day.map(([time, text]) => (
+          <li>
+            <span class="timeline__time">{time}</span>
+            <span>{text}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec sec--lime" aria-labelledby="label-title">
+    <div class="wrap about-label">
+      <div class="about-label__art">
+        <Label product={coffee} />
+      </div>
+      <div>
+        <h2 id="label-title">Jak czytać etykietę</h2>
+        <p class="lead">
+          Nie robimy zdjęć paczek. Zamiast tego każda etykieta pokazuje, jak ta konkretna kawa była
+          palona.
+        </p>
+        <dl class="ledger">
+          {labelParts.map(([name, text]) => (
+            <div>
+              <dt>{name}</dt>
+              <dd>{text}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="sack-title">
+    <div class="wrap split">
+      <div>
+        <h2 id="sack-title">Z&nbsp;worka na etykietę</h2>
+        <p class="lead">
+          Zielone ziarno kupujemy w&nbsp;małych partiach, od importerów, którzy mogą nam powiedzieć,
+          z której stacji mycia ono jest i&nbsp;na jakiej wysokości rosło.
+        </p>
+        <p>
+          Zanim kupimy worek, próbujemy próbkę palonej na naszym bębnie kawy. Jeśli nie umiemy
+          jednym zdaniem napisać, czym ta kawa się wyróżnia, nie kupujemy jej. Dlatego asortyment
+          jest krótki: dwanaście kaw, z&nbsp;czego dwie to mieszanki, które składamy sami.
+        </p>
+        <p>
+          Zielone ziarno trzymamy w&nbsp;chłodnej, suchej piwnicy i&nbsp;palimy dopiero na
+          zamówienia. Nie ma u&nbsp;nas kawy palonej na zapas.
+        </p>
+      </div>
+      <div
+        class="sack"
+        role="img"
+        aria-label="Worek z zielonym ziarnem z czarnym napisem stencilowym: Ethiopia, Gedeb Gedeo, washed grade 1, lot 14, net 60 kg.">
+        <div class="sack__stitch"></div>
+        {coffee.sackMark.map((line, index) => (
+          <p class={index === 0 ? 'sack__big' : ''}>{line}</p>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--mist" aria-labelledby="rest-title">
+    <div class="wrap split">
+      <div>
+        <h2 id="rest-title">Kiedy parzyć</h2>
+        <p class="lead">
+          Świeżo upalona kawa jest pełna gazu i&nbsp;parzy się nierówno. Dajemy jej odpocząć, zanim
+          trafi do paczki, a&nbsp;ty możesz dać jeszcze kilka dni.
+        </p>
+      </div>
+      <dl class="ledger">
+        {rest.map(([name, text]) => (
+          <div>
+            <dt>{name}</dt>
+            <dd>{text}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec sec--ink" aria-labelledby="visit-title">
+    <div class="wrap split">
+      <h2 id="visit-title">Przyjdź zobaczyć bęben</h2>
+      <div>
+        <p class="lead">
+          We wtorki i&nbsp;czwartki rano jest głośno i&nbsp;gorąco, a&nbsp;po południu można zajrzeć
+          i&nbsp;zobaczyć, jak wygląda świeża partia. Odbierzesz tu też zamówienie.
+        </p>
+        <div class="btns">
+          <a class="btn btn--lime" href={link('/trzask/kontakt/')}>
+            Jak dojść
+          </a>
+          <a class="btn btn--ghost" href={link('/trzask/sklep/')}>
+            Do sklepu
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

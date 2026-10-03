@@ -1,0 +1,190 @@
+---
+import { link } from '../../shared/link';
+import SampleNote from '../../shared/SampleNote.astro';
+import { business, freeDeliveryFromGr, vatRatePercent } from './data/site';
+import { preloadedFonts } from './fonts';
+import { navItems } from './nav';
+import type { NavKey } from './nav';
+import { formatPln } from './lib/money';
+import CartHeader from './islands/CartHeader';
+import { styleBundles } from './styles';
+import type { StyleBundle } from './styles';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: NavKey;
+  bundles?: StyleBundle[];
+  noindex?: boolean;
+}
+
+const { title, description, path, current, bundles = [], noindex = false } = Astro.props;
+const canonical = new URL(link(path), Astro.site).href;
+const ogImage = new URL(link('/trzask/og.png'), Astro.site).href;
+const fullTitle = path === '/trzask/' ? title : `${title} | Trzask`;
+const css = ['core', ...bundles].map(name => styleBundles[name as StyleBundle]).join('');
+const cartNeedsPage = current === 'koszyk' || current === 'kasa';
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0e110f" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={link('/trzask/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Trzask" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Wordmark Trzask z pęknięciem w literze Z na czarnym tle."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    {preloadedFonts.map(href => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin="anonymous" />
+    ))}
+    <style set:html={css}></style>
+    <noscript>
+      <style>
+        .menu-btn {
+          display: none;
+        }
+        .nav {
+          display: flex;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Przejdź do treści
+    </a>
+    <header class="hdr">
+      <div class="ticker">
+        <div class="wrap ticker__in">
+          <p class="ticker__roast">
+            <strong data-roast="head">Palimy we wtorki i czwartki</strong>
+            <span class="ticker__tail" data-roast="tail">
+              Zamów do 12:00 dzień wcześniej, wyślemy następnego dnia roboczego po paleniu
+            </span>
+          </p>
+          <p class="ticker__free">Dostawa gratis od {formatPln(freeDeliveryFromGr, true)}</p>
+        </div>
+      </div>
+      <div class="wrap hdr__bar">
+        <a class="brand" href={link('/trzask/')} aria-label="Trzask, strona główna">
+          Trzask
+        </a>
+        <nav class="nav" id="site-nav" aria-label="Główna">
+          {navItems.map(item => (
+            <a href={link(item.path)} aria-current={current === item.key ? 'page' : undefined}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        <div class="hdr__tools">
+          <CartHeader client:idle drawer={!cartNeedsPage} />
+          <button
+            type="button"
+            class="menu-btn"
+            id="menu-btn"
+            aria-expanded="false"
+            aria-controls="site-nav">
+            Menu
+          </button>
+        </div>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="ftr">
+      <div class="wrap">
+        {path !== '/trzask/' && (
+          <div class="mark" aria-hidden="true">
+            <p class="mark__word">Trzask</p>
+            <span class="mark__crack"></span>
+          </div>
+        )}
+        <div class="ftr__cols">
+          <div>
+            <h2>Sklep</h2>
+            <ul>
+              <li>
+                <a href={link('/trzask/sklep/')}>Wszystkie kawy</a>
+              </li>
+              <li>
+                <a href={link('/trzask/sklep/?palenie=jasne')}>Jasne palenie</a>
+              </li>
+              <li>
+                <a href={link('/trzask/sklep/?palenie=srednie,ciemne')}>Do espresso</a>
+              </li>
+              <li>
+                <a href={link('/trzask/subskrypcja/')}>Subskrypcja</a>
+              </li>
+              <li>
+                <a href={link('/trzask/koszyk/')}>Koszyk</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2>Palarnia</h2>
+            <address>
+              {business.street}
+              <br />
+              {business.city}
+            </address>
+            <p class="ftr__hours">
+              {business.pickupHours.map(([day, hours]) => (
+                <span>
+                  {day}: {hours}
+                  <br />
+                </span>
+              ))}
+            </p>
+          </div>
+          <div>
+            <h2>Pytania</h2>
+            <ul>
+              <li>
+                <a href={`mailto:${business.email}`}>{business.email}</a>
+              </li>
+              <li>
+                <a href={business.phoneHref}>{business.phone}</a>
+              </li>
+              <li>
+                <a href={link('/trzask/o-palarni/')}>O palarni</a>
+              </li>
+              <li>
+                <a href={link('/trzask/dostawa-i-zwroty/')}>Dostawa i zwroty</a>
+              </li>
+              <li>
+                <a href={link('/trzask/kontakt/')}>Kontakt</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p class="ftr__vat">
+          Wszystkie ceny w złotych zawierają {vatRatePercent}% VAT. Cena za kilogram jest podana
+          przy każdej kawie.
+        </p>
+        <SampleNote name="Trzask" lang="pl" />
+      </div>
+    </footer>
+    <script>
+      import './scripts/chrome';
+    </script>
+  </body>
+</html>

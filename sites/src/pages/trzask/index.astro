@@ -1,0 +1,250 @@
+---
+import { link } from '../../shared/link';
+import Layout from '../../sites/trzask/Layout.astro';
+import RoastExplorer from '../../sites/trzask/islands/RoastExplorer';
+import { Label } from '../../sites/trzask/components/Label';
+import { ProductTile } from '../../sites/trzask/components/ProductTile';
+import { getCoffee } from '../../sites/trzask/data/catalog';
+import {
+  freeDeliveryFromGr,
+  deliveryMethods,
+  subscriptionProfiles,
+} from '../../sites/trzask/data/site';
+import { formatPln } from '../../sites/trzask/lib/money';
+import { weightPriceGr } from '../../sites/trzask/lib/pricing';
+
+const heroIds = ['etiopia-gedeb', 'kolumbia-huila', 'drugi-trzask'];
+const heroCoffees = heroIds.flatMap(id => {
+  const coffee = getCoffee(id);
+  return coffee ? [coffee] : [];
+});
+const pickIds = ['etiopia-gedeb', 'kolumbia-huila', 'pierwszy-trzask', 'drugi-trzask'];
+const picks = pickIds.flatMap(id => {
+  const coffee = getCoffee(id);
+  return coffee ? [coffee] : [];
+});
+
+const week = [
+  {
+    day: 'Poniedziałek',
+    short: 'Pn',
+    role: 'Zamówienia',
+    note: 'do 12:00 wejdą na wtorkowe palenie',
+    kind: 'order',
+  },
+  { day: 'Wtorek', short: 'Wt', role: 'Palenie', note: 'od rana, 4 do 5 partii', kind: 'roast' },
+  {
+    day: 'Środa',
+    short: 'Śr',
+    role: 'Wysyłka',
+    note: 'kawa z wtorku, zamówienia do 12:00 na czwartek',
+    kind: 'ship',
+  },
+  { day: 'Czwartek', short: 'Cz', role: 'Palenie', note: 'od rana, 4 do 5 partii', kind: 'roast' },
+  { day: 'Piątek', short: 'Pt', role: 'Wysyłka', note: 'kawa z czwartku', kind: 'ship' },
+  { day: 'Sobota', short: 'Sb', role: 'Odbiór', note: 'w palarni 10:00 do 14:00', kind: 'open' },
+  { day: 'Niedziela', short: 'Nd', role: 'Zamknięte', note: 'ziarna odpoczywają', kind: 'closed' },
+];
+
+const levels = [
+  {
+    id: 'jasne',
+    name: 'Jasne',
+    drop: 'Wysypujemy 1 do 2 minut po pierwszym trzasku, około 205 °C.',
+    taste: 'Kwiaty, cytrusy, jagody, czarna herbata. Kwasowość jest tu zaletą.',
+    brew: 'Dripper, AeroPress, Chemex.',
+  },
+  {
+    id: 'srednie',
+    name: 'Średnie',
+    drop: 'Wysypujemy 2 do 3 minut po pierwszym trzasku, około 212 °C.',
+    taste: 'Karmel, orzechy, czerwone jabłko, mleczna czekolada. Słodko i równo.',
+    brew: 'Dripper, kawiarka, ekspres.',
+  },
+  {
+    id: 'ciemne',
+    name: 'Ciemne',
+    drop: 'Wysypujemy na początku drugiego trzasku, około 224 °C.',
+    taste: 'Gorzka czekolada, przyprawy, palony cukier. Ciężkie ciało, mało kwasowości.',
+    brew: 'Ekspres, kawiarka, French press.',
+  },
+];
+---
+
+<Layout
+  title="Trzask, palarnia kawy z Wrocławia"
+  description="Mała wrocławska palarnia. Palimy kawę we wtorki i czwartki, wysyłamy następnego dnia roboczego. Dwanaście kaw w ziarnach, akcesoria i subskrypcja."
+  path="/trzask/"
+  bundles={['shop', 'product', 'home']}>
+  <section class="hero crack-b" aria-labelledby="hero-title">
+    <div class="wrap hero__grid">
+      <h1 class="hero__title" id="hero-title">
+        <span class="mark" aria-hidden="true">
+          <span class="mark__word">Trzask</span>
+          <span class="mark__crack"></span>
+        </span>
+        <span class="sr-only">Trzask, palarnia kawy z&nbsp;Wrocławia</span>
+      </h1>
+      <p class="hero__big">Palimy we wtorki i&nbsp;czwartki. Wysyłamy następnego dnia.</p>
+      <div class="btns hero__btns">
+        <a class="btn btn--lime" href={link('/trzask/sklep/')}>
+          Zobacz kawy
+        </a>
+        <a class="btn btn--ghost" href={link('/trzask/subskrypcja/')}>
+          Subskrypcja
+        </a>
+      </div>
+      <div class="hero__labels" aria-hidden="true">
+        {heroCoffees.map(coffee => (
+          <div>
+            <Label product={coffee} decorative />
+          </div>
+        ))}
+      </div>
+      <p class="hero__lead">
+        Mała palarnia z&nbsp;Wrocławia. Dwanaście kaw w&nbsp;ziarnach, a&nbsp;na każdej etykiecie
+        krzywa palenia z&nbsp;zaznaczonym pierwszym trzaskiem.
+      </p>
+      <p class="hero__slot" data-roast="sentence">
+        Zamów do 12:00 dzień przed paleniem. Wyślemy następnego dnia roboczego po paleniu.
+      </p>
+    </div>
+  </section>
+
+  <section class="sec sec--lime week" aria-labelledby="week-title">
+    <div class="wrap">
+      <h2 id="week-title">Tydzień w&nbsp;palarni</h2>
+      <ol class="week__days">
+        {week.map(item => (
+          <li class={`week__day week__day--${item.kind}`}>
+            <span class="week__name">
+              <abbr title={item.day}>{item.short}</abbr>
+            </span>
+            <span class="week__role">{item.role}</span>
+            <span class="week__note">{item.note}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="picks-title">
+    <div class="wrap">
+      <div class="head-row">
+        <h2 id="picks-title">Na półce w&nbsp;tym tygodniu</h2>
+        <a class="btn btn--ghost" href={link('/trzask/sklep/')}>
+          Wszystkie kawy
+        </a>
+      </div>
+      <ul class="wall wall--spaced">
+        {picks.map(coffee => (
+          <li>
+            <ProductTile product={coffee} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec sec--ink" aria-labelledby="crack-title">
+    <div class="wrap">
+      <div class="rx-head">
+        <h2 id="crack-title">Pierwszy trzask</h2>
+        <div class="crack-copy">
+          <p class="lead">
+            W&nbsp;połowie palenia ziarno ma około 196 °C. Para w&nbsp;środku nie ma dokąd uciec
+            i&nbsp;pęka ścianki komórek z&nbsp;głośnym trzaskiem, jak popcorn. Od tej chwili ziarno
+            robi się kruche, słodkie i&nbsp;zaczyna pachnieć kawą.
+          </p>
+          <p class="lead">
+            To nasz sygnał, żeby zwolnić. Zbyt szybko po trzasku wyjdzie kwaśno i&nbsp;trawiasto,
+            zbyt wolno płasko i&nbsp;gorzko. Przesuń suwak i&nbsp;zobacz to na wykresie Etiopii
+            Gedeb.
+          </p>
+        </div>
+      </div>
+      <RoastExplorer client:visible coffeeId="etiopia-gedeb" />
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="levels-title">
+    <div class="wrap">
+      <h2 id="levels-title">Trzy stopnie palenia</h2>
+      <ul class="levels">
+        {levels.map(level => (
+          <li class={`level level--${level.id}`}>
+            <h3>{level.name}</h3>
+            <div class="level__text">
+              <p>{level.drop}</p>
+              <p>{level.taste}</p>
+            </div>
+            <div class="level__brew">
+              <p>
+                <strong>Do czego:</strong> {level.brew}
+              </p>
+              <a class="btn" href={link(`/trzask/sklep/?palenie=${level.id}`)}>
+                Pokaż {level.name.toLowerCase()}
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec sec--mist" aria-labelledby="sub-title">
+    <div class="wrap sub-teaser">
+      <div>
+        <h2 id="sub-title">Kawa co dwa tygodnie</h2>
+        <p class="lead">
+          Wybierasz profil, my dobieramy kawę. Paczka jedzie w&nbsp;dniu wysyłki, dostawa jest
+          w&nbsp;cenie. Pomijasz albo rezygnujesz do 12:00 dnia przed paleniem.
+        </p>
+        <a class="btn btn--lime" href={link('/trzask/subskrypcja/')}>
+          Ułóż subskrypcję
+        </a>
+      </div>
+      <dl class="ledger">
+        {subscriptionProfiles.map(profile => (
+          <div>
+            <dt>{profile.name}</dt>
+            <dd>
+              {profile.roast}, od {formatPln(weightPriceGr(profile.base250, 250), true)} za 250 g
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec sec--tight" aria-labelledby="ship-title">
+    <div class="wrap ship">
+      <h2 id="ship-title">Dostawa</h2>
+      <dl class="ledger ship__list">
+        {deliveryMethods.map(method => (
+          <div>
+            <dt>{method.name}</dt>
+            <dd>{method.priceGr === 0 ? 'gratis' : formatPln(method.priceGr)}</dd>
+          </div>
+        ))}
+        <div>
+          <dt>Od {formatPln(freeDeliveryFromGr, true)}</dt>
+          <dd>paczkomat i&nbsp;kurier gratis</dd>
+        </div>
+      </dl>
+      <div class="ship__text">
+        <p>
+          Zamówienie z&nbsp;poniedziałku do 12:00 palimy we wtorek i&nbsp;wysyłamy w&nbsp;środę.
+          Zamówienie ze środy do 12:00 palimy w&nbsp;czwartek i&nbsp;wysyłamy w&nbsp;piątek. Odbiór
+          w&nbsp;palarni: wtorek do piątku od 11:00 do 17:00 i&nbsp;w&nbsp;sobotę od 10:00 do 14:00.
+        </p>
+        <p>
+          <a href={link('/trzask/dostawa-i-zwroty/')}>
+            Zobacz zasady dostawy, zwrotów i&nbsp;reklamacji
+          </a>
+          albo <a href={link('/trzask/o-palarni/')}>sprawdź, jak wygląda dzień palenia</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

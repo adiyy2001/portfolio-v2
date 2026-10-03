@@ -1,0 +1,19 @@
+---
+import Layout from '../../../sites/trzask/Layout.astro';
+import Checkout from '../../../sites/trzask/islands/Checkout';
+---
+
+<Layout
+  title="Kasa"
+  description="Kasa w sklepie Trzask: dane kontaktowe, dostawa, płatność i podsumowanie zamówienia. Strona przykładowa, nic nie jest wysyłane."
+  path="/trzask/kasa/"
+  current="kasa"
+  bundles={['shop', 'cart']}
+  noindex>
+  <div class="wrap page-head">
+    <h1>Kasa</h1>
+  </div>
+  <div class="wrap page-body">
+    <Checkout client:load />
+  </div>
+</Layout>

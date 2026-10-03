@@ -1,0 +1,93 @@
+.label {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/4;
+}
+.lb-f {
+  fill: var(--f);
+}
+.lb-strip {
+  fill: #0e110f;
+}
+.lb-mark {
+  fill: #d3f33a;
+  font: 900 24px/1 var(--fd);
+  letter-spacing: 0;
+}
+.lb-lot {
+  fill: #d3f33a;
+  font: 800 13px/1 var(--fd);
+  letter-spacing: 1.5px;
+}
+.lb-valve {
+  fill: none;
+  stroke: #d3f33a;
+  stroke-width: 2;
+}
+.lb-valve-dot {
+  fill: #d3f33a;
+}
+.lb-t {
+  fill: var(--i);
+  font-family: var(--fd);
+}
+.lt9 {
+  font-weight: 900;
+}
+.lt8 {
+  font-weight: 800;
+}
+.lt7 {
+  font-weight: 700;
+}
+.lb-c {
+  fill: none;
+  stroke: var(--i);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.lb-ring {
+  fill: none;
+  stroke: var(--i);
+  stroke-width: 2.5;
+}
+.lb-dot {
+  fill: var(--i);
+}
+.lb-on {
+  fill: var(--i);
+}
+.lb-off {
+  fill: none;
+  stroke: var(--i);
+  stroke-width: 2;
+}
+.ar-s {
+  fill: none;
+  stroke: var(--i);
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.ar-thick {
+  stroke-width: 9;
+}
+.ar-f {
+  fill: var(--i);
+  stroke: none;
+}
+.ar-g {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.ar-p {
+  fill: #fff;
+}
+.ar-text {
+  fill: var(--i);
+  stroke: none;
+}

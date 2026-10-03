@@ -1,0 +1,65 @@
+---
+import Layout from '../../../sites/trzask/Layout.astro';
+import ContactForm from '../../../sites/trzask/islands/ContactForm';
+import { business } from '../../../sites/trzask/data/site';
+---
+
+<Layout
+  title="Kontakt z palarnią"
+  description="Napisz albo zadzwoń do palarni Trzask przy ul. Drukarskiej 17 we Wrocławiu. Odbiór osobisty od wtorku do soboty."
+  path="/trzask/kontakt/"
+  current="kontakt"
+  bundles={['cart', 'info']}>
+  <div class="wrap page-head">
+    <h1>Kontakt</h1>
+    <p class="lead">
+      Pytania o&nbsp;kawę, o&nbsp;paczkę albo o&nbsp;kawę dla biura. Odpowiadamy w&nbsp;dzień
+      roboczy, zwykle przed południem.
+    </p>
+  </div>
+  <div class="wrap contact">
+    <div class="contact__form">
+      <h2>Napisz do nas</h2>
+      <ContactForm client:load />
+    </div>
+    <div class="contact__info">
+      <h2>Albo wpadnij</h2>
+      <address>
+        <strong>Palarnia Trzask</strong>
+        <br />
+        {business.street}
+        <br />
+        {business.city}
+      </address>
+      <p>
+        Wejście od podwórka, przy drzwiach z&nbsp;czarną tabliczką. W&nbsp;palarni odbierzesz
+        zamówienie, kupisz kawę na wagę i&nbsp;wypijesz espresso przy ladzie.
+      </p>
+      <dl class="ledger">
+        {business.pickupHours.map(([day, hours]) => (
+          <div>
+            <dt>{day}</dt>
+            <dd>{hours}</dd>
+          </div>
+        ))}
+      </dl>
+      <dl class="ledger contact__lines">
+        <div>
+          <dt>E-mail</dt>
+          <dd>
+            <a href={`mailto:${business.email}`}>{business.email}</a>
+          </dd>
+        </div>
+        <div>
+          <dt>Telefon</dt>
+          <dd>
+            <a href={business.phoneHref}>{business.phone}</a>
+          </dd>
+        </div>
+      </dl>
+      <p class="muted">
+        We wtorki i&nbsp;czwartki palimy, więc telefon odbieramy z&nbsp;przerwami.
+      </p>
+    </div>
+  </div>
+</Layout>

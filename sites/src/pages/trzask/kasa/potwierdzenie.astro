@@ -1,0 +1,23 @@
+---
+import Layout from '../../../sites/trzask/Layout.astro';
+import Confirmation from '../../../sites/trzask/islands/Confirmation';
+---
+
+<Layout
+  title="Nie złożono zamówienia"
+  description="Potwierdzenie z kasy sklepu Trzask. To strona przykładowa: żadne zamówienie nie zostało złożone i nic nie zostało pobrane."
+  path="/trzask/kasa/potwierdzenie/"
+  current="kasa"
+  bundles={['shop', 'cart']}
+  noindex>
+  <div class="wrap page-head">
+    <h1>To był tylko przykład</h1>
+    <p class="lead">
+      Nie złożyłeś żadnego zamówienia i&nbsp;nic nie zostało pobrane. Poniżej zobaczysz, jak
+      wyglądałoby potwierdzenie w&nbsp;prawdziwym sklepie.
+    </p>
+  </div>
+  <div class="wrap page-body">
+    <Confirmation client:load />
+  </div>
+</Layout>

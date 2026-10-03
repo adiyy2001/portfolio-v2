@@ -1,0 +1,22 @@
+---
+import Layout from '../../../sites/trzask/Layout.astro';
+import Subscription from '../../../sites/trzask/islands/Subscription';
+---
+
+<Layout
+  title="Subskrypcja kawy"
+  description="Wybierz profil kawy, gramaturę i częstotliwość. Paczka z palarni Trzask przyjeżdża co 2, 3 albo 4 tygodnie, z dostawą w cenie."
+  path="/trzask/subskrypcja/"
+  current="subskrypcja"
+  bundles={['cart', 'info']}>
+  <div class="wrap page-head">
+    <h1>Kawa co dwa tygodnie, zanim się skończy poprzednia</h1>
+    <p class="lead">
+      Wybierasz profil, my dobieramy kawę z&nbsp;aktualnej oferty. Palimy we wtorki i&nbsp;czwartki,
+      paczka jedzie następnego dnia. Dostawa jest w&nbsp;cenie.
+    </p>
+  </div>
+  <div class="wrap page-body">
+    <Subscription client:load />
+  </div>
+</Layout>

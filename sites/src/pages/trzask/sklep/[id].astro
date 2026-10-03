@@ -1,0 +1,253 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/trzask/Layout.astro';
+import ProductBuy from '../../../sites/trzask/islands/ProductBuy';
+import RoastExplorer from '../../../sites/trzask/islands/RoastExplorer';
+import { ProductTile } from '../../../sites/trzask/components/ProductTile';
+import {
+  accessoriesForCoffee,
+  coffees,
+  getProduct,
+  products,
+  relatedCoffees,
+} from '../../../sites/trzask/data/catalog';
+import { accessoryCopy, coffeeCopy } from '../../../sites/trzask/data/copy';
+import {
+  brewLabels,
+  countryLabels,
+  processLabels,
+  processNotes,
+  roastLabels,
+} from '../../../sites/trzask/data/facets';
+import { recipeTemplates } from '../../../sites/trzask/data/recipes';
+import { formatPln } from '../../../sites/trzask/lib/money';
+import { productPriceGr } from '../../../sites/trzask/lib/pricing';
+import { formatClock } from '../../../sites/trzask/lib/roast';
+
+export function getStaticPaths() {
+  return products.map(product => ({ params: { id: product.id } }));
+}
+
+const { id } = Astro.params;
+const product = getProduct(id ?? '');
+if (!product) throw new Error(`Unknown product ${id}`);
+
+const coffeeText = product.kind === 'coffee' ? coffeeCopy[product.id] : undefined;
+const accessoryText = product.kind === 'accessory' ? accessoryCopy[product.id] : undefined;
+const summary = coffeeText?.summary ?? accessoryText?.summary ?? '';
+const recipe = product.kind === 'coffee' ? recipeTemplates[product.recipe.method] : undefined;
+const related = product.kind === 'coffee' ? relatedCoffees(product.id, 4) : [];
+const matchingAccessories = product.kind === 'coffee' ? accessoriesForCoffee(product.id) : [];
+const matchingCoffees =
+  product.kind === 'accessory'
+    ? coffees.filter(coffee => product.tags.includes(coffee.recipe.method)).slice(0, 4)
+    : [];
+
+const description =
+  product.kind === 'coffee'
+    ? `${product.name}: ${roastLabels[product.roast].toLowerCase()} palenie, ${processLabels[product.process].toLowerCase()}, nuty: ${product.notes.join(', ').toLowerCase()}. Od ${formatPln(productPriceGr(product, 250), true)} za 250 g, palona we Wrocławiu we wtorki i czwartki.`
+    : `${product.name}: ${summary.charAt(0).toLowerCase()}${summary.slice(1)} Cena ${formatPln(productPriceGr(product, null), true)}, wysyłamy z Wrocławia razem z kawą albo osobno.`;
+---
+
+<Layout
+  title={product.name}
+  description={description}
+  path={`/trzask/sklep/${product.id}/`}
+  current="sklep"
+  bundles={['shop', 'product']}>
+  <div class="wrap crumbs">
+    <nav aria-label="Ścieżka">
+      <ol>
+        <li>
+          <a href={link('/trzask/sklep/')}>Sklep</a>
+        </li>
+        <li aria-current="page">{product.name}</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="wrap">
+    <ProductBuy client:load productId={product.id} summary={summary} />
+  </div>
+
+  {product.kind === 'coffee' && coffeeText && recipe && (
+    <>
+      <section class="sec sec--tight" aria-labelledby="origin-title">
+        <div class="wrap origin">
+          <div class="origin__text">
+            <h2 id="origin-title">Skąd ta kawa</h2>
+            {coffeeText.story.map(paragraph => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+          <dl class="ledger origin__facts">
+            <div>
+              <dt>Kraj</dt>
+              <dd>{countryLabels[product.country]}</dd>
+            </div>
+            <div>
+              <dt>Region</dt>
+              <dd>{product.region}</dd>
+            </div>
+            <div>
+              <dt>Producent</dt>
+              <dd>{product.producer}</dd>
+            </div>
+            <div>
+              <dt>Wysokość</dt>
+              <dd>{product.altitude}</dd>
+            </div>
+            <div>
+              <dt>Odmiana</dt>
+              <dd>{product.variety}</dd>
+            </div>
+            <div>
+              <dt>Zbiór</dt>
+              <dd>{product.harvest}</dd>
+            </div>
+            <div>
+              <dt>Obróbka</dt>
+              <dd>
+                <strong>{processLabels[product.process]}.</strong> {processNotes[product.process]}
+              </dd>
+            </div>
+            <div>
+              <dt>Palenie</dt>
+              <dd>
+                {roastLabels[product.roast]}, pierwszy trzask w{' '}
+                {formatClock(product.profile.firstCrack.at)}
+              </dd>
+            </div>
+            <div>
+              <dt>Do parzenia</dt>
+              <dd>{product.brew.map(method => brewLabels[method]).join(', ')}</dd>
+            </div>
+            <div>
+              <dt>Partia</dt>
+              <dd>{product.lot}</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="sec sec--ink" aria-labelledby="roast-title">
+        <div class="wrap">
+          <div class="rx-head">
+            <h2 id="roast-title">Tak ją paliliśmy</h2>
+            <p class="lead">
+              Wykres pokazuje temperaturę ziaren w&nbsp;bębnie. Przesuń suwak albo odtwórz palenie i
+              zobacz, kiedy ziarno zmienia kolor i&nbsp;kiedy trzaska.
+            </p>
+          </div>
+          <RoastExplorer client:visible coffeeId={product.id} />
+        </div>
+      </section>
+
+      <section class="sec" aria-labelledby="brew-title">
+        <div class="wrap brew">
+          <div>
+            <h2 id="brew-title">{recipe.title}</h2>
+            <p class="lead">{coffeeText.tip}</p>
+            <dl class="brew__nums">
+              <div>
+                <dt>Kawa</dt>
+                <dd>{recipe.dose} g</dd>
+              </div>
+              <div>
+                <dt>Woda</dt>
+                <dd>{recipe.water}</dd>
+              </div>
+              <div>
+                <dt>Temperatura</dt>
+                <dd>{product.recipe.temp} °C</dd>
+              </div>
+              <div>
+                <dt>Czas</dt>
+                <dd>{recipe.time}</dd>
+              </div>
+            </dl>
+            <p class="brew__grind">
+              <strong>Mielenie:</strong> {recipe.grind}.
+            </p>
+          </div>
+          <ol class="steps">
+            {recipe.steps.map(step => (
+              <li>{step}</li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {matchingAccessories.length > 0 && (
+        <section class="sec sec--mist sec--tight" aria-labelledby="gear-title">
+          <div class={`wrap pair pair--${matchingAccessories.length}`}>
+            <div class="pair__text">
+              <h2 id="gear-title">Do tej kawy</h2>
+              <p class="lead">
+                Rzeczy, których potrzebujesz, żeby parzyć ją tak, jak w&nbsp;przepisie.
+              </p>
+            </div>
+            <ul class={`wall wall--${matchingAccessories.length}`}>
+              {matchingAccessories.map(item => (
+                <li>
+                  <ProductTile product={item} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      <section class="sec sec--tight" aria-labelledby="related-title">
+        <div class="wrap">
+          <h2 id="related-title">Podobne kawy</h2>
+          <ul class="wall wall--spaced">
+            {related.map(item => (
+              <li>
+                <ProductTile product={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </>
+  )}
+
+  {product.kind === 'accessory' && accessoryText && (
+    <>
+      <section class="sec sec--tight" aria-labelledby="about-title">
+        <div class="wrap origin">
+          <div class="origin__text">
+            <h2 id="about-title">O&nbsp;produkcie</h2>
+            {accessoryText.description.map(paragraph => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+          <dl class="ledger origin__facts">
+            {accessoryText.specs.map(([name, value]) => (
+              <div>
+                <dt>{name}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+      {matchingCoffees.length > 0 && (
+        <section class="sec sec--mist sec--tight" aria-labelledby="coffee-title">
+          <div class={`wrap pair pair--${matchingCoffees.length}`}>
+            <div class="pair__text">
+              <h2 id="coffee-title">Kawy, które do tego pasują</h2>
+            </div>
+            <ul class={`wall wall--${matchingCoffees.length}`}>
+              {matchingCoffees.map(item => (
+                <li>
+                  <ProductTile product={item} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+    </>
+  )}
+</Layout>
