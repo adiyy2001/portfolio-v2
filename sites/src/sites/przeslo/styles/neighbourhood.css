@@ -1,0 +1,237 @@
+.walk-layout {
+  display: grid;
+  gap: var(--s-7);
+  align-items: start;
+}
+
+@media (min-width: 1000px) {
+  .walk-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: var(--s-8);
+  }
+
+  .walk-map {
+    position: sticky;
+    top: var(--s-6);
+  }
+}
+
+.walk-lead {
+  max-width: 40em;
+  margin: calc(var(--s-3) * -1) 0 var(--s-5);
+  color: var(--muted);
+}
+
+.walk-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: walk;
+  border-top: 2px solid var(--ink);
+}
+
+.walk-list li {
+  position: relative;
+  padding: var(--s-5) 0 var(--s-5) 56px;
+  border-bottom: 1.5px solid var(--hairline);
+  counter-increment: walk;
+}
+
+.walk-list li::before {
+  content: counter(walk);
+  position: absolute;
+  left: 0;
+  top: var(--s-5);
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 800;
+}
+
+.walk-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-1) var(--s-4);
+  margin-bottom: var(--s-2);
+}
+
+.walk-head h3 {
+  font-size: 1.375rem;
+}
+
+.walk-minutes {
+  font-weight: 800;
+  color: var(--berry-deep);
+}
+
+.walk-list li > p:last-child {
+  max-width: 38em;
+}
+
+.neighbour-map {
+  margin: 0;
+}
+
+.neighbour-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--ink);
+  border-radius: 8px 8px 8px 36px;
+  background: var(--paper);
+}
+
+.neighbour-map figcaption {
+  margin-top: var(--s-3);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.map-ground {
+  fill: var(--paper);
+}
+
+.map-river {
+  fill: none;
+  stroke: var(--rose);
+  stroke-width: 44;
+  stroke-linecap: round;
+}
+
+.map-river-edge {
+  fill: none;
+  stroke: var(--steel);
+  stroke-width: 1.5;
+}
+
+.map-island {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.map-river-label {
+  fill: var(--ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.map-square {
+  fill: var(--fog);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.map-hall {
+  fill: var(--fog);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.map-street {
+  fill: none;
+  stroke: var(--hairline);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.map-street-label {
+  fill: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.map-route {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-dasharray: 2 7;
+  stroke-linecap: round;
+}
+
+.map-hotel rect {
+  fill: var(--berry);
+}
+
+.map-hotel circle {
+  fill: var(--paper);
+}
+
+.map-marker circle {
+  fill: var(--ink);
+  stroke: var(--paper);
+  stroke-width: 3;
+}
+
+.map-number {
+  fill: #fff;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.map-label {
+  fill: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 999px) {
+  .walk-map {
+    order: -1;
+  }
+}
+
+@media (max-width: 639px) {
+  .map-street-label,
+  .map-label,
+  .map-river-label {
+    display: none;
+  }
+
+  .map-label--hotel {
+    display: block;
+    font-size: 20px;
+  }
+
+  .map-marker circle {
+    r: 21px;
+  }
+
+  .map-number {
+    font-size: 24px;
+  }
+}
+
+.getting-list {
+  display: grid;
+  gap: var(--s-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.getting-list li {
+  padding-left: var(--s-5);
+  border-left: 5px solid var(--berry);
+}
+
+.getting-list h3 {
+  font-size: 1.25rem;
+}
+
+.getting-list p {
+  margin-top: var(--s-1);
+}

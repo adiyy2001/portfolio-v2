@@ -1,0 +1,98 @@
+---
+import { link } from '../../../shared/link';
+import ArchRule from '../components/ArchRule.astro';
+import NeighbourMap from '../components/NeighbourMap.astro';
+import PageHead from '../components/PageHead.astro';
+import { neighbourhoodText } from '../content/neighbourhood';
+import { places } from '../data/places';
+import type { Lang } from '../i18n/lang';
+import { pagePath } from '../i18n/lang';
+import Layout from '../layouts/Layout.astro';
+import neighbourhoodCss from '../styles/neighbourhood.css?raw';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = neighbourhoodText[lang];
+const walking = places.flatMap(place =>
+  place.id === 'hotel' || place.walkingMinutes === null
+    ? []
+    : [{ id: place.id, minutes: place.walkingMinutes }],
+);
+---
+
+<Layout
+  lang={lang}
+  pageKey="neighbourhood"
+  title={text.title}
+  description={text.description}
+  css={[neighbourhoodCss]}>
+  <PageHead title={text.heading} lead={text.lead} />
+
+  <section class="section wrap" aria-labelledby="walk-title">
+    <div class="walk-layout">
+      <div>
+        <h2 id="walk-title" class="section-title">
+          {text.walkHeading}
+        </h2>
+        <p class="walk-lead">{text.walkLead}</p>
+        <ol class="walk-list">
+          {walking.map(item => (
+            <li>
+              <div class="walk-head">
+                <h3>{text.places[item.id].name}</h3>
+                <p class="walk-minutes">{text.minutes(item.minutes)}</p>
+              </div>
+              <p>{text.places[item.id].note}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div class="walk-map">
+        <NeighbourMap text={text} />
+      </div>
+    </div>
+  </section>
+
+  <ArchRule />
+
+  <section class="section wrap" aria-labelledby="getting-title">
+    <div class="split">
+      <div class="stack">
+        <h2 id="getting-title" class="section-title">
+          {text.gettingHeading}
+        </h2>
+        <p class="lead">{text.gettingLead}</p>
+        <p class="picker-note">{text.statusNote}</p>
+      </div>
+      <ul class="getting-list">
+        <li>
+          <h3>{text.tram.name}</h3>
+          <p>{text.tram.note}</p>
+        </li>
+        {text.getting.map(item => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section band-ink">
+    <div class="wrap closing">
+      <div>
+        <h2>{text.closingHeading}</h2>
+        <p>{text.closingText}</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--light" href={link(pagePath('booking', lang))}>
+          {text.closingLink}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

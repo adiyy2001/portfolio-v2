@@ -1,0 +1,369 @@
+---
+import { planOf, planArea } from '../data/floorplans';
+import type { Furniture, Space } from '../data/floorplans';
+import type { RoomTypeId } from '../data/rooms';
+import { roomTypeById } from '../data/rooms';
+import { planText } from '../content/plan';
+import { roomText } from '../content/rooms';
+import type { Lang } from '../i18n/lang';
+import { doorShape, gapOf, windowLines } from '../lib/planGeometry';
+
+interface Props {
+  lang: Lang;
+  roomType: RoomTypeId;
+  id: string;
+}
+
+const { lang, roomType, id } = Astro.props;
+const plan = planOf(roomType);
+const text = planText[lang];
+const name = roomText[lang][roomType].name;
+const size = roomTypeById(roomType).size;
+const margin = 96;
+const labelDesktop = Math.round((15 * (plan.width + margin + 24)) / 560);
+const labelMobile = Math.round((13.5 * (plan.width + margin + 24)) / 295);
+const wall = 9;
+const viewBox = `${-margin} ${-margin} ${plan.width + margin + 24} ${plan.depth + margin + 24}`;
+const spaceNames = plan.spaces.map(space => text.spaces[space.kind]);
+const description = text.describe(name, plan.width, plan.depth, spaceNames);
+const keyedPieces = [...new Set(plan.furniture.map(piece => piece.kind))].flatMap(kind => {
+  const piece = plan.furniture.find(candidate => candidate.kind === kind);
+  return piece ? [piece] : [];
+});
+const legend = keyedPieces.map(piece =>
+  text.furnitureLine(text.furniture[piece.kind], piece.width, piece.depth),
+);
+const spaceFill: Record<string, string> = {
+  room: '#ffffff',
+  bedroom: '#ffffff',
+  sitting: '#ffffff',
+  children: '#fbf6fa',
+  bath: '#f1e3ee',
+  hall: '#f8eff5',
+};
+const labelX = (space: Space): number =>
+  space.kind === 'hall'
+    ? space.x + space.width * 0.4
+    : space.kind === 'children'
+      ? space.x + space.width - 12
+      : space.x + space.width / 2;
+const labelAnchor = (space: Space): string => (space.kind === 'children' ? 'end' : 'middle');
+const labelText = (space: Space): string =>
+  space.kind === 'children' ? text.childrenLabel : text.spaces[space.kind];
+const labelY = (space: Space): number =>
+  space.kind === 'hall'
+    ? space.y + space.depth * 0.46
+    : space.kind === 'room'
+      ? space.y + space.depth * 0.8
+      : space.kind === 'children'
+        ? space.y + space.depth * 0.92
+        : space.y + space.depth / 2;
+const round = (value: number): number => Math.round(value * 10) / 10;
+const pillowRects = (
+  piece: Furniture,
+): { x: number; y: number; width: number; depth: number }[] => {
+  if (piece.kind === 'doubleBed') {
+    const width = (piece.width - 40) / 2;
+    return [
+      { x: piece.x + 12, y: piece.y + 12, width, depth: 46 },
+      { x: piece.x + 28 + width, y: piece.y + 12, width, depth: 46 },
+    ];
+  }
+  if (piece.kind === 'singleBed') {
+    return [{ x: piece.x + 12, y: piece.y + 12, width: piece.width - 24, depth: 46 }];
+  }
+  if (piece.kind === 'sofaBed') {
+    return [{ x: piece.x + 10, y: piece.y + 10, width: 46, depth: piece.depth - 20 }];
+  }
+  return [];
+};
+const isBed = (piece: Furniture): boolean =>
+  piece.kind === 'doubleBed' || piece.kind === 'singleBed' || piece.kind === 'sofaBed';
+---
+
+<figure class="plan">
+  <svg
+    viewBox={viewBox}
+    role="img"
+    aria-labelledby={`${id}-title ${id}-desc`}
+    class="plan-svg"
+    style={`--plan-label-desktop: ${labelDesktop}px; --plan-label-mobile: ${labelMobile}px; --plan-marker-desktop: ${Math.round(labelDesktop * 0.95)}px; --plan-marker-mobile: ${Math.round(labelMobile * 0.95)}px`}
+    font-family="Besley, 'Besley Fallback', Georgia, serif">
+    <title id={`${id}-title`}>{name}, {size} m²</title>
+    <desc id={`${id}-desc`}>{description}</desc>
+    <defs>
+      <pattern
+        id={`${id}-slope`}
+        width="14"
+        height="14"
+        patternUnits="userSpaceOnUse"
+        patternTransform="rotate(45)">
+        <line
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="14"
+          stroke="#1c1130"
+          stroke-width="2.5"
+          opacity="0.55"></line>
+      </pattern>
+    </defs>
+    {plan.spaces.map(space => (
+      <rect
+        x={space.x}
+        y={space.y}
+        width={space.width}
+        height={space.depth}
+        fill={spaceFill[space.kind]}></rect>
+    ))}
+    {plan.slopes.map(slope => (
+      <rect
+        x={slope.x}
+        y={slope.y}
+        width={slope.width}
+        height={slope.depth}
+        fill={`url(#${id}-slope)`}></rect>
+    ))}
+    {plan.furniture.map(piece => (
+      <g stroke="#1c1130" stroke-width="3" stroke-linejoin="round">
+        {piece.kind === 'basin' && (
+          <ellipse
+            cx={piece.x + piece.width / 2}
+            cy={piece.y + piece.depth / 2}
+            rx={piece.width / 2}
+            ry={piece.depth / 2}
+            fill="#fff"></ellipse>
+        )}
+        {piece.kind === 'table' && (
+          <circle
+            cx={piece.x + piece.width / 2}
+            cy={piece.y + piece.depth / 2}
+            r={piece.width / 2}
+            fill="#fff"></circle>
+        )}
+        {piece.kind === 'toilet' && (
+          <>
+            <rect
+              x={piece.x}
+              y={piece.y}
+              width={piece.width}
+              height={piece.depth * 0.32}
+              rx="4"
+              fill="#fff"></rect>
+            <ellipse
+              cx={piece.x + piece.width / 2}
+              cy={piece.y + piece.depth * 0.66}
+              rx={piece.width / 2}
+              ry={piece.depth * 0.34}
+              fill="#fff"></ellipse>
+          </>
+        )}
+        {piece.kind === 'bathtub' && (
+          <>
+            <rect
+              x={piece.x}
+              y={piece.y}
+              width={piece.width}
+              height={piece.depth}
+              rx="14"
+              fill="#fff"></rect>
+            <rect
+              x={piece.x + 10}
+              y={piece.y + 10}
+              width={piece.width - 20}
+              height={piece.depth - 20}
+              rx="20"
+              fill="none"></rect>
+          </>
+        )}
+        {piece.kind === 'shower' && (
+          <>
+            <rect
+              x={piece.x}
+              y={piece.y}
+              width={piece.width}
+              height={piece.depth}
+              fill="#fff"></rect>
+            <line
+              x1={piece.x}
+              y1={piece.y}
+              x2={piece.x + piece.width}
+              y2={piece.y + piece.depth}></line>
+            <line
+              x1={piece.x + piece.width}
+              y1={piece.y}
+              x2={piece.x}
+              y2={piece.y + piece.depth}></line>
+          </>
+        )}
+        {isBed(piece) && (
+          <>
+            <rect
+              x={piece.x}
+              y={piece.y}
+              width={piece.width}
+              height={piece.depth}
+              rx="6"
+              fill="#f4c6dc"></rect>
+            {pillowRects(piece).map(pillow => (
+              <rect
+                x={pillow.x}
+                y={pillow.y}
+                width={pillow.width}
+                height={pillow.depth}
+                rx="10"
+                fill="#fff"></rect>
+            ))}
+          </>
+        )}
+        {(piece.kind === 'desk' || piece.kind === 'wardrobe') && (
+          <rect
+            x={piece.x}
+            y={piece.y}
+            width={piece.width}
+            height={piece.depth}
+            rx="3"
+            fill="#e4d4e0"></rect>
+        )}
+        {piece.kind === 'wardrobe' && (
+          <line
+            x1={piece.x + piece.width / 2}
+            y1={piece.y}
+            x2={piece.x + piece.width / 2}
+            y2={piece.y + piece.depth}></line>
+        )}
+        {piece.kind === 'armchair' && (
+          <rect
+            x={piece.x}
+            y={piece.y}
+            width={piece.width}
+            height={piece.depth}
+            rx="16"
+            fill="#f4c6dc"></rect>
+        )}
+      </g>
+    ))}
+    {plan.spaces.map(space => (
+      <rect
+        x={space.x}
+        y={space.y}
+        width={space.width}
+        height={space.depth}
+        fill="none"
+        stroke="#1c1130"
+        stroke-width={wall}></rect>
+    ))}
+    {plan.openings.map(opening => {
+      const gap = gapOf(opening);
+      return (
+        <>
+          <line
+            x1={gap.x1}
+            y1={gap.y1}
+            x2={gap.x2}
+            y2={gap.y2}
+            stroke="#fff"
+            stroke-width={wall + 3}></line>
+          {opening.kind === 'door' && (
+            <>
+              <path
+                d={doorShape(opening).arc}
+                fill="none"
+                stroke="#1c1130"
+                stroke-width="2"
+                stroke-dasharray="6 5"></path>
+              <line
+                x1={doorShape(opening).leaf.x1}
+                y1={doorShape(opening).leaf.y1}
+                x2={doorShape(opening).leaf.x2}
+                y2={doorShape(opening).leaf.y2}
+                stroke="#1c1130"
+                stroke-width="4"
+                stroke-linecap="round"></line>
+            </>
+          )}
+          {opening.kind === 'window' &&
+            windowLines(opening, 4).map(line => (
+              <line
+                x1={line.x1}
+                y1={line.y1}
+                x2={line.x2}
+                y2={line.y2}
+                stroke="#1c1130"
+                stroke-width="2.5"></line>
+            ))}
+          {opening.kind === 'passage' && (
+            <line
+              x1={gap.x1}
+              y1={gap.y1}
+              x2={gap.x2}
+              y2={gap.y2}
+              stroke="#1c1130"
+              stroke-width="2.5"
+              stroke-dasharray="10 8"></line>
+          )}
+        </>
+      );
+    })}
+    {plan.spaces.map(space => (
+      <text
+        class="plan-text"
+        x={labelX(space)}
+        y={labelY(space)}
+        text-anchor={labelAnchor(space)}
+        font-weight="600"
+        fill="#5a4d6b"
+        aria-hidden="true">
+        {labelText(space)}
+      </text>
+    ))}
+    {keyedPieces.map((piece, index) => (
+      <g class="plan-marker" aria-hidden="true">
+        <circle cx={piece.x + piece.width / 2} cy={piece.y + piece.depth / 2}></circle>
+        <text x={piece.x + piece.width / 2} y={piece.y + piece.depth / 2}>
+          {index + 1}
+        </text>
+      </g>
+    ))}
+    <g stroke="#1c1130" stroke-width="2.5" fill="#1c1130" aria-hidden="true">
+      <line x1="0" y1={-34} x2={plan.width} y2={-34}></line>
+      <line x1="0" y1={-44} x2="0" y2={-24}></line>
+      <line x1={plan.width} y1={-44} x2={plan.width} y2={-24}></line>
+      <text
+        class="plan-text"
+        x={plan.width / 2}
+        y={-46}
+        text-anchor="middle"
+        font-weight="700"
+        stroke="none">
+        {text.meters(plan.width)}
+      </text>
+      <line x1={-34} y1="0" x2={-34} y2={plan.depth}></line>
+      <line x1={-44} y1="0" x2={-24} y2="0"></line>
+      <line x1={-44} y1={plan.depth} x2={-24} y2={plan.depth}></line>
+      <text
+        class="plan-text"
+        x={round(-46)}
+        y={plan.depth / 2}
+        text-anchor="middle"
+        font-weight="700"
+        stroke="none"
+        transform={`rotate(-90 ${-46} ${plan.depth / 2})`}>
+        {text.meters(plan.depth)}
+      </text>
+    </g>
+  </svg>
+  <figcaption>
+    <p class="plan-area">{planArea(plan)} m²</p>
+    <ol class="plan-legend">
+      {legend.map((entry, index) => (
+        <li>
+          <span class="plan-key" aria-hidden="true">
+            {index + 1}
+          </span>
+          {entry}
+        </li>
+      ))}
+    </ol>
+  </figcaption>
+</figure>

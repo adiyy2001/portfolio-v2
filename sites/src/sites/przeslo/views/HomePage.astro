@@ -1,0 +1,134 @@
+---
+import { link } from '../../../shared/link';
+import ArchRule from '../components/ArchRule.astro';
+import RoomRack from '../components/RoomRack.astro';
+import { common } from '../content/common';
+import { hotel } from '../content/facts';
+import { home } from '../content/home';
+import { roomsPage } from '../content/rooms';
+import type { Lang } from '../i18n/lang';
+import { pagePath } from '../i18n/lang';
+import { HomeBooking } from '../islands/HomeBooking';
+import Layout from '../layouts/Layout.astro';
+import homeCss from '../styles/home.css?raw';
+import pickerCss from '../styles/picker.css?raw';
+import roomsCss from '../styles/rooms.css?raw';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = home[lang];
+const shared = common[lang];
+const rooms = roomsPage[lang];
+---
+
+<Layout
+  lang={lang}
+  pageKey="home"
+  title={text.title}
+  description={text.description}
+  css={[pickerCss, roomsCss, homeCss]}>
+  <section class="hero wrap">
+    <h1>{text.heroTitle}</h1>
+    <p class="lead">{text.heroLead}</p>
+    <HomeBooking client:only="preact" lang={lang}>
+      <div slot="fallback" class="console-fallback">
+        <p>{text.pickerFallback}</p>
+      </div>
+    </HomeBooking>
+    <noscript>
+      <p class="picker-note">{shared.noScriptBooking}</p>
+    </noscript>
+  </section>
+
+  <section class="section wrap" aria-labelledby="rooms-title">
+    <div class="section-head">
+      <h2 id="rooms-title">{text.roomsHeading}</h2>
+      <p class="lead">{text.roomsLead}</p>
+    </div>
+    <RoomRack lang={lang} />
+    <p class="rooms-more">
+      <a class="text-link" href={link(pagePath('rooms', lang))}>
+        {text.roomsAll}
+      </a>
+    </p>
+    <p class="picker-note">{rooms.priceNote}</p>
+  </section>
+
+  <ArchRule />
+
+  <section class="section wrap" aria-labelledby="direct-title">
+    <div class="direct">
+      <div class="section-head">
+        <h2 id="direct-title">{text.directHeading}</h2>
+        <p class="lead">{text.directLead}</p>
+      </div>
+      <ul class="perks">
+        {text.perks.map(perk => (
+          <li>
+            <h3>{perk.title}</h3>
+            <p>{perk.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="breakfast-title">
+    <div class="wrap breakfast">
+      <div>
+        <h2 id="breakfast-title">{text.breakfastHeading}</h2>
+        <p class="lead">{text.breakfastText}</p>
+        <div class="btn-row">
+          <a class="btn btn--ghost" href={link(pagePath('breakfast', lang))}>
+            {text.breakfastLink}
+          </a>
+        </div>
+      </div>
+      <ul class="facts-tags">
+        {text.breakfastFacts.map(fact => (
+          <li>{fact}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="area-title">
+    <div class="walks-layout">
+      <div class="section-head">
+        <h2 id="area-title">{text.areaHeading}</h2>
+        <p class="lead">{text.areaLead}</p>
+        <p>
+          <a class="text-link" href={link(pagePath('neighbourhood', lang))}>
+            {text.areaLink}
+          </a>
+        </p>
+      </div>
+      <ul class="walks">
+        {text.areaItems.map(item => (
+          <li>
+            <span class="minutes num">{item.minutes}</span>
+            <h3>{item.place}</h3>
+            <p>{item.note}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section band-ink">
+    <div class="wrap closing">
+      <div>
+        <h2>{text.closingHeading}</h2>
+        <p>{text.closingText}</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--light" href={hotel.phoneHref}>
+          {text.closingPhone}: <span class="nowrap">{hotel.phone}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,208 @@
+---
+import { link } from '../../../shared/link';
+import ArchRule from '../components/ArchRule.astro';
+import PageHead from '../components/PageHead.astro';
+import { hotel } from '../content/facts';
+import { packagesText } from '../content/packages';
+import { roomText } from '../content/rooms';
+import type { Lang } from '../i18n/lang';
+import { pagePath } from '../i18n/lang';
+import Layout from '../layouts/Layout.astro';
+import { formatPln } from '../lib/format';
+import { buildBookingQuery } from '../lib/urlState';
+import packagesCss from '../styles/packages.css?raw';
+import { longStayRows, weekendRows } from './packageExamples';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = packagesText[lang];
+const weekend = text.weekend;
+const longStay = text.longStay;
+const bookingPath = link(pagePath('booking', lang));
+const weekendHref = `${bookingPath}${buildBookingQuery({ weekendPackage: true })}`;
+const weekendData = weekendRows();
+const longStayData = longStayRows();
+---
+
+<Layout
+  lang={lang}
+  pageKey="packages"
+  title={text.title}
+  description={text.description}
+  css={[packagesCss]}>
+  <PageHead title={text.heading} lead={text.lead} />
+
+  <section class="section wrap" aria-labelledby="weekend-title">
+    <div class="split package-split">
+      <div class="stack">
+        <h2 id="weekend-title" class="section-title">
+          {weekend.heading}
+        </h2>
+        <p class="lead">{weekend.lead}</p>
+        <ul class="package-rules">
+          {weekend.rules.map(rule => (
+            <li>{rule}</li>
+          ))}
+        </ul>
+        <div class="btn-row">
+          <a class="btn" href={weekendHref}>
+            {weekend.book}
+          </a>
+        </div>
+      </div>
+      <div class="package-tag">
+        <h3>{weekend.includesHeading}</h3>
+        <ul>
+          {weekend.includes.map(item => (
+            <li>
+              <p class="package-item">{item.title}</p>
+              <p>{item.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="step-subheading">{weekend.exampleHeading}</h3>
+    <p class="package-lead">{weekend.exampleLead}</p>
+    <div class="table-scroll" role="region" aria-labelledby="weekend-caption" tabindex="0">
+      <table class="data-table stack-table">
+        <caption id="weekend-caption">{weekend.caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{weekend.columns.room}</th>
+            <th scope="col" class="number">
+              {weekend.columns.accommodation}
+            </th>
+            <th scope="col" class="number">
+              {weekend.columns.separately}
+            </th>
+            <th scope="col" class="number">
+              {weekend.columns.inPackage}
+            </th>
+            <th scope="col" class="number">
+              {weekend.columns.saving}
+            </th>
+            <th scope="col" class="number">
+              {weekend.columns.total}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {weekendData.map(row => (
+            <tr>
+              <th scope="row">{roomText[lang][row.roomType].name}</th>
+              <td class="number" data-label={weekend.columns.accommodation}>
+                {formatPln(row.accommodation, lang)}
+              </td>
+              <td class="number" data-label={weekend.columns.separately}>
+                {formatPln(row.extrasSeparately, lang)}
+              </td>
+              <td class="number" data-label={weekend.columns.inPackage}>
+                {formatPln(row.extrasInPackage, lang)}
+              </td>
+              <td class="number" data-label={weekend.columns.saving}>
+                {formatPln(row.saving, lang)}
+              </td>
+              <td class="number" data-label={weekend.columns.total}>
+                {formatPln(row.total, lang)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <ArchRule />
+
+  <section class="section wrap" aria-labelledby="long-title">
+    <div class="split package-split">
+      <div class="stack">
+        <h2 id="long-title" class="section-title">
+          {longStay.heading}
+        </h2>
+        <p class="lead">{longStay.lead}</p>
+        <ul class="package-rules">
+          {longStay.rules.map(rule => (
+            <li>{rule}</li>
+          ))}
+        </ul>
+        <div class="btn-row">
+          <a class="btn" href={bookingPath}>
+            {longStay.book}
+          </a>
+        </div>
+      </div>
+      <ul class="tier-list">
+        {longStay.tiers.map(tier => (
+          <li>
+            <p class="tier-range">{tier.range}</p>
+            <p class="tier-discount">{tier.discount}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <h3 class="step-subheading">{longStay.exampleHeading}</h3>
+    <p class="package-lead">{longStay.exampleLead}</p>
+    <div class="table-scroll" role="region" aria-labelledby="long-caption" tabindex="0">
+      <table class="data-table stack-table">
+        <caption id="long-caption">{longStay.caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{longStay.columns.room}</th>
+            <th scope="col" class="number">
+              {longStay.columns.sevenList}
+            </th>
+            <th scope="col" class="number">
+              {longStay.columns.sevenPay}
+            </th>
+            <th scope="col" class="number">
+              {longStay.columns.eightList}
+            </th>
+            <th scope="col" class="number">
+              {longStay.columns.eightPay}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {longStayData.map(row => (
+            <tr>
+              <th scope="row">{roomText[lang][row.roomType].name}</th>
+              <td class="number" data-label={longStay.columns.sevenList}>
+                {formatPln(row.sevenNightsList, lang)}
+              </td>
+              <td class="number" data-label={longStay.columns.sevenPay}>
+                {formatPln(row.sevenNightsPay, lang)}
+              </td>
+              <td class="number" data-label={longStay.columns.eightList}>
+                {formatPln(row.eightNightsList, lang)}
+              </td>
+              <td class="number" data-label={longStay.columns.eightPay}>
+                {formatPln(row.eightNightsPay, lang)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section band-ink">
+    <div class="wrap closing">
+      <div>
+        <h2>{text.closingHeading}</h2>
+        <p>{text.closingText}</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--light" href={hotel.phoneHref}>
+          {text.closingPhone}: <span class="nowrap">{hotel.phone}</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

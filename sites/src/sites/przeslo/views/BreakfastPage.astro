@@ -1,0 +1,122 @@
+---
+import { link } from '../../../shared/link';
+import ArchRule from '../components/ArchRule.astro';
+import PageHead from '../components/PageHead.astro';
+import { breakfastText } from '../content/breakfast';
+import { hotel } from '../content/facts';
+import type { Lang } from '../i18n/lang';
+import { pagePath } from '../i18n/lang';
+import Layout from '../layouts/Layout.astro';
+import { buildBookingQuery } from '../lib/urlState';
+import breakfastCss from '../styles/breakfast.css?raw';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = breakfastText[lang];
+const bookingHref = `${link(pagePath('booking', lang))}${buildBookingQuery({ guests: 2 })}`;
+---
+
+<Layout
+  lang={lang}
+  pageKey="breakfast"
+  title={text.title}
+  description={text.description}
+  css={[breakfastCss]}>
+  <PageHead title={text.heading} lead={text.lead} />
+
+  <section class="section wrap" aria-labelledby="hours-title">
+    <div class="split breakfast-top">
+      <div class="stack">
+        <h2 id="hours-title" class="section-title">
+          {text.hoursHeading}
+        </h2>
+        <p class="lead">{text.priceNote}</p>
+        <div class="btn-row">
+          <a class="btn" href={bookingHref}>
+            {text.book}
+          </a>
+        </div>
+      </div>
+      <div class="hours-tag">
+        <dl>
+          {text.hours.map(row => (
+            <div>
+              <dt>{row.label}</dt>
+              <dd class="num">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="hours-price">{text.priceLine}</p>
+      </div>
+    </div>
+  </section>
+
+  <ArchRule />
+
+  <section class="section wrap" aria-labelledby="table-title">
+    <h2 id="table-title" class="section-title">
+      {text.tableHeading}
+    </h2>
+    <p class="breakfast-lead">{text.tableLead}</p>
+    <table class="data-table menu-table">
+      <caption id="menu-caption" class="visually-hidden">
+        {text.caption}
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">{text.columns.item}</th>
+          <th scope="col">{text.columns.contains}</th>
+          <th scope="col">{text.columns.allergens}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {text.items.map(item => (
+          <tr>
+            <th scope="row">{item.name}</th>
+            <td data-label={text.columns.contains}>{item.detail}</td>
+            <td data-label={text.columns.allergens}>
+              {item.allergens.length === 0 ? text.noAllergens : item.allergens.join(', ')}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="notice breakfast-note">{text.allergenNote}</p>
+  </section>
+
+  <section class="section band" aria-labelledby="diet-title">
+    <div class="wrap">
+      <h2 id="diet-title" class="section-title">
+        {text.dietHeading}
+      </h2>
+      <ul class="diet-list">
+        {text.diet.map(item => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="allergens-title">
+    <h2 id="allergens-title" class="section-title">
+      {text.listHeading}
+    </h2>
+    <p class="breakfast-lead">{text.listLead}</p>
+    <ol class="allergen-list">
+      {text.allergenList.map(name => (
+        <li>{name}</li>
+      ))}
+    </ol>
+    <p class="breakfast-contact">
+      <a class="text-link" href={hotel.phoneHref}>
+        {text.call}
+      </a>
+    </p>
+  </section>
+</Layout>

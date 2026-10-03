@@ -1,0 +1,73 @@
+---
+import ArchRule from '../components/ArchRule.astro';
+import PageHead from '../components/PageHead.astro';
+import { contactText } from '../content/contact';
+import type { Lang } from '../i18n/lang';
+import { ContactForm } from '../islands/ContactForm';
+import Layout from '../layouts/Layout.astro';
+import bookingCss from '../styles/booking.css?raw';
+import contactCss from '../styles/contact.css?raw';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = contactText[lang];
+---
+
+<Layout
+  lang={lang}
+  pageKey="contact"
+  title={text.title}
+  description={text.description}
+  css={[bookingCss, contactCss]}>
+  <PageHead title={text.heading} lead={text.lead} />
+
+  <section class="section wrap" aria-labelledby="details-title">
+    <div class="split contact-split">
+      <div class="stack">
+        <h2 id="details-title" class="section-title">
+          {text.detailsHeading}
+        </h2>
+        <dl class="contact-details">
+          {text.details.map(item => (
+            <div>
+              <dt>{item.label}</dt>
+              <dd>{item.href ? <a href={item.href}>{item.value}</a> : item.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <h3 class="contact-find">{text.findHeading}</h3>
+        <p>{text.find}</p>
+      </div>
+      <div class="contact-card" aria-labelledby="form-title">
+        <h2 id="form-title">{text.form.heading}</h2>
+        <ContactForm client:visible lang={lang} />
+      </div>
+    </div>
+  </section>
+
+  <ArchRule />
+
+  <section class="section wrap" aria-labelledby="faq-title">
+    <div class="faq-head">
+      <h2 id="faq-title" class="section-title">
+        {text.faqHeading}
+      </h2>
+      <p class="lead">{text.faqLead}</p>
+    </div>
+    <div class="faq">
+      {text.faq.map(item => (
+        <details>
+          <summary>{item.question}</summary>
+          <div>
+            {item.answer.map(paragraph => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+</Layout>

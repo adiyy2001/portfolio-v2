@@ -1,0 +1,35 @@
+---
+import PageHead from '../components/PageHead.astro';
+import { bookingText } from '../content/booking';
+import { common } from '../content/common';
+import type { Lang } from '../i18n/lang';
+import { BookingFlow } from '../islands/BookingFlow';
+import Layout from '../layouts/Layout.astro';
+import bookingCss from '../styles/booking.css?raw';
+import pickerCss from '../styles/picker.css?raw';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = bookingText[lang];
+const shared = common[lang];
+---
+
+<Layout
+  lang={lang}
+  pageKey="booking"
+  title={text.title}
+  description={text.description}
+  css={[pickerCss, bookingCss]}>
+  <PageHead title={text.heading} lead={text.lead} />
+  <section class="section wrap booking-section" aria-label={text.heading}>
+    <BookingFlow client:only="preact" lang={lang}>
+      <div slot="fallback" class="flow-fallback" aria-hidden="true"></div>
+    </BookingFlow>
+    <noscript>
+      <p class="notice">{shared.noScriptBooking}</p>
+    </noscript>
+  </section>
+</Layout>

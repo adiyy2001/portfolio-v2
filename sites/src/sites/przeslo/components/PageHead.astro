@@ -1,0 +1,38 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  title: string;
+  lead?: string;
+  crumbs?: Crumb[];
+  crumbsLabel?: string;
+}
+
+const { title, lead, crumbs = [], crumbsLabel = 'Breadcrumb' } = Astro.props;
+---
+
+<header class:list={['page-head', 'wrap', Astro.slots.has('aside') && 'page-head--aside']}>
+  <div class="page-head-main">
+    {crumbs.length > 0 && (
+      <nav aria-label={crumbsLabel}>
+        <ol class="crumbs">
+          {crumbs.map(crumb => (
+            <li>
+              {crumb.href ? (
+                <a href={crumb.href}>{crumb.label}</a>
+              ) : (
+                <span aria-current="page">{crumb.label}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
+    <h1>{title}</h1>
+    {lead && <p class="lead">{lead}</p>}
+  </div>
+  <slot name="aside" />
+</header>

@@ -1,0 +1,11 @@
+---
+import { roomTypes } from '../../../sites/przeslo/data/rooms';
+import RoomPage from '../../../sites/przeslo/views/RoomPage.astro';
+
+export const getStaticPaths = () =>
+  roomTypes.map(type => ({ params: { room: type.slug.pl }, props: { roomType: type.id } }));
+
+const { roomType } = Astro.props;
+---
+
+<RoomPage lang="pl" roomType={roomType} />

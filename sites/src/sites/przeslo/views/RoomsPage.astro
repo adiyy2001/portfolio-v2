@@ -1,0 +1,128 @@
+---
+import { link } from '../../../shared/link';
+import ArchRule from '../components/ArchRule.astro';
+import PageHead from '../components/PageHead.astro';
+import RoomRack from '../components/RoomRack.astro';
+import { roomsPage, roomText } from '../content/rooms';
+import { roomTypes } from '../data/rooms';
+import type { Lang } from '../i18n/lang';
+import { pagePath } from '../i18n/lang';
+import Layout from '../layouts/Layout.astro';
+import { formatPln } from '../lib/format';
+import roomsCss from '../styles/rooms.css?raw';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = roomsPage[lang];
+const head = text.compareHead;
+---
+
+<Layout
+  lang={lang}
+  pageKey="rooms"
+  title={text.title}
+  description={text.description}
+  css={[roomsCss]}>
+  <PageHead title={text.heading} lead={text.lead} />
+
+  <section class="section wrap" aria-labelledby="rack-title">
+    <h2 id="rack-title" class="section-title">
+      {text.rackHeading}
+    </h2>
+    <RoomRack lang={lang} headingLevel={3} />
+    <p class="picker-note">{text.priceNote}</p>
+  </section>
+
+  <ArchRule />
+
+  <section class="section wrap">
+    <h2 id="compare-title" class="section-title">
+      {text.compareHeading}
+    </h2>
+    <div class="table-scroll" tabindex="0" role="region" aria-labelledby="compare-title">
+      <table class="data-table stack-table">
+        <thead>
+          <tr>
+            <th scope="col">{head.room}</th>
+            <th scope="col" class="number">
+              {head.size}
+            </th>
+            <th scope="col" class="number">
+              {head.guests}
+            </th>
+            <th scope="col">{head.bed}</th>
+            <th scope="col" class="number">
+              {head.from}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {roomTypes.map(type => (
+            <tr>
+              <th scope="row">
+                <a href={link(pagePath('rooms', lang, type.slug[lang]))}>
+                  {roomText[lang][type.id].name}
+                </a>
+              </th>
+              <td class="number" data-label={head.size}>
+                {type.size} m²
+              </td>
+              <td class="number" data-label={head.guests}>
+                {type.capacity}
+              </td>
+              <td data-label={head.bed}>{roomText[lang][type.id].bed}</td>
+              <td class="number" data-label={head.from}>
+                {formatPln(type.basePrice, lang)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section band" aria-labelledby="common-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="common-title">{text.commonHeading}</h2>
+        <p class="lead">{text.commonLead}</p>
+      </div>
+      <div class="amenity-groups">
+        {text.commonGroups.map(group => (
+          <div>
+            <h3>{group.title}</h3>
+            <ul class="tag-list">
+              {group.items.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="rules-title">
+    <div class="split">
+      <div class="section-head">
+        <h2 id="rules-title">{text.priceHeading}</h2>
+        <p class="lead">{text.priceLead}</p>
+      </div>
+      <table class="data-table">
+        <caption class="visually-hidden">{text.priceHeading}</caption>
+        <tbody>
+          {text.priceRows.map(row => (
+            <tr>
+              <th scope="row">{row.label}</th>
+              <td class="number">{row.factor}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="picker-note">{text.cancelNote}</p>
+  </section>
+</Layout>

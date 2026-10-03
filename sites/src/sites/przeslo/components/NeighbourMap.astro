@@ -1,0 +1,97 @@
+---
+import type { NeighbourhoodText } from '../content/neighbourhood';
+import { placeById, places, walkingRoutes } from '../data/places';
+import type { PlaceId } from '../data/places';
+
+interface Props {
+  text: NeighbourhoodText;
+}
+
+const { text } = Astro.props;
+const streets = [
+  'M20 300C110 280 190 292 290 270',
+  'M70 40V280',
+  'M130 36V285',
+  'M300 40V270',
+  'M360 60V250',
+  'M20 80H330',
+  'M20 170H350',
+  'M20 232H340',
+];
+const hotelPoint = placeById('hotel').position;
+const walkingPlaces = places.filter(place => place.walkingMinutes !== null);
+const labelFor = (id: PlaceId): string => (id === 'hotel' ? text.hotelLabel : text.places[id].name);
+const routePath = (from: PlaceId, to: PlaceId): string => {
+  const start = placeById(from).position;
+  const end = placeById(to).position;
+  return `M${start.x} ${start.y}L${end.x} ${end.y}`;
+};
+---
+
+<figure class="neighbour-map">
+  <svg viewBox="0 0 640 420" role="img" aria-labelledby="map-title map-desc" focusable="false">
+    <title id="map-title">{text.mapTitle}</title>
+    <desc id="map-desc">{text.mapDescription}</desc>
+    <rect class="map-ground" width="640" height="420"></rect>
+    <g transform="matrix(1 0 0 -1 0 420)">
+      {streets.map(street => (
+        <path class="map-street" d={street}></path>
+      ))}
+      <path
+        class="map-river"
+        d="M-20 360C110 338 210 350 318 326C430 300 450 232 520 222C580 214 620 240 660 232"></path>
+      <path
+        class="map-river-edge"
+        d="M-20 338C110 316 210 328 318 304C430 278 450 210 520 200C580 192 620 218 660 210"></path>
+      <path
+        class="map-river-edge"
+        d="M-20 382C110 360 210 372 318 348C430 322 450 254 520 244C580 236 620 262 660 254"></path>
+      <ellipse
+        class="map-island"
+        cx="486"
+        cy="226"
+        rx="62"
+        ry="20"
+        transform="rotate(-18 486 226)"></ellipse>
+      <rect class="map-square" x="170" y="88" width="88" height="60" rx="4"></rect>
+      <rect class="map-hall" x="236" y="200" width="32" height="28" rx="3"></rect>
+    </g>
+    <text class="map-street-label" x="146" y="102" transform="rotate(9 146 102)">
+      ul. Grodzka
+    </text>
+    <text class="map-river-label" x="60" y="48">
+      {text.river}
+    </text>
+    {walkingRoutes.map(([from, to]) => (
+      <path class="map-route" d={routePath(from, to)}></path>
+    ))}
+    <g class="map-hotel" transform={`translate(${hotelPoint.x} ${hotelPoint.y})`}>
+      <rect x="-15" y="-15" width="30" height="30" rx="4"></rect>
+      <circle cx="0" cy="0" r="5"></circle>
+      <text
+        class="map-label map-label--hotel"
+        x="26"
+        y="0"
+        text-anchor="start"
+        dominant-baseline="central">
+        {text.hotelLabel}
+      </text>
+    </g>
+    {walkingPlaces.map((place, index) => (
+      <g class="map-marker" transform={`translate(${place.position.x} ${place.position.y})`}>
+        <circle cx="0" cy="0" r="16"></circle>
+        <text class="map-number" x="0" y="0" text-anchor="middle" dominant-baseline="central">
+          {index + 1}
+        </text>
+        <text
+          class="map-label"
+          x={place.labelAnchor === 'end' ? 22 : 0}
+          y={place.labelDy ?? -26}
+          text-anchor={place.labelAnchor ?? 'middle'}>
+          {labelFor(place.id)}
+        </text>
+      </g>
+    ))}
+  </svg>
+  <figcaption>{text.mapNote}</figcaption>
+</figure>

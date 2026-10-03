@@ -1,0 +1,49 @@
+---
+import { planOf } from '../data/floorplans';
+import type { Furniture } from '../data/floorplans';
+import type { RoomTypeId } from '../data/rooms';
+
+interface Props {
+  roomType: RoomTypeId;
+}
+
+const { roomType } = Astro.props;
+const plan = planOf(roomType);
+const padding = 14;
+const viewBox = `${-padding} ${-padding} ${plan.width + padding * 2} ${plan.depth + padding * 2}`;
+const spaceFill: Record<string, string> = {
+  room: '#ffffff',
+  bedroom: '#ffffff',
+  sitting: '#ffffff',
+  children: '#fbf6fa',
+  bath: '#f1e3ee',
+  hall: '#f8eff5',
+};
+const isSleeping = (piece: Furniture): boolean =>
+  piece.kind === 'doubleBed' ||
+  piece.kind === 'singleBed' ||
+  piece.kind === 'sofaBed' ||
+  piece.kind === 'armchair';
+---
+
+<svg class="plan-thumb" viewBox={viewBox} aria-hidden="true" focusable="false">
+  {plan.spaces.map(space => (
+    <rect
+      x={space.x}
+      y={space.y}
+      width={space.width}
+      height={space.depth}
+      fill={spaceFill[space.kind]}
+      stroke="#1c1130"
+      stroke-width="12"></rect>
+  ))}
+  {plan.furniture.filter(isSleeping).map(piece => (
+    <rect
+      x={piece.x}
+      y={piece.y}
+      width={piece.width}
+      height={piece.depth}
+      rx="8"
+      fill="#f4c6dc"></rect>
+  ))}
+</svg>

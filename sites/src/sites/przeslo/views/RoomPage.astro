@@ -1,0 +1,166 @@
+---
+import { link } from '../../../shared/link';
+import FloorPlan from '../components/FloorPlan.astro';
+import PageHead from '../components/PageHead.astro';
+import PlanThumb from '../components/PlanThumb.astro';
+import RoomRack from '../components/RoomRack.astro';
+import { roomsPage, roomText } from '../content/rooms';
+import { roomsOfType, roomTypeById } from '../data/rooms';
+import type { RoomTypeId } from '../data/rooms';
+import type { Lang } from '../i18n/lang';
+import { pagePath } from '../i18n/lang';
+import Layout from '../layouts/Layout.astro';
+import { formatPln } from '../lib/format';
+import { nightPrice, rateNightPrice } from '../lib/pricing';
+import { buildBookingQuery } from '../lib/urlState';
+import roomsCss from '../styles/rooms.css?raw';
+import { exampleNights } from './exampleNights';
+
+interface Props {
+  lang: Lang;
+  roomType: RoomTypeId;
+}
+
+const { lang, roomType } = Astro.props;
+const text = roomsPage[lang];
+const room = roomText[lang][roomType];
+const type = roomTypeById(roomType);
+const roomNumbers = roomsOfType(roomType).map(room => room.number);
+const bookingHref = link(pagePath('booking', lang)) + buildBookingQuery({ room: roomType });
+const amenities = [...room.amenities, ...text.commonGroups[0].items.slice(0, 3)];
+---
+
+<Layout
+  lang={lang}
+  pageKey="rooms"
+  roomType={roomType}
+  title={room.pageTitle}
+  description={room.pageDescription}
+  css={[roomsCss]}>
+  <PageHead
+    title={room.name}
+    lead={room.summary}
+    crumbsLabel={text.breadcrumbLabel}
+    crumbs={[
+      { label: text.breadcrumbHome, href: link(pagePath('home', lang)) },
+      { label: text.breadcrumbRooms, href: link(pagePath('rooms', lang)) },
+      { label: room.name },
+    ]}>
+    <aside class="hero-tag" slot="aside" aria-labelledby="hero-tag-title">
+      <PlanThumb roomType={roomType} />
+      <div>
+        <h2 id="hero-tag-title" class="hero-tag-title">
+          {text.numbersLabel}
+        </h2>
+        <ul class="hero-tag-numbers">
+          {roomNumbers.map(number => (
+            <li class="num">{number}</li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+  </PageHead>
+
+  <section class="section wrap room-intro">
+    <div class="prose">
+      <h2>{room.headline}</h2>
+      {room.intro.map(paragraph => (
+        <p>{paragraph}</p>
+      ))}
+      <p>
+        <strong>{room.goodFor}</strong>
+      </p>
+    </div>
+    <aside class="ink-panel price-panel" aria-labelledby="from-title">
+      <h2 id="from-title" class="visually-hidden">
+        {text.priceHeading}
+      </h2>
+      <p class="price-from">{text.fromLabel}</p>
+      <p class="price-amount num">{formatPln(type.basePrice, lang)}</p>
+      <p class="price-unit">{text.perNight}</p>
+      <a class="btn btn--light btn--block" href={bookingHref}>
+        {text.checkDates}
+      </a>
+    </aside>
+  </section>
+
+  <section class="section band" aria-labelledby="plan-title">
+    <div class="wrap room-plan">
+      <div>
+        <h2 id="plan-title">{text.planHeading}</h2>
+        <p class="lead">{room.planCaption}</p>
+        <p class="picker-note">{text.planLegend}</p>
+      </div>
+      <FloorPlan lang={lang} roomType={roomType} id={`plan-${type.slug[lang]}`} />
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="facts-title">
+    <div class="split">
+      <div>
+        <h2 id="facts-title" class="section-title">
+          {text.specHeading}
+        </h2>
+        <dl class="spec">
+          {room.details.map(detail => (
+            <div>
+              <dt>{detail.label}</dt>
+              <dd>{detail.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+      <div>
+        <h2 class="section-title">{text.amenitiesHeading}</h2>
+        <ul class="tag-list">
+          {amenities.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="example-title">{text.exampleHeading}</h2>
+        <p class="lead">{text.exampleLead}</p>
+      </div>
+      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="example-title">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">{text.exampleHead.night}</th>
+              <th scope="col" class="number">
+                {text.exampleHead.flexible}
+              </th>
+              <th scope="col" class="number">
+                {text.exampleHead.nonRefundable}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {exampleNights.map(example => (
+              <tr>
+                <th scope="row">{text.exampleNights[example.key]}</th>
+                <td class="number">{formatPln(nightPrice(roomType, example.night), lang)}</td>
+                <td class="number">
+                  {formatPln(rateNightPrice(roomType, example.night, 'nonRefundable'), lang)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="picker-note">{text.cancelNote}</p>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="others-title">
+    <h2 id="others-title" class="section-title">
+      {text.otherRooms}
+    </h2>
+    <RoomRack lang={lang} headingLevel={3} current={roomType} />
+  </section>
+</Layout>

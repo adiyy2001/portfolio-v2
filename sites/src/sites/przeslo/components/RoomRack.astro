@@ -1,0 +1,44 @@
+---
+import { link } from '../../../shared/link';
+import { roomTypes } from '../data/rooms';
+import type { Lang } from '../i18n/lang';
+import { pagePath } from '../i18n/lang';
+import { formatPln } from '../lib/format';
+import PlanThumb from './PlanThumb.astro';
+import { roomsPage, roomText } from '../content/rooms';
+
+interface Props {
+  lang: Lang;
+  headingLevel?: 2 | 3;
+  current?: string;
+}
+
+const { lang, headingLevel = 3, current } = Astro.props;
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+const page = roomsPage[lang];
+const types = roomTypes.filter(type => type.id !== current);
+---
+
+<ul class="rack">
+  {types.map(type => {
+    const text = roomText[lang][type.id];
+    return (
+      <li>
+        <article class="key-tag">
+          <PlanThumb roomType={type.id} />
+          <Heading>
+            <a href={link(pagePath('rooms', lang, type.slug[lang]))}>{text.name}</a>
+          </Heading>
+          <p class="key-tag-meta">
+            {type.size} {page.sizeLabel}, {text.bed}, {page.guestsLabel(type.capacity)}
+          </p>
+          <p class="key-tag-price">
+            <span class="key-tag-from">{page.fromLabel}</span>
+            <span class="num">{formatPln(type.basePrice, lang)}</span>
+            <span class="key-tag-unit">{page.perNight}</span>
+          </p>
+        </article>
+      </li>
+    );
+  })}
+</ul>

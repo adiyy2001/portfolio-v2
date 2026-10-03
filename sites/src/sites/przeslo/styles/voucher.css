@@ -1,0 +1,263 @@
+.voucher-section {
+  padding-top: var(--s-5);
+}
+
+.voucher-fallback {
+  min-height: 720px;
+}
+
+.voucher-layout {
+  display: grid;
+  gap: var(--s-8);
+  align-items: start;
+}
+
+@media (min-width: 1000px) {
+  .voucher-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
+  }
+
+  .voucher-preview {
+    position: sticky;
+    top: var(--s-6);
+  }
+}
+
+.voucher-form {
+  display: grid;
+  gap: var(--s-5);
+  max-width: 44rem;
+}
+
+.voucher-form h2,
+.voucher-preview h2,
+.voucher-done h2 {
+  font-size: clamp(1.5rem, 2.6vw, 2.125rem);
+}
+
+.voucher-kinds,
+.voucher-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-6);
+}
+
+.voucher-amounts {
+  margin-bottom: var(--s-4);
+}
+
+.voucher-preview {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.voucher {
+  position: relative;
+  display: grid;
+  gap: var(--s-3);
+  padding: var(--s-6) var(--s-5) var(--s-5) 72px;
+  border-radius: 56px 14px 14px 56px;
+  background: var(--ink);
+  color: #fff;
+  overflow: hidden;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.voucher::after {
+  content: '';
+  position: absolute;
+  right: -48px;
+  top: -64px;
+  width: 200px;
+  height: 120px;
+  border: 8px solid rgba(244, 198, 220, 0.18);
+  border-top: 0;
+  border-radius: 0 0 100px 100px;
+  pointer-events: none;
+}
+
+.voucher-eyelet {
+  position: absolute;
+  left: 28px;
+  top: 40px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.voucher-brand {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.voucher-kind {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--rose);
+}
+
+.voucher-value {
+  font-size: clamp(2.5rem, 7vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.voucher-detail {
+  display: grid;
+  gap: 2px;
+}
+
+.voucher-detail span {
+  color: var(--steel);
+  font-size: 0.9375rem;
+}
+
+.voucher-names {
+  display: grid;
+  gap: var(--s-2);
+  margin: var(--s-2) 0 0;
+}
+
+.voucher-names > div,
+.voucher-foot > div {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: var(--s-3);
+  align-items: baseline;
+}
+
+.voucher dt {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--steel);
+}
+
+.voucher dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-weight: 700;
+}
+
+.voucher dd[data-empty='true'],
+.voucher-message[data-empty='true'] {
+  color: var(--steel);
+  font-weight: 400;
+}
+
+.voucher-message {
+  position: relative;
+  max-width: 28em;
+  padding-top: var(--s-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.voucher-foot {
+  display: grid;
+  gap: var(--s-1);
+  margin: var(--s-2) 0 0;
+  position: relative;
+  z-index: 1;
+}
+
+.voucher-sample {
+  position: relative;
+  margin-top: var(--s-2);
+  font-size: 0.8125rem;
+  color: var(--steel);
+}
+
+.voucher-code {
+  letter-spacing: 0.04em;
+}
+
+.voucher-done {
+  display: grid;
+  gap: var(--s-5);
+  max-width: 34rem;
+}
+
+.voucher-steps {
+  display: grid;
+  gap: var(--s-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: voucher-step;
+}
+
+.voucher-steps li {
+  position: relative;
+  padding-left: 56px;
+  counter-increment: voucher-step;
+}
+
+.voucher-steps li::before {
+  content: counter(voucher-step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 800;
+}
+
+.voucher-steps h3 {
+  font-size: 1.25rem;
+}
+
+.voucher-terms {
+  display: grid;
+  gap: var(--s-3);
+  max-width: 40em;
+  margin: 0;
+  padding-left: 1.25em;
+}
+
+@media (max-width: 639px) {
+  .voucher {
+    padding: var(--s-6) var(--s-4) var(--s-5) 56px;
+    border-radius: 40px 12px 12px 40px;
+  }
+
+  .voucher-eyelet {
+    left: 20px;
+    top: 32px;
+  }
+
+  .voucher-names > div,
+  .voucher-foot > div {
+    grid-template-columns: 3.75rem minmax(0, 1fr);
+  }
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .voucher-sheet,
+  .voucher-sheet * {
+    visibility: visible;
+  }
+
+  .voucher-sheet {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .voucher {
+    max-width: 150mm;
+  }
+}
