@@ -1,0 +1,260 @@
+---
+import { formatArea, formatNumber } from '../flats';
+import { buildPlan, edge, labelCentre, metre, nameFits, type PlanDoor } from '../plan';
+import { outdoorName } from '../outdoor';
+import type { Flat } from '../types';
+
+interface Props {
+  flat: Flat;
+  code: string;
+}
+
+const { flat, code } = Astro.props;
+const plan = buildPlan(flat);
+const { body, outdoor } = plan;
+const right = body.x + body.width;
+const bottom = body.y + body.height;
+const metres = (value: number) => value.toFixed(2).replace('.', ',');
+const dimensionY = (outdoor?.side === 'east' ? outdoor.y + outdoor.height : bottom) + 26;
+const scaleY = plan.height - 20;
+const fit = Math.min(2, Math.max(1, plan.width / 250)).toFixed(2);
+const arc = (door: PlanDoor) => {
+  const length = Math.hypot(door.leafEnd.x - door.hinge.x, door.leafEnd.y - door.hinge.y);
+  return `M${door.leafEnd.x} ${door.leafEnd.y}A${length} ${length} 0 0 ${door.sweep} ${door.closedEnd.x} ${door.closedEnd.y}`;
+};
+const entranceArrow = plan.entrance
+  ? `M${body.x - 16} ${plan.entrance.gap.y + plan.entrance.gap.height / 2 - 6}L${body.x - 6} ${plan.entrance.gap.y + plan.entrance.gap.height / 2}L${body.x - 16} ${plan.entrance.gap.y + plan.entrance.gap.height / 2 + 6}Z`
+  : '';
+const description = plan.rooms.map(room => `${room.name} ${formatArea(room.area)}`).join(', ');
+const outdoorLabel = outdoor ? `${outdoorName[outdoor.kind]} ${formatNumber(outdoor.area)} m²` : '';
+const windowRect = (window: (typeof plan.windows)[number]) => {
+  const along = window.length * metre;
+  if (window.side === 'west')
+    return { x: body.x + window.start * metre, y: body.y - 4, width: along, height: 8 };
+  if (window.side === 'east')
+    return { x: body.x + window.start * metre, y: bottom - 4, width: along, height: 8 };
+  if (window.side === 'south')
+    return { x: body.x - 4, y: body.y + window.start * metre, width: 8, height: along };
+  return { x: right - 4, y: body.y + window.start * metre, width: 8, height: along };
+};
+---
+
+<figure class="plan">
+  <svg
+    class="plan__svg"
+    viewBox={`0 0 ${plan.width} ${plan.height}`}
+    style={`max-width:${Math.round(plan.width * 1.8)}px;--fit:${fit}`}
+    role="img"
+    aria-labelledby="plan-title plan-desc"
+    focusable="false">
+    <title id="plan-title">Rzut mieszkania {code}</title>
+    <desc id="plan-desc">
+      Rzut narysowany w skali, północ po prawej stronie. Pomieszczenia: {description}.
+    </desc>
+    <defs>
+      <pattern
+        id="plan-grass"
+        width="8"
+        height="8"
+        patternUnits="userSpaceOnUse"
+        patternTransform="rotate(45)">
+        <rect width="8" height="8" class="plan__grass-bg"></rect>
+        <line x1="0" y1="0" x2="0" y2="8" class="plan__grass-line"></line>
+      </pattern>
+    </defs>
+
+    {outdoor && (
+      <g class="plan__outdoor" data-kind={outdoor.kind}>
+        <rect
+          x={outdoor.x}
+          y={outdoor.y}
+          width={outdoor.width}
+          height={outdoor.height}
+          fill={outdoor.kind === 'garden' ? 'url(#plan-grass)' : undefined}></rect>
+        <text
+          x={outdoor.x + outdoor.width / 2}
+          y={outdoor.y + outdoor.height / 2 + 4}
+          text-anchor="middle"
+          class="plan__outdoor-label">
+          {outdoorLabel}
+        </text>
+      </g>
+    )}
+
+    <g class="plan__rooms">
+      {plan.rooms.map(room => (
+        <rect
+          class="plan__room"
+          data-kind={room.kind}
+          x={room.x}
+          y={room.y}
+          width={room.width}
+          height={room.height}></rect>
+      ))}
+    </g>
+
+    <rect class="plan__walls" x={body.x} y={body.y} width={body.width} height={body.height}></rect>
+    <line class="plan__brick" x1={body.x - 3} y1={bottom} x2={right + 3} y2={bottom}></line>
+
+    {plan.windows.map(window => {
+      const rect = windowRect(window);
+      const horizontal = window.side === 'west' || window.side === 'east';
+      return (
+        <g class="plan__window">
+          <rect x={rect.x} y={rect.y} width={rect.width} height={rect.height}></rect>
+          <line
+            x1={horizontal ? rect.x : rect.x + rect.width / 2}
+            y1={horizontal ? rect.y + rect.height / 2 : rect.y}
+            x2={horizontal ? rect.x + rect.width : rect.x + rect.width / 2}
+            y2={horizontal ? rect.y + rect.height / 2 : rect.y + rect.height}></line>
+        </g>
+      );
+    })}
+
+    <g class="plan__fixtures">
+      {plan.fixtures.map(fixture =>
+        fixture.round ? (
+          <ellipse
+            class={`plan__fixture plan__fixture--${fixture.kind}`}
+            cx={fixture.x + fixture.width / 2}
+            cy={fixture.y + fixture.height / 2}
+            rx={fixture.width / 2}
+            ry={fixture.height / 2}></ellipse>
+        ) : (
+          <rect
+            class={`plan__fixture plan__fixture--${fixture.kind}`}
+            x={fixture.x}
+            y={fixture.y}
+            width={fixture.width}
+            height={fixture.height}
+            rx={fixture.kind === 'tub' ? 7 : 1.5}></rect>
+        ),
+      )}
+    </g>
+
+    {[...plan.doors, ...(plan.entrance ? [plan.entrance] : [])].map(door => (
+      <g class="plan__door">
+        <rect
+          class="plan__gap"
+          data-kind={door.room?.kind}
+          x={door.gap.x}
+          y={door.gap.y}
+          width={door.gap.width}
+          height={door.gap.height}></rect>
+        <line x1={door.hinge.x} y1={door.hinge.y} x2={door.leafEnd.x} y2={door.leafEnd.y}></line>
+        <path class="plan__arc" d={arc(door)}></path>
+      </g>
+    ))}
+
+    {plan.entrance && <path class="plan__entrance" d={entranceArrow}></path>}
+
+    {plan.ironColumn && (
+      <g class="plan__column">
+        <circle cx={plan.ironColumn.x} cy={plan.ironColumn.y} r="9"></circle>
+        <circle cx={plan.ironColumn.x} cy={plan.ironColumn.y} r="3.5"></circle>
+      </g>
+    )}
+
+    <g class="plan__labels">
+      {plan.rooms.map(room => {
+        if (room.chip) {
+          return (
+            <g>
+              <circle class="plan__chip" cx={room.chip.x} cy={room.chip.y} r="11"></circle>
+              <text class="plan__letter" x={room.chip.x} y={room.chip.y + 4.5} text-anchor="middle">
+                {room.letter}
+              </text>
+            </g>
+          );
+        }
+        const centreX = labelCentre(room, plan.kitchenWidth);
+        const centreY = room.y + room.height * (room.kind === 'bedroom' ? 0.4 : 0.5);
+        const showName = nameFits({
+          name: room.name,
+          width: room.kind === 'living' ? room.width - plan.kitchenWidth : room.width,
+        });
+        return (
+          <g>
+            <circle
+              class="plan__chip"
+              cx={centreX}
+              cy={centreY - (showName ? 14 : 8)}
+              r="11"></circle>
+            <text
+              class="plan__letter"
+              x={centreX}
+              y={centreY - (showName ? 14 : 8) + 4.5}
+              text-anchor="middle">
+              {room.letter}
+            </text>
+            {showName && (
+              <text class="plan__name" x={centreX} y={centreY + 9} text-anchor="middle">
+                {room.name}
+              </text>
+            )}
+            <text
+              class="plan__area"
+              x={centreX}
+              y={centreY + (showName ? 24 : 20)}
+              text-anchor="middle">
+              {formatArea(room.area)}
+            </text>
+          </g>
+        );
+      })}
+    </g>
+
+    <g class="plan__dimension">
+      <line x1={body.x} y1={dimensionY} x2={right} y2={dimensionY}></line>
+      <line x1={body.x} y1={dimensionY - 5} x2={body.x} y2={dimensionY + 5}></line>
+      <line x1={right} y1={dimensionY - 5} x2={right} y2={dimensionY + 5}></line>
+      <text x={(body.x + right) / 2} y={dimensionY + 18} text-anchor="middle">
+        {metres(plan.widthMetres)} m
+      </text>
+      <line x1={right + 24} y1={body.y} x2={right + 24} y2={bottom}></line>
+      <line x1={right + 19} y1={body.y} x2={right + 29} y2={body.y}></line>
+      <line x1={right + 19} y1={bottom} x2={right + 29} y2={bottom}></line>
+      <text
+        x={right + 38}
+        y={(body.y + bottom) / 2}
+        text-anchor="middle"
+        transform={`rotate(-90 ${right + 38} ${(body.y + bottom) / 2})`}>
+        {metres(plan.depthMetres)} m
+      </text>
+    </g>
+
+    <g class="plan__north">
+      <line x1={plan.width - 76} y1="26" x2={plan.width - 22} y2="26"></line>
+      <path d={`M${plan.width - 22} 26L${plan.width - 34} 20V32Z`}></path>
+      <text x={plan.width - 49} y="16" text-anchor="middle">
+        N
+      </text>
+    </g>
+
+    <g class="plan__orientation">
+      <text x={edge} y="20">
+        dziedziniec, zachód
+      </text>
+      <text x={plan.width - edge} y={scaleY + 4} text-anchor="end">
+        ulica, wschód
+      </text>
+    </g>
+
+    <g class="plan__scale">
+      {[0, 1, 2].map(index => (
+        <rect
+          x={edge + index * metre}
+          y={scaleY - 4}
+          width={metre}
+          height="8"
+          data-fill={index % 2}></rect>
+      ))}
+      <text x={edge} y={scaleY + 20}>
+        0
+      </text>
+      <text x={edge + 3 * metre} y={scaleY + 20} text-anchor="end">
+        3 m
+      </text>
+    </g>
+  </svg>
+</figure>

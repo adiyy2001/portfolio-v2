@@ -1,0 +1,58 @@
+---
+import SampleNote from '../../../shared/SampleNote.astro';
+import { link } from '../../../shared/link';
+import { navItems } from '../nav';
+import { site } from '../site';
+import Mark from './Mark.astro';
+
+interface Props {
+  flush?: boolean;
+}
+
+const { flush = false } = Astro.props;
+---
+
+<footer class:list={['foot', 'on-ink', { 'foot--flush': flush }]}>
+  <div class="wrap">
+    <div class="grid foot__grid">
+      <div class="foot__brand">
+        <p class="foot__name">
+          <Mark />
+          {site.name}
+        </p>
+        <address>
+          Biuro sprzedaży
+          <br />
+          {site.street}, {site.postcode} {site.city}
+          <br />
+          <a href={site.phoneHref} class="num">
+            {site.phone}
+          </a>
+          <br />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </address>
+      </div>
+      <nav class="foot__nav" aria-label="Stopka">
+        <p class="foot__title">Na skróty</p>
+        <ul>
+          {navItems.map(item => (
+            <li>
+              <a href={link(item.path)}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div class="foot__legal">
+        <p class="foot__title">Dla kupujących</p>
+        <p>
+          Ceny brutto, {site.asOf}. Zestawienie ma charakter informacyjny i nie jest ofertą w
+          rozumieniu art. 66 Kodeksu cywilnego. Przed rezerwacją i umową dostajesz prospekt
+          informacyjny.
+        </p>
+      </div>
+    </div>
+    <div class="foot__note">
+      <SampleNote name={site.name} lang="pl" />
+    </div>
+  </div>
+</footer>

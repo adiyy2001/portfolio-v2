@@ -1,0 +1,208 @@
+---
+import Cta from '../../sites/przedza/components/Cta.astro';
+import Facts from '../../sites/przedza/components/Facts.astro';
+import LocationMap from '../../sites/przedza/components/LocationMap.astro';
+import PageHead from '../../sites/przedza/components/PageHead.astro';
+import Pull from '../../sites/przedza/components/Pull.astro';
+import SheetHead from '../../sites/przedza/components/SheetHead.astro';
+import { parkingPrice } from '../../sites/przedza/building';
+import { formatPrice } from '../../sites/przedza/flats';
+import Layout from '../../sites/przedza/Layout.astro';
+import {
+  formatRoute,
+  groupTitle,
+  modeLabel,
+  placeById,
+  placeLetter,
+  placesInGroup,
+  travelMinutes,
+  type Place,
+  type PlaceGroup,
+} from '../../sites/przedza/places';
+import '../../sites/przedza/styles/location.css';
+
+const get = (id: string): Place => {
+  const place = placeById(id);
+  if (!place) throw new Error(`Unknown place ${id}`);
+  return place;
+};
+
+const minutes = (id: string) => travelMinutes(get(id));
+const groups = (Object.keys(groupTitle) as PlaceGroup[]).map(group => ({
+  group,
+  title: groupTitle[group],
+  rows: placesInGroup(group),
+}));
+
+const ways = [
+  {
+    term: 'Tramwajem',
+    text: `Najbliższe przystanki to Paulińska (${minutes('paulinska')} min pieszo) i Jedności Narodowej (${minutes('jednosci')} min). Numery linii i rozkład sprawdź w rozkładzie MPK Wrocław, bo trasy zmieniają się przy remontach torowisk.`,
+  },
+  {
+    term: 'Koleją',
+    text: `Dworzec Nadodrze jest ${minutes('dworzec-nadodrze')} minut pieszo od budynku. Dworzec Wrocław Główny to około ${minutes('dworzec-glowny')} minut rowerem.`,
+  },
+  {
+    term: 'Rowerem',
+    text: `Rowerownia przy wejściu od dziedzińca ma stojaki i punkt do dopompowania opon. Do placu Grunwaldzkiego dojedziesz w około ${minutes('plac-grunwaldzki')} minut.`,
+  },
+  {
+    term: 'Samochodem',
+    text: `Wjazd do garażu pod dziedzińcem jest od ulicy Wrzecionowej. Miejsce postojowe kosztuje ${formatPrice(parkingPrice)}, a przy części jest gniazdo do ładowania. Dla gości zostaje kilka miejsc na ulicy.`,
+  },
+];
+---
+
+<Layout
+  title="Lokalizacja: Przędza na Nadodrzu we Wrocławiu"
+  description="Przędza stoi na wrocławskim Nadodrzu. Mapa okolicy, odległości do przystanków, sklepów, szkoły, Rynku i parku oraz dojazd tramwajem, koleją, rowerem i samochodem."
+  path="/przedza/lokalizacja/"
+  current="lokalizacja"
+  exact
+  flush>
+  <PageHead label="Lokalizacja" title="Nadodrze, po północnej stronie Odry.">
+    <p>
+      Sklep, aptekę i przystanek masz w kilka minut pieszo. Do Rynku dojdziesz w około{' '}
+      {minutes('rynek')} minut.
+    </p>
+  </PageHead>
+
+  <section class="sheet" aria-labelledby="mapa-title">
+    <div class="wrap">
+      <SheetHead label="Mapa" title="Co jest wokół budynku." id="mapa-title">
+        <p>
+          Przerywane okręgi pokazują 400, 800 i 1200 metrów w linii prostej. Czasy w tabeli poniżej
+          liczymy po ulicach, z doliczeniem objazdu, w tempie 80 metrów na minutę.
+        </p>
+      </SheetHead>
+      <LocationMap />
+      <ul class="locmap-legend" aria-label="Legenda mapy">
+        <li>
+          <i class="legend-road"></i>ulica
+        </li>
+        <li>
+          <i class="legend-tram"></i>torowisko tramwajowe
+        </li>
+        <li>
+          <i class="legend-rail"></i>kolej
+        </li>
+        <li>
+          <i class="legend-water"></i>Odra i kanały
+        </li>
+        <li>
+          <i class="legend-park"></i>park, skwer
+        </li>
+        <li>
+          <i class="legend-ring"></i>odległość w linii prostej
+        </li>
+        <li>
+          <i class="legend-frame"></i>obszar mapy najbliższej okolicy
+        </li>
+      </ul>
+      <p class="small muted legend-note">
+        To schemat, nie mapa do nawigowania. Przebieg ulic, torów i rzek pochodzi z danych
+        OpenStreetMap (autorzy OpenStreetMap, licencja ODbL). Miejsce Przędzy na mapie jest
+        wymyślone, tak samo jak ulica Wrzecionowa.
+      </p>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="odleglosci-title">
+    <div class="wrap">
+      <SheetHead label="Odległości" title="Ile to trwa." id="odleglosci-title">
+        <p>
+          Dojścia i dojazdy z wejścia głównego, bez korków i oczekiwania na przystanku. Zaokrąglamy
+          do dziesięciu metrów i do pełnej minuty.
+        </p>
+      </SheetHead>
+      <div class="grid">
+        <div class="where-tables">
+          {groups.map(group => (
+            <table class="where-table where-group">
+              <caption>{group.title}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Miejsce</th>
+                  <th scope="col" class="where-distance">
+                    Droga
+                  </th>
+                  <th scope="col">Czas</th>
+                </tr>
+              </thead>
+              <tbody>
+                {group.rows.map(place => (
+                  <tr>
+                    <th scope="row">
+                      <span
+                        class:list={['where-chip', { 'where-chip--none': !placeLetter(place) }]}>
+                        {placeLetter(place)}
+                      </span>
+                      {place.name}
+                      {!placeLetter(place) && <span class="where-offmap">poza mapą</span>}
+                    </th>
+                    <td class="where-distance num">{formatRoute(place)}</td>
+                    <td class="num">
+                      {travelMinutes(place)} min {modeLabel[place.mode]}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="dojazd-title">
+    <div class="wrap">
+      <SheetHead label="Dojazd" title="Jak tu dotrzeć." id="dojazd-title">
+        <p>
+          Budynek stoi przy spokojnej ulicy, a komunikacja miejska jest po obu stronach kwartału.
+        </p>
+      </SheetHead>
+      <div class="grid">
+        <div class="home-facts">
+          <Facts items={ways} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="okolica-title">
+    <div class="wrap">
+      <SheetHead label="Okolica" title="Kamienice, podwórka i Odra za rogiem." id="okolica-title" />
+      <div class="grid">
+        <div class="home-facts home-facts--split prose">
+          <p>
+            Wokół stoją głównie przedwojenne kamienice z podwórkami i drobnymi sklepami na
+            parterach. Przędzalnia jest tu jednym z większych budynków: wysokie okna i ceglany komin
+            widać z ulicy z daleka.
+          </p>
+          <p>
+            Od zachodu masz dziedziniec zamknięty dla samochodów, od wschodu ulicę o umiarkowanym
+            ruchu. Najgłośniej jest przy skrzyżowaniach z ulicami z torowiskiem tramwajowym, więc
+            sypialnie w naszych mieszkaniach wychodzą na dziedziniec.
+          </p>
+          <p>
+            Park Staszica jest {minutes('park-staszica')} minut pieszo, a Ogród Botaniczny i Ostrów
+            Tumski około {minutes('ostrow-tumski')} minut. Na Halę Targową dojdziesz w{' '}
+            {minutes('hala-targowa')} minut.
+          </p>
+        </div>
+        <Pull
+          figure="41 m"
+          text="tyle ma ceglany komin przy północnym końcu budynku. Od ulicy widać go z daleka, więc trudno się zgubić."
+        />
+      </div>
+    </div>
+  </section>
+
+  <div class="page-end">
+    <Cta
+      title="Przejdź się po okolicy z nami."
+      text="Po wizycie w biurze możemy wyjść razem na dziedziniec i sąsiednie ulice. Umów termin, a wskażemy ci okna twojego mieszkania z ulicy."
+    />
+  </div>
+</Layout>

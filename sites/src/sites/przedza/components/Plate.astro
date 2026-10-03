@@ -1,0 +1,33 @@
+---
+interface Props {
+  title: string;
+  scale: string;
+  wide?: boolean;
+  label: string;
+}
+
+const { title, scale, wide = false, label } = Astro.props;
+---
+
+<figure class:list={['plate', { 'plate--wide': wide }]}>
+  <div class="plate__scroll" role="region" aria-label={label} tabindex="0">
+    <slot name="drawing" />
+  </div>
+  {wide && (
+    <p class="plate__hint">
+      <span>Przewiń rysunek w bok</span>
+      <svg viewBox="0 0 24 10" width="24" height="10" aria-hidden="true" focusable="false">
+        <path
+          d="M0 5H22M17 1L22 5L17 9"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"></path>
+      </svg>
+    </p>
+  )}
+  <figcaption class="plate__caption">
+    <span class="plate__title">{title}</span>
+    <span class="plate__scale">{scale}</span>
+    <slot />
+  </figcaption>
+</figure>

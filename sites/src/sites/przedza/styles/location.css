@@ -1,0 +1,480 @@
+.locmap {
+  border: 2px solid var(--ink);
+  background: var(--concrete);
+}
+
+.locmap__defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.locmap__view + .locmap__view {
+  border-top: 2px solid var(--ink);
+}
+
+@media (min-width: 1000px) {
+  .locmap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.28fr);
+  }
+
+  .locmap__view + .locmap__view {
+    border-top: 0;
+    border-left: 2px solid var(--ink);
+  }
+}
+
+.locmap__view {
+  container-type: inline-size;
+}
+
+.locmap__frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.locmap__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.m-park {
+  fill: var(--concrete-deep);
+  stroke: var(--concrete-shade);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.m-water {
+  fill: var(--concrete-shade);
+}
+
+.m-river-main {
+  fill: none;
+  stroke: var(--concrete-shade);
+  stroke-width: 70;
+  stroke-linejoin: round;
+}
+
+.m-river-side {
+  fill: none;
+  stroke: var(--concrete-shade);
+  stroke-width: 28;
+}
+
+.m-canal {
+  fill: none;
+  stroke: var(--concrete-shade);
+  stroke-width: 10;
+}
+
+.m-minor,
+.m-tertiary,
+.m-secondary,
+.m-tram,
+.m-rail,
+.m-rail-ties {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+}
+
+.m-minor {
+  stroke: var(--ink-mute);
+  stroke-width: 0.8;
+  opacity: 0.7;
+}
+
+.m-tertiary {
+  stroke: var(--ink);
+  stroke-width: 1.4;
+}
+
+.m-secondary {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.m-tram {
+  stroke: var(--brick-deep);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 3;
+}
+
+.m-rail {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.m-rail-ties {
+  stroke: var(--ink);
+  stroke-width: 8;
+  stroke-dasharray: 1.5 7;
+}
+
+.m-ring {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+  vector-effect: non-scaling-stroke;
+}
+
+.locmap__layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.locmap__ring {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 0 4px;
+  background: var(--concrete);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.locmap__name {
+  text-shadow:
+    0 0 3px var(--concrete),
+    0 0 3px var(--concrete),
+    0 0 4px var(--concrete);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ink-soft);
+}
+
+.locmap__name--water {
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.locmap__place {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.locmap__chip {
+  position: absolute;
+  left: -11px;
+  top: -11px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--concrete);
+  font-size: 0.6875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 0 0 2px var(--concrete);
+}
+
+.locmap__text {
+  position: absolute;
+  padding: 2px 6px;
+  background: color-mix(in srgb, var(--concrete) 90%, transparent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.locmap__text b {
+  display: block;
+  font-weight: 340;
+  font-size: 0.6875rem;
+}
+
+.locmap__place[data-side='right'] .locmap__text {
+  left: 15px;
+  top: 0;
+  transform: translateY(-50%);
+}
+
+.locmap__place[data-side='left'] .locmap__text {
+  right: 15px;
+  top: 0;
+  transform: translateY(-50%);
+  text-align: right;
+}
+
+.locmap__place[data-side='above'] .locmap__text {
+  left: 0;
+  bottom: 14px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.locmap__place[data-side='below'] .locmap__text {
+  left: 0;
+  top: 14px;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.locmap__place .locmap__text {
+  display: none;
+}
+
+.locmap__name--street {
+  display: none;
+}
+
+@container (min-width: 480px) {
+  .locmap__name--street {
+    display: block;
+  }
+
+  .locmap__view--close .locmap__place .locmap__text {
+    display: block;
+  }
+}
+
+@container (min-width: 640px) {
+  .locmap__view--wide .locmap__place .locmap__text {
+    display: block;
+  }
+}
+
+.locmap__title {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 6px 12px;
+  border-left: 2px solid var(--ink);
+  border-top: 2px solid var(--ink);
+  background: var(--white);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.m-frame {
+  fill: none;
+  stroke: var(--brick);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.locmap__site {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transform: translate(-50%, -100%);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.locmap__site svg {
+  width: 40px;
+  height: 27px;
+  fill: var(--brick);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  paint-order: stroke;
+}
+
+.locmap__site .locmap__text {
+  position: static;
+  border: 2px solid var(--ink);
+  background: var(--white);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.locmap-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8125rem;
+}
+
+.locmap-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.locmap-legend i {
+  display: block;
+  flex: none;
+  width: 26px;
+  height: 10px;
+}
+
+.legend-road {
+  height: 3px;
+  background: var(--ink);
+}
+
+.legend-tram {
+  height: 0;
+  border-top: 2px dashed var(--brick-deep);
+}
+
+.legend-rail {
+  height: 6px;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 6px);
+  border-block: 1px solid var(--ink);
+}
+
+.legend-frame {
+  height: 14px;
+  border: 2px solid var(--brick);
+}
+
+.legend-water {
+  background: var(--concrete-shade);
+}
+
+.legend-park {
+  background: var(--concrete-deep);
+  border: 1px solid var(--concrete-shade);
+}
+
+.legend-ring {
+  height: 0;
+  border-top: 1px dashed var(--ink);
+}
+
+.where-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.where-table caption {
+  padding-bottom: 14px;
+  text-align: left;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.where-table th,
+.where-table td {
+  padding: 12px 16px 12px 0;
+  border-top: 1px solid var(--ink);
+  text-align: left;
+  font-weight: 340;
+}
+
+.where-table thead th {
+  border-top: 2px solid var(--ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.where-table tbody th {
+  font-weight: 500;
+}
+
+.where-chip {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--concrete);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  vertical-align: 1px;
+}
+
+.where-chip--none {
+  background: transparent;
+}
+
+.where-table td:last-child {
+  padding-right: 0;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.where-table thead th:last-child {
+  text-align: right;
+}
+
+.where-table tbody:last-of-type tr:last-child th,
+.where-table tbody:last-of-type tr:last-child td {
+  border-bottom: 1px solid var(--ink);
+}
+
+.where-group {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+@media (max-width: 719px) {
+  .where-table .where-distance {
+    display: none;
+  }
+}
+
+.legend-note {
+  max-width: 44rem;
+  margin-top: 14px;
+}
+
+.where-tables {
+  grid-column: 4 / -1;
+}
+
+@media (max-width: 899px) {
+  .where-tables {
+    grid-column: 1 / -1;
+  }
+}
+
+.where-group:first-child {
+  margin-top: 0;
+}
+
+.where-table .where-distance {
+  width: 7.5rem;
+}
+
+.where-table thead th:last-child,
+.where-table td:last-child {
+  width: 11.5rem;
+}
+
+@media (max-width: 719px) {
+  .where-table thead th:last-child,
+  .where-table td:last-child {
+    width: 9.5rem;
+  }
+}
+
+.where-offmap {
+  margin-left: 8px;
+  color: var(--ink-mute);
+  font-size: 0.75rem;
+  font-weight: 400;
+}

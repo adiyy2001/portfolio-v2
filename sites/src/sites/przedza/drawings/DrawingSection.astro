@@ -1,0 +1,143 @@
+---
+import {
+  floorHeights,
+  slab,
+  wallThickness,
+  buildingDepth,
+  clearDepth,
+  shedRise,
+  levelBottoms,
+  formatMetres,
+} from '../drawings';
+
+const k = 26;
+const x0 = 170;
+const width = buildingDepth * k;
+const wall = wallThickness * k;
+const { bottoms, top } = levelBottoms(floorHeights, slab);
+const garage = 3 * k;
+const ground = 168 + top * k;
+const eave = ground - top * k;
+const shed = shedRise * k;
+const x1 = x0 + width;
+const boxes = floorHeights.map((height, index) => ({
+  index,
+  ceiling: ground - (bottoms[index] + height) * k,
+  floor: ground - bottoms[index] * k,
+}));
+const names = ['parter', '1. piętro', '2. piętro', '3. piętro', '4. piętro'];
+---
+
+<svg
+  class="dr"
+  viewBox="0 0 640 840"
+  role="img"
+  aria-label="Przekrój poprzeczny: dwie ceglane ściany grubości 65 centymetrów, pięć kondygnacji ze stropami, garaż pod dziedzińcem i szklona ściana zęba dachu."
+  focusable="false">
+  <defs>
+    <pattern id="se-bricks" width="26" height="8" patternUnits="userSpaceOnUse">
+      <rect class="dr-course" y="7" width="26" height="1"></rect>
+      <rect class="dr-course" width="1" height="7"></rect>
+      <rect class="dr-course" x="13" width="1" height="7"></rect>
+    </pattern>
+    <pattern
+      id="se-earth"
+      width="10"
+      height="10"
+      patternUnits="userSpaceOnUse"
+      patternTransform="rotate(45)">
+      <rect class="dr-earth" width="1" height="10"></rect>
+    </pattern>
+  </defs>
+
+  <rect class="dr-earth-fill" x="40" y={ground} width="520" height={garage + 20}></rect>
+  <rect x="40" y={ground} width="520" height={garage + 20} fill="url(#se-earth)"></rect>
+  <rect class="dr-void" x={x0 + wall} y={ground} width={width - 2 * wall} height={garage}></rect>
+
+  <rect class="dr-void" x={x0 + wall} y={eave} width={width - 2 * wall} height={top * k}></rect>
+  <rect class="dr-wall" x={x0} y={eave} width={wall} height={top * k + garage}></rect>
+  <rect class="dr-wall" x={x1 - wall} y={eave} width={wall} height={top * k + garage}></rect>
+  <rect x={x0} y={eave} width={wall} height={top * k + garage} fill="url(#se-bricks)"></rect>
+  <rect x={x1 - wall} y={eave} width={wall} height={top * k + garage} fill="url(#se-bricks)"></rect>
+
+  {boxes.map(box => (
+    <rect
+      class="dr-slab"
+      x={x0 + wall}
+      y={box.ceiling - slab * k}
+      width={width - 2 * wall}
+      height={slab * k}></rect>
+  ))}
+  <rect class="dr-slab" x={x0 + wall} y={ground} width={width - 2 * wall} height={slab * k}></rect>
+  <rect
+    class="dr-slab"
+    x={x0 + wall}
+    y={ground + garage}
+    width={width - 2 * wall}
+    height="8"></rect>
+
+  <path class="dr-roof" d={`M${x0 - 4} ${eave}H${x1 + 4}L${x1 + 4} ${eave - 6}H${x0 - 4}Z`}></path>
+  <rect class="dr-shed-frame" x={x0} y={eave - shed} width={width} height={shed}></rect>
+  <rect
+    class="dr-shed-glass"
+    x={x0 + 6}
+    y={eave - shed + 6}
+    width={width - 12}
+    height={shed - 12}></rect>
+  {[1, 2, 3].map(index => (
+    <line
+      class="dr-shed-bar"
+      x1={x0 + (index * width) / 4}
+      y1={eave - shed + 6}
+      x2={x0 + (index * width) / 4}
+      y2={eave - 6}></line>
+  ))}
+
+  <g class="dr-dim">
+    <line x1={x0 + wall} y1={ground + garage + 36} x2={x1 - wall} y2={ground + garage + 36}></line>
+    <line x1={x0 + wall} y1={ground + garage + 28} x2={x0 + wall} y2={ground + garage + 44}></line>
+    <line x1={x1 - wall} y1={ground + garage + 28} x2={x1 - wall} y2={ground + garage + 44}></line>
+    <text class="dr-text" x={(x0 + x1) / 2} y={ground + garage + 70} text-anchor="middle">
+      {formatMetres(clearDepth)} w świetle
+    </text>
+
+    {boxes.map(box => (
+      <g>
+        <line x1={x0 - 34} y1={box.ceiling} x2={x0 - 34} y2={box.floor}></line>
+        <line x1={x0 - 42} y1={box.ceiling} x2={x0 - 26} y2={box.ceiling}></line>
+        <line x1={x0 - 42} y1={box.floor} x2={x0 - 26} y2={box.floor}></line>
+        <text class="dr-text" x={x0 - 50} y={(box.ceiling + box.floor) / 2 - 4} text-anchor="end">
+          {names[box.index]}
+        </text>
+        <text
+          class="dr-text dr-text--faint"
+          x={x0 - 50}
+          y={(box.ceiling + box.floor) / 2 + 20}
+          text-anchor="end">
+          {formatMetres(floorHeights[box.index])}
+        </text>
+      </g>
+    ))}
+  </g>
+
+  <g class="dr-note">
+    <text class="dr-text" x={x1 + 26} y={eave - shed / 2 - 6}>
+      szklona
+    </text>
+    <text class="dr-text" x={x1 + 26} y={eave - shed / 2 + 18}>
+      ściana zęba
+    </text>
+    <text class="dr-text" x={x1 + 26} y={eave + 80}>
+      mur 65 cm
+    </text>
+    <text class="dr-text" x={x1 + 26} y={ground + garage / 2 + 6}>
+      garaż
+    </text>
+    <text class="dr-text" x={x0} y="40">
+      zachód
+    </text>
+    <text class="dr-text" x={x1} y="40" text-anchor="end">
+      wschód
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,190 @@
+---
+import Facts from '../../sites/przedza/components/Facts.astro';
+import EnquiryForm from '../../sites/przedza/components/EnquiryForm.astro';
+import PageHead from '../../sites/przedza/components/PageHead.astro';
+import Plate from '../../sites/przedza/components/Plate.astro';
+import Pull from '../../sites/przedza/components/Pull.astro';
+import SheetHead from '../../sites/przedza/components/SheetHead.astro';
+import DrawingEntrance from '../../sites/przedza/drawings/DrawingEntrance.astro';
+import { reservationFee } from '../../sites/przedza/building';
+import { formatPrice } from '../../sites/przedza/flats';
+import Layout from '../../sites/przedza/Layout.astro';
+import { placeById, travelMinutes, type Place } from '../../sites/przedza/places';
+import { site } from '../../sites/przedza/site';
+import '../../sites/przedza/styles/drawings.css';
+import '../../sites/przedza/styles/office.css';
+
+const get = (id: string): Place => {
+  const place = placeById(id);
+  if (!place) throw new Error(`Unknown place ${id}`);
+  return place;
+};
+
+const minutes = (id: string) => travelMinutes(get(id));
+
+const contact = [
+  {
+    term: 'Adres',
+    text: `${site.street}, ${site.postcode} ${site.city}, parter, wejście od ulicy.`,
+  },
+  { term: 'Telefon', text: site.phone },
+  { term: 'E-mail', text: site.email },
+];
+
+const arrival = [
+  {
+    term: 'Tramwajem',
+    text: `Przystanek Paulińska jest ${minutes('paulinska')} minut pieszo, a Jedności Narodowej ${minutes('jednosci')} minut.`,
+  },
+  {
+    term: 'Koleją',
+    text: `Z dworca Nadodrze idziesz około ${minutes('dworzec-nadodrze')} minut.`,
+  },
+  {
+    term: 'Samochodem',
+    text: 'Dla gości zostaje kilka miejsc przy ulicy Wrzecionowej. Garaż w budynku jest dla mieszkańców.',
+  },
+  {
+    term: 'Bez schodów',
+    text: 'Wejście do biura jest z poziomu chodnika, bez progu. Biuro mieści się w jednym pomieszczeniu na parterze.',
+  },
+];
+
+const visit = [
+  'Makieta budynku w skali 1:100 z wyjmowanymi piętrami.',
+  'Próbki cegły, szkła i żeliwa oraz katalog okien.',
+  'Rzuty wszystkich mieszkań w skali 1:50, do przejrzenia na stole.',
+  'Prospekt informacyjny z załącznikami, na papierze albo mailem.',
+];
+---
+
+<Layout
+  title="Biuro sprzedaży: Przędza, ul. Wrzecionowa 2"
+  description="Biuro sprzedaży Przędzy we Wrocławiu: adres, godziny otwarcia, telefon, e-mail i formularz do umówienia prezentacji mieszkań. To strona przykładowa."
+  path="/przedza/biuro-sprzedazy/"
+  current="biuro"
+  exact
+  flush>
+  <PageHead label="Biuro sprzedaży" title="Przyjdź obejrzeć, zanim zdecydujesz.">
+    <p>
+      Biuro jest na parterze budynku, od ulicy. Jest makieta, są próbki materiałów i rzuty. Możesz
+      przyjść bez zapowiedzi albo umówić konkretny termin.
+    </p>
+  </PageHead>
+
+  <section class="sheet" aria-labelledby="kontakt-title">
+    <div class="wrap">
+      <SheetHead label="Kontakt" title="Adres, telefon, godziny." id="kontakt-title" />
+      <div class="grid office-grid">
+        <div class="office-main">
+          <Facts items={contact} />
+        </div>
+        <div class="office-aside">
+          <table class="hours">
+            <caption>Godziny otwarcia</caption>
+            <thead class="visually-hidden">
+              <tr>
+                <th scope="col">Dni</th>
+                <th scope="col">Godziny</th>
+              </tr>
+            </thead>
+            <tbody>
+              {site.hours.map(row => (
+                <tr>
+                  <th scope="row">{row.days}</th>
+                  <td class:list={['num', { hours__closed: row.time === 'zamknięte' }]}>
+                    {row.time}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p class="small muted office-note">W dni ustawowo wolne od pracy biuro jest zamknięte.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="dojscie-title">
+    <div class="wrap">
+      <SheetHead label="Dojście" title="Wejście od ulicy, obok bramy." id="dojscie-title">
+        <p>Drzwi biura są na północ od bramy przejazdowej, po stronie ulicy Wrzecionowej.</p>
+      </SheetHead>
+      <div class="grid office-grid">
+        <div class="office-main">
+          <Plate
+            title="Plan sytuacyjny parteru"
+            scale="Rysunek schematyczny, bez skali."
+            label="Plan sytuacyjny parteru, przewijany rysunek">
+            <DrawingEntrance slot="drawing" />
+            <p>
+              Przez bramę wchodzi się na dziedziniec, a do biura wprost z ulicy. Droga od przystanku
+              Paulińska zajmuje około {minutes('paulinska')} minut.
+            </p>
+          </Plate>
+        </div>
+        <div class="office-wide">
+          <Facts items={arrival} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" id="prezentacja" aria-labelledby="prezentacja-title">
+    <div class="wrap">
+      <SheetHead label="Prezentacja" title="Umów spotkanie." id="prezentacja-title">
+        <p>
+          Prezentacja trwa około godziny i do niczego nie zobowiązuje. Odpowiadamy w dzień roboczy.
+        </p>
+      </SheetHead>
+      <div class="grid office-grid">
+        <div class="office-main">
+          <EnquiryForm
+            id="prezentacja-formularz"
+            subject="Prośba o prezentację w biurze sprzedaży."
+            messageLabel="Co chcesz zobaczyć?"
+            messageHint="Nieobowiązkowo. Napisz, które mieszkania cię interesują."
+            submitLabel="Umów prezentację"
+            withVisit
+          />
+        </div>
+        <div class="office-aside">
+          <h3 class="home-facts__title">Co zobaczysz</h3>
+          <ul class="office-list">
+            {visit.map(item => (
+              <li>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="rezerwacja-title">
+    <div class="wrap">
+      <SheetHead
+        label="Zanim zarezerwujesz"
+        title="Co warto mieć przy sobie."
+        id="rezerwacja-title"
+      />
+      <div class="grid">
+        <div class="home-facts home-facts--split prose">
+          <p>
+            Do rezerwacji potrzebny jest dowód osobisty. Umowa rezerwacyjna jest pisemna, a jeśli
+            bank odmówi ci kredytu, zwracamy opłatę niezwłocznie.
+          </p>
+          <p>
+            Prospekt informacyjny dostajesz bezpłatnie przed rezerwacją.
+            {` Ceny mieszkań są brutto (${site.asOf}) i mają charakter informacyjny.`}
+          </p>
+        </div>
+        <Pull
+          figure={formatPrice(reservationFee)}
+          text="to opłata rezerwacyjna. Zaliczamy ją na poczet ceny, a ustawa dopuszcza najwyżej jeden procent ceny mieszkania."
+        />
+      </div>
+    </div>
+  </section>
+
+  <div class="page-end"></div>
+</Layout>

@@ -1,0 +1,166 @@
+---
+import Cta from '../../sites/przedza/components/Cta.astro';
+import PageHead from '../../sites/przedza/components/PageHead.astro';
+import Plate from '../../sites/przedza/components/Plate.astro';
+import SheetHead from '../../sites/przedza/components/SheetHead.astro';
+import DrawingBrick from '../../sites/przedza/drawings/DrawingBrick.astro';
+import DrawingColumn from '../../sites/przedza/drawings/DrawingColumn.astro';
+import DrawingElevation from '../../sites/przedza/drawings/DrawingElevation.astro';
+import DrawingSection from '../../sites/przedza/drawings/DrawingSection.astro';
+import DrawingShed from '../../sites/przedza/drawings/DrawingShed.astro';
+import DrawingWindow from '../../sites/przedza/drawings/DrawingWindow.astro';
+import {
+  bayLength,
+  buildingLength,
+  chimneyHeight,
+  formatMetres,
+  shedPitchDegrees,
+} from '../../sites/przedza/drawings';
+import Layout from '../../sites/przedza/Layout.astro';
+import '../../sites/przedza/styles/drawings.css';
+
+const pitch = shedPitchDegrees.toFixed(1).replace('.', ',');
+---
+
+<Layout
+  title="Galeria: rysunki budynku Przędzy"
+  description="Elewacja, przekrój, dach szedowy, okno, żeliwna kolumna i wątek ceglany. Galeria Przędzy to rysunki, nie zdjęcia, bo budynek jest przykładowy."
+  path="/przedza/galeria/"
+  current="galeria"
+  exact
+  flush>
+  <PageHead label="Galeria" title="Rysunki, nie zdjęcia.">
+    <p>
+      Przędza jest budynkiem przykładowym, więc nie mamy jej zdjęć. Pokazujemy rysunki, które
+      opisują, jak zbudowany jest dom: z cegły, żeliwa i szkła pod pięcioma szedowymi dachami.
+    </p>
+  </PageHead>
+
+  <section class="sheet" aria-labelledby="elewacja-title">
+    <div class="wrap">
+      <SheetHead label="Elewacja" title="Wschodnia fasada w całości." id="elewacja-title">
+        <p>
+          Dziesięć osi okien, pięć kondygnacji i komin. Bramę przejazdową w parterze zajmują dwie
+          środkowe osie.
+        </p>
+      </SheetHead>
+      <div class="grid">
+        <div class="plates">
+          <Plate
+            title="Elewacja wschodnia"
+            scale="Rysunek schematyczny, bez skali. Wymiary w metrach."
+            label="Elewacja wschodnia, przewijany rysunek"
+            wide>
+            <DrawingElevation slot="drawing" />
+            <p>
+              Budynek ma {formatMetres(buildingLength)} długości, czyli dziesięć osi po{' '}
+              {formatMetres(bayLength)}. Komin ma {formatMetres(chimneyHeight)}, a na rysunku jest
+              ucięty u góry. Pięć zębów dachu szedowego przykrywa po dwie osie.
+            </p>
+            <p>
+              Jedno okno na elewacji to jedno mieszkanie. Rzuty są schematyczne: szerokość
+              mieszkania na rzucie wynika z jego powierzchni i nie musi pokrywać się z osią okna.
+            </p>
+          </Plate>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="przekroj-title">
+    <div class="wrap">
+      <SheetHead
+        label="Przekrój, dach, cegła"
+        title="Od garażu po szklany ząb."
+        id="przekroj-title">
+        <p>
+          Mur grubości 65 centymetrów trzyma temperaturę, a szkło od północy daje równe światło w
+          najwyższych mieszkaniach.
+        </p>
+      </SheetHead>
+      <div class="grid">
+        <div class="plates plates--pair plates--stack">
+          <Plate
+            title="Przekrój poprzeczny"
+            scale="Rysunek schematyczny. Wysokości kondygnacji w świetle."
+            label="Przekrój poprzeczny">
+            <DrawingSection slot="drawing" />
+            <p>
+              Wysokości kondygnacji są różne: parter ma najwięcej, a górne piętra mniej. Pod
+              dziedzińcem jest garaż.
+            </p>
+          </Plate>
+          <Plate
+            title="Dach szedowy, detal"
+            scale="Rysunek schematyczny. Nachylenie połaci wynika z wymiarów."
+            label="Detal dachu szedowego">
+            <DrawingShed slot="drawing" />
+            <p>
+              Połać ma {pitch}° nachylenia i opada ku północy. Szklenie jest pionowe, a woda spływa
+              do rynny w dolinie między zębami.
+            </p>
+          </Plate>
+          <Plate
+            title="Wątek ceglany"
+            scale="Rysunek schematyczny. Cegła 25 na 12 na 6,5 cm."
+            label="Wątek ceglany">
+            <DrawingBrick slot="drawing" />
+            <p>Wątek gotycki: w każdej warstwie wozówka i główka na przemian.</p>
+          </Plate>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="detale-title">
+    <div class="wrap">
+      <SheetHead label="Detale" title="Okno i kolumna." id="detale-title">
+        <p>
+          Dwie rzeczy, które widać w mieszkaniach: wysokie okno i żeliwna kolumna, którą zostawiamy
+          tam, gdzie stoi w środku pokoju.
+        </p>
+      </SheetHead>
+      <div class="grid">
+        <div class="plates plates--pair plates--details">
+          <Plate title="Okno" scale="Rysunek schematyczny. Wymiary w metrach." label="Detal okna">
+            <DrawingWindow slot="drawing" />
+            <p>Trzy skrzydła i nadświetle, a nad nimi rząd cegieł na sztorc.</p>
+          </Plate>
+          <Plate
+            title="Kolumna żeliwna"
+            scale="Rysunek schematyczny. Wymiary w metrach i centymetrach."
+            label="Detal kolumny żeliwnej">
+            <DrawingColumn slot="drawing" />
+            <p>Zostawiamy ją w pięciu mieszkaniach, tam gdzie stoi w środku pokoju.</p>
+          </Plate>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="uczciwie-title">
+    <div class="wrap">
+      <SheetHead label="O rysunkach" title="Co tu widzisz, a czego nie." id="uczciwie-title" />
+      <div class="grid">
+        <div class="home-facts prose">
+          <p>
+            Rysunki powstały na potrzeby tej strony i pokazują zasadę budowy, nie dokumentację
+            projektową. Wymiary są przykładowe. Prawdziwe rzuty i przekroje konkretnego mieszkania
+            znajdziesz na stronie tego mieszkania.
+          </p>
+          <p>
+            Zdjęć celowo nie ma, bo budynek jest wymyślony. Zamiast nich daliśmy rysunki, które nie
+            udają fotografii.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-end">
+    <Cta
+      title="Cegłę możesz dotknąć w biurze."
+      text="W biurze sprzedaży leżą próbki cegły, szkła i żeliwa. Przyjdź w godzinach otwarcia albo umów termin."
+    />
+  </div>
+</Layout>

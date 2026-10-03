@@ -1,0 +1,150 @@
+---
+import Cta from '../../sites/przedza/components/Cta.astro';
+import Facts from '../../sites/przedza/components/Facts.astro';
+import RoomsTable from '../../sites/przedza/components/RoomsTable.astro';
+import Schedule from '../../sites/przedza/components/Schedule.astro';
+import SheetHead from '../../sites/przedza/components/SheetHead.astro';
+import Steps from '../../sites/przedza/components/Steps.astro';
+import Finder from '../../sites/przedza/finder/Finder';
+import Layout from '../../sites/przedza/Layout.astro';
+import { parkingPrice, storageFrom } from '../../sites/przedza/building';
+import { formatPrice } from '../../sites/przedza/flats';
+import { site } from '../../sites/przedza/site';
+import '../../sites/przedza/styles/home.css';
+
+const remains = [
+  {
+    term: 'Cegła',
+    text: 'Ściany zewnętrzne mają od 51 do 77 cm grubości. Są oczyszczone i zabezpieczone, bez tynku. Ocieplamy je od środka, żeby elewacja została taka, jaka była.',
+  },
+  {
+    term: 'Szedy',
+    text: 'Pięć dachów szedowych nad najwyższym piętrem. Przeszklone ściany zwrócone na północ dają równe światło przez cały dzień, a stropy pod nimi sięgają 5,2 m.',
+  },
+  {
+    term: 'Żeliwo',
+    text: 'Słupy żeliwne z 1908 roku zostają w holu i w kilku mieszkaniach na parterze i pierwszym piętrze. Każdy jest wyczyszczony i zaznaczony na rzucie.',
+  },
+  {
+    term: 'Okna',
+    text: 'Nowe okna w dawnym, wysokim podziale, z trzema szybami. Z zewnątrz wyglądają jak oryginały, od środka grzeją jak nowe.',
+  },
+  {
+    term: 'Komin',
+    text: 'Ceglany komin ma 41 metrów i stoi przy północnym końcu budynku. Już nie dymi, ale zostaje: od ulicy widać go z daleka.',
+  },
+];
+
+const extras = [
+  {
+    term: 'Miejsce postojowe',
+    text: `W garażu pod dziedzińcem, ${formatPrice(parkingPrice)}. Przy części miejsc jest gniazdo do ładowania samochodu elektrycznego.`,
+  },
+  {
+    term: 'Komórka lokatorska',
+    text: `W piwnicy budynku, od ${formatPrice(storageFrom)} w zależności od metrażu.`,
+  },
+  {
+    term: 'Rowerownia i wózkownia',
+    text: 'Przy wejściu od dziedzińca, bez dopłaty. Rowerownia ma stojaki i punkt do dopompowania opon.',
+  },
+];
+---
+
+<Layout
+  title="Przędza: mieszkania w dawnej przędzalni, Wrocław Nadodrze"
+  description="48 mieszkań od 2 do 4 pokoi w odnowionej przędzalni na wrocławskim Nadodrzu. Wybierz mieszkanie na elewacji budynku, sprawdź rzut i cenę."
+  path="/przedza/"
+  current="mieszkania"
+  exact
+  flush>
+  <noscript slot="head">
+    <style>
+      .filters,
+      .list__sort {
+        display: none !important;
+      }
+    </style>
+  </noscript>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__top">
+        <p class="label">
+          {site.street}, {site.city} {site.district}
+        </p>
+        <p class="lead">48 mieszkań, od 2 do 4 pokoi. Oddanie w 2027.</p>
+      </div>
+      <h1 class="hero__title">
+        <span class="hero__line">Mieszkania</span>{' '}
+        <span class="hero__line">w dawnej przędzalni.</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="finder-section" id="mieszkania" aria-labelledby="finder-title">
+    <div class="wrap">
+      <h2 class="visually-hidden" id="finder-title">
+        Wyszukiwarka mieszkań
+      </h2>
+      <Finder client:load />
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="budynek-title">
+    <div class="wrap">
+      <SheetHead label="Budynek" title="Cegła, żeliwo i pięć szedów zostają." id="budynek-title">
+        <p>
+          Przędzalnię bawełny postawiono tu w 1908 roku, a produkcję zamknięto w 1994. Budynek stał
+          potem pusty trzydzieści lat. Nie obklejamy go nową elewacją: czyścimy cegłę, odtwarzamy
+          okna w dawnym podziale i wstawiamy nowe stropy, instalacje oraz ocieplenie od środka.
+        </p>
+      </SheetHead>
+      <div class="grid">
+        <div class="home-facts">
+          <Facts items={remains} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="uklady-title">
+    <div class="wrap">
+      <SheetHead label="Układy" title="Dwa, trzy i cztery pokoje." id="uklady-title">
+        <p>
+          Każde mieszkanie ma okna na dwie strony: na ulicę i na dziedziniec. Mieszkania narożne
+          mają jeszcze trzecie okno, w ścianie szczytowej.
+        </p>
+      </SheetHead>
+      <RoomsTable />
+      <div class="home-facts home-facts--extras">
+        <h3 class="home-facts__title">Do mieszkania dokupisz</h3>
+        <Facts items={extras} />
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="harmonogram-title">
+    <div class="wrap">
+      <SheetHead label="Harmonogram" title="Gdzie jesteśmy z budową." id="harmonogram-title">
+        <p>
+          Stan na październik 2026. Terminy są z prospektu informacyjnego, który dostajesz przed
+          rezerwacją.
+        </p>
+      </SheetHead>
+      <Schedule />
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="zakup-title">
+    <div class="wrap">
+      <SheetHead label="Zakup" title="Od wyboru do kluczy." id="zakup-title">
+        <p>Pięć kroków, w tej kolejności. Przed każdym masz czas, żeby się zastanowić.</p>
+      </SheetHead>
+      <Steps />
+    </div>
+  </section>
+
+  <div class="page-end">
+    <Cta />
+  </div>
+</Layout>

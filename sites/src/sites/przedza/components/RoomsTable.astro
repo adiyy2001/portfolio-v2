@@ -1,0 +1,57 @@
+---
+import { link } from '../../../shared/link';
+import { flats } from '../data';
+import { WindowGlyph } from '../finder/Elevation';
+import { flatKey, formatPrice, pluralPl, roomsLabel, summaryByRooms } from '../flats';
+
+const nbsp = String.fromCharCode(0xa0);
+const rows = summaryByRooms(flats).map(item => ({
+  ...item,
+  members: flats.filter(flat => flat.rooms === item.rooms).sort((a, b) => flatKey(a) - flatKey(b)),
+  range: `${item.minArea.toFixed(1).replace('.', ',')}-${item.maxArea.toFixed(1).replace('.', ',')}${nbsp}m²`,
+  href: `${link('/przedza/')}?pokoje=${item.rooms}&wolne=1#mieszkania`,
+}));
+const evenRowLength = (count: number, longest: number) => {
+  for (let length = longest; length > 1; length -= 1) {
+    if (count % length === 0) return length;
+  }
+  return count;
+};
+const glyphBox = { x: 1, y: 1, width: 30, height: 46 };
+---
+
+<ul class="rooms">
+  {rows.map(row => (
+    <li class="rooms__row">
+      <p class="rooms__count">
+        <span class="rooms__digit">{row.rooms}</span>
+        <span class="rooms__word">{pluralPl(row.rooms, 'pokój', 'pokoje', 'pokoi')}</span>
+      </p>
+      <div class="rooms__facts">
+        <p class="rooms__area num">{row.range}</p>
+        <p class="rooms__stock">
+          {row.total} {pluralPl(row.total, 'mieszkanie', 'mieszkania', 'mieszkań')}, z tego{' '}
+          {row.available} wolnych
+        </p>
+        <p class="rooms__price num">
+          {row.priceFrom ? `wolne od ${formatPrice(row.priceFrom)}` : 'brak wolnych'}
+        </p>
+      </div>
+      <div
+        class="rooms__glyphs"
+        style={`--per-row:${evenRowLength(row.members.length, 12)}`}
+        aria-hidden="true">
+        {row.members.map(flat => (
+          <svg viewBox="0 0 32 48" width="16" height="24" focusable="false">
+            <g class="win" data-status={flat.status} data-match="true">
+              <WindowGlyph flat={{ rooms: flat.rooms, status: flat.status }} box={glyphBox} />
+            </g>
+          </svg>
+        ))}
+      </div>
+      <a class="btn btn--arrow rooms__link" href={row.href}>
+        Pokaż wolne, {roomsLabel(row.rooms)}
+      </a>
+    </li>
+  ))}
+</ul>

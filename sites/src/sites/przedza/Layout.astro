@@ -1,0 +1,91 @@
+---
+import { link } from '../../shared/link';
+import Footer from './components/Footer.astro';
+import Header from './components/Header.astro';
+import { fontFaceCss, fontHref } from './fonts';
+import type { NavKey } from './nav';
+import { site } from './site';
+import { glueHtml } from './typography';
+import './styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: NavKey;
+  exact?: boolean;
+  flush?: boolean;
+}
+
+const { title, description, path, current, exact, flush = false } = Astro.props;
+const canonical = new URL(link(path), Astro.site).href;
+const image = new URL(link('/przedza/og.png'), Astro.site).href;
+const content = glueHtml(await Astro.slots.render('default'));
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#d7d8d3" />
+    <link rel="icon" href={link('/przedza/favicon.svg')} type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Elewacja dawnej przędzalni z oknami mieszkań i dachem szedowym"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href={fontHref} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaceCss}></style>
+    <noscript>
+      <style>
+        .enquiry [data-form] {
+          display: none !important;
+        }
+        @media (max-width: 899px) {
+          .bar__toggle {
+            display: none !important;
+          }
+          .bar {
+            position: static !important;
+          }
+          .bar__inner {
+            flex-wrap: wrap;
+          }
+          .bar__logo {
+            min-height: var(--bar);
+          }
+          .bar__nav {
+            flex: 1 1 100% !important;
+            position: static !important;
+            display: flex !important;
+            box-shadow: none !important;
+          }
+        }
+      </style>
+    </noscript>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#tresc">
+      Przejdź do treści
+    </a>
+    <Header current={current} exact={exact} />
+    <main id="tresc" tabindex="-1">
+      <Fragment set:html={content} />
+    </main>
+    <Footer flush={flush} />
+  </body>
+</html>

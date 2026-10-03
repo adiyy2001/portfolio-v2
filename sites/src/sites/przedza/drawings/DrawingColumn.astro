@@ -1,0 +1,80 @@
+---
+import { formatMetres } from '../drawings';
+
+const k = 120;
+const height = 3.4 * k;
+const base = 480;
+const cx = 160;
+const shaft = 0.28 * k;
+const capital = 0.5 * k;
+const capHeight = 0.34 * k;
+const footHeight = 0.2 * k;
+const ringCx = 490;
+const ringCy = 250;
+const outer = 84;
+---
+
+<svg
+  class="dr"
+  viewBox="0 0 600 560"
+  role="img"
+  aria-label="Detal żeliwnej kolumny: smukły trzon o średnicy 28 centymetrów, rozszerzona głowica i podstawa oraz przekrój pierścieniowy trzonu."
+  focusable="false">
+  <path
+    class="dr-iron"
+    d={`M${cx - capital / 2} ${base - height}H${cx + capital / 2}L${cx + shaft / 2 + 4} ${base - height + capHeight}H${cx - shaft / 2 - 4}Z`}></path>
+  <rect
+    class="dr-iron"
+    x={cx - shaft / 2}
+    y={base - height + capHeight}
+    width={shaft}
+    height={height - capHeight - footHeight}></rect>
+  <path
+    class="dr-iron"
+    d={`M${cx - shaft / 2 - 4} ${base - footHeight}H${cx + shaft / 2 + 4}L${cx + capital / 2 - 6} ${base}H${cx - capital / 2 + 6}Z`}></path>
+  <line class="dr-axis" x1={cx} y1={base - height - 24} x2={cx} y2={base + 24}></line>
+  <rect class="dr-slab" x={cx - 100} y={base - height - 20} width="200" height="20"></rect>
+  <rect class="dr-slab" x={cx - 100} y={base} width="200" height="14"></rect>
+
+  <circle class="dr-iron" cx={ringCx} cy={ringCy} r={outer / 2}></circle>
+  <circle class="dr-void" cx={ringCx} cy={ringCy} r={outer / 2 - 8}></circle>
+  <line
+    class="dr-axis"
+    x1={ringCx - outer / 2 - 18}
+    y1={ringCy}
+    x2={ringCx + outer / 2 + 18}
+    y2={ringCy}></line>
+  <line
+    class="dr-axis"
+    x1={ringCx}
+    y1={ringCy - outer / 2 - 18}
+    x2={ringCx}
+    y2={ringCy + outer / 2 + 18}></line>
+
+  <g class="dr-dim">
+    <line x1={cx + 235} y1={base - height} x2={cx + 235} y2={base}></line>
+    <line x1={cx + 227} y1={base - height} x2={cx + 243} y2={base - height}></line>
+    <line x1={cx + 227} y1={base} x2={cx + 243} y2={base}></line>
+    <text class="dr-text" x={cx + 223} text-anchor="end" y={base - height / 2 + 6}>
+      {formatMetres(3.4)}
+    </text>
+    <line x1={ringCx - outer / 2} y1={ringCy + 62} x2={ringCx + outer / 2} y2={ringCy + 62}></line>
+    <line x1={ringCx - outer / 2} y1={ringCy + 54} x2={ringCx - outer / 2} y2={ringCy + 70}></line>
+    <line x1={ringCx + outer / 2} y1={ringCy + 54} x2={ringCx + outer / 2} y2={ringCy + 70}></line>
+    <text class="dr-text" x={ringCx} y={ringCy + 98} text-anchor="middle">
+      ø 28 cm
+    </text>
+  </g>
+
+  <g class="dr-note">
+    <text class="dr-text" x="40" y="40">
+      żeliwo, trzon pusty w środku
+    </text>
+    <text class="dr-text" x={ringCx} y={ringCy + 130} text-anchor="middle">
+      przekrój trzonu
+    </text>
+    <text class="dr-text" x={cx + 50} y={base - height + 24}>
+      głowica 50 cm
+    </text>
+  </g>
+</svg>

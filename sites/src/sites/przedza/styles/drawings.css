@@ -1,0 +1,380 @@
+.plate {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  margin: 0;
+  border: 2px solid var(--ink);
+  background: var(--concrete);
+}
+
+.plate__scroll {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  overflow-x: auto;
+  background: var(--concrete);
+}
+
+.plate__scroll:focus-visible {
+  outline: 3px solid var(--brick-deep);
+  outline-offset: -3px;
+}
+
+.plate__scroll > .dr {
+  display: block;
+  flex: none;
+  width: 100%;
+  height: auto;
+}
+
+.plate--wide .dr {
+  min-width: 920px;
+}
+
+@media (max-width: 720px) {
+  .plate--wide .dr {
+    min-width: 960px;
+  }
+
+  .plate:not(.plate--wide) .dr-text {
+    font-size: 23px;
+  }
+}
+
+.plate__hint {
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 0;
+  padding: 8px 18px;
+  border-top: 1px solid var(--ink);
+  background: var(--white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 999px) {
+  .plate__hint {
+    display: flex;
+  }
+}
+
+.plate__caption {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px 20px;
+  border-top: 2px solid var(--ink);
+  background: var(--white);
+}
+
+.plate__title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.plate__scale {
+  color: var(--ink-mute);
+  font-size: 0.8125rem;
+}
+
+.plate__caption p {
+  max-width: 44rem;
+  font-size: 0.9375rem;
+}
+
+.plates {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--gap);
+  grid-column: 1 / -1;
+}
+
+.plates--pair {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .plates--pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .plates--stack > .plate:first-child {
+    grid-row: span 2;
+  }
+
+  .plates--details .plate__scroll > .dr {
+    width: auto;
+    max-width: 100%;
+    height: 460px;
+    margin-inline: auto;
+  }
+}
+
+.dr {
+  font-family: var(--font);
+}
+
+.dr-text {
+  fill: var(--ink);
+  font-size: 19px;
+  font-weight: 400;
+  font-feature-settings: 'tnum';
+}
+
+.dr-text--faint {
+  fill: var(--ink-mute);
+}
+
+.dr-text--floor {
+  font-size: 19px;
+}
+
+.dr-wall {
+  fill: var(--concrete-shade);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-course {
+  fill: var(--ink);
+  opacity: 0.35;
+}
+
+.dr-belt {
+  fill: var(--ink);
+  opacity: 0.4;
+}
+
+.dr-roof {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.dr-eave {
+  fill: var(--ink);
+}
+
+.dr-shed-glass {
+  fill: var(--white);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-shed-frame {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.dr-shed-bar {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-window rect {
+  fill: var(--white);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.dr-window line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.dr-window .dr-sill {
+  fill: var(--ink);
+}
+
+.dr-gate rect {
+  fill: var(--brick);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-gate line {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-chimney {
+  fill: var(--brick);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-chimney-band {
+  fill: var(--ink);
+}
+
+.dr-ground {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.dr-ground-hatch {
+  fill: var(--ink);
+  opacity: 0.15;
+}
+
+.dr-dim line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.dr-note line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.dr-north line,
+.dr-north path {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-north path {
+  fill: var(--ink);
+}
+
+.dr-slab {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.dr-void {
+  fill: var(--white);
+}
+
+.dr-earth-fill {
+  fill: var(--concrete-deep);
+}
+
+.dr-earth {
+  fill: var(--ink);
+  opacity: 0.3;
+}
+
+.dr-insulation {
+  fill: var(--concrete-shade);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.dr-gutter {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+}
+
+.dr-lintel {
+  fill: var(--brick);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-frame {
+  fill: var(--ink);
+}
+
+.dr-glass-fill {
+  fill: var(--white);
+}
+
+.dr-sash {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+}
+
+.dr-swing {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-dasharray: 8 6;
+}
+
+.dr-sill {
+  fill: var(--ink);
+}
+
+.dr-iron {
+  fill: var(--ink-soft);
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.dr-axis {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-dasharray: 14 5 3 5;
+}
+
+.dr-joint {
+  fill: var(--concrete-shade);
+}
+
+.dr-brick {
+  fill: var(--brick);
+  stroke: var(--brick-deep);
+  stroke-width: 1;
+}
+
+.dr-brick--header {
+  fill: var(--brick-deep);
+}
+
+.dr-court {
+  fill: var(--concrete-deep);
+}
+
+.dr-street {
+  fill: var(--concrete-shade);
+}
+
+.dr-kerb {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-bay {
+  stroke: var(--ink);
+  stroke-width: 1;
+  opacity: 0.35;
+}
+
+.dr-office {
+  fill: var(--brick);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dr-door {
+  fill: var(--ink);
+}
+
+.dr-path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-dasharray: 10 8;
+}
+
+.dr-text--on-office {
+  fill: var(--white);
+}
+
+.dr-gate-floor {
+  fill: var(--concrete-deep);
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 6 5;
+}

@@ -1,0 +1,40 @@
+---
+import { link } from '../../../shared/link';
+import { site } from '../site';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'Zobacz budynek na żywo.',
+  text = 'W biurze sprzedaży są makieta, próbki cegły i okna oraz rzuty wszystkich mieszkań. Przyjdź w godzinach otwarcia albo umów konkretny termin.',
+} = Astro.props;
+---
+
+<section class="cta on-brick" aria-labelledby="cta-title">
+  <div class="wrap">
+    <div class="cta__grid">
+      <div class="cta__copy">
+        <h2 id="cta-title">{title}</h2>
+        <p class="lead">{text}</p>
+      </div>
+      <div class="cta__side">
+        <p class="cta__address">
+          {site.street}, {site.postcode} {site.city}
+          <br />
+          pon.-pt. 9:00-17:00, sobota 10:00-14:00
+        </p>
+        <div class="cta__actions">
+          <a class="btn btn--ink btn--arrow" href={link('/przedza/biuro-sprzedazy/')}>
+            Umów prezentację
+          </a>
+          <a class="btn btn--ghost" href={site.phoneHref}>
+            <span class="num">{site.phone}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

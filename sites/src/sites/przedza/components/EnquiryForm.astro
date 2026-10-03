@@ -1,0 +1,295 @@
+---
+import { site } from '../site';
+import { messageLimit } from '../validation';
+
+interface Props {
+  id: string;
+  subject: string;
+  messageLabel?: string;
+  messageHint?: string;
+  withVisit?: boolean;
+  submitLabel?: string;
+}
+
+const {
+  id,
+  subject,
+  messageLabel = 'Wiadomość',
+  messageHint = 'Nieobowiązkowo. Napisz, o co chcesz zapytać.',
+  withVisit = false,
+  submitLabel = 'Wyślij zapytanie',
+} = Astro.props;
+
+const financing = ['Jeszcze nie wiem', 'Kredyt hipoteczny', 'Środki własne'];
+const visits = [
+  'Bez wizyty, proszę o kontakt',
+  'W dzień powszedni rano (9:00-12:00)',
+  'W dzień powszedni po południu (12:00-17:00)',
+  'W sobotę (10:00-14:00)',
+];
+---
+
+<div class="enquiry" data-enquiry data-subject={subject}>
+  <form class="form" novalidate data-form aria-label="Formularz zapytania">
+    <div class="form-summary" role="alert" tabindex="-1" hidden data-summary></div>
+
+    <div class="field" data-field="name">
+      <label class="field__label" for={`${id}-name`}>
+        Imię i nazwisko
+      </label>
+      <input id={`${id}-name`} name="name" type="text" autocomplete="name" required />
+      <p class="field__error" id={`${id}-name-error`} hidden data-error></p>
+    </div>
+
+    <div class="enquiry__pair">
+      <div class="field" data-field="email">
+        <label class="field__label" for={`${id}-email`}>
+          Adres e-mail
+        </label>
+        <input id={`${id}-email`} name="email" type="email" autocomplete="email" required />
+        <p class="field__error" id={`${id}-email-error`} hidden data-error></p>
+      </div>
+      <div class="field" data-field="phone">
+        <label class="field__label" for={`${id}-phone`}>
+          Telefon, jeśli wolisz rozmowę
+        </label>
+        <input
+          id={`${id}-phone`}
+          name="phone"
+          type="tel"
+          inputmode="tel"
+          autocomplete="tel"
+          aria-describedby={`${id}-phone-hint`}
+        />
+        <p class="field__hint" id={`${id}-phone-hint`}>
+          Dziewięć cyfr, na przykład 600 100 200.
+        </p>
+        <p class="field__error" id={`${id}-phone-error`} hidden data-error></p>
+      </div>
+    </div>
+
+    <div class="enquiry__pair">
+      <div class="field">
+        <label class="field__label" for={`${id}-financing`}>
+          Jak planujesz zakup?
+        </label>
+        <select id={`${id}-financing`} name="financing">
+          {financing.map(option => (
+            <option value={option}>{option}</option>
+          ))}
+        </select>
+      </div>
+      {withVisit && (
+        <div class="field">
+          <label class="field__label" for={`${id}-visit`}>
+            Kiedy możemy oddzwonić lub przyjąć cię w biurze?
+          </label>
+          <select id={`${id}-visit`} name="visit">
+            {visits.map(option => (
+              <option value={option}>{option}</option>
+            ))}
+          </select>
+        </div>
+      )}
+    </div>
+
+    <div class="field" data-field="message">
+      <label class="field__label" for={`${id}-message`}>
+        {messageLabel}
+      </label>
+      <textarea
+        id={`${id}-message`}
+        name="message"
+        rows="5"
+        aria-describedby={`${id}-message-hint`}></textarea>
+      <p class="field__hint" id={`${id}-message-hint`}>
+        {messageHint} Do {messageLimit} znaków.
+      </p>
+      <p class="field__error" id={`${id}-message-error`} hidden data-error></p>
+    </div>
+
+    <div class="field" data-field="consent">
+      <label class="tick" for={`${id}-consent`}>
+        <input id={`${id}-consent`} name="consent" type="checkbox" />
+        <span>
+          Zgadzam się, żeby biuro sprzedaży Przędzy odpowiedziało na to zapytanie. To strona
+          przykładowa, więc moje dane nigdzie nie trafią.
+        </span>
+      </label>
+      <p class="field__error" id={`${id}-consent-error`} hidden data-error></p>
+    </div>
+
+    <div class="enquiry__actions">
+      <button class="btn btn--primary btn--arrow" type="submit">
+        {submitLabel}
+      </button>
+    </div>
+  </form>
+
+  <noscript>
+    <div class="form-done">
+      <h3>Formularz wymaga JavaScriptu.</h3>
+      <p>
+        Zadzwoń pod <a href={site.phoneHref}>{site.phone}</a> albo napisz na{' '}
+        <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+    </div>
+  </noscript>
+
+  <div class="form-done" tabindex="-1" hidden data-done>
+    <h3>Zapytanie gotowe, ale nic nie poszło.</h3>
+    <p>
+      To strona przykładowa, więc nic nie zostało wysłane. W prawdziwym biurze odpowiedzielibyśmy w
+      następnym dniu roboczym.
+    </p>
+    <p class="enquiry__echo" data-echo></p>
+    <button class="btn" type="button" data-reset>
+      Wypełnij ponownie
+    </button>
+  </div>
+</div>
+
+<script>
+  import {
+    errorFields,
+    validateEnquiry,
+    type EnquiryField,
+    type EnquiryValues,
+  } from '../validation';
+
+  const labels: Record<EnquiryField, string> = {
+    name: 'Imię i nazwisko',
+    email: 'Adres e-mail',
+    phone: 'Telefon',
+    message: 'Wiadomość',
+    consent: 'Zgoda',
+  };
+
+  const setup = (root: HTMLElement) => {
+    const form = root.querySelector<HTMLFormElement>('[data-form]');
+    const summary = root.querySelector<HTMLElement>('[data-summary]');
+    const done = root.querySelector<HTMLElement>('[data-done]');
+    const echo = root.querySelector<HTMLElement>('[data-echo]');
+    const reset = root.querySelector<HTMLButtonElement>('[data-reset]');
+    if (!form || !summary || !done || !echo || !reset) return;
+
+    const control = (field: EnquiryField) =>
+      form.querySelector<HTMLInputElement | HTMLTextAreaElement>(`[name="${field}"]`);
+
+    const read = (): EnquiryValues => {
+      const value = (field: EnquiryField) => control(field)?.value ?? '';
+      const consent = form.querySelector<HTMLInputElement>('[name="consent"]');
+      return {
+        name: value('name'),
+        email: value('email'),
+        phone: value('phone'),
+        message: value('message'),
+        consent: consent?.checked ?? false,
+      };
+    };
+
+    const paint = (field: EnquiryField, message: string | undefined) => {
+      const wrapper = form.querySelector<HTMLElement>(`[data-field="${field}"]`);
+      const input = control(field);
+      const error = wrapper?.querySelector<HTMLElement>('[data-error]');
+      if (!wrapper || !input || !error) return;
+      const hint = input.getAttribute('data-hint-id');
+      if (message) {
+        wrapper.setAttribute('data-invalid', 'true');
+        input.setAttribute('aria-invalid', 'true');
+        error.hidden = false;
+        error.replaceChildren();
+        const lead = document.createElement('strong');
+        lead.textContent = 'Błąd: ';
+        error.append(lead, message);
+        const ids = [hint, error.id].filter(Boolean).join(' ');
+        input.setAttribute('aria-describedby', ids);
+        const tick = wrapper.querySelector('.tick');
+        if (tick) tick.setAttribute('data-invalid', 'true');
+      } else {
+        wrapper.removeAttribute('data-invalid');
+        input.removeAttribute('aria-invalid');
+        error.hidden = true;
+        error.replaceChildren();
+        if (hint) input.setAttribute('aria-describedby', hint);
+        else input.removeAttribute('aria-describedby');
+        wrapper.querySelector('.tick')?.removeAttribute('data-invalid');
+      }
+    };
+
+    for (const field of ['name', 'email', 'phone', 'message', 'consent'] as const) {
+      const input = control(field);
+      const hintId = input?.getAttribute('aria-describedby');
+      if (input && hintId) input.setAttribute('data-hint-id', hintId);
+    }
+
+    const showSummary = (errors: ReturnType<typeof validateEnquiry>) => {
+      const failing = errorFields(errors);
+      summary.replaceChildren();
+      if (failing.length === 0) {
+        summary.hidden = true;
+        return;
+      }
+      const heading = document.createElement('p');
+      heading.textContent =
+        failing.length === 1
+          ? 'Popraw jedno pole:'
+          : `Popraw ${failing.length} pola, żeby wysłać zapytanie:`;
+      const list = document.createElement('ul');
+      for (const field of failing) {
+        const item = document.createElement('li');
+        const anchor = document.createElement('a');
+        const target = control(field);
+        anchor.href = `#${target?.id ?? ''}`;
+        anchor.textContent = `${labels[field]}: ${errors[field] ?? ''}`;
+        anchor.addEventListener('click', event => {
+          event.preventDefault();
+          target?.focus();
+        });
+        item.append(anchor);
+        list.append(item);
+      }
+      summary.append(heading, list);
+      summary.hidden = false;
+    };
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const errors = validateEnquiry(read());
+      for (const field of ['name', 'email', 'phone', 'message', 'consent'] as const) {
+        paint(field, errors[field]);
+      }
+      const failing = errorFields(errors);
+      showSummary(errors);
+      if (failing.length > 0) {
+        control(failing[0])?.focus();
+        return;
+      }
+      const values = read();
+      echo.textContent = `${root.dataset.subject ?? ''} Odpowiedź przyszłaby na adres ${values.email.trim()}.`;
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    });
+
+    form.addEventListener('input', event => {
+      const target = event.target;
+      if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) return;
+      const field = target.name as EnquiryField;
+      if (!(field in labels)) return;
+      if (target.closest('[data-field]')?.hasAttribute('data-invalid')) {
+        paint(field, validateEnquiry(read())[field]);
+      }
+    });
+
+    reset.addEventListener('click', () => {
+      form.reset();
+      summary.hidden = true;
+      done.hidden = true;
+      form.hidden = false;
+      control('name')?.focus();
+    });
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-enquiry]').forEach(setup);
+</script>

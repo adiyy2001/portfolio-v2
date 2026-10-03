@@ -1,0 +1,52 @@
+---
+import { formatArea } from '../flats';
+import { outdoorName } from '../outdoor';
+import { buildPlan } from '../plan';
+import type { Flat } from '../types';
+
+interface Props {
+  flat: Flat;
+}
+
+const { flat } = Astro.props;
+const { rooms } = buildPlan(flat);
+---
+
+<table class="roomlist">
+  <caption class="visually-hidden">Pomieszczenia i ich powierzchnie</caption>
+  <thead>
+    <tr>
+      <th scope="col">Pomieszczenie</th>
+      <th scope="col" class="roomlist__area">
+        Powierzchnia
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {rooms.map(room => (
+      <tr>
+        <th scope="row">
+          <span class="roomlist__chip">{room.letter}</span>
+          {room.name}
+        </th>
+        <td class="roomlist__area num">{formatArea(room.area)}</td>
+      </tr>
+    ))}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="row">Razem w mieszkaniu</th>
+      <td class="roomlist__area num">{formatArea(flat.area)}</td>
+    </tr>
+    {flat.outdoor && (
+      <tr>
+        <th scope="row">
+          {outdoorName[flat.outdoor.kind].charAt(0).toUpperCase() +
+            outdoorName[flat.outdoor.kind].slice(1)}
+          , poza powierzchnią użytkową
+        </th>
+        <td class="roomlist__area num">{formatArea(flat.outdoor.area)}</td>
+      </tr>
+    )}
+  </tfoot>
+</table>

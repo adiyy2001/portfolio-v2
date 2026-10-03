@@ -1,0 +1,36 @@
+---
+import { reservationFee } from '../building';
+import { formatPrice } from '../flats';
+
+const steps = [
+  {
+    name: 'Wybierasz mieszkanie',
+    text: 'Filtrujesz po pokojach i piętrze, otwierasz stronę mieszkania i sprawdzasz rzut, cenę oraz cenę za metr. Ceny wolnych mieszkań są aktualne na październik 2026.',
+  },
+  {
+    name: 'Dostajesz prospekt informacyjny',
+    text: 'Zanim cokolwiek podpiszesz, dostajesz od nas prospekt informacyjny z załącznikami. Jest bezpłatny, na papierze albo mailem. Tak nakazuje ustawa deweloperska.',
+  },
+  {
+    name: 'Rezerwujesz',
+    text: `Umowa rezerwacyjna jest pisemna. Opłata rezerwacyjna to ${formatPrice(reservationFee)}, a ustawa pozwala na najwyżej 1% ceny. Zaliczamy ją na poczet ceny. Jeśli bank oceni twoją zdolność kredytową negatywnie, zwracamy ją niezwłocznie.`,
+  },
+  {
+    name: 'Podpisujesz umowę deweloperską',
+    text: 'U notariusza, w formie aktu notarialnego. Koszty notariusza dzielimy po połowie. Wpłaty trafiają na mieszkaniowy rachunek powierniczy w banku, a nie na konto firmy.',
+  },
+  {
+    name: 'Odbierasz klucze',
+    text: 'Po pozwoleniu na użytkowanie odbieramy mieszkanie razem, z protokołem. Na odpowiedź w sprawie zgłoszonych usterek mamy 14 dni, na naprawę uznanych 30 dni.',
+  },
+];
+---
+
+<ol class="steps">
+  {steps.map(step => (
+    <li class="steps__item">
+      <h3 class="steps__name">{step.name}</h3>
+      <p class="steps__text">{step.text}</p>
+    </li>
+  ))}
+</ol>

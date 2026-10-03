@@ -1,0 +1,272 @@
+.hero {
+  padding: clamp(20px, 3vw, 36px) 0 clamp(28px, 3.4vw, 44px);
+}
+
+.hero__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 32px;
+  margin-bottom: clamp(18px, 2.4vw, 30px);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.hero__top .lead {
+  font-weight: 500;
+}
+
+.hero__title {
+  font-size: clamp(2rem, 5.2vw, 4.25rem);
+}
+
+@media (min-width: 900px) {
+  .hero__line {
+    display: block;
+  }
+}
+
+@media (min-width: 1000px) and (max-height: 1000px) {
+  .hero {
+    padding: 14px 0 20px;
+  }
+
+  .hero__top {
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+  }
+
+  .hero__title {
+    font-size: clamp(2rem, 3.4vw, 3.1rem);
+  }
+}
+
+.finder-section {
+  padding-bottom: 0;
+}
+
+.rooms {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--ink);
+}
+
+.rooms__row {
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1.1fr) minmax(0, 1.5fr) auto;
+  align-items: center;
+  gap: 16px var(--gap);
+  padding: 28px 0;
+  border-top: 1px solid var(--ink);
+}
+
+.rooms__row:first-child {
+  border-top: 2px solid var(--ink);
+}
+
+.rooms__count {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.rooms__digit {
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--brick);
+}
+
+.rooms__word {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rooms__area {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.rooms__stock,
+.rooms__price {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.rooms__glyphs {
+  display: grid;
+  grid-template-columns: repeat(var(--per-row), 16px);
+  gap: 4px;
+}
+
+@media (max-width: 1099px) {
+  .rooms__row {
+    grid-template-columns: 8rem minmax(0, 1fr);
+  }
+
+  .rooms__glyphs,
+  .rooms__link {
+    grid-column: 2;
+  }
+
+  .rooms__link {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 719px) {
+  .rooms__row {
+    grid-template-columns: 1fr;
+  }
+
+  .rooms__glyphs,
+  .rooms__link {
+    grid-column: 1;
+  }
+}
+
+.schedule {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0 var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.schedule__stage {
+  position: relative;
+  padding-top: 26px;
+  border-top: 2px solid var(--ink);
+}
+
+.schedule__stage::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -9px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--ink);
+  background: var(--concrete);
+}
+
+.schedule__stage[data-state='done']::before {
+  background: var(--ink);
+}
+
+.schedule__stage[data-state='current']::before {
+  top: -11px;
+  width: 20px;
+  height: 20px;
+  border-color: var(--ink);
+  background: var(--brick);
+}
+
+.schedule__name {
+  margin-top: 8px;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.schedule__text {
+  margin-top: 10px;
+  color: var(--ink-soft);
+}
+
+.schedule__state {
+  margin-top: 12px;
+  font-weight: 600;
+}
+
+.schedule__stage[data-state='current'] .schedule__state {
+  color: var(--brick-deep);
+}
+
+.schedule__stage[data-state='next'] .schedule__state {
+  color: var(--ink-mute);
+  font-weight: 400;
+}
+
+@media (max-width: 1099px) {
+  .schedule {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 40px;
+  }
+}
+
+@media (max-width: 719px) {
+  .schedule {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+    border-left: 2px solid var(--ink);
+  }
+
+  .schedule__stage {
+    padding: 0 0 32px 28px;
+    border-top: 0;
+  }
+
+  .schedule__stage::before {
+    left: -10px;
+    top: 4px;
+  }
+
+  .schedule__stage[data-state='current']::before {
+    left: -12px;
+    top: 2px;
+  }
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  border-bottom: 1px solid var(--ink);
+}
+
+.steps__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 60px minmax(0, 4fr) minmax(0, 7fr);
+  gap: 8px var(--gap);
+  padding: 24px 0;
+  border-top: 1px solid var(--ink);
+  counter-increment: step;
+}
+
+.steps__item::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: var(--ink);
+  color: var(--concrete);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.steps__name {
+  font-size: 1.125rem;
+}
+
+.steps__text {
+  max-width: 38rem;
+}
+
+@media (max-width: 899px) {
+  .steps__item {
+    grid-template-columns: 52px minmax(0, 1fr);
+  }
+
+  .steps__text {
+    grid-column: 2;
+  }
+}

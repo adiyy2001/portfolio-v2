@@ -1,0 +1,71 @@
+---
+import { shedRise, shedSpan, shedPitchDegrees, formatMetres } from '../drawings';
+
+const k = 30;
+const x0 = 50;
+const base = 250;
+const span = shedSpan * k;
+const rise = shedRise * k;
+const x1 = x0 + span;
+const pitch = shedPitchDegrees.toFixed(1).replace('.', ',');
+---
+
+<svg
+  class="dr"
+  viewBox="0 0 600 380"
+  role="img"
+  aria-label={`Detal dachu szedowego: połać o nachyleniu ${pitch} stopnia, pionowe szklenie od północy, rynna w dolinie i warstwy pokrycia.`}
+  focusable="false">
+  <path
+    class="dr-slab"
+    d={`M${x0} ${base}L${x1} ${base - rise}V${base - rise + 18}L${x0} ${base + 18}Z`}></path>
+  <path
+    class="dr-roof"
+    d={`M${x0} ${base - 8}L${x1} ${base - rise - 8}V${base - rise}L${x0} ${base}Z`}></path>
+  <path
+    class="dr-insulation"
+    d={`M${x0} ${base}L${x1} ${base - rise}V${base - rise + 8}L${x0} ${base + 8}Z`}></path>
+  <rect class="dr-shed-glass" x={x1 - 10} y={base - rise} width="10" height={rise}></rect>
+  <rect class="dr-wall" x={x1 - 6} y={base - rise + 18} width="6" height="40"></rect>
+  <rect class="dr-wall" x={x1 - 6} y={base - rise - 4} width="12" height="4"></rect>
+  <path class="dr-gutter" d={`M${x1 + 16} ${base - 2}H${x1 + 6}V${base + 22}H${x1 + 16}`}></path>
+  <line class="dr-ground" x1={x1 + 26} y1={base - rise + 58} x2={x1 + 26} y2={base + 22}></line>
+  <line class="dr-ground" x1={x0 - 20} y1={base + 18} x2={x1 + 26} y2={base + 18}></line>
+
+  <g class="dr-dim">
+    <line x1={x0} y1={base + 70} x2={x1} y2={base + 70}></line>
+    <line x1={x0} y1={base + 62} x2={x0} y2={base + 78}></line>
+    <line x1={x1} y1={base + 62} x2={x1} y2={base + 78}></line>
+    <text class="dr-text" x={(x0 + x1) / 2} y={base + 100} text-anchor="middle">
+      {formatMetres(shedSpan)}
+    </text>
+
+    <line x1={x1 + 62} y1={base - rise} x2={x1 + 62} y2={base}></line>
+    <line x1={x1 + 54} y1={base - rise} x2={x1 + 70} y2={base - rise}></line>
+    <line x1={x1 + 54} y1={base} x2={x1 + 70} y2={base}></line>
+    <text class="dr-text" x={x1 + 78} y={base - rise / 2 + 6}>
+      {formatMetres(shedRise)}
+    </text>
+  </g>
+
+  <g class="dr-note">
+    <text class="dr-text" x={x0 + 6} y={base - rise / 2 - 22}>
+      połać {pitch}°
+    </text>
+    <text class="dr-text" x={x0 + 6} y={base + 50}>
+      blacha stojąca
+    </text>
+    <text class="dr-text" x={x1 - 20} y={base - rise - 20} text-anchor="end">
+      szklenie od północy
+    </text>
+    <text class="dr-text" x={x1 + 30} y={base + 50}>
+      rynna
+    </text>
+    <text class="dr-text" x="40" y="40">
+      południe
+    </text>
+    <text class="dr-text" x="550" y="40" text-anchor="end">
+      północ
+    </text>
+  </g>
+</svg>

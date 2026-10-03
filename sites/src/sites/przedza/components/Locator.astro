@@ -1,0 +1,73 @@
+---
+import { floors } from '../building';
+import { flats } from '../data';
+import { flatKey } from '../flats';
+import {
+  bayWidth,
+  cellBox,
+  groundY,
+  teethCount,
+  toothPath,
+  view,
+  wallLeft,
+  wallRight,
+  wallTop,
+  windowBox,
+} from '../finder/geometry';
+import type { Flat } from '../types';
+
+interface Props {
+  flat: Flat;
+  label: string;
+}
+
+const { flat, label } = Astro.props;
+---
+
+<svg
+  class="locator"
+  viewBox={`0 0 ${view.width} ${groundY + 8}`}
+  role="img"
+  aria-label={label}
+  focusable="false">
+  <rect
+    class="locator__wall"
+    x={wallLeft}
+    y={wallTop}
+    width={wallRight - wallLeft}
+    height={groundY - wallTop}></rect>
+  {Array.from({ length: teethCount }, (_, tooth) => (
+    <path class="locator__roof" d={toothPath(tooth)}></path>
+  ))}
+  {flats.map(other => {
+    const box = windowBox(other);
+    const current = flatKey(other) === flatKey(flat);
+    return (
+      <rect
+        class="locator__window"
+        data-current={current}
+        x={box.x}
+        y={box.y}
+        width={box.width}
+        height={box.height}></rect>
+    );
+  })}
+  {floors.slice(1).map(floor => {
+    const cell = cellBox({ floor, column: 1 });
+    return (
+      <line
+        class="locator__belt"
+        x1={wallLeft}
+        y1={cell.y + cell.height}
+        x2={wallRight}
+        y2={cell.y + cell.height}></line>
+    );
+  })}
+  <line class="locator__ground" x1="0" y1={groundY} x2={view.width} y2={groundY}></line>
+  <rect
+    class="locator__frame"
+    x={cellBox(flat).x}
+    y={cellBox(flat).y}
+    width={bayWidth}
+    height={cellBox(flat).height}></rect>
+</svg>

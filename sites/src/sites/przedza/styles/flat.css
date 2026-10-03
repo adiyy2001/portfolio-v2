@@ -1,0 +1,625 @@
+.flat-head {
+  padding: 8px 0 clamp(28px, 4vw, 48px);
+}
+
+.flat-head__grid {
+  align-items: end;
+  row-gap: 28px;
+}
+
+.flat-head__title {
+  grid-column: 1 / span 7;
+}
+
+.flat-head__title .label {
+  margin-bottom: 16px;
+}
+
+.flat-head__title h1 {
+  font-size: clamp(2.5rem, 8vw, 6.25rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.flat-head__lead {
+  max-width: 30rem;
+  margin-top: 20px;
+}
+
+.flat-price {
+  grid-column: 9 / span 4;
+  padding: 20px 22px 22px;
+  border: 2px solid var(--ink);
+  background: var(--white);
+}
+
+.flat-price__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.flat-price__value {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.flat-price__unit {
+  margin-top: 6px;
+  color: var(--ink-soft);
+}
+
+.flat-price__note {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ink);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.flat-price .btn {
+  margin-top: 18px;
+  width: 100%;
+}
+
+@media (max-width: 899px) {
+  .flat-head__title,
+  .flat-price {
+    grid-column: 1 / -1;
+  }
+}
+
+.flat-main {
+  align-items: start;
+  row-gap: 36px;
+}
+
+.flat-main__plan {
+  grid-column: 1 / span 8;
+}
+
+.flat-main__side {
+  grid-column: 9 / span 4;
+  display: grid;
+  gap: 36px;
+}
+
+@media (max-width: 899px) {
+  .flat-main__plan,
+  .flat-main__side {
+    grid-column: 1 / -1;
+  }
+}
+
+.plan {
+  container-type: inline-size;
+  margin: 0;
+  padding: 16px;
+  border: 2px solid var(--ink);
+  background: var(--concrete);
+}
+
+.plan__svg {
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+
+.plan__room[data-kind='living'],
+.plan__room[data-kind='bedroom'] {
+  fill: var(--white);
+}
+
+.plan__room[data-kind='hall'],
+.plan__room[data-kind='bathroom'],
+.plan__room[data-kind='wardrobe'] {
+  fill: var(--concrete-deep);
+}
+
+.plan__room {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.plan__walls {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 6;
+  stroke-linejoin: miter;
+}
+
+.plan__brick {
+  stroke: var(--brick);
+  stroke-width: 6;
+}
+
+.plan__window rect {
+  fill: var(--white);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.plan__window line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.plan__gap {
+  fill: var(--concrete-deep);
+}
+
+.plan__gap[data-kind='bedroom'],
+.plan__gap[data-kind='living'] {
+  fill: var(--white);
+}
+
+.plan__door line {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.plan__arc {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+}
+
+.plan__entrance {
+  fill: var(--brick);
+}
+
+.plan__fixture {
+  fill: var(--white);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+}
+
+.plan__fixture--counter {
+  fill: var(--concrete-deep);
+}
+
+.plan__fixture--fridge {
+  fill: var(--concrete);
+}
+
+.plan__fixture--hob {
+  fill: var(--ink);
+  stroke: none;
+}
+
+.plan__fixture--toilet-tank {
+  fill: var(--concrete);
+}
+
+.plan__column circle:first-child {
+  fill: var(--ink);
+}
+
+.plan__column circle:last-child {
+  fill: var(--concrete);
+}
+
+.plan__chip {
+  fill: var(--ink);
+}
+
+.plan__letter {
+  fill: var(--concrete);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.plan__name {
+  fill: var(--ink);
+  font-size: 10px;
+  font-weight: 600;
+  display: none;
+}
+
+.plan__area {
+  fill: var(--ink);
+  font-size: 10px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+.plan__outdoor rect {
+  fill: var(--concrete-deep);
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
+}
+
+.plan__outdoor[data-kind='garden'] rect {
+  stroke-dasharray: none;
+}
+
+.plan__outdoor-label {
+  fill: var(--ink);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.plan__grass-bg {
+  fill: var(--concrete-deep);
+}
+
+.plan__grass-line {
+  stroke: var(--ink-mute);
+  stroke-width: 1;
+}
+
+.plan__dimension line {
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.plan__dimension text,
+.plan__orientation text,
+.plan__scale text,
+.plan__north text {
+  fill: var(--ink);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.plan__north line {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.plan__north path {
+  fill: var(--ink);
+}
+
+.plan__north text {
+  font-weight: 700;
+}
+
+.plan__scale rect {
+  fill: var(--ink);
+  stroke: var(--ink);
+  stroke-width: 1;
+}
+
+.plan__scale rect[data-fill='1'] {
+  fill: var(--concrete);
+}
+
+.plan__label {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@container (max-width: 459px) {
+  .plan__label {
+    transform: scale(var(--fit));
+  }
+
+  .plan__dimension text,
+  .plan__orientation text,
+  .plan__scale text,
+  .plan__north text,
+  .plan__area,
+  .plan__outdoor-label {
+    font-size: calc(10px * var(--fit));
+  }
+}
+
+@container (min-width: 460px) {
+  .plan__name {
+    display: block;
+  }
+
+  .plan__letter,
+  .plan__name,
+  .plan__area,
+  .plan__outdoor-label {
+    font-size: 11px;
+  }
+}
+
+.plan__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.plan__legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.plan__swatch {
+  flex: none;
+  width: 22px;
+  height: 10px;
+  border: 1.5px solid var(--ink);
+  background: var(--white);
+}
+
+.plan__swatch--brick {
+  height: 6px;
+  border: 0;
+  background: var(--brick);
+}
+
+.plan__swatch--column {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--concrete) 0 25%, var(--ink) 30%);
+  border: 0;
+}
+
+.plan__caption {
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.roomlist {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.roomlist th,
+.roomlist td {
+  padding: 10px 0;
+  border-top: 1px solid var(--ink);
+  text-align: left;
+  font-weight: 340;
+  vertical-align: top;
+}
+
+.roomlist thead th {
+  padding-top: 0;
+  border-top: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.roomlist tbody th {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.roomlist tfoot th,
+.roomlist tfoot td {
+  font-weight: 600;
+}
+
+.roomlist tfoot tr:first-child th,
+.roomlist tfoot tr:first-child td {
+  border-top: 2px solid var(--ink);
+}
+
+.roomlist .roomlist__area {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.roomlist__chip {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--concrete);
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+
+.where__figure {
+  margin: 0;
+}
+
+.locator {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+}
+
+.locator__wall {
+  fill: var(--concrete-deep);
+}
+
+.locator__roof {
+  fill: var(--ink);
+}
+
+.locator__window {
+  fill: var(--ink-mute);
+  opacity: 0.55;
+}
+
+.locator__window[data-current='true'] {
+  fill: var(--brick);
+  opacity: 1;
+}
+
+.locator__belt {
+  stroke: var(--ink);
+  stroke-width: 1;
+  opacity: 0.4;
+}
+
+.locator__ground {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.locator__frame {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+.where__caption {
+  margin-top: 12px;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.flat-facts {
+  margin: 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.flat-facts div {
+  display: grid;
+  grid-template-columns: minmax(7rem, 2fr) minmax(0, 3fr);
+  gap: 4px 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--ink);
+}
+
+.flat-facts dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-top: 3px;
+}
+
+.flat-facts dd {
+  margin: 0;
+  font-weight: 500;
+}
+
+.flat-columns {
+  align-items: start;
+  row-gap: 36px;
+}
+
+.flat-columns__main {
+  grid-column: 4 / span 6;
+}
+
+.flat-columns__main--wide {
+  grid-column: 4 / -1;
+}
+
+.flat-columns__aside {
+  grid-column: 10 / span 3;
+}
+
+@media (max-width: 1099px) {
+  .flat-columns__main,
+  .flat-columns__main--wide {
+    grid-column: 4 / span 9;
+  }
+
+  .flat-columns__aside {
+    grid-column: 4 / span 9;
+  }
+}
+
+@media (max-width: 899px) {
+  .flat-columns__main,
+  .flat-columns__main--wide,
+  .flat-columns__aside {
+    grid-column: 1 / -1;
+  }
+}
+
+.costs {
+  margin: 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.costs div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 0;
+  border-top: 1px solid var(--ink);
+}
+
+.costs dt {
+  font-weight: 340;
+}
+
+.costs dd {
+  margin: 0;
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.similar {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid var(--ink);
+}
+
+.similar a {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr) auto 18px;
+  align-items: center;
+  gap: 8px 20px;
+  min-height: 64px;
+  padding: 14px 0;
+  border-top: 1px solid var(--ink);
+  text-decoration: none;
+}
+
+.similar a:hover {
+  background: var(--concrete-deep);
+}
+
+.similar a::after {
+  content: '';
+  width: 18px;
+  height: 12px;
+  background: currentColor;
+  clip-path: polygon(0 38%, 68% 38%, 68% 0, 100% 50%, 68% 100%, 68% 62%, 0 62%);
+}
+
+.similar__code {
+  font-weight: 700;
+}
+
+.similar__price {
+  font-weight: 600;
+  text-align: right;
+}
+
+@media (max-width: 719px) {
+  .similar a {
+    grid-template-columns: 4.5rem minmax(0, 1fr) 18px;
+  }
+
+  .similar__price {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: clamp(40px, 5vw, 64px);
+}

@@ -1,0 +1,21 @@
+---
+interface Item {
+  term: string;
+  text: string;
+}
+
+interface Props {
+  items: readonly Item[];
+}
+
+const { items } = Astro.props;
+---
+
+<dl class="facts">
+  {items.map(item => (
+    <div class="facts__row">
+      <dt>{item.term}</dt>
+      <dd>{item.text}</dd>
+    </div>
+  ))}
+</dl>

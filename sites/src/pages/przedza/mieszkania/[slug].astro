@@ -1,0 +1,297 @@
+---
+import { link } from '../../../shared/link';
+import Breadcrumb from '../../../sites/przedza/components/Breadcrumb.astro';
+import EnquiryForm from '../../../sites/przedza/components/EnquiryForm.astro';
+import FloorPlan from '../../../sites/przedza/components/FloorPlan.astro';
+import Locator from '../../../sites/przedza/components/Locator.astro';
+import RoomList from '../../../sites/przedza/components/RoomList.astro';
+import SheetHead from '../../../sites/przedza/components/SheetHead.astro';
+import {
+  ceilingText,
+  exposureText,
+  floorName,
+  hasIronColumn,
+  parkingPrice,
+  reservationFee,
+  storageFrom,
+} from '../../../sites/przedza/building';
+import { flats } from '../../../sites/przedza/data';
+import {
+  flatCode,
+  flatPath,
+  flatSlug,
+  formatArea,
+  formatPrice,
+  formatPricePerM2,
+  neighbours,
+  roomsLabel,
+  similarFlats,
+  statusLabel,
+} from '../../../sites/przedza/flats';
+import Layout from '../../../sites/przedza/Layout.astro';
+import { outdoorText } from '../../../sites/przedza/outdoor';
+import '../../../sites/przedza/styles/flat.css';
+
+export function getStaticPaths() {
+  return flats.map(flat => ({ params: { slug: flatSlug(flat) }, props: { flat } }));
+}
+
+const { flat } = Astro.props;
+const code = flatCode(flat);
+const sold = flat.status === 'sold';
+const reserved = flat.status === 'reserved';
+const { previous, next } = neighbours(flat);
+const similar = similarFlats(flat);
+
+const title = `Mieszkanie ${code}, ${roomsLabel(flat.rooms)}, ${formatArea(flat.area)}, ${floorName(flat.floor)}`;
+const description = sold
+  ? `Mieszkanie ${code} w Przędzy jest już sprzedane. Zobacz rzut i podobne wolne mieszkania w dawnej przędzalni na Nadodrzu.`
+  : `${roomsLabel(flat.rooms)}, ${formatArea(flat.area)}, ${floorName(flat.floor)}, ekspozycja: ${exposureText(flat.column)}. Cena ${formatPrice(flat.price)}. Rzut, koszty dodatkowe i formularz zapytania.`;
+
+const facts = [
+  { term: 'Pokoje', value: roomsLabel(flat.rooms) },
+  { term: 'Powierzchnia', value: formatArea(flat.area) },
+  { term: 'Piętro', value: floorName(flat.floor) },
+  { term: 'Wysokość', value: ceilingText(flat.floor) },
+  { term: 'Ekspozycja', value: exposureText(flat.column) },
+  { term: 'Na zewnątrz', value: outdoorText(flat) },
+];
+
+const crumbs = [
+  { label: 'Przędza', href: link('/przedza/') },
+  { label: 'Mieszkania', href: link('/przedza/#mieszkania') },
+  { label: code },
+];
+
+const columnFromSouth = `${flat.column}. okno od południowego końca budynku`;
+const locatorLabel = `${code} na elewacji wschodniej: ${floorName(flat.floor)}, ${columnFromSouth}`;
+const leadByStatus = sold
+  ? 'To mieszkanie jest już sprzedane. Zostawiamy jego stronę, żebyś mógł porównać rzut z wolnymi mieszkaniami.'
+  : reserved
+    ? 'To mieszkanie jest zarezerwowane. Jeśli rezerwacja nie przejdzie w umowę, wróci do sprzedaży, a zapisanie się na listę kolejną niczego nie kosztuje.'
+    : 'To mieszkanie jest wolne. Poniżej rzut, powierzchnie pomieszczeń i koszty dodatkowe.';
+const extras = [
+  { term: 'Opłata rezerwacyjna', value: formatPrice(reservationFee) },
+  { term: 'Miejsce postojowe w garażu', value: formatPrice(parkingPrice) },
+  { term: 'Komórka lokatorska', value: `od ${formatPrice(storageFrom)}` },
+];
+---
+
+<Layout
+  title={`${title} | Przędza`}
+  description={description}
+  path={flatPath(flat)}
+  current="mieszkania">
+  <div class="wrap">
+    <Breadcrumb items={crumbs} />
+
+    <section class="flat-head" aria-labelledby="flat-title">
+      <div class="grid flat-head__grid">
+        <div class="flat-head__title">
+          <p class="label">
+            {floorName(flat.floor)}, {flat.column}. okno od południa
+          </p>
+          <h1 id="flat-title">
+            <span class="visually-hidden">Mieszkanie </span>
+            {code}
+          </h1>
+          <p class="lead flat-head__lead">{leadByStatus}</p>
+        </div>
+        <section class="flat-price" aria-label="Cena i status">
+          <div class="flat-price__top">
+            <span class="status" data-status={flat.status}>
+              {statusLabel[flat.status]}
+            </span>
+            <span class="num">
+              {roomsLabel(flat.rooms)}, {formatArea(flat.area)}
+            </span>
+          </div>
+          {sold ? (
+            <p class="flat-price__value">Sprzedane</p>
+          ) : (
+            <>
+              <p class="flat-price__value num">{formatPrice(flat.price)}</p>
+              <p class="flat-price__unit num">{formatPricePerM2(flat)}, cena brutto</p>
+            </>
+          )}
+          <p class="flat-price__note">
+            {sold
+              ? 'Cena sprzedanych mieszkań nie jest publikowana. Ceny wolnych mieszkań podajemy na stan z października 2026.'
+              : 'Cena zawiera 8% VAT. Przed rezerwacją dostajesz prospekt informacyjny.'}
+          </p>
+          {sold ? (
+            <a class="btn btn--primary btn--arrow" href={link('/przedza/#mieszkania')}>
+              Szukaj wolnych
+            </a>
+          ) : (
+            <a class="btn btn--primary btn--arrow" href="#zapytanie">
+              {reserved ? 'Zapisz się na listę kolejną' : 'Zapytaj o to mieszkanie'}
+            </a>
+          )}
+        </section>
+      </div>
+    </section>
+
+    <section class="flat-main grid" aria-labelledby="rzut-title">
+      <div class="flat-main__plan">
+        <h2 class="visually-hidden" id="rzut-title">
+          Rzut mieszkania {code}
+        </h2>
+        <FloorPlan flat={flat} code={code} />
+        <ul class="plan__legend">
+          <li>
+            <span class="plan__swatch plan__swatch--brick"></span>ściana zewnętrzna z cegły
+          </li>
+          <li>
+            <span class="plan__swatch"></span>okno
+          </li>
+          {hasIronColumn(flat) && (
+            <li>
+              <span class="plan__swatch plan__swatch--column"></span>żeliwny słup z 1908 roku
+            </li>
+          )}
+        </ul>
+        <p class="plan__caption">
+          To rysunek, nie zdjęcie. Rzut jest w skali, a pasek pod rysunkiem pokazuje trzy metry.
+          Układ pomieszczeń jest schematyczny. Północ jest po prawej stronie, wejście od klatki
+          schodowej po lewej.
+        </p>
+      </div>
+      <div class="flat-main__side">
+        <RoomList flat={flat} />
+        <dl class="flat-facts">
+          {facts.map(item => (
+            <div>
+              <dt>{item.term}</dt>
+              <dd class="num">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="sheet" aria-labelledby="opis-title">
+      <SheetHead label="Opis" title="Jak to mieszkanie jest ułożone." id="opis-title" />
+      <div class="grid flat-columns">
+        <div class="flat-columns__main prose">
+          <p>{flat.note}</p>
+          {hasIronColumn(flat) && (
+            <p>
+              W salonie stoi żeliwny słup z 1908 roku. Jest wyczyszczony, pomalowany na ciemno i
+              zostaje na swoim miejscu, więc meble ustawisz wokół niego.
+            </p>
+          )}
+          <p>
+            Ściana od ulicy to oryginalna cegła, ocieplona od środka. Wszystkie okna mają trzy szyby
+            i dawny, wysoki podział.{' '}
+            {flat.column === 1
+              ? 'To mieszkanie narożne od południa, więc ma jeszcze okno w ścianie szczytowej. '
+              : ''}
+            {flat.column === 10
+              ? 'To mieszkanie narożne od północy, więc ma jeszcze okno w ścianie szczytowej. '
+              : ''}
+            Wykończenie w standardzie deweloperskim: tynki, wylewki, stolarka i instalacje. Podłogi
+            i kuchnię robisz po swojemu.
+          </p>
+        </div>
+        <div
+          class="flat-columns__aside where__figure"
+          role="group"
+          aria-label="Położenie w budynku">
+          <Locator flat={flat} label={locatorLabel} />
+          <p class="where__caption">
+            {code} na elewacji wschodniej: {floorName(flat.floor)}, {columnFromSouth}.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {!sold && (
+      <section class="sheet" aria-labelledby="koszty-title">
+        <SheetHead label="Koszty" title="Co jeszcze płacisz." id="koszty-title">
+          <p>
+            Opłata rezerwacyjna jest zaliczana na poczet ceny. Miejsce w garażu i komórka są
+            opcjonalne i kupujesz je osobno.
+          </p>
+        </SheetHead>
+        <div class="grid flat-columns">
+          <dl class="costs flat-columns__main">
+            <div>
+              <dt>Cena mieszkania, brutto</dt>
+              <dd class="num">{formatPrice(flat.price)}</dd>
+            </div>
+            {extras.map(item => (
+              <div>
+                <dt>{item.term}</dt>
+                <dd class="num">{item.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+    )}
+
+    {!sold && (
+      <section class="sheet" id="zapytanie" aria-labelledby="zapytanie-title">
+        <SheetHead
+          label="Zapytanie"
+          title={reserved ? `Lista kolejna dla ${code}.` : `Zapytaj o ${code}.`}
+          id="zapytanie-title">
+          <p>
+            {reserved
+              ? 'Napisz, a odezwiemy się, jeśli rezerwacja wygaśnie. Możesz też od razu poprosić o inne mieszkanie podobnej wielkości.'
+              : 'Odpowiadamy w dzień roboczy. Napisz, czy wolisz obejrzeć mieszkanie na rzucie w biurze, czy porozmawiać o finansowaniu.'}
+          </p>
+        </SheetHead>
+        <div class="grid flat-columns">
+          <div class="flat-columns__main">
+            <EnquiryForm
+              id="zapytanie"
+              subject={`Zapytanie o mieszkanie ${code}.`}
+              messageHint="Nieobowiązkowo. Napisz, o co chcesz zapytać."
+            />
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="sheet" aria-labelledby="podobne-title">
+      <SheetHead
+        label="Podobne"
+        title={sold ? 'Wolne mieszkania o podobnym układzie.' : 'Podobne wolne mieszkania.'}
+        id="podobne-title"
+      />
+      <div class="grid flat-columns">
+        <ul class="similar flat-columns__main flat-columns__main--wide">
+          {similar.map(other => (
+            <li>
+              <a href={link(flatPath(other))}>
+                <span class="similar__code">{flatCode(other)}</span>
+                <span class="num">
+                  {roomsLabel(other.rooms)}, {formatArea(other.area)}, {floorName(other.floor)}
+                </span>
+                <span class="similar__price num">{formatPrice(other.price)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <nav class="pager" aria-label="Sąsiednie mieszkania">
+        {previous ? (
+          <a class="btn" href={link(flatPath(previous))}>
+            Poprzednie: {flatCode(previous)}
+          </a>
+        ) : (
+          <span></span>
+        )}
+        {next ? (
+          <a class="btn btn--arrow" href={link(flatPath(next))}>
+            Następne: {flatCode(next)}
+          </a>
+        ) : (
+          <span></span>
+        )}
+      </nav>
+    </section>
+  </div>
+</Layout>

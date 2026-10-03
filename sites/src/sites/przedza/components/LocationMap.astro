@@ -1,0 +1,124 @@
+---
+import { mapGeometry } from '../map-data';
+import { mapViews as views, type MapView } from '../map-views';
+import { modeLabel, placeLetter, places, projectToMetres, travelMinutes } from '../places';
+
+const rings = [400, 800, 1200];
+
+const names = [
+  { text: 'Odra', x: 168, y: 602, kind: 'water', wide: true, close: false },
+  { text: 'Odra', x: -748, y: 922, kind: 'water', wide: true, close: false },
+  { text: 'Stara Odra', x: 1560, y: -640, kind: 'water', wide: true, close: false },
+  { text: 'ul. Nowowiejska', x: 836, y: -119, kind: 'street', wide: true, close: false },
+  { text: 'ul. Wyszyńskiego', x: 886, y: 190, kind: 'street', wide: true, close: false },
+] as const;
+
+const percent = (view: MapView, point: { x: number; y: number }) => ({
+  left: `${(((point.x - view.x) / view.width) * 100).toFixed(2)}%`,
+  top: `${(((point.y - view.y) / view.height) * 100).toFixed(2)}%`,
+});
+
+const variants = [
+  {
+    key: 'close',
+    view: views.close,
+    title: 'Najbliższa okolica',
+    description:
+      'Schematyczna mapa najbliższej okolicy budynku: przystanki, dworzec Nadodrze, sklep, apteka, przychodnia, szkoła i park, z okręgami 400 i 800 metrów.',
+  },
+  {
+    key: 'wide',
+    view: views.wide,
+    title: 'Miasto',
+    description:
+      'Schematyczna mapa Nadodrza i centrum Wrocławia z rzeką Odrą, torami i miejscami w odległości do kilku kilometrów: Rynek, Hala Targowa, Ostrów Tumski, Ogród Botaniczny i plac Grunwaldzki.',
+  },
+] as const;
+---
+
+<div class="locmap">
+  <svg class="locmap__defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <g id="locmap-base">
+        <path class="m-park" d={mapGeometry.parks}></path>
+        <path class="m-water" d={mapGeometry.water}></path>
+        <path class="m-river-main" d={mapGeometry.riverMain}></path>
+        <path class="m-river-side" d={mapGeometry.riverSide}></path>
+        <path class="m-canal" d={mapGeometry.canal}></path>
+        <path class="m-minor" d={mapGeometry.minor}></path>
+        <path class="m-tertiary" d={mapGeometry.tertiary}></path>
+        <path class="m-secondary" d={mapGeometry.secondary}></path>
+        <path class="m-tram" d={mapGeometry.tram}></path>
+        <path class="m-rail" d={mapGeometry.rail}></path>
+        <path class="m-rail-ties" d={mapGeometry.rail}></path>
+      </g>
+    </defs>
+  </svg>
+
+  {variants.map(({ key, view, title, description }) => (
+    <div class={`locmap__view locmap__view--${key}`}>
+      <div class="locmap__frame" style={`aspect-ratio:${view.width} / ${view.height}`}>
+        <svg
+          class="locmap__svg"
+          viewBox={`${view.x} ${view.y} ${view.width} ${view.height}`}
+          role="img"
+          aria-label={description}
+          focusable="false">
+          <use href="#locmap-base"></use>
+          {key === 'wide' && (
+            <rect
+              class="m-frame"
+              x={views.close.x}
+              y={views.close.y}
+              width={views.close.width}
+              height={views.close.height}></rect>
+          )}
+          {rings
+            .filter(radius => key === 'wide' || radius <= 800)
+            .map(radius => (
+              <circle class="m-ring" cx="0" cy="0" r={radius}></circle>
+            ))}
+        </svg>
+        <div class="locmap__layer" aria-hidden="true">
+          <span class="locmap__title">{title}</span>
+          {rings
+            .filter(radius => key === 'wide' || radius <= 800)
+            .map(radius => (
+              <span class="locmap__ring" style={percent(view, { x: 0, y: -radius })}>
+                {radius} m
+              </span>
+            ))}
+          {names
+            .filter(item => item[key])
+            .map(item => (
+              <span class={`locmap__name locmap__name--${item.kind}`} style={percent(view, item)}>
+                {item.text}
+              </span>
+            ))}
+          {places
+            .filter(place => (key === 'wide' ? place.wideMap : place.closeMap))
+            .map(place => (
+              <span
+                class="locmap__place"
+                data-side={place.side}
+                style={percent(view, projectToMetres(place))}>
+                <i class="locmap__chip">{placeLetter(place)}</i>
+                <span class="locmap__text">
+                  {place.name}
+                  <b>
+                    {travelMinutes(place)} min {modeLabel[place.mode]}
+                  </b>
+                </span>
+              </span>
+            ))}
+          <span class="locmap__site" style={percent(view, { x: 0, y: 0 })}>
+            <svg viewBox="0 0 30 20" focusable="false">
+              <path d="M0 20V12L10 3V12L20 3V12L30 3V20Z"></path>
+            </svg>
+            <span class="locmap__text">Przędza</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>

@@ -1,0 +1,231 @@
+---
+import {
+  floorHeights,
+  slab,
+  buildingLength,
+  bayLength,
+  chimneyHeight,
+  shedRise,
+  levelBottoms,
+  formatMetres,
+} from '../drawings';
+
+const k = 13;
+const x0 = 150;
+const ground = 650;
+const length = buildingLength * k;
+const x1 = x0 + length;
+const bay = bayLength * k;
+const { bottoms, top } = levelBottoms(floorHeights, slab);
+const eave = ground - top * k;
+const shed = shedRise * k;
+const floorBox = floorHeights.map((height, index) => ({
+  index,
+  y: ground - (bottoms[index] + height) * k,
+  height: height * k,
+  slabY: ground - (bottoms[index] + height + slab) * k,
+}));
+const windowWidth = 2.3 * k;
+const windowHeight = 2.6 * k;
+const chimneyX = x1 + 34;
+const chimneyBase = 3.6 * k;
+const chimneyTop = 2.4 * k;
+const drawnChimneyHeight = 27;
+const chimneyY = ground - drawnChimneyHeight * k;
+const chimneyWidthAt = (height: number) =>
+  chimneyBase - ((chimneyBase - chimneyTop) * height) / chimneyHeight;
+const chimneyCutLeft = chimneyX + (chimneyBase - chimneyWidthAt(drawnChimneyHeight)) / 2;
+const chimneyCutRight = chimneyX + (chimneyBase + chimneyWidthAt(drawnChimneyHeight)) / 2;
+const chimneyZigzag = Array.from(
+  { length: 6 },
+  (_, index) =>
+    `L${chimneyCutLeft + ((chimneyCutRight - chimneyCutLeft) * (index + 1)) / 6} ${chimneyY + (index % 2 === 0 ? 7 : 0)}`,
+).join('');
+const levelLabels = ['parter', '1', '2', '3', '4'];
+const bays = Array.from({ length: 10 }, (_, index) => index);
+const teeth = Array.from({ length: 5 }, (_, index) => index);
+---
+
+<svg
+  class="dr"
+  viewBox="0 190 1200 600"
+  role="img"
+  aria-label="Elewacja wschodnia przędzalni: dziesięć osi okien na pięciu kondygnacjach, pięć dachów szedowych i ceglany komin o wysokości 41 metrów."
+  focusable="false">
+  <defs>
+    <pattern id="el-bricks" width="26" height="8" patternUnits="userSpaceOnUse">
+      <rect class="dr-course" y="7" width="26" height="1"></rect>
+      <rect class="dr-course" x="0" y="0" width="1" height="7"></rect>
+      <rect class="dr-course" x="13" y="0" width="1" height="7" transform="translate(0 0)"></rect>
+    </pattern>
+    <pattern
+      id="el-glass"
+      width="4"
+      height="4"
+      patternUnits="userSpaceOnUse"
+      patternTransform="rotate(45)">
+      <rect class="dr-glass-bg" width="4" height="4"></rect>
+      <rect class="dr-glass-line" width="1" height="4"></rect>
+    </pattern>
+  </defs>
+
+  <rect class="dr-wall" x={x0} y={eave} width={length} height={ground - eave}></rect>
+  <rect x={x0} y={eave} width={length} height={ground - eave} fill="url(#el-bricks)"></rect>
+
+  {floorBox.slice(1).map(box => (
+    <rect
+      class="dr-belt"
+      x={x0}
+      y={box.slabY + box.height + slab * k - 3}
+      width={length}
+      height="4"></rect>
+  ))}
+
+  {teeth.map(tooth => (
+    <g>
+      <path
+        class="dr-roof"
+        d={`M${x0 + tooth * 2 * bay} ${eave}L${x0 + (tooth + 1) * 2 * bay} ${eave - shed}V${eave}Z`}></path>
+      <rect
+        class="dr-shed-glass"
+        x={x0 + (tooth + 1) * 2 * bay - 11}
+        y={eave - shed}
+        width="11"
+        height={shed}></rect>
+    </g>
+  ))}
+  <rect class="dr-eave" x={x0 - 3} y={eave - 3} width={length + 6} height="6"></rect>
+
+  {bays.map(bayIndex =>
+    floorBox.map(box => {
+      const skip = box.index === 0 && (bayIndex === 4 || bayIndex === 5);
+      if (skip) return null;
+      const cx = x0 + bayIndex * bay + bay / 2;
+      const wy = box.y + box.height - 0.5 * k - windowHeight;
+      return (
+        <g class="dr-window">
+          <rect x={cx - windowWidth / 2} y={wy} width={windowWidth} height={windowHeight}></rect>
+          <line
+            x1={cx - windowWidth / 6}
+            y1={wy}
+            x2={cx - windowWidth / 6}
+            y2={wy + windowHeight}></line>
+          <line
+            x1={cx + windowWidth / 6}
+            y1={wy}
+            x2={cx + windowWidth / 6}
+            y2={wy + windowHeight}></line>
+          <line
+            x1={cx - windowWidth / 2}
+            y1={wy + windowHeight * 0.22}
+            x2={cx + windowWidth / 2}
+            y2={wy + windowHeight * 0.22}></line>
+          <rect
+            class="dr-sill"
+            x={cx - windowWidth / 2 - 3}
+            y={wy + windowHeight}
+            width={windowWidth + 6}
+            height="4"></rect>
+        </g>
+      );
+    }),
+  )}
+
+  <g class="dr-gate">
+    <rect x={x0 + 4 * bay + 12} y={ground - 3.4 * k} width={2 * bay - 24} height={3.4 * k}></rect>
+    {Array.from({ length: 13 }, (_, index) => (
+      <line
+        x1={x0 + 4 * bay + 20 + index * ((2 * bay - 40) / 12)}
+        y1={ground - 3.4 * k + 4}
+        x2={x0 + 4 * bay + 20 + index * ((2 * bay - 40) / 12)}
+        y2={ground}></line>
+    ))}
+  </g>
+
+  <path
+    class="dr-chimney"
+    d={`M${chimneyX} ${ground}L${chimneyCutLeft} ${chimneyY}${chimneyZigzag}L${chimneyX + chimneyBase} ${ground}Z`}></path>
+  <rect
+    class="dr-chimney-band"
+    x={chimneyX + chimneyBase / 2 - chimneyTop / 2 - 8}
+    y={ground - 22 * k}
+    width={chimneyTop + 16}
+    height="4"></rect>
+
+  <line class="dr-ground" x1="40" y1={ground} x2="1160" y2={ground}></line>
+  <rect class="dr-ground-hatch" x="40" y={ground} width="1120" height="14"></rect>
+
+  <g class="dr-dim">
+    <line x1={x0} y1={ground + 48} x2={x1} y2={ground + 48}></line>
+    <line x1={x0} y1={ground + 40} x2={x0} y2={ground + 56}></line>
+    <line x1={x1} y1={ground + 40} x2={x1} y2={ground + 56}></line>
+    <text class="dr-text" x={(x0 + x1) / 2} y={ground + 72} text-anchor="middle">
+      {formatMetres(buildingLength)} (dziesięć osi po {formatMetres(bayLength)})
+    </text>
+
+    <line
+      x1={chimneyX + chimneyBase + 40}
+      y1={ground}
+      x2={chimneyX + chimneyBase + 40}
+      y2={chimneyY}></line>
+    <line
+      x1={chimneyX + chimneyBase + 32}
+      y1={ground}
+      x2={chimneyX + chimneyBase + 48}
+      y2={ground}></line>
+    <line
+      x1={chimneyX + chimneyBase + 32}
+      y1={chimneyY}
+      x2={chimneyX + chimneyBase + 48}
+      y2={chimneyY}></line>
+    <text
+      class="dr-text"
+      x={chimneyX + chimneyBase + 52}
+      y={(ground + chimneyY) / 2}
+      transform={`rotate(90 ${chimneyX + chimneyBase + 52} ${(ground + chimneyY) / 2})`}
+      text-anchor="middle">
+      komin {formatMetres(chimneyHeight)}, ucięty
+    </text>
+
+    {floorBox.map((box, index) => (
+      <g>
+        <line x1={x0 - 46} y1={box.y} x2={x0 - 46} y2={box.y + box.height}></line>
+        <line x1={x0 - 54} y1={box.y} x2={x0 - 38} y2={box.y}></line>
+        <line x1={x0 - 54} y1={box.y + box.height} x2={x0 - 38} y2={box.y + box.height}></line>
+        <text
+          class="dr-text dr-text--floor"
+          x={x0 - 62}
+          y={box.y + box.height / 2 + 4}
+          text-anchor="end">
+          {levelLabels[index]}
+        </text>
+      </g>
+    ))}
+  </g>
+
+  <g class="dr-note">
+    <line
+      x1={x0 + 2 * bay + 60}
+      y1={eave - shed * 0.6}
+      x2={x0 + 2 * bay + 120}
+      y2={eave - shed - 60}></line>
+    <text class="dr-text" x={x0 + 2 * bay + 126} y={eave - shed - 56}>
+      dach szedowy, szkło od północy
+    </text>
+    <text class="dr-text" x={x0} y={ground + 118}>
+      mur z cegły oczyszczonej, bez tynku
+    </text>
+  </g>
+
+  <g class="dr-north">
+    <line x1="1000" y1="244" x2="1120" y2="244"></line>
+    <path d="M1120 244L1106 237V251Z"></path>
+    <text class="dr-text" x="1060" y="228" text-anchor="middle">
+      północ
+    </text>
+    <text class="dr-text" x="40" y="228">
+      południe
+    </text>
+    <line x1="40" y1="244" x2="160" y2="244"></line>
+  </g>
+</svg>

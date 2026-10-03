@@ -1,0 +1,13 @@
+---
+interface Props {
+  figure: string;
+  text: string;
+}
+
+const { figure, text } = Astro.props;
+---
+
+<div class="pull">
+  <p class="pull__figure">{figure}</p>
+  <p class="pull__text">{text}</p>
+</div>

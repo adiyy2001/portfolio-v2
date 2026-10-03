@@ -1,0 +1,53 @@
+---
+const stages = [
+  {
+    state: 'done',
+    when: 'III kwartał 2025',
+    name: 'Pozwolenie i wejście na budowę',
+    text: 'Ekipa wchodzi do pustego budynku. Zaczyna od odgruzowania i inwentaryzacji cegły.',
+  },
+  {
+    state: 'done',
+    when: 'I kwartał 2026',
+    name: 'Stan surowy otwarty',
+    text: 'Wzmocnione stropy i nowa konstrukcja pod dachy szedowe. Słupy żeliwne zabezpieczone.',
+  },
+  {
+    state: 'done',
+    when: 'III kwartał 2026',
+    name: 'Stan surowy zamknięty',
+    text: 'Dach, okna i ściany zamknięte. Elewacja z cegły wyczyszczona od dołu do gzymsu.',
+  },
+  {
+    state: 'current',
+    when: 'do II kwartału 2027',
+    name: 'Instalacje, tynki, stolarka',
+    text: 'Teraz: instalacje i wylewki na niższych piętrach, drzwi i klatki schodowe w następnej kolejności.',
+  },
+  {
+    state: 'next',
+    when: 'II kwartał 2027',
+    name: 'Pozwolenie na użytkowanie',
+    text: 'Odbiory urzędowe i kominiarskie, odbiór części wspólnych, porządki na dziedzińcu.',
+  },
+  {
+    state: 'next',
+    when: 'III kwartał 2027',
+    name: 'Odbiór mieszkań i klucze',
+    text: 'Odbiór każdego mieszkania razem z tobą, z protokołem. Potem akt przenoszący własność.',
+  },
+] as const;
+
+const stateLabel = { done: 'zakończone', current: 'trwa teraz', next: 'przed nami' } as const;
+---
+
+<ol class="schedule">
+  {stages.map(stage => (
+    <li class="schedule__stage" data-state={stage.state}>
+      <p class="schedule__when label">{stage.when}</p>
+      <h3 class="schedule__name">{stage.name}</h3>
+      <p class="schedule__text small">{stage.text}</p>
+      <p class="schedule__state small">{stateLabel[stage.state]}</p>
+    </li>
+  ))}
+</ol>

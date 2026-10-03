@@ -1,0 +1,82 @@
+---
+const x0 = 60;
+const bay = 52;
+const top = 100;
+const bottom = 170;
+const kerb = 212;
+const bays = Array.from({ length: 10 }, (_, index) => index);
+const gateX = x0 + 4 * bay;
+const officeX = x0 + 6 * bay;
+const doorX = officeX + bay - 16;
+---
+
+<svg
+  class="dr"
+  viewBox="0 0 640 320"
+  role="img"
+  aria-label="Plan sytuacyjny parteru: ulica Wrzecionowa od wschodu, brama przejazdowa w środku budynku, drzwi biura sprzedaży na północ od bramy i dziedziniec od zachodu."
+  focusable="false">
+  <rect class="dr-court" x="20" y="20" width="600" height={top - 20}></rect>
+  <rect class="dr-street" x="20" y={kerb} width="600" height="62"></rect>
+  <line class="dr-kerb" x1="20" y1={kerb} x2="620" y2={kerb}></line>
+
+  <rect class="dr-wall" x={x0} y={top} width={bay * 10} height={bottom - top}></rect>
+  <rect
+    class="dr-void"
+    x={x0 + 8}
+    y={top + 8}
+    width={bay * 10 - 16}
+    height={bottom - top - 16}></rect>
+  {bays.slice(1).map(index => (
+    <line
+      class="dr-bay"
+      x1={x0 + index * bay}
+      y1={top + 8}
+      x2={x0 + index * bay}
+      y2={bottom - 8}></line>
+  ))}
+
+  <rect
+    class="dr-gate-floor"
+    x={gateX + 1}
+    y={top - 2}
+    width={2 * bay - 2}
+    height={bottom - top + 4}></rect>
+  <rect
+    class="dr-office"
+    x={officeX + 4}
+    y={top + 12}
+    width={2 * bay - 8}
+    height={bottom - top - 24}></rect>
+  <rect class="dr-door" x={doorX} y={bottom - 4} width="32" height="8"></rect>
+
+  <text class="dr-text dr-text--on-office" x={officeX + bay} y={top + 42} text-anchor="middle">
+    biuro
+  </text>
+  <text class="dr-text" x={gateX + bay} y={top + 42} text-anchor="middle">
+    brama
+  </text>
+  <text class="dr-text" x={gateX + bay} y="62" text-anchor="middle">
+    dziedziniec
+  </text>
+  <text class="dr-text" x={doorX + 16} y={bottom + 34} text-anchor="middle">
+    drzwi biura
+  </text>
+  <text class="dr-text dr-text--faint" x="30" y="252">
+    ul. Wrzecionowa
+  </text>
+  <text class="dr-text dr-text--faint" x="30" y="46">
+    zachód
+  </text>
+  <text class="dr-text dr-text--faint" x="30" y="304">
+    wschód
+  </text>
+
+  <g class="dr-north">
+    <line x1="470" y1="308" x2="590" y2="308"></line>
+    <path d="M590 308L576 301V315Z"></path>
+    <text class="dr-text" x="530" y="294" text-anchor="middle">
+      północ
+    </text>
+  </g>
+</svg>

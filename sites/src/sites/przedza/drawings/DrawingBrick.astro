@@ -1,0 +1,80 @@
+---
+import { brick, brickCourse, courseHeight } from '../drawings';
+
+const scale = 0.78;
+const width = 640;
+const courses = 6;
+const x0 = 50;
+const y0 = 60;
+const rows = Array.from({ length: courses }, (_, index) => ({
+  index,
+  y: y0 + (courses - 1 - index) * courseHeight * scale,
+  units: brickCourse(index, width),
+}));
+const widthPx = width * scale;
+const heightPx = courses * courseHeight * scale;
+---
+
+<svg
+  class="dr"
+  viewBox="0 0 690 420"
+  role="img"
+  aria-label="Wątek ceglany: wątek gotycki, na przemian wozówki i główki, w każdej warstwie cegła 25 na 12 na 6,5 centymetra ze spoiną 1 centymetr."
+  focusable="false">
+  <rect class="dr-joint" x={x0} y={y0} width={widthPx} height={heightPx}></rect>
+  {rows.map(row =>
+    row.units.map(unit => (
+      <rect
+        class={unit.kind === 'stretcher' ? 'dr-brick' : 'dr-brick dr-brick--header'}
+        x={x0 + unit.x * scale}
+        y={row.y}
+        width={unit.width * scale}
+        height={brick.height * scale}></rect>
+    )),
+  )}
+
+  <g class="dr-dim">
+    <line
+      x1={x0 + widthPx + 28}
+      y1={y0 + heightPx - courseHeight * scale}
+      x2={x0 + widthPx + 28}
+      y2={y0 + heightPx}></line>
+    <line
+      x1={x0 + widthPx + 20}
+      y1={y0 + heightPx - courseHeight * scale}
+      x2={x0 + widthPx + 36}
+      y2={y0 + heightPx - courseHeight * scale}></line>
+    <line
+      x1={x0 + widthPx + 20}
+      y1={y0 + heightPx}
+      x2={x0 + widthPx + 36}
+      y2={y0 + heightPx}></line>
+    <text class="dr-text" x={x0 + widthPx + 46} y={y0 + heightPx - (courseHeight * scale) / 2 + 6}>
+      7,5 cm
+    </text>
+    <line
+      x1={x0}
+      y1={y0 + heightPx + 36}
+      x2={x0 + brick.stretcher * scale}
+      y2={y0 + heightPx + 36}></line>
+    <line x1={x0} y1={y0 + heightPx + 28} x2={x0} y2={y0 + heightPx + 44}></line>
+    <line
+      x1={x0 + brick.stretcher * scale}
+      y1={y0 + heightPx + 28}
+      x2={x0 + brick.stretcher * scale}
+      y2={y0 + heightPx + 44}></line>
+    <text
+      class="dr-text"
+      x={x0 + (brick.stretcher * scale) / 2}
+      y={y0 + heightPx + 72}
+      text-anchor="middle">
+      25 cm
+    </text>
+  </g>
+
+  <g class="dr-note">
+    <text class="dr-text" x={x0} y="36">
+      wozówka i główka na przemian
+    </text>
+  </g>
+</svg>

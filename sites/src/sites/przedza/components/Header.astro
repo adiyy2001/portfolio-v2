@@ -1,0 +1,77 @@
+---
+import { link } from '../../../shared/link';
+import { navItems, type NavKey } from '../nav';
+import { site } from '../site';
+import Mark from './Mark.astro';
+
+interface Props {
+  current?: NavKey;
+  exact?: boolean;
+}
+
+const { current, exact = false } = Astro.props;
+---
+
+<header class="bar">
+  <div class="bar__inner">
+    <a class="bar__logo" href={link('/przedza/')}>
+      <Mark />
+      <span>{site.name}</span>
+    </a>
+    <button
+      class="bar__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu"
+      data-nav-toggle>
+      <span class="bar__bars" aria-hidden="true"></span>
+      <span>Menu</span>
+    </button>
+    <nav class="bar__nav" id="menu" aria-label="Główna" data-nav>
+      <ul class="bar__list">
+        {navItems.map(item => (
+          <li>
+            <a
+              href={link(item.path)}
+              aria-current={item.key === current ? (exact ? 'page' : 'true') : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a class="bar__mobile-phone" href={site.phoneHref}>
+        {site.phone}
+      </a>
+      <a class="bar__phone" href={site.phoneHref}>
+        {site.phone}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-nav]');
+
+  if (toggle && menu) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.dataset.open = String(open);
+    };
+
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    menu.addEventListener('click', event => {
+      if (event.target instanceof Element && event.target.closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>
