@@ -1,0 +1,29 @@
+---
+import MapBase from '../../../sites/prog/components/MapBase.astro';
+import OffersBrowser from '../../../sites/prog/components/OffersBrowser';
+import { cards } from '../../../sites/prog/data/listings';
+import Layout from '../../../sites/prog/layouts/Layout.astro';
+import { offersLabel } from '../../../sites/prog/lib/format';
+import '../../../sites/prog/styles/map.css';
+import '../../../sites/prog/styles/browser.css';
+---
+
+<Layout
+  title="Oferty: mieszkania i domy na sprzedaż i wynajem we Wrocławiu | Próg"
+  description="Oferty biura Próg: mieszkania i domy na sprzedaż i wynajem we Wrocławiu. Filtry po dzielnicy, cenie, metrażu i piętrze, mapa z pinezkami i rysunek budynku z zaznaczonym oknem przy każdej ofercie."
+  path="/prog/oferty/"
+  nav="oferty">
+  <div class="page page-title">
+    <p class="label eyebrow">Oferty</p>
+    <h1>{offersLabel(cards.length)} i na każdej jedno okno</h1>
+    <p class="lead">
+      Sprzedaż i wynajem we Wrocławiu. Filtry zapisują się w adresie strony, więc gotowe
+      wyszukiwanie możesz wysłać komuś w wiadomości. Mapa i lista pokazują te same oferty.
+    </p>
+  </div>
+  <div class="page">
+    <OffersBrowser client:load>
+      <MapBase />
+    </OffersBrowser>
+  </div>
+</Layout>

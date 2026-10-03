@@ -1,0 +1,130 @@
+---
+import { link } from '../../../shared/link';
+import Icon from '../../../sites/prog/components/Icon.tsx';
+import Monogram from '../../../sites/prog/components/Monogram.astro';
+import { agents } from '../../../sites/prog/data/agents';
+import { listingsOfAgent } from '../../../sites/prog/data/listings';
+import { districtById } from '../../../sites/prog/data/districts';
+import { formatMonthlyPrice, formatPrice, roomsLabel } from '../../../sites/prog/lib/format';
+import Layout from '../../../sites/prog/layouts/Layout.astro';
+import '../../../sites/prog/styles/team.css';
+
+const principles = [
+  {
+    title: 'Wady przed zaletami',
+    text: 'Hałas od tramwaju, brak windy, remont dachu uchwalony przez wspólnotę: piszemy to w opisie, a nie dopiero na oględzinach.',
+  },
+  {
+    title: 'Jedna osoba na ofertę',
+    text: 'Z tym samym agentem rozmawiasz od pierwszego telefonu do aktu. Nie przekazujemy klientów między działami, bo działów nie mamy.',
+  },
+  {
+    title: 'Oddzwaniamy tego samego dnia',
+    text: 'Jeśli nie odbierzemy w godzinach pracy, oddzwaniamy tego samego dnia roboczego. Formularze czytamy rano.',
+  },
+  {
+    title: 'Nie obiecujemy ceny',
+    text: 'Dajemy przedział i uzasadnienie. Jeśli po pierwszym tygodniu rynek go nie potwierdza, mówimy o tym wprost.',
+  },
+];
+
+const entries = agents.map(agent => ({
+  agent,
+  offers: listingsOfAgent(agent.id),
+}));
+---
+
+<Layout
+  title="Zespół: trzy osoby z biura Próg we Wrocławiu"
+  description="Zofia, Tymon i Natalia prowadzą biuro Próg. Sprawdź, kto zajmuje się mieszkaniami w kamienicach, domami i nowymi budynkami oraz wynajmem, i jak pracujemy."
+  path="/prog/zespol/"
+  nav="zespol">
+  <div class="page page-title">
+    <p class="label eyebrow">Zespół</p>
+    <h1>Trzy osoby, jedno biuro na parterze</h1>
+    <p class="lead">
+      Każdy z nas zna swoje dzielnice i dokumenty, które się z nimi wiążą. Dzwonisz do tej osoby,
+      która potem stoi z tobą w mieszkaniu.
+    </p>
+  </div>
+
+  <div class="page team">
+    {entries.map(({ agent, offers }) => (
+      <section class="agent" aria-labelledby={`agent-${agent.id}`}>
+        <Monogram initials={agent.initials} tone={agent.doorTone} size="large" />
+        <div class="agent-body">
+          <p class="label">{agent.role}</p>
+          <h2 id={`agent-${agent.id}`}>{agent.name}</h2>
+          <div class="prose">
+            {agent.bio.map(paragraph => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+          <dl class="agent-facts">
+            <div>
+              <dt>Dzielnice</dt>
+              <dd>{agent.areas.join(', ')}</dd>
+            </div>
+            <div>
+              <dt>Języki</dt>
+              <dd>{agent.languages.join(', ')}</dd>
+            </div>
+            <div>
+              <dt>E-mail</dt>
+              <dd>
+                <a href={`mailto:${agent.email}`}>{agent.email}</a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+        <div class="agent-offers">
+          <h3>Oferty: {agent.firstName}</h3>
+          <ul>
+            {offers.map(offer => (
+              <li>
+                <a href={link(`/prog/oferty/${offer.slug}/`)}>
+                  <span class="offer-line">{offer.street}</span>
+                  <span class="offer-meta">
+                    {districtById(offer.district).label}, {roomsLabel(offer.rooms)}
+                  </span>
+                  <span class="offer-price">
+                    {offer.transaction === 'sprzedaz'
+                      ? formatPrice(offer.price)
+                      : formatMonthlyPrice(offer.price)}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    ))}
+  </div>
+
+  <section class="section" aria-labelledby="principles-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">Jak pracujemy</p>
+        <h2 id="principles-title">Cztery zasady, które spisaliśmy, bo ich pilnujemy</h2>
+      </div>
+      <ul class="principles">
+        {principles.map(item => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section team-call" aria-labelledby="team-call-title">
+    <div class="page team-call-inner">
+      <h2 id="team-call-title">Nie wiesz, do kogo napisać?</h2>
+      <p class="lead">Napisz do biura, a wiadomość trafi do osoby, która zna twoją dzielnicę.</p>
+      <a class="btn btn-primary" href={link('/prog/kontakt/')}>
+        Napisz do biura <Icon name="arrow" size={18} />
+      </a>
+    </div>
+  </section>
+</Layout>

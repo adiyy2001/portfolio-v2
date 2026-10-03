@@ -1,0 +1,160 @@
+.contact-layout {
+  display: grid;
+  gap: var(--s5) var(--s5);
+  padding-bottom: var(--s5);
+}
+
+@media (min-width: 900px) {
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.contact-info {
+  display: grid;
+  gap: var(--s4);
+}
+
+.contact-info section {
+  display: grid;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 2px solid var(--ink);
+}
+
+.contact-info h2 {
+  font-size: 1.75rem;
+}
+
+.contact-info address {
+  font-style: normal;
+}
+
+.address-line {
+  font-family: var(--font-display);
+  font-stretch: 72%;
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.hours {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hours th,
+.hours td {
+  padding: 10px 0;
+  border-bottom: 2px solid var(--rule);
+  text-align: left;
+}
+
+.hours th {
+  padding-right: 16px;
+  font-weight: 400;
+}
+
+.hours td {
+  font-weight: 700;
+}
+
+.phone-line a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-family: var(--font-display);
+  font-stretch: 72%;
+  font-size: 2.25rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.agent-mails li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 10px 0;
+  border-bottom: 2px solid var(--rule);
+}
+
+.contact-map-wrap {
+  display: grid;
+  gap: 10px;
+}
+
+.map-caption {
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.form-split {
+  display: grid;
+  gap: var(--s4) var(--s5);
+  align-items: start;
+}
+
+@media (min-width: 1000px) {
+  .form-split {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}
+
+.form-card {
+  padding: var(--s3);
+  border: 2px solid var(--ink);
+  border-top-width: 6px;
+  min-height: 480px;
+}
+
+@media (min-width: 700px) {
+  .form-card {
+    padding: var(--s4);
+  }
+}
+
+.contact-form {
+  display: grid;
+  gap: var(--s3);
+  justify-items: start;
+}
+
+.contact-form > * {
+  min-width: 0;
+}
+
+.contact-form .field,
+.contact-form .error-summary {
+  width: 100%;
+}
+
+.contact-pair {
+  display: grid;
+  gap: var(--s3) var(--s2);
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .contact-pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-aside {
+  display: grid;
+  gap: var(--s3);
+}
+
+.aside-list {
+  display: grid;
+  gap: 0;
+}
+
+.aside-list li {
+  padding: 12px 0;
+  border-top: 2px solid var(--rule);
+}

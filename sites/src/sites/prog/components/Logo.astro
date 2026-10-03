@@ -1,0 +1,22 @@
+---
+interface Props {
+  caption?: boolean;
+}
+
+const { caption = false } = Astro.props;
+---
+
+<svg class="logo-mark" viewBox="0 0 36 36" aria-hidden="true" focusable="false">
+  <rect width="36" height="36" fill="#4b30e8"></rect>
+  <path d="M11 6h14v21H11z" fill="#fff"></path>
+  <path d="M7 27h22v4H7z" fill="#17151f"></path>
+  <path d="M22.5 17.5a1.5 1.5 0 1 1 0 3a1.5 1.5 0 0 1 0-3z" fill="#4b30e8"></path>
+</svg>
+<span class="logo-word">Próg</span>
+{caption && (
+  <span class="logo-caption">
+    Biuro
+    <br />
+    nieruchomości
+  </span>
+)}

@@ -1,0 +1,13 @@
+---
+interface Props {
+  initials: string;
+  tone: number;
+  size?: 'medium' | 'large';
+}
+
+const { initials, tone, size = 'medium' } = Astro.props;
+---
+
+<div class:list={['monogram', `monogram-${size}`]} data-tone={tone} aria-hidden="true">
+  <span>{initials}</span>
+</div>

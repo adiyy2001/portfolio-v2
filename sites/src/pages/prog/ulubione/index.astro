@@ -1,0 +1,24 @@
+---
+import FavouritesList from '../../../sites/prog/components/FavouritesList';
+import { cards } from '../../../sites/prog/data/listings';
+import Layout from '../../../sites/prog/layouts/Layout.astro';
+import '../../../sites/prog/styles/favourites.css';
+---
+
+<Layout
+  title="Ulubione oferty | Próg"
+  description="Oferty, które zapisałeś w biurze Próg. Lista zostaje w twojej przeglądarce, a przy dwóch i więcej ofertach pokazujemy porównanie cen i metrażu."
+  path="/prog/ulubione/"
+  nav="ulubione">
+  <div class="page page-title">
+    <p class="label eyebrow">Ulubione</p>
+    <h1>Twoja krótka lista</h1>
+    <p class="lead">
+      Zapisujesz oferty jednym kliknięciem. Lista zostaje w tej przeglądarce i nie trafia do nas,
+      więc na innym urządzeniu będzie pusta.
+    </p>
+  </div>
+  <div class="page favourites-page">
+    <FavouritesList client:load cards={cards} />
+  </div>
+</Layout>

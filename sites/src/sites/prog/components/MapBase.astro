@@ -1,0 +1,114 @@
+---
+import { districtById, districts } from '../data/districts';
+import { listings } from '../data/listings';
+import { mapLandmarks, mapShapes, mapWater } from '../data/map-data';
+import { metersPerMapUnit } from '../lib/geo';
+import { pinSpot } from '../lib/pin-spots';
+import type { MapPoint } from '../data/types';
+import {
+  cityWindow,
+  dotBox,
+  officeNameBox,
+  pinBox,
+  placeLabels,
+  placeLandmarks,
+  scaleBox,
+  toPercent,
+  type MapWindow,
+} from '../lib/map-view';
+
+interface Props {
+  view?: MapWindow;
+  labelled?: boolean;
+  everyDistrict?: boolean;
+  office?: MapPoint | undefined;
+  pins?: readonly MapPoint[];
+}
+
+const allPins = listings.map(listing => pinSpot(listing.slug, listing.position));
+const {
+  view = cityWindow,
+  labelled = true,
+  everyDistrict = false,
+  office,
+  pins = allPins,
+} = Astro.props;
+const withOffers = new Set(listings.map(listing => districtById(listing.district).shape));
+const shapeNames = new Map(districts.map(district => [district.shape, district.label]));
+const candidates = mapShapes.flatMap(shape => {
+  const name = shapeNames.get(shape.name) ?? shape.name;
+  const hasOffers = withOffers.has(shape.name);
+  return hasOffers || (everyDistrict && name.length <= 24)
+    ? [{ name, x: shape.label[0], y: shape.label[1] }]
+    : [];
+});
+const fixedBlockers = [
+  scaleBox(view),
+  ...pins.map(pin => pinBox(pin, view)),
+  ...(office ? [dotBox(office, view), officeNameBox(office, view)] : []),
+];
+const landmarks = placeLandmarks(mapLandmarks, view, fixedBlockers).map(landmark => ({
+  ...landmark,
+  ...toPercent(landmark, view),
+}));
+const labelBlockers = [
+  ...fixedBlockers,
+  ...mapLandmarks.map(landmark => dotBox(landmark, view)),
+  ...landmarks.map(landmark => landmark.labelBox),
+];
+const labels = placeLabels(candidates, view, labelBlockers).map(label => ({
+  name: label.name,
+  ...toPercent(label, view),
+}));
+const officeSpot = office ? toPercent(office, view) : null;
+const scaleMeters = view.size > 600 ? 1000 : 500;
+const scaleWidth = Math.round((scaleMeters / metersPerMapUnit / view.size) * 10000) / 100;
+---
+
+<div class="map-base">
+  <svg
+    viewBox={`${view.x} ${view.y} ${view.size} ${view.size}`}
+    preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true"
+    focusable="false">
+    <g class="map-areas">
+      {mapShapes.map(shape => (
+        <path class={withOffers.has(shape.name) ? 'map-area has-offers' : 'map-area'} d={shape.d} />
+      ))}
+    </g>
+    <path class="map-moat" d={mapWater.moatArea}></path>
+    <path class="map-stream" d={mapWater.stream}></path>
+    <path class="map-river map-river-minor" d={mapWater.odraMinor}></path>
+    <path class="map-river" d={mapWater.odra}></path>
+  </svg>
+  {labelled &&
+    labels.map(label => (
+      <span class="map-label" style={`left:${label.left}%;top:${label.top}%`} aria-hidden="true">
+        {label.name}
+      </span>
+    ))}
+  {landmarks.map(landmark => (
+    <span
+      class="map-landmark"
+      style={`left:${landmark.left}%;top:${landmark.top}%`}
+      aria-hidden="true">
+      <span
+        class="map-landmark-name"
+        style={`--shift-x:${Math.round(landmark.labelShiftX)}px;--shift-y:${landmark.labelShiftY}px`}>
+        {landmark.name}
+      </span>
+    </span>
+  ))}
+  <span class="map-scale" style={`width:${scaleWidth}%`} aria-hidden="true">
+    <span class="map-scale-bar"></span>
+    <span class="map-scale-text">{scaleMeters === 1000 ? '1 km' : '500 m'}</span>
+  </span>
+  {officeSpot && (
+    <span
+      class="map-office"
+      style={`left:${officeSpot.left}%;top:${officeSpot.top}%`}
+      aria-hidden="true">
+      <span class="map-office-name">Próg</span>
+    </span>
+  )}
+</div>

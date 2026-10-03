@@ -1,0 +1,120 @@
+---
+import ContactForm from '../../../sites/prog/components/ContactForm';
+import Icon from '../../../sites/prog/components/Icon.tsx';
+import MapBase from '../../../sites/prog/components/MapBase.astro';
+import {
+  agents,
+  officeAddress,
+  officeEmail,
+  officePhone,
+  officePhoneHref,
+} from '../../../sites/prog/data/agents';
+import Layout from '../../../sites/prog/layouts/Layout.astro';
+import { officePoint, windowAround } from '../../../sites/prog/lib/map-view';
+import '../../../sites/prog/styles/map.css';
+import '../../../sites/prog/styles/contact.css';
+
+const view = windowAround(officePoint, 300);
+const hours = [
+  { days: 'Poniedziałek-piątek', time: '9:00-17:00' },
+  { days: 'Sobota', time: '10:00-13:00, po umówieniu' },
+  { days: 'Niedziela i święta', time: 'zamknięte' },
+];
+---
+
+<Layout
+  title="Kontakt: biuro Próg, ul. Sienkiewicza 24/1 we Wrocławiu"
+  description="Adres, godziny, telefon i formularz biura nieruchomości Próg. Jesteśmy na parterze przy ulicy Sienkiewicza, wejście od podwórka z szyldem na bramie."
+  path="/prog/kontakt/"
+  nav="kontakt">
+  <div class="page page-title">
+    <p class="label eyebrow">Kontakt</p>
+    <h1>Wejście od podwórka, szyld na bramie</h1>
+    <p class="lead">
+      Biuro jest na parterze. Zadzwoń, napisz albo po prostu przyjdź w godzinach pracy.
+    </p>
+  </div>
+
+  <div class="page contact-layout">
+    <div class="contact-info">
+      <section aria-labelledby="address-title">
+        <h2 id="address-title">Adres</h2>
+        <address>
+          <p class="address-line">{officeAddress.street}</p>
+          <p class="address-line">{officeAddress.city}</p>
+          <p class="muted">{officeAddress.note}</p>
+        </address>
+      </section>
+      <section aria-labelledby="hours-title">
+        <h2 id="hours-title">Godziny</h2>
+        <table class="hours">
+          <tbody>
+            {hours.map(row => (
+              <tr>
+                <th scope="row">{row.days}</th>
+                <td>{row.time}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+      <section aria-labelledby="phone-title">
+        <h2 id="phone-title">Telefon i e-mail</h2>
+        <p class="phone-line">
+          <a href={officePhoneHref}>
+            <Icon name="phone" size={22} />
+            {officePhone}
+          </a>
+        </p>
+        <p>
+          <a href={`mailto:${officeEmail}`}>{officeEmail}</a>
+        </p>
+        <ul class="agent-mails">
+          {agents.map(agent => (
+            <li>
+              <span>{agent.name}</span>
+              <a href={`mailto:${agent.email}`}>{agent.email}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    <div class="contact-map-wrap">
+      <div class="map contact-map">
+        <MapBase view={view} office={officePoint} pins={[]} everyDistrict />
+      </div>
+      <p class="map-caption">
+        Uproszczona mapa. Kontury osiedli i rzek: współtwórcy OpenStreetMap, licencja ODbL. Biuro
+        jest kilka minut pieszo od Placu Grunwaldzkiego.
+      </p>
+    </div>
+  </div>
+
+  <section class="section" aria-labelledby="form-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">Napisz</p>
+        <h2 id="form-title">Wiadomość do biura</h2>
+      </div>
+      <div class="form-split">
+        <div class="form-aside">
+          <p class="lead">
+            Napisz, czego szukasz albo co chcesz sprzedać. Odpowiadamy w dni robocze, zwykle jeszcze
+            tego samego dnia.
+          </p>
+          <ul class="aside-list">
+            <li>Przy zakupie: dzielnice, budżet i to, czy kupujesz z kredytem.</li>
+            <li>Przy sprzedaży: adres, metraż i rok budynku. Resztę ustalimy przy rozmowie.</li>
+            <li>
+              Przy najmie: od kiedy i na jak długo. Kaucja to najwyżej dwunastokrotność czynszu.
+            </li>
+          </ul>
+        </div>
+        <div class="form-card">
+          <ContactForm client:idle />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,145 @@
+.team {
+  display: grid;
+  gap: var(--s6);
+  padding-bottom: var(--s6);
+}
+
+.agent {
+  display: grid;
+  gap: var(--s3) var(--gutter);
+  padding-top: var(--s2);
+  border-top: 6px solid var(--ink);
+}
+
+.agent .monogram {
+  width: 160px;
+}
+
+.agent-body {
+  display: grid;
+  gap: var(--s2);
+  align-content: start;
+}
+
+.agent-body h2 {
+  font-size: clamp(2.5rem, 1.9rem + 3vw, 4.25rem);
+}
+
+.agent-facts {
+  display: grid;
+  gap: 0;
+  max-width: 40em;
+  margin-top: var(--s1);
+}
+
+.agent-facts > div {
+  display: grid;
+  gap: 2px 16px;
+  padding: 12px 0;
+  border-bottom: 2px solid var(--rule);
+}
+
+.agent-facts dt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .agent-facts > div {
+    grid-template-columns: 120px minmax(0, 1fr);
+  }
+}
+
+.agent-offers h3 {
+  margin-bottom: 8px;
+}
+
+.agent-offers a {
+  display: grid;
+  gap: 0 12px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 12px 0;
+  border-bottom: 2px solid var(--rule);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.agent-offers a:hover {
+  background: var(--tint);
+}
+
+.offer-line {
+  font-weight: 700;
+}
+
+.offer-meta {
+  grid-column: 1;
+  font-size: var(--fs-small);
+  color: var(--ink-soft);
+}
+
+.offer-price {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-family: var(--font-display);
+  font-stretch: 72%;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+@media (min-width: 1000px) {
+  .agent {
+    grid-template-columns: 200px minmax(0, 1fr) 340px;
+    align-items: start;
+  }
+
+  .agent .monogram {
+    width: 100%;
+  }
+}
+
+.principles {
+  display: grid;
+  gap: var(--s4) var(--gutter);
+}
+
+@media (min-width: 700px) {
+  .principles {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1100px) {
+  .principles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.principles li {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding-top: 14px;
+  border-top: 2px solid var(--ink);
+}
+
+.principles h3 {
+  font-size: 1.625rem;
+}
+
+.team-call {
+  background: var(--tint);
+}
+
+.team-call-inner {
+  display: grid;
+  gap: var(--s2);
+  justify-items: start;
+}
+
+.team-call-inner h2 {
+  font-size: clamp(2rem, 1.6rem + 1.8vw, 3rem);
+}

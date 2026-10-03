@@ -1,0 +1,399 @@
+---
+import { link } from '../../shared/link';
+import Icon from '../../sites/prog/components/Icon.tsx';
+import MapBase from '../../sites/prog/components/MapBase.astro';
+import { MapPins } from '../../sites/prog/components/MapPins';
+import Monogram from '../../sites/prog/components/Monogram.astro';
+import { Sheet } from '../../sites/prog/components/Sheet';
+import { Street } from '../../sites/prog/components/Street';
+import { agents, officeAddress } from '../../sites/prog/data/agents';
+import { districts } from '../../sites/prog/data/districts';
+import { cards, getListing, listings } from '../../sites/prog/data/listings';
+import { streetHeroSlug } from '../../sites/prog/data/street';
+import { districtById } from '../../sites/prog/data/districts';
+import { Facade } from '../../sites/prog/facade/Facade';
+import { estimateValue } from '../../sites/prog/lib/estimate';
+import { groupThousands, offersLabel } from '../../sites/prog/lib/format';
+import Layout from '../../sites/prog/layouts/Layout.astro';
+import '../../sites/prog/styles/map.css';
+import '../../sites/prog/styles/home.css';
+
+const newest = (transaction: 'sprzedaz' | 'wynajem', count: number) =>
+  cards
+    .filter(card => card.transaction === transaction)
+    .sort((a, b) => b.published.localeCompare(a.published) || a.slug.localeCompare(b.slug))
+    .slice(0, count);
+const windowCards = [...newest('sprzedaz', 3), ...newest('wynajem', 3)];
+
+const heroListing = getListing(streetHeroSlug);
+const districtCounts = districts
+  .map(district => ({
+    district,
+    count: listings.filter(listing => listing.district === district.id).length,
+  }))
+  .filter(entry => entry.count > 0)
+  .sort((a, b) => b.count - a.count || a.district.name.localeCompare(b.district.name, 'pl'));
+
+const example = estimateValue({
+  district: districtById('nadodrze'),
+  type: 'mieszkanie',
+  area: 54,
+  floor: 3,
+  floorsTotal: 5,
+  condition: 'dobry',
+  elevator: false,
+  outdoor: false,
+});
+const saleCount = cards.filter(card => card.transaction === 'sprzedaz').length;
+const rentCount = cards.length - saleCount;
+---
+
+<Layout
+  title="Próg, biuro nieruchomości we Wrocławiu: mieszkania i domy"
+  description="Trzyosobowe biuro nieruchomości z Wrocławia. Sprzedajemy i wynajmujemy mieszkania i domy, a na każdej ofercie rysujemy budynek z zaznaczonym oknem. Dla właścicieli: wstępna wycena."
+  path="/prog/"
+  nav="home">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="page hero-top">
+      <div class="hero-copy">
+        <p class="label eyebrow">Biuro nieruchomości, Wrocław</p>
+        <h1 id="hero-title">Które okno będzie twoje?</h1>
+        <p class="lead">
+          Próg to trzyosobowe biuro z ulicy Sienkiewicza. Sprzedajemy i wynajmujemy mieszkania i
+          domy we Wrocławiu, a na każdej karcie oferty rysujemy budynek i zaznaczamy to jedno okno.
+        </p>
+      </div>
+      <div class="search-wrap">
+        <form class="search" method="get" action={link('/prog/oferty/')} data-search>
+          <h2 class="search-title">Szukaj oferty</h2>
+          <div class="search-fields">
+            <fieldset class="field">
+              <legend class="field-label">Czego szukasz</legend>
+              <div class="choice-row">
+                <label class="choice">
+                  <input type="radio" name="transakcja" value="sprzedaz" checked />
+                  <span>Kupić</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="transakcja" value="wynajem" />
+                  <span>Wynająć</span>
+                </label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="search-type">Rodzaj</label>
+              <select class="select" id="search-type" name="typ">
+                <option value="">Mieszkanie lub dom</option>
+                <option value="mieszkanie">Mieszkanie</option>
+                <option value="dom">Dom</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="search-district">Dzielnica</label>
+              <select class="select" id="search-district" name="dzielnica">
+                <option value="">Cały Wrocław</option>
+                {districts.map(district => (
+                  <option value={district.id}>{district.name}</option>
+                ))}
+              </select>
+            </div>
+            <div class="field">
+              <label for="search-rooms">Pokoje</label>
+              <select class="select" id="search-rooms" name="pokoje">
+                <option value="">Dowolnie</option>
+                <option value="1">1 pokój</option>
+                <option value="2">2 pokoje</option>
+                <option value="3">3 pokoje</option>
+                <option value="4">4 pokoje</option>
+                <option value="5">5 i więcej</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="search-price">Cena do</label>
+              <div class="input-affix">
+                <input
+                  class="input"
+                  id="search-price"
+                  name="cena_do"
+                  type="number"
+                  inputmode="numeric"
+                  min="0"
+                  step="100"
+                  placeholder="bez limitu"
+                  aria-describedby="search-price-hint"
+                />
+                <span class="affix" aria-hidden="true">
+                  zł
+                </span>
+              </div>
+              <span class="field-hint" id="search-price-hint">
+                Przy wynajmie: za miesiąc.
+              </span>
+            </div>
+            <div class="search-actions">
+              <button class="btn btn-primary" type="submit">
+                Pokaż oferty <Icon name="arrow" size={18} />
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="street-band">
+      <Street />
+    </div>
+  </section>
+
+  <section class="section window-section" aria-labelledby="window-title">
+    <div class="page">
+      <div class="section-head section-head-stacked">
+        <p class="label">Wybrane oferty</p>
+        <h2 id="window-title">Co wisi dziś w witrynie</h2>
+        <p class="section-aside muted">
+          {offersLabel(saleCount)} na sprzedaż i {offersLabel(rentCount)} do wynajęcia.
+        </p>
+      </div>
+      <div class="sheet-grid">
+        {windowCards.map(card => (
+          <Sheet card={card} />
+        ))}
+      </div>
+      <div class="section-more">
+        <a class="btn" href={link('/prog/oferty/')}>
+          Wszystkie oferty ({cards.length}) <Icon name="arrow" size={18} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="reading-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">Jak czytać kartę</p>
+        <h2 id="reading-title">Zaznaczamy okno, nie obiecujemy widoku</h2>
+      </div>
+      <div class="reading">
+        <figure class="reading-figure">
+          {heroListing && (
+            <Facade
+              spec={heroListing.facade}
+              width={640}
+              height={460}
+              label="Rysunek kamienicy z pięcioma piętrami. Fioletowa ramka zaznacza okna mieszkania na trzecim piętrze."
+            />
+          )}
+          <figcaption>
+            Kamienica z 1905 roku, ul. Księcia Witolda. Zaznaczone: trzecie piętro, okna od ulicy.
+          </figcaption>
+        </figure>
+        <ul class="reading-notes">
+          <li>
+            <span class="note-swatch" aria-hidden="true"></span>
+            <div>
+              <h3>Fioletowa ramka to mieszkanie</h3>
+              <p>
+                Obejmuje wszystkie okna lokalu po tej stronie budynku. Na kartach okno zapala się,
+                kiedy najedziesz na ofertę, a pinezka na mapie robi to samo.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="note-swatch note-swatch-count" aria-hidden="true">
+              5p
+            </span>
+            <div>
+              <h3>Budynek jest narysowany z danych</h3>
+              <p>
+                Liczba pięter, szerokość frontu, rodzaj dachu i typ zabudowy pochodzą z opisu
+                oferty. Kamienica z 1905 roku nie wygląda jak blok z wielkiej płyty i nie powinna.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="note-swatch note-swatch-plaster" aria-hidden="true"></span>
+            <div>
+              <h3>Kolor tynku jest ozdobą</h3>
+              <p>
+                To rysunek, nie zdjęcie. Prawdziwą elewację zobaczysz na oglądaniu, a rzut wnętrza
+                znajdziesz na stronie każdej oferty.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="where-title">
+    <div class="page">
+      <div class="section-head section-head-stacked">
+        <p class="label">Gdzie szukamy</p>
+        <h2 id="where-title">Osiedla, na których mamy oferty</h2>
+      </div>
+      <div class="where">
+        <figure class="map-figure where-map">
+          <div class="map">
+            <MapBase />
+            <MapPins cards={cards} />
+          </div>
+          <ul class="map-legend">
+            <li>
+              <span class="legend-pin" aria-hidden="true"></span>Sprzedaż
+            </li>
+            <li>
+              <span class="legend-pin legend-pin-rent" aria-hidden="true"></span>Wynajem
+            </li>
+            <li>
+              <span class="legend-pin legend-pin-area" aria-hidden="true"></span>Osiedle z ofertą
+            </li>
+          </ul>
+          <figcaption class="map-caption">
+            Uproszczona mapa Wrocławia. Każda pinezka prowadzi do oferty, a pełną listę znajdziesz
+            obok.
+          </figcaption>
+        </figure>
+        <div class="where-text">
+          <ul class="where-list">
+            {districtCounts.map(entry => (
+              <li>
+                <a href={link(`/prog/oferty/?dzielnica=${entry.district.id}`)}>
+                  {entry.district.name}
+                </a>
+                <span>{offersLabel(entry.count)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="valuation-title">
+    <div class="page">
+      <div class="teaser">
+        <div class="teaser-copy">
+          <p class="label">Dla właścicieli</p>
+          <h2 id="valuation-title">Ile warte jest twoje mieszkanie?</h2>
+          <p class="lead">
+            Podaj dzielnicę, metraż, piętro i stan, a pokażemy przedział ceny. Potem umówimy
+            oględziny, bo cenę da się naprawdę ocenić dopiero po obejrzeniu okien i instalacji.
+          </p>
+          <p>
+            Nie podpisujesz przy tym żadnej umowy. Przedział jest wstępny i liczony z cen
+            ofertowych, nie transakcyjnych.
+          </p>
+          <div>
+            <a class="btn btn-primary" href={link('/prog/sprzedaj-z-nami/')}>
+              Poproś o wycenę <Icon name="arrow" size={18} />
+            </a>
+          </div>
+        </div>
+        <div class="estimate-card">
+          <p class="label">Przykład z formularza</p>
+          <p class="estimate-range">
+            {groupThousands(example.low)}-{groupThousands(example.high)} zł
+          </p>
+          <dl>
+            <dt>Osiedle</dt>
+            <dd>Nadodrze</dd>
+            <dt>Mieszkanie</dt>
+            <dd>54 m², 3. piętro bez windy</dd>
+            <dt>Stan</dt>
+            <dd>dobry</dd>
+            <dt>Cena za m²</dt>
+            <dd>{groupThousands(example.perSquareMeter)} zł</dd>
+          </dl>
+          <p class="field-hint">
+            Przykład liczony tym samym kalkulatorem co formularz. To nie jest oferta.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="team-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">Zespół</p>
+        <h2 id="team-title">Trzy osoby, które odbierają telefon</h2>
+        <a class="section-aside text-link" href={link('/prog/zespol/')}>
+          Poznaj zespół
+        </a>
+      </div>
+      <ul class="agents-strip">
+        {agents.map(agent => (
+          <li class="agent-mini">
+            <Monogram initials={agent.initials} tone={agent.doorTone} />
+            <div>
+              <h3>{agent.name}</h3>
+              <p>{agent.role}</p>
+              <p>{agent.summary}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="closing-title">
+    <div class="page closing">
+      <div class="closing-copy">
+        <h2 id="closing-title">Od czego zacząć? Zadzwoń.</h2>
+        <a class="closing-phone" href="tel:+48710000008">
+          +48 71 000 00 08
+        </a>
+        <p class="lead">
+          W dni powszednie od 9 do 17 odbiera ktoś z biura. Możesz też napisać, a odpowiemy
+          następnego dnia roboczego.
+        </p>
+        <div class="closing-actions">
+          <a class="btn btn-primary" href={link('/prog/kontakt/')}>
+            Napisz do nas
+          </a>
+          <a class="btn" href={link('/prog/oferty/')}>
+            Zobacz oferty
+          </a>
+        </div>
+      </div>
+      <div class="plaque">
+        <p class="plaque-name">Próg</p>
+        <p class="label">Biuro nieruchomości</p>
+        <p>
+          {officeAddress.street}
+          <br />
+          {officeAddress.city}
+          <br />
+          {officeAddress.note}
+        </p>
+        <p>
+          Pon.-pt. 9:00-17:00
+          <br />
+          Sob. 10:00-13:00, po umówieniu
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector<HTMLFormElement>('[data-search]');
+    form?.addEventListener('submit', () => {
+      for (const element of Array.from(form.elements)) {
+        if (
+          (element instanceof HTMLInputElement || element instanceof HTMLSelectElement) &&
+          element.name &&
+          element.value === ''
+        ) {
+          element.disabled = true;
+        }
+      }
+    });
+    window.addEventListener('pageshow', () => {
+      if (!form) return;
+      for (const element of Array.from(form.elements)) {
+        if (element instanceof HTMLInputElement || element instanceof HTMLSelectElement) {
+          element.disabled = false;
+        }
+      }
+    });
+  </script>
+</Layout>

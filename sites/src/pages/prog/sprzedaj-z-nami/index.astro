@@ -1,0 +1,232 @@
+---
+import { link } from '../../../shared/link';
+import Icon from '../../../sites/prog/components/Icon.tsx';
+import ValuationForm from '../../../sites/prog/components/ValuationForm';
+import { officePhone, officePhoneHref } from '../../../sites/prog/data/agents';
+import {
+  commissionFor,
+  commissionRate,
+  minimumNetCommission,
+  vatRate,
+} from '../../../sites/prog/lib/commission';
+import { formatPercent, formatPrice } from '../../../sites/prog/lib/format';
+import Layout from '../../../sites/prog/layouts/Layout.astro';
+import '../../../sites/prog/styles/sell.css';
+
+const steps = [
+  {
+    title: 'Oględziny i wycena',
+    text: 'Przychodzimy na godzinę. Patrzymy na instalacje, okna i księgę wieczystą. Przedział ceny dostajesz na miejscu, a pisemną wycenę po dwóch dniach.',
+  },
+  {
+    title: 'Umowa',
+    text: 'Pośrednictwo na trzy miesiące, z wyłącznością. Czytamy ją razem, punkt po punkcie, i nie musisz podpisywać tego samego dnia.',
+  },
+  {
+    title: 'Przygotowanie',
+    text: 'Zbieramy dokumenty, rysujemy rzut i budynek z zaznaczonym oknem, piszemy opis z tym, co w mieszkaniu naprawdę jest.',
+  },
+  {
+    title: 'Oglądania',
+    text: 'Każdy termin ustalamy z tobą. Możesz być przy oglądaniu albo zostawić je agentowi i dostać krótkie podsumowanie.',
+  },
+  {
+    title: 'Akt notarialny',
+    text: 'Pilnujemy dokumentów przed notariuszem oraz przekazania mieszkania z protokołem odczytów liczników.',
+  },
+];
+
+const examples = [400000, 600000, 900000].map(price => ({
+  price,
+  commission: commissionFor(price),
+}));
+
+const faqs = [
+  {
+    question: 'Ile trwa sprzedaż mieszkania?',
+    answer:
+      'To zależy od ceny, dzielnicy i stanu. Mieszkanie wycenione zgodnie z rynkiem ma pierwsze oglądania w tygodniu publikacji. Od umowy przedwstępnej do aktu mija zwykle od jednego do trzech miesięcy, głównie przez kredyt kupującego.',
+  },
+  {
+    question: 'Czy zapłacę podatek od sprzedaży?',
+    answer:
+      'Jeśli sprzedajesz po upływie pięciu lat, liczonych od końca roku, w którym kupiłeś mieszkanie (przy spadku od końca roku, w którym nabył je spadkodawca), podatku dochodowego nie ma. Przy sprzedaży wcześniej płaci się 19 procent od dochodu, czyli od różnicy między ceną sprzedaży a kosztami nabycia. Dochód jest zwolniony, jeśli przychód wydasz na własne cele mieszkaniowe w ciągu trzech lat od końca roku podatkowego, w którym sprzedałeś. Rozliczasz to w PIT-39. Szczegóły sprawdź na podatki.gov.pl albo u doradcy podatkowego.',
+  },
+  {
+    question: 'Jakie dokumenty są potrzebne?',
+    answer:
+      'Dokument tożsamości, akt, z którego wynika twoje prawo do mieszkania, numer księgi wieczystej, zaświadczenie od wspólnoty lub spółdzielni o opłatach i braku zaległości oraz świadectwo charakterystyki energetycznej. Resztę uzupełnimy razem po oględzinach.',
+  },
+  {
+    question: 'Czy muszę być przy oglądaniach?',
+    answer:
+      'Nie. Jeśli zostawisz nam klucze, zabierzemy kupujących sami i zadzwonimy po każdym oglądaniu. Jeśli wolisz być na miejscu, ustalamy terminy tak, żebyś mógł.',
+  },
+  {
+    question: 'Czy ktoś może sprzedać mieszkanie w moim imieniu?',
+    answer:
+      'Tak, jeśli ma pełnomocnictwo w formie aktu notarialnego. Przy współwłasności podpisują wszyscy współwłaściciele albo ich pełnomocnicy.',
+  },
+  {
+    question: 'Co jeśli mieszkanie ma lokatora?',
+    answer:
+      'Najpierw sprawdzamy umowę najmu. Kupujący przejmuje najemcę na dotychczasowych warunkach, więc umowa i termin wypowiedzenia muszą być jasne przed publikacją oferty.',
+  },
+];
+---
+
+<Layout
+  title="Sprzedaj z nami: wycena i sprzedaż mieszkania we Wrocławiu | Próg"
+  description="Sprzedaż mieszkania lub domu z biurem Próg. Pięć kroków od oględzin do aktu, prowizja 2 procent plus VAT płatna po akcie i formularz wstępnej wyceny."
+  path="/prog/sprzedaj-z-nami/"
+  nav="sprzedaj">
+  <div class="page page-title">
+    <p class="label eyebrow">Dla właścicieli</p>
+    <h1>Sprzedaż mieszkania, krok po kroku</h1>
+    <div class="title-side">
+      <p class="lead">
+        Najpierw oglądamy i liczymy, dopiero potem podpisujemy. Prowizję płacisz po akcie u
+        notariusza, a nie po umowie z nami.
+      </p>
+      <a class="btn btn-primary" href="#wycena">
+        Poproś o wycenę <Icon name="arrow" size={18} />
+      </a>
+    </div>
+  </div>
+
+  <section class="section process" aria-labelledby="process-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">Jak to wygląda</p>
+        <h2 id="process-title">Pięć stopni do aktu</h2>
+      </div>
+      <ol class="stairs">
+        {steps.map(step => (
+          <li>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="wycena" aria-labelledby="valuation-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">Wycena</p>
+        <h2 id="valuation-title">Zacznij od przedziału ceny</h2>
+      </div>
+      <div class="sell-split">
+        <div class="sell-copy">
+          <p class="lead">
+            Trzy krótkie kroki: nieruchomość, termin, kontakt. Na końcu zobaczysz przedział ceny i
+            do niego odezwie się agent.
+          </p>
+          <p>
+            Przedział liczymy z cen ofertowych w twojej dzielnicy, poprawionych o piętro, stan i
+            balkon. To punkt wyjścia do rozmowy. Nie zastępuje operatu rzeczoznawcy ani oględzin, po
+            których cena zwykle się przesuwa.
+          </p>
+          <p>Nie podpisujesz przy tym żadnej umowy.</p>
+          <ul class="sell-gets">
+            <li>
+              <strong>Przedział ceny od razu</strong>
+              <span>Widzisz go na ekranie po trzecim kroku, bez czekania na maila.</span>
+            </li>
+            <li>
+              <strong>Telefon od agenta</strong>
+              <span>Dzwoni osoba, która zna twoją dzielnicę, w dzień roboczy.</span>
+            </li>
+            <li>
+              <strong>Oględziny, jeśli chcesz</strong>
+              <span>Dopiero po nich mówimy o cenie ofertowej. Nic nie jest zobowiązaniem.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="valuation-card">
+          <ValuationForm client:idle />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="costs-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">Koszty</p>
+        <h2 id="costs-title">Ile to kosztuje</h2>
+      </div>
+      <div class="costs-split">
+        <div class="prose">
+          <p>
+            Prowizja to {formatPercent(commissionRate * 100)} ceny sprzedaży plus{' '}
+            {Math.round(vatRate * 100)}% VAT, nie mniej niż {formatPrice(minimumNetCommission)}{' '}
+            netto. Płacisz ją w ciągu 14 dni po akcie notarialnym. Jeśli do aktu nie dojdzie, nie
+            płacisz nic.
+          </p>
+          <p>
+            Kupujący nie płaci nam prowizji. Poza prowizją zapłacisz za świadectwo charakterystyki
+            energetycznej, jeśli go nie masz (zwykle kilkaset złotych), oraz za zaświadczenia ze
+            wspólnoty lub spółdzielni, według jej cennika.
+          </p>
+          <p class="muted">Stan na październik 2026. Nie jest to porada prawna ani podatkowa.</p>
+        </div>
+        <table class="commission-table">
+          <caption class="visually-hidden">
+            Przykładowa prowizja biura przy trzech cenach sprzedaży
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Cena</th>
+              <th scope="col">Prowizja netto</th>
+              <th scope="col">Z VAT</th>
+            </tr>
+          </thead>
+          <tbody>
+            {examples.map(({ price, commission }) => (
+              <tr>
+                <th scope="row">{formatPrice(price)}</th>
+                <td>{formatPrice(commission.net)}</td>
+                <td>{formatPrice(commission.gross)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-title">
+    <div class="page">
+      <div class="section-head">
+        <p class="label">Pytania</p>
+        <h2 id="faq-title">Najczęściej pytacie</h2>
+      </div>
+      <div class="faq">
+        {faqs.map(item => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section call" aria-labelledby="call-title">
+    <div class="page call-inner">
+      <h2 id="call-title">Wolisz porozmawiać?</h2>
+      <p class="lead">
+        Zadzwoń w godzinach pracy. Odbiera jedna z trzech osób, które potem przyjdą na oględziny.
+      </p>
+      <a class="btn" href={officePhoneHref}>
+        <Icon name="phone" size={20} />
+        {officePhone}
+      </a>
+      <a class="text-link" href={link('/prog/kontakt/')}>
+        Adres i godziny biura
+      </a>
+    </div>
+  </section>
+</Layout>

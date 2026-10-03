@@ -1,0 +1,452 @@
+---
+import { link } from '../../../shared/link';
+import FavouriteButton from '../../../sites/prog/components/FavouriteButton';
+import FloorPlan from '../../../sites/prog/components/FloorPlan.astro';
+import Icon from '../../../sites/prog/components/Icon.tsx';
+import MapBase from '../../../sites/prog/components/MapBase.astro';
+import Monogram from '../../../sites/prog/components/Monogram.astro';
+import MortgageCalculator from '../../../sites/prog/components/MortgageCalculator';
+import { Sheet } from '../../../sites/prog/components/Sheet';
+import ViewingBooking from '../../../sites/prog/components/ViewingBooking';
+import { agentById, officePhone, officePhoneHref } from '../../../sites/prog/data/agents';
+import { districtById } from '../../../sites/prog/data/districts';
+import {
+  conditionLabel,
+  extraLabel,
+  heatingLabel,
+  leaseLabel,
+  marketLabel,
+  ownershipLabel,
+  transactionLabel,
+  typeLabel,
+} from '../../../sites/prog/data/labels';
+import { listings, similarListings, toCard } from '../../../sites/prog/data/listings';
+import { mapLandmarks } from '../../../sites/prog/data/map-data';
+import type { Listing } from '../../../sites/prog/data/types';
+import { Facade } from '../../../sites/prog/facade/Facade';
+import {
+  floorLabel,
+  formatArea,
+  formatDate,
+  formatMonthlyPrice,
+  formatPrice,
+  roomsLabel,
+} from '../../../sites/prog/lib/format';
+import { distanceMeters, formatDistance } from '../../../sites/prog/lib/geo';
+import { roomsOf } from '../../../sites/prog/plan/build';
+import { toPercent, windowAround } from '../../../sites/prog/lib/map-view';
+import {
+  depositFor,
+  maxDeposit,
+  monthlyTotal,
+  pccTax,
+  pricePerSquareMeter,
+} from '../../../sites/prog/lib/price';
+import Layout from '../../../sites/prog/layouts/Layout.astro';
+import '../../../sites/prog/styles/map.css';
+import '../../../sites/prog/styles/offer.css';
+
+export function getStaticPaths() {
+  return listings.map(listing => ({ params: { slug: listing.slug }, props: { listing } }));
+}
+
+interface Props {
+  listing: Listing;
+}
+
+const { listing } = Astro.props;
+const district = districtById(listing.district);
+const agent = agentById(listing.agent);
+const isSale = listing.transaction === 'sprzedaz';
+const isHouse = listing.type === 'dom';
+const perSquareMeter = pricePerSquareMeter(listing.price, listing.area);
+const priceText = isSale ? formatPrice(listing.price) : formatMonthlyPrice(listing.price);
+const title = `${roomsLabel(listing.rooms)}, ${formatArea(listing.area)}, ${district.label}`;
+const pageTitle = `${listing.street}, ${district.label} | ${isSale ? 'Sprzedaż' : 'Wynajem'} | Próg`;
+const pageDescription = `${listing.headline}. ${roomsLabel(listing.rooms)}, ${formatArea(listing.area)}, ${district.label}, ${isSale ? 'cena' : 'czynsz'} ${priceText}. Rzut, mapa dojazdu${isSale ? ', kalkulator raty' : ''} i termin oglądania.`;
+
+const facts: { label: string; value: string }[] = [
+  { label: isSale ? 'Cena' : 'Czynsz najmu', value: priceText },
+  ...(isSale ? [{ label: 'Cena za m²', value: `${formatPrice(perSquareMeter)}` }] : []),
+  { label: 'Powierzchnia', value: formatArea(listing.area) },
+  ...(isHouse && listing.plotArea
+    ? [{ label: 'Działka', value: formatArea(listing.plotArea) }]
+    : []),
+  { label: 'Pokoje', value: String(listing.rooms) },
+  ...(isHouse
+    ? [{ label: 'Kondygnacje', value: String(listing.floorsTotal) }]
+    : [{ label: 'Piętro', value: `${floorLabel(listing.floor)} z ${listing.floorsTotal}` }]),
+  { label: 'Rok budowy', value: String(listing.buildYear) },
+  { label: 'Stan', value: conditionLabel[listing.condition] },
+  { label: 'Ogrzewanie', value: heatingLabel[listing.heating] },
+  ...(listing.market ? [{ label: 'Rynek', value: marketLabel[listing.market] }] : []),
+  ...(listing.ownership
+    ? [
+        {
+          label: 'Forma własności',
+          value:
+            isHouse && listing.ownership === 'wlasnosc'
+              ? 'własność z księgą wieczystą'
+              : ownershipLabel[listing.ownership],
+        },
+      ]
+    : []),
+  ...(listing.lease ? [{ label: 'Umowa najmu', value: leaseLabel[listing.lease] }] : []),
+  ...(listing.leaseTerm ? [{ label: 'Czas najmu', value: listing.leaseTerm }] : []),
+  { label: 'Wskaźnik EP', value: `${listing.energyIndex} kWh/m² rok` },
+  { label: 'Dostępne', value: listing.availableFrom },
+  { label: 'Dodano', value: formatDate(listing.published) },
+];
+
+const monthlyLines: { label: string; value: string; note?: string }[] = isSale
+  ? [
+      {
+        label: isHouse ? 'Opłaty wspólne' : 'Czynsz do wspólnoty lub spółdzielni',
+        value: formatMonthlyPrice(listing.adminFee),
+        note: isHouse
+          ? listing.adminFee > 0
+            ? 'Droga, oświetlenie i zieleń wspólna. Śmieci, podatek od nieruchomości i ubezpieczenie płacisz osobno.'
+            : 'Dom bez wspólnoty. Śmieci, podatek od nieruchomości i ubezpieczenie płacisz osobno.'
+          : 'Zawiera fundusz remontowy.',
+      },
+    ]
+  : [
+      { label: 'Czynsz najmu', value: formatMonthlyPrice(listing.price) },
+      { label: 'Czynsz do wspólnoty lub spółdzielni', value: formatMonthlyPrice(listing.adminFee) },
+      ...(listing.utilities
+        ? [
+            {
+              label: 'Media (zaliczka)',
+              value: formatMonthlyPrice(listing.utilities),
+              note: 'Rozliczane według zużycia.',
+            },
+          ]
+        : []),
+    ];
+const monthlyTotalText = formatMonthlyPrice(monthlyTotal(listing));
+const deposit = depositFor(listing);
+
+const nearby = mapLandmarks
+  .map(landmark => ({ name: landmark.name, meters: distanceMeters(listing.position, landmark) }))
+  .sort((a, b) => a.meters - b.meters);
+const view = windowAround(listing.position, 520);
+const pinSpot = toPercent(listing.position, view);
+const planTitle = (floorName: string) =>
+  `Rzut: ${floorName.toLowerCase()}, ${formatArea(listing.area)}, ${roomsLabel(listing.rooms)}`;
+
+const similar = similarListings(listing).map(toCard);
+const extras = listing.extras.map(extra => extraLabel[extra]);
+const facadeLabel =
+  `Rysunek ${isHouse ? 'domu' : 'budynku'} wygenerowany z danych oferty. ${isHouse ? '' : 'Zaznaczone okno to oferowane mieszkanie.'}`.trim();
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  path={`/prog/oferty/${listing.slug}/`}
+  nav="oferty">
+  <div class="page offer">
+    <nav class="crumbs" aria-label="Ścieżka">
+      <ol>
+        <li>
+          <a href={link('/prog/oferty/')}>Oferty</a>
+        </li>
+        <li>{district.label}</li>
+        <li aria-current="page">{listing.street}</li>
+      </ol>
+    </nav>
+
+    <header class="offer-head">
+      <p class="label eyebrow">
+        {transactionLabel[listing.transaction]}, {typeLabel[listing.type].toLowerCase()}
+      </p>
+      <h1>{title}</h1>
+      <p class="offer-street">{listing.street}, Wrocław</p>
+      <p class="lead">{listing.headline}</p>
+    </header>
+
+    <div class="offer-hero">
+      <figure class="offer-facade">
+        <span class={isSale ? 'tag tag-sale' : 'tag'}>{transactionLabel[listing.transaction]}</span>
+        <Facade spec={listing.facade} width={800} height={480} label={facadeLabel} />
+        <figcaption>
+          Rysunek powstaje z danych oferty: piętra, okna i dach zgadzają się z opisem.{' '}
+          {isHouse ? '' : 'Zaznaczone okno należy do tego mieszkania.'}
+        </figcaption>
+      </figure>
+      <aside class="offer-side" aria-label="Cena i kontakt">
+        <div class="price-panel">
+          <p class="price-figure">{priceText}</p>
+          {isSale ? (
+            <p class="price-sub">{formatPrice(perSquareMeter)} za m²</p>
+          ) : (
+            <p class="price-sub">Razem z opłatami {monthlyTotalText}</p>
+          )}
+          <a class="btn btn-primary btn-block" href="#ogladanie">
+            Umów oglądanie
+          </a>
+          <a class="btn btn-block" href={officePhoneHref}>
+            <Icon name="phone" size={20} />
+            <span>Zadzwoń: {officePhone}</span>
+          </a>
+          <FavouriteButton client:load slug={listing.slug} street={listing.street} />
+          <p class="price-agent">Prowadzi: {agent.name}.</p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="offer-main">
+      <section class="offer-section" aria-labelledby="facts-title">
+        <h2 id="facts-title">Najważniejsze dane</h2>
+        <dl class="facts">
+          {facts.map(fact => (
+            <div>
+              <dt>{fact.label}</dt>
+              <dd>{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="offer-section" aria-labelledby="description-title">
+        <h2 id="description-title">Opis</h2>
+        <div class="prose">
+          {listing.description.map(paragraph => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+        <div class="offer-lists">
+          <div>
+            <h3>Co warto wiedzieć</h3>
+            <ul class="tick-list">
+              {listing.highlights.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3>W okolicy</h3>
+            <ul class="tick-list">
+              {listing.surroundings.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        {extras.length > 0 && (
+          <p class="offer-extras">
+            <strong>Udogodnienia:</strong> {extras.join(', ')}.
+          </p>
+        )}
+      </section>
+
+      <section class="offer-section" aria-labelledby="costs-title">
+        <h2 id="costs-title">Koszty</h2>
+        <div class="cost-columns">
+          <div>
+            <h3>Co miesiąc</h3>
+            <dl class="cost-list">
+              {monthlyLines.map(line => (
+                <div>
+                  <dt>
+                    {line.label}
+                    {line.note && <small>{line.note}</small>}
+                  </dt>
+                  <dd>{line.value}</dd>
+                </div>
+              ))}
+              {!isSale && (
+                <div class="cost-total">
+                  <dt>Razem miesięcznie</dt>
+                  <dd>{monthlyTotalText}</dd>
+                </div>
+              )}
+            </dl>
+          </div>
+          <div>
+            <h3>{isSale ? 'Przy zakupie' : 'Na start'}</h3>
+            {isSale ? (
+              <dl class="cost-list">
+                <div>
+                  <dt>
+                    Podatek PCC
+                    <small>
+                      {listing.market === 'pierwotny'
+                        ? 'Nie dotyczy: sprzedaż od dewelopera jest objęta VAT, który jest w cenie.'
+                        : 'Płaci kupujący, 2% ceny. Są zwolnienia, o których powie notariusz.'}
+                    </small>
+                  </dt>
+                  <dd>
+                    {listing.market === 'pierwotny'
+                      ? '0 zł'
+                      : `do ${formatPrice(pccTax(listing.price))}`}
+                  </dd>
+                </div>
+                <div>
+                  <dt>
+                    Notariusz i księga wieczysta
+                    <small>
+                      Taksa z VAT i opłaty sądowe za wpisy. Przy tej cenie to kilka tysięcy złotych.
+                    </small>
+                  </dt>
+                  <dd>kilka tys. zł</dd>
+                </div>
+                <div>
+                  <dt>
+                    Prowizja biura
+                    <small>Płaci sprzedający. Kupujący nie płaci biuru Próg nic.</small>
+                  </dt>
+                  <dd>0 zł</dd>
+                </div>
+              </dl>
+            ) : (
+              <dl class="cost-list">
+                <div>
+                  <dt>
+                    Kaucja
+                    <small>
+                      {listing.depositMonths === 1
+                        ? 'Jeden czynsz'
+                        : `${listing.depositMonths} czynsze`}
+                      . Prawo pozwala na najwyżej dwunastokrotność czynszu, czyli{' '}
+                      {formatPrice(maxDeposit(listing.price))}.
+                    </small>
+                  </dt>
+                  <dd>{formatPrice(deposit)}</dd>
+                </div>
+                <div>
+                  <dt>
+                    Prowizja biura
+                    <small>Płaci wynajmujący. Najemca nie płaci biuru Próg nic.</small>
+                  </dt>
+                  <dd>0 zł</dd>
+                </div>
+              </dl>
+            )}
+          </div>
+        </div>
+        <p class="offer-note">
+          Stan na październik 2026. To informacje ogólne, nie porada prawna ani podatkowa.
+        </p>
+      </section>
+
+      <section class="offer-section" aria-labelledby="plan-title">
+        <h2 id="plan-title">Rzut</h2>
+        <div class="plan-set">
+          {listing.plan.map((floor, index) => (
+            <figure class="plan-figure">
+              {listing.plan.length > 1 && <h3>{floor.name}</h3>}
+              <FloorPlan floor={floor} title={planTitle(floor.name)} patternId={`hatch-${index}`} />
+              <figcaption>
+                {floor.stairsIn && <p class="plan-key">Kreskowany prostokąt to schody.</p>}
+                <ul class="plan-rooms">
+                  {roomsOf(floor.root).map(room => (
+                    <li>
+                      <span>{room.name}</span>
+                      <strong>{formatArea(room.area)}</strong>
+                    </li>
+                  ))}
+                </ul>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <p class="offer-note">
+          Rzut jest schematem z danych oferty, bez skali i z uproszczonymi ścianami. Dokładne
+          wymiary podajemy na oglądaniu.
+        </p>
+      </section>
+
+      <section class="offer-section" aria-labelledby="place-title">
+        <h2 id="place-title">Lokalizacja</h2>
+        <div class="place">
+          <div class="map place-map">
+            <MapBase view={view} pins={[listing.position]} />
+            <ul class="map-pins">
+              <li class="map-pin is-active" style={`left:${pinSpot.left}%;top:${pinSpot.top}%`}>
+                <span class={isSale ? 'pin pin-sale' : 'pin pin-rent'}>
+                  <svg
+                    width="28"
+                    height="34"
+                    viewBox="0 0 28 34"
+                    aria-hidden="true"
+                    focusable="false">
+                    <path class="pin-body" d="M2 2h24v24h-7.5L14 32l-4.5-6H2z"></path>
+                    <path class="pin-door" d="M10 20V10.5h8V20z"></path>
+                  </svg>
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="place-text">
+            <p>
+              <strong>{district.name}.</strong> {district.blurb}
+            </p>
+            <h3>Odległość w linii prostej</h3>
+            <ul class="distance-list">
+              {nearby.map(point => (
+                <li>
+                  <span>{point.name}</span>
+                  <strong>{formatDistance(point.meters)}</strong>
+                </li>
+              ))}
+            </ul>
+            <p class="offer-note">
+              Uproszczona mapa. Pinezka stoi na ulicy oferty, nie pod numerem domu.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {isSale && (
+        <section class="offer-section" aria-labelledby="mortgage-title">
+          <h2 id="mortgage-title">Ile wyniesie rata</h2>
+          <p class="offer-intro">
+            Wpisz własne założenia. Kalkulator liczy ratę ze wzoru, bez oferty żadnego banku.
+          </p>
+          <MortgageCalculator client:idle price={listing.price} />
+        </section>
+      )}
+
+      <section class="offer-section" id="ogladanie" aria-labelledby="booking-title">
+        <h2 id="booking-title">Umów oglądanie lub zapytaj</h2>
+        <div class="booking-layout">
+          <div class="agent-card">
+            <Monogram initials={agent.initials} tone={agent.doorTone} />
+            <div>
+              <p class="agent-name">{agent.name}</p>
+              <p class="muted">{agent.role}</p>
+              <p>
+                <a href={`mailto:${agent.email}`}>{agent.email}</a>
+              </p>
+              <p>
+                <a href={officePhoneHref}>{officePhone}</a>
+              </p>
+            </div>
+          </div>
+          <div class="booking-wrap">
+            <ViewingBooking
+              client:idle
+              slug={listing.slug}
+              street={listing.street}
+              agentName={agent.firstName}
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <section class="section offer-similar" aria-labelledby="similar-title">
+    <div class="page">
+      <div class="section-head">
+        <h2 id="similar-title">Podobne oferty</h2>
+      </div>
+      <div class="sheet-grid">
+        {similar.map(item => (
+          <Sheet card={item} />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

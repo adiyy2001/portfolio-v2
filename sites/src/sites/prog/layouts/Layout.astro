@@ -1,0 +1,206 @@
+---
+import SampleNote from '../../../shared/SampleNote.astro';
+import { link } from '../../../shared/link';
+import { officeAddress, officeEmail, officePhone, officePhoneHref } from '../data/agents';
+import Icon from '../components/Icon.tsx';
+import Logo from '../components/Logo.astro';
+import { fontFaces, fontUrl } from '../components/fonts';
+import '../styles/base.css';
+import '../styles/layout.css';
+import '../styles/facade.css';
+import '../styles/sheet.css';
+
+type NavKey = 'home' | 'oferty' | 'sprzedaj' | 'zespol' | 'kontakt' | 'ulubione';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  nav?: NavKey;
+  ogImage?: string;
+}
+
+const { title, description, path, nav, ogImage = '/prog/og.png' } = Astro.props;
+const canonical = new URL(link(path), Astro.site).href;
+const image = new URL(link(ogImage), Astro.site).href;
+const navItems: { key: NavKey; label: string; href: string }[] = [
+  { key: 'oferty', label: 'Oferty', href: link('/prog/oferty/') },
+  { key: 'sprzedaj', label: 'Sprzedaj z nami', href: link('/prog/sprzedaj-z-nami/') },
+  { key: 'zespol', label: 'Zespół', href: link('/prog/zespol/') },
+  { key: 'kontakt', label: 'Kontakt', href: link('/prog/kontakt/') },
+];
+const favouritesHref = link('/prog/ulubione/');
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Próg" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Próg, biuro nieruchomości we Wrocławiu: rząd kamienic z jednym zaznaczonym oknem"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href={link('/prog/favicon.svg')} />
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaces}></style>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Przejdź do treści
+    </a>
+    <header class="site-header">
+      <div class="strip">
+        <div class="page strip-inner">
+          <p>
+            <span class="strip-address">
+              {officeAddress.street}, {officeAddress.city}.{' '}
+            </span>
+            <span class="strip-hours">Pon.-pt. 9:00-17:00, sob. 10:00-13:00.</span>
+          </p>
+          <a href={officePhoneHref}>{officePhone}</a>
+        </div>
+      </div>
+      <div class="bar-wrap">
+        <div class="page">
+          <div class="bar">
+            <a
+              class="logo"
+              href={link('/prog/')}
+              aria-label="Próg, biuro nieruchomości, strona główna">
+              <Logo caption />
+            </a>
+            <button
+              class="menu-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="site-nav"
+              data-menu-toggle>
+              <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true" focusable="false">
+                <path class="bar-top" d="M0 1h20" stroke="currentColor" stroke-width="2.4"></path>
+                <path
+                  class="bar-middle"
+                  d="M0 7h20"
+                  stroke="currentColor"
+                  stroke-width="2.4"></path>
+                <path
+                  class="bar-bottom"
+                  d="M0 13h20"
+                  stroke="currentColor"
+                  stroke-width="2.4"></path>
+              </svg>
+              Menu
+            </button>
+            <nav class="site-nav" id="site-nav" aria-label="Główna">
+              <ul>
+                {navItems.map(item => (
+                  <li>
+                    <a
+                      class="nav-link"
+                      href={item.href}
+                      aria-current={nav === item.key ? 'page' : undefined}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a
+                    class="nav-link"
+                    href={favouritesHref}
+                    data-favourites-link
+                    aria-current={nav === 'ulubione' ? 'page' : undefined}>
+                    <span class="nav-heart">
+                      <Icon name="heart" size={18} />
+                      Ulubione
+                    </span>
+                    <span class="nav-count" data-favourites-count hidden></span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="page">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a class="logo" href={link('/prog/')} aria-label="Próg, strona główna">
+              <Logo />
+            </a>
+            <p>
+              Trzy osoby w jednym biurze na parterze. Sprzedajemy i wynajmujemy mieszkania i domy we
+              Wrocławiu.
+            </p>
+          </div>
+          <address class="footer-col">
+            <h2>Biuro</h2>
+            <span class="footer-line">{officeAddress.street}</span>
+            <span class="footer-line">{officeAddress.city}</span>
+            <span class="footer-line">Pon.-pt. 9:00-17:00</span>
+            <span class="footer-line">Sob. 10:00-13:00, po umówieniu</span>
+          </address>
+          <nav class="footer-col" aria-label="W serwisie">
+            <h2>W serwisie</h2>
+            <ul>
+              <li>
+                <a href={link('/prog/oferty/')}>Oferty</a>
+              </li>
+              <li>
+                <a href={link('/prog/sprzedaj-z-nami/')}>Sprzedaj z nami</a>
+              </li>
+              <li>
+                <a href={link('/prog/zespol/')}>Zespół</a>
+              </li>
+              <li>
+                <a href={link('/prog/kontakt/')}>Kontakt</a>
+              </li>
+              <li>
+                <a href={favouritesHref}>Ulubione</a>
+              </li>
+            </ul>
+          </nav>
+          <div class="footer-col">
+            <h2>Napisz lub zadzwoń</h2>
+            <a class="footer-phone" href={officePhoneHref}>
+              {officePhone}
+            </a>
+            <a href={`mailto:${officeEmail}`}>{officeEmail}</a>
+          </div>
+        </div>
+        <div class="footer-base">
+          <SampleNote name="Próg" lang="pl" />
+          <p class="map-credit">
+            Kontury osiedli i rzek: współtwórcy OpenStreetMap, licencja ODbL.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      import '../components/header-behaviour';
+    </script>
+  </body>
+</html>

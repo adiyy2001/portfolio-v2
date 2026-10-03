@@ -1,0 +1,189 @@
+.facade {
+  --sky: #e6f0fa;
+  --ground: #dcdde6;
+  --neighbour: #e3e7ee;
+  --neighbour-window: #c9d0dc;
+  --tree: #9fbf96;
+  --wall: #e8c780;
+  --shade: #d2ab5c;
+  --roof: #5b3a2a;
+  --door: #3a2a22;
+  --glass: #33415a;
+  --lit-window: #6f86a8;
+  --frame: #ffffff;
+  --rail: #17151f;
+  --step: #f4f0e8;
+  width: 100%;
+  height: auto;
+}
+
+.facade[data-tone='1'] {
+  --wall: #eab5ac;
+  --shade: #d2958a;
+  --roof: #4a3036;
+  --sky: #f5ecee;
+}
+
+.facade[data-tone='2'] {
+  --wall: #a9cbe8;
+  --shade: #86afd2;
+  --roof: #34455a;
+  --sky: #f0f4f8;
+}
+
+.facade[data-tone='3'] {
+  --wall: #b5cfae;
+  --shade: #92b38a;
+  --roof: #3b4a3a;
+  --sky: #eef3ec;
+}
+
+.facade[data-tone='4'] {
+  --wall: #c4c6d0;
+  --shade: #a3a6b6;
+  --roof: #3a3b48;
+  --sky: #eceef3;
+}
+
+.facade[data-tone='5'] {
+  --wall: #f0c4a0;
+  --shade: #d9a47c;
+  --roof: #4a3226;
+  --sky: #f8efe7;
+  --door: #3a2a22;
+}
+
+.facade[data-tone='6'] {
+  --wall: #b8553a;
+  --shade: #9b4330;
+  --roof: #2b2020;
+  --glass: #2a2328;
+  --sky: #f3ece8;
+  --frame: #f3e6e0;
+}
+
+.facade[data-tone='7'] {
+  --wall: #f1efe9;
+  --shade: #d6d2c6;
+  --roof: #8a4b36;
+  --sky: #e6f0fa;
+}
+
+.fx-sky {
+  fill: var(--sky);
+}
+
+.fx-ground {
+  fill: var(--ground);
+}
+
+.fx-neighbour {
+  fill: var(--neighbour);
+}
+
+.fx-neighbourWindow {
+  fill: var(--neighbour-window);
+}
+
+.fx-tree {
+  fill: var(--tree);
+}
+
+.fx-wall {
+  fill: var(--wall);
+}
+
+.fx-shade {
+  fill: var(--shade);
+}
+
+.fx-roof {
+  fill: var(--roof);
+}
+
+.fx-gable {
+  fill: var(--wall);
+}
+
+.fx-stack {
+  fill: var(--shade);
+}
+
+.fx-door {
+  fill: var(--door);
+}
+
+.fx-glass {
+  fill: var(--glass);
+}
+
+.fx-lit {
+  fill: var(--lit-window);
+}
+
+.fx-blind {
+  fill: #fff;
+  opacity: 0.22;
+}
+
+.fx-sill {
+  fill: var(--frame);
+}
+
+.fx-mullion {
+  fill: none;
+  stroke: var(--frame);
+  stroke-width: 1.1;
+  vector-effect: non-scaling-stroke;
+}
+
+.fx-rail {
+  fill: var(--rail);
+  opacity: 0.35;
+}
+
+.fx-step {
+  fill: var(--step);
+}
+
+.fx-flat {
+  fill: #fff;
+  transition: fill 240ms ease;
+}
+
+.fx-flatFrame {
+  fill: none;
+  stroke: var(--spot);
+  stroke-width: 2.2;
+  vector-effect: non-scaling-stroke;
+}
+
+.fx-bracket {
+  fill: none;
+  stroke: var(--spot);
+  stroke-width: 2.6;
+  vector-effect: non-scaling-stroke;
+}
+
+.is-lit .fx-flat,
+.sheet:hover .fx-flat,
+.sheet:focus-within .fx-flat,
+.sheet.is-active .fx-flat {
+  fill: var(--lit);
+}
+
+.sheet:hover .fx-flatFrame,
+.sheet:focus-within .fx-flatFrame,
+.sheet.is-active .fx-flatFrame {
+  stroke-width: 3.2;
+}
+
+.sheet:hover .fx-bracket,
+.sheet:focus-within .fx-bracket,
+.sheet.is-active .fx-bracket {
+  stroke-width: 3.6;
+}
+
+.facade .fx-bracket {
+  transition: stroke-width 200ms ease;
+}
