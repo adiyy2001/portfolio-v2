@@ -1,6 +1,16 @@
 ---
 import { link, portfolio } from '../shared/link';
 import { sites } from '../shared/sites';
+
+const faces = [
+  ['Bespoke Serif', 'bespoke-serif-700', '700'],
+  ['Schibsted Grotesk', 'schibsted-grotesk', '400 600'],
+]
+  .map(
+    ([family, file, weight]) =>
+      `@font-face{font-family:'${family}';src:url(${portfolio(`/fonts/${file}.woff2`)}) format('woff2');font-weight:${weight};font-display:swap}`,
+  )
+  .join('');
 ---
 
 <!doctype html>
@@ -15,6 +25,8 @@ import { sites } from '../shared/sites';
     />
     <meta name="theme-color" content="#5a1424" />
     <link rel="canonical" href={new URL(link('/'), Astro.site)} />
+    <link rel="icon" type="image/svg+xml" href={portfolio('/favicon.svg')} />
+    <style is:inline set:html={faces} />
   </head>
   <body>
     <main>
@@ -51,7 +63,8 @@ import { sites } from '../shared/sites';
     background: var(--chalk);
     color: var(--ink);
     font:
-      18px/1.5 system-ui,
+      18px/1.5 'Schibsted Grotesk',
+      system-ui,
       'Segoe UI',
       Arial,
       sans-serif;
@@ -67,7 +80,8 @@ import { sites } from '../shared/sites';
     margin: 0 0 16px;
     color: var(--wool);
     font:
-      700 clamp(48px, 10vw, 96px) / 1 Georgia,
+      700 clamp(48px, 10vw, 96px) / 1 'Bespoke Serif',
+      Georgia,
       serif;
   }
 
@@ -96,7 +110,8 @@ import { sites } from '../shared/sites';
   li a {
     color: var(--wool);
     font:
-      700 28px/1.2 Georgia,
+      700 28px/1.2 'Bespoke Serif',
+      Georgia,
       serif;
   }
 
