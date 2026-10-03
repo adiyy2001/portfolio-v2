@@ -31,15 +31,21 @@ const htmlFiles = dir =>
     return entry.name.endsWith('.html') ? [file] : [];
   });
 
+const streamPadding = /\0/g;
+
 exports.onPostBuild = () => {
   htmlFiles(path.join(__dirname, 'public')).forEach(file => {
     const sources = [];
-    const html = fs.readFileSync(file, 'utf8').replace(entryScript, (tag, source) => {
-      sources.push(source);
-      return '';
-    });
-    if (sources.length) {
-      fs.writeFileSync(file, html.replace('</body>', `${afterFirstPaint(sources)}</body>`));
-    }
+    const html = fs
+      .readFileSync(file, 'utf8')
+      .replace(streamPadding, '')
+      .replace(entryScript, (tag, source) => {
+        sources.push(source);
+        return '';
+      });
+    fs.writeFileSync(
+      file,
+      sources.length ? html.replace('</body>', `${afterFirstPaint(sources)}</body>`) : html,
+    );
   });
 };
