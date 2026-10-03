@@ -1,0 +1,87 @@
+---
+import type { Block } from '../data/articles';
+import { uniqueSlugs } from '../lib/slug';
+import { tie } from '../lib/tie';
+import Rich from './Rich.astro';
+
+interface Props {
+  blocks: Block[];
+}
+
+const { blocks } = Astro.props;
+const headingTexts = blocks.flatMap(block => (block.type === 'h2' ? [block.text] : []));
+const headingIds = uniqueSlugs(headingTexts);
+let headingIndex = 0;
+const items = blocks.map((block, index) => {
+  const id = block.type === 'h2' ? headingIds[headingIndex++] : undefined;
+  return { block, id, key: index };
+});
+---
+
+{items.map(({ block, id, key }) => {
+  switch (block.type) {
+    case 'h2':
+      return <h2 id={id}>{tie(block.text)}</h2>;
+    case 'h3':
+      return <h3>{tie(block.text)}</h3>;
+    case 'p':
+      return (
+        <p>
+          <Rich text={block.text} />
+        </p>
+      );
+    case 'ul':
+      return (
+        <ul class="bullets">
+          {block.items.map(item => (
+            <li>
+              <Rich text={item} />
+            </li>
+          ))}
+        </ul>
+      );
+    case 'ol':
+      return (
+        <ol class="counted">
+          {block.items.map(item => (
+            <li>
+              <Rich text={item} />
+            </li>
+          ))}
+        </ol>
+      );
+    case 'note':
+      return (
+        <aside class="note" aria-labelledby={`note-${key}`}>
+          <p class="note__title label" id={`note-${key}`}>
+            {block.title}
+          </p>
+          <p>
+            <Rich text={block.text} />
+          </p>
+        </aside>
+      );
+    case 'table':
+      return (
+        <table class="data-table">
+          <caption class="label">{block.caption}</caption>
+          <thead>
+            <tr>
+              {block.head.map(cell => (
+                <th scope="col">{tie(cell)}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {block.rows.map(row => (
+              <tr>
+                {row.map(cell => (
+                  <td>{tie(cell)}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+  }
+})}

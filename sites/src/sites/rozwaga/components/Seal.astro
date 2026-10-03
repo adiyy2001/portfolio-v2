@@ -1,0 +1,106 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={['seal', className]} aria-hidden="true">
+  <div class="seal__shadow"></div>
+  <svg class="seal__layer seal__bloom" viewBox="-8 -8 216 216" focusable="false">
+    <defs>
+      <filter id="seal-bloom-filter" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.045"
+          numOctaves="2"
+          seed="11"
+          result="wobble"></feTurbulence>
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="wobble"
+          scale="14"
+          xChannelSelector="R"
+          yChannelSelector="G"></feDisplacementMap>
+      </filter>
+    </defs>
+    <circle cx="100" cy="100" r="99" fill="#b3122a" filter="url(#seal-bloom-filter)"></circle>
+  </svg>
+  <svg class="seal__layer seal__body" viewBox="-8 -8 216 216" focusable="false">
+    <defs>
+      <path id="seal-arc-top" d="M34 100A66 66 0 0 1 166 100"></path>
+      <path id="seal-arc-bottom" d="M25 100A75 75 0 0 0 175 100"></path>
+      <filter id="seal-ink" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.8"
+          numOctaves="2"
+          seed="7"
+          result="grain"></feTurbulence>
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="grain"
+          scale="1.9"
+          xChannelSelector="R"
+          yChannelSelector="G"
+          result="rough"></feDisplacementMap>
+        <feColorMatrix
+          in="grain"
+          type="matrix"
+          values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 9 0 0 -1.6"
+          result="mask"></feColorMatrix>
+        <feComposite in="rough" in2="mask" operator="in"></feComposite>
+      </filter>
+    </defs>
+    <g filter="url(#seal-ink)">
+      <circle cx="100" cy="100" r="98" fill="#b3122a"></circle>
+      <circle
+        cx="100"
+        cy="100"
+        r="92.5"
+        fill="none"
+        stroke="#fff"
+        stroke-width="3"
+        stroke-dasharray="1.7 2.3"></circle>
+      <circle cx="100" cy="100" r="86" fill="none" stroke="#fff" stroke-width="1.4"></circle>
+      <circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="1"></circle>
+      <circle cx="100" cy="100" r="58" fill="none" stroke="#fff" stroke-width="1.4"></circle>
+      <text fill="#fff" font-size="10" font-weight="700">
+        <textPath
+          href="#seal-arc-top"
+          startOffset="50%"
+          text-anchor="middle"
+          textLength="176"
+          lengthAdjust="spacing">
+          KANCELARIA RADCY PRAWNEGO
+        </textPath>
+      </text>
+      <text fill="#fff" font-size="10" font-weight="700">
+        <textPath
+          href="#seal-arc-bottom"
+          startOffset="50%"
+          text-anchor="middle"
+          textLength="84"
+          lengthAdjust="spacing">
+          WROCŁAW
+        </textPath>
+      </text>
+      <circle cx="30" cy="100" r="2.6" fill="#fff"></circle>
+      <circle cx="170" cy="100" r="2.6" fill="#fff"></circle>
+      <text x="100" y="126" fill="#fff" text-anchor="middle" font-size="76" font-weight="500">
+        R
+      </text>
+      <text
+        x="100"
+        y="146"
+        fill="#fff"
+        text-anchor="middle"
+        font-size="9"
+        font-weight="700"
+        letter-spacing="2.2">
+        ROZWAGA
+      </text>
+    </g>
+  </svg>
+</div>

@@ -1,0 +1,35 @@
+---
+import { ellipsesOf, rosetteLayers } from '../lib/rosette';
+
+interface Props {
+  name: string;
+  initials: string;
+  class?: string;
+}
+
+const { name, initials, class: className } = Astro.props;
+const layers = rosetteLayers(name).map(layer => ({ ...layer, ellipses: ellipsesOf(layer) }));
+---
+
+<svg class:list={['rosette', className]} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+  <g transform="translate(50 50)" fill="none" stroke-width="0.4">
+    {layers.map(layer => (
+      <g stroke={layer.tone === 'seal' ? '#b3122a' : '#121212'}>
+        {layer.ellipses.map(ellipse => (
+          <ellipse
+            cx={ellipse.cx}
+            cy="0"
+            rx={ellipse.rx}
+            ry={ellipse.ry}
+            transform={`rotate(${ellipse.rotate})`}
+          />
+        ))}
+      </g>
+    ))}
+  </g>
+  <circle cx="50" cy="50" r="49" fill="none" stroke="#121212" stroke-width="1"></circle>
+  <circle cx="50" cy="50" r="27" fill="#fff" stroke="#121212" stroke-width="0.8"></circle>
+  <text x="50" y="57" text-anchor="middle" font-size="19" font-weight="600" fill="#121212">
+    {initials}
+  </text>
+</svg>

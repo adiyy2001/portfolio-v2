@@ -1,0 +1,95 @@
+---
+import CtaBand from '../../../sites/rozwaga/components/CtaBand.astro';
+import Layout from '../../../sites/rozwaga/components/Layout.astro';
+import PageHeader from '../../../sites/rozwaga/components/PageHeader.astro';
+import Rosette from '../../../sites/rozwaga/components/Rosette.astro';
+import Section from '../../../sites/rozwaga/components/Section.astro';
+import { areaBySlug } from '../../../sites/rozwaga/data/areas';
+import { team } from '../../../sites/rozwaga/data/team';
+import { siteHref } from '../../../sites/rozwaga/lib/paths';
+import { tie } from '../../../sites/rozwaga/lib/tie';
+import innerCss from '../../../sites/rozwaga/styles/inner.css?raw';
+
+const initialsOf = (name: string): string =>
+  name
+    .split(' ')
+    .map(part => part.charAt(0))
+    .join('');
+---
+
+<Layout
+  title="Zespół: radcowie prawni i asystentka | Rozwaga"
+  description="Aneta Wojtyńska i Rafał Dzierżanowski, radcowie prawni, oraz Weronika Chmielecka, asystentka. Kto prowadzi jakie sprawy w kancelarii Rozwaga."
+  path="/zespol/"
+  css={innerCss}
+  current="zespol"
+  exact>
+  <PageHeader
+    title="Zespół"
+    crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Zespół' }]}
+    lead="Dwoje radców prawnych i asystentka. Mała kancelaria, w której wiesz, kto prowadzi twoją sprawę."
+  />
+  {team.map(member => (
+    <section class="doc person" id={member.slug} aria-labelledby={`${member.slug}-name`}>
+      <div class="wrap">
+        <div class="doc__inner">
+          <div class="doc__side person__side">
+            <Rosette
+              class="person__rosette"
+              name={member.name}
+              initials={initialsOf(member.name)}
+            />
+          </div>
+          <div class="doc__body">
+            <h2 class="title" id={`${member.slug}-name`}>
+              {member.name}
+            </h2>
+            <p class="label person__role">{member.role}</p>
+            <div class="prose person__bio">
+              {member.bio.map(paragraph => (
+                <p>{tie(paragraph)}</p>
+              ))}
+            </div>
+            <dl class="details">
+              {member.details.map(detail => (
+                <div>
+                  <dt class="label">{detail.label}</dt>
+                  <dd>{tie(detail.value)}</dd>
+                </div>
+              ))}
+            </dl>
+            {member.focus.length > 0 && (
+              <p class="person__areas small">
+                Prowadzi sprawy z obszarów:{' '}
+                {member.focus.map((slug, index) => (
+                  <>
+                    {index > 0 && ', '}
+                    <a href={siteHref(`/specjalizacje/${slug}/`)}>
+                      {areaBySlug(slug)?.name.toLowerCase()}
+                    </a>
+                  </>
+                ))}
+                .
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+  <Section label="Kto prowadzi sprawę" id="podzial">
+    <div class="prose">
+      <p>
+        {tie(
+          'Do każdej sprawy przypisujemy jednego radcę prawnego. Odpowiada za nią od pierwszej rozmowy do końca i to on odbiera od ciebie telefon.',
+        )}
+      </p>
+      <p>
+        {tie(
+          'Drugi radca czyta ważniejsze pisma przed wysłaniem. Asystentka pilnuje terminów i dokumentów, a ty dostajesz po każdym piśmie z sądu krótką wiadomość o tym, co przyszło i co robimy dalej.',
+        )}
+      </p>
+    </div>
+  </Section>
+  <CtaBand />
+</Layout>

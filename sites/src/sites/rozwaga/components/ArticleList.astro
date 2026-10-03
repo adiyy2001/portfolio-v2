@@ -1,0 +1,44 @@
+---
+import { articleMinutes } from '../data/content';
+import type { Article } from '../data/articles';
+import { areaBySlug } from '../data/areas';
+import { formatLongDate } from '../lib/names';
+import { siteHref } from '../lib/paths';
+import { readingTimeLabel } from '../lib/reading-time';
+import { tie } from '../lib/tie';
+import Arrow from './Arrow.astro';
+
+interface Props {
+  items: Article[];
+}
+
+const rows = Astro.props.items.map(article => {
+  const [year = 0, month = 1, day = 1] = article.published.split('-').map(Number);
+  return {
+    article,
+    area: areaBySlug(article.areaSlug)?.name ?? '',
+    date: formatLongDate(year, month, day),
+    time: readingTimeLabel(articleMinutes(article)),
+  };
+});
+---
+
+<ul class="ruled articles">
+  {rows.map(row => (
+    <li>
+      <a class="articles__link" href={siteHref(`/artykuly/${row.article.slug}/`)}>
+        <p class="articles__meta label">
+          {row.area}
+          <span aria-hidden="true">·</span>
+          <time datetime={row.article.published}>{tie(row.date)}</time>
+        </p>
+        <h3 class="articles__title">{tie(row.article.title)}</h3>
+        <p class="articles__lead">{tie(row.article.lead)}</p>
+        <p class="articles__time label">
+          {row.time}
+          <Arrow />
+        </p>
+      </a>
+    </li>
+  ))}
+</ul>

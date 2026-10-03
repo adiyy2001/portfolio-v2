@@ -1,0 +1,69 @@
+---
+import baseCss from '../styles/base.css?raw';
+import { fontFacesCss } from '../lib/font-faces';
+import { headScript } from '../lib/head-script';
+import { siteHref } from '../lib/paths';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  css: string;
+  current?: string;
+  exact?: boolean;
+  ogType?: 'website' | 'article';
+}
+
+const { title, description, path, css, current, exact, ogType = 'website' } = Astro.props;
+const canonical = new URL(siteHref(path), Astro.site).href;
+const image = new URL(siteHref('/og.png'), Astro.site).href;
+const fontUrl = siteHref('/fonts/BodoniModa.woff2');
+const faces = fontFacesCss(fontUrl);
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" type="image/svg+xml" href={siteHref('/favicon.svg')} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Rozwaga" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Pieczęć kancelarii Rozwaga i hasło: Umowa, która wytrzyma spór."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" as="font" type="font/woff2" href={fontUrl} crossorigin />
+    <script is:inline set:html={headScript}></script>
+    <style is:inline set:html={faces}></style>
+    <style is:inline set:html={baseCss}></style>
+    <style is:inline set:html={css}></style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Przejdź do treści
+    </a>
+    <Header current={current} exact={exact} />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/menu';
+    </script>
+  </body>
+</html>

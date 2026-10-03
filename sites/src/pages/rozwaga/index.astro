@@ -1,0 +1,152 @@
+---
+import homeCss from '../../sites/rozwaga/styles/home.css?raw';
+import AreaList from '../../sites/rozwaga/components/AreaList.astro';
+import ArticleList from '../../sites/rozwaga/components/ArticleList.astro';
+import Arrow from '../../sites/rozwaga/components/Arrow.astro';
+import CtaBand from '../../sites/rozwaga/components/CtaBand.astro';
+import Layout from '../../sites/rozwaga/components/Layout.astro';
+import PriceTable from '../../sites/rozwaga/components/PriceTable.astro';
+import Seal from '../../sites/rozwaga/components/Seal.astro';
+import Section from '../../sites/rozwaga/components/Section.astro';
+import TeamList from '../../sites/rozwaga/components/TeamList.astro';
+import { articles } from '../../sites/rozwaga/data/articles';
+import { firstContactSteps, priceHighlights } from '../../sites/rozwaga/data/home';
+import { formatZloty, grossFromNet, site } from '../../sites/rozwaga/data/site';
+import { siteHref } from '../../sites/rozwaga/lib/paths';
+import { tie } from '../../sites/rozwaga/lib/tie';
+
+const gross = formatZloty(grossFromNet(site.hourlyRateNet));
+---
+
+<Layout
+  title="Rozwaga, kancelaria radcy prawnego dla firm we Wrocławiu"
+  description="Umowa, która wytrzyma spór. Kancelaria radcy prawnego dla firm: prawo spółek, umowy, spory sądowe i nieruchomości. Pierwsza rozmowa do 20 minut bez opłaty."
+  path="/"
+  css={homeCss}
+  current="home"
+  exact>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__inner">
+        <p class="hero__label label">
+          Prawo dla firm
+          <br />
+          Wrocław i online
+        </p>
+        <div class="hero__sealbox">
+          <Seal class="hero__seal" />
+          <button class="seal-replay-button label" type="button" data-seal-replay>
+            Pieczęć jeszcze raz
+          </button>
+        </div>
+        <h1 class="display hero__title">Umowa, która wytrzyma spór.</h1>
+        <div class="hero__text">
+          <p class="lead">
+            {tie(
+              'Prowadzimy firmy przez umowy, spółki, spory o pieniądze i najem lokali. Mówimy, ile to kosztuje, zanim zaczniemy.',
+            )}
+          </p>
+          <div class="actions">
+            <a class="button" href={siteHref('/kontakt/#formularz')}>
+              Umów konsultację
+              <Arrow />
+            </a>
+            <a class="button button--ghost numerals" href={`tel:${site.phoneHref}`}>
+              {tie(site.phone)}
+            </a>
+          </div>
+          <p class="hero__status small" data-open-status>
+            Pn-czw 9:00-17:00, pt 9:00-15:00.
+          </p>
+        </div>
+      </div>
+      <dl class="hero__facts">
+        <div>
+          <dt class="label">Pierwsza rozmowa</dt>
+          <dd>{tie('do 20 minut, bez opłaty')}</dd>
+        </div>
+        <div>
+          <dt class="label">Oddzwonimy</dt>
+          <dd>w ciągu dnia roboczego</dd>
+        </div>
+        <div>
+          <dt class="label">Stawka</dt>
+          <dd>{tie(`${formatZloty(site.hourlyRateNet)} netto za godzinę`)}</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <Section label="W czym pomagamy" id="obszary" class="doc--areas">
+    <p class="subtitle areas-intro">
+      {tie(
+        'Cztery obszary, w których pracujemy na co dzień. W każdym mamy swoje ceny i swój tryb pracy.',
+      )}
+    </p>
+    <AreaList />
+  </Section>
+
+  <Section label="Jak zaczynamy" id="start">
+    <div class="first-call">
+      <div class="first-call__figure">
+        <span class="first-call__number numerals">20</span>
+        <p class="first-call__unit">{tie('minut rozmowy, bez opłaty')}</p>
+      </div>
+      <dl class="steps">
+        {firstContactSteps.map(step => (
+          <div>
+            <dt>
+              {step.title}
+              <p class="steps__time">{tie(step.duration)}</p>
+            </dt>
+            <dd>{tie(step.text)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </Section>
+
+  <Section label="Ile to kosztuje" id="cennik">
+    <div class="pricing">
+      <div class="pricing__rate">
+        <p class="pricing__amount numerals">{tie(formatZloty(site.hourlyRateNet))}</p>
+        <p class="pricing__unit">netto za godzinę pracy</p>
+        <p class="small pricing__note">
+          {tie(
+            `Plus 23% VAT, razem ${gross} brutto. Przy zadaniach, które da się opisać z góry, podajemy cenę za całość.`,
+          )}
+        </p>
+        <p class="small">
+          <a href={siteHref('/specjalizacje/')}>Ceny w każdym obszarze</a>
+        </p>
+      </div>
+      <PriceTable caption="Przykładowe ceny netto" rows={priceHighlights} />
+    </div>
+  </Section>
+
+  <Section label="Artykuły" id="artykuly">
+    <ArticleList items={articles} />
+    <p class="section-more">
+      <a class="button button--ghost" href={siteHref('/artykuly/')}>
+        Wszystkie artykuły
+        <Arrow />
+      </a>
+    </p>
+  </Section>
+
+  <Section label="Zespół" id="zespol">
+    <p class="subtitle team-lead">
+      {tie(
+        'Dwoje radców prawnych i asystentka. Dzwoniąc do nas, rozmawiasz z osobą, która poprowadzi twoją sprawę.',
+      )}
+    </p>
+    <TeamList />
+  </Section>
+
+  <CtaBand />
+
+  <script>
+    import '../../sites/rozwaga/scripts/open-status';
+    import '../../sites/rozwaga/scripts/seal-replay';
+  </script>
+</Layout>

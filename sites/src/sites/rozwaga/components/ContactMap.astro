@@ -1,0 +1,169 @@
+---
+import { site } from '../data/site';
+---
+
+<figure class="map">
+  <svg
+    class="map__svg"
+    viewBox="0 0 640 420"
+    preserveAspectRatio="xMidYMid slice"
+    role="img"
+    aria-labelledby="map-title map-desc">
+    <title id="map-title">Plan dojścia do kancelarii Rozwaga</title>
+    <desc id="map-desc">
+      Uproszczony plan Starego Miasta we Wrocławiu. Kancelaria jest przy ulicy Kuźniczej, na północ
+      od Rynku, w stronę Placu Uniwersyteckiego i Odry. Od północno-wschodniego narożnika Rynku to
+      około pięć minut pieszo.
+    </desc>
+    <defs>
+      <pattern id="map-water" width="9" height="7" patternUnits="userSpaceOnUse">
+        <path
+          d="M0 3.5q2.25-2.5 4.5 0t4.5 0"
+          fill="none"
+          stroke="#121212"
+          stroke-width="0.8"></path>
+      </pattern>
+      <pattern id="map-square" width="7" height="7" patternUnits="userSpaceOnUse">
+        <circle cx="3.5" cy="3.5" r="0.9" fill="#121212"></circle>
+      </pattern>
+      <pattern
+        id="map-hatch"
+        width="6"
+        height="6"
+        patternUnits="userSpaceOnUse"
+        patternTransform="rotate(45)">
+        <path d="M0 0v6" stroke="#121212" stroke-width="1"></path>
+      </pattern>
+    </defs>
+    <rect width="640" height="420" fill="#fff"></rect>
+    <path
+      d="M0 0H640V44C590 62 540 30 480 44S380 66 320 46S220 28 160 48S60 62 0 40Z"
+      fill="url(#map-water)"
+      stroke="#121212"
+      stroke-width="1.2"></path>
+    <rect
+      x="286"
+      y="10"
+      width="68"
+      height="26"
+      fill="#fff"
+      stroke="#121212"
+      stroke-width="1"></rect>
+    <text class="map__text map__text--small map__text--halo" x="320" y="28" text-anchor="middle">
+      Odra
+    </text>
+    <rect
+      x="48"
+      y="92"
+      width="544"
+      height="308"
+      rx="46"
+      fill="none"
+      stroke="#121212"
+      stroke-width="1"
+      stroke-dasharray="1 5"></rect>
+    <rect
+      x="58"
+      y="102"
+      width="524"
+      height="288"
+      rx="38"
+      fill="none"
+      stroke="#121212"
+      stroke-width="1"></rect>
+    <text class="map__text map__text--small map__text--halo" x="320" y="412" text-anchor="middle">
+      Fosa Miejska
+    </text>
+    <g stroke="#5c5c5c" stroke-width="1" fill="none">
+      <path d="M58 180H582"></path>
+      <path d="M58 232H260M390 232H582"></path>
+      <path d="M58 300H260M390 300H582"></path>
+      <path d="M58 350H582"></path>
+      <path d="M140 102V350"></path>
+      <path d="M215 102V350"></path>
+      <path d="M470 102V350"></path>
+      <path d="M525 102V350"></path>
+      <path d="M260 232V350M390 232V350"></path>
+    </g>
+    <rect
+      x="260"
+      y="250"
+      width="130"
+      height="86"
+      fill="url(#map-square)"
+      stroke="#121212"
+      stroke-width="1.5"></rect>
+    <rect x="262" y="252" width="126" height="82" fill="#fff" fill-opacity="0.55"></rect>
+    <text class="map__text map__text--halo" x="325" y="299" text-anchor="middle">
+      Rynek
+    </text>
+    <rect
+      x="236"
+      y="62"
+      width="264"
+      height="30"
+      fill="url(#map-hatch)"
+      stroke="#121212"
+      stroke-width="1.5"></rect>
+    <text class="map__text map__text--small map__text--halo" x="380" y="118" text-anchor="end">
+      pl. Uniwersytecki
+    </text>
+    <path d="M390 250L398 92" stroke="#121212" stroke-width="10" fill="none"></path>
+    <path d="M390 250L398 92" stroke="#fff" stroke-width="7" fill="none"></path>
+    <path
+      d="M390 246L397 156"
+      stroke="#b3122a"
+      stroke-width="3"
+      stroke-dasharray="7 6"
+      fill="none"></path>
+    <text
+      class="map__text map__text--street map__text--halo"
+      transform="translate(426 236) rotate(-85)">
+      ul. Kuźnicza
+    </text>
+    <text class="map__text map__text--small map__text--halo" x="404" y="300">
+      ok. 5 minut
+    </text>
+    <text class="map__text map__text--small map__text--halo" x="404" y="316">
+      pieszo od Rynku
+    </text>
+    <g transform="translate(397 148)">
+      <circle r="15" fill="#b3122a" stroke="#fff" stroke-width="2"></circle>
+      <text class="map__mark" y="6" text-anchor="middle">
+        R
+      </text>
+    </g>
+    <g>
+      <path d="M366 154H384" stroke="#121212" stroke-width="1.5" fill="none"></path>
+      <rect
+        x="160"
+        y="130"
+        width="206"
+        height="48"
+        fill="#fff"
+        stroke="#121212"
+        stroke-width="1.5"></rect>
+      <text class="map__text map__text--bold" x="356" y="150" text-anchor="end">
+        Rozwaga
+      </text>
+      <text class="map__text map__text--small" x="356" y="168" text-anchor="end">
+        {site.street}
+      </text>
+    </g>
+    <g transform="translate(497 132)" fill="none" stroke="#121212" stroke-width="1.5">
+      <path d="M0 22V-14M-7 -6L0 -16L7 -6"></path>
+      <text
+        class="map__text map__text--small map__text--halo"
+        x="0"
+        y="42"
+        text-anchor="middle"
+        stroke="none"
+        fill="#121212">
+        N
+      </text>
+    </g>
+  </svg>
+  <figcaption class="small">
+    Plan poglądowy, nie w skali. Czerwona linia: dojście od Rynku.
+  </figcaption>
+</figure>

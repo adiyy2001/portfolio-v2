@@ -1,0 +1,24 @@
+---
+import { areas } from '../data/areas';
+import { siteHref } from '../lib/paths';
+import { tie } from '../lib/tie';
+import Arrow from './Arrow.astro';
+
+interface Props {
+  exclude?: string;
+}
+
+const items = areas.filter(area => area.slug !== Astro.props.exclude);
+---
+
+<ul class="ruled">
+  {items.map(area => (
+    <li>
+      <a class="ruled__link" href={siteHref(`/specjalizacje/${area.slug}/`)}>
+        <h3 class="ruled__name">{area.name}</h3>
+        <p class="ruled__text">{tie(area.short)}</p>
+        <Arrow class="ruled__go" />
+      </a>
+    </li>
+  ))}
+</ul>

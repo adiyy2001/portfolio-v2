@@ -1,0 +1,27 @@
+---
+import { team } from '../data/team';
+import Rosette from './Rosette.astro';
+import { siteHref } from '../lib/paths';
+import { tie } from '../lib/tie';
+
+const initialsOf = (name: string): string =>
+  name
+    .split(' ')
+    .map(part => part.charAt(0))
+    .join('');
+---
+
+<ul class="ruled people">
+  {team.map(member => (
+    <li>
+      <a class="people__link" href={`${siteHref('/zespol/')}#${member.slug}`}>
+        <Rosette class="people__rosette" name={member.name} initials={initialsOf(member.name)} />
+        <div class="people__text">
+          <h3 class="people__name">{member.name}</h3>
+          <p class="people__role label">{member.role}</p>
+        </div>
+        <p class="people__tagline">{tie(member.tagline)}</p>
+      </a>
+    </li>
+  ))}
+</ul>

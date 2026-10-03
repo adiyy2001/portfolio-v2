@@ -1,0 +1,28 @@
+---
+import ArticleList from '../../../sites/rozwaga/components/ArticleList.astro';
+import CtaBand from '../../../sites/rozwaga/components/CtaBand.astro';
+import Layout from '../../../sites/rozwaga/components/Layout.astro';
+import PageHeader from '../../../sites/rozwaga/components/PageHeader.astro';
+import Section from '../../../sites/rozwaga/components/Section.astro';
+import { articles } from '../../../sites/rozwaga/data/articles';
+import innerCss from '../../../sites/rozwaga/styles/inner.css?raw';
+---
+
+<Layout
+  title="Artykuły o prawie dla firm | Rozwaga"
+  description="Trzy artykuły dla właścicieli firm: impas między wspólnikami, niezapłacone faktury i nakaz zapłaty, najem lokalu. Stan na październik 2026."
+  path="/artykuly/"
+  css={innerCss}
+  current="artykuly"
+  exact>
+  <PageHeader
+    title="Artykuły"
+    crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Artykuły' }]}
+    lead="Odpowiedzi na pytania, które słyszymy najczęściej od właścicieli firm. Każdy tekst ma datę stanu prawnego i spis treści."
+  />
+  <Section label="Wszystkie artykuły" id="lista">
+    <ArticleList items={articles} />
+    <p class="small section-note">Stan prawny: październik 2026.</p>
+  </Section>
+  <CtaBand />
+</Layout>

@@ -1,0 +1,131 @@
+---
+import ArticleBody from '../../../sites/rozwaga/components/ArticleBody.astro';
+import Arrow from '../../../sites/rozwaga/components/Arrow.astro';
+import CtaBand from '../../../sites/rozwaga/components/CtaBand.astro';
+import Layout from '../../../sites/rozwaga/components/Layout.astro';
+import PageHeader from '../../../sites/rozwaga/components/PageHeader.astro';
+import { areaBySlug } from '../../../sites/rozwaga/data/areas';
+import { articles } from '../../../sites/rozwaga/data/articles';
+import { articleMinutes } from '../../../sites/rozwaga/data/content';
+import { team } from '../../../sites/rozwaga/data/team';
+import { formatLongDate } from '../../../sites/rozwaga/lib/names';
+import { siteHref } from '../../../sites/rozwaga/lib/paths';
+import { readingTimeLabel } from '../../../sites/rozwaga/lib/reading-time';
+import { uniqueSlugs } from '../../../sites/rozwaga/lib/slug';
+import { tie } from '../../../sites/rozwaga/lib/tie';
+import innerCss from '../../../sites/rozwaga/styles/inner.css?raw';
+
+export function getStaticPaths() {
+  return articles.map(article => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const author = team.find(member => member.slug === article.authorSlug);
+const area = areaBySlug(article.areaSlug);
+const [year = 0, month = 1, day = 1] = article.published.split('-').map(Number);
+const headings = article.blocks.flatMap(block => (block.type === 'h2' ? [block.text] : []));
+const headingIds = uniqueSlugs(headings);
+const contents = headings.map((text, index) => ({ text, id: headingIds[index] }));
+const minutes = readingTimeLabel(articleMinutes(article));
+const others = articles.filter(other => other.slug !== article.slug);
+---
+
+<Layout
+  title={`${article.metaTitle} | Rozwaga`}
+  description={article.description}
+  path={`/artykuly/${article.slug}/`}
+  css={innerCss}
+  current="artykuly"
+  exact={false}
+  ogType="article">
+  <PageHeader
+    title={article.title}
+    crumbs={[
+      { label: 'Strona główna', href: '/' },
+      { label: 'Artykuły', href: '/artykuly/' },
+      { label: area?.name ?? 'Artykuł' },
+    ]}
+    lead={article.lead}
+    long>
+    <dl class="article-meta">
+      <div>
+        <dt class="label">Autor</dt>
+        <dd>
+          {author?.name}, {author?.role.split(',')[0]}
+        </dd>
+      </div>
+      <div>
+        <dt class="label">Opublikowano</dt>
+        <dd>
+          <time datetime={article.published}>{tie(formatLongDate(year, month, day))}</time>
+        </dd>
+      </div>
+      <div>
+        <dt class="label">Czas czytania</dt>
+        <dd>{minutes}</dd>
+      </div>
+      <div>
+        <dt class="label">Stan prawny</dt>
+        <dd>październik 2026</dd>
+      </div>
+    </dl>
+  </PageHeader>
+  <div class="article">
+    <div class="wrap">
+      <div class="article__layout">
+        <div class="toc" data-toc>
+          <h2 class="toc__title label" id="toc-title">
+            Spis treści
+          </h2>
+          <button class="toc__toggle" type="button" aria-expanded="false" aria-controls="toc-list">
+            <span class="label">Spis treści</span>
+            <span class="toc__state label" aria-hidden="true">
+              Rozwiń
+            </span>
+          </button>
+          <nav id="toc-list" class="toc__nav" aria-labelledby="toc-title">
+            <ol>
+              {contents.map(item => (
+                <li>
+                  <a href={`#${item.id}`}>{tie(item.text)}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </div>
+        <article class="prose article__body" data-article-body>
+          <ArticleBody blocks={article.blocks} />
+        </article>
+      </div>
+    </div>
+  </div>
+  <section class="doc more" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="doc__inner">
+        <h2 class="doc__label" id="more-title">
+          Czytaj dalej
+        </h2>
+        <div class="doc__body">
+          <ul class="ruled">
+            {others.map(other => (
+              <li>
+                <a class="ruled__link" href={siteHref(`/artykuly/${other.slug}/`)}>
+                  <h3 class="ruled__name">{tie(other.title)}</h3>
+                  <p class="ruled__text">{tie(other.lead)}</p>
+                  <Arrow class="ruled__go" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <CtaBand
+    title="Masz podobną sprawę? Opisz ją, a oddzwonimy."
+    text="Pierwsza rozmowa do 20 minut jest bezpłatna. Stan prawny w tekście: październik 2026."
+  />
+  <script>
+    import '../../../sites/rozwaga/scripts/toc';
+  </script>
+</Layout>

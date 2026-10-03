@@ -1,0 +1,36 @@
+---
+import { site } from '../data/site';
+import { siteHref } from '../lib/paths';
+import { tie } from '../lib/tie';
+import Arrow from './Arrow.astro';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'Opisz sprawę. Oddzwonimy w ciągu dnia roboczego.',
+  text = 'Wystarczy imię, telefon i kilka zdań. Pierwsza rozmowa trwa do 20 minut i nic nie kosztuje.',
+} = Astro.props;
+---
+
+<section class="cta on-dark" aria-labelledby="cta-title">
+  <div class="wrap cta__inner">
+    <div>
+      <h2 class="title cta__title" id="cta-title">
+        {tie(title)}
+      </h2>
+      <p class="lead">{tie(text)}</p>
+    </div>
+    <div class="actions">
+      <a class="button" href={siteHref('/kontakt/#formularz')}>
+        Umów konsultację
+        <Arrow />
+      </a>
+      <a class="button button--ghost numerals" href={`tel:${site.phoneHref}`}>
+        {tie(site.phone)}
+      </a>
+    </div>
+  </div>
+</section>

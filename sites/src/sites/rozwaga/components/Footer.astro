@@ -1,0 +1,52 @@
+---
+import SampleNote from '../../../shared/SampleNote.astro';
+import { hoursRows, navigation, site } from '../data/site';
+import { siteHref } from '../lib/paths';
+import { tie } from '../lib/tie';
+---
+
+<footer class="site-footer">
+  <div class="wrap site-footer__grid">
+    <div class="site-footer__brand">
+      <p class="site-footer__name">Rozwaga</p>
+      <p>Kancelaria radcy prawnego dla firm. Wrocław i online.</p>
+    </div>
+    <div>
+      <h2 class="site-footer__label">Adres</h2>
+      <address>
+        {tie(site.street)}
+        <br />
+        {`${site.postalCode} ${site.city}`}
+      </address>
+      <p>
+        <a href={`tel:${site.phoneHref}`}>{tie(site.phone)}</a>
+        <br />
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+    <div>
+      <h2 class="site-footer__label">Godziny pracy</h2>
+      <dl class="hours">
+        {hoursRows.map(row => (
+          <div>
+            <dt>{row.days}</dt>
+            <dd>{row.time}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+    <nav aria-label="Stopka">
+      <h2 class="site-footer__label">Na stronie</h2>
+      <ul class="site-footer__links">
+        {navigation.map(item => (
+          <li>
+            <a href={siteHref(item.href)}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap">
+    <SampleNote name="Rozwaga" lang="pl" />
+  </div>
+</footer>

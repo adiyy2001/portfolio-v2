@@ -1,0 +1,63 @@
+---
+import AreaList from '../../../sites/rozwaga/components/AreaList.astro';
+import CtaBand from '../../../sites/rozwaga/components/CtaBand.astro';
+import Layout from '../../../sites/rozwaga/components/Layout.astro';
+import PageHeader from '../../../sites/rozwaga/components/PageHeader.astro';
+import Section from '../../../sites/rozwaga/components/Section.astro';
+import { formatZloty, grossFromNet, site } from '../../../sites/rozwaga/data/site';
+import innerCss from '../../../sites/rozwaga/styles/inner.css?raw';
+import { tie } from '../../../sites/rozwaga/lib/tie';
+
+const feeModels = [
+  {
+    title: 'Godziny',
+    text: `Stawka to ${formatZloty(site.hourlyRateNet)} netto (${formatZloty(grossFromNet(site.hourlyRateNet))} z VAT) za godzinę. Liczymy faktyczny czas, w kwadransach, i wysyłamy zestawienie razem z fakturą.`,
+  },
+  {
+    title: 'Cena za całość',
+    text: 'Gdy zadanie da się opisać z góry, na przykład przegląd umowy albo pozew o zapłatę, podajemy kwotę i pilnujemy jej, nawet jeśli praca zajmie dłużej.',
+  },
+  {
+    title: 'Abonament',
+    text: 'Firmy, które potrzebują nas co miesiąc, płacą stałą kwotę za pulę godzin. Niewykorzystane godziny przechodzą na następny miesiąc.',
+  },
+];
+---
+
+<Layout
+  title="Specjalizacje: spółki, umowy, spory, nieruchomości | Rozwaga"
+  description="Cztery obszary pracy kancelarii Rozwaga we Wrocławiu: prawo spółek, umowy, spory sądowe i nieruchomości. Jak ustalamy honorarium i od czego zaczynamy."
+  path="/specjalizacje/"
+  css={innerCss}
+  current="specjalizacje"
+  exact>
+  <PageHeader
+    title="Specjalizacje"
+    crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Specjalizacje' }]}
+    lead="Pracujemy dla firm w czterech obszarach. Każdy ma swoją stronę z typowymi sytuacjami, przebiegiem współpracy i cenami."
+  />
+  <Section label="Obszary" id="obszary">
+    <AreaList />
+  </Section>
+  <Section label="Jak ustalamy honorarium" id="honorarium">
+    <p class="subtitle section-intro">
+      {tie(
+        'Trzy sposoby rozliczenia. Wybieramy ten, który pasuje do zadania, a nie ten, który jest dla nas najkorzystniejszy.',
+      )}
+    </p>
+    <dl class="steps">
+      {feeModels.map(model => (
+        <div>
+          <dt>{model.title}</dt>
+          <dd>{tie(model.text)}</dd>
+        </div>
+      ))}
+    </dl>
+    <p class="small section-note">
+      {tie(
+        'Kwoty podajemy netto. Do usług dla firm doliczamy 23% VAT. Pierwsza rozmowa do 20 minut jest bezpłatna.',
+      )}
+    </p>
+  </Section>
+  <CtaBand />
+</Layout>

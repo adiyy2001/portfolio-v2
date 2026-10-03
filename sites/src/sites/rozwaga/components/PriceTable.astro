@@ -1,0 +1,34 @@
+---
+import type { PriceRow } from '../data/home';
+import { formatZloty } from '../data/site';
+import { tie } from '../lib/tie';
+
+interface Props {
+  caption: string;
+  rows: readonly PriceRow[];
+}
+
+const { caption, rows } = Astro.props;
+---
+
+<table class="price-table">
+  <caption class="label">{caption}</caption>
+  <thead class="visually-hidden">
+    <tr>
+      <th scope="col">Usługa</th>
+      <th scope="col">Cena netto</th>
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map(row => (
+      <tr>
+        <th scope="row">{tie(row.service)}</th>
+        <td>
+          {row.exact ? '' : 'od '}
+          {tie(formatZloty(row.netFrom))}
+          {row.per && <span class="price-table__per">{row.per}</span>}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>

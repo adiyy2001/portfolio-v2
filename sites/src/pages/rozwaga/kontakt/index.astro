@@ -1,0 +1,81 @@
+---
+import ContactForm from '../../../sites/rozwaga/components/ContactForm.astro';
+import ContactMap from '../../../sites/rozwaga/components/ContactMap.astro';
+import Layout from '../../../sites/rozwaga/components/Layout.astro';
+import PageHeader from '../../../sites/rozwaga/components/PageHeader.astro';
+import Section from '../../../sites/rozwaga/components/Section.astro';
+import { hoursRows, site } from '../../../sites/rozwaga/data/site';
+import { tie } from '../../../sites/rozwaga/lib/tie';
+import contactCss from '../../../sites/rozwaga/styles/contact.css?raw';
+import innerCss from '../../../sites/rozwaga/styles/inner.css?raw';
+---
+
+<Layout
+  title="Kontakt i umówienie konsultacji | Rozwaga"
+  description="Kancelaria Rozwaga, ul. Kuźnicza 40 we Wrocławiu: godziny pracy, telefon, plan dojścia i formularz. Opisz sprawę, a oddzwonimy w ciągu dnia roboczego."
+  path="/kontakt/"
+  css={innerCss + contactCss}
+  current="kontakt"
+  exact>
+  <PageHeader
+    title="Kontakt"
+    crumbs={[{ label: 'Strona główna', href: '/' }, { label: 'Kontakt' }]}
+    lead="Opisz sprawę w formularzu albo zadzwoń. Oddzwonimy w ciągu dnia roboczego, a pierwsza rozmowa do 20 minut jest bezpłatna."
+  />
+  <Section label="Dane kontaktowe" id="dane">
+    <div class="contact-grid">
+      <div class="contact-block">
+        <h3 class="label">Adres</h3>
+        <address class="contact-block__big">
+          {tie(site.street)}
+          <br />
+          {`${site.postalCode} ${site.city}`}
+        </address>
+        <p class="small">
+          {tie(
+            'Lokal na pierwszym piętrze, w budynku jest winda. Na Starym Mieście obowiązuje strefa płatnego parkowania, więc lepiej przyjechać tramwajem albo dojść pieszo.',
+          )}
+        </p>
+      </div>
+      <div class="contact-block">
+        <h3 class="label">Telefon i e-mail</h3>
+        <p class="contact-block__big numerals">
+          <a href={`tel:${site.phoneHref}`}>{tie(site.phone)}</a>
+        </p>
+        <p class="contact-block__big">
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </div>
+      <div class="contact-block contact-block--hours">
+        <h3 class="label">Godziny pracy</h3>
+        <dl class="hours hours--light">
+          {hoursRows.map(row => (
+            <div>
+              <dt>{row.days}</dt>
+              <dd>{row.time}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="small contact-block__status" data-open-status>
+          Pn-czw 9:00-17:00, pt 9:00-15:00.
+        </p>
+      </div>
+    </div>
+  </Section>
+  <Section label="Jak dojść" id="dojscie">
+    <ContactMap />
+    <p class="prose directions">
+      {tie(
+        'Z Rynku idź ulicą Kuźniczą na północ, w stronę Placu Uniwersyteckiego. To około pięciu minut spacerem. Wejście jest od ulicy, lok. 4 na pierwszym piętrze.',
+      )}
+    </p>
+  </Section>
+  <Section label="Formularz" id="formularz">
+    <h3 class="subtitle section-intro">Opisz sprawę, a oddzwonimy</h3>
+    <ContactForm />
+  </Section>
+  <script>
+    import '../../../sites/rozwaga/scripts/open-status';
+    import '../../../sites/rozwaga/scripts/contact';
+  </script>
+</Layout>

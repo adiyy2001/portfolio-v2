@@ -1,0 +1,186 @@
+---
+import { areas } from '../data/areas';
+import { callbackWindows } from '../lib/callback';
+import { descriptionLimits } from '../lib/validation';
+import { site } from '../data/site';
+import { tie } from '../lib/tie';
+import Arrow from './Arrow.astro';
+
+const areaOptions = [
+  ...areas.map(area => ({ id: area.slug, label: area.name })),
+  { id: 'inne', label: 'Nie wiem, której dotyczy' },
+];
+---
+
+<div class="consult" id="formularz-wrap">
+  <noscript>
+    <p class="consult__noscript">
+      {tie(
+        `Formularz działa z włączonym JavaScriptem. Zadzwoń pod ${site.phone} albo napisz na ${site.email}.`,
+      )}
+    </p>
+  </noscript>
+  <form class="consult__form" id="consult-form" novalidate autocomplete="on">
+    <div class="error-summary" id="error-summary" role="alert" tabindex="-1" hidden>
+      <p class="error-summary__title" id="error-summary-title"></p>
+      <ul id="error-summary-list"></ul>
+    </div>
+
+    <div class="field">
+      <label class="field__label label" for="field-name">
+        Imię i nazwisko
+      </label>
+      <input
+        class="field__input"
+        id="field-name"
+        name="name"
+        type="text"
+        autocomplete="name"
+        required
+        aria-describedby="field-name-error"
+        maxlength="100"
+      />
+      <p class="field__error" id="field-name-error"></p>
+    </div>
+
+    <div class="field">
+      <label class="field__label label" for="field-contact">
+        Telefon lub e-mail
+      </label>
+      <p class="field__hint small" id="field-contact-hint">
+        Tym kanałem się odezwiemy.
+      </p>
+      <input
+        class="field__input"
+        id="field-contact"
+        name="contact"
+        type="text"
+        inputmode="email"
+        autocomplete="off"
+        required
+        aria-describedby="field-contact-hint field-contact-error"
+        maxlength="254"
+      />
+      <p class="field__error" id="field-contact-error"></p>
+    </div>
+
+    <div class="field">
+      <label class="field__label label" for="field-company">
+        Firma <span class="field__optional">(nieobowiązkowo)</span>
+      </label>
+      <input
+        class="field__input"
+        id="field-company"
+        name="company"
+        type="text"
+        autocomplete="organization"
+        maxlength="120"
+      />
+    </div>
+
+    <fieldset class="field fieldset" aria-describedby="field-area-error">
+      <legend class="field__label label">Czego dotyczy sprawa</legend>
+      <div class="choices" id="field-area">
+        {areaOptions.map(option => (
+          <label class="choice">
+            <input type="radio" name="area" value={option.id} />
+            <span>{option.label}</span>
+          </label>
+        ))}
+      </div>
+      <p class="field__error" id="field-area-error"></p>
+    </fieldset>
+
+    <div class="field">
+      <label class="field__label label" for="field-description">
+        Krótki opis sprawy
+      </label>
+      <p class="field__hint small" id="field-description-hint">
+        {tie(
+          `Kilka zdań wystarczy: kto z kim, o co chodzi i do kiedy. Od ${descriptionLimits.min} do ${descriptionLimits.max} znaków.`,
+        )}
+      </p>
+      <textarea
+        class="field__input field__input--area"
+        id="field-description"
+        name="description"
+        rows="5"
+        required
+        aria-describedby="field-description-hint field-description-error"></textarea>
+      <p class="field__counter small numerals" id="field-description-counter">
+        0 / {descriptionLimits.max}
+      </p>
+      <p class="field__error" id="field-description-error"></p>
+    </div>
+
+    <fieldset class="field fieldset">
+      <legend class="field__label label">Kiedy zadzwonić</legend>
+      <div class="when">
+        <div>
+          <label class="when__label small" for="field-day">
+            Dzień
+          </label>
+          <select class="field__input field__select" id="field-day" name="day"></select>
+        </div>
+        <div class="choices choices--tight" id="field-window">
+          <label class="choice">
+            <input type="radio" name="window" value="" checked />
+            <span>Dowolna pora w godzinach pracy</span>
+          </label>
+          {callbackWindows.map(window => (
+            <label class="choice">
+              <input type="radio" name="window" value={window.id} />
+              <span class="numerals">{window.label}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+      <p class="consult__callback" id="callback-summary" role="status" aria-live="polite">
+        Oddzwonimy w ciągu jednego dnia roboczego.
+      </p>
+    </fieldset>
+
+    <div class="field">
+      <label class="choice choice--consent">
+        <input
+          type="checkbox"
+          name="consent"
+          id="field-consent"
+          aria-describedby="field-consent-error"
+        />
+        <span>
+          {tie(
+            'Zgadzam się, żeby Kancelaria Rozwaga skontaktowała się ze mną w sprawie opisanej w formularzu. Dane posłużą tylko do tego kontaktu.',
+          )}
+        </span>
+      </label>
+      <p class="field__error" id="field-consent-error"></p>
+    </div>
+
+    <div class="consult__submit">
+      <button class="button" type="submit">
+        Wyślij do kancelarii
+        <Arrow />
+      </button>
+      <p class="small">
+        {tie(
+          'Administratorem danych byłaby Kancelaria Rozwaga. Na tej przykładowej stronie dane nie są nigdzie wysyłane ani zapisywane.',
+        )}
+      </p>
+    </div>
+  </form>
+
+  <div class="consult__done" id="consult-done" tabindex="-1" hidden>
+    <p class="stamp" aria-hidden="true">
+      Przykład
+    </p>
+    <h3 class="subtitle" id="consult-done-title">
+      Dziękujemy. To strona przykładowa, więc nic nie zostało wysłane.
+    </h3>
+    <p id="consult-done-callback"></p>
+    <dl class="details" id="consult-done-recap"></dl>
+    <button class="button button--ghost" type="button" id="consult-again">
+      Wypełnij ponownie
+    </button>
+  </div>
+</div>

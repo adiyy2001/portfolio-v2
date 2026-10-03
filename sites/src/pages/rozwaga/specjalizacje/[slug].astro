@@ -1,0 +1,99 @@
+---
+import AreaSpecimen from '../../../sites/rozwaga/components/AreaSpecimen.astro';
+import ArticleList from '../../../sites/rozwaga/components/ArticleList.astro';
+import AreaList from '../../../sites/rozwaga/components/AreaList.astro';
+import CtaBand from '../../../sites/rozwaga/components/CtaBand.astro';
+import Layout from '../../../sites/rozwaga/components/Layout.astro';
+import PageHeader from '../../../sites/rozwaga/components/PageHeader.astro';
+import PriceTable from '../../../sites/rozwaga/components/PriceTable.astro';
+import Section from '../../../sites/rozwaga/components/Section.astro';
+import { areas } from '../../../sites/rozwaga/data/areas';
+import { articles } from '../../../sites/rozwaga/data/articles';
+import { grossFromNet, formatZloty, site } from '../../../sites/rozwaga/data/site';
+import { tie } from '../../../sites/rozwaga/lib/tie';
+import innerCss from '../../../sites/rozwaga/styles/inner.css?raw';
+
+export function getStaticPaths() {
+  return areas.map(area => ({ params: { slug: area.slug }, props: { area } }));
+}
+
+const { area } = Astro.props;
+const related = articles.filter(article => area.articleSlugs.includes(article.slug));
+const gross = formatZloty(grossFromNet(site.hourlyRateNet));
+---
+
+<Layout
+  title={`${area.name} dla firm we Wrocławiu | Rozwaga`}
+  description={area.metaDescription}
+  path={`/specjalizacje/${area.slug}/`}
+  css={innerCss}
+  current="specjalizacje"
+  exact={false}>
+  <PageHeader
+    title={area.name}
+    crumbs={[
+      { label: 'Strona główna', href: '/' },
+      { label: 'Specjalizacje', href: '/specjalizacje/' },
+      { label: area.name },
+    ]}
+    lead={area.lead}
+  />
+  <Section label="Czym się zajmujemy" id="zakres">
+    <AreaSpecimen slug={area.slug} />
+    <ul class="ledger">
+      {area.handles.map(item => (
+        <li>{tie(item)}</li>
+      ))}
+    </ul>
+  </Section>
+  <Section label="Typowe sytuacje" id="sytuacje">
+    <dl class="steps">
+      {area.situations.map(situation => (
+        <div>
+          <dt>{tie(situation.title)}</dt>
+          <dd>{tie(situation.text)}</dd>
+        </div>
+      ))}
+    </dl>
+  </Section>
+  <Section label="Jak pracujemy" id="wspolpraca">
+    <dl class="steps">
+      {area.steps.map(step => (
+        <div>
+          <dt>
+            {step.title}
+            <p class="steps__time">{tie(step.duration)}</p>
+          </dt>
+          <dd>{tie(step.text)}</dd>
+        </div>
+      ))}
+    </dl>
+  </Section>
+  <Section label="Ile to kosztuje" id="honorarium">
+    <div class="fees">
+      <div class="prose">
+        {area.feeIntro.map(paragraph => (
+          <p>{tie(paragraph)}</p>
+        ))}
+        <p class="small">
+          {tie(
+            `Wszystkie kwoty netto, plus 23% VAT. Godzina pracy: ${formatZloty(site.hourlyRateNet)} netto, ${gross} brutto.`,
+          )}
+        </p>
+      </div>
+      <PriceTable caption="Przykładowe ceny netto" rows={area.feeRows} />
+    </div>
+  </Section>
+  {related.length > 0 && (
+    <Section label="Przeczytaj" id="artykuly">
+      <ArticleList items={related} />
+    </Section>
+  )}
+  <Section label="Pozostałe obszary" id="pozostale">
+    <AreaList exclude={area.slug} />
+  </Section>
+  <CtaBand
+    title="Masz podobną sprawę? Opisz ją, a oddzwonimy."
+    text="Opisz ją w kilku zdaniach. Oddzwonimy w ciągu dnia roboczego, a pierwsza rozmowa do 20 minut jest bezpłatna."
+  />
+</Layout>
