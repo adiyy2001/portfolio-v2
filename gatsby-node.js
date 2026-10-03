@@ -1,69 +1,5 @@
+const fs = require('fs');
 const path = require('path');
-const _ = require('lodash');
-
-exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions;
-  const postTemplate = path.resolve(`src/templates/post.js`);
-  const tagTemplate = path.resolve('src/templates/tag.js');
-
-  const result = await graphql(`
-    {
-      postsRemark: allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
-        edges {
-          node {
-            frontmatter {
-              slug
-              tags
-            }
-          }
-        }
-      }
-      tagsGroup: allMarkdownRemark(limit: 2000) {
-        group(field: frontmatter___tags) {
-          fieldValue
-        }
-      }
-    }
-  `);
-
-  // Handle errors
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`);
-    return;
-  }
-
-  // Create post detail pages
-  const posts = result.data.postsRemark.edges;
-  posts.forEach(({ node }) => {
-    const { slug } = node.frontmatter;
-    if (slug) {
-      createPage({
-        path: slug,
-        component: postTemplate,
-        context: {
-          slug,
-        },
-      });
-    } else {
-      reporter.warn(`Skipping post creation due to missing slug.`);
-    }
-  });
-
-  // Extract tag data from query
-  const tags = result.data.tagsGroup.group;
-  tags.forEach(tag => {
-    createPage({
-      path: `/pensieve/tags/${_.kebabCase(tag.fieldValue)}/`,
-      component: tagTemplate,
-      context: {
-        tag: tag.fieldValue,
-      },
-    });
-  });
-};
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
@@ -82,42 +18,28 @@ exports.createSchemaCustomization = ({ actions }) => {
   `);
 };
 
+const entryScript =
+  /<script src="([^"]*\/(?:webpack-runtime|framework|app)-[0-9a-f]+\.js)" async><\/script>/g;
 
+const afterFirstPaint = sources =>
+  `<script>!function(){var s=${JSON.stringify(sources)},d=0;function load(){if(d)return;d=1;s.forEach(function(u){var e=document.createElement("script");e.src=u;e.async=true;document.body.appendChild(e)})}try{var o=new PerformanceObserver(function(l){l.getEntries().some(function(e){return e.name==="first-contentful-paint"})&&(o.disconnect(),load())});o.observe({type:"paint",buffered:true})}catch(e){load()}setTimeout(load,1500)}()</script>`;
 
-exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  if (stage === 'build-html' || stage === 'develop-html') {
-    actions.setWebpackConfig({
-      module: {
-        rules: [
-          {
-            test: /scrollreveal/,
-            use: loaders.null(),
-          },
-          {
-            test: /animejs/,
-            use: loaders.null(),
-          },
-          {
-            test: /miniraf/,
-            use: loaders.null(),
-          },
-        ],
-      },
+const htmlFiles = dir =>
+  fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
+    const file = path.join(dir, entry.name);
+    if (entry.isDirectory()) return entry.name === '_gatsby' ? [] : htmlFiles(file);
+    return entry.name.endsWith('.html') ? [file] : [];
+  });
+
+exports.onPostBuild = () => {
+  htmlFiles(path.join(__dirname, 'public')).forEach(file => {
+    const sources = [];
+    const html = fs.readFileSync(file, 'utf8').replace(entryScript, (tag, source) => {
+      sources.push(source);
+      return '';
     });
-  }
-
-  actions.setWebpackConfig({
-    resolve: {
-      alias: {
-        '@components': path.resolve(__dirname, 'src/components'),
-        '@config': path.resolve(__dirname, 'src/config'),
-        '@fonts': path.resolve(__dirname, 'src/fonts'),
-        '@hooks': path.resolve(__dirname, 'src/hooks'),
-        '@images': path.resolve(__dirname, 'src/images'),
-        '@pages': path.resolve(__dirname, 'src/pages'),
-        '@styles': path.resolve(__dirname, 'src/styles'),
-        '@utils': path.resolve(__dirname, 'src/utils'),
-      },
-    },
+    if (sources.length) {
+      fs.writeFileSync(file, html.replace('</body>', `${afterFirstPaint(sources)}</body>`));
+    }
   });
 };
