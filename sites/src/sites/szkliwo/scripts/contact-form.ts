@@ -30,7 +30,7 @@ const control = (field: ContactField) =>
   form?.querySelector<HTMLInputElement | HTMLSelectElement>(`[name="${field}"]`) ?? null;
 
 const readFields = () => {
-  const data = new FormData(form);
+  const data = new FormData(form ?? undefined);
   return {
     name: String(data.get('name') ?? ''),
     phone: String(data.get('phone') ?? ''),
