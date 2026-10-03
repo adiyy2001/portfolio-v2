@@ -1,0 +1,56 @@
+---
+import SampleNote from '../../../shared/SampleNote.astro';
+import { link } from '../../../shared/link';
+import { nav, quotePath, site } from '../site';
+import Mark from './Mark.astro';
+---
+
+<footer class="footer on-navy">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a class="brand" href={link('/rubryka/')}>
+          <Mark />
+          <span>{site.name}</span>
+        </a>
+        <p>
+          Biuro rachunkowe dla małych firm z Wrocławia. Księgowość, kadry, VAT i KSeF za stałą cenę
+          miesięczną.
+        </p>
+      </div>
+      <div>
+        <h2 class="footer__title">Biuro</h2>
+        <address>
+          <p>
+            {site.street}
+            <br />
+            {site.postalCity}
+          </p>
+          <p>{site.hours}</p>
+        </address>
+      </div>
+      <div>
+        <h2 class="footer__title">Kontakt</h2>
+        <p>
+          <a href={site.phoneHref}>{site.phone}</a>
+          <br />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+      </div>
+      <nav aria-label="Na skróty">
+        <h2 class="footer__title">Na skróty</h2>
+        <ul class="footer__links">
+          {nav.map(item => (
+            <li>
+              <a href={link(item.path)}>{item.label}</a>
+            </li>
+          ))}
+          <li>
+            <a href={link(quotePath)}>Wycena księgowości</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <SampleNote name="Rubryka" lang="pl" />
+  </div>
+</footer>

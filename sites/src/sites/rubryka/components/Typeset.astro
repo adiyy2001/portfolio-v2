@@ -1,0 +1,7 @@
+---
+import { tieHtml } from '../tie';
+
+const html = tieHtml(await Astro.slots.render('default'));
+---
+
+<Fragment set:html={html} />

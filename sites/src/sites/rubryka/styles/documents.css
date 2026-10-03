@@ -1,0 +1,125 @@
+.doc {
+  width: 100%;
+  height: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.doc text {
+  fill: var(--navy);
+  font-size: 13.5px;
+}
+
+.doc .doc-title {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.doc .doc-bold {
+  font-weight: 700;
+}
+
+.doc .doc-faint {
+  fill: var(--muted);
+}
+
+.doc .doc-small {
+  font-size: 13px;
+}
+
+.doc .doc-line {
+  stroke: var(--navy);
+  stroke-width: 2;
+  fill: none;
+}
+
+.doc .doc-dash {
+  stroke: var(--dash);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  fill: none;
+}
+
+.doc .doc-orange {
+  fill: var(--orange);
+}
+
+.doc .doc-navy {
+  fill: var(--navy);
+}
+
+.doc .doc-paper {
+  fill: var(--paper);
+}
+
+.doc .doc-on-navy {
+  fill: var(--paper);
+}
+
+.doc .doc-total {
+  stroke: var(--orange);
+  stroke-width: 2;
+}
+
+.plan {
+  width: 100%;
+  height: auto;
+}
+
+.plan__block {
+  fill: var(--white);
+  stroke: var(--navy);
+  stroke-width: 2;
+}
+
+.plan__block--current {
+  fill: var(--orange);
+}
+
+.plan__number {
+  fill: var(--muted);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.plan__number--current {
+  fill: var(--navy);
+}
+
+.plan__street {
+  fill: var(--paper);
+  stroke: var(--navy);
+  stroke-width: 2;
+}
+
+.plan__lane {
+  stroke: var(--dash);
+  stroke-dasharray: 10 8;
+  stroke-width: 2;
+}
+
+.plan__street-name {
+  fill: var(--navy);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.plan__door {
+  fill: var(--navy);
+}
+
+.plan__arrow {
+  fill: none;
+  stroke: var(--navy);
+  stroke-width: 3;
+}
+
+.plan__label {
+  fill: var(--navy);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.plan__small {
+  fill: var(--navy);
+  font-size: 17px;
+}

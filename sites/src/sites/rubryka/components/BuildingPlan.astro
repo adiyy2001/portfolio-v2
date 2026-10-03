@@ -1,0 +1,49 @@
+---
+const blocks = [
+  { x: 16, width: 96, label: '41' },
+  { x: 120, width: 96, label: '43' },
+  { x: 224, width: 112, label: '45', current: true },
+  { x: 344, width: 120, label: '47' },
+];
+---
+
+<svg viewBox="0 0 480 230" role="img" aria-labelledby="plan-title plan-desc" class="plan">
+  <title id="plan-title">Plan dojścia do biura Rubryki</title>
+  <desc id="plan-desc">
+    Schemat ulicy Kazimierza Wielkiego z budynkami od 41 do 47. Biuro jest w budynku 45, na trzecim
+    piętrze, wejście od ulicy.
+  </desc>
+  {blocks.map(block => (
+    <g>
+      <rect
+        x={block.x}
+        y="24"
+        width={block.width}
+        height="112"
+        class:list={['plan__block', block.current && 'plan__block--current']}></rect>
+      <text
+        x={block.x + block.width / 2}
+        y="101"
+        text-anchor="middle"
+        class:list={['plan__number', block.current && 'plan__number--current']}>
+        {block.label}
+      </text>
+    </g>
+  ))}
+  <rect x="0" y="156" width="480" height="48" class="plan__street"></rect>
+  <line x1="0" y1="180" x2="480" y2="180" class="plan__lane"></line>
+  <text x="16" y="225" class="plan__street-name">
+    ul. Kazimierza Wielkiego
+  </text>
+  <g>
+    <rect x="262" y="132" width="36" height="28" class="plan__door"></rect>
+    <path d="M280 108v22" class="plan__arrow"></path>
+    <path d="M272 120l8 10 8-10" class="plan__arrow"></path>
+  </g>
+  <text x="280" y="50" text-anchor="middle" class="plan__label">
+    Rubryka
+  </text>
+  <text x="280" y="69" text-anchor="middle" class="plan__small">
+    3. piętro
+  </text>
+</svg>

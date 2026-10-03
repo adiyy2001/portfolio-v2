@@ -1,0 +1,50 @@
+---
+const rows = [
+  { label: 'Sprzedaż netto', amount: '40 000,00' },
+  { label: 'VAT należny', amount: '9 200,00' },
+  { label: 'VAT naliczony z zakupów', amount: '5 060,00' },
+];
+---
+
+<svg class="doc" viewBox="0 0 360 290" aria-hidden="true" focusable="false">
+  <text class="doc-title" x="16" y="30">
+    JPK_V7M, wrzesień 2026
+  </text>
+  <text class="doc-faint doc-small" x="16" y="48">
+    część deklaracyjna, kwoty w złotych
+  </text>
+  {rows.map((row, index) => (
+    <g>
+      <text x="16" y={82 + index * 28}>
+        {row.label}
+      </text>
+      <text x="344" y={82 + index * 28} text-anchor="end">
+        {row.amount}
+      </text>
+      <line class="doc-dash" x1="16" y1={92 + index * 28} x2="344" y2={92 + index * 28}></line>
+    </g>
+  ))}
+  <line class="doc-line" x1="16" y1="168" x2="344" y2="168"></line>
+  <text class="doc-bold" x="16" y="190">
+    VAT do zapłaty
+  </text>
+  <text class="doc-bold" x="344" y="190" text-anchor="end">
+    4 140,00
+  </text>
+  <line class="doc-total" x1="250" y1="198" x2="344" y2="198"></line>
+  <line class="doc-total" x1="250" y1="203" x2="344" y2="203"></line>
+  <g transform="rotate(-3 180 245)">
+    <rect class="doc-paper" x="16" y="218" width="328" height="56"></rect>
+    <rect class="doc-line" x="16" y="218" width="328" height="56"></rect>
+    <rect class="doc-orange" x="16" y="218" width="64" height="56"></rect>
+    <text class="doc-bold" x="48" y="252" text-anchor="middle" font-size="18">
+      UPO
+    </text>
+    <text class="doc-bold" x="92" y="241">
+      Status 200: przetworzono poprawnie
+    </text>
+    <text class="doc-small" x="92" y="258">
+      Wysłano 22.10.2026, termin 26.10.2026
+    </text>
+  </g>
+</svg>

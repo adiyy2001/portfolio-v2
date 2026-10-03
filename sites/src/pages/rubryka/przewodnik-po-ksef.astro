@@ -1,0 +1,743 @@
+---
+import { link } from '../../shared/link';
+import {
+  accessSteps,
+  checklistItems,
+  comparisons,
+  modes,
+  sources,
+  tableOfContents,
+} from '../../sites/rubryka/guide';
+import Layout from '../../sites/rubryka/Layout.astro';
+import { ksefStartPrice } from '../../sites/rubryka/packages';
+import { quotePath, site } from '../../sites/rubryka/site';
+import { formatZloty } from '../../sites/rubryka/format';
+
+const buyerChoices = [
+  { value: 'business', label: 'Firmom', hint: 'Faktury z NIP nabywcy' },
+  { value: 'consumers', label: 'Konsumentom', hint: 'Klienci bez firmy, paragony' },
+  { value: 'both', label: 'Jednym i drugim', hint: 'Firmy i konsumenci' },
+];
+
+const salesChoices = [
+  { value: 'upTo10k', label: 'Do 10 000 zł brutto w miesiącu', hint: 'Faktury dla firm, razem' },
+  {
+    value: 'over10k',
+    label: 'Powyżej 10 000 zł brutto w miesiącu',
+    hint: 'Faktury dla firm, razem',
+  },
+  {
+    value: 'exceeded',
+    label: 'Już raz przekroczyłem limit',
+    hint: 'W tym roku w dowolnym miesiącu',
+  },
+];
+---
+
+<Layout
+  title="Przewodnik po KSeF dla małej firmy | Rubryka"
+  description="Co to jest KSeF, od kiedy obowiązuje i kogo dotyczy, co zmienia się w codziennym wystawianiu faktur i jak się przygotować. Stan na październik 2026, z listą kontrolną."
+  path="/rubryka/przewodnik-po-ksef/">
+  <div class="pagehead">
+    <div class="wrap">
+      <p class="stamp">Stan na {site.stateOn}</p>
+      <h1>Przewodnik po KSeF dla małej firmy</h1>
+      <span class="total-rule" aria-hidden="true"></span>
+      <p class="lead">
+        Krajowy System e-Faktur w jednym miejscu: od kiedy, kogo dotyczy, co się zmienia i co zrobić
+        w tym tygodniu. Sprawdzone na stronach Ministerstwa Finansów.
+      </p>
+    </div>
+  </div>
+
+  <div class="wrap guide">
+    <nav class="contents" aria-label="Spis treści przewodnika" data-contents>
+      <p class="contents__title">Na tej stronie</p>
+      <ol>
+        {tableOfContents.map(item => (
+          <li>
+            <a href={`#${item.id}`}>{item.label}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    <div class="guide__body">
+      <section class="summary sheet" aria-labelledby="summary-title">
+        <h2 id="summary-title">W skrócie</h2>
+        <ul class="ticks">
+          <li>
+            Od 1 kwietnia 2026 r. faktury dla firm wystawia się w KSeF. Największe firmy robią to od
+            1 lutego 2026 r.
+          </li>
+          <li>
+            Do 31 grudnia 2026 r. faktury dla firm do 10 000 zł brutto w miesiącu można jeszcze
+            wystawiać poza KSeF.
+          </li>
+          <li>
+            Od 1 stycznia 2027 r. ulgi nie ma, zaczynają się kary, a w płatnościach między czynnymi
+            podatnikami VAT numer KSeF trafia do tytułu przelewu.
+          </li>
+          <li>
+            Faktury odbierasz w KSeF już teraz. System nie wysyła powiadomień, więc ktoś musi do
+            niego zaglądać.
+          </li>
+        </ul>
+      </section>
+
+      <section class="topic" id="czym-jest" aria-labelledby="czym-jest-title">
+        <h2 id="czym-jest-title">Czym jest KSeF</h2>
+        <p>
+          Krajowy System e-Faktur to państwowy system, w którym wystawiasz i odbierasz faktury.
+          Faktura ustrukturyzowana to plik XML o ustalonym układzie pól. Gdy go wyślesz, system
+          sprawdza plik, nadaje mu numer KSeF i udostępnia kupującemu. Ty dostajesz UPO, czyli
+          urzędowe poświadczenie odbioru.
+        </p>
+        <p>
+          Prawnie liczy się plik w systemie, a nie PDF z maila. Wizualizację możesz kupującemu
+          wysłać dodatkowo, ale to plik w KSeF jest fakturą. Wystawionej faktury nie edytujesz ani
+          nie usuwasz, a błąd poprawiasz fakturą korygującą. System przechowuje faktury 10 lat od
+          końca roku wystawienia.
+        </p>
+        <p>
+          Numer KSeF nie jest częścią pliku XML. Zwraca go UPO, więc po wysłaniu faktury trzeba go
+          odczytać z potwierdzenia.
+        </p>
+      </section>
+
+      <section class="topic" id="daty" aria-labelledby="daty-title">
+        <h2 id="daty-title">Od kiedy i kogo dotyczy</h2>
+        <p>
+          Obowiązek wchodził etapami. Odbierać faktury w KSeF można od 1 lutego 2026 r. w każdej
+          firmie z numerem NIP, a wystawianie rozpoczęło się w dwóch krokach.
+        </p>
+        <div class="sheet table-sheet">
+          <table class="ledger dates">
+            <caption class="sr-only">Daty obowiązywania KSeF według rodzaju podatnika</caption>
+            <thead>
+              <tr>
+                <th scope="col">Kto</th>
+                <th scope="col">Wystawianie faktur w KSeF</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Firmy ze sprzedażą powyżej 200 mln zł w 2024 r.</th>
+                <td>Obowiązek od 1 lutego 2026 r.</td>
+              </tr>
+              <tr>
+                <th scope="row">Pozostałe firmy, także zwolnione z VAT</th>
+                <td>
+                  Obowiązek od 1 kwietnia 2026 r. Do 31 grudnia 2026 r. działa ulga opisana niżej.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Wszystkie firmy</th>
+                <td>Od 1 stycznia 2027 r. bez ulgi. Kary za naruszenia obowiązują od tego dnia.</td>
+              </tr>
+              <tr>
+                <th scope="row">Sprzedaż konsumentom</th>
+                <td>
+                  Faktury dla konsumentów można wystawiać w KSeF dobrowolnie. Paragony z kasy
+                  zostają poza systemem.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Ulga do końca 2026 roku</h3>
+        <p>
+          Do 31 grudnia 2026 r. faktury dla firm można wystawiać poza KSeF, na papierze albo
+          elektronicznie, jeśli ich łączna wartość w miesiącu nie przekracza 10 000 zł brutto. Do
+          limitu nie wlicza się faktur dla konsumentów ani sprzedaży na kasie.
+        </p>
+        <p>
+          Limit liczy się według daty wystawienia. Gdy go przekroczysz, od tej faktury i wszystkich
+          kolejnych wystawiasz w KSeF na stałe. Sprzedaż, która w następnym miesiącu spadnie poniżej
+          10 000 zł, niczego nie cofa.
+        </p>
+        <h3>Co zmienia się 1 stycznia 2027 roku</h3>
+        <p>
+          Kara za naruszenie obowiązku KSeF może sięgnąć 100% kwoty podatku z faktury, a przy
+          fakturach bez podatku do 18,7% kwoty należności ogółem. Kary obejmują wyłącznie naruszenia
+          od 1 stycznia 2027 r. Od tego dnia numer KSeF trzeba też podawać w tytule przelewu za
+          fakturę, gdy płacą sobie czynni podatnicy VAT, a paragon z NIP przestaje być fakturą
+          uproszczoną.
+        </p>
+      </section>
+
+      <section class="topic" id="czy-dotyczy" aria-labelledby="czy-dotyczy-title">
+        <h2 id="czy-dotyczy-title">Czy dotyczy mnie</h2>
+        <p>
+          Odpowiedz na dwa pytania, a podpowiemy, co obowiązuje Twoją firmę dzisiaj. To ogólna
+          podpowiedź, nie opinia podatkowa. Największych firm, ze sprzedażą powyżej 200 mln zł w
+          2024 r., ten test nie obejmuje.
+        </p>
+        <p class="check-fallback">
+          Ten test działa z włączonym JavaScriptem. Bez niego skorzystaj z tabeli powyżej.
+        </p>
+        <form class="finder sheet" data-ksef-check novalidate>
+          <fieldset class="field">
+            <legend>Komu wystawiasz faktury?</legend>
+            <div class="choices">
+              {buyerChoices.map((choice, index) => (
+                <label class="choice">
+                  <input type="radio" name="buyers" value={choice.value} checked={index === 0} />
+                  <span>
+                    <span class="choice__text">
+                      {choice.label}
+                      <small>{choice.hint}</small>
+                    </span>
+                  </span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <fieldset class="field" data-sales-field>
+            <legend>Ile wynosi sprzedaż fakturami dla firm?</legend>
+            <div class="choices">
+              {salesChoices.map((choice, index) => (
+                <label class="choice">
+                  <input type="radio" name="sales" value={choice.value} checked={index === 0} />
+                  <span>
+                    <span class="choice__text">
+                      {choice.label}
+                      <small>{choice.hint}</small>
+                    </span>
+                  </span>
+                </label>
+              ))}
+            </div>
+            <p class="hint" data-sales-hint hidden>
+              Ten limit dotyczy faktur dla firm, więc przy sprzedaży samym konsumentom nie ma
+              znaczenia.
+            </p>
+          </fieldset>
+          <div class="verdict" data-ksef-result data-verdict="relief" aria-live="polite">
+            <p class="verdict__label" data-result-label></p>
+            <h3 data-result-headline></h3>
+            <ul class="plain" data-result-points></ul>
+            <p class="verdict__count" data-result-countdown></p>
+          </div>
+        </form>
+      </section>
+
+      <section class="topic" id="na-co-dzien" aria-labelledby="na-co-dzien-title">
+        <h2 id="na-co-dzien-title">Co zmienia się na co dzień</h2>
+        <p>
+          Sama faktura wygląda podobnie. Zmienia się droga, którą dociera do kupującego, i to, kto
+          pilnuje odbioru.
+        </p>
+        <div class="sheet table-sheet">
+          <table class="ledger compare">
+            <caption class="sr-only">Porównanie wystawiania faktur dotąd i w KSeF</caption>
+            <thead>
+              <tr>
+                <th scope="col">Temat</th>
+                <th scope="col">Dotąd</th>
+                <th scope="col">W KSeF</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisons.map(row => (
+                <tr>
+                  <th scope="row">{row.topic}</th>
+                  <td>{row.before}</td>
+                  <td>{row.now}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <h3>Termin wystawienia nie zmienia się</h3>
+        <p>
+          Fakturę trzeba wystawić najpóźniej 15. dnia miesiąca następującego po miesiącu dostawy lub
+          wykonania usługi. Sprzedaż z 5 kwietnia ma więc termin 15 maja. Ten termin nie przesuwa
+          się, gdy 15. wypada w weekend.
+        </p>
+        <h3>Cztery tryby pracy</h3>
+        <p>
+          System bywa niedostępny, a faktura i tak musi zostać wystawiona. Dlatego są cztery tryby.
+        </p>
+        <dl class="modes">
+          {modes.map(mode => (
+            <div>
+              <dt>{mode.name}</dt>
+              <dd>
+                <span class="modes__when">{mode.when}</span>
+                {mode.rule}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="topic" id="dostep" aria-labelledby="dostep-title">
+        <h2 id="dostep-title">Dostęp i uprawnienia</h2>
+        <p>
+          Jednoosobowa firma loguje się do KSeF Profilem Zaufanym albo podpisem kwalifikowanym.
+          Spółka bez pieczęci kwalifikowanej składa w urzędzie skarbowym wniosek ZAW-FA. Do
+          wystawiania faktur Ministerstwo Finansów udostępnia bezpłatnie Aplikację Podatnika KSeF,
+          Aplikację Mobilną i program e-mikrofirma.
+        </p>
+        <p>Biuru rachunkowemu nadajesz uprawnienia w pięciu krokach.</p>
+        <ol class="steps">
+          {accessSteps.map(step => (
+            <li>{step}</li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="topic" id="lista" aria-labelledby="lista-title">
+        <h2 id="lista-title">Lista kontrolna</h2>
+        <p>
+          Osiem rzeczy do zrobienia przed 1 stycznia 2027 r. Zaznaczenia zapamiętujemy w tej
+          przeglądarce, nigdzie ich nie wysyłamy.
+        </p>
+        <div class="sheet checklist">
+          <ul>
+            {checklistItems.map(item => (
+              <li>
+                <label class="check">
+                  <input type="checkbox" data-checklist-id={item.id} />
+                  <span>{item.text}</span>
+                </label>
+              </li>
+            ))}
+          </ul>
+          <div class="checklist__foot">
+            <p data-checklist-progress aria-live="polite">
+              Zrobione: 0 z {checklistItems.length}
+            </p>
+            <button class="button button--plain" type="button" data-checklist-reset hidden>
+              Wyczyść zaznaczenia
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="topic" id="pomoc" aria-labelledby="pomoc-title">
+        <h2 id="pomoc-title">Jak pomagamy</h2>
+        <p>
+          Klientom księgowości zakładamy dostęp, nadajemy uprawnienia i wystawiamy z nimi pierwszą
+          fakturę, a potem co miesiąc pobieramy faktury kosztowe. Start z KSeF kosztuje klientów 0
+          zł, a pozostałych {formatZloty(ksefStartPrice * 100)} netto jednorazowo.
+        </p>
+        <div class="button-row">
+          <a class="button" href={link(quotePath)}>
+            Wyceń księgowość
+          </a>
+          <a class="button button--plain" href={link('/rubryka/uslugi/#start-z-ksef')}>
+            Zobacz, co robimy
+          </a>
+        </div>
+      </section>
+
+      <section class="topic" id="zrodla" aria-labelledby="zrodla-title">
+        <h2 id="zrodla-title">Źródła</h2>
+        <p>
+          Przewodnik opiera się na oficjalnych stronach Ministerstwa Finansów i Krajowej
+          Administracji Skarbowej, stan na {site.stateOn}. Przepisy bywają zmieniane, więc przy
+          decyzjach o pieniądzach sprawdź datę aktualizacji na stronie źródła. Pytania o KSeF
+          przyjmuje Krajowa Informacja Skarbowa: <span class="nowrap">22 330 03 30</span>.
+        </p>
+        <ul class="sources">
+          {sources.map(source => (
+            <li>
+              <a href={source.href} rel="noopener">
+                {source.label}
+              </a>
+              <span>{source.note}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { setupChecklist } from '../../sites/rubryka/scripts/checklist';
+  import { setupContents } from '../../sites/rubryka/scripts/contents';
+  import { setupKsefCheck } from '../../sites/rubryka/scripts/ksef-check';
+
+  setupChecklist();
+  setupKsefCheck();
+  setupContents();
+</script>
+
+<style>
+  .guide {
+    display: grid;
+    gap: 32px;
+    padding-bottom: clamp(56px, 9cqi, 104px);
+  }
+
+  .contents {
+    padding: 16px;
+    border: 2px solid var(--navy);
+    background: var(--white);
+  }
+
+  .contents__title {
+    margin: 0 0 8px;
+    font-weight: 800;
+  }
+
+  .contents ol {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contents li + li {
+    border-top: 1px dashed var(--dash);
+  }
+
+  .contents a {
+    display: block;
+    padding: 10px 0 10px 14px;
+    border-left: 4px solid transparent;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .contents a:hover {
+    background: var(--paper);
+  }
+
+  .contents a[aria-current='location'] {
+    border-left-color: var(--orange);
+    background: var(--paper);
+    font-weight: 800;
+  }
+
+  .guide__body {
+    min-width: 0;
+    max-width: 760px;
+  }
+
+  @container page (min-width: 1000px) {
+    .guide {
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 64px;
+      align-items: start;
+    }
+
+    .contents {
+      position: sticky;
+      top: 24px;
+    }
+  }
+
+  .summary {
+    padding: 22px 22px 26px;
+  }
+
+  .summary h2 {
+    margin-bottom: 16px;
+    font-size: 1.75rem;
+  }
+
+  .topic {
+    padding-top: clamp(40px, 6cqi, 64px);
+  }
+
+  .topic > h2 {
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--navy);
+  }
+
+  .topic h3 {
+    margin: 28px 0 10px;
+    font-size: 1.375rem;
+  }
+
+  .topic p {
+    max-width: 66ch;
+  }
+
+  .table-sheet {
+    margin: 24px 0 8px;
+    overflow: hidden;
+  }
+
+  .table-sheet th,
+  .table-sheet td {
+    padding: 14px 16px;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+  }
+
+  .table-sheet thead th {
+    background: var(--navy);
+    color: var(--paper);
+    border-bottom: 0;
+  }
+
+  .table-sheet tbody th {
+    width: 36%;
+  }
+
+  .compare tbody th {
+    width: 22%;
+  }
+
+  @container page (max-width: 639px) {
+    .table-sheet table,
+    .table-sheet tbody,
+    .table-sheet tr,
+    .table-sheet th,
+    .table-sheet td {
+      display: block;
+    }
+
+    .table-sheet thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    .table-sheet tbody tr {
+      padding: 14px 0;
+      border-top: 2px solid var(--navy);
+    }
+
+    .table-sheet tbody tr:first-child {
+      border-top: 0;
+    }
+
+    .table-sheet th,
+    .table-sheet td {
+      width: auto;
+      border-top: 0;
+      padding: 4px 16px;
+    }
+
+    .table-sheet tbody th {
+      width: auto;
+      font-size: 1.0625rem;
+    }
+
+    .compare td::before {
+      display: block;
+      color: var(--muted);
+      font-size: 0.8125rem;
+      font-weight: 700;
+    }
+
+    .compare td:nth-of-type(1)::before {
+      content: 'Dotąd';
+    }
+
+    .compare td:nth-of-type(2)::before {
+      content: 'W KSeF';
+    }
+  }
+
+  .check-fallback {
+    padding: 12px 16px;
+    border: 2px dashed var(--navy);
+    background: var(--white);
+  }
+
+  :global(.js) .check-fallback {
+    display: none;
+  }
+
+  .finder {
+    display: none;
+    gap: 28px;
+    padding: 16px;
+  }
+
+  :global(.js) .finder {
+    display: grid;
+  }
+
+  .choice__text {
+    display: grid;
+    gap: 2px;
+  }
+
+  .verdict {
+    display: grid;
+    gap: 10px;
+    padding: 16px;
+    border: 2px solid var(--navy);
+    border-left-width: 10px;
+  }
+
+  .verdict h3 {
+    margin: 0;
+    font-size: 1.375rem;
+  }
+
+  .verdict p {
+    margin: 0;
+  }
+
+  .verdict__label {
+    width: fit-content;
+    padding: 4px 10px;
+    background: var(--navy);
+    color: var(--paper);
+    font-size: 0.875rem;
+    font-weight: 800;
+  }
+
+  .verdict[data-verdict='relief'] {
+    border-color: var(--navy);
+    border-left-color: var(--orange);
+    background: var(--white);
+  }
+
+  .verdict[data-verdict='mandatory'] {
+    background: var(--navy);
+    color: var(--paper);
+    border-left-color: var(--orange);
+  }
+
+  .verdict[data-verdict='mandatory'] .verdict__label {
+    background: var(--orange);
+    color: var(--navy);
+  }
+
+  .verdict[data-verdict='optional'] {
+    border-style: dashed;
+    border-left-style: solid;
+    border-left-color: var(--navy);
+    background: var(--white);
+  }
+
+  .verdict__count {
+    font-weight: 700;
+  }
+
+  .modes {
+    display: grid;
+    margin: 16px 0 0;
+    border-top: 2px solid var(--navy);
+  }
+
+  .modes > div {
+    display: grid;
+    gap: 4px 24px;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--dash);
+  }
+
+  .modes dt {
+    font: 800 1.25rem/1.2 var(--font-display);
+  }
+
+  .modes dd {
+    margin: 0;
+  }
+
+  .modes__when {
+    display: block;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  @container page (min-width: 640px) {
+    .modes > div {
+      grid-template-columns: 160px minmax(0, 1fr);
+    }
+  }
+
+  .steps {
+    display: grid;
+    gap: 12px;
+    margin: 0 0 16px;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+
+  .steps li {
+    position: relative;
+    min-height: 40px;
+    padding: 6px 0 6px 56px;
+    counter-increment: step;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    background: var(--navy);
+    color: var(--paper);
+    font: 800 1.25rem/1 var(--font-display);
+  }
+
+  .checklist {
+    margin-top: 24px;
+  }
+
+  .checklist ul {
+    margin: 0;
+    padding: 8px 20px;
+    list-style: none;
+  }
+
+  .checklist li + li {
+    border-top: 1px dashed var(--dash);
+  }
+
+  .checklist .check {
+    display: flex;
+    padding: 14px 0;
+  }
+
+  .checklist__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding: 16px 20px;
+    border-top: 2px solid var(--navy);
+    background: var(--paper);
+  }
+
+  .checklist__foot p {
+    margin: 0;
+    font-weight: 800;
+  }
+
+  .sources {
+    display: grid;
+    gap: 16px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sources li {
+    display: grid;
+    gap: 2px;
+    padding-left: 16px;
+    border-left: 4px solid var(--orange);
+  }
+
+  .sources a {
+    width: fit-content;
+    font-weight: 700;
+  }
+
+  .sources span {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+</style>

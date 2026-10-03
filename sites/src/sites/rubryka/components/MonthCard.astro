@@ -1,0 +1,373 @@
+---
+const rows = [
+  {
+    id: 'ksef',
+    title: 'Faktury z KSeF',
+    hint: 'faktury sprzedaży za poprzedni miesiąc',
+    due: 'do 15.',
+  },
+  { id: 'zus', title: 'ZUS', hint: 'składki za poprzedni miesiąc', due: 'do 20.' },
+  { id: 'vat', title: 'VAT', hint: 'wpłata podatku za poprzedni miesiąc', due: 'do 25.' },
+  { id: 'jpk', title: 'JPK', hint: 'plik JPK_V7 za poprzedni miesiąc', due: 'do 25.' },
+] as const;
+---
+
+<section class="month sheet" aria-labelledby="month-title" data-month-card>
+  <h2 class="month__title" id="month-title">
+    Twój <span data-month-name>miesiąc</span>
+  </h2>
+  <fieldset class="month__profile segmented">
+    <legend class="sr-only">Rodzaj firmy, od którego zależy termin ZUS</legend>
+    <label>
+      <input type="radio" name="month-profile" value="sole" checked />
+      <span>Jednoosobowa firma</span>
+    </label>
+    <label>
+      <input type="radio" name="month-profile" value="company" />
+      <span>Spółka z o.o.</span>
+    </label>
+  </fieldset>
+  <ul class="month__rows">
+    {rows.map(row => (
+      <li data-row={row.id} data-status="open" data-base-hint={row.hint}>
+        <span class="month__mark" aria-hidden="true" />
+        <span class="month__what">
+          <span class="month__name">{row.title}</span>
+          <span class="month__hint" data-hint>
+            {row.hint}
+          </span>
+        </span>
+        <span class="month__state">
+          <b data-state-main>{row.due}</b>
+          <small data-state-note />
+        </span>
+      </li>
+    ))}
+  </ul>
+  <div class="month__scrub">
+    <div class="month__ruler" data-ruler aria-hidden="true"></div>
+    <input
+      class="month__slider"
+      type="range"
+      min="1"
+      max="31"
+      step="1"
+      value="1"
+      aria-label="Dzień miesiąca, od którego liczymy terminy"
+      aria-describedby="month-today"
+      data-slider
+    />
+  </div>
+  <div class="month__caption">
+    <p class="month__today" id="month-today" data-today>
+      Terminy liczymy od dzisiejszej daty.
+    </p>
+    <button class="month__reset" type="button" data-reset hidden>
+      Wróć do dziś
+    </button>
+  </div>
+  <p class="month__summary" data-summary>
+    Terminy: 15., 20. (spółki 15.) i 25. dnia miesiąca, gdy wypadają w weekend lub święto, wskakują
+    na następny dzień roboczy.
+  </p>
+  <p class="month__note">Pola odhaczamy za Ciebie, według terminów.</p>
+  <p class="sr-only" role="status" data-announcer></p>
+</section>
+
+<style is:global>
+  .month {
+    padding: 20px 18px 16px;
+  }
+
+  .month__title {
+    font: 700 1.75rem/1.05 var(--font-display);
+    letter-spacing: -0.03em;
+  }
+
+  .month .month__profile {
+    display: none;
+    margin-top: 16px;
+  }
+
+  .js .month .month__profile {
+    display: grid;
+  }
+
+  .month__rows {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .month__rows li {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    min-height: 72px;
+    padding: 10px 0;
+    border-top: 1px dashed var(--dash);
+  }
+
+  .month__mark {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--navy);
+    background: var(--white);
+  }
+
+  .month__rows li[data-status='done'] .month__mark {
+    border-color: var(--orange);
+    background: var(--tick) center / 100% no-repeat;
+  }
+
+  .month__rows li[data-status='today'] .month__mark {
+    background: var(--navy);
+  }
+
+  .month__rows li[data-status='today'] .month__mark::after {
+    content: '!';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: var(--white);
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .month__what {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .month__name {
+    font-weight: 700;
+    font-size: 1.0625rem;
+    line-height: 1.2;
+  }
+
+  .month__hint {
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+
+  .month__state {
+    display: grid;
+    justify-items: end;
+    gap: 2px;
+    min-width: 84px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .month__state b {
+    font-size: 1.0625rem;
+    line-height: 1.2;
+  }
+
+  .month__state small {
+    min-height: 1.3em;
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.3;
+  }
+
+  .month__scrub {
+    position: relative;
+    margin-top: 12px;
+  }
+
+  .month__ruler {
+    display: none;
+    height: 44px;
+    border-top: 1px dashed var(--dash);
+    padding-top: 6px;
+  }
+
+  .js .month__ruler {
+    display: grid;
+    grid-template-columns: repeat(var(--days, 31), 1fr);
+    align-items: end;
+  }
+
+  .month__slider {
+    display: none;
+    position: absolute;
+    top: 7px;
+    left: calc(50% / var(--days, 31) - 8px);
+    width: calc(100% - 100% / var(--days, 31) + 16px);
+    height: 37px;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    appearance: none;
+    cursor: ew-resize;
+    touch-action: pan-y;
+  }
+
+  .js .month__slider {
+    display: block;
+  }
+
+  .month__slider::-webkit-slider-runnable-track {
+    height: 37px;
+    background: transparent;
+  }
+
+  .month__slider::-moz-range-track {
+    height: 37px;
+    background: transparent;
+  }
+
+  .month__slider::-webkit-slider-thumb {
+    width: 16px;
+    height: 37px;
+    border: 0;
+    border-radius: 0;
+    background:
+      linear-gradient(var(--orange), var(--orange)) 50% 6px / 8px 2px no-repeat,
+      linear-gradient(var(--navy), var(--navy)) 50% 0 / 100% 14px no-repeat,
+      linear-gradient(var(--navy), var(--navy)) 50% 100% / 4px 100% no-repeat;
+    appearance: none;
+  }
+
+  .month__slider::-moz-range-thumb {
+    width: 16px;
+    height: 37px;
+    border: 0;
+    border-radius: 0;
+    background:
+      linear-gradient(var(--orange), var(--orange)) 50% 6px / 8px 2px no-repeat,
+      linear-gradient(var(--navy), var(--navy)) 50% 0 / 100% 14px no-repeat,
+      linear-gradient(var(--navy), var(--navy)) 50% 100% / 4px 100% no-repeat;
+  }
+
+  .month__slider:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .month__day {
+    position: relative;
+    height: 100%;
+  }
+
+  .month__day::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    height: 10px;
+    margin-left: -1px;
+    background: var(--navy);
+  }
+
+  .month__day[data-kind='weekend']::before {
+    height: 6px;
+    background: var(--dash);
+  }
+
+  .month__day[data-kind='holiday']::before {
+    height: 6px;
+    background: var(--orange-ink);
+  }
+
+  .month__day[data-today]::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    margin-left: -2px;
+    background: var(--navy);
+  }
+
+  .month[data-scrubbed='true'] .month__day[data-today]::after {
+    background: var(--dash);
+  }
+
+  .month__flag {
+    position: absolute;
+    bottom: calc(14px + var(--stack, 0) * 11px);
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    border: 1.5px solid var(--navy);
+    background: var(--orange);
+  }
+
+  .month__caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0 16px;
+    margin-top: 10px;
+  }
+
+  .month__today {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.875rem;
+    line-height: 1.35;
+  }
+
+  .month__reset {
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: var(--navy);
+    font: 700 0.9375rem/1 var(--font);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+  }
+
+  .month__reset[hidden] {
+    display: none;
+  }
+
+  .month__rows li[data-next='true'] .month__state b {
+    background: linear-gradient(transparent 58%, var(--orange) 58%);
+  }
+
+  .month__summary {
+    min-height: 2.8em;
+    margin: 6px 0 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .month__note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  @keyframes month-tick {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+  }
+
+  .month--live li[data-status='done'] .month__mark {
+    animation: month-tick 240ms steps(4) calc(var(--order, 0) * 170ms) both;
+  }
+</style>
+
+<script>
+  import { setupMonthCard } from '../scripts/month-card';
+
+  setupMonthCard();
+</script>

@@ -1,0 +1,477 @@
+---
+import { link } from '../../shared/link';
+import Faq from '../../sites/rubryka/components/Faq.astro';
+import { priceExamples } from '../../sites/rubryka/examples';
+import { formatZloty } from '../../sites/rubryka/format';
+import Layout from '../../sites/rubryka/Layout.astro';
+import {
+  includedFeatures,
+  monthlyPrices,
+  packages,
+  pricedBuckets,
+  surchargeRows,
+} from '../../sites/rubryka/packages';
+import { buildQuote, toQuoteParams } from '../../sites/rubryka/quote';
+import { site } from '../../sites/rubryka/site';
+
+const examples = priceExamples.map(example => {
+  const quote = buildQuote(example.input);
+  return {
+    ...example,
+    quote: quote.kind === 'priced' ? quote : null,
+    href: `${link('/rubryka/kontakt/')}?${toQuoteParams(example.input)}#wycena`,
+  };
+});
+
+const questions = [
+  {
+    question: 'Co się dzieje, gdy mam więcej dokumentów, niż wynika z pakietu?',
+    answer:
+      'Nie dopłacasz za pojedyncze sztuki. Jeśli dwa miesiące z rzędu przekraczasz próg, proponujemy przejście do wyższego i zmieniamy cenę od następnego miesiąca. Wcześniej dostajesz od nas wiadomość.',
+  },
+  {
+    question: 'Czy ceny są netto czy brutto?',
+    answer:
+      'Tabela pokazuje ceny netto. Do kwoty doliczamy 23% VAT, więc na przykład 299 zł netto to 367,77 zł brutto. Firmy, które odliczają VAT, płacą w praktyce kwotę netto.',
+  },
+  {
+    question: 'Czy roczne rozliczenie kosztuje osobno?',
+    answer:
+      'Nie. PIT-28, PIT-36, PIT-36L, CIT-8 i sprawozdanie finansowe są w cenie pakietu. Osobno liczymy tylko to, co wykracza poza zwykłą obsługę, na przykład kontrolę w urzędzie skarbowym, i zawsze uzgadniamy to z Tobą wcześniej.',
+  },
+  {
+    question: 'Ile kosztuje przejęcie ksiąg z innego biura?',
+    answer:
+      'Przejęcie nic nie kosztuje. Pierwszy miesiąc rozliczamy według tabeli, a uzgodnienie sald z poprzednim biurem robimy w jego trakcie.',
+  },
+  {
+    question: 'Czy mogę zmienić pakiet w trakcie roku?',
+    answer:
+      'Tak, gdy zmieniasz formę opodatkowania albo firma przekracza próg dokumentów. Zmianę formy trzeba zgłosić w urzędzie w ustawowych terminach, więc daj nam znać przed końcem miesiąca, od którego ma obowiązywać.',
+  },
+];
+---
+
+<Layout
+  title="Pakiety i cennik księgowości | Rubryka"
+  description="Ceny księgowości dla małych firm: ryczałt od 229 zł, KPiR od 299 zł i pełna księgowość od 690 zł netto miesięcznie. Jedna tabela, dopłaty i przykłady wyliczeń."
+  path="/rubryka/pakiety/">
+  <div class="pagehead">
+    <div class="wrap">
+      <h1>Trzy pakiety, jedna tabela</h1>
+      <span class="total-rule" aria-hidden="true"></span>
+      <p class="lead">
+        Cena zależy od formy opodatkowania i liczby dokumentów w miesiącu. Telefony, maile i
+        przypomnienia o terminach są w każdym pakiecie.
+      </p>
+    </div>
+  </div>
+
+  <section class="pricing" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <h2 id="pricing-title" class="sr-only">
+        Porównanie pakietów
+      </h2>
+      <fieldset class="switcher">
+        <legend>Pakiet do porównania</legend>
+        <div class="segmented">
+          {packages.map((item, index) => (
+            <label>
+              <input type="radio" name="package" value={item.id} checked={index === 0} />
+              <span>{item.name}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <div class="audiences">
+        {packages.map(item => (
+          <p data-pkg={item.id}>{item.audience}</p>
+        ))}
+      </div>
+      <div class="sheet matrix-wrap">
+        <table class="matrix">
+          <caption class="sr-only">Ceny i zakres pakietów Ryczałt, KPiR i Pełna księgowość</caption>
+          <thead>
+            <tr>
+              <th scope="col">Pakiet</th>
+              {packages.map(item => (
+                <th scope="col" data-pkg={item.id}>
+                  <span class="matrix__name">{item.name}</span>
+                  <span class="matrix__audience">{item.audience}</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="matrix__group">
+              <th scope="rowgroup" colspan="4">
+                Cena netto za miesiąc, według liczby dokumentów
+              </th>
+            </tr>
+            {pricedBuckets.map(bucket => (
+              <tr>
+                <th scope="row">{bucket.label}</th>
+                {packages.map(item => (
+                  <td data-pkg={item.id} class="matrix__price">
+                    {formatZloty(monthlyPrices[item.id][bucket.id] * 100)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+          <tbody>
+            <tr class="matrix__group">
+              <th scope="rowgroup" colspan="4">
+                W cenie każdego pakietu
+              </th>
+            </tr>
+            {includedFeatures.map(row => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                {packages.map(item => (
+                  <td data-pkg={item.id}>
+                    <span class="cell-tick" aria-hidden="true" />
+                    <span class="sr-only">wliczone</span>
+                    {row.cells[item.id].text}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+          <tbody>
+            <tr class="matrix__group">
+              <th scope="rowgroup" colspan="4">
+                Osobno, gdy tego potrzebujesz
+              </th>
+            </tr>
+            {surchargeRows.map(row => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                {packages.map(item => (
+                  <td data-pkg={item.id} class:list={[!row.cells[item.id].tick && 'matrix__price']}>
+                    {row.cells[item.id].tick && <span class="cell-tick" aria-hidden="true" />}
+                    {row.cells[item.id].text}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="matrix__note">
+        Ceny netto, do których doliczamy 23% VAT. Powyżej 150 dokumentów miesięcznie albo powyżej 20
+        osób w kadrach wyceniamy indywidualnie.
+      </p>
+    </div>
+  </section>
+
+  <section class="section examples-section">
+    <div class="wrap">
+      <div class="section-head section-head--spaced">
+        <h2>Trzy firmy, trzy ceny</h2>
+        <p class="lead">
+          Tak liczymy przy różnych formach opodatkowania. Każdy przykład otwiera formularz wyceny z
+          tymi samymi danymi, które możesz zmienić.
+        </p>
+      </div>
+      <ul class="sheet examples">
+        {examples.map(example => (
+          <li class="example">
+            <div class="example__who">
+              <h3>{example.title}</h3>
+              <p>{example.description}</p>
+            </div>
+            {example.quote && (
+              <>
+                <dl class="example__lines">
+                  {example.quote.lines.map(line => (
+                    <>
+                      <dt>{line.label}</dt>
+                      <dd>{formatZloty(line.grosze)}</dd>
+                    </>
+                  ))}
+                </dl>
+                <p class="example__total">
+                  <b>{formatZloty(example.quote.netGrosze)}</b>
+                  <span>netto, {formatZloty(example.quote.grossGrosze)} brutto miesięcznie</span>
+                </p>
+              </>
+            )}
+            <a class="button button--plain" href={example.href}>
+              Policz moją cenę
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="wrap split">
+      <div class="section-head">
+        <h2>O cenach i limitach</h2>
+        <p class="lead">
+          Nie ma tu Twojego pytania? Napisz na {site.email}, odpiszemy w dzień roboczy.
+        </p>
+      </div>
+      <Faq items={questions} />
+    </div>
+  </section>
+
+  <section class="band on-orange closing">
+    <div class="wrap closing__grid">
+      <div>
+        <h2>Policz cenę dla swojej firmy</h2>
+        <p class="lead">Cztery pytania i kwota netto oraz brutto od razu na ekranie.</p>
+      </div>
+      <div class="button-row">
+        <a class="button" href={link('/rubryka/kontakt/#wycena')}>
+          Wyceń księgowość
+        </a>
+        <a class="button button--plain" href={site.phoneHref}>
+          Zadzwoń: {site.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .pricing {
+    padding-bottom: clamp(48px, 8cqi, 88px);
+  }
+
+  .switcher {
+    position: sticky;
+    z-index: 5;
+    top: var(--bar);
+    display: grid;
+    gap: 8px;
+    margin: 0 -16px;
+    padding: 12px 16px;
+    border: 0;
+    border-bottom: 2px solid var(--navy);
+    background: var(--paper);
+  }
+
+  .switcher legend {
+    float: left;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 0;
+    font-weight: 700;
+  }
+
+  .audiences {
+    margin: 16px 0;
+  }
+
+  .audiences p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .matrix-wrap {
+    overflow: hidden;
+  }
+
+  .matrix {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .matrix th,
+  .matrix td {
+    padding: 12px 10px;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px dashed var(--dash);
+    font-size: 0.9375rem;
+    line-height: 1.35;
+  }
+
+  .matrix thead th {
+    border-top: 0;
+    border-bottom: 2px solid var(--navy);
+    background: var(--white);
+    vertical-align: top;
+  }
+
+  .matrix__name {
+    display: block;
+    font: 800 1.25rem/1.1 var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .matrix__audience {
+    display: none;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  .matrix tbody th[scope='row'] {
+    font-weight: 600;
+  }
+
+  .matrix tr.matrix__group th {
+    padding: 10px;
+    border-top: 2px solid var(--navy);
+    background: var(--navy);
+    color: var(--paper);
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  .matrix tbody:first-of-type tr.matrix__group th {
+    border-top: 0;
+  }
+
+  .matrix__price {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .cell-tick {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    vertical-align: -3px;
+    background: var(--tick) center / 100% no-repeat;
+  }
+
+  .matrix__note {
+    max-width: 62ch;
+    margin: 20px 0 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  @container page (max-width: 759px) {
+    .pricing:has(input[value='ryczalt']:checked) [data-pkg]:not([data-pkg='ryczalt']),
+    .pricing:has(input[value='kpir']:checked) [data-pkg]:not([data-pkg='kpir']),
+    .pricing:has(input[value='pelna']:checked) [data-pkg]:not([data-pkg='pelna']) {
+      display: none;
+    }
+
+    .matrix thead th:first-child {
+      width: 54%;
+    }
+
+    .matrix thead th {
+      font-size: 0.875rem;
+    }
+  }
+
+  @container page (min-width: 760px) {
+    .switcher,
+    .audiences {
+      display: none;
+    }
+
+    .matrix {
+      table-layout: fixed;
+    }
+
+    .matrix th,
+    .matrix td {
+      padding: 14px 16px;
+    }
+
+    .matrix thead th:first-child {
+      width: 31%;
+      font-size: 1.0625rem;
+    }
+
+    .matrix__audience {
+      display: block;
+    }
+
+    .matrix td:nth-child(3),
+    .matrix thead th:nth-child(3) {
+      background: var(--paper);
+    }
+
+    .matrix tr.matrix__group th {
+      padding-inline: 16px;
+    }
+  }
+
+  .examples {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .example {
+    display: grid;
+    gap: 18px 32px;
+    align-items: start;
+    padding: 24px 20px;
+  }
+
+  .example + .example {
+    border-top: 2px solid var(--navy);
+  }
+
+  .example h3 {
+    font-size: 1.5rem;
+  }
+
+  .example__who p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .example__lines {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 16px;
+    margin: 0;
+    font-size: 0.9375rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .example__lines dd {
+    margin: 0;
+    font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .example__total {
+    display: grid;
+    gap: 4px;
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px dashed var(--dash);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .example__total b {
+    font: 800 2rem/1 var(--font-display);
+    letter-spacing: -0.03em;
+  }
+
+  .example__total span {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  @container page (min-width: 900px) {
+    .example {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 4fr) minmax(0, 3fr) auto;
+      padding: 28px 28px;
+    }
+
+    .example__total {
+      padding-top: 0;
+      border-top: 0;
+    }
+  }
+</style>

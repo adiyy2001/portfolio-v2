@@ -1,0 +1,99 @@
+---
+interface Entry {
+  number: number;
+  date: string;
+  label: string;
+  income?: string;
+  cost?: string;
+  fromKsef?: boolean;
+}
+
+const entries: Entry[] = [
+  { number: 1, date: '02.09', label: 'FV 41', income: '3 690,00', fromKsef: true },
+  { number: 2, date: '04.09', label: 'Hurtownia', cost: '1 215,50' },
+  { number: 3, date: '09.09', label: 'FV 42', income: '5 535,00', fromKsef: true },
+  { number: 4, date: '15.09', label: 'Czynsz biura', cost: '2 460,00' },
+  { number: 5, date: '18.09', label: 'FV 43', income: '1 845,00', fromKsef: true },
+];
+
+const top = 106;
+const step = 28;
+---
+
+<svg class="doc" viewBox="0 0 360 290" aria-hidden="true" focusable="false">
+  <text class="doc-title" x="16" y="30">
+    Księga przychodów i rozchodów
+  </text>
+  <text class="doc-faint doc-small" x="16" y="48">
+    wrzesień 2026, kwoty w złotych
+  </text>
+  <text class="doc-bold" x="16" y="78">
+    Lp.
+  </text>
+  <text class="doc-bold" x="40" y="78">
+    Data
+  </text>
+  <text class="doc-bold" x="86" y="78">
+    Opis
+  </text>
+  <text class="doc-bold" x="262" y="78" text-anchor="end">
+    Przychód
+  </text>
+  <text class="doc-bold" x="344" y="78" text-anchor="end">
+    Koszt
+  </text>
+  <line class="doc-line" x1="16" y1="86" x2="344" y2="86"></line>
+  {entries.map((entry, index) => (
+    <g>
+      <text x="16" y={top + index * step}>
+        {entry.number}
+      </text>
+      <text x="40" y={top + index * step}>
+        {entry.date}
+      </text>
+      <text x="86" y={top + index * step}>
+        {entry.label}
+      </text>
+      {entry.fromKsef && (
+        <g>
+          <rect
+            class="doc-orange"
+            x="130"
+            y={top + index * step - 12}
+            width="44"
+            height="16"></rect>
+          <text class="doc-small doc-bold" x="136" y={top + index * step}>
+            KSeF
+          </text>
+        </g>
+      )}
+      {entry.income && (
+        <text x="262" y={top + index * step} text-anchor="end">
+          {entry.income}
+        </text>
+      )}
+      {entry.cost && (
+        <text x="344" y={top + index * step} text-anchor="end">
+          {entry.cost}
+        </text>
+      )}
+      <line
+        class="doc-dash"
+        x1="16"
+        y1={top + index * step + 10}
+        x2="344"
+        y2={top + index * step + 10}></line>
+    </g>
+  ))}
+  <text class="doc-bold" x="86" y="252">
+    Razem
+  </text>
+  <text class="doc-bold" x="262" y="252" text-anchor="end">
+    11 070,00
+  </text>
+  <text class="doc-bold" x="344" y="252" text-anchor="end">
+    3 675,50
+  </text>
+  <line class="doc-total" x1="196" y1="260" x2="344" y2="260"></line>
+  <line class="doc-total" x1="196" y1="265" x2="344" y2="265"></line>
+</svg>

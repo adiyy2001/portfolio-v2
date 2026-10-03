@@ -1,0 +1,67 @@
+---
+import { link } from '../../shared/link';
+import Footer from './components/Footer.astro';
+import Header from './components/Header.astro';
+import Typeset from './components/Typeset.astro';
+import { fontFaceCss, fontUrl } from './fonts';
+import { site } from './site';
+import './styles/base.css';
+import './styles/controls.css';
+import './styles/layout.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const canonical = new URL(link(path), Astro.site).href;
+const image = new URL(link('/rubryka/og.png'), Astro.site).href;
+const imageAlt = 'Rubryka, biuro rachunkowe: karta Twój miesiąc z terminami KSeF, VAT, ZUS i JPK';
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content={site.themeColor} />
+    <link rel="icon" type="image/svg+xml" href={link('/rubryka/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaceCss}></style>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Przejdź do treści
+    </a>
+    <div class="shell">
+      <Header />
+      <div class="page">
+        <Typeset>
+          <main id="main" tabindex="-1">
+            <slot />
+          </main>
+          <Footer />
+        </Typeset>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+---
+import { link } from '../../../shared/link';
+import { nav, quotePath, site } from '../site';
+import Mark from './Mark.astro';
+
+const current = Astro.url.pathname;
+const homePath = link('/rubryka/');
+---
+
+<header class="spine on-navy">
+  <div class="spine__bar">
+    <div class="spine__identity">
+      <a class="brand" href={homePath} aria-current={current === homePath ? 'page' : undefined}>
+        <Mark />
+        <span>{site.name}</span>
+      </a>
+      <span class="spine__sample">Strona przykładowa</span>
+    </div>
+    <button class="spine__toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="spine__icon" aria-hidden="true"></span>
+      Menu
+    </button>
+  </div>
+  <div class="spine__panel" id="site-nav">
+    <p class="spine__tagline">{site.tagline}</p>
+    <nav aria-label="Główna nawigacja">
+      <ul class="spine__links">
+        {nav.map(item => (
+          <li>
+            <a
+              href={link(item.path)}
+              aria-current={current === link(item.path) ? 'page' : undefined}>
+              <span>{item.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <a class="button spine__cta" href={link(quotePath)}>
+      Wyceń księgowość
+    </a>
+    <address class="spine__contact">
+      <a href={site.phoneHref}>{site.phone}</a>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <span>{site.hours}</span>
+    </address>
+  </div>
+</header>
+
+<script>
+  import { setupMenu } from '../scripts/menu';
+
+  setupMenu();
+</script>

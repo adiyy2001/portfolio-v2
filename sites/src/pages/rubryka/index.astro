@@ -1,0 +1,783 @@
+---
+import { link } from '../../shared/link';
+import Faq from '../../sites/rubryka/components/Faq.astro';
+import MonthCard from '../../sites/rubryka/components/MonthCard.astro';
+import { formatZloty } from '../../sites/rubryka/format';
+import Layout from '../../sites/rubryka/Layout.astro';
+import { monthlyPrices, packages, pricedBuckets } from '../../sites/rubryka/packages';
+import { services } from '../../sites/rubryka/services';
+import { quotePath, site } from '../../sites/rubryka/site';
+import { team } from '../../sites/rubryka/team';
+
+const facts = [
+  { figure: 'od 229 zł', caption: 'netto za miesiąc, ryczałt do 10 dokumentów' },
+  { figure: '1 dzień', caption: 'roboczy na odpowiedź na e-mail' },
+  { figure: '15. 20. 25.', caption: 'terminy, których pilnujemy co miesiąc' },
+  { figure: '0 zł', caption: 'za start z KSeF dla klientów księgowości' },
+];
+
+const routine = [
+  {
+    when: 'Cały miesiąc',
+    you: 'Wystawiasz faktury w KSeF i wrzucasz do folderu dokumenty, których tam nie ma.',
+    us: 'Pobieramy faktury z KSeF i księgujemy na bieżąco.',
+  },
+  {
+    when: 'do 10.',
+    you: 'Dosyłasz brakujące dokumenty i wyciąg z rachunku firmowego.',
+    us: 'Wyjaśniamy braki i przypominamy, czego jeszcze nie ma.',
+  },
+  {
+    when: 'do 15.',
+    you: 'Wystawiasz faktury za poprzedni miesiąc.',
+    us: 'Sprawdzamy kompletność w KSeF. Dla spółek przygotowujemy ZUS.',
+  },
+  {
+    when: 'do 20.',
+    you: 'Potwierdzasz kwotę składek.',
+    us: 'Przygotowujemy ZUS jednoosobowych firm.',
+  },
+  {
+    when: 'do 25.',
+    you: 'Akceptujesz VAT i robisz przelew.',
+    us: 'Liczymy VAT i wysyłamy plik JPK_V7.',
+  },
+];
+
+const ksefDates = [
+  {
+    date: '1 lutego 2026',
+    text: 'Największe firmy, ze sprzedażą powyżej 200 mln zł w 2024 r., wystawiają faktury w KSeF. Każda firma z NIP może w nim już odbierać faktury.',
+  },
+  {
+    date: '1 kwietnia 2026',
+    text: 'Obowiązek obejmuje pozostałe firmy. Do końca 2026 r. działa ulga: faktury dla firm do 10 000 zł brutto w miesiącu można jeszcze wystawiać poza KSeF.',
+  },
+  {
+    date: '1 stycznia 2027',
+    text: 'Ulga się kończy, a kary za naruszenia sięgają 100% kwoty VAT z faktury. Numer KSeF trafia do tytułu przelewu.',
+  },
+];
+
+const questions = [
+  {
+    question: 'Czy mała firma musi już wystawiać faktury w KSeF?',
+    answer:
+      'Od 1 kwietnia 2026 r. tak, ale do końca 2026 r. działa ulga: faktury dla firm, których łączna wartość w miesiącu nie przekracza 10 000 zł brutto, można wystawiać poza KSeF. Po przekroczeniu limitu KSeF obowiązuje od tej faktury na stałe, a od 1 stycznia 2027 r. wszystkich. Szczegóły są w przewodniku po KSeF.',
+  },
+  {
+    question: 'Co dostaję w cenie pakietu?',
+    answer:
+      'Księgowanie dokumentów w limicie z cennika, odbiór faktur z KSeF, zaliczki na podatek dochodowy, roczne rozliczenie, ZUS właściciela, przypomnienia o terminach i stałego opiekuna. VAT z plikiem JPK oraz kadry i płace to osobne pozycje.',
+  },
+  {
+    question: 'Jak liczycie dokumenty?',
+    answer:
+      'Liczymy faktury sprzedaży i kosztowe oraz inne dokumenty, które trzeba zaksięgować. Wyciągi z rachunku i dokumenty płacowe nie wliczają się do limitu. Faktury pobrane z KSeF liczą się tak samo jak pozostałe.',
+  },
+  {
+    question: 'Czy przejmujecie księgi od innego biura?',
+    answer:
+      'Tak. Potrzebujemy zamkniętego poprzedniego miesiąca, zestawienia obrotów i dostępu do dokumentów. Przy zmianie w trakcie roku przenosimy salda i uzgadniamy je z poprzednim biurem.',
+  },
+  {
+    question: 'Jak szybko dostanę odpowiedź?',
+    answer:
+      'Na e-mail odpowiadamy w ciągu jednego dnia roboczego. Sprawy pilne, na przykład pismo z urzędu, zgłoś telefonicznie w godzinach pracy biura.',
+  },
+  {
+    question: 'Na jak długo podpisuję umowę?',
+    answer:
+      'Umowa jest na czas nieokreślony z miesięcznym okresem wypowiedzenia. Za rezygnację nie pobieramy opłat.',
+  },
+];
+---
+
+<Layout
+  title="Rubryka: biuro rachunkowe dla małych firm we Wrocławiu"
+  description="Księgowość, kadry, VAT i KSeF dla małych firm z Wrocławia. Stała cena za miesiąc, jedna księgowa z imienia i karta z terminami na każdy miesiąc."
+  path="/rubryka/">
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <h1>
+          Księgowość
+          <span class="total">bez zgadywania.</span>
+        </h1>
+        <p class="lead">
+          Pełna księgowość, kadry i KSeF dla małych firm. Stała cena za miesiąc i jedna osoba z
+          imienia, która odbiera telefon.
+        </p>
+        <div class="button-row">
+          <a class="button" href={link(quotePath)}>
+            Wyceń księgowość
+          </a>
+          <a class="button button--plain" href={link('/rubryka/pakiety/')}>
+            Zobacz pakiety
+          </a>
+        </div>
+        <p class="hero__meta">
+          Odpowiadamy w ciągu jednego dnia roboczego. Pierwsza rozmowa jest bezpłatna.
+        </p>
+      </div>
+      <div class="hero__card">
+        <MonthCard />
+      </div>
+    </div>
+  </section>
+
+  <section class="facts" aria-label="Najważniejsze liczby">
+    <div class="wrap">
+      <ul>
+        {facts.map(fact => (
+          <li>
+            <b class="fact__figure">{fact.figure}</b>
+            <span class="fact__caption">{fact.caption}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div class="section-head">
+        <h2>Czym się zajmujemy</h2>
+        <p class="lead">
+          Pięć usług i jeden opiekun. Zaczynasz od tego, czego potrzebujesz, a resztę dokładamy, gdy
+          firma rośnie.
+        </p>
+        <p>
+          <a href={link('/rubryka/uslugi/')}>Wszystkie usługi</a>
+        </p>
+        <aside class="which" aria-labelledby="which-title">
+          <h3 id="which-title">Nie wiesz, co wybrać?</h3>
+          <p>
+            Cztery pytania: rodzaj firmy, dokumenty w miesiącu, pracownicy i VAT. Od razu widzisz
+            pasujący pakiet i cenę.
+          </p>
+          <p>
+            <a class="button button--plain" href={link(quotePath)}>
+              Policz wycenę
+            </a>
+          </p>
+        </aside>
+      </div>
+      <div>
+        <div class="sheet services">
+          <p class="services__head">
+            <span>Usługa</span>
+            <span>Cena netto, miesięcznie</span>
+          </p>
+          <ul>
+            {services.map(service => (
+              <li>
+                <a class="svc" href={link(`/rubryka/uslugi/#${service.id}`)}>
+                  <span class="svc__tick" aria-hidden="true" />
+                  <span class="svc__name">{service.title}</span>
+                  <span class="svc__price">{service.priceShort}</span>
+                  <span class="svc__text">{service.teaser}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section routine-section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Jak wygląda Twój miesiąc z nami</h2>
+        <p class="lead">
+          Pięć dat wyznacza rytm. Ty robisz to, co leży po Twojej stronie, a my całą resztę.
+        </p>
+      </div>
+      <ol class="routine">
+        {routine.map(step => (
+          <li>
+            <h3 class="routine__when">{step.when}</h3>
+            <p>
+              <span class="who who--you">Ty</span>
+              {step.you}
+            </p>
+            <p>
+              <span class="who who--us">My</span>
+              {step.us}
+            </p>
+          </li>
+        ))}
+      </ol>
+      <p class="routine__note">
+        Gdy 20. albo 25. wypada w weekend lub święto, ZUS i VAT płacisz następnego dnia roboczego.
+        Termin 15. na faktury liczymy zawsze kalendarzowo, bez przesuwania.
+      </p>
+    </div>
+  </section>
+
+  <section class="band on-navy ksef">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>KSeF: trzy daty, które mają znaczenie</h2>
+        <p class="lead">
+          Krajowy System e-Faktur zmienia to, jak wystawiasz i odbierasz faktury. Tak wygląda
+          harmonogram.
+        </p>
+      </div>
+      <ol class="timeline">
+        {ksefDates.map(item => (
+          <li>
+            <h3 class="timeline__date">{item.date}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="button-row ksef__actions">
+        <a class="button" href={link('/rubryka/przewodnik-po-ksef/')}>
+          Przewodnik po KSeF
+        </a>
+        <a class="button button--plain" href={link('/rubryka/uslugi/#start-z-ksef')}>
+          Start z KSeF u nas
+        </a>
+      </div>
+      <p class="ksef__stamp">Stan na {site.stateOn}.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap split">
+      <div class="section-head">
+        <h2>Płacisz za dokumenty, nie za telefony</h2>
+        <p class="lead">
+          Cena miesięczna zależy od formy opodatkowania i liczby dokumentów. Rozmowy z opiekunem i
+          przypomnienia o terminach są w cenie.
+        </p>
+        <p>
+          <a class="button" href={link('/rubryka/pakiety/')}>
+            Porównaj pakiety
+          </a>
+        </p>
+      </div>
+      <div class="sheet price-sheet">
+        <table class="ledger">
+          <caption class="sr-only">
+            Cena miesięczna netto według pakietu i liczby dokumentów
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Dokumenty</th>
+              {packages.map(item => (
+                <th scope="col">{item.id === 'pelna' ? 'Pełna' : item.name}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {pricedBuckets.map(bucket => (
+              <tr>
+                <th scope="row">{bucket.short}</th>
+                {packages.map(item => (
+                  <td>{formatZloty(monthlyPrices[item.id][bucket.id] * 100)}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="price-sheet__note">
+          Ceny netto za miesiąc. Do tego VAT z plikiem JPK od 69 zł oraz kadry i płace po 59 zł za
+          osobę.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section team-section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Z kim rozmawiasz</h2>
+        <p class="lead">
+          Każdy klient ma opiekuna z imienia. Piszesz wprost do niego, a nie na ogólną skrzynkę.
+        </p>
+      </div>
+      <ul class="people">
+        {team.map(person => (
+          <li class="person">
+            <span class="person__mono" aria-hidden="true">
+              {person.name.charAt(0)}
+            </span>
+            <div>
+              <h3>
+                {person.name}, {person.role}
+              </h3>
+              <p>{person.focus}</p>
+              <p>
+                <a href={`mailto:${person.email}`}>{person.email}</a>
+              </p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="wrap split">
+      <div class="section-head">
+        <h2>Pytania, które słyszymy najczęściej</h2>
+        <p class="lead">Nie ma tu Twojego? Napisz na {site.email}, odpiszemy w dzień roboczy.</p>
+      </div>
+      <Faq items={questions} />
+    </div>
+  </section>
+
+  <section class="band on-orange closing">
+    <div class="wrap closing__grid">
+      <div>
+        <h2>Wyceń księgowość w dwie minuty</h2>
+        <p class="lead">Cztery pytania i cena od razu na ekranie. Bez zobowiązań.</p>
+      </div>
+      <div class="button-row">
+        <a class="button" href={link(quotePath)}>
+          Wyceń księgowość
+        </a>
+        <a class="button button--plain" href={site.phoneHref}>
+          Zadzwoń: {site.phone}
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    padding-block: clamp(32px, 6cqi, 72px) clamp(40px, 8cqi, 88px);
+  }
+
+  .hero__grid {
+    display: grid;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .hero__copy {
+    container: hero / inline-size;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 12.5cqi, 5.25rem);
+  }
+
+  .total {
+    --rule: max(3px, 0.045em);
+    display: block;
+    width: fit-content;
+    padding-bottom: calc(var(--rule) * 3 + 0.05em);
+    background:
+      linear-gradient(var(--orange), var(--orange)) 0 100% / 100% var(--rule) no-repeat,
+      linear-gradient(var(--orange), var(--orange)) 0 calc(100% - var(--rule) * 2) / 100%
+        var(--rule) no-repeat;
+    animation: rule-in 520ms steps(13) 250ms both;
+  }
+
+  @keyframes rule-in {
+    from {
+      background-size:
+        0 var(--rule),
+        0 var(--rule);
+    }
+  }
+
+  .hero__copy .lead {
+    margin: 28px 0 32px;
+  }
+
+  .hero__meta {
+    margin: 24px 0 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .hero__card {
+    width: 100%;
+    max-width: 540px;
+  }
+
+  @container page (min-width: 940px) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 48px;
+    }
+
+    .hero__card {
+      justify-self: end;
+    }
+  }
+
+  .facts {
+    border-block: 2px solid var(--navy);
+    background: var(--white);
+  }
+
+  .facts ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .facts li {
+    display: grid;
+    align-content: start;
+    gap: 6px;
+    padding: 22px 12px;
+    border-bottom: 1px dashed var(--dash);
+  }
+
+  .facts li:nth-child(odd) {
+    border-right: 1px dashed var(--dash);
+    padding-left: 0;
+  }
+
+  .facts li:nth-child(even) {
+    padding-right: 0;
+  }
+
+  .facts li:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .fact__figure {
+    font: 800 clamp(1.625rem, 1rem + 2.4cqi, 2.5rem) / 1 var(--font-display);
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .fact__caption {
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.35;
+  }
+
+  @container page (min-width: 860px) {
+    .facts ul {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .facts li,
+    .facts li:nth-child(odd),
+    .facts li:nth-child(even) {
+      padding: 28px 24px;
+      border-right: 0;
+      border-bottom: 0;
+      border-left: 1px dashed var(--dash);
+    }
+
+    .facts li:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+
+    .facts li:last-child {
+      padding-right: 0;
+    }
+  }
+
+  .services__head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0;
+    padding: 12px 18px;
+    border-bottom: 2px solid var(--navy);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .services ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .services li + li .svc {
+    border-top: 1px dashed var(--dash);
+  }
+
+  .svc {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    gap: 4px 14px;
+    align-items: start;
+    padding: 16px 18px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .svc:hover {
+    background: var(--paper);
+  }
+
+  .svc:hover .svc__name {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+  }
+
+  .svc__tick {
+    grid-row: 1 / span 2;
+    width: 24px;
+    height: 24px;
+    margin-top: 1px;
+    background: var(--tick) center / 100% no-repeat;
+  }
+
+  .svc__name {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .svc__price {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .svc__text {
+    grid-column: 2 / -1;
+    color: var(--muted);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+  }
+
+  .routine {
+    margin: 36px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--navy);
+  }
+
+  .routine li {
+    display: grid;
+    gap: 10px 32px;
+    padding: 20px 0;
+    border-bottom: 1px dashed var(--dash);
+  }
+
+  .routine__when {
+    font: 800 1.5rem/1.1 var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .routine p {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .who {
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    min-width: 36px;
+    height: 28px;
+    padding: 0 8px;
+    font-size: 0.9375rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .who--you {
+    background: var(--navy);
+    color: var(--paper);
+  }
+
+  .who--us {
+    background: var(--orange);
+    color: var(--navy);
+  }
+
+  .routine__note {
+    max-width: 62ch;
+    margin: 20px 0 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  @container page (min-width: 760px) {
+    .routine li {
+      grid-template-columns: 150px minmax(0, 1fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+
+  .timeline {
+    display: grid;
+    gap: 28px;
+    margin: 40px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .timeline li {
+    position: relative;
+    padding-left: 36px;
+  }
+
+  .timeline li::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--orange);
+  }
+
+  .timeline li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 30px;
+    bottom: -28px;
+    left: 9px;
+    width: 2px;
+    background: var(--on-navy-rule);
+  }
+
+  .timeline__date {
+    font: 800 1.75rem/1.1 var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .timeline p {
+    max-width: 34em;
+    margin: 8px 0 0;
+    color: var(--on-navy-muted);
+  }
+
+  @container page (min-width: 860px) {
+    .timeline {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 40px;
+    }
+
+    .timeline li {
+      padding: 44px 0 0;
+    }
+
+    .timeline li::before {
+      top: 0;
+    }
+
+    .timeline li:not(:last-child)::after {
+      top: 9px;
+      right: -40px;
+      bottom: auto;
+      left: 28px;
+      width: auto;
+      height: 2px;
+    }
+  }
+
+  .ksef__actions {
+    margin-top: 40px;
+  }
+
+  .ksef__stamp {
+    margin: 24px 0 0;
+    color: var(--on-navy-muted);
+    font-size: 0.9375rem;
+  }
+
+  .which {
+    display: grid;
+    gap: 10px;
+    padding: 4px 0 4px 20px;
+    border-left: 4px solid var(--orange);
+  }
+
+  .which h3 {
+    font-size: 1.25rem;
+  }
+
+  .which p {
+    margin: 0;
+  }
+
+  .price-sheet {
+    padding: 8px 6px 18px;
+  }
+
+  .price-sheet .ledger th,
+  .price-sheet .ledger td {
+    padding: 14px 8px;
+  }
+
+  .price-sheet .ledger td,
+  .price-sheet .ledger thead th:not(:first-child) {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  @container page (max-width: 400px) {
+    .price-sheet .ledger {
+      font-size: 0.875rem;
+    }
+
+    .price-sheet .ledger th,
+    .price-sheet .ledger td {
+      padding-inline: 4px;
+    }
+  }
+
+  .price-sheet__note {
+    margin: 12px 8px 0;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .people {
+    display: grid;
+    margin: 36px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 2px solid var(--navy);
+  }
+
+  .person {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 18px;
+    padding: 22px 0;
+    border-bottom: 1px dashed var(--dash);
+  }
+
+  .person__mono {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border: 2px solid var(--navy);
+    background: var(--orange);
+    font: 800 2rem/1 var(--font-display);
+  }
+
+  .person h3 {
+    font-size: 1.25rem;
+  }
+
+  .person p {
+    margin: 4px 0 0;
+    overflow-wrap: anywhere;
+  }
+
+  @container page (min-width: 760px) {
+    .people {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 48px;
+    }
+  }
+</style>

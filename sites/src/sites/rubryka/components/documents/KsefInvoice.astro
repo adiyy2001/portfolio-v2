@@ -1,0 +1,95 @@
+---
+const size = 21;
+const cell = 3;
+let seed = 20260918;
+const nextBit = (): boolean => {
+  seed = (seed * 1103515245 + 12345) % 2147483648;
+  return seed % 7 < 3;
+};
+
+const inFinder = (x: number, y: number): boolean =>
+  (x < 8 && y < 8) || (x >= size - 8 && y < 8) || (x < 8 && y >= size - 8);
+
+const finderCell = (x: number, y: number): boolean => {
+  const fx = x < 8 ? x : x - (size - 8);
+  const fy = y < 8 ? y : y - (size - 8);
+  if (fx === 7 || fy === 7) return false;
+  const ring = Math.max(Math.abs(fx - 3), Math.abs(fy - 3));
+  return ring !== 2 && ring <= 3;
+};
+
+const cells: { x: number; y: number }[] = [];
+for (let y = 0; y < size; y += 1) {
+  for (let x = 0; x < size; x += 1) {
+    const dark = inFinder(x, y) ? finderCell(x, y) : nextBit();
+    if (dark) cells.push({ x, y });
+  }
+}
+
+const lines = [
+  { label: 'Usługa projektowa', amount: '2 400,00' },
+  { label: 'Wydruk i oprawa', amount: '300,00' },
+];
+---
+
+<svg class="doc" viewBox="0 0 360 290" aria-hidden="true" focusable="false">
+  <text class="doc-title" x="16" y="30">
+    Faktura FV/09/2026/014
+  </text>
+  <text class="doc-faint doc-small" x="16" y="48">
+    wystawiona 18.09.2026, plik XML
+  </text>
+  <rect class="doc-paper" x="16" y="56" width="156" height="42"></rect>
+  <rect class="doc-paper" x="188" y="56" width="156" height="42"></rect>
+  <text class="doc-faint doc-small" x="24" y="72">
+    Sprzedawca
+  </text>
+  <text class="doc-faint doc-small" x="196" y="72">
+    Nabywca
+  </text>
+  <text class="doc-small" x="24" y="90">
+    NIP 000 000 00 00
+  </text>
+  <text class="doc-small" x="196" y="90">
+    NIP 000 000 00 00
+  </text>
+  <line class="doc-line" x1="16" y1="122" x2="240" y2="122"></line>
+  <text class="doc-bold" x="16" y="116">
+    Pozycja
+  </text>
+  <text class="doc-bold" x="240" y="116" text-anchor="end">
+    Netto
+  </text>
+  {lines.map((line, index) => (
+    <g>
+      <text x="16" y={142 + index * 24}>
+        {line.label}
+      </text>
+      <text x="240" y={142 + index * 24} text-anchor="end">
+        {line.amount}
+      </text>
+      <line class="doc-dash" x1="16" y1={150 + index * 24} x2="240" y2={150 + index * 24}></line>
+    </g>
+  ))}
+  <text x="16" y="194">
+    Netto 2 700,00 plus VAT 621,00
+  </text>
+  <text class="doc-bold" x="16" y="212">
+    Do zapłaty 3 321,00 zł
+  </text>
+  <line class="doc-total" x1="16" y1="220" x2="150" y2="220"></line>
+  <line class="doc-total" x1="16" y1="225" x2="150" y2="225"></line>
+  <rect class="doc-paper" x="16" y="238" width="328" height="42"></rect>
+  <text class="doc-faint doc-small" x="24" y="254">
+    Numer KSeF nadany przez system
+  </text>
+  <text class="doc-bold doc-small" x="24" y="270">
+    0000000000-20260918-A1B2C3D4E5F6-7A
+  </text>
+  <rect class="doc-paper" x="262" y="126" width="82" height="82"></rect>
+  <g transform="translate(269 133)">
+    {cells.map(({ x, y }) => (
+      <rect class="doc-navy" x={x * cell} y={y * cell} width={cell} height={cell}></rect>
+    ))}
+  </g>
+</svg>

@@ -1,0 +1,806 @@
+---
+import BuildingPlan from '../../sites/rubryka/components/BuildingPlan.astro';
+import { formatZloty } from '../../sites/rubryka/format';
+import Layout from '../../sites/rubryka/Layout.astro';
+import {
+  documentBuckets,
+  ksefStartPrice,
+  maxPayrollPeople,
+  payrollPerPerson,
+} from '../../sites/rubryka/packages';
+import { type QuoteInput, buildQuote, maxEmployeesField } from '../../sites/rubryka/quote';
+import { site } from '../../sites/rubryka/site';
+import '../../sites/rubryka/styles/documents.css';
+
+const defaults: QuoteInput = {
+  businessType: 'ryczalt',
+  documents: 'upTo30',
+  employees: 0,
+  vat: 'active',
+};
+
+const initialQuote = buildQuote(defaults);
+
+const barLabel =
+  initialQuote.kind === 'priced' ? `Pakiet ${initialQuote.packageName}` : 'Wycena indywidualna';
+const barValue =
+  initialQuote.kind === 'priced' ? `${formatZloty(initialQuote.netGrosze)} netto` : '';
+
+const fineText = `Roczne rozliczenie jest w cenie. Start z KSeF kosztuje klientów 0 zł, pozostałych ${formatZloty(ksefStartPrice * 100)} netto. Do ${maxPayrollPeople} osób w kadrach liczymy ${formatZloty(payrollPerPerson * 100)} za osobę.`;
+
+const businessChoices = [
+  { value: 'ryczalt', label: 'Jednoosobowa firma na ryczałcie', hint: 'Podatek od przychodów' },
+  { value: 'kpir', label: 'Jednoosobowa firma na KPiR', hint: 'Skala podatkowa albo liniowy' },
+  { value: 'spolka', label: 'Spółka z o.o.', hint: 'Albo inna firma z księgami rachunkowymi' },
+  { value: 'unknown', label: 'Nie wiem', hint: 'Dobierzemy formę na rozmowie' },
+];
+
+const vatChoices = [
+  { value: 'active', label: 'Czynny podatnik VAT' },
+  { value: 'exempt', label: 'Zwolniony z VAT' },
+  { value: 'unknown', label: 'Nie wiem' },
+];
+
+const nextSteps = [
+  {
+    when: 'Dzień 1',
+    text: 'Odpowiadamy w ciągu jednego dnia roboczego, telefonem albo mailem, jak wolisz.',
+  },
+  {
+    when: 'Dzień 2 lub 3',
+    text: 'Rozmawiamy około 20 minut: sprawdzamy firmę, formę opodatkowania i dokumenty.',
+  },
+  {
+    when: 'Dzień 4',
+    text: 'Dostajesz ofertę z ceną na piśmie, bez drobnego druku.',
+  },
+  {
+    when: 'Od 1. dnia miesiąca',
+    text: 'Gdy się zgodzisz, przejmujemy księgi od pierwszego dnia miesiąca.',
+  },
+];
+
+const hours = [
+  { days: 'Poniedziałek do piątku', time: '8:00-16:00' },
+  { days: 'Sobota i niedziela', time: 'zamknięte' },
+];
+---
+
+<Layout
+  title="Kontakt i wycena księgowości | Rubryka"
+  description="Wyceń księgowość w dwie minuty: forma firmy, dokumenty, pracownicy i VAT dają cenę od razu. Adres biura we Wrocławiu, godziny, telefon i e-mail."
+  path="/rubryka/kontakt/">
+  <div class="pagehead">
+    <div class="wrap">
+      <h1>Wyceń księgowość i umów rozmowę</h1>
+      <span class="total-rule" aria-hidden="true"></span>
+      <p class="lead">
+        Cztery pytania o firmę i cena pokazuje się od razu. Potem zostaw dane, a odezwiemy się w
+        ciągu jednego dnia roboczego.
+      </p>
+    </div>
+  </div>
+
+  <section class="quote-section" id="wycena" aria-labelledby="quote-title">
+    <div class="wrap">
+      <h2 id="quote-title" class="sr-only">
+        Formularz wyceny
+      </h2>
+      <p class="no-script-note">
+        Formularz działa z włączonym JavaScriptem. Bez niego napisz na{' '}
+        <a href={`mailto:${site.email}`}>{site.email}</a> albo zadzwoń:{' '}
+        <a href={site.phoneHref}>{site.phone}</a>.
+      </p>
+      <form class="quote" data-quote-form novalidate>
+        <div
+          class="error-summary"
+          data-error-summary
+          tabindex="-1"
+          role="group"
+          aria-labelledby="error-summary-title"
+          hidden>
+          <h3 id="error-summary-title">Popraw dane kontaktowe</h3>
+          <ul data-error-list></ul>
+        </div>
+        <div class="quote__grid">
+          <div class="quote__questions">
+            <fieldset class="field">
+              <legend>Jaką masz firmę?</legend>
+              <div class="choices choices--pair">
+                {businessChoices.map(choice => (
+                  <label class="choice">
+                    <input
+                      type="radio"
+                      name="businessType"
+                      value={choice.value}
+                      checked={choice.value === defaults.businessType}
+                    />
+                    <span>
+                      <span class="choice__text">
+                        {choice.label}
+                        <small>{choice.hint}</small>
+                      </span>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <fieldset class="field">
+              <legend>Ile dokumentów miesięcznie?</legend>
+              <p class="hint" id="documents-hint">
+                Faktury sprzedaży i kosztowe oraz inne dokumenty do zaksięgowania. Wyciągi z konta
+                nie wliczają się.
+              </p>
+              <div class="choices choices--pair" aria-describedby="documents-hint">
+                {documentBuckets.map(bucket => (
+                  <label class="choice">
+                    <input
+                      type="radio"
+                      name="documents"
+                      value={bucket.id}
+                      checked={bucket.id === defaults.documents}
+                    />
+                    <span>{bucket.label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <div class="field" data-field="employees">
+              <label for="employees">Ilu masz pracowników?</label>
+              <p class="hint" id="employees-hint">
+                Na umowie o pracę lub zleceniu. Wpisz 0, jeśli prowadzisz firmę sam.
+              </p>
+              <div class="stepper">
+                <button
+                  class="stepper__button stepper__button--minus"
+                  type="button"
+                  data-step="-1"
+                  aria-label="Mniej pracowników"></button>
+                <input
+                  class="input"
+                  id="employees"
+                  name="employees"
+                  type="number"
+                  inputmode="numeric"
+                  min="0"
+                  max={maxEmployeesField}
+                  value={defaults.employees}
+                  aria-describedby="employees-hint"
+                />
+                <button
+                  class="stepper__button stepper__button--plus"
+                  type="button"
+                  data-step="1"
+                  aria-label="Więcej pracowników"></button>
+              </div>
+            </div>
+            <fieldset class="field">
+              <legend>Jaki masz status VAT?</legend>
+              <div class="choices choices--triple">
+                {vatChoices.map(choice => (
+                  <label class="choice">
+                    <input
+                      type="radio"
+                      name="vat"
+                      value={choice.value}
+                      checked={choice.value === defaults.vat}
+                    />
+                    <span>{choice.label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <p class="quote-bar on-navy" aria-hidden="true">
+              <span data-bar-label>{barLabel}</span>
+              <b data-bar-value>{barValue}</b>
+            </p>
+          </div>
+
+          <section class="sheet quote-sheet" data-quote-sheet aria-labelledby="quote-sheet-title">
+            <h3 id="quote-sheet-title">Twoja wycena</h3>
+            <div data-quote-priced>
+              <p class="quote-sheet__package">
+                Pakiet{' '}
+                <b data-quote-package>
+                  {initialQuote.kind === 'priced' ? initialQuote.packageName : ''}
+                </b>
+              </p>
+              <dl class="quote-sheet__lines" data-quote-lines>
+                {initialQuote.kind === 'priced' &&
+                  initialQuote.lines.map(line => (
+                    <>
+                      <dt>{line.label}</dt>
+                      <dd>{formatZloty(line.grosze)}</dd>
+                    </>
+                  ))}
+              </dl>
+              <p class="quote-sheet__net">
+                <b data-quote-net>
+                  {initialQuote.kind === 'priced' ? formatZloty(initialQuote.netGrosze) : ''}
+                </b>
+                <span>netto miesięcznie</span>
+              </p>
+              <p class="quote-sheet__gross" data-quote-gross>
+                {initialQuote.kind === 'priced'
+                  ? `${formatZloty(initialQuote.grossGrosze)} brutto z 23% VAT`
+                  : ''}
+              </p>
+              <ul class="plain" data-quote-assumptions>
+                {initialQuote.kind === 'priced' &&
+                  initialQuote.assumptions.map(text => <li>{text}</li>)}
+              </ul>
+            </div>
+            <p class="quote-sheet__individual" data-quote-individual hidden></p>
+            <p class="quote-sheet__fine">{fineText}</p>
+          </section>
+
+          <div class="quote__contact">
+            <h3>Gdzie mamy odpowiedzieć?</h3>
+            <div class="quote__fields">
+              <div class="field" data-field="name">
+                <label for="name">Imię i nazwisko</label>
+                <input
+                  class="input"
+                  id="name"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  aria-describedby="name-error"
+                />
+                <p class="field-error" id="name-error"></p>
+              </div>
+              <div class="field" data-field="email">
+                <label for="email">Adres e-mail</label>
+                <input
+                  class="input"
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  aria-describedby="email-error"
+                />
+                <p class="field-error" id="email-error"></p>
+              </div>
+              <div class="field" data-field="phone">
+                <label for="phone">Telefon</label>
+                <input
+                  class="input"
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  aria-describedby="phone-hint phone-error"
+                />
+                <p class="hint" id="phone-hint">
+                  Wymagany, jeśli wolisz rozmowę.
+                </p>
+                <p class="field-error" id="phone-error"></p>
+              </div>
+              <div class="field" data-field="nip">
+                <label for="nip">NIP firmy (nieobowiązkowo)</label>
+                <input
+                  class="input"
+                  id="nip"
+                  name="nip"
+                  type="text"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  aria-describedby="nip-hint nip-error"
+                />
+                <p class="hint" id="nip-hint">
+                  Przyspieszy sprawdzenie firmy.
+                </p>
+                <p class="field-error" id="nip-error"></p>
+              </div>
+            </div>
+            <fieldset class="field">
+              <legend>Jak odpowiedzieć?</legend>
+              <div class="segmented">
+                <label>
+                  <input type="radio" name="contactMethod" value="email" checked />
+                  <span>E-mailem</span>
+                </label>
+                <label>
+                  <input type="radio" name="contactMethod" value="phone" />
+                  <span>Telefonem</span>
+                </label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="note">Coś, co powinniśmy wiedzieć (nieobowiązkowo)</label>
+              <textarea class="input" id="note" name="note" rows="4"></textarea>
+            </div>
+            <div class="field" data-field="consent">
+              <label class="check">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  aria-describedby="consent-error"
+                />
+                <span>Zgadzam się, żebyście odpowiedzieli na tę wycenę na podane dane.</span>
+              </label>
+              <p class="field-error" id="consent-error"></p>
+            </div>
+            <p class="hint">
+              Dane służą tylko do odpowiedzi na wycenę i nie trafiają do żadnych list mailingowych.
+            </p>
+            <button class="button" type="submit">
+              Poproś o wycenę
+            </button>
+          </div>
+        </div>
+      </form>
+      <p class="sr-only" aria-live="polite" data-quote-announce></p>
+
+      <section
+        class="sheet success"
+        data-success
+        tabindex="-1"
+        aria-labelledby="success-title"
+        hidden>
+        <h3 id="success-title">
+          Dziękujemy, <span data-success-name></span>
+        </h3>
+        <p class="success__sample">To strona przykładowa, więc nic nie zostało wysłane.</p>
+        <p>W prawdziwej wersji dostalibyśmy tę wycenę:</p>
+        <p class="success__quote" data-success-quote></p>
+        <button class="button button--plain" type="button" data-success-reset>
+          Wypełnij jeszcze raz
+        </button>
+      </section>
+    </div>
+  </section>
+
+  <section class="section contact-section" aria-labelledby="biuro-title">
+    <div class="wrap split">
+      <div class="section-head">
+        <h2 id="biuro-title">Biuro we Wrocławiu</h2>
+        <address class="office">
+          <p>
+            <b>{site.street}</b>
+            <br />
+            {site.postalCity}
+          </p>
+          <p>
+            <a href={site.phoneHref}>{site.phone}</a>
+            <br />
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </p>
+        </address>
+        <table class="ledger hours">
+          <caption class="sr-only">Godziny pracy biura</caption>
+          <tbody>
+            {hours.map(row => (
+              <tr>
+                <th scope="row">{row.days}</th>
+                <td>{row.time}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="hint">
+          Wejście od ulicy, domofon 3, trzecie piętro. Na spotkanie umów się wcześniej, bo w
+          godzinach pracy odbieramy telefony.
+        </p>
+      </div>
+      <figure class="sheet plan-sheet">
+        <BuildingPlan />
+        <figcaption>Schemat dojścia bez skali. Biuro jest w budynku 45.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section next-section" aria-labelledby="dalej-title">
+    <div class="wrap">
+      <div class="section-head section-head--spaced">
+        <h2 id="dalej-title">Co dzieje się po wycenie</h2>
+      </div>
+      <ol class="next">
+        {nextSteps.map(step => (
+          <li>
+            <span class="next__when">{step.when}</span>
+            <span class="next__text">{step.text}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { setupQuoteForm } from '../../sites/rubryka/scripts/quote-form';
+
+  setupQuoteForm();
+</script>
+
+<style>
+  .quote-section {
+    padding-bottom: clamp(48px, 8cqi, 88px);
+  }
+
+  .no-script-note {
+    padding: 12px 16px;
+    border: 2px dashed var(--navy);
+    background: var(--white);
+  }
+
+  :global(.js) .no-script-note {
+    display: none;
+  }
+
+  .quote {
+    display: none;
+  }
+
+  :global(.js) .quote {
+    display: block;
+  }
+
+  .quote__grid {
+    display: grid;
+    gap: 40px;
+  }
+
+  .quote__questions {
+    display: grid;
+    gap: 32px;
+  }
+
+  .quote .field > legend,
+  .quote .field > label:not(.check) {
+    font-size: 1.125rem;
+  }
+
+  .choices--pair,
+  .choices--triple {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .choice__text {
+    display: grid;
+    gap: 2px;
+  }
+
+  .stepper {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 120px) 52px;
+  }
+
+  .stepper .input {
+    border-inline: 0;
+    text-align: center;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+
+  .stepper .input::-webkit-outer-spin-button,
+  .stepper .input::-webkit-inner-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+
+  .stepper__button {
+    position: relative;
+    min-height: 52px;
+    border: 2px solid var(--navy);
+    background: var(--white);
+    cursor: pointer;
+  }
+
+  .stepper__button:hover {
+    background: var(--orange);
+  }
+
+  .stepper__button::before,
+  .stepper__button--plus::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    background: var(--navy);
+  }
+
+  .stepper__button::before {
+    width: 16px;
+    height: 3px;
+  }
+
+  .stepper__button--plus::after {
+    width: 3px;
+    height: 16px;
+  }
+
+  .quote-bar {
+    position: sticky;
+    z-index: 4;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 -16px;
+    padding: 12px 16px;
+    border-top: 3px solid var(--orange);
+    font-weight: 700;
+  }
+
+  .quote-bar b {
+    font: 800 1.375rem/1 var(--font-display);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .quote-sheet {
+    padding: 22px;
+  }
+
+  .quote-sheet h3 {
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--navy);
+    font-size: 1.5rem;
+  }
+
+  .quote-sheet__package {
+    margin: 0 0 12px;
+    font-size: 1.125rem;
+  }
+
+  .quote-sheet__package b {
+    padding: 2px 8px;
+    background: var(--orange);
+  }
+
+  .quote-sheet__lines {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px 16px;
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .quote-sheet__lines dd {
+    margin: 0;
+    font-weight: 700;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .quote-sheet__net {
+    display: grid;
+    gap: 2px;
+    margin: 16px 0 0;
+    padding-top: 14px;
+    border-top: 1px dashed var(--dash);
+  }
+
+  .quote-sheet__net b {
+    font: 800 2.5rem/1 var(--font-display);
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .quote-sheet__gross {
+    margin: 6px 0 14px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .quote-sheet__individual {
+    margin: 0 0 14px;
+    font-weight: 700;
+  }
+
+  .quote-sheet__fine {
+    margin: 14px 0 0;
+    padding-top: 12px;
+    border-top: 1px dashed var(--dash);
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .quote-sheet .plain {
+    gap: 8px;
+    font-size: 0.9375rem;
+  }
+
+  .quote__contact {
+    display: grid;
+    gap: 22px;
+    align-content: start;
+  }
+
+  .quote__contact h3 {
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--navy);
+    font-size: 1.5rem;
+  }
+
+  .quote__fields {
+    display: grid;
+    gap: 22px;
+  }
+
+  .quote__contact .hint {
+    margin: 0;
+  }
+
+  .quote__contact .button {
+    justify-self: start;
+  }
+
+  .error-summary {
+    margin-bottom: 32px;
+    padding: 18px 20px;
+    border: 2px solid var(--orange-ink);
+    border-left-width: 10px;
+    background: var(--white);
+  }
+
+  .error-summary h3 {
+    margin-bottom: 8px;
+    color: var(--orange-ink);
+  }
+
+  .error-summary ul {
+    display: grid;
+    gap: 6px;
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  @container page (min-width: 640px) {
+    .choices--pair {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .choices--triple {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .quote__fields {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @container page (min-width: 1000px) {
+    .quote__grid {
+      grid-template-columns: minmax(0, 1fr) 380px;
+      grid-template-areas:
+        'questions sheet'
+        'contact sheet';
+      gap: 56px 64px;
+      align-items: start;
+    }
+
+    .quote__questions {
+      grid-area: questions;
+    }
+
+    .quote-bar {
+      display: none;
+    }
+
+    .quote-sheet {
+      grid-area: sheet;
+      position: sticky;
+      top: 24px;
+    }
+
+    .quote__contact {
+      grid-area: contact;
+    }
+  }
+
+  .success {
+    padding: 28px;
+    max-width: 640px;
+  }
+
+  .success[hidden] {
+    display: none;
+  }
+
+  .success h3 {
+    font-size: 1.75rem;
+  }
+
+  .success__sample {
+    margin: 14px 0;
+    padding: 12px 16px;
+    border-left: 8px solid var(--orange);
+    background: var(--paper);
+    font-weight: 700;
+  }
+
+  .success__quote {
+    font-weight: 700;
+  }
+
+  .office {
+    display: grid;
+    gap: 4px;
+  }
+
+  .office p {
+    margin: 0 0 12px;
+  }
+
+  .hours {
+    max-width: 420px;
+    margin: 4px 0 12px;
+  }
+
+  .hours th,
+  .hours td {
+    padding-inline: 0;
+  }
+
+  .quote .check {
+    font-weight: 400;
+  }
+
+  .plan-sheet {
+    margin: 0;
+    padding: 12px 12px 0;
+  }
+
+  .plan-sheet figcaption {
+    margin-top: 8px;
+    padding: 12px 4px 16px;
+    border-top: 1px dashed var(--dash);
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .next {
+    display: grid;
+    gap: 0;
+    max-width: 880px;
+    margin: 0;
+    padding: 0 0 0 4px;
+    list-style: none;
+    border-left: 2px solid var(--navy);
+  }
+
+  .next li {
+    position: relative;
+    display: grid;
+    gap: 4px;
+    padding: 0 0 36px 28px;
+  }
+
+  .next li:last-child {
+    padding-bottom: 0;
+  }
+
+  .next li::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -12px;
+    width: 18px;
+    height: 18px;
+    background: var(--orange);
+    border: 2px solid var(--navy);
+  }
+
+  .next__when {
+    font: 800 1.375rem/1.2 var(--font-display);
+  }
+
+  .next__text {
+    font-size: 1.125rem;
+  }
+
+  @container page (min-width: 700px) {
+    .next li {
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 24px;
+    }
+  }
+</style>

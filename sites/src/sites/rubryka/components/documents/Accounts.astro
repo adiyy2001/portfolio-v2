@@ -1,0 +1,70 @@
+---
+interface Account {
+  title: string;
+  debit: string[];
+  credit: string[];
+  balance: string;
+}
+
+const accounts: Account[] = [
+  {
+    title: '130 Rachunek bankowy',
+    debit: ['1 230,00', '4 920,00'],
+    credit: ['2 460,00', '800,00'],
+    balance: 'Sd 2 890,00',
+  },
+  {
+    title: '201 Odbiorcy',
+    debit: ['6 150,00'],
+    credit: ['1 230,00', '4 920,00'],
+    balance: 'Sd 0,00',
+  },
+];
+
+const left = (index: number) => 16 + index * 172;
+---
+
+<svg class="doc" viewBox="0 0 360 290" aria-hidden="true" focusable="false">
+  <text class="doc-title" x="16" y="30">
+    Konta księgowe
+  </text>
+  <text class="doc-faint doc-small" x="16" y="48">
+    Wn po lewej, Ma po prawej
+  </text>
+  {accounts.map((account, index) => (
+    <g>
+      <text class="doc-bold" x={left(index)} y="80">
+        {account.title}
+      </text>
+      <line class="doc-line" x1={left(index)} y1="90" x2={left(index) + 156} y2="90"></line>
+      <line class="doc-line" x1={left(index) + 78} y1="90" x2={left(index) + 78} y2="196"></line>
+      <text class="doc-faint doc-small" x={left(index) + 4} y="106">
+        Wn
+      </text>
+      <text class="doc-faint doc-small" x={left(index) + 82} y="106">
+        Ma
+      </text>
+      {account.debit.map((amount, row) => (
+        <text x={left(index) + 70} y={128 + row * 24} text-anchor="end">
+          {amount}
+        </text>
+      ))}
+      {account.credit.map((amount, row) => (
+        <text x={left(index) + 152} y={128 + row * 24} text-anchor="end">
+          {amount}
+        </text>
+      ))}
+      <line class="doc-line" x1={left(index)} y1="196" x2={left(index) + 156} y2="196"></line>
+      <text class="doc-bold" x={left(index) + 152} y="216" text-anchor="end">
+        {account.balance}
+      </text>
+      <line class="doc-total" x1={left(index) + 70} y1="223" x2={left(index) + 152} y2="223"></line>
+      <line class="doc-total" x1={left(index) + 70} y1="228" x2={left(index) + 152} y2="228"></line>
+    </g>
+  ))}
+  <rect class="doc-orange" x="16" y="250" width="18" height="18"></rect>
+  <path d="M20 259.5l4 4 7-8" fill="none" stroke="#0f1f3d" stroke-width="2.5"></path>
+  <text x="44" y="264">
+    Wn = Ma, księgi się zgadzają
+  </text>
+</svg>

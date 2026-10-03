@@ -1,0 +1,330 @@
+.button {
+  --button-bg: var(--orange);
+  --button-fg: var(--navy);
+  --button-edge: var(--navy);
+  --button-shadow: var(--navy);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 24px;
+  border: 2px solid var(--button-edge);
+  background: var(--button-bg);
+  color: var(--button-fg);
+  box-shadow: var(--key-shadow) var(--key-shadow) 0 var(--button-shadow);
+  font: 700 1.0625rem/1.1 var(--font);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 90ms steps(2),
+    box-shadow 90ms steps(2);
+}
+
+.button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--button-shadow);
+}
+
+.button:active {
+  transform: translate(var(--key-shadow), var(--key-shadow));
+  box-shadow: 0 0 0 var(--button-shadow);
+}
+
+.button--plain {
+  --button-bg: var(--white);
+}
+
+.on-navy .button {
+  --button-edge: var(--orange);
+  --button-shadow: var(--paper);
+}
+
+.on-navy .button--plain {
+  --button-bg: var(--navy);
+  --button-fg: var(--paper);
+  --button-edge: var(--paper);
+  --button-shadow: var(--orange);
+}
+
+.on-orange .button {
+  --button-bg: var(--navy);
+  --button-fg: var(--paper);
+  --button-edge: var(--navy);
+  --button-shadow: var(--white);
+}
+
+.on-orange .button--plain {
+  --button-bg: var(--white);
+  --button-fg: var(--navy);
+  --button-shadow: var(--navy);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 20px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.field > label,
+.field > legend {
+  padding: 0;
+  font-weight: 700;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.input {
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 2px solid var(--navy);
+  border-radius: 0;
+  background: var(--white);
+  color: var(--navy);
+  font: 400 1.0625rem/1.3 var(--font);
+  appearance: none;
+}
+
+textarea.input {
+  min-height: 132px;
+  resize: vertical;
+}
+
+select.input {
+  padding-right: 44px;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--navy) 50%) calc(100% - 22px) 50% / 8px 8px
+      no-repeat,
+    linear-gradient(-45deg, transparent 50%, var(--navy) 50%) calc(100% - 14px) 50% / 8px 8px
+      no-repeat,
+    var(--white);
+}
+
+.input:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 2px;
+  box-shadow: var(--key-shadow) var(--key-shadow) 0 var(--orange);
+}
+
+.field-error {
+  display: none;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--orange-ink);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.field-error::before {
+  content: '!';
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  background: var(--orange-ink);
+  color: var(--white);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.field[data-invalid='true'] .field-error {
+  display: flex;
+}
+
+.field[data-invalid='true'] .input,
+.field[data-invalid='true'] .choice > span {
+  border-color: var(--orange-ink);
+}
+
+.field[data-invalid='true'] .input {
+  box-shadow: inset 6px 0 0 var(--orange-ink);
+}
+
+.choices {
+  display: grid;
+  gap: 10px;
+}
+
+.choice {
+  position: relative;
+  display: block;
+}
+
+.choice input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.choice > span {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 2px solid var(--navy);
+  background: var(--white);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.choice > span::before {
+  content: '';
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--navy);
+  background: var(--white);
+}
+
+.choice input:checked + span {
+  background: var(--navy);
+  color: var(--paper);
+}
+
+.choice input:checked + span::before {
+  border-color: var(--orange);
+  background: var(--tick) center / 100% no-repeat;
+}
+
+.choice input:focus-visible + span {
+  outline: 3px solid var(--navy);
+  outline-offset: 3px;
+}
+
+.on-navy .choice input:focus-visible + span {
+  outline-color: var(--orange);
+}
+
+.choice small {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.check {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.check input {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  border: 2px solid var(--navy);
+  background: var(--white);
+  appearance: none;
+  cursor: pointer;
+}
+
+.check input:checked {
+  background: var(--tick) center / 100% no-repeat;
+}
+
+.check input:focus-visible {
+  outline: 3px solid var(--navy);
+  outline-offset: 2px;
+}
+
+.segmented {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  margin: 0;
+  padding: 0;
+  border: 2px solid var(--navy);
+  background: var(--white);
+}
+
+.segmented label {
+  position: relative;
+  display: block;
+}
+
+.segmented label + label {
+  border-left: 2px solid var(--navy);
+}
+
+.segmented input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.segmented span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 6px 10px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.segmented input:checked + span {
+  background: var(--navy);
+  color: var(--paper);
+}
+
+.segmented input:focus-visible + span {
+  outline: 3px solid var(--navy);
+  outline-offset: -6px;
+}
+
+.segmented input:checked:focus-visible + span {
+  outline-color: var(--orange);
+}
+
+.field:disabled .choices {
+  opacity: 0.5;
+}
+
+.field:disabled .choice input {
+  cursor: default;
+}
+
+.field:disabled .choice input:checked + span {
+  background: var(--white);
+  color: inherit;
+}
+
+.field:disabled .choice input:checked + span::before {
+  border-color: var(--navy);
+  background: var(--white);
+}

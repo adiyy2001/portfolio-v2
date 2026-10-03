@@ -1,0 +1,66 @@
+---
+interface Part {
+  label: string;
+  amount: string;
+  value: number;
+  tone: 'navy' | 'orange' | 'paper';
+}
+
+const parts: Part[] = [
+  { label: 'Składki ZUS pracownika', amount: '822,60', value: 822.6, tone: 'navy' },
+  { label: 'Składka zdrowotna', amount: '465,97', value: 465.97, tone: 'navy' },
+  { label: 'Zaliczka na PIT', amount: '291,00', value: 291, tone: 'navy' },
+  { label: 'Do wypłaty', amount: '4 420,43', value: 4420.43, tone: 'orange' },
+];
+
+const total = 6000;
+const barWidth = 328;
+const offsets = parts.reduce<number[]>((all, part, index) => {
+  const previous = index === 0 ? 0 : all[index - 1] + (parts[index - 1].value / total) * barWidth;
+  return [...all, previous];
+}, []);
+---
+
+<svg class="doc" viewBox="0 0 360 290" aria-hidden="true" focusable="false">
+  <text class="doc-title" x="16" y="30">
+    Lista płac, wrzesień 2026
+  </text>
+  <text class="doc-faint doc-small" x="16" y="48">
+    umowa o pracę, kwoty w złotych
+  </text>
+  <text class="doc-bold" x="16" y="82">
+    Wynagrodzenie brutto
+  </text>
+  <text class="doc-bold" x="344" y="82" text-anchor="end">
+    6 000,00
+  </text>
+  <line class="doc-dash" x1="16" y1="92" x2="344" y2="92"></line>
+  {parts.map((part, index) => (
+    <g>
+      <text class:list={[part.tone === 'orange' && 'doc-bold']} x="16" y={116 + index * 28}>
+        {part.label}
+      </text>
+      <text
+        class:list={[part.tone === 'orange' && 'doc-bold']}
+        x="344"
+        y={116 + index * 28}
+        text-anchor="end">
+        {part.amount}
+      </text>
+      <line class="doc-dash" x1="16" y1={126 + index * 28} x2="344" y2={126 + index * 28}></line>
+    </g>
+  ))}
+  <text class="doc-faint doc-small" x="16" y="248">
+    Z czego składa się 6 000 zł brutto
+  </text>
+  <rect class="doc-paper" x="16" y="256" width={barWidth} height="22"></rect>
+  {parts.map((part, index) => (
+    <rect
+      class:list={[part.tone === 'orange' ? 'doc-orange' : 'doc-navy']}
+      x={16 + offsets[index]}
+      y="256"
+      width={Math.max((part.value / total) * barWidth - 2, 3)}
+      height="22"></rect>
+  ))}
+  <rect class="doc-line" x="16" y="256" width={barWidth} height="22"></rect>
+</svg>
