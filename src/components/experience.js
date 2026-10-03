@@ -9,9 +9,9 @@ const copy = {
   years: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
   nowAt: '97.917%',
   bars: [
-    { id: 'brainode', l: '7.292%', w: '25%', lane: 0, full: 'BRAINODE', short: 'BRAINODE' },
+    { id: 'brainode', l: '7.292%', w: '17.708%', lane: 0, full: 'BRAINODE', short: 'BRAINODE' },
     { id: 'cobiro', l: '38.542%', w: '7.292%', lane: 0, full: 'Cobiro', short: 'Cobiro' },
-    { id: 'roche', l: '33.333%', w: '5.208%', lane: 1, full: 'Roche', short: 'Roche' },
+    { id: 'roche', l: '25%', w: '13.542%', lane: 1, full: 'Roche', short: 'Roche' },
     { id: 'ttms', l: '45.833%', w: '12.5%', lane: 1, full: 'TTMS', short: 'TTMS' },
     { id: 'mh', l: '58.333%', w: '16.667%', lane: 0, full: 'Media Hunters', short: 'MH' },
     { id: 'pse', l: '75%', w: '22.917%', lane: 1, full: 'PSE Innowacje', short: 'PSE' },
@@ -81,11 +81,11 @@ const copy = {
         win: 'o 40% mniej zduplikowanego kodu po przejściu na monorepo Nx',
       },
       roche: {
-        when: 'od września 2021 do stycznia 2022, kontrakt, zdalnie',
+        when: 'od stycznia 2021 do stycznia 2022, kontrakt, zdalnie',
         desc: 'Wewnętrzne aplikacje, w których badacze analizują i walidują dane kliniczne. Środowisko regulowane, mała tolerancja na błędy. Przyspieszyłem je lazy loadingiem tras i oszczędniejszym użyciem API.',
       },
       brainode: {
-        when: 'od sierpnia 2019 do lipca 2021, kontrakt, hybrydowo',
+        when: 'od sierpnia 2019 do grudnia 2020, kontrakt, hybrydowo',
         desc: 'Sklep z produktami pokazywanymi w 3D na żywo, w Angularze i Three.js. Współtworzyłem własną warstwę renderowania w WebGL. Zrobiłem wymianę walut w czasie rzeczywistym na WebSocketach, odporną na niestabilną sieć.',
       },
     },
@@ -118,11 +118,11 @@ const copy = {
         win: '40% less duplicated code after the move to an Nx monorepo',
       },
       roche: {
-        when: 'September 2021 to January 2022, contract, remote',
+        when: 'January 2021 to January 2022, contract, remote',
         desc: 'Internal apps where researchers analyze and validate clinical data. A regulated environment with little tolerance for errors. I made them faster with route-based lazy loading and leaner API usage.',
       },
       brainode: {
-        when: 'August 2019 to July 2021, contract, hybrid',
+        when: 'August 2019 to December 2020, contract, hybrid',
         desc: 'A high-end shop with real-time 3D product views, in Angular and Three.js. I helped build a custom WebGL rendering layer. I implemented real-time currency exchange over WebSockets that holds up on unstable networks.',
       },
     },
