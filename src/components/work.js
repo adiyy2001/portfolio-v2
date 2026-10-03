@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Link } from 'gatsby';
+import { Link, withPrefix } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
 import Reveal from './reveal';
 import Shot from './shot';
@@ -15,6 +15,7 @@ const copy = {
   swatches: [
     {
       id: 'law',
+      slug: 'rozwaga',
       name: 'Rozwaga',
       bg: '#121212',
       fg: '#ffffff',
@@ -22,6 +23,7 @@ const copy = {
     },
     {
       id: 'acc',
+      slug: 'rubryka',
       name: 'Rubryka',
       bg: '#f3f6fb',
       fg: '#0f1f3d',
@@ -29,6 +31,7 @@ const copy = {
     },
     {
       id: 'den',
+      slug: 'szkliwo',
       name: 'Szkliwo',
       bg: '#ff6f5b',
       fg: '#1b1f2a',
@@ -36,6 +39,7 @@ const copy = {
     },
     {
       id: 'psy',
+      slug: 'tafla',
       name: 'Tafla',
       bg: '#dfe8e1',
       fg: '#1f2d26',
@@ -43,6 +47,7 @@ const copy = {
     },
     {
       id: 'est',
+      slug: 'przedza',
       name: 'Przędza',
       bg: '#b4462e',
       fg: '#ffffff',
@@ -50,10 +55,37 @@ const copy = {
     },
     {
       id: 'bis',
+      slug: 'kminek',
       name: 'Kminek',
+      en: true,
       bg: '#ffcf3a',
       fg: '#2b1408',
       chips: ['#2b1408', '#ffcf3a', '#d93a1f'],
+    },
+    {
+      id: 'shop',
+      slug: 'trzask',
+      name: 'Trzask',
+      bg: '#d3f33a',
+      fg: '#0e110f',
+      chips: ['#0e110f', '#d3f33a', '#ffa21f'],
+    },
+    {
+      id: 'flat',
+      slug: 'prog',
+      name: 'Próg',
+      bg: '#4b30e8',
+      fg: '#ffffff',
+      chips: ['#17151f', '#ffffff', '#4b30e8'],
+    },
+    {
+      id: 'stay',
+      slug: 'przeslo',
+      name: 'Przęsło',
+      en: true,
+      bg: '#1c1130',
+      fg: '#f4c6dc',
+      chips: ['#1c1130', '#ffffff', '#b0245c'],
     },
   ],
   pl: {
@@ -64,10 +96,10 @@ const copy = {
     go: 'Zobacz projekt',
     swTitle: 'Wzornik.',
     swLead:
-      'Sześć przykładowych stron dla branż, które najczęściej szukają strony. Każda skrojona inaczej.',
+      'Dziewięć przykładowych stron dla zmyślonych firm z różnych branż. Każda skrojona inaczej i każda działa.',
     swNote: 'firmy zmyślone, projekty moje',
-    concept: 'Projekt koncepcyjny',
-    status: 'Projekt koncepcyjny. Wersja na żywo w przygotowaniu.',
+    status:
+      'Firmy są zmyślone, strony działają naprawdę. Koszyk, rezerwacja i formularze niczego nie wysyłają.',
     more: 'Otwórz wzornik w wersji dla klienta',
     trades: [
       'kancelaria prawna',
@@ -76,6 +108,9 @@ const copy = {
       'gabinet psychoterapii',
       'inwestycja mieszkaniowa',
       'bistro',
+      'palarnia kawy',
+      'biuro nieruchomości',
+      'hotel',
     ],
     kinds: [
       'strona firmowa',
@@ -84,6 +119,9 @@ const copy = {
       'wizytówka',
       'strona sprzedażowa',
       'strona z kartą, PL i EN',
+      'sklep internetowy',
+      'wyszukiwarka ofert',
+      'strona z rezerwacją, PL i EN',
     ],
   },
   en: {
@@ -94,10 +132,11 @@ const copy = {
     go: 'See the project',
     swTitle: 'Swatch book.',
     swLead:
-      'Six sample websites for the trades that most often need one. Each one cut differently.',
-    swNote: 'made-up firms, my designs',
-    concept: 'Concept design',
-    status: 'Concept design. Live version in progress.',
+      'Nine sample websites for made-up businesses in different trades. Each one cut differently, and each one works.',
+    swNote: 'made-up businesses, my designs',
+    status:
+      'The businesses are made up, the websites really work. The cart, the booking and the forms send nothing.',
+    polish: ', in Polish',
     more: 'Open the swatch book in the client edition',
     trades: [
       'law firm',
@@ -106,6 +145,9 @@ const copy = {
       'psychotherapy practice',
       'residential development',
       'bistro',
+      'coffee roastery',
+      'estate agency',
+      'hotel',
     ],
     kinds: [
       'company website',
@@ -114,6 +156,9 @@ const copy = {
       'one-page business card',
       'sales website',
       'website with a menu, PL and EN',
+      'online shop',
+      'listings search',
+      'website with booking, PL and EN',
     ],
   },
 };
@@ -170,37 +215,37 @@ export default function Work({ lang }) {
           {tie(t.swNote)}
         </m.p>
         <ul className="work__list" ref={list}>
-          {copy.swatches.map((swatch, i) => (
-            <Reveal as="li" key={swatch.name} className="work__item" style={{ '--i': i }}>
-              <Link
-                className={`ws ws--${swatch.id}`}
-                to={wzornik}
-                style={{
-                  '--sb': swatch.bg,
-                  '--sf': swatch.fg,
-                  '--rot': '-0.25deg',
-                }}>
-                <span className="ws__name">{swatch.name}</span>
-                <span className="ws__what">
-                  <span className="ws__trade">{t.trades[i]}</span>
-                  <span className="sr">, </span>
-                  <span className="ws__kind">{t.kinds[i]}</span>
-                </span>
-                <span className="ws__side">
-                  <span className="ws__chips" aria-hidden="true">
-                    {swatch.chips.map(chip => (
-                      <i key={chip} style={{ '--c': chip }} />
-                    ))}
-                  </span>
-                  <span className="ws__state">
+          {copy.swatches.map((swatch, i) => {
+            const english = lang === 'en' && swatch.en;
+            return (
+              <Reveal as="li" key={swatch.slug} className="work__item" style={{ '--i': i }}>
+                <a
+                  className={`ws ws--${swatch.id}`}
+                  href={withPrefix(`/wzornik/${swatch.slug}/${english ? 'en/' : ''}`)}
+                  style={{
+                    '--sb': swatch.bg,
+                    '--sf': swatch.fg,
+                    '--rot': '-0.25deg',
+                  }}>
+                  <span className="ws__name">{swatch.name}</span>
+                  <span className="ws__what">
+                    <span className="ws__trade">{t.trades[i]}</span>
                     <span className="sr">, </span>
-                    {tie(t.concept)}
+                    <span className="ws__kind">{t.kinds[i]}</span>
+                    {lang === 'en' && !swatch.en && <span className="sr">{t.polish}</span>}
                   </span>
-                  {arrow}
-                </span>
-              </Link>
-            </Reveal>
-          ))}
+                  <span className="ws__side">
+                    <span className="ws__chips" aria-hidden="true">
+                      {swatch.chips.map(chip => (
+                        <i key={chip} style={{ '--c': chip }} />
+                      ))}
+                    </span>
+                    {arrow}
+                  </span>
+                </a>
+              </Reveal>
+            );
+          })}
         </ul>
         <p className="work__status">{tie(t.status)}</p>
       </section>

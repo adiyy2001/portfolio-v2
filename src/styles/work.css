@@ -392,6 +392,23 @@ main[data-glide] + .mini {
   --sn: 400 clamp(2rem, 3.6vw, 3.4rem) / 0.95 var(--wz-gloock);
 }
 
+.ws--shop {
+  --sn: 800 clamp(2.3rem, 4vw, 3.8rem) / 0.9 var(--wz-shoulders);
+}
+
+.ws--shop .ws__name {
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.ws--flat {
+  --sn: 800 clamp(2rem, 3.6vw, 3.4rem) / 0.95 var(--wz-archivo);
+}
+
+.ws--stay {
+  --sn: 800 clamp(1.8rem, 3.2vw, 3rem) / 0.95 var(--wz-besley);
+}
+
 .ws__what {
   position: relative;
   display: flex;
@@ -426,13 +443,6 @@ main[data-glide] + .mini {
 
 .ws:hover .ws__side svg {
   transform: translateX(6px);
-}
-
-.ws__state {
-  padding: 7px 10px;
-  border: 1px dashed currentColor;
-  font: 600 0.8125rem/1 var(--text);
-  white-space: nowrap;
 }
 
 .ws__chips {

@@ -1,4 +1,5 @@
 import React, { useRef, useState, useSyncExternalStore } from 'react';
+import { withPrefix } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
 import { tie } from '../i18n';
 import { instant } from '../motion';
@@ -8,30 +9,58 @@ import Acc from './wzornik/acc';
 import Bis from './wzornik/bis';
 import Den from './wzornik/den';
 import Est from './wzornik/est';
+import Flat from './wzornik/flat';
 import useFaces from './wzornik/fonts';
 import Law from './wzornik/law';
 import Psy from './wzornik/psy';
+import Shop from './wzornik/shop';
+import Stay from './wzornik/stay';
 
-const mocks = { law: Law, acc: Acc, den: Den, psy: Psy, est: Est, bis: Bis };
+const mocks = {
+  law: Law,
+  acc: Acc,
+  den: Den,
+  psy: Psy,
+  est: Est,
+  bis: Bis,
+  shop: Shop,
+  flat: Flat,
+  stay: Stay,
+};
 
 const copy = {
   sites: [
-    { id: 'law', name: 'Rozwaga', chips: ['#121212', '#ffffff', '#b3122a'] },
-    { id: 'acc', name: 'Rubryka', chips: ['#0f1f3d', '#f3f6fb', '#ff5b24'] },
-    { id: 'den', name: 'Szkliwo', chips: ['#1b1f2a', '#ffffff', '#ff6f5b'] },
-    { id: 'psy', name: 'Tafla', chips: ['#1f2d26', '#dfe8e1', '#2f5d50'] },
-    { id: 'est', name: 'Przędza', chips: ['#161616', '#d7d8d3', '#b4462e'] },
-    { id: 'bis', name: 'Kminek', chips: ['#2b1408', '#ffcf3a', '#d93a1f'] },
+    { id: 'law', slug: 'rozwaga', name: 'Rozwaga', chips: ['#121212', '#ffffff', '#b3122a'] },
+    { id: 'acc', slug: 'rubryka', name: 'Rubryka', chips: ['#0f1f3d', '#f3f6fb', '#ff5b24'] },
+    { id: 'den', slug: 'szkliwo', name: 'Szkliwo', chips: ['#1b1f2a', '#ffffff', '#ff6f5b'] },
+    { id: 'psy', slug: 'tafla', name: 'Tafla', chips: ['#1f2d26', '#dfe8e1', '#2f5d50'] },
+    { id: 'est', slug: 'przedza', name: 'Przędza', chips: ['#161616', '#d7d8d3', '#b4462e'] },
+    {
+      id: 'bis',
+      slug: 'kminek',
+      name: 'Kminek',
+      en: true,
+      chips: ['#2b1408', '#ffcf3a', '#d93a1f'],
+    },
+    { id: 'shop', slug: 'trzask', name: 'Trzask', chips: ['#0e110f', '#d3f33a', '#ffa21f'] },
+    { id: 'flat', slug: 'prog', name: 'Próg', chips: ['#17151f', '#ffffff', '#4b30e8'] },
+    {
+      id: 'stay',
+      slug: 'przeslo',
+      name: 'Przęsło',
+      en: true,
+      chips: ['#1c1130', '#ffffff', '#b0245c'],
+    },
   ],
   pl: {
     id: 'wzornik',
     title: 'Wzornik.',
-    lead: 'Sześć przykładowych stron dla branż, które najczęściej szukają strony. Każda skrojona inaczej.',
+    lead: 'Dziewięć przykładowych stron dla zmyślonych firm z różnych branż. Każda skrojona inaczej i każda działa.',
     note: 'firmy zmyślone, projekty moje',
     who: 'Dla kogo',
     inside: 'W środku',
     cut: 'Krój',
-    state: 'Projekt koncepcyjny. Wersja na żywo w przygotowaniu.',
+    open: 'Otwórz stronę',
     law: {
       trade: 'kancelaria prawna',
       kind: 'strona firmowa',
@@ -81,16 +110,44 @@ const copy = {
       cut: 'Gloock, musztarda, pomidor i biała karta.',
       alt: 'Projekt strony bistro Kminek: nagłówek „Kuchnia polska, podana od nowa.” i karta dnia z pierogami, żurkiem i kopytkami.',
     },
+    shop: {
+      trade: 'palarnia kawy',
+      kind: 'sklep internetowy',
+      who: 'Mała palarnia, która pali dwa razy w tygodniu i chce sprzedawać ziarno bez pośredników.',
+      inside:
+        'Sklep z filtrami, karta każdej kawy z krzywą palenia, koszyk, kasa na niby i subskrypcja.',
+      cut: 'Big Shoulders Display, prawie czarny, limonka i bursztyn.',
+      alt: 'Projekt strony palarni Trzask: nagłówek „Palimy we wtorki i czwartki.” i etykiety kaw z krzywą palenia.',
+    },
+    flat: {
+      trade: 'biuro nieruchomości',
+      kind: 'wyszukiwarka ofert',
+      who: 'Trzyosobowe biuro, które sprzedaje i wynajmuje mieszkania i chce, żeby kupujący sami przeszukiwali oferty.',
+      inside:
+        'Oferty z filtrami i mapą dzielnic, karta każdej oferty z kalkulatorem kredytu, ulubione, wycena dla sprzedających.',
+      cut: 'Archivo, biel, atrament i fiolet.',
+      alt: 'Projekt strony biura nieruchomości Próg: nagłówek „Które okno będzie twoje?” i rysowane fasady kamienic z zaznaczonym oknem.',
+    },
+    stay: {
+      trade: 'hotel',
+      kind: 'strona z rezerwacją, PL i EN',
+      who: 'Hotel na 24 pokoje w kamienicy nad Odrą, który chce, żeby goście rezerwowali bezpośrednio, a nie przez portale.',
+      inside:
+        'Pokoje, kalendarz z cenami, rezerwacja z dodatkami, moja rezerwacja, pakiety, bon podarunkowy, wersja angielska.',
+      cut: 'Besley, bakłażan, malina i biel.',
+      alt: 'Projekt strony hotelu Przęsło: nagłówek „Dwadzieścia cztery klucze nad Odrą.” i tablica recepcji z kluczami wolnych pokoi.',
+    },
   },
   en: {
     id: 'swatch-book',
     title: 'Swatch book.',
-    lead: 'Six sample websites for the trades that most often need one. Each one cut differently.',
-    note: 'made-up firms, my designs',
+    lead: 'Nine sample websites for made-up businesses in different trades. Each one cut differently, and each one works.',
+    note: 'made-up businesses, my designs',
     who: "Who it's for",
     inside: 'Inside',
     cut: 'Cut',
-    state: 'Concept design. Live version in progress.',
+    open: 'Open the website',
+    openPl: 'Open the website, in Polish',
     law: {
       trade: 'law firm',
       kind: 'company website',
@@ -140,6 +197,33 @@ const copy = {
       cut: 'Gloock, mustard, tomato and a white menu card.',
       alt: 'Design of the Kminek bistro website: the headline “Kuchnia polska, podana od nowa.” (Polish food, served anew) and the menu of the day with pierogi, żurek and kopytka.',
     },
+    shop: {
+      trade: 'coffee roastery',
+      kind: 'online shop',
+      who: 'A small roastery that roasts twice a week and wants to sell its beans without a middleman.',
+      inside:
+        'A shop with filters, a page for every coffee with its roast curve, a cart, a pretend checkout and a subscription.',
+      cut: 'Big Shoulders Display, near black, lime and amber.',
+      alt: 'Design of the Trzask roastery website: the headline “Palimy we wtorki i czwartki.” (We roast on Tuesdays and Thursdays) and coffee labels with roast curves.',
+    },
+    flat: {
+      trade: 'estate agency',
+      kind: 'listings search',
+      who: 'A three-person agency that sells and lets flats and wants buyers to search the offers on their own.',
+      inside:
+        'Listings with filters and a district map, a page for every offer with a mortgage calculator, favourites, a valuation request for owners.',
+      cut: 'Archivo, white, ink and violet.',
+      alt: 'Design of the Próg estate agency website: the headline “Które okno będzie twoje?” (Which window will be yours?) and drawn tenement facades with one window marked.',
+    },
+    stay: {
+      trade: 'hotel',
+      kind: 'website with booking, PL and EN',
+      who: 'A 24-room hotel in a tenement by the Oder that wants guests to book direct instead of through portals.',
+      inside:
+        'Rooms, a calendar with prices, booking with extras, my booking, packages, a gift voucher, an English version.',
+      cut: 'Besley, aubergine, raspberry and white.',
+      alt: 'Design of the Przęsło hotel website: the headline “Dwadzieścia cztery klucze nad Odrą.” (Twenty-four keys by the Oder) and the reception key board with the keys of free rooms.',
+    },
   },
 };
 
@@ -169,7 +253,7 @@ export default function Wzornik({ lang }) {
         <p className="sec-head__side">{tie(t.lead)}</p>
       </div>
       <Reveal as="ol" className="book">
-        {copy.sites.map(({ id, name, chips }, i) => {
+        {copy.sites.map(({ id, slug, name, en, chips }, i) => {
           const s = t[id];
           const Mock = mocks[id];
           const isOpen = Boolean(open[id]);
@@ -225,7 +309,14 @@ export default function Wzornik({ lang }) {
                           ))}
                         </p>
                       </div>
-                      <p className="sw__state">{tie(t.state)}</p>
+                      <p className="sw__state">
+                        <a
+                          className="link"
+                          href={withPrefix(`/wzornik/${slug}/${lang === 'en' && en ? 'en/' : ''}`)}>
+                          {lang === 'en' && !en ? t.openPl : t.open}
+                          <span className="sr">, {name}</span>
+                        </a>
+                      </p>
                     </div>
                   </div>
                 </div>

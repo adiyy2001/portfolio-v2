@@ -8,6 +8,9 @@ const faces = [
   ['Newsreader', 'wz-newsreader', '400'],
   ['Unbounded', 'wz-unbounded', '600'],
   ['Gloock', 'wz-gloock', '400'],
+  ['Big Shoulders Display', 'wz-big-shoulders', '800'],
+  ['Archivo', 'wz-archivo', '800'],
+  ['Besley', 'wz-besley', '800'],
 ];
 
 let requested = false;
