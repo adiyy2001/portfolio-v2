@@ -6,7 +6,7 @@ const prettier = require('eslint-config-prettier');
 const globals = require('globals');
 
 module.exports = [
-  { ignores: ['public/', '.cache/', 'rebrand-explorations/', 'static/', 'sites/'] },
+  { ignores: ['public/', '.cache/', '.claude/', 'rebrand-explorations/', 'static/', 'sites/'] },
   js.configs.recommended,
   react.configs.flat.recommended,
   hooks.configs.flat.recommended,
@@ -20,6 +20,9 @@ module.exports = [
       globals: { ...globals.browser, ...globals.node },
     },
     settings: { react: { version: 'detect' } },
-    rules: { 'react/prop-types': 'off' },
+    rules: {
+      'react/prop-types': 'off',
+      'react/no-unknown-property': ['error', { ignore: ['fetchpriority'] }],
+    },
   },
 ];

@@ -1,8 +1,16 @@
 import React, { useContext } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
-import { m } from 'framer-motion';
+import { LazyMotion, m } from 'framer-motion';
 import { Swap, glideTransition } from './layout';
 import { tie } from '../i18n';
+
+let layoutBundle;
+
+const layoutFeatures = () =>
+  import('../features-max').then(
+    module => (layoutBundle = module.default),
+    () => new Promise(() => {}),
+  );
 
 const copy = {
   layoutId: 'tailorcloth-shot',
@@ -27,7 +35,13 @@ export default function Shot({ lang, sizes }) {
         relativePath: { eq: "tailorcloth-order.webp" }
       ) {
         childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED, width: 880, quality: 82, placeholder: NONE)
+          gatsbyImageData(
+            layout: CONSTRAINED
+            width: 880
+            breakpoints: [440, 660, 880]
+            quality: 82
+            placeholder: NONE
+          )
         }
       }
     }
@@ -37,27 +51,30 @@ export default function Shot({ lang, sizes }) {
 
   return (
     <figure className="shot">
-      <m.div
-        className="shot__frame"
-        layoutId={copy.layoutId}
-        data-shared
-        transition={{ layout: glideTransition }}
-        onLayoutAnimationComplete={land}>
-        <picture>
-          {images.sources.map(source => (
-            <source key={source.type} type={source.type} srcSet={source.srcSet} sizes={sizes} />
-          ))}
-          <img
-            src={images.fallback.src}
-            srcSet={images.fallback.srcSet}
-            sizes={sizes}
-            width={copy.width}
-            height={copy.height}
-            decoding="async"
-            alt={t.alt}
-          />
-        </picture>
-      </m.div>
+      <LazyMotion features={layoutBundle ?? layoutFeatures} strict>
+        <m.div
+          className="shot__frame"
+          layoutId={copy.layoutId}
+          data-shared
+          transition={{ layout: glideTransition }}
+          onLayoutAnimationComplete={land}>
+          <picture>
+            {images.sources.map(source => (
+              <source key={source.type} type={source.type} srcSet={source.srcSet} sizes={sizes} />
+            ))}
+            <img
+              src={images.fallback.src}
+              srcSet={images.fallback.srcSet}
+              sizes={sizes}
+              width={copy.width}
+              height={copy.height}
+              decoding="async"
+              fetchpriority="high"
+              alt={t.alt}
+            />
+          </picture>
+        </m.div>
+      </LazyMotion>
       <figcaption className="shot__cap">{tie(t.caption)}</figcaption>
     </figure>
   );
