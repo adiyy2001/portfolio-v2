@@ -19,9 +19,9 @@ const copy = {
     { id: 'law', name: 'Rozwaga', chips: ['#121212', '#ffffff', '#b3122a'] },
     { id: 'acc', name: 'Rubryka', chips: ['#0f1f3d', '#f3f6fb', '#ff5b24'] },
     { id: 'den', name: 'Szkliwo', chips: ['#1b1f2a', '#ffffff', '#ff6f5b'] },
-    { id: 'psy', name: 'Przystań', chips: ['#1f2d26', '#dfe8e1', '#2f5d50'] },
+    { id: 'psy', name: 'Tafla', chips: ['#1f2d26', '#dfe8e1', '#2f5d50'] },
     { id: 'est', name: 'Przędza', chips: ['#161616', '#d7d8d3', '#b4462e'] },
-    { id: 'bis', name: 'Kluska', chips: ['#2b1408', '#ffcf3a', '#d93a1f'] },
+    { id: 'bis', name: 'Kminek', chips: ['#2b1408', '#ffcf3a', '#d93a1f'] },
   ],
   pl: {
     id: 'wzornik',
@@ -62,7 +62,7 @@ const copy = {
       who: 'Terapeuta, który pracuje sam i potrzebuje jednej spokojnej strony.',
       inside: 'O mnie, jak pracuję, cennik, kontakt. Jedna strona, szybka i czytelna.',
       cut: 'Newsreader, szałwia i głęboka zieleń.',
-      alt: 'Projekt strony gabinetu Przystań: nagłówek „Możesz zacząć od jednej rozmowy.” i kręgi na wodzie.',
+      alt: 'Projekt strony gabinetu Tafla: nagłówek „Możesz zacząć od jednej rozmowy.” i kręgi na wodzie.',
     },
     est: {
       trade: 'inwestycja mieszkaniowa',
@@ -79,7 +79,7 @@ const copy = {
       who: 'Restauracja, do której przychodzą też turyści i która co tydzień zmienia kartę.',
       inside: 'Karta, wydarzenia, o nas, rezerwacja przez zewnętrzny system, wersja angielska.',
       cut: 'Gloock, musztarda, pomidor i biała karta.',
-      alt: 'Projekt strony bistro Kluska: nagłówek „Kuchnia polska, podana od nowa.” i karta dnia z pierogami, żurkiem i kopytkami.',
+      alt: 'Projekt strony bistro Kminek: nagłówek „Kuchnia polska, podana od nowa.” i karta dnia z pierogami, żurkiem i kopytkami.',
     },
   },
   en: {
@@ -122,7 +122,7 @@ const copy = {
       who: 'A therapist who works alone and needs one calm page.',
       inside: 'About me, how I work, prices, contact. One page, fast and easy to read.',
       cut: 'Newsreader, sage and deep green.',
-      alt: 'Design of the Przystań practice website: the headline “Możesz zacząć od jednej rozmowy.” (You can start with one conversation) and ripples on water.',
+      alt: 'Design of the Tafla practice website: the headline “Możesz zacząć od jednej rozmowy.” (You can start with one conversation) and ripples on water.',
     },
     est: {
       trade: 'residential development',
@@ -138,7 +138,7 @@ const copy = {
       who: 'A restaurant that also gets tourists and changes its menu every week.',
       inside: 'Menu, events, about, booking through an external system, an English version.',
       cut: 'Gloock, mustard, tomato and a white menu card.',
-      alt: 'Design of the Kluska bistro website: the headline “Kuchnia polska, podana od nowa.” (Polish food, served anew) and the menu of the day with pierogi, żurek and kopytka.',
+      alt: 'Design of the Kminek bistro website: the headline “Kuchnia polska, podana od nowa.” (Polish food, served anew) and the menu of the day with pierogi, żurek and kopytka.',
     },
   },
 };

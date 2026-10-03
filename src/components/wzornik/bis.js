@@ -12,7 +12,7 @@ export default function Bis() {
   return (
     <>
       <div className="mk__nav">
-        <span className="mk__logo">Kluska</span>
+        <span className="mk__logo">Kminek</span>
         <span className="mk__links">
           {links.map(link => (
             <span key={link}>{link}</span>

@@ -26,7 +26,7 @@ export default function Psy() {
         ))}
       </svg>
       <div className="mk__nav">
-        <span className="mk__logo">Przystań</span>
+        <span className="mk__logo">Tafla</span>
         <span className="mk__links">
           {links.map(link => (
             <span key={link}>{link}</span>

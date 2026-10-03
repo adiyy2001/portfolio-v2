@@ -15,9 +15,9 @@ const copy = {
     { name: 'Rozwaga', bg: '#121212', fg: '#ffffff', chips: ['#121212', '#ffffff', '#b3122a'] },
     { name: 'Rubryka', bg: '#f3f6fb', fg: '#0f1f3d', chips: ['#0f1f3d', '#f3f6fb', '#ff5b24'] },
     { name: 'Szkliwo', bg: '#ff6f5b', fg: '#1b1f2a', chips: ['#1b1f2a', '#ffffff', '#ff6f5b'] },
-    { name: 'Przystań', bg: '#dfe8e1', fg: '#1f2d26', chips: ['#1f2d26', '#dfe8e1', '#2f5d50'] },
+    { name: 'Tafla', bg: '#dfe8e1', fg: '#1f2d26', chips: ['#1f2d26', '#dfe8e1', '#2f5d50'] },
     { name: 'Przędza', bg: '#b4462e', fg: '#ffffff', chips: ['#161616', '#d7d8d3', '#b4462e'] },
-    { name: 'Kluska', bg: '#ffcf3a', fg: '#2b1408', chips: ['#2b1408', '#ffcf3a', '#d93a1f'] },
+    { name: 'Kminek', bg: '#ffcf3a', fg: '#2b1408', chips: ['#2b1408', '#ffcf3a', '#d93a1f'] },
   ],
   pl: {
     anchor: 'wzornik',
