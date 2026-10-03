@@ -24,6 +24,7 @@ export const ui = {
       cli: 'dla klienta',
       work: 'projekty',
       case: 'TailorCloth',
+      blog: 'blog',
     },
   },
   en: {
@@ -43,9 +44,12 @@ export const ui = {
       cli: 'for clients',
       work: 'projects',
       case: 'TailorCloth',
+      blog: 'blog',
     },
   },
 };
+
+export const blogPath = '/blog/';
 
 export function locate(path) {
   for (const view of Object.keys(routes)) {
@@ -53,6 +57,7 @@ export function locate(path) {
       if (routes[view][lang] === path) return { lang, view };
     }
   }
+  if (path.startsWith(blogPath)) return { lang: 'en', view: 'blog' };
   return { lang: path.startsWith('/en/') ? 'en' : 'pl', view: null };
 }
 

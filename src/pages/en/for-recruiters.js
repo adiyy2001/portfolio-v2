@@ -6,6 +6,7 @@ import Hero from '../../components/hero';
 import Kit from '../../components/kit';
 import Magnet from '../../components/magnet';
 import Seo from '../../components/seo';
+import Writing from '../../components/writing';
 import { tie } from '../../i18n';
 
 export default function Recruiter() {
@@ -46,6 +47,7 @@ export default function Recruiter() {
       </Hero>
       <Experience lang="en" />
       <Kit lang="en" />
+      <Writing lang="en" />
       <Close lang="en" />
     </>
   );

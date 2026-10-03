@@ -1,5 +1,6 @@
 import React from 'react';
 import { withPrefix } from 'gatsby';
+import { siteMetadata } from './gatsby-config';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';
 
@@ -15,7 +16,17 @@ const faces = () => `
 @font-face{font-family:'Schibsted Grotesk fallback';src:local('Arial'),local('ArialMT'),local('Liberation Sans');font-weight:400 600;size-adjust:105%;ascent-override:93.01%;descent-override:24.55%;line-gap-override:0%}
 `;
 
-export const onRenderBody = ({ setHeadComponents }) => {
+const counter = code => (
+  <script
+    key="goatcounter"
+    data-goatcounter={`https://${code}.goatcounter.com/count`}
+    async
+    src="https://gc.zgo.at/count.js"
+  />
+);
+
+export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
+  if (siteMetadata.goatcounter) setPostBodyComponents([counter(siteMetadata.goatcounter)]);
   setHeadComponents([
     <link
       key="font-display"

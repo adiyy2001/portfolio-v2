@@ -4,9 +4,9 @@ import { routes } from '../i18n';
 
 const locales = { pl: 'pl_PL', en: 'en_US' };
 
-const pageTypes = { rec: 'ProfilePage', work: 'CollectionPage' };
+const pageTypes = { rec: 'ProfilePage', work: 'CollectionPage', blog: 'CollectionPage' };
 
-const graph = ({ url, lang, view, title, description, canonical }) => {
+const graph = ({ url, lang, view, title, description, canonical, image, post }) => {
   const person = {
     '@type': 'Person',
     '@id': url('/#adrian'),
@@ -39,7 +39,7 @@ const graph = ({ url, lang, view, title, description, canonical }) => {
     inLanguage: lang,
     isPartOf: { '@id': site['@id'] },
     about: { '@id': person['@id'] },
-    primaryImageOfPage: url(`/og/${view}-${lang}.jpg`),
+    primaryImageOfPage: image,
   };
   if (view === 'rec') page.mainEntity = { '@id': person['@id'] };
   const nodes = [person, site, page];
@@ -55,10 +55,29 @@ const graph = ({ url, lang, view, title, description, canonical }) => {
       about: { '@type': 'Organization', name: 'TailorCloth', url: 'https://tailorcloth.com/' },
     });
   }
+  if (post) {
+    page['@type'] = 'WebPage';
+    nodes.push({
+      '@type': 'BlogPosting',
+      '@id': `${url(canonical)}#post`,
+      headline: post.headline,
+      description,
+      url: url(canonical),
+      image,
+      datePublished: post.published,
+      dateModified: post.modified ?? post.published,
+      inLanguage: lang,
+      keywords: post.tags?.join(', '),
+      author: { '@id': person['@id'] },
+      publisher: { '@id': person['@id'] },
+      mainEntityOfPage: { '@id': page['@id'] },
+      isPartOf: { '@id': url('/blog/#page') },
+    });
+  }
   return { '@context': 'https://schema.org', '@graph': nodes };
 };
 
-export default function Seo({ lang, view, path, title, description, noindex }) {
+export default function Seo({ lang, view, path, title, description, noindex, post }) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -70,9 +89,14 @@ export default function Seo({ lang, view, path, title, description, noindex }) {
   `);
   const url = to => site.siteMetadata.siteUrl + withPrefix(to);
   const pair = routes[view];
+  const blog = view === 'blog';
+  const shared = Boolean(pair || blog);
   const canonical = pair ? pair[lang] : path;
   const other = lang === 'pl' ? 'en' : 'pl';
-  const image = pair && url(`/og/${view}-${lang}.jpg`);
+  const image = post?.image
+    ? site.siteMetadata.siteUrl + post.image
+    : shared && url(`/og/${pair ? view : 'home'}-${lang}.jpg`);
+  const shareTitle = post?.headline ?? title;
   return (
     <>
       <html lang={lang} />
@@ -86,24 +110,37 @@ export default function Seo({ lang, view, path, title, description, noindex }) {
       {pair && <link rel="alternate" hrefLang="pl" href={url(pair.pl)} />}
       {pair && <link rel="alternate" hrefLang="en" href={url(pair.en)} />}
       {pair && <link rel="alternate" hrefLang="x-default" href={url(pair.pl)} />}
-      {pair && <meta property="og:type" content="website" />}
-      {pair && <meta property="og:site_name" content="Adrian Turbiński" />}
-      {pair && <meta property="og:title" content={title} />}
-      {pair && description && <meta property="og:description" content={description} />}
-      {pair && <meta property="og:url" content={url(canonical)} />}
-      {pair && <meta property="og:locale" content={locales[lang]} />}
+      {blog && (
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Adrian Turbiński, blog"
+          href={url('/blog/rss.xml')}
+        />
+      )}
+      {shared && <meta property="og:type" content={post ? 'article' : 'website'} />}
+      {shared && <meta property="og:site_name" content="Adrian Turbiński" />}
+      {shared && <meta property="og:title" content={shareTitle} />}
+      {shared && description && <meta property="og:description" content={description} />}
+      {shared && <meta property="og:url" content={url(canonical)} />}
+      {shared && <meta property="og:locale" content={locales[lang]} />}
       {pair && <meta property="og:locale:alternate" content={locales[other]} />}
-      {pair && <meta property="og:image" content={image} />}
-      {pair && <meta property="og:image:width" content="1200" />}
-      {pair && <meta property="og:image:height" content="630" />}
-      {pair && <meta property="og:image:alt" content={title} />}
-      {pair && <meta name="twitter:card" content="summary_large_image" />}
-      {pair && (
+      {shared && <meta property="og:image" content={image} />}
+      {shared && <meta property="og:image:width" content="1200" />}
+      {shared && <meta property="og:image:height" content="630" />}
+      {shared && <meta property="og:image:alt" content={shareTitle} />}
+      {post && <meta property="article:published_time" content={post.published} />}
+      {post?.modified && <meta property="article:modified_time" content={post.modified} />}
+      {post?.tags?.map(tag => (
+        <meta key={tag} property="article:tag" content={tag} />
+      ))}
+      {shared && <meta name="twitter:card" content="summary_large_image" />}
+      {shared && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(
-              graph({ url, lang, view, title, description, canonical }),
+              graph({ url, lang, view, title, description, canonical, image, post }),
             ).replace(/</g, '\\u003c'),
           }}
         />

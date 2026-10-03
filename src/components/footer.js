@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
-import { routes, ui } from '../i18n';
+import { usePosts } from './posts';
+import { blogPath, routes, ui } from '../i18n';
 import { duration, ease, instant } from '../motion';
 import { letters, needle, thread } from '../wordmark';
 
@@ -10,6 +11,7 @@ const seen = { once: true, amount: 0.6 };
 export default function Footer({ lang }) {
   const t = ui[lang];
   const reduce = useReducedMotion();
+  const hasBlog = usePosts().length > 0;
   return (
     <footer className="mini">
       <svg
@@ -46,6 +48,11 @@ export default function Footer({ lang }) {
       <p>{t.footerName}</p>
       <p className="mini__links">
         <Link to={routes.work[lang]}>{t.footerWork}</Link>
+        {hasBlog && (
+          <Link to={blogPath} hrefLang="en">
+            Blog
+          </Link>
+        )}
         <a href="mailto:adrian.turbinski@gmail.com">{t.footerMail}</a>
         <a href="https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6" rel="noopener">
           LinkedIn

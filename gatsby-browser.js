@@ -5,6 +5,7 @@ import './src/styles/case.css';
 import './src/styles/wzornik.css';
 import './src/styles/work.css';
 import './src/styles/notfound.css';
+import './src/styles/blog.css';
 import { keepScroll } from './src/components/layout';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';
@@ -38,6 +39,10 @@ export const onInitialClientRender = () => {
   const idle = window.requestIdleCallback || window.setTimeout;
   const hand = () => document.documentElement.classList.add('hand');
   idle(() => document.fonts.load('400 1em Mynerve').then(hand, hand));
+};
+
+export const onRouteUpdate = ({ location, prevLocation }) => {
+  if (prevLocation) window.goatcounter?.count?.({ path: location.pathname });
 };
 
 export const shouldUpdateScroll = ({ routerProps, prevRouterProps, getSavedScrollPosition }) => {

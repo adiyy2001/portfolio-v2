@@ -1,6 +1,6 @@
 # Sample work briefs
 
-Status on 2026-10-03: the nine client sample websites are built and live under `/portfolio-v2/wzornik/`. The GitHub repos follow Adrian's own briefs, kept outside this repo, and are being built (see "GitHub repos"). On 2026-10-02 everything here was design only ("tylko zaprojektuj, do tego nie pisz kodu na razie") and the main site came first. Status and decisions live in `REBRAND.md`; this file holds the briefs of the sample websites.
+Status on 2026-10-03: the nine client sample websites are built and live under `/wzornik/`. The GitHub repos follow Adrian's own briefs, kept outside this repo, and are being built (see "GitHub repos"). On 2026-10-02 everything here was design only ("tylko zaprojektuj, do tego nie pisz kodu na razie") and the main site came first. Status and decisions live in `REBRAND.md`; this file holds the briefs of the sample websites.
 
 Shared rules:
 

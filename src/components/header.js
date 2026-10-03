@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import { routes, ui } from '../i18n';
+import { usePosts } from './posts';
+import { blogPath, routes, ui } from '../i18n';
 import { letters, needle } from '../wordmark';
 
 export default function Header({ lang, view }) {
   const t = ui[lang];
   const here = routes[view] || routes.home;
+  const hasBlog = usePosts().length > 0;
   return (
     <header className="top">
       <Link className="mark" to={routes.home[lang]} aria-label={t.markAria}>
@@ -27,18 +29,29 @@ export default function Header({ lang, view }) {
           </Link>
         </nav>
       )}
-      <nav className="lang" aria-label={t.langAria}>
-        {['pl', 'en'].map(l => (
-          <Link
-            key={l}
-            to={here[l]}
-            lang={l}
-            hrefLang={l}
-            aria-current={l === lang ? 'true' : undefined}>
-            {l.toUpperCase()}
-          </Link>
-        ))}
-      </nav>
+      {hasBlog && (
+        <Link
+          className="top__blog"
+          to={blogPath}
+          hrefLang="en"
+          aria-current={view === 'blog' ? 'page' : undefined}>
+          Blog
+        </Link>
+      )}
+      {view !== 'blog' && (
+        <nav className="lang" aria-label={t.langAria}>
+          {['pl', 'en'].map(l => (
+            <Link
+              key={l}
+              to={here[l]}
+              lang={l}
+              hrefLang={l}
+              aria-current={l === lang ? 'true' : undefined}>
+              {l.toUpperCase()}
+            </Link>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }
