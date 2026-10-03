@@ -134,26 +134,26 @@ export default function Work({ lang }) {
           {copy.swatches.map((swatch, i) => (
             <Reveal as="li" key={swatch.name} className="work__item" style={{ '--i': i }}>
               <Link
-                className="sw"
+                className="ws"
                 to={wzornik}
                 style={{
                   '--sb': swatch.bg,
                   '--sf': swatch.fg,
-                  '--rot': i % 2 ? '0.2deg' : '-0.25deg',
+                  '--rot': '-0.25deg',
                 }}>
-                <span className="sw__name">{swatch.name}</span>
-                <span className="sw__what">
-                  <span className="sw__trade">{t.trades[i]}</span>
+                <span className="ws__name">{swatch.name}</span>
+                <span className="ws__what">
+                  <span className="ws__trade">{t.trades[i]}</span>
                   <span className="sr">, </span>
-                  <span className="sw__kind">{t.kinds[i]}</span>
+                  <span className="ws__kind">{t.kinds[i]}</span>
                 </span>
-                <span className="sw__side">
-                  <span className="sw__chips" aria-hidden="true">
+                <span className="ws__side">
+                  <span className="ws__chips" aria-hidden="true">
                     {swatch.chips.map(chip => (
                       <i key={chip} style={{ '--c': chip }} />
                     ))}
                   </span>
-                  <span className="sw__state">
+                  <span className="ws__state">
                     <span className="sr">, </span>
                     {tie(t.concept)}
                   </span>
