@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: 'Adrian Turbiński',
     siteUrl: 'https://adrianturbinski.pl',
-    goatcounter: '',
+    goatcounter: 'adrianturbinski',
   },
   plugins: [
     'gatsby-plugin-image',

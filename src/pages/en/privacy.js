@@ -20,9 +20,8 @@ export default function Privacy() {
         <h2>This website</h2>
         <p>
           The website sets no cookies and has no forms. Its host, GitHub Pages, keeps standard
-          server logs, including IP addresses, under its own privacy statement. If I add a visitor
-          counter, it will be a cookieless one that stores no personal data, and this page will say
-          so.
+          server logs, including IP addresses, under its own privacy statement. I count visits with
+          GoatCounter, a cookieless counter that stores no personal data.
         </p>
         <h2>My publishing tools</h2>
         <p>
