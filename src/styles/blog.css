@@ -40,14 +40,82 @@
   font-size: 0.9375rem;
 }
 
+.post__layout {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  column-gap: clamp(16px, 2vw, 32px);
+  padding: 0 var(--pad);
+  align-items: start;
+}
+
+.post__body {
+  grid-column: 1 / span 7;
+  grid-row: 1;
+  min-width: 0;
+}
+
+.toc {
+  grid-column: 10 / span 3;
+  grid-row: 1;
+  position: sticky;
+  top: 96px;
+  margin-top: clamp(36px, 4vw, 60px);
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+
+.toc__label {
+  margin-bottom: 14px;
+  color: var(--chalk-dim);
+  font: 600 0.8125rem/1 var(--text);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: default;
+}
+
+.toc__label::-webkit-details-marker {
+  display: none;
+}
+
+.toc__list {
+  border-left: 1px solid rgba(195, 206, 221, 0.35);
+}
+
+.toc__list a {
+  display: block;
+  padding: 7px 0 7px 16px;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  color: var(--chalk-dim);
+  text-decoration: none;
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.toc__list a:hover,
+.toc__list a[aria-current] {
+  color: var(--chalk);
+}
+
+.toc__list a[aria-current] {
+  border-left-color: var(--chalk-blue);
+  font-weight: 600;
+}
+
 .prose {
-  padding: clamp(36px, 4vw, 60px) var(--pad) clamp(72px, 9vw, 140px);
-  font-size: 1.125rem;
-  line-height: 1.7;
+  padding: clamp(36px, 4vw, 60px) 0 clamp(72px, 9vw, 140px);
+  font-size: 1.1875rem;
+  line-height: 1.72;
 }
 
 .prose > * {
-  max-width: 44rem;
+  max-width: 100%;
+}
+
+.prose h2 {
+  scroll-margin-top: 96px;
 }
 
 .prose > * + * {
@@ -117,7 +185,7 @@
 }
 
 .prose pre {
-  max-width: 52rem;
+  max-width: 100%;
   padding: 18px 20px;
   overflow-x: auto;
   background: var(--wool-deep);
@@ -155,8 +223,15 @@
 }
 
 .post__end {
-  max-width: calc(44rem + 2 * var(--pad));
-  padding: 28px var(--pad) clamp(72px, 9vw, 120px);
+  max-width: none;
+  padding: 0 var(--pad) clamp(72px, 9vw, 120px);
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  column-gap: clamp(16px, 2vw, 32px);
+}
+
+.post__end > * {
+  grid-column: 1 / span 7;
 }
 
 .post__end > p:first-child {
@@ -255,6 +330,30 @@
 
   .prose {
     font-size: 1.0625rem;
+  }
+
+  .post__layout {
+    display: block;
+  }
+
+  .toc {
+    position: static;
+    margin: 28px 0 0;
+    padding: 14px 16px;
+    border: 1px solid rgba(195, 206, 221, 0.35);
+  }
+
+  .toc__label {
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+
+  .toc__box[open] .toc__label {
+    margin-bottom: 12px;
+  }
+
+  .post__end {
+    display: block;
   }
 }
 
