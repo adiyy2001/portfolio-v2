@@ -6,7 +6,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-identyfikacja.md`. Run ru
 - [x] F foundation, with the first brand end to end (B1 Skibka)
 - [ ] B2 Nośna
 - [ ] B3 Rzut
-- [ ] B4 Klamra
+- [x] B4 Klamra
 - [x] B5 Cuvée
 - [ ] B6 Wolnobieg
 - [ ] Q quality control
