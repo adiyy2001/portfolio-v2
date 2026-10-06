@@ -8,7 +8,16 @@ interface Props {
 
 const { href } = Astro.props;
 const meta = identityBrands.find(item => item.slug === 'cuvee')!;
+const face = (family: string, file: string, style: string) =>
+  `@font-face{font-family:'${family}';src:url(${assetUrl('cuvee', file)}) format('woff2');font-weight:400;font-style:${style};font-display:swap}`;
+const faces = [
+  face('Cuvee Display', 'fonts/NotoSerifDisplay-400.woff2', 'normal'),
+  face('Cuvee Text', 'fonts/SourceSerif4-400.woff2', 'normal'),
+  face('Cuvee Text', 'fonts/SourceSerif4-400-italic.woff2', 'italic'),
+].join('');
 ---
+
+<style set:html={faces}></style>
 
 <a class="cuvee-tile" href={href}>
   <img
@@ -59,7 +68,8 @@ const meta = identityBrands.find(item => item.slug === 'cuvee')!;
 
   .cuvee-tile__trade {
     font:
-      italic 400 16px/1.4 Georgia,
+      italic 400 16px/1.4 'Cuvee Text',
+      Georgia,
       serif;
   }
 
@@ -67,7 +77,8 @@ const meta = identityBrands.find(item => item.slug === 'cuvee')!;
     margin-top: auto;
     padding-top: 12px;
     font:
-      400 15px/1 Georgia,
+      400 15px/1 'Cuvee Text',
+      Georgia,
       serif;
     border-bottom: 1px solid #b08d57;
     align-self: flex-start;

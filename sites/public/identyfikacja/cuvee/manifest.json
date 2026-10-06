@@ -8,11 +8,11 @@
     "city": "Dolny Śląsk"
   },
   "base": "/wzornik/identyfikacja/cuvee/",
-  "totalBytes": 5690137,
+  "totalBytes": 5689435,
   "totalHuman": "5.4 MB",
   "zip": {
     "path": "cuvee-identyfikacja.zip",
-    "bytes": 2434106
+    "bytes": 2435744
   },
   "groups": [
     {
@@ -58,7 +58,7 @@
       "id": "favicon",
       "title": "Ikona strony",
       "count": 3,
-      "bytes": 7627,
+      "bytes": 9333,
       "formats": "PNG, ICO, SVG, PNG 180 px",
       "files": [
         "apple-touch-icon.png",
@@ -181,7 +181,7 @@
       "id": "animation",
       "title": "Animacja logo",
       "count": 2,
-      "bytes": 116730,
+      "bytes": 112692,
       "formats": "MP4, WEBM",
       "files": [
         "animation/cuvee-logo.mp4",
@@ -192,7 +192,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1446510,
+      "bytes": 1446502,
       "formats": "PDF",
       "files": [
         "cuvee-brandbook.pdf"
@@ -202,7 +202,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 2434106,
+      "bytes": 2435744,
       "formats": "ZIP",
       "files": [
         "cuvee-identyfikacja.zip"
@@ -228,7 +228,7 @@
   "files": [
     {
       "path": "animation/cuvee-logo.mp4",
-      "bytes": 48503,
+      "bytes": 45806,
       "type": "mp4",
       "group": "animation",
       "codec": "h264",
@@ -238,7 +238,7 @@
     },
     {
       "path": "animation/cuvee-logo.webm",
-      "bytes": 68227,
+      "bytes": 66886,
       "type": "webm",
       "group": "animation",
       "codec": "vp9",
@@ -248,7 +248,7 @@
     },
     {
       "path": "apple-touch-icon.png",
-      "bytes": 3475,
+      "bytes": 4686,
       "type": "png",
       "group": "favicon",
       "width": 180,
@@ -269,7 +269,7 @@
     },
     {
       "path": "cuvee-brandbook.pdf",
-      "bytes": 1446510,
+      "bytes": 1446502,
       "type": "pdf",
       "group": "brandbook",
       "pages": 29,
@@ -284,7 +284,7 @@
     },
     {
       "path": "cuvee-identyfikacja.zip",
-      "bytes": 2434106,
+      "bytes": 2435744,
       "type": "zip",
       "group": "zip"
     },
@@ -296,7 +296,7 @@
     },
     {
       "path": "favicon.ico",
-      "bytes": 3393,
+      "bytes": 3839,
       "type": "ico",
       "group": "favicon",
       "sizes": [
@@ -307,7 +307,7 @@
     },
     {
       "path": "favicon.svg",
-      "bytes": 759,
+      "bytes": 808,
       "type": "svg",
       "group": "favicon",
       "width": 200,

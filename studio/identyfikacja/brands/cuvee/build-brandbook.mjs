@@ -77,7 +77,7 @@ sheet(`${heading('Kolor', 'Proporcje użycia', 'Kość niesie stronę, czerń da
 
 sheet(`${heading('Typografia', 'Dwa kroje')}<div class="cols"><div class="face"><p class="mega display">Noto Serif Display</p><p class="specimen display">${extras.specimen}</p><p class="small">Nagłówki i znak. Grubości 200, 300, 400, 500 i kursywa 300, 400. Kapitaliki ze światłem.</p></div><div class="face"><p class="mega text">Source Serif 4</p><p class="specimen text">${extras.specimen}</p><p class="small">Tekst. Grubości 400 i 600, kursywa 400. Licencja OFL.</p></div></div>`, { section: 'typografia' });
 
-sheet(`${heading('Typografia', 'Skala pisma')}<div class="scale">${extras.typeScale.map(row => `<div><span class="s-${row.font}" style="font-size:${Math.min(row.size * 1.6, 96)}px;font-weight:${row.weight}">${row.name}</span><span class="small">${row.size} px, interlinia ${String(row.line).replace('.', ',')}. ${row.use}</span></div>`).join('')}</div>`, { section: 'typografia' });
+sheet(`${heading('Typografia', 'Skala pisma')}<div class="scale">${extras.typeScale.map(row => `<div><span class="s-${row.font}" style="font-size:${Math.min(row.size * 1.6, 96)}px;font-weight:${row.weight}">${row.name}</span><span class="small">${row.size} px, interlinia ${String(row.line).replace('.', ',')}: ${row.use}</span></div>`).join('')}</div>`, { section: 'typografia' });
 
 sheet(`${heading('Typografia', 'Polskie znaki i kapitaliki', 'Oba kroje mają komplet polskich liter, kapitaliki z ogonkami, cudzysłowy drukarskie i kropkę środkową.')}<p class="glyphs display">${extras.glyphs}</p><p class="glyphs caps">Hotel · Winnica, Ślęża, Sobótka</p><p class="glyphs text">${extras.glyphs}</p>`, { section: 'typografia' });
 
@@ -103,6 +103,8 @@ const css = `
 ${baseCss()}
 @page{size:1920px 1080px;margin:0}
 html,body{margin:0}
+p,li,span,blockquote{text-wrap:pretty}
+h1,h2,h3,h4{text-wrap:balance}
 .page{position:relative;width:1920px;height:1080px;overflow:hidden;page-break-after:always;break-after:page;padding:170px 240px 130px;background:${c.kosc};color:${c.czern}}
 .page.dark{background:${c.czern};color:${c.kosc}}
 .page header{position:absolute;left:240px;right:240px;top:64px;display:flex;justify-content:space-between;align-items:baseline;font-size:18px;color:${c.wegiel};padding-bottom:18px;border-bottom:1px solid ${c.mosiadz}}

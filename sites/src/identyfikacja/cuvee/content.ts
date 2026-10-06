@@ -187,7 +187,7 @@ export const extras = {
       size: 15,
       line: 1.4,
       weight: 400,
-      use: 'etykiety, numery i nazwy sekcji, rozstaw 0,22 em',
+      use: 'etykiety, numery i nazwy sekcji, rozstaw 0,22\u00a0em',
     },
     { name: 'Tekst', font: 'text', size: 18, line: 1.6, weight: 400, use: 'akapity, opisy, menu' },
     {
