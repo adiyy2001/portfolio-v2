@@ -14,11 +14,15 @@ body.cuvee{margin:0;background:var(--kosc);color:var(--czern);font:400 18px/1.65
 .top a:hover{color:var(--szampan)}
 .cover{position:relative;background:var(--czern);color:var(--kosc);padding:clamp(120px,18vw,200px) var(--gut) clamp(48px,8vw,96px)}
 .cover__in{max-width:1120px;margin:0 auto;display:grid;gap:clamp(40px,7vw,88px)}
-.cover__logo{width:min(108.5%,824px);transform:translateX(-3.9%);animation:slow-in 2.4s ease both}
-.cover__rule{height:1px;background:var(--mosiadz);animation:slow-in 2.4s ease .6s both}
-.cover__body{display:grid;gap:clamp(28px,4vw,48px);animation:slow-in 2.4s ease 1.1s both}
+.cover__top{display:grid;gap:clamp(32px,6vw,56px);align-items:center}
+.cover__brand{display:grid;gap:clamp(28px,4vw,44px);min-width:0}
+.cover__logo{width:min(108.5%,824px);transform:translateX(-2%);animation:slow-in 1s ease both}
+.cover__show{margin:0;min-width:0;animation:slow-in 1s ease .4s both}
+.cover__show img{width:100%;border:1px solid var(--mosiadz)}
+.cover__body{display:grid;gap:clamp(28px,4vw,48px);animation:slow-in 1s ease .5s both}
+@media (min-width:1000px){.cover{padding-top:clamp(112px,12vw,150px)}.cover__top{grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:clamp(40px,5vw,72px)}}
 .cover__kicker{font-size:17px;color:var(--szampan)}
-.cover__lead{font:italic 300 clamp(28px,4.4vw,52px)/1.2 var(--display);max-width:20em}
+.cover__lead{font:italic 300 clamp(26px,3.6vw,42px)/1.2 var(--display);max-width:18em}
 .cover__facts{display:grid;gap:0 40px;margin:0}
 .cover__facts div{border-top:1px solid var(--mosiadz);padding:14px 0 18px}
 .cover__facts dt{font-size:15px;color:var(--szampan);margin-bottom:6px}
@@ -71,8 +75,8 @@ body.cuvee{margin:0;background:var(--kosc);color:var(--czern);font:400 18px/1.65
 .variants{display:grid;gap:14px;margin:0;padding:0;list-style:none}
 @media (min-width:560px){.variants{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1000px){.variants{grid-template-columns:repeat(3,1fr)}}
-.variants li{padding:20px;display:grid;gap:14px;align-content:space-between;min-height:220px;border:1px solid var(--kamien)}
-.variants img{max-height:120px;width:auto;max-width:100%;margin:0 auto}
+.variants li{padding:20px;display:grid;grid-template-rows:minmax(0,1fr) auto;gap:14px;min-height:220px;border:1px solid var(--kamien)}
+.variants img{max-height:120px;width:auto;max-width:100%;margin:auto}
 .variants p{display:grid;gap:2px;font-size:14px}
 .variants strong{font:400 15px/1.2 var(--display);font-variant-caps:all-small-caps;letter-spacing:.2em}
 .ground--papier{background:var(--papier)}
@@ -89,6 +93,13 @@ body.cuvee{margin:0;background:var(--kosc);color:var(--czern);font:400 18px/1.65
 .swatches__chip{display:block;height:72px;margin-bottom:8px;border:1px solid var(--kamien)}
 .swatches strong{font:300 21px/1.15 var(--display)}
 .swatches em{font-style:normal;color:var(--wegiel);font-size:13px;line-height:1.4}
+.fold{border-top:1px solid var(--kamien);border-bottom:1px solid var(--kamien)}
+.fold summary{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;padding:14px 0;cursor:pointer;list-style:none}
+.fold summary::-webkit-details-marker{display:none}
+.fold__title{font:300 22px/1.2 var(--display)}
+.fold__hint{font:400 14px/1.4 var(--text);color:var(--mosiadz-ciemny)}
+.fold[open] .fold__hint{display:none}
+.fold .tbl-wrap{padding-bottom:16px}
 .tbl-wrap{overflow-x:auto;max-width:100%}
 .tbl{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
 .tbl th,.tbl td{text-align:left;padding:9px 10px 9px 0;border-top:1px solid var(--kamien);vertical-align:middle}
@@ -136,17 +147,19 @@ body.cuvee{margin:0;background:var(--kosc);color:var(--czern);font:400 18px/1.65
 @media (min-width:1280px){.composer{grid-template-columns:minmax(0,380px) minmax(0,1fr);align-items:stretch}.composer__stage{align-content:center}}
 .composer__stage{display:grid;place-items:center;padding:clamp(20px,4vw,40px);background:var(--len)}
 .lab-wrap{container-type:inline-size;width:min(100%,380px)}
-.lab{position:relative;display:flex;flex-direction:column;aspect-ratio:560/860;background:var(--papier);color:var(--czern);padding:9.6cqw 10.4cqw;border:1px solid var(--mosiadz);outline:1px solid var(--mosiadz);outline-offset:-2.5cqw;box-shadow:0 22px 40px -26px rgba(21,17,14,.6)}
+.lab{position:relative;display:flex;flex-direction:column;aspect-ratio:560/860;background:var(--papier);color:var(--czern);padding:9.6cqw 10.4cqw;border:1px solid var(--mosiadz);outline:1px solid var(--mosiadz);outline-offset:-2.5cqw}
 .lab__logo{width:100%;padding:0 2.5cqw}
 .lab__year{font:200 26.8cqw/1 var(--display);text-align:center;margin-top:16cqw;font-variant-numeric:lining-nums}
 .lab__grapes{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1cqw 2.5cqw;margin-top:4.6cqw;font-size:3.7cqw;min-height:5cqw}
-.lab__grapes span{display:inline-flex;align-items:center;gap:2.5cqw}
+.lab__grapes span{display:inline-flex;align-items:center;gap:2.5cqw;white-space:nowrap}
+.lab__grapes--stack{flex-direction:column;gap:.8cqw}
+.lab__grapes--stack i{display:none}
 .lab__grapes i{width:.9cqw;height:.9cqw;background:var(--mosiadz);border-radius:50%}
 .lab__prop{display:flex;gap:.7cqw;margin:4.6cqw 12.5cqw 0}
 .lab__prop b{height:1px;background:var(--czern)}
 .lab__app{text-align:center;margin-top:auto;font-size:3.7cqw;color:var(--mosiadz-ciemny)}
 .lab__note{text-align:center;font:italic 400 3.4cqw/1.5 var(--text);color:var(--wegiel);margin-top:1.8cqw}
-.lab__foot{display:flex;justify-content:space-between;margin-top:5cqw;font-size:3cqw;color:var(--wegiel)}
+.lab__foot{display:flex;justify-content:space-between;margin-top:5cqw;font-size:3.5cqw;color:var(--wegiel)}
 .composer__controls{display:grid;gap:30px}
 .composer fieldset{border:0;margin:0;padding:0;min-width:0;display:grid;gap:12px}
 .composer legend{padding:0;margin-bottom:12px;font:400 16px/1 var(--display);font-variant-caps:all-small-caps;letter-spacing:.22em;color:var(--szampan)}
@@ -164,6 +177,7 @@ body.cuvee{margin:0;background:var(--kosc);color:var(--czern);font:400 18px/1.65
 @media (min-width:1280px){.years{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .year{width:100%;padding:12px 4px;background:transparent;color:var(--kosc);border:1px solid var(--mgla);font:300 20px/1 var(--display);cursor:pointer;transition:border-color .6s ease,background-color .6s ease}
 .year[aria-pressed=true]{border-color:var(--mosiadz);background:rgba(176,141,87,.14)}
+.composer__hint{font-size:15px;color:var(--szampan);min-height:1.5em}
 .composer__label{font-size:16px;color:var(--szampan);margin-bottom:8px}
 .blend{display:grid;margin:0;padding:0;list-style:none}
 .blend li{display:grid;grid-template-columns:3em 1fr auto;gap:12px;align-items:baseline;border-top:1px solid var(--mosiadz);padding:10px 0}
@@ -176,10 +190,12 @@ body.cuvee{margin:0;background:var(--kosc);color:var(--czern);font:400 18px/1.65
 @media (min-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}.gallery figure:nth-child(3){grid-row:span 2;align-self:stretch;grid-template-rows:minmax(0,1fr) auto;align-content:stretch}.gallery figure:nth-child(3) img{height:100%;object-fit:cover;object-position:center top}}
 .gallery figure{margin:0;display:grid;gap:12px;align-content:start}
 .gallery img{width:100%;border:1px solid var(--kamien)}
+.zoom{display:block;color:inherit}
+.zoom:hover img{border-color:var(--mosiadz-ciemny)}
+.again{font-size:17px;display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;border-top:1px solid var(--mosiadz);padding-top:16px}
 .gallery figcaption{display:grid;gap:3px;font-size:15px;color:var(--wegiel)}
 .gallery strong{font:300 24px/1.2 var(--display);color:var(--czern)}
-.posts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:0;padding:0;list-style:none}
-@media (min-width:760px){.posts{grid-template-columns:repeat(4,1fr)}}
+.posts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:0;padding:0;list-style:none}
 .posts li{display:grid;gap:8px;align-content:start;font-size:14px;color:var(--wegiel)}
 .posts img{width:100%;border:1px solid var(--kamien)}
 .dl{display:grid;gap:18px}
@@ -227,5 +243,5 @@ body.cuvee{margin:0;background:var(--kosc);color:var(--czern);font:400 18px/1.65
 }
 :where(.cuvee) :is(p,li,dd,figcaption){text-wrap:pretty}
 :where(.cuvee) :is(h1,h2,h3,h4,blockquote){text-wrap:balance}
-@media (prefers-reduced-motion:reduce){.cover__logo,.cover__rule,.cover__body{animation:none}.chip,.year,.cta__link{transition:none}}
+@media (prefers-reduced-motion:reduce){.cover__logo,.cover__show,.cover__body{animation:none}.chip,.year,.cta__link{transition:none}}
 `;

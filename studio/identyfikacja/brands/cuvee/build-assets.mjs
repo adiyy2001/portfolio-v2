@@ -1,8 +1,10 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { withBrowser, htmlToImage, htmlToPdf } from '../../lib/browser.mjs';
 import { ensureDir, writeFile } from '../../lib/files.mjs';
 import { quantizePng } from '../../lib/png.mjs';
+import { PDFDocument } from 'pdf-lib';
+import { typesetHtml } from '../../../../sites/src/identyfikacja/cuvee/typography.ts';
 import { brand, file } from './theme.mjs';
 import { buildIcons } from './icons.mjs';
 import { buildPattern } from './pattern.mjs';
@@ -27,7 +29,7 @@ buildPattern();
 buildIcons();
 buildFigures();
 ensureDir(pub('email'));
-writeFile(pub(file.emailHtml), emailHtmlFile());
+writeFile(pub(file.emailHtml), typesetHtml(emailHtmlFile()));
 
 const pngData = `data:image/png;base64,${readFileSync(pub(file.logoPng('horizontal', 512))).toString('base64')}`;
 
@@ -44,6 +46,18 @@ const jobs = [
   { name: 'og', html: ogScene(), out: file.og, width: 1200, height: 630 },
 ];
 
+const pointsPerMm = 72 / 25.4;
+const setPrintBoxes = async (path, bleedMm) => {
+  const doc = await PDFDocument.load(readFileSync(path));
+  const inset = bleedMm * pointsPerMm;
+  doc.getPages().forEach(page => {
+    const { width, height } = page.getSize();
+    page.setBleedBox(0, 0, width, height);
+    page.setTrimBox(inset, inset, width - inset * 2, height - inset * 2);
+  });
+  writeFileSync(path, await doc.save());
+};
+
 const errors = [];
 await withBrowser(async browser => {
   for (const job of jobs) {
@@ -52,9 +66,10 @@ await withBrowser(async browser => {
     if (!job.type) quantizePng(pub(job.out));
     console.log(`  ${job.out}`);
   }
-  await htmlToPdf(browser, { outDir, name: 'card-print', html: cardPrintHtml(), out: pub(file.cardPdf), width: 344, height: 231 });
+  await htmlToPdf(browser, { outDir, name: 'card-print', html: typesetHtml(cardPrintHtml()), out: pub(file.cardPdf), width: 344, height: 231 });
+  await setPrintBoxes(pub(file.cardPdf), 3);
   console.log(`  ${file.cardPdf}`);
-  await htmlToPdf(browser, { outDir, name: 'letterhead-print', html: letterheadPrintHtml(), out: pub(file.letterheadPdf), width: 794, height: 1123 });
+  await htmlToPdf(browser, { outDir, name: 'letterhead-print', html: typesetHtml(letterheadPrintHtml()), out: pub(file.letterheadPdf), width: 794, height: 1123 });
   console.log(`  ${file.letterheadPdf}`);
 });
 

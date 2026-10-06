@@ -45,31 +45,36 @@ export const descriptor = (targetWidth, { size = 22, weight = 400, origin = { x:
   return { d, bounds, layout, tracking };
 };
 
-const circle = (cx, cy, r) => `M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0Z`;
-const ring = (cx, cy, outer, thickness) => `${circle(cx, cy, outer)}${circle(cx, cy, outer - thickness)}`;
+const archPath = (inset, { x0 = 12.5, x1 = 147.5, top = 12.5, bottom = 187.5, cy = 80 } = {}) => {
+  const left = x0 + inset;
+  const right = x1 - inset;
+  const r = (x1 - x0) / 2 - inset;
+  const base = bottom - inset;
+  return `M${left} ${base}V${cy}A${r} ${r} 0 0 1 ${right} ${cy}V${base}Z`;
+};
+const arch = (inset, thickness) => `${archPath(inset)}${archPath(inset + thickness)}`;
 
-export const monogram = ({ double = true, weight = 300, thickness = 2.6, glyphSize = 136, dot = true, heavy = false } = {}) => {
+export const symbolSize = { width: 160, height: 200 };
+
+export const monogram = ({ double = true, weight = 300, thickness = 2.6, glyphSize = 128, sillWidth = 34, sillHeight = 1.6, sillY = 160, glyphLift = 6 } = {}) => {
   const font = display(weight);
   const layout = layoutText(font, 'C', { size: glyphSize });
   const bounds = textBounds(layout);
-  const cx = 100;
-  const cy = 100;
-  const ox = cx - (bounds.minX + bounds.maxX) / 2 - glyphSize * 0.05;
+  const cx = 80;
+  const cy = 100 - glyphLift;
+  const ox = cx - (bounds.minX + bounds.maxX) / 2 - glyphSize * 0.03;
   const oy = cy - (bounds.minY + bounds.maxY) / 2;
   const d = lineToPath(layout, { x: ox, y: oy, digits: 1, fit: 0.12 });
-  const rings = double ? `${ring(cx, cy, 98, thickness)}${ring(cx, cy, 90, thickness * 0.45)}` : ring(cx, cy, 96, thickness);
-  const dotX = ox + bounds.maxX - glyphSize * 0.09;
-  const dotY = cy + glyphSize * 0.02;
-  return { rings, d, dot: dot ? { x: Number(dotX.toFixed(1)), y: Number(dotY.toFixed(1)), r: heavy ? 10 : 4.6 } : null, bounds };
+  const frame = double ? `${arch(0, thickness)}${arch(8, thickness * 0.45)}` : arch(0, thickness);
+  return { frame, d, sill: { x: cx - sillWidth / 2, y: sillY, width: sillWidth, height: sillHeight }, bounds };
 };
 
 export const symbolMarkup = (colors, options = {}) => {
   const m = monogram(options);
-  const dot = m.dot ? `<circle cx="${m.dot.x}" cy="${m.dot.y}" r="${m.dot.r}" fill="${colors.accent}"/>` : '';
-  return `<path fill="${colors.ink}" fill-rule="evenodd" d="${m.rings}"/><path fill="${colors.ink}" d="${m.d}"/>${dot}`;
+  return `<path fill="${colors.ink}" fill-rule="evenodd" d="${m.frame}"/><path fill="${colors.ink}" d="${m.d}"/><rect fill="${colors.accent}" x="${m.sill.x}" y="${m.sill.y}" width="${m.sill.width}" height="${m.sill.height}"/>`;
 };
 
-export const faviconMarkup = colors => symbolMarkup(colors, { double: false, weight: 500, thickness: 9, glyphSize: 140, heavy: true });
+export const faviconMarkup = colors => symbolMarkup(colors, { double: false, weight: 500, thickness: 11, glyphSize: 120, sillWidth: 44, sillHeight: 8, sillY: 150, glyphLift: 10 });
 
 const buildStack = (size, left, top, { ruleGap, descriptorSize, descriptorGap, weight = 400, descriptorWeight = 400 }) => {
   const word = wordmark(size, { weight });
@@ -80,49 +85,57 @@ const buildStack = (size, left, top, { ruleGap, descriptorSize, descriptorGap, w
   return { wordPlaced, ruleY, desc, left, baseline };
 };
 
+export const logoPadding = 10;
+
 export const primaryLayout = () => {
-  const p = buildStack(120, 20, 20, { ruleGap: 30, descriptorSize: 24, descriptorGap: 24, descriptorWeight: 500 });
-  return { ...p, width: Math.ceil(p.wordPlaced.width + 40), height: Math.ceil(p.ruleY + 24 + 12 + 24 * 0.5 + 24) };
+  const descriptorSize = 24;
+  const descriptorGap = 24;
+  const p = buildStack(120, logoPadding, logoPadding, { ruleGap: 30, descriptorSize, descriptorGap, descriptorWeight: 500 });
+  const descBaseline = p.ruleY + descriptorGap + descriptorSize * 0.5;
+  return { ...p, width: Math.ceil(p.wordPlaced.width + logoPadding * 2), height: Math.ceil(descBaseline + p.desc.bounds.maxY + logoPadding) };
 };
 
 export const lockups = colors => {
   const { ink, accent, small } = colors;
   const p = primaryLayout();
-  const pWidth = p.width;
-  const pHeight = p.height;
   const ruleSvg = (x, y, w) => `<rect fill="${accent}" x="${x}" y="${y}" width="${w}" height="1.6"/>`;
   const primaryBody = `<path fill="${ink}" d="${p.wordPlaced.d}"/>${ruleSvg(p.left, p.ruleY, p.wordPlaced.width)}<path fill="${small}" d="${p.desc.d}"/>`;
-  const primary = { viewBox: [0, 0, pWidth, pHeight], body: primaryBody };
+  const primary = { viewBox: [0, 0, p.width, p.height], body: primaryBody };
 
-  const markScale = 150 / 200;
-  const hMarkSize = 150;
+  const hMarkHeight = 160;
+  const hMarkScale = hMarkHeight / symbolSize.height;
+  const hMarkWidth = symbolSize.width * hMarkScale;
   const hWordSize = 70;
-  const hLeft = hMarkSize + 34;
+  const hLeft = hMarkWidth + 30;
   const hWord = wordmark(hWordSize, { origin: { x: hLeft, y: 0 } });
-  const hBaseline = hMarkSize / 2 - 6 + hWord.capHeight / 2 - 10;
+  const hBaseline = hMarkHeight / 2 - 8 + hWord.capHeight / 2;
   const hWordPlaced = wordmark(hWordSize, { origin: { x: hLeft, y: hBaseline } });
   const hRuleY = hBaseline + 18;
   const hDesc = descriptor(hWordPlaced.width, { size: 14, weight: 500, origin: { x: hLeft, y: hRuleY + 17 + 7 } });
   const horizontal = {
-    viewBox: [0, 0, Math.ceil(hLeft + hWordPlaced.width + 2), hMarkSize],
-    body: `<g transform="scale(${markScale})">${symbolMarkup({ ink, accent })}</g><path fill="${ink}" d="${hWordPlaced.d}"/>${ruleSvg(hLeft, hRuleY, hWordPlaced.width)}<path fill="${small}" d="${hDesc.d}"/>`,
+    viewBox: [0, 0, Math.ceil(hLeft + hWordPlaced.width + logoPadding), hMarkHeight],
+    body: `<g transform="scale(${hMarkScale})">${symbolMarkup({ ink, accent })}</g><path fill="${ink}" d="${hWordPlaced.d}"/>${ruleSvg(hLeft, hRuleY, hWordPlaced.width)}<path fill="${small}" d="${hDesc.d}"/>`,
   };
 
-  const vMark = 170;
+  const vMarkHeight = 180;
+  const vMarkScale = vMarkHeight / symbolSize.height;
+  const vMarkWidth = symbolSize.width * vMarkScale;
   const vWordSize = 66;
   const vProbe = wordmark(vWordSize);
-  const vWidth = Math.ceil(vProbe.width + 24);
+  const vWidth = Math.ceil(Math.max(vProbe.width, vMarkWidth) + logoPadding * 2);
   const vLeft = (vWidth - vProbe.width) / 2;
-  const vBaseline = vMark + 34 - vProbe.bounds.minY * 0.45 + vProbe.capHeight * 0.55;
+  const vBaseline = vMarkHeight + 28 - vProbe.bounds.minY * 0.45 + vProbe.capHeight * 0.55;
   const vWordPlaced = wordmark(vWordSize, { origin: { x: vLeft, y: vBaseline } });
   const vRuleY = vBaseline + 16;
-  const vDesc = descriptor(vWordPlaced.width, { size: 13, weight: 500, origin: { x: vLeft, y: vRuleY + 15 + 6.5 } });
+  const vDescSize = 13;
+  const vDescBaseline = vRuleY + 15 + vDescSize * 0.5;
+  const vDesc = descriptor(vWordPlaced.width, { size: vDescSize, weight: 500, origin: { x: vLeft, y: vDescBaseline } });
   const vertical = {
-    viewBox: [0, 0, vWidth, Math.ceil(vRuleY + 15 + 6.5 + 20)],
-    body: `<g transform="translate(${(vWidth - vMark) / 2} 0) scale(${vMark / 200})">${symbolMarkup({ ink, accent })}</g><path fill="${ink}" d="${vWordPlaced.d}"/>${ruleSvg(vLeft, vRuleY, vWordPlaced.width)}<path fill="${small}" d="${vDesc.d}"/>`,
+    viewBox: [0, 0, vWidth, Math.ceil(vDescBaseline + vDesc.bounds.maxY + logoPadding)],
+    body: `<g transform="translate(${(vWidth - vMarkWidth) / 2} 0) scale(${vMarkScale})">${symbolMarkup({ ink, accent })}</g><path fill="${ink}" d="${vWordPlaced.d}"/>${ruleSvg(vLeft, vRuleY, vWordPlaced.width)}<path fill="${small}" d="${vDesc.d}"/>`,
   };
 
-  return { primary, horizontal, vertical, symbol: { viewBox: [0, 0, 200, 200], body: symbolMarkup({ ink, accent }) } };
+  return { primary, horizontal, vertical, symbol: { viewBox: [0, 0, symbolSize.width, symbolSize.height], body: symbolMarkup({ ink, accent }) } };
 };
 
 export { brand, fontPathFor };

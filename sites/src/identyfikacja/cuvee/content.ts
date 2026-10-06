@@ -58,7 +58,7 @@ export const content: CaseContent = {
       {
         id: 'kursywa',
         title: 'Kursywa z kropką',
-        text: 'Mała kursywa cuvée z mosiężną kropką nad ostatnią literą.',
+        text: 'Mała kursywa cuvée z mosiężną kropką po ostatniej literze.',
         reason:
           'Odpadła, bo kursywa w małych literach jest ciepła i piękna, ale brzmi jak pracownia ceramiki albo kawiarnia. Hotel z dwunastoma pokojami potrzebuje powagi kapitalików.',
         thumb: 'figures/direction-kursywa.svg',
@@ -75,7 +75,7 @@ export const content: CaseContent = {
     chosen: {
       title: 'Wersalik',
       reason:
-        'Rozstrzelone kapitaliki Cuvée, cienka linia w kolorze mosiądzu i napis Hotel, Winnica w kapitalikach dają znak, który wygląda jak okładka dobrej książki. Sygnet to litera C w podwójnym cienkim kole, spokojna jak pieczęć na kopercie, i dobrze zastępuje napis tam, gdzie brakuje miejsca.',
+        'Rozstrzelone kapitaliki Cuvée, cienka linia w kolorze mosiądzu i napis Hotel, Winnica w kapitalikach dają znak, który wygląda jak okładka dobrej książki. Sygnet to litera C w arkadzie z dwóch cienkich linii, jak okno w murze folwarku, z mosiężną kreską jak próg pod literą. Dobrze zastępuje napis tam, gdzie brakuje miejsca.',
     },
     refinement: [
       {
@@ -88,7 +88,7 @@ export const content: CaseContent = {
       },
       {
         title: 'Test czytelności',
-        text: 'Pełny sygnet z dwoma cienkimi kołami działa od 48 pikseli. Poniżej zastępuje go sygnet uproszczony: jedno grube koło i grubsza litera, która czyta się w 16 pikselach jako ikona karty przeglądarki.',
+        text: 'Pełny sygnet z dwiema cienkimi liniami arkady działa od 48 pikseli. Poniżej zastępuje go sygnet uproszczony: jedna gruba arkada, grubsza litera i szeroka mosiężna kreska, które w 16 pikselach czytają się jako ikona karty przeglądarki.',
       },
     ],
   },
@@ -124,7 +124,7 @@ export const content: CaseContent = {
       title: 'Wizytówka, awers',
       caption: 'Sygnet w kolorze kości na czerni i nic więcej. Druk 85 na 55 mm, spad 3 mm.',
       image: 'mockups/cuvee-card-front.jpg',
-      alt: 'Awers wizytówki Cuvée: czarna karta z sygnetem, literą C w cienkim podwójnym kole.',
+      alt: 'Awers wizytówki Cuvée: czarna karta z sygnetem, literą C w cienkiej, podwójnej arkadzie.',
     },
     {
       id: 'karta-rewers',
@@ -158,7 +158,7 @@ export const content: CaseContent = {
   ],
   deliverables: {
     intro:
-      'Wszystko, co dostaje hotel, leży w jednej paczce ZIP i osobno na liście poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
+      'Paczka ZIP zawiera pliki robocze: logo, ikonę strony, kolory, kroje, wzór, ikony, druk, grafiki do mediów, podpis e-mail i brand book. Animacja i makiety leżą osobno, w grupach poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk, zwłaszcza dla mosiądzu. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
@@ -228,8 +228,8 @@ export const extras = {
   clearSpace:
     'Pole ochronne jest równe wysokości litery C z napisu Cuvée. Żaden tekst ani brzeg strony nie wchodzi w ten obszar.',
   minimum: {
-    symbol: '16 px na ekranie, 6 mm w druku (uproszczony sygnet)',
-    fullStamp: '48 px na ekranie, 14 mm w druku (pełny sygnet z dwoma kołami)',
+    symbol: '16 px na ekranie, 6 mm w druku',
+    fullStamp: '48 px na ekranie, 14 mm w druku',
     primary: '140 px szerokości, 30 mm w druku',
   },
   social: [

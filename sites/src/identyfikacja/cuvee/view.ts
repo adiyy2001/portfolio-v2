@@ -23,7 +23,12 @@ export const logoVariants = [
   },
   { id: 'horizontal', name: 'Poziome', note: 'paski, nagłówki i podpis e-mail', ground: 'len' },
   { id: 'vertical', name: 'Pionowe', note: 'etykiety, szyldy i kwadratowe pola', ground: 'papier' },
-  { id: 'symbol', name: 'Sygnet', note: 'sama litera C w kole, awatary i pieczęć', ground: 'len' },
+  {
+    id: 'symbol',
+    name: 'Sygnet',
+    note: 'sama litera C w arkadzie, awatary i pieczęć',
+    ground: 'len',
+  },
   {
     id: 'mono-black',
     name: 'Jednokolorowe',

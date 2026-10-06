@@ -14,6 +14,7 @@ import {
 } from './composer';
 import { content, contact, extras, grapes, vintages } from './content';
 import type { Manifest } from '../shared/types';
+import { nbsp, typesetHtml } from './typography';
 import { iconNames, logoVariants } from './view';
 
 describe('label composer', () => {
@@ -133,5 +134,37 @@ describe('case study content', () => {
       ],
     } as unknown as Manifest;
     expect(iconNames(manifest)).toEqual(['klucz', 'lozko']);
+  });
+});
+
+describe('typography', () => {
+  it('binds single letter words to the next word', () => {
+    expect(nbsp('Hotel działa w dawnym folwarku i w winnicy')).toBe(
+      'Hotel działa w\u00a0dawnym folwarku i\u00a0w\u00a0winnicy',
+    );
+  });
+
+  it('binds numbers to their units', () => {
+    expect(nbsp('48 px na ekranie, 14 mm w druku')).toBe(
+      '48\u00a0px na ekranie, 14\u00a0mm w\u00a0druku',
+    );
+  });
+
+  it('keeps words that only end in a short letter', () => {
+    expect(nbsp('kolora dom')).toBe('kolora dom');
+  });
+
+  it('leaves tags, scripts and styles alone', () => {
+    const html =
+      '<p class="a b">wino z odmian</p><style>.x a b{}</style><script>var a = 1;</script>';
+    expect(typesetHtml(html)).toBe(
+      '<p class="a b">wino z\u00a0odmian</p><style>.x a b{}</style><script>var a = 1;</script>',
+    );
+  });
+
+  it('leaves no loose short words in the case study copy', () => {
+    const loose = JSON.stringify(content).match(/ [aiouwz] /gi) ?? [];
+    expect(loose.length).toBeGreaterThan(0);
+    expect(nbsp(content.client.paragraphs[0])).not.toMatch(/ [aiouwz] /i);
   });
 });

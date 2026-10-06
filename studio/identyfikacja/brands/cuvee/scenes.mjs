@@ -1,13 +1,14 @@
+import { typesetHtml } from '../../../../sites/src/identyfikacja/cuvee/typography.ts';
 import { c, contact, extras, baseCss, dataUri, logoMarkup, readPub, file, grapes } from './theme.mjs';
 
 export const L = (variant, scheme, style = '') => logoMarkup(variant, scheme, style);
 
 export const scene = (body, { width, height, css = '' }) =>
-  `<!doctype html><html lang="pl"><meta charset="utf-8"><style>${baseCss()}html,body{width:${width}px;height:${height}px;overflow:hidden}${css}</style><body>${body}</body></html>`;
+  typesetHtml(`<!doctype html><html lang="pl"><meta charset="utf-8"><style>${baseCss()}html,body{width:${width}px;height:${height}px;overflow:hidden}${css}</style><body>${body}</body></html>`);
 
 const mm = n => `calc(${n} * var(--mm))`;
 const patternUri = () => dataUri(readPub(file.pattern));
-const shadow = 'box-shadow:0 1px 0 rgba(21,17,14,.12),0 28px 50px -34px rgba(21,17,14,.55)';
+const shadow = 'box-shadow:0 0 0 1px rgba(21,17,14,.22)';
 
 export const cardFront = mode => `<div class="card front" style="--mm:${mode === 'print' ? '1mm' : '13.2px'}"><div class="f-mark">${L('symbol', 'negative', 'width:100%;height:100%')}</div></div>`;
 
