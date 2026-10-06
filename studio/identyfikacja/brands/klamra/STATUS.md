@@ -42,10 +42,23 @@
 ## Open issues
 
 - Root `yarn lint` could not run in this worktree (no root `node_modules`), `eslint` is not installed there.
-- On phones the stickers on the laptop lid are small because the lid scales down with the viewport.
-- The contrast table scrolls sideways inside its frame at 390 px (shared component).
-- Tidy layout leaves the right side of the lid empty, rows break early because of sticker widths.
+- The table markup is shared, so the phone layout of the colour and contrast tables is done only from the brand CSS (rows stacked with labels). The page is about 29900 px tall at 390 px because of that.
 - No independent review done yet.
+
+## QA (phase 4)
+
+Checked and fixed in this pass:
+
+- Full page screenshots at 390 and 1440 px, all slices viewed, also with reduced motion: 0 problems reported, console clean, favicon SVG, ICO and apple touch icon links resolve (200).
+- Fixed: widows (balanced headings, `text-wrap: pretty`, non breaking space after one letter words such as "K"), odd last item of the hero navigation, clipped terminal sketch, cropped e-mail signature in the gallery, the animation block (video beside the copy), the CTA block layout, icon names with Polish letters ("błąd", "gałąź"), tight scale and specimen spacing in the brand book, sheet titles in the brand book.
+- Fixed: the pattern strip on the business card and letterhead was rasterised by Chromium (blurry in the PDF), now inline vector SVG tiles. Card and letterhead PDFs and mockups regenerated.
+- Fixed: on phones the laptop lid uses a compact area, so the stickers are bigger and the right side is no longer empty.
+- Logo at 16, 24, 48 and 512 px legible, SVG rules met (no text elements, clean viewBox, logo under 10 KB).
+- PDFs: pdffonts has no Type 3, page sizes as specified, business card 91 by 61 mm with bleed, random pages rendered and opened.
+- Video: ffprobe 1080 by 1080, 3 s, MP4 and WebM.
+- Contrast recomputed by script, every pair matches the table.
+- ZIP contents match the "Co dostaje klient" list, validation 64 of 64.
+- `yarn --cwd sites run check` 0 errors, `yarn --cwd sites test` 1205 passed, `yarn --cwd sites build` ok, prettier clean, guard 0 problems.
 
 ## Review scores
 
