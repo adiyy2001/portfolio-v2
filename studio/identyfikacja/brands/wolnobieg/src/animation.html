@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pl">
+<meta charset="utf-8">
+<title>Wolnobieg animacja</title>
+<style>
+html,body{margin:0;width:1080px;height:1080px;overflow:hidden;background:#f8edd5}
+.stage{position:relative;width:1080px;height:1080px;background:#f8edd5;overflow:hidden}
+img{position:absolute;display:block}
+#badge{left:290px;top:290px;width:500px;height:500px;transform-origin:50% 50%}
+#lockup{left:140px;top:245px;width:800px;opacity:0;transform-origin:50% 50%}
+#trail{position:absolute;left:0;top:0}
+#roll{position:absolute;left:0;top:0;width:1080px;height:1080px;transform-origin:50% 50%}
+</style>
+<body>
+<div class="stage" id="stage">
+<div id="roll"><svg id="trail" width="1080" height="1080" viewBox="0 0 1080 1080" aria-hidden="true" fill="none" stroke-linecap="round" stroke-width="30">
+<path id="t1" pathLength="1" stroke="#ec7424" stroke-dasharray="1 1" stroke-dashoffset="1" d="M-60 484C150 520 360 500 540 484"/>
+<path id="t2" pathLength="1" stroke="#e9a81d" stroke-dasharray="1 1" stroke-dashoffset="1" d="M-60 540C150 576 360 556 540 540"/>
+<path id="t3" pathLength="1" stroke="#5b2f14" stroke-dasharray="1 1" stroke-dashoffset="1" d="M-60 596C150 632 360 612 540 596"/>
+</svg>
+<img id="badge" alt="" src="../../../../../sites/public/identyfikacja/wolnobieg/logo/wolnobieg-symbol.svg"></div>
+<img id="lockup" alt="" src="../../../../../sites/public/identyfikacja/wolnobieg/logo/wolnobieg-vertical.svg">
+</div>
+<script>
+const roll = 'cubic-bezier(.25,.6,.25,1)';
+const run = (id, keyframes, options) => document.getElementById(id).animate(keyframes, { fill: 'both', easing: roll, ...options });
+const trail = (id, delay) => run(id, [{ strokeDashoffset: 1, offset: 0 }, { strokeDashoffset: 0, offset: 1 }], { duration: 1300, delay, easing: roll });
+const animations = [
+  trail('t1', 0),
+  trail('t2', 40),
+  trail('t3', 80),
+  run('badge', [
+    { transform: 'translateX(-600px) rotate(-540deg)', offset: 0 },
+    { transform: 'translateX(0) rotate(0deg)', offset: 1 },
+  ], { duration: 1300 }),
+  run('roll', [
+    { opacity: 1, transform: 'scale(1)', offset: 0 },
+    { opacity: 0, transform: 'scale(0.9)', offset: 1 },
+  ], { duration: 350, delay: 1750, easing: 'ease-in' }),
+  run('lockup', [
+    { opacity: 0, transform: 'translateY(40px) scale(0.94)', offset: 0 },
+    { opacity: 1, transform: 'translateY(0) scale(1)', offset: 1 },
+  ], { duration: 800, delay: 1900 }),
+];
+window.__duration = 3000;
+animations.forEach(animation => animation.pause());
+window.__seek = ms => {
+  animations.forEach(animation => {
+    animation.currentTime = ms;
+  });
+};
+window.__seek(0);
+</script>
