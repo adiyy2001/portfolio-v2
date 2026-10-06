@@ -120,8 +120,8 @@ export const letterheadPrintHtml = () => scene(letterheadBody('print'), {
 
 const posterData = [
   { variant: piatek, day: 'Piątek', stage: 'Przędzalnia', ground: c.piatek, ink: c.atrament, thread: c.atrament, text: c.atrament, lines: ['18:00 instalacja na 32 szpule', '20:00 warsztat nitek', '21:30 pokaz Szpulomat'] },
-  { variant: tkalnia, day: 'Sobota', stage: 'Tkalnia', ground: c.atrament, ink: c.kosc, thread: c.sobota, text: c.kosc, lines: ['20:00 otwarcie sceny', '22:00 koncert na 8 syntezatorów', '00:30 set 128 BPM'] },
-  { variant: farb, day: 'Niedziela', stage: 'Farbiarnia', ground: c.kosc, ink: c.atrament, thread: c.niedziela, text: c.atrament, lines: ['16:00 projekcje wideo', '18:30 spotkanie z artystami', '21:00 finał w trzech halach'] },
+  { variant: tkalnia, day: 'Sobota', stage: 'Tkalnia', ground: c.sobota, ink: c.atrament, thread: c.atrament, text: c.atrament, lines: ['20:00 otwarcie sceny', '22:00 koncert na 8 syntezatorów', '00:30 set 128 BPM'] },
+  { variant: farb, day: 'Niedziela', stage: 'Farbiarnia', ground: c.niedziela, ink: c.atrament, thread: c.atrament, text: c.atrament, lines: ['16:00 projekcje wideo', '18:30 spotkanie z artystami', '21:00 finał w trzech halach'] },
 ];
 
 const poster = (item, width) => `<div class="poster shadow" style="width:${width}px;height:${Math.round(width * 1.414)}px;background:${item.ground};color:${item.text}">
@@ -139,7 +139,7 @@ export const applicationScene = () => {
 .poster{position:absolute;overflow:hidden}
 .poster .p-day{position:absolute;left:34px;top:30px;font:800 50px/1 'Nosna Display',sans-serif;white-space:nowrap}
 .poster .p-stage{position:absolute;left:36px;top:96px;font-size:20px}
-.poster .p-field{position:absolute;left:12px;right:-34px;top:224px}
+.poster .p-field{position:absolute;left:0;right:30px;top:224px}
 .poster .p-lines{position:absolute;left:36px;bottom:96px;margin:0;padding:0;list-style:none;font-size:16px;line-height:1.7}
 .poster .p-name{position:absolute;left:34px;bottom:30px;font:800 44px/1 'Nosna Display',sans-serif}
 .pass{position:absolute;left:1680px;top:330px;width:360px;height:600px;background:${c.papier};color:${c.atrament};transform:rotate(-2deg)}
@@ -207,12 +207,12 @@ export const postScene = n => {
   const grounds = [
     { ground: c.piatek, text: c.atrament, thread: c.atrament, ink: c.atrament, variant: piatek, label: 'Przędzalnia, 100 BPM' },
     { ground: c.atrament, text: c.kosc, thread: c.sobota, ink: c.kosc, variant: tkalnia, label: 'Tkalnia, 128 BPM' },
-    { ground: c.kosc, text: c.atrament, thread: c.niedziela, ink: c.atrament, variant: { day: 'niedziela', stage: 'wykonczalnia', bpm: 146 }, label: 'Wykończalnia, 146 BPM' },
+    { ground: c.niedziela, text: c.atrament, thread: c.atrament, ink: c.atrament, variant: { day: 'niedziela', stage: 'wykonczalnia', bpm: 146 }, label: 'Wykończalnia, 146 BPM' },
   ];
   const g = grounds[n - 1];
   const name = lockSvg(piatek, { thread: g.thread, ink: g.ink }, 'width:100%;height:auto');
   return scene(
-    `<div class="post" style="background:${g.ground};color:${g.text}"><div style="position:absolute;left:80px;top:90px"><h2>${p.headline}</h2><p class="stage" style="margin-top:22px">${g.label}</p></div><div style="position:absolute;left:-40px;right:-110px;top:340px">${markSvg(g.variant, { thread: g.thread, ink: g.ink }, 'width:100%;height:auto')}</div><div style="position:absolute;left:80px;right:80px;top:900px"><p class="body" style="max-width:780px">${p.body}</p></div><p class="foot">${p.foot}</p><div class="name">${name}</div></div>`,
+    `<div class="post" style="background:${g.ground};color:${g.text}"><div style="position:absolute;left:80px;top:90px"><h2>${p.headline}</h2><p class="stage" style="margin-top:22px">${g.label}</p></div><div style="position:absolute;left:0;right:70px;top:340px">${markSvg(g.variant, { thread: g.thread, ink: g.ink }, 'width:100%;height:auto')}</div><div style="position:absolute;left:80px;right:80px;top:900px"><p class="body" style="max-width:780px">${p.body}</p></div><p class="foot">${p.foot}</p><div class="name">${name}</div></div>`,
     { width: 1080, height: 1350, css: postCss, background: g.ground },
   );
 };
