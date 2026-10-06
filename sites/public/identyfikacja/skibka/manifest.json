@@ -8,11 +8,11 @@
     "city": "Kraków"
   },
   "base": "/wzornik/identyfikacja/skibka/",
-  "totalBytes": 15271680,
-  "totalHuman": "14.6 MB",
+  "totalBytes": 12369412,
+  "totalHuman": "11.8 MB",
   "zip": {
     "path": "skibka-identyfikacja.zip",
-    "bytes": 6261112
+    "bytes": 4837083
   },
   "groups": [
     {
@@ -188,7 +188,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 3338013,
+      "bytes": 1856914,
       "formats": "PDF",
       "files": [
         "skibka-brandbook.pdf"
@@ -198,7 +198,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 6261112,
+      "bytes": 4837083,
       "formats": "ZIP",
       "files": [
         "skibka-identyfikacja.zip"
@@ -208,7 +208,7 @@
       "id": "meta",
       "title": "Pozostałe",
       "count": 7,
-      "bytes": 250010,
+      "bytes": 252870,
       "formats": "SVG, PNG, PNG 1200 px",
       "files": [
         "figures/clearspace.svg",
@@ -290,7 +290,7 @@
     },
     {
       "path": "figures/clearspace.svg",
-      "bytes": 8669,
+      "bytes": 10163,
       "type": "svg",
       "group": "meta",
       "width": 857,
@@ -298,7 +298,7 @@
     },
     {
       "path": "figures/direction-klos.svg",
-      "bytes": 2713,
+      "bytes": 2910,
       "type": "svg",
       "group": "meta",
       "width": 200,
@@ -306,7 +306,7 @@
     },
     {
       "path": "figures/direction-kromka.svg",
-      "bytes": 1083,
+      "bytes": 1144,
       "type": "svg",
       "group": "meta",
       "width": 200,
@@ -314,7 +314,7 @@
     },
     {
       "path": "figures/direction-stamp.svg",
-      "bytes": 5809,
+      "bytes": 6312,
       "type": "svg",
       "group": "meta",
       "width": 400,
@@ -322,7 +322,7 @@
     },
     {
       "path": "figures/wordmark-default.svg",
-      "bytes": 2996,
+      "bytes": 3345,
       "type": "svg",
       "group": "meta",
       "width": 437,
@@ -330,7 +330,7 @@
     },
     {
       "path": "figures/wordmark-kerned.svg",
-      "bytes": 2856,
+      "bytes": 3112,
       "type": "svg",
       "group": "meta",
       "width": 437,
@@ -859,7 +859,7 @@
     },
     {
       "path": "skibka-brandbook.pdf",
-      "bytes": 3338013,
+      "bytes": 1856914,
       "type": "pdf",
       "group": "brandbook",
       "pages": 27,
@@ -874,7 +874,7 @@
     },
     {
       "path": "skibka-identyfikacja.zip",
-      "bytes": 6261112,
+      "bytes": 4837083,
       "type": "zip",
       "group": "zip"
     },
