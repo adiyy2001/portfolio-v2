@@ -1,6 +1,6 @@
 # Adrian Turbiński
 
-> Front-end and full-stack developer from Wrocław, Poland. He has built web applications since 2019, employed and freelance, mostly in Angular, TypeScript, RxJS and Node.js. The site has two editions, one for recruiters and one for clients, each in Polish and English.
+> Front-end, Angular and full-stack developer from Wrocław, Poland, available for freelance work in Wrocław, in Lower Silesia and remotely. He has built web applications since 2019, employed and freelance, mostly in Angular, TypeScript, RxJS and Node.js. The site has two editions, one for recruiters and one for clients, each in Polish and English.
 
 - Senior frontend developer and tech lead. At PSE Innowacje he builds an app that models and visualizes high-voltage power lines. He designs front-end and back-end architecture, has led a small team and onboards new engineers.
 - As a freelancer he builds complete web apps for companies: front end, back end and deployment, usable with a keyboard and a screen reader. From the quote through deployment to maintenance, clients talk to him directly.

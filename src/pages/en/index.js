@@ -52,7 +52,7 @@ export const Head = () => (
   <Seo
     lang="en"
     view="home"
-    title="Adrian Turbiński, front-end and full-stack developer"
-    description="Adrian Turbiński, front-end and full-stack developer from Wrocław. Two editions of the site: for recruiters and for clients."
+    title="Front-end and Angular developer in Wrocław, Adrian Turbiński"
+    description="Front-end and full-stack developer from Wrocław. Angular, TypeScript, Node.js, web apps, websites and WCAG accessibility for companies. Editions for recruiters and for clients."
   />
 );

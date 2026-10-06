@@ -57,7 +57,7 @@ export const Head = () => (
   <Seo
     lang="pl"
     view="rec"
-    title="Adrian Turbiński dla rekrutera: senior frontend, tech lead"
-    description="Senior frontend i tech lead z Wrocławia. Angular, TypeScript, RxJS i Node.js od 2019 roku. CV do druku."
+    title="Senior Angular developer Wrocław, tech lead: Adrian Turbiński"
+    description="Senior frontend developer i tech lead z Wrocławia. Angular, TypeScript, RxJS, NgRx i Node.js od 2019 roku. CV do druku."
   />
 );

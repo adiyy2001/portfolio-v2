@@ -61,7 +61,7 @@ export const Head = () => (
   <Seo
     lang="pl"
     view="cli"
-    title="Adrian Turbiński dla klienta: aplikacje, strony i dostępność"
-    description="Aplikacje webowe i strony dla firm, od wyceny po utrzymanie. Front, back, wdrożenie i dostępność według WCAG."
+    title="Programista freelancer Wrocław: aplikacje, strony, WCAG"
+    description="Freelancer z Wrocławia: aplikacje webowe i strony internetowe dla firm, od wyceny po utrzymanie. Front, back, wdrożenie i dostępność według WCAG."
   />
 );

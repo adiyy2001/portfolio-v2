@@ -16,7 +16,17 @@ const graph = ({ url, lang, view, title, description, canonical, image, post }) 
     jobTitle:
       lang === 'pl' ? 'Programista front-end i full-stack' : 'Front-end and full-stack developer',
     address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
-    knowsAbout: ['Angular', 'TypeScript', 'RxJS', 'Node.js'],
+    knowsAbout: [
+      'Angular',
+      'TypeScript',
+      'RxJS',
+      'NgRx',
+      'Node.js',
+      'Frontend architecture',
+      'Web accessibility',
+      'WCAG',
+    ],
+    workLocation: { '@type': 'City', name: 'Wrocław' },
     sameAs: [
       'https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6',
       'https://github.com/adiyy2001',
@@ -43,6 +53,27 @@ const graph = ({ url, lang, view, title, description, canonical, image, post }) 
   };
   if (view === 'rec') page.mainEntity = { '@id': person['@id'] };
   const nodes = [person, site, page];
+  if (view === 'home' || view === 'cli') {
+    nodes.push({
+      '@type': 'ProfessionalService',
+      '@id': url('/#service'),
+      name: 'Adrian Turbiński Software',
+      url: url('/'),
+      email: 'mailto:adrian.turbinski@gmail.com',
+      founder: { '@id': person['@id'] },
+      address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
+      areaServed: [
+        { '@type': 'City', name: 'Wrocław' },
+        { '@type': 'AdministrativeArea', name: 'Dolnośląskie' },
+        { '@type': 'Country', name: 'Poland' },
+      ],
+      knowsLanguage: ['pl', 'en'],
+      serviceType:
+        lang === 'pl'
+          ? ['Aplikacje webowe', 'Strony internetowe', 'Dostępność WCAG', 'Programowanie Angular']
+          : ['Web applications', 'Websites', 'WCAG accessibility', 'Angular development'],
+    });
+  }
   if (view === 'case') {
     nodes.push({
       '@type': 'CreativeWork',
