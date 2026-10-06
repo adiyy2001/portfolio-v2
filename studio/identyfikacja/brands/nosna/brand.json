@@ -1,0 +1,81 @@
+{
+  "slug": "nosna",
+  "name": "Nośna",
+  "styleId": "I6",
+  "style": "Generatywna identyfikacja dynamiczna",
+  "trade": "festiwal sztuki nowych mediów i muzyki elektronicznej",
+  "city": "Łódź",
+  "themeColor": "#E9E6DE",
+  "appIconBackground": "#0E0E12",
+  "testBackground": { "light": "kosc", "dark": "atrament" },
+  "palette": [
+    { "id": "atrament", "name": "Atrament", "group": "primary", "hex": "#0E0E12", "role": "tekst, nośna, pierścień, ciemne tło" },
+    { "id": "piatek", "name": "Piątek", "group": "accent", "hex": "#FF3D1F", "role": "kolor piątku, wypełnienia i nitki pola" },
+    { "id": "sobota", "name": "Sobota", "group": "accent", "hex": "#00B3A4", "role": "kolor soboty, wypełnienia i nitki pola" },
+    { "id": "niedziela", "name": "Niedziela", "group": "accent", "hex": "#FF2D95", "role": "kolor niedzieli, wypełnienia i nitki pola" },
+    { "id": "piatek-tekst", "name": "Piątek ciemny", "group": "accent", "hex": "#B02A0B", "role": "piątek w tekście na kości" },
+    { "id": "sobota-tekst", "name": "Sobota ciemna", "group": "accent", "hex": "#00695F", "role": "sobota w tekście na kości" },
+    { "id": "niedziela-tekst", "name": "Niedziela ciemna", "group": "accent", "hex": "#A8005C", "role": "niedziela w tekście na kości" },
+    { "id": "papier", "name": "Papier", "group": "neutral", "hex": "#F6F4EF", "role": "karty, panele, kartki" },
+    { "id": "kosc", "name": "Kość", "group": "neutral", "hex": "#E9E6DE", "role": "tło strony i plakatów" },
+    { "id": "mgla", "name": "Mgła", "group": "neutral", "hex": "#CFCBC0", "role": "linie, obwódki, tło tabel" },
+    { "id": "dym", "name": "Dym", "group": "neutral", "hex": "#8F8B82", "role": "cienkie linie, bez tekstu" },
+    { "id": "grafit", "name": "Grafit", "group": "neutral", "hex": "#4B4B50", "role": "tekst drugorzędny, podpisy" }
+  ],
+  "iconNames": ["bilet", "scena", "glosnik", "sluchawki", "fala", "nic", "szpula", "krosno", "projektor", "pinezka", "zegar", "wejscie"],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki i napis",
+      "family": "Syne",
+      "css": "Nosna Display",
+      "dir": "syne",
+      "file": "Syne[wght].ttf",
+      "instances": [
+        { "weight": 500, "style": "normal", "axes": { "wght": 500 } },
+        { "weight": 700, "style": "normal", "axes": { "wght": 700 } },
+        { "weight": 800, "style": "normal", "axes": { "wght": 800 } }
+      ]
+    },
+    {
+      "id": "mono",
+      "role": "parametry, godziny, ziarna",
+      "family": "Martian Mono",
+      "css": "Nosna Mono",
+      "dir": "martianmono",
+      "file": "MartianMono[wdth,wght].ttf",
+      "instances": [
+        { "weight": 400, "style": "normal", "axes": { "wght": 400, "wdth": 100 } },
+        { "weight": 500, "style": "normal", "axes": { "wght": 500, "wdth": 100 } },
+        { "weight": 700, "style": "normal", "axes": { "wght": 700, "wdth": 100 } }
+      ]
+    }
+  ],
+  "contrast": [
+    { "id": "atrament-kosc", "fg": "atrament", "bg": "kosc", "kind": "text", "use": "tekst podstawowy na tle strony" },
+    { "id": "atrament-papier", "fg": "atrament", "bg": "papier", "kind": "text", "use": "tekst na kartach i papierze firmowym" },
+    { "id": "atrament-mgla", "fg": "atrament", "bg": "mgla", "kind": "text", "use": "tekst w tabelach i na tle sekcji" },
+    { "id": "grafit-kosc", "fg": "grafit", "bg": "kosc", "kind": "text", "use": "tekst drugorzędny, podpisy, parametry" },
+    { "id": "grafit-papier", "fg": "grafit", "bg": "papier", "kind": "text", "use": "podpisy na kartach" },
+    { "id": "piatek-tekst-kosc", "fg": "piatek-tekst", "bg": "kosc", "kind": "text", "use": "piątek jako tekst na kości" },
+    { "id": "sobota-tekst-kosc", "fg": "sobota-tekst", "bg": "kosc", "kind": "text", "use": "sobota jako tekst na kości" },
+    { "id": "niedziela-tekst-kosc", "fg": "niedziela-tekst", "bg": "kosc", "kind": "text", "use": "niedziela jako tekst na kości" },
+    { "id": "piatek-tekst-papier", "fg": "piatek-tekst", "bg": "papier", "kind": "text", "use": "piątek jako tekst na kartach" },
+    { "id": "atrament-piatek", "fg": "atrament", "bg": "piatek", "kind": "text", "use": "tekst na polu piątku" },
+    { "id": "atrament-sobota", "fg": "atrament", "bg": "sobota", "kind": "text", "use": "tekst na polu soboty" },
+    { "id": "atrament-niedziela", "fg": "atrament", "bg": "niedziela", "kind": "text", "use": "tekst na polu niedzieli" },
+    { "id": "kosc-atrament", "fg": "kosc", "bg": "atrament", "kind": "text", "use": "negatyw: jasny tekst na atramencie" },
+    { "id": "mgla-atrament", "fg": "mgla", "bg": "atrament", "kind": "text", "use": "tekst drugorzędny na atramencie" },
+    { "id": "piatek-atrament", "fg": "piatek", "bg": "atrament", "kind": "text", "use": "piątek jako tekst na atramencie" },
+    { "id": "sobota-atrament", "fg": "sobota", "bg": "atrament", "kind": "text", "use": "sobota jako tekst na atramencie" },
+    { "id": "niedziela-atrament", "fg": "niedziela", "bg": "atrament", "kind": "text", "use": "niedziela jako tekst na atramencie" },
+    { "id": "kosc-grafit", "fg": "kosc", "bg": "grafit", "kind": "text", "use": "jasny tekst na grafitowym tle" },
+    { "id": "atrament-kosc-large", "fg": "atrament", "bg": "kosc", "kind": "large", "use": "duże nagłówki i napis festiwalu" },
+    { "id": "atrament-kosc-ui", "fg": "atrament", "bg": "kosc", "kind": "ui", "use": "obrys fokusu, ramki pól i suwak generatora" },
+    { "id": "piatek-tekst-kosc-ui", "fg": "piatek-tekst", "bg": "kosc", "kind": "ui", "use": "aktywny przycisk dnia i znacznik suwaka" },
+    { "id": "piatek-kosc", "fg": "piatek", "bg": "kosc", "kind": "decorative", "use": "nitki pola w kolorze piątku na kości", "note": "grafika generowana, nie niesie tekstu; znak jest czytelny dzięki nośnej i napisowi w atramencie" },
+    { "id": "sobota-kosc", "fg": "sobota", "bg": "kosc", "kind": "decorative", "use": "nitki pola w kolorze soboty na kości", "note": "grafika generowana, nie niesie tekstu; znak jest czytelny dzięki nośnej i napisowi w atramencie" },
+    { "id": "niedziela-kosc", "fg": "niedziela", "bg": "kosc", "kind": "decorative", "use": "nitki pola w kolorze niedzieli na kości", "note": "grafika generowana, nie niesie tekstu; znak jest czytelny dzięki nośnej i napisowi w atramencie" },
+    { "id": "dym-kosc", "fg": "dym", "bg": "kosc", "kind": "decorative", "use": "cienkie linie podziału i wzór", "note": "dekoracja bez tekstu" }
+  ]
+}
