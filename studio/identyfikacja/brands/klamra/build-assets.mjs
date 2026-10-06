@@ -37,7 +37,7 @@ const jobs = [
   { name: 'card-front', html: cardScene('front'), out: file.cardFront, width: 1800, height: 1260, type: 'jpeg' },
   { name: 'card-back', html: cardScene('back'), out: file.cardBack, width: 1800, height: 1260, type: 'jpeg' },
   { name: 'letterhead', html: letterheadScene(), out: file.letterhead, width: 1500, height: 1860, type: 'jpeg' },
-  { name: 'application', html: applicationScene(), out: file.application, width: 1900, height: 1400, type: 'jpeg' },
+  { name: 'application', html: applicationScene(), out: file.application, width: 1900, height: 1180, type: 'jpeg' },
   { name: 'email', html: emailScene(pngData), out: file.emailMock, width: 1600, height: 1100, type: 'jpeg' },
   { name: 'avatar', html: avatarScene(), out: file.avatar, width: 1080, height: 1080 },
   { name: 'post-1', html: postScene(1), out: file.post(1), width: 1080, height: 1350 },

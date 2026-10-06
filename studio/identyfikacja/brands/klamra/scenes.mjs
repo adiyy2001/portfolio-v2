@@ -135,7 +135,7 @@ const sealMarkup = () => {
     const r = i % 2 === 0 ? 56 : 46;
     pts.push(`${(60 + Math.cos(a) * r).toFixed(1)},${(60 + Math.sin(a) * r).toFixed(1)}`);
   }
-  return `<polygon points="${pts.join(' ')}" fill="${c.atrament}" transform="translate(5 5)"/><polygon points="${pts.join(' ')}" fill="${c.roz}" stroke="${c.atrament}" stroke-width="4"/><text x="60" y="56" text-anchor="middle" font-family="'Klamra Display'" font-weight="900" font-size="15" fill="${c.atrament}">ZALICZONE</text><text x="60" y="76" text-anchor="middle" font-family="'Klamra Mono'" font-weight="800" font-size="13" fill="${c.atrament}">{ ok }</text>`;
+  return `<polygon points="${pts.join(' ')}" fill="${c.atrament}" transform="translate(5 5)"/><polygon points="${pts.join(' ')}" fill="${c.roz}" stroke="${c.atrament}" stroke-width="4"/><text x="60" y="56" text-anchor="middle" font-family="'Klamra Display'" font-weight="900" font-size="13" fill="${c.atrament}">ZALICZONE</text><text x="60" y="76" text-anchor="middle" font-family="'Klamra Mono'" font-weight="800" font-size="13" fill="${c.atrament}">{ ok }</text>`;
 };
 
 export const bigBraces = (style = '') => {
