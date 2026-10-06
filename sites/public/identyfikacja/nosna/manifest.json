@@ -8,11 +8,11 @@
     "city": "Łódź"
   },
   "base": "/wzornik/identyfikacja/nosna/",
-  "totalBytes": 10276141,
-  "totalHuman": "9.8 MB",
+  "totalBytes": 10802105,
+  "totalHuman": "10.3 MB",
   "zip": {
     "path": "nosna-identyfikacja.zip",
-    "bytes": 4100966
+    "bytes": 4355496
   },
   "groups": [
     {
@@ -153,7 +153,7 @@
       "id": "social",
       "title": "Media społecznościowe",
       "count": 4,
-      "bytes": 258686,
+      "bytes": 247866,
       "formats": "PNG, PNG 1080 px",
       "files": [
         "social/nosna-avatar.png",
@@ -176,7 +176,7 @@
       "id": "mockups",
       "title": "Makiety",
       "count": 5,
-      "bytes": 557988,
+      "bytes": 547284,
       "formats": "JPG",
       "files": [
         "mockups/nosna-application.jpg",
@@ -201,7 +201,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1781285,
+      "bytes": 2074243,
       "formats": "PDF",
       "files": [
         "nosna-brandbook.pdf"
@@ -211,7 +211,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 4100966,
+      "bytes": 4355496,
       "formats": "ZIP",
       "files": [
         "nosna-identyfikacja.zip"
@@ -915,7 +915,7 @@
     },
     {
       "path": "mockups/nosna-application.jpg",
-      "bytes": 192916,
+      "bytes": 182212,
       "type": "jpg",
       "group": "mockups"
     },
@@ -945,7 +945,7 @@
     },
     {
       "path": "nosna-brandbook.pdf",
-      "bytes": 1781285,
+      "bytes": 2074243,
       "type": "pdf",
       "group": "brandbook",
       "pages": 28,
@@ -960,7 +960,7 @@
     },
     {
       "path": "nosna-identyfikacja.zip",
-      "bytes": 4100966,
+      "bytes": 4355496,
       "type": "zip",
       "group": "zip"
     },
@@ -1022,7 +1022,7 @@
     },
     {
       "path": "social/nosna-post-1.png",
-      "bytes": 103336,
+      "bytes": 91736,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -1031,7 +1031,7 @@
     },
     {
       "path": "social/nosna-post-2.png",
-      "bytes": 46845,
+      "bytes": 45043,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -1040,7 +1040,7 @@
     },
     {
       "path": "social/nosna-post-3.png",
-      "bytes": 64048,
+      "bytes": 66630,
       "type": "png",
       "group": "social",
       "width": 1080,
