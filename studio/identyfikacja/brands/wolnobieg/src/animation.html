@@ -7,9 +7,9 @@ html,body{margin:0;width:1080px;height:1080px;overflow:hidden;background:#f8edd5
 .stage{position:relative;width:1080px;height:1080px;background:#f8edd5;overflow:hidden}
 img{position:absolute;display:block}
 #badge{left:290px;top:290px;width:500px;height:500px;transform-origin:50% 50%}
-#lockup{left:140px;top:245px;width:800px;opacity:0;transform-origin:50% 50%}
+#lockup{left:140px;top:230px;width:800px;opacity:0;clip-path:inset(282px 0 0 0)}
 #trail{position:absolute;left:0;top:0}
-#roll{position:absolute;left:0;top:0;width:1080px;height:1080px;transform-origin:50% 50%}
+#roll{position:absolute;left:0;top:0;width:1080px;height:1080px}
 </style>
 <body>
 <div class="stage" id="stage">
@@ -23,24 +23,30 @@ img{position:absolute;display:block}
 </div>
 <script>
 const roll = 'cubic-bezier(.25,.6,.25,1)';
-const run = (id, keyframes, options) => document.getElementById(id).animate(keyframes, { fill: 'both', easing: roll, ...options });
-const trail = (id, delay) => run(id, [{ strokeDashoffset: 1, offset: 0 }, { strokeDashoffset: 0, offset: 1 }], { duration: 1300, delay, easing: roll });
+const settle = 'cubic-bezier(.45,0,.2,1)';
+const run = (id, keyframes, options) => document.getElementById(id).animate(keyframes, { fill: 'both', easing: 'linear', ...options });
+const trail = (id, delay) => run(id, [
+  { strokeDashoffset: 1, opacity: 1, offset: 0, easing: roll },
+  { strokeDashoffset: 0, opacity: 1, offset: 1300 / 2400 },
+  { strokeDashoffset: 0, opacity: 1, offset: 1400 / 2400, easing: settle },
+  { strokeDashoffset: -0.97, opacity: 1, offset: 1650 / 2400 },
+  { strokeDashoffset: -1, opacity: 0, offset: 1690 / 2400 },
+  { strokeDashoffset: -1, opacity: 0, offset: 1 },
+], { duration: 2400, delay });
 const animations = [
   trail('t1', 0),
   trail('t2', 40),
   trail('t3', 80),
   run('badge', [
-    { transform: 'translateX(-600px) rotate(-540deg)', offset: 0 },
-    { transform: 'translateX(0) rotate(0deg)', offset: 1 },
-  ], { duration: 1300 }),
-  run('roll', [
-    { opacity: 1, transform: 'scale(1)', offset: 0 },
-    { opacity: 0, transform: 'scale(0.9)', offset: 1 },
-  ], { duration: 350, delay: 1750, easing: 'ease-in' }),
+    { transform: 'translateX(-600px) rotate(-540deg)', offset: 0, easing: roll },
+    { transform: 'translate(0, 0) scale(1) rotate(0deg)', offset: 1300 / 2100 },
+    { transform: 'translate(0, 0) scale(1) rotate(0deg)', offset: 1500 / 2100, easing: settle },
+    { transform: 'translate(0, -174.5px) scale(0.5418) rotate(0deg)', offset: 1 },
+  ], { duration: 2100 }),
   run('lockup', [
-    { opacity: 0, transform: 'translateY(40px) scale(0.94)', offset: 0 },
-    { opacity: 1, transform: 'translateY(0) scale(1)', offset: 1 },
-  ], { duration: 800, delay: 1900 }),
+    { opacity: 0, transform: 'translateY(40px)', offset: 0, easing: roll },
+    { opacity: 1, transform: 'translateY(0)', offset: 1 },
+  ], { duration: 900, delay: 1950 }),
 ];
 window.__duration = 3000;
 animations.forEach(animation => animation.pause());

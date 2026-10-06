@@ -1,8 +1,11 @@
-import { readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { PDFDocument } from 'pdf-lib';
 import { join } from 'node:path';
 import { withBrowser, htmlToImage, htmlToPdf } from '../../lib/browser.mjs';
 import { ensureDir, writeFile } from '../../lib/files.mjs';
 import { quantizePng } from '../../lib/png.mjs';
+import { cardMm } from '../../lib/convention.mjs';
 import { brand, file } from './theme.mjs';
 import { buildIcons } from './icons.mjs';
 import { buildPattern } from './pattern.mjs';
@@ -33,6 +36,19 @@ const jobs = [
   { name: 'og', html: ogScene(), out: file.og, width: 1200, height: 630 },
 ];
 
+const mmToPt = mm => (mm * 72) / 25.4;
+const markCardBoxes = async path => {
+  const document = await PDFDocument.load(readFileSync(path));
+  const bleed = mmToPt(cardMm.bleed);
+  for (const page of document.getPages()) {
+    const { width, height } = page.getMediaBox();
+    page.setBleedBox(0, 0, width, height);
+    page.setCropBox(0, 0, width, height);
+    page.setTrimBox(bleed, bleed, width - bleed * 2, height - bleed * 2);
+  }
+  writeFileSync(path, await document.save());
+};
+
 const errors = [];
 await withBrowser(async browser => {
   for (const job of jobs) {
@@ -42,10 +58,17 @@ await withBrowser(async browser => {
     console.log(`  ${job.out}`);
   }
   await htmlToPdf(browser, { outDir, name: 'card-print', html: cardPrintHtml(), out: pub(file.cardPdf), width: 344, height: 231 });
+  await markCardBoxes(pub(file.cardPdf));
   console.log(`  ${file.cardPdf}`);
   await htmlToPdf(browser, { outDir, name: 'letterhead-print', html: letterheadPrintHtml(), out: pub(file.letterheadPdf), width: 794, height: 1123 });
   console.log(`  ${file.letterheadPdf}`);
 });
+
+const film = pub(file.mp4);
+if (existsSync(film)) {
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', '2.9', '-i', film, '-frames:v', '1', '-vf', 'scale=720:720', '-q:v', '4', pub('figures/animation-poster.jpg')]);
+  console.log('  figures/animation-poster.jpg');
+}
 
 if (errors.length) {
   console.error(errors.join('\n'));

@@ -39,6 +39,7 @@ const readme = [
   'Pliki SVG i PDF są wektorowe, pliki PNG mają przezroczyste tło.',
   'Kroje są na licencji SIL OFL, jej tekst leży obok plików krojów.',
   'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk.',
+  'Jako favicon użyj pliku favicon.svg, a nie pełnego sygnetu: sygnet jest czytelny dopiero od 48 pikseli.',
   '',
 ].join('\n');
 

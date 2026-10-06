@@ -45,12 +45,22 @@ export const logoVariants = [
 ] as const;
 
 export const sizeTest = [
-  { src: 'favicon.svg', size: 16, label: 'uproszczony sygnet, 16 px' },
-  { src: 'favicon.svg', size: 24, label: '24 px' },
-  { src: 'favicon.svg', size: 48, label: '48 px' },
-  { src: 'logo/wolnobieg-symbol.svg', size: 48, label: 'pełna odznaka, 48 px' },
-  { src: 'logo/wolnobieg-symbol.svg', size: 96, label: '96 px' },
-  { src: 'logo/wolnobieg-symbol.svg', size: 192, label: '192 px' },
+  {
+    title: 'Uproszczony sygnet',
+    items: [
+      { src: 'favicon.svg', size: 16 },
+      { src: 'favicon.svg', size: 24 },
+      { src: 'favicon.svg', size: 48 },
+    ],
+  },
+  {
+    title: 'Pełna odznaka',
+    items: [
+      { src: 'logo/wolnobieg-symbol.svg', size: 48 },
+      { src: 'logo/wolnobieg-symbol.svg', size: 96 },
+      { src: 'logo/wolnobieg-symbol.svg', size: 192 },
+    ],
+  },
 ] as const;
 
 const heroColors = ['#3f2411', '#e9a81d', '#fbf3df'];

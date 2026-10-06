@@ -75,6 +75,10 @@ const picks = [
         </li>
       ))}
     </ul>
+    <a class="route__cta" href={portfolio('/dla-klienta/#wzornik')}>
+      <span class="long">Zobacz ofertę</span>
+      <span class="short">Oferta</span>
+    </a>
   </nav>
 
   <main id="main" tabindex="-1">
@@ -225,7 +229,7 @@ const picks = [
           ))}
         </ol>
         <div class="duo">
-          <div class="panel panel--cream">
+          <div class="panel panel--cream panel--wide">
             <h3 class="panel__title">Ręczny kerning</h3>
             <p>{content.process.refinement[0].text}</p>
             <div class="kern">
@@ -252,23 +256,30 @@ const picks = [
             </div>
             <p class="muted">{content.process.refinement[1].text}</p>
           </div>
-          <div class="panel panel--cream panel--flip">
+          <div class="panel panel--cream panel--flip panel--wide">
             <h3 class="panel__title">Test czytelności</h3>
             <p>{content.process.refinement[2].text}</p>
-            <ul class="sizes">
-              {sizeTest.map(item => (
-                <li>
-                  <img
-                    src={asset(item.src)}
-                    alt=""
-                    width={item.size}
-                    height={item.size}
-                    style={`width:${item.size}px;height:${item.size}px`}
-                  />
-                  <span>{item.label}</span>
-                </li>
+            <div class="sizes">
+              {sizeTest.map(group => (
+                <div class="sizes__group">
+                  <ul class="sizes__row">
+                    {group.items.map(item => (
+                      <li>
+                        <img
+                          src={asset(item.src)}
+                          alt=""
+                          width={item.size}
+                          height={item.size}
+                          style={`width:${item.size}px;height:${item.size}px`}
+                        />
+                        <span>{item.size} px</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p class="sizes__title">{group.title}</p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -322,6 +333,7 @@ const picks = [
                 <li>Sygnet: {extras.minimum.symbol}.</li>
                 <li>Pełna odznaka: {extras.minimum.fullBadge}.</li>
                 <li>Logo główne: {extras.minimum.primary}.</li>
+                <li>Logo pionowe: {extras.minimum.vertical}.</li>
               </ul>
             </div>
           </div>
@@ -346,7 +358,10 @@ const picks = [
               Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają
               WCAG AA, a elementy dekoracyjne są oznaczone osobno.
             </p>
-            <ContrastTable pairs={manifest.contrast} />
+            <details class="fold">
+              <summary>Tabela kontrastu, {manifest.contrast.length} par</summary>
+              <ContrastTable pairs={manifest.contrast} />
+            </details>
           </div>
         </div>
 
@@ -395,7 +410,7 @@ const picks = [
                   height="40"
                   loading="lazy"
                 />
-                <span>{name}</span>
+                <span>{extras.iconLabels[name] ?? name}</span>
               </li>
             ))}
           </ul>
@@ -467,10 +482,11 @@ const picks = [
               loop
               playsinline
               preload="metadata"
+              poster={asset('figures/animation-poster.jpg')}
               width="1080"
               height="1080">
-              <source src={`${asset('animation/wolnobieg-logo.webm')}#t=2.9`} type="video/webm" />
-              <source src={`${asset('animation/wolnobieg-logo.mp4')}#t=2.9`} type="video/mp4" />
+              <source src={asset('animation/wolnobieg-logo.webm')} type="video/webm" />
+              <source src={asset('animation/wolnobieg-logo.mp4')} type="video/mp4" />
             </video>
           </div>
         </div>
@@ -575,6 +591,14 @@ const picks = [
         <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
           Zobacz ofertę dla klientów
         </a>
+        <img
+          class="cta__sign"
+          src={asset('logo/wolnobieg-symbol.svg')}
+          alt=""
+          width="244"
+          height="244"
+          loading="lazy"
+        />
       </div>
     </section>
   </main>

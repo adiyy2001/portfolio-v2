@@ -120,7 +120,7 @@ export const lockups = colors => {
   const vPoints = [[0, vProbe.bounds.minY], [vRight, vProbe.bounds.minY], [vRight, vProbe.bounds.maxY], [0, vProbe.bounds.maxY]].map(([x, y]) => rotatePoint(x - vRight / 2, y, slope));
   const vBox = boundsOf(vPoints, 3);
   const vBand = stripeBand(stripes, { left: 0, right: vRight + 20, endTop: 0, width: 17, gap: 6, radius: 1800 });
-  const note = descriptor(21, 0.18);
+  const note = descriptor(34, 0.14);
   const noteWidth = note.bounds.width;
   const vWidth = Math.ceil(Math.max(vBadge, vBox.width, vRight + 60, noteWidth) + 20);
   const wordY = vBadge + 20 - vBox.minY;

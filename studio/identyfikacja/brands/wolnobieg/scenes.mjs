@@ -142,7 +142,7 @@ export const avatarScene = () => scene(`<div class="worn" style="width:1080px;he
 
 const postCss = `
 .post{position:relative;width:1080px;height:1350px;overflow:hidden}
-.post h2{font:400 128px/1.14 'Wolnobieg Display',serif}
+.post h2{font:400 128px/1.32 'Wolnobieg Display',serif}
 .post .body{font:800 58px/1.25 'Wolnobieg Text',sans-serif}
 .post .foot{position:absolute;left:80px;bottom:76px;font:800 38px/1.3 'Wolnobieg Text',sans-serif}
 `;

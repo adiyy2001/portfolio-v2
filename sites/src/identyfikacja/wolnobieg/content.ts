@@ -168,7 +168,7 @@ export const content: CaseContent = {
   ],
   deliverables: {
     intro:
-      'Wszystko, co dostaje serwis, leży w jednej paczce ZIP i osobno na liście poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
+      'Pliki marki leżą w jednej paczce ZIP i osobno na liście poniżej. Animacji logo i makiet nie ma w paczce, pobierasz je z listy. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
@@ -178,6 +178,20 @@ export const content: CaseContent = {
 };
 
 export const extras = {
+  iconLabels: {
+    rower: 'rower',
+    kolo: 'koło',
+    zebatka: 'zębatka',
+    klucz: 'klucz',
+    detka: 'dętka',
+    pompka: 'pompka',
+    lampka: 'lampka',
+    dzwonek: 'dzwonek',
+    kask: 'kask',
+    zegar: 'zegar',
+    adres: 'adres',
+    telefon: 'telefon',
+  } as Record<string, string>,
   typeScale: [
     {
       name: 'Tytuł',
@@ -225,7 +239,7 @@ export const extras = {
     'Rogi zawsze zaokrąglone, promień od 20 do 40 pikseli, nigdy ostre.',
     'Pas sekcji idzie łukiem, nie linijką. Tekst nigdy nie leży na łuku.',
     'Jeden akapit na jedną kartę, kolor tła z palety, ciemny tekst na jasnym lub jasny na ciemnym.',
-    'Pasy mają trzy kolory na raz, nigdy więcej, a ich kolejność zawsze zaczyna się od pomarańczy.',
+    'W logo pasy mają trzy kolory i zawsze zaczynają się od pomarańczy. W grafice może ich być do pięciu.',
   ],
   photoStyle:
     'Zdjęć w tym projekcie nie generujemy. Opis stylu dla fotografa: ciepłe popołudniowe światło, lekko ziarniste ujęcia z poziomu kierownicy. Rowery stoją pod ścianą warsztatu, na stojaku do naprawy albo na ulicy z kocimi łbami, a dłonie mechanika są widoczne w kadrze. Kolory zbliżamy do palety: kremowe ściany, brązowy metal, pomarańczowe akcenty. Bez chłodnych filtrów, bez sportowych póz i bez przesadnej ostrości.',
@@ -243,6 +257,7 @@ export const extras = {
     symbol: '16 px na ekranie, 6 mm w druku (uproszczony sygnet)',
     fullBadge: '48 px na ekranie, 14 mm w druku',
     primary: '140 px szerokości, 30 mm w druku',
+    vertical: '240 px szerokości, 50 mm w druku (hasło pod napisem czyta się od 320 px)',
   },
   social: [
     {
