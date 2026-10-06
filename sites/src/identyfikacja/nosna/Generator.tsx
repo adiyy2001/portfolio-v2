@@ -35,11 +35,16 @@ export default function Generator({ initial, ink }: Props) {
   const [calm, setCalm] = useState(false);
   const [drift, setDrift] = useState(0);
   const frame = useRef(0);
+  const root = useRef<HTMLDivElement>(null);
 
   const variant = useMemo<Variant>(() => ({ day, stage, bpm: clampTempo(bpm) }), [day, stage, bpm]);
   const params = useMemo(() => paramsOf(variant), [variant]);
   const color = dayOf(day).color;
   const seed = seedHex(seedOf(variant));
+
+  useEffect(() => {
+    root.current?.closest<HTMLElement>('[data-hero]')?.style.setProperty('--hero', `var(--${day})`);
+  }, [day]);
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -98,7 +103,7 @@ export default function Generator({ initial, ink }: Props) {
   const description = `${variantName(variant)}, ziarno ${seed}`;
 
   return (
-    <div class="gen">
+    <div class="gen" ref={root}>
       <figure class="gen__stage">
         <svg
           viewBox={geometryBox}

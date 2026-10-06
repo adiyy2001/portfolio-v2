@@ -150,9 +150,9 @@ export const content: CaseContent = {
       id: 'identyfikator',
       title: 'Identyfikator i plakaty dni',
       caption:
-        'Zastosowanie dla festiwalu: identyfikator na smyczy i trzy plakaty, po jednym na dzień, w trzech formatach.',
+        'Trzy plakaty, po jednym na dzień, na kolorze dnia z polem w atramencie, i identyfikator na smyczy. Pierścień odbiornika zostaje widoczny na każdym formacie.',
       image: 'mockups/nosna-application.jpg',
-      alt: 'Identyfikator festiwalowy i trzy plakaty Nośnej w kolorach piątku, soboty i niedzieli.',
+      alt: 'Identyfikator festiwalowy i trzy plakaty Nośnej na tle czerwonym, morskim i różowym, z czarnym polem nitek i widocznym pierścieniem.',
     },
     {
       id: 'podpis',
@@ -164,7 +164,7 @@ export const content: CaseContent = {
   ],
   deliverables: {
     intro:
-      'Pliki marki leżą w jednej paczce ZIP i osobno na liście poniżej. Makiet i animacji logo nie ma w paczce, pobierasz je z listy. Rozwiń grupę, żeby zobaczyć pliki z wymiarami. Dwanaście wariantów znaku to osobne pliki SVG w grupie Logo.',
+      'Pliki marki leżą w jednej paczce ZIP i osobno na liście poniżej. Paczka zawiera logo, kolory, kroje, ikony, wzór, druki, media społecznościowe i brand book. Makiet i animacji logo w niej nie ma, pobierasz je z listy. Rozwiń grupę, żeby zobaczyć pliki z wymiarami. Dwanaście wariantów znaku to osobne pliki SVG w grupie Logo.',
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
@@ -251,6 +251,8 @@ export const extras = {
     'Godziny, parametry i ziarno w kroju monospace, tekst w Syne.',
     'Pole zawsze na nośnej, nigdy obok niej i nigdy pod napisem.',
     'Zero tekstur, zdjęć w tle i cieni. Kolor jest płaski.',
+    'Kolor niesie dzień na dwa sposoby: nitki w kolorze dnia na atramencie albo pole w atramencie na tle w kolorze dnia. Na kości kolor dnia jest tylko dekoracją.',
+    'Pierścień odbiornika zawsze jest widoczny. Pole może wyjść poza lewą krawędź plakatu, prawa strona kończy się pierścieniem.',
   ],
   photoStyle:
     'Zdjęć w tym projekcie nie generujemy. Opis stylu dla fotografa: dokumentacja pracy artystów w hali, światło zastane, bez lamp błyskowych. Kadry szerokie, z ludźmi przy urządzeniach, kablami i projektorami widocznymi w kadrze. Ostrość na dłoniach i interfejsach, tło może się rozmywać. Kolory neutralne, przyciemniony kontrast, bez nasycania. Zdjęcia nie mają ramek, kolor dnia pojawia się tylko w podpisie.',
@@ -259,10 +261,10 @@ export const extras = {
   clearSpace:
     'Pole ochronne jest równe wysokości litery N z napisu Nośna. Żaden tekst ani brzeg kartki nie wchodzi w ten obszar.',
   minimum: {
-    symbol:
-      '16\u00a0px na ekranie dla ikony strony, 48\u00a0px dla sygnetu z polem, 12\u00a0mm w druku',
-    fullStamp: '96\u00a0px szerokości dla logo głównego, 30\u00a0mm w druku',
-    primary: '120\u00a0px szerokości, 32\u00a0mm w druku',
+    primary: { px: 120, mm: 32, label: 'Logo główne' },
+    horizontal: { px: 96, mm: 30, label: 'Logo poziome' },
+    symbol: { px: 48, mm: 12, label: 'Sygnet' },
+    favicon: { px: 16, mm: 0, label: 'Ikona strony' },
   },
   social: [
     {

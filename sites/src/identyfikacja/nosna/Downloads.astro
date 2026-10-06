@@ -1,0 +1,54 @@
+---
+import { filesLabel, formatBytes } from '../shared/format';
+import { assetUrl, dimensionsOf, fileName, filesOf } from '../shared/manifest';
+import type { Manifest } from '../shared/types';
+
+interface Props {
+  manifest: Manifest;
+  class?: string;
+}
+
+const { manifest, class: className } = Astro.props;
+const slug = manifest.brand.slug;
+const formatsOf = (formats: string) => {
+  const parts = formats.split(', ');
+  return parts.some(part => /^PNG \d/.test(part))
+    ? parts.filter(part => part !== 'PNG').join(', ')
+    : formats;
+};
+const rows = manifest.groups.filter(group => group.id !== 'zip' && group.id !== 'meta');
+---
+
+<div class:list={['dl', className]}>
+  {manifest.zip && (
+    <a class="dl__zip" href={assetUrl(slug, manifest.zip.path)} download>
+      <span class="dl__zip-name">{fileName(manifest.zip.path)}</span>
+      <span class="dl__zip-size">{formatBytes(manifest.zip.bytes)}</span>
+    </a>
+  )}
+  <ul class="dl__list">
+    {rows.map(group => (
+      <li class="dl__row">
+        <details>
+          <summary>
+            <span class="dl__title">{group.title}</span>
+            <span class="dl__formats">{formatsOf(group.formats)}</span>
+            <span class="dl__count">{filesLabel(group.count)}</span>
+            <span class="dl__size">{formatBytes(group.bytes)}</span>
+          </summary>
+          <ul class="dl__files">
+            {filesOf(manifest, group).map(file => (
+              <li>
+                <a href={assetUrl(slug, file.path)} download={fileName(file.path)}>
+                  {fileName(file.path)}
+                </a>
+                <span class="dl__dim">{dimensionsOf(file)}</span>
+                <span class="dl__bytes">{formatBytes(file.bytes)}</span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      </li>
+    ))}
+  </ul>
+</div>

@@ -14,7 +14,7 @@ const meta = identityBrands.find(item => item.slug === 'nosna')!;
   <span class="nosna-tile__bar" aria-hidden="true"></span>
   <img
     class="nosna-tile__logo"
-    src={assetUrl('nosna', 'logo/nosna-negative.svg')}
+    src={assetUrl('nosna', 'logo/nosna-primary.svg')}
     alt=""
     width="600"
     height="392"
@@ -34,17 +34,17 @@ const meta = identityBrands.find(item => item.slug === 'nosna')!;
     flex-direction: column;
     gap: 6px;
     min-height: 260px;
-    padding: 24px 24px 22px;
-    background: #0e0e12;
-    color: #e9e6de;
+    padding: 24px 24px 34px;
+    background: #e9e6de;
+    color: #0e0e12;
     text-decoration: none;
-    border-top: 10px solid #ff3d1f;
-    transition: border-color 0.2s ease;
+    border-top: 6px solid #0e0e12;
+    transition: background-color 0.2s ease;
   }
 
   .nosna-tile:hover,
   .nosna-tile:focus-visible {
-    border-top-color: #ff2d95;
+    background: #f6f4ef;
   }
 
   .nosna-tile__bar {
@@ -52,12 +52,12 @@ const meta = identityBrands.find(item => item.slug === 'nosna')!;
     left: 0;
     right: 0;
     bottom: 0;
-    height: 4px;
+    height: 12px;
     background: linear-gradient(90deg, #ff3d1f 33%, #00b3a4 33% 66%, #ff2d95 66%);
   }
 
   .nosna-tile__logo {
-    width: 170px;
+    width: 190px;
     height: auto;
     align-self: flex-start;
     margin-bottom: 8px;
