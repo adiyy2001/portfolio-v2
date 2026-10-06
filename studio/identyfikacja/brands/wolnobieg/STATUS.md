@@ -23,6 +23,8 @@
 - The icon sprite is written without svgo, because svgo drops unused symbols and leaves an empty file.
 - The CTA title uses "Twój biznes" because the shared test style forbids the phrase "twoja firma".
 
+- Distinctness rebuild: the page and the brand book were redone because they read as the Skibka template in other colours. The page is now arched bands with stripe edges, ring numbered sections, a sticky pill navigation, coin values and leaf panels; the brand book has seven tones, an L shaped ribbon frame, ring page numbers and a full bleed pattern page. Rechecked: validate 64 of 64, guard 0 problems, screens at 390 and 1440 px (also reduced motion) with no overflow, console or request problems, 27 pages, `pdffonts` embedded CID TrueType only, check, test and build green.
+
 ## Shared change requests
 
 - Resolved: `@types/node` is now in `sites/package.json` on `wzornik-identyfikacja` (the Skibka QA step added it); this branch merged it and `yarn --cwd sites run check` is at 0 errors.

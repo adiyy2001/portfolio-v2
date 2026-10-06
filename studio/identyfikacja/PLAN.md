@@ -9,7 +9,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-identyfikacja.md`. Run ru
 - [x] B4 Klamra
 - [x] B5 Cuvée
 - [x] B6 Wolnobieg
-- [ ] Q quality control
+- [x] Q quality control
 - [ ] R independent review, every rubric score at least 4
 - [ ] P publication and final report
 ```
@@ -270,3 +270,4 @@ Taken without asking, in the autonomous mode. Brand agents add their own to `STA
 17. **Skibka is 15.3 MB published** (budget 12 MB, cap 16 MB). The ZIP is 6.0 MB of it. Social and og PNGs go through `lib/png.mjs` (`quantizePng`, 128 colours, ffmpeg palette), mockups are JPEG at quality 80, and the brand book is flat vector (3.3 MB) after a grain overlay made it 36 MB. The other brands should aim for 12 MB or less.
 18. **Print PDFs are flat**: no filters or blend modes, texture on screen files only.
 19. **Studio tests**: `yarn --cwd studio test` runs `node --test` on the libs (8 tests); the page logic is tested by vitest in `sites/`.
+20. **Distinctness check (Q).** The six case study heroes at 1440 px and the first inner brand book pages were composed on boards and compared. Five realizations already had their own skeleton. Wolnobieg shared the Skibka page skeleton (stacked cream cards, hairline section heads) and its brand book used plain cream template pages, so it was rebuilt: the page is a stack of arched colour bands with ring badge section numbers, pill navigation, coin values and leaf shaped panels; the brand book is 27 pages in seven tones with an L shaped three stripe ribbon, ring page number badges, tilted titles, a pill contents list, coin and disc layouts and a full bleed pattern page. Validation stays 64 of 64, no new contrast pairs were needed.
