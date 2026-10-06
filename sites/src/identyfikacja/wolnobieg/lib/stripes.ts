@@ -168,7 +168,9 @@ export const composerStripes = (input: StripeParams): DrawnStripe[] => {
   const gap = 9;
   const pitch = stripeWidth + gap;
   const innerRadius = 2400 - params.curvature * 2160;
-  const peak = height * 0.5 - ((params.count - 1) * pitch) / 2;
+  const reach = Math.min(width / 2, innerRadius * Math.sin((80 * Math.PI) / 180));
+  const sag = innerRadius - Math.sqrt(innerRadius * innerRadius - reach * reach);
+  const peak = height * 0.5 + ((params.count - 1) * pitch - sag - stripeWidth) / 2;
   const cx = width / 2;
   const cy = peak + innerRadius;
   return Array.from({ length: params.count }, (_, index) => {

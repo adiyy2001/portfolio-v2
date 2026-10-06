@@ -231,6 +231,12 @@ export const extras = {
     'Zdjęć w tym projekcie nie generujemy. Opis stylu dla fotografa: ciepłe popołudniowe światło, lekko ziarniste ujęcia z poziomu kierownicy. Rowery stoją pod ścianą warsztatu, na stojaku do naprawy albo na ulicy z kocimi łbami, a dłonie mechanika są widoczne w kadrze. Kolory zbliżamy do palety: kremowe ściany, brązowy metal, pomarańczowe akcenty. Bez chłodnych filtrów, bez sportowych póz i bez przesadnej ostrości.',
   animation:
     'Odznaka toczy się z lewej strony i zatrzymuje na środku, a trzy pasy suną za nią łukiem. Potem wjeżdża napis. Całość trwa trzy sekundy. Przy ustawieniu ograniczenia ruchu strona pokazuje nieruchome logo.',
+  animationFacts: [
+    ['Czas', 'trzy sekundy'],
+    ['Formaty', 'MP4 (H.264) i WebM (VP9)'],
+    ['Wymiary', '1080 na 1080 px'],
+    ['Użycie', 'intro filmu, ekran powitalny i okładka relacji'],
+  ] as [string, string][],
   clearSpace:
     'Pole ochronne jest równe wysokości litery W z napisu Wolnobieg. Żaden tekst ani brzeg strony nie wchodzi w ten obszar.',
   minimum: {

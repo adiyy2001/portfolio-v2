@@ -25,7 +25,7 @@ const sheet = (title, body, { tone = 'light', kicker = '' } = {}) => {
 const titleBlock = (kicker, title, lead = '') => `<div class="head"><p class="kicker">${kicker}</p><h2>${title}</h2>${lead ? `<p class="lead">${lead}</p>` : ''}</div>`;
 const arcs = (corner, options = {}) => arcsSvg({ w: 1920, h: 1080, corner, width: 60, gap: 22, start: 220, style: 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none', ...options });
 
-sheets.push(`<section class="page cover">${arcs('br', { width: 70, gap: 26, start: 560, colors: [c.kakao, c.musztarda, c['krem-jasny']] })}<div class="cover-badge">${logoIn('symbol', onOrange, 'width:100%;height:auto')}</div><div class="cover-text"><p class="kicker">Księga identyfikacji wizualnej</p><h1>Wolnobieg</h1><p class="lead">${content.lead}</p><p class="small">Serwis i sklep rowerowy, Gdańsk. Projekt przykładowy: Wolnobieg to zmyślona firma.</p></div></section>`);
+sheets.push(`<section class="page cover">${arcs('br', { width: 70, gap: 26, start: 420, colors: [c.kakao, c.musztarda, c['krem-jasny']] })}<div class="cover-badge">${logoIn('symbol', onOrange, 'width:100%;height:auto')}</div><div class="cover-text"><p class="kicker">Księga identyfikacji wizualnej</p><h1>Wolnobieg</h1><p class="lead">${content.lead}</p><p class="small">Serwis i sklep rowerowy, Gdańsk. Projekt przykładowy: Wolnobieg to zmyślona firma.</p></div></section>`);
 
 sheet('Spis treści', `${titleBlock('Spis treści', 'Co jest w środku')}<ol class="toc">${[
   ['Klient i zadanie', 3], ['Kierunek i strategia', 4], ['Proces', 7], ['Logo', 9], ['Kolor', 14], ['Typografia', 17], ['Ikony, wzór i grafika', 20], ['Zdjęcia i ton głosu', 23], ['Zastosowania', 25], ['Animacja i kontakt', 27],
@@ -112,7 +112,7 @@ html,body{margin:0}
 .page footer{position:absolute;left:140px;bottom:50px;font:600 18px/1 'Wolnobieg Text';color:${c.kawa}}
 .cover-badge{width:500px;flex:none;position:relative}
 .cover-text{position:relative}
-.cover-text h1{font-size:150px;line-height:1.1;margin:20px 0 34px;white-space:nowrap;transform:rotate(-4deg);transform-origin:0 100%}
+.cover-text h1{font-size:130px;line-height:1.1;margin:20px 0 34px;white-space:nowrap;transform:rotate(-4deg);transform-origin:0 100%}
 .cover-text .lead{max-width:620px;margin-bottom:18px}
 .cover-text .small{max-width:560px}
 .cover .kicker,.cover .small{color:${c.kakao}}
@@ -193,9 +193,9 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 .tone p{font:400 24px/1.4 'Wolnobieg Text'}
 .tone .yes{color:${c.oliwka};font-weight:800;margin-top:12px}
 .tone .no{color:${c.kawa};text-decoration:line-through;text-decoration-color:${c.pomarancz}}
-.mocks{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.mocks{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:620px}
 .mocks .mock{height:430px;width:auto;border-radius:24px;display:block}
-.mocks.wide .mock{height:470px}
+.mocks.wide .mock{height:540px}
 .end{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
 .toc{list-style:none;margin:0;padding:0;columns:2;column-gap:120px;font:400 42px/1 'Wolnobieg Display'}
 .toc li{display:flex;justify-content:space-between;border-top:3px solid ${c.brazowy};padding:22px 0 26px;break-inside:avoid}

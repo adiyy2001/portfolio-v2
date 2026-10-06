@@ -82,6 +82,9 @@ const valueCards = ['card--orange', 'card--mustard', ''];
             {heroArcs.map(arc => (
               <path d={arc.d} fill={arc.color}></path>
             ))}
+            {heroArcs.map(arc => (
+              <rect x="598" y={arc.runY} width="900" height="66" fill={arc.color}></rect>
+            ))}
           </svg>
           <div class="hero__badge">
             <img
@@ -403,9 +406,19 @@ const valueCards = ['card--orange', 'card--mustard', ''];
           </div>
         </div>
 
-        <div class="card">
+        <div class="card card--film">
           <h3>Animacja</h3>
-          <p>{extras.animation}</p>
+          <div class="film__text">
+            <p>{extras.animation}</p>
+            <dl class="facts">
+              {extras.animationFacts.map(([term, text]) => (
+                <div>
+                  <dt>{term}</dt>
+                  <dd>{text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
           <video
             class="film"
             controls

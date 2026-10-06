@@ -8,11 +8,11 @@
     "city": "Gdańsk"
   },
   "base": "/wzornik/identyfikacja/wolnobieg/",
-  "totalBytes": 7877919,
+  "totalBytes": 7873431,
   "totalHuman": "7.5 MB",
   "zip": {
     "path": "wolnobieg-identyfikacja.zip",
-    "bytes": 3270080
+    "bytes": 3267788
   },
   "groups": [
     {
@@ -162,7 +162,7 @@
       "id": "mockups",
       "title": "Makiety",
       "count": 5,
-      "bytes": 503710,
+      "bytes": 502556,
       "formats": "JPG",
       "files": [
         "mockups/wolnobieg-application.jpg",
@@ -187,7 +187,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1922212,
+      "bytes": 1921170,
       "formats": "PDF",
       "files": [
         "wolnobieg-brandbook.pdf"
@@ -197,7 +197,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 3270080,
+      "bytes": 3267788,
       "formats": "ZIP",
       "files": [
         "wolnobieg-identyfikacja.zip"
@@ -777,7 +777,7 @@
     },
     {
       "path": "mockups/wolnobieg-application.jpg",
-      "bytes": 138518,
+      "bytes": 137364,
       "type": "jpg",
       "group": "mockups"
     },
@@ -890,7 +890,7 @@
     },
     {
       "path": "wolnobieg-brandbook.pdf",
-      "bytes": 1922212,
+      "bytes": 1921170,
       "type": "pdf",
       "group": "brandbook",
       "pages": 27,
@@ -905,7 +905,7 @@
     },
     {
       "path": "wolnobieg-identyfikacja.zip",
-      "bytes": 3270080,
+      "bytes": 3267788,
       "type": "zip",
       "group": "zip"
     }

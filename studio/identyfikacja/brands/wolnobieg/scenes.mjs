@@ -95,8 +95,8 @@ export const applicationScene = () => {
 .bar.r{left:1070px}
 .door{position:absolute;left:150px;top:540px;width:560px;height:360px;background:${c.kakao};border-radius:260px 260px 0 0;overflow:hidden}
 .door .glass{position:absolute;left:46px;right:46px;top:46px;bottom:0;background:${c.musztarda};border-radius:214px 214px 0 0}
-.door .hours{position:absolute;left:46px;right:46px;top:150px;text-align:center;font:600 30px/1.4 'Wolnobieg Text',sans-serif;color:${c.kakao}}
-.door .hours b{display:block;font:400 40px/1.2 'Wolnobieg Display',serif;color:${c.brazowy};margin-bottom:8px}
+.door .hours{position:absolute;left:46px;right:46px;top:176px;text-align:center;font:600 28px/1.35 'Wolnobieg Text',sans-serif;color:${c.kakao}}
+.door .hours b{display:block;font:400 34px/1.2 'Wolnobieg Display',serif;color:${c.brazowy};margin-bottom:8px}
 .bike{position:absolute;left:770px;top:626px;width:480px}
 .tag{position:relative;width:540px;padding:60px 44px 40px;background:${c['krem-jasny']};border-radius:34px;color:${c.kakao}}
 .tag-hole{position:absolute;left:50%;top:22px;width:34px;height:34px;margin-left:-17px;border-radius:50%;background:${c.len};box-shadow:inset 0 0 0 4px ${c.brazowy}}

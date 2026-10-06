@@ -58,6 +58,7 @@ const heroColors = ['#3f2411', '#e9a81d', '#fbf3df'];
 export const heroArcs = heroColors.map((color, index) => ({
   color,
   d: arcStripe(600, 600, 300 + index * 92, 66, 180, 270, true),
+  runY: 600 - (300 + index * 92) - 33,
 }));
 
 export const swoosh = [
