@@ -4,7 +4,7 @@ import { layoutText, lineToPath, loadFont, ringGlyphs, ringToPath, textBounds } 
 import { faviconArt, loafParts, stamp, stampArt } from '../../../../sites/src/identyfikacja/skibka/lib/stamp.ts';
 
 export const canonicalSeed = 11;
-export const kerning = { Sk: -14, ki: 6, ib: 4, bk: -8, ka: -10 };
+export const kerning = { Sk: -14, ki: 14, ib: 6, bk: 6, ka: -10 };
 export const ringString = 'SKIBKA · PIEKARNIA NA ZAKWASIE · KRAKÓW ·';
 
 const display = () => loadFont(join(fontsSrcRoot(), 'youngserif', 'YoungSerif-Regular.ttf'));

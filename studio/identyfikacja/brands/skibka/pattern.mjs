@@ -80,3 +80,15 @@ export const patternSvg = ({ ink = c['lan-jasny'], second = c.mioz, third = c.sk
 };
 
 export const buildPattern = () => writeFile(join(brand.paths.pub, file.pattern), `${patternSvg()}\n`);
+
+export const patternStrip = ({ widthMm, heightMm, tileMm, id }) => {
+  const { slashes, grains, dots } = patternParts();
+  const width = Number(((widthMm / tileMm) * tile).toFixed(2));
+  const height = Number(((heightMm / tileMm) * tile).toFixed(2));
+  const uses = [];
+  for (let y = 0; y < height; y += tile) {
+    for (let x = 0; x < width; x += tile) uses.push(`<use href="#${id}" x="${x}" y="${y}"/>`);
+  }
+  const unit = `<g id="${id}"><path fill="${c['lan-jasny']}" d="${grains}"/><path fill="${c.mioz}" d="${slashes}"/><path fill="${c.skorka}" d="${dots}"/></g>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="100%" height="100%" preserveAspectRatio="xMinYMin slice" style="display:block"><defs>${unit}</defs>${uses.join('')}</svg>`;
+};

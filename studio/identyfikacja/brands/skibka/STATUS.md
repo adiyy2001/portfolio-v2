@@ -22,7 +22,7 @@ See "Decisions for Adrian" 14 to 19 in `PLAN.md`.
 
 ## Open issues
 
-- Published size is now 11.8 MB, inside the 12 MB budget (the old note of 15.3 MB no longer applies; the rebuilt brand book is 1.8 MB).
+- Published size is 13.0 MB (ZIP 5.1 MB, brand book 2.6 MB): over the 12 MB budget, inside the 16 MB hard cap. The hand-cut icon paths and the 29 page brand book added about 0.7 MB.
 - The primary and vertical logos are not legible below about 24 px height (the wordmark turns to a smudge); the page and the brand book state the minimum sizes (120 px width for the primary logo), the simplified sygnet is the 16 px mark.
 - Loaf cuts in the ink filtered stamps look faint on the page press; left as the intended worn look.
 
@@ -47,4 +47,31 @@ Defects found and fixed:
 
 ## Review scores
 
-Not scored yet.
+Round 1 (independent review, `identyfikacja-b1-r1.json`): style fidelity 4, craft 3, system consistency 4, fit to trade 5, readability 4, sales value 4, distinctness 3.
+
+## Repair after review round 1
+
+Craft (3):
+
+- Business card and letterhead: the pattern strips are now inline vector `<use>` tiles, so the PDFs contain no raster pattern (`pdfimages` lists no images). `skibka-business-card.pdf` carries BleedBox 91 x 61 mm and TrimBox 85 x 55 mm (set with pdf-lib in `build-assets.mjs`).
+- `figures/clearspace.svg` redrawn: the letter S is drawn as a block in all four margins and the dimension lines touch the dashed box. New `figures/minimum-sizes.svg` shows the 16 px, 48 px and 120 px sizes at 1:1 with px and mm marks; it is on the page (System) and in the brand book. Labels are glyph paths, not text.
+- `figures/direction-kromka.svg` redrawn as a toast slice (domed crust, crumb, dotted inner crust, letter S).
+- Icon `noz` redrawn as a bread knife (handle with rivets, serrated blade). The whole icon set got the hand-cut treatment: each path is resampled in a browser, shifted by a smooth seeded wobble (about 0.1 unit) and given its own stroke width between 1.65 and 2.05. The result is `icons-handcut.json`, regenerated with `node identyfikacja/brands/skibka/bake-icons.mjs`; `icons.mjs` reads it, so the SVG files, the sprite, the page and the brand book all use the same drawing.
+- Kerning: `bk` from -8 to 6, `ki` from 6 to 14, `ib` from 4 to 6 so the serif feet of b, k and i no longer read as one rail. All logo files, PNG, PDF, favicon, animation and figures were regenerated; the primary logo is 9762 bytes, still under 10000.
+- The five mockup images have width and height (`mockupSize` in `view.ts`), so the page no longer grows while scrolling.
+- The logo animation autoplays muted and looped without controls; with reduced motion it stays paused on the last frame with controls (small inline script in `Page.astro`).
+
+Distinctness (3), brand book rebuilt (29 pages, 2.6 MB):
+
+- Paper grain as a tiled PNG background (one resource, not a full page raster), torn edge cards (`clip-path` polygons, vector), a stamped page number with a wobbly double ring on every page, a stamped numbered contents page on torn kraft tabs, pattern field as vector `<use>` tiles on the cover and on the pattern page.
+- Two divider pages (Logo on rye with a giant stamp, Zastosowania on kraft with the bag mockup), tonal pages in rye and kraft, giant glyph page, a three frame animation page. Pages 4, 8, 19, 22, 23 and 24 no longer use the title, paragraph and three cards skeleton. Body copy is 25 to 35 px on the 1920 x 1080 pages.
+- No `mix-blend-mode`, no CSS opacity and no filters except the four deliberate misuse examples on page 14.
+
+Other findings:
+
+- ZIP statement: the page and `content.ts` now say that the ZIP holds logo, colours, fonts, pattern, icons, print, social, e-mail and brand book, that mockups and animation are separate files, and give both sizes.
+- Letterhead caption (page and brand book) now matches the mockup: logo in the header, pattern strip on the left, address in the footer. Kerning text in `content.ts` matches the new pairs.
+- Hero: the bag is about 30 percent larger (cropped viewBox, art column 120 percent wide from 1200 px). The duplicated Branża, Miejsce, Zakres list in "Klient i zadanie" is replaced by Odbiorcy, Zadanie and Wynik.
+- Left as is: the "Poziome" lockup (sign and name on one baseline is already the difference; the review marked it optional).
+
+Shared change request: `studio/identyfikacja/scripts/zip.mjs` writes `1 plików` and `3 plików` in README.txt (plural forms). It does not block anything, so it was not edited here.

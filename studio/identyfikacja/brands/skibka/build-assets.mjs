@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { PDFDocument } from 'pdf-lib';
 import { join } from 'node:path';
 import { withBrowser, htmlToImage, htmlToPdf } from '../../lib/browser.mjs';
 import { ensureDir, writeFile } from '../../lib/files.mjs';
@@ -44,6 +45,17 @@ const jobs = [
   { name: 'og', html: ogScene(), out: file.og, width: 1200, height: 630 },
 ];
 
+const setPrintBoxes = async (path, bleedMm) => {
+  const pdf = await PDFDocument.load(readFileSync(path));
+  const bleed = (bleedMm * 72) / 25.4;
+  for (const page of pdf.getPages()) {
+    const { width, height } = page.getSize();
+    page.setBleedBox(0, 0, width, height);
+    page.setTrimBox(bleed, bleed, width - bleed * 2, height - bleed * 2);
+  }
+  writeFileSync(path, await pdf.save());
+};
+
 const errors = [];
 await withBrowser(async browser => {
   for (const job of jobs) {
@@ -53,6 +65,7 @@ await withBrowser(async browser => {
     console.log(`  ${job.out}`);
   }
   await htmlToPdf(browser, { outDir, name: 'card-print', html: cardPrintHtml(), out: pub(file.cardPdf), width: 344, height: 231 });
+  await setPrintBoxes(pub(file.cardPdf), 3);
   console.log(`  ${file.cardPdf}`);
   await htmlToPdf(browser, { outDir, name: 'letterhead-print', html: letterheadPrintHtml(), out: pub(file.letterheadPdf), width: 794, height: 1123 });
   console.log(`  ${file.letterheadPdf}`);

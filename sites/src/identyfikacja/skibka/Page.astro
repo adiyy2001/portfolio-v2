@@ -12,7 +12,7 @@ import StampPress from './StampPress.tsx';
 import { brand } from './brand';
 import { content, contact, extras } from './content';
 import { css } from './styles';
-import { asset, fileInfo, heroArt, iconNames, logoVariants, pressData } from './view';
+import { asset, fileInfo, heroArt, iconNames, logoVariants, mockupSize, pressData } from './view';
 
 const manifest = readManifest('skibka');
 const colors = manifest.palette;
@@ -23,6 +23,11 @@ const mp4 = fileInfo(manifest, 'animation/skibka-logo.mp4');
 const webm = fileInfo(manifest, 'animation/skibka-logo.webm');
 const letterhead = fileInfo(manifest, 'print/skibka-letterhead.pdf');
 const zip = manifest.zip;
+const clientFacts = [
+  ...content.client.facts.slice(3),
+  ['Zadanie', 'jeden znak, który da się przybić na torbie i wydrukować na wizytówce'],
+  ['Wynik', 'logo, system, druk, media, animacja i brand book w jednej paczce'],
+];
 const sizeTest = [
   { src: 'favicon.svg', size: 16, label: 'sygnet uproszczony, 16 px' },
   { src: 'favicon.svg', size: 24, label: '24 px' },
@@ -127,7 +132,7 @@ const navigation = [
       </div>
       <figure class="hero__art">
         <svg
-          viewBox="0 0 640 560"
+          viewBox="60 30 640 530"
           role="img"
           aria-label="Papierowa torba z pieczątką Skibki, dwa bochenki i mąka na stole">
           <g class="hero__shadow">
@@ -208,7 +213,7 @@ const navigation = [
             ))}
           </div>
           <dl class="facts">
-            {content.client.facts.map(([term, text]) => (
+            {clientFacts.map(([term, text]) => (
               <div>
                 <dt>{term}</dt>
                 <dd>{text}</dd>
@@ -359,8 +364,8 @@ const navigation = [
             <img
               src={asset('figures/clearspace.svg')}
               alt="Logo główne otoczone polem ochronnym równym wysokości litery S"
-              width="857"
-              height="370"
+              width="872"
+              height="382"
               loading="lazy"
             />
           </figure>
@@ -374,6 +379,15 @@ const navigation = [
             </ul>
           </div>
         </div>
+        <figure class="minsizes">
+          <img
+            src={asset('figures/minimum-sizes.svg')}
+            alt="Trzy rozmiary minimalne w skali jeden do jednego: sygnet 16 pikseli, pieczątka 48 pikseli, logo główne 120 pikseli szerokości"
+            width="590"
+            height="160"
+            loading="lazy"
+          />
+        </figure>
       </div>
 
       <div class="paper paper--wide" style="--tilt:0.4deg">
@@ -491,15 +505,17 @@ const navigation = [
         <div class="two two--even film-row">
           <video
             class="film"
-            controls
+            id="film"
+            autoplay
             muted
             loop
             playsinline
-            preload="metadata"
+            preload="auto"
             width="1080"
-            height="1080">
-            <source src={`${asset('animation/skibka-logo.webm')}#t=2.9`} type="video/webm" />
-            <source src={`${asset('animation/skibka-logo.mp4')}#t=2.9`} type="video/mp4" />
+            height="1080"
+            aria-label="Animacja logo: pieczątka opada na papier i zmienia się w pionowe logo Skibka">
+            <source src={asset('animation/skibka-logo.webm')} type="video/webm" />
+            <source src={asset('animation/skibka-logo.mp4')} type="video/mp4" />
           </video>
           <dl class="facts">
             <div>
@@ -540,8 +556,8 @@ const navigation = [
             <img
               src={asset(item.image)}
               alt={item.alt}
-              width={item.info?.width}
-              height={item.info?.height}
+              width={mockupSize[item.image]?.[0]}
+              height={mockupSize[item.image]?.[1]}
               loading="lazy"
             />
             <figcaption>
@@ -602,7 +618,12 @@ const navigation = [
       </h2>
       <div class="paper paper--wide" style="--tilt:-0.4deg">
         <p>{content.deliverables.intro}</p>
-        {zip && <p class="muted">Cała paczka waży {formatBytes(zip.bytes)}.</p>}
+        {zip && (
+          <p class="muted">
+            Sama paczka ZIP waży {formatBytes(zip.bytes)}. Makiety i animacja nie wchodzą do niej,
+            leżą osobno na liście poniżej, razem całość to {manifest.totalHuman}.
+          </p>
+        )}
         <Downloads manifest={manifest} />
         <p class="muted">{content.deliverables.note}</p>
       </div>
@@ -625,4 +646,16 @@ const navigation = [
       {contact.street}, {contact.city}. Dane kontaktowe są zmyślone.
     </p>
   </footer>
+  <script is:inline>
+    (function () {
+      var film = document.getElementById('film');
+      if (!film || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      film.removeAttribute('autoplay');
+      film.pause();
+      film.controls = true;
+      film.addEventListener('loadedmetadata', function () {
+        film.currentTime = 2.9;
+      });
+    })();
+  </script>
 </Shell>
