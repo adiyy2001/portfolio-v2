@@ -1,0 +1,1413 @@
+{
+  "brand": {
+    "slug": "wolnobieg",
+    "name": "Wolnobieg",
+    "style": "Retro lata 70.",
+    "styleId": "I5",
+    "trade": "serwis i sklep rowerowy",
+    "city": "Gdańsk"
+  },
+  "base": "/wzornik/identyfikacja/wolnobieg/",
+  "totalBytes": 7877919,
+  "totalHuman": "7.5 MB",
+  "zip": {
+    "path": "wolnobieg-identyfikacja.zip",
+    "bytes": 3270080
+  },
+  "groups": [
+    {
+      "id": "logo",
+      "title": "Logo",
+      "count": 30,
+      "bytes": 1049773,
+      "formats": "PDF, PNG, SVG, PNG 512, 1024, 2048 px",
+      "files": [
+        "logo/pdf/wolnobieg-horizontal.pdf",
+        "logo/pdf/wolnobieg-mono-black.pdf",
+        "logo/pdf/wolnobieg-negative.pdf",
+        "logo/pdf/wolnobieg-primary.pdf",
+        "logo/pdf/wolnobieg-symbol.pdf",
+        "logo/pdf/wolnobieg-vertical.pdf",
+        "logo/png/wolnobieg-horizontal-1024.png",
+        "logo/png/wolnobieg-horizontal-2048.png",
+        "logo/png/wolnobieg-horizontal-512.png",
+        "logo/png/wolnobieg-mono-black-1024.png",
+        "logo/png/wolnobieg-mono-black-2048.png",
+        "logo/png/wolnobieg-mono-black-512.png",
+        "logo/png/wolnobieg-negative-1024.png",
+        "logo/png/wolnobieg-negative-2048.png",
+        "logo/png/wolnobieg-negative-512.png",
+        "logo/png/wolnobieg-primary-1024.png",
+        "logo/png/wolnobieg-primary-2048.png",
+        "logo/png/wolnobieg-primary-512.png",
+        "logo/png/wolnobieg-symbol-1024.png",
+        "logo/png/wolnobieg-symbol-2048.png",
+        "logo/png/wolnobieg-symbol-512.png",
+        "logo/png/wolnobieg-vertical-1024.png",
+        "logo/png/wolnobieg-vertical-2048.png",
+        "logo/png/wolnobieg-vertical-512.png",
+        "logo/wolnobieg-horizontal.svg",
+        "logo/wolnobieg-mono-black.svg",
+        "logo/wolnobieg-negative.svg",
+        "logo/wolnobieg-primary.svg",
+        "logo/wolnobieg-symbol.svg",
+        "logo/wolnobieg-vertical.svg"
+      ]
+    },
+    {
+      "id": "favicon",
+      "title": "Ikona strony",
+      "count": 3,
+      "bytes": 11449,
+      "formats": "PNG, ICO, SVG, PNG 180 px",
+      "files": [
+        "apple-touch-icon.png",
+        "favicon.ico",
+        "favicon.svg"
+      ]
+    },
+    {
+      "id": "colors",
+      "title": "Kolor",
+      "count": 2,
+      "bytes": 11522,
+      "formats": "JSON, CSS",
+      "files": [
+        "colors/wolnobieg-palette.json",
+        "colors/wolnobieg-tokens.css"
+      ]
+    },
+    {
+      "id": "fonts",
+      "title": "Kroje",
+      "count": 6,
+      "bytes": 101765,
+      "formats": "WOFF2, TXT",
+      "files": [
+        "fonts/Baloo2-400.woff2",
+        "fonts/Baloo2-600.woff2",
+        "fonts/Baloo2-800.woff2",
+        "fonts/OFL-Baloo2.txt",
+        "fonts/OFL-RammettoOne.txt",
+        "fonts/RammettoOne-400.woff2"
+      ]
+    },
+    {
+      "id": "pattern",
+      "title": "Wzór",
+      "count": 1,
+      "bytes": 1265,
+      "formats": "SVG",
+      "files": [
+        "pattern/wolnobieg-pattern.svg"
+      ]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 13,
+      "bytes": 6685,
+      "formats": "SVG",
+      "files": [
+        "icons/svg/wolnobieg-icon-adres.svg",
+        "icons/svg/wolnobieg-icon-detka.svg",
+        "icons/svg/wolnobieg-icon-dzwonek.svg",
+        "icons/svg/wolnobieg-icon-kask.svg",
+        "icons/svg/wolnobieg-icon-klucz.svg",
+        "icons/svg/wolnobieg-icon-kolo.svg",
+        "icons/svg/wolnobieg-icon-lampka.svg",
+        "icons/svg/wolnobieg-icon-pompka.svg",
+        "icons/svg/wolnobieg-icon-rower.svg",
+        "icons/svg/wolnobieg-icon-telefon.svg",
+        "icons/svg/wolnobieg-icon-zebatka.svg",
+        "icons/svg/wolnobieg-icon-zegar.svg",
+        "icons/wolnobieg-icons.svg"
+      ]
+    },
+    {
+      "id": "print",
+      "title": "Druk",
+      "count": 2,
+      "bytes": 91258,
+      "formats": "PDF",
+      "files": [
+        "print/wolnobieg-business-card.pdf",
+        "print/wolnobieg-letterhead.pdf"
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Media społecznościowe",
+      "count": 4,
+      "bytes": 254331,
+      "formats": "PNG, PNG 1080 px",
+      "files": [
+        "social/wolnobieg-avatar.png",
+        "social/wolnobieg-post-1.png",
+        "social/wolnobieg-post-2.png",
+        "social/wolnobieg-post-3.png"
+      ]
+    },
+    {
+      "id": "email",
+      "title": "Podpis e-mail",
+      "count": 1,
+      "bytes": 1206,
+      "formats": "HTML",
+      "files": [
+        "email/wolnobieg-email-signature.html"
+      ]
+    },
+    {
+      "id": "mockups",
+      "title": "Makiety",
+      "count": 5,
+      "bytes": 503710,
+      "formats": "JPG",
+      "files": [
+        "mockups/wolnobieg-application.jpg",
+        "mockups/wolnobieg-card-back.jpg",
+        "mockups/wolnobieg-card-front.jpg",
+        "mockups/wolnobieg-email-signature.jpg",
+        "mockups/wolnobieg-letterhead.jpg"
+      ]
+    },
+    {
+      "id": "animation",
+      "title": "Animacja logo",
+      "count": 2,
+      "bytes": 598367,
+      "formats": "MP4, WEBM",
+      "files": [
+        "animation/wolnobieg-logo.mp4",
+        "animation/wolnobieg-logo.webm"
+      ]
+    },
+    {
+      "id": "brandbook",
+      "title": "Brand book",
+      "count": 1,
+      "bytes": 1922212,
+      "formats": "PDF",
+      "files": [
+        "wolnobieg-brandbook.pdf"
+      ]
+    },
+    {
+      "id": "zip",
+      "title": "Wszystko w jednym pliku",
+      "count": 1,
+      "bytes": 3270080,
+      "formats": "ZIP",
+      "files": [
+        "wolnobieg-identyfikacja.zip"
+      ]
+    },
+    {
+      "id": "meta",
+      "title": "Pozostałe",
+      "count": 7,
+      "bytes": 54296,
+      "formats": "SVG, PNG, PNG 1200 px",
+      "files": [
+        "figures/clearspace.svg",
+        "figures/direction-kolo.svg",
+        "figures/direction-odznaka.svg",
+        "figures/direction-wstega.svg",
+        "figures/wordmark-default.svg",
+        "figures/wordmark-kerned.svg",
+        "og.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "animation/wolnobieg-logo.mp4",
+      "bytes": 232890,
+      "type": "mp4",
+      "group": "animation",
+      "codec": "h264",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "animation/wolnobieg-logo.webm",
+      "bytes": 365477,
+      "type": "webm",
+      "group": "animation",
+      "codec": "vp9",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "bytes": 6025,
+      "type": "png",
+      "group": "favicon",
+      "width": 180,
+      "height": 180,
+      "hasAlpha": true
+    },
+    {
+      "path": "colors/wolnobieg-palette.json",
+      "bytes": 11109,
+      "type": "json",
+      "group": "colors"
+    },
+    {
+      "path": "colors/wolnobieg-tokens.css",
+      "bytes": 413,
+      "type": "css",
+      "group": "colors"
+    },
+    {
+      "path": "email/wolnobieg-email-signature.html",
+      "bytes": 1206,
+      "type": "html",
+      "group": "email"
+    },
+    {
+      "path": "favicon.ico",
+      "bytes": 4248,
+      "type": "ico",
+      "group": "favicon",
+      "sizes": [
+        16,
+        32,
+        48
+      ]
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 1176,
+      "type": "svg",
+      "group": "favicon",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "path": "figures/clearspace.svg",
+      "bytes": 2672,
+      "type": "svg",
+      "group": "meta",
+      "width": 1344,
+      "height": 655
+    },
+    {
+      "path": "figures/direction-kolo.svg",
+      "bytes": 1863,
+      "type": "svg",
+      "group": "meta",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "path": "figures/direction-odznaka.svg",
+      "bytes": 6619,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-wstega.svg",
+      "bytes": 532,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/wordmark-default.svg",
+      "bytes": 2693,
+      "type": "svg",
+      "group": "meta",
+      "width": 700,
+      "height": 190
+    },
+    {
+      "path": "figures/wordmark-kerned.svg",
+      "bytes": 1678,
+      "type": "svg",
+      "group": "meta",
+      "width": 700,
+      "height": 190
+    },
+    {
+      "path": "fonts/Baloo2-400.woff2",
+      "bytes": 23024,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Baloo2-600.woff2",
+      "bytes": 23812,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Baloo2-800.woff2",
+      "bytes": 22724,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-Baloo2.txt",
+      "bytes": 4384,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-RammettoOne.txt",
+      "bytes": 4429,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/RammettoOne-400.woff2",
+      "bytes": 23392,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-adres.svg",
+      "bytes": 312,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-detka.svg",
+      "bytes": 322,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-dzwonek.svg",
+      "bytes": 286,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-kask.svg",
+      "bytes": 284,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-klucz.svg",
+      "bytes": 343,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-kolo.svg",
+      "bytes": 396,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-lampka.svg",
+      "bytes": 306,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-pompka.svg",
+      "bytes": 328,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-rower.svg",
+      "bytes": 361,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-telefon.svg",
+      "bytes": 302,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-zebatka.svg",
+      "bytes": 424,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/wolnobieg-icon-zegar.svg",
+      "bytes": 257,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/wolnobieg-icons.svg",
+      "bytes": 2764,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "logo/pdf/wolnobieg-horizontal.pdf",
+      "bytes": 7987,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 17.6
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 67
+      }
+    },
+    {
+      "path": "logo/pdf/wolnobieg-mono-black.pdf",
+      "bytes": 7820,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 37.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 143
+      }
+    },
+    {
+      "path": "logo/pdf/wolnobieg-negative.pdf",
+      "bytes": 7863,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 37.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 143
+      }
+    },
+    {
+      "path": "logo/pdf/wolnobieg-primary.pdf",
+      "bytes": 7864,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 37.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 143
+      }
+    },
+    {
+      "path": "logo/pdf/wolnobieg-symbol.pdf",
+      "bytes": 22585,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 99.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 377
+      }
+    },
+    {
+      "path": "logo/pdf/wolnobieg-vertical.pdf",
+      "bytes": 23110,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 77.6
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 293
+      }
+    },
+    {
+      "path": "logo/png/wolnobieg-horizontal-1024.png",
+      "bytes": 25265,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 182,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-horizontal-2048.png",
+      "bytes": 55234,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 365,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-horizontal-512.png",
+      "bytes": 11789,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 91,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-mono-black-1024.png",
+      "bytes": 25001,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 386,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-mono-black-2048.png",
+      "bytes": 53851,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 772,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-mono-black-512.png",
+      "bytes": 11614,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 193,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-negative-1024.png",
+      "bytes": 33800,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 386,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-negative-2048.png",
+      "bytes": 73833,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 772,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-negative-512.png",
+      "bytes": 16199,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 193,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-primary-1024.png",
+      "bytes": 33503,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 386,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-primary-2048.png",
+      "bytes": 73394,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 772,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-primary-512.png",
+      "bytes": 15900,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 193,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-symbol-1024.png",
+      "bytes": 73861,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 1024,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-symbol-2048.png",
+      "bytes": 172143,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 2048,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-symbol-512.png",
+      "bytes": 33684,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 512,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-vertical-1024.png",
+      "bytes": 66244,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 794,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-vertical-2048.png",
+      "bytes": 146686,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 1587,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/wolnobieg-vertical-512.png",
+      "bytes": 30992,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 397,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/wolnobieg-horizontal.svg",
+      "bytes": 2636,
+      "type": "svg",
+      "group": "logo",
+      "width": 842,
+      "height": 150
+    },
+    {
+      "path": "logo/wolnobieg-mono-black.svg",
+      "bytes": 2271,
+      "type": "svg",
+      "group": "logo",
+      "width": 1106,
+      "height": 417
+    },
+    {
+      "path": "logo/wolnobieg-negative.svg",
+      "bytes": 2337,
+      "type": "svg",
+      "group": "logo",
+      "width": 1106,
+      "height": 417
+    },
+    {
+      "path": "logo/wolnobieg-primary.svg",
+      "bytes": 2345,
+      "type": "svg",
+      "group": "logo",
+      "width": 1106,
+      "height": 417
+    },
+    {
+      "path": "logo/wolnobieg-symbol.svg",
+      "bytes": 1862,
+      "type": "svg",
+      "group": "logo",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "path": "logo/wolnobieg-vertical.svg",
+      "bytes": 8100,
+      "type": "svg",
+      "group": "logo",
+      "width": 827,
+      "height": 641
+    },
+    {
+      "path": "mockups/wolnobieg-application.jpg",
+      "bytes": 138518,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/wolnobieg-card-back.jpg",
+      "bytes": 98645,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/wolnobieg-card-front.jpg",
+      "bytes": 91468,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/wolnobieg-email-signature.jpg",
+      "bytes": 66823,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/wolnobieg-letterhead.jpg",
+      "bytes": 108256,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "og.png",
+      "bytes": 38239,
+      "type": "png",
+      "group": "meta",
+      "width": 1200,
+      "height": 630,
+      "hasAlpha": false
+    },
+    {
+      "path": "pattern/wolnobieg-pattern.svg",
+      "bytes": 1265,
+      "type": "svg",
+      "group": "pattern",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "print/wolnobieg-business-card.pdf",
+      "bytes": 55084,
+      "type": "pdf",
+      "group": "print",
+      "pages": 2,
+      "pageMm": {
+        "width": 91,
+        "height": 61
+      },
+      "pagePx": {
+        "width": 344,
+        "height": 231
+      }
+    },
+    {
+      "path": "print/wolnobieg-letterhead.pdf",
+      "bytes": 36174,
+      "type": "pdf",
+      "group": "print",
+      "pages": 1,
+      "pageMm": {
+        "width": 209.9,
+        "height": 297
+      },
+      "pagePx": {
+        "width": 793,
+        "height": 1123
+      }
+    },
+    {
+      "path": "social/wolnobieg-avatar.png",
+      "bytes": 57251,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1080,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/wolnobieg-post-1.png",
+      "bytes": 65807,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/wolnobieg-post-2.png",
+      "bytes": 69932,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/wolnobieg-post-3.png",
+      "bytes": 61341,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "wolnobieg-brandbook.pdf",
+      "bytes": 1922212,
+      "type": "pdf",
+      "group": "brandbook",
+      "pages": 27,
+      "pageMm": {
+        "width": 508,
+        "height": 285.8
+      },
+      "pagePx": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "path": "wolnobieg-identyfikacja.zip",
+      "bytes": 3270080,
+      "type": "zip",
+      "group": "zip"
+    }
+  ],
+  "palette": [
+    {
+      "id": "brazowy",
+      "name": "Brąz",
+      "group": "primary",
+      "role": "napis logo, nagłówki, odznaka",
+      "hex": "#5B2F14",
+      "rgb": "91 47 20",
+      "oklch": "oklch(35.7% 0.075 49.8)",
+      "cmykApprox": "C 0 M 48 Y 78 K 64"
+    },
+    {
+      "id": "pomarancz",
+      "name": "Pomarańcz",
+      "group": "primary",
+      "role": "pasy, wypełnienia i tło sekcji z ciemnym tekstem",
+      "hex": "#EC7424",
+      "rgb": "236 116 36",
+      "oklch": "oklch(68.8% 0.171 48.8)",
+      "cmykApprox": "C 0 M 51 Y 85 K 7"
+    },
+    {
+      "id": "musztarda",
+      "name": "Musztarda",
+      "group": "accent",
+      "role": "pasy, odznaki i jasne tła z ciemnym tekstem",
+      "hex": "#E9A81D",
+      "rgb": "233 168 29",
+      "oklch": "oklch(77.4% 0.155 79.4)",
+      "cmykApprox": "C 0 M 28 Y 88 K 9"
+    },
+    {
+      "id": "awokado",
+      "name": "Awokado",
+      "group": "accent",
+      "role": "pasy i wypełnienia, bez tekstu",
+      "hex": "#7C8A2B",
+      "rgb": "124 138 43",
+      "oklch": "oklch(60.3% 0.119 117.3)",
+      "cmykApprox": "C 10 M 0 Y 69 K 46"
+    },
+    {
+      "id": "oliwka",
+      "name": "Oliwka",
+      "group": "accent",
+      "role": "zielony akcent w tekście i tło z jasnym tekstem",
+      "hex": "#556020",
+      "rgb": "85 96 32",
+      "oklch": "oklch(46.5% 0.088 118.3)",
+      "cmykApprox": "C 11 M 0 Y 67 K 62"
+    },
+    {
+      "id": "rdza",
+      "name": "Rdza",
+      "group": "accent",
+      "role": "pomarańcz w tekście, linki i przyciski",
+      "hex": "#A64A0D",
+      "rgb": "166 74 13",
+      "oklch": "oklch(52% 0.138 47.1)",
+      "cmykApprox": "C 0 M 55 Y 92 K 35"
+    },
+    {
+      "id": "krem-jasny",
+      "name": "Krem jasny",
+      "group": "neutral",
+      "role": "karty i okładki",
+      "hex": "#FBF3DF",
+      "rgb": "251 243 223",
+      "oklch": "oklch(96.5% 0.028 88.7)",
+      "cmykApprox": "C 0 M 3 Y 11 K 2"
+    },
+    {
+      "id": "krem",
+      "name": "Krem",
+      "group": "neutral",
+      "role": "tło strony i papier",
+      "hex": "#F6E8C8",
+      "rgb": "246 232 200",
+      "oklch": "oklch(93.4% 0.045 87.2)",
+      "cmykApprox": "C 0 M 6 Y 19 K 4"
+    },
+    {
+      "id": "piasek",
+      "name": "Piasek",
+      "group": "neutral",
+      "role": "tło tabel i pól",
+      "hex": "#EAD7AE",
+      "rgb": "234 215 174",
+      "oklch": "oklch(88.4% 0.058 86)",
+      "cmykApprox": "C 0 M 8 Y 26 K 8"
+    },
+    {
+      "id": "len",
+      "name": "Len",
+      "group": "neutral",
+      "role": "linie i faktura, bez tekstu",
+      "hex": "#CDB27F",
+      "rgb": "205 178 127",
+      "oklch": "oklch(77.5% 0.074 83)",
+      "cmykApprox": "C 0 M 13 Y 38 K 20"
+    },
+    {
+      "id": "tyton",
+      "name": "Tytoń",
+      "group": "neutral",
+      "role": "obrysy elementów, bez tekstu",
+      "hex": "#9A7447",
+      "rgb": "154 116 71",
+      "oklch": "oklch(58.6% 0.078 70)",
+      "cmykApprox": "C 0 M 25 Y 54 K 40"
+    },
+    {
+      "id": "kawa",
+      "name": "Kawa",
+      "group": "neutral",
+      "role": "tekst drugorzędny",
+      "hex": "#6B4528",
+      "rgb": "107 69 40",
+      "oklch": "oklch(42.7% 0.068 57)",
+      "cmykApprox": "C 0 M 36 Y 63 K 58"
+    },
+    {
+      "id": "kakao",
+      "name": "Kakao",
+      "group": "neutral",
+      "role": "tekst podstawowy i ciemne tło",
+      "hex": "#3F2411",
+      "rgb": "63 36 17",
+      "oklch": "oklch(29.1% 0.051 54.3)",
+      "cmykApprox": "C 0 M 43 Y 73 K 75"
+    }
+  ],
+  "contrast": [
+    {
+      "id": "kakao-krem",
+      "use": "tekst podstawowy na tle strony",
+      "foreground": "#3F2411",
+      "background": "#F6E8C8",
+      "kind": "text",
+      "ratio": 11.75,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kakao-krem-jasny",
+      "use": "tekst na kartach",
+      "foreground": "#3F2411",
+      "background": "#FBF3DF",
+      "kind": "text",
+      "ratio": 12.9,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kakao-piasek",
+      "use": "tekst w tabelach i na polach",
+      "foreground": "#3F2411",
+      "background": "#EAD7AE",
+      "kind": "text",
+      "ratio": 10.08,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "brazowy-krem",
+      "use": "napis logo i nagłówki",
+      "foreground": "#5B2F14",
+      "background": "#F6E8C8",
+      "kind": "text",
+      "ratio": 9.29,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "brazowy-krem-jasny",
+      "use": "nagłówki na kartach",
+      "foreground": "#5B2F14",
+      "background": "#FBF3DF",
+      "kind": "text",
+      "ratio": 10.2,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kawa-krem",
+      "use": "tekst drugorzędny, podpisy",
+      "foreground": "#6B4528",
+      "background": "#F6E8C8",
+      "kind": "text",
+      "ratio": 6.9,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kawa-krem-jasny",
+      "use": "podpisy na kartach",
+      "foreground": "#6B4528",
+      "background": "#FBF3DF",
+      "kind": "text",
+      "ratio": 7.57,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kawa-piasek",
+      "use": "podpisy w tabelach",
+      "foreground": "#6B4528",
+      "background": "#EAD7AE",
+      "kind": "text",
+      "ratio": 5.92,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "rdza-krem",
+      "use": "linki i pomarańcz w tekście",
+      "foreground": "#A64A0D",
+      "background": "#F6E8C8",
+      "kind": "text",
+      "ratio": 4.8,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "rdza-krem-jasny",
+      "use": "linki na kartach",
+      "foreground": "#A64A0D",
+      "background": "#FBF3DF",
+      "kind": "text",
+      "ratio": 5.26,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "oliwka-krem",
+      "use": "zielony akcent w tekście",
+      "foreground": "#556020",
+      "background": "#F6E8C8",
+      "kind": "text",
+      "ratio": 5.61,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "oliwka-krem-jasny",
+      "use": "zielony akcent na kartach",
+      "foreground": "#556020",
+      "background": "#FBF3DF",
+      "kind": "text",
+      "ratio": 6.16,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kakao-pomarancz",
+      "use": "tekst na pomarańczowej sekcji",
+      "foreground": "#3F2411",
+      "background": "#EC7424",
+      "kind": "text",
+      "ratio": 4.82,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kakao-musztarda",
+      "use": "tekst na musztardowej sekcji i odznakach",
+      "foreground": "#3F2411",
+      "background": "#E9A81D",
+      "kind": "text",
+      "ratio": 6.85,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "brazowy-musztarda",
+      "use": "nagłówki na musztardzie",
+      "foreground": "#5B2F14",
+      "background": "#E9A81D",
+      "kind": "text",
+      "ratio": 5.42,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "krem-brazowy",
+      "use": "jasny tekst na brązowej sekcji",
+      "foreground": "#F6E8C8",
+      "background": "#5B2F14",
+      "kind": "text",
+      "ratio": 9.29,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "krem-kakao",
+      "use": "negatyw: jasny tekst na ciemnym tle",
+      "foreground": "#F6E8C8",
+      "background": "#3F2411",
+      "kind": "text",
+      "ratio": 11.75,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "krem-jasny-oliwka",
+      "use": "jasny tekst na oliwkowej sekcji",
+      "foreground": "#FBF3DF",
+      "background": "#556020",
+      "kind": "text",
+      "ratio": 6.16,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "krem-rdza",
+      "use": "jasny tekst na przycisku w kolorze rdzy",
+      "foreground": "#F6E8C8",
+      "background": "#A64A0D",
+      "kind": "text",
+      "ratio": 4.8,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "musztarda-kakao",
+      "use": "musztardowy akcent na ciemnym tle",
+      "foreground": "#E9A81D",
+      "background": "#3F2411",
+      "kind": "text",
+      "ratio": 6.85,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "pomarancz-kakao",
+      "use": "pomarańczowy duży napis na ciemnym tle",
+      "foreground": "#EC7424",
+      "background": "#3F2411",
+      "kind": "large",
+      "ratio": 4.82,
+      "required": 3,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "brazowy-krem-large",
+      "use": "duże nagłówki Rammetto One",
+      "foreground": "#5B2F14",
+      "background": "#F6E8C8",
+      "kind": "large",
+      "ratio": 9.29,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "rdza-krem-ui",
+      "use": "obrys fokusu i ramki pól formularza",
+      "foreground": "#A64A0D",
+      "background": "#F6E8C8",
+      "kind": "ui",
+      "ratio": 4.8,
+      "required": 3,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "tyton-krem-ui",
+      "use": "obrys przełączników i suwaków",
+      "foreground": "#9A7447",
+      "background": "#F6E8C8",
+      "kind": "ui",
+      "ratio": 3.48,
+      "required": 3,
+      "level": "AA large",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "pomarancz-krem",
+      "use": "pasy i łuki",
+      "foreground": "#EC7424",
+      "background": "#F6E8C8",
+      "kind": "decorative",
+      "ratio": 2.44,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    },
+    {
+      "id": "awokado-krem",
+      "use": "pasy i wypełnienia",
+      "foreground": "#7C8A2B",
+      "background": "#F6E8C8",
+      "kind": "decorative",
+      "ratio": 3.13,
+      "required": 0,
+      "level": "AA large",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    },
+    {
+      "id": "len-krem",
+      "use": "linie podziału i faktura",
+      "foreground": "#CDB27F",
+      "background": "#F6E8C8",
+      "kind": "decorative",
+      "ratio": 1.68,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki",
+      "family": "Rammetto One",
+      "css": "Wolnobieg Display",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/RammettoOne-400.woff2",
+      "bytes": 23392
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Baloo 2",
+      "css": "Wolnobieg Text",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/Baloo2-400.woff2",
+      "bytes": 23024
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Baloo 2",
+      "css": "Wolnobieg Text",
+      "weight": 600,
+      "style": "normal",
+      "file": "fonts/Baloo2-600.woff2",
+      "bytes": 23812
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Baloo 2",
+      "css": "Wolnobieg Text",
+      "weight": 800,
+      "style": "normal",
+      "file": "fonts/Baloo2-800.woff2",
+      "bytes": 22724
+    }
+  ]
+}
