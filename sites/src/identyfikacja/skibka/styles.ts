@@ -30,6 +30,7 @@ main{display:block;max-width:1120px;margin:0 auto;padding:0 var(--gut);overflow-
 .hero__art svg{width:100%;height:auto;overflow:visible}
 .hero__shadow{filter:drop-shadow(0 14px 14px rgba(58,49,40,.28))}
 @media (min-width:900px){.hero{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}}
+@media (min-width:1200px){.hero__art svg{width:120%;max-width:none}}
 .band{padding:clamp(24px,5vw,56px) 0;display:grid;gap:clamp(20px,3vw,36px)}
 .band__title{font-size:clamp(36px,6vw,64px)}
 .band__sub{font-size:clamp(26px,3.6vw,36px)}
@@ -86,6 +87,8 @@ main{display:block;max-width:1120px;margin:0 auto;padding:0 var(--gut);overflow-
 .ground--zyto{background:var(--zyto);color:var(--maka)}
 .clear{margin:0;background:var(--maka);padding:16px}
 .clear img{width:100%}
+.minsizes{margin:20px 0 0;background:var(--maka);padding:16px;overflow:hidden}
+.minsizes img{width:100%;max-width:590px}
 .plain{display:grid;gap:8px;margin:0;padding:0;list-style:none}
 .plain--rules li{border-top:2px solid var(--zyto);padding-top:10px}
 .swatches{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 14px;margin:0;padding:0;list-style:none}

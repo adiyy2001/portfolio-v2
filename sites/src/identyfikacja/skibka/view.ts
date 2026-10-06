@@ -59,3 +59,11 @@ export const heroArt = (() => {
 })();
 
 export const pressData = { ring: stampData.ring.d, loaf: stampData.loaf };
+
+export const mockupSize: Record<string, [number, number]> = {
+  'mockups/skibka-card-front.jpg': [1800, 1260],
+  'mockups/skibka-card-back.jpg': [1800, 1260],
+  'mockups/skibka-letterhead.jpg': [1500, 1860],
+  'mockups/skibka-application.jpg': [1900, 1400],
+  'mockups/skibka-email-signature.jpg': [1600, 1100],
+};

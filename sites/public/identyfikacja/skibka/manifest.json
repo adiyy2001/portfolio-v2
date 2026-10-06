@@ -8,18 +8,18 @@
     "city": "Kraków"
   },
   "base": "/wzornik/identyfikacja/skibka/",
-  "totalBytes": 12369412,
-  "totalHuman": "11.8 MB",
+  "totalBytes": 13047220,
+  "totalHuman": "12.4 MB",
   "zip": {
     "path": "skibka-identyfikacja.zip",
-    "bytes": 4837083
+    "bytes": 5153373
   },
   "groups": [
     {
       "id": "logo",
       "title": "Logo",
       "count": 30,
-      "bytes": 1179110,
+      "bytes": 1172816,
       "formats": "PDF, PNG, SVG, PNG 512, 1024, 2048 px",
       "files": [
         "logo/pdf/skibka-horizontal.pdf",
@@ -107,7 +107,7 @@
       "id": "icons",
       "title": "Ikony",
       "count": 13,
-      "bytes": 3828,
+      "bytes": 16402,
       "formats": "SVG",
       "files": [
         "icons/skibka-icons.svg",
@@ -129,7 +129,7 @@
       "id": "print",
       "title": "Druk",
       "count": 2,
-      "bytes": 431931,
+      "bytes": 69896,
       "formats": "PDF",
       "files": [
         "print/skibka-business-card.pdf",
@@ -163,7 +163,7 @@
       "id": "mockups",
       "title": "Makiety",
       "count": 5,
-      "bytes": 1063016,
+      "bytes": 1063223,
       "formats": "JPG",
       "files": [
         "mockups/skibka-application.jpg",
@@ -177,7 +177,7 @@
       "id": "animation",
       "title": "Animacja logo",
       "count": 2,
-      "bytes": 1177054,
+      "bytes": 1175796,
       "formats": "MP4, WEBM",
       "files": [
         "animation/skibka-logo.mp4",
@@ -188,7 +188,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1856914,
+      "bytes": 2536292,
       "formats": "PDF",
       "files": [
         "skibka-brandbook.pdf"
@@ -198,7 +198,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 4837083,
+      "bytes": 5153373,
       "formats": "ZIP",
       "files": [
         "skibka-identyfikacja.zip"
@@ -207,14 +207,15 @@
     {
       "id": "meta",
       "title": "Pozostałe",
-      "count": 7,
-      "bytes": 252870,
+      "count": 8,
+      "bytes": 291816,
       "formats": "SVG, PNG, PNG 1200 px",
       "files": [
         "figures/clearspace.svg",
         "figures/direction-klos.svg",
         "figures/direction-kromka.svg",
         "figures/direction-stamp.svg",
+        "figures/minimum-sizes.svg",
         "figures/wordmark-default.svg",
         "figures/wordmark-kerned.svg",
         "og.png"
@@ -224,7 +225,7 @@
   "files": [
     {
       "path": "animation/skibka-logo.mp4",
-      "bytes": 616052,
+      "bytes": 616453,
       "type": "mp4",
       "group": "animation",
       "codec": "h264",
@@ -234,7 +235,7 @@
     },
     {
       "path": "animation/skibka-logo.webm",
-      "bytes": 561002,
+      "bytes": 559343,
       "type": "webm",
       "group": "animation",
       "codec": "vp9",
@@ -290,15 +291,15 @@
     },
     {
       "path": "figures/clearspace.svg",
-      "bytes": 10163,
+      "bytes": 14013,
       "type": "svg",
       "group": "meta",
-      "width": 857,
-      "height": 370
+      "width": 872,
+      "height": 382
     },
     {
       "path": "figures/direction-klos.svg",
-      "bytes": 2910,
+      "bytes": 2947,
       "type": "svg",
       "group": "meta",
       "width": 200,
@@ -306,7 +307,7 @@
     },
     {
       "path": "figures/direction-kromka.svg",
-      "bytes": 1144,
+      "bytes": 1650,
       "type": "svg",
       "group": "meta",
       "width": 200,
@@ -321,6 +322,14 @@
       "height": 400
     },
     {
+      "path": "figures/minimum-sizes.svg",
+      "bytes": 33862,
+      "type": "svg",
+      "group": "meta",
+      "width": 590,
+      "height": 160
+    },
+    {
       "path": "figures/wordmark-default.svg",
       "bytes": 3345,
       "type": "svg",
@@ -330,7 +339,7 @@
     },
     {
       "path": "figures/wordmark-kerned.svg",
-      "bytes": 3112,
+      "bytes": 3102,
       "type": "svg",
       "group": "meta",
       "width": 437,
@@ -380,13 +389,13 @@
     },
     {
       "path": "icons/skibka-icons.svg",
-      "bytes": 137,
+      "bytes": 118,
       "type": "svg",
       "group": "icons"
     },
     {
       "path": "icons/svg/skibka-icon-adres.svg",
-      "bytes": 287,
+      "bytes": 1312,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -394,7 +403,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-chleb.svg",
-      "bytes": 330,
+      "bytes": 1280,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -402,7 +411,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-koszyk.svg",
-      "bytes": 269,
+      "bytes": 1644,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -410,7 +419,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-kromka.svg",
-      "bytes": 302,
+      "bytes": 1279,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -418,7 +427,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-maka.svg",
-      "bytes": 408,
+      "bytes": 1437,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -426,7 +435,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-noz.svg",
-      "bytes": 310,
+      "bytes": 1384,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -434,7 +443,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-piec.svg",
-      "bytes": 282,
+      "bytes": 1628,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -442,7 +451,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-telefon.svg",
-      "bytes": 325,
+      "bytes": 1186,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -450,7 +459,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-torba.svg",
-      "bytes": 313,
+      "bytes": 1750,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -458,7 +467,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-zakwas.svg",
-      "bytes": 335,
+      "bytes": 1138,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -466,7 +475,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-zegar.svg",
-      "bytes": 249,
+      "bytes": 1164,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -474,7 +483,7 @@
     },
     {
       "path": "icons/svg/skibka-icon-ziarno.svg",
-      "bytes": 281,
+      "bytes": 1082,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -482,7 +491,7 @@
     },
     {
       "path": "logo/pdf/skibka-horizontal.pdf",
-      "bytes": 5553,
+      "bytes": 5572,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
@@ -497,47 +506,47 @@
     },
     {
       "path": "logo/pdf/skibka-mono-black.pdf",
-      "bytes": 9831,
+      "bytes": 9805,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 25.7
+        "height": 25.4
       },
       "pagePx": {
         "width": 377,
-        "height": 97
+        "height": 96
       }
     },
     {
       "path": "logo/pdf/skibka-negative.pdf",
-      "bytes": 9850,
+      "bytes": 9819,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 25.7
+        "height": 25.4
       },
       "pagePx": {
         "width": 377,
-        "height": 97
+        "height": 96
       }
     },
     {
       "path": "logo/pdf/skibka-primary.pdf",
-      "bytes": 9865,
+      "bytes": 9836,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 25.7
+        "height": 25.4
       },
       "pagePx": {
         "width": 377,
-        "height": 97
+        "height": 96
       }
     },
     {
@@ -557,40 +566,40 @@
     },
     {
       "path": "logo/pdf/skibka-vertical.pdf",
-      "bytes": 9335,
+      "bytes": 9315,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 83.2
+        "height": 82.5
       },
       "pagePx": {
         "width": 377,
-        "height": 315
+        "height": 312
       }
     },
     {
       "path": "logo/png/skibka-horizontal-1024.png",
-      "bytes": 24578,
+      "bytes": 24922,
       "type": "png",
       "group": "logo",
       "width": 1024,
-      "height": 213,
+      "height": 211,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-horizontal-2048.png",
-      "bytes": 56136,
+      "bytes": 54814,
       "type": "png",
       "group": "logo",
       "width": 2048,
-      "height": 425,
+      "height": 423,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-horizontal-512.png",
-      "bytes": 11959,
+      "bytes": 12115,
       "type": "png",
       "group": "logo",
       "width": 512,
@@ -599,25 +608,25 @@
     },
     {
       "path": "logo/png/skibka-mono-black-1024.png",
-      "bytes": 30893,
+      "bytes": 30678,
       "type": "png",
       "group": "logo",
       "width": 1024,
-      "height": 263,
+      "height": 261,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-mono-black-2048.png",
-      "bytes": 66727,
+      "bytes": 66975,
       "type": "png",
       "group": "logo",
       "width": 2048,
-      "height": 525,
+      "height": 523,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-mono-black-512.png",
-      "bytes": 13641,
+      "bytes": 13479,
       "type": "png",
       "group": "logo",
       "width": 512,
@@ -626,25 +635,25 @@
     },
     {
       "path": "logo/png/skibka-negative-1024.png",
-      "bytes": 39703,
+      "bytes": 39503,
       "type": "png",
       "group": "logo",
       "width": 1024,
-      "height": 263,
+      "height": 261,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-negative-2048.png",
-      "bytes": 87654,
+      "bytes": 86440,
       "type": "png",
       "group": "logo",
       "width": 2048,
-      "height": 525,
+      "height": 523,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-negative-512.png",
-      "bytes": 18465,
+      "bytes": 18324,
       "type": "png",
       "group": "logo",
       "width": 512,
@@ -653,25 +662,25 @@
     },
     {
       "path": "logo/png/skibka-primary-1024.png",
-      "bytes": 38939,
+      "bytes": 38742,
       "type": "png",
       "group": "logo",
       "width": 1024,
-      "height": 263,
+      "height": 261,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-primary-2048.png",
-      "bytes": 85526,
+      "bytes": 84658,
       "type": "png",
       "group": "logo",
       "width": 2048,
-      "height": 525,
+      "height": 523,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-primary-512.png",
-      "bytes": 17766,
+      "bytes": 17694,
       "type": "png",
       "group": "logo",
       "width": 512,
@@ -707,61 +716,61 @@
     },
     {
       "path": "logo/png/skibka-vertical-1024.png",
-      "bytes": 68982,
+      "bytes": 68809,
       "type": "png",
       "group": "logo",
       "width": 1024,
-      "height": 853,
+      "height": 847,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-vertical-2048.png",
-      "bytes": 155209,
+      "bytes": 153441,
       "type": "png",
       "group": "logo",
       "width": 2048,
-      "height": 1706,
+      "height": 1693,
       "hasAlpha": true
     },
     {
       "path": "logo/png/skibka-vertical-512.png",
-      "bytes": 32371,
+      "bytes": 31755,
       "type": "png",
       "group": "logo",
       "width": 512,
-      "height": 426,
+      "height": 423,
       "hasAlpha": true
     },
     {
       "path": "logo/skibka-horizontal.svg",
-      "bytes": 4545,
+      "bytes": 4538,
       "type": "svg",
       "group": "logo",
-      "width": 366,
+      "width": 368,
       "height": 76
     },
     {
       "path": "logo/skibka-mono-black.svg",
-      "bytes": 9720,
+      "bytes": 9723,
       "type": "svg",
       "group": "logo",
-      "width": 655,
+      "width": 658,
       "height": 168
     },
     {
       "path": "logo/skibka-negative.svg",
-      "bytes": 9751,
+      "bytes": 9754,
       "type": "svg",
       "group": "logo",
-      "width": 655,
+      "width": 658,
       "height": 168
     },
     {
       "path": "logo/skibka-primary.svg",
-      "bytes": 9759,
+      "bytes": 9762,
       "type": "svg",
       "group": "logo",
-      "width": 655,
+      "width": 658,
       "height": 168
     },
     {
@@ -774,10 +783,10 @@
     },
     {
       "path": "logo/skibka-vertical.svg",
-      "bytes": 9401,
+      "bytes": 9392,
       "type": "svg",
       "group": "logo",
-      "width": 407,
+      "width": 410,
       "height": 339
     },
     {
@@ -788,7 +797,7 @@
     },
     {
       "path": "mockups/skibka-card-back.jpg",
-      "bytes": 225583,
+      "bytes": 225488,
       "type": "jpg",
       "group": "mockups"
     },
@@ -800,19 +809,19 @@
     },
     {
       "path": "mockups/skibka-email-signature.jpg",
-      "bytes": 134976,
+      "bytes": 134946,
       "type": "jpg",
       "group": "mockups"
     },
     {
       "path": "mockups/skibka-letterhead.jpg",
-      "bytes": 255524,
+      "bytes": 255856,
       "type": "jpg",
       "group": "mockups"
     },
     {
       "path": "og.png",
-      "bytes": 225884,
+      "bytes": 226585,
       "type": "png",
       "group": "meta",
       "width": 1200,
@@ -829,7 +838,7 @@
     },
     {
       "path": "print/skibka-business-card.pdf",
-      "bytes": 68712,
+      "bytes": 34292,
       "type": "pdf",
       "group": "print",
       "pages": 2,
@@ -844,7 +853,7 @@
     },
     {
       "path": "print/skibka-letterhead.pdf",
-      "bytes": 363219,
+      "bytes": 35604,
       "type": "pdf",
       "group": "print",
       "pages": 1,
@@ -859,10 +868,10 @@
     },
     {
       "path": "skibka-brandbook.pdf",
-      "bytes": 1856914,
+      "bytes": 2536292,
       "type": "pdf",
       "group": "brandbook",
-      "pages": 27,
+      "pages": 29,
       "pageMm": {
         "width": 508,
         "height": 285.8
@@ -874,7 +883,7 @@
     },
     {
       "path": "skibka-identyfikacja.zip",
-      "bytes": 4837083,
+      "bytes": 5153373,
       "type": "zip",
       "group": "zip"
     },

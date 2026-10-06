@@ -4,7 +4,8 @@ import { optimizeSvg, viewBoxOf } from '../../lib/svg.mjs';
 import { layoutText, lineToPath, loadFont } from '../../lib/text-path.mjs';
 import { fontsSrcRoot } from '../../lib/paths.mjs';
 import { brand, c, logo } from './theme.mjs';
-import { kerning, wordmark } from './logo-parts.mjs';
+import { canonicalSeed, faviconMarkup, kerning, lockups, stampParts, wordmark } from './logo-parts.mjs';
+import { stamp } from '../../../../sites/src/identyfikacja/skibka/lib/stamp.ts';
 
 const figure = (name, svg) => writeFile(join(brand.paths.pub, 'figures', name), `${optimizeSvg(svg)}\n`);
 const display = () => loadFont(join(fontsSrcRoot(), 'youngserif', 'YoungSerif-Regular.ttf'));
@@ -21,11 +22,15 @@ const rough = (points, jitter = 1.2, seed = 3) => {
 const sketchStyle = `fill="none" stroke="${c.zyto}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"`;
 
 export const buildFigures = () => {
-  const glyphS = layoutText(display(), 'S', { size: 96 });
-  const sPath = lineToPath(glyphS, { x: 66, y: 126, digits: 1 });
+  const glyphS = layoutText(display(), 'S', { size: 82 });
+  const sPath = lineToPath(glyphS, { x: 100 - glyphS.width / 2, y: 148, digits: 1 });
+  const slice = 'M48 174V98C30 94 26 62 42 46C58 30 84 34 100 40C116 34 142 30 158 46C174 62 170 94 152 98V174Z';
+  const crumbs = [[74, 84], [126, 80], [112, 112], [82, 118], [140, 116], [66, 150], [136, 156]]
+    .map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.2" fill="${c.zyto}"/>`)
+    .join('');
   figure(
     'direction-kromka.svg',
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path ${sketchStyle} d="${rough([[48, 172], [48, 98], [30, 90], [28, 58], [44, 38], [76, 30], [124, 30], [156, 38], [172, 58], [170, 90], [152, 98], [152, 172], [48, 172]], 2.2, 5)}"/><path ${sketchStyle} stroke-width="2" d="${sPath}"/></svg>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path ${sketchStyle} d="${slice}"/><path ${sketchStyle} stroke-width="2" stroke-dasharray="1 7" transform="translate(100 108) scale(.82) translate(-100 -108)" d="${slice}"/>${crumbs}<path fill="${c.zyto}" d="${sPath}"/></svg>`,
   );
 
   const grains = [
@@ -64,12 +69,52 @@ export const buildFigures = () => {
   const inner = `<g transform="translate(${unit} ${unit})">${primary.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '').replace(/<title>.*?<\/title>/, '')}</g>`;
   const total = [pw + unit * 2, ph + unit * 2];
   const bandPath = `M0 0H${total[0]}V${total[1]}H0ZM${unit} ${unit}V${total[1] - unit}H${total[0] - unit}V${unit}Z`;
-  const marks = [
-    `<rect x="${total[0] - unit - 30}" y="${total[1] - unit + 8}" width="${unit}" height="${unit - 16}" fill="none"/>`,
+  const sLayout = layoutText(display(), 'S', { size: 134 });
+  const sScale = unit / sLayout.capHeight;
+  const sBlock = (cx, cy) => {
+    const d = lineToPath(sLayout, { x: 0, y: 0, digits: 1 });
+    return `<g transform="translate(${(cx - (sLayout.width * sScale) / 2).toFixed(1)} ${(cy + unit / 2).toFixed(1)}) scale(${sScale.toFixed(4)})"><path fill="${c.skorka}" d="${d}"/></g>`;
+  };
+  const mid = [total[0] / 2, total[1] / 2];
+  const tick = 7;
+  const dim = (x1, y1, x2, y2) => {
+    const horizontal = y1 === y2;
+    const ends = horizontal ? `M${x1} ${y1 - tick}V${y1 + tick}M${x2} ${y2 - tick}V${y2 + tick}` : `M${x1 - tick} ${y1}H${x1 + tick}M${x2 - tick} ${y2}H${x2 + tick}`;
+    return `M${x1} ${y1}L${x2} ${y2}${ends}`;
+  };
+  const dims = [
+    dim(mid[0] + unit * 0.7, 0, mid[0] + unit * 0.7, unit),
+    dim(mid[0] + unit * 0.7, total[1] - unit, mid[0] + unit * 0.7, total[1]),
+    dim(0, mid[1] + unit * 0.5 + 22, unit, mid[1] + unit * 0.5 + 22),
+    dim(total[0] - unit, mid[1] + unit * 0.5 + 22, total[0], mid[1] + unit * 0.5 + 22),
   ].join('');
+  const blocks = [sBlock(mid[0], unit / 2), sBlock(mid[0], total[1] - unit / 2), sBlock(unit / 2, mid[1]), sBlock(total[0] - unit / 2, mid[1])].join('');
   figure(
     'clearspace.svg',
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total[0]} ${total[1]}"><path fill="${c.kraft}" fill-opacity=".55" fill-rule="evenodd" d="${bandPath}"/><rect x="${unit}" y="${unit}" width="${pw}" height="${ph}" fill="none" stroke="${c.skorka}" stroke-width="1.5" stroke-dasharray="6 5"/>${marks}${inner}<g stroke="${c.zyto}" stroke-width="1.5" fill="none"><path d="M${unit} ${unit / 2}H0M0 ${unit / 2 - 6}V${unit / 2 + 6}M${unit} ${unit / 2 - 6}V${unit / 2 + 6}"/><path d="M${total[0] - unit} ${unit / 2}H${total[0]}M${total[0] - unit} ${unit / 2 - 6}V${unit / 2 + 6}M${total[0]} ${unit / 2 - 6}V${unit / 2 + 6}"/><path d="M${total[0] / 2 + 40} ${total[1] - unit}V${total[1]}M${total[0] / 2 + 34} ${total[1] - unit}H${total[0] / 2 + 46}M${total[0] / 2 + 34} ${total[1]}H${total[0] / 2 + 46}"/></g></svg>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 ${total[0] + 12} ${total[1] + 12}"><path fill="${c.kraft}" fill-opacity=".55" fill-rule="evenodd" d="${bandPath}"/><rect x="${unit}" y="${unit}" width="${pw}" height="${ph}" fill="none" stroke="${c.skorka}" stroke-width="1.5" stroke-dasharray="6 5"/>${inner}${blocks}<path d="${dims}" stroke="${c.zyto}" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`,
   );
+
+  const parts = stampParts(canonicalSeed);
+  const set = lockups({ ink: c.skorka, wordInk: c.zyto, loafInk: c.skorka }, parts);
+  const labelFont = loadFont(join(fontsSrcRoot(), 'karla', 'Karla[wght].ttf'), { wght: 700 });
+  const label = (text, x, y, size, color) => {
+    const layout = layoutText(labelFont, text, { size });
+    return `<path fill="${color}" d="${lineToPath(layout, { x: x - layout.width / 2, y, digits: 1 })}"/>`;
+  };
+  const sizes = [
+    { x: 100, width: 16, art: `<g transform="scale(${16 / 400})">${faviconMarkup(c.skorka, c.skorka)}</g>`, height: 16, a: '16 px, 6 mm', b: 'sygnet uproszczony' },
+    { x: 290, width: 48, art: `<g transform="scale(${48 / stamp.size})">${set.symbol.body}</g>`, height: 48, a: '48 px, 18 mm', b: 'pełna pieczątka' },
+    { x: 480, width: 120, art: `<g transform="scale(${120 / set.primary.viewBox[2]})">${set.primary.body}</g>`, height: (120 * set.primary.viewBox[3]) / set.primary.viewBox[2], a: '120 px, 32 mm', b: 'logo główne, szerokość' },
+  ];
+  const baseline = 72;
+  const items = sizes
+    .map(item => {
+      const left = item.x - item.width / 2;
+      const top = baseline - item.height;
+      const bar = `M${left} ${baseline + 12}H${left + item.width}M${left} ${baseline + 8}V${baseline + 16}M${left + item.width} ${baseline + 8}V${baseline + 16}`;
+      return `<g transform="translate(${left} ${top})">${item.art}</g><path d="${bar}" stroke="${c.skorka}" stroke-width="1.2" fill="none"/>${label(item.a, item.x, baseline + 42, 20, c.zyto)}${label(item.b, item.x, baseline + 66, 17, c.popiol)}`;
+    })
+    .join('');
+  figure('minimum-sizes.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 590 160">${items}</svg>`);
   return { unit, kerning };
 };

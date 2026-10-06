@@ -1,4 +1,5 @@
-import { c, contact, extras, file, baseCss, dataUri, grain, logo, readPub } from './theme.mjs';
+import { c, contact, extras, file, baseCss, grain, logo } from './theme.mjs';
+import { patternStrip } from './pattern.mjs';
 
 export const ink = (svg, color) => svg.replace(/fill="#[0-9a-fA-F]{3,8}"/g, `fill="${color}"`);
 export const sized = (svg, style) => svg.replace('<svg ', `<svg style="${style}" `);
@@ -39,7 +40,7 @@ export const cardBack = mode => `<div class="card back" style="--mm:${mode === '
 <div class="b-person"><p class="b-name">${contact.person}</p><p class="b-role">${contact.role}</p></div>
 <ul class="b-lines"><li>${contact.street}, ${contact.city}</li><li>${contact.phone}</li><li>${contact.email}</li></ul>
 <div class="b-stamp">${stampInk(c.skorka, 'width:100%;height:100%')}</div>
-<div class="b-strip" style="background-image:url('${dataUri(readPub(file.pattern))}')"></div>
+<div class="b-strip">${patternStrip({ widthMm: 91, heightMm: 5.5, tileMm: 24, id: 'strip-card' })}</div>
 </div>`;
 
 export const cardCss = `
@@ -53,7 +54,7 @@ export const cardCss = `
 .b-role{font:500 ${mm(2.6)}/1.4 'Skibka Text',sans-serif;color:${c.popiol};margin-top:${mm(1)}}
 .b-lines{position:absolute;left:${mm(9)};bottom:${mm(11.5)};margin:0;padding:0;list-style:none;font:400 ${mm(2.6)}/1.55 'Skibka Text',sans-serif}
 .b-stamp{position:absolute;right:${mm(8)};top:${mm(9)};width:${mm(22)};height:${mm(22)};transform:rotate(7deg)}
-.b-strip{position:absolute;left:0;right:0;bottom:0;height:${mm(5.5)};background-size:${mm(24)};background-color:${c.otreby};opacity:1}
+.b-strip{position:absolute;left:0;right:0;bottom:0;height:${mm(5.5)};background-color:${c.otreby}}
 `;
 
 export const cardScene = side => {
@@ -75,7 +76,7 @@ const letter = `
 `;
 
 export const letterheadBody = mode => `<div class="sheet" style="--mm:${mode === 'print' ? '1mm' : '5.2px'}">
-<div class="l-strip" style="background-image:url('${dataUri(readPub(file.pattern))}')"></div>
+<div class="l-strip">${patternStrip({ widthMm: 9, heightMm: 297, tileMm: 30, id: 'strip-letter' })}</div>
 <div class="l-logo">${wordInk('primary', c.zyto, 'width:100%;height:auto')}</div>
 <div class="l-addr"><p>${contact.street}<br>${contact.city}</p><p>${contact.phone}<br>${contact.email}</p></div>
 <div class="l-body">${letter}</div>
@@ -84,7 +85,7 @@ export const letterheadBody = mode => `<div class="sheet" style="--mm:${mode ===
 
 export const letterheadCss = `
 .sheet{position:relative;width:${mm(210)};height:${mm(297)};background:${c['maka-biala']};color:${c.zyto};overflow:hidden;flex:none}
-.l-strip{position:absolute;left:0;top:0;bottom:0;width:${mm(9)};background-size:${mm(30)};background-color:${c.otreby}}
+.l-strip{position:absolute;left:0;top:0;bottom:0;width:${mm(9)};background-color:${c.otreby}}
 .l-logo{position:absolute;left:${mm(24)};top:${mm(18)};width:${mm(58)}}
 .l-addr{position:absolute;right:${mm(18)};top:${mm(20)};text-align:right;font:400 ${mm(3.1)}/1.5 'Skibka Text',sans-serif;color:${c.popiol}}
 .l-addr p+p{margin-top:${mm(2.4)}}

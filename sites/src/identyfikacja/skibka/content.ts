@@ -87,7 +87,7 @@ export const content: CaseContent = {
     refinement: [
       {
         title: 'Ręczny kerning',
-        text: 'Pary Sk, bk i ka zostały ściągnięte, ki i ib odrobinę rozsunięte, żeby kolor tekstu w słowie Skibka był równy.',
+        text: 'Pary Sk i ka zostały ściągnięte, a ki, ib i bk rozsunięte o kilka jednostek, żeby szeryfy nie zlewały się w jedną szynę, a kolor tekstu w słowie Skibka był równy.',
       },
       {
         title: 'Wyrównania optyczne',
@@ -143,7 +143,7 @@ export const content: CaseContent = {
     {
       id: 'papier',
       title: 'Papier firmowy A4',
-      caption: 'Pieczątka w rogu, adres w stopce, szeroki margines.',
+      caption: 'Logo główne w nagłówku, pasek ze wzorem z lewej, adres w stopce.',
       image: 'mockups/skibka-letterhead.jpg',
       alt: 'Papier firmowy Skibki w formacie A4 z krótkim listem.',
     },
@@ -165,7 +165,7 @@ export const content: CaseContent = {
   ],
   deliverables: {
     intro:
-      'Wszystko, co dostaje piekarnia, leży w jednej paczce ZIP i osobno na liście poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
+      'Logo, kolory, kroje, wzór, ikony, druk, grafiki do mediów, podpis e-mail i brand book leżą w jednej paczce ZIP. Makiety i animacja są osobnymi plikami. Wszystko jest też na liście poniżej, rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
