@@ -37,18 +37,46 @@ export interface Item {
 export const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), Math.max(min, max));
 
+const overlapArea = (a: Rect, b: Rect) =>
+  Math.max(0, Math.min(a.x + a.width, b.x + b.width) - Math.max(a.x, b.x)) *
+  Math.max(0, Math.min(a.y + a.height, b.y + b.height) - Math.max(a.y, b.y));
+
+interface Rect {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+const attempts = 28;
+
 export const scatter = (
   items: Item[],
   area: { width: number; height: number },
   round: number,
 ): Placement[] => {
   const rng = mulberry32(hashSeed(`mix-${round}`));
-  return items.map(item => ({
-    id: item.id,
-    x: Math.round(clamp(rng() * (area.width - item.width), 0, area.width - item.width)),
-    y: Math.round(clamp(rng() * (area.height - item.height), 0, area.height - item.height)),
-    rotation: Math.round((rng() - 0.5) * 36),
-  }));
+  const placed: Rect[] = [];
+  return items.map(item => {
+    let best: Rect | null = null;
+    let bestScore = Infinity;
+    for (let attempt = 0; attempt < attempts; attempt += 1) {
+      const candidate = {
+        x: Math.round(clamp(rng() * (area.width - item.width), 0, area.width - item.width)),
+        y: Math.round(clamp(rng() * (area.height - item.height), 0, area.height - item.height)),
+        width: item.width,
+        height: item.height,
+      };
+      const score = placed.reduce((sum, other) => sum + overlapArea(candidate, other), 0);
+      if (score < bestScore) {
+        best = candidate;
+        bestScore = score;
+      }
+    }
+    const chosen = best as Rect;
+    placed.push(chosen);
+    return { id: item.id, x: chosen.x, y: chosen.y, rotation: Math.round((rng() - 0.5) * 36) };
+  });
 };
 
 export const tidy = (

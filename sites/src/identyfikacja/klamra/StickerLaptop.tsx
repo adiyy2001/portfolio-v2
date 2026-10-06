@@ -119,8 +119,8 @@ export default function StickerLaptop({ pieces, area }: Props) {
         <span class="laptop__brand" aria-hidden="true">
           {'{ }'}
         </span>
-        {order.map((id, index) => {
-          const piece = pieceOf(id);
+        {pieces.map(piece => {
+          const id = piece.id;
           const place = placementOf(id);
           return (
             <div
@@ -133,7 +133,7 @@ export default function StickerLaptop({ pieces, area }: Props) {
                 left: `${(place.x / area.width) * 100}%`,
                 top: `${(place.y / area.height) * 100}%`,
                 width: `${(piece.width / area.width) * 100}%`,
-                zIndex: index + 1,
+                zIndex: order.indexOf(id) + 1,
                 transform: `rotate(${place.rotation}deg)`,
               }}
               onPointerDown={event => onPointerDown(event, id)}

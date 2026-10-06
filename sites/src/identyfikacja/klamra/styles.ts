@@ -13,9 +13,9 @@ body.klamra{margin:0;background:var(--biel);color:var(--atrament);font:500 17px/
 .klamra .top a{padding:8px 14px;background:var(--biel);border:3px solid var(--atrament);box-shadow:4px 4px 0 var(--atrament);font:800 14px/1 var(--mono);text-decoration:none;text-transform:uppercase}
 .klamra .top a:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--atrament)}
 .klamra main{display:block;max-width:1240px;margin:0 auto;padding:0 var(--gut)}
-.tag{display:inline-block;align-self:start;padding:5px 10px;background:var(--atrament);color:var(--biel);font:800 13px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.tag{display:inline-block;align-self:start;justify-self:start;padding:5px 10px;background:var(--atrament);color:var(--biel);font:800 13px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .tag--light{background:var(--biel);color:var(--atrament);border:3px solid var(--atrament)}
-.blk{position:relative;display:grid;gap:16px;align-content:start;padding:clamp(20px,3vw,40px);margin:0;background:var(--biel);border:var(--line) solid var(--atrament);box-shadow:var(--lift) var(--lift) 0 var(--atrament);min-width:0}
+.blk{position:relative;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-content:start;padding:clamp(20px,3vw,40px);margin:0;background:var(--biel);border:var(--line) solid var(--atrament);box-shadow:var(--lift) var(--lift) 0 var(--atrament);min-width:0}
 .blk--cytryna{background:var(--cytryna)}
 .blk--roz{background:var(--roz)}
 .blk--mieta{background:var(--mieta)}
@@ -27,9 +27,9 @@ body.klamra{margin:0;background:var(--biel);color:var(--atrament);font:500 17px/
 .hero{display:grid;gap:clamp(20px,3vw,32px);padding:clamp(24px,5vw,56px) 0}
 .hero>*{min-width:0}
 .hero__main{padding:clamp(24px,4vw,56px)}
-.hero h1{font-size:clamp(72px,16vw,220px);line-height:.88;letter-spacing:-.035em;margin:10px 0 6px}
+.hero h1{font-size:clamp(64px,17vw,128px);line-height:.88;letter-spacing:-.035em;margin:10px 0 6px}
 .hero__lead{font:700 clamp(20px,2.6vw,30px)/1.3 var(--text);max-width:24em}
-.hero__facts{display:grid;gap:12px;margin:12px 0 0}
+.hero__facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0 0}
 .hero__facts div{background:var(--biel);border:3px solid var(--atrament);padding:8px 12px}
 .hero__facts dt{font:800 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
 .hero__facts dd{margin:0}
@@ -43,7 +43,7 @@ body.klamra{margin:0;background:var(--biel);color:var(--atrament);font:500 17px/
 .hero__nav a span{color:var(--cytryna)}
 .hero__nav a:hover{background:var(--roz);color:var(--atrament)}
 .hero__nav a:hover span{color:var(--atrament)}
-@media (min-width:980px){.hero{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:start}.hero__facts{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:980px){.hero{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start}.hero h1{font-size:clamp(100px,9.4vw,136px)}}
 .band{padding:clamp(28px,5vw,64px) 0;display:grid;gap:clamp(20px,3vw,36px)}
 .band__head{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
 .band__num{display:grid;place-items:center;min-width:56px;height:56px;padding:0 10px;background:var(--atrament);color:var(--cytryna);font:900 26px/1 var(--mono)}
@@ -55,7 +55,7 @@ body.klamra{margin:0;background:var(--biel);color:var(--atrament);font:500 17px/
 .two{display:grid;gap:clamp(20px,3vw,32px);align-items:start}
 @media (min-width:900px){.two{grid-template-columns:1.3fr 1fr}.two--even{grid-template-columns:1fr 1fr}}
 .facts{display:grid;gap:14px;margin:0}
-.facts div{background:var(--biel);border:3px solid var(--atrament);padding:10px 14px}
+.facts div{background:var(--biel);color:var(--atrament);border:3px solid var(--atrament);padding:10px 14px}
 .facts div:nth-child(4n+1){background:var(--cytryna)}
 .facts div:nth-child(4n+2){background:var(--mieta)}
 .facts div:nth-child(4n+3){background:var(--niebo)}
@@ -149,13 +149,13 @@ body.klamra{margin:0;background:var(--biel);color:var(--atrament);font:500 17px/
 .tone .yes,.tone .no{font-size:16px}
 .tone .yes{font-weight:700}
 .tone .yes .tag{background:var(--mieta);color:var(--atrament)}
-.tone .no{color:var(--grafit);text-decoration:line-through;text-decoration-color:var(--roz);text-decoration-thickness:3px}
+.tone .no{color:var(--grafit);text-decoration:line-through;text-decoration-color:var(--roz);text-decoration-thickness:2px}
 .tone .no .tag{text-decoration:none;display:inline-block}
 .tone .tag{margin-right:8px;font-size:11px}
 .film{width:100%;max-width:520px;height:auto;aspect-ratio:1;background:var(--mgla);border:var(--line) solid var(--atrament)}
 .palette-demo{display:flex;height:64px;border:var(--line) solid var(--atrament)}
 .palette-demo i{display:block}
-.laptop{display:grid;gap:0;max-width:880px}
+.laptop{display:grid;gap:0;max-width:960px}
 .laptop__lid{position:relative;overflow:hidden;background:var(--beton);border:var(--line) solid var(--atrament);box-shadow:var(--lift) var(--lift) 0 var(--atrament);touch-action:manipulation;user-select:none}
 .laptop__brand{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font:900 clamp(60px,14vw,160px)/1 var(--display);color:var(--kamien);opacity:.5;pointer-events:none}
 .laptop__sticker{position:absolute;cursor:grab;touch-action:none;transition:left .3s cubic-bezier(.3,.8,.3,1),top .3s cubic-bezier(.3,.8,.3,1),transform .3s ease}
@@ -168,7 +168,7 @@ body.klamra{margin:0;background:var(--biel);color:var(--atrament);font:500 17px/
 .laptop__button:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--atrament)}
 .laptop__hint{flex:1 1 280px;color:var(--grafit);font-size:15px}
 .gallery{display:grid;gap:clamp(20px,3vw,36px)}
-@media (min-width:760px){.gallery{grid-template-columns:repeat(2,1fr);align-items:start}.gallery__item--papier{grid-row:span 2}.gallery__item--naklejki{grid-column:1/-1}}
+@media (min-width:760px){.gallery{grid-template-columns:repeat(2,1fr);align-items:start}.gallery__item--naklejki{grid-column:1/-1;order:5}.gallery__item--podpis{order:4}}
 .gallery__item{gap:12px}
 .gallery__item img{width:100%;border:3px solid var(--atrament)}
 .gallery__item figcaption{display:grid;gap:2px;font-size:15px}
