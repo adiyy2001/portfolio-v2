@@ -6,7 +6,7 @@ import { fontsSrcRoot } from '../../lib/paths.mjs';
 import { brand, c, logo } from './theme.mjs';
 import { kerning, wordmark } from './logo-parts.mjs';
 
-const figure = (name, svg) => writeFile(join(brand.paths.pub, 'figures', name), `${optimizeSvg(svg, { precision: 1 })}\n`);
+const figure = (name, svg) => writeFile(join(brand.paths.pub, 'figures', name), `${optimizeSvg(svg)}\n`);
 const display = () => loadFont(join(fontsSrcRoot(), 'youngserif', 'YoungSerif-Regular.ttf'));
 
 const rough = (points, jitter = 1.2, seed = 3) => {

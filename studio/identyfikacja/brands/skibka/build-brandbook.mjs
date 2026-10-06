@@ -70,14 +70,14 @@ sheet('Czego nie robić', `${titleBlock('Logo', 'Czego nie robimy')}<div class="
 
 sheet('Paleta', `${titleBlock('Kolor', 'Paleta', 'Dziesięć kolorów z mąki, skórki i żyta. Wartości CMYK są przybliżone, do druku zamów próbę.')}<div class="swatches">${palette.map(entry => `<figure><div class="chip" style="background:${entry.hex}"></div><figcaption><b>${entry.name}</b><span>${entry.hex}</span><span>${entry.rgbCss}</span><span>${entry.oklchCss}</span><span>${entry.cmykApproxText}</span><em>${entry.role}</em></figcaption></figure>`).join('')}</div>`);
 
-sheet('Kontrast', `${titleBlock('Kolor', 'Kontrast')}<table class="contrast"><thead><tr><th>Użycie</th><th>Tekst</th><th>Tło</th><th>Stosunek</th><th>Poziom</th></tr></thead><tbody>${contrast.map(row => `<tr><td>${row.use}</td><td><i style="background:${row.fgHex}"></i>${colorName(row.fg)}</td><td><i style="background:${row.bgHex}"></i>${colorName(row.bg)}</td><td>${row.ratio.toFixed(1)}:1</td><td>${row.kind === 'decorative' ? 'dekoracja' : row.level}</td></tr>`).join('')}</tbody></table>`, { kicker: 'Kolor' });
+sheet('Kontrast', `${titleBlock('Kolor', 'Kontrast')}<table class="contrast"><thead><tr><th>Użycie</th><th>Tekst</th><th>Tło</th><th>Stosunek</th><th>Poziom</th></tr></thead><tbody>${contrast.map(row => `<tr><td>${row.use}</td><td><i style="background:${row.fgHex}"></i>${colorName(row.fg)}</td><td><i style="background:${row.bgHex}"></i>${colorName(row.bg)}</td><td>${row.ratio.toFixed(1).replace('.', ',')}:1</td><td>${row.kind === 'decorative' ? 'dekoracja' : row.level}</td></tr>`).join('')}</tbody></table>`, { kicker: 'Kolor' });
 
 const shares = [['maka', 46], ['zyto', 20], ['kraft', 14], ['skorka', 10], ['lan', 6], ['otreby', 4]];
 sheet('Proporcje', `${titleBlock('Kolor', 'Proporcje użycia', 'Mąka niesie stronę, żyto niesie tekst, kraft i skórka dają ciepło. Zieleń łanu pojawia się rzadko, jak liść w koszu.')}<div class="bar">${shares.map(([id, w]) => `<div style="flex:${w};background:${c[id]};color:${['zyto', 'lan', 'skorka'].includes(id) ? c.maka : c.zyto}"><span>${colorName(id)} ${w}%</span></div>`).join('')}</div>`);
 
 sheet('Kroje', `${titleBlock('Typografia', 'Dwa kroje')}<div class="cols"><div class="face"><p class="mega display">Young Serif</p><p class="specimen display">${extras.specimen}</p><p class="small">Nagłówki. Jedna grubość, 400.</p></div><div class="face"><p class="mega text">Karla</p><p class="specimen text">${extras.specimen}</p><p class="small">Tekst. Grubości 400, 500, 700 i kursywa 400.</p></div></div>`, { tone: 'kraft' });
 
-sheet('Skala', `${titleBlock('Typografia', 'Skala pisma')}<div class="scale">${extras.typeScale.map(row => `<div><span class="${row.font}" style="font-size:${Math.min(row.size * 1.6, 90)}px;font-weight:${row.weight ?? 400};line-height:1.1">${row.name}</span><span class="small">${row.size} px, interlinia ${row.line}. ${row.use}</span></div>`).join('')}</div>`);
+sheet('Skala', `${titleBlock('Typografia', 'Skala pisma')}<div class="scale">${extras.typeScale.map(row => `<div><span class="${row.font}" style="font-size:${Math.min(row.size * 1.6, 90)}px;font-weight:${row.weight ?? 400};line-height:1.1">${row.name}</span><span class="small">${row.size} px, interlinia ${String(row.line).replace('.', ',')}. ${row.use}</span></div>`).join('')}</div>`);
 
 sheet('Polskie znaki', `${titleBlock('Typografia', 'Polskie znaki', 'Oba kroje mają komplet polskich liter, cudzysłowy drukarskie i kropkę środkową.')}<p class="glyphs display">${extras.glyphs}</p><p class="glyphs text">${extras.glyphs}</p>`);
 
@@ -91,8 +91,8 @@ sheet('Zdjęcia', `${titleBlock('Zdjęcia', 'Styl zdjęć')}<div class="prose wi
 
 sheet('Ton głosu', `${titleBlock('Ton głosu', 'Cztery zasady')}<div class="tone">${content.tone.map(rule => `<article><h3>${rule.title}</h3><p>${rule.text}</p><p class="yes">Tak: ${rule.yes}</p><p class="no">Nie: ${rule.no}</p></article>`).join('')}</div>`);
 
-const mock = path => `<img class="mock" src="${jpeg(path)}" alt="">`;
-sheet('Wizytówka i papier', `${titleBlock('Zastosowania', 'Wizytówka i papier firmowy')}<div class="mocks">${mock(file.cardFront)}${mock(file.cardBack)}${mock(file.letterhead)}</div>`);
+const mock = (path, caption = '') => (caption ? `<figure class="cap"><img class="mock" src="${jpeg(path)}" alt=""><figcaption class="small">${caption}</figcaption></figure>` : `<img class="mock" src="${jpeg(path)}" alt="">`);
+sheet('Wizytówka i papier', `${titleBlock('Zastosowania', 'Wizytówka i papier firmowy')}<div class="mocks">${mock(file.cardFront, 'Awers wizytówki: kraft i pieczątka, spad 3 mm')}${mock(file.cardBack, 'Rewers: dane na mące, bez ozdób')}${mock(file.letterhead, 'Papier firmowy A4: pieczątka w rogu, adres w stopce')}</div>`);
 sheet('Torba i cyfra', `${titleBlock('Zastosowania', 'Torba, e-mail i media')}<div class="mocks wide">${mock(file.application)}${mock(file.emailMock)}</div>`);
 
 sheet('Animacja i kontakt', `${titleBlock('Animacja', 'Pieczątka opada na papier', extras.animation)}<div class="end"><div>${recolored('negative', c.maka, 'height:300px')}</div><dl class="facts"><div><dt>Adres</dt><dd>${contact.street}, ${contact.city}</dd></div><div><dt>Telefon</dt><dd>${contact.phone}</dd></div><div><dt>E-mail</dt><dd>${contact.email}</dd></div></dl></div>`, { tone: 'dark' });
@@ -114,7 +114,8 @@ html,body{margin:0}
 .cover-text h1{font-size:260px;line-height:.95;margin:20px 0 30px}
 .cover-text .lead{max-width:760px}
 .kicker{font:700 20px/1 'Skibka Text';letter-spacing:.14em;text-transform:uppercase;color:${c.skorka};margin-bottom:22px}
-.page.kraft .kicker{color:${c.zyto}}
+.page.kraft .kicker,.page.cover .kicker{color:${c.zyto}}
+.page.kraft header,.page.kraft footer,.page.kraft .small,.page.cover .small{color:${c.zyto}}
 h2{font-size:88px;line-height:1.02;margin-bottom:26px}
 h3{font-size:40px;line-height:1.1;margin-bottom:14px}
 .lead{font:500 30px/1.45 'Skibka Text';max-width:1200px}
@@ -142,7 +143,7 @@ blockquote{margin:0;font:400 54px/1.25 'Skibka Display';border-left:8px solid ${
 .page.kraft .card{background:${c.maka}}
 .tilt0{transform:rotate(-1.4deg)}.tilt1{transform:rotate(1deg)}.tilt2{transform:rotate(-0.8deg)}
 .chosen{outline:6px solid ${c.skorka};outline-offset:-6px}
-.thumb{height:150px;display:block;margin-bottom:22px;background:${c.maka};width:100%;object-fit:contain}
+.thumb{height:120px;display:block;margin-bottom:16px;background:${c.maka};width:100%;object-fit:contain}
 .stage{height:500px;display:grid;place-items:center}
 .stage.small{height:540px}
 .caption{font:500 26px/1.5 'Skibka Text';margin-top:30px;max-width:1300px}
@@ -189,6 +190,10 @@ blockquote{margin:0;font:400 54px/1.25 'Skibka Display';border-left:8px solid ${
 .tone .yes{color:${c.lan};font-weight:700;margin-top:12px}
 .tone .no{color:${c.popiol};text-decoration:line-through;text-decoration-color:${c.skorka}}
 .mocks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;align-items:start}
+.mocks:not(.wide){display:flex;justify-content:space-between;gap:30px}
+.mocks:not(.wide) .mock{width:auto;height:425px;object-fit:contain}
+.mocks .cap{margin:0;display:grid;gap:14px}
+.mocks .cap figcaption{max-width:26em}
 .mocks .mock{width:100%;height:560px;object-fit:cover;object-position:center}
 .mocks.wide{grid-template-columns:1fr 1fr}
 .mocks.wide .mock{height:600px}
