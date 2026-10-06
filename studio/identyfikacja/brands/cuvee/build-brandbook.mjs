@@ -4,6 +4,7 @@ import { colorTable, contrastTable } from '../../lib/brand.mjs';
 import { htmlToPdf, withBrowser } from '../../lib/browser.mjs';
 import { brand, c, content, contact, dataUri, extras, file, baseCss, logoMarkup, readPub } from './theme.mjs';
 import { iconSvg } from './icons.mjs';
+import { typesetHtml } from '../../../../sites/src/identyfikacja/cuvee/typography.ts';
 import { faviconMarkup } from './logo-parts.mjs';
 
 const pub = path => join(brand.paths.pub, path);
@@ -14,7 +15,7 @@ const palette = colorTable(brand);
 const contrast = contrastTable(brand);
 const colorName = id => palette.find(entry => entry.id === id)?.name ?? id;
 const total = 29;
-const simpleSymbol = (style = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style="display:block;${style}">${faviconMarkup({ ink: c.czern, accent: c.mosiadz })}</svg>`;
+const simpleSymbol = (style = '') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 200" style="display:block;${style}">${faviconMarkup({ ink: c.czern, accent: c.mosiadz })}</svg>`;
 const logo = (variant, scheme, style = '') => logoMarkup(variant, scheme, style);
 
 const sheets = [];
@@ -31,7 +32,7 @@ const toc = [
   ['Klient i zadanie', 3], ['Kierunek i strategia', 4], ['Proces logo', 7], ['Logo', 9], ['Kolor', 15], ['Typografia', 18],
   ['Ikony, wzór i grafika', 21], ['Zdjęcia i ton głosu', 23], ['Zastosowania', 25], ['Animacja i kontakt', 29],
 ];
-sheet(`${heading('Spis treści', 'W tym numerze')}<ol class="toc">${toc.map(([name, page], i) => `<li><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="name">${name}</span><span class="pg">${String(page).padStart(2, '0')}</span></li>`).join('')}</ol>`);
+sheet(`<div class="toc-wrap"><div>${heading('Spis treści', 'W tym numerze')}</div><ol class="toc">${toc.map(([name, page], i) => `<li><span class="num">${String(i + 1).padStart(2, '0')}</span><span class="name">${name}</span><span class="pg">${String(page).padStart(2, '0')}</span></li>`).join('')}</ol></div>`);
 
 sheet(`${heading('Klient i zadanie', 'Dwanaście pokoi i cztery hektary')}<div class="cols"><div class="prose">${content.client.paragraphs.map(text => `<p>${text}</p>`).join('')}</div><dl class="facts">${content.client.facts.map(([k, v]) => `<div><dt class="caps">${k}</dt><dd>${v}</dd></div>`).join('')}</dl></div>`, { section: 'klient' });
 
@@ -44,11 +45,11 @@ sheet(`<div class="quote-wrap"><p class="kicker caps">Osobowość i pozycjonowan
 const directions = [...content.process.rejected.map((item, i) => ({ ...item, label: `Odrzucony ${i + 1}` })), { title: content.process.chosen.title, reason: content.process.chosen.reason, thumb: 'figures/direction-wersalik.svg', label: 'Wybrany', chosen: true }];
 sheet(`${heading('Proces', 'Trzy kierunki, jeden wybrany', content.process.intro)}<div class="three plates">${directions.map(item => `<article class="${item.chosen ? 'chosen' : ''}"><div class="plate"><img src="${svgUri(item.thumb)}" alt=""></div><p class="caps lab">${item.label}</p><h3>${item.title}</h3><p>${item.reason}</p></article>`).join('')}</div>`, { section: 'proces' });
 
-sheet(`${heading('Proces', 'Dopracowanie wybranego znaku')}<div class="three">${content.process.refinement.map((step, i) => `<article><p class="num">${String(i + 1).padStart(2, '0')}</p><h3>${step.title}</h3><p>${step.text}</p></article>`).join('')}</div>`, { section: 'proces' });
+sheet(`${heading('Proces', 'Dopracowanie wybranego znaku')}<div class="refine"><figure class="refine-fig"><img src="${svgUri('figures/wordmark-kerned.svg')}" alt=""><figcaption class="caps">Nazwa po ręcznej korekcie</figcaption></figure><div class="steps">${content.process.refinement.map((step, i) => `<article><p class="num">${String(i + 1).padStart(2, '0')}</p><div><h3>${step.title}</h3><p>${step.text}</p></div></article>`).join('')}</div></div>`, { section: 'proces' });
 
 sheet(`${heading('Logo', 'Znak główny')}<div class="stage">${logo('primary', 'color', 'height:300px;width:auto')}</div><p class="caption">Kapitaliki w rozstawie 0,2 em, mosiężna linia i napis Hotel, Winnica o tej samej szerokości co nazwa. Ten znak stosujemy zawsze, gdy jest miejsce.</p>`, { section: 'logo' });
 
-sheet(`${heading('Logo', 'Sygnet', 'Litera C w podwójnym cienkim kole i jedna mosiężna kropka. Poniżej 48 pikseli używamy sygnetu uproszczonego.')}<div class="pair"><figure><div class="stage small">${logo('symbol', 'color', 'height:300px;width:auto')}</div><figcaption class="caps">Sygnet pełny, od 48 px</figcaption></figure><figure><div class="stage small">${simpleSymbol('height:300px;width:auto')}</div><figcaption class="caps">Sygnet uproszczony, od 16 px</figcaption></figure></div>`, { section: 'logo' });
+sheet(`${heading('Logo', 'Sygnet', 'Litera C w arkadzie z dwóch cienkich linii i mosiężna kreska jak próg pod literą. Poniżej 48 pikseli używamy sygnetu uproszczonego.')}<div class="pair"><figure><div class="stage small">${logo('symbol', 'color', 'height:300px;width:auto')}</div><figcaption class="caps">Sygnet pełny, od 48 px</figcaption></figure><figure><div class="stage small">${simpleSymbol('height:300px;width:auto')}</div><figcaption class="caps">Sygnet uproszczony, od 16 px</figcaption></figure></div>`, { section: 'logo' });
 
 const variants = [
   ['primary', 'Główne', 'color', c.papier], ['horizontal', 'Poziome', 'color', c.kosc], ['vertical', 'Pionowe', 'color', c.papier],
@@ -204,14 +205,25 @@ blockquote{margin:0;border-top:1px solid ${c.mosiadz};padding-top:36px;font:300 
 .tone .yes{margin-top:12px}
 .tone .no{color:${c.wegiel};text-decoration:line-through;text-decoration-color:${c.mosiadz}}
 .tone p span{display:inline-block;width:70px;font-size:15px;color:${c['mosiadz-ciemny']};text-decoration:none}
+.refine{display:grid;grid-template-columns:560px 1fr;gap:100px;align-items:start}
+.refine-fig{margin:0;background:${c.papier};border:1px solid ${c.kamien};padding:40px 30px 24px}
+.refine-fig img{width:100%;height:auto}
+.refine-fig figcaption{margin-top:18px;font-size:17px;color:${c.wegiel};text-align:center}
+.steps{display:grid;gap:0}
+.steps article{display:grid;grid-template-columns:70px 1fr;border-top:1px solid ${c.mosiadz};padding:18px 0 20px}
+.steps .num{font:300 italic 24px/1.4 'Cuvee Display',serif;color:${c['mosiadz-ciemny']};font-variant-numeric:oldstyle-nums}
+.steps h3{font-size:32px;margin-bottom:6px}
+.steps p:not(.num){font:400 21px/1.5 'Cuvee Text',serif}
 .mocks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;align-items:start}
-.mocks .mock{width:100%;height:560px;object-fit:cover;object-position:top center}
+.mocks .mock{width:100%;height:600px;object-fit:contain;object-position:center;background:${c.len}}
 .mocks.one{grid-template-columns:1fr}
 .mocks.one .mock{height:600px;object-fit:contain;object-position:center}
-.posts{display:flex;gap:36px;justify-content:flex-start}
-.posts img{height:560px;width:auto;border:1px solid ${c.kamien}}
-.toc{list-style:none;margin:0;padding:0;columns:2;column-gap:120px}
-.toc li{display:grid;grid-template-columns:70px 1fr auto;border-top:1px solid ${c.mosiadz};padding:20px 0 24px;break-inside:avoid;align-items:baseline}
+.posts{display:flex;justify-content:space-between}
+.posts img{height:560px;width:auto}
+.toc-wrap{display:grid;grid-template-columns:460px 1fr;gap:150px;align-items:start}
+.toc-wrap .head{margin-bottom:0}
+.toc{list-style:none;margin:0;padding:0}
+.toc li{display:grid;grid-template-columns:70px 1fr auto;border-top:1px solid ${c.mosiadz};padding:11px 0 13px;align-items:baseline}
 .toc .name{font:300 40px/1 'Cuvee Display',serif}
 .toc .num,.toc .pg{font:300 italic 24px/1 'Cuvee Display',serif;color:${c['mosiadz-ciemny']};font-variant-numeric:oldstyle-nums;margin:0}
 .end{display:grid;grid-template-columns:1fr 1fr;gap:120px;align-items:center;margin-top:20px}
@@ -220,7 +232,7 @@ blockquote{margin:0;border-top:1px solid ${c.mosiadz};padding-top:36px;font:300 
 .page.dark .facts dt{color:${c.mosiadz}}
 `;
 
-const html = `<!doctype html><html lang="pl"><meta charset="utf-8"><title>Cuvée, księga identyfikacji</title><style>${css}</style><body>${sheets.join('')}</body></html>`;
+const html = typesetHtml(`<!doctype html><html lang="pl"><meta charset="utf-8"><title>Cuvée, księga identyfikacji</title><style>${css}</style><body>${sheets.join('')}</body></html>`);
 
 await withBrowser(browser => htmlToPdf(browser, { outDir: brand.paths.out, name: 'brandbook', html, out: pub(file.brandbook), width: 1920, height: 1080 }));
 console.log(`  ${file.brandbook} (${sheets.length} pages)`);

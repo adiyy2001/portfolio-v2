@@ -12,6 +12,7 @@ import LabelComposer from './LabelComposer.tsx';
 import { brand } from './brand';
 import { content, contact, extras } from './content';
 import { css } from './styles';
+import Typeset from './Typeset.astro';
 import { asset, fileInfo, iconNames, logoVariants, sizeTest } from './view';
 
 const manifest = readManifest('cuvee');
@@ -31,11 +32,13 @@ const navigation = [
   ['zadanie', 'Zadanie'],
   ['kierunek', 'Kierunek'],
   ['proces', 'Proces'],
-  ['logo', 'System'],
-  ['etykieta', 'Etykieta'],
+  ['logo', 'Logo'],
   ['zastosowania', 'Zastosowania'],
+  ['etykieta', 'Etykieta'],
+  ['kolor', 'Kolor i pismo'],
   ['pliki', 'Pliki'],
 ];
+const showcase = mockups.find(item => item.id === 'etykieta');
 const rejected = content.process.rejected;
 ---
 
@@ -46,518 +49,566 @@ const rejected = content.process.rejected;
   css={fontCss + css}
   preload={preloadFonts(manifest, ['display'])}
   bodyClass="cuvee">
-  <header class="top">
-    <a href={link('/identyfikacja/')}>Wzornik, identyfikacja</a>
-    <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
-  </header>
+  <Typeset>
+    <header class="top">
+      <a href={link('/identyfikacja/')}>Wzornik, identyfikacja</a>
+      <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+    </header>
 
-  <main id="main" tabindex="-1">
-    <section class="cover" aria-labelledby="t-cover">
-      <div class="cover__in">
-        <h1 id="t-cover" class="cover__logo">
-          <img
-            src={asset('logo/cuvee-negative.svg')}
-            alt="Cuvée, hotel i winnica"
-            width="760"
-            height="360"
-          />
-        </h1>
-        <div class="cover__rule"></div>
-        <div class="cover__body">
-          <p class="cover__kicker caps">
-            Identyfikacja wizualna, butikowy hotel z winnicą, Dolny Śląsk
-          </p>
-          <p class="cover__lead">{content.lead}</p>
-          <dl class="cover__facts">
-            {content.client.facts.slice(0, 3).map(([term, text]) => (
+    <main id="main" tabindex="-1">
+      <section class="cover" aria-labelledby="t-cover">
+        <div class="cover__in">
+          <div class="cover__top">
+            <div class="cover__brand">
+              <h1 id="t-cover" class="cover__logo">
+                <img
+                  src={asset('logo/cuvee-negative.svg')}
+                  alt="Cuvée, hotel i winnica"
+                  width="760"
+                  height="360"
+                />
+              </h1>
+              <p class="cover__lead">{content.lead}</p>
+            </div>
+            {showcase && (
+              <figure class="cover__show">
+                <img
+                  src={asset(showcase.image)}
+                  alt={showcase.alt}
+                  width={showcase.info?.width}
+                  height={showcase.info?.height}
+                  fetchpriority="high"
+                />
+              </figure>
+            )}
+          </div>
+          <div class="cover__body">
+            <p class="cover__kicker caps">
+              Identyfikacja wizualna, butikowy hotel z winnicą, Dolny Śląsk
+            </p>
+            <dl class="cover__facts">
+              {content.client.facts.slice(0, 3).map(([term, text]) => (
+                <div>
+                  <dt class="caps">{term}</dt>
+                  <dd>{text}</dd>
+                </div>
+              ))}
+            </dl>
+            <nav class="cover__nav" aria-label="Spis treści">
+              <ul>
+                {navigation.map(([id, label]) => (
+                  <li>
+                    <a href={`#${id}`}>{label}</a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <div class="sheet">
+        <section class="sec" id="zadanie" aria-labelledby="t-zadanie">
+          <header class="sec__head">
+            <span class="sec__num">01</span>
+            <h2 id="t-zadanie" class="sec__title">
+              Klient i zadanie
+            </h2>
+          </header>
+          <div class="sec__body">
+            <div class="col">
+              {content.client.paragraphs.map(text => (
+                <p>{text}</p>
+              ))}
+            </div>
+            <dl class="facts">
+              {content.client.facts.map(([term, text]) => (
+                <div>
+                  <dt class="caps">{term}</dt>
+                  <dd>{text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        <section class="sec" id="kierunek" aria-labelledby="t-kierunek">
+          <header class="sec__head">
+            <span class="sec__num">02</span>
+            <h2 id="t-kierunek" class="sec__title">
+              Kierunek i strategia
+            </h2>
+          </header>
+          <div class="sec__body">
+            <h3 class="sub">{content.direction.title}</h3>
+            <div class="col">
+              {content.direction.paragraphs.map(text => (
+                <p>{text}</p>
+              ))}
+            </div>
+            <p class="keywords">
+              {content.direction.keywords.map(word => (
+                <span>{word}</span>
+              ))}
+            </p>
+            <div class="pillars">
+              {content.strategy.values.map((value, index) => (
+                <article>
+                  <span class="n">{`0${index + 1}`}</span>
+                  <h3>{value.title}</h3>
+                  <p>{value.text}</p>
+                </article>
+              ))}
+            </div>
+            <dl class="facts facts--row">
               <div>
-                <dt class="caps">{term}</dt>
-                <dd>{text}</dd>
+                <dt class="caps">Odbiorcy</dt>
+                <dd>{content.strategy.audience}</dd>
               </div>
-            ))}
-          </dl>
-          <nav class="cover__nav" aria-label="Spis treści">
-            <ul>
-              {navigation.map(([id, label]) => (
+              <div>
+                <dt class="caps">Osobowość</dt>
+                <dd>{content.strategy.personality.join(', ')}</dd>
+              </div>
+              <div>
+                <dt class="caps">Czego unikamy</dt>
+                <dd>{content.strategy.avoids}</dd>
+              </div>
+            </dl>
+            <blockquote>{content.strategy.positioning}</blockquote>
+          </div>
+        </section>
+
+        <section class="sec" id="proces" aria-labelledby="t-proces">
+          <header class="sec__head">
+            <span class="sec__num">03</span>
+            <h2 id="t-proces" class="sec__title">
+              Proces
+            </h2>
+          </header>
+          <div class="sec__body">
+            <p class="lead">{content.process.intro}</p>
+            <div class="plates">
+              {rejected.map((item, index) => (
+                <article class="plate">
+                  <div class="plate__art">
+                    <img src={asset(item.thumb)} alt="" width="240" height="160" loading="lazy" />
+                  </div>
+                  <p class="plate__tag caps">{`Odrzucony ${index + 1}`}</p>
+                  <h3>{item.title}</h3>
+                  <p class="muted">{item.text}</p>
+                  <p>{item.reason}</p>
+                </article>
+              ))}
+              <article class="plate plate--chosen">
+                <div class="plate__art">
+                  <img
+                    src={asset('figures/direction-wersalik.svg')}
+                    alt=""
+                    width="240"
+                    height="160"
+                  />
+                </div>
+                <p class="plate__tag caps">Wybrany</p>
+                <h3>{content.process.chosen.title}</h3>
+                <p>{content.process.chosen.reason}</p>
+              </article>
+            </div>
+            <h3 class="sub">{content.process.refinement[0].title}</h3>
+            <p class="col">{content.process.refinement[0].text}</p>
+            <div class="pair">
+              <figure>
+                <img
+                  src={asset('figures/wordmark-default.svg')}
+                  alt="Napis Cuvée bez korekty kerningu"
+                  width="420"
+                  height="160"
+                  loading="lazy"
+                />
+                <figcaption class="caps">Bez korekty</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src={asset('figures/wordmark-kerned.svg')}
+                  alt="Napis Cuvée po ręcznej korekcie kerningu"
+                  width="420"
+                  height="160"
+                  loading="lazy"
+                />
+                <figcaption class="caps">Po korekcie</figcaption>
+              </figure>
+            </div>
+            <h3 class="sub">{content.process.refinement[1].title}</h3>
+            <p class="col">{content.process.refinement[1].text}</p>
+            <h3 class="sub">{content.process.refinement[2].title}</h3>
+            <p class="col">{content.process.refinement[2].text}</p>
+            <ul class="sizes">
+              {sizeTest.map(item => (
                 <li>
-                  <a href={`#${id}`}>{label}</a>
+                  <img
+                    src={asset(item.src)}
+                    alt=""
+                    width={item.size}
+                    height={item.size}
+                    style={`width:${item.size}px;height:${item.size}px`}
+                  />
+                  <span>{item.label}</span>
                 </li>
               ))}
             </ul>
-          </nav>
-        </div>
-      </div>
-    </section>
+          </div>
+        </section>
 
-    <div class="sheet">
-      <section class="sec" id="zadanie" aria-labelledby="t-zadanie">
-        <header class="sec__head">
-          <span class="sec__num">01</span>
-          <h2 id="t-zadanie" class="sec__title">
-            Klient i zadanie
-          </h2>
-        </header>
-        <div class="sec__body">
-          <div class="col">
-            {content.client.paragraphs.map(text => (
-              <p>{text}</p>
-            ))}
-          </div>
-          <dl class="facts">
-            {content.client.facts.map(([term, text]) => (
-              <div>
-                <dt class="caps">{term}</dt>
-                <dd>{text}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
-
-      <section class="sec" id="kierunek" aria-labelledby="t-kierunek">
-        <header class="sec__head">
-          <span class="sec__num">02</span>
-          <h2 id="t-kierunek" class="sec__title">
-            Kierunek i strategia
-          </h2>
-        </header>
-        <div class="sec__body">
-          <h3 class="sub">{content.direction.title}</h3>
-          <div class="col">
-            {content.direction.paragraphs.map(text => (
-              <p>{text}</p>
-            ))}
-          </div>
-          <p class="keywords">
-            {content.direction.keywords.map(word => (
-              <span>{word}</span>
-            ))}
-          </p>
-          <div class="pillars">
-            {content.strategy.values.map((value, index) => (
-              <article>
-                <span class="n">{`0${index + 1}`}</span>
-                <h3>{value.title}</h3>
-                <p>{value.text}</p>
-              </article>
-            ))}
-          </div>
-          <dl class="facts facts--row">
-            <div>
-              <dt class="caps">Odbiorcy</dt>
-              <dd>{content.strategy.audience}</dd>
-            </div>
-            <div>
-              <dt class="caps">Osobowość</dt>
-              <dd>{content.strategy.personality.join(', ')}</dd>
-            </div>
-            <div>
-              <dt class="caps">Czego unikamy</dt>
-              <dd>{content.strategy.avoids}</dd>
-            </div>
-          </dl>
-          <blockquote>{content.strategy.positioning}</blockquote>
-        </div>
-      </section>
-
-      <section class="sec" id="proces" aria-labelledby="t-proces">
-        <header class="sec__head">
-          <span class="sec__num">03</span>
-          <h2 id="t-proces" class="sec__title">
-            Proces
-          </h2>
-        </header>
-        <div class="sec__body">
-          <p class="lead">{content.process.intro}</p>
-          <div class="plates">
-            {rejected.map((item, index) => (
-              <article class="plate">
-                <div class="plate__art">
-                  <img src={asset(item.thumb)} alt="" width="240" height="160" loading="lazy" />
-                </div>
-                <p class="plate__tag caps">{`Odrzucony ${index + 1}`}</p>
-                <h3>{item.title}</h3>
-                <p class="muted">{item.text}</p>
-                <p>{item.reason}</p>
-              </article>
-            ))}
-            <article class="plate plate--chosen">
-              <div class="plate__art">
-                <img
-                  src={asset('figures/direction-wersalik.svg')}
-                  alt=""
-                  width="240"
-                  height="160"
-                />
-              </div>
-              <p class="plate__tag caps">Wybrany</p>
-              <h3>{content.process.chosen.title}</h3>
-              <p>{content.process.chosen.reason}</p>
-            </article>
-          </div>
-          <h3 class="sub">{content.process.refinement[0].title}</h3>
-          <p class="col">{content.process.refinement[0].text}</p>
-          <div class="pair">
-            <figure>
+        <section class="sec" id="logo" aria-labelledby="t-logo">
+          <header class="sec__head">
+            <span class="sec__num">04</span>
+            <h2 id="t-logo" class="sec__title">
+              Logo w sześciu wersjach
+            </h2>
+          </header>
+          <div class="sec__body">
+            <ul class="variants">
+              {logoVariants.map(variant => (
+                <li class={`ground--${variant.ground}`}>
+                  <img
+                    src={asset(`logo/cuvee-${variant.id}.svg`)}
+                    alt={`Logo Cuvée, wersja ${variant.name.toLowerCase()}`}
+                    width="240"
+                    height="120"
+                    loading="lazy"
+                  />
+                  <p>
+                    <strong>{variant.name}</strong>
+                    <span>{variant.note}</span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+            <figure class="clear">
               <img
-                src={asset('figures/wordmark-default.svg')}
-                alt="Napis Cuvée bez korekty kerningu"
-                width="420"
-                height="160"
+                src={asset('figures/clearspace.svg')}
+                alt="Logo główne otoczone polem ochronnym równym wysokości litery C"
+                width="857"
+                height="370"
                 loading="lazy"
               />
-              <figcaption class="caps">Bez korekty</figcaption>
             </figure>
-            <figure>
-              <img
-                src={asset('figures/wordmark-kerned.svg')}
-                alt="Napis Cuvée po ręcznej korekcie kerningu"
-                width="420"
-                height="160"
-                loading="lazy"
-              />
-              <figcaption class="caps">Po korekcie</figcaption>
-            </figure>
+            <div class="col">
+              <h3 class="sub">Pole ochronne i rozmiary</h3>
+              <p>{extras.clearSpace}</p>
+              <ul class="plain">
+                <li>Sygnet uproszczony: {extras.minimum.symbol}.</li>
+                <li>Pełny sygnet: {extras.minimum.fullStamp}.</li>
+                <li>Logo główne: {extras.minimum.primary}.</li>
+              </ul>
+            </div>
           </div>
-          <h3 class="sub">{content.process.refinement[1].title}</h3>
-          <p class="col">{content.process.refinement[1].text}</p>
-          <h3 class="sub">{content.process.refinement[2].title}</h3>
-          <p class="col">{content.process.refinement[2].text}</p>
-          <ul class="sizes">
-            {sizeTest.map(item => (
+        </section>
+
+        <section class="sec" id="zastosowania" aria-labelledby="t-zastosowania">
+          <header class="sec__head">
+            <span class="sec__num">05</span>
+            <h2 id="t-zastosowania" class="sec__title">
+              Zastosowania
+            </h2>
+          </header>
+          <div class="sec__body">
+            <div class="gallery">
+              {mockups.map(item => (
+                <figure>
+                  <a
+                    class="zoom"
+                    href={asset(item.image)}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`${item.title}, otwórz pełny obraz w nowej karcie`}>
+                    <img
+                      src={asset(item.image)}
+                      alt={item.alt}
+                      width={item.info?.width}
+                      height={item.info?.height}
+                      loading="lazy"
+                    />
+                  </a>
+                  <figcaption>
+                    <strong>{item.title}</strong>
+                    <span>{item.caption}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+            <h3 class="sub">Media społecznościowe</h3>
+            <ul class="posts">
               <li>
-                <img
-                  src={asset(item.src)}
-                  alt=""
-                  width={item.size}
-                  height={item.size}
-                  style={`width:${item.size}px;height:${item.size}px`}
-                />
-                <span>{item.label}</span>
+                <a
+                  class="zoom"
+                  href={asset('social/cuvee-avatar.png')}
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Awatar, otwórz pełny obraz w nowej karcie">
+                  <img
+                    src={asset('social/cuvee-avatar.png')}
+                    alt="Awatar Cuvée: sygnet, litera C w arkadzie"
+                    width="1080"
+                    height="1080"
+                    loading="lazy"
+                  />
+                </a>
+                <span>Awatar</span>
               </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+              {posts.map(post => (
+                <li>
+                  <a
+                    class="zoom"
+                    href={asset(post.path)}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={`Post ${post.headline}, otwórz pełny obraz w nowej karcie`}>
+                    <img
+                      src={asset(post.path)}
+                      alt={`Post w mediach społecznościowych: ${post.headline} ${post.body}`}
+                      width="1080"
+                      height="1350"
+                      loading="lazy"
+                    />
+                  </a>
+                  <span>{post.headline}</span>
+                </li>
+              ))}
+            </ul>
+            <p class="again">
+              Taki komplet powstaje dla każdej marki.
+              <a href={portfolio('/dla-klienta/#wzornik')}>Zobacz ofertę dla klientów</a>
+            </p>
+          </div>
+        </section>
+      </div>
 
-      <section class="sec" id="logo" aria-labelledby="t-logo">
-        <header class="sec__head">
-          <span class="sec__num">04</span>
-          <h2 id="t-logo" class="sec__title">
-            Logo w sześciu wersjach
-          </h2>
-        </header>
-        <div class="sec__body">
-          <ul class="variants">
-            {logoVariants.map(variant => (
-              <li class={`ground--${variant.ground}`}>
-                <img
-                  src={asset(`logo/cuvee-${variant.id}.svg`)}
-                  alt={`Logo Cuvée, wersja ${variant.name.toLowerCase()}`}
-                  width="240"
-                  height="120"
-                  loading="lazy"
-                />
-                <p>
-                  <strong>{variant.name}</strong>
-                  <span>{variant.note}</span>
+      <div class="dark">
+        <section class="sec" id="etykieta" aria-labelledby="t-etykieta">
+          <header class="sec__head">
+            <span class="sec__num">06</span>
+            <h2 id="t-etykieta" class="sec__title">
+              Złóż etykietę cuvée
+            </h2>
+          </header>
+          <div class="sec__body">
+            <p class="lead">
+              Wybierz dwie albo trzy odmiany z dolnośląskiej winnicy i rocznik. Etykieta układa
+              proporcje sama, a dominująca odmiana jest pierwsza. Bez ceny i bez koszyka.
+            </p>
+            <LabelComposer client:visible logo={asset('logo/cuvee-primary.svg')} />
+          </div>
+        </section>
+      </div>
+
+      <div class="sheet">
+        <section class="sec" id="kolor" aria-labelledby="t-kolor">
+          <header class="sec__head">
+            <span class="sec__num">07</span>
+            <h2 id="t-kolor" class="sec__title">
+              Kolor
+            </h2>
+          </header>
+          <div class="sec__body">
+            <ul class="swatches">
+              {colors.map(color => (
+                <li>
+                  <span class="swatches__chip" style={`background:${color.hex}`}></span>
+                  <strong>{color.name}</strong>
+                  <span>{color.hex}</span>
+                  <em>{color.role}</em>
+                </li>
+              ))}
+            </ul>
+            <ColorTable colors={colors} />
+            <h3 class="sub">Kontrast</h3>
+            <p class="muted">
+              Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają
+              WCAG AA, a elementy dekoracyjne są oznaczone osobno.
+            </p>
+            <details class="fold">
+              <summary>
+                <span class="fold__title">{`${manifest.contrast.length} par, wszystkie teksty co najmniej AA`}</span>
+                <span class="fold__hint">Pokaż tabelę</span>
+              </summary>
+              <ContrastTable pairs={manifest.contrast} />
+            </details>
+          </div>
+        </section>
+
+        <section class="sec" id="typografia" aria-labelledby="t-typografia">
+          <header class="sec__head">
+            <span class="sec__num">08</span>
+            <h2 id="t-typografia" class="sec__title">
+              Typografia
+            </h2>
+          </header>
+          <div class="sec__body">
+            <div class="faces">
+              <div class="face">
+                <p class="face__name face__name--display">Noto Serif Display</p>
+                <p class="face__sample face__sample--display">{extras.specimen}</p>
+                <p class="muted">
+                  Nagłówki i znak. Grubości 200, 300, 400, 500 i kursywa. Licencja OFL.
                 </p>
-              </li>
-            ))}
-          </ul>
-          <figure class="clear">
-            <img
-              src={asset('figures/clearspace.svg')}
-              alt="Logo główne otoczone polem ochronnym równym wysokości litery C"
-              width="857"
-              height="370"
-              loading="lazy"
-            />
-          </figure>
-          <div class="col">
-            <h3 class="sub">Pole ochronne i rozmiary</h3>
-            <p>{extras.clearSpace}</p>
+              </div>
+              <div class="face">
+                <p class="face__name face__name--text">Source Serif 4</p>
+                <p class="face__sample">{extras.specimen}</p>
+                <p class="muted">Tekst. Grubości 400 i 600 oraz kursywa. Licencja OFL.</p>
+              </div>
+            </div>
+            <ul class="scale">
+              {extras.typeScale.map(row => (
+                <li>
+                  <span
+                    class={`scale__sample scale__sample--${row.font}`}
+                    style={`font-size:${Math.min(row.size, 40)}px;font-weight:${row.weight}`}>
+                    {row.name}
+                  </span>
+                  <span class="muted">
+                    {row.size} px, interlinia {String(row.line).replace('.', ',')}: {row.use}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p class="glyphs">{extras.glyphs}</p>
+          </div>
+        </section>
+
+        <section class="sec" id="ikony" aria-labelledby="t-ikony">
+          <header class="sec__head">
+            <span class="sec__num">09</span>
+            <h2 id="t-ikony" class="sec__title">
+              Ikony, wzór i grafika
+            </h2>
+          </header>
+          <div class="sec__body">
+            <ul class="icons">
+              {icons.map(name => (
+                <li>
+                  <img
+                    src={asset(`icons/svg/cuvee-icon-${name}.svg`)}
+                    alt=""
+                    width="40"
+                    height="40"
+                    loading="lazy"
+                  />
+                  <span>{name}</span>
+                </li>
+              ))}
+            </ul>
+            <div
+              class="pattern"
+              role="img"
+              aria-label="Wzór szpaleru: cienkie przekątne i mosiężne punkty"
+              style={`background-image:url(${asset('pattern/cuvee-pattern.svg')})`}></div>
+            <div class="notes">
+              {extras.graphics.map(item => (
+                <div>
+                  <h4>{item.title}</h4>
+                  <p>{item.text}</p>
+                </div>
+              ))}
+            </div>
             <ul class="plain">
-              <li>Sygnet uproszczony: {extras.minimum.symbol}.</li>
-              <li>Pełny sygnet: {extras.minimum.fullStamp}.</li>
-              <li>Logo główne: {extras.minimum.primary}.</li>
+              {extras.layoutRules.map(rule => (
+                <li>{rule}</li>
+              ))}
             </ul>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="sec" id="kolor" aria-labelledby="t-kolor">
-        <header class="sec__head">
-          <span class="sec__num">05</span>
-          <h2 id="t-kolor" class="sec__title">
-            Kolor
-          </h2>
-        </header>
-        <div class="sec__body">
-          <ul class="swatches">
-            {colors.map(color => (
-              <li>
-                <span class="swatches__chip" style={`background:${color.hex}`}></span>
-                <strong>{color.name}</strong>
-                <span>{color.hex}</span>
-                <em>{color.role}</em>
-              </li>
-            ))}
-          </ul>
-          <ColorTable colors={colors} />
-          <h3 class="sub">Kontrast</h3>
-          <p class="muted">
-            Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają
-            WCAG AA, a elementy dekoracyjne są oznaczone osobno.
-          </p>
-          <ContrastTable pairs={manifest.contrast} />
-        </div>
-      </section>
-
-      <section class="sec" id="typografia" aria-labelledby="t-typografia">
-        <header class="sec__head">
-          <span class="sec__num">06</span>
-          <h2 id="t-typografia" class="sec__title">
-            Typografia
-          </h2>
-        </header>
-        <div class="sec__body">
-          <div class="faces">
-            <div class="face">
-              <p class="face__name face__name--display">Noto Serif Display</p>
-              <p class="face__sample face__sample--display">{extras.specimen}</p>
-              <p class="muted">
-                Nagłówki i znak. Grubości 200, 300, 400, 500 i kursywa. Licencja OFL.
-              </p>
-            </div>
-            <div class="face">
-              <p class="face__name face__name--text">Source Serif 4</p>
-              <p class="face__sample">{extras.specimen}</p>
-              <p class="muted">Tekst. Grubości 400 i 600 oraz kursywa. Licencja OFL.</p>
+        <section class="sec" id="ton" aria-labelledby="t-ton">
+          <header class="sec__head">
+            <span class="sec__num">10</span>
+            <h2 id="t-ton" class="sec__title">
+              Zdjęcia i ton głosu
+            </h2>
+          </header>
+          <div class="sec__body">
+            <p class="col">{extras.photoStyle}</p>
+            <div class="tone">
+              {content.tone.map(rule => (
+                <article>
+                  <h4>{rule.title}</h4>
+                  <p>{rule.text}</p>
+                  <p class="yes">
+                    <span class="tag">Tak</span>
+                    {rule.yes}
+                  </p>
+                  <p class="no">
+                    <span class="tag">Nie</span>
+                    {rule.no}
+                  </p>
+                </article>
+              ))}
             </div>
           </div>
-          <ul class="scale">
-            {extras.typeScale.map(row => (
-              <li>
-                <span
-                  class={`scale__sample scale__sample--${row.font}`}
-                  style={`font-size:${Math.min(row.size, 40)}px;font-weight:${row.weight}`}>
-                  {row.name}
-                </span>
-                <span class="muted">
-                  {row.size} px, interlinia {String(row.line).replace('.', ',')}: {row.use}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p class="glyphs">{extras.glyphs}</p>
-        </div>
-      </section>
+        </section>
 
-      <section class="sec" id="ikony" aria-labelledby="t-ikony">
-        <header class="sec__head">
-          <span class="sec__num">07</span>
-          <h2 id="t-ikony" class="sec__title">
-            Ikony, wzór i grafika
-          </h2>
-        </header>
-        <div class="sec__body">
-          <ul class="icons">
-            {icons.map(name => (
-              <li>
-                <img
-                  src={asset(`icons/svg/cuvee-icon-${name}.svg`)}
-                  alt=""
-                  width="40"
-                  height="40"
-                  loading="lazy"
-                />
-                <span>{name}</span>
-              </li>
-            ))}
-          </ul>
-          <div
-            class="pattern"
-            role="img"
-            aria-label="Wzór szpaleru: cienkie przekątne i mosiężne punkty"
-            style={`background-image:url(${asset('pattern/cuvee-pattern.svg')})`}></div>
-          <div class="notes">
-            {extras.graphics.map(item => (
-              <div>
-                <h4>{item.title}</h4>
-                <p>{item.text}</p>
-              </div>
-            ))}
+        <section class="sec" id="animacja" aria-labelledby="t-animacja">
+          <header class="sec__head">
+            <span class="sec__num">11</span>
+            <h2 id="t-animacja" class="sec__title">
+              Animacja
+            </h2>
+          </header>
+          <div class="sec__body">
+            <p class="col">{extras.animation}</p>
+            <video
+              class="film"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster={asset('figures/animation-poster.jpg')}
+              width="1080"
+              height="1080">
+              <source src={asset('animation/cuvee-logo.webm')} type="video/webm" />
+              <source src={asset('animation/cuvee-logo.mp4')} type="video/mp4" />
+            </video>
           </div>
-          <ul class="plain">
-            {extras.layoutRules.map(rule => (
-              <li>{rule}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
+        </section>
 
-      <section class="sec" id="ton" aria-labelledby="t-ton">
-        <header class="sec__head">
-          <span class="sec__num">08</span>
-          <h2 id="t-ton" class="sec__title">
-            Zdjęcia i ton głosu
-          </h2>
-        </header>
-        <div class="sec__body">
-          <p class="col">{extras.photoStyle}</p>
-          <div class="tone">
-            {content.tone.map(rule => (
-              <article>
-                <h4>{rule.title}</h4>
-                <p>{rule.text}</p>
-                <p class="yes">
-                  <span class="tag">Tak</span>
-                  {rule.yes}
-                </p>
-                <p class="no">
-                  <span class="tag">Nie</span>
-                  {rule.no}
-                </p>
-              </article>
-            ))}
+        <section class="sec" id="pliki" aria-labelledby="t-pliki">
+          <header class="sec__head">
+            <span class="sec__num">12</span>
+            <h2 id="t-pliki" class="sec__title">
+              Pliki do pobrania
+            </h2>
+          </header>
+          <div class="sec__body">
+            <p class="col">{content.deliverables.intro}</p>
+            {zip && <p class="muted">Cała paczka waży {formatBytes(zip.bytes)}.</p>}
+            <Downloads manifest={manifest} />
+            <p class="muted">{content.deliverables.note}</p>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <section class="sec" id="animacja" aria-labelledby="t-animacja">
-        <header class="sec__head">
-          <span class="sec__num">09</span>
-          <h2 id="t-animacja" class="sec__title">
-            Animacja
-          </h2>
-        </header>
-        <div class="sec__body">
-          <p class="col">{extras.animation}</p>
-          <video
-            class="film"
-            controls
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            width="1080"
-            height="1080">
-            <source src={`${asset('animation/cuvee-logo.webm')}#t=2.9`} type="video/webm" />
-            <source src={`${asset('animation/cuvee-logo.mp4')}#t=2.9`} type="video/mp4" />
-          </video>
-        </div>
-      </section>
-    </div>
-
-    <div class="dark">
-      <section class="sec" id="etykieta" aria-labelledby="t-etykieta">
-        <header class="sec__head">
-          <span class="sec__num">10</span>
-          <h2 id="t-etykieta" class="sec__title">
-            Złóż etykietę cuvée
-          </h2>
-        </header>
-        <div class="sec__body">
-          <p class="lead">
-            Wybierz dwie albo trzy odmiany z dolnośląskiej winnicy i rocznik. Etykieta układa
-            proporcje sama, a dominująca odmiana jest pierwsza. Bez ceny i bez koszyka.
-          </p>
-          <LabelComposer client:visible logo={asset('logo/cuvee-primary.svg')} />
-        </div>
-      </section>
-    </div>
-
-    <div class="sheet">
-      <section class="sec" id="zastosowania" aria-labelledby="t-zastosowania">
-        <header class="sec__head">
-          <span class="sec__num">11</span>
-          <h2 id="t-zastosowania" class="sec__title">
-            Zastosowania
-          </h2>
-        </header>
-        <div class="sec__body">
-          <div class="gallery">
-            {mockups.map(item => (
-              <figure>
-                <img
-                  src={asset(item.image)}
-                  alt={item.alt}
-                  width={item.info?.width}
-                  height={item.info?.height}
-                  loading="lazy"
-                />
-                <figcaption>
-                  <strong>{item.title}</strong>
-                  <span>{item.caption}</span>
-                </figcaption>
-              </figure>
-            ))}
+      <div class="dark cta">
+        <section class="sec" aria-labelledby="t-cta">
+          <header class="sec__head"></header>
+          <div class="cta__in">
+            <h2 id="t-cta">{content.cta.title}</h2>
+            <p>{content.cta.text}</p>
+            <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
+              Zobacz ofertę dla klientów
+            </a>
           </div>
-          <h3 class="sub">Media społecznościowe</h3>
-          <ul class="posts">
-            <li>
-              <img
-                src={asset('social/cuvee-avatar.png')}
-                alt="Awatar Cuvée: sygnet, litera C w podwójnym kole"
-                width="1080"
-                height="1080"
-                loading="lazy"
-              />
-              <span>Awatar</span>
-            </li>
-            {posts.map(post => (
-              <li>
-                <img
-                  src={asset(post.path)}
-                  alt={`Post w mediach społecznościowych: ${post.headline} ${post.body}`}
-                  width="1080"
-                  height="1350"
-                  loading="lazy"
-                />
-                <span>{post.headline}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+        </section>
+      </div>
+    </main>
 
-      <section class="sec" id="pliki" aria-labelledby="t-pliki">
-        <header class="sec__head">
-          <span class="sec__num">12</span>
-          <h2 id="t-pliki" class="sec__title">
-            Pliki do pobrania
-          </h2>
-        </header>
-        <div class="sec__body">
-          <p class="col">{content.deliverables.intro}</p>
-          {zip && <p class="muted">Cała paczka waży {formatBytes(zip.bytes)}.</p>}
-          <Downloads manifest={manifest} />
-          <p class="muted">{content.deliverables.note}</p>
-        </div>
-      </section>
-    </div>
-
-    <div class="dark cta">
-      <section class="sec" aria-labelledby="t-cta">
-        <header class="sec__head"></header>
-        <div class="cta__in">
-          <h2 id="t-cta">{content.cta.title}</h2>
-          <p>{content.cta.text}</p>
-          <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
-            Zobacz ofertę dla klientów
-          </a>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <footer class="foot">
-    <div class="foot__in">
-      <SampleLine name={brand.name} />
-      <p>
-        {contact.street}, {contact.city}. Dane kontaktowe są zmyślone.
-      </p>
-    </div>
-  </footer>
+    <footer class="foot">
+      <div class="foot__in">
+        <SampleLine name={brand.name} />
+        <p>
+          {contact.street}, {contact.city}. Dane kontaktowe są zmyślone.
+        </p>
+      </div>
+    </footer>
+  </Typeset>
 </Shell>

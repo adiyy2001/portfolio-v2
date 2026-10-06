@@ -27,11 +27,12 @@ export default function LabelComposer({ logo }: Props) {
           <div class="lab" role="img" aria-label={summary(picks, vintage)}>
             <img class="lab__logo" src={logo} alt="" width="560" height="270" />
             <p class="lab__year">{vintage}</p>
-            <p class="lab__grapes caps">
+            <p
+              class={parts.length > 2 ? 'lab__grapes lab__grapes--stack caps' : 'lab__grapes caps'}>
               {parts.map((part, index) => (
                 <span key={part.id}>
-                  {index > 0 && <i aria-hidden="true"></i>}
                   {part.name} {part.share}
+                  {index < parts.length - 1 && <i aria-hidden="true"></i>}
                 </span>
               ))}
             </p>
@@ -71,6 +72,9 @@ export default function LabelComposer({ logo }: Props) {
               );
             })}
           </ul>
+          <p class="composer__hint" role="status">
+            {canAdd(picks) ? '' : 'Najwyżej trzy odmiany. Odznacz jedną, żeby wybrać inną.'}
+          </p>
         </fieldset>
         <fieldset>
           <legend>Rocznik</legend>

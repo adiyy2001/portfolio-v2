@@ -26,6 +26,6 @@ write(file.logoSvg('vertical'), color, 'vertical', 'wersja pionowa');
 write(file.logoSvg('mono-black'), mono, 'primary', 'wersja czarna');
 write(file.logoSvg('negative'), negative, 'primary', 'negatyw');
 
-const favicon = svgDocument({ viewBox: [0, 0, 200, 200], body: `<circle cx="100" cy="100" r="96" fill="${c.kosc}"/>${faviconMarkup({ ink: c.czern, accent: c.mosiadz })}`, title: 'Cuvée' });
+const favicon = svgDocument({ viewBox: [0, 0, 160, 160], body: `<rect x="0" y="0" width="160" height="160" rx="36" fill="${c.kosc}"/><g transform="translate(16 0) scale(0.8)">${faviconMarkup({ ink: c.czern, accent: c.mosiadz })}</g>`, title: 'Cuvée' });
 writeFile(join(pub, file.favicon), `${optimizeSvg(favicon)}\n`);
 console.log('logos written');

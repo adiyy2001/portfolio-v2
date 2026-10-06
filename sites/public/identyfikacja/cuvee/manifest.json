@@ -8,19 +8,19 @@
     "city": "Dolny Śląsk"
   },
   "base": "/wzornik/identyfikacja/cuvee/",
-  "totalBytes": 5689435,
-  "totalHuman": "5.4 MB",
+  "totalBytes": 4954487,
+  "totalHuman": "4.7 MB",
   "zip": {
     "path": "cuvee-identyfikacja.zip",
-    "bytes": 2435744
+    "bytes": 2055660
   },
   "groups": [
     {
       "id": "logo",
       "title": "Logo",
       "count": 30,
-      "bytes": 883298,
-      "formats": "SVG, PDF, PNG, PNG 459, 512, 917, 1024, 1834, 2048 px",
+      "bytes": 708352,
+      "formats": "SVG, PDF, PNG, PNG 410, 461, 512, 819, 922, 1024, 1638, 1843, 2048 px",
       "files": [
         "logo/cuvee-horizontal.svg",
         "logo/cuvee-mono-black.svg",
@@ -58,7 +58,7 @@
       "id": "favicon",
       "title": "Ikona strony",
       "count": 3,
-      "bytes": 9333,
+      "bytes": 7594,
       "formats": "PNG, ICO, SVG, PNG 180 px",
       "files": [
         "apple-touch-icon.png",
@@ -133,7 +133,7 @@
       "id": "print",
       "title": "Druk",
       "count": 2,
-      "bytes": 47808,
+      "bytes": 39360,
       "formats": "PDF",
       "files": [
         "print/cuvee-business-card.pdf",
@@ -144,7 +144,7 @@
       "id": "social",
       "title": "Media społecznościowe",
       "count": 4,
-      "bytes": 135635,
+      "bytes": 120589,
       "formats": "PNG, PNG 1080 px",
       "files": [
         "social/cuvee-avatar.png",
@@ -157,7 +157,7 @@
       "id": "email",
       "title": "Podpis e-mail",
       "count": 1,
-      "bytes": 1147,
+      "bytes": 1148,
       "formats": "HTML",
       "files": [
         "email/cuvee-email-signature.html"
@@ -167,7 +167,7 @@
       "id": "mockups",
       "title": "Makiety",
       "count": 5,
-      "bytes": 350763,
+      "bytes": 332187,
       "formats": "JPG",
       "files": [
         "mockups/cuvee-application.jpg",
@@ -192,7 +192,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1446502,
+      "bytes": 1296455,
       "formats": "PDF",
       "files": [
         "cuvee-brandbook.pdf"
@@ -202,7 +202,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 2435744,
+      "bytes": 2055660,
       "formats": "ZIP",
       "files": [
         "cuvee-identyfikacja.zip"
@@ -211,10 +211,11 @@
     {
       "id": "meta",
       "title": "Pozostałe",
-      "count": 7,
-      "bytes": 31281,
-      "formats": "SVG, PNG, PNG 1200 px",
+      "count": 8,
+      "bytes": 45218,
+      "formats": "JPG, SVG, PNG, PNG 1200 px",
       "files": [
+        "figures/animation-poster.jpg",
         "figures/clearspace.svg",
         "figures/direction-kursywa.svg",
         "figures/direction-linia.svg",
@@ -248,7 +249,7 @@
     },
     {
       "path": "apple-touch-icon.png",
-      "bytes": 4686,
+      "bytes": 3912,
       "type": "png",
       "group": "favicon",
       "width": 180,
@@ -269,7 +270,7 @@
     },
     {
       "path": "cuvee-brandbook.pdf",
-      "bytes": 1446502,
+      "bytes": 1296455,
       "type": "pdf",
       "group": "brandbook",
       "pages": 29,
@@ -284,19 +285,19 @@
     },
     {
       "path": "cuvee-identyfikacja.zip",
-      "bytes": 2435744,
+      "bytes": 2055660,
       "type": "zip",
       "group": "zip"
     },
     {
       "path": "email/cuvee-email-signature.html",
-      "bytes": 1147,
+      "bytes": 1148,
       "type": "html",
       "group": "email"
     },
     {
       "path": "favicon.ico",
-      "bytes": 3839,
+      "bytes": 2851,
       "type": "ico",
       "group": "favicon",
       "sizes": [
@@ -307,19 +308,25 @@
     },
     {
       "path": "favicon.svg",
-      "bytes": 808,
+      "bytes": 831,
       "type": "svg",
       "group": "favicon",
-      "width": 200,
-      "height": 200
+      "width": 160,
+      "height": 160
+    },
+    {
+      "path": "figures/animation-poster.jpg",
+      "bytes": 15901,
+      "type": "jpg",
+      "group": "meta"
     },
     {
       "path": "figures/clearspace.svg",
-      "bytes": 3968,
+      "bytes": 3964,
       "type": "svg",
       "group": "meta",
-      "width": 682,
-      "height": 406
+      "width": 662,
+      "height": 370
     },
     {
       "path": "figures/direction-kursywa.svg",
@@ -339,7 +346,7 @@
     },
     {
       "path": "figures/direction-wersalik.svg",
-      "bytes": 2876,
+      "bytes": 2838,
       "type": "svg",
       "group": "meta",
       "width": 200,
@@ -531,337 +538,337 @@
     },
     {
       "path": "logo/cuvee-horizontal.svg",
-      "bytes": 4230,
+      "bytes": 4227,
       "type": "svg",
       "group": "logo",
-      "width": 460,
-      "height": 150
+      "width": 442,
+      "height": 160
     },
     {
       "path": "logo/cuvee-mono-black.svg",
       "bytes": 4082,
       "type": "svg",
       "group": "logo",
-      "width": 510,
-      "height": 234
+      "width": 490,
+      "height": 198
     },
     {
       "path": "logo/cuvee-negative.svg",
       "bytes": 4146,
       "type": "svg",
       "group": "logo",
-      "width": 510,
-      "height": 234
+      "width": 490,
+      "height": 198
     },
     {
       "path": "logo/cuvee-primary.svg",
       "bytes": 4154,
       "type": "svg",
       "group": "logo",
-      "width": 510,
-      "height": 234
+      "width": 490,
+      "height": 198
     },
     {
       "path": "logo/cuvee-symbol.svg",
-      "bytes": 835,
+      "bytes": 789,
       "type": "svg",
       "group": "logo",
-      "width": 200,
+      "width": 160,
       "height": 200
     },
     {
       "path": "logo/cuvee-vertical.svg",
-      "bytes": 4264,
+      "bytes": 4281,
       "type": "svg",
       "group": "logo",
-      "width": 283,
-      "height": 316
+      "width": 279,
+      "height": 310
     },
     {
       "path": "logo/pdf/cuvee-horizontal.pdf",
-      "bytes": 9696,
+      "bytes": 7463,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 32.4
+        "height": 36.3
       },
       "pagePx": {
         "width": 377,
-        "height": 123
+        "height": 137
       }
     },
     {
       "path": "logo/pdf/cuvee-mono-black.pdf",
-      "bytes": 4070,
+      "bytes": 4060,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 45.9
+        "height": 40.6
       },
       "pagePx": {
         "width": 377,
-        "height": 173
+        "height": 153
       }
     },
     {
       "path": "logo/pdf/cuvee-negative.pdf",
-      "bytes": 4097,
+      "bytes": 4087,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 45.9
+        "height": 40.6
       },
       "pagePx": {
         "width": 377,
-        "height": 173
+        "height": 153
       }
     },
     {
       "path": "logo/pdf/cuvee-primary.pdf",
-      "bytes": 4098,
+      "bytes": 4088,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 45.9
+        "height": 40.6
       },
       "pagePx": {
         "width": 377,
-        "height": 173
+        "height": 153
       }
     },
     {
       "path": "logo/pdf/cuvee-symbol.pdf",
-      "bytes": 12741,
+      "bytes": 7233,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 99.8
+        "height": 124.9
       },
       "pagePx": {
         "width": 377,
-        "height": 377
+        "height": 472
       }
     },
     {
       "path": "logo/pdf/cuvee-vertical.pdf",
-      "bytes": 15398,
+      "bytes": 7670,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
       "pageMm": {
         "width": 99.8,
-        "height": 111.8
+        "height": 111.2
       },
       "pagePx": {
         "width": 377,
-        "height": 423
+        "height": 420
       }
     },
     {
       "path": "logo/png/cuvee-horizontal-1024.png",
-      "bytes": 32557,
+      "bytes": 28674,
       "type": "png",
       "group": "logo",
       "width": 1024,
-      "height": 334,
+      "height": 371,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-horizontal-2048.png",
-      "bytes": 74866,
+      "bytes": 62370,
       "type": "png",
       "group": "logo",
       "width": 2048,
-      "height": 668,
+      "height": 741,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-horizontal-512.png",
-      "bytes": 14899,
+      "bytes": 12372,
       "type": "png",
       "group": "logo",
       "width": 512,
-      "height": 167,
+      "height": 185,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-mono-black-1024.png",
-      "bytes": 21007,
+      "bytes": 21203,
       "type": "png",
       "group": "logo",
       "width": 1024,
-      "height": 470,
+      "height": 414,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-mono-black-2048.png",
-      "bytes": 46344,
+      "bytes": 48517,
       "type": "png",
       "group": "logo",
       "width": 2048,
-      "height": 940,
+      "height": 828,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-mono-black-512.png",
-      "bytes": 8877,
+      "bytes": 8996,
       "type": "png",
       "group": "logo",
       "width": 512,
-      "height": 235,
+      "height": 207,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-negative-1024.png",
-      "bytes": 23041,
+      "bytes": 23342,
       "type": "png",
       "group": "logo",
       "width": 1024,
-      "height": 470,
+      "height": 414,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-negative-2048.png",
-      "bytes": 51005,
+      "bytes": 52608,
       "type": "png",
       "group": "logo",
       "width": 2048,
-      "height": 940,
+      "height": 828,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-negative-512.png",
-      "bytes": 10283,
+      "bytes": 10368,
       "type": "png",
       "group": "logo",
       "width": 512,
-      "height": 235,
+      "height": 207,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-primary-1024.png",
-      "bytes": 23241,
+      "bytes": 23564,
       "type": "png",
       "group": "logo",
       "width": 1024,
-      "height": 470,
+      "height": 414,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-primary-2048.png",
-      "bytes": 51773,
+      "bytes": 52902,
       "type": "png",
       "group": "logo",
       "width": 2048,
-      "height": 940,
+      "height": 828,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-primary-512.png",
-      "bytes": 10411,
+      "bytes": 10273,
       "type": "png",
       "group": "logo",
       "width": 512,
-      "height": 235,
+      "height": 207,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-symbol-1024.png",
-      "bytes": 61687,
+      "bytes": 37612,
       "type": "png",
       "group": "logo",
-      "width": 1024,
+      "width": 819,
       "height": 1024,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-symbol-2048.png",
-      "bytes": 148816,
+      "bytes": 85067,
       "type": "png",
       "group": "logo",
-      "width": 2048,
+      "width": 1638,
       "height": 2048,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-symbol-512.png",
-      "bytes": 27952,
+      "bytes": 15548,
       "type": "png",
       "group": "logo",
-      "width": 512,
+      "width": 410,
       "height": 512,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-vertical-1024.png",
-      "bytes": 54560,
+      "bytes": 41734,
       "type": "png",
       "group": "logo",
-      "width": 917,
+      "width": 922,
       "height": 1024,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-vertical-2048.png",
-      "bytes": 125809,
+      "bytes": 97923,
       "type": "png",
       "group": "logo",
-      "width": 1834,
+      "width": 1843,
       "height": 2048,
       "hasAlpha": true
     },
     {
       "path": "logo/png/cuvee-vertical-512.png",
-      "bytes": 24359,
+      "bytes": 18999,
       "type": "png",
       "group": "logo",
-      "width": 459,
+      "width": 461,
       "height": 512,
       "hasAlpha": true
     },
     {
       "path": "mockups/cuvee-application.jpg",
-      "bytes": 104479,
+      "bytes": 103389,
       "type": "jpg",
       "group": "mockups"
     },
     {
       "path": "mockups/cuvee-card-back.jpg",
-      "bytes": 53412,
+      "bytes": 50872,
       "type": "jpg",
       "group": "mockups"
     },
     {
       "path": "mockups/cuvee-card-front.jpg",
-      "bytes": 39253,
+      "bytes": 30719,
       "type": "jpg",
       "group": "mockups"
     },
     {
       "path": "mockups/cuvee-email-signature.jpg",
-      "bytes": 74653,
+      "bytes": 71528,
       "type": "jpg",
       "group": "mockups"
     },
     {
       "path": "mockups/cuvee-letterhead.jpg",
-      "bytes": 78966,
+      "bytes": 75679,
       "type": "jpg",
       "group": "mockups"
     },
     {
       "path": "og.png",
-      "bytes": 19012,
+      "bytes": 17090,
       "type": "png",
       "group": "meta",
       "width": 1200,
@@ -878,7 +885,7 @@
     },
     {
       "path": "print/cuvee-business-card.pdf",
-      "bytes": 21802,
+      "bytes": 17402,
       "type": "pdf",
       "group": "print",
       "pages": 2,
@@ -893,7 +900,7 @@
     },
     {
       "path": "print/cuvee-letterhead.pdf",
-      "bytes": 26006,
+      "bytes": 21958,
       "type": "pdf",
       "group": "print",
       "pages": 1,
@@ -908,7 +915,7 @@
     },
     {
       "path": "social/cuvee-avatar.png",
-      "bytes": 27485,
+      "bytes": 16022,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -917,7 +924,7 @@
     },
     {
       "path": "social/cuvee-post-1.png",
-      "bytes": 31674,
+      "bytes": 31071,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -926,7 +933,7 @@
     },
     {
       "path": "social/cuvee-post-2.png",
-      "bytes": 36333,
+      "bytes": 35034,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -935,7 +942,7 @@
     },
     {
       "path": "social/cuvee-post-3.png",
-      "bytes": 40143,
+      "bytes": 38462,
       "type": "png",
       "group": "social",
       "width": 1080,
