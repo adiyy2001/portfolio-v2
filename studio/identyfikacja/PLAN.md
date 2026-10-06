@@ -8,7 +8,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-identyfikacja.md`. Run ru
 - [ ] B3 Rzut
 - [x] B4 Klamra
 - [x] B5 Cuvée
-- [ ] B6 Wolnobieg
+- [x] B6 Wolnobieg
 - [ ] Q quality control
 - [ ] R independent review, every rubric score at least 4
 - [ ] P publication and final report
