@@ -1,0 +1,300 @@
+{
+  "brand": "Skibka",
+  "note": "CMYK jest przybliżony, bez profilu druku. Odpowiedników Pantone nie podajemy.",
+  "palette": [
+    {
+      "id": "zyto",
+      "name": "Żyto",
+      "group": "primary",
+      "role": "tekst, znak, ciemne tło",
+      "hex": "#3A3128",
+      "rgb": "58 49 40",
+      "oklch": "oklch(32% 0.02 67)",
+      "cmykApprox": "C 0 M 16 Y 31 K 77"
+    },
+    {
+      "id": "skorka",
+      "name": "Skórka",
+      "group": "primary",
+      "role": "akcent w tekście i na przyciskach",
+      "hex": "#8F5530",
+      "rgb": "143 85 48",
+      "oklch": "oklch(50.8% 0.093 51.8)",
+      "cmykApprox": "C 0 M 41 Y 66 K 44"
+    },
+    {
+      "id": "lan",
+      "name": "Łan",
+      "group": "accent",
+      "role": "zielony akcent w tekście",
+      "hex": "#4F5B33",
+      "rgb": "79 91 51",
+      "oklch": "oklch(45% 0.062 122.5)",
+      "cmykApprox": "C 13 M 0 Y 44 K 64"
+    },
+    {
+      "id": "lan-jasny",
+      "name": "Łan jasny",
+      "group": "accent",
+      "role": "wypełnienia, wzór, bez tekstu",
+      "hex": "#6B7A4A",
+      "rgb": "107 122 74",
+      "oklch": "oklch(55.5% 0.072 122.9)",
+      "cmykApprox": "C 12 M 0 Y 39 K 52"
+    },
+    {
+      "id": "kraft",
+      "name": "Kraft",
+      "group": "accent",
+      "role": "papier na torby i etykiety",
+      "hex": "#C9AD83",
+      "rgb": "201 173 131",
+      "oklch": "oklch(76.2% 0.065 77.6)",
+      "cmykApprox": "C 0 M 14 Y 35 K 21"
+    },
+    {
+      "id": "maka-biala",
+      "name": "Mąka biała",
+      "group": "neutral",
+      "role": "karty i okładki",
+      "hex": "#FAF7F0",
+      "rgb": "250 247 240",
+      "oklch": "oklch(97.7% 0.01 87.5)",
+      "cmykApprox": "C 0 M 1 Y 4 K 2"
+    },
+    {
+      "id": "maka",
+      "name": "Mąka",
+      "group": "neutral",
+      "role": "tło strony",
+      "hex": "#F2EDE2",
+      "rgb": "242 237 226",
+      "oklch": "oklch(94.7% 0.016 86.4)",
+      "cmykApprox": "C 0 M 2 Y 7 K 5"
+    },
+    {
+      "id": "otreby",
+      "name": "Otręby",
+      "group": "neutral",
+      "role": "tło sekcji i tabel",
+      "hex": "#E4D7BC",
+      "rgb": "228 215 188",
+      "oklch": "oklch(88.3% 0.039 85.3)",
+      "cmykApprox": "C 0 M 6 Y 18 K 11"
+    },
+    {
+      "id": "mioz",
+      "name": "Miąższ",
+      "group": "neutral",
+      "role": "cienkie linie, bez tekstu",
+      "hex": "#A08B6D",
+      "rgb": "160 139 109",
+      "oklch": "oklch(64.8% 0.049 76.5)",
+      "cmykApprox": "C 0 M 13 Y 32 K 37"
+    },
+    {
+      "id": "popiol",
+      "name": "Popiół",
+      "group": "neutral",
+      "role": "tekst drugorzędny",
+      "hex": "#6A5D4D",
+      "rgb": "106 93 77",
+      "oklch": "oklch(48.6% 0.03 72.8)",
+      "cmykApprox": "C 0 M 12 Y 27 K 58"
+    }
+  ],
+  "contrast": [
+    {
+      "id": "zyto-maka",
+      "use": "tekst podstawowy na tle strony",
+      "foreground": "#3A3128",
+      "background": "#F2EDE2",
+      "kind": "text",
+      "ratio": 10.9,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "zyto-maka-biala",
+      "use": "tekst na kartach",
+      "foreground": "#3A3128",
+      "background": "#FAF7F0",
+      "kind": "text",
+      "ratio": 11.9,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "zyto-otreby",
+      "use": "tekst w tabelach i na tle sekcji",
+      "foreground": "#3A3128",
+      "background": "#E4D7BC",
+      "kind": "text",
+      "ratio": 8.94,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "zyto-kraft",
+      "use": "tekst na papierze kraft, etykiety i torba",
+      "foreground": "#3A3128",
+      "background": "#C9AD83",
+      "kind": "text",
+      "ratio": 5.93,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "popiol-maka",
+      "use": "tekst drugorzędny, podpisy",
+      "foreground": "#6A5D4D",
+      "background": "#F2EDE2",
+      "kind": "text",
+      "ratio": 5.47,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "popiol-maka-biala",
+      "use": "podpisy na kartach",
+      "foreground": "#6A5D4D",
+      "background": "#FAF7F0",
+      "kind": "text",
+      "ratio": 5.97,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "skorka-maka",
+      "use": "linki i akcenty w tekście",
+      "foreground": "#8F5530",
+      "background": "#F2EDE2",
+      "kind": "text",
+      "ratio": 5.12,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "skorka-maka-biala",
+      "use": "linki na kartach",
+      "foreground": "#8F5530",
+      "background": "#FAF7F0",
+      "kind": "text",
+      "ratio": 5.59,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "lan-maka",
+      "use": "zielony akcent w tekście",
+      "foreground": "#4F5B33",
+      "background": "#F2EDE2",
+      "kind": "text",
+      "ratio": 6.25,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "maka-zyto",
+      "use": "negatyw: jasny tekst na żytnim tle",
+      "foreground": "#F2EDE2",
+      "background": "#3A3128",
+      "kind": "text",
+      "ratio": 10.9,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "maka-skorka",
+      "use": "jasny tekst na przycisku w kolorze skórki",
+      "foreground": "#F2EDE2",
+      "background": "#8F5530",
+      "kind": "text",
+      "ratio": 5.12,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "maka-lan",
+      "use": "jasny tekst na zielonym tle",
+      "foreground": "#F2EDE2",
+      "background": "#4F5B33",
+      "kind": "text",
+      "ratio": 6.25,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "skorka-maka-ui",
+      "use": "obrys fokusu i ramki pól formularza",
+      "foreground": "#8F5530",
+      "background": "#F2EDE2",
+      "kind": "ui",
+      "ratio": 5.12,
+      "required": 3,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "zyto-maka-large",
+      "use": "duże nagłówki",
+      "foreground": "#3A3128",
+      "background": "#F2EDE2",
+      "kind": "large",
+      "ratio": 10.9,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "lan-jasny-maka",
+      "use": "wzór i kłosy w tle",
+      "foreground": "#6B7A4A",
+      "background": "#F2EDE2",
+      "kind": "decorative",
+      "ratio": 3.99,
+      "required": 0,
+      "level": "AA large",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    },
+    {
+      "id": "mioz-maka",
+      "use": "cienkie linie podziału",
+      "foreground": "#A08B6D",
+      "background": "#F2EDE2",
+      "kind": "decorative",
+      "ratio": 2.81,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    }
+  ]
+}

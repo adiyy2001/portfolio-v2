@@ -1,0 +1,649 @@
+---
+import { link, portfolio } from '../../shared/link';
+import ColorTable from '../shared/ColorTable.astro';
+import ContrastTable from '../shared/ContrastTable.astro';
+import Downloads from '../shared/Downloads.astro';
+import SampleLine from '../shared/SampleLine.astro';
+import Shell from '../shared/Shell.astro';
+import { fontFaceCss, preloadFonts } from '../shared/fonts';
+import { formatBytes } from '../shared/format';
+import { readManifest } from '../shared/manifest';
+import StickerLaptop from './StickerLaptop.tsx';
+import Typography from './Typography.astro';
+import { brand } from './brand';
+import { content, contact, extras } from './content';
+import { css } from './styles';
+import {
+  asset,
+  fileInfo,
+  brandbookPreviews,
+  heroProof,
+  heroStickers,
+  iconLabel,
+  iconNames,
+  laptopArea,
+  laptopStickers,
+  logoVariants,
+  minimums,
+  sizeTest,
+} from './view';
+
+const manifest = readManifest('klamra');
+const colors = manifest.palette;
+const icons = iconNames(manifest);
+const zip = manifest.zip;
+const mockups = content.applications.map(item => ({
+  ...item,
+  info: fileInfo(manifest, item.image),
+}));
+const posts = extras.social.map(item => ({ ...item, path: `social/klamra-${item.id}.png` }));
+const fontCss = fontFaceCss(manifest);
+const stickerTilt = [-8, 5, 10];
+const navigation = [
+  ['zadanie', 'Zadanie'],
+  ['kierunek', 'Kierunek'],
+  ['proces', 'Proces'],
+  ['system', 'System'],
+  ['naklejki', 'Naklejki'],
+  ['zastosowania', 'Zastosowania'],
+  ['pliki', 'Pliki'],
+];
+const heading = (index: number) => String(index).padStart(2, '0');
+---
+
+<Shell
+  brand={brand}
+  title="Identyfikacja wizualna szkoły programowania online"
+  description="Neobrutalizm w praktyce: kompletna identyfikacja zmyślonej szkoły programowania Klamra, od strategii i procesu po pliki do druku, animację, brand book i naklejki do przeciągania."
+  css={fontCss + css}
+  preload={preloadFonts(manifest, ['display'])}
+  bodyClass="klamra">
+  <Typography>
+    <header class="top">
+      <a href={link('/identyfikacja/')}>Wzornik, identyfikacja</a>
+      <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="hero">
+        <div class="blk blk--cytryna hero__main">
+          <p class="tag">Identyfikacja wizualna</p>
+          <h1>Klamra</h1>
+          <p class="hero__lead">{content.lead}</p>
+          <dl class="hero__facts">
+            {content.client.facts.slice(0, 3).map(([term, text]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="hero__side">
+          <div class="blk hero__logo">
+            <img
+              src={asset('logo/klamra-primary.svg')}
+              alt="Logo Klamra: dwie klamry z różowym kursorem w żółtej ramce z twardym cieniem"
+              width="900"
+              height="300"
+            />
+            <ul class="hero__proof">
+              {heroProof.map(item => (
+                <li>
+                  <img
+                    src={asset(item.src)}
+                    alt={item.alt}
+                    width={item.width}
+                    height={item.height}
+                  />
+                </li>
+              ))}
+            </ul>
+            <div class="hero__stickers" aria-hidden="true">
+              {heroStickers.map((sticker, index) => (
+                <div
+                  style={`width:${Math.round(sticker.width * 0.7)}px;transform:rotate(${stickerTilt[index]}deg)`}
+                  set:html={sticker.svg}
+                />
+              ))}
+            </div>
+          </div>
+          <nav class="blk blk--atrament hero__nav" aria-label="Spis treści">
+            <ul>
+              {navigation.map(([id, label], index) => (
+                <li>
+                  <a href={`#${id}`}>
+                    <span>{heading(index + 1)}</span>
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </section>
+
+      <section class="band" id="zadanie" aria-labelledby="t-zadanie">
+        <div class="band__head">
+          <span class="band__num" aria-hidden="true">
+            01
+          </span>
+          <h2 id="t-zadanie" class="band__title">
+            Zadanie
+          </h2>
+          <span class="band__cmd" aria-hidden="true">
+            $ cat brief.md
+          </span>
+        </div>
+        <div class="two">
+          <div class="blk prose">
+            {content.client.paragraphs.map(text => (
+              <p>{text}</p>
+            ))}
+          </div>
+          <dl class="facts">
+            {content.client.facts.map(([term, text]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section class="band" id="kierunek" aria-labelledby="t-kierunek">
+        <div class="band__head">
+          <span class="band__num" aria-hidden="true">
+            02
+          </span>
+          <h2 id="t-kierunek" class="band__title">
+            Kierunek
+          </h2>
+          <span class="band__cmd" aria-hidden="true">
+            $ git checkout kierunek
+          </span>
+        </div>
+        <div class="two">
+          <div class="blk blk--roz">
+            <h3>{content.direction.title}</h3>
+            <div class="prose">
+              {content.direction.paragraphs.map(text => (
+                <p>{text}</p>
+              ))}
+            </div>
+          </div>
+          <p class="keywords">
+            {content.direction.keywords.map(word => (
+              <span>{word}</span>
+            ))}
+          </p>
+        </div>
+        <div class="cards three values">
+          {content.strategy.values.map((value, index) => (
+            <article class="blk">
+              <span class="num" aria-hidden="true">
+                {index + 1}
+              </span>
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </article>
+          ))}
+        </div>
+        <div class="blk blk--atrament">
+          <dl class="facts facts--plain">
+            <div>
+              <dt>Odbiorcy</dt>
+              <dd>{content.strategy.audience}</dd>
+            </div>
+            <div>
+              <dt>Osobowość</dt>
+              <dd>{content.strategy.personality.join(', ')}</dd>
+            </div>
+            <div>
+              <dt>Czego unikamy</dt>
+              <dd>{content.strategy.avoids}</dd>
+            </div>
+          </dl>
+          <blockquote>{content.strategy.positioning}</blockquote>
+        </div>
+      </section>
+
+      <section class="band" id="proces" aria-labelledby="t-proces">
+        <div class="band__head">
+          <span class="band__num" aria-hidden="true">
+            03
+          </span>
+          <h2 id="t-proces" class="band__title">
+            Proces
+          </h2>
+          <span class="band__cmd" aria-hidden="true">
+            $ git log --oneline
+          </span>
+        </div>
+        <p class="band__lead">{content.process.intro}</p>
+        <div class="cards three">
+          {content.process.rejected.map(item => (
+            <article class="blk blk--reject">
+              <span class="tag tag--light">Odrzucony</span>
+              <img
+                class="thumb"
+                src={asset(item.thumb)}
+                alt=""
+                width="240"
+                height="240"
+                loading="lazy"
+              />
+              <h3>{item.title}</h3>
+              <p class="muted">{item.text}</p>
+              <p>{item.reason}</p>
+            </article>
+          ))}
+          <article class="blk blk--chosen">
+            <span class="tag">Wybrany</span>
+            <img
+              class="thumb"
+              src={asset('figures/direction-klamry.svg')}
+              alt=""
+              width="240"
+              height="240"
+            />
+            <h3>{content.process.chosen.title}</h3>
+            <p>{content.process.chosen.reason}</p>
+          </article>
+        </div>
+        <div class="blk">
+          <h3>Ręczny kerning</h3>
+          <p>{content.process.refinement[0].text}</p>
+          <figure class="kern">
+            <img
+              src={asset('figures/wordmark-overlay.svg')}
+              alt="Napis Klamra po korekcie kerningu w czerni z różowym śladem napisu bez korekty i wartościami korekty każdej pary liter"
+              width="811"
+              height="300"
+              loading="lazy"
+            />
+            <figcaption>{extras.kerningCaption}</figcaption>
+          </figure>
+        </div>
+        <div class="blk blk--mgla">
+          <h3>Test czytelności</h3>
+          <p>{content.process.refinement[2].text}</p>
+          <ul class="sizes">
+            {sizeTest.map(item => (
+              <li>
+                <img
+                  src={asset(item.src)}
+                  alt=""
+                  width={item.size}
+                  height={item.size}
+                  style={`width:${item.size}px;height:${item.size}px`}
+                />
+                <span>{item.label}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="muted">{content.process.refinement[1].text}</p>
+        </div>
+      </section>
+
+      <section class="band" id="system" aria-labelledby="t-system">
+        <div class="band__head">
+          <span class="band__num" aria-hidden="true">
+            04
+          </span>
+          <h2 id="t-system" class="band__title">
+            System
+          </h2>
+          <span class="band__cmd" aria-hidden="true">
+            $ ls system/
+          </span>
+        </div>
+
+        <div class="blk">
+          <h3>Logo w sześciu wersjach</h3>
+          <ul class="variants">
+            {logoVariants.map(variant => (
+              <li class={`ground--${variant.ground}`}>
+                <img
+                  src={asset(`logo/klamra-${variant.id}.svg`)}
+                  alt={`Logo Klamra, ${variant.alt}`}
+                  width="240"
+                  height="160"
+                  loading="lazy"
+                />
+                <p>
+                  <strong>{variant.name}</strong>
+                  <span>{variant.note}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+          <div class="two two--even two--mid">
+            <figure class="clear">
+              <img
+                src={asset('figures/clearspace.svg')}
+                alt="Logo główne otoczone polem ochronnym równym szerokości kursora"
+                width="693"
+                height="244"
+                loading="lazy"
+              />
+            </figure>
+            <div class="prose">
+              <h4>Pole ochronne i rozmiary</h4>
+              <p>{extras.clearSpace}</p>
+              <ul class="minimum">
+                {minimums.map(item => (
+                  <li>
+                    <span class="minimum__sample">
+                      <img src={asset(item.src)} alt="" width={item.width} height={item.height} />
+                    </span>
+                    <span>
+                      {item.label}: {item.text}.
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="blk">
+          <h3>Kolor</h3>
+          <ul class="swatches">
+            {colors.map(color => (
+              <li>
+                <span class="swatches__chip" style={`background:${color.hex}`}></span>
+                <strong>{color.name}</strong>
+                <span>{color.hex}</span>
+                <em>{color.role}</em>
+              </li>
+            ))}
+          </ul>
+          <details class="fold" open>
+            <summary>Tabela kolorów: HEX, RGB, OKLCH, CMYK</summary>
+            <ColorTable colors={colors} />
+          </details>
+          <h4>Kontrast</h4>
+          <p class="muted">
+            Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają
+            WCAG AA, a elementy dekoracyjne są oznaczone osobno.
+          </p>
+          <details class="fold" open>
+            <summary>Tabela kontrastu, {manifest.contrast.length} par</summary>
+            <ContrastTable pairs={manifest.contrast} />
+          </details>
+        </div>
+
+        <div class="blk blk--niebo">
+          <h3>Typografia</h3>
+          <div class="two two--even">
+            <div class="face">
+              <p class="face__name face__name--display">Epilogue</p>
+              <p class="face__sample face__sample--display">{extras.specimen}</p>
+              <p>
+                Nagłówki i tekst. Grubości 900 i 800 do tytułów, 700 i 500 do tekstu. Licencja OFL.
+              </p>
+            </div>
+            <div class="face">
+              <p class="face__name face__name--mono">JetBrains Mono</p>
+              <p class="face__sample face__sample--mono">{extras.specimen}</p>
+              <p>Etykiety, naklejki, numery i kod. Grubości 400, 700 i 800. Licencja OFL.</p>
+            </div>
+          </div>
+          <ul class="scale">
+            {extras.typeScale.map(row => (
+              <li>
+                <span
+                  class={`scale__sample scale__sample--${row.font}`}
+                  style={`font-size:${Math.min(row.size, 40)}px;font-weight:${row.weight}`}>
+                  {row.name}
+                </span>
+                <span>
+                  {row.size} px, interlinia {String(row.line).replace('.', ',')}. {row.use}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p class="glyphs">{extras.glyphs}</p>
+        </div>
+
+        <div class="blk">
+          <h3>Ikony i wzór</h3>
+          <ul class="icons">
+            {icons.map(name => (
+              <li>
+                <img
+                  src={asset(`icons/svg/klamra-icon-${name}.svg`)}
+                  alt=""
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                />
+                <span>{iconLabel(name)}</span>
+              </li>
+            ))}
+          </ul>
+          <div
+            class="pattern"
+            role="img"
+            aria-label="Wzór z kwadratów, kół, trójkątów i plusów z twardymi cieniami"
+            style={`background-image:url(${asset('pattern/klamra-pattern.svg')})`}></div>
+          <div class="inner">
+            {extras.graphics.map(item => (
+              <div>
+                <h4>{item.title}</h4>
+                <p>{item.text}</p>
+              </div>
+            ))}
+          </div>
+          <ul class="rules">
+            {extras.layoutRules.map(rule => (
+              <li>{rule}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="blk blk--roz">
+          <h3>Zdjęcia i ton głosu</h3>
+          <p class="prose">{extras.photoStyle}</p>
+          <div class="tone">
+            {content.tone.map(rule => (
+              <article>
+                <h4>{rule.title}</h4>
+                <p>{rule.text}</p>
+                <p class="yes">
+                  <span class="tag">Tak</span>
+                  {rule.yes}
+                </p>
+                <p class="no">
+                  <span class="tag tag--light">Nie</span>
+                  {rule.no}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="blk blk--mieta anim">
+          <div class="anim__copy">
+            <h3>Animacja</h3>
+            <p class="prose">{extras.animation}</p>
+          </div>
+          <video
+            class="film"
+            controls
+            muted
+            loop
+            playsinline
+            preload="auto"
+            width="1080"
+            height="1080">
+            <source src={`${asset('animation/klamra-logo.webm')}#t=2.9`} type="video/webm" />
+            <source src={`${asset('animation/klamra-logo.mp4')}#t=2.9`} type="video/mp4" />
+          </video>
+        </div>
+      </section>
+
+      <section class="band" id="naklejki" aria-labelledby="t-naklejki">
+        <div class="band__head">
+          <span class="band__num" aria-hidden="true">
+            05
+          </span>
+          <h2 id="t-naklejki" class="band__title">
+            Okleń laptopa
+          </h2>
+          <span class="band__cmd" aria-hidden="true">
+            $ sticker --add --all
+          </span>
+        </div>
+        <p class="band__lead">
+          Znak jest naklejką, więc przykleiliśmy dziesięć. Przeciągaj je po pokrywie laptopa,
+          wymieszaj albo ułóż w rzędach.
+        </p>
+        <StickerLaptop client:visible pieces={laptopStickers} area={laptopArea} />
+      </section>
+
+      <section class="band" id="zastosowania" aria-labelledby="t-zastosowania">
+        <div class="band__head">
+          <span class="band__num" aria-hidden="true">
+            06
+          </span>
+          <h2 id="t-zastosowania" class="band__title">
+            Zastosowania
+          </h2>
+          <span class="band__cmd" aria-hidden="true">
+            $ ls zastosowania/
+          </span>
+        </div>
+        <div class="gallery">
+          {mockups.map(item => (
+            <figure class={`blk gallery__item gallery__item--${item.id}`}>
+              <img
+                src={asset(item.image)}
+                alt={item.alt}
+                width={item.info?.width}
+                height={item.info?.height}
+                loading="lazy"
+              />
+              <figcaption>
+                <strong>{item.title}</strong>
+                <span>{item.caption}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <h3 class="band__sub">Media społecznościowe</h3>
+        <ul class="posts">
+          <li>
+            <img
+              src={asset('social/klamra-avatar.png')}
+              alt="Awatar Klamry: znak w żółtej ramce z twardym cieniem"
+              width="1080"
+              height="1080"
+              loading="lazy"
+            />
+            <span>Awatar</span>
+          </li>
+          {posts.map(post => (
+            <li>
+              <img
+                src={asset(post.path)}
+                alt={`Post w mediach społecznościowych: ${post.headline} ${post.body}`}
+                width="1080"
+                height="1350"
+                loading="lazy"
+              />
+              <span>{post.headline}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="band" id="pliki" aria-labelledby="t-pliki">
+        <div class="band__head">
+          <span class="band__num" aria-hidden="true">
+            07
+          </span>
+          <h2 id="t-pliki" class="band__title">
+            Pliki
+          </h2>
+          <span class="band__cmd" aria-hidden="true">
+            $ ls -lh pliki/
+          </span>
+        </div>
+        <div class="blk">
+          <p>{content.deliverables.intro}</p>
+          <ul class="book">
+            {brandbookPreviews.map(item => (
+              <li>
+                <a
+                  href={asset('klamra-brandbook.pdf')}
+                  aria-label={`Brand book, strona ${item.page}: ${item.label}`}>
+                  <img
+                    src={asset(`figures/brandbook-${String(item.page).padStart(2, '0')}.jpg`)}
+                    alt=""
+                    width="960"
+                    height="540"
+                    loading="lazy"
+                  />
+                  <span>
+                    {String(item.page).padStart(2, '0')} {item.label}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          {zip && <p class="muted">Cała paczka waży {formatBytes(zip.bytes)}.</p>}
+          <Downloads manifest={manifest} />
+          <p class="muted">{content.deliverables.note}</p>
+        </div>
+      </section>
+
+      <section class="cta" aria-labelledby="t-cta">
+        <div class="blk blk--cytryna cta__box">
+          <h2 id="t-cta">{content.cta.title}</h2>
+          <p>{content.cta.text}</p>
+          <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
+            Zobacz ofertę dla klientów
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <SampleLine name={brand.name} />
+      <p class="foot__contact">{contact.office}. Dane kontaktowe są zmyślone.</p>
+    </footer>
+  </Typography>
+</Shell>
+
+<script>
+  if (window.matchMedia('(max-width: 639px)').matches) {
+    document.querySelectorAll<HTMLDetailsElement>('details.fold').forEach(fold => {
+      fold.open = false;
+    });
+  }
+
+  const film = document.querySelector<HTMLVideoElement>('.film');
+  if (film && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let started = false;
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            film.pause();
+            return;
+          }
+          if (!started) {
+            film.currentTime = 0;
+            started = true;
+          }
+          film.play().catch(() => {});
+        });
+      },
+      { threshold: 0.4 },
+    );
+    observer.observe(film);
+  }
+</script>

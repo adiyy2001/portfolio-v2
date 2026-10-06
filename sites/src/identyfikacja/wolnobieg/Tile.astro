@@ -1,0 +1,116 @@
+---
+import { assetUrl } from '../shared/manifest';
+import { identityBrands } from '../../shared/sites';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = identityBrands.find(item => item.slug === 'wolnobieg')!;
+---
+
+<a class="wolnobieg-tile" href={href}>
+  <span class="wolnobieg-tile__arcs" aria-hidden="true"></span>
+  <img
+    class="wolnobieg-tile__logo"
+    src={assetUrl('wolnobieg', 'logo/wolnobieg-symbol.svg')}
+    alt=""
+    width="120"
+    height="120"
+  />
+  <span class="wolnobieg-tile__style">{meta.style}</span>
+  <span class="wolnobieg-tile__name">{meta.name}</span>
+  <span class="wolnobieg-tile__trade">
+    {meta.trade}, {meta.city}
+  </span>
+  <span class="wolnobieg-tile__go">Zobacz identyfikację</span>
+</a>
+
+<style is:global>
+  .wolnobieg-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 260px;
+    padding: 28px 26px 24px;
+    overflow: hidden;
+    color: #3f2411;
+    text-decoration: none;
+    background: #ec7424;
+    border-radius: 28px;
+    box-shadow: 0 10px 20px -12px rgba(63, 36, 17, 0.5);
+    isolation: isolate;
+    transition: transform 0.25s ease;
+  }
+
+  .wolnobieg-tile:hover,
+  .wolnobieg-tile:focus-visible {
+    transform: translateY(-4px) rotate(-0.6deg);
+  }
+
+  .wolnobieg-tile__arcs {
+    position: absolute;
+    right: -70px;
+    bottom: -70px;
+    z-index: -1;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      #fbf3df 0 38%,
+      #e9a81d 38% 50%,
+      #ec7424 50% 54%,
+      #5b2f14 54% 66%,
+      #ec7424 66% 70%,
+      #fbf3df 70% 82%,
+      transparent 82%
+    );
+  }
+
+  .wolnobieg-tile__logo {
+    width: 110px;
+    height: auto;
+    align-self: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .wolnobieg-tile__style {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .wolnobieg-tile__name {
+    font:
+      700 30px/1.1 'Rammetto One',
+      Georgia,
+      serif;
+  }
+
+  .wolnobieg-tile__trade {
+    font-size: 15px;
+  }
+
+  .wolnobieg-tile__go {
+    margin-top: auto;
+    padding-top: 12px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wolnobieg-tile {
+      transition: none;
+    }
+
+    .wolnobieg-tile:hover,
+    .wolnobieg-tile:focus-visible {
+      transform: none;
+    }
+  }
+</style>

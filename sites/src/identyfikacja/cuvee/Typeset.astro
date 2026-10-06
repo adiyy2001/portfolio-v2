@@ -1,0 +1,7 @@
+---
+import { typesetHtml } from './typography';
+
+const html = await Astro.slots.render('default');
+---
+
+<Fragment set:html={typesetHtml(html)} />

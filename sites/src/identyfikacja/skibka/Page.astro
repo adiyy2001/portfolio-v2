@@ -1,0 +1,661 @@
+---
+import { link, portfolio } from '../../shared/link';
+import ColorTable from '../shared/ColorTable.astro';
+import ContrastTable from '../shared/ContrastTable.astro';
+import Downloads from '../shared/Downloads.astro';
+import SampleLine from '../shared/SampleLine.astro';
+import Shell from '../shared/Shell.astro';
+import { fontFaceCss, preloadFonts } from '../shared/fonts';
+import { formatBytes } from '../shared/format';
+import { readManifest } from '../shared/manifest';
+import StampPress from './StampPress.tsx';
+import { brand } from './brand';
+import { content, contact, extras } from './content';
+import { css } from './styles';
+import { asset, fileInfo, heroArt, iconNames, logoVariants, mockupSize, pressData } from './view';
+
+const manifest = readManifest('skibka');
+const colors = manifest.palette;
+const swatchStyle = (hex: string) => `background:${hex}`;
+const icons = iconNames(manifest);
+const iconLabels: Record<string, string> = { maka: 'mąka', noz: 'nóż' };
+const mp4 = fileInfo(manifest, 'animation/skibka-logo.mp4');
+const webm = fileInfo(manifest, 'animation/skibka-logo.webm');
+const letterhead = fileInfo(manifest, 'print/skibka-letterhead.pdf');
+const zip = manifest.zip;
+const clientFacts = [
+  ...content.client.facts.slice(3),
+  ['Zadanie', 'jeden znak, który da się przybić na torbie i wydrukować na wizytówce'],
+  ['Wynik', 'logo, system, druk, media, animacja i brand book w jednej paczce'],
+];
+const sizeTest = [
+  { src: 'favicon.svg', size: 16, label: 'sygnet uproszczony, 16 px' },
+  { src: 'favicon.svg', size: 24, label: '24 px' },
+  { src: 'favicon.svg', size: 48, label: '48 px' },
+  { src: 'logo/skibka-symbol.svg', size: 48, label: 'pełna pieczątka, 48 px' },
+  { src: 'logo/skibka-symbol.svg', size: 96, label: '96 px' },
+  { src: 'logo/skibka-symbol.svg', size: 192, label: '192 px' },
+];
+const mockups = content.applications.map(item => ({
+  ...item,
+  info: fileInfo(manifest, item.image),
+}));
+const posts = extras.social.map(item => ({
+  ...item,
+  path: `social/skibka-${item.id}.png`,
+}));
+const fontCss = fontFaceCss(manifest);
+const navigation = [
+  ['zadanie', 'Zadanie'],
+  ['kierunek', 'Kierunek'],
+  ['proces', 'Proces'],
+  ['system', 'System'],
+  ['zastosowania', 'Zastosowania'],
+  ['pliki', 'Pliki'],
+];
+---
+
+<Shell
+  brand={brand}
+  title="Identyfikacja wizualna piekarni na zakwasie"
+  description="Pieczątka zamiast logotypu: kompletna identyfikacja zmyślonej piekarni Skibka z Krakowa, od strategii i procesu po pliki do druku, animację i brand book."
+  css={fontCss + css}
+  preload={preloadFonts(manifest, ['display'])}
+  bodyClass="skibka">
+  <svg class="filters" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="paper-edge" x="-3%" y="-3%" width="106%" height="106%">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.035"
+          numOctaves="3"
+          seed="12"
+          result="w"></feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="w" scale="7"></feDisplacementMap>
+      </filter>
+      <filter id="stamp-ink" x="-6%" y="-6%" width="112%" height="112%">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.03"
+          numOctaves="2"
+          seed="8"
+          result="warp"></feTurbulence>
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="warp"
+          scale="4"
+          result="moved"></feDisplacementMap>
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.85"
+          numOctaves="2"
+          seed="2"
+          result="speck"></feTurbulence>
+        <feColorMatrix
+          in="speck"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 0 0 0 -2.3"
+          result="mask"></feColorMatrix>
+        <feComposite in="moved" in2="mask" operator="in"></feComposite>
+      </filter>
+    </defs>
+  </svg>
+
+  <header class="top">
+    <a href={link('/identyfikacja/')}>Wzornik, identyfikacja</a>
+    <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero">
+      <div class="hero__text">
+        <p class="kicker">Identyfikacja wizualna, piekarnia na zakwasie, Kraków</p>
+        <h1>Skibka</h1>
+        <p class="hero__lead">{content.lead}</p>
+        <dl class="hero__facts">
+          {content.client.facts.slice(0, 3).map(([term, text]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{text}</dd>
+            </div>
+          ))}
+        </dl>
+        <nav class="hero__nav" aria-label="Spis treści">
+          <ul>
+            {navigation.map(([id, label]) => (
+              <li>
+                <a href={`#${id}`}>{label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <figure class="hero__art">
+        <svg
+          viewBox="60 30 640 530"
+          role="img"
+          aria-label="Papierowa torba z pieczątką Skibki, dwa bochenki i mąka na stole">
+          <g class="hero__shadow">
+            <g transform="rotate(-3 300 290)">
+              <rect
+                x="120"
+                y="50"
+                width="340"
+                height="450"
+                fill="#c9ad83"
+                filter="url(#paper-edge)"></rect>
+              <rect x="120" y="50" width="340" height="64" fill="#a08b6d" opacity="0.4"></rect>
+              <path
+                d="M290 114V500"
+                stroke="#3a3128"
+                stroke-width="2"
+                opacity="0.14"
+                fill="none"></path>
+              <g transform="translate(180 150) scale(0.55)" fill="#3a3128" filter="url(#stamp-ink)">
+                <g fill-rule="evenodd">
+                  <path d={heroArt.art.band + heroArt.art.specks}></path>
+                  <path d={heroArt.art.thin}></path>
+                  <path d={heroArt.ring}></path>
+                  <path d={pressData.loaf.body + pressData.loaf.cuts + pressData.loaf.dots}></path>
+                </g>
+              </g>
+              <text
+                x="290"
+                y="420"
+                text-anchor="middle"
+                font-family="'Skibka Display', Georgia, serif"
+                font-size="34"
+                fill="#3a3128">
+                Chleb na zakwasie
+              </text>
+              <text
+                x="290"
+                y="452"
+                text-anchor="middle"
+                font-family="'Skibka Text', system-ui, sans-serif"
+                font-size="15"
+                font-weight="500"
+                fill="#3a3128">
+                36 godzin, mąka, woda, sól
+              </text>
+            </g>
+            <g transform="translate(515 425) rotate(-8) scale(0.78)">
+              <path
+                d={heroArt.loaf.body}
+                transform="translate(-200 -202)"
+                fill="#8f5530"
+                fill-rule="evenodd"></path>
+              <path d={heroArt.loaf.cuts} transform="translate(-200 -202)" fill="#c9ad83"></path>
+            </g>
+            <g transform="translate(582 505) rotate(7) scale(0.5)">
+              <path
+                d={heroArt.loaf.body}
+                transform="translate(-200 -202)"
+                fill="#6b7a4a"
+                fill-rule="evenodd"></path>
+              <path d={heroArt.loaf.cuts} transform="translate(-200 -202)" fill="#faf7f0"></path>
+            </g>
+          </g>
+          {heroArt.specks.map(speck => (
+            <circle cx={speck.x} cy={speck.y} r={speck.r} fill="#faf7f0" opacity={speck.o}></circle>
+          ))}
+        </svg>
+      </figure>
+    </section>
+
+    <section class="band" id="zadanie" aria-labelledby="t-zadanie">
+      <div class="paper paper--wide" style="--tilt:-0.6deg">
+        <h2 id="t-zadanie">Klient i zadanie</h2>
+        <div class="two">
+          <div class="prose">
+            {content.client.paragraphs.map(text => (
+              <p>{text}</p>
+            ))}
+          </div>
+          <dl class="facts">
+            {clientFacts.map(([term, text]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="kierunek" aria-labelledby="t-kierunek">
+      <h2 id="t-kierunek" class="band__title">
+        Kierunek i strategia
+      </h2>
+      <div class="paper paper--kraft" style="--tilt:0.8deg">
+        <h3>{content.direction.title}</h3>
+        <div class="prose">
+          {content.direction.paragraphs.map(text => (
+            <p>{text}</p>
+          ))}
+        </div>
+        <p class="keywords">
+          {content.direction.keywords.map(word => (
+            <span>{word}</span>
+          ))}
+        </p>
+      </div>
+      <div class="cards three">
+        {content.strategy.values.map((value, index) => (
+          <article class="paper" style={`--tilt:${[-1, 0.7, -0.5][index]}deg`}>
+            <h3>{value.title}</h3>
+            <p>{value.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="paper paper--wide" style="--tilt:-0.4deg">
+        <dl class="facts facts--row">
+          <div>
+            <dt>Odbiorcy</dt>
+            <dd>{content.strategy.audience}</dd>
+          </div>
+          <div>
+            <dt>Osobowość</dt>
+            <dd>{content.strategy.personality.join(', ')}</dd>
+          </div>
+          <div>
+            <dt>Czego unikamy</dt>
+            <dd>{content.strategy.avoids}</dd>
+          </div>
+        </dl>
+        <blockquote>{content.strategy.positioning}</blockquote>
+      </div>
+    </section>
+
+    <section class="band" id="proces" aria-labelledby="t-proces">
+      <h2 id="t-proces" class="band__title">
+        Proces
+      </h2>
+      <p class="band__lead">{content.process.intro}</p>
+      <div class="cards three">
+        {content.process.rejected.map((item, index) => (
+          <article class="paper paper--reject" style={`--tilt:${[-0.9, 0.8][index]}deg`}>
+            <img src={asset(item.thumb)} alt="" width="200" height="200" loading="lazy" />
+            <h3>{item.title}</h3>
+            <p class="muted">{item.text}</p>
+            <p>{item.reason}</p>
+          </article>
+        ))}
+        <article class="paper paper--chosen" style="--tilt:0.4deg">
+          <img src={asset('figures/direction-stamp.svg')} alt="" width="200" height="200" />
+          <h3>{content.process.chosen.title}</h3>
+          <p>{content.process.chosen.reason}</p>
+        </article>
+      </div>
+      <div class="paper paper--wide" style="--tilt:0.5deg">
+        <h3>Ręczny kerning</h3>
+        <p>{content.process.refinement[0].text}</p>
+        <div class="kern">
+          <figure>
+            <img
+              src={asset('figures/wordmark-default.svg')}
+              alt="Napis Skibka bez korekty kerningu"
+              width="320"
+              height="190"
+              loading="lazy"
+            />
+            <figcaption>Bez korekty</figcaption>
+          </figure>
+          <figure>
+            <img
+              src={asset('figures/wordmark-kerned.svg')}
+              alt="Napis Skibka po ręcznej korekcie kerningu"
+              width="320"
+              height="190"
+              loading="lazy"
+            />
+            <figcaption>Po korekcie</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="paper paper--wide" style="--tilt:-0.5deg">
+        <h3>Test czytelności</h3>
+        <p>{content.process.refinement[2].text}</p>
+        <ul class="sizes">
+          {sizeTest.map(item => (
+            <li>
+              <img
+                src={asset(item.src)}
+                alt=""
+                width={item.size}
+                height={item.size}
+                style={`width:${item.size}px;height:${item.size}px`}
+              />
+              <span>{item.label}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="muted">{content.process.refinement[1].text}</p>
+      </div>
+    </section>
+
+    <section class="band" id="system" aria-labelledby="t-system">
+      <h2 id="t-system" class="band__title">
+        System identyfikacji
+      </h2>
+
+      <div class="paper paper--wide" style="--tilt:-0.5deg">
+        <h3>Logo w sześciu wersjach</h3>
+        <ul class="variants">
+          {logoVariants.map(variant => (
+            <li class={`ground ground--${variant.ground}`}>
+              <img
+                src={asset(`logo/skibka-${variant.id}.svg`)}
+                alt={`Logo Skibka, wersja ${variant.name.toLowerCase()}`}
+                width="240"
+                height="160"
+                loading="lazy"
+              />
+              <p>
+                <strong>{variant.name}</strong>
+                <span>{variant.note}</span>
+              </p>
+            </li>
+          ))}
+        </ul>
+        <div class="two two--even">
+          <figure class="clear">
+            <img
+              src={asset('figures/clearspace.svg')}
+              alt="Logo główne otoczone polem ochronnym równym wysokości litery S"
+              width="872"
+              height="382"
+              loading="lazy"
+            />
+          </figure>
+          <div class="prose">
+            <h4>Pole ochronne i rozmiary</h4>
+            <p>{extras.clearSpace}</p>
+            <ul class="plain">
+              <li>Sygnet: {extras.minimum.symbol}.</li>
+              <li>Pełna pieczątka: {extras.minimum.fullStamp}.</li>
+              <li>Logo główne: {extras.minimum.primary}.</li>
+            </ul>
+          </div>
+        </div>
+        <figure class="minsizes">
+          <img
+            src={asset('figures/minimum-sizes.svg')}
+            alt="Trzy rozmiary minimalne w skali jeden do jednego: sygnet 16 pikseli, pieczątka 48 pikseli, logo główne 120 pikseli szerokości"
+            width="590"
+            height="160"
+            loading="lazy"
+          />
+        </figure>
+      </div>
+
+      <div class="paper paper--wide" style="--tilt:0.4deg">
+        <h3>Kolor</h3>
+        <ul class="swatches">
+          {colors.map(color => (
+            <li>
+              <span class="swatches__chip" style={swatchStyle(color.hex)}></span>
+              <strong>{color.name}</strong>
+              <span>{color.hex}</span>
+              <em>{color.role}</em>
+            </li>
+          ))}
+        </ul>
+        <ColorTable colors={colors} />
+        <h4>Kontrast</h4>
+        <p class="muted">
+          Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają WCAG
+          AA, a elementy dekoracyjne są oznaczone osobno.
+        </p>
+        <ContrastTable pairs={manifest.contrast} />
+      </div>
+
+      <div class="paper paper--wide" style="--tilt:-0.4deg">
+        <h3>Typografia</h3>
+        <div class="two two--even">
+          <div class="face">
+            <p class="face__name face__name--display">Young Serif</p>
+            <p class="face__sample face__sample--display">{extras.specimen}</p>
+            <p class="muted">Nagłówki. Jedna grubość, 400. Licencja OFL.</p>
+          </div>
+          <div class="face">
+            <p class="face__name face__name--text">Karla</p>
+            <p class="face__sample face__sample--text">{extras.specimen}</p>
+            <p class="muted">Tekst. Grubości 400, 500, 700 i kursywa. Licencja OFL.</p>
+          </div>
+        </div>
+        <ul class="scale">
+          {extras.typeScale.map(row => (
+            <li>
+              <span
+                class={`scale__sample scale__sample--${row.font}`}
+                style={`font-size:${Math.min(row.size, 40)}px;font-weight:${'weight' in row ? row.weight : 400}`}>
+                {row.name}
+              </span>
+              <span class="muted">
+                {row.size} px, interlinia {String(row.line).replace('.', ',')}. {row.use}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p class="glyphs">{extras.glyphs}</p>
+      </div>
+
+      <div class="paper paper--wide" style="--tilt:0.5deg">
+        <h3>Ikony i wzór</h3>
+        <ul class="icons">
+          {icons.map(name => (
+            <li>
+              <img
+                src={asset(`icons/svg/skibka-icon-${name}.svg`)}
+                alt=""
+                width="40"
+                height="40"
+                loading="lazy"
+              />
+              <span>{iconLabels[name] ?? name}</span>
+            </li>
+          ))}
+        </ul>
+        <div
+          class="pattern"
+          role="img"
+          aria-label="Wzór z nieregularnych nacięć, ziaren i kropek"
+          style={`background-image:url(${asset('pattern/skibka-pattern.svg')})`}></div>
+        <div class="cards three cards--inner">
+          {extras.graphics.map(item => (
+            <div>
+              <h4>{item.title}</h4>
+              <p>{item.text}</p>
+            </div>
+          ))}
+        </div>
+        <ul class="plain plain--rules">
+          {extras.layoutRules.map(rule => (
+            <li>{rule}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="paper paper--wide" style="--tilt:-0.6deg">
+        <h3>Zdjęcia i ton głosu</h3>
+        <p class="prose-p">{extras.photoStyle}</p>
+        <div class="tone">
+          {content.tone.map(rule => (
+            <article>
+              <h4>{rule.title}</h4>
+              <p>{rule.text}</p>
+              <p class="yes">
+                <span class="tag">Tak</span>
+                {rule.yes}
+              </p>
+              <p class="no">
+                <span class="tag">Nie</span>
+                {rule.no}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="paper paper--wide" style="--tilt:0.3deg">
+        <h3>Animacja</h3>
+        <p>{extras.animation}</p>
+        <div class="two two--even film-row">
+          <video
+            class="film"
+            id="film"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            width="1080"
+            height="1080"
+            aria-label="Animacja logo: pieczątka opada na papier i zmienia się w pionowe logo Skibka">
+            <source src={asset('animation/skibka-logo.webm')} type="video/webm" />
+            <source src={asset('animation/skibka-logo.mp4')} type="video/mp4" />
+          </video>
+          <dl class="facts">
+            <div>
+              <dt>Czas</dt>
+              <dd>trzy sekundy, w pętli</dd>
+            </div>
+            <div>
+              <dt>Format</dt>
+              <dd>1080 na 1080 px</dd>
+            </div>
+            <div>
+              <dt>Pliki</dt>
+              <dd>
+                MP4 (H.264){mp4 && `, ${formatBytes(mp4.bytes)}`}
+                <br />
+                WebM (VP9){webm && `, ${formatBytes(webm.bytes)}`}
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="press-wrap">
+        <h3>Przybij pieczątkę</h3>
+        <StampPress client:visible ring={pressData.ring} loaf={pressData.loaf} />
+      </div>
+    </section>
+
+    <section class="band" id="zastosowania" aria-labelledby="t-zastosowania">
+      <h2 id="t-zastosowania" class="band__title">
+        Zastosowania
+      </h2>
+      <div class="gallery">
+        {mockups.map((item, index) => (
+          <figure
+            class={`paper gallery__item gallery__item--${item.id}`}
+            style={`--tilt:${[-0.7, 0.6, -0.4, 0.8, -0.6][index % 5]}deg`}>
+            <img
+              src={asset(item.image)}
+              alt={item.alt}
+              width={mockupSize[item.image]?.[0]}
+              height={mockupSize[item.image]?.[1]}
+              loading="lazy"
+            />
+            <figcaption>
+              <strong>{item.title}</strong>
+              <span>{item.caption}</span>
+            </figcaption>
+            {item.id === 'papier' && (
+              <dl class="facts">
+                <div>
+                  <dt>Format</dt>
+                  <dd>A4, 210 na 297 mm</dd>
+                </div>
+                <div>
+                  <dt>Plik</dt>
+                  <dd>
+                    PDF do druku{letterhead && `, ${formatBytes(letterhead.bytes)}`}, kroje osadzone
+                  </dd>
+                </div>
+                <div>
+                  <dt>Układ</dt>
+                  <dd>logo i dane w nagłówku, adres w stopce, tekst w jednej kolumnie</dd>
+                </div>
+              </dl>
+            )}
+          </figure>
+        ))}
+      </div>
+      <h3 class="band__sub">Media społecznościowe</h3>
+      <ul class="posts">
+        <li>
+          <img
+            src={asset('social/skibka-avatar.png')}
+            alt="Awatar Skibki: pieczątka z bochenkiem"
+            width="1080"
+            height="1080"
+            loading="lazy"
+          />
+          <span>Awatar</span>
+        </li>
+        {posts.map(post => (
+          <li>
+            <img
+              src={asset(post.path)}
+              alt={`Post w mediach społecznościowych: ${post.headline} ${post.body}`}
+              width="1080"
+              height="1350"
+              loading="lazy"
+            />
+            <span>{post.headline}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="band" id="pliki" aria-labelledby="t-pliki">
+      <h2 id="t-pliki" class="band__title">
+        Pliki do pobrania
+      </h2>
+      <div class="paper paper--wide" style="--tilt:-0.4deg">
+        <p>{content.deliverables.intro}</p>
+        {zip && (
+          <p class="muted">
+            Sama paczka ZIP waży {formatBytes(zip.bytes)}. Makiety i animacja nie wchodzą do niej,
+            leżą osobno na liście poniżej, razem całość to {manifest.totalHuman}.
+          </p>
+        )}
+        <Downloads manifest={manifest} />
+        <p class="muted">{content.deliverables.note}</p>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="t-cta">
+      <div class="paper paper--kraft" style="--tilt:0.7deg">
+        <h2 id="t-cta">{content.cta.title}</h2>
+        <p>{content.cta.text}</p>
+        <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
+          Zobacz ofertę dla klientów
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <SampleLine name={brand.name} />
+    <p class="foot__contact">
+      {contact.street}, {contact.city}. Dane kontaktowe są zmyślone.
+    </p>
+  </footer>
+  <script is:inline>
+    (function () {
+      var film = document.getElementById('film');
+      if (!film || !window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      film.removeAttribute('autoplay');
+      film.pause();
+      film.controls = true;
+      film.addEventListener('loadedmetadata', function () {
+        film.currentTime = 2.9;
+      });
+    })();
+  </script>
+</Shell>

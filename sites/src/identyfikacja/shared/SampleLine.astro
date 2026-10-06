@@ -1,0 +1,15 @@
+---
+import { portfolio } from '../../shared/link';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<p class:list={['sample-note', className]}>
+  Projekt przykładowy. {name} to zmyślona firma. Projekt i wykonanie:{' '}
+  <a href={portfolio('/dla-klienta/#wzornik')}>Adrian Turbiński</a>.
+</p>

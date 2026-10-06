@@ -1,0 +1,24 @@
+{
+  "name": "studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Production tooling for the Wzornik identity case studies. Not part of the site build.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "culori": "^4.0.2",
+    "fflate": "^0.8.3",
+    "fontkit": "^2.0.4",
+    "pdf-lib": "^1.17.1",
+    "playwright": "1.63.0",
+    "subset-font": "^2.9.0",
+    "svgo": "^4.1.0"
+  },
+  "scripts": {
+    "test": "node --test \"identyfikacja/lib/*.test.mjs\""
+  }
+}

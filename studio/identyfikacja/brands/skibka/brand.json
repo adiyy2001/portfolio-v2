@@ -1,0 +1,75 @@
+{
+  "slug": "skibka",
+  "name": "Skibka",
+  "styleId": "I3",
+  "style": "Organiczny rzemieślniczy",
+  "trade": "piekarnia na zakwasie",
+  "city": "Kraków",
+  "themeColor": "#F2EDE2",
+  "appIconBackground": "#F2EDE2",
+  "testBackground": { "light": "maka", "dark": "zyto" },
+  "palette": [
+    { "id": "zyto", "name": "Żyto", "group": "primary", "hex": "#3A3128", "role": "tekst, znak, ciemne tło" },
+    { "id": "skorka", "name": "Skórka", "group": "primary", "hex": "#8F5530", "role": "akcent w tekście i na przyciskach" },
+    { "id": "lan", "name": "Łan", "group": "accent", "hex": "#4F5B33", "role": "zielony akcent w tekście" },
+    { "id": "lan-jasny", "name": "Łan jasny", "group": "accent", "hex": "#6B7A4A", "role": "wypełnienia, wzór, bez tekstu" },
+    { "id": "kraft", "name": "Kraft", "group": "accent", "hex": "#C9AD83", "role": "papier na torby i etykiety" },
+    { "id": "maka-biala", "name": "Mąka biała", "group": "neutral", "hex": "#FAF7F0", "role": "karty i okładki" },
+    { "id": "maka", "name": "Mąka", "group": "neutral", "hex": "#F2EDE2", "role": "tło strony" },
+    { "id": "otreby", "name": "Otręby", "group": "neutral", "hex": "#E4D7BC", "role": "tło sekcji i tabel" },
+    { "id": "mioz", "name": "Miąższ", "group": "neutral", "hex": "#A08B6D", "role": "cienkie linie, bez tekstu" },
+    { "id": "popiol", "name": "Popiół", "group": "neutral", "hex": "#6A5D4D", "role": "tekst drugorzędny" }
+  ],
+  "iconNames": ["chleb", "kromka", "zakwas", "maka", "piec", "zegar", "torba", "koszyk", "noz", "ziarno", "adres", "telefon"],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki",
+      "family": "Young Serif",
+      "css": "Skibka Display",
+      "dir": "youngserif",
+      "file": "YoungSerif-Regular.ttf",
+      "instances": [{ "weight": 400, "style": "normal", "axes": {} }]
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Karla",
+      "css": "Skibka Text",
+      "dir": "karla",
+      "file": "Karla[wght].ttf",
+      "instances": [
+        { "weight": 400, "style": "normal", "axes": { "wght": 400 } },
+        { "weight": 500, "style": "normal", "axes": { "wght": 500 } },
+        { "weight": 700, "style": "normal", "axes": { "wght": 700 } }
+      ]
+    },
+    {
+      "id": "text-italic",
+      "role": "tekst, kursywa",
+      "family": "Karla",
+      "css": "Skibka Text",
+      "dir": "karla",
+      "file": "Karla-Italic[wght].ttf",
+      "instances": [{ "weight": 400, "style": "italic", "axes": { "wght": 400 } }]
+    }
+  ],
+  "contrast": [
+    { "id": "zyto-maka", "fg": "zyto", "bg": "maka", "kind": "text", "use": "tekst podstawowy na tle strony" },
+    { "id": "zyto-maka-biala", "fg": "zyto", "bg": "maka-biala", "kind": "text", "use": "tekst na kartach" },
+    { "id": "zyto-otreby", "fg": "zyto", "bg": "otreby", "kind": "text", "use": "tekst w tabelach i na tle sekcji" },
+    { "id": "zyto-kraft", "fg": "zyto", "bg": "kraft", "kind": "text", "use": "tekst na papierze kraft, etykiety i torba" },
+    { "id": "popiol-maka", "fg": "popiol", "bg": "maka", "kind": "text", "use": "tekst drugorzędny, podpisy" },
+    { "id": "popiol-maka-biala", "fg": "popiol", "bg": "maka-biala", "kind": "text", "use": "podpisy na kartach" },
+    { "id": "skorka-maka", "fg": "skorka", "bg": "maka", "kind": "text", "use": "linki i akcenty w tekście" },
+    { "id": "skorka-maka-biala", "fg": "skorka", "bg": "maka-biala", "kind": "text", "use": "linki na kartach" },
+    { "id": "lan-maka", "fg": "lan", "bg": "maka", "kind": "text", "use": "zielony akcent w tekście" },
+    { "id": "maka-zyto", "fg": "maka", "bg": "zyto", "kind": "text", "use": "negatyw: jasny tekst na żytnim tle" },
+    { "id": "maka-skorka", "fg": "maka", "bg": "skorka", "kind": "text", "use": "jasny tekst na przycisku w kolorze skórki" },
+    { "id": "maka-lan", "fg": "maka", "bg": "lan", "kind": "text", "use": "jasny tekst na zielonym tle" },
+    { "id": "skorka-maka-ui", "fg": "skorka", "bg": "maka", "kind": "ui", "use": "obrys fokusu i ramki pól formularza" },
+    { "id": "zyto-maka-large", "fg": "zyto", "bg": "maka", "kind": "large", "use": "duże nagłówki" },
+    { "id": "lan-jasny-maka", "fg": "lan-jasny", "bg": "maka", "kind": "decorative", "use": "wzór i kłosy w tle", "note": "dekoracja bez tekstu" },
+    { "id": "mioz-maka", "fg": "mioz", "bg": "maka", "kind": "decorative", "use": "cienkie linie podziału", "note": "dekoracja bez tekstu" }
+  ]
+}

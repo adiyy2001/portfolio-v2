@@ -61,6 +61,11 @@ const copy = {
     inside: 'W środku',
     cut: 'Krój',
     open: 'Otwórz stronę',
+    identity: {
+      title: 'Identyfikacja wizualna',
+      lead: 'Sześć realizacji z logo, kolorem, typografią, makietami, animacją i brand bookiem. Każda ze stylem dobranym do branży, z plikami do pobrania.',
+      all: 'Wszystkie realizacje',
+    },
     law: {
       trade: 'kancelaria prawna',
       kind: 'strona firmowa',
@@ -148,6 +153,11 @@ const copy = {
     cut: 'Cut',
     open: 'Open the website',
     openPl: 'Open the website, in Polish',
+    identity: {
+      title: 'Visual identity',
+      lead: 'Six identity case studies with a logo, colour, typography, mockups, animation and a brand book, each in a style matched to its trade, with downloadable files. The pages are in Polish.',
+      all: 'All case studies, in Polish',
+    },
     law: {
       trade: 'law firm',
       kind: 'company website',
@@ -226,6 +236,30 @@ const copy = {
     },
   },
 };
+
+const identity = [
+  {
+    slug: 'skibka',
+    name: 'Skibka',
+    trade: 'piekarnia na zakwasie',
+    style: 'organiczny rzemieślniczy',
+  },
+  {
+    slug: 'nosna',
+    name: 'Nośna',
+    trade: 'festiwal sztuki nowych mediów',
+    style: 'generatywna identyfikacja',
+  },
+  {
+    slug: 'rzut',
+    name: 'Rzut',
+    trade: 'pracownia architektoniczna',
+    style: 'szwajcarski modernizm',
+  },
+  { slug: 'klamra', name: 'Klamra', trade: 'szkoła programowania online', style: 'neobrutalizm' },
+  { slug: 'cuvee', name: 'Cuvée', trade: 'hotel z winnicą', style: 'luksusowy edytorial' },
+  { slug: 'wolnobieg', name: 'Wolnobieg', trade: 'serwis rowerowy', style: 'retro lata 70.' },
+];
 
 const noop = () => () => {};
 
@@ -325,6 +359,27 @@ export default function Wzornik({ lang }) {
           );
         })}
       </Reveal>
+      <div className="wz-id">
+        <h3 className="wz-id__h">{t.identity.title}</h3>
+        <p className="wz-id__lead">{tie(t.identity.lead)}</p>
+        <ul className="wz-id__list">
+          {identity.map(({ slug, name, trade, style }) => (
+            <li key={slug}>
+              <a className="link" href={withPrefix(`/wzornik/identyfikacja/${slug}/`)}>
+                {name}
+              </a>
+              <span>
+                {trade}, {style}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="wz-id__all">
+          <a className="link" href={withPrefix('/wzornik/identyfikacja/')}>
+            {t.identity.all}
+          </a>
+        </p>
+      </div>
       <m.p
         className="hand-note"
         initial={{ opacity: 0 }}

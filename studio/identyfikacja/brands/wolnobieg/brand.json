@@ -1,0 +1,80 @@
+{
+  "slug": "wolnobieg",
+  "name": "Wolnobieg",
+  "styleId": "I5",
+  "style": "Retro lata 70.",
+  "trade": "serwis i sklep rowerowy",
+  "city": "Gdańsk",
+  "themeColor": "#F6E8C8",
+  "appIconBackground": "#F6E8C8",
+  "testBackground": { "light": "krem", "dark": "kakao" },
+  "palette": [
+    { "id": "brazowy", "name": "Brąz", "group": "primary", "hex": "#5B2F14", "role": "napis logo, nagłówki, odznaka" },
+    { "id": "pomarancz", "name": "Pomarańcz", "group": "primary", "hex": "#EC7424", "role": "pasy, wypełnienia i tło sekcji z ciemnym tekstem" },
+    { "id": "musztarda", "name": "Musztarda", "group": "accent", "hex": "#E9A81D", "role": "pasy, odznaki i jasne tła z ciemnym tekstem" },
+    { "id": "awokado", "name": "Awokado", "group": "accent", "hex": "#7C8A2B", "role": "pasy i wypełnienia, bez tekstu" },
+    { "id": "oliwka", "name": "Oliwka", "group": "accent", "hex": "#556020", "role": "zielony akcent w tekście i tło z jasnym tekstem" },
+    { "id": "rdza", "name": "Rdza", "group": "accent", "hex": "#A64A0D", "role": "pomarańcz w tekście, linki i przyciski" },
+    { "id": "krem-jasny", "name": "Krem jasny", "group": "neutral", "hex": "#FBF3DF", "role": "karty i okładki" },
+    { "id": "krem", "name": "Krem", "group": "neutral", "hex": "#F6E8C8", "role": "tło strony i papier" },
+    { "id": "piasek", "name": "Piasek", "group": "neutral", "hex": "#EAD7AE", "role": "tło tabel i pól" },
+    { "id": "len", "name": "Len", "group": "neutral", "hex": "#CDB27F", "role": "linie i faktura, bez tekstu" },
+    { "id": "tyton", "name": "Tytoń", "group": "neutral", "hex": "#9A7447", "role": "obrysy elementów, bez tekstu" },
+    { "id": "kawa", "name": "Kawa", "group": "neutral", "hex": "#6B4528", "role": "tekst drugorzędny" },
+    { "id": "kakao", "name": "Kakao", "group": "neutral", "hex": "#3F2411", "role": "tekst podstawowy i ciemne tło" }
+  ],
+  "iconNames": ["rower", "kolo", "zebatka", "klucz", "detka", "pompka", "lampka", "dzwonek", "kask", "zegar", "adres", "telefon"],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki",
+      "family": "Rammetto One",
+      "css": "Wolnobieg Display",
+      "dir": "rammettoone",
+      "file": "RammettoOne-Regular.ttf",
+      "instances": [{ "weight": 400, "style": "normal", "axes": {} }]
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Baloo 2",
+      "css": "Wolnobieg Text",
+      "dir": "baloo2",
+      "file": "Baloo2[wght].ttf",
+      "instances": [
+        { "weight": 400, "style": "normal", "axes": { "wght": 400 } },
+        { "weight": 600, "style": "normal", "axes": { "wght": 600 } },
+        { "weight": 800, "style": "normal", "axes": { "wght": 800 } }
+      ]
+    }
+  ],
+  "contrast": [
+    { "id": "kakao-krem", "fg": "kakao", "bg": "krem", "kind": "text", "use": "tekst podstawowy na tle strony" },
+    { "id": "kakao-krem-jasny", "fg": "kakao", "bg": "krem-jasny", "kind": "text", "use": "tekst na kartach" },
+    { "id": "kakao-piasek", "fg": "kakao", "bg": "piasek", "kind": "text", "use": "tekst w tabelach i na polach" },
+    { "id": "brazowy-krem", "fg": "brazowy", "bg": "krem", "kind": "text", "use": "napis logo i nagłówki" },
+    { "id": "brazowy-krem-jasny", "fg": "brazowy", "bg": "krem-jasny", "kind": "text", "use": "nagłówki na kartach" },
+    { "id": "kawa-krem", "fg": "kawa", "bg": "krem", "kind": "text", "use": "tekst drugorzędny, podpisy" },
+    { "id": "kawa-krem-jasny", "fg": "kawa", "bg": "krem-jasny", "kind": "text", "use": "podpisy na kartach" },
+    { "id": "kawa-piasek", "fg": "kawa", "bg": "piasek", "kind": "text", "use": "podpisy w tabelach" },
+    { "id": "rdza-krem", "fg": "rdza", "bg": "krem", "kind": "text", "use": "linki i pomarańcz w tekście" },
+    { "id": "rdza-krem-jasny", "fg": "rdza", "bg": "krem-jasny", "kind": "text", "use": "linki na kartach" },
+    { "id": "oliwka-krem", "fg": "oliwka", "bg": "krem", "kind": "text", "use": "zielony akcent w tekście" },
+    { "id": "oliwka-krem-jasny", "fg": "oliwka", "bg": "krem-jasny", "kind": "text", "use": "zielony akcent na kartach" },
+    { "id": "kakao-pomarancz", "fg": "kakao", "bg": "pomarancz", "kind": "text", "use": "tekst na pomarańczowej sekcji" },
+    { "id": "kakao-musztarda", "fg": "kakao", "bg": "musztarda", "kind": "text", "use": "tekst na musztardowej sekcji i odznakach" },
+    { "id": "brazowy-musztarda", "fg": "brazowy", "bg": "musztarda", "kind": "text", "use": "nagłówki na musztardzie" },
+    { "id": "krem-brazowy", "fg": "krem", "bg": "brazowy", "kind": "text", "use": "jasny tekst na brązowej sekcji" },
+    { "id": "krem-kakao", "fg": "krem", "bg": "kakao", "kind": "text", "use": "negatyw: jasny tekst na ciemnym tle" },
+    { "id": "krem-jasny-oliwka", "fg": "krem-jasny", "bg": "oliwka", "kind": "text", "use": "jasny tekst na oliwkowej sekcji" },
+    { "id": "krem-rdza", "fg": "krem", "bg": "rdza", "kind": "text", "use": "jasny tekst na przycisku w kolorze rdzy" },
+    { "id": "musztarda-kakao", "fg": "musztarda", "bg": "kakao", "kind": "text", "use": "musztardowy akcent na ciemnym tle" },
+    { "id": "pomarancz-kakao", "fg": "pomarancz", "bg": "kakao", "kind": "large", "use": "pomarańczowy duży napis na ciemnym tle" },
+    { "id": "brazowy-krem-large", "fg": "brazowy", "bg": "krem", "kind": "large", "use": "duże nagłówki Rammetto One" },
+    { "id": "rdza-krem-ui", "fg": "rdza", "bg": "krem", "kind": "ui", "use": "obrys fokusu i ramki pól formularza" },
+    { "id": "tyton-krem-ui", "fg": "tyton", "bg": "krem", "kind": "ui", "use": "obrys przełączników i suwaków" },
+    { "id": "pomarancz-krem", "fg": "pomarancz", "bg": "krem", "kind": "decorative", "use": "pasy i łuki", "note": "dekoracja bez tekstu" },
+    { "id": "awokado-krem", "fg": "awokado", "bg": "krem", "kind": "decorative", "use": "pasy i wypełnienia", "note": "dekoracja bez tekstu" },
+    { "id": "len-krem", "fg": "len", "bg": "krem", "kind": "decorative", "use": "linie podziału i faktura", "note": "dekoracja bez tekstu" }
+  ]
+}

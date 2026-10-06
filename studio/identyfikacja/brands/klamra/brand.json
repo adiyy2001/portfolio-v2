@@ -1,0 +1,84 @@
+{
+  "slug": "klamra",
+  "name": "Klamra",
+  "styleId": "I2",
+  "style": "Neobrutalizm",
+  "trade": "szkoła programowania online",
+  "city": "cała Polska",
+  "themeColor": "#FFE14A",
+  "appIconBackground": "#FFE14A",
+  "appIconSvg": "src/app-icon.svg",
+  "testBackground": { "light": "biel", "dark": "atrament" },
+  "palette": [
+    { "id": "atrament", "name": "Atrament", "group": "primary", "hex": "#111111", "role": "tekst, obrysy, cienie i znak" },
+    { "id": "cytryna", "name": "Cytryna", "group": "primary", "hex": "#FFE14A", "role": "kolor marki, tło znaku i pierwszego planu" },
+    { "id": "roz", "name": "Róż", "group": "accent", "hex": "#FF5FA8", "role": "akcent, kursor, ostrzeżenia, wypełnienia" },
+    { "id": "mieta", "name": "Mięta", "group": "accent", "hex": "#3DDC97", "role": "akcent, potwierdzenia, wypełnienia" },
+    { "id": "niebo", "name": "Niebo", "group": "accent", "hex": "#5CC8FF", "role": "akcent, odnośniki w ramkach, wypełnienia" },
+    { "id": "biel", "name": "Biel", "group": "neutral", "hex": "#FFFFFF", "role": "tło strony i kart, jedyny jasny tekst na atramencie" },
+    { "id": "mgla", "name": "Mgła", "group": "neutral", "hex": "#F2F2F2", "role": "tło tabel i pól kodu" },
+    { "id": "beton", "name": "Beton", "group": "neutral", "hex": "#D9D9D9", "role": "linie pomocnicze, wyłączone pola, bez tekstu" },
+    { "id": "kamien", "name": "Kamień", "group": "neutral", "hex": "#8F8F8F", "role": "ramki pomocnicze, bez tekstu" },
+    { "id": "grafit", "name": "Grafit", "group": "neutral", "hex": "#4A4A4A", "role": "tekst drugorzędny" }
+  ],
+  "iconNames": ["kod", "terminal", "commit", "galaz", "blad", "laptop", "mentor", "grupa", "kalendarz", "projekt", "certyfikat", "kontakt"],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki",
+      "family": "Epilogue",
+      "css": "Klamra Display",
+      "dir": "epilogue",
+      "file": "Epilogue[wght].ttf",
+      "instances": [
+        { "weight": 800, "style": "normal", "axes": { "wght": 800 } },
+        { "weight": 900, "style": "normal", "axes": { "wght": 900 } }
+      ]
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Epilogue",
+      "css": "Klamra Text",
+      "dir": "epilogue",
+      "file": "Epilogue[wght].ttf",
+      "instances": [
+        { "weight": 500, "style": "normal", "axes": { "wght": 500 } },
+        { "weight": 700, "style": "normal", "axes": { "wght": 700 } }
+      ]
+    },
+    {
+      "id": "mono",
+      "role": "etykiety i kod",
+      "family": "JetBrains Mono",
+      "css": "Klamra Mono",
+      "dir": "jetbrainsmono",
+      "file": "JetBrainsMono[wght].ttf",
+      "instances": [
+        { "weight": 400, "style": "normal", "axes": { "wght": 400 } },
+        { "weight": 700, "style": "normal", "axes": { "wght": 700 } },
+        { "weight": 800, "style": "normal", "axes": { "wght": 800 } }
+      ]
+    }
+  ],
+  "contrast": [
+    { "id": "atrament-biel", "fg": "atrament", "bg": "biel", "kind": "text", "use": "tekst podstawowy na tle strony i na kartach" },
+    { "id": "atrament-mgla", "fg": "atrament", "bg": "mgla", "kind": "text", "use": "tekst w tabelach i polach kodu" },
+    { "id": "atrament-cytryna", "fg": "atrament", "bg": "cytryna", "kind": "text", "use": "tekst na kolorze marki i na znaku" },
+    { "id": "atrament-roz", "fg": "atrament", "bg": "roz", "kind": "text", "use": "tekst na różowych blokach i naklejkach" },
+    { "id": "atrament-mieta", "fg": "atrament", "bg": "mieta", "kind": "text", "use": "tekst na miętowych blokach i naklejkach" },
+    { "id": "atrament-niebo", "fg": "atrament", "bg": "niebo", "kind": "text", "use": "tekst na niebieskich blokach i naklejkach" },
+    { "id": "biel-atrament", "fg": "biel", "bg": "atrament", "kind": "text", "use": "negatyw: biały tekst na atramencie" },
+    { "id": "cytryna-atrament", "fg": "cytryna", "bg": "atrament", "kind": "text", "use": "etykiety i akcenty na atramencie" },
+    { "id": "grafit-biel", "fg": "grafit", "bg": "biel", "kind": "text", "use": "tekst drugorzędny, podpisy" },
+    { "id": "grafit-mgla", "fg": "grafit", "bg": "mgla", "kind": "text", "use": "podpisy w tabelach i na polach kodu" },
+    { "id": "grafit-cytryna", "fg": "grafit", "bg": "cytryna", "kind": "text", "use": "tekst drugorzędny na kolorze marki" },
+    { "id": "atrament-biel-large", "fg": "atrament", "bg": "biel", "kind": "large", "use": "duże nagłówki i napisy na plakatach" },
+    { "id": "atrament-cytryna-ui", "fg": "atrament", "bg": "cytryna", "kind": "ui", "use": "obrys fokusu i ramki na kolorze marki" },
+    { "id": "atrament-biel-ui", "fg": "atrament", "bg": "biel", "kind": "ui", "use": "obrysy kart, pól formularza i przycisków" },
+    { "id": "roz-biel", "fg": "roz", "bg": "biel", "kind": "decorative", "use": "kursor w znaku, kształty wzoru i naklejki", "note": "wypełnienie bez tekstu, zawsze z obrysem w atramencie" },
+    { "id": "mieta-biel", "fg": "mieta", "bg": "biel", "kind": "decorative", "use": "kształty wzoru i naklejki", "note": "wypełnienie bez tekstu, zawsze z obrysem w atramencie" },
+    { "id": "niebo-biel", "fg": "niebo", "bg": "biel", "kind": "decorative", "use": "kształty wzoru i naklejki", "note": "wypełnienie bez tekstu, zawsze z obrysem w atramencie" },
+    { "id": "kamien-biel", "fg": "kamien", "bg": "biel", "kind": "decorative", "use": "linie pomocnicze na planszach", "note": "bez tekstu" }
+  ]
+}

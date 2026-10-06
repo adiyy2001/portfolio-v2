@@ -1,0 +1,39 @@
+---
+import type { ManifestColor } from './types';
+
+interface Props {
+  colors: ManifestColor[];
+  class?: string;
+}
+
+const { colors, class: className } = Astro.props;
+---
+
+<div class:list={['tbl-wrap', className]}>
+  <table class="tbl tbl--colors">
+    <caption class="sr-only">Kolory marki w zapisie HEX, RGB, OKLCH i przybliżonym CMYK</caption>
+    <thead>
+      <tr>
+        <th scope="col">Kolor</th>
+        <th scope="col">HEX</th>
+        <th scope="col">RGB</th>
+        <th scope="col">OKLCH</th>
+        <th scope="col">CMYK (przybliżony)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {colors.map(color => (
+        <tr>
+          <th scope="row">
+            <span class="tbl__chip" style={`background:${color.hex}`} aria-hidden="true"></span>
+            {color.name}
+          </th>
+          <td>{color.hex}</td>
+          <td>{color.rgb}</td>
+          <td>{color.oklch}</td>
+          <td>{color.cmykApprox}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

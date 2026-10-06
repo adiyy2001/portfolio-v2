@@ -1,0 +1,1377 @@
+{
+  "brand": {
+    "slug": "cuvee",
+    "name": "Cuvée",
+    "style": "Luksusowy edytorial",
+    "styleId": "I4",
+    "trade": "butikowy hotel z winnicą",
+    "city": "Dolny Śląsk"
+  },
+  "base": "/wzornik/identyfikacja/cuvee/",
+  "totalBytes": 4954487,
+  "totalHuman": "4.7 MB",
+  "zip": {
+    "path": "cuvee-identyfikacja.zip",
+    "bytes": 2055660
+  },
+  "groups": [
+    {
+      "id": "logo",
+      "title": "Logo",
+      "count": 30,
+      "bytes": 708352,
+      "formats": "SVG, PDF, PNG, PNG 410, 461, 512, 819, 922, 1024, 1638, 1843, 2048 px",
+      "files": [
+        "logo/cuvee-horizontal.svg",
+        "logo/cuvee-mono-black.svg",
+        "logo/cuvee-negative.svg",
+        "logo/cuvee-primary.svg",
+        "logo/cuvee-symbol.svg",
+        "logo/cuvee-vertical.svg",
+        "logo/pdf/cuvee-horizontal.pdf",
+        "logo/pdf/cuvee-mono-black.pdf",
+        "logo/pdf/cuvee-negative.pdf",
+        "logo/pdf/cuvee-primary.pdf",
+        "logo/pdf/cuvee-symbol.pdf",
+        "logo/pdf/cuvee-vertical.pdf",
+        "logo/png/cuvee-horizontal-1024.png",
+        "logo/png/cuvee-horizontal-2048.png",
+        "logo/png/cuvee-horizontal-512.png",
+        "logo/png/cuvee-mono-black-1024.png",
+        "logo/png/cuvee-mono-black-2048.png",
+        "logo/png/cuvee-mono-black-512.png",
+        "logo/png/cuvee-negative-1024.png",
+        "logo/png/cuvee-negative-2048.png",
+        "logo/png/cuvee-negative-512.png",
+        "logo/png/cuvee-primary-1024.png",
+        "logo/png/cuvee-primary-2048.png",
+        "logo/png/cuvee-primary-512.png",
+        "logo/png/cuvee-symbol-1024.png",
+        "logo/png/cuvee-symbol-2048.png",
+        "logo/png/cuvee-symbol-512.png",
+        "logo/png/cuvee-vertical-1024.png",
+        "logo/png/cuvee-vertical-2048.png",
+        "logo/png/cuvee-vertical-512.png"
+      ]
+    },
+    {
+      "id": "favicon",
+      "title": "Ikona strony",
+      "count": 3,
+      "bytes": 7594,
+      "formats": "PNG, ICO, SVG, PNG 180 px",
+      "files": [
+        "apple-touch-icon.png",
+        "favicon.ico",
+        "favicon.svg"
+      ]
+    },
+    {
+      "id": "colors",
+      "title": "Kolor",
+      "count": 2,
+      "bytes": 8477,
+      "formats": "JSON, CSS",
+      "files": [
+        "colors/cuvee-palette.json",
+        "colors/cuvee-tokens.css"
+      ]
+    },
+    {
+      "id": "fonts",
+      "title": "Kroje",
+      "count": 11,
+      "bytes": 223266,
+      "formats": "WOFF2, TXT",
+      "files": [
+        "fonts/NotoSerifDisplay-200.woff2",
+        "fonts/NotoSerifDisplay-300-italic.woff2",
+        "fonts/NotoSerifDisplay-300.woff2",
+        "fonts/NotoSerifDisplay-400-italic.woff2",
+        "fonts/NotoSerifDisplay-400.woff2",
+        "fonts/NotoSerifDisplay-500.woff2",
+        "fonts/OFL-NotoSerifDisplay.txt",
+        "fonts/OFL-SourceSerif4.txt",
+        "fonts/SourceSerif4-400-italic.woff2",
+        "fonts/SourceSerif4-400.woff2",
+        "fonts/SourceSerif4-600.woff2"
+      ]
+    },
+    {
+      "id": "pattern",
+      "title": "Wzór",
+      "count": 1,
+      "bytes": 245,
+      "formats": "SVG",
+      "files": [
+        "pattern/cuvee-pattern.svg"
+      ]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 13,
+      "bytes": 3244,
+      "formats": "SVG",
+      "files": [
+        "icons/cuvee-icons.svg",
+        "icons/svg/cuvee-icon-butelka.svg",
+        "icons/svg/cuvee-icon-dzwonek.svg",
+        "icons/svg/cuvee-icon-filizanka.svg",
+        "icons/svg/cuvee-icon-grono.svg",
+        "icons/svg/cuvee-icon-kapiel.svg",
+        "icons/svg/cuvee-icon-kieliszek.svg",
+        "icons/svg/cuvee-icon-klucz.svg",
+        "icons/svg/cuvee-icon-lozko.svg",
+        "icons/svg/cuvee-icon-parking.svg",
+        "icons/svg/cuvee-icon-schody.svg",
+        "icons/svg/cuvee-icon-spokoj.svg",
+        "icons/svg/cuvee-icon-wzgorze.svg"
+      ]
+    },
+    {
+      "id": "print",
+      "title": "Druk",
+      "count": 2,
+      "bytes": 39360,
+      "formats": "PDF",
+      "files": [
+        "print/cuvee-business-card.pdf",
+        "print/cuvee-letterhead.pdf"
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Media społecznościowe",
+      "count": 4,
+      "bytes": 120589,
+      "formats": "PNG, PNG 1080 px",
+      "files": [
+        "social/cuvee-avatar.png",
+        "social/cuvee-post-1.png",
+        "social/cuvee-post-2.png",
+        "social/cuvee-post-3.png"
+      ]
+    },
+    {
+      "id": "email",
+      "title": "Podpis e-mail",
+      "count": 1,
+      "bytes": 1148,
+      "formats": "HTML",
+      "files": [
+        "email/cuvee-email-signature.html"
+      ]
+    },
+    {
+      "id": "mockups",
+      "title": "Makiety",
+      "count": 5,
+      "bytes": 332187,
+      "formats": "JPG",
+      "files": [
+        "mockups/cuvee-application.jpg",
+        "mockups/cuvee-card-back.jpg",
+        "mockups/cuvee-card-front.jpg",
+        "mockups/cuvee-email-signature.jpg",
+        "mockups/cuvee-letterhead.jpg"
+      ]
+    },
+    {
+      "id": "animation",
+      "title": "Animacja logo",
+      "count": 2,
+      "bytes": 112692,
+      "formats": "MP4, WEBM",
+      "files": [
+        "animation/cuvee-logo.mp4",
+        "animation/cuvee-logo.webm"
+      ]
+    },
+    {
+      "id": "brandbook",
+      "title": "Brand book",
+      "count": 1,
+      "bytes": 1296455,
+      "formats": "PDF",
+      "files": [
+        "cuvee-brandbook.pdf"
+      ]
+    },
+    {
+      "id": "zip",
+      "title": "Wszystko w jednym pliku",
+      "count": 1,
+      "bytes": 2055660,
+      "formats": "ZIP",
+      "files": [
+        "cuvee-identyfikacja.zip"
+      ]
+    },
+    {
+      "id": "meta",
+      "title": "Pozostałe",
+      "count": 8,
+      "bytes": 45218,
+      "formats": "JPG, SVG, PNG, PNG 1200 px",
+      "files": [
+        "figures/animation-poster.jpg",
+        "figures/clearspace.svg",
+        "figures/direction-kursywa.svg",
+        "figures/direction-linia.svg",
+        "figures/direction-wersalik.svg",
+        "figures/wordmark-default.svg",
+        "figures/wordmark-kerned.svg",
+        "og.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "animation/cuvee-logo.mp4",
+      "bytes": 45806,
+      "type": "mp4",
+      "group": "animation",
+      "codec": "h264",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "animation/cuvee-logo.webm",
+      "bytes": 66886,
+      "type": "webm",
+      "group": "animation",
+      "codec": "vp9",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "bytes": 3912,
+      "type": "png",
+      "group": "favicon",
+      "width": 180,
+      "height": 180,
+      "hasAlpha": true
+    },
+    {
+      "path": "colors/cuvee-palette.json",
+      "bytes": 8196,
+      "type": "json",
+      "group": "colors"
+    },
+    {
+      "path": "colors/cuvee-tokens.css",
+      "bytes": 281,
+      "type": "css",
+      "group": "colors"
+    },
+    {
+      "path": "cuvee-brandbook.pdf",
+      "bytes": 1296455,
+      "type": "pdf",
+      "group": "brandbook",
+      "pages": 29,
+      "pageMm": {
+        "width": 508,
+        "height": 285.8
+      },
+      "pagePx": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "path": "cuvee-identyfikacja.zip",
+      "bytes": 2055660,
+      "type": "zip",
+      "group": "zip"
+    },
+    {
+      "path": "email/cuvee-email-signature.html",
+      "bytes": 1148,
+      "type": "html",
+      "group": "email"
+    },
+    {
+      "path": "favicon.ico",
+      "bytes": 2851,
+      "type": "ico",
+      "group": "favicon",
+      "sizes": [
+        16,
+        32,
+        48
+      ]
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 831,
+      "type": "svg",
+      "group": "favicon",
+      "width": 160,
+      "height": 160
+    },
+    {
+      "path": "figures/animation-poster.jpg",
+      "bytes": 15901,
+      "type": "jpg",
+      "group": "meta"
+    },
+    {
+      "path": "figures/clearspace.svg",
+      "bytes": 3964,
+      "type": "svg",
+      "group": "meta",
+      "width": 662,
+      "height": 370
+    },
+    {
+      "path": "figures/direction-kursywa.svg",
+      "bytes": 1769,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-linia.svg",
+      "bytes": 486,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-wersalik.svg",
+      "bytes": 2838,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/wordmark-default.svg",
+      "bytes": 1484,
+      "type": "svg",
+      "group": "meta",
+      "width": 499,
+      "height": 180
+    },
+    {
+      "path": "figures/wordmark-kerned.svg",
+      "bytes": 1686,
+      "type": "svg",
+      "group": "meta",
+      "width": 499,
+      "height": 180
+    },
+    {
+      "path": "fonts/NotoSerifDisplay-200.woff2",
+      "bytes": 21092,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/NotoSerifDisplay-300-italic.woff2",
+      "bytes": 22704,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/NotoSerifDisplay-300.woff2",
+      "bytes": 21072,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/NotoSerifDisplay-400-italic.woff2",
+      "bytes": 21164,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/NotoSerifDisplay-400.woff2",
+      "bytes": 19928,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/NotoSerifDisplay-500.woff2",
+      "bytes": 20664,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-NotoSerifDisplay.txt",
+      "bytes": 4350,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-SourceSerif4.txt",
+      "bytes": 4400,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/SourceSerif4-400-italic.woff2",
+      "bytes": 24952,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/SourceSerif4-400.woff2",
+      "bytes": 30564,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/SourceSerif4-600.woff2",
+      "bytes": 32376,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "icons/cuvee-icons.svg",
+      "bytes": 115,
+      "type": "svg",
+      "group": "icons"
+    },
+    {
+      "path": "icons/svg/cuvee-icon-butelka.svg",
+      "bytes": 253,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-dzwonek.svg",
+      "bytes": 232,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-filizanka.svg",
+      "bytes": 287,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-grono.svg",
+      "bytes": 436,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-kapiel.svg",
+      "bytes": 276,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-kieliszek.svg",
+      "bytes": 227,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-klucz.svg",
+      "bytes": 234,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-lozko.svg",
+      "bytes": 230,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-parking.svg",
+      "bytes": 229,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-schody.svg",
+      "bytes": 214,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-spokoj.svg",
+      "bytes": 239,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/cuvee-icon-wzgorze.svg",
+      "bytes": 272,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "logo/cuvee-horizontal.svg",
+      "bytes": 4227,
+      "type": "svg",
+      "group": "logo",
+      "width": 442,
+      "height": 160
+    },
+    {
+      "path": "logo/cuvee-mono-black.svg",
+      "bytes": 4082,
+      "type": "svg",
+      "group": "logo",
+      "width": 490,
+      "height": 198
+    },
+    {
+      "path": "logo/cuvee-negative.svg",
+      "bytes": 4146,
+      "type": "svg",
+      "group": "logo",
+      "width": 490,
+      "height": 198
+    },
+    {
+      "path": "logo/cuvee-primary.svg",
+      "bytes": 4154,
+      "type": "svg",
+      "group": "logo",
+      "width": 490,
+      "height": 198
+    },
+    {
+      "path": "logo/cuvee-symbol.svg",
+      "bytes": 789,
+      "type": "svg",
+      "group": "logo",
+      "width": 160,
+      "height": 200
+    },
+    {
+      "path": "logo/cuvee-vertical.svg",
+      "bytes": 4281,
+      "type": "svg",
+      "group": "logo",
+      "width": 279,
+      "height": 310
+    },
+    {
+      "path": "logo/pdf/cuvee-horizontal.pdf",
+      "bytes": 7463,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 36.3
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 137
+      }
+    },
+    {
+      "path": "logo/pdf/cuvee-mono-black.pdf",
+      "bytes": 4060,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 40.6
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 153
+      }
+    },
+    {
+      "path": "logo/pdf/cuvee-negative.pdf",
+      "bytes": 4087,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 40.6
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 153
+      }
+    },
+    {
+      "path": "logo/pdf/cuvee-primary.pdf",
+      "bytes": 4088,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 40.6
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 153
+      }
+    },
+    {
+      "path": "logo/pdf/cuvee-symbol.pdf",
+      "bytes": 7233,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 124.9
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 472
+      }
+    },
+    {
+      "path": "logo/pdf/cuvee-vertical.pdf",
+      "bytes": 7670,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 111.2
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 420
+      }
+    },
+    {
+      "path": "logo/png/cuvee-horizontal-1024.png",
+      "bytes": 28674,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 371,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-horizontal-2048.png",
+      "bytes": 62370,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 741,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-horizontal-512.png",
+      "bytes": 12372,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 185,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-mono-black-1024.png",
+      "bytes": 21203,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 414,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-mono-black-2048.png",
+      "bytes": 48517,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 828,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-mono-black-512.png",
+      "bytes": 8996,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 207,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-negative-1024.png",
+      "bytes": 23342,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 414,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-negative-2048.png",
+      "bytes": 52608,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 828,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-negative-512.png",
+      "bytes": 10368,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 207,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-primary-1024.png",
+      "bytes": 23564,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 414,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-primary-2048.png",
+      "bytes": 52902,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 828,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-primary-512.png",
+      "bytes": 10273,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 207,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-symbol-1024.png",
+      "bytes": 37612,
+      "type": "png",
+      "group": "logo",
+      "width": 819,
+      "height": 1024,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-symbol-2048.png",
+      "bytes": 85067,
+      "type": "png",
+      "group": "logo",
+      "width": 1638,
+      "height": 2048,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-symbol-512.png",
+      "bytes": 15548,
+      "type": "png",
+      "group": "logo",
+      "width": 410,
+      "height": 512,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-vertical-1024.png",
+      "bytes": 41734,
+      "type": "png",
+      "group": "logo",
+      "width": 922,
+      "height": 1024,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-vertical-2048.png",
+      "bytes": 97923,
+      "type": "png",
+      "group": "logo",
+      "width": 1843,
+      "height": 2048,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/cuvee-vertical-512.png",
+      "bytes": 18999,
+      "type": "png",
+      "group": "logo",
+      "width": 461,
+      "height": 512,
+      "hasAlpha": true
+    },
+    {
+      "path": "mockups/cuvee-application.jpg",
+      "bytes": 103389,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/cuvee-card-back.jpg",
+      "bytes": 50872,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/cuvee-card-front.jpg",
+      "bytes": 30719,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/cuvee-email-signature.jpg",
+      "bytes": 71528,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/cuvee-letterhead.jpg",
+      "bytes": 75679,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "og.png",
+      "bytes": 17090,
+      "type": "png",
+      "group": "meta",
+      "width": 1200,
+      "height": 630,
+      "hasAlpha": false
+    },
+    {
+      "path": "pattern/cuvee-pattern.svg",
+      "bytes": 245,
+      "type": "svg",
+      "group": "pattern",
+      "width": 120,
+      "height": 120
+    },
+    {
+      "path": "print/cuvee-business-card.pdf",
+      "bytes": 17402,
+      "type": "pdf",
+      "group": "print",
+      "pages": 2,
+      "pageMm": {
+        "width": 91,
+        "height": 61
+      },
+      "pagePx": {
+        "width": 344,
+        "height": 231
+      }
+    },
+    {
+      "path": "print/cuvee-letterhead.pdf",
+      "bytes": 21958,
+      "type": "pdf",
+      "group": "print",
+      "pages": 1,
+      "pageMm": {
+        "width": 209.9,
+        "height": 297
+      },
+      "pagePx": {
+        "width": 793,
+        "height": 1123
+      }
+    },
+    {
+      "path": "social/cuvee-avatar.png",
+      "bytes": 16022,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1080,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/cuvee-post-1.png",
+      "bytes": 31071,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/cuvee-post-2.png",
+      "bytes": 35034,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/cuvee-post-3.png",
+      "bytes": 38462,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    }
+  ],
+  "palette": [
+    {
+      "id": "czern",
+      "name": "Czerń winnicy",
+      "group": "primary",
+      "role": "okładka, tekst, znak",
+      "hex": "#15110E",
+      "rgb": "21 17 14",
+      "oklch": "oklch(18.1% 0.009 59)",
+      "cmykApprox": "C 0 M 19 Y 33 K 92"
+    },
+    {
+      "id": "kosc",
+      "name": "Kość słoniowa",
+      "group": "primary",
+      "role": "tło strony, znak na czerni",
+      "hex": "#F3ECDD",
+      "rgb": "243 236 221",
+      "oklch": "oklch(94.5% 0.021 85.9)",
+      "cmykApprox": "C 0 M 3 Y 9 K 5"
+    },
+    {
+      "id": "mosiadz",
+      "name": "Mosiądz",
+      "group": "accent",
+      "role": "linia, kropka i napis na czerni",
+      "hex": "#B08D57",
+      "rgb": "176 141 87",
+      "oklch": "oklch(66.4% 0.083 77.4)",
+      "cmykApprox": "C 0 M 20 Y 51 K 31"
+    },
+    {
+      "id": "mosiadz-ciemny",
+      "name": "Mosiądz ciemny",
+      "group": "accent",
+      "role": "akcent w tekście na kości",
+      "hex": "#7A5A2A",
+      "rgb": "122 90 42",
+      "oklch": "oklch(49.1% 0.077 75.3)",
+      "cmykApprox": "C 0 M 26 Y 66 K 52"
+    },
+    {
+      "id": "szampan",
+      "name": "Szampan",
+      "group": "accent",
+      "role": "jasny akcent w tekście na czerni",
+      "hex": "#D7BE8D",
+      "rgb": "215 190 141",
+      "oklch": "oklch(81.1% 0.071 83.9)",
+      "cmykApprox": "C 0 M 12 Y 34 K 16"
+    },
+    {
+      "id": "papier",
+      "name": "Papier",
+      "group": "neutral",
+      "role": "etykiety, karty i papier firmowy",
+      "hex": "#FAF6EC",
+      "rgb": "250 246 236",
+      "oklch": "oklch(97.4% 0.014 88.7)",
+      "cmykApprox": "C 0 M 2 Y 6 K 2"
+    },
+    {
+      "id": "len",
+      "name": "Len",
+      "group": "neutral",
+      "role": "tło sekcji i tabel",
+      "hex": "#E5DCC8",
+      "rgb": "229 220 200",
+      "oklch": "oklch(89.6% 0.029 86.6)",
+      "cmykApprox": "C 0 M 4 Y 13 K 10"
+    },
+    {
+      "id": "kamien",
+      "name": "Kamień",
+      "group": "neutral",
+      "role": "cienkie linie, bez tekstu",
+      "hex": "#C9BFA8",
+      "rgb": "201 191 168",
+      "oklch": "oklch(80.7% 0.033 87.3)",
+      "cmykApprox": "C 0 M 5 Y 16 K 21"
+    },
+    {
+      "id": "mgla",
+      "name": "Mgła",
+      "group": "neutral",
+      "role": "linie pomocnicze, bez tekstu",
+      "hex": "#8C8472",
+      "rgb": "140 132 114",
+      "oklch": "oklch(61.5% 0.028 86.9)",
+      "cmykApprox": "C 0 M 6 Y 19 K 45"
+    },
+    {
+      "id": "wegiel",
+      "name": "Węgiel",
+      "group": "neutral",
+      "role": "tekst drugorzędny",
+      "hex": "#4A443A",
+      "rgb": "74 68 58",
+      "oklch": "oklch(38.9% 0.018 80.6)",
+      "cmykApprox": "C 0 M 8 Y 22 K 71"
+    }
+  ],
+  "contrast": [
+    {
+      "id": "czern-kosc",
+      "use": "tekst podstawowy na tle strony",
+      "foreground": "#15110E",
+      "background": "#F3ECDD",
+      "kind": "text",
+      "ratio": 15.96,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "czern-papier",
+      "use": "tekst na etykiecie i papierze firmowym",
+      "foreground": "#15110E",
+      "background": "#FAF6EC",
+      "kind": "text",
+      "ratio": 17.4,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "czern-len",
+      "use": "tekst w tabelach i na tle sekcji",
+      "foreground": "#15110E",
+      "background": "#E5DCC8",
+      "kind": "text",
+      "ratio": 13.77,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "wegiel-kosc",
+      "use": "tekst drugorzędny, podpisy",
+      "foreground": "#4A443A",
+      "background": "#F3ECDD",
+      "kind": "text",
+      "ratio": 8.19,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "wegiel-papier",
+      "use": "podpisy na kartach i etykietach",
+      "foreground": "#4A443A",
+      "background": "#FAF6EC",
+      "kind": "text",
+      "ratio": 8.93,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "wegiel-len",
+      "use": "podpisy w tabelach",
+      "foreground": "#4A443A",
+      "background": "#E5DCC8",
+      "kind": "text",
+      "ratio": 7.07,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "mosiadz-ciemny-kosc",
+      "use": "linki i akcenty w tekście na kości",
+      "foreground": "#7A5A2A",
+      "background": "#F3ECDD",
+      "kind": "text",
+      "ratio": 5.37,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "mosiadz-ciemny-papier",
+      "use": "akcenty na kartach i etykiecie",
+      "foreground": "#7A5A2A",
+      "background": "#FAF6EC",
+      "kind": "text",
+      "ratio": 5.85,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kosc-czern",
+      "use": "negatyw: tekst na okładce i w ciemnych sekcjach",
+      "foreground": "#F3ECDD",
+      "background": "#15110E",
+      "kind": "text",
+      "ratio": 15.96,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "mosiadz-czern",
+      "use": "napisy w kolorze mosiądzu na czerni",
+      "foreground": "#B08D57",
+      "background": "#15110E",
+      "kind": "text",
+      "ratio": 6.07,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "szampan-czern",
+      "use": "jasny akcent w tekście na czerni",
+      "foreground": "#D7BE8D",
+      "background": "#15110E",
+      "kind": "text",
+      "ratio": 10.41,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kamien-czern",
+      "use": "tekst drugorzędny na czerni",
+      "foreground": "#C9BFA8",
+      "background": "#15110E",
+      "kind": "text",
+      "ratio": 10.28,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "czern-mosiadz",
+      "use": "czarny napis na polu w kolorze mosiądzu",
+      "foreground": "#15110E",
+      "background": "#B08D57",
+      "kind": "text",
+      "ratio": 6.07,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "mosiadz-ciemny-kosc-ui",
+      "use": "obrys fokusu i ramki pól formularza",
+      "foreground": "#7A5A2A",
+      "background": "#F3ECDD",
+      "kind": "ui",
+      "ratio": 5.37,
+      "required": 3,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "mosiadz-czern-ui",
+      "use": "obrys fokusu na czerni",
+      "foreground": "#B08D57",
+      "background": "#15110E",
+      "kind": "ui",
+      "ratio": 6.07,
+      "required": 3,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "czern-kosc-large",
+      "use": "duże nagłówki",
+      "foreground": "#15110E",
+      "background": "#F3ECDD",
+      "kind": "large",
+      "ratio": 15.96,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "mosiadz-kosc",
+      "use": "linia i kropka w logo na kości",
+      "foreground": "#B08D57",
+      "background": "#F3ECDD",
+      "kind": "decorative",
+      "ratio": 2.63,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "elementy znaku i cienkie linie bez tekstu"
+    },
+    {
+      "id": "kamien-kosc",
+      "use": "włosowate linie podziału",
+      "foreground": "#C9BFA8",
+      "background": "#F3ECDD",
+      "kind": "decorative",
+      "ratio": 1.55,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    },
+    {
+      "id": "mgla-kosc",
+      "use": "linie pomocnicze i wzór szpaleru",
+      "foreground": "#8C8472",
+      "background": "#F3ECDD",
+      "kind": "decorative",
+      "ratio": 3.16,
+      "required": 0,
+      "level": "AA large",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki i znak",
+      "family": "Noto Serif Display",
+      "css": "Cuvee Display",
+      "weight": 200,
+      "style": "normal",
+      "file": "fonts/NotoSerifDisplay-200.woff2",
+      "bytes": 21092
+    },
+    {
+      "id": "display",
+      "role": "nagłówki i znak",
+      "family": "Noto Serif Display",
+      "css": "Cuvee Display",
+      "weight": 300,
+      "style": "normal",
+      "file": "fonts/NotoSerifDisplay-300.woff2",
+      "bytes": 21072
+    },
+    {
+      "id": "display",
+      "role": "nagłówki i znak",
+      "family": "Noto Serif Display",
+      "css": "Cuvee Display",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/NotoSerifDisplay-400.woff2",
+      "bytes": 19928
+    },
+    {
+      "id": "display",
+      "role": "nagłówki i znak",
+      "family": "Noto Serif Display",
+      "css": "Cuvee Display",
+      "weight": 500,
+      "style": "normal",
+      "file": "fonts/NotoSerifDisplay-500.woff2",
+      "bytes": 20664
+    },
+    {
+      "id": "display-italic",
+      "role": "nagłówki, kursywa",
+      "family": "Noto Serif Display",
+      "css": "Cuvee Display",
+      "weight": 300,
+      "style": "italic",
+      "file": "fonts/NotoSerifDisplay-300-italic.woff2",
+      "bytes": 22704
+    },
+    {
+      "id": "display-italic",
+      "role": "nagłówki, kursywa",
+      "family": "Noto Serif Display",
+      "css": "Cuvee Display",
+      "weight": 400,
+      "style": "italic",
+      "file": "fonts/NotoSerifDisplay-400-italic.woff2",
+      "bytes": 21164
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Source Serif 4",
+      "css": "Cuvee Text",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/SourceSerif4-400.woff2",
+      "bytes": 30564
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Source Serif 4",
+      "css": "Cuvee Text",
+      "weight": 600,
+      "style": "normal",
+      "file": "fonts/SourceSerif4-600.woff2",
+      "bytes": 32376
+    },
+    {
+      "id": "text-italic",
+      "role": "tekst, kursywa",
+      "family": "Source Serif 4",
+      "css": "Cuvee Text",
+      "weight": 400,
+      "style": "italic",
+      "file": "fonts/SourceSerif4-400-italic.woff2",
+      "bytes": 24952
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+---
+import { assetUrl } from '../shared/manifest';
+import { identityBrands } from '../../shared/sites';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = identityBrands.find(item => item.slug === 'skibka')!;
+---
+
+<a class="skibka-tile" href={href}>
+  <span class="skibka-tile__paper" aria-hidden="true"></span>
+  <img
+    class="skibka-tile__logo"
+    src={assetUrl('skibka', 'logo/skibka-vertical.svg')}
+    alt=""
+    width="407"
+    height="339"
+  />
+  <span class="skibka-tile__style">{meta.style}</span>
+  <span class="skibka-tile__name">{meta.name}</span>
+  <span class="skibka-tile__trade">
+    {meta.trade}, {meta.city}
+  </span>
+  <span class="skibka-tile__go">Zobacz identyfikację</span>
+</a>
+
+<style is:global>
+  .skibka-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 260px;
+    padding: 28px 26px 24px;
+    color: #3a3128;
+    text-decoration: none;
+    isolation: isolate;
+  }
+
+  .skibka-tile__paper {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: #c9ad83;
+    transform: rotate(-1.2deg);
+    border-radius: 3px;
+    box-shadow:
+      0 14px 22px -12px rgba(58, 49, 40, 0.45),
+      0 2px 3px rgba(58, 49, 40, 0.25);
+    transition: transform 0.25s ease;
+  }
+
+  .skibka-tile:hover .skibka-tile__paper,
+  .skibka-tile:focus-visible .skibka-tile__paper {
+    transform: rotate(0.4deg) translateY(-3px);
+  }
+
+  .skibka-tile__logo {
+    width: 150px;
+    height: auto;
+    align-self: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .skibka-tile__style {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .skibka-tile__name {
+    font:
+      700 30px/1.1 'Bespoke Serif',
+      Georgia,
+      serif;
+  }
+
+  .skibka-tile__trade {
+    font-size: 15px;
+  }
+
+  .skibka-tile__go {
+    margin-top: auto;
+    padding-top: 12px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skibka-tile__paper {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,53 @@
+---
+import type { ManifestContrast } from './types';
+
+interface Props {
+  pairs: ManifestContrast[];
+  class?: string;
+}
+
+const { pairs, class: className } = Astro.props;
+const kindLabel = {
+  text: 'tekst',
+  large: 'duży tekst',
+  ui: 'element interfejsu',
+  decorative: 'dekoracja',
+} as const;
+---
+
+<div class:list={['tbl-wrap', className]}>
+  <table class="tbl tbl--contrast">
+    <caption class="sr-only">Kontrast każdej pary tekst i tło używanej w systemie</caption>
+    <thead>
+      <tr>
+        <th scope="col">Użycie</th>
+        <th scope="col">Para</th>
+        <th scope="col">Kontrast</th>
+        <th scope="col">Wymóg</th>
+        <th scope="col">Poziom</th>
+      </tr>
+    </thead>
+    <tbody>
+      {pairs.map(pair => (
+        <tr>
+          <th scope="row">{pair.use}</th>
+          <td>
+            <span
+              class="tbl__pair"
+              style={`background:${pair.background};color:${pair.foreground}`}>
+              Aa
+            </span>
+            {pair.foreground} na {pair.background}
+          </td>
+          <td>{String(pair.ratio).replace('.', ',')}:1</td>
+          <td>
+            {pair.kind === 'decorative'
+              ? 'brak'
+              : `${String(pair.required).replace('.', ',')}:1, ${kindLabel[pair.kind]}`}
+          </td>
+          <td>{pair.kind === 'decorative' ? 'dekoracja' : pair.level}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
