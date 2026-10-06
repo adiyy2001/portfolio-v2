@@ -1,0 +1,94 @@
+---
+import { assetUrl } from '../shared/manifest';
+import { identityBrands } from '../../shared/sites';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = identityBrands.find(item => item.slug === 'rzut')!;
+---
+
+<a class="rzut-tile" href={href}>
+  <span class="rzut-tile__top">
+    <img
+      class="rzut-tile__mark"
+      src={assetUrl('rzut', 'logo/rzut-symbol.svg')}
+      alt=""
+      width="56"
+      height="56"
+    />
+    <span class="rzut-tile__style">{meta.styleId}, {meta.style}</span>
+  </span>
+  <span class="rzut-tile__name">{meta.name}</span>
+  <span class="rzut-tile__trade">
+    {meta.trade}, {meta.city}
+  </span>
+  <span class="rzut-tile__go">Zobacz identyfikację</span>
+</a>
+
+<style is:global>
+  .rzut-tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 260px;
+    padding: 22px 24px 20px;
+    color: #0a0a0a;
+    background-color: #ffffff;
+    background-image:
+      linear-gradient(90deg, #e6e6e3 1px, transparent 1px),
+      linear-gradient(#e6e6e3 1px, transparent 1px);
+    background-size: 40px 40px;
+    border: 2px solid #0a0a0a;
+    text-decoration: none;
+    font-family: 'Schibsted Grotesk', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .rzut-tile:hover,
+  .rzut-tile:focus-visible {
+    background-color: #0a0a0a;
+    background-image: none;
+    color: #ffffff;
+  }
+
+  .rzut-tile__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .rzut-tile__mark {
+    width: 56px;
+    height: 56px;
+  }
+
+  .rzut-tile__style {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  .rzut-tile__name {
+    margin-top: auto;
+    font-weight: 600;
+    font-size: 56px;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+  }
+
+  .rzut-tile__trade {
+    font-size: 15px;
+  }
+
+  .rzut-tile__go {
+    padding-top: 10px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>
