@@ -84,7 +84,7 @@ describe('case study content', () => {
   const texts = JSON.stringify({ content, contact, extras });
 
   it('has no dashes and no placeholder copy', () => {
-    expect(texts).not.toMatch(/[–—]/);
+    expect(texts).not.toMatch(/[\u2013\u2014]/);
     expect(texts.toLowerCase()).not.toMatch(/lorem|twoja firma/);
   });
 
