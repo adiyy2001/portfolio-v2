@@ -8,11 +8,11 @@
     "city": "Wrocław"
   },
   "base": "/wzornik/identyfikacja/rzut/",
-  "totalBytes": 4903145,
+  "totalBytes": 4952474,
   "totalHuman": "4.7 MB",
   "zip": {
     "path": "rzut-identyfikacja.zip",
-    "bytes": 1664252
+    "bytes": 1679512
   },
   "groups": [
     {
@@ -96,7 +96,7 @@
       "id": "pattern",
       "title": "Wzór",
       "count": 1,
-      "bytes": 1541,
+      "bytes": 1509,
       "formats": "SVG",
       "files": [
         "pattern/rzut-pattern.svg"
@@ -128,7 +128,7 @@
       "id": "print",
       "title": "Druk",
       "count": 2,
-      "bytes": 39254,
+      "bytes": 36504,
       "formats": "PDF",
       "files": [
         "print/rzut-business-card.pdf",
@@ -187,7 +187,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1639091,
+      "bytes": 1675540,
       "formats": "PDF",
       "files": [
         "rzut-brandbook.pdf"
@@ -197,7 +197,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 1664252,
+      "bytes": 1679512,
       "formats": "ZIP",
       "files": [
         "rzut-identyfikacja.zip"
@@ -207,7 +207,7 @@
       "id": "meta",
       "title": "Pozostałe",
       "count": 8,
-      "bytes": 35576,
+      "bytes": 35978,
       "formats": "SVG, PNG, PNG 1200 px",
       "files": [
         "figures/clearspace.svg",
@@ -290,15 +290,15 @@
     },
     {
       "path": "figures/clearspace.svg",
-      "bytes": 3230,
+      "bytes": 3591,
       "type": "svg",
       "group": "meta",
       "width": 631,
-      "height": 276
+      "height": 286
     },
     {
       "path": "figures/construction.svg",
-      "bytes": 1951,
+      "bytes": 1992,
       "type": "svg",
       "group": "meta",
       "width": 250,
@@ -825,7 +825,7 @@
     },
     {
       "path": "pattern/rzut-pattern.svg",
-      "bytes": 1541,
+      "bytes": 1509,
       "type": "svg",
       "group": "pattern",
       "width": 240,
@@ -833,7 +833,7 @@
     },
     {
       "path": "print/rzut-business-card.pdf",
-      "bytes": 17127,
+      "bytes": 14377,
       "type": "pdf",
       "group": "print",
       "pages": 2,
@@ -863,7 +863,7 @@
     },
     {
       "path": "rzut-brandbook.pdf",
-      "bytes": 1639091,
+      "bytes": 1675540,
       "type": "pdf",
       "group": "brandbook",
       "pages": 29,
@@ -878,7 +878,7 @@
     },
     {
       "path": "rzut-identyfikacja.zip",
-      "bytes": 1664252,
+      "bytes": 1679512,
       "type": "zip",
       "group": "zip"
     },

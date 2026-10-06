@@ -7,6 +7,7 @@ import { ensureDir } from '../../lib/files.mjs';
 import { brand, c, content, contact, dataUri, extras, file, baseCss, logoColors, readPub } from './theme.mjs';
 import { iconSvg } from './icons.mjs';
 import { symbolPath } from './logo-parts.mjs';
+import { nbsp } from '../../../../sites/src/identyfikacja/rzut/lib/typo.ts';
 
 const pub = path => join(brand.paths.pub, path);
 const jpeg = path => `data:image/jpeg;base64,${readFileSync(pub(path)).toString('base64')}`;
@@ -97,12 +98,6 @@ std({
 });
 
 std({
-  section: 'Proces',
-  title: 'Trzy poprawki',
-  body: content.process.refinement.map((step, i) => `<article class="value big" style="${col(1 + i * 4, 4)}"><span class="cn idx">${pad(i + 1)}</span><h3>${step.title}</h3><p>${step.text}</p></article>`).join(''),
-});
-
-std({
   section: 'Logo',
   title: 'Znak główny',
   lead: 'Kwadrat z wejściem i nazwa Rzut. Pod nazwą podpis i współrzędne pracowni.',
@@ -113,7 +108,7 @@ std({
   section: 'Logo',
   title: 'Konstrukcja znaku',
   body: `<div class="stage fig" style="${col(1, 7)}"><img src="${svgUri('figures/construction.svg')}" alt="" style="height:560px;width:auto"></div>
-<div class="prose" style="${col(9, 4)}"><p>Moduł U to jedna szósta wysokości wersalika R. Kwadrat ma bok 6U, wejście ma 2U szerokości i 3U wysokości i leży od dołu.</p><p>Odstęp między znakiem a nazwą to 2U. Dolna krawędź kwadratu leży na linii pisma.</p></div>`,
+<div class="prose" style="${col(9, 4)}">${paragraphs(extras.construction)}</div>`,
 });
 
 const variantTiles = [
@@ -170,7 +165,7 @@ const shares = [['biel', 62], ['czern', 28], ['kobalt', 10]];
 std({
   section: 'Kolor',
   title: 'Czerń, biel i jeden kobalt',
-  lead: 'Strona niesie biel, tekst niesie czerń. Kobalt jest jedynym kolorem sygnałowym i pojawia się raz na rozkładówkę.',
+  lead: extras.colorLead,
   body: `<div class="bar" style="${col(1, 12)}">${shares.map(([id, w]) => `<div style="flex:${w};background:${c[id]};color:${id === 'biel' ? c.czern : c.biel}"><span class="lbl">${colorName(id)} ${w}%</span></div>`).join('')}</div>
 ${['czern', 'biel', 'kobalt'].map((id, i) => {
   const entry = palette.find(item => item.id === id);
@@ -224,7 +219,7 @@ std({
   section: 'Układ i grafika',
   title: 'Dwanaście ikon na siatce 24 px',
   lead: 'Kreska 2 px, proste końce, ostre narożniki. Ikona zawsze leży na pełnych pikselach siatki.',
-  body: brand.iconNames.map((name, i) => `<figure class="icon" style="${col(1 + (i % 6) * 2, 2)}"><div><img src="${dataUri(iconSvg(name, c.czern))}" alt=""></div><figcaption class="lbl">${name}</figcaption></figure>`).join(''),
+  body: brand.iconNames.map((name, i) => `<figure class="icon" style="${col(1 + (i % 6) * 2, 2)}"><div><img src="${dataUri(iconSvg(name, c.czern))}" alt=""></div><figcaption class="lbl">${extras.iconLabels[name] ?? name}</figcaption></figure>`).join(''),
 });
 
 std({
@@ -238,7 +233,7 @@ std({
 std({
   section: 'Układ i grafika',
   title: 'Styl zdjęć',
-  body: `<div class="prose" style="${col(3, 6)}"><p style="font-size:34px">${extras.photoStyle}</p></div>
+  body: `<div class="prose" style="${col(3, 6)}"><p style="font-size:42px;line-height:1.4">${extras.photoStyle}</p></div>
 <div class="crops" style="${col(10, 3)}"><span class="crop whole"><b class="lbl">całość</b></span><span class="crop half"><b class="lbl">połowa</b></span><span class="crop quarter"><b class="lbl">ćwierć</b></span></div>`,
 });
 
@@ -277,19 +272,39 @@ std({
 });
 
 const frameDir = ensureDir(join(brand.paths.out, 'bb-frames'));
-const frameUris = [20, 36, 56, 88].map(n => {
-  const out = join(frameDir, `f${n}.jpg`);
-  execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', pub(file.mp4), '-vf', `select=eq(n\\,${n}),scale=480:480`, '-frames:v', '1', '-q:v', '4', out]);
-  return `data:image/jpeg;base64,${readFileSync(out).toString('base64')}`;
+const frameSteps = [
+  [0.7, '0,7 s', 'Siatka rysuje się'],
+  [1.5, '1,5 s', 'Kwadrat wskakuje na moduł'],
+  [2.2, '2,2 s', 'Nazwa i podpis wyrównują się'],
+  [2.97, '3,0 s', 'Gotowy znak'],
+];
+const frameCells = frameSteps.map(([time, stamp, text]) => {
+  const out = join(frameDir, `f${time}.jpg`);
+  execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-ss', String(time), '-i', pub(file.mp4), '-frames:v', '1', '-vf', 'scale=600:600', '-q:v', '3', out]);
+  const uri = `data:image/jpeg;base64,${readFileSync(out).toString('base64')}`;
+  return `<figure class="frame"><img src="${uri}" alt=""><figcaption><b class="cn">${stamp}</b><span>${text}</span></figcaption></figure>`;
 });
 
-std({
+add({
   section: 'Animacja i kontakt',
   title: 'Siatka, kwadrat, nazwa',
   top: 380,
   lead: extras.animation,
-  body: `<div class="frames" style="${col(1, 12)}">${frameUris.map(uri => `<img src="${uri}" alt="">`).join('')}</div>
-<dl class="facts contact" style="${col(1, 12)}"><div><dt class="lbl">Kontakt</dt><dd>${contact.person}, ${contact.role}</dd></div><div><dt class="lbl">Adres</dt><dd>${contact.street}, ${contact.city}</dd></div><div><dt class="lbl">Telefon</dt><dd>${contact.phone}</dd></div><div><dt class="lbl">E-mail</dt><dd>${contact.email}</dd></div></dl>`,
+  tone: 'light',
+  compact: false,
+  bodyClass: 'tight',
+  body: `<div class="frames" style="${col(1, 12)}">${frameCells.join('')}</div>`,
+});
+
+add({
+  raw: true,
+  tone: 'dark',
+  html: number => `<section class="page dark cover closing">${gridSvg(c.asfalt)}
+<div class="top"><span class="lbl">Animacja i kontakt</span><span class="lbl">${pad(number)} / ${pad(total)}</span></div>
+<div class="cover-logo" style="left:${colLeft(1)}px;width:${colWidth(5)}px;top:150px">${logoImg('negative', 'width:100%;height:auto;display:block', onDark)}</div>
+<dl class="facts contact-card" style="left:${colLeft(7)}px;width:${colWidth(6)}px"><div><dt class="lbl">Kontakt</dt><dd>${contact.person}, ${contact.role}</dd></div><div><dt class="lbl">Adres</dt><dd>${contact.street}, ${contact.city}</dd></div><div><dt class="lbl">Telefon</dt><dd>${contact.phone}</dd></div><div><dt class="lbl">E-mail</dt><dd>${contact.email}</dd></div><div><dt class="lbl">Godziny</dt><dd>${contact.hours.map(([k, v]) => `${k}: ${v}`).join('<br>')}</dd></div></dl>
+<p class="cover-meta lbl" style="left:${colLeft(1)}px;width:${colWidth(6)}px;top:900px">Projekt przykładowy: Rzut to zmyślona firma</p>
+</section>`,
 });
 
 const total = pages.length;
@@ -302,7 +317,7 @@ const sectionIndex = name => sectionStart.findIndex(entry => entry.name === name
 
 const render = (page, i) => {
   const number = i + 1;
-  if (page.html) return page.html();
+  if (page.html) return page.html(number);
   if (page.toc) {
     return `<section class="page">${gridSvg(c.mgla)}<div class="top"><span class="lbl">Spis treści</span><span class="lbl">${pad(number)} / ${pad(total)}</span></div>
 <h2 class="h" style="left:${colLeft(3)}px;width:${colWidth(8)}px">Spis treści</h2>
@@ -353,8 +368,8 @@ html,body{margin:0}
 .value h3{font-size:40px;line-height:1.1;margin:12px 0 16px}
 .value p{font-size:28px;line-height:1.45}
 .value.big .idx{font-size:120px;line-height:1}
-.value.big h3{font-size:60px;margin:20px 0 24px}
-.value.big p{font-size:37px}
+.value.big h3{font-size:72px;margin:24px 0 28px}
+.value.big p{font-size:44px;line-height:1.4}
 .idx{font-weight:700;font-size:26px;color:${c.kobalt};display:inline-block}
 .personality{display:grid;gap:0}
 .personality span{font:700 130px/1 'Rzut Sans',sans-serif;letter-spacing:-.03em}
@@ -376,7 +391,8 @@ blockquote{margin:0;font-size:34px;line-height:1.25;font-weight:500;border-top:2
 .tile figcaption b{font-size:16px;color:${c.czern}}
 .pair{margin:0;display:grid;gap:12px}
 .pair .stage{height:520px}
-.pair figcaption,.misuse figcaption,.icon figcaption{font-size:16px;color:${c.grafit}}
+.pair figcaption,.misuse figcaption{font-size:16px;color:${c.grafit}}
+.icon figcaption{font-size:22px;color:${c.czern}}
 .misuse{margin:0;display:grid;grid-template-rows:310px auto;gap:12px}
 .misuse>div{background:${c.papier};display:flex;align-items:center;justify-content:center;overflow:hidden}
 .shadow{position:relative;display:inline-block}
@@ -432,7 +448,12 @@ td{padding:10px;border-top:2px solid ${c.mgla};font-size:20px}
 .shot.post figcaption{font-size:22px}
 .stack{display:grid;gap:24px;align-content:start}
 .frames{display:grid;grid-template-columns:repeat(4,1fr);column-gap:24px}
-.frames img{width:100%;height:auto;display:block;border:2px solid ${c.mgla}}
+.frame{margin:0;display:grid;gap:12px}
+.frame img{width:100%;height:auto;display:block;border:2px solid ${c.czern}}
+.frame figcaption{display:grid;gap:2px;border-top:2px solid ${c.czern};padding-top:10px;font-size:26px;line-height:1.3}
+.frame figcaption b{font-size:44px;line-height:1;color:${c.kobalt}}
+.contact-card{position:absolute;top:150px;margin:0}
+.contact-card div{border-top-color:${c.biel}}
 .toc{position:absolute;top:215px;margin:0;padding:0;list-style:none;display:grid;gap:0}
 .toc li{display:grid;grid-template-columns:90px 1fr 80px;align-items:baseline;border-top:2px solid ${c.czern};padding:10px 0 12px;font-size:34px;font-weight:700}
 .toc li .cn{font-size:26px}
@@ -441,7 +462,9 @@ td{padding:10px;border-top:2px solid ${c.mgla};font-size:20px}
 .cover-meta{position:absolute;top:760px;font-size:18px;line-height:1.6;color:${c.szary}}
 `;
 
-const html = `<!doctype html><html lang="pl"><meta charset="utf-8"><title>Rzut, księga identyfikacji</title><style>${css}</style><body>${pages.map(render).join('')}</body></html>`;
+const textNodes = markup => markup.replace(/>([^<>]+)</g, (match, text) => `>${nbsp(text)}<`);
+const bodyHtml = textNodes(pages.map(render).join(''));
+const html = `<!doctype html><html lang="pl"><meta charset="utf-8"><title>Rzut, księga identyfikacji</title><style>${css}</style><body>${bodyHtml}</body></html>`;
 
 await withBrowser(browser => htmlToPdf(browser, { outDir: brand.paths.out, name: 'brandbook', html, out: pub(file.brandbook), width: 1920, height: 1080 }));
 console.log(`  ${file.brandbook} (${total} pages)`);

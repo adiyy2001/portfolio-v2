@@ -1,6 +1,7 @@
 import type { CaseContent } from '../shared/types';
+import { typo } from './lib/typo.ts';
 
-export const contact = {
+const rawContact = {
   person: 'Tomasz Biernat',
   role: 'architekt, współzałożyciel',
   street: 'ul. Pracowniana 4',
@@ -14,7 +15,9 @@ export const contact = {
   ],
 } as const;
 
-export const content: CaseContent = {
+export const contact = typo(rawContact);
+
+const rawContent: CaseContent = {
   lead: 'Znak narysowany jak rzut: kwadrat, wejście i siatka, na której leży cała reszta.',
   client: {
     paragraphs: [
@@ -157,7 +160,7 @@ export const content: CaseContent = {
   ],
   deliverables: {
     intro:
-      'Wszystko, co dostaje pracownia, leży w jednej paczce ZIP i osobno na liście poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
+      'Logo, kolory, kroje, ikony, pliki do druku, media społecznościowe, podpis e-mail i brand book leżą w jednej paczce ZIP. Makiety i animacja leżą osobno, bo pokazują zastosowania i nie są plikami roboczymi. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
@@ -166,7 +169,36 @@ export const content: CaseContent = {
   },
 };
 
-export const extras = {
+export const content = typo(rawContent);
+
+const rawExtras = {
+  colorLead:
+    'Strona niesie biel, tekst niesie czerń. Kobalt jest jedynym kolorem sygnałowym: jedno duże pole na rozkładówkę, a w drobnych numerach i odnośnikach tylko akcent.',
+  iconLabels: {
+    rzut: 'Rzut',
+    przekroj: 'Przekrój',
+    elewacja: 'Elewacja',
+    wymiar: 'Wymiar',
+    siatka: 'Siatka',
+    dzialka: 'Działka',
+    dom: 'Dom',
+    schody: 'Schody',
+    okno: 'Okno',
+    drzwi: 'Drzwi',
+    adres: 'Adres',
+    telefon: 'Telefon',
+  } as Record<string, string>,
+  construction: [
+    'Moduł U to jedna szósta wysokości wersalika R. Kwadrat ma bok 6U, wejście ma 2U szerokości i 3U wysokości i leży od dołu.',
+    'Odstęp między znakiem a nazwą to 2U. Dolna krawędź kwadratu leży na linii pisma.',
+  ],
+  mockupSizes: {
+    'mockups/rzut-card-front.jpg': [1800, 1260],
+    'mockups/rzut-card-back.jpg': [1800, 1260],
+    'mockups/rzut-letterhead.jpg': [1500, 1860],
+    'mockups/rzut-application.jpg': [1900, 1400],
+    'mockups/rzut-email-signature.jpg': [1600, 1100],
+  } as Record<string, number[]>,
   typeScale: [
     {
       name: 'Numer',
@@ -217,7 +249,7 @@ export const extras = {
     'Tekst do lewej, prawa krawędź poszarpana. Nie wyrównujemy do prawej ani do środka.',
     'Kolumny tekstu mają nierówne szerokości: wąska na 3, szeroka na 6 kolumn.',
     'Numery wiszą w marginesie, nie w tekście.',
-    'Kobalt występuje raz na rozkładówkę. Zaokrągleń, cieni i gradientów nie używamy.',
+    'Kobalt to jedno duże pole na rozkładówkę. Drobne numery, odnośniki i znaczniki mogą być kobaltowe, ale nie tworzą drugiego pola. Zaokrągleń, cieni i gradientów nie używamy.',
   ],
   photoStyle:
     'Zdjęć w tym projekcie nie generujemy. Opis stylu dla fotografa: budynek frontalnie lub w ścisłym narożniku, pionowe linie pionowo, bez perspektywy żabiej. Światło rozproszone, najlepiej pochmurne popołudnie. Bez ludzi, bez pozowanych wnętrz, bez filtrów. Kolory neutralne, szarość betonu i cegły bez podbijania. Kadr przycinamy do modułu siatki: całość, połowa albo ćwierć.',
@@ -264,3 +296,5 @@ export const extras = {
     },
   ],
 } as const;
+
+export const extras = typo(rawExtras);

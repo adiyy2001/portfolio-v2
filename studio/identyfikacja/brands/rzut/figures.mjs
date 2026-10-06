@@ -17,11 +17,11 @@ const gridLines = (w, h, step, color = c.mgla) => {
 const label = (text, x, y, { size = 11, anchor = 'start', fill = c.grafit } = {}) =>
   `<path fill="${fill}" d="${textPath(text, { size, x, y, width: 75, tracking: 0.06, anchor, fit: 0.1 }).d}"/>`;
 
-const dimH = (x1, x2, y, text) =>
-  `<path fill="none" stroke="${c.czern}" stroke-width="1" d="M${x1} ${y}H${x2}M${x1} ${y - 4}v8M${x2} ${y - 4}v8"/>${label(text, (x1 + x2) / 2, y - 7, { anchor: 'middle' })}`;
+const dimH = (x1, x2, y, text, size = 11) =>
+  `<path fill="none" stroke="${c.czern}" stroke-width="1" d="M${x1} ${y}H${x2}M${x1} ${y - 4}v8M${x2} ${y - 4}v8"/>${label(text, (x1 + x2) / 2, y - 7, { anchor: 'middle', size })}`;
 
-const dimV = (x, y1, y2, text) =>
-  `<path fill="none" stroke="${c.czern}" stroke-width="1" d="M${x} ${y1}V${y2}M${x - 4} ${y1}h8M${x - 4} ${y2}h8"/>${label(text, x + 8, (y1 + y2) / 2 + 4)}`;
+const dimV = (x, y1, y2, text, size = 11) =>
+  `<path fill="none" stroke="${c.czern}" stroke-width="1" d="M${x} ${y1}V${y2}M${x - 4} ${y1}h8M${x - 4} ${y2}h8"/>${label(text, x + 8, (y1 + y2) / 2 + size / 3, { size })}`;
 
 export const buildFigures = () => {
   const small = 0.3;
@@ -67,8 +67,8 @@ export const buildFigures = () => {
     'clearspace.svg',
     svgWrap(
       total[0],
-      total[1] + 36,
-      `<path fill="${c.mgla}" fill-rule="evenodd" d="${frame}"/><rect x="${margin}" y="${margin}" width="${hw}" height="${hh}" fill="none" stroke="${c.kobalt}" stroke-width="1" stroke-dasharray="5 4"/><g transform="translate(${margin} ${margin})">${inner}</g>${dimH(0, margin, margin / 2, 'M/2')}${dimH(total[0] - margin, total[0], margin / 2, 'M/2')}${dimV(total[0] / 2, total[1] - margin, total[1], 'M/2')}${label('M = BOK KWADRATU = 6U', margin, total[1] + 26, { size: 13 })}`,
+      total[1] + 46,
+      `<path fill="${c.mgla}" fill-rule="evenodd" d="${frame}"/><rect x="${margin}" y="${margin}" width="${hw}" height="${hh}" fill="none" stroke="${c.kobalt}" stroke-width="1" stroke-dasharray="5 4"/><g transform="translate(${margin} ${margin})">${inner}</g>${dimH(0, margin, margin / 2 + 8, 'M/2', 22)}${dimH(total[0] - margin, total[0], margin / 2 + 8, 'M/2', 22)}${dimV(total[0] / 2, total[1] - margin, total[1], 'M/2', 22)}${label('M = BOK KWADRATU = 6U', margin, total[1] + 34, { size: 20 })}`,
     ),
   );
 
@@ -80,7 +80,7 @@ export const buildFigures = () => {
     svgWrap(
       250,
       230,
-      `<g transform="translate(${ox} ${oy})">${gridLines(120, 120, k, c.szary)}<path fill="${c.kobalt}" d="${symbolPath(120)}"/><path fill="none" stroke="${c.czern}" stroke-width="1" stroke-dasharray="3 3" d="M60 60H100V120"/></g>${dimH(ox, ox + 120, 30, 'M = 6U')}${dimV(ox + 120 + 16, oy + 60, oy + 120, '3U')}${dimH(ox + 60, ox + 100, oy + 120 + 22, '2U')}${label('U = M / 6', ox, 216, { size: 13 })}`,
+      `<g transform="translate(${ox} ${oy})">${gridLines(120, 120, k, c.szary)}<path fill="${c.kobalt}" d="${symbolPath(120)}"/><path fill="none" stroke="${c.czern}" stroke-width="1" stroke-dasharray="3 3" d="M60 60H100V120"/></g>${dimH(ox, ox + 120, 30, 'M = 6U', 14)}${dimV(ox + 120 + 16, oy + 60, oy + 120, '3U', 14)}${dimH(ox + 60, ox + 100, oy + 120 + 22, '2U', 14)}${label('U = M / 6', ox, 216, { size: 14 })}`,
     ),
   );
   return { unit };
