@@ -79,7 +79,7 @@ Ports 4317 to 4319 are for the distinctness board, publication and the final ver
 sites/src/pages/identyfikacja/index.astro                 SHARED  index of the six case studies
 sites/src/pages/identyfikacja/<slug>/index.astro          brand   case study page (thin, imports the brand page)
 sites/src/identyfikacja/shared/                           SHARED  types, manifest reader, head and footer parts, download list helper
-sites/src/identyfikacja/<slug>/brand.ts                   brand   metadata the index reads (slug, name, style, trade, city, order)
+sites/src/identyfikacja/<slug>/brand.ts                   brand   BrandMeta for the page head: slug, name, themeColor, ogAlt, tagline
 sites/src/identyfikacja/<slug>/Tile.astro                 brand   the tile on the index, in the brand's own style
 sites/src/identyfikacja/<slug>/                           brand   Page.astro, sections, styles, content.ts, islands, scripts, tests
 sites/public/identyfikacja/<slug>/                        brand   everything published: favicon.svg, favicon.ico, apple-touch-icon.png, og.png,
@@ -92,7 +92,7 @@ studio/identyfikacja/brands/<slug>/                       brand   STATUS.md, bra
 studio/out/<slug>/                                        brand   git-ignored masters, renders, screenshots, QA output
 ```
 
-The index finds the brands by itself: `import.meta.glob('../../identyfikacja/*/brand.ts', { eager: true })` for the metadata and `import.meta.glob('../../identyfikacja/*/Tile.astro', { eager: true })` for the tiles. A brand appears on the index when its folder is merged. Nobody edits the index to add a brand.
+All six slugs are registered up front in `identityBrands` (`sites/src/shared/sites.ts`), so the index lists six cells from the start. A cell shows the brand's own tile when `sites/src/identyfikacja/<slug>/Tile.astro` exists (`import.meta.glob('../../identyfikacja/*/Tile.astro', { eager: true })`, the tile gets one prop, `href`) and a shared stub otherwise. A brand appears on the index when its folder is merged. Nobody edits the index or `sites.ts` to add a brand.
 
 ### Shared files (a brand agent never edits them)
 
@@ -108,4 +108,63 @@ When a brand agent finishes: commit in its worktree (`add the identity case stud
 
 ### File conventions
 
-The foundation agent fills this section in with the final names of the published files (logo variants, PNG sizes, print files, social posts, animation, brand book, ZIP, manifest) after it has built Skibka end to end. Every later agent follows it without changes.
+Every published file lives in `sites/public/identyfikacja/<slug>/`. Names always start with the slug. Every script takes the slug as its first argument or as `--brand <slug>`, run from `studio/` with `node identyfikacja/scripts/<script>.mjs <slug>`. The names come from one function, `studio/identyfikacja/lib/convention.mjs` (`names(slug)`), and `validate.mjs` checks them; do not invent others.
+
+| Group | Files |
+|---|---|
+| Logo | `logo/<slug>-<variant>.svg` for the variants `primary`, `symbol`, `horizontal`, `vertical`, `mono-black`, `negative`; `logo/png/<slug>-<variant>-<size>.png` at 512, 1024, 2048 px wide with alpha; `logo/pdf/<slug>-<variant>.pdf` |
+| Site icons | `favicon.svg`, `favicon.ico` (16, 32, 48 as PNG), `apple-touch-icon.png` (180, solid background from `appIconBackground`), `og.png` (1200x630) |
+| Colour | `colors/<slug>-palette.json`, `colors/<slug>-tokens.css` |
+| Fonts | `fonts/*.woff2` (subsets) and the OFL texts, listed in the manifest |
+| Pattern and icons | `pattern/<slug>-pattern.svg` (tileable), `icons/<slug>-icons.svg` (sprite) and `icons/svg/<slug>-icon-<name>.svg`, 12 icons on a 24 px grid, names from `iconNames` in `brand.json` |
+| Social | `social/<slug>-avatar.png` (1080x1080), `social/<slug>-post-1.png` to `-post-3.png` (1080x1350) |
+| Mockups | `mockups/<slug>-card-front.jpg`, `-card-back.jpg`, `-letterhead.jpg`, `-application.jpg`, `-email-signature.jpg` |
+| Print | `print/<slug>-business-card.pdf` (91x61 mm, 2 pages, 3 mm bleed), `print/<slug>-letterhead.pdf` (A4); fonts embedded, no Type 3 |
+| E-mail | `email/<slug>-email-signature.html` (tables and inline styles, logo as an absolute URL under `https://adrianturbinski.pl/wzornik/identyfikacja/<slug>/logo/png/<slug>-horizontal-512.png`) |
+| Animation | `animation/<slug>-logo.mp4` (H.264) and `.webm` (VP9), 1080x1080, 2 to 4 s, each under 1.5 MB |
+| Brand book | `<slug>-brandbook.pdf`, 20 to 30 pages of 1920x1080 px, fonts embedded, up to 6 MB |
+| Package | `<slug>-identyfikacja.zip` (everything except animation, mockups, `figures/`, `og.png`, the manifest and itself) |
+| Meta | `manifest.json` (written by `manifest.mjs`, read by the page) |
+| Free form | `figures/*` is for pictures the case study page needs (rejected directions, kerning, clear space); it is not in the ZIP and the page may name them freely |
+
+Limits checked by `validate.mjs`: logo SVG under 10000 bytes with no `<text>`, no `font-family`, no `<image>`, no script and a `viewBox`; published folder up to 16 MB (budget 12 MB), ZIP up to 8 MB, every file under 50 MB; contrast table from `brand.json` with every text pair at least AA; no comments and no en or em dashes in any file the guard covers. Skibka lands at 15.3 MB published, of which 6.0 MB is the ZIP.
+
+`brand.json` is the single source of truth. Keys: `slug`, `name`, `styleId`, `style`, `trade`, `city`, `themeColor`, `appIconBackground`, `testBackground` (`{light, dark}` palette ids for the logo size sheet), `palette` (entries `id`, `name`, `group` of `primary`, `accent` or `neutral`, `hex`, `role`; at least one of each group, 5 to 9 neutrals, so 8 to 12 colours is typical), `iconNames` (exactly 12), `fonts` (entries `id`, `role`, `family`, `css`, `dir`, `file`, `instances` with `weight`, `style`, `axes`), `contrast` (pairs `id`, `use`, `fg`, `bg` as palette ids, `kind` of `text`, `large`, `ui` or `decorative`, optional `note`).
+
+Page contract: `sites/src/identyfikacja/<slug>/Page.astro` wraps everything in `shared/Shell.astro` (head, noindex, canonical, og, icons, skip link) and ends with `shared/SampleLine.astro`; the route `sites/src/pages/identyfikacja/<slug>/index.astro` only renders `Page`. Data comes from `readManifest('<slug>')` (`shared/manifest.ts`), which reads `public/identyfikacja/<slug>/manifest.json` during the build. Use `shared/Downloads.astro`, `ColorTable.astro` and `ContrastTable.astro` for the file list and the tables; they carry no styling, so the brand page styles `.dl`, `.tbl` and `.tbl-wrap` itself. Copy and the rest of the data live in `sites/src/identyfikacja/<slug>/content.ts` (type `CaseContent` in `shared/types.ts`). A brand script can import that `.ts` file straight from Node 24 (type stripping), as `brands/skibka/theme.mjs` does, so the page and the brand book use the same words. Islands are Preact, loaded with `client:visible`.
+
+## How to build a brand
+
+Skibka is the worked example. Read `brands/skibka/` and `sites/src/identyfikacja/skibka/` first; copy the structure, not the look.
+
+### Setup and ports
+
+1. In the brand worktree: `export PATH=~/.nvm/versions/node/v24.13.0/bin:$PATH`, then `yarn --cwd sites install --frozen-lockfile`, `yarn --cwd studio install --frozen-lockfile`, and copy `studio/out/fonts-src` from the main identity worktree (`WZ_FONTS_SRC` overrides the folder).
+2. Ports: your own port from the table above for the dev or preview server, bound to 127.0.0.1 only. `screens.mjs` and `distinct.mjs` serve `sites/dist` themselves on `--port` (default 4311, so pass your own). Kill servers with `pgrep` and `kill <PID>`, never `pkill -f`. One heavy renderer (Chromium, ffmpeg) at a time per worktree.
+
+### Order of steps
+
+1. `brands/<slug>/brand.json`: palette, fonts, 12 icon names, contrast pairs. `node identyfikacja/scripts/fonts-check.mjs <slug>` and `fonts-verify.mjs <slug>` confirm the Polish glyphs and the pinned instances.
+2. `sites/src/identyfikacja/<slug>/content.ts`: the copy for the case study (typed `CaseContent`, plus anything extra the brand needs, such as `extras` and `contact` in Skibka).
+3. `brands/<slug>/build-logos.mjs`: draws the six logo variants and `favicon.svg` into the published folder using `lib/text-path.mjs` (fontkit paths, tracking, manual kerning pairs, Schneider curve fitting), writes any data the page needs (`stamp-data.json` in Skibka). Keep every SVG under 10000 bytes: reuse glyph paths with `<use>` inside `<defs>`, round to one decimal, fit curves with `fit` set.
+4. `node identyfikacja/scripts/pipeline.mjs <slug> --from fonts --skip assets,animate,brandbook` runs fonts, colors, logos, logo-export, favicon and logo-test; open `studio/out/<slug>/logo-sizes.png` and fix the logo at 16, 24, 48 and 512 px.
+5. `brands/<slug>/build-assets.mjs`: pattern, icons, figures, mockups, print PDFs, social, og and the e-mail signature, rendered from HTML with `lib/browser.mjs` (`htmlToImage`, `htmlToPdf`). Print is flat: no filters or blend modes in the PDFs. A big grain overlay in a PDF explodes the file size, keep texture on screen files only. `lib/png.mjs` (`quantizePng`) shrinks noisy PNGs.
+6. `brands/<slug>/src/animation.html`: the logo animation as a page that defines `window.__duration` (2000 to 4000 ms) and `window.__seek(ms)`; drive it with the Web Animations API (paused, `currentTime = ms`). `animate.mjs` captures frames and encodes MP4 and WebM.
+7. `brands/<slug>/build-brandbook.mjs`: 20 to 30 pages of 1920x1080 px from the same content, fonts as pinned `data:` URIs (`theme.mjs` shows `pinnedFaceCss`).
+8. `node identyfikacja/scripts/pipeline.mjs <slug> --from zip` builds the ZIP and the manifest and runs `validate.mjs`; it must end with all checks passed.
+9. The page: `Page.astro`, `Tile.astro`, `brand.ts`, `styles.ts` or the brand's own styles, islands and the thin route. Then `yarn --cwd sites run check`, `yarn --cwd sites test`, `yarn --cwd sites build`.
+10. `node identyfikacja/scripts/screens.mjs <slug> --port <port>` writes full page screenshots at 390 and 1440 px in slices to `studio/out/<slug>/shots/` plus the console errors, horizontal overflow and h1 count. Open every slice, list defects, fix, repeat. Add `--reduced` once to check reduced motion.
+11. `node identyfikacja/scripts/pdf-preview.mjs <slug> --pages all --dpi 36` renders brand book pages to PNG (`--random 3` for a spot check); look at them.
+12. `node identyfikacja/scripts/guard.mjs --brand <slug>` checks the brand's files for comments and dashes (no arguments checks the changed files, paths are accepted too), `yarn lint` at the repo root checks the Gatsby side. Tests: `yarn --cwd sites test` for the page logic and `yarn --cwd studio test` for the studio libs.
+13. Write `STATUS.md`, commit as `add the identity case study for <brand>`, merge as described above.
+
+`pipeline.mjs` flags: `--only a,b`, `--from step`, `--skip a,b`. Steps in order: fonts, colors, logos, logo-export, favicon, logo-test, assets, animate, brandbook, zip, manifest, validate. The three steps marked brand specific (`logos`, `assets`, `brandbook`) run `brands/<slug>/build-logos.mjs`, `build-assets.mjs` and `build-brandbook.mjs`, and are skipped with a message when the file is missing.
+
+### Lessons from Skibka
+
+- A glyph reused with `<use>` must be defined inside `<defs>`, or it is also drawn once at the origin and leaves a stray mark in the corner of the logo.
+- svgo removes `width` and `height` from nested `<svg>` elements; use a `<g transform>` to place a logo inside a figure.
+- `mix-blend-mode` and large `feTurbulence` overlays in a PDF turn every page into a raster (36 MB for 27 pages). Flat vector pages came to 3.3 MB.
+- Chromium embeds a variable font as Type 3; pinned instances embed as CID TrueType. The fonts step makes them.
+- Specificity: base rules such as `.brand p{margin:0}` beat component classes; write base rules with `:where(...)`.
+- Text on the page is never rotated or filtered; apply texture and tilt to a background layer behind the content.

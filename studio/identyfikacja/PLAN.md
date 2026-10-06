@@ -3,7 +3,7 @@
 Brief: `/home/adrian/root/side_projects/briefs/wzornik-identyfikacja.md`. Run rules: `/home/adrian/root/side_projects/briefs/agent-runs/wzornik-common.md`. Recon, tooling and the parallel build rules: `NOTES.md`. Mode: autonomous, no checkpoint, every decision worth Adrian's review is under "Decisions for Adrian" below. Written on 2026-10-06.
 
 ```
-- [ ] F foundation, with the first brand end to end (B1 Skibka)
+- [x] F foundation, with the first brand end to end (B1 Skibka)
 - [ ] B2 Nośna
 - [ ] B3 Rzut
 - [ ] B4 Klamra
@@ -264,3 +264,9 @@ Taken without asking, in the autonomous mode. Brand agents add their own to `STA
 11. **Size budget:** about 12 MB published per brand, 16 MB hard cap, so the extension stays well under 300 MB with the other two briefs.
 12. **Case studies are Polish only** and `noindex`, like Trzask. The English client page links to them and says they are in Polish.
 13. **Publishing:** the six case studies are linked from `#wzornik` as one block "Identyfikacja wizualna" and from the `/wzornik/` index, in the publication step only. The run stops after the local merge into `rebrand-2026`; nothing is pushed because a push deploys the public site.
+14. **Files carry the slug**: `logo/skibka-primary.svg`, not `logo/primary.svg`, so a download from any brand is recognisable outside its folder. The brand book is `<slug>-brandbook.pdf` and the package `<slug>-identyfikacja.zip`.
+15. **Logo lockups.** `primary` is the stamp with the name below, `symbol` the stamp alone, `horizontal` and `vertical` the two arrangements of symbol and wordmark, `mono-black` the one colour print version, `negative` the version for dark grounds.
+16. **Skibka ring text is Karla 700**, not Young Serif: the serif outlines on a small ring were too heavy and ran together; the wordmark still uses Young Serif. The B to K spacing in the ring is slightly wide and was left.
+17. **Skibka is 15.3 MB published** (budget 12 MB, cap 16 MB). The ZIP is 6.0 MB of it. Social and og PNGs go through `lib/png.mjs` (`quantizePng`, 128 colours, ffmpeg palette), mockups are JPEG at quality 80, and the brand book is flat vector (3.3 MB) after a grain overlay made it 36 MB. The other brands should aim for 12 MB or less.
+18. **Print PDFs are flat**: no filters or blend modes, texture on screen files only.
+19. **Studio tests**: `yarn --cwd studio test` runs `node --test` on the libs (8 tests); the page logic is tested by vitest in `sites/`.
