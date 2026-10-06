@@ -239,7 +239,7 @@ export const extras = {
     'Rogi zawsze zaokrąglone, promień od 20 do 40 pikseli, nigdy ostre.',
     'Pas sekcji idzie łukiem, nie linijką. Tekst nigdy nie leży na łuku.',
     'Jeden akapit na jedną kartę, kolor tła z palety, ciemny tekst na jasnym lub jasny na ciemnym.',
-    'Pasy mają trzy kolory na raz, nigdy więcej, a ich kolejność zawsze zaczyna się od pomarańczy.',
+    'W logo pasy mają trzy kolory i zawsze zaczynają się od pomarańczy. W grafice może ich być do pięciu.',
   ],
   photoStyle:
     'Zdjęć w tym projekcie nie generujemy. Opis stylu dla fotografa: ciepłe popołudniowe światło, lekko ziarniste ujęcia z poziomu kierownicy. Rowery stoją pod ścianą warsztatu, na stojaku do naprawy albo na ulicy z kocimi łbami, a dłonie mechanika są widoczne w kadrze. Kolory zbliżamy do palety: kremowe ściany, brązowy metal, pomarańczowe akcenty. Bez chłodnych filtrów, bez sportowych póz i bez przesadnej ostrości.',

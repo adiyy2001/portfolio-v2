@@ -75,6 +75,10 @@ const picks = [
         </li>
       ))}
     </ul>
+    <a class="route__cta" href={portfolio('/dla-klienta/#wzornik')}>
+      <span class="long">Zobacz ofertę</span>
+      <span class="short">Oferta</span>
+    </a>
   </nav>
 
   <main id="main" tabindex="-1">
@@ -354,7 +358,10 @@ const picks = [
               Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają
               WCAG AA, a elementy dekoracyjne są oznaczone osobno.
             </p>
-            <ContrastTable pairs={manifest.contrast} />
+            <details class="fold">
+              <summary>Tabela kontrastu, {manifest.contrast.length} par</summary>
+              <ContrastTable pairs={manifest.contrast} />
+            </details>
           </div>
         </div>
 
@@ -475,10 +482,11 @@ const picks = [
               loop
               playsinline
               preload="metadata"
+              poster={asset('figures/animation-poster.jpg')}
               width="1080"
               height="1080">
-              <source src={`${asset('animation/wolnobieg-logo.webm')}#t=2.9`} type="video/webm" />
-              <source src={`${asset('animation/wolnobieg-logo.mp4')}#t=2.9`} type="video/mp4" />
+              <source src={asset('animation/wolnobieg-logo.webm')} type="video/webm" />
+              <source src={asset('animation/wolnobieg-logo.mp4')} type="video/mp4" />
             </video>
           </div>
         </div>
@@ -583,6 +591,14 @@ const picks = [
         <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
           Zobacz ofertę dla klientów
         </a>
+        <img
+          class="cta__sign"
+          src={asset('logo/wolnobieg-symbol.svg')}
+          alt=""
+          width="244"
+          height="244"
+          loading="lazy"
+        />
       </div>
     </section>
   </main>

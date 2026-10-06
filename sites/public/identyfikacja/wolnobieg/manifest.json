@@ -8,11 +8,11 @@
     "city": "Gdańsk"
   },
   "base": "/wzornik/identyfikacja/wolnobieg/",
-  "totalBytes": 7712616,
+  "totalBytes": 7740469,
   "totalHuman": "7.4 MB",
   "zip": {
     "path": "wolnobieg-identyfikacja.zip",
-    "bytes": 3223243
+    "bytes": 3222665
   },
   "groups": [
     {
@@ -106,7 +106,7 @@
       "id": "icons",
       "title": "Ikony",
       "count": 13,
-      "bytes": 6685,
+      "bytes": 7605,
       "formats": "SVG",
       "files": [
         "icons/svg/wolnobieg-icon-adres.svg",
@@ -128,7 +128,7 @@
       "id": "print",
       "title": "Druk",
       "count": 2,
-      "bytes": 89324,
+      "bytes": 89323,
       "formats": "PDF",
       "files": [
         "print/wolnobieg-business-card.pdf",
@@ -139,7 +139,7 @@
       "id": "social",
       "title": "Media społecznościowe",
       "count": 4,
-      "bytes": 254331,
+      "bytes": 254381,
       "formats": "PNG, PNG 1080 px",
       "files": [
         "social/wolnobieg-avatar.png",
@@ -187,7 +187,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1869033,
+      "bytes": 1867842,
       "formats": "PDF",
       "files": [
         "wolnobieg-brandbook.pdf"
@@ -197,7 +197,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 3223243,
+      "bytes": 3222665,
       "formats": "ZIP",
       "files": [
         "wolnobieg-identyfikacja.zip"
@@ -206,10 +206,11 @@
     {
       "id": "meta",
       "title": "Pozostałe",
-      "count": 7,
-      "bytes": 56428,
-      "formats": "SVG, PNG, PNG 1200 px",
+      "count": 8,
+      "bytes": 85081,
+      "formats": "JPG, SVG, PNG, PNG 1200 px",
       "files": [
+        "figures/animation-poster.jpg",
         "figures/clearspace.svg",
         "figures/direction-kolo.svg",
         "figures/direction-odznaka.svg",
@@ -286,6 +287,12 @@
       "group": "favicon",
       "width": 400,
       "height": 400
+    },
+    {
+      "path": "figures/animation-poster.jpg",
+      "bytes": 28653,
+      "type": "jpg",
+      "group": "meta"
     },
     {
       "path": "figures/clearspace.svg",
@@ -381,7 +388,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-detka.svg",
-      "bytes": 322,
+      "bytes": 332,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -389,7 +396,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-dzwonek.svg",
-      "bytes": 286,
+      "bytes": 306,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -453,7 +460,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-zebatka.svg",
-      "bytes": 424,
+      "bytes": 746,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -469,7 +476,7 @@
     },
     {
       "path": "icons/wolnobieg-icons.svg",
-      "bytes": 2764,
+      "bytes": 3332,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -824,7 +831,7 @@
     },
     {
       "path": "print/wolnobieg-business-card.pdf",
-      "bytes": 53150,
+      "bytes": 53149,
       "type": "pdf",
       "group": "print",
       "pages": 2,
@@ -863,7 +870,7 @@
     },
     {
       "path": "social/wolnobieg-post-1.png",
-      "bytes": 65807,
+      "bytes": 65914,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -872,7 +879,7 @@
     },
     {
       "path": "social/wolnobieg-post-2.png",
-      "bytes": 69932,
+      "bytes": 70048,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -881,7 +888,7 @@
     },
     {
       "path": "social/wolnobieg-post-3.png",
-      "bytes": 61341,
+      "bytes": 61168,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -890,7 +897,7 @@
     },
     {
       "path": "wolnobieg-brandbook.pdf",
-      "bytes": 1869033,
+      "bytes": 1867842,
       "type": "pdf",
       "group": "brandbook",
       "pages": 28,
@@ -905,7 +912,7 @@
     },
     {
       "path": "wolnobieg-identyfikacja.zip",
-      "bytes": 3223243,
+      "bytes": 3222665,
       "type": "zip",
       "group": "zip"
     }

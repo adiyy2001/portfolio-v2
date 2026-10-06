@@ -56,7 +56,7 @@ sheet('Kierunek', `${titleBlock('Kierunek', content.direction.title)}<div class=
 
 sheet('Strategia', `${titleBlock('Strategia', 'Dla kogo i o czym', content.strategy.audience)}<div class="coins">${content.strategy.values.map((value, i) => `<article class="coin c${i}"><h3>${value.title}</h3><p>${value.text}</p></article>`).join('')}</div>`);
 
-sheet('Osobowość', `${arcs('tr', { width: 50, gap: 20, start: 150, colors: [c.musztarda, c.pomarancz, c.krem] })}${titleBlock('Strategia', 'Osobowość i pozycjonowanie')}<div class="cols"><div class="prose"><p class="big">Marka jest: ${content.strategy.personality.join(', ')}.</p><p>Unikamy: ${content.strategy.avoids}.</p></div><blockquote>${content.strategy.positioning}</blockquote></div>`, { tone: 'dark' });
+sheet('Osobowość', `${arcs('tr', { width: 30, gap: 12, start: 40, colors: [c.musztarda, c.pomarancz, c.krem] })}${titleBlock('Strategia', 'Osobowość i pozycjonowanie')}<div class="cols persona"><div class="prose"><p class="big">Marka jest: ${content.strategy.personality.join(', ')}.</p><p>Unikamy: ${content.strategy.avoids}.</p></div><blockquote>${content.strategy.positioning}</blockquote></div>`, { tone: 'dark' });
 
 sheet('Proces', `${titleBlock('Proces', 'Trzy kierunki, jeden wybrany', content.process.intro)}<div class="three picks">${[...content.process.rejected, { title: content.process.chosen.title, reason: content.process.chosen.reason, thumb: 'figures/direction-kolo.svg', chosen: true }].slice(0, 3).map(item => `<article class="pick ${item.chosen ? 'chosen' : ''}"><div class="disc"><img src="${svgUri(item.thumb)}" alt=""></div><h3>${item.title}</h3><p>${item.reason}</p></article>`).join('')}</div>`);
 
@@ -86,12 +86,12 @@ const misuse = [
 ];
 sheet('Czego nie robić', `${titleBlock('Logo', 'Czego nie robimy')}<div class="four">${misuse.map(([text, style]) => `<figure class="misuse"><div>${logoIn('symbol', {}, `height:260px;width:auto;${style}`)}</div><figcaption>${text}</figcaption></figure>`).join('')}</div>`, { tone: 'brown' });
 
-sheet('Paleta', `${titleBlock('Kolor', 'Paleta', 'Trzynaście kolorów z lat siedemdziesiątych: pomarańcz, musztarda, brąz i awokado na kremie. Wartości CMYK są przybliżone, do druku zamów próbę.')}<div class="swatches">${palette.map(entry => `<figure><div class="chip-c" style="background:${entry.hex}"></div><figcaption><b>${entry.name}</b><span>${entry.hex}</span><span>${entry.rgbCss}</span><span>${entry.cmykApproxText}</span><em>${entry.role}</em></figcaption></figure>`).join('')}</div>`);
+sheet('Paleta', `${titleBlock('Kolor', 'Paleta', 'Trzynaście kolorów. Wartości CMYK są przybliżone, do druku zamów próbę.')}<div class="swatches">${palette.map(entry => `<figure><div class="chip-c" style="background:${entry.hex}"></div><figcaption><b>${entry.name}</b><span>${entry.hex}</span><span>${entry.rgbCss}</span><span>${entry.cmykApproxText}</span><em>${entry.role}</em></figcaption></figure>`).join('')}</div>`);
 
 const contrastRows = rows => `<table class="contrast"><thead><tr><th>Użycie</th><th>Tekst</th><th>Tło</th><th>Stosunek</th><th>Poziom</th></tr></thead><tbody>${rows.map(row => `<tr><td>${row.use}</td><td><i style="background:${row.fgHex}"></i>${colorName(row.fg)}</td><td><i style="background:${row.bgHex}"></i>${colorName(row.bg)}</td><td>${row.ratio.toFixed(1)}:1</td><td>${row.kind === 'decorative' ? 'dekoracja' : row.level}</td></tr>`).join('')}</tbody></table>`;
 const contrastSplit = Math.ceil(contrast.length / 2);
 sheet('Kontrast', `${titleBlock('Kolor', 'Kontrast tekstu')}${contrastRows(contrast.slice(0, contrastSplit))}`, { tone: 'sand' });
-sheet('Kontrast, ciąg dalszy', `${titleBlock('Kolor', 'Kontrast, ciąg dalszy', 'Wszystkie pary użyte w projekcie. Tekst zwykły wymaga 4,5:1, duży napis i elementy interfejsu 3:1, dekoracja nie niesie tekstu.')}${contrastRows(contrast.slice(contrastSplit))}`, { tone: 'sand' });
+sheet('Kontrast, ciąg dalszy', `${titleBlock('Kolor', 'Kontrast, ciąg dalszy', 'Tekst zwykły wymaga 4,5:1, duży napis i elementy interfejsu 3:1, dekoracja nie niesie tekstu.')}${contrastRows(contrast.slice(contrastSplit))}`, { tone: 'sand' });
 
 const shares = [['krem-jasny', 36], ['brazowy', 20], ['pomarancz', 18], ['musztarda', 12], ['awokado', 8], ['kakao', 6]];
 sheet('Proporcje', `${titleBlock('Kolor', 'Proporcje użycia', 'Krem niesie stronę, brąz niesie tekst, pomarańcz i musztarda dają ciepło pasów. Awokado pojawia się rzadko, jak detal na ramie.')}<div class="bar">${shares.map(([id, w]) => `<div style="flex:${w};background:${c[id]}"></div>`).join('')}</div><ul class="legend">${shares.map(([id, w]) => `<li><i style="background:${c[id]}"></i>${colorName(id)} ${w}%</li>`).join('')}</ul>`, { tone: 'orange' });
@@ -149,13 +149,13 @@ ${toneCss}
 .page.cover{background:${c.pomarancz};padding:0;display:flex;align-items:center;gap:90px;padding:0 150px}
 .cover-badge{width:500px;flex:none;position:relative}
 .cover-text{position:relative}
-.cover-text h1{font-size:130px;line-height:1.1;margin:20px 0 34px;white-space:nowrap;transform:rotate(-4deg);transform-origin:0 100%}
+.cover-text h1{font-size:130px;line-height:1.2;margin:20px 0 34px;white-space:nowrap;transform:rotate(-4deg);transform-origin:0 100%}
 .cover-text .lead{max-width:620px;margin-bottom:18px}
 .cover-text .small{max-width:560px}
 .cover .kicker,.cover .small{color:${c.kakao}}
 .kicker{display:none;font:800 20px/1 'Wolnobieg Text';letter-spacing:.14em;text-transform:uppercase;color:var(--kick);margin-bottom:22px}
 .cover .kicker,.plate .kicker{display:block}
-h2{font-size:80px;line-height:1.08;margin-bottom:26px;color:var(--head);transform:rotate(-2deg);transform-origin:0 100%}
+h2{font-size:80px;line-height:1.22;margin-bottom:22px;color:var(--head);transform:rotate(-2deg);transform-origin:0 100%}
 h3{font-size:34px;line-height:1.25;margin-bottom:14px;color:${c.brazowy};text-wrap:balance}
 .lead{font:600 34px/1.45 'Wolnobieg Text';max-width:1300px}
 .head{margin-bottom:44px;max-width:1480px}
@@ -164,6 +164,10 @@ h3{font-size:34px;line-height:1.25;margin-bottom:14px;color:${c.brazowy};text-wr
 .prose p{font:400 28px/1.42 'Wolnobieg Text';margin-bottom:16px;max-width:900px}
 .prose.wide p{max-width:1400px;font:600 50px/1.45 'Wolnobieg Text'}
 .big{font:400 48px/1.2 'Wolnobieg Display'!important;color:${c.musztarda}}
+.persona .prose p{font-size:34px;max-width:900px}
+.persona .big{font-size:60px!important}
+.persona{grid-template-columns:1fr 1.3fr;gap:70px}
+.persona blockquote{font-size:50px}
 .facts{margin:0}
 .facts div{border-top:3px solid var(--rule);padding:18px 0 22px}
 .facts dt{font:800 18px/1 'Wolnobieg Text';letter-spacing:.12em;text-transform:uppercase;color:var(--kick);margin-bottom:10px}
@@ -175,7 +179,7 @@ h3{font-size:34px;line-height:1.25;margin-bottom:14px;color:${c.brazowy};text-wr
 .tags dt{font:800 17px/1 'Wolnobieg Text';letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
 .tags dd{margin:0;font:600 30px/1.35 'Wolnobieg Text'}
 .words{display:flex;flex-direction:column;gap:0}
-.words span{font:400 130px/1.05 'Wolnobieg Display';color:${c.brazowy};transform:rotate(-4deg);transform-origin:0 100%}
+.words span{font:400 130px/1.16 'Wolnobieg Display';color:${c.brazowy};transform:rotate(-4deg);transform-origin:0 100%}
 .words span:nth-child(2){padding-left:70px}
 .words span:nth-child(3){padding-left:140px}
 blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid ${c.pomarancz};padding-left:50px}
@@ -185,7 +189,7 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 .card{background:var(--card);color:${c.kakao};padding:38px 42px;position:relative;border-radius:0 80px 0 80px}
 .card.leaf1{border-radius:80px 0 80px 0}
 .card p{font:400 28px/1.5 'Wolnobieg Text'}
-.three .card{min-height:520px}
+.three .card{min-height:0}
 .three-stack .card{min-height:0}
 .card h3{font-size:38px}
 .coins{display:grid;grid-template-columns:repeat(3,1fr);gap:46px;margin-top:10px}
@@ -200,30 +204,30 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 .pick.chosen .disc{box-shadow:0 0 0 10px ${c.pomarancz},0 0 0 20px ${c.musztarda}}
 .pick p{font:400 27px/1.45 'Wolnobieg Text'}
 .stage{height:520px;display:grid;place-items:center;border-radius:0 120px 0 120px}
-.stage.small{height:620px}
+.stage.small{height:500px}
 .caption{font:600 30px/1.5 'Wolnobieg Text';margin-top:30px;max-width:1500px}
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 .tiles figure{margin:0;height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;position:relative;border-radius:0 80px 0 80px;overflow:hidden}
 .tiles figure:nth-child(2n){border-radius:80px 0 80px 0}
 .tiles figcaption{position:absolute;left:30px;bottom:22px;font:800 26px/1 'Wolnobieg Text'}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-.pair figure{margin:0;background:${c['krem-jasny']};color:${c.kakao};height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;border-radius:0 100px 0 100px}
+.pair figure{margin:0;background:${c['krem-jasny']};color:${c.kakao};height:470px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;border-radius:0 100px 0 100px}
 .pair figure:last-child{border-radius:100px 0 100px 0}
 .pair img{width:88%}
 .pair figcaption{font:800 30px/1 'Wolnobieg Text'}
 .misuse{margin:0}
 .misuse div{height:420px;background:${c.krem};display:grid;place-items:center;overflow:hidden;border-radius:50%}
 .misuse figcaption{font:600 32px/1.3 'Wolnobieg Text';margin-top:22px;text-align:center}
-.swatches{display:grid;grid-template-columns:repeat(7,1fr);gap:30px 20px}
+.swatches{display:grid;grid-template-columns:repeat(7,1fr);gap:24px 20px}
 .swatches figure{margin:0}
-.chip-c{width:96px;aspect-ratio:1;border-radius:50%;box-shadow:inset 0 0 0 3px ${c.kakao}}
-.swatches figcaption{display:grid;gap:3px;padding-top:12px;font:400 17px/1.25 'Wolnobieg Text'}
-.swatches b{font:400 24px/1.1 'Wolnobieg Display'}
-.swatches em{font:600 16px/1.25 'Wolnobieg Text';color:${c.kawa};font-style:normal}
-.contrast{width:100%;border-collapse:collapse;font:400 20px/1.15 'Wolnobieg Text'}
-.contrast th{text-align:left;font:800 16px/1 'Wolnobieg Text';letter-spacing:.1em;text-transform:uppercase;padding:0 10px 10px;color:${c.kakao}}
-.contrast td{padding:5px 10px;border-top:2px solid ${c.tyton}}
-.contrast i{display:inline-block;width:20px;height:20px;border-radius:50%;margin-right:10px;vertical-align:-3px;border:2px solid ${c.kakao}}
+.chip-c{width:90px;aspect-ratio:1;border-radius:50%;box-shadow:inset 0 0 0 3px ${c.kakao}}
+.swatches figcaption{display:grid;gap:3px;padding-top:12px;font:400 20px/1.3 'Wolnobieg Text'}
+.swatches b{font:400 28px/1.25 'Wolnobieg Display'}
+.swatches em{font:600 19px/1.25 'Wolnobieg Text';color:${c.kawa};font-style:normal}
+.contrast{width:100%;border-collapse:collapse;font:400 24px/1.15 'Wolnobieg Text'}
+.contrast th{text-align:left;font:800 19px/1 'Wolnobieg Text';letter-spacing:.1em;text-transform:uppercase;padding:0 10px 10px;color:${c.kakao}}
+.contrast td{padding:4px 10px;border-top:2px solid ${c.tyton}}
+.contrast i{display:inline-block;width:24px;height:24px;border-radius:50%;margin-right:10px;vertical-align:-3px;border:2px solid ${c.kakao}}
 .bar{display:flex;height:350px;border:6px solid ${c.kakao};border-radius:175px;overflow:hidden}
 .legend{list-style:none;margin:44px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:20px 40px;font:800 30px/1 'Wolnobieg Text'}
 .legend li{display:flex;align-items:center;gap:14px}
@@ -259,17 +263,17 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 .tone b{display:inline-block;margin-right:12px;padding:5px 12px;border-radius:99px;font:800 18px/1 'Wolnobieg Text';letter-spacing:.1em;text-transform:uppercase;color:${c['krem-jasny']};background:${c.kawa};text-decoration:none}
 .tone .yes b{background:${c.oliwka}}
 .mocks{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:600px}
-.mocks .mock{height:440px;width:auto;border-radius:0 40px 0 40px;display:block}
-.mocks.wide .mock{height:520px}
+.mocks .mock{height:430px;width:auto;border-radius:0 40px 0 40px;display:block}
+.mocks.wide .mock{height:470px}
 .end{display:grid;grid-template-columns:1.1fr 1fr;gap:70px;align-items:center}
 .toc-left{position:absolute!important;left:140px;top:150px;width:700px}
-.toc-left h2{font-size:104px;line-height:1.05;color:${c.krem}}
+.toc-left h2{font-size:104px;line-height:1.2;color:${c.krem}}
 .toc-bike{width:560px;margin-top:70px}
-.toc{position:absolute!important;right:150px;top:150px;width:900px;margin:0;padding:0;list-style:none;display:grid;gap:12px}
-.toc li{display:grid;grid-template-columns:70px 1fr auto;align-items:center;gap:26px;padding:8px 36px 8px 8px;border-radius:99px;background:${c['krem-jasny']};color:${c.kakao}}
+.toc{position:absolute!important;right:150px;top:124px;width:900px;margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.toc li{display:grid;grid-template-columns:70px 1fr auto;align-items:center;gap:26px;padding:5px 36px 5px 5px;border-radius:99px;background:${c['krem-jasny']};color:${c.kakao}}
 .toc li.t1{background:${c.musztarda}}
 .toc li.t2{background:${c.pomarancz}}
-.toc li b{display:grid;place-items:center;width:62px;height:62px;border-radius:50%;background:${c.brazowy};color:${c.krem};font:400 28px/1 'Wolnobieg Display'}
+.toc li b{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:${c.brazowy};color:${c.krem};font:400 28px/1 'Wolnobieg Display'}
 .toc li span{font:400 38px/1 'Wolnobieg Display'}
 .toc li i{font:800 24px/1 'Wolnobieg Text';font-style:normal}
 `;

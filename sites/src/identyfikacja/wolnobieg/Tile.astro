@@ -14,9 +14,9 @@ const meta = identityBrands.find(item => item.slug === 'wolnobieg')!;
   <span class="wolnobieg-tile__arcs" aria-hidden="true"></span>
   <img
     class="wolnobieg-tile__logo"
-    src={assetUrl('wolnobieg', 'logo/wolnobieg-primary.svg')}
+    src={assetUrl('wolnobieg', 'logo/wolnobieg-symbol.svg')}
     alt=""
-    width="260"
+    width="120"
     height="120"
   />
   <span class="wolnobieg-tile__style">{meta.style}</span>
@@ -38,7 +38,7 @@ const meta = identityBrands.find(item => item.slug === 'wolnobieg')!;
     overflow: hidden;
     color: #3f2411;
     text-decoration: none;
-    background: #f6e8c8;
+    background: #ec7424;
     border-radius: 28px;
     box-shadow: 0 10px 20px -12px rgba(63, 36, 17, 0.5);
     isolation: isolate;
@@ -60,18 +60,18 @@ const meta = identityBrands.find(item => item.slug === 'wolnobieg')!;
     border-radius: 50%;
     background: radial-gradient(
       circle,
-      #f6e8c8 0 38%,
-      #ec7424 38% 50%,
-      #f6e8c8 50% 54%,
-      #e9a81d 54% 66%,
-      #f6e8c8 66% 70%,
-      #5b2f14 70% 82%,
+      #fbf3df 0 38%,
+      #e9a81d 38% 50%,
+      #ec7424 50% 54%,
+      #5b2f14 54% 66%,
+      #ec7424 66% 70%,
+      #fbf3df 70% 82%,
       transparent 82%
     );
   }
 
   .wolnobieg-tile__logo {
-    width: 170px;
+    width: 110px;
     height: auto;
     align-self: flex-start;
     margin-bottom: 8px;

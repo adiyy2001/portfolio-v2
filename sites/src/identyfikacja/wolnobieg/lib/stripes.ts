@@ -190,7 +190,7 @@ export const composerStripes = (input: StripeParams): DrawnStripe[] => {
 };
 
 export const wearFilter =
-  '<filter id="wear" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 -3.6" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>';
+  '<filter id="wear" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.03 0.22" numOctaves="3" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 8 -2.35" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>';
 
 export const composerSvg = (input: StripeParams) => {
   const params = clampParams(input);

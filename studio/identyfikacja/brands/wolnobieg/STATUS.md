@@ -86,3 +86,23 @@ Scores before: craft 3, legibility and accessibility 3, sales value 3, coherence
 Not done: thicker icons (optional, not blocking).
 
 Checks: `validate.mjs` 64 of 64, `guard.mjs` 0 problems, no en or em dashes, `yarn --cwd sites run check` 0 errors, `yarn --cwd sites test` 1260 passed, `yarn --cwd sites build` 185 pages, `yarn --cwd studio test` ok, `screens.mjs` 0 problems at 390 and 1440 px.
+
+## Review round 2 repairs
+
+Scores before: craft 3, legibility and accessibility 3, fidelity 4, coherence 4, sales value 4, distinctness 4, fit 5. Fixed:
+
+- Diacritic collisions: line height raised to 1.15 to 1.32 on every Rammetto display heading (page headings, hero, CTA, keywords, pills, brand book titles, cover, TOC, social post headlines).
+- Brand book: the 10th TOC pill ends at about y 830 of 1080, clear of the frame and footer; cards on pages 8, 11 and 12 end well above the footer; page 27 mockups fit the content margins (page 26 shortened too); page 6 has a small corner ring away from the page number and larger type, so the lower third is fuller; palette page and contrast tables use 20 to 24 px type (pages 14 to 16) and the palette lead is one line.
+- Icons redrawn: dętka (tube ring with a valve stem), dzwonek (side view bell with a lever on a handlebar tube and sound marks), zębatka (trapezoid teeth from the same `cogPath` as the sign).
+- Page: palette grid is five columns so names do not touch; social grid has equal gaps and the third post stays inside the content edge (borders instead of outer shadows); the files card is full width; the CTA ring holds the badge, the CTA text column was widened.
+- Accessibility: focus outline is cream on the dark top bar, footer, brown and olive bands and the skip link (checked with Tab); contrast table sits in a closed details element.
+- Sales: "Zobacz ofertę" pill in the sticky nav (short "Oferta" on a phone); video has a poster (`figures/animation-poster.jpg`, made by `build-assets.mjs` with ffmpeg from the MP4 when it exists) and the `#t` fragment is gone; the composer preview stretches to the control panel height.
+- Fidelity: a light worn print texture on every band (speckles in cream on colour, brown on cream and mustard), the composer wear filter is now soft streaks (about 10 percent loss) instead of dotted noise.
+- Coherence: the layout rule now says three colours in the logo and up to five in graphics, matching the composer presets; the index tile is orange with the badge so it holds its own next to the other five.
+- ZIP: README line "Jako favicon użyj pliku favicon.svg, a nie pełnego sygnetu" (small change in the shared `studio/identyfikacja/scripts/zip.mjs`, other brands pick it up on their next ZIP build).
+
+Not done: the simplified sign on a browser tab mockup, ZIP with mockups and animation (convention says no, the page states it), regenerated index boards (shared).
+
+Known and harmless: `screens.mjs` reports one `net::ERR_ABORTED` for the WebM, the browser cancels the first range request of the video after reading the metadata; the video loads (readyState 4).
+
+Checks: `validate.mjs` 64 of 64, `guard.mjs` 0 problems, no en or em dashes, `yarn --cwd sites run check` 0 errors, `yarn --cwd sites test` 1260 passed, `yarn --cwd sites build` 185 pages, `yarn --cwd studio test` ok, `screens.mjs` no console errors, no overflow, one h1 at 390 and 1440 px, brand book 28 pages.

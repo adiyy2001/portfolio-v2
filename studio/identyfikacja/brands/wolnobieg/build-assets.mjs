@@ -1,4 +1,5 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { PDFDocument } from 'pdf-lib';
 import { join } from 'node:path';
 import { withBrowser, htmlToImage, htmlToPdf } from '../../lib/browser.mjs';
@@ -62,6 +63,12 @@ await withBrowser(async browser => {
   await htmlToPdf(browser, { outDir, name: 'letterhead-print', html: letterheadPrintHtml(), out: pub(file.letterheadPdf), width: 794, height: 1123 });
   console.log(`  ${file.letterheadPdf}`);
 });
+
+const film = pub(file.mp4);
+if (existsSync(film)) {
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', '2.9', '-i', film, '-frames:v', '1', '-vf', 'scale=720:720', '-q:v', '4', pub('figures/animation-poster.jpg')]);
+  console.log('  figures/animation-poster.jpg');
+}
 
 if (errors.length) {
   console.error(errors.join('\n'));
