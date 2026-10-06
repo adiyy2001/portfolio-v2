@@ -1,0 +1,98 @@
+{
+  "slug": "cuvee",
+  "name": "Cuvée",
+  "styleId": "I4",
+  "style": "Luksusowy edytorial",
+  "trade": "butikowy hotel z winnicą",
+  "city": "Dolny Śląsk",
+  "themeColor": "#15110E",
+  "appIconBackground": "#15110E",
+  "testBackground": { "light": "kosc", "dark": "czern" },
+  "palette": [
+    { "id": "czern", "name": "Czerń winnicy", "group": "primary", "hex": "#15110E", "role": "okładka, tekst, znak" },
+    { "id": "kosc", "name": "Kość słoniowa", "group": "primary", "hex": "#F3ECDD", "role": "tło strony, znak na czerni" },
+    { "id": "mosiadz", "name": "Mosiądz", "group": "accent", "hex": "#B08D57", "role": "linia, kropka i napis na czerni" },
+    { "id": "mosiadz-ciemny", "name": "Mosiądz ciemny", "group": "accent", "hex": "#7A5A2A", "role": "akcent w tekście na kości" },
+    { "id": "szampan", "name": "Szampan", "group": "accent", "hex": "#D7BE8D", "role": "jasny akcent w tekście na czerni" },
+    { "id": "papier", "name": "Papier", "group": "neutral", "hex": "#FAF6EC", "role": "etykiety, karty i papier firmowy" },
+    { "id": "len", "name": "Len", "group": "neutral", "hex": "#E5DCC8", "role": "tło sekcji i tabel" },
+    { "id": "kamien", "name": "Kamień", "group": "neutral", "hex": "#C9BFA8", "role": "cienkie linie, bez tekstu" },
+    { "id": "mgla", "name": "Mgła", "group": "neutral", "hex": "#8C8472", "role": "linie pomocnicze, bez tekstu" },
+    { "id": "wegiel", "name": "Węgiel", "group": "neutral", "hex": "#4A443A", "role": "tekst drugorzędny" }
+  ],
+  "iconNames": ["klucz", "lozko", "kieliszek", "grono", "butelka", "filizanka", "kapiel", "dzwonek", "parking", "schody", "wzgorze", "spokoj"],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki i znak",
+      "family": "Noto Serif Display",
+      "css": "Cuvee Display",
+      "dir": "notoserifdisplay",
+      "file": "NotoSerifDisplay[wdth,wght].ttf",
+      "keepFeatures": ["kern", "liga", "smcp", "c2sc", "onum", "lnum", "case", "ccmp", "locl", "mark", "mkmk"],
+      "instances": [
+        { "weight": 200, "style": "normal", "axes": { "wght": 200, "wdth": 100 } },
+        { "weight": 300, "style": "normal", "axes": { "wght": 300, "wdth": 100 } },
+        { "weight": 400, "style": "normal", "axes": { "wght": 400, "wdth": 100 } },
+        { "weight": 500, "style": "normal", "axes": { "wght": 500, "wdth": 100 } }
+      ]
+    },
+    {
+      "id": "display-italic",
+      "role": "nagłówki, kursywa",
+      "family": "Noto Serif Display",
+      "css": "Cuvee Display",
+      "dir": "notoserifdisplay",
+      "file": "NotoSerifDisplay-Italic[wdth,wght].ttf",
+      "keepFeatures": ["kern", "liga", "smcp", "c2sc", "onum", "lnum", "case", "ccmp", "locl", "mark", "mkmk"],
+      "instances": [
+        { "weight": 300, "style": "italic", "axes": { "wght": 300, "wdth": 100 } },
+        { "weight": 400, "style": "italic", "axes": { "wght": 400, "wdth": 100 } }
+      ]
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Source Serif 4",
+      "css": "Cuvee Text",
+      "dir": "sourceserif4",
+      "file": "SourceSerif4[opsz,wght].ttf",
+      "keepFeatures": ["kern", "liga", "smcp", "c2sc", "onum", "lnum", "tnum", "case", "ccmp", "locl", "mark", "mkmk"],
+      "instances": [
+        { "weight": 400, "style": "normal", "axes": { "wght": 400, "opsz": 16 } },
+        { "weight": 600, "style": "normal", "axes": { "wght": 600, "opsz": 16 } }
+      ]
+    },
+    {
+      "id": "text-italic",
+      "role": "tekst, kursywa",
+      "family": "Source Serif 4",
+      "css": "Cuvee Text",
+      "dir": "sourceserif4",
+      "file": "SourceSerif4-Italic[opsz,wght].ttf",
+      "keepFeatures": ["kern", "liga", "smcp", "c2sc", "onum", "lnum", "tnum", "case", "ccmp", "locl", "mark", "mkmk"],
+      "instances": [{ "weight": 400, "style": "italic", "axes": { "wght": 400, "opsz": 16 } }]
+    }
+  ],
+  "contrast": [
+    { "id": "czern-kosc", "fg": "czern", "bg": "kosc", "kind": "text", "use": "tekst podstawowy na tle strony" },
+    { "id": "czern-papier", "fg": "czern", "bg": "papier", "kind": "text", "use": "tekst na etykiecie i papierze firmowym" },
+    { "id": "czern-len", "fg": "czern", "bg": "len", "kind": "text", "use": "tekst w tabelach i na tle sekcji" },
+    { "id": "wegiel-kosc", "fg": "wegiel", "bg": "kosc", "kind": "text", "use": "tekst drugorzędny, podpisy" },
+    { "id": "wegiel-papier", "fg": "wegiel", "bg": "papier", "kind": "text", "use": "podpisy na kartach i etykietach" },
+    { "id": "wegiel-len", "fg": "wegiel", "bg": "len", "kind": "text", "use": "podpisy w tabelach" },
+    { "id": "mosiadz-ciemny-kosc", "fg": "mosiadz-ciemny", "bg": "kosc", "kind": "text", "use": "linki i akcenty w tekście na kości" },
+    { "id": "mosiadz-ciemny-papier", "fg": "mosiadz-ciemny", "bg": "papier", "kind": "text", "use": "akcenty na kartach i etykiecie" },
+    { "id": "kosc-czern", "fg": "kosc", "bg": "czern", "kind": "text", "use": "negatyw: tekst na okładce i w ciemnych sekcjach" },
+    { "id": "mosiadz-czern", "fg": "mosiadz", "bg": "czern", "kind": "text", "use": "napisy w kolorze mosiądzu na czerni" },
+    { "id": "szampan-czern", "fg": "szampan", "bg": "czern", "kind": "text", "use": "jasny akcent w tekście na czerni" },
+    { "id": "kamien-czern", "fg": "kamien", "bg": "czern", "kind": "text", "use": "tekst drugorzędny na czerni" },
+    { "id": "czern-mosiadz", "fg": "czern", "bg": "mosiadz", "kind": "text", "use": "czarny napis na polu w kolorze mosiądzu" },
+    { "id": "mosiadz-ciemny-kosc-ui", "fg": "mosiadz-ciemny", "bg": "kosc", "kind": "ui", "use": "obrys fokusu i ramki pól formularza" },
+    { "id": "mosiadz-czern-ui", "fg": "mosiadz", "bg": "czern", "kind": "ui", "use": "obrys fokusu na czerni" },
+    { "id": "czern-kosc-large", "fg": "czern", "bg": "kosc", "kind": "large", "use": "duże nagłówki" },
+    { "id": "mosiadz-kosc", "fg": "mosiadz", "bg": "kosc", "kind": "decorative", "use": "linia i kropka w logo na kości", "note": "elementy znaku i cienkie linie bez tekstu" },
+    { "id": "kamien-kosc", "fg": "kamien", "bg": "kosc", "kind": "decorative", "use": "włosowate linie podziału", "note": "dekoracja bez tekstu" },
+    { "id": "mgla-kosc", "fg": "mgla", "bg": "kosc", "kind": "decorative", "use": "linie pomocnicze i wzór szpaleru", "note": "dekoracja bez tekstu" }
+  ]
+}
