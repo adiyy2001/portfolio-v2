@@ -1,9 +1,12 @@
+import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { colorTable, contrastTable } from '../../lib/brand.mjs';
 import { htmlToPdf, withBrowser } from '../../lib/browser.mjs';
+import { ensureDir } from '../../lib/files.mjs';
 import { brand, c, content, contact, dataUri, extras, file, baseCss, readPub } from './theme.mjs';
 import { iconSvg } from './icons.mjs';
+import { glueHtml } from '../../../../sites/src/identyfikacja/klamra/lib/typography.ts';
 import { stickerSet, stickerSvg, stickerBox } from '../../../../sites/src/identyfikacja/klamra/lib/stickers.ts';
 
 const pub = path => join(brand.paths.pub, path);
@@ -52,7 +55,7 @@ sheet(
     ['Zastosowania', 25],
     ['Animacja i kontakt', 28],
   ]
-    .map(([name, page]) => `<li><span>${name}</span><span class="mono">${String(page).padStart(2, '0')}</span></li>`)
+    .map(([name, page], index) => `<li style="margin-left:${index * 52}px"><span>${name}</span><span class="mono">${String(page).padStart(2, '0')}</span></li>`)
     .join('')}</ol>`,
   { tone: 'yellow' },
 );
@@ -81,7 +84,7 @@ sheet(
 
 sheet(
   'Proces',
-  `${titleBlock('Proces', 'Trzy kierunki, jeden wybrany', content.process.intro)}<div class="three">${[
+  `${titleBlock('Proces', 'Trzy kierunki, jeden wybrany', content.process.intro)}<div class="four proces">${[
     ...content.process.rejected,
     { title: content.process.chosen.title, reason: content.process.chosen.reason, thumb: 'figures/direction-klamry.svg', chosen: true },
   ]
@@ -94,7 +97,7 @@ sheet(
 
 sheet(
   'Wybrany kierunek',
-  `${titleBlock('Proces', content.process.chosen.title, content.process.chosen.reason)}<div class="three">${content.process.refinement.map(step => `<article class="card"><h3>${step.title}</h3><p>${step.text}</p></article>`).join('')}</div>`,
+  `${titleBlock('Proces', content.process.chosen.title, content.process.chosen.reason)}<div class="lid">${content.process.refinement.map((step, i) => `<article class="patch p${i}"><h3>${step.title}</h3><p>${step.text}</p></article>`).join('')}</div>`,
   { tone: 'mint' },
 );
 
@@ -123,13 +126,19 @@ sheet(
 
 sheet(
   'Kerning',
-  `${titleBlock('Logo', 'Ręczny kerning', content.process.refinement[0].text)}<div class="pair"><figure><img src="${svgUri('figures/wordmark-default.svg')}" alt=""><figcaption class="tag">Bez korekty</figcaption></figure><figure><img src="${svgUri('figures/wordmark-kerned.svg')}" alt=""><figcaption class="tag">Po korekcie</figcaption></figure></div>`,
+  `${titleBlock('Logo', 'Ręczny kerning', content.process.refinement[0].text)}<figure class="overlay"><img src="${svgUri('figures/wordmark-overlay.svg')}" alt=""><figcaption class="small">${extras.kerningCaption}</figcaption></figure>`,
   { tone: 'yellow' },
 );
 
+const minimums = [
+  { src: 'favicon.svg', width: 16, label: 'Sygnet', text: extras.minimum.symbol },
+  { src: file.logoSvg('symbol'), width: 24, label: 'Pełny znak', text: extras.minimum.fullStamp },
+  { src: file.logoSvg('primary'), width: 120, label: 'Logo główne', text: extras.minimum.primary },
+];
+
 sheet(
   'Pole ochronne',
-  `${titleBlock('Logo', 'Pole ochronne i rozmiar minimalny', extras.clearSpace)}<div class="cols"><div class="stage small" style="background:${c.biel}"><img src="${svgUri('figures/clearspace.svg')}" alt="" style="width:94%;height:auto"></div><dl class="facts"><div><dt>Sygnet</dt><dd>${extras.minimum.symbol}</dd></div><div><dt>Pełny znak</dt><dd>${extras.minimum.fullStamp}</dd></div><div><dt>Logo główne</dt><dd>${extras.minimum.primary}</dd></div></dl></div>`,
+  `${titleBlock('Logo', 'Pole ochronne i rozmiar minimalny', extras.clearSpace)}<div class="cols"><div class="stage small" style="background:${c.biel}"><img src="${svgUri('figures/clearspace.svg')}" alt="" style="width:94%;height:auto"></div><dl class="facts">${minimums.map(item => `<div class="minrow"><span class="minsample"><img src="${svgUri(item.src)}" alt="" style="width:${item.width}px"></span><span class="mt"><span class="mtl">${item.label}</span><span class="mtd">${item.text}</span></span></div>`).join('')}</dl></div>`,
 );
 
 const misuse = [
@@ -321,6 +330,11 @@ h3{font-size:40px;line-height:1.08;margin-bottom:14px}
 .prose.wide p{max-width:1200px;font-size:36px;line-height:1.6}
 .big{font:900 54px/1.15 'Klamra Display',sans-serif!important}
 .facts div{border:4px solid ${c.atrament};background:${c.biel};color:${c.atrament};padding:16px 22px 20px;margin-bottom:20px;${shadow(8)}}
+.facts .minrow{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}
+.mt{display:grid;gap:8px}
+.mtl{font:800 17px/1 'Klamra Mono',monospace;text-transform:uppercase;color:${c.grafit}}
+.mtd{font:700 24px/1.3 'Klamra Text',sans-serif}
+.minsample{display:grid;place-items:center;height:70px;background:${c.mgla};border:4px solid ${c.atrament}}
 .facts dt{font:800 17px/1 'Klamra Mono',monospace;text-transform:uppercase;margin-bottom:10px;color:${c.grafit}}
 .facts dd{margin:0;font:700 26px/1.3 'Klamra Text',sans-serif}
 .words{display:flex;flex-direction:column;gap:12px}
@@ -336,14 +350,27 @@ blockquote{margin:0;font:800 46px/1.25 'Klamra Display',sans-serif;border:5px so
 .three .card{min-height:300px}
 .card.f0{background:${c.cytryna}}.card.f1{background:${c.mieta}}.card.f2{background:${c.niebo}}
 .chosen{background:${c.cytryna}}
-.thumb{height:100px;display:block;margin-bottom:22px;background:${c.mgla};border:4px solid ${c.atrament};width:100%;object-fit:contain}
+.lid{position:relative;height:420px;background:${c.beton};border:5px solid ${c.atrament};${shadow(12)}}
+.patch{position:absolute;background:${c.biel};border:5px solid ${c.atrament};padding:24px 28px;${shadow(10)};width:520px}
+.patch h3{font-size:34px;margin-bottom:10px}
+.patch p{font:500 23px/1.4 'Klamra Text',sans-serif}
+.patch.p0{left:46px;top:46px;background:${c.cytryna};transform:rotate(-3deg)}
+.patch.p1{left:612px;top:96px;background:${c.roz};transform:rotate(2deg);width:560px}
+.patch.p2{left:1210px;top:30px;background:${c.niebo};transform:rotate(-2deg);width:360px}
+.proces{grid-template-columns:1fr 1fr 1fr 1.4fr;gap:30px}
+.proces .card{min-height:0;padding:22px 24px}
+.proces .card h3{font-size:30px;margin-bottom:10px}
+.proces .card p{font-size:19px;line-height:1.35}
+.thumb{height:150px;display:block;margin-bottom:22px;background:${c.mgla};border:4px solid ${c.atrament};width:100%;object-fit:contain}
 .stage{height:480px;display:grid;place-items:center;border:5px solid ${c.atrament};${shadow(12)}}
 .stage.small{height:470px}
 .caption{font:500 26px/1.5 'Klamra Text',sans-serif;margin-top:36px;max-width:1300px}
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
 .tiles figure{height:290px;display:flex;align-items:center;justify-content:center;position:relative;border:5px solid ${c.atrament};${shadow(8)}}
 .tiles figcaption{position:absolute;left:16px;top:16px}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.overlay{margin:0;background:${c.biel};border:5px solid ${c.atrament};${shadow(10)};padding:20px 30px 18px}
+.overlay img{display:block;height:400px;margin:0 auto}
+.overlay figcaption{margin-top:10px}
 .pair figure{background:${c.biel};height:420px;display:flex;align-items:center;justify-content:center;position:relative;border:5px solid ${c.atrament};${shadow(10)}}
 .pair figcaption{position:absolute;left:16px;top:16px}
 .pair img{width:78%}
@@ -386,7 +413,7 @@ blockquote{margin:0;font:800 46px/1.25 'Klamra Display',sans-serif;border:5px so
 .tone .no{color:${c.grafit};margin-top:8px;text-decoration:line-through;text-decoration-color:${c.roz};text-decoration-thickness:3px}
 .mocks{display:grid;grid-template-columns:560px 560px 1fr;gap:34px;align-items:start}
 .mocks .mock{width:100%;display:block;border:5px solid ${c.atrament};${shadow(10)}}
-.mocks .papercol .mock{width:auto;height:620px;margin-left:auto}
+.mocks .papercol .mock{width:auto;height:560px;margin-left:auto}
 .mockcap{font:500 22px/1.45 'Klamra Text',sans-serif;margin-top:26px}
 .mocks.wide{grid-template-columns:860px 1fr}
 .mocks.wide .mock{width:100%;height:auto}
@@ -396,12 +423,24 @@ blockquote{margin:0;font:800 46px/1.25 'Klamra Display',sans-serif;border:5px so
 .end{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center}
 .endlogo{background:${c.cytryna};padding:50px;border:5px solid ${c.biel}}
 .endlogo img{width:100%;display:block}
-.toc{columns:2;column-gap:100px;font:900 44px/1 'Klamra Display',sans-serif}
-.toc li{display:flex;justify-content:space-between;align-items:center;border:5px solid ${c.atrament};background:${c.biel};padding:20px 26px;margin-bottom:26px;break-inside:avoid;${shadow(8)}}
-.toc li .mono{font-size:24px}
+.toc{width:1020px;font:900 28px/1 'Klamra Display',sans-serif}
+.toc li{display:flex;justify-content:space-between;align-items:center;border:5px solid ${c.atrament};background:${c.biel};padding:6px 22px 9px;margin-bottom:10px;${shadow(8)}}
+.toc li:nth-child(4n+2){background:${c.roz}}
+.toc li:nth-child(4n+3){background:${c.mieta}}
+.toc li:nth-child(4n+4){background:${c.niebo}}
+.toc li .mono{font-size:22px}
 `;
 
-const html = `<!doctype html><html lang="pl"><meta charset="utf-8"><title>Klamra, księga identyfikacji</title><style>${css}</style><body>${sheets.join('')}</body></html>`;
+const rawHtml = `<!doctype html><html lang="pl"><meta charset="utf-8"><title>Klamra, księga identyfikacji</title><style>${css}</style><body>${sheets.join('')}</body></html>`;
+
+const html = glueHtml(rawHtml);
 
 await withBrowser(browser => htmlToPdf(browser, { outDir: brand.paths.out, name: 'brandbook', html, out: pub(file.brandbook), width: 1920, height: 1080 }));
 console.log(`  ${file.brandbook} (${sheets.length} pages)`);
+
+const previewDir = ensureDir(pub('figures'));
+for (const { page } of extras.brandbookPages) {
+  const target = join(previewDir, `brandbook-${String(page).padStart(2, '0')}`);
+  execFileSync('pdftoppm', ['-jpeg', '-jpegopt', 'quality=82', '-scale-to-x', '960', '-scale-to-y', '540', '-f', String(page), '-l', String(page), '-singlefile', pub(file.brandbook), target]);
+}
+console.log(`  ${extras.brandbookPages.length} brand book previews`);

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { content, contact, extras } from './content';
+import { glue, glueHtml } from './lib/typography';
 import { clamp, hashSeed, mulberry32, nudge, scatter, tidy } from './lib/scatter';
 import { stickerBox, stickerSet, stickerSvg } from './lib/stickers';
 import { laptopArea, laptopStickers, logoVariants } from './view';
@@ -120,5 +121,26 @@ describe('case study content', () => {
       'mono-black',
       'negative',
     ]);
+  });
+});
+
+describe('typography', () => {
+  it('glues one letter words to the next word', () => {
+    expect(glue('kod się pisze, a nie ogląda')).toBe('kod się pisze, a\u00a0nie ogląda');
+    expect(glue('piszesz w pierwszy wieczór, a w trzecim')).toBe(
+      'piszesz w\u00a0pierwszy wieczór, a\u00a0w\u00a0trzecim',
+    );
+    expect(glue('wersalik K jest wyższy')).toBe('wersalik K\u00a0jest wyższy');
+  });
+
+  it('glues numbers to their units', () => {
+    expect(glue('od 24 px do 16 px')).toBe('od 24\u00a0px do 16\u00a0px');
+  });
+
+  it('leaves tags, attributes, scripts and styles alone', () => {
+    const html = '<p title="a b">a b</p><script>var a = 1;</script><style>.a b{}</style>';
+    expect(glueHtml(html)).toBe(
+      '<p title="a b">a\u00a0b</p><script>var a = 1;</script><style>.a b{}</style>',
+    );
   });
 });

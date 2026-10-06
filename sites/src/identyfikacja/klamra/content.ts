@@ -164,7 +164,7 @@ export const content: CaseContent = {
   ],
   deliverables: {
     intro:
-      'Wszystko, co dostaje szkoła, leży w jednej paczce ZIP i osobno na liście poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
+      'W jednej paczce ZIP leżą logo, kolory, kroje, ikony, druk, media społecznościowe i brand book. Animacja i makiety są tylko na liście poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
@@ -194,6 +194,16 @@ export const extras = {
       weight: 700,
       use: 'naklejki, numery, kod',
     },
+  ],
+  kerningCaption:
+    'Czarny napis po korekcie, różowy ślad to napis bez korekty. Liczby pod literami to korekta pary w tysięcznych częściach em.',
+  brandbookPages: [
+    { page: 1, label: 'Okładka' },
+    { page: 8, label: 'Wybrany kierunek' },
+    { page: 10, label: 'Warianty logo' },
+    { page: 14, label: 'Paleta' },
+    { page: 20, label: 'Ikony' },
+    { page: 25, label: 'Wizytówka i papier' },
   ],
   specimen: 'Pierwszą linijkę kodu piszesz pierwszego wieczoru.',
   glyphs: 'ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż 0123456789 {}[]()<>;',
