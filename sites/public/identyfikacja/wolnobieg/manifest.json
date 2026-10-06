@@ -8,18 +8,18 @@
     "city": "Gdańsk"
   },
   "base": "/wzornik/identyfikacja/wolnobieg/",
-  "totalBytes": 8862291,
-  "totalHuman": "8.5 MB",
+  "totalBytes": 7712616,
+  "totalHuman": "7.4 MB",
   "zip": {
     "path": "wolnobieg-identyfikacja.zip",
-    "bytes": 3762101
+    "bytes": 3223243
   },
   "groups": [
     {
       "id": "logo",
       "title": "Logo",
       "count": 30,
-      "bytes": 1049773,
+      "bytes": 1064563,
       "formats": "PDF, PNG, SVG, PNG 512, 1024, 2048 px",
       "files": [
         "logo/pdf/wolnobieg-horizontal.pdf",
@@ -96,7 +96,7 @@
       "id": "pattern",
       "title": "Wzór",
       "count": 1,
-      "bytes": 1265,
+      "bytes": 1698,
       "formats": "SVG",
       "files": [
         "pattern/wolnobieg-pattern.svg"
@@ -128,7 +128,7 @@
       "id": "print",
       "title": "Druk",
       "count": 2,
-      "bytes": 91258,
+      "bytes": 89324,
       "formats": "PDF",
       "files": [
         "print/wolnobieg-business-card.pdf",
@@ -176,7 +176,7 @@
       "id": "animation",
       "title": "Animacja logo",
       "count": 2,
-      "bytes": 598367,
+      "bytes": 518813,
       "formats": "MP4, WEBM",
       "files": [
         "animation/wolnobieg-logo.mp4",
@@ -187,7 +187,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 2415717,
+      "bytes": 1869033,
       "formats": "PDF",
       "files": [
         "wolnobieg-brandbook.pdf"
@@ -197,7 +197,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 3762101,
+      "bytes": 3223243,
       "formats": "ZIP",
       "files": [
         "wolnobieg-identyfikacja.zip"
@@ -207,7 +207,7 @@
       "id": "meta",
       "title": "Pozostałe",
       "count": 7,
-      "bytes": 54296,
+      "bytes": 56428,
       "formats": "SVG, PNG, PNG 1200 px",
       "files": [
         "figures/clearspace.svg",
@@ -223,7 +223,7 @@
   "files": [
     {
       "path": "animation/wolnobieg-logo.mp4",
-      "bytes": 232890,
+      "bytes": 223048,
       "type": "mp4",
       "group": "animation",
       "codec": "h264",
@@ -233,7 +233,7 @@
     },
     {
       "path": "animation/wolnobieg-logo.webm",
-      "bytes": 365477,
+      "bytes": 295765,
       "type": "webm",
       "group": "animation",
       "codec": "vp9",
@@ -289,7 +289,7 @@
     },
     {
       "path": "figures/clearspace.svg",
-      "bytes": 2672,
+      "bytes": 4392,
       "type": "svg",
       "group": "meta",
       "width": 1344,
@@ -321,7 +321,7 @@
     },
     {
       "path": "figures/wordmark-default.svg",
-      "bytes": 2693,
+      "bytes": 2899,
       "type": "svg",
       "group": "meta",
       "width": 700,
@@ -329,7 +329,7 @@
     },
     {
       "path": "figures/wordmark-kerned.svg",
-      "bytes": 1678,
+      "bytes": 1884,
       "type": "svg",
       "group": "meta",
       "width": 700,
@@ -552,7 +552,7 @@
     },
     {
       "path": "logo/pdf/wolnobieg-vertical.pdf",
-      "bytes": 23110,
+      "bytes": 23834,
       "type": "pdf",
       "group": "logo",
       "pages": 1,
@@ -702,7 +702,7 @@
     },
     {
       "path": "logo/png/wolnobieg-vertical-1024.png",
-      "bytes": 66244,
+      "bytes": 70030,
       "type": "png",
       "group": "logo",
       "width": 1024,
@@ -711,7 +711,7 @@
     },
     {
       "path": "logo/png/wolnobieg-vertical-2048.png",
-      "bytes": 146686,
+      "bytes": 154511,
       "type": "png",
       "group": "logo",
       "width": 2048,
@@ -720,7 +720,7 @@
     },
     {
       "path": "logo/png/wolnobieg-vertical-512.png",
-      "bytes": 30992,
+      "bytes": 32875,
       "type": "png",
       "group": "logo",
       "width": 512,
@@ -769,7 +769,7 @@
     },
     {
       "path": "logo/wolnobieg-vertical.svg",
-      "bytes": 8100,
+      "bytes": 8672,
       "type": "svg",
       "group": "logo",
       "width": 827,
@@ -816,7 +816,7 @@
     },
     {
       "path": "pattern/wolnobieg-pattern.svg",
-      "bytes": 1265,
+      "bytes": 1698,
       "type": "svg",
       "group": "pattern",
       "width": 200,
@@ -824,7 +824,7 @@
     },
     {
       "path": "print/wolnobieg-business-card.pdf",
-      "bytes": 55084,
+      "bytes": 53150,
       "type": "pdf",
       "group": "print",
       "pages": 2,
@@ -890,10 +890,10 @@
     },
     {
       "path": "wolnobieg-brandbook.pdf",
-      "bytes": 2415717,
+      "bytes": 1869033,
       "type": "pdf",
       "group": "brandbook",
-      "pages": 27,
+      "pages": 28,
       "pageMm": {
         "width": 508,
         "height": 285.8
@@ -905,7 +905,7 @@
     },
     {
       "path": "wolnobieg-identyfikacja.zip",
-      "bytes": 3762101,
+      "bytes": 3223243,
       "type": "zip",
       "group": "zip"
     }

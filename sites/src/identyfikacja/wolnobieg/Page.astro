@@ -225,7 +225,7 @@ const picks = [
           ))}
         </ol>
         <div class="duo">
-          <div class="panel panel--cream">
+          <div class="panel panel--cream panel--wide">
             <h3 class="panel__title">Ręczny kerning</h3>
             <p>{content.process.refinement[0].text}</p>
             <div class="kern">
@@ -252,23 +252,30 @@ const picks = [
             </div>
             <p class="muted">{content.process.refinement[1].text}</p>
           </div>
-          <div class="panel panel--cream panel--flip">
+          <div class="panel panel--cream panel--flip panel--wide">
             <h3 class="panel__title">Test czytelności</h3>
             <p>{content.process.refinement[2].text}</p>
-            <ul class="sizes">
-              {sizeTest.map(item => (
-                <li>
-                  <img
-                    src={asset(item.src)}
-                    alt=""
-                    width={item.size}
-                    height={item.size}
-                    style={`width:${item.size}px;height:${item.size}px`}
-                  />
-                  <span>{item.label}</span>
-                </li>
+            <div class="sizes">
+              {sizeTest.map(group => (
+                <div class="sizes__group">
+                  <ul class="sizes__row">
+                    {group.items.map(item => (
+                      <li>
+                        <img
+                          src={asset(item.src)}
+                          alt=""
+                          width={item.size}
+                          height={item.size}
+                          style={`width:${item.size}px;height:${item.size}px`}
+                        />
+                        <span>{item.size} px</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p class="sizes__title">{group.title}</p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -322,6 +329,7 @@ const picks = [
                 <li>Sygnet: {extras.minimum.symbol}.</li>
                 <li>Pełna odznaka: {extras.minimum.fullBadge}.</li>
                 <li>Logo główne: {extras.minimum.primary}.</li>
+                <li>Logo pionowe: {extras.minimum.vertical}.</li>
               </ul>
             </div>
           </div>
@@ -395,7 +403,7 @@ const picks = [
                   height="40"
                   loading="lazy"
                 />
-                <span>{name}</span>
+                <span>{extras.iconLabels[name] ?? name}</span>
               </li>
             ))}
           </ul>

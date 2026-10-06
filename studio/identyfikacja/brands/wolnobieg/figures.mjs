@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { writeFile } from '../../lib/files.mjs';
 import { optimizeSvg, viewBoxOf } from '../../lib/svg.mjs';
-import { layoutText, loadFont, ringToPath } from '../../lib/text-path.mjs';
+import { layoutText, lineToPath, loadFont, ringToPath, textBounds } from '../../lib/text-path.mjs';
 import { fontsSrcRoot } from '../../lib/paths.mjs';
 import { discPath } from '../../../../sites/src/identyfikacja/wolnobieg/lib/stripes.ts';
 import { brand, c, logo } from './theme.mjs';
@@ -46,8 +46,22 @@ export const buildFigures = () => {
   const kerned = wordmark(100, 0, { x: 0, y: 0 });
   const guides = w => `<g stroke="${c.rdza}" stroke-width="1" fill="none" stroke-dasharray="5 4"><path d="M0 150H${w}M0 ${150 - 79}H${w}M0 ${150 - 61}H${w}"/></g>`;
   const width = Math.ceil(Math.max(plain.width, kerned.width) + 24);
-  figure('wordmark-default.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${guides(width)}<g transform="translate(12 150)"><path fill="${c.kawa}" d="${plain.d}"/></g></svg>`);
-  figure('wordmark-kerned.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${guides(width)}<g transform="translate(12 150)"><path fill="${c.kakao}" d="${kerned.d}"/></g></svg>`);
+  const changedPairs = ['Wo', 'eg'];
+  const outlines = result => {
+    const glyphs = result.layout.glyphs;
+    return changedPairs
+      .map(pair => {
+        const at = glyphs.findIndex((entry, i) => entry.char + (glyphs[i + 1]?.char ?? '') === pair);
+        const first = glyphs[at];
+        const second = glyphs[at + 1];
+        const left = 12 + first.x - 6;
+        const right = 12 + second.x + second.advance + 6;
+        return `<rect x="${left.toFixed(1)}" y="52" width="${(right - left).toFixed(1)}" height="116" rx="22" fill="none" stroke="${c.pomarancz}" stroke-width="4"/>`;
+      })
+      .join('');
+  };
+  figure('wordmark-default.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${guides(width)}<g transform="translate(12 150)"><path fill="${c.kawa}" d="${plain.d}"/></g>${outlines(plain)}</svg>`);
+  figure('wordmark-kerned.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${guides(width)}<g transform="translate(12 150)"><path fill="${c.kakao}" d="${kerned.d}"/></g>${outlines(kerned)}</svg>`);
 
   const primary = logo('primary');
   const [, , pw, ph] = viewBoxOf(primary);
@@ -55,10 +69,20 @@ export const buildFigures = () => {
   const inner = `<g transform="translate(${unit} ${unit})">${primary.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '').replace(/<title>.*?<\/title>/, '')}</g>`;
   const total = [pw + unit * 2, ph + unit * 2];
   const bandPath = `M0 0H${total[0]}V${total[1]}H0ZM${unit} ${unit}V${total[1] - unit}H${total[0] - unit}V${unit}Z`;
-  const wTop = unit / 2;
+  const xLayout = layoutText(font, 'X', { size: 64 });
+  const xBounds = textBounds(xLayout);
+  const marker = (cx, cy) => {
+    const half = unit / 2;
+    const labelX = cx - (xBounds.minX + xBounds.maxX) / 2;
+    const labelY = cy + (xLayout.capHeight || 46) / 2;
+    return `<rect x="${cx - half + 6}" y="${cy - half + 6}" width="${unit - 12}" height="${unit - 12}" rx="14" fill="${c.pomarancz}" stroke="${c.kakao}" stroke-width="4"/><path fill="${c['krem-jasny']}" d="${lineToPath(xLayout, { x: labelX, y: labelY, digits: 1 })}"/>`;
+  };
+  const centerX = total[0] / 2;
+  const centerY = total[1] / 2;
+  const half = unit / 2;
   figure(
     'clearspace.svg',
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total[0]} ${total[1]}"><path fill="${c.musztarda}" fill-opacity=".45" fill-rule="evenodd" d="${bandPath}"/><rect x="${unit}" y="${unit}" width="${pw}" height="${ph}" fill="none" stroke="${c.rdza}" stroke-width="2" stroke-dasharray="8 6"/>${inner}<g stroke="${c.kakao}" stroke-width="2" fill="none"><path d="M0 ${wTop}H${unit}M0 ${wTop - 8}V${wTop + 8}M${unit} ${wTop - 8}V${wTop + 8}"/><path d="M${total[0] - unit} ${wTop}H${total[0]}M${total[0] - unit} ${wTop - 8}V${wTop + 8}M${total[0]} ${wTop - 8}V${wTop + 8}"/><path d="M${total[0] / 2} ${total[1] - unit}V${total[1]}M${total[0] / 2 - 8} ${total[1] - unit}H${total[0] / 2 + 8}M${total[0] / 2 - 8} ${total[1]}H${total[0] / 2 + 8}"/></g></svg>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total[0]} ${total[1]}"><path fill="${c.musztarda}" fill-opacity=".45" fill-rule="evenodd" d="${bandPath}"/><rect x="${unit}" y="${unit}" width="${pw}" height="${ph}" fill="none" stroke="${c.rdza}" stroke-width="2" stroke-dasharray="8 6"/>${inner}${marker(centerX, half)}${marker(centerX, total[1] - half)}${marker(half, centerY)}${marker(total[0] - half, centerY)}</svg>`,
   );
   return { unit };
 };

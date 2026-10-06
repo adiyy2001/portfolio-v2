@@ -15,6 +15,8 @@ const include = walk(pub)
   .map(path => rel(pub, path))
   .filter(path => !zipExcludes(path));
 
+const plural = n => (n === 1 ? 'plik' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? 'pliki' : 'plików');
+
 const readme = [
   `${brand.name}: identyfikacja wizualna`,
   '',
@@ -24,7 +26,7 @@ const readme = [
   ...groups
     .map(group => {
       const members = include.filter(path => groupOf(path) === group.id);
-      return members.length === 0 ? null : `  ${group.title}: ${members.length} plików (${[...new Set(members.map(path => path.split('.').pop().toUpperCase()))].join(', ')})`;
+      return members.length === 0 ? null : `  ${group.title}: ${members.length} ${plural(members.length)} (${[...new Set(members.map(path => path.split('.').pop().toUpperCase()))].join(', ')})`;
     })
     .filter(Boolean),
   '',

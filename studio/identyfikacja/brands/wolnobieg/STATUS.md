@@ -64,3 +64,25 @@ Defects found and fixed:
 ## Review scores
 
 Not scored yet.
+
+## Review round 1 repairs
+
+Scores before: craft 3, legibility and accessibility 3, sales value 3, coherence 4, fidelity 5, fit 5, distinctness 5. Fixed:
+
+- Case study CTA: the ring no longer covers the paragraph; at 1100 px and up the text column is capped at the width left of the ring (checked at 1100, 1440 and 1920 px).
+- Brand book: footer moved right of the ribbon curve (no clipped "W"); h3 line height 1.25 with balanced wrapping (also on the page); contrast table now lists all 27 pairs over two pages (28 pages in total, contents page numbers updated); half empty pages filled with larger type and bigger figures; the pattern page is one overscanned SVG so no tile seams show in the PDF; the pattern page chip and page number got their colours.
+- Icon captions use real Polish labels (dętka, koło, zębatka) on the page and the brand book.
+- Test czytelności: two bottom aligned rows (simplified sygnet 16, 24, 48 px and full badge 48, 96, 192 px), kerning and test panels are full width, kerning comparison larger with the changed pairs (Wo, eg) outlined.
+- Rule bullets are 16 px rings with row gap so they no longer touch.
+- Tone cards on sand: heading colour is brown, no rdza on piasek at small size.
+- Pattern tile: internal joins overlap by 1.5 units.
+- Logo animation: the badge now rolls in and shrinks into its place in the vertical lockup, the stripes of the roll are drawn off behind it and the wordmark, stripes and tagline fade in below; the sign is never cross-dissolved. Frames at 1.7 to 2.2 s checked in MP4 and WebM.
+- clearspace.svg shows the X as four filled squares with an X glyph path on every side.
+- Vertical logo tagline raised from 21 to 34 units; the minimum size note for the vertical logo is on the page and in the brand book.
+- Business card PDF: TrimBox 85 x 55 mm, BleedBox and CropBox 91 x 61 mm (pdf-lib after printing).
+- The page no longer says everything is in the ZIP: it states that animation and mockups are downloaded from the list (same wording as Nosna). The ZIP convention (no animation, no mockups) is unchanged.
+- README plural forms: small fix in the shared `studio/identyfikacja/scripts/zip.mjs` (plik, pliki, plików); other brands pick it up on their next ZIP build.
+
+Not done: thicker icons (optional, not blocking).
+
+Checks: `validate.mjs` 64 of 64, `guard.mjs` 0 problems, no en or em dashes, `yarn --cwd sites run check` 0 errors, `yarn --cwd sites test` 1260 passed, `yarn --cwd sites build` 185 pages, `yarn --cwd studio test` ok, `screens.mjs` 0 problems at 390 and 1440 px.
