@@ -30,7 +30,7 @@ export const patternParts = () => {
   const ink = [];
   const accent = [];
   for (let j = -1; j <= rows; j += 1) {
-    const d = threadPath(gap * j + gap / 2, (Math.PI * 2 * j) / rows * 1.5, gap * 0.78, 2);
+    const d = threadPath(gap * j + gap / 2, (Math.PI * 2 * j * 2) / rows, gap * 0.78, 2);
     (((j % rows) + rows) % rows) % 4 === 0 ? accent.push(d) : ink.push(d);
   }
   return { ink: ink.join(''), accent: accent.join('') };

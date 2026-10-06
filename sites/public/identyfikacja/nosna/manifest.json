@@ -1,0 +1,1537 @@
+{
+  "brand": {
+    "slug": "nosna",
+    "name": "Nośna",
+    "style": "Generatywna identyfikacja dynamiczna",
+    "styleId": "I6",
+    "trade": "festiwal sztuki nowych mediów i muzyki elektronicznej",
+    "city": "Łódź"
+  },
+  "base": "/wzornik/identyfikacja/nosna/",
+  "totalBytes": 10272799,
+  "totalHuman": "9.8 MB",
+  "zip": {
+    "path": "nosna-identyfikacja.zip",
+    "bytes": 4099044
+  },
+  "groups": [
+    {
+      "id": "logo",
+      "title": "Logo",
+      "count": 42,
+      "bytes": 2226042,
+      "formats": "SVG, PDF, PNG, PNG 335, 512, 669, 1024, 1338, 2048 px",
+      "files": [
+        "logo/nosna-horizontal.svg",
+        "logo/nosna-mono-black.svg",
+        "logo/nosna-negative.svg",
+        "logo/nosna-primary.svg",
+        "logo/nosna-symbol.svg",
+        "logo/nosna-vertical.svg",
+        "logo/nosna-wariant-niedziela-farbiarnia.svg",
+        "logo/nosna-wariant-niedziela-przedzalnia.svg",
+        "logo/nosna-wariant-niedziela-tkalnia.svg",
+        "logo/nosna-wariant-niedziela-wykonczalnia.svg",
+        "logo/nosna-wariant-piatek-farbiarnia.svg",
+        "logo/nosna-wariant-piatek-przedzalnia.svg",
+        "logo/nosna-wariant-piatek-tkalnia.svg",
+        "logo/nosna-wariant-piatek-wykonczalnia.svg",
+        "logo/nosna-wariant-sobota-farbiarnia.svg",
+        "logo/nosna-wariant-sobota-przedzalnia.svg",
+        "logo/nosna-wariant-sobota-tkalnia.svg",
+        "logo/nosna-wariant-sobota-wykonczalnia.svg",
+        "logo/pdf/nosna-horizontal.pdf",
+        "logo/pdf/nosna-mono-black.pdf",
+        "logo/pdf/nosna-negative.pdf",
+        "logo/pdf/nosna-primary.pdf",
+        "logo/pdf/nosna-symbol.pdf",
+        "logo/pdf/nosna-vertical.pdf",
+        "logo/png/nosna-horizontal-1024.png",
+        "logo/png/nosna-horizontal-2048.png",
+        "logo/png/nosna-horizontal-512.png",
+        "logo/png/nosna-mono-black-1024.png",
+        "logo/png/nosna-mono-black-2048.png",
+        "logo/png/nosna-mono-black-512.png",
+        "logo/png/nosna-negative-1024.png",
+        "logo/png/nosna-negative-2048.png",
+        "logo/png/nosna-negative-512.png",
+        "logo/png/nosna-primary-1024.png",
+        "logo/png/nosna-primary-2048.png",
+        "logo/png/nosna-primary-512.png",
+        "logo/png/nosna-symbol-1024.png",
+        "logo/png/nosna-symbol-2048.png",
+        "logo/png/nosna-symbol-512.png",
+        "logo/png/nosna-vertical-1024.png",
+        "logo/png/nosna-vertical-2048.png",
+        "logo/png/nosna-vertical-512.png"
+      ]
+    },
+    {
+      "id": "favicon",
+      "title": "Ikona strony",
+      "count": 3,
+      "bytes": 5800,
+      "formats": "PNG, ICO, SVG, PNG 180 px",
+      "files": [
+        "apple-touch-icon.png",
+        "favicon.ico",
+        "favicon.svg"
+      ]
+    },
+    {
+      "id": "colors",
+      "title": "Kolor",
+      "count": 2,
+      "bytes": 11083,
+      "formats": "JSON, CSS",
+      "files": [
+        "colors/nosna-palette.json",
+        "colors/nosna-tokens.css"
+      ]
+    },
+    {
+      "id": "fonts",
+      "title": "Kroje",
+      "count": 8,
+      "bytes": 97140,
+      "formats": "WOFF2, TXT",
+      "files": [
+        "fonts/MartianMono-400.woff2",
+        "fonts/MartianMono-500.woff2",
+        "fonts/MartianMono-700.woff2",
+        "fonts/OFL-MartianMono.txt",
+        "fonts/OFL-Syne.txt",
+        "fonts/Syne-500.woff2",
+        "fonts/Syne-700.woff2",
+        "fonts/Syne-800.woff2"
+      ]
+    },
+    {
+      "id": "pattern",
+      "title": "Wzór",
+      "count": 1,
+      "bytes": 4261,
+      "formats": "SVG",
+      "files": [
+        "pattern/nosna-pattern.svg"
+      ]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 13,
+      "bytes": 2502,
+      "formats": "SVG",
+      "files": [
+        "icons/nosna-icons.svg",
+        "icons/svg/nosna-icon-bilet.svg",
+        "icons/svg/nosna-icon-fala.svg",
+        "icons/svg/nosna-icon-glosnik.svg",
+        "icons/svg/nosna-icon-krosno.svg",
+        "icons/svg/nosna-icon-nic.svg",
+        "icons/svg/nosna-icon-pinezka.svg",
+        "icons/svg/nosna-icon-projektor.svg",
+        "icons/svg/nosna-icon-scena.svg",
+        "icons/svg/nosna-icon-sluchawki.svg",
+        "icons/svg/nosna-icon-szpula.svg",
+        "icons/svg/nosna-icon-wejscie.svg",
+        "icons/svg/nosna-icon-zegar.svg"
+      ]
+    },
+    {
+      "id": "print",
+      "title": "Druk",
+      "count": 2,
+      "bytes": 38444,
+      "formats": "PDF",
+      "files": [
+        "print/nosna-business-card.pdf",
+        "print/nosna-letterhead.pdf"
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Media społecznościowe",
+      "count": 4,
+      "bytes": 258686,
+      "formats": "PNG, PNG 1080 px",
+      "files": [
+        "social/nosna-avatar.png",
+        "social/nosna-post-1.png",
+        "social/nosna-post-2.png",
+        "social/nosna-post-3.png"
+      ]
+    },
+    {
+      "id": "email",
+      "title": "Podpis e-mail",
+      "count": 1,
+      "bytes": 872,
+      "formats": "HTML",
+      "files": [
+        "email/nosna-email-signature.html"
+      ]
+    },
+    {
+      "id": "mockups",
+      "title": "Makiety",
+      "count": 5,
+      "bytes": 557988,
+      "formats": "JPG",
+      "files": [
+        "mockups/nosna-application.jpg",
+        "mockups/nosna-card-back.jpg",
+        "mockups/nosna-card-front.jpg",
+        "mockups/nosna-email-signature.jpg",
+        "mockups/nosna-letterhead.jpg"
+      ]
+    },
+    {
+      "id": "animation",
+      "title": "Animacja logo",
+      "count": 2,
+      "bytes": 1114896,
+      "formats": "MP4, WEBM",
+      "files": [
+        "animation/nosna-logo.mp4",
+        "animation/nosna-logo.webm"
+      ]
+    },
+    {
+      "id": "brandbook",
+      "title": "Brand book",
+      "count": 1,
+      "bytes": 1779865,
+      "formats": "PDF",
+      "files": [
+        "nosna-brandbook.pdf"
+      ]
+    },
+    {
+      "id": "zip",
+      "title": "Wszystko w jednym pliku",
+      "count": 1,
+      "bytes": 4099044,
+      "formats": "ZIP",
+      "files": [
+        "nosna-identyfikacja.zip"
+      ]
+    },
+    {
+      "id": "meta",
+      "title": "Pozostałe",
+      "count": 9,
+      "bytes": 76176,
+      "formats": "SVG, PNG, PNG 1200 px",
+      "files": [
+        "figures/clearspace.svg",
+        "figures/days-envelope.svg",
+        "figures/direction-akcent.svg",
+        "figures/direction-nitki.svg",
+        "figures/direction-nosna.svg",
+        "figures/grid-12.svg",
+        "figures/wordmark-default.svg",
+        "figures/wordmark-kerned.svg",
+        "og.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "animation/nosna-logo.mp4",
+      "bytes": 504380,
+      "type": "mp4",
+      "group": "animation",
+      "codec": "h264",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "animation/nosna-logo.webm",
+      "bytes": 610516,
+      "type": "webm",
+      "group": "animation",
+      "codec": "vp9",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "bytes": 3011,
+      "type": "png",
+      "group": "favicon",
+      "width": 180,
+      "height": 180,
+      "hasAlpha": true
+    },
+    {
+      "path": "colors/nosna-palette.json",
+      "bytes": 10731,
+      "type": "json",
+      "group": "colors"
+    },
+    {
+      "path": "colors/nosna-tokens.css",
+      "bytes": 352,
+      "type": "css",
+      "group": "colors"
+    },
+    {
+      "path": "email/nosna-email-signature.html",
+      "bytes": 872,
+      "type": "html",
+      "group": "email"
+    },
+    {
+      "path": "favicon.ico",
+      "bytes": 2402,
+      "type": "ico",
+      "group": "favicon",
+      "sizes": [
+        16,
+        32,
+        48
+      ]
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 387,
+      "type": "svg",
+      "group": "favicon",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "figures/clearspace.svg",
+      "bytes": 3619,
+      "type": "svg",
+      "group": "meta",
+      "width": 752,
+      "height": 544
+    },
+    {
+      "path": "figures/days-envelope.svg",
+      "bytes": 1339,
+      "type": "svg",
+      "group": "meta",
+      "width": 300,
+      "height": 90
+    },
+    {
+      "path": "figures/direction-akcent.svg",
+      "bytes": 1031,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-nitki.svg",
+      "bytes": 1643,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-nosna.svg",
+      "bytes": 3246,
+      "type": "svg",
+      "group": "meta",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "figures/grid-12.svg",
+      "bytes": 23527,
+      "type": "svg",
+      "group": "meta",
+      "width": 2600,
+      "height": 890
+    },
+    {
+      "path": "figures/wordmark-default.svg",
+      "bytes": 1689,
+      "type": "svg",
+      "group": "meta",
+      "width": 632,
+      "height": 190
+    },
+    {
+      "path": "figures/wordmark-kerned.svg",
+      "bytes": 1703,
+      "type": "svg",
+      "group": "meta",
+      "width": 632,
+      "height": 190
+    },
+    {
+      "path": "fonts/MartianMono-400.woff2",
+      "bytes": 11408,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/MartianMono-500.woff2",
+      "bytes": 11636,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/MartianMono-700.woff2",
+      "bytes": 11612,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-MartianMono.txt",
+      "bytes": 4390,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-Syne.txt",
+      "bytes": 4402,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Syne-500.woff2",
+      "bytes": 18164,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Syne-700.woff2",
+      "bytes": 17908,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Syne-800.woff2",
+      "bytes": 17620,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "icons/nosna-icons.svg",
+      "bytes": 88,
+      "type": "svg",
+      "group": "icons"
+    },
+    {
+      "path": "icons/svg/nosna-icon-bilet.svg",
+      "bytes": 234,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-fala.svg",
+      "bytes": 171,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-glosnik.svg",
+      "bytes": 211,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-krosno.svg",
+      "bytes": 201,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-nic.svg",
+      "bytes": 182,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-pinezka.svg",
+      "bytes": 219,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-projektor.svg",
+      "bytes": 226,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-scena.svg",
+      "bytes": 190,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-sluchawki.svg",
+      "bytes": 218,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-szpula.svg",
+      "bytes": 202,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-wejscie.svg",
+      "bytes": 179,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/nosna-icon-zegar.svg",
+      "bytes": 181,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "logo/nosna-horizontal.svg",
+      "bytes": 3074,
+      "type": "svg",
+      "group": "logo",
+      "width": 741,
+      "height": 130
+    },
+    {
+      "path": "logo/nosna-mono-black.svg",
+      "bytes": 3258,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-negative.svg",
+      "bytes": 3276,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-primary.svg",
+      "bytes": 3284,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-symbol.svg",
+      "bytes": 1758,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 260
+    },
+    {
+      "path": "logo/nosna-vertical.svg",
+      "bytes": 3322,
+      "type": "svg",
+      "group": "logo",
+      "width": 392,
+      "height": 600
+    },
+    {
+      "path": "logo/nosna-wariant-niedziela-farbiarnia.svg",
+      "bytes": 2844,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-niedziela-przedzalnia.svg",
+      "bytes": 3263,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-niedziela-tkalnia.svg",
+      "bytes": 3631,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-niedziela-wykonczalnia.svg",
+      "bytes": 4267,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-piatek-farbiarnia.svg",
+      "bytes": 2853,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-piatek-przedzalnia.svg",
+      "bytes": 3299,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-piatek-tkalnia.svg",
+      "bytes": 3947,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-piatek-wykonczalnia.svg",
+      "bytes": 4349,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-sobota-farbiarnia.svg",
+      "bytes": 2884,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-sobota-przedzalnia.svg",
+      "bytes": 3330,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-sobota-tkalnia.svg",
+      "bytes": 3899,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/nosna-wariant-sobota-wykonczalnia.svg",
+      "bytes": 4303,
+      "type": "svg",
+      "group": "logo",
+      "width": 600,
+      "height": 392
+    },
+    {
+      "path": "logo/pdf/nosna-horizontal.pdf",
+      "bytes": 4096,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 17.6
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 67
+      }
+    },
+    {
+      "path": "logo/pdf/nosna-mono-black.pdf",
+      "bytes": 5526,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 65.3
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 247
+      }
+    },
+    {
+      "path": "logo/pdf/nosna-negative.pdf",
+      "bytes": 5552,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 65.3
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 247
+      }
+    },
+    {
+      "path": "logo/pdf/nosna-primary.pdf",
+      "bytes": 5551,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 65.3
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 247
+      }
+    },
+    {
+      "path": "logo/pdf/nosna-symbol.pdf",
+      "bytes": 3172,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 43.4
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 164
+      }
+    },
+    {
+      "path": "logo/pdf/nosna-vertical.pdf",
+      "bytes": 5787,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 153.1
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 579
+      }
+    },
+    {
+      "path": "logo/png/nosna-horizontal-1024.png",
+      "bytes": 48512,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 180,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-horizontal-2048.png",
+      "bytes": 103972,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 359,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-horizontal-512.png",
+      "bytes": 20387,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 90,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-mono-black-1024.png",
+      "bytes": 94775,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 669,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-mono-black-2048.png",
+      "bytes": 206833,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 1338,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-mono-black-512.png",
+      "bytes": 42563,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 335,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-negative-1024.png",
+      "bytes": 120477,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 669,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-negative-2048.png",
+      "bytes": 259531,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 1338,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-negative-512.png",
+      "bytes": 55636,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 335,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-primary-1024.png",
+      "bytes": 120813,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 669,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-primary-2048.png",
+      "bytes": 260956,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 1338,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-primary-512.png",
+      "bytes": 55896,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 335,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-symbol-1024.png",
+      "bytes": 106362,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 444,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-symbol-2048.png",
+      "bytes": 230136,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 887,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-symbol-512.png",
+      "bytes": 49356,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 222,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-vertical-1024.png",
+      "bytes": 99791,
+      "type": "png",
+      "group": "logo",
+      "width": 669,
+      "height": 1024,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-vertical-2048.png",
+      "bytes": 212582,
+      "type": "png",
+      "group": "logo",
+      "width": 1338,
+      "height": 2048,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/nosna-vertical-512.png",
+      "bytes": 46939,
+      "type": "png",
+      "group": "logo",
+      "width": 335,
+      "height": 512,
+      "hasAlpha": true
+    },
+    {
+      "path": "mockups/nosna-application.jpg",
+      "bytes": 192916,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/nosna-card-back.jpg",
+      "bytes": 83379,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/nosna-card-front.jpg",
+      "bytes": 111444,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/nosna-email-signature.jpg",
+      "bytes": 70614,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/nosna-letterhead.jpg",
+      "bytes": 99635,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "nosna-brandbook.pdf",
+      "bytes": 1779865,
+      "type": "pdf",
+      "group": "brandbook",
+      "pages": 28,
+      "pageMm": {
+        "width": 508,
+        "height": 285.8
+      },
+      "pagePx": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "path": "nosna-identyfikacja.zip",
+      "bytes": 4099044,
+      "type": "zip",
+      "group": "zip"
+    },
+    {
+      "path": "og.png",
+      "bytes": 38379,
+      "type": "png",
+      "group": "meta",
+      "width": 1200,
+      "height": 630,
+      "hasAlpha": false
+    },
+    {
+      "path": "pattern/nosna-pattern.svg",
+      "bytes": 4261,
+      "type": "svg",
+      "group": "pattern",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "print/nosna-business-card.pdf",
+      "bytes": 14875,
+      "type": "pdf",
+      "group": "print",
+      "pages": 2,
+      "pageMm": {
+        "width": 91,
+        "height": 61
+      },
+      "pagePx": {
+        "width": 344,
+        "height": 231
+      }
+    },
+    {
+      "path": "print/nosna-letterhead.pdf",
+      "bytes": 23569,
+      "type": "pdf",
+      "group": "print",
+      "pages": 1,
+      "pageMm": {
+        "width": 209.9,
+        "height": 297
+      },
+      "pagePx": {
+        "width": 793,
+        "height": 1123
+      }
+    },
+    {
+      "path": "social/nosna-avatar.png",
+      "bytes": 44457,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1080,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/nosna-post-1.png",
+      "bytes": 103336,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/nosna-post-2.png",
+      "bytes": 46845,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/nosna-post-3.png",
+      "bytes": 64048,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    }
+  ],
+  "palette": [
+    {
+      "id": "atrament",
+      "name": "Atrament",
+      "group": "primary",
+      "role": "tekst, nośna, pierścień, ciemne tło",
+      "hex": "#0E0E12",
+      "rgb": "14 14 18",
+      "oklch": "oklch(16.6% 0.008 285.5)",
+      "cmykApprox": "C 22 M 22 Y 0 K 93"
+    },
+    {
+      "id": "piatek",
+      "name": "Piątek",
+      "group": "accent",
+      "role": "kolor piątku, wypełnienia i nitki pola",
+      "hex": "#FF3D1F",
+      "rgb": "255 61 31",
+      "oklch": "oklch(65.5% 0.233 31.6)",
+      "cmykApprox": "C 0 M 76 Y 88 K 0"
+    },
+    {
+      "id": "sobota",
+      "name": "Sobota",
+      "group": "accent",
+      "role": "kolor soboty, wypełnienia i nitki pola",
+      "hex": "#00B3A4",
+      "rgb": "0 179 164",
+      "oklch": "oklch(68.9% 0.122 184.4)",
+      "cmykApprox": "C 100 M 0 Y 8 K 30"
+    },
+    {
+      "id": "niedziela",
+      "name": "Niedziela",
+      "group": "accent",
+      "role": "kolor niedzieli, wypełnienia i nitki pola",
+      "hex": "#FF2D95",
+      "rgb": "255 45 149",
+      "oklch": "oklch(66.5% 0.249 357.3)",
+      "cmykApprox": "C 0 M 82 Y 42 K 0"
+    },
+    {
+      "id": "piatek-tekst",
+      "name": "Piątek ciemny",
+      "group": "accent",
+      "role": "piątek w tekście na kości",
+      "hex": "#B02A0B",
+      "rgb": "176 42 11",
+      "oklch": "oklch(49.8% 0.175 33.4)",
+      "cmykApprox": "C 0 M 76 Y 94 K 31"
+    },
+    {
+      "id": "sobota-tekst",
+      "name": "Sobota ciemna",
+      "group": "accent",
+      "role": "sobota w tekście na kości",
+      "hex": "#00695F",
+      "rgb": "0 105 95",
+      "oklch": "oklch(46.8% 0.083 183.6)",
+      "cmykApprox": "C 100 M 0 Y 10 K 59"
+    },
+    {
+      "id": "niedziela-tekst",
+      "name": "Niedziela ciemna",
+      "group": "accent",
+      "role": "niedziela w tekście na kości",
+      "hex": "#A8005C",
+      "rgb": "168 0 92",
+      "oklch": "oklch(47.5% 0.194 357.9)",
+      "cmykApprox": "C 0 M 100 Y 45 K 34"
+    },
+    {
+      "id": "papier",
+      "name": "Papier",
+      "group": "neutral",
+      "role": "karty, panele, kartki",
+      "hex": "#F6F4EF",
+      "rgb": "246 244 239",
+      "oklch": "oklch(96.7% 0.007 88.6)",
+      "cmykApprox": "C 0 M 1 Y 3 K 4"
+    },
+    {
+      "id": "kosc",
+      "name": "Kość",
+      "group": "neutral",
+      "role": "tło strony i plakatów",
+      "hex": "#E9E6DE",
+      "rgb": "233 230 222",
+      "oklch": "oklch(92.5% 0.011 89.7)",
+      "cmykApprox": "C 0 M 1 Y 5 K 9"
+    },
+    {
+      "id": "mgla",
+      "name": "Mgła",
+      "group": "neutral",
+      "role": "linie, obwódki, tło tabel",
+      "hex": "#CFCBC0",
+      "rgb": "207 203 192",
+      "oklch": "oklch(84.2% 0.016 90.3)",
+      "cmykApprox": "C 0 M 2 Y 7 K 19"
+    },
+    {
+      "id": "dym",
+      "name": "Dym",
+      "group": "neutral",
+      "role": "cienkie linie, bez tekstu",
+      "hex": "#8F8B82",
+      "rgb": "143 139 130",
+      "oklch": "oklch(63.8% 0.014 86.9)",
+      "cmykApprox": "C 0 M 3 Y 9 K 44"
+    },
+    {
+      "id": "grafit",
+      "name": "Grafit",
+      "group": "neutral",
+      "role": "tekst drugorzędny, podpisy",
+      "hex": "#4B4B50",
+      "rgb": "75 75 80",
+      "oklch": "oklch(41.5% 0.008 286)",
+      "cmykApprox": "C 6 M 6 Y 0 K 69"
+    }
+  ],
+  "contrast": [
+    {
+      "id": "atrament-kosc",
+      "use": "tekst podstawowy na tle strony",
+      "foreground": "#0E0E12",
+      "background": "#E9E6DE",
+      "kind": "text",
+      "ratio": 15.44,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-papier",
+      "use": "tekst na kartach i papierze firmowym",
+      "foreground": "#0E0E12",
+      "background": "#F6F4EF",
+      "kind": "text",
+      "ratio": 17.52,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-mgla",
+      "use": "tekst w tabelach i na tle sekcji",
+      "foreground": "#0E0E12",
+      "background": "#CFCBC0",
+      "kind": "text",
+      "ratio": 11.88,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "grafit-kosc",
+      "use": "tekst drugorzędny, podpisy, parametry",
+      "foreground": "#4B4B50",
+      "background": "#E9E6DE",
+      "kind": "text",
+      "ratio": 6.95,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "grafit-papier",
+      "use": "podpisy na kartach",
+      "foreground": "#4B4B50",
+      "background": "#F6F4EF",
+      "kind": "text",
+      "ratio": 7.89,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "piatek-tekst-kosc",
+      "use": "piątek jako tekst na kości",
+      "foreground": "#B02A0B",
+      "background": "#E9E6DE",
+      "kind": "text",
+      "ratio": 5.29,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "sobota-tekst-kosc",
+      "use": "sobota jako tekst na kości",
+      "foreground": "#00695F",
+      "background": "#E9E6DE",
+      "kind": "text",
+      "ratio": 5.29,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "niedziela-tekst-kosc",
+      "use": "niedziela jako tekst na kości",
+      "foreground": "#A8005C",
+      "background": "#E9E6DE",
+      "kind": "text",
+      "ratio": 5.97,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "piatek-tekst-papier",
+      "use": "piątek jako tekst na kartach",
+      "foreground": "#B02A0B",
+      "background": "#F6F4EF",
+      "kind": "text",
+      "ratio": 6,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-piatek",
+      "use": "tekst na polu piątku",
+      "foreground": "#0E0E12",
+      "background": "#FF3D1F",
+      "kind": "text",
+      "ratio": 5.45,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-sobota",
+      "use": "tekst na polu soboty",
+      "foreground": "#0E0E12",
+      "background": "#00B3A4",
+      "kind": "text",
+      "ratio": 7.32,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-niedziela",
+      "use": "tekst na polu niedzieli",
+      "foreground": "#0E0E12",
+      "background": "#FF2D95",
+      "kind": "text",
+      "ratio": 5.56,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kosc-atrament",
+      "use": "negatyw: jasny tekst na atramencie",
+      "foreground": "#E9E6DE",
+      "background": "#0E0E12",
+      "kind": "text",
+      "ratio": 15.44,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "mgla-atrament",
+      "use": "tekst drugorzędny na atramencie",
+      "foreground": "#CFCBC0",
+      "background": "#0E0E12",
+      "kind": "text",
+      "ratio": 11.88,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "piatek-atrament",
+      "use": "piątek jako tekst na atramencie",
+      "foreground": "#FF3D1F",
+      "background": "#0E0E12",
+      "kind": "text",
+      "ratio": 5.45,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "sobota-atrament",
+      "use": "sobota jako tekst na atramencie",
+      "foreground": "#00B3A4",
+      "background": "#0E0E12",
+      "kind": "text",
+      "ratio": 7.32,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "niedziela-atrament",
+      "use": "niedziela jako tekst na atramencie",
+      "foreground": "#FF2D95",
+      "background": "#0E0E12",
+      "kind": "text",
+      "ratio": 5.56,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kosc-grafit",
+      "use": "jasny tekst na grafitowym tle",
+      "foreground": "#E9E6DE",
+      "background": "#4B4B50",
+      "kind": "text",
+      "ratio": 6.95,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-kosc-large",
+      "use": "duże nagłówki i napis festiwalu",
+      "foreground": "#0E0E12",
+      "background": "#E9E6DE",
+      "kind": "large",
+      "ratio": 15.44,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-kosc-ui",
+      "use": "obrys fokusu, ramki pól i suwak generatora",
+      "foreground": "#0E0E12",
+      "background": "#E9E6DE",
+      "kind": "ui",
+      "ratio": 15.44,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "piatek-tekst-kosc-ui",
+      "use": "aktywny przycisk dnia i znacznik suwaka",
+      "foreground": "#B02A0B",
+      "background": "#E9E6DE",
+      "kind": "ui",
+      "ratio": 5.29,
+      "required": 3,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "piatek-kosc",
+      "use": "nitki pola w kolorze piątku na kości",
+      "foreground": "#FF3D1F",
+      "background": "#E9E6DE",
+      "kind": "decorative",
+      "ratio": 2.84,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "grafika generowana, nie niesie tekstu; znak jest czytelny dzięki nośnej i napisowi w atramencie"
+    },
+    {
+      "id": "sobota-kosc",
+      "use": "nitki pola w kolorze soboty na kości",
+      "foreground": "#00B3A4",
+      "background": "#E9E6DE",
+      "kind": "decorative",
+      "ratio": 2.11,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "grafika generowana, nie niesie tekstu; znak jest czytelny dzięki nośnej i napisowi w atramencie"
+    },
+    {
+      "id": "niedziela-kosc",
+      "use": "nitki pola w kolorze niedzieli na kości",
+      "foreground": "#FF2D95",
+      "background": "#E9E6DE",
+      "kind": "decorative",
+      "ratio": 2.78,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "grafika generowana, nie niesie tekstu; znak jest czytelny dzięki nośnej i napisowi w atramencie"
+    },
+    {
+      "id": "dym-kosc",
+      "use": "cienkie linie podziału i wzór",
+      "foreground": "#8F8B82",
+      "background": "#E9E6DE",
+      "kind": "decorative",
+      "ratio": 2.72,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki i napis",
+      "family": "Syne",
+      "css": "Nosna Display",
+      "weight": 500,
+      "style": "normal",
+      "file": "fonts/Syne-500.woff2",
+      "bytes": 18164
+    },
+    {
+      "id": "display",
+      "role": "nagłówki i napis",
+      "family": "Syne",
+      "css": "Nosna Display",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/Syne-700.woff2",
+      "bytes": 17908
+    },
+    {
+      "id": "display",
+      "role": "nagłówki i napis",
+      "family": "Syne",
+      "css": "Nosna Display",
+      "weight": 800,
+      "style": "normal",
+      "file": "fonts/Syne-800.woff2",
+      "bytes": 17620
+    },
+    {
+      "id": "mono",
+      "role": "parametry, godziny, ziarna",
+      "family": "Martian Mono",
+      "css": "Nosna Mono",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/MartianMono-400.woff2",
+      "bytes": 11408
+    },
+    {
+      "id": "mono",
+      "role": "parametry, godziny, ziarna",
+      "family": "Martian Mono",
+      "css": "Nosna Mono",
+      "weight": 500,
+      "style": "normal",
+      "file": "fonts/MartianMono-500.woff2",
+      "bytes": 11636
+    },
+    {
+      "id": "mono",
+      "role": "parametry, godziny, ziarna",
+      "family": "Martian Mono",
+      "css": "Nosna Mono",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/MartianMono-700.woff2",
+      "bytes": 11612
+    }
+  ]
+}
