@@ -39,9 +39,18 @@ export const content: CaseContent = {
     audience:
       'Dorośli, którzy chcą przejść do pracy w kodzie, i maturzyści, którzy wolą pracować z mentorem niż studiować. Czytają w telefonie, porównują trzy szkoły naraz i nie ufają obietnicom.',
     values: [
-      { title: 'Robisz, nie oglądasz', text: 'Pierwszą linijkę kodu piszesz w pierwszy wieczór, a w trzecim tygodniu publikujesz swoją stronę.' },
-      { title: 'Małe grupy', text: 'Do ośmiu osób na jednego mentora. Mentor zna twój kod i twoje błędy po imieniu.' },
-      { title: 'Uczciwa cena', text: 'Jedna cena podana z góry, bez ukrytych modułów i bez raty, której nie widać na stronie.' },
+      {
+        title: 'Robisz, nie oglądasz',
+        text: 'Pierwszą linijkę kodu piszesz w pierwszy wieczór, a w trzecim tygodniu publikujesz swoją stronę.',
+      },
+      {
+        title: 'Małe grupy',
+        text: 'Do ośmiu osób na jednego mentora. Mentor zna twój kod i twoje błędy po imieniu.',
+      },
+      {
+        title: 'Uczciwa cena',
+        text: 'Jedna cena podana z góry, bez ukrytych modułów i bez raty, której nie widać na stronie.',
+      },
     ],
     personality: ['bezpośrednia', 'żywa', 'trochę szalona'],
     avoids: 'luksusu, pastelowej miękkości, miękkich cieni i startupowego połysku',
@@ -166,11 +175,25 @@ export const content: CaseContent = {
 
 export const extras = {
   typeScale: [
-    { name: 'Tytuł', font: 'display', size: 64, line: 1, weight: 900, use: 'okładki, hasła, nagłówek strony' },
+    {
+      name: 'Tytuł',
+      font: 'display',
+      size: 64,
+      line: 1,
+      weight: 900,
+      use: 'okładki, hasła, nagłówek strony',
+    },
     { name: 'Nagłówek', font: 'display', size: 36, line: 1.1, weight: 800, use: 'sekcje i karty' },
     { name: 'Podtytuł', font: 'text', size: 20, line: 1.35, weight: 700, use: 'wstępy i lead' },
     { name: 'Tekst', font: 'text', size: 17, line: 1.55, weight: 500, use: 'akapity, opisy' },
-    { name: 'Etykieta', font: 'mono', size: 13, line: 1.3, weight: 700, use: 'naklejki, numery, kod' },
+    {
+      name: 'Etykieta',
+      font: 'mono',
+      size: 13,
+      line: 1.3,
+      weight: 700,
+      use: 'naklejki, numery, kod',
+    },
   ],
   specimen: 'Pierwszą linijkę kodu piszesz pierwszego wieczoru.',
   glyphs: 'ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż 0123456789 {}[]()<>;',
@@ -229,7 +252,8 @@ export const extras = {
     title: 'Certyfikat ukończenia kursu',
     course: 'Pierwsza praca w kodzie',
     lead: 'Klamra, szkoła programowania online, potwierdza, że',
-    detail: 'ukończył(a) kurs trwający cztery miesiące i opublikował(a) własną aplikację internetową.',
+    detail:
+      'ukończył(a) kurs trwający cztery miesiące i opublikował(a) własną aplikację internetową.',
     date: '28 czerwca',
   },
   stickers: ['git push', 'TODO', '404', '{ }', 'sudo', ';', 'commit', 'works on my machine'],

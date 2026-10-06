@@ -34,9 +34,14 @@ export interface Item {
   height: number;
 }
 
-export const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), Math.max(min, max));
+export const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), Math.max(min, max));
 
-export const scatter = (items: Item[], area: { width: number; height: number }, round: number): Placement[] => {
+export const scatter = (
+  items: Item[],
+  area: { width: number; height: number },
+  round: number,
+): Placement[] => {
   const rng = mulberry32(hashSeed(`mix-${round}`));
   return items.map(item => ({
     id: item.id,
@@ -46,7 +51,11 @@ export const scatter = (items: Item[], area: { width: number; height: number }, 
   }));
 };
 
-export const tidy = (items: Item[], area: { width: number; height: number }, gap = 14): Placement[] => {
+export const tidy = (
+  items: Item[],
+  area: { width: number; height: number },
+  gap = 14,
+): Placement[] => {
   const placements: Placement[] = [];
   let x = gap;
   let y = gap;
@@ -64,7 +73,13 @@ export const tidy = (items: Item[], area: { width: number; height: number }, gap
   return placements;
 };
 
-export const nudge = (placement: Placement, dx: number, dy: number, item: Item, area: { width: number; height: number }): Placement => ({
+export const nudge = (
+  placement: Placement,
+  dx: number,
+  dy: number,
+  item: Item,
+  area: { width: number; height: number },
+): Placement => ({
   ...placement,
   x: clamp(placement.x + dx, 0, area.width - item.width),
   y: clamp(placement.y + dy, 0, area.height - item.height),

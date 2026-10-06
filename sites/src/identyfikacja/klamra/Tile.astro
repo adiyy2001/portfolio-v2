@@ -1,0 +1,96 @@
+---
+import { assetUrl } from '../shared/manifest';
+import { identityBrands } from '../../shared/sites';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = identityBrands.find(item => item.slug === 'klamra')!;
+---
+
+<a class="klamra-tile" href={href}>
+  <img
+    class="klamra-tile__logo"
+    src={assetUrl('klamra', 'logo/klamra-primary.svg')}
+    alt=""
+    width="440"
+    height="150"
+  />
+  <span class="klamra-tile__style">{meta.style}</span>
+  <span class="klamra-tile__name">{meta.name}</span>
+  <span class="klamra-tile__trade">
+    {meta.trade}, {meta.city}
+  </span>
+  <span class="klamra-tile__go">Zobacz identyfikację</span>
+</a>
+
+<style is:global>
+  .klamra-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 260px;
+    padding: 24px;
+    color: #111111;
+    text-decoration: none;
+    background: #ffe14a;
+    border: 4px solid #111111;
+    box-shadow: 8px 8px 0 #111111;
+    transition:
+      transform 0.12s ease,
+      box-shadow 0.12s ease;
+  }
+
+  .klamra-tile:hover,
+  .klamra-tile:focus-visible {
+    transform: translate(4px, 4px);
+    box-shadow: 4px 4px 0 #111111;
+  }
+
+  .klamra-tile__logo {
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .klamra-tile__style {
+    align-self: flex-start;
+    padding: 3px 8px;
+    background: #111111;
+    color: #ffffff;
+    font:
+      700 12px/1.3 'JetBrains Mono',
+      ui-monospace,
+      monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .klamra-tile__name {
+    font:
+      600 30px/1.1 'Schibsted Grotesk',
+      system-ui,
+      sans-serif;
+  }
+
+  .klamra-tile__trade {
+    font-size: 15px;
+  }
+
+  .klamra-tile__go {
+    margin-top: auto;
+    padding-top: 12px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .klamra-tile {
+      transition: none;
+    }
+  }
+</style>
