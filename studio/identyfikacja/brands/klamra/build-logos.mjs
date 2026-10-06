@@ -3,7 +3,7 @@ import { loadBrand } from '../../lib/brand.mjs';
 import { names } from '../../lib/convention.mjs';
 import { writeFile } from '../../lib/files.mjs';
 import { optimizeSvg, svgDocument } from '../../lib/svg.mjs';
-import { colorSets, faviconParts, lockups } from './logo-parts.mjs';
+import { appIconParts, colorSets, faviconParts, lockups } from './logo-parts.mjs';
 
 const brand = loadBrand('klamra');
 const file = names('klamra');
@@ -29,4 +29,6 @@ write(file.logoSvg('negative'), negative, 'primary', 'negatyw');
 
 const favicon = faviconParts(sets.color);
 writeFile(join(pub, file.favicon), `${optimizeSvg(svgDocument({ viewBox: favicon.viewBox, body: favicon.body, title: 'Klamra' }))}\n`);
+const appIcon = appIconParts(sets.color);
+writeFile(join(brand.paths.src, 'app-icon.svg'), `${optimizeSvg(svgDocument({ viewBox: appIcon.viewBox, body: appIcon.body, title: 'Klamra' }))}\n`);
 console.log('logos written');

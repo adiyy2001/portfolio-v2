@@ -8,11 +8,11 @@
     "city": "cała Polska"
   },
   "base": "/wzornik/identyfikacja/klamra/",
-  "totalBytes": 4368018,
-  "totalHuman": "4.2 MB",
+  "totalBytes": 4737426,
+  "totalHuman": "4.5 MB",
   "zip": {
     "path": "klamra-identyfikacja.zip",
-    "bytes": 1599868
+    "bytes": 1603080
   },
   "groups": [
     {
@@ -58,7 +58,7 @@
       "id": "favicon",
       "title": "Ikona strony",
       "count": 3,
-      "bytes": 3968,
+      "bytes": 3138,
       "formats": "PNG, ICO, SVG, PNG 180 px",
       "files": [
         "apple-touch-icon.png",
@@ -131,7 +131,7 @@
       "id": "print",
       "title": "Druk",
       "count": 2,
-      "bytes": 34690,
+      "bytes": 32679,
       "formats": "PDF",
       "files": [
         "print/klamra-business-card.pdf",
@@ -165,7 +165,7 @@
       "id": "mockups",
       "title": "Makiety",
       "count": 5,
-      "bytes": 641909,
+      "bytes": 641903,
       "formats": "JPG",
       "files": [
         "mockups/klamra-application.jpg",
@@ -190,7 +190,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1214356,
+      "bytes": 1219316,
       "formats": "PDF",
       "files": [
         "klamra-brandbook.pdf"
@@ -200,7 +200,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 1599868,
+      "bytes": 1603080,
       "formats": "ZIP",
       "files": [
         "klamra-identyfikacja.zip"
@@ -209,16 +209,21 @@
     {
       "id": "meta",
       "title": "Pozostałe",
-      "count": 7,
-      "bytes": 24613,
-      "formats": "SVG, PNG, PNG 1200 px",
+      "count": 12,
+      "bytes": 388696,
+      "formats": "JPG, SVG, PNG, PNG 1200 px",
       "files": [
+        "figures/brandbook-01.jpg",
+        "figures/brandbook-08.jpg",
+        "figures/brandbook-10.jpg",
+        "figures/brandbook-14.jpg",
+        "figures/brandbook-20.jpg",
+        "figures/brandbook-25.jpg",
         "figures/clearspace.svg",
         "figures/direction-k.svg",
         "figures/direction-klamry.svg",
         "figures/direction-terminal.svg",
-        "figures/wordmark-default.svg",
-        "figures/wordmark-kerned.svg",
+        "figures/wordmark-overlay.svg",
         "og.png"
       ]
     }
@@ -273,7 +278,7 @@
     },
     {
       "path": "favicon.ico",
-      "bytes": 1748,
+      "bytes": 751,
       "type": "ico",
       "group": "favicon",
       "sizes": [
@@ -284,11 +289,47 @@
     },
     {
       "path": "favicon.svg",
-      "bytes": 399,
+      "bytes": 566,
       "type": "svg",
       "group": "favicon",
-      "width": 64,
-      "height": 64
+      "width": 16,
+      "height": 16
+    },
+    {
+      "path": "figures/brandbook-01.jpg",
+      "bytes": 44590,
+      "type": "jpg",
+      "group": "meta"
+    },
+    {
+      "path": "figures/brandbook-08.jpg",
+      "bytes": 77399,
+      "type": "jpg",
+      "group": "meta"
+    },
+    {
+      "path": "figures/brandbook-10.jpg",
+      "bytes": 59425,
+      "type": "jpg",
+      "group": "meta"
+    },
+    {
+      "path": "figures/brandbook-14.jpg",
+      "bytes": 60801,
+      "type": "jpg",
+      "group": "meta"
+    },
+    {
+      "path": "figures/brandbook-20.jpg",
+      "bytes": 57500,
+      "type": "jpg",
+      "group": "meta"
+    },
+    {
+      "path": "figures/brandbook-25.jpg",
+      "bytes": 61821,
+      "type": "jpg",
+      "group": "meta"
     },
     {
       "path": "figures/clearspace.svg",
@@ -323,20 +364,12 @@
       "height": 200
     },
     {
-      "path": "figures/wordmark-default.svg",
-      "bytes": 1713,
+      "path": "figures/wordmark-overlay.svg",
+      "bytes": 5979,
       "type": "svg",
       "group": "meta",
-      "width": 491,
-      "height": 190
-    },
-    {
-      "path": "figures/wordmark-kerned.svg",
-      "bytes": 1719,
-      "type": "svg",
-      "group": "meta",
-      "width": 491,
-      "height": 190
+      "width": 811,
+      "height": 300
     },
     {
       "path": "fonts/Epilogue-500.woff2",
@@ -496,7 +529,7 @@
     },
     {
       "path": "klamra-brandbook.pdf",
-      "bytes": 1214356,
+      "bytes": 1219316,
       "type": "pdf",
       "group": "brandbook",
       "pages": 28,
@@ -511,7 +544,7 @@
     },
     {
       "path": "klamra-identyfikacja.zip",
-      "bytes": 1599868,
+      "bytes": 1603080,
       "type": "zip",
       "group": "zip"
     },
@@ -817,7 +850,7 @@
     },
     {
       "path": "mockups/klamra-application.jpg",
-      "bytes": 220742,
+      "bytes": 220736,
       "type": "jpg",
       "group": "mockups"
     },
@@ -864,7 +897,7 @@
     },
     {
       "path": "print/klamra-business-card.pdf",
-      "bytes": 15785,
+      "bytes": 13736,
       "type": "pdf",
       "group": "print",
       "pages": 2,
@@ -879,7 +912,7 @@
     },
     {
       "path": "print/klamra-letterhead.pdf",
-      "bytes": 18905,
+      "bytes": 18943,
       "type": "pdf",
       "group": "print",
       "pages": 1,

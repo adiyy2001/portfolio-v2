@@ -18,6 +18,12 @@ export const wordmarkPlain = (size = 100) => {
   return { d: lineToPath(layout, { x: 0, y: 0, digits: 1, fit: 0.35 }), layout, bounds: textBounds(layout), width: layout.width };
 };
 
+export const labelPath = (text, size, x, y, { anchor = 'middle' } = {}) => {
+  const layout = layoutText(display(), text, { size, tracking: 0 });
+  const left = anchor === 'middle' ? x - layout.width / 2 : x;
+  return lineToPath(layout, { x: left, y, digits: 1, fit: 0.35 });
+};
+
 export const lettersAt = (size = 100, origin = { x: 0, y: 0 }) => {
   const layout = layoutText(display(), 'Klamra', { size, kern: kerning, tracking: -0.01 });
   return layout.glyphs.map(({ glyph, x, advance, char }, index) => {
@@ -82,7 +88,7 @@ export const symbolParts = (colors, { size = 150, border = 10, shadow = 14 } = {
   return { viewBox: [0, 0, size + shadow, size + shadow], body, size, shadow };
 };
 
-export const faviconParts = colors => {
+export const appIconParts = colors => {
   const size = 58;
   const border = 6;
   const shadow = 6;
@@ -93,6 +99,17 @@ export const faviconParts = colors => {
   const right = braceGeometry({ x: c + 13, y: c, h: 28, depth: 6, arm: 6, stroke, side: 'right' });
   const body = shell({ colors, parts, braces: [left, right], cursor: { x: c - 4, y: c - 6, w: 8, h: 12, stroke: 0 } });
   return { viewBox: [0, 0, size + shadow, size + shadow], body };
+};
+
+const rectPath = ([x, y, w, h]) => `M${x} ${y}h${w}v${h}h${-w}Z`;
+const mirror = ([x, y]) => [13 - x, y];
+const leftBrace = [[3, 3], [4, 3], [3, 4], [3, 5], [2, 6], [3, 6], [2, 7], [3, 7], [3, 8], [3, 9], [3, 10], [4, 10]];
+
+export const faviconParts = colors => {
+  const pixels = [...leftBrace, ...leftBrace.map(mirror)].map(([x, y]) => rectPath([x, y, 1, 1])).join('');
+  const shadow = `${rectPath([14, 2, 2, 14])}${rectPath([2, 14, 12, 2])}`;
+  const body = `<g shape-rendering="crispEdges"><path fill="${colors.shadow}" d="${shadow}"/><path fill="${colors.frame}" d="${rectPath([0, 0, 14, 14])}"/><path fill="${colors.face}" d="${rectPath([1, 1, 12, 12])}"/><path fill="${colors.brace}" d="${pixels}"/><path fill="${colors.cursor}" d="${rectPath([6, 5, 2, 4])}"/></g>`;
+  return { viewBox: [0, 0, 16, 16], body };
 };
 
 export const badgeParts = (colors, { height = 150, border = 10, shadow = 14, wordSize = 100 } = {}) => {

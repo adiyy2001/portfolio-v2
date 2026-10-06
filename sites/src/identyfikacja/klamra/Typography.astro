@@ -1,0 +1,7 @@
+---
+import { glueHtml } from './lib/typography';
+
+const html = await Astro.slots.render('default');
+---
+
+<Fragment set:html={glueHtml(html)} />

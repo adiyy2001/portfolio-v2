@@ -1,4 +1,6 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { PDFDocument } from 'pdf-lib';
+import { glueHtml } from '../../../../sites/src/identyfikacja/klamra/lib/typography.ts';
 import { join } from 'node:path';
 import { withBrowser, htmlToImage, htmlToPdf } from '../../lib/browser.mjs';
 import { ensureDir, writeFile } from '../../lib/files.mjs';
@@ -29,22 +31,33 @@ buildIcons();
 buildFigures();
 buildAnimationPage();
 ensureDir(pub('email'));
-writeFile(pub(file.emailHtml), emailHtmlFile());
+writeFile(pub(file.emailHtml), glueHtml(emailHtmlFile()));
 
 const pngData = `data:image/png;base64,${readFileSync(pub(file.logoPng('horizontal', 512))).toString('base64')}`;
 
 const jobs = [
-  { name: 'card-front', html: cardScene('front'), out: file.cardFront, width: 1800, height: 1260, type: 'jpeg' },
-  { name: 'card-back', html: cardScene('back'), out: file.cardBack, width: 1800, height: 1260, type: 'jpeg' },
-  { name: 'letterhead', html: letterheadScene(), out: file.letterhead, width: 1500, height: 1860, type: 'jpeg' },
-  { name: 'application', html: applicationScene(), out: file.application, width: 1900, height: 1180, type: 'jpeg' },
-  { name: 'email', html: emailScene(pngData), out: file.emailMock, width: 1600, height: 1100, type: 'jpeg' },
-  { name: 'avatar', html: avatarScene(), out: file.avatar, width: 1080, height: 1080 },
-  { name: 'post-1', html: postScene(1), out: file.post(1), width: 1080, height: 1350 },
-  { name: 'post-2', html: postScene(2), out: file.post(2), width: 1080, height: 1350 },
-  { name: 'post-3', html: postScene(3), out: file.post(3), width: 1080, height: 1350 },
-  { name: 'og', html: ogScene(), out: file.og, width: 1200, height: 630 },
+  { name: 'card-front', html: glueHtml(cardScene('front')), out: file.cardFront, width: 1800, height: 1260, type: 'jpeg' },
+  { name: 'card-back', html: glueHtml(cardScene('back')), out: file.cardBack, width: 1800, height: 1260, type: 'jpeg' },
+  { name: 'letterhead', html: glueHtml(letterheadScene()), out: file.letterhead, width: 1500, height: 1860, type: 'jpeg' },
+  { name: 'application', html: glueHtml(applicationScene()), out: file.application, width: 1900, height: 1180, type: 'jpeg' },
+  { name: 'email', html: glueHtml(emailScene(pngData)), out: file.emailMock, width: 1600, height: 1100, type: 'jpeg' },
+  { name: 'avatar', html: glueHtml(avatarScene()), out: file.avatar, width: 1080, height: 1080 },
+  { name: 'post-1', html: glueHtml(postScene(1)), out: file.post(1), width: 1080, height: 1350 },
+  { name: 'post-2', html: glueHtml(postScene(2)), out: file.post(2), width: 1080, height: 1350 },
+  { name: 'post-3', html: glueHtml(postScene(3)), out: file.post(3), width: 1080, height: 1350 },
+  { name: 'og', html: glueHtml(ogScene()), out: file.og, width: 1200, height: 630 },
 ];
+
+const mm = 72 / 25.4;
+const setCardBoxes = async path => {
+  const document = await PDFDocument.load(readFileSync(path));
+  for (const page of document.getPages()) {
+    const { width, height } = page.getMediaBox();
+    page.setBleedBox(0, 0, width, height);
+    page.setTrimBox(3 * mm, 3 * mm, 85 * mm, 55 * mm);
+  }
+  writeFileSync(path, await document.save());
+};
 
 const errors = [];
 await withBrowser(async browser => {
@@ -54,9 +67,10 @@ await withBrowser(async browser => {
     if (!job.type) quantizePng(pub(job.out));
     console.log(`  ${job.out}`);
   }
-  await htmlToPdf(browser, { outDir, name: 'card-print', html: cardPrintHtml(), out: pub(file.cardPdf), width: 344, height: 231 });
+  await htmlToPdf(browser, { outDir, name: 'card-print', html: glueHtml(cardPrintHtml()), out: pub(file.cardPdf), width: 344, height: 231 });
+  await setCardBoxes(pub(file.cardPdf));
   console.log(`  ${file.cardPdf}`);
-  await htmlToPdf(browser, { outDir, name: 'letterhead-print', html: letterheadPrintHtml(), out: pub(file.letterheadPdf), width: 794, height: 1123 });
+  await htmlToPdf(browser, { outDir, name: 'letterhead-print', html: glueHtml(letterheadPrintHtml()), out: pub(file.letterheadPdf), width: 794, height: 1123 });
   console.log(`  ${file.letterheadPdf}`);
 });
 

@@ -7,6 +7,7 @@
   "city": "cała Polska",
   "themeColor": "#FFE14A",
   "appIconBackground": "#FFE14A",
+  "appIconSvg": "src/app-icon.svg",
   "testBackground": { "light": "biel", "dark": "atrament" },
   "palette": [
     { "id": "atrament", "name": "Atrament", "group": "primary", "hex": "#111111", "role": "tekst, obrysy, cienie i znak" },

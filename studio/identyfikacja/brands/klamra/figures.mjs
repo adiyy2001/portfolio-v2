@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { writeFile } from '../../lib/files.mjs';
 import { optimizeSvg, viewBoxOf } from '../../lib/svg.mjs';
 import { brand, c, logo } from './theme.mjs';
-import { kerning, wordmark, wordmarkPlain } from './logo-parts.mjs';
+import { kerning, labelPath, wordmark, wordmarkPlain } from './logo-parts.mjs';
 
 const figure = (name, svg) => writeFile(join(brand.paths.pub, 'figures', name), `${optimizeSvg(svg, { precision: 1 })}\n`);
 
@@ -33,15 +33,29 @@ export const buildFigures = () => {
 
   figure('direction-klamry.svg', logo('symbol').replace('<svg ', '<svg width="200" height="200" '));
 
-  const plainWord = wordmarkPlain(120);
-  const kernedTracked = wordmark(120, { x: 10, y: 150 });
-  const baseline = 150;
-  const capLine = baseline - 120 * 0.7;
-  const lines = w => `<g stroke="${c.kamien}" stroke-width="1" fill="none" stroke-dasharray="4 4"><path d="M0 ${baseline}H${w}M0 ${capLine}H${w}"/></g>`;
-  const width = Math.ceil(Math.max(plainWord.width, kernedTracked.width) + 40);
-  const shifted = wordmarkPlain(120);
-  figure('wordmark-default.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${lines(width)}<g transform="translate(10 150)"><path fill="${c.grafit}" d="${shifted.d}"/></g></svg>`);
-  figure('wordmark-kerned.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${lines(width)}<path fill="${c.atrament}" d="${kernedTracked.d}"/></svg>`);
+  const size = 200;
+  const origin = { x: 30, y: 215 };
+  const kerned = wordmark(size, origin);
+  const plainWord = wordmarkPlain(size);
+  const capLine = origin.y - size * 0.7;
+  const frame = Math.ceil(Math.max(plainWord.width, kerned.width) + origin.x * 2);
+  const guide = `<path fill="none" stroke="${c.kamien}" stroke-width="1.5" stroke-dasharray="5 5" d="M0 ${origin.y}H${frame}M0 ${capLine}H${frame}"/>`;
+  const outline = `<g transform="translate(${origin.x} ${origin.y})"><path fill="${c.roz}" d="${plainWord.d}"/></g>`;
+  const pairs = ['Kl', 'la', 'am', 'mr', 'ra'];
+  const labels = pairs
+    .map((pair, index) => {
+      const glyph = kerned.layout.glyphs[index + 1];
+      const boundary = origin.x + glyph.x;
+      const value = kerning[pair];
+      const text = `${pair} ${value > 0 ? '+' : ''}${value}`;
+      const tick = `<path stroke="${c.atrament}" stroke-width="2" d="M${boundary.toFixed(1)} ${origin.y + 8}V${origin.y + 30}"/>`;
+      return `${tick}<path fill="${c.atrament}" d="${labelPath(text, 24, boundary, origin.y + 62)}"/>`;
+    })
+    .join('');
+  figure(
+    'wordmark-overlay.svg',
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${frame} 300">${guide}${outline}<path fill="${c.atrament}" d="${kerned.d}"/>${labels}</svg>`,
+  );
 
   const primary = logo('primary');
   const [, , pw, ph] = viewBoxOf(primary);
