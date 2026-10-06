@@ -5,8 +5,8 @@ import { brand, c, file } from './theme.mjs';
 
 export const icons = {
   rzut: ['M3 3h18v18H3Z', 'M3 13h7M14 13h7', 'M13 13v8'],
-  przekroj: ['M3 21v-4h4v-4h4V9h4V5h6v16Z', 'M15 21l6-6', 'M11 21l6-6'],
-  elewacja: ['M3 9h18v12H3Z', 'M3 9l9-6 9 6', 'M6 12h3v3H6Z', 'M15 12h3v3h-3Z', 'M10 21v-5h4v5'],
+  przekroj: ['M4 4h16v16H4Z', 'M4 14 14 4', 'M4 20 20 4', 'M10 20 20 10'],
+  elewacja: ['M3 21h18', 'M5 21V3h14v18', 'M5 9h14', 'M5 15h14'],
   wymiar: ['M3 5v14', 'M21 5v14', 'M3 12h18', 'M3 12l3-3', 'M3 12l3 3', 'M21 12l-3-3', 'M21 12l-3 3'],
   siatka: ['M3 3h18v18H3Z', 'M9 3v18', 'M15 3v18', 'M3 9h18', 'M3 15h18'],
   dzialka: ['M4 6l12-3 5 8-4 10H4Z', 'M9 10h6v6H9Z'],
@@ -28,6 +28,6 @@ export const buildIcons = () => {
     if (!icons[name]) throw new Error(`no drawing for icon ${name}`);
     writeFile(join(brand.paths.pub, file.icon(name)), `${optimizeSvg(iconSvg(name))}\n`);
   }
-  const symbols = brand.iconNames.map(name => `<symbol id="${name}" viewBox="0 0 24 24">${icons[name].map(d => `<path d="${d}"/>`).join('')}</symbol>`).join('');
-  writeFile(join(brand.paths.pub, file.iconsSprite), `${optimizeSvg(`<svg xmlns="http://www.w3.org/2000/svg" ${attrs(c.czern)}>${symbols}</svg>`)}\n`);
+  const symbols = brand.iconNames.map(name => `<symbol id="${name}" viewBox="0 0 24 24" ${attrs(c.czern)}>${icons[name].map(d => `<path d="${d}"/>`).join('')}</symbol>`).join('');
+  writeFile(join(brand.paths.pub, file.iconsSprite), `<svg xmlns="http://www.w3.org/2000/svg">${symbols}</svg>\n`);
 };

@@ -8,11 +8,11 @@
     "city": "Wrocław"
   },
   "base": "/wzornik/identyfikacja/rzut/",
-  "totalBytes": 4899814,
+  "totalBytes": 4903145,
   "totalHuman": "4.7 MB",
   "zip": {
     "path": "rzut-identyfikacja.zip",
-    "bytes": 1663780
+    "bytes": 1664252
   },
   "groups": [
     {
@@ -106,7 +106,7 @@
       "id": "icons",
       "title": "Ikony",
       "count": 13,
-      "bytes": 2642,
+      "bytes": 5414,
       "formats": "SVG",
       "files": [
         "icons/rzut-icons.svg",
@@ -187,7 +187,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1639004,
+      "bytes": 1639091,
       "formats": "PDF",
       "files": [
         "rzut-brandbook.pdf"
@@ -197,7 +197,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 1663780,
+      "bytes": 1664252,
       "formats": "ZIP",
       "files": [
         "rzut-identyfikacja.zip"
@@ -382,9 +382,11 @@
     },
     {
       "path": "icons/rzut-icons.svg",
-      "bytes": 111,
+      "bytes": 2921,
       "type": "svg",
-      "group": "icons"
+      "group": "icons",
+      "width": 24,
+      "height": 24
     },
     {
       "path": "icons/svg/rzut-icon-adres.svg",
@@ -420,7 +422,7 @@
     },
     {
       "path": "icons/svg/rzut-icon-elewacja.svg",
-      "bytes": 244,
+      "bytes": 207,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -436,7 +438,7 @@
     },
     {
       "path": "icons/svg/rzut-icon-przekroj.svg",
-      "bytes": 217,
+      "bytes": 216,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -861,7 +863,7 @@
     },
     {
       "path": "rzut-brandbook.pdf",
-      "bytes": 1639004,
+      "bytes": 1639091,
       "type": "pdf",
       "group": "brandbook",
       "pages": 29,
@@ -876,7 +878,7 @@
     },
     {
       "path": "rzut-identyfikacja.zip",
-      "bytes": 1663780,
+      "bytes": 1664252,
       "type": "zip",
       "group": "zip"
     },

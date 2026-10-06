@@ -161,7 +161,7 @@ export const content: CaseContent = {
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
-    title: 'Twoja firma też może leżeć na siatce',
+    title: 'Twoja marka też może leżeć na siatce',
     text: 'Opowiedz mi, czym się zajmujesz i do kogo mówisz. Zaproponuję kierunek, pokażę trzy szkice logo i dowiozę komplet plików na każdą okazję.',
   },
 };

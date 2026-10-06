@@ -71,7 +71,7 @@ std({
   section: 'Kierunek i strategia',
   title: 'Dla kogo i o czym',
   lead: content.strategy.audience,
-  body: content.strategy.values.map((value, i) => `<article class="value" style="${col(1 + i * 4, 4)}"><span class="cn idx">${pad(i + 1)}</span><h3>${value.title}</h3><p>${value.text}</p></article>`).join(''),
+  body: content.strategy.values.map((value, i) => `<article class="value big" style="${col(1 + i * 4, 4)}"><span class="cn idx">${pad(i + 1)}</span><h3>${value.title}</h3><p>${value.text}</p></article>`).join(''),
 });
 
 std({
@@ -92,14 +92,14 @@ std({
 std({
   section: 'Proces',
   title: `Wybrany kierunek: ${content.process.chosen.title}`,
-  body: `<div class="thumb big" style="${col(1, 4)}"><img src="${svgUri('figures/direction-modul.svg')}" alt=""></div>
-<div class="prose" style="${col(6, 7)}"><p style="font-size:40px;line-height:1.35">${content.process.chosen.reason}</p></div>`,
+  body: `<div class="thumb big" style="${col(1, 6)}"><img src="${svgUri('figures/direction-modul.svg')}" alt=""></div>
+<div class="prose" style="${col(8, 5)}"><p style="font-size:40px;line-height:1.35">${content.process.chosen.reason}</p></div>`,
 });
 
 std({
   section: 'Proces',
   title: 'Trzy poprawki',
-  body: content.process.refinement.map((step, i) => `<article class="value" style="${col(1 + i * 4, 4)}"><span class="cn idx">${pad(i + 1)}</span><h3>${step.title}</h3><p>${step.text}</p></article>`).join(''),
+  body: content.process.refinement.map((step, i) => `<article class="value big" style="${col(1 + i * 4, 4)}"><span class="cn idx">${pad(i + 1)}</span><h3>${step.title}</h3><p>${step.text}</p></article>`).join(''),
 });
 
 std({
@@ -272,8 +272,8 @@ std({
   title: 'Media społecznościowe',
   compact: true,
   body: `${[1, 2, 3].map(n => `<figure class="shot post" style="${col(1 + (n - 1) * 3, 3)}"><img src="${png(file.post(n))}" alt=""><figcaption>${extras.social[n - 1].headline}</figcaption></figure>`).join('')}
-<figure class="shot" style="${col(10, 3)}"><img src="${png(file.avatar)}" alt=""><figcaption>Awatar</figcaption></figure>
-<figure class="shot" style="${col(10, 3)}"><img src="${png(file.og)}" alt=""><figcaption>Obraz do udostępniania</figcaption></figure>`,
+<div class="stack" style="${col(10, 3)}"><figure class="shot"><img src="${png(file.avatar)}" alt=""><figcaption>Awatar</figcaption></figure>
+<figure class="shot"><img src="${png(file.og)}" alt=""><figcaption>Obraz do udostępniania</figcaption></figure></div>`,
 });
 
 const frameDir = ensureDir(join(brand.paths.out, 'bb-frames'));
@@ -352,17 +352,21 @@ html,body{margin:0}
 .value{border-top:2px solid ${c.czern};padding-top:14px}
 .value h3{font-size:40px;line-height:1.1;margin:12px 0 16px}
 .value p{font-size:28px;line-height:1.45}
+.value.big .idx{font-size:120px;line-height:1}
+.value.big h3{font-size:60px;margin:20px 0 24px}
+.value.big p{font-size:37px}
 .idx{font-weight:700;font-size:26px;color:${c.kobalt};display:inline-block}
 .personality{display:grid;gap:0}
 .personality span{font:700 130px/1 'Rzut Sans',sans-serif;letter-spacing:-.03em}
 .personality .small{margin-top:30px}
 blockquote{margin:0;font-size:34px;line-height:1.25;font-weight:500;border-top:2px solid ${c.biel};padding-top:18px}
-.dir{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
+.dir{display:grid;grid-template-columns:400px 1fr;gap:28px;align-items:start}
 .thumb{background:${c.papier};display:flex;align-items:center;justify-content:center}
 .thumb img{width:100%;height:auto;display:block}
-.thumb.big{aspect-ratio:1/1}
-.dir h3{font-size:50px;line-height:1.05;margin-bottom:10px}
-.dir p{font-size:26px;line-height:1.45;margin-bottom:12px}
+.thumb.big{height:640px}
+.thumb.big img{height:100%;width:100%;object-fit:contain}
+.dir h3{font-size:56px;line-height:1.05;margin-bottom:14px}
+.dir p{font-size:28px;line-height:1.4;margin-bottom:14px}
 .dir .what{color:${c.grafit}}
 .stage{background:${c.papier};display:flex;align-items:center;justify-content:center;height:640px}
 .stage.fig{background:${c.biel};border:2px solid ${c.mgla}}
@@ -417,8 +421,8 @@ td{padding:10px;border-top:2px solid ${c.mgla};font-size:20px}
 .crop.half{height:210px;width:50%}
 .crop.quarter{height:105px;width:50%}
 .rule{border-top:2px solid ${c.czern};padding-top:14px}
-.rule h3{font-size:42px;line-height:1.1;margin-bottom:12px}
-.rule p{font-size:28px;line-height:1.4;margin-bottom:12px}
+.rule h3{font-size:46px;line-height:1.1;margin-bottom:14px}
+.rule p{font-size:30px;line-height:1.4;margin-bottom:14px}
 .rule .yes b{color:${c.kobalt};margin-right:8px}
 .rule .no{color:${c.grafit};text-decoration:line-through}
 .rule .no b{text-decoration:none;display:inline-block;margin-right:8px}
@@ -426,6 +430,7 @@ td{padding:10px;border-top:2px solid ${c.mgla};font-size:20px}
 .shot img{width:100%;height:auto;display:block;border:2px solid ${c.mgla}}
 .shot figcaption{font-size:21px;line-height:1.35;color:${c.grafit}}
 .shot.post figcaption{font-size:22px}
+.stack{display:grid;gap:24px;align-content:start}
 .frames{display:grid;grid-template-columns:repeat(4,1fr);column-gap:24px}
 .frames img{width:100%;height:auto;display:block;border:2px solid ${c.mgla}}
 .toc{position:absolute;top:215px;margin:0;padding:0;list-style:none;display:grid;gap:0}
