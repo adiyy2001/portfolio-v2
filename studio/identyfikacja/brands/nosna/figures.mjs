@@ -30,7 +30,8 @@ export const buildFigures = () => {
   );
 
   const mark = primaryLockup({ day: 'piatek', stage: 'przedzalnia', bpm: 100 }, { thread: c.piatek, ink: c.atrament }, primaryWord());
-  figure('direction-nosna.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${mark.viewBox.join(' ')}">${mark.body}</svg>`);
+  const pad = 20;
+  figure('direction-nosna.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${-pad} ${-pad} ${mark.viewBox[2] + pad * 2} ${mark.viewBox[3] + pad * 2}">${mark.body}</svg>`);
 
   const base = wordmark(120, { x: 0, y: 0 }, {});
   const kerned = wordmark(120, { x: 0, y: 0 }, kerning);
@@ -39,7 +40,7 @@ export const buildFigures = () => {
   const plainDraw = wordmark(120, { x: 12, y: 150 }, {});
   const kernDraw = wordmark(120, { x: 12, y: 150 }, kerning);
   figure('wordmark-default.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${lines}<path fill="${c.grafit}" d="${plainDraw.d}"/></svg>`);
-  figure('wordmark-kerned.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${lines}<path fill="${c.atrament}" d="${kernDraw.d}"/></svg>`);
+  figure('wordmark-kerned.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${lines}<path fill="none" stroke="${c.piatek}" stroke-width="1.6" d="${plainDraw.d}"/><path fill="${c.atrament}" d="${kernDraw.d}"/></svg>`);
 
   const unit = 76;
   const word = primaryWord();

@@ -250,7 +250,7 @@ export const extras = {
     'Trzy kolumny, jedna na dzień. Każda w swoim kolorze.',
     'Godziny, parametry i ziarno w kroju monospace, tekst w Syne.',
     'Pole zawsze na nośnej, nigdy obok niej i nigdy pod napisem.',
-    'Zero tekstur, zdjęć w tle i cieni. Kolor jest płaski.',
+    'Zero tekstur, zdjęć w tle i cieni w znaku, wzorze i układach. Kolor jest płaski, cień pojawia się tylko pod przedmiotami w makietach.',
     'Kolor niesie dzień na dwa sposoby: nitki w kolorze dnia na atramencie albo pole w atramencie na tle w kolorze dnia. Na kości kolor dnia jest tylko dekoracją.',
     'Pierścień odbiornika zawsze jest widoczny. Pole może wyjść poza lewą krawędź plakatu, prawa strona kończy się pierścieniem.',
   ],

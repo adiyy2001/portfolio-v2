@@ -18,6 +18,10 @@ export const icons = {
   wejscie: ['M6 21V4h10v17', 'M3 21h18', 'M12.5 12.5h1'],
 };
 
+export const iconLabels = { glosnik: 'głośnik', sluchawki: 'słuchawki', wejscie: 'wejście' };
+
+export const iconLabel = name => iconLabels[name] ?? name;
+
 const attrs = 'fill="none" stroke-width="2" stroke-linecap="butt" stroke-linejoin="miter"';
 
 export const iconSvg = (name, stroke = c.atrament) =>

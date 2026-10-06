@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { exportName } from './Generator';
 import { content, contact, extras } from './content';
@@ -93,5 +95,21 @@ describe('case study content', () => {
       'mono-black',
       'negative',
     ]);
+  });
+});
+
+describe('generator hydration', () => {
+  const dir = join(process.cwd(), 'src', 'identyfikacja', 'nosna');
+  const page = readFileSync(join(dir, 'Page.astro'), 'utf8');
+  const styles = readFileSync(join(dir, 'styles.ts'), 'utf8');
+
+  it('hydrates the generator on load because its island has no layout box', () => {
+    expect(page).toMatch(/<Generator client:load/);
+    expect(page).not.toMatch(/<Generator client:(visible|media|only)/);
+  });
+
+  it('keeps the island out of the layout through display contents only with an eager hydration', () => {
+    expect(styles).toMatch(/astro-island,\.gen\{display:contents\}/);
+    expect(page).not.toMatch(/client:visible/);
   });
 });

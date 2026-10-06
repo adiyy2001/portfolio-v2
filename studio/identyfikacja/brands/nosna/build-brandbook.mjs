@@ -1,14 +1,17 @@
+import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { colorTable, contrastTable } from '../../lib/brand.mjs';
 import { htmlToPdf, withBrowser } from '../../lib/browser.mjs';
 import { dayOf, grid, variantName } from '../../../../sites/src/identyfikacja/nosna/lib/field.ts';
 import { brand, c, content, contact, dataUri, extras, file, baseCss, readPub } from './theme.mjs';
-import { iconSvg } from './icons.mjs';
+import { iconLabel, iconSvg } from './icons.mjs';
 import { markSvg } from './scenes.mjs';
 
 const pub = path => join(brand.paths.pub, path);
 const jpeg = path => `data:image/jpeg;base64,${readFileSync(pub(path)).toString('base64')}`;
+const lastFrame = () =>
+  `data:image/jpeg;base64,${execFileSync('ffmpeg', ['-v', 'error', '-sseof', '-0.1', '-i', pub(file.mp4), '-update', '1', '-frames:v', '1', '-vf', 'scale=900:-1', '-q:v', '2', '-f', 'image2', '-c:v', 'mjpeg', 'pipe:1'], { maxBuffer: 1 << 26 }).toString('base64')}`;
 const svgUri = path => dataUri(readPub(path));
 const palette = colorTable(brand);
 const contrast = contrastTable(brand);
@@ -84,7 +87,7 @@ sheet('Dwanaście pól', `<div class="grid12">${grid.map(variant => `<figure sty
 
 sheet('Reguły generatora', `${head('Cztery parametry')}<ol class="params">${extras.rules.map(rule => `<li><b>${rule.parameter}</b><em>${rule.sets}</em><p>${rule.text}</p></li>`).join('')}</ol>`, { ground: 'sobota' });
 
-sheet('Kerning', `${head('Ręczny kerning napisu', content.process.refinement[0].text)}<div class="pair"><figure><img src="${svgUri('figures/wordmark-default.svg')}" alt=""><figcaption>Bez korekty</figcaption></figure><figure><img src="${svgUri('figures/wordmark-kerned.svg')}" alt=""><figcaption>Po korekcie</figcaption></figure></div>`);
+sheet('Kerning', `${head('Ręczny kerning napisu', content.process.refinement[0].text)}<div class="pair"><figure><img src="${svgUri('figures/wordmark-default.svg')}" alt=""><figcaption>Bez korekty</figcaption></figure><figure><img src="${svgUri('figures/wordmark-kerned.svg')}" alt=""><figcaption>Po korekcie, kontur pokazuje stary rozstaw<small>Pary w tysięcznych em: No -6, oś +4, śn -2, na -4</small></figcaption></figure></div>`);
 
 const m = extras.minimum;
 const minRow = (key, src, bg) => `<div class="min-row"><div class="min-art" style="background:${bg}"><img src="${src}" alt="" style="width:${m[key].px}px"><i class="dim" style="width:${m[key].px}px"></i></div><p><b>${m[key].label}</b><span>${m[key].px} px${m[key].mm ? `, ${m[key].mm} mm w druku` : ' na ekranie'}</span></p></div>`;
@@ -109,7 +112,7 @@ sheet('Kroje', `<div class="faces"><div class="panel"><p class="mega display">Sy
 
 sheet('Skala i znaki', `${head('Skala pisma i polskie znaki')}<div class="scale">${extras.typeScale.map(row => `<div><span class="${row.font}" style="font-size:${Math.min(row.size * 1.3, 72)}px;font-weight:${row.weight};line-height:1.1">${row.name}</span><span class="small">${row.size} px, interlinia ${row.line}. ${row.use}</span></div>`).join('')}</div><p class="glyphs display">${extras.glyphs}</p>`);
 
-sheet('Ikony', `${head('Dwanaście ikon', 'Rysowane kreską na siatce 24 px, z okrągłymi końcami i jednym pierścieniem jako akcentem.')}<div class="icons">${brand.iconNames.map(name => `<figure><img src="${dataUri(iconSvg(name, c.atrament))}" alt=""><figcaption>${name}</figcaption></figure>`).join('')}</div>`, { ground: 'niedziela' });
+sheet('Ikony', `${head('Dwanaście ikon', 'Rysowane kreską na siatce 24 px, z okrągłymi końcami i jednym pierścieniem jako akcentem.')}<div class="icons">${brand.iconNames.map(name => `<figure><img src="${dataUri(iconSvg(name, c.atrament))}" alt=""><figcaption>${iconLabel(name)}</figcaption></figure>`).join('')}</div>`, { ground: 'niedziela' });
 
 sheet('Wzór i układ', `<div class="pattern-full" style="background-image:url('${svgUri(file.pattern)}')"></div><div class="over panel"><h2 class="h2s">Wzór z interferencji</h2><p class="lead tight">${extras.graphics[0].text}</p><ul class="rules rules--small">${list(extras.layoutRules)}</ul></div>`, { bleed: true });
 
@@ -121,7 +124,7 @@ sheet('Wizytówka i papier', `<div class="paper-grid"><div class="cards">${mock(
 
 sheet('Plakaty i identyfikator', `<img class="full" src="${jpeg(file.application)}" alt=""><p class="bleed-cap bleed-cap--light">Plakaty dni na kolorze dnia z polem w atramencie. Pierścień jest zawsze widoczny. Identyfikator na smyczy z kodem kreskowym.</p>`, { bleed: true, low: true });
 
-sheet('Animacja i kontakt', `<div class="split"><div>${head('Trzy dni w trzy sekundy')}<p class="lead tight" style="margin:-6px 0 24px">${extras.animation}</p><dl class="facts panel">${[['Adres', `${contact.street}, ${contact.city}`], ['Telefon', contact.phone], ['E-mail', contact.email]].map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl></div><div class="panel center">${mock(file.emailMock)}</div></div>`, { ground: 'niedziela' });
+sheet('Animacja i kontakt', `<div class="split"><div>${head('Trzy dni w trzy sekundy')}<p class="lead tight" style="margin:-6px 0 24px">${extras.animation}</p><dl class="facts panel">${[['Adres', `${contact.street}, ${contact.city}`], ['Telefon', contact.phone], ['E-mail', contact.email]].map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl></div><figure class="panel frame"><img src="${lastFrame()}" alt=""><figcaption>Ostatnia klatka animacji, pole osiada w znaku głównym</figcaption></figure></div>`, { ground: 'niedziela' });
 
 if (sheets.length !== total) throw new Error(`expected ${total} pages, built ${sheets.length}`);
 
@@ -158,6 +161,9 @@ h3{font-size:40px;line-height:1.1;margin-bottom:14px;font-weight:800}
 .small{font:500 22px/1.5 'Nosna Mono'}
 .panel{background:${c.papier};color:${c.atrament};padding:46px 54px}
 .panel.center .mock{width:100%;height:auto}
+.panel.frame{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;align-self:stretch}
+.panel.frame img{max-height:700px;width:auto;max-width:100%}
+.panel.frame figcaption{font:700 22px/1.3 'Nosna Mono';text-align:center}
 .panel.center{display:grid;grid-template-columns:minmax(0,1fr);place-items:center;align-self:stretch;min-height:420px}
 .split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:70px;flex:1;min-height:0;align-items:start}
 .split.wide{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
@@ -184,8 +190,8 @@ h3{font-size:40px;line-height:1.1;margin-bottom:14px;font-weight:800}
 .steps h3{font-size:36px;margin:0}
 .steps p{font:500 28px/1.45 'Nosna Display'}
 .persona{display:flex;flex-direction:column;justify-content:center;height:100%;gap:6px}
-.persona span{font:800 60px/1.05 'Nosna Display';letter-spacing:-.02em}
-.persona span::after{content:'';display:inline-block;width:34px;height:34px;border:9px solid var(--ink);border-radius:50%;margin-left:30px;box-sizing:border-box}
+.persona span{font:800 56px/1.05 'Nosna Display';letter-spacing:-.02em;white-space:nowrap}
+.persona span::after{content:'';display:inline-block;width:34px;height:34px;border:9px solid var(--ink);border-radius:50%;margin-left:20px;box-sizing:border-box}
 .quote{padding:40px 46px;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:40px}
 blockquote{margin:0;font:800 38px/1.25 'Nosna Display'}
 .avoid{font:500 26px/1.5 'Nosna Display'}
@@ -227,7 +233,8 @@ blockquote{margin:0;font:800 38px/1.25 'Nosna Display'}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:34px;flex:1}
 .pair figure{margin:0;background:${c.papier};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px}
 .pair img{width:80%}
-.pair figcaption{font:700 26px/1 'Nosna Mono'}
+.pair figcaption{font:700 26px/1.3 'Nosna Mono';text-align:center}
+.pair figcaption small{display:block;margin-top:10px;font:500 22px/1.3 'Nosna Mono'}
 .mins{display:grid;gap:22px}
 .min-row{display:grid;grid-template-columns:1fr 330px;gap:26px;align-items:center}
 .min-art{height:150px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:10px;padding:0 36px;background:${c.papier}}
@@ -280,7 +287,7 @@ blockquote{margin:0;font:800 38px/1.25 'Nosna Display'}
 .paper-grid .side{align-self:stretch;display:flex;flex-direction:column;justify-content:center}
 .side h3{font-size:40px;margin-bottom:24px}
 .side p{font:500 26px/1.5 'Nosna Display';margin-bottom:18px}
-.full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.full{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:${c.mgla}}
 .mock{display:block}
 .toc{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;flex:1;min-height:0}
 .toc-day h3{background:var(--g);color:${c.atrament};font-size:62px;padding:16px 28px;margin:0 0 6px}

@@ -10,11 +10,19 @@ interface Props {
 
 const { manifest, class: className } = Astro.props;
 const slug = manifest.brand.slug;
-const formatsOf = (formats: string) => {
-  const parts = formats.split(', ');
-  return parts.some(part => /^PNG \d/.test(part))
-    ? parts.filter(part => part !== 'PNG').join(', ')
-    : formats;
+const formatsOf = (group: Manifest['groups'][number]) => {
+  const parts = group.formats.split(', ');
+  if (!parts.some(part => /^PNG \d/.test(part))) return group.formats;
+  const longSides = [
+    ...new Set(
+      filesOf(manifest, group)
+        .filter(file => file.type === 'png' && file.width && file.height)
+        .map(file => Math.max(file.width ?? 0, file.height ?? 0)),
+    ),
+  ].sort((a, b) => a - b);
+  const kinds = parts.filter(part => part !== 'PNG' && !/^(PNG )?\d+( px)?$/.test(part));
+  const sizes = longSides.length > 0 ? `PNG ${longSides.join(', ')} px, dłuższy bok` : '';
+  return [...kinds, sizes].filter(Boolean).join(', ');
 };
 const rows = manifest.groups.filter(group => group.id !== 'zip' && group.id !== 'meta');
 ---
@@ -32,7 +40,7 @@ const rows = manifest.groups.filter(group => group.id !== 'zip' && group.id !== 
         <details>
           <summary>
             <span class="dl__title">{group.title}</span>
-            <span class="dl__formats">{formatsOf(group.formats)}</span>
+            <span class="dl__formats">{formatsOf(group)}</span>
             <span class="dl__count">{filesLabel(group.count)}</span>
             <span class="dl__size">{formatBytes(group.bytes)}</span>
           </summary>
