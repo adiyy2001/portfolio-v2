@@ -2,7 +2,7 @@ import { join } from 'node:path';
 import { optimizeSvg } from '../../lib/svg.mjs';
 import { writeFile } from '../../lib/files.mjs';
 import { dayOf, days, grid, markBody, primaryLockup, stageOf, stages } from '../../../../sites/src/identyfikacja/nosna/lib/field.ts';
-import { brand, c, logo } from './theme.mjs';
+import { brand, c } from './theme.mjs';
 import { kerning, primaryWord, wordmark } from './logo-parts.mjs';
 
 const figure = (name, svg) => writeFile(join(brand.paths.pub, 'figures', name), `${optimizeSvg(svg, { precision: 1 })}\n`);

@@ -20,7 +20,6 @@ export const horizontalSvg = (ink, style = '') => {
 const piatek = { day: 'piatek', stage: 'przedzalnia', bpm: 100 };
 const tkalnia = { day: 'sobota', stage: 'tkalnia', bpm: 128 };
 const farb = { day: 'niedziela', stage: 'farbiarnia', bpm: 92 };
-const wyk = { day: 'sobota', stage: 'wykonczalnia', bpm: 146 };
 const dayColor = id => dayOf(id).color;
 
 const mm = n => `calc(${n} * var(--mm))`;

@@ -45,7 +45,7 @@ export const descriptor = (targetWidth, { size = 22, weight = 400, origin = { x:
   return { d, bounds, layout, tracking };
 };
 
-const archPath = (inset, { x0 = 12.5, x1 = 147.5, top = 12.5, bottom = 187.5, cy = 80 } = {}) => {
+const archPath = (inset, { x0 = 12.5, x1 = 147.5, bottom = 187.5, cy = 80 } = {}) => {
   const left = x0 + inset;
   const right = x1 - inset;
   const r = (x1 - x0) / 2 - inset;

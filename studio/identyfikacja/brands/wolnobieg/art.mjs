@@ -14,7 +14,6 @@ export const cornerArcs = ({ size, corner = 'br', colors = stripeColors(), width
 };
 
 export const arcsSvg = ({ w, h, corner = 'br', colors, width, gap, start, round = true, style = '' }) => {
-  const size = Math.max(w, h);
   const cx = corner.includes('r') ? w : 0;
   const cy = corner.includes('b') ? h : 0;
   const from = corner === 'br' ? 180 : corner === 'bl' ? 270 : corner === 'tl' ? 0 : 90;

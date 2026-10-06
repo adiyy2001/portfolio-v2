@@ -14,7 +14,6 @@ const palette = colorTable(brand);
 const contrast = contrastTable(brand);
 const colorName = id => palette.find(entry => entry.id === id)?.name ?? id;
 const total = 28;
-const light = { '#5b2f14': c['krem-jasny'] };
 const onOrange = { '#5b2f14': c.kakao, '#ec7424': c['krem-jasny'] };
 
 const sheets = [];

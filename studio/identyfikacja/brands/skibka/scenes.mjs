@@ -1,4 +1,4 @@
-import { c, contact, extras, file, baseCss, grain, logo } from './theme.mjs';
+import { c, contact, extras, baseCss, grain, logo } from './theme.mjs';
 import { patternStrip } from './pattern.mjs';
 
 export const ink = (svg, color) => svg.replace(/fill="#[0-9a-fA-F]{3,8}"/g, `fill="${color}"`);
