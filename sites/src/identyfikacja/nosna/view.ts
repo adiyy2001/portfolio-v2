@@ -16,6 +16,14 @@ export const iconNames = (manifest: Manifest) =>
     return match ? [match[1]] : [];
   });
 
+export const iconLabels: Record<string, string> = {
+  glosnik: 'głośnik',
+  sluchawki: 'słuchawki',
+  wejscie: 'wejście',
+};
+
+export const iconLabel = (name: string) => iconLabels[name] ?? name;
+
 export const ink = '#0E0E12';
 
 export const logoVariants = [

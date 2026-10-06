@@ -2,41 +2,77 @@
 import { link, portfolio } from '../../shared/link';
 import ColorTable from '../shared/ColorTable.astro';
 import ContrastTable from '../shared/ContrastTable.astro';
-import Downloads from '../shared/Downloads.astro';
 import SampleLine from '../shared/SampleLine.astro';
 import Shell from '../shared/Shell.astro';
 import { fontFaceCss, preloadFonts } from '../shared/fonts';
 import { formatBytes } from '../shared/format';
 import { readManifest } from '../shared/manifest';
+import Downloads from './Downloads.astro';
 import Generator from './Generator.tsx';
 import { brand } from './brand';
 import { content, contact, extras } from './content';
 import { primaryVariant } from './lib/field';
 import { css } from './styles';
-import { asset, fileInfo, gridCells, ink, iconNames, logoVariants, sizeTest } from './view';
+import {
+  asset,
+  fileInfo,
+  gridCells,
+  iconLabel,
+  iconNames,
+  ink,
+  logoVariants,
+  sizeTest,
+} from './view';
 
 const manifest = readManifest('nosna');
 const colors = manifest.palette;
 const icons = iconNames(manifest);
 const zip = manifest.zip;
-const mockups = content.applications.map(item => ({
-  ...item,
-  info: fileInfo(manifest, item.image),
-}));
+const mockups = content.applications
+  .filter(item => item.id !== 'identyfikator')
+  .map(item => ({
+    ...item,
+    info: fileInfo(manifest, item.image),
+  }));
 const posts = extras.social.map(item => ({
   ...item,
   path: `social/nosna-${item.id}.png`,
 }));
 const fontCss = fontFaceCss(manifest);
+const brandPages = manifest.files.find(file => file.path === 'nosna-brandbook.pdf')?.pages ?? 28;
+const printPdfs = manifest.files.filter(
+  file => file.path.startsWith('print/') && file.type === 'pdf',
+).length;
 const days = [
-  { id: 'piatek', name: 'Piątek', sub: 'Zadanie, kierunek, proces', text: 'piatek-tekst' },
-  { id: 'sobota', name: 'Sobota', sub: 'System i generator', text: 'sobota-tekst' },
+  {
+    id: 'piatek',
+    name: 'Piątek',
+    when: 'od 18:00',
+    sub: 'Zadanie, kierunek, proces',
+    text: 'piatek-tekst',
+  },
+  {
+    id: 'sobota',
+    name: 'Sobota',
+    when: 'od 20:00',
+    sub: 'System i generator',
+    text: 'sobota-tekst',
+  },
   {
     id: 'niedziela',
     name: 'Niedziela',
+    when: 'od 16:00',
     sub: 'Animacja, zastosowania, pliki',
     text: 'niedziela-tekst',
   },
+] as const;
+const showcase = content.applications.find(item => item.id === 'identyfikator')!;
+const showcaseInfo = fileInfo(manifest, showcase.image);
+const minimums = [
+  { key: 'primary', src: 'logo/nosna-primary.svg' },
+  { key: 'horizontal', src: 'logo/nosna-horizontal.svg' },
+  { key: 'symbol', src: 'logo/nosna-symbol.svg' },
+  { key: 'favicon', src: 'favicon.svg' },
 ] as const;
 const dayStyle = (index: number) =>
   `--day:var(--${days[index].id});--day-text:var(--${days[index].text})`;
@@ -55,24 +91,32 @@ const dayStyle = (index: number) =>
   </header>
 
   <main id="main" tabindex="-1">
-    <section class="hero" aria-labelledby="t-hero">
-      <div class="wrap">
-        <p class="kicker">Identyfikacja wizualna, festiwal sztuki nowych mediów, Łódź</p>
-        <h1 id="t-hero">Nośna</h1>
+    <section class="hero" aria-labelledby="t-hero" style="--hero:var(--piatek)" data-hero>
+      <div class="wrap hero__grid">
+        <p class="kicker hero__kicker">
+          Identyfikacja wizualna, festiwal sztuki nowych mediów, Łódź
+        </p>
+        <Generator client:load initial={primaryVariant} ink={ink} />
+        <h1 id="t-hero" class="hero__title">
+          Nośna
+        </h1>
         <p class="hero__lead">{content.lead}</p>
         <ul class="hero__nav" aria-label="Spis treści">
           {days.map(day => (
-            <li>
+            <li style={`--d:var(--${day.id})`}>
               <a href={`#${day.id}`}>
-                <i style={`background:var(--${day.id})`}></i>
-                {day.name}: {day.sub}
+                <span class="hero__when">{day.when}</span>
+                <strong>{day.name}</strong>
+                <span>{day.sub}</span>
               </a>
             </li>
           ))}
         </ul>
-      </div>
-      <div class="wrap" style="margin-top:clamp(24px,4vw,44px)">
-        <Generator client:visible initial={primaryVariant} ink={ink} />
+        <p class="hero__give">
+          <b>Co dostaniesz:</b> dwanaście pól do pobrania jako SVG, brand book na {brandPages}{' '}
+          stron, {printPdfs} PDF do druku (wizytówka i papier firmowy), animację MP4 i WebM oraz
+          paczkę ZIP z logo, kolorami i krojami.
+        </p>
       </div>
     </section>
 
@@ -149,9 +193,28 @@ const dayStyle = (index: number) =>
           </div>
         </div>
 
-        <div class="row">
+        <div class="row row--show">
           <div class="row__label">
             <span class="row__no">03</span>
+            <h3>Plakaty dni i identyfikator</h3>
+          </div>
+          <div class="row__body">
+            <figure class="show">
+              <img
+                src={asset(showcase.image)}
+                alt={showcase.alt}
+                width={showcaseInfo?.width}
+                height={showcaseInfo?.height}
+                loading="lazy"
+              />
+              <figcaption>{showcase.caption}</figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row__label">
+            <span class="row__no">04</span>
             <h3>Proces</h3>
           </div>
           <div class="row__body">
@@ -201,7 +264,10 @@ const dayStyle = (index: number) =>
                     height="190"
                     loading="lazy"
                   />
-                  <figcaption>Po korekcie</figcaption>
+                  <figcaption>
+                    Po korekcie, kontur pokazuje stary rozstaw
+                    <small>Pary w tysięcznych em: No -6, oś +4, śn -2, na -4</small>
+                  </figcaption>
                 </figure>
               </div>
             </div>
@@ -239,7 +305,7 @@ const dayStyle = (index: number) =>
       <div class="wrap">
         <div class="row">
           <div class="row__label">
-            <span class="row__no">04</span>
+            <span class="row__no">05</span>
             <h3>Logo jako system</h3>
           </div>
           <div class="row__body">
@@ -290,21 +356,48 @@ const dayStyle = (index: number) =>
                 />
               </figure>
               <div class="prose">
-                <h4>Pole ochronne i rozmiary</h4>
+                <h4>Pole ochronne</h4>
                 <p>{extras.clearSpace}</p>
-                <ul class="plain">
-                  <li>Sygnet: {extras.minimum.symbol}.</li>
-                  <li>Logo z napisem: {extras.minimum.fullStamp}.</li>
-                  <li>Logo główne: {extras.minimum.primary}.</li>
-                </ul>
               </div>
             </div>
+            <div class="prose">
+              <h4>Minimalne rozmiary</h4>
+              <p>
+                Każdy znak ma jeden próg: poniżej niego używamy mniejszego znaku. Poniżej rysunki w
+                skali 1:1.
+              </p>
+            </div>
+            <ul class="mins">
+              {minimums.map(item => (
+                <li>
+                  <div class="mins__art">
+                    <img
+                      src={asset(item.src)}
+                      alt=""
+                      width={extras.minimum[item.key].px}
+                      style={`width:${extras.minimum[item.key].px}px`}
+                      loading="lazy"
+                    />
+                    <i class="mins__dim" style={`width:${extras.minimum[item.key].px}px`}></i>
+                  </div>
+                  <p>
+                    <strong>{extras.minimum[item.key].label}</strong>
+                    <span>
+                      {extras.minimum[item.key].px}&nbsp;px
+                      {extras.minimum[item.key].mm
+                        ? `, ${extras.minimum[item.key].mm}\u00a0mm w druku`
+                        : ' na ekranie'}
+                    </span>
+                  </p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
         <div class="row">
           <div class="row__label">
-            <span class="row__no">05</span>
+            <span class="row__no">06</span>
             <h3>Dwanaście pól</h3>
           </div>
           <div class="row__body">
@@ -344,7 +437,7 @@ const dayStyle = (index: number) =>
 
         <div class="row">
           <div class="row__label">
-            <span class="row__no">06</span>
+            <span class="row__no">07</span>
             <h3>Kolor</h3>
           </div>
           <div class="row__body">
@@ -358,20 +451,26 @@ const dayStyle = (index: number) =>
                 </li>
               ))}
             </ul>
-            <ColorTable colors={colors} />
+            <details class="fold">
+              <summary>Tabela kolorów: HEX, RGB, OKLCH i CMYK</summary>
+              <ColorTable colors={colors} />
+            </details>
             <h4>Kontrast</h4>
             <p class="muted">
               Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają
               WCAG AA, a barwy dni na kości służą wyłącznie jako dekoracja, więc w tekście na jasnym
               tle używamy ich ciemnych odpowiedników.
             </p>
-            <ContrastTable pairs={manifest.contrast} />
+            <details class="fold">
+              <summary>Pełna tabela kontrastu ({manifest.contrast.length} par)</summary>
+              <ContrastTable pairs={manifest.contrast} />
+            </details>
           </div>
         </div>
 
         <div class="row">
           <div class="row__label">
-            <span class="row__no">07</span>
+            <span class="row__no">08</span>
             <h3>Typografia</h3>
           </div>
           <div class="row__body">
@@ -409,7 +508,7 @@ const dayStyle = (index: number) =>
 
         <div class="row">
           <div class="row__label">
-            <span class="row__no">08</span>
+            <span class="row__no">09</span>
             <h3>Ikony i wzór</h3>
           </div>
           <div class="row__body">
@@ -423,7 +522,7 @@ const dayStyle = (index: number) =>
                     height="40"
                     loading="lazy"
                   />
-                  <span>{name}</span>
+                  <span>{iconLabel(name)}</span>
                 </li>
               ))}
             </ul>
@@ -450,7 +549,7 @@ const dayStyle = (index: number) =>
 
         <div class="row">
           <div class="row__label">
-            <span class="row__no">09</span>
+            <span class="row__no">10</span>
             <h3>Zdjęcia i ton głosu</h3>
           </div>
           <div class="row__body">
@@ -486,7 +585,7 @@ const dayStyle = (index: number) =>
       <div class="wrap">
         <div class="row">
           <div class="row__label">
-            <span class="row__no">10</span>
+            <span class="row__no">11</span>
             <h3>Animacja</h3>
           </div>
           <div class="row__body">
@@ -515,7 +614,7 @@ const dayStyle = (index: number) =>
 
         <div class="row">
           <div class="row__label">
-            <span class="row__no">11</span>
+            <span class="row__no">12</span>
             <h3>Użycie w praktyce</h3>
           </div>
           <div class="row__body">
@@ -566,7 +665,7 @@ const dayStyle = (index: number) =>
 
         <div class="row" id="pliki">
           <div class="row__label">
-            <span class="row__no">12</span>
+            <span class="row__no">13</span>
             <h3>Pliki do pobrania</h3>
           </div>
           <div class="row__body">

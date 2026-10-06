@@ -23,6 +23,7 @@ interface Props {
 }
 
 const geometryBox = '0 0 600 260';
+const reelLength = 3000;
 
 export const exportName = (variant: Variant) =>
   `nosna-${variant.day}-${variant.stage}-${variant.bpm}bpm.svg`;
@@ -34,12 +35,24 @@ export default function Generator({ initial, ink }: Props) {
   const [moving, setMoving] = useState(false);
   const [calm, setCalm] = useState(false);
   const [drift, setDrift] = useState(0);
+  const [reel, setReel] = useState<number | null>(null);
   const frame = useRef(0);
+  const reelFrame = useRef(0);
+  const root = useRef<HTMLDivElement>(null);
 
   const variant = useMemo<Variant>(() => ({ day, stage, bpm: clampTempo(bpm) }), [day, stage, bpm]);
-  const params = useMemo(() => paramsOf(variant), [variant]);
-  const color = dayOf(day).color;
+  const shownDay =
+    reel === null ? day : days[Math.min(days.length - 1, Math.floor(reel / 1000))].id;
+  const shown = useMemo<Variant>(() => ({ ...variant, day: shownDay }), [variant, shownDay]);
+  const params = useMemo(() => paramsOf(shown), [shown]);
+  const color = dayOf(shownDay).color;
   const seed = seedHex(seedOf(variant));
+
+  useEffect(() => {
+    root.current
+      ?.closest<HTMLElement>('[data-hero]')
+      ?.style.setProperty('--hero', `var(--${shownDay})`);
+  }, [shownDay]);
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -66,10 +79,29 @@ export default function Generator({ initial, ink }: Props) {
     return () => cancelAnimationFrame(frame.current);
   }, [moving]);
 
+  const reelDrift = reel === null ? 0 : (reel / reelLength) * Math.PI * 2;
   const threads = useMemo(
-    () => composeParams({ ...params, phase: params.phase + drift }, 1),
-    [params, drift],
+    () => composeParams({ ...params, phase: params.phase + drift + reelDrift }, 1),
+    [params, drift, reelDrift],
   );
+
+  const playReel = () => {
+    setMoving(false);
+    const started = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - started;
+      if (elapsed >= reelLength) {
+        setReel(null);
+        return;
+      }
+      setReel(elapsed);
+      reelFrame.current = requestAnimationFrame(tick);
+    };
+    cancelAnimationFrame(reelFrame.current);
+    reelFrame.current = requestAnimationFrame(tick);
+  };
+
+  useEffect(() => () => cancelAnimationFrame(reelFrame.current), []);
 
   const download = () => {
     const svg = standaloneSvg(
@@ -98,7 +130,7 @@ export default function Generator({ initial, ink }: Props) {
   const description = `${variantName(variant)}, ziarno ${seed}`;
 
   return (
-    <div class="gen">
+    <div class="gen" ref={root}>
       <figure class="gen__stage">
         <svg
           viewBox={geometryBox}
@@ -209,6 +241,13 @@ export default function Generator({ initial, ink }: Props) {
             disabled={calm}
             onClick={() => setMoving(value => !value)}>
             {calm ? 'Ruch wyłączony w systemie' : moving ? 'Zatrzymaj ruch' : 'Poruszaj fazą'}
+          </button>
+          <button
+            type="button"
+            class="gen__btn"
+            disabled={calm || reel !== null}
+            onClick={playReel}>
+            Trzy dni, 3 s
           </button>
         </div>
         <p class="gen__status" role="status">
