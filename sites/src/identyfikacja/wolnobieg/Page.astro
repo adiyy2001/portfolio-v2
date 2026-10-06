@@ -12,7 +12,7 @@ import StripeComposer from './StripeComposer.tsx';
 import { brand } from './brand';
 import { content, contact, extras } from './content';
 import { css } from './styles';
-import { asset, fileInfo, heroArcs, iconNames, logoVariants, sizeTest, swoosh } from './view';
+import { asset, fileInfo, heroArcs, iconNames, logoVariants, sizeTest } from './view';
 
 const manifest = readManifest('wolnobieg');
 const colors = manifest.palette;
@@ -35,7 +35,23 @@ const navigation = [
   ['zastosowania', 'Zastosowania'],
   ['pliki', 'Pliki'],
 ];
-const valueCards = ['card--orange', 'card--mustard', ''];
+const coinTones = ['coin--orange', 'coin--cream', 'coin--brown'];
+const picks = [
+  ...content.process.rejected.map(item => ({
+    title: item.title,
+    text: item.text,
+    reason: item.reason,
+    thumb: item.thumb,
+    chosen: false,
+  })),
+  {
+    title: content.process.chosen.title,
+    text: '',
+    reason: content.process.chosen.reason,
+    thumb: 'figures/direction-kolo.svg',
+    chosen: true,
+  },
+];
 ---
 
 <Shell
@@ -50,8 +66,19 @@ const valueCards = ['card--orange', 'card--mustard', ''];
     <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
   </header>
 
+  <nav class="route" aria-label="Spis treści">
+    <img class="route__mark" src={asset('favicon.svg')} alt="" width="40" height="40" />
+    <ul>
+      {navigation.map(([id, label]) => (
+        <li>
+          <a href={`#${id}`}>{label}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
   <main id="main" tabindex="-1">
-    <section class="hero" aria-labelledby="t-hero">
+    <section class="band band--hero" style="--z:9" aria-labelledby="t-hero">
       <div class="hero__in">
         <div class="hero__head">
           <p class="kicker">Identyfikacja wizualna, serwis i sklep rowerowy, Gdańsk</p>
@@ -67,15 +94,6 @@ const valueCards = ['card--orange', 'card--mustard', ''];
               </div>
             ))}
           </dl>
-          <nav class="hero__nav" aria-label="Spis treści">
-            <ul>
-              {navigation.map(([id, label]) => (
-                <li>
-                  <a href={`#${id}`}>{label}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
         </div>
         <figure class="hero__art">
           <svg viewBox="0 0 600 600" aria-hidden="true" focusable="false">
@@ -98,71 +116,71 @@ const valueCards = ['card--orange', 'card--mustard', ''];
       </div>
     </section>
 
-    <div class="wrap">
-      <section class="band" id="zadanie" aria-labelledby="t-zadanie">
-        <div class="band__head">
-          <h2 id="t-zadanie" class="band__title">
+    <section class="band band--cream" style="--z:8" id="zadanie" aria-labelledby="t-zadanie">
+      <div class="wrap">
+        <header class="sh">
+          <span class="sh__no" aria-hidden="true">
+            1
+          </span>
+          <h2 id="t-zadanie" class="sh__title">
             Klient i zadanie
           </h2>
-          <svg class="swoosh" viewBox="0 0 280 40" aria-hidden="true" focusable="false">
-            {swoosh.map(line => (
-              <path
-                d={line.d}
-                fill="none"
-                stroke={line.color}
-                stroke-width="8"
-                stroke-linecap="round"></path>
-            ))}
-          </svg>
-        </div>
-        <div class="card">
-          <div class="two">
-            <div class="prose">
-              {content.client.paragraphs.map(text => (
-                <p>{text}</p>
-              ))}
-            </div>
-            <dl class="facts">
-              {content.client.facts.map(([term, text]) => (
-                <div>
-                  <dt>{term}</dt>
-                  <dd>{text}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-      </section>
-
-      <section class="band" id="kierunek" aria-labelledby="t-kierunek">
-        <div class="band__head">
-          <h2 id="t-kierunek" class="band__title">
-            Kierunek i strategia
-          </h2>
-        </div>
-        <div class="card card--sand">
-          <h3>{content.direction.title}</h3>
-          <div class="prose">
-            {content.direction.paragraphs.map(text => (
+          <span class="sh__rail" aria-hidden="true"></span>
+        </header>
+        <div class="task">
+          <div class="task__lead prose">
+            {content.client.paragraphs.map(text => (
               <p>{text}</p>
             ))}
           </div>
-          <p class="keywords">
+          <dl class="tags">
+            {content.client.facts.map(([term, text]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="band band--mustard" style="--z:7" id="kierunek" aria-labelledby="t-kierunek">
+      <div class="wrap">
+        <header class="sh">
+          <span class="sh__no" aria-hidden="true">
+            2
+          </span>
+          <h2 id="t-kierunek" class="sh__title">
+            Kierunek i strategia
+          </h2>
+          <span class="sh__rail" aria-hidden="true"></span>
+        </header>
+        <div class="dir">
+          <p class="keywords" aria-label="Trzy słowa klucze">
             {content.direction.keywords.map(word => (
               <span>{word}</span>
             ))}
           </p>
+          <div class="dir__text">
+            <h3 class="lede">{content.direction.title}</h3>
+            <div class="prose">
+              {content.direction.paragraphs.map(text => (
+                <p>{text}</p>
+              ))}
+            </div>
+          </div>
         </div>
-        <div class="cards three">
+        <ul class="coins">
           {content.strategy.values.map((value, index) => (
-            <article class={`card ${valueCards[index]}`}>
+            <li class={`coin ${coinTones[index]}`}>
               <h3>{value.title}</h3>
               <p>{value.text}</p>
-            </article>
+            </li>
           ))}
-        </div>
-        <div class="card card--brown">
-          <dl class="facts facts--row">
+        </ul>
+        <div class="panel panel--brown strat">
+          <dl class="strat__facts">
             <div>
               <dt>Odbiorcy</dt>
               <dd>{content.strategy.audience}</dd>
@@ -178,86 +196,98 @@ const valueCards = ['card--orange', 'card--mustard', ''];
           </dl>
           <blockquote>{content.strategy.positioning}</blockquote>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="band" id="proces" aria-labelledby="t-proces">
-        <div class="band__head">
-          <h2 id="t-proces" class="band__title">
+    <section class="band band--brown" style="--z:6" id="proces" aria-labelledby="t-proces">
+      <div class="wrap">
+        <header class="sh">
+          <span class="sh__no" aria-hidden="true">
+            3
+          </span>
+          <h2 id="t-proces" class="sh__title">
             Proces
           </h2>
-          <p class="band__lead">{content.process.intro}</p>
-        </div>
-        <div class="cards three">
-          {content.process.rejected.map(item => (
-            <article class="card card--reject">
-              <img src={asset(item.thumb)} alt="" width="200" height="200" loading="lazy" />
+          <span class="sh__rail" aria-hidden="true"></span>
+        </header>
+        <p class="band__lead">{content.process.intro}</p>
+        <ol class="picks">
+          {picks.map((item, index) => (
+            <li class={item.chosen ? 'pick pick--chosen' : 'pick'}>
+              <span class="pick__label">{item.chosen ? 'Wybrany' : `Odrzucony ${index + 1}`}</span>
+              <span class="pick__img">
+                <img src={asset(item.thumb)} alt="" width="200" height="200" loading="lazy" />
+              </span>
               <h3>{item.title}</h3>
-              <p class="muted">{item.text}</p>
+              {item.text && <p class="pick__text">{item.text}</p>}
               <p>{item.reason}</p>
-            </article>
+            </li>
           ))}
-          <article class="card card--chosen">
-            <img src={asset('figures/direction-kolo.svg')} alt="" width="200" height="200" />
-            <h3>{content.process.chosen.title}</h3>
-            <p>{content.process.chosen.reason}</p>
-          </article>
-        </div>
-        <div class="card">
-          <h3>Ręczny kerning</h3>
-          <p>{content.process.refinement[0].text}</p>
-          <div class="kern">
-            <figure>
-              <img
-                src={asset('figures/wordmark-default.svg')}
-                alt="Napis Wolnobieg bez korekty kerningu"
-                width="320"
-                height="190"
-                loading="lazy"
-              />
-              <figcaption>Bez korekty</figcaption>
-            </figure>
-            <figure>
-              <img
-                src={asset('figures/wordmark-kerned.svg')}
-                alt="Napis Wolnobieg po ręcznej korekcie kerningu"
-                width="320"
-                height="190"
-                loading="lazy"
-              />
-              <figcaption>Po korekcie</figcaption>
-            </figure>
-          </div>
-          <p class="muted">{content.process.refinement[1].text}</p>
-        </div>
-        <div class="card">
-          <h3>Test czytelności</h3>
-          <p>{content.process.refinement[2].text}</p>
-          <ul class="sizes">
-            {sizeTest.map(item => (
-              <li>
+        </ol>
+        <div class="duo">
+          <div class="panel panel--cream">
+            <h3 class="panel__title">Ręczny kerning</h3>
+            <p>{content.process.refinement[0].text}</p>
+            <div class="kern">
+              <figure>
                 <img
-                  src={asset(item.src)}
-                  alt=""
-                  width={item.size}
-                  height={item.size}
-                  style={`width:${item.size}px;height:${item.size}px`}
+                  src={asset('figures/wordmark-default.svg')}
+                  alt="Napis Wolnobieg bez korekty kerningu"
+                  width="320"
+                  height="190"
+                  loading="lazy"
                 />
-                <span>{item.label}</span>
-              </li>
-            ))}
-          </ul>
+                <figcaption>Bez korekty</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src={asset('figures/wordmark-kerned.svg')}
+                  alt="Napis Wolnobieg po ręcznej korekcie kerningu"
+                  width="320"
+                  height="190"
+                  loading="lazy"
+                />
+                <figcaption>Po korekcie</figcaption>
+              </figure>
+            </div>
+            <p class="muted">{content.process.refinement[1].text}</p>
+          </div>
+          <div class="panel panel--cream panel--flip">
+            <h3 class="panel__title">Test czytelności</h3>
+            <p>{content.process.refinement[2].text}</p>
+            <ul class="sizes">
+              {sizeTest.map(item => (
+                <li>
+                  <img
+                    src={asset(item.src)}
+                    alt=""
+                    width={item.size}
+                    height={item.size}
+                    style={`width:${item.size}px;height:${item.size}px`}
+                  />
+                  <span>{item.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="band" id="system" aria-labelledby="t-system">
-        <div class="band__head">
-          <h2 id="t-system" class="band__title">
+    <section class="band band--cream" style="--z:5" id="system" aria-labelledby="t-system">
+      <div class="wrap">
+        <header class="sh">
+          <span class="sh__no" aria-hidden="true">
+            4
+          </span>
+          <h2 id="t-system" class="sh__title">
             System identyfikacji
           </h2>
-        </div>
+          <span class="sh__rail" aria-hidden="true"></span>
+        </header>
 
-        <div class="card">
-          <h3>Logo w sześciu wersjach</h3>
+        <div class="sys">
+          <h3 class="pill">Logo w sześciu wersjach</h3>
           <ul class="variants">
             {logoVariants.map(variant => (
               <li class={`ground ground--${variant.ground}`}>
@@ -275,7 +305,7 @@ const valueCards = ['card--orange', 'card--mustard', ''];
               </li>
             ))}
           </ul>
-          <div class="two two--even">
+          <div class="duo duo--even">
             <figure class="clear">
               <img
                 src={asset('figures/clearspace.svg')}
@@ -297,8 +327,8 @@ const valueCards = ['card--orange', 'card--mustard', ''];
           </div>
         </div>
 
-        <div class="card">
-          <h3>Kolor</h3>
+        <div class="sys">
+          <h3 class="pill">Kolor</h3>
           <ul class="swatches">
             {colors.map(color => (
               <li>
@@ -309,48 +339,52 @@ const valueCards = ['card--orange', 'card--mustard', ''];
               </li>
             ))}
           </ul>
-          <ColorTable colors={colors} />
-          <h4>Kontrast</h4>
-          <p class="muted">
-            Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają
-            WCAG AA, a elementy dekoracyjne są oznaczone osobno.
-          </p>
-          <ContrastTable pairs={manifest.contrast} />
-        </div>
-
-        <div class="card card--sand">
-          <h3>Typografia</h3>
-          <div class="two two--even">
-            <div class="face">
-              <p class="face__name face__name--display">Rammetto One</p>
-              <p class="face__sample face__sample--display">{extras.specimen}</p>
-              <p class="muted">Nagłówki i napis logo. Jedna grubość, 400. Licencja OFL.</p>
-            </div>
-            <div class="face">
-              <p class="face__name face__name--text">Baloo 2</p>
-              <p class="face__sample face__sample--text">{extras.specimen}</p>
-              <p class="muted">Tekst. Grubości 400, 600 i 800. Licencja OFL.</p>
-            </div>
+          <div class="panel panel--white">
+            <ColorTable colors={colors} />
+            <h4>Kontrast</h4>
+            <p class="muted">
+              Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają
+              WCAG AA, a elementy dekoracyjne są oznaczone osobno.
+            </p>
+            <ContrastTable pairs={manifest.contrast} />
           </div>
-          <ul class="scale">
-            {extras.typeScale.map(row => (
-              <li>
-                <span
-                  class={`scale__sample scale__sample--${row.font}`}
-                  style={`font-size:${Math.min(row.size, 40)}px;font-weight:${'weight' in row ? row.weight : 400}`}>
-                  {row.name}
-                </span>
-                <span class="muted">
-                  {row.size} px, interlinia {String(row.line).replace('.', ',')}. {row.use}
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p class="glyphs">{extras.glyphs}</p>
         </div>
 
-        <div class="card">
-          <h3>Ikony i wzór</h3>
+        <div class="sys">
+          <h3 class="pill">Typografia</h3>
+          <div class="panel panel--orange type">
+            <div class="duo duo--even">
+              <div class="face">
+                <p class="face__name face__name--display">Rammetto One</p>
+                <p class="face__sample face__sample--display">{extras.specimen}</p>
+                <p class="muted">Nagłówki i napis logo. Jedna grubość, 400. Licencja OFL.</p>
+              </div>
+              <div class="face">
+                <p class="face__name face__name--text">Baloo 2</p>
+                <p class="face__sample face__sample--text">{extras.specimen}</p>
+                <p class="muted">Tekst. Grubości 400, 600 i 800. Licencja OFL.</p>
+              </div>
+            </div>
+            <ul class="scale">
+              {extras.typeScale.map(row => (
+                <li>
+                  <span
+                    class={`scale__sample scale__sample--${row.font}`}
+                    style={`font-size:${Math.min(row.size, 40)}px;font-weight:${'weight' in row ? row.weight : 400}`}>
+                    {row.name}
+                  </span>
+                  <span class="muted">
+                    {row.size} px, interlinia {String(row.line).replace('.', ',')}. {row.use}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p class="glyphs">{extras.glyphs}</p>
+          </div>
+        </div>
+
+        <div class="sys">
+          <h3 class="pill">Ikony i wzór</h3>
           <ul class="icons">
             {icons.map(name => (
               <li>
@@ -365,19 +399,25 @@ const valueCards = ['card--orange', 'card--mustard', ''];
               </li>
             ))}
           </ul>
-          <div
-            class="pattern"
-            role="img"
-            aria-label="Wzór z koncentrycznych pierścieni w pomarańczy, musztardzie i brązie"
-            style={`background-image:url(${asset('pattern/wolnobieg-pattern.svg')})`}></div>
-          <div class="cards three cards--inner">
+        </div>
+      </div>
+
+      <div
+        class="pattern"
+        role="img"
+        aria-label="Wzór z koncentrycznych pierścieni w pomarańczy, musztardzie i brązie"
+        style={`background-image:url(${asset('pattern/wolnobieg-pattern.svg')})`}></div>
+
+      <div class="wrap">
+        <div class="sys">
+          <ul class="graphics">
             {extras.graphics.map(item => (
-              <div>
+              <li>
                 <h4>{item.title}</h4>
                 <p>{item.text}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
           <ul class="plain plain--rules">
             {extras.layoutRules.map(rule => (
               <li>{rule}</li>
@@ -385,12 +425,12 @@ const valueCards = ['card--orange', 'card--mustard', ''];
           </ul>
         </div>
 
-        <div class="card card--mustard">
-          <h3>Zdjęcia i ton głosu</h3>
+        <div class="sys">
+          <h3 class="pill">Zdjęcia i ton głosu</h3>
           <p class="prose-p">{extras.photoStyle}</p>
           <div class="tone">
-            {content.tone.map(rule => (
-              <article>
+            {content.tone.map((rule, index) => (
+              <article class={index % 2 ? 'tone__item tone__item--alt' : 'tone__item'}>
                 <h4>{rule.title}</h4>
                 <p>{rule.text}</p>
                 <p class="yes">
@@ -406,52 +446,66 @@ const valueCards = ['card--orange', 'card--mustard', ''];
           </div>
         </div>
 
-        <div class="card card--film">
-          <h3>Animacja</h3>
-          <div class="film__text">
-            <p>{extras.animation}</p>
-            <dl class="facts">
-              {extras.animationFacts.map(([term, text]) => (
-                <div>
-                  <dt>{term}</dt>
-                  <dd>{text}</dd>
-                </div>
-              ))}
-            </dl>
+        <div class="sys">
+          <div class="panel panel--mustard film">
+            <div class="film__text">
+              <h3 class="panel__title">Animacja</h3>
+              <p>{extras.animation}</p>
+              <dl class="facts">
+                {extras.animationFacts.map(([term, text]) => (
+                  <div>
+                    <dt>{term}</dt>
+                    <dd>{text}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <video
+              class="film__video"
+              controls
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              width="1080"
+              height="1080">
+              <source src={`${asset('animation/wolnobieg-logo.webm')}#t=2.9`} type="video/webm" />
+              <source src={`${asset('animation/wolnobieg-logo.mp4')}#t=2.9`} type="video/mp4" />
+            </video>
           </div>
-          <video
-            class="film"
-            controls
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            width="1080"
-            height="1080">
-            <source src={`${asset('animation/wolnobieg-logo.webm')}#t=2.9`} type="video/webm" />
-            <source src={`${asset('animation/wolnobieg-logo.mp4')}#t=2.9`} type="video/mp4" />
-          </video>
         </div>
 
-        <div class="card card--orange">
-          <h3>Ułóż własne pasy</h3>
-          <p>
+        <div class="sys">
+          <h3 class="pill">Ułóż własne pasy</h3>
+          <p class="prose-p">
             Pasy to najważniejszy element systemu. Zmień liczbę, kolory i łuk, a potem pobierz
             gotowy plik SVG.
           </p>
-          <StripeComposer client:visible />
+          <div class="panel panel--sand">
+            <StripeComposer client:visible />
+          </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="band" id="zastosowania" aria-labelledby="t-zastosowania">
-        <div class="band__head">
-          <h2 id="t-zastosowania" class="band__title">
+    <section
+      class="band band--olive"
+      style="--z:4"
+      id="zastosowania"
+      aria-labelledby="t-zastosowania">
+      <div class="wrap">
+        <header class="sh">
+          <span class="sh__no" aria-hidden="true">
+            5
+          </span>
+          <h2 id="t-zastosowania" class="sh__title">
             Zastosowania
           </h2>
-        </div>
+          <span class="sh__rail" aria-hidden="true"></span>
+        </header>
         <div class="gallery">
           {mockups.map(item => (
-            <figure class={`card gallery__item gallery__item--${item.id}`}>
+            <figure class={`gallery__item gallery__item--${item.id}`}>
               <img
                 src={asset(item.image)}
                 alt={item.alt}
@@ -466,9 +520,9 @@ const valueCards = ['card--orange', 'card--mustard', ''];
             </figure>
           ))}
         </div>
-        <h3 class="band__sub">Media społecznościowe</h3>
+        <h3 class="pill pill--light">Media społecznościowe</h3>
         <ul class="posts">
-          <li>
+          <li class="posts__avatar">
             <img
               src={asset('social/wolnobieg-avatar.png')}
               alt="Awatar Wolnobiegu: odznaka z zębatką na pomarańczowym tle"
@@ -491,32 +545,38 @@ const valueCards = ['card--orange', 'card--mustard', ''];
             </li>
           ))}
         </ul>
-      </section>
+      </div>
+    </section>
 
-      <section class="band" id="pliki" aria-labelledby="t-pliki">
-        <div class="band__head">
-          <h2 id="t-pliki" class="band__title">
+    <section class="band band--orange" style="--z:3" id="pliki" aria-labelledby="t-pliki">
+      <div class="wrap">
+        <header class="sh">
+          <span class="sh__no" aria-hidden="true">
+            6
+          </span>
+          <h2 id="t-pliki" class="sh__title">
             Pliki do pobrania
           </h2>
-        </div>
-        <div class="card">
+          <span class="sh__rail" aria-hidden="true"></span>
+        </header>
+        <div class="panel panel--cream files">
           <p>{content.deliverables.intro}</p>
           {zip && <p class="muted">Cała paczka waży {formatBytes(zip.bytes)}.</p>}
           <Downloads manifest={manifest} />
           <p class="muted">{content.deliverables.note}</p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="cta" aria-labelledby="t-cta">
-        <div class="card card--mustard">
-          <h2 id="t-cta">{content.cta.title}</h2>
-          <p>{content.cta.text}</p>
-          <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
-            Zobacz ofertę dla klientów
-          </a>
-        </div>
-      </section>
-    </div>
+    <section class="band band--cta" style="--z:2" aria-labelledby="t-cta">
+      <div class="wrap cta">
+        <h2 id="t-cta">{content.cta.title}</h2>
+        <p>{content.cta.text}</p>
+        <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
+          Zobacz ofertę dla klientów
+        </a>
+      </div>
+    </section>
   </main>
 
   <footer class="foot">
