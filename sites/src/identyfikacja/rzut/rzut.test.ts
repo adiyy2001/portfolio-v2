@@ -14,7 +14,8 @@ import {
 } from './lib/grid';
 import motionData from './motion-data.json';
 import { animationSvg, duration, initialCss, play, stage, timeline } from './lib/motion';
-import { logoVariants, proportions } from './view';
+import { nbsp, typo } from './lib/typo';
+import { groupFormats, logoVariants, proportions } from './view';
 
 describe('case study content', () => {
   const texts = JSON.stringify({ content, contact, extras });
@@ -22,7 +23,7 @@ describe('case study content', () => {
   it('has no dashes and no placeholder copy', () => {
     expect(texts).not.toMatch(/[\u2013\u2014]/);
     const withoutCta = JSON.stringify({ content: { ...content, cta: null }, contact, extras });
-    expect(withoutCta.toLowerCase()).not.toMatch(/lorem|twoja firma/);
+    expect(withoutCta.toLowerCase()).not.toMatch(/\blorem\b|twoja firma/);
   });
 
   it('uses a made up e-mail and phone', () => {
@@ -56,6 +57,46 @@ describe('case study content', () => {
 
   it('keeps characters outside the font subset out of the copy', () => {
     expect(texts).not.toMatch(/²/);
+  });
+});
+
+describe('typography filter', () => {
+  it('ties single letter words to the next word', () => {
+    expect(nbsp('Dom z garażem i basenem w parku')).toBe(
+      'Dom z\u00a0garażem i\u00a0basenem w\u00a0parku',
+    );
+    expect(nbsp('w z a')).toBe('w\u00a0z\u00a0a');
+    expect(nbsp('Rzut 07 i 08')).toBe('Rzut 07 i\u00a008');
+  });
+
+  it('walks nested content and leaves other values alone', () => {
+    expect(typo({ list: ['a b', 3], text: 'o domu' })).toEqual({
+      list: ['a\u00a0b', 3],
+      text: 'o\u00a0domu',
+    });
+  });
+
+  it('leaves no single letter word at the end of a line in the copy', () => {
+    const texts = JSON.stringify({ content, extras });
+    expect(texts).not.toMatch(/[ \u201e(]['aiouwzAIOUWZ] [^\s]/);
+  });
+
+  it('labels every icon with Polish letters', () => {
+    expect(extras.iconLabels.dzialka).toBe('Działka');
+    expect(extras.iconLabels.przekroj).toBe('Przekrój');
+    expect(Object.keys(extras.iconLabels)).toHaveLength(12);
+  });
+});
+
+describe('download groups', () => {
+  const manifest = { files: [{ group: 'brandbook', pages: 28, width: 0, height: 0 }] } as never;
+  it('names the dimensions of the brand book and the mockups', () => {
+    expect(groupFormats(manifest, { id: 'brandbook', formats: '' } as never)).toBe(
+      'PDF, 28 stron 1920×1080 px',
+    );
+    expect(groupFormats(manifest, { id: 'mockups', formats: '' } as never)).toBe(
+      'JPG, szerokość 1500 do 1900 px',
+    );
   });
 });
 

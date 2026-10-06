@@ -1,0 +1,30 @@
+---
+interface Props {
+  id: string;
+  src: string;
+  alt: string;
+  title: string;
+  caption: string;
+  width: number;
+  height: number;
+  row?: boolean;
+}
+
+const { id, src, alt, title, caption, width, height, row = false } = Astro.props;
+const ratio = (width / height).toFixed(3);
+---
+
+<figure class={`shot shot--${id}`} style={row ? `--ar:${ratio}` : undefined}>
+  <a
+    class="shot__zoom"
+    href={src}
+    target="_blank"
+    rel="noopener"
+    aria-label={`Otwórz w pełnym rozmiarze: ${title}`}>
+    <img src={src} alt={alt} width={width} height={height} loading="lazy" />
+  </a>
+  <figcaption>
+    <strong>{title}</strong>
+    <span>{caption}</span>
+  </figcaption>
+</figure>

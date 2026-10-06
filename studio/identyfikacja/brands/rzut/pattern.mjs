@@ -9,15 +9,14 @@ const tile = cell * cells;
 
 const filled = [
   [1, 1, 'kobalt'],
-  [4, 2, 'kobalt'],
-  [6, 5, 'kobalt'],
-  [2, 6, 'kobalt'],
-  [3, 4, 'mgla'],
-  [5, 0, 'mgla'],
-  [7, 3, 'mgla'],
-  [0, 3, 'mgla'],
+  [5, 5, 'kobalt'],
+  [5, 1, 'mgla'],
+  [1, 5, 'mgla'],
 ];
-const notched = [[4, 6]];
+const notched = [
+  [3, 3],
+  [7, 7],
+];
 
 export const patternSvg = () => {
   const rects = filled.map(([x, y, id]) => `<rect x="${x * cell}" y="${y * cell}" width="${cell}" height="${cell}" fill="${c[id]}"/>`).join('');

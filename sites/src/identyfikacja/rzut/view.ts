@@ -1,5 +1,7 @@
 import { assetUrl } from '../shared/manifest';
-import type { Manifest } from '../shared/types';
+import { pluralPl } from '../shared/format';
+import type { Manifest, ManifestGroup } from '../shared/types';
+import { extras } from './content';
 
 export const slug = 'rzut';
 
@@ -70,3 +72,29 @@ export const proportions = [
   { id: 'czern', name: 'Czerń', share: 28 },
   { id: 'kobalt', name: 'Kobalt', share: 10 },
 ] as const;
+
+const outsideZip = ['mockups', 'animation'];
+
+export const inZip = (group: ManifestGroup) => !outsideZip.includes(group.id);
+
+export const groupFormats = (manifest: Manifest, group: ManifestGroup) => {
+  const first = manifest.files.find(file => file.group === group.id);
+  switch (group.id) {
+    case 'logo':
+      return 'SVG, PDF, PNG w trzech rozmiarach: dłuższy bok 512, 1024 i 2048 px';
+    case 'print':
+      return 'PDF, wizytówka 91×61 mm ze spadem 3 mm, papier A4';
+    case 'social':
+      return 'PNG, awatar 1080×1080 px, posty 1080×1350 px';
+    case 'mockups': {
+      const widths = Object.values(extras.mockupSizes).map(([width]) => width);
+      return `JPG, szerokość ${Math.min(...widths)} do ${Math.max(...widths)} px`;
+    }
+    case 'animation':
+      return `MP4, WebM, ${first?.width}×${first?.height} px, 3 s`;
+    case 'brandbook':
+      return `PDF, ${first?.pages} ${pluralPl(first?.pages ?? 0, 'strona', 'strony', 'stron')} 1920×1080 px`;
+    default:
+      return group.formats;
+  }
+};
