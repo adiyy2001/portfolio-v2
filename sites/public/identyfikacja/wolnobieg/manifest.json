@@ -8,11 +8,11 @@
     "city": "Gdańsk"
   },
   "base": "/wzornik/identyfikacja/wolnobieg/",
-  "totalBytes": 7873431,
-  "totalHuman": "7.5 MB",
+  "totalBytes": 8862291,
+  "totalHuman": "8.5 MB",
   "zip": {
     "path": "wolnobieg-identyfikacja.zip",
-    "bytes": 3267788
+    "bytes": 3762101
   },
   "groups": [
     {
@@ -187,7 +187,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1921170,
+      "bytes": 2415717,
       "formats": "PDF",
       "files": [
         "wolnobieg-brandbook.pdf"
@@ -197,7 +197,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 3267788,
+      "bytes": 3762101,
       "formats": "ZIP",
       "files": [
         "wolnobieg-identyfikacja.zip"
@@ -890,7 +890,7 @@
     },
     {
       "path": "wolnobieg-brandbook.pdf",
-      "bytes": 1921170,
+      "bytes": 2415717,
       "type": "pdf",
       "group": "brandbook",
       "pages": 27,
@@ -905,7 +905,7 @@
     },
     {
       "path": "wolnobieg-identyfikacja.zip",
-      "bytes": 3267788,
+      "bytes": 3762101,
       "type": "zip",
       "group": "zip"
     }
