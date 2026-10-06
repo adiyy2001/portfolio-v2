@@ -15,6 +15,10 @@ export const iconNames = (manifest: Manifest) =>
     return match ? [match[1]] : [];
   });
 
+const iconLabels: Record<string, string> = { blad: 'błąd', galaz: 'gałąź' };
+
+export const iconLabel = (name: string) => iconLabels[name] ?? name;
+
 export const logoVariants = [
   {
     id: 'primary',

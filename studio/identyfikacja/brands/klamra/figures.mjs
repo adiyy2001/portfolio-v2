@@ -23,11 +23,12 @@ export const buildFigures = () => {
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="14" y="14" width="172" height="172" fill="${c.cytryna}"/><path ${sketch} d="${rough([[62, 44], [62, 156]], 2, 4)}"/><path ${sketch} d="${rough([[136, 44], [118, 44], [118, 74], [96, 100], [118, 126], [118, 156], [136, 156]], 2, 8)}" transform="translate(-14 0)"/><path ${sketch} stroke-dasharray="2 10" d="M30 100H170"/></svg>`,
   );
 
-  const plain = wordmarkPlain(52);
-  const word = wordmark(52, { x: 100 - plain.width / 2, y: 118 });
+  const plain = wordmarkPlain(32);
+  const cursorWidth = 11;
+  const word = wordmark(32, { x: 100 - (plain.width + 4 + cursorWidth) / 2, y: 122 });
   figure(
     'direction-terminal.svg',
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="12" y="46" width="176" height="108" fill="${c.biel}" stroke="${c.atrament}" stroke-width="7"/><path d="M12 46h176v18H12Z" fill="${c.atrament}"/><path fill="${c.atrament}" d="${word.d}"/><rect x="${(100 + plain.width / 2 + 4).toFixed(1)}" y="86" width="14" height="38" fill="${c.roz}" stroke="${c.atrament}" stroke-width="4"/></svg>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect x="12" y="46" width="176" height="108" fill="${c.biel}" stroke="${c.atrament}" stroke-width="7"/><path d="M12 46h176v18H12Z" fill="${c.atrament}"/><path fill="${c.atrament}" d="${word.d}"/><rect x="${(100 + (plain.width + 4 + cursorWidth) / 2 - cursorWidth).toFixed(1)}" y="96" width="${cursorWidth}" height="28" fill="${c.roz}" stroke="${c.atrament}" stroke-width="3"/></svg>`,
   );
 
   figure('direction-klamry.svg', logo('symbol').replace('<svg ', '<svg width="200" height="200" '));

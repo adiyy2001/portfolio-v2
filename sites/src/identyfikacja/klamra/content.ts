@@ -63,7 +63,7 @@ export const content: CaseContent = {
     rejected: [
       {
         id: 'k-z-klamer',
-        title: 'K zbudowane z klamer',
+        title: 'K zbudowane z klamer',
         text: 'Pionowa kreska i dwa ramiona w kształcie połówek klamry składają się w literę K.',
         reason:
           'Odpadło, bo ramiona klamer przy 24 pikselach zlewają się w zwykłe K, a właśnie klamra miała być rozpoznawalna. Znak czyta się jako litera, nie jako kod.',

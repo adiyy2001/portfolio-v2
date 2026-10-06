@@ -1,4 +1,4 @@
-import { useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { nudge, scatter, tidy } from './lib/scatter';
 import type { Placement } from './lib/scatter';
 
@@ -23,16 +23,32 @@ interface Drag {
   originY: number;
 }
 
+const compactQuery = '(max-width: 640px)';
+const compactArea = { width: 420, height: 520 };
 const step = 12;
 const bigStep = 36;
 
-export default function StickerLaptop({ pieces, area }: Props) {
+export default function StickerLaptop({ pieces, area: wideArea }: Props) {
+  const [compact, setCompact] = useState(false);
+  const area = compact ? compactArea : wideArea;
   const [round, setRound] = useState(0);
   const [placements, setPlacements] = useState<Placement[]>(() => scatter(pieces, area, 0));
   const [order, setOrder] = useState<string[]>(() => pieces.map(piece => piece.id));
   const [note, setNote] = useState('');
   const lid = useRef<HTMLDivElement>(null);
   const drag = useRef<Drag | null>(null);
+
+  useEffect(() => {
+    const query = window.matchMedia(compactQuery);
+    const apply = () => setCompact(query.matches);
+    apply();
+    query.addEventListener('change', apply);
+    return () => query.removeEventListener('change', apply);
+  }, []);
+
+  useEffect(() => {
+    setPlacements(scatter(pieces, area, round));
+  }, [compact]);
 
   const pieceOf = (id: string) => pieces.find(piece => piece.id === id)!;
   const placementOf = (id: string) => placements.find(item => item.id === id)!;

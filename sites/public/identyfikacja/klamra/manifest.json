@@ -8,11 +8,11 @@
     "city": "cała Polska"
   },
   "base": "/wzornik/identyfikacja/klamra/",
-  "totalBytes": 4885777,
-  "totalHuman": "4.7 MB",
+  "totalBytes": 4368018,
+  "totalHuman": "4.2 MB",
   "zip": {
     "path": "klamra-identyfikacja.zip",
-    "bytes": 1857945
+    "bytes": 1599868
   },
   "groups": [
     {
@@ -131,7 +131,7 @@
       "id": "print",
       "title": "Druk",
       "count": 2,
-      "bytes": 298788,
+      "bytes": 34690,
       "formats": "PDF",
       "files": [
         "print/klamra-business-card.pdf",
@@ -165,7 +165,7 @@
       "id": "mockups",
       "title": "Makiety",
       "count": 5,
-      "bytes": 639518,
+      "bytes": 641909,
       "formats": "JPG",
       "files": [
         "mockups/klamra-application.jpg",
@@ -190,7 +190,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1212113,
+      "bytes": 1214356,
       "formats": "PDF",
       "files": [
         "klamra-brandbook.pdf"
@@ -200,7 +200,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 1857945,
+      "bytes": 1599868,
       "formats": "ZIP",
       "files": [
         "klamra-identyfikacja.zip"
@@ -210,7 +210,7 @@
       "id": "meta",
       "title": "Pozostałe",
       "count": 7,
-      "bytes": 24831,
+      "bytes": 24613,
       "formats": "SVG, PNG, PNG 1200 px",
       "files": [
         "figures/clearspace.svg",
@@ -316,7 +316,7 @@
     },
     {
       "path": "figures/direction-terminal.svg",
-      "bytes": 1434,
+      "bytes": 1216,
       "type": "svg",
       "group": "meta",
       "width": 200,
@@ -496,7 +496,7 @@
     },
     {
       "path": "klamra-brandbook.pdf",
-      "bytes": 1212113,
+      "bytes": 1214356,
       "type": "pdf",
       "group": "brandbook",
       "pages": 28,
@@ -511,7 +511,7 @@
     },
     {
       "path": "klamra-identyfikacja.zip",
-      "bytes": 1857945,
+      "bytes": 1599868,
       "type": "zip",
       "group": "zip"
     },
@@ -823,7 +823,7 @@
     },
     {
       "path": "mockups/klamra-card-back.jpg",
-      "bytes": 108854,
+      "bytes": 110027,
       "type": "jpg",
       "group": "mockups"
     },
@@ -841,7 +841,7 @@
     },
     {
       "path": "mockups/klamra-letterhead.jpg",
-      "bytes": 139112,
+      "bytes": 140330,
       "type": "jpg",
       "group": "mockups"
     },
@@ -864,7 +864,7 @@
     },
     {
       "path": "print/klamra-business-card.pdf",
-      "bytes": 59839,
+      "bytes": 15785,
       "type": "pdf",
       "group": "print",
       "pages": 2,
@@ -879,7 +879,7 @@
     },
     {
       "path": "print/klamra-letterhead.pdf",
-      "bytes": 238949,
+      "bytes": 18905,
       "type": "pdf",
       "group": "print",
       "pages": 1,

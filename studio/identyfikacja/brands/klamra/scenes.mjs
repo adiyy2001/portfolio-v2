@@ -1,8 +1,19 @@
 import { braceGeometry } from './logo-parts.mjs';
+import { patternBody, tile } from './pattern.mjs';
 import { c, contact, extras, file, baseCss, dataUri, logoImg, readPub } from './theme.mjs';
 import { stickerSet, stickerSvg, stickerBox } from '../../../../sites/src/identyfikacja/klamra/lib/stickers.ts';
 
 export const patternUri = () => dataUri(readPub(file.pattern));
+
+const patternArt = (id, viewWidth, viewHeight) => {
+  const uses = [];
+  for (let row = 0; row * tile < viewHeight; row += 1) {
+    for (let col = 0; col * tile < viewWidth; col += 1) {
+      uses.push(`<use href="#${id}" x="${col * tile}" y="${row * tile}"/>`);
+    }
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${viewWidth} ${viewHeight}" preserveAspectRatio="xMinYMin slice" style="position:absolute;left:0;top:0;width:100%;height:100%;display:block"><defs><g id="${id}">${patternBody()}</g></defs>${uses.join('')}</svg>`;
+};
 
 export const scene = (body, { width, height, css = '' }) =>
   `<!doctype html><html lang="pl"><meta charset="utf-8"><style>${baseCss()}html,body{width:${width}px;height:${height}px;overflow:hidden}${css}</style><body>${body}</body></html>`;
@@ -19,7 +30,7 @@ export const cardBack = mode => `<div class="card back" style="--mm:${mode === '
 <div class="b-logo">${logoImg('horizontal', 'width:100%;height:auto')}</div>
 <div class="b-person"><p class="b-name">${contact.person}</p><p class="b-role">${contact.role}</p></div>
 <ul class="b-lines"><li>${contact.phone}</li><li>${contact.email}</li><li>${contact.site}</li></ul>
-<div class="b-strip" style="background-image:url('${patternUri()}')"></div>
+<div class="b-strip">${patternArt('pt-card', (91 / 14) * tile, (7.2 / 14) * tile)}</div>
 </div>`;
 
 export const cardCss = `
@@ -63,7 +74,7 @@ const letter = `
 `;
 
 export const letterheadBody = mode => `<div class="sheet" style="--mm:${mode === 'print' ? '1mm' : '5.2px'}">
-<div class="l-strip" style="background-image:url('${patternUri()}')"></div>
+<div class="l-strip">${patternArt('pt-sheet', (14 / 28) * tile, (297 / 28) * tile)}</div>
 <div class="l-logo">${logoImg('primary', 'width:100%;height:auto')}</div>
 <div class="l-addr"><p>${contact.office}</p><p>${contact.phone}<br>${contact.email}</p></div>
 <div class="l-body">${letter}</div>

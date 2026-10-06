@@ -13,6 +13,7 @@ const png = path => raster(path, 'image/png');
 const svgUri = path => dataUri(readPub(path));
 const palette = colorTable(brand);
 const contrast = contrastTable(brand);
+const iconLabel = name => ({ blad: 'błąd', galaz: 'gałąź' })[name] ?? name;
 const colorName = id => palette.find(entry => entry.id === id)?.name ?? id;
 const total = 28;
 
@@ -38,7 +39,7 @@ sheets.push(
 );
 
 sheet(
-  'Spis treści',
+  'Spis',
   `${titleBlock('Spis treści', 'Co jest w środku')}<ol class="toc">${[
     ['Klient i zadanie', 3],
     ['Kierunek i strategia', 4],
@@ -57,12 +58,12 @@ sheet(
 );
 
 sheet(
-  'Klient i zadanie',
+  'Brief klienta',
   `${titleBlock('Klient i zadanie', 'Szkoła, która pokazuje, że kod się pisze')}<div class="cols"><div class="prose">${content.client.paragraphs.map(text => `<p>${text}</p>`).join('')}</div><dl class="facts">${content.client.facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl></div>`,
 );
 
 sheet(
-  'Kierunek',
+  'Dobór stylu',
   `${titleBlock('Kierunek', content.direction.title)}<div class="cols"><div class="prose">${content.direction.paragraphs.map(text => `<p>${text}</p>`).join('')}</div><div class="words">${content.direction.keywords.map((word, i) => `<span class="w${i}">${word}</span>`).join('')}</div></div>`,
   { tone: 'pink' },
 );
@@ -199,7 +200,7 @@ sheet(
   `${titleBlock('Typografia', 'Skala pisma')}<div class="scale">${extras.typeScale
     .map(
       row =>
-        `<div><span class="${row.font === 'mono' ? 'mono' : row.font === 'display' ? 'display' : 'text'}" style="font-size:${Math.min(row.size * 1.5, 96)}px;font-weight:${row.weight};line-height:1.1">${row.name}</span><span class="small">${row.size} px, interlinia ${row.line}. ${row.use}</span></div>`,
+        `<div><span class="${row.font === 'mono' ? 'mono' : row.font === 'display' ? 'display' : 'text'}" style="font-size:${Math.min(row.size * 2, 120)}px;font-weight:${row.weight};line-height:1.1">${row.name}</span><span class="small">${row.size} px, interlinia ${row.line}. ${row.use}</span></div>`,
     )
     .join('')}</div>`,
 );
@@ -215,7 +216,7 @@ sheet(
   `${titleBlock('Ikony', 'Dwanaście ikon', 'Rysowane kreską 2,5 px na siatce 24 px, z prostymi końcami i ostrymi narożnikami.')}<div class="icons">${brand.iconNames
     .map(
       (name, i) =>
-        `<figure style="background:${[c.cytryna, c.roz, c.mieta, c.niebo][i % 4]}"><img src="${dataUri(iconSvg(name, c.atrament))}" alt=""><figcaption class="mono">${name}</figcaption></figure>`,
+        `<figure style="background:${[c.cytryna, c.roz, c.mieta, c.niebo][i % 4]}"><img src="${dataUri(iconSvg(name, c.atrament))}" alt=""><figcaption class="mono">${iconLabel(name)}</figcaption></figure>`,
     )
     .join('')}</div>`,
 );
@@ -360,12 +361,12 @@ blockquote{margin:0;font:800 46px/1.25 'Klamra Display',sans-serif;border:5px so
 .bar{display:flex;height:420px;border:5px solid ${c.atrament};${shadow(12)}}
 .bar div{display:flex;align-items:flex-end;padding:20px;font:800 22px/1 'Klamra Mono',monospace;border-right:5px solid ${c.atrament}}
 .bar div:last-child{border-right:0}
-.face .mega{font-size:110px;line-height:1;margin-bottom:34px}
-.face .specimen{font-size:44px;line-height:1.3;margin-bottom:30px}
+.face .mega{font-size:124px;line-height:1;margin-bottom:40px}
+.face .specimen{font-size:54px;line-height:1.25;margin-bottom:36px}
 .display{font-family:'Klamra Display',sans-serif;font-weight:900}
 .text{font-family:'Klamra Text',sans-serif}
-.scale{display:grid;gap:18px}
-.scale div{display:grid;grid-template-columns:560px 1fr;align-items:baseline;gap:40px;border-top:4px solid ${c.atrament};padding-top:14px}
+.scale{display:grid;gap:34px}
+.scale div{display:grid;grid-template-columns:560px 1fr;align-items:baseline;gap:40px;border-top:4px solid ${c.atrament};padding-top:28px}
 .glyphs{font-size:92px;line-height:1.35;margin:18px 0}
 .icons{display:grid;grid-template-columns:repeat(6,1fr);gap:30px}
 .icons figure{height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;border:5px solid ${c.atrament};${shadow(8)}}

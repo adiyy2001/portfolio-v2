@@ -16,6 +16,7 @@ import {
   asset,
   fileInfo,
   heroStickers,
+  iconLabel,
   iconNames,
   laptopArea,
   laptopStickers,
@@ -301,7 +302,7 @@ const heading = (index: number) => String(index).padStart(2, '0');
             </li>
           ))}
         </ul>
-        <div class="two two--even">
+        <div class="two two--even two--mid">
           <figure class="clear">
             <img
               src={asset('figures/clearspace.svg')}
@@ -389,7 +390,7 @@ const heading = (index: number) => String(index).padStart(2, '0');
                 height="44"
                 loading="lazy"
               />
-              <span>{name}</span>
+              <span>{iconLabel(name)}</span>
             </li>
           ))}
         </ul>
@@ -434,9 +435,11 @@ const heading = (index: number) => String(index).padStart(2, '0');
         </div>
       </div>
 
-      <div class="blk blk--mieta">
-        <h3>Animacja</h3>
-        <p class="prose">{extras.animation}</p>
+      <div class="blk blk--mieta anim">
+        <div class="anim__copy">
+          <h3>Animacja</h3>
+          <p class="prose">{extras.animation}</p>
+        </div>
         <video
           class="film"
           controls
@@ -539,7 +542,7 @@ const heading = (index: number) => String(index).padStart(2, '0');
     </section>
 
     <section class="cta" aria-labelledby="t-cta">
-      <div class="blk blk--cytryna">
+      <div class="blk blk--cytryna cta__box">
         <h2 id="t-cta">{content.cta.title}</h2>
         <p>{content.cta.text}</p>
         <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
