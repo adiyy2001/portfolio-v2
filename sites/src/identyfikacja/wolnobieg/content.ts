@@ -172,7 +172,7 @@ export const content: CaseContent = {
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
-    title: 'Twoja firma też może toczyć się własnym tempem',
+    title: 'Twój biznes też może toczyć się własnym tempem',
     text: 'Opowiedz mi o swojej firmie i o ludziach, którzy ją znają. Zaproponuję kierunek, pokażę trzy szkice logo i dowiozę komplet plików na każdą okazję.',
   },
 };
@@ -188,7 +188,14 @@ export const extras = {
     },
     { name: 'Nagłówek', font: 'display', size: 34, line: 1.12, use: 'sekcje i karty' },
     { name: 'Podtytuł', font: 'text', weight: 800, size: 22, line: 1.25, use: 'wstępy i lead' },
-    { name: 'Tekst', font: 'text', weight: 400, size: 18, line: 1.5, use: 'akapity, opisy, cenniki' },
+    {
+      name: 'Tekst',
+      font: 'text',
+      weight: 400,
+      size: 18,
+      line: 1.5,
+      use: 'akapity, opisy, cenniki',
+    },
     {
       name: 'Podpis',
       font: 'text',

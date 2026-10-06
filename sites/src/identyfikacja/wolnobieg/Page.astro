@@ -1,0 +1,515 @@
+---
+import { link, portfolio } from '../../shared/link';
+import ColorTable from '../shared/ColorTable.astro';
+import ContrastTable from '../shared/ContrastTable.astro';
+import Downloads from '../shared/Downloads.astro';
+import SampleLine from '../shared/SampleLine.astro';
+import Shell from '../shared/Shell.astro';
+import { fontFaceCss, preloadFonts } from '../shared/fonts';
+import { formatBytes } from '../shared/format';
+import { readManifest } from '../shared/manifest';
+import StripeComposer from './StripeComposer.tsx';
+import { brand } from './brand';
+import { content, contact, extras } from './content';
+import { css } from './styles';
+import { asset, fileInfo, heroArcs, iconNames, logoVariants, sizeTest, swoosh } from './view';
+
+const manifest = readManifest('wolnobieg');
+const colors = manifest.palette;
+const icons = iconNames(manifest);
+const zip = manifest.zip;
+const mockups = content.applications.map(item => ({
+  ...item,
+  info: fileInfo(manifest, item.image),
+}));
+const posts = extras.social.map(item => ({
+  ...item,
+  path: `social/wolnobieg-${item.id}.png`,
+}));
+const fontCss = fontFaceCss(manifest);
+const navigation = [
+  ['zadanie', 'Zadanie'],
+  ['kierunek', 'Kierunek'],
+  ['proces', 'Proces'],
+  ['system', 'System'],
+  ['zastosowania', 'Zastosowania'],
+  ['pliki', 'Pliki'],
+];
+const valueCards = ['card--orange', 'card--mustard', ''];
+---
+
+<Shell
+  brand={brand}
+  title="Identyfikacja wizualna serwisu rowerowego"
+  description="Pasy i koło w stylu lat siedemdziesiątych: kompletna identyfikacja zmyślonego serwisu rowerowego Wolnobieg z Gdańska, od strategii i procesu po pliki do druku, animację i brand book."
+  css={fontCss + css}
+  preload={preloadFonts(manifest, ['display'])}
+  bodyClass="wolnobieg">
+  <header class="top">
+    <a href={link('/identyfikacja/')}>Wzornik, identyfikacja</a>
+    <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="t-hero">
+      <div class="hero__in">
+        <div class="hero__head">
+          <p class="kicker">Identyfikacja wizualna, serwis i sklep rowerowy, Gdańsk</p>
+          <h1 id="t-hero">Wolnobieg</h1>
+        </div>
+        <div class="hero__text">
+          <p class="hero__lead">{content.lead}</p>
+          <dl class="hero__facts">
+            {content.client.facts.slice(0, 3).map(([term, text]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{text}</dd>
+              </div>
+            ))}
+          </dl>
+          <nav class="hero__nav" aria-label="Spis treści">
+            <ul>
+              {navigation.map(([id, label]) => (
+                <li>
+                  <a href={`#${id}`}>{label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+        <figure class="hero__art">
+          <svg viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+            {heroArcs.map(arc => (
+              <path d={arc.d} fill={arc.color}></path>
+            ))}
+          </svg>
+          <div class="hero__badge">
+            <img
+              src={asset('logo/wolnobieg-symbol.svg')}
+              alt="Odznaka Wolnobiegu: zębatka z pierścieniami jak koło wolnobiegu"
+              width="400"
+              height="400"
+            />
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <section class="band" id="zadanie" aria-labelledby="t-zadanie">
+        <div class="band__head">
+          <h2 id="t-zadanie" class="band__title">
+            Klient i zadanie
+          </h2>
+          <svg class="swoosh" viewBox="0 0 280 40" aria-hidden="true" focusable="false">
+            {swoosh.map(line => (
+              <path
+                d={line.d}
+                fill="none"
+                stroke={line.color}
+                stroke-width="8"
+                stroke-linecap="round"></path>
+            ))}
+          </svg>
+        </div>
+        <div class="card">
+          <div class="two">
+            <div class="prose">
+              {content.client.paragraphs.map(text => (
+                <p>{text}</p>
+              ))}
+            </div>
+            <dl class="facts">
+              {content.client.facts.map(([term, text]) => (
+                <div>
+                  <dt>{term}</dt>
+                  <dd>{text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" id="kierunek" aria-labelledby="t-kierunek">
+        <div class="band__head">
+          <h2 id="t-kierunek" class="band__title">
+            Kierunek i strategia
+          </h2>
+        </div>
+        <div class="card card--sand">
+          <h3>{content.direction.title}</h3>
+          <div class="prose">
+            {content.direction.paragraphs.map(text => (
+              <p>{text}</p>
+            ))}
+          </div>
+          <p class="keywords">
+            {content.direction.keywords.map(word => (
+              <span>{word}</span>
+            ))}
+          </p>
+        </div>
+        <div class="cards three">
+          {content.strategy.values.map((value, index) => (
+            <article class={`card ${valueCards[index]}`}>
+              <h3>{value.title}</h3>
+              <p>{value.text}</p>
+            </article>
+          ))}
+        </div>
+        <div class="card card--brown">
+          <dl class="facts facts--row">
+            <div>
+              <dt>Odbiorcy</dt>
+              <dd>{content.strategy.audience}</dd>
+            </div>
+            <div>
+              <dt>Osobowość</dt>
+              <dd>{content.strategy.personality.join(', ')}</dd>
+            </div>
+            <div>
+              <dt>Czego unikamy</dt>
+              <dd>{content.strategy.avoids}</dd>
+            </div>
+          </dl>
+          <blockquote>{content.strategy.positioning}</blockquote>
+        </div>
+      </section>
+
+      <section class="band" id="proces" aria-labelledby="t-proces">
+        <div class="band__head">
+          <h2 id="t-proces" class="band__title">
+            Proces
+          </h2>
+          <p class="band__lead">{content.process.intro}</p>
+        </div>
+        <div class="cards three">
+          {content.process.rejected.map(item => (
+            <article class="card card--reject">
+              <img src={asset(item.thumb)} alt="" width="200" height="200" loading="lazy" />
+              <h3>{item.title}</h3>
+              <p class="muted">{item.text}</p>
+              <p>{item.reason}</p>
+            </article>
+          ))}
+          <article class="card card--chosen">
+            <img src={asset('figures/direction-kolo.svg')} alt="" width="200" height="200" />
+            <h3>{content.process.chosen.title}</h3>
+            <p>{content.process.chosen.reason}</p>
+          </article>
+        </div>
+        <div class="card">
+          <h3>Ręczny kerning</h3>
+          <p>{content.process.refinement[0].text}</p>
+          <div class="kern">
+            <figure>
+              <img
+                src={asset('figures/wordmark-default.svg')}
+                alt="Napis Wolnobieg bez korekty kerningu"
+                width="320"
+                height="190"
+                loading="lazy"
+              />
+              <figcaption>Bez korekty</figcaption>
+            </figure>
+            <figure>
+              <img
+                src={asset('figures/wordmark-kerned.svg')}
+                alt="Napis Wolnobieg po ręcznej korekcie kerningu"
+                width="320"
+                height="190"
+                loading="lazy"
+              />
+              <figcaption>Po korekcie</figcaption>
+            </figure>
+          </div>
+          <p class="muted">{content.process.refinement[1].text}</p>
+        </div>
+        <div class="card">
+          <h3>Test czytelności</h3>
+          <p>{content.process.refinement[2].text}</p>
+          <ul class="sizes">
+            {sizeTest.map(item => (
+              <li>
+                <img
+                  src={asset(item.src)}
+                  alt=""
+                  width={item.size}
+                  height={item.size}
+                  style={`width:${item.size}px;height:${item.size}px`}
+                />
+                <span>{item.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section class="band" id="system" aria-labelledby="t-system">
+        <div class="band__head">
+          <h2 id="t-system" class="band__title">
+            System identyfikacji
+          </h2>
+        </div>
+
+        <div class="card">
+          <h3>Logo w sześciu wersjach</h3>
+          <ul class="variants">
+            {logoVariants.map(variant => (
+              <li class={`ground ground--${variant.ground}`}>
+                <img
+                  src={asset(`logo/wolnobieg-${variant.id}.svg`)}
+                  alt={`Logo Wolnobieg, wersja ${variant.name.toLowerCase()}`}
+                  width="240"
+                  height="160"
+                  loading="lazy"
+                />
+                <p>
+                  <strong>{variant.name}</strong>
+                  <span>{variant.note}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+          <div class="two two--even">
+            <figure class="clear">
+              <img
+                src={asset('figures/clearspace.svg')}
+                alt="Logo główne otoczone polem ochronnym równym wysokości litery W"
+                width="857"
+                height="370"
+                loading="lazy"
+              />
+            </figure>
+            <div class="prose">
+              <h4>Pole ochronne i rozmiary</h4>
+              <p>{extras.clearSpace}</p>
+              <ul class="plain">
+                <li>Sygnet: {extras.minimum.symbol}.</li>
+                <li>Pełna odznaka: {extras.minimum.fullBadge}.</li>
+                <li>Logo główne: {extras.minimum.primary}.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Kolor</h3>
+          <ul class="swatches">
+            {colors.map(color => (
+              <li>
+                <span class="swatches__chip" style={`background:${color.hex}`}></span>
+                <strong>{color.name}</strong>
+                <span>{color.hex}</span>
+                <em>{color.role}</em>
+              </li>
+            ))}
+          </ul>
+          <ColorTable colors={colors} />
+          <h4>Kontrast</h4>
+          <p class="muted">
+            Każda para tekstu i tła w systemie ma policzony stosunek kontrastu. Teksty spełniają
+            WCAG AA, a elementy dekoracyjne są oznaczone osobno.
+          </p>
+          <ContrastTable pairs={manifest.contrast} />
+        </div>
+
+        <div class="card card--sand">
+          <h3>Typografia</h3>
+          <div class="two two--even">
+            <div class="face">
+              <p class="face__name face__name--display">Rammetto One</p>
+              <p class="face__sample face__sample--display">{extras.specimen}</p>
+              <p class="muted">Nagłówki i napis logo. Jedna grubość, 400. Licencja OFL.</p>
+            </div>
+            <div class="face">
+              <p class="face__name face__name--text">Baloo 2</p>
+              <p class="face__sample face__sample--text">{extras.specimen}</p>
+              <p class="muted">Tekst. Grubości 400, 600 i 800. Licencja OFL.</p>
+            </div>
+          </div>
+          <ul class="scale">
+            {extras.typeScale.map(row => (
+              <li>
+                <span
+                  class={`scale__sample scale__sample--${row.font}`}
+                  style={`font-size:${Math.min(row.size, 40)}px;font-weight:${'weight' in row ? row.weight : 400}`}>
+                  {row.name}
+                </span>
+                <span class="muted">
+                  {row.size} px, interlinia {String(row.line).replace('.', ',')}. {row.use}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p class="glyphs">{extras.glyphs}</p>
+        </div>
+
+        <div class="card">
+          <h3>Ikony i wzór</h3>
+          <ul class="icons">
+            {icons.map(name => (
+              <li>
+                <img
+                  src={asset(`icons/svg/wolnobieg-icon-${name}.svg`)}
+                  alt=""
+                  width="40"
+                  height="40"
+                  loading="lazy"
+                />
+                <span>{name}</span>
+              </li>
+            ))}
+          </ul>
+          <div
+            class="pattern"
+            role="img"
+            aria-label="Wzór z koncentrycznych pierścieni w pomarańczy, musztardzie i brązie"
+            style={`background-image:url(${asset('pattern/wolnobieg-pattern.svg')})`}></div>
+          <div class="cards three cards--inner">
+            {extras.graphics.map(item => (
+              <div>
+                <h4>{item.title}</h4>
+                <p>{item.text}</p>
+              </div>
+            ))}
+          </div>
+          <ul class="plain plain--rules">
+            {extras.layoutRules.map(rule => (
+              <li>{rule}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="card card--mustard">
+          <h3>Zdjęcia i ton głosu</h3>
+          <p class="prose-p">{extras.photoStyle}</p>
+          <div class="tone">
+            {content.tone.map(rule => (
+              <article>
+                <h4>{rule.title}</h4>
+                <p>{rule.text}</p>
+                <p class="yes">
+                  <span class="tag">Tak</span>
+                  {rule.yes}
+                </p>
+                <p class="no">
+                  <span class="tag">Nie</span>
+                  {rule.no}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Animacja</h3>
+          <p>{extras.animation}</p>
+          <video
+            class="film"
+            controls
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            width="1080"
+            height="1080">
+            <source src={`${asset('animation/wolnobieg-logo.webm')}#t=2.9`} type="video/webm" />
+            <source src={`${asset('animation/wolnobieg-logo.mp4')}#t=2.9`} type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="card card--orange">
+          <h3>Ułóż własne pasy</h3>
+          <p>
+            Pasy to najważniejszy element systemu. Zmień liczbę, kolory i łuk, a potem pobierz
+            gotowy plik SVG.
+          </p>
+          <StripeComposer client:visible />
+        </div>
+      </section>
+
+      <section class="band" id="zastosowania" aria-labelledby="t-zastosowania">
+        <div class="band__head">
+          <h2 id="t-zastosowania" class="band__title">
+            Zastosowania
+          </h2>
+        </div>
+        <div class="gallery">
+          {mockups.map(item => (
+            <figure class={`card gallery__item gallery__item--${item.id}`}>
+              <img
+                src={asset(item.image)}
+                alt={item.alt}
+                width={item.info?.width}
+                height={item.info?.height}
+                loading="lazy"
+              />
+              <figcaption>
+                <strong>{item.title}</strong>
+                <span>{item.caption}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <h3 class="band__sub">Media społecznościowe</h3>
+        <ul class="posts">
+          <li>
+            <img
+              src={asset('social/wolnobieg-avatar.png')}
+              alt="Awatar Wolnobiegu: odznaka z zębatką na pomarańczowym tle"
+              width="1080"
+              height="1080"
+              loading="lazy"
+            />
+            <span>Awatar</span>
+          </li>
+          {posts.map(post => (
+            <li>
+              <img
+                src={asset(post.path)}
+                alt={`Post w mediach społecznościowych: ${post.headline} ${post.body}`}
+                width="1080"
+                height="1350"
+                loading="lazy"
+              />
+              <span>{post.headline}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="band" id="pliki" aria-labelledby="t-pliki">
+        <div class="band__head">
+          <h2 id="t-pliki" class="band__title">
+            Pliki do pobrania
+          </h2>
+        </div>
+        <div class="card">
+          <p>{content.deliverables.intro}</p>
+          {zip && <p class="muted">Cała paczka waży {formatBytes(zip.bytes)}.</p>}
+          <Downloads manifest={manifest} />
+          <p class="muted">{content.deliverables.note}</p>
+        </div>
+      </section>
+
+      <section class="cta" aria-labelledby="t-cta">
+        <div class="card card--mustard">
+          <h2 id="t-cta">{content.cta.title}</h2>
+          <p>{content.cta.text}</p>
+          <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
+            Zobacz ofertę dla klientów
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <SampleLine name={brand.name} />
+    <p class="foot__contact">
+      {contact.street}, {contact.city}. Dane kontaktowe są zmyślone.
+    </p>
+  </footer>
+</Shell>
