@@ -71,22 +71,25 @@ export const symbolMarkup = (colors, options = {}) => {
 
 export const faviconMarkup = colors => symbolMarkup(colors, { double: false, weight: 500, thickness: 9, glyphSize: 140, heavy: true });
 
+const buildStack = (size, left, top, { ruleGap, descriptorSize, descriptorGap, weight = 400, descriptorWeight = 400 }) => {
+  const word = wordmark(size, { weight });
+  const baseline = top - word.bounds.minY;
+  const wordPlaced = wordmark(size, { weight, origin: { x: left, y: baseline } });
+  const ruleY = baseline + ruleGap;
+  const desc = descriptor(wordPlaced.width, { size: descriptorSize, weight: descriptorWeight, origin: { x: left, y: ruleY + descriptorGap + descriptorSize * 0.5 } });
+  return { wordPlaced, ruleY, desc, left, baseline };
+};
+
+export const primaryLayout = () => {
+  const p = buildStack(120, 20, 20, { ruleGap: 30, descriptorSize: 24, descriptorGap: 24, descriptorWeight: 500 });
+  return { ...p, width: Math.ceil(p.wordPlaced.width + 40), height: Math.ceil(p.ruleY + 24 + 12 + 24 * 0.5 + 24) };
+};
+
 export const lockups = colors => {
   const { ink, accent, small } = colors;
-  const stack = (word, rule, descriptorHeight) => ({ word, rule, descriptorHeight });
-  const build = (size, left, top, { ruleGap, descriptorSize, descriptorGap, weight = 400, descriptorWeight = 400 }) => {
-    const word = wordmark(size, { weight, origin: { x: left, y: top + 0 } });
-    const baseline = top - word.bounds.minY;
-    const wordPlaced = wordmark(size, { weight, origin: { x: left, y: baseline } });
-    const ruleY = baseline + ruleGap;
-    const desc = descriptor(wordPlaced.width, { size: descriptorSize, weight: descriptorWeight, origin: { x: left, y: ruleY + descriptorGap + descriptorSize * 0.5 } });
-    return { wordPlaced, ruleY, desc, left, baseline };
-  };
-
-  const wordSize = 120;
-  const p = build(wordSize, 20, 20, { ruleGap: 30, descriptorSize: 24, descriptorGap: 24, descriptorWeight: 500 });
-  const pWidth = Math.ceil(p.wordPlaced.width + 40);
-  const pHeight = Math.ceil(p.ruleY + 24 + 12 + 24 * 0.5 + 24);
+  const p = primaryLayout();
+  const pWidth = p.width;
+  const pHeight = p.height;
   const ruleSvg = (x, y, w) => `<rect fill="${accent}" x="${x}" y="${y}" width="${w}" height="1.6"/>`;
   const primaryBody = `<path fill="${ink}" d="${p.wordPlaced.d}"/>${ruleSvg(p.left, p.ruleY, p.wordPlaced.width)}<path fill="${small}" d="${p.desc.d}"/>`;
   const primary = { viewBox: [0, 0, pWidth, pHeight], body: primaryBody };
