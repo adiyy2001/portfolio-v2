@@ -4,7 +4,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-identyfikacja.md`. Run ru
 
 ```
 - [x] F foundation, with the first brand end to end (B1 Skibka)
-- [ ] B2 Nośna
+- [x] B2 Nośna
 - [ ] B3 Rzut
 - [x] B4 Klamra
 - [x] B5 Cuvée
