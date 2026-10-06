@@ -1,0 +1,1266 @@
+{
+  "brand": {
+    "slug": "skibka",
+    "name": "Skibka",
+    "style": "Organiczny rzemieślniczy",
+    "styleId": "I3",
+    "trade": "piekarnia na zakwasie",
+    "city": "Kraków"
+  },
+  "base": "/wzornik/identyfikacja/skibka/",
+  "totalBytes": 15271383,
+  "totalHuman": "14.6 MB",
+  "zip": {
+    "path": "skibka-identyfikacja.zip",
+    "bytes": 6261112
+  },
+  "groups": [
+    {
+      "id": "logo",
+      "title": "Logo",
+      "count": 30,
+      "bytes": 1179110,
+      "formats": "PDF, PNG, SVG, PNG 512, 1024, 2048 px",
+      "files": [
+        "logo/pdf/skibka-horizontal.pdf",
+        "logo/pdf/skibka-mono-black.pdf",
+        "logo/pdf/skibka-negative.pdf",
+        "logo/pdf/skibka-primary.pdf",
+        "logo/pdf/skibka-symbol.pdf",
+        "logo/pdf/skibka-vertical.pdf",
+        "logo/png/skibka-horizontal-1024.png",
+        "logo/png/skibka-horizontal-2048.png",
+        "logo/png/skibka-horizontal-512.png",
+        "logo/png/skibka-mono-black-1024.png",
+        "logo/png/skibka-mono-black-2048.png",
+        "logo/png/skibka-mono-black-512.png",
+        "logo/png/skibka-negative-1024.png",
+        "logo/png/skibka-negative-2048.png",
+        "logo/png/skibka-negative-512.png",
+        "logo/png/skibka-primary-1024.png",
+        "logo/png/skibka-primary-2048.png",
+        "logo/png/skibka-primary-512.png",
+        "logo/png/skibka-symbol-1024.png",
+        "logo/png/skibka-symbol-2048.png",
+        "logo/png/skibka-symbol-512.png",
+        "logo/png/skibka-vertical-1024.png",
+        "logo/png/skibka-vertical-2048.png",
+        "logo/png/skibka-vertical-512.png",
+        "logo/skibka-horizontal.svg",
+        "logo/skibka-mono-black.svg",
+        "logo/skibka-negative.svg",
+        "logo/skibka-primary.svg",
+        "logo/skibka-symbol.svg",
+        "logo/skibka-vertical.svg"
+      ]
+    },
+    {
+      "id": "favicon",
+      "title": "Ikona strony",
+      "count": 3,
+      "bytes": 9117,
+      "formats": "PNG, ICO, SVG, PNG 180 px",
+      "files": [
+        "apple-touch-icon.png",
+        "favicon.ico",
+        "favicon.svg"
+      ]
+    },
+    {
+      "id": "colors",
+      "title": "Kolor",
+      "count": 2,
+      "bytes": 7446,
+      "formats": "JSON, CSS",
+      "files": [
+        "colors/skibka-palette.json",
+        "colors/skibka-tokens.css"
+      ]
+    },
+    {
+      "id": "fonts",
+      "title": "Kroje",
+      "count": 7,
+      "bytes": 99858,
+      "formats": "WOFF2, TXT",
+      "files": [
+        "fonts/Karla-400-italic.woff2",
+        "fonts/Karla-400.woff2",
+        "fonts/Karla-500.woff2",
+        "fonts/Karla-700.woff2",
+        "fonts/OFL-Karla.txt",
+        "fonts/OFL-YoungSerif.txt",
+        "fonts/YoungSerif-400.woff2"
+      ]
+    },
+    {
+      "id": "pattern",
+      "title": "Wzór",
+      "count": 1,
+      "bytes": 4085,
+      "formats": "SVG",
+      "files": [
+        "pattern/skibka-pattern.svg"
+      ]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 13,
+      "bytes": 3828,
+      "formats": "SVG",
+      "files": [
+        "icons/skibka-icons.svg",
+        "icons/svg/skibka-icon-adres.svg",
+        "icons/svg/skibka-icon-chleb.svg",
+        "icons/svg/skibka-icon-koszyk.svg",
+        "icons/svg/skibka-icon-kromka.svg",
+        "icons/svg/skibka-icon-maka.svg",
+        "icons/svg/skibka-icon-noz.svg",
+        "icons/svg/skibka-icon-piec.svg",
+        "icons/svg/skibka-icon-telefon.svg",
+        "icons/svg/skibka-icon-torba.svg",
+        "icons/svg/skibka-icon-zakwas.svg",
+        "icons/svg/skibka-icon-zegar.svg",
+        "icons/svg/skibka-icon-ziarno.svg"
+      ]
+    },
+    {
+      "id": "print",
+      "title": "Druk",
+      "count": 2,
+      "bytes": 431931,
+      "formats": "PDF",
+      "files": [
+        "print/skibka-business-card.pdf",
+        "print/skibka-letterhead.pdf"
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Media społecznościowe",
+      "count": 4,
+      "bytes": 1445919,
+      "formats": "PNG, PNG 1080 px",
+      "files": [
+        "social/skibka-avatar.png",
+        "social/skibka-post-1.png",
+        "social/skibka-post-2.png",
+        "social/skibka-post-3.png"
+      ]
+    },
+    {
+      "id": "email",
+      "title": "Podpis e-mail",
+      "count": 1,
+      "bytes": 1181,
+      "formats": "HTML",
+      "files": [
+        "email/skibka-email-signature.html"
+      ]
+    },
+    {
+      "id": "mockups",
+      "title": "Makiety",
+      "count": 5,
+      "bytes": 1063016,
+      "formats": "JPG",
+      "files": [
+        "mockups/skibka-application.jpg",
+        "mockups/skibka-card-back.jpg",
+        "mockups/skibka-card-front.jpg",
+        "mockups/skibka-email-signature.jpg",
+        "mockups/skibka-letterhead.jpg"
+      ]
+    },
+    {
+      "id": "animation",
+      "title": "Animacja logo",
+      "count": 2,
+      "bytes": 1177054,
+      "formats": "MP4, WEBM",
+      "files": [
+        "animation/skibka-logo.mp4",
+        "animation/skibka-logo.webm"
+      ]
+    },
+    {
+      "id": "brandbook",
+      "title": "Brand book",
+      "count": 1,
+      "bytes": 3338013,
+      "formats": "PDF",
+      "files": [
+        "skibka-brandbook.pdf"
+      ]
+    },
+    {
+      "id": "zip",
+      "title": "Wszystko w jednym pliku",
+      "count": 1,
+      "bytes": 6261112,
+      "formats": "ZIP",
+      "files": [
+        "skibka-identyfikacja.zip"
+      ]
+    },
+    {
+      "id": "meta",
+      "title": "Pozostałe",
+      "count": 7,
+      "bytes": 249713,
+      "formats": "SVG, PNG, PNG 1200 px",
+      "files": [
+        "figures/clearspace.svg",
+        "figures/direction-klos.svg",
+        "figures/direction-kromka.svg",
+        "figures/direction-stamp.svg",
+        "figures/wordmark-default.svg",
+        "figures/wordmark-kerned.svg",
+        "og.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "animation/skibka-logo.mp4",
+      "bytes": 616052,
+      "type": "mp4",
+      "group": "animation",
+      "codec": "h264",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "animation/skibka-logo.webm",
+      "bytes": 561002,
+      "type": "webm",
+      "group": "animation",
+      "codec": "vp9",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "bytes": 4275,
+      "type": "png",
+      "group": "favicon",
+      "width": 180,
+      "height": 180,
+      "hasAlpha": true
+    },
+    {
+      "path": "colors/skibka-palette.json",
+      "bytes": 7160,
+      "type": "json",
+      "group": "colors"
+    },
+    {
+      "path": "colors/skibka-tokens.css",
+      "bytes": 286,
+      "type": "css",
+      "group": "colors"
+    },
+    {
+      "path": "email/skibka-email-signature.html",
+      "bytes": 1181,
+      "type": "html",
+      "group": "email"
+    },
+    {
+      "path": "favicon.ico",
+      "bytes": 3081,
+      "type": "ico",
+      "group": "favicon",
+      "sizes": [
+        16,
+        32,
+        48
+      ]
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 1761,
+      "type": "svg",
+      "group": "favicon",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "path": "figures/clearspace.svg",
+      "bytes": 8669,
+      "type": "svg",
+      "group": "meta",
+      "width": 857,
+      "height": 370
+    },
+    {
+      "path": "figures/direction-klos.svg",
+      "bytes": 2416,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-kromka.svg",
+      "bytes": 1083,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-stamp.svg",
+      "bytes": 5809,
+      "type": "svg",
+      "group": "meta",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "path": "figures/wordmark-default.svg",
+      "bytes": 2996,
+      "type": "svg",
+      "group": "meta",
+      "width": 437,
+      "height": 190
+    },
+    {
+      "path": "figures/wordmark-kerned.svg",
+      "bytes": 2856,
+      "type": "svg",
+      "group": "meta",
+      "width": 437,
+      "height": 190
+    },
+    {
+      "path": "fonts/Karla-400-italic.woff2",
+      "bytes": 15396,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Karla-400.woff2",
+      "bytes": 15064,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Karla-500.woff2",
+      "bytes": 15360,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Karla-700.woff2",
+      "bytes": 15216,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-Karla.txt",
+      "bytes": 4384,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-YoungSerif.txt",
+      "bytes": 4398,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/YoungSerif-400.woff2",
+      "bytes": 30040,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "icons/skibka-icons.svg",
+      "bytes": 137,
+      "type": "svg",
+      "group": "icons"
+    },
+    {
+      "path": "icons/svg/skibka-icon-adres.svg",
+      "bytes": 287,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-chleb.svg",
+      "bytes": 330,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-koszyk.svg",
+      "bytes": 269,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-kromka.svg",
+      "bytes": 302,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-maka.svg",
+      "bytes": 408,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-noz.svg",
+      "bytes": 310,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-piec.svg",
+      "bytes": 282,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-telefon.svg",
+      "bytes": 325,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-torba.svg",
+      "bytes": 313,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-zakwas.svg",
+      "bytes": 335,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-zegar.svg",
+      "bytes": 249,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/skibka-icon-ziarno.svg",
+      "bytes": 281,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "logo/pdf/skibka-horizontal.pdf",
+      "bytes": 5553,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 20.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 79
+      }
+    },
+    {
+      "path": "logo/pdf/skibka-mono-black.pdf",
+      "bytes": 9831,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 25.7
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 97
+      }
+    },
+    {
+      "path": "logo/pdf/skibka-negative.pdf",
+      "bytes": 9850,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 25.7
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 97
+      }
+    },
+    {
+      "path": "logo/pdf/skibka-primary.pdf",
+      "bytes": 9865,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 25.7
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 97
+      }
+    },
+    {
+      "path": "logo/pdf/skibka-symbol.pdf",
+      "bytes": 6580,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 99.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 377
+      }
+    },
+    {
+      "path": "logo/pdf/skibka-vertical.pdf",
+      "bytes": 9335,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 83.2
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 315
+      }
+    },
+    {
+      "path": "logo/png/skibka-horizontal-1024.png",
+      "bytes": 24578,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 213,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-horizontal-2048.png",
+      "bytes": 56136,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 425,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-horizontal-512.png",
+      "bytes": 11959,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 106,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-mono-black-1024.png",
+      "bytes": 30893,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 263,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-mono-black-2048.png",
+      "bytes": 66727,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 525,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-mono-black-512.png",
+      "bytes": 13641,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 131,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-negative-1024.png",
+      "bytes": 39703,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 263,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-negative-2048.png",
+      "bytes": 87654,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 525,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-negative-512.png",
+      "bytes": 18465,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 131,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-primary-1024.png",
+      "bytes": 38939,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 263,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-primary-2048.png",
+      "bytes": 85526,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 525,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-primary-512.png",
+      "bytes": 17766,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 131,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-symbol-1024.png",
+      "bytes": 89472,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 1024,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-symbol-2048.png",
+      "bytes": 198764,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 2048,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-symbol-512.png",
+      "bytes": 41824,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 512,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-vertical-1024.png",
+      "bytes": 68982,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 853,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-vertical-2048.png",
+      "bytes": 155209,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 1706,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/skibka-vertical-512.png",
+      "bytes": 32371,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 426,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/skibka-horizontal.svg",
+      "bytes": 4545,
+      "type": "svg",
+      "group": "logo",
+      "width": 366,
+      "height": 76
+    },
+    {
+      "path": "logo/skibka-mono-black.svg",
+      "bytes": 9720,
+      "type": "svg",
+      "group": "logo",
+      "width": 655,
+      "height": 168
+    },
+    {
+      "path": "logo/skibka-negative.svg",
+      "bytes": 9751,
+      "type": "svg",
+      "group": "logo",
+      "width": 655,
+      "height": 168
+    },
+    {
+      "path": "logo/skibka-primary.svg",
+      "bytes": 9759,
+      "type": "svg",
+      "group": "logo",
+      "width": 655,
+      "height": 168
+    },
+    {
+      "path": "logo/skibka-symbol.svg",
+      "bytes": 6311,
+      "type": "svg",
+      "group": "logo",
+      "width": 400,
+      "height": 400
+    },
+    {
+      "path": "logo/skibka-vertical.svg",
+      "bytes": 9401,
+      "type": "svg",
+      "group": "logo",
+      "width": 407,
+      "height": 339
+    },
+    {
+      "path": "mockups/skibka-application.jpg",
+      "bytes": 257063,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/skibka-card-back.jpg",
+      "bytes": 225583,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/skibka-card-front.jpg",
+      "bytes": 189870,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/skibka-email-signature.jpg",
+      "bytes": 134976,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/skibka-letterhead.jpg",
+      "bytes": 255524,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "og.png",
+      "bytes": 225884,
+      "type": "png",
+      "group": "meta",
+      "width": 1200,
+      "height": 630,
+      "hasAlpha": false
+    },
+    {
+      "path": "pattern/skibka-pattern.svg",
+      "bytes": 4085,
+      "type": "svg",
+      "group": "pattern",
+      "width": 320,
+      "height": 320
+    },
+    {
+      "path": "print/skibka-business-card.pdf",
+      "bytes": 68712,
+      "type": "pdf",
+      "group": "print",
+      "pages": 2,
+      "pageMm": {
+        "width": 91,
+        "height": 61
+      },
+      "pagePx": {
+        "width": 344,
+        "height": 231
+      }
+    },
+    {
+      "path": "print/skibka-letterhead.pdf",
+      "bytes": 363219,
+      "type": "pdf",
+      "group": "print",
+      "pages": 1,
+      "pageMm": {
+        "width": 209.9,
+        "height": 297
+      },
+      "pagePx": {
+        "width": 793,
+        "height": 1123
+      }
+    },
+    {
+      "path": "skibka-brandbook.pdf",
+      "bytes": 3338013,
+      "type": "pdf",
+      "group": "brandbook",
+      "pages": 27,
+      "pageMm": {
+        "width": 508,
+        "height": 285.8
+      },
+      "pagePx": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "path": "skibka-identyfikacja.zip",
+      "bytes": 6261112,
+      "type": "zip",
+      "group": "zip"
+    },
+    {
+      "path": "social/skibka-avatar.png",
+      "bytes": 408111,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1080,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/skibka-post-1.png",
+      "bytes": 428929,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/skibka-post-2.png",
+      "bytes": 259934,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/skibka-post-3.png",
+      "bytes": 348945,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    }
+  ],
+  "palette": [
+    {
+      "id": "zyto",
+      "name": "Żyto",
+      "group": "primary",
+      "role": "tekst, znak, ciemne tło",
+      "hex": "#3A3128",
+      "rgb": "58 49 40",
+      "oklch": "oklch(32% 0.02 67)",
+      "cmykApprox": "C 0 M 16 Y 31 K 77"
+    },
+    {
+      "id": "skorka",
+      "name": "Skórka",
+      "group": "primary",
+      "role": "akcent w tekście i na przyciskach",
+      "hex": "#8F5530",
+      "rgb": "143 85 48",
+      "oklch": "oklch(50.8% 0.093 51.8)",
+      "cmykApprox": "C 0 M 41 Y 66 K 44"
+    },
+    {
+      "id": "lan",
+      "name": "Łan",
+      "group": "accent",
+      "role": "zielony akcent w tekście",
+      "hex": "#4F5B33",
+      "rgb": "79 91 51",
+      "oklch": "oklch(45% 0.062 122.5)",
+      "cmykApprox": "C 13 M 0 Y 44 K 64"
+    },
+    {
+      "id": "lan-jasny",
+      "name": "Łan jasny",
+      "group": "accent",
+      "role": "wypełnienia, wzór, bez tekstu",
+      "hex": "#6B7A4A",
+      "rgb": "107 122 74",
+      "oklch": "oklch(55.5% 0.072 122.9)",
+      "cmykApprox": "C 12 M 0 Y 39 K 52"
+    },
+    {
+      "id": "kraft",
+      "name": "Kraft",
+      "group": "accent",
+      "role": "papier na torby i etykiety",
+      "hex": "#C9AD83",
+      "rgb": "201 173 131",
+      "oklch": "oklch(76.2% 0.065 77.6)",
+      "cmykApprox": "C 0 M 14 Y 35 K 21"
+    },
+    {
+      "id": "maka-biala",
+      "name": "Mąka biała",
+      "group": "neutral",
+      "role": "karty i okładki",
+      "hex": "#FAF7F0",
+      "rgb": "250 247 240",
+      "oklch": "oklch(97.7% 0.01 87.5)",
+      "cmykApprox": "C 0 M 1 Y 4 K 2"
+    },
+    {
+      "id": "maka",
+      "name": "Mąka",
+      "group": "neutral",
+      "role": "tło strony",
+      "hex": "#F2EDE2",
+      "rgb": "242 237 226",
+      "oklch": "oklch(94.7% 0.016 86.4)",
+      "cmykApprox": "C 0 M 2 Y 7 K 5"
+    },
+    {
+      "id": "otreby",
+      "name": "Otręby",
+      "group": "neutral",
+      "role": "tło sekcji i tabel",
+      "hex": "#E4D7BC",
+      "rgb": "228 215 188",
+      "oklch": "oklch(88.3% 0.039 85.3)",
+      "cmykApprox": "C 0 M 6 Y 18 K 11"
+    },
+    {
+      "id": "mioz",
+      "name": "Miąższ",
+      "group": "neutral",
+      "role": "cienkie linie, bez tekstu",
+      "hex": "#A08B6D",
+      "rgb": "160 139 109",
+      "oklch": "oklch(64.8% 0.049 76.5)",
+      "cmykApprox": "C 0 M 13 Y 32 K 37"
+    },
+    {
+      "id": "popiol",
+      "name": "Popiół",
+      "group": "neutral",
+      "role": "tekst drugorzędny",
+      "hex": "#6A5D4D",
+      "rgb": "106 93 77",
+      "oklch": "oklch(48.6% 0.03 72.8)",
+      "cmykApprox": "C 0 M 12 Y 27 K 58"
+    }
+  ],
+  "contrast": [
+    {
+      "id": "zyto-maka",
+      "use": "tekst podstawowy na tle strony",
+      "foreground": "#3A3128",
+      "background": "#F2EDE2",
+      "kind": "text",
+      "ratio": 10.9,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "zyto-maka-biala",
+      "use": "tekst na kartach",
+      "foreground": "#3A3128",
+      "background": "#FAF7F0",
+      "kind": "text",
+      "ratio": 11.9,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "zyto-otreby",
+      "use": "tekst w tabelach i na tle sekcji",
+      "foreground": "#3A3128",
+      "background": "#E4D7BC",
+      "kind": "text",
+      "ratio": 8.94,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "zyto-kraft",
+      "use": "tekst na papierze kraft, etykiety i torba",
+      "foreground": "#3A3128",
+      "background": "#C9AD83",
+      "kind": "text",
+      "ratio": 5.93,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "popiol-maka",
+      "use": "tekst drugorzędny, podpisy",
+      "foreground": "#6A5D4D",
+      "background": "#F2EDE2",
+      "kind": "text",
+      "ratio": 5.47,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "popiol-maka-biala",
+      "use": "podpisy na kartach",
+      "foreground": "#6A5D4D",
+      "background": "#FAF7F0",
+      "kind": "text",
+      "ratio": 5.97,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "skorka-maka",
+      "use": "linki i akcenty w tekście",
+      "foreground": "#8F5530",
+      "background": "#F2EDE2",
+      "kind": "text",
+      "ratio": 5.12,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "skorka-maka-biala",
+      "use": "linki na kartach",
+      "foreground": "#8F5530",
+      "background": "#FAF7F0",
+      "kind": "text",
+      "ratio": 5.59,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "lan-maka",
+      "use": "zielony akcent w tekście",
+      "foreground": "#4F5B33",
+      "background": "#F2EDE2",
+      "kind": "text",
+      "ratio": 6.25,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "maka-zyto",
+      "use": "negatyw: jasny tekst na żytnim tle",
+      "foreground": "#F2EDE2",
+      "background": "#3A3128",
+      "kind": "text",
+      "ratio": 10.9,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "maka-skorka",
+      "use": "jasny tekst na przycisku w kolorze skórki",
+      "foreground": "#F2EDE2",
+      "background": "#8F5530",
+      "kind": "text",
+      "ratio": 5.12,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "maka-lan",
+      "use": "jasny tekst na zielonym tle",
+      "foreground": "#F2EDE2",
+      "background": "#4F5B33",
+      "kind": "text",
+      "ratio": 6.25,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "skorka-maka-ui",
+      "use": "obrys fokusu i ramki pól formularza",
+      "foreground": "#8F5530",
+      "background": "#F2EDE2",
+      "kind": "ui",
+      "ratio": 5.12,
+      "required": 3,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "zyto-maka-large",
+      "use": "duże nagłówki",
+      "foreground": "#3A3128",
+      "background": "#F2EDE2",
+      "kind": "large",
+      "ratio": 10.9,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "lan-jasny-maka",
+      "use": "wzór i kłosy w tle",
+      "foreground": "#6B7A4A",
+      "background": "#F2EDE2",
+      "kind": "decorative",
+      "ratio": 3.99,
+      "required": 0,
+      "level": "AA large",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    },
+    {
+      "id": "mioz-maka",
+      "use": "cienkie linie podziału",
+      "foreground": "#A08B6D",
+      "background": "#F2EDE2",
+      "kind": "decorative",
+      "ratio": 2.81,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki",
+      "family": "Young Serif",
+      "css": "Skibka Display",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/YoungSerif-400.woff2",
+      "bytes": 30040
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Karla",
+      "css": "Skibka Text",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/Karla-400.woff2",
+      "bytes": 15064
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Karla",
+      "css": "Skibka Text",
+      "weight": 500,
+      "style": "normal",
+      "file": "fonts/Karla-500.woff2",
+      "bytes": 15360
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Karla",
+      "css": "Skibka Text",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/Karla-700.woff2",
+      "bytes": 15216
+    },
+    {
+      "id": "text-italic",
+      "role": "tekst, kursywa",
+      "family": "Karla",
+      "css": "Skibka Text",
+      "weight": 400,
+      "style": "italic",
+      "file": "fonts/Karla-400-italic.woff2",
+      "bytes": 15396
+    }
+  ]
+}
