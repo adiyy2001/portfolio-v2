@@ -1,0 +1,93 @@
+---
+import { assetUrl } from '../shared/manifest';
+import { identityBrands } from '../../shared/sites';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = identityBrands.find(item => item.slug === 'cuvee')!;
+---
+
+<a class="cuvee-tile" href={href}>
+  <img
+    class="cuvee-tile__logo"
+    src={assetUrl('cuvee', 'logo/cuvee-negative.svg')}
+    alt=""
+    width="340"
+    height="160"
+  />
+  <span class="cuvee-tile__style">{meta.style}</span>
+  <span class="cuvee-tile__trade">
+    {meta.trade}, {meta.city}
+  </span>
+  <span class="cuvee-tile__go">Zobacz identyfikację</span>
+</a>
+
+<style is:global>
+  .cuvee-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 260px;
+    padding: 30px 28px 24px;
+    background: #15110e;
+    color: #f3ecdd;
+    text-decoration: none;
+    border: 1px solid #b08d57;
+    outline: 1px solid #15110e;
+    outline-offset: -8px;
+  }
+
+  .cuvee-tile__logo {
+    width: 78%;
+    max-width: 240px;
+    height: auto;
+    margin-bottom: 14px;
+  }
+
+  .cuvee-tile__style {
+    font:
+      400 14px/1.2 'Cuvee Display',
+      Georgia,
+      serif;
+    font-variant-caps: all-small-caps;
+    letter-spacing: 0.22em;
+    color: #d7be8d;
+  }
+
+  .cuvee-tile__trade {
+    font:
+      italic 400 16px/1.4 Georgia,
+      serif;
+  }
+
+  .cuvee-tile__go {
+    margin-top: auto;
+    padding-top: 12px;
+    font:
+      400 15px/1 Georgia,
+      serif;
+    border-bottom: 1px solid #b08d57;
+    align-self: flex-start;
+    padding-bottom: 3px;
+    transition: color 0.6s ease;
+  }
+
+  .cuvee-tile:hover .cuvee-tile__go,
+  .cuvee-tile:focus-visible .cuvee-tile__go {
+    color: #d7be8d;
+  }
+
+  .cuvee-tile:focus-visible {
+    outline: 3px solid #d7be8d;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cuvee-tile__go {
+      transition: none;
+    }
+  }
+</style>

@@ -181,9 +181,23 @@ export const extras = {
   typeScale: [
     { name: 'Tytuł', font: 'display', size: 64, line: 1.02, weight: 200, use: 'okładki i hasła' },
     { name: 'Nagłówek', font: 'display', size: 36, line: 1.12, weight: 300, use: 'sekcje i karty' },
-    { name: 'Kapitaliki', font: 'caps', size: 15, line: 1.4, weight: 400, use: 'etykiety, numery i nazwy sekcji, rozstaw 0,22 em' },
+    {
+      name: 'Kapitaliki',
+      font: 'caps',
+      size: 15,
+      line: 1.4,
+      weight: 400,
+      use: 'etykiety, numery i nazwy sekcji, rozstaw 0,22 em',
+    },
     { name: 'Tekst', font: 'text', size: 18, line: 1.6, weight: 400, use: 'akapity, opisy, menu' },
-    { name: 'Podpis', font: 'text', size: 14, line: 1.45, weight: 400, use: 'podpisy, adresy, drobny druk' },
+    {
+      name: 'Podpis',
+      font: 'text',
+      size: 14,
+      line: 1.45,
+      weight: 400,
+      use: 'podpisy, adresy, drobny druk',
+    },
   ],
   specimen: 'Winorośl pamięta każdy rok. Cisza też ma rocznik.',
   glyphs: 'ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż 0123456789 „”·×',
@@ -219,9 +233,24 @@ export const extras = {
     primary: '140 px szerokości, 30 mm w druku',
   },
   social: [
-    { id: 'post-1', headline: 'Winobranie', body: 'Zaczynamy w poniedziałek o świcie. Solaris, johanniter, regent.', foot: 'Cuvée, Sobótka' },
-    { id: 'post-2', headline: 'Cisza ma rocznik.', body: 'Rocznik 2024, pierwsza butelka.', foot: 'Cuvée, hotel i winnica' },
-    { id: 'post-3', headline: 'Dwanaście pokoi', body: 'Cztery hektary winnicy pod Ślężą.', foot: 'ul. Winna 12, Sobótka' },
+    {
+      id: 'post-1',
+      headline: 'Winobranie',
+      body: 'Zaczynamy w poniedziałek o świcie. Solaris, johanniter, regent.',
+      foot: 'Cuvée, Sobótka',
+    },
+    {
+      id: 'post-2',
+      headline: 'Cisza ma rocznik.',
+      body: 'Rocznik 2024, pierwsza butelka.',
+      foot: 'Cuvée, hotel i winnica',
+    },
+    {
+      id: 'post-3',
+      headline: 'Dwanaście pokoi',
+      body: 'Cztery hektary winnicy pod Ślężą.',
+      foot: 'ul. Winna 12, Sobótka',
+    },
   ],
   label: {
     appellation: 'Dolny Śląsk, pod Ślężą',
