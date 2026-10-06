@@ -35,13 +35,13 @@ export const buildFigures = () => {
     [100, 80, 1],
     [100, 50, 0],
   ];
-  const earPath = grains
-    .map(([x, y, side]) => (side === 0 ? `M${x} ${y}c-5-12 -5-20 0-28 5 8 5 16 0 28Z` : `M${x} ${y}c${side * 22 - 2} -2 ${side * 30} -14 ${side * 30} -30-${side * 22 - 4} 2-${side * 30 - 4} 14-${side * 30 - 4} 30Z`))
+  const earGrains = grains
+    .map(([x, y, side]) => `<ellipse cx="${x + side * 15}" cy="${y - 14}" rx="7" ry="17" transform="rotate(${side * 38} ${x + side * 15} ${y - 14})"/>`)
     .join('');
   const word = wordmark(46, 0, { x: 100 - wordmark(46).width / 2, y: 178 });
   figure(
     'direction-klos.svg',
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path ${sketchStyle} d="${rough([[100, 150], [100, 56]], 2, 9)}"/><path ${sketchStyle} stroke-width="2.4" d="${earPath}"/><path fill="${c.zyto}" d="${word.d}"/></svg>`,
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path ${sketchStyle} d="${rough([[100, 150], [100, 56]], 2, 9)}"/><g ${sketchStyle} stroke-width="2.4">${earGrains}</g><path fill="${c.zyto}" d="${word.d}"/></svg>`,
   );
 
   const stampSvg = logo('symbol').replace('<svg ', '<svg width="200" height="200" ');
@@ -53,10 +53,10 @@ export const buildFigures = () => {
     return { d: lineToPath(layout, { x: 10, y: 150, digits: 1, fit: 0.3 }), width: layout.width };
   })();
   const adjusted = wordmark(120, 0, { x: 10, y: 150 });
-  const lines = (w, id) => `<g stroke="${c.skorka}" stroke-width="0.8" fill="none"><path d="M0 150H${w}M0 ${150 - 120 * 0.69}H${w}M0 ${150 - 120 * 0.5}H${w}" stroke-dasharray="4 4"/></g>`;
+  const lines = w => `<g stroke="${c.skorka}" stroke-width="0.8" fill="none"><path d="M0 150H${w}M0 ${150 - 120 * 0.69}H${w}M0 ${150 - 120 * 0.5}H${w}" stroke-dasharray="4 4"/></g>`;
   const width = Math.ceil(Math.max(plain.width, adjusted.width) + 24);
-  figure('wordmark-default.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${lines(width, 'a')}<path fill="${c.popiol}" d="${plain.d}"/></svg>`);
-  figure('wordmark-kerned.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${lines(width, 'b')}<path fill="${c.zyto}" d="${adjusted.d}"/></svg>`);
+  figure('wordmark-default.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${lines(width)}<path fill="${c.popiol}" d="${plain.d}"/></svg>`);
+  figure('wordmark-kerned.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 190">${lines(width)}<path fill="${c.zyto}" d="${adjusted.d}"/></svg>`);
 
   const primary = logo('primary');
   const [, , pw, ph] = viewBoxOf(primary);

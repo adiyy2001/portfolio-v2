@@ -1,6 +1,4 @@
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
-import { brand, c, content, contact, extras, file, baseCss, dataUri, grain, logo, readPub } from './theme.mjs';
+import { c, contact, extras, file, baseCss, dataUri, grain, logo, readPub } from './theme.mjs';
 
 export const ink = (svg, color) => svg.replace(/fill="#[0-9a-fA-F]{3,8}"/g, `fill="${color}"`);
 export const sized = (svg, style) => svg.replace('<svg ', `<svg style="${style}" `);
@@ -140,7 +138,7 @@ export const bagScene = () => {
   return scene(body, { width: 1900, height: 1400, css });
 };
 
-export const emailSignature = (logoSrc, { inline = false } = {}) => `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:${c.zyto}">
+export const emailSignature = logoSrc => `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:${c.zyto}">
 <tr><td style="padding:0 0 10px 0"><img src="${logoSrc}" width="180" alt="Skibka, piekarnia na zakwasie" style="display:block;border:0;width:180px;height:auto"></td></tr>
 <tr><td style="font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.3;color:${c.zyto}">${contact.person}</td></tr>
 <tr><td style="color:${c.popiol};padding-bottom:8px">${contact.role}</td></tr>

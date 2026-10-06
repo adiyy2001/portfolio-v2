@@ -19,7 +19,6 @@ const sheet = (title, body, { tone = 'light', kicker = '' } = {}) => {
   sheets.push(`<section class="page ${tone}"><header><span>${kicker || title}</span><span>${String(number).padStart(2, '0')} / ${total}</span></header>${body}<footer>Skibka, księga identyfikacji. Projekt przykładowy.</footer></section>`);
 };
 
-const logoImg = (path, style = '') => `<img src="${svgUri(path)}" alt="" style="${style}">`;
 const recolored = (variant, color, style = '') => {
   const svg = readPub(file.logoSvg(variant)).replace(/fill="#[0-9a-fA-F]{3,8}"/g, `fill="${color}"`);
   return `<img src="${dataUri(svg)}" alt="" style="${style}">`;
