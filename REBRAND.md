@@ -737,6 +737,14 @@ Open:
 
 The recruiter repos question (whether the six concepts are right, GoJS for repo 4) is closed: Adrian's six briefs replace them and allow only permissive dependencies, so no GoJS.
 
+## Local SEO (2026-10-06)
+
+- Adrian asked to rank first in Wrocław. Titles and descriptions of the six main routes now lead with the service and the city ("Programista front-end i Angular Wrocław", "Programista freelancer Wrocław: aplikacje, strony, WCAG", the recruiter pages with "Senior Angular developer Wrocław"). The visible h1 lines are unchanged.
+- JSON-LD has a `ProfessionalService` node ("Adrian Turbiński Software", area served Wrocław, Dolnośląskie, Poland) on the home and client routes, and the `Person` node lists NgRx, WCAG and accessibility. `llms.txt` says he is available in Wrocław and remotely.
+- Keyword choice came from search results, not from a volume tool: there is no Ahrefs, Semrush or Search Console API access. Check the volumes in Keyword Planner and the queries in Search Console after two to four weeks, then adjust the copy.
+- Not done, needs Adrian: Google Business Profile (the main lever for the local pack, saved as a Command Center task for later) and local backlinks (Clutch, GoWork, WroclawIT, LinkedIn headline with Wrocław).
+- Commits in this repo use `adrian.turbinski@gmail.com` only. The last commit was force-pushed once to fix that; the older commit `0225870` keeps the company address and stays as it is (Adrian, 2026-10-06).
+
 ## Pages
 
 - [x] Phase 2 system (tokens, fonts, global styles, motion, Lenis, shell, nav, footer, transitions), approved
