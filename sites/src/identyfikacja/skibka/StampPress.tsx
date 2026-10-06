@@ -50,8 +50,13 @@ export default function StampPress({ ring, loaf, limit = 14 }: Props) {
         type="button"
         class="press__pad"
         onClick={press}
+        aria-label="Przybij pieczątkę"
         aria-describedby="press-hint">
-        <span class="press__label">Przybij pieczątkę</span>
+        <span
+          class={count === 0 ? 'press__label' : 'press__label press__label--gone'}
+          aria-hidden="true">
+          Kliknij w papier
+        </span>
         {marks.map(mark => {
           const print = imprint(mark.n);
           return (

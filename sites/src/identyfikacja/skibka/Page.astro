@@ -18,6 +18,10 @@ const manifest = readManifest('skibka');
 const colors = manifest.palette;
 const swatchStyle = (hex: string) => `background:${hex}`;
 const icons = iconNames(manifest);
+const iconLabels: Record<string, string> = { maka: 'mąka', noz: 'nóż' };
+const mp4 = fileInfo(manifest, 'animation/skibka-logo.mp4');
+const webm = fileInfo(manifest, 'animation/skibka-logo.webm');
+const letterhead = fileInfo(manifest, 'print/skibka-letterhead.pdf');
 const zip = manifest.zip;
 const sizeTest = [
   { src: 'favicon.svg', size: 16, label: 'sygnet uproszczony, 16 px' },
@@ -436,7 +440,7 @@ const navigation = [
                 height="40"
                 loading="lazy"
               />
-              <span>{name}</span>
+              <span>{iconLabels[name] ?? name}</span>
             </li>
           ))}
         </ul>
@@ -484,18 +488,38 @@ const navigation = [
       <div class="paper paper--wide" style="--tilt:0.3deg">
         <h3>Animacja</h3>
         <p>{extras.animation}</p>
-        <video
-          class="film"
-          controls
-          muted
-          loop
-          playsinline
-          preload="metadata"
-          width="1080"
-          height="1080">
-          <source src={`${asset('animation/skibka-logo.webm')}#t=2.9`} type="video/webm" />
-          <source src={`${asset('animation/skibka-logo.mp4')}#t=2.9`} type="video/mp4" />
-        </video>
+        <div class="two two--even film-row">
+          <video
+            class="film"
+            controls
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            width="1080"
+            height="1080">
+            <source src={`${asset('animation/skibka-logo.webm')}#t=2.9`} type="video/webm" />
+            <source src={`${asset('animation/skibka-logo.mp4')}#t=2.9`} type="video/mp4" />
+          </video>
+          <dl class="facts">
+            <div>
+              <dt>Czas</dt>
+              <dd>trzy sekundy, w pętli</dd>
+            </div>
+            <div>
+              <dt>Format</dt>
+              <dd>1080 na 1080 px</dd>
+            </div>
+            <div>
+              <dt>Pliki</dt>
+              <dd>
+                MP4 (H.264){mp4 && `, ${formatBytes(mp4.bytes)}`}
+                <br />
+                WebM (VP9){webm && `, ${formatBytes(webm.bytes)}`}
+              </dd>
+            </div>
+          </dl>
+        </div>
       </div>
 
       <div class="press-wrap">
@@ -524,6 +548,24 @@ const navigation = [
               <strong>{item.title}</strong>
               <span>{item.caption}</span>
             </figcaption>
+            {item.id === 'papier' && (
+              <dl class="facts">
+                <div>
+                  <dt>Format</dt>
+                  <dd>A4, 210 na 297 mm</dd>
+                </div>
+                <div>
+                  <dt>Plik</dt>
+                  <dd>
+                    PDF do druku{letterhead && `, ${formatBytes(letterhead.bytes)}`}, kroje osadzone
+                  </dd>
+                </div>
+                <div>
+                  <dt>Układ</dt>
+                  <dd>logo i dane w nagłówku, adres w stopce, tekst w jednej kolumnie</dd>
+                </div>
+              </dl>
+            )}
           </figure>
         ))}
       </div>
