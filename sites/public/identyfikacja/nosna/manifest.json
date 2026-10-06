@@ -8,11 +8,11 @@
     "city": "Łódź"
   },
   "base": "/wzornik/identyfikacja/nosna/",
-  "totalBytes": 10272799,
+  "totalBytes": 10276141,
   "totalHuman": "9.8 MB",
   "zip": {
     "path": "nosna-identyfikacja.zip",
-    "bytes": 4099044
+    "bytes": 4100966
   },
   "groups": [
     {
@@ -201,7 +201,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1779865,
+      "bytes": 1781285,
       "formats": "PDF",
       "files": [
         "nosna-brandbook.pdf"
@@ -211,7 +211,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 4099044,
+      "bytes": 4100966,
       "formats": "ZIP",
       "files": [
         "nosna-identyfikacja.zip"
@@ -945,7 +945,7 @@
     },
     {
       "path": "nosna-brandbook.pdf",
-      "bytes": 1779865,
+      "bytes": 1781285,
       "type": "pdf",
       "group": "brandbook",
       "pages": 28,
@@ -960,7 +960,7 @@
     },
     {
       "path": "nosna-identyfikacja.zip",
-      "bytes": 4099044,
+      "bytes": 4100966,
       "type": "zip",
       "group": "zip"
     },

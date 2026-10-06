@@ -33,7 +33,7 @@ sheet('Klient i zadanie', `${titleBlock('Klient i zadanie', 'Festiwal, który zm
 
 sheet('Kierunek', `${titleBlock('Kierunek', content.direction.title)}<div class="cols"><div class="prose">${content.direction.paragraphs.map(text => `<p>${text}</p>`).join('')}</div><div class="words">${content.direction.keywords.map(word => `<span>${word}</span>`).join('')}</div></div>`, { tone: 'dark' });
 
-sheet('Strategia', `${titleBlock('Strategia', 'Dla kogo i o czym', content.strategy.audience)}<div class="three">${content.strategy.values.map(value => `<article class="card"><h3>${value.title}</h3><p>${value.text}</p></article>`).join('')}</div>`);
+sheet('Strategia', `${titleBlock('Strategia', 'Dla kogo i o czym', content.strategy.audience)}<div class="three numbered">${content.strategy.values.map(value => `<article class="card"><h3>${value.title}</h3><p>${value.text}</p></article>`).join('')}</div>`);
 
 sheet('Osobowość', `${titleBlock('Strategia', 'Osobowość i pozycjonowanie')}<div class="cols"><div class="prose"><p class="big">Marka jest: ${content.strategy.personality.join(', ')}.</p><p>Unikamy: ${content.strategy.avoids}.</p></div><blockquote>${content.strategy.positioning}</blockquote></div>`);
 
@@ -86,7 +86,7 @@ sheet('Ikony', `${titleBlock('Ikony, wzór i układ', 'Dwanaście ikon', 'Rysowa
 
 sheet('Wzór i układ', `${titleBlock('Ikony, wzór i układ', 'Wzór z interferencji', extras.graphics[0].text)}<div class="cols"><div class="pattern" style="background-image:url('${svgUri(file.pattern)}')"></div><ul class="rules">${list(extras.layoutRules)}</ul></div>`);
 
-sheet('Zdjęcia', `${titleBlock('Zdjęcia i ton głosu', 'Styl zdjęć')}<div class="prose wide"><p>${extras.photoStyle}</p></div>`, { tone: 'dark' });
+sheet('Zdjęcia', `${titleBlock('Zdjęcia i ton głosu', 'Styl zdjęć')}<div class="cols"><div class="prose"><p>${extras.photoStyle}</p></div><dl class="facts">${[['Światło', 'zastane, bez lamp błyskowych'], ['Kadr', 'szeroki, z ludźmi przy urządzeniach, kablami i projektorami'], ['Ostrość', 'na dłoniach i interfejsach, tło może się rozmywać'], ['Kolor', 'neutralny, przyciemniony kontrast, kolor dnia tylko w podpisie']].map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl></div>`, { tone: 'dark' });
 
 sheet('Ton głosu', `${titleBlock('Zdjęcia i ton głosu', 'Cztery zasady')}<div class="tone">${content.tone.map(rule => `<article><h3>${rule.title}</h3><p>${rule.text}</p><p class="yes">Tak: ${rule.yes}</p><p class="no">Nie: ${rule.no}</p></article>`).join('')}</div>`);
 
@@ -103,6 +103,10 @@ ${baseCss()}
 @page{size:1920px 1080px;margin:0}
 html,body{margin:0}
 .page{position:relative;width:1920px;height:1080px;overflow:hidden;page-break-after:always;break-after:page;padding:150px 140px 120px;background:${c.kosc};color:${c.atrament}}
+.page:not(.cover){display:flex;flex-direction:column}
+.page>.head{flex:none}
+.page>*:not(.head):not(header):not(footer){flex:1 1 auto}
+.page>.caption,.page>.glyphs,.page>.toc{flex:none}
 .page.dark{background:${c.atrament};color:${c.kosc}}
 .page.dark .kicker,.page.dark footer,.page.dark header{color:${c.mgla}}
 .page.cover{background:${c.atrament};color:${c.kosc};padding:0 160px;display:flex;align-items:center;gap:110px}
@@ -122,80 +126,87 @@ h3{font-size:34px;line-height:1.1;margin-bottom:14px;font-weight:700}
 .small{font:500 17px/1.5 'Nosna Mono';color:${c.grafit}}
 .page.dark .small{color:${c.mgla}}
 .cols{display:grid;grid-template-columns:1.2fr 1fr;gap:90px;align-items:start}
-.prose p{font:500 26px/1.55 'Nosna Display';margin-bottom:22px;max-width:900px}
+.prose p{font:500 27px/1.5 'Nosna Display';margin-bottom:22px;max-width:900px}
 .prose.wide p{max-width:1300px;font-size:32px}
-.big{font:800 46px/1.2 'Nosna Display'!important}
+.big{font:800 54px/1.15 'Nosna Display'!important}
 .facts{margin:0}
 .facts div{border-top:4px solid currentColor;padding:18px 0 22px}
 .facts dt{font:700 16px/1 'Nosna Mono';letter-spacing:.12em;text-transform:uppercase;color:${c['sobota-tekst']};margin-bottom:10px}
 .page.dark .facts dt{color:${c.sobota}}
-.facts dd{margin:0;font:500 26px/1.35 'Nosna Display'}
+.facts dd{margin:0;font:500 30px/1.35 'Nosna Display'}
 .words{display:flex;flex-direction:column;gap:0}
 .words span{font:800 112px/1.05 'Nosna Display'}
 .words span:nth-child(1){color:${c.piatek}}.words span:nth-child(2){color:${c.sobota}}.words span:nth-child(3){color:${c.niedziela}}
-blockquote{margin:0;font:700 42px/1.25 'Nosna Display';border-left:10px solid ${c.piatek};padding-left:44px}
+blockquote{margin:0;font:700 44px/1.25 'Nosna Display';border-left:10px solid ${c.piatek};padding-left:44px}
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
 .four{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
 .card{background:${c.papier};padding:34px;position:relative;border-top:10px solid ${c.atrament}}
+.three.numbered{counter-reset:n}
+.three.numbered .card{counter-increment:n}
+.three.numbered .card::before{content:'0' counter(n);display:block;font:800 150px/1 'Nosna Display';color:${c.mgla};margin-bottom:30px}
 .card:nth-child(1){border-color:${c.piatek}}.card:nth-child(2){border-color:${c.sobota}}.card:nth-child(3){border-color:${c.niedziela}}.card:nth-child(4){border-color:${c.atrament}}
-.card p{font:500 22px/1.5 'Nosna Display'}
-.compact p{font-size:19px}
-.compact .thumb{height:120px;margin-bottom:16px;padding:8px}
+.card p{font:500 29px/1.5 'Nosna Display'}
+.card h3{font-size:44px}
+.card{padding:44px}
+.compact p{font-size:20px}
+.compact h3{font-size:36px}
+.compact .thumb{height:150px;margin-bottom:22px;padding:8px}
+.compact{align-items:stretch}
 .param{font:700 16px/1 'Nosna Mono'!important;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
 .chosen{outline:6px solid ${c.atrament};outline-offset:-6px}
 .thumb{height:150px;display:block;margin-bottom:22px;background:${c.kosc};width:100%;object-fit:contain}
-.stage{height:500px;display:grid;place-items:center}
-.stage.small{height:520px}
-.stage.grid{height:640px;overflow:hidden}
+.stage{display:grid;place-items:center;min-height:480px}
+.stage.small{height:520px;flex:none}
+.stage.grid{overflow:hidden}
 .caption{font:500 24px/1.5 'Nosna Display';margin-top:28px;max-width:1300px}
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.tiles figure{margin:0;height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.tiles figure{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
 .tiles figcaption{position:absolute;left:22px;bottom:16px;font:700 17px/1 'Nosna Mono'}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-.pair figure{margin:0;background:${c.papier};height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px}
+.pair figure{margin:0;background:${c.papier};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px}
 .pair img{width:75%}
 .pair figcaption{font:700 20px/1 'Nosna Mono'}
-.misuse{margin:0}
-.misuse div{height:340px;background:${c.papier};display:grid;place-items:center;overflow:hidden}
-.misuse figcaption{font:500 22px/1.3 'Nosna Display';margin-top:16px}
+.misuse{margin:0;display:flex;flex-direction:column}
+.misuse div{flex:1;background:${c.papier};display:grid;place-items:center;overflow:hidden}
+.misuse figcaption{font:500 28px/1.3 'Nosna Display';margin-top:16px}
 .rulegrid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.rulegrid .card h3{font-size:40px}
 .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:26px 20px}
-.swatches figure{margin:0}
-.chip{height:92px;box-shadow:inset 0 0 0 2px ${c.mgla}}
+.swatches figure{margin:0;display:flex;flex-direction:column}
+.chip{flex:1;min-height:92px;box-shadow:inset 0 0 0 2px ${c.mgla}}
 .swatches figcaption{display:grid;gap:4px;padding-top:12px;font:500 15px/1.3 'Nosna Mono'}
 .swatches b{font:800 22px/1.1 'Nosna Display'}
-.contrast{width:100%;border-collapse:collapse;font:500 18px/1.2 'Nosna Display'}
+.contrast{width:100%;border-collapse:collapse;font:500 20px/1.2 'Nosna Display'}
 .contrast th{text-align:left;font:700 14px/1 'Nosna Mono';letter-spacing:.1em;text-transform:uppercase;padding:0 10px 12px}
 .contrast td{padding:5px 10px;border-top:2px solid ${c.mgla}}
 .contrast i{display:inline-block;width:18px;height:18px;border-radius:50%;margin-right:10px;vertical-align:-3px;border:2px solid ${c.atrament}}
-.face .mega{font-size:96px;line-height:1;margin-bottom:34px;white-space:nowrap}
-.face .specimen{font-size:40px;line-height:1.3;margin-bottom:30px}
+.face .mega{font-size:104px;line-height:1;margin-bottom:34px;white-space:nowrap}
+.face .specimen{font-size:44px;line-height:1.3;margin-bottom:30px}
 .display{font-family:'Nosna Display',sans-serif;font-weight:800}
 .mono{font-family:'Nosna Mono',monospace;font-weight:500}
-.scale{display:grid;gap:14px}
+.scale{display:grid;gap:18px;align-content:start}
 .scale div{display:grid;grid-template-columns:520px 1fr;align-items:baseline;gap:40px;border-top:3px solid ${c.mgla};padding-top:10px}
 .glyphs{font-size:72px;line-height:1.3;margin:28px 0 0}
 .icons{display:grid;grid-template-columns:repeat(6,1fr);gap:28px}
-.icons figure{margin:0;background:${c.papier};height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
-.icons img{width:92px}
+.icons figure{margin:0;background:${c.papier};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.icons img{width:104px}
 .icons figcaption{font:500 17px/1 'Nosna Mono'}
-.pattern{height:470px;background-size:420px;background-color:${c.papier}}
+.pattern{align-self:stretch;min-height:470px;background-size:420px;background-color:${c.papier}}
 .rules{margin:0;padding:0;list-style:none;display:grid;gap:20px}
-.rules li{font:500 26px/1.4 'Nosna Display';border-top:4px solid ${c.atrament};padding-top:14px}
+.rules li{font:500 30px/1.4 'Nosna Display';border-top:4px solid ${c.atrament};padding-top:14px}
 .tone{display:grid;grid-template-columns:1fr 1fr;gap:30px 50px}
-.tone article{background:${c.papier};padding:28px 34px}
-.tone h3{font-size:30px;margin-bottom:8px}
-.tone p{font:500 22px/1.4 'Nosna Display'}
+.tone article{background:${c.papier};padding:34px 40px}
+.tone h3{font-size:36px;margin-bottom:10px}
+.tone p{font:500 25px/1.4 'Nosna Display'}
 .tone .yes{color:${c['sobota-tekst']};font-weight:700;margin-top:12px}
 .tone .no{color:${c.grafit};text-decoration:line-through;text-decoration-color:${c.piatek}}
 .mocks{display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;align-items:start}
-.mocks .mock{width:100%;height:600px;object-fit:cover;object-position:center}
+.mocks .mock{width:100%;height:auto}
 .mocks.wide{grid-template-columns:1.25fr 1fr}
-.mocks.wide .mock{height:560px}
 .end{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
-.toc{list-style:none;margin:0;padding:0;columns:2;column-gap:120px;font:800 38px/1 'Nosna Display'}
-.toc li{display:flex;justify-content:space-between;border-top:4px solid ${c.atrament};padding:20px 0 24px;break-inside:avoid}
-.toc li span:last-child{font:500 22px/1 'Nosna Mono';color:${c['piatek-tekst']}}
+.toc{list-style:none;margin:0;padding:0;columns:2;column-gap:120px;font:800 44px/1 'Nosna Display'}
+.toc li{display:flex;justify-content:space-between;align-items:center;border-top:4px solid ${c.atrament};padding:22px 0 24px;break-inside:avoid}
+.toc li span:last-child{font:500 26px/1 'Nosna Mono';color:${c['piatek-tekst']}}
 `;
 
 const html = `<!doctype html><html lang="pl"><meta charset="utf-8"><title>Nośna, księga identyfikacji</title><style>${css}</style><body>${sheets.join('')}</body></html>`;

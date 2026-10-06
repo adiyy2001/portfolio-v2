@@ -102,7 +102,7 @@ export const content: CaseContent = {
     {
       title: 'Podajemy dane, nie przymiotniki',
       text: 'Godzina, hala, tempo. Resztę dopowiada program.',
-      yes: 'Sobota, 22:00, Tkalnia. 128 BPM.',
+      yes: 'Sobota, 22:00, Tkalnia. 128\u00a0BPM.',
       no: 'Niesamowita noc pełna elektryzujących brzmień!',
     },
     {
@@ -128,7 +128,7 @@ export const content: CaseContent = {
     {
       id: 'karta-awers',
       title: 'Wizytówka, awers',
-      caption: 'Pole piątku na atramencie. Druk 85 na 55 mm, spad 3 mm.',
+      caption: 'Pole piątku na atramencie. Druk 85 na 55\u00a0mm, spad\u00a03\u00a0mm.',
       image: 'mockups/nosna-card-front.jpg',
       alt: 'Awers wizytówki Nośnej: czerwone pole nitek na atramentowym tle.',
     },
@@ -164,7 +164,7 @@ export const content: CaseContent = {
   ],
   deliverables: {
     intro:
-      'Wszystko, co dostaje festiwal, leży w jednej paczce ZIP i osobno na liście poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami. Dwanaście wariantów znaku to osobne pliki SVG w grupie Logo.',
+      'Pliki marki leżą w jednej paczce ZIP i osobno na liście poniżej. Makiet i animacji logo nie ma w paczce, pobierasz je z listy. Rozwiń grupę, żeby zobaczyć pliki z wymiarami. Dwanaście wariantów znaku to osobne pliki SVG w grupie Logo.',
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
@@ -202,7 +202,7 @@ export const extras = {
       use: 'godziny, tempo, ziarno, podpisy',
     },
   ],
-  specimen: 'Sygnał niesie treść. Sobota, 22:00, Tkalnia, 128 BPM.',
+  specimen: 'Sygnał niesie treść. Sobota, 22:00, Tkalnia, 128\u00a0BPM.',
   glyphs: 'ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż 0123456789 → ×',
   rules: [
     {
@@ -218,7 +218,7 @@ export const extras = {
     {
       parameter: 'Tempo',
       sets: 'gęstość i częstotliwość',
-      text: 'Od 60 do 180 BPM. Im szybciej, tym więcej nitek i więcej drgań na długości pola. Zakres nitek zależy od sceny.',
+      text: 'Od 60 do 180\u00a0BPM. Im szybciej, tym więcej nitek i więcej drgań na długości pola. Zakres nitek zależy od sceny.',
     },
     {
       parameter: 'Ziarno',
@@ -259,9 +259,10 @@ export const extras = {
   clearSpace:
     'Pole ochronne jest równe wysokości litery N z napisu Nośna. Żaden tekst ani brzeg kartki nie wchodzi w ten obszar.',
   minimum: {
-    symbol: '16 px na ekranie dla ikony strony, 48 px dla sygnetu z polem, 12 mm w druku',
-    fullStamp: '96 px szerokości dla logo głównego, 30 mm w druku',
-    primary: '120 px szerokości, 32 mm w druku',
+    symbol:
+      '16\u00a0px na ekranie dla ikony strony, 48\u00a0px dla sygnetu z polem, 12\u00a0mm w druku',
+    fullStamp: '96\u00a0px szerokości dla logo głównego, 30\u00a0mm w druku',
+    primary: '120\u00a0px szerokości, 32\u00a0mm w druku',
   },
   social: [
     {
@@ -275,14 +276,14 @@ export const extras = {
       id: 'post-2',
       day: 'sobota',
       headline: 'Sobota',
-      body: 'Tkalnia, 22:00. Koncert na 8 syntezatorów modularnych. 128 BPM.',
+      body: 'Tkalnia, 22:00. Koncert na 8 syntezatorów modularnych. 128\u00a0BPM.',
       foot: 'ul. Szpulowa 5, Łódź',
     },
     {
       id: 'post-3',
       day: 'niedziela',
       headline: 'Niedziela',
-      body: 'Wykończalnia, do rana. Noc klubowa na 146 BPM.',
+      body: 'Wykończalnia, do rana. Noc klubowa na 146\u00a0BPM.',
       foot: 'ul. Szpulowa 5, Łódź',
     },
   ],

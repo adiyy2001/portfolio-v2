@@ -34,17 +34,17 @@ export const logoVariants = [
 
 export const gridCells = grid.map((variant: Variant) => ({
   variant,
-  name: variantName(variant),
+  name: variantName(variant).replace(' BPM', '\u00a0BPM'),
   file: `logo/${variantFile(variant)}`,
   viewBox: markBox.join(' '),
   markup: markBody(variant, { thread: dayOf(variant.day).color, ink }),
 }));
 
 export const sizeTest = [
-  { src: 'favicon.svg', size: 16, label: 'ikona strony, 16 px' },
-  { src: 'favicon.svg', size: 24, label: '24 px' },
-  { src: 'favicon.svg', size: 48, label: '48 px' },
-  { src: 'logo/nosna-symbol.svg', size: 48, label: 'pełny sygnet, 48 px' },
-  { src: 'logo/nosna-symbol.svg', size: 96, label: '96 px' },
-  { src: 'logo/nosna-symbol.svg', size: 192, label: '192 px' },
+  { src: 'favicon.svg', size: 16, label: 'ikona strony, 16\u00a0px' },
+  { src: 'favicon.svg', size: 24, label: '24\u00a0px' },
+  { src: 'favicon.svg', size: 48, label: '48\u00a0px' },
+  { src: 'logo/nosna-symbol.svg', size: 48, label: 'pełny sygnet, 48\u00a0px' },
+  { src: 'logo/nosna-symbol.svg', size: 96, label: '96\u00a0px' },
+  { src: 'logo/nosna-symbol.svg', size: 192, label: '192\u00a0px' },
 ] as const;
