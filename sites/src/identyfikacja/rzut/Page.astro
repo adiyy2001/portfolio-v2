@@ -18,7 +18,10 @@ const manifest = readManifest('rzut');
 const icons = iconNames(manifest);
 const zip = manifest.zip;
 const fontCss = fontFaceCss(manifest);
-const mockups = content.applications.map(item => ({ ...item, info: fileInfo(manifest, item.image) }));
+const mockups = content.applications.map(item => ({
+  ...item,
+  info: fileInfo(manifest, item.image),
+}));
 const posts = extras.social.map(item => ({ ...item, path: `social/rzut-${item.id}.png` }));
 const sources = {
   primary: asset('logo/rzut-primary.svg'),
@@ -64,7 +67,9 @@ const [client1, client2, task] = content.client.paragraphs;
   preload={preloadFonts(manifest, ['text'])}
   bodyClass="rzut">
   <div class="lines" aria-hidden="true">
-    {Array.from({ length: 12 }, () => <span></span>)}
+    {Array.from({ length: 12 }, () => (
+      <span></span>
+    ))}
   </div>
   <header class="top">
     <a href={link('/')}>Wzornik</a>
@@ -74,13 +79,7 @@ const [client1, client2, task] = content.client.paragraphs;
   <main id="main" tabindex="-1">
     <section class="hero" aria-labelledby="t-hero">
       <div class="x" style="--col:1/span 7">
-        <img
-          class="hero__mark"
-          src={asset('logo/rzut-symbol.svg')}
-          alt=""
-          width="56"
-          height="56"
-        />
+        <img class="hero__mark" src={asset('logo/rzut-symbol.svg')} alt="" width="56" height="56" />
         <p class="kicker">Wzornik, identyfikacja wizualna. I1, szwajcarski modernizm</p>
         <h1 id="t-hero">Rzut</h1>
         <p class="hero__lead">{content.lead}</p>
@@ -114,7 +113,9 @@ const [client1, client2, task] = content.client.paragraphs;
     </section>
 
     <section class="sec" id="zadanie" aria-labelledby="t-zadanie">
-      <p class="sec__num cn" aria-hidden="true">01</p>
+      <p class="sec__num cn" aria-hidden="true">
+        01
+      </p>
       <div class="sec__head">
         <h2 id="t-zadanie">Pięć osób, jeden rysunek</h2>
       </div>
@@ -122,19 +123,27 @@ const [client1, client2, task] = content.client.paragraphs;
         <p>{client1}</p>
         <p>{client2}</p>
       </div>
-      <p class="x quote" style="--col:9/span 4">{task}</p>
+      <p class="x quote" style="--col:9/span 4">
+        {task}
+      </p>
     </section>
 
     <section class="sec" id="kierunek" aria-labelledby="t-kierunek">
-      <p class="sec__num cn" aria-hidden="true">02</p>
+      <p class="sec__num cn" aria-hidden="true">
+        02
+      </p>
       <div class="sec__head">
         <h2 id="t-kierunek">{content.direction.title}</h2>
       </div>
       <div class="x prose" style="--col:3/span 5">
-        {content.direction.paragraphs.map(text => <p>{text}</p>)}
+        {content.direction.paragraphs.map(text => (
+          <p>{text}</p>
+        ))}
       </div>
       <p class="x keywords" style="--col:9/span 4">
-        {content.direction.keywords.map(word => <span>{word}</span>)}
+        {content.direction.keywords.map(word => (
+          <span>{word}</span>
+        ))}
       </p>
       <div class="x" style="--col:3/span 10">
         <h3>Dla kogo i o czym</h3>
@@ -151,15 +160,21 @@ const [client1, client2, task] = content.client.paragraphs;
       </ul>
       <div class="x" style="--col:3/span 5">
         <p class="words">
-          {content.strategy.personality.map(word => <span>{word}</span>)}
+          {content.strategy.personality.map(word => (
+            <span>{word}</span>
+          ))}
         </p>
-        <p class="muted">Unikamy: {content.strategy.avoids}.</p>
+        <p class="muted avoids">Unikamy: {content.strategy.avoids}.</p>
       </div>
-      <p class="x quote" style="--col:9/span 4">{content.strategy.positioning}</p>
+      <p class="x quote" style="--col:9/span 4">
+        {content.strategy.positioning}
+      </p>
     </section>
 
     <section class="sec" id="proces" aria-labelledby="t-proces">
-      <p class="sec__num cn" aria-hidden="true">03</p>
+      <p class="sec__num cn" aria-hidden="true">
+        03
+      </p>
       <div class="sec__head">
         <h2 id="t-proces">Trzy szkice, jeden wybrany</h2>
         <p class="lead">{content.process.intro}</p>
@@ -228,7 +243,9 @@ const [client1, client2, task] = content.client.paragraphs;
     </section>
 
     <section class="sec" id="logo" aria-labelledby="t-logo">
-      <p class="sec__num cn" aria-hidden="true">04</p>
+      <p class="sec__num cn" aria-hidden="true">
+        04
+      </p>
       <div class="sec__head">
         <h2 id="t-logo">Znak i sześć wariantów</h2>
         <p class="lead">
@@ -312,7 +329,9 @@ const [client1, client2, task] = content.client.paragraphs;
     </section>
 
     <section class="sec" id="kolor" aria-labelledby="t-kolor">
-      <p class="sec__num cn" aria-hidden="true">05</p>
+      <p class="sec__num cn" aria-hidden="true">
+        05
+      </p>
       <div class="sec__head">
         <h2 id="t-kolor">Czerń, biel i jeden kobalt</h2>
         <p class="lead">
@@ -320,10 +339,16 @@ const [client1, client2, task] = content.client.paragraphs;
           się raz na rozkładówkę.
         </p>
       </div>
-      <div class="x bar" style={`--col:3/span 10`} role="img" aria-label="Proporcje użycia: biel 62 procent, czerń 28 procent, kobalt 10 procent">
+      <div
+        class="x bar"
+        style={`--col:3/span 10`}
+        role="img"
+        aria-label="Proporcje użycia: biel 62 procent, czerń 28 procent, kobalt 10 procent">
         {proportions.map(item => (
           <div class={`bar-${item.id}`} style={`flex:${item.share}`}>
-            <span class="lbl">{item.name} {item.share}%</span>
+            <span class="lbl">
+              {item.name} {item.share}%
+            </span>
           </div>
         ))}
       </div>
@@ -337,13 +362,17 @@ const [client1, client2, task] = content.client.paragraphs;
     </section>
 
     <section class="sec" id="typografia" aria-labelledby="t-typografia">
-      <p class="sec__num cn" aria-hidden="true">06</p>
+      <p class="sec__num cn" aria-hidden="true">
+        06
+      </p>
       <div class="sec__head">
         <h2 id="t-typografia">Jedna rodzina, dwie szerokości</h2>
       </div>
       <div class="x faces" style="--col:3/span 10">
         <div class="face">
-          <p class="face__mega" aria-hidden="true">Aa</p>
+          <p class="face__mega" aria-hidden="true">
+            Aa
+          </p>
           <h3>Instrument Sans</h3>
           <p class="face__specimen">{extras.specimen}</p>
           <p class="weights">
@@ -354,7 +383,9 @@ const [client1, client2, task] = content.client.paragraphs;
           <p class="muted">Nagłówki i tekst.</p>
         </div>
         <div class="face">
-          <p class="face__mega cn" aria-hidden="true">Aa</p>
+          <p class="face__mega cn" aria-hidden="true">
+            Aa
+          </p>
           <h3>Instrument Sans Condensed</h3>
           <p class="face__specimen cn">{extras.specimen}</p>
           <p class="weights cn">
@@ -378,11 +409,15 @@ const [client1, client2, task] = content.client.paragraphs;
           </li>
         ))}
       </ul>
-      <p class="x glyphs" style="--col:3/span 10">{extras.glyphs}</p>
+      <p class="x glyphs" style="--col:3/span 10">
+        {extras.glyphs}
+      </p>
     </section>
 
     <section class="sec" id="uklad" aria-labelledby="t-uklad">
-      <p class="sec__num cn" aria-hidden="true">07</p>
+      <p class="sec__num cn" aria-hidden="true">
+        07
+      </p>
       <div class="sec__head">
         <h2 id="t-uklad">Siatka, ikony i wzór</h2>
         <p class="lead">
@@ -411,9 +446,7 @@ const [client1, client2, task] = content.client.paragraphs;
       </dl>
       <div class="x" style="--col:3/span 10">
         <h3>Dwanaście ikon</h3>
-        <p class="muted">
-          Kreska 2 px, proste końce, ostre narożniki, siatka 24 px.
-        </p>
+        <p class="muted">Kreska 2 px, proste końce, ostre narożniki, siatka 24 px.</p>
       </div>
       <ul class="x icons" style="--col:3/span 10">
         {icons.map(name => (
@@ -435,8 +468,7 @@ const [client1, client2, task] = content.client.paragraphs;
         class="x pattern"
         style={`--col:3/span 6;background-image:url('${asset('pattern/rzut-pattern.svg')}')`}
         role="img"
-        aria-label="Wzór Rzutu: cienka siatka z krzyżykami na przecięciach, kobaltowymi i szarymi polami">
-      </div>
+        aria-label="Wzór Rzutu: cienka siatka z krzyżykami na przecięciach, kobaltowymi i szarymi polami"></div>
       <ul class="x gfx" style="--col:9/span 4">
         {extras.graphics.map(item => (
           <li>
@@ -471,7 +503,9 @@ const [client1, client2, task] = content.client.paragraphs;
     </section>
 
     <section class="sec" id="zastosowania" aria-labelledby="t-zastosowania">
-      <p class="sec__num cn" aria-hidden="true">08</p>
+      <p class="sec__num cn" aria-hidden="true">
+        08
+      </p>
       <div class="sec__head">
         <h2 id="t-zastosowania">Zastosowania</h2>
       </div>
@@ -522,7 +556,9 @@ const [client1, client2, task] = content.client.paragraphs;
     </section>
 
     <section class="sec" id="animacja" aria-labelledby="t-animacja">
-      <p class="sec__num cn" aria-hidden="true">09</p>
+      <p class="sec__num cn" aria-hidden="true">
+        09
+      </p>
       <div class="sec__head">
         <h2 id="t-animacja">Siatka, kwadrat, nazwa</h2>
         <p class="lead">{extras.animation}</p>
@@ -553,7 +589,9 @@ const [client1, client2, task] = content.client.paragraphs;
     </section>
 
     <section class="sec" id="pliki" aria-labelledby="t-pliki">
-      <p class="sec__num cn" aria-hidden="true">10</p>
+      <p class="sec__num cn" aria-hidden="true">
+        10
+      </p>
       <div class="sec__head">
         <h2 id="t-pliki">Pliki do pobrania</h2>
         <p class="lead">{content.deliverables.intro}</p>
@@ -568,7 +606,9 @@ const [client1, client2, task] = content.client.paragraphs;
 
   <section class="cta" aria-labelledby="t-cta">
     <div class="cta__in">
-      <h2 id="t-cta" class="x" style="--col:1/span 8">{content.cta.title}</h2>
+      <h2 id="t-cta" class="x" style="--col:1/span 8">
+        {content.cta.title}
+      </h2>
       <div class="x" style="--col:1/span 6">
         <p>{content.cta.text}</p>
         <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>

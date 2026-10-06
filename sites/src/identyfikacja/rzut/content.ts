@@ -168,12 +168,26 @@ export const content: CaseContent = {
 
 export const extras = {
   typeScale: [
-    { name: 'Numer', font: 'condensed', weight: 700, size: 96, line: 0.9, use: 'numery projektów i sekcji' },
+    {
+      name: 'Numer',
+      font: 'condensed',
+      weight: 700,
+      size: 96,
+      line: 0.9,
+      use: 'numery projektów i sekcji',
+    },
     { name: 'Tytuł', font: 'text', weight: 700, size: 56, line: 1.02, use: 'okładki i hasła' },
     { name: 'Nagłówek', font: 'text', weight: 700, size: 32, line: 1.1, use: 'sekcje i tabliczki' },
     { name: 'Podtytuł', font: 'text', weight: 500, size: 20, line: 1.3, use: 'wstępy i lead' },
     { name: 'Tekst', font: 'text', weight: 400, size: 17, line: 1.5, use: 'akapity i opisy' },
-    { name: 'Podpis', font: 'condensed', weight: 700, size: 13, line: 1.3, use: 'etykiety, wersaliki z rozstrzelaniem 0,07 em' },
+    {
+      name: 'Podpis',
+      font: 'condensed',
+      weight: 700,
+      size: 13,
+      line: 1.3,
+      use: 'etykiety, wersaliki z rozstrzelaniem 0,07 em',
+    },
   ],
   specimen: 'Dom przy parku. Okna co 1,2 m, schody w osi, wejście od północy.',
   glyphs: 'ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż 0123456789 „”·×°',

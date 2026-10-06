@@ -113,7 +113,9 @@ export default function GridTester({ sources }: Props) {
           />
         </label>
         <label class="gt__range">
-          <span>Szerokość: {numberPl(placed.span)} z {cols} kolumn</span>
+          <span>
+            Szerokość: {numberPl(placed.span)} z {cols} kolumn
+          </span>
           <input
             type="range"
             min="1"
@@ -129,7 +131,10 @@ export default function GridTester({ sources }: Props) {
           <div
             class="gt__cols"
             aria-hidden="true"
-            style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`, columnGap: `${gutter}px` }}>
+            style={{
+              gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+              columnGap: `${gutter}px`,
+            }}>
             {Array.from({ length: cols }, (_, i) => (
               <span key={i}>{i + 1}</span>
             ))}
@@ -144,12 +149,12 @@ export default function GridTester({ sources }: Props) {
             height: `${height}px`,
           }}>
           {showClear && (
-            <span
-              class="gt__clear"
-              aria-hidden="true"
-              style={{ inset: `${-clear}px` }}></span>
+            <span class="gt__clear" aria-hidden="true" style={{ inset: `${-clear}px` }}></span>
           )}
-          <img src={sources[variant]} alt={`Logo Rzut, wariant ${variants[variant].name.toLowerCase()}`} />
+          <img
+            src={sources[variant]}
+            alt={`Logo Rzut, wariant ${variants[variant].name.toLowerCase()}`}
+          />
         </div>
       </div>
       <p class="gt__readout" role="status">

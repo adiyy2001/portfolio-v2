@@ -32,7 +32,9 @@ describe('case study content', () => {
 
   it('describes two rejected directions and refers to existing figure names', () => {
     expect(content.process.rejected).toHaveLength(2);
-    content.process.rejected.forEach(item => expect(item.thumb).toMatch(/^figures\/direction-.+\.svg$/));
+    content.process.rejected.forEach(item =>
+      expect(item.thumb).toMatch(/^figures\/direction-.+\.svg$/),
+    );
   });
 
   it('gives alt text for every application and three social posts', () => {
@@ -104,7 +106,9 @@ describe('logo animation', () => {
   it('finishes inside the declared duration', () => {
     expect(duration).toBeGreaterThanOrEqual(2000);
     expect(duration).toBeLessThanOrEqual(4000);
-    steps.forEach(step => expect(step.options.delay + step.options.duration).toBeLessThanOrEqual(duration));
+    steps.forEach(step =>
+      expect(step.options.delay + step.options.duration).toBeLessThanOrEqual(duration),
+    );
   });
 
   it('animates only elements that exist in the svg', () => {

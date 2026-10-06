@@ -15,9 +15,18 @@ export interface Step {
 }
 
 export const duration = 3000;
-export const stage = { size: 1080, margin: 60, cols: 12, gutter: 12, scale: 1.35, ox: 141, oy: 378 };
+export const stage = {
+  size: 1080,
+  margin: 60,
+  cols: 12,
+  gutter: 12,
+  scale: 1.35,
+  ox: 141,
+  oy: 378,
+};
 
-const colWidth = () => (stage.size - stage.margin * 2 - stage.gutter * (stage.cols - 1)) / stage.cols;
+const colWidth = () =>
+  (stage.size - stage.margin * 2 - stage.gutter * (stage.cols - 1)) / stage.cols;
 const rowStep = () => colWidth() + stage.gutter;
 const verticals = () =>
   Array.from({ length: stage.cols + 1 }, (_, i) =>
@@ -25,7 +34,8 @@ const verticals = () =>
       ? stage.size - stage.margin
       : Number((stage.margin + i * rowStep()).toFixed(1)),
   );
-const horizontals = () => Array.from({ length: 13 }, (_, j) => Number((54 + j * rowStep()).toFixed(1)));
+const horizontals = () =>
+  Array.from({ length: 13 }, (_, j) => Number((54 + j * rowStep()).toFixed(1)));
 
 const palette = { grid: '#bdbdb9', square: '#1f4bff', word: '#0a0a0a', label: '#5a5a57' };
 
@@ -35,14 +45,12 @@ export const animationSvg = (data: MotionData) => {
   const lines =
     vs
       .map(
-        (x, i) =>
-          `<line id="v${i}" x1="${x}" y1="0" x2="${x}" y2="${stage.size}" class="gl gv"/>`,
+        (x, i) => `<line id="v${i}" x1="${x}" y1="0" x2="${x}" y2="${stage.size}" class="gl gv"/>`,
       )
       .join('') +
     hs
       .map(
-        (y, j) =>
-          `<line id="h${j}" x1="0" y1="${y}" x2="${stage.size}" y2="${y}" class="gl gh"/>`,
+        (y, j) => `<line id="h${j}" x1="0" y1="${y}" x2="${stage.size}" y2="${y}" class="gl gh"/>`,
       )
       .join('');
   const place = `translate(${stage.ox} ${stage.oy}) scale(${stage.scale})`;
@@ -78,20 +86,14 @@ export const timeline = (): Step[] => {
   for (let i = 0; i <= stage.cols; i += 1) {
     steps.push({
       id: `v${i}`,
-      keyframes: [
-        { transform: 'scaleY(0)', easing: snap(8) },
-        { transform: 'scaleY(1)' },
-      ],
+      keyframes: [{ transform: 'scaleY(0)', easing: snap(8) }, { transform: 'scaleY(1)' }],
       options: { duration: 500, delay: i * 35 },
     });
   }
   for (let j = 0; j < 13; j += 1) {
     steps.push({
       id: `h${j}`,
-      keyframes: [
-        { transform: 'scaleX(0)', easing: snap(8) },
-        { transform: 'scaleX(1)' },
-      ],
+      keyframes: [{ transform: 'scaleX(0)', easing: snap(8) }, { transform: 'scaleX(1)' }],
       options: { duration: 500, delay: 80 + j * 35 },
     });
   }
