@@ -17,7 +17,7 @@ const copy = {
   title: 'From the first call | to production.',
   lead: 'I build whole web apps for companies: front end, back end and deployment. Usable by everyone, keyboard and screen reader included.',
   lead2:
-    'I take on contracts as a freelancer. From the quote through launch to maintenance, you talk to me.',
+    'I take on contracts as a freelancer and invoice B2B. From the quote through launch to maintenance, you talk to me.',
   cta: 'Tell me about the project',
   link: 'See the project for a tailor',
   subject: 'Project',

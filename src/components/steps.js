@@ -20,7 +20,7 @@ const copy = {
       },
       {
         name: 'Oddanie.',
-        text: 'Wdrażam aplikację na produkcję. Kod i dostępy zostają u ciebie.',
+        text: 'Wdrażam aplikację na produkcję. Na koniec przekazuję ci kod i dostępy.',
       },
       {
         name: 'Poprawki.',
@@ -42,7 +42,7 @@ const copy = {
       },
       {
         name: 'Handover.',
-        text: 'I deploy the app to production. The code and the access stay with you.',
+        text: 'I deploy the app to production. At the end I hand over the code and the access to you.',
       },
       {
         name: 'Alterations.',

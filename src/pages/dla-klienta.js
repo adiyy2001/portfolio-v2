@@ -17,7 +17,7 @@ const copy = {
   title: 'Od pierwszej rozmowy | do produkcji.',
   lead: 'Robię całe aplikacje webowe dla firm: front, back i wdrożenie. Dostępne dla każdego, także z klawiatury i czytnika ekranu.',
   lead2:
-    'Zlecenia biorę jako freelancer. Od wyceny przez wdrożenie po utrzymanie rozmawiasz ze mną.',
+    'Zlecenia biorę jako freelancer, rozliczam się na fakturę B2B. Od wyceny przez wdrożenie po utrzymanie rozmawiasz ze mną.',
   cta: 'Opowiedz o projekcie',
   link: 'Zobacz projekt dla krawca',
   subject: 'Projekt',
