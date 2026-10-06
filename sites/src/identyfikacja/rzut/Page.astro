@@ -1,0 +1,627 @@
+---
+import { link, portfolio } from '../../shared/link';
+import ColorTable from '../shared/ColorTable.astro';
+import ContrastTable from '../shared/ContrastTable.astro';
+import Downloads from '../shared/Downloads.astro';
+import SampleLine from '../shared/SampleLine.astro';
+import Shell from '../shared/Shell.astro';
+import { fontFaceCss, preloadFonts } from '../shared/fonts';
+import { formatBytes } from '../shared/format';
+import { readManifest } from '../shared/manifest';
+import GridTester from './GridTester.tsx';
+import { brand } from './brand';
+import { content, contact, extras } from './content';
+import { styles } from './styles';
+import { asset, fileInfo, iconNames, logoVariants, proportions } from './view';
+
+const manifest = readManifest('rzut');
+const icons = iconNames(manifest);
+const zip = manifest.zip;
+const fontCss = fontFaceCss(manifest);
+const mockups = content.applications.map(item => ({
+  ...item,
+  info: fileInfo(manifest, item.image),
+}));
+const posts = extras.social.map(item => ({ ...item, path: `social/rzut-${item.id}.png` }));
+const sources = {
+  primary: asset('logo/rzut-primary.svg'),
+  horizontal: asset('logo/rzut-horizontal.svg'),
+  vertical: asset('logo/rzut-vertical.svg'),
+  symbol: asset('logo/rzut-symbol.svg'),
+};
+const pad = (n: number) => String(n).padStart(2, '0');
+const sections = [
+  ['zadanie', 'Zadanie'],
+  ['kierunek', 'Kierunek'],
+  ['proces', 'Proces'],
+  ['logo', 'Logo'],
+  ['kolor', 'Kolor'],
+  ['typografia', 'Pismo'],
+  ['uklad', 'Układ'],
+  ['zastosowania', 'Zastosowania'],
+  ['animacja', 'Animacja'],
+  ['pliki', 'Pliki'],
+] as const;
+const gridFacts = [
+  ['Kolumny', String(extras.grid.columns)],
+  ['Odstęp', extras.grid.gutter],
+  ['Margines', extras.grid.margin],
+  ['Linia bazowa', extras.grid.baseline],
+  ['Moduł', extras.grid.module],
+];
+const minimums = [
+  ['Sygnet', extras.minimum.symbol],
+  ['Logo poziome', extras.minimum.horizontal],
+  ['Logo pionowe', extras.minimum.vertical],
+  ['Logo główne', extras.minimum.primary],
+];
+const rejectedTags = ['Odrzucony', 'Odrzucona'];
+const [client1, client2, task] = content.client.paragraphs;
+---
+
+<Shell
+  brand={brand}
+  title="Identyfikacja wizualna pracowni architektonicznej"
+  description="Szwajcarski modernizm w praktyce: kompletna identyfikacja zmyślonej pracowni architektonicznej Rzut z Wrocławia, od strategii i procesu po pliki do druku, animację i brand book."
+  css={fontCss + styles}
+  preload={preloadFonts(manifest, ['text'])}
+  bodyClass="rzut">
+  <div class="lines" aria-hidden="true">
+    {Array.from({ length: 12 }, () => (
+      <span></span>
+    ))}
+  </div>
+  <header class="top">
+    <a href={link('/')}>Wzornik</a>
+    <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="t-hero">
+      <div class="x" style="--col:1/span 7">
+        <img class="hero__mark" src={asset('logo/rzut-symbol.svg')} alt="" width="56" height="56" />
+        <p class="kicker">Wzornik, identyfikacja wizualna. I1, szwajcarski modernizm</p>
+        <h1 id="t-hero">Rzut</h1>
+        <p class="hero__lead">{content.lead}</p>
+        <dl class="hero__facts">
+          {content.client.facts.map(([term, value]) => (
+            <div>
+              <dt class="lbl">{term}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
+        </dl>
+        <nav class="hero__nav" aria-label="Sekcje strony">
+          <ul>
+            {sections.map(([id, name]) => (
+              <li>
+                <a href={`#${id}`}>{name}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <figure class="x plate" style="--col:8/span 5">
+        <img
+          src={asset('figures/construction.svg')}
+          alt="Konstrukcja znaku Rzut: kwadrat o boku sześciu modułów z wejściem szerokim na dwa i wysokim na trzy moduły"
+          width="250"
+          height="230"
+        />
+        <figcaption>Rys. 01. Konstrukcja znaku. Bok M = 6U, wejście 2U na 3U.</figcaption>
+      </figure>
+    </section>
+
+    <section class="sec" id="zadanie" aria-labelledby="t-zadanie">
+      <p class="sec__num cn" aria-hidden="true">
+        01
+      </p>
+      <div class="sec__head">
+        <h2 id="t-zadanie">Pięć osób, jeden rysunek</h2>
+      </div>
+      <div class="x prose" style="--col:3/span 5">
+        <p>{client1}</p>
+        <p>{client2}</p>
+      </div>
+      <p class="x quote" style="--col:9/span 4">
+        {task}
+      </p>
+    </section>
+
+    <section class="sec" id="kierunek" aria-labelledby="t-kierunek">
+      <p class="sec__num cn" aria-hidden="true">
+        02
+      </p>
+      <div class="sec__head">
+        <h2 id="t-kierunek">{content.direction.title}</h2>
+      </div>
+      <div class="x prose" style="--col:3/span 5">
+        {content.direction.paragraphs.map(text => (
+          <p>{text}</p>
+        ))}
+      </div>
+      <p class="x keywords" style="--col:9/span 4">
+        {content.direction.keywords.map(word => (
+          <span>{word}</span>
+        ))}
+      </p>
+      <div class="x" style="--col:3/span 10">
+        <h3>Dla kogo i o czym</h3>
+        <p class="lead">{content.strategy.audience}</p>
+      </div>
+      <ul class="x values" style="--col:3/span 10">
+        {content.strategy.values.map((value, i) => (
+          <li>
+            <span class="idx">{pad(i + 1)}</span>
+            <h3>{value.title}</h3>
+            <p>{value.text}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="x" style="--col:3/span 5">
+        <p class="words">
+          {content.strategy.personality.map(word => (
+            <span>{word}</span>
+          ))}
+        </p>
+        <p class="muted avoids">Unikamy: {content.strategy.avoids}.</p>
+      </div>
+      <p class="x quote" style="--col:9/span 4">
+        {content.strategy.positioning}
+      </p>
+    </section>
+
+    <section class="sec" id="proces" aria-labelledby="t-proces">
+      <p class="sec__num cn" aria-hidden="true">
+        03
+      </p>
+      <div class="sec__head">
+        <h2 id="t-proces">Trzy szkice, jeden wybrany</h2>
+        <p class="lead">{content.process.intro}</p>
+      </div>
+      <div class="x dirs" style="--col:3/span 10">
+        {content.process.rejected.map((item, i) => (
+          <article class="dir">
+            <p class="dir__tag lbl">{rejectedTags[i]}</p>
+            <div class="dir__thumb">
+              <img src={asset(item.thumb)} alt="" width="200" height="200" loading="lazy" />
+            </div>
+            <h3>{item.title}</h3>
+            <p class="dir__what">{item.text}</p>
+            <p>{item.reason}</p>
+          </article>
+        ))}
+        <article class="dir dir--chosen">
+          <p class="dir__tag lbl">Wybrany</p>
+          <div class="dir__thumb">
+            <img
+              src={asset('figures/direction-modul.svg')}
+              alt=""
+              width="200"
+              height="200"
+              loading="lazy"
+            />
+          </div>
+          <h3>{content.process.chosen.title}</h3>
+          <p>{content.process.chosen.reason}</p>
+        </article>
+      </div>
+      <div class="x" style="--col:3/span 10">
+        <h3>Trzy poprawki</h3>
+      </div>
+      <ol class="x steps" style="--col:3/span 10">
+        {content.process.refinement.map((step, i) => (
+          <li>
+            <span class="idx">{pad(i + 1)}</span>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="x pair" style="--col:3/span 10">
+        <figure>
+          <img
+            src={asset('figures/wordmark-default.svg')}
+            alt="Napis Rzut bez korekty kerningu"
+            width="381"
+            height="190"
+            loading="lazy"
+          />
+          <figcaption class="lbl">Bez korekty</figcaption>
+        </figure>
+        <figure>
+          <img
+            src={asset('figures/wordmark-kerned.svg')}
+            alt="Napis Rzut po ręcznej korekcie kerningu"
+            width="381"
+            height="190"
+            loading="lazy"
+          />
+          <figcaption class="lbl">Po korekcie</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sec" id="logo" aria-labelledby="t-logo">
+      <p class="sec__num cn" aria-hidden="true">
+        04
+      </p>
+      <div class="sec__head">
+        <h2 id="t-logo">Znak i sześć wariantów</h2>
+        <p class="lead">
+          Kwadrat z wejściem, nazwa Rzut i podpis ze współrzędnymi pracowni. Sygnet działa sam.
+        </p>
+      </div>
+      <ul class="x tiles" style="--col:3/span 10">
+        {logoVariants.map(item => (
+          <li>
+            <figure class="vt">
+              <div class={`vt__stage ground-${item.ground}`}>
+                <img
+                  src={asset(`logo/rzut-${item.id}.svg`)}
+                  alt={`Logo Rzut, wariant ${item.name.toLowerCase()}`}
+                  width={item.width}
+                  height={item.height}
+                  loading="lazy"
+                />
+              </div>
+              <figcaption>
+                <b class="lbl">{item.name}</b>
+                <span>{item.note}</span>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+      <figure class="x fig" style="--col:3/span 5">
+        <img
+          src={asset('figures/clearspace.svg')}
+          alt="Pole ochronne wokół logo, równe połowie boku kwadratu"
+          width="631"
+          height="276"
+          loading="lazy"
+        />
+      </figure>
+      <div class="x prose" style="--col:8/span 5">
+        <h3>Pole ochronne</h3>
+        <p>{extras.clearSpace}</p>
+      </div>
+      <dl class="x facts facts--row" style="--col:3/span 10">
+        {minimums.map(([term, value]) => (
+          <div>
+            <dt class="lbl">{term}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div class="x sizes" style="--col:3/span 10">
+        <figure>
+          <img src={asset('favicon.svg')} alt="Sygnet w 16 pikselach" width="16" height="16" />
+          <figcaption class="cap">16 px</figcaption>
+        </figure>
+        <figure>
+          <img src={asset('favicon.svg')} alt="Sygnet w 24 pikselach" width="24" height="24" />
+          <figcaption class="cap">24 px</figcaption>
+        </figure>
+        <figure>
+          <img src={asset('favicon.svg')} alt="Sygnet w 48 pikselach" width="48" height="48" />
+          <figcaption class="cap">48 px</figcaption>
+        </figure>
+        <figure>
+          <img
+            src={asset('logo/rzut-horizontal.svg')}
+            alt="Logo poziome w 96 pikselach szerokości"
+            width="96"
+            height="23"
+          />
+          <figcaption class="cap">poziome, 96 px</figcaption>
+        </figure>
+        <figure>
+          <img
+            src={asset('logo/rzut-primary.svg')}
+            alt="Logo główne w 280 pikselach szerokości"
+            width="280"
+            height="116"
+          />
+          <figcaption class="cap">główne, 280 px</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sec" id="kolor" aria-labelledby="t-kolor">
+      <p class="sec__num cn" aria-hidden="true">
+        05
+      </p>
+      <div class="sec__head">
+        <h2 id="t-kolor">Czerń, biel i jeden kobalt</h2>
+        <p class="lead">
+          Strona niesie biel, tekst niesie czerń. Kobalt jest jedynym kolorem sygnałowym i pojawia
+          się raz na rozkładówkę.
+        </p>
+      </div>
+      <div
+        class="x bar"
+        style={`--col:3/span 10`}
+        role="img"
+        aria-label="Proporcje użycia: biel 62 procent, czerń 28 procent, kobalt 10 procent">
+        {proportions.map(item => (
+          <div class={`bar-${item.id}`} style={`flex:${item.share}`}>
+            <span class="lbl">
+              {item.name} {item.share}%
+            </span>
+          </div>
+        ))}
+      </div>
+      <div class="x" style="--col:3/span 10">
+        <ColorTable colors={manifest.palette} />
+        <details class="more">
+          <summary>Tabela kontrastu WCAG</summary>
+          <ContrastTable pairs={manifest.contrast} />
+        </details>
+      </div>
+    </section>
+
+    <section class="sec" id="typografia" aria-labelledby="t-typografia">
+      <p class="sec__num cn" aria-hidden="true">
+        06
+      </p>
+      <div class="sec__head">
+        <h2 id="t-typografia">Jedna rodzina, dwie szerokości</h2>
+      </div>
+      <div class="x faces" style="--col:3/span 10">
+        <div class="face">
+          <p class="face__mega" aria-hidden="true">
+            Aa
+          </p>
+          <h3>Instrument Sans</h3>
+          <p class="face__specimen">{extras.specimen}</p>
+          <p class="weights">
+            <span style="font-weight:400">400 Regular</span>
+            <span style="font-weight:500">500 Medium</span>
+            <span style="font-weight:700">700 Bold</span>
+          </p>
+          <p class="muted">Nagłówki i tekst.</p>
+        </div>
+        <div class="face">
+          <p class="face__mega cn" aria-hidden="true">
+            Aa
+          </p>
+          <h3>Instrument Sans Condensed</h3>
+          <p class="face__specimen cn">{extras.specimen}</p>
+          <p class="weights cn">
+            <span style="font-weight:400">400 Regular</span>
+            <span style="font-weight:700">700 Bold</span>
+          </p>
+          <p class="muted">Liczby, indeksy i podpisy, cyfry tabelaryczne.</p>
+        </div>
+      </div>
+      <ul class="x scale" style="--col:3/span 10">
+        {extras.typeScale.map(row => (
+          <li>
+            <span
+              class={row.font === 'condensed' ? 'cn' : ''}
+              style={`font-size:min(${row.size}px,11vw);font-weight:${row.weight};line-height:${row.line}`}>
+              {row.name}
+            </span>
+            <span class="meta">
+              {row.size} px, interlinia {String(row.line).replace('.', ',')}. {row.use}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <p class="x glyphs" style="--col:3/span 10">
+        {extras.glyphs}
+      </p>
+    </section>
+
+    <section class="sec" id="uklad" aria-labelledby="t-uklad">
+      <p class="sec__num cn" aria-hidden="true">
+        07
+      </p>
+      <div class="sec__head">
+        <h2 id="t-uklad">Siatka, ikony i wzór</h2>
+        <p class="lead">
+          Wszystko stoi na dwunastu kolumnach. Przesuń logo po siatce i sprawdź, kiedy robi się za
+          małe.
+        </p>
+      </div>
+      <div class="x" style="--col:3/span 10">
+        <GridTester client:visible sources={sources} />
+      </div>
+      <ol class="x rules" style="--col:3/span 6">
+        {extras.layoutRules.map((rule, i) => (
+          <li>
+            <span class="idx">{pad(i + 1)}</span>
+            <span>{rule}</span>
+          </li>
+        ))}
+      </ol>
+      <dl class="x facts" style="--col:10/span 3">
+        {gridFacts.map(([term, value]) => (
+          <div>
+            <dt class="lbl">{term}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div class="x" style="--col:3/span 10">
+        <h3>Dwanaście ikon</h3>
+        <p class="muted">Kreska 2 px, proste końce, ostre narożniki, siatka 24 px.</p>
+      </div>
+      <ul class="x icons" style="--col:3/span 10">
+        {icons.map(name => (
+          <li>
+            <div class="cell">
+              <img
+                src={asset(`icons/svg/rzut-icon-${name}.svg`)}
+                alt={`Ikona: ${name}`}
+                width="96"
+                height="96"
+                loading="lazy"
+              />
+            </div>
+            <span class="lbl">{name}</span>
+          </li>
+        ))}
+      </ul>
+      <div
+        class="x pattern"
+        style={`--col:3/span 6;background-image:url('${asset('pattern/rzut-pattern.svg')}')`}
+        role="img"
+        aria-label="Wzór Rzutu: cienka siatka z krzyżykami na przecięciach, kobaltowymi i szarymi polami"></div>
+      <ul class="x gfx" style="--col:9/span 4">
+        {extras.graphics.map(item => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="x prose" style="--col:3/span 6">
+        <h3>Styl zdjęć</h3>
+        <p>{extras.photoStyle}</p>
+      </div>
+      <div class="x" style="--col:3/span 10">
+        <h3>Ton głosu</h3>
+      </div>
+      <div class="x tone" style="--col:3/span 10">
+        {content.tone.map(rule => (
+          <article>
+            <h3>{rule.title}</h3>
+            <p>{rule.text}</p>
+            <p class="yes">
+              <span class="tag lbl">Tak</span>
+              {rule.yes}
+            </p>
+            <p class="no">
+              <span class="tag lbl">Nie</span>
+              {rule.no}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="sec" id="zastosowania" aria-labelledby="t-zastosowania">
+      <p class="sec__num cn" aria-hidden="true">
+        08
+      </p>
+      <div class="sec__head">
+        <h2 id="t-zastosowania">Zastosowania</h2>
+      </div>
+      <div class="x gallery" style="--col:3/span 10">
+        {mockups.map(item => (
+          <figure class={`shot shot--${item.id}`}>
+            <img
+              src={asset(item.image)}
+              alt={item.alt}
+              width={item.info?.width}
+              height={item.info?.height}
+              loading="lazy"
+            />
+            <figcaption>
+              <strong>{item.title}</strong>
+              <span>{item.caption}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <div class="x" style="--col:3/span 10">
+        <h3>Media społecznościowe</h3>
+      </div>
+      <ul class="x posts" style="--col:3/span 10">
+        <li>
+          <img
+            src={asset('social/rzut-avatar.png')}
+            alt="Awatar Rzutu: biały kwadrat z wejściem na kobaltowym polu"
+            width="1080"
+            height="1080"
+            loading="lazy"
+          />
+          <span>Awatar</span>
+        </li>
+        {posts.map(post => (
+          <li>
+            <img
+              src={asset(post.path)}
+              alt={`Post w mediach społecznościowych: ${post.headline}. ${post.body}`}
+              width="1080"
+              height="1350"
+              loading="lazy"
+            />
+            <span>{post.headline}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="sec" id="animacja" aria-labelledby="t-animacja">
+      <p class="sec__num cn" aria-hidden="true">
+        09
+      </p>
+      <div class="sec__head">
+        <h2 id="t-animacja">Siatka, kwadrat, nazwa</h2>
+        <p class="lead">{extras.animation}</p>
+      </div>
+      <div class="x film-box" style="--col:3/span 6">
+        <video
+          class="film"
+          controls
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          width="1080"
+          height="1080"
+          aria-label="Animacja logo Rzut: siatka rysuje się, kwadrat wskakuje na moduł, nazwa i podpis wyrównują się jedno po drugim">
+          <source src={`${asset('animation/rzut-logo.webm')}#t=2.9`} type="video/webm" />
+          <source src={`${asset('animation/rzut-logo.mp4')}#t=2.9`} type="video/mp4" />
+        </video>
+        <div class="still">
+          <img
+            src={asset('logo/rzut-primary.svg')}
+            alt="Logo Rzut, nieruchome, bo ustawiono ograniczenie ruchu"
+            width="511"
+            height="211"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="pliki" aria-labelledby="t-pliki">
+      <p class="sec__num cn" aria-hidden="true">
+        10
+      </p>
+      <div class="sec__head">
+        <h2 id="t-pliki">Pliki do pobrania</h2>
+        <p class="lead">{content.deliverables.intro}</p>
+      </div>
+      <div class="x" style="--col:3/span 10">
+        {zip && <p class="muted">Cała paczka waży {formatBytes(zip.bytes)}.</p>}
+        <Downloads manifest={manifest} />
+        <p class="muted">{content.deliverables.note}</p>
+      </div>
+    </section>
+  </main>
+
+  <section class="cta" aria-labelledby="t-cta">
+    <div class="cta__in">
+      <h2 id="t-cta" class="x" style="--col:1/span 8">
+        {content.cta.title}
+      </h2>
+      <div class="x" style="--col:1/span 6">
+        <p>{content.cta.text}</p>
+        <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
+          Zobacz ofertę dla klientów
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <SampleLine name={brand.name} />
+    <p>
+      {contact.street}, {contact.city}. Dane kontaktowe są zmyślone.
+    </p>
+  </footer>
+</Shell>

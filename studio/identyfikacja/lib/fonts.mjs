@@ -20,8 +20,11 @@ export const subsetText = ranges
   .flatMap(([from, to]) => Array.from({ length: to - from + 1 }, (_, i) => String.fromCodePoint(from + i)))
   .join('');
 
-export const faceFile = (family, instance) =>
-  `${family.replace(/\s+/g, '')}-${instance.weight}${instance.style === 'italic' ? '-italic' : ''}`;
+export const faceFile = (family, instance) => {
+  const width = instance.axes?.wdth;
+  const narrow = width && width !== 100 ? `-w${width}` : '';
+  return `${family.replace(/\s+/g, '')}-${instance.weight}${narrow}${instance.style === 'italic' ? '-italic' : ''}`;
+};
 
 export const sourceFile = font => join(fontsSrcRoot(), font.dir, font.file);
 

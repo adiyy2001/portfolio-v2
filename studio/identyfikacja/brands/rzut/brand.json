@@ -1,0 +1,72 @@
+{
+  "slug": "rzut",
+  "name": "Rzut",
+  "styleId": "I1",
+  "style": "Szwajcarski modernizm",
+  "trade": "pracownia architektoniczna",
+  "city": "Wrocław",
+  "themeColor": "#FFFFFF",
+  "appIconBackground": "#FFFFFF",
+  "testBackground": { "light": "biel", "dark": "czern" },
+  "palette": [
+    { "id": "czern", "name": "Czerń", "group": "primary", "hex": "#0A0A0A", "role": "tekst, rysunek, ciemne tło" },
+    { "id": "biel", "name": "Biel", "group": "primary", "hex": "#FFFFFF", "role": "tło strony i arkusza" },
+    { "id": "kobalt", "name": "Kobalt", "group": "accent", "hex": "#1F4BFF", "role": "jedyny kolor sygnałowy: znak, linki, wyróżnienia" },
+    { "id": "papier", "name": "Papier", "group": "neutral", "hex": "#F4F4F2", "role": "tło sekcji i pól" },
+    { "id": "mgla", "name": "Mgła", "group": "neutral", "hex": "#E6E6E3", "role": "tło tabel i kart" },
+    { "id": "szary", "name": "Szary", "group": "neutral", "hex": "#BDBDB9", "role": "linie siatki i podziałów, bez tekstu" },
+    { "id": "beton", "name": "Beton", "group": "neutral", "hex": "#8A8A86", "role": "linie pomocnicze, podpisy na czerni" },
+    { "id": "grafit", "name": "Grafit", "group": "neutral", "hex": "#5A5A57", "role": "tekst drugorzędny" },
+    { "id": "asfalt", "name": "Asfalt", "group": "neutral", "hex": "#2B2B2A", "role": "ciemne pola i obrysy" }
+  ],
+  "iconNames": ["rzut", "przekroj", "elewacja", "wymiar", "siatka", "dzialka", "dom", "schody", "okno", "drzwi", "adres", "telefon"],
+  "fonts": [
+    {
+      "id": "text",
+      "role": "nagłówki i tekst",
+      "family": "Instrument Sans",
+      "css": "Rzut Sans",
+      "dir": "instrumentsans",
+      "file": "InstrumentSans[wdth,wght].ttf",
+      "instances": [
+        { "weight": 400, "style": "normal", "axes": { "wght": 400, "wdth": 100 } },
+        { "weight": 500, "style": "normal", "axes": { "wght": 500, "wdth": 100 } },
+        { "weight": 700, "style": "normal", "axes": { "wght": 700, "wdth": 100 } }
+      ]
+    },
+    {
+      "id": "condensed",
+      "role": "liczby, indeksy i podpisy",
+      "family": "Instrument Sans",
+      "css": "Rzut Condensed",
+      "dir": "instrumentsans",
+      "file": "InstrumentSans[wdth,wght].ttf",
+      "instances": [
+        { "weight": 400, "style": "normal", "axes": { "wght": 400, "wdth": 75 } },
+        { "weight": 700, "style": "normal", "axes": { "wght": 700, "wdth": 75 } }
+      ]
+    }
+  ],
+  "contrast": [
+    { "id": "czern-biel", "fg": "czern", "bg": "biel", "kind": "text", "use": "tekst podstawowy na tle strony i arkusza" },
+    { "id": "czern-papier", "fg": "czern", "bg": "papier", "kind": "text", "use": "tekst na polach i w sekcjach" },
+    { "id": "czern-mgla", "fg": "czern", "bg": "mgla", "kind": "text", "use": "tekst w tabelach i kartach" },
+    { "id": "grafit-biel", "fg": "grafit", "bg": "biel", "kind": "text", "use": "tekst drugorzędny, podpisy" },
+    { "id": "grafit-papier", "fg": "grafit", "bg": "papier", "kind": "text", "use": "podpisy na polach" },
+    { "id": "grafit-mgla", "fg": "grafit", "bg": "mgla", "kind": "text", "use": "podpisy w tabelach" },
+    { "id": "kobalt-biel", "fg": "kobalt", "bg": "biel", "kind": "text", "use": "linki i wyróżnienia w tekście" },
+    { "id": "kobalt-papier", "fg": "kobalt", "bg": "papier", "kind": "text", "use": "linki i numery na polach" },
+    { "id": "kobalt-mgla", "fg": "kobalt", "bg": "mgla", "kind": "text", "use": "numery i akcenty w tabelach" },
+    { "id": "biel-kobalt", "fg": "biel", "bg": "kobalt", "kind": "text", "use": "tekst na polu w kolorze kobaltu i na przycisku" },
+    { "id": "biel-czern", "fg": "biel", "bg": "czern", "kind": "text", "use": "negatyw: jasny tekst na czerni" },
+    { "id": "biel-asfalt", "fg": "biel", "bg": "asfalt", "kind": "text", "use": "jasny tekst na asfalcie" },
+    { "id": "beton-czern", "fg": "beton", "bg": "czern", "kind": "text", "use": "podpisy i indeksy na czerni" },
+    { "id": "szary-czern", "fg": "szary", "bg": "czern", "kind": "text", "use": "tekst drugorzędny na czerni" },
+    { "id": "czern-biel-large", "fg": "czern", "bg": "biel", "kind": "large", "use": "duże nagłówki i liczby" },
+    { "id": "kobalt-czern-ui", "fg": "kobalt", "bg": "czern", "kind": "ui", "use": "znak w kobalcie na czarnym tle (negatyw)", "note": "sama figura znaku, bez tekstu" },
+    { "id": "kobalt-biel-ui", "fg": "kobalt", "bg": "biel", "kind": "ui", "use": "obrys fokusu i aktywne przełączniki" },
+    { "id": "beton-biel-ui", "fg": "beton", "bg": "biel", "kind": "ui", "use": "obrysy pól formularza i suwaków" },
+    { "id": "szary-biel", "fg": "szary", "bg": "biel", "kind": "decorative", "use": "linie siatki modułowej", "note": "dekoracja bez tekstu" },
+    { "id": "mgla-biel", "fg": "mgla", "bg": "biel", "kind": "decorative", "use": "pola siatki i wypełnienia wzoru", "note": "dekoracja bez tekstu" }
+  ]
+}

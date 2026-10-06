@@ -1,0 +1,1308 @@
+{
+  "brand": {
+    "slug": "rzut",
+    "name": "Rzut",
+    "style": "Szwajcarski modernizm",
+    "styleId": "I1",
+    "trade": "pracownia architektoniczna",
+    "city": "Wrocław"
+  },
+  "base": "/wzornik/identyfikacja/rzut/",
+  "totalBytes": 4903145,
+  "totalHuman": "4.7 MB",
+  "zip": {
+    "path": "rzut-identyfikacja.zip",
+    "bytes": 1664252
+  },
+  "groups": [
+    {
+      "id": "logo",
+      "title": "Logo",
+      "count": 30,
+      "bytes": 749027,
+      "formats": "PDF, PNG, SVG, PNG 460, 512, 919, 1024, 1838, 2048 px",
+      "files": [
+        "logo/pdf/rzut-horizontal.pdf",
+        "logo/pdf/rzut-mono-black.pdf",
+        "logo/pdf/rzut-negative.pdf",
+        "logo/pdf/rzut-primary.pdf",
+        "logo/pdf/rzut-symbol.pdf",
+        "logo/pdf/rzut-vertical.pdf",
+        "logo/png/rzut-horizontal-1024.png",
+        "logo/png/rzut-horizontal-2048.png",
+        "logo/png/rzut-horizontal-512.png",
+        "logo/png/rzut-mono-black-1024.png",
+        "logo/png/rzut-mono-black-2048.png",
+        "logo/png/rzut-mono-black-512.png",
+        "logo/png/rzut-negative-1024.png",
+        "logo/png/rzut-negative-2048.png",
+        "logo/png/rzut-negative-512.png",
+        "logo/png/rzut-primary-1024.png",
+        "logo/png/rzut-primary-2048.png",
+        "logo/png/rzut-primary-512.png",
+        "logo/png/rzut-symbol-1024.png",
+        "logo/png/rzut-symbol-2048.png",
+        "logo/png/rzut-symbol-512.png",
+        "logo/png/rzut-vertical-1024.png",
+        "logo/png/rzut-vertical-2048.png",
+        "logo/png/rzut-vertical-512.png",
+        "logo/rzut-horizontal.svg",
+        "logo/rzut-mono-black.svg",
+        "logo/rzut-negative.svg",
+        "logo/rzut-primary.svg",
+        "logo/rzut-symbol.svg",
+        "logo/rzut-vertical.svg"
+      ]
+    },
+    {
+      "id": "favicon",
+      "title": "Ikona strony",
+      "count": 3,
+      "bytes": 1467,
+      "formats": "PNG, ICO, SVG, PNG 180 px",
+      "files": [
+        "apple-touch-icon.png",
+        "favicon.ico",
+        "favicon.svg"
+      ]
+    },
+    {
+      "id": "colors",
+      "title": "Kolor",
+      "count": 2,
+      "bytes": 8299,
+      "formats": "JSON, CSS",
+      "files": [
+        "colors/rzut-palette.json",
+        "colors/rzut-tokens.css"
+      ]
+    },
+    {
+      "id": "fonts",
+      "title": "Kroje",
+      "count": 6,
+      "bytes": 120595,
+      "formats": "WOFF2, TXT",
+      "files": [
+        "fonts/InstrumentSans-400-w75.woff2",
+        "fonts/InstrumentSans-400.woff2",
+        "fonts/InstrumentSans-500.woff2",
+        "fonts/InstrumentSans-700-w75.woff2",
+        "fonts/InstrumentSans-700.woff2",
+        "fonts/OFL-InstrumentSans.txt"
+      ]
+    },
+    {
+      "id": "pattern",
+      "title": "Wzór",
+      "count": 1,
+      "bytes": 1541,
+      "formats": "SVG",
+      "files": [
+        "pattern/rzut-pattern.svg"
+      ]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 13,
+      "bytes": 5414,
+      "formats": "SVG",
+      "files": [
+        "icons/rzut-icons.svg",
+        "icons/svg/rzut-icon-adres.svg",
+        "icons/svg/rzut-icon-dom.svg",
+        "icons/svg/rzut-icon-drzwi.svg",
+        "icons/svg/rzut-icon-dzialka.svg",
+        "icons/svg/rzut-icon-elewacja.svg",
+        "icons/svg/rzut-icon-okno.svg",
+        "icons/svg/rzut-icon-przekroj.svg",
+        "icons/svg/rzut-icon-rzut.svg",
+        "icons/svg/rzut-icon-schody.svg",
+        "icons/svg/rzut-icon-siatka.svg",
+        "icons/svg/rzut-icon-telefon.svg",
+        "icons/svg/rzut-icon-wymiar.svg"
+      ]
+    },
+    {
+      "id": "print",
+      "title": "Druk",
+      "count": 2,
+      "bytes": 39254,
+      "formats": "PDF",
+      "files": [
+        "print/rzut-business-card.pdf",
+        "print/rzut-letterhead.pdf"
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Media społecznościowe",
+      "count": 4,
+      "bytes": 114591,
+      "formats": "PNG, PNG 1080 px",
+      "files": [
+        "social/rzut-avatar.png",
+        "social/rzut-post-1.png",
+        "social/rzut-post-2.png",
+        "social/rzut-post-3.png"
+      ]
+    },
+    {
+      "id": "email",
+      "title": "Podpis e-mail",
+      "count": 1,
+      "bytes": 1006,
+      "formats": "HTML",
+      "files": [
+        "email/rzut-email-signature.html"
+      ]
+    },
+    {
+      "id": "mockups",
+      "title": "Makiety",
+      "count": 5,
+      "bytes": 450558,
+      "formats": "JPG",
+      "files": [
+        "mockups/rzut-application.jpg",
+        "mockups/rzut-card-back.jpg",
+        "mockups/rzut-card-front.jpg",
+        "mockups/rzut-email-signature.jpg",
+        "mockups/rzut-letterhead.jpg"
+      ]
+    },
+    {
+      "id": "animation",
+      "title": "Animacja logo",
+      "count": 2,
+      "bytes": 72474,
+      "formats": "MP4, WEBM",
+      "files": [
+        "animation/rzut-logo.mp4",
+        "animation/rzut-logo.webm"
+      ]
+    },
+    {
+      "id": "brandbook",
+      "title": "Brand book",
+      "count": 1,
+      "bytes": 1639091,
+      "formats": "PDF",
+      "files": [
+        "rzut-brandbook.pdf"
+      ]
+    },
+    {
+      "id": "zip",
+      "title": "Wszystko w jednym pliku",
+      "count": 1,
+      "bytes": 1664252,
+      "formats": "ZIP",
+      "files": [
+        "rzut-identyfikacja.zip"
+      ]
+    },
+    {
+      "id": "meta",
+      "title": "Pozostałe",
+      "count": 8,
+      "bytes": 35576,
+      "formats": "SVG, PNG, PNG 1200 px",
+      "files": [
+        "figures/clearspace.svg",
+        "figures/construction.svg",
+        "figures/direction-indeks.svg",
+        "figures/direction-modul.svg",
+        "figures/direction-os.svg",
+        "figures/wordmark-default.svg",
+        "figures/wordmark-kerned.svg",
+        "og.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "animation/rzut-logo.mp4",
+      "bytes": 37822,
+      "type": "mp4",
+      "group": "animation",
+      "codec": "h264",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "animation/rzut-logo.webm",
+      "bytes": 34652,
+      "type": "webm",
+      "group": "animation",
+      "codec": "vp9",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "bytes": 877,
+      "type": "png",
+      "group": "favicon",
+      "width": 180,
+      "height": 180,
+      "hasAlpha": true
+    },
+    {
+      "path": "colors/rzut-palette.json",
+      "bytes": 8063,
+      "type": "json",
+      "group": "colors"
+    },
+    {
+      "path": "colors/rzut-tokens.css",
+      "bytes": 236,
+      "type": "css",
+      "group": "colors"
+    },
+    {
+      "path": "email/rzut-email-signature.html",
+      "bytes": 1006,
+      "type": "html",
+      "group": "email"
+    },
+    {
+      "path": "favicon.ico",
+      "bytes": 448,
+      "type": "ico",
+      "group": "favicon",
+      "sizes": [
+        16,
+        32,
+        48
+      ]
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 142,
+      "type": "svg",
+      "group": "favicon",
+      "width": 120,
+      "height": 120
+    },
+    {
+      "path": "figures/clearspace.svg",
+      "bytes": 3230,
+      "type": "svg",
+      "group": "meta",
+      "width": 631,
+      "height": 276
+    },
+    {
+      "path": "figures/construction.svg",
+      "bytes": 1951,
+      "type": "svg",
+      "group": "meta",
+      "width": 250,
+      "height": 230
+    },
+    {
+      "path": "figures/direction-indeks.svg",
+      "bytes": 1701,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-modul.svg",
+      "bytes": 1370,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-os.svg",
+      "bytes": 1252,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/wordmark-default.svg",
+      "bytes": 762,
+      "type": "svg",
+      "group": "meta",
+      "width": 381,
+      "height": 190
+    },
+    {
+      "path": "figures/wordmark-kerned.svg",
+      "bytes": 758,
+      "type": "svg",
+      "group": "meta",
+      "width": 381,
+      "height": 190
+    },
+    {
+      "path": "fonts/InstrumentSans-400-w75.woff2",
+      "bytes": 22256,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/InstrumentSans-400.woff2",
+      "bytes": 23296,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/InstrumentSans-500.woff2",
+      "bytes": 24020,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/InstrumentSans-700-w75.woff2",
+      "bytes": 22892,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/InstrumentSans-700.woff2",
+      "bytes": 23728,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-InstrumentSans.txt",
+      "bytes": 4403,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "icons/rzut-icons.svg",
+      "bytes": 2921,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-adres.svg",
+      "bytes": 219,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-dom.svg",
+      "bytes": 211,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-drzwi.svg",
+      "bytes": 197,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-dzialka.svg",
+      "bytes": 215,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-elewacja.svg",
+      "bytes": 207,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-okno.svg",
+      "bytes": 195,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-przekroj.svg",
+      "bytes": 216,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-rzut.svg",
+      "bytes": 200,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-schody.svg",
+      "bytes": 196,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-siatka.svg",
+      "bytes": 212,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-telefon.svg",
+      "bytes": 198,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/rzut-icon-wymiar.svg",
+      "bytes": 227,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "logo/pdf/rzut-horizontal.pdf",
+      "bytes": 1433,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 23.6
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 89
+      }
+    },
+    {
+      "path": "logo/pdf/rzut-mono-black.pdf",
+      "bytes": 3415,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 41.2
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 156
+      }
+    },
+    {
+      "path": "logo/pdf/rzut-negative.pdf",
+      "bytes": 3452,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 41.2
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 156
+      }
+    },
+    {
+      "path": "logo/pdf/rzut-primary.pdf",
+      "bytes": 3457,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 41.2
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 156
+      }
+    },
+    {
+      "path": "logo/pdf/rzut-symbol.pdf",
+      "bytes": 893,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 99.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 377
+      }
+    },
+    {
+      "path": "logo/pdf/rzut-vertical.pdf",
+      "bytes": 3460,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 111.5
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 421
+      }
+    },
+    {
+      "path": "logo/png/rzut-horizontal-1024.png",
+      "bytes": 14212,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 240,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-horizontal-2048.png",
+      "bytes": 36073,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 481,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-horizontal-512.png",
+      "bytes": 6187,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 120,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-mono-black-1024.png",
+      "bytes": 34630,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 423,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-mono-black-2048.png",
+      "bytes": 76565,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 846,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-mono-black-512.png",
+      "bytes": 15447,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 211,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-negative-1024.png",
+      "bytes": 40474,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 423,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-negative-2048.png",
+      "bytes": 90921,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 846,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-negative-512.png",
+      "bytes": 17818,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 211,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-primary-1024.png",
+      "bytes": 38897,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 423,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-primary-2048.png",
+      "bytes": 88429,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 846,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-primary-512.png",
+      "bytes": 17171,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 211,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-symbol-1024.png",
+      "bytes": 9072,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 1024,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-symbol-2048.png",
+      "bytes": 26617,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 2048,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-symbol-512.png",
+      "bytes": 3441,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 512,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-vertical-1024.png",
+      "bytes": 52572,
+      "type": "png",
+      "group": "logo",
+      "width": 919,
+      "height": 1024,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-vertical-2048.png",
+      "bytes": 119334,
+      "type": "png",
+      "group": "logo",
+      "width": 1838,
+      "height": 2048,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/rzut-vertical-512.png",
+      "bytes": 25217,
+      "type": "png",
+      "group": "logo",
+      "width": 460,
+      "height": 512,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/rzut-horizontal.svg",
+      "bytes": 797,
+      "type": "svg",
+      "group": "logo",
+      "width": 511,
+      "height": 120
+    },
+    {
+      "path": "logo/rzut-mono-black.svg",
+      "bytes": 4683,
+      "type": "svg",
+      "group": "logo",
+      "width": 511,
+      "height": 211
+    },
+    {
+      "path": "logo/rzut-negative.svg",
+      "bytes": 4738,
+      "type": "svg",
+      "group": "logo",
+      "width": 511,
+      "height": 211
+    },
+    {
+      "path": "logo/rzut-primary.svg",
+      "bytes": 4749,
+      "type": "svg",
+      "group": "logo",
+      "width": 511,
+      "height": 211
+    },
+    {
+      "path": "logo/rzut-symbol.svg",
+      "bytes": 150,
+      "type": "svg",
+      "group": "logo",
+      "width": 120,
+      "height": 120
+    },
+    {
+      "path": "logo/rzut-vertical.svg",
+      "bytes": 4723,
+      "type": "svg",
+      "group": "logo",
+      "width": 351,
+      "height": 391
+    },
+    {
+      "path": "mockups/rzut-application.jpg",
+      "bytes": 140190,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/rzut-card-back.jpg",
+      "bytes": 76833,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/rzut-card-front.jpg",
+      "bytes": 53183,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/rzut-email-signature.jpg",
+      "bytes": 77363,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/rzut-letterhead.jpg",
+      "bytes": 102989,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "og.png",
+      "bytes": 24552,
+      "type": "png",
+      "group": "meta",
+      "width": 1200,
+      "height": 630,
+      "hasAlpha": false
+    },
+    {
+      "path": "pattern/rzut-pattern.svg",
+      "bytes": 1541,
+      "type": "svg",
+      "group": "pattern",
+      "width": 240,
+      "height": 240
+    },
+    {
+      "path": "print/rzut-business-card.pdf",
+      "bytes": 17127,
+      "type": "pdf",
+      "group": "print",
+      "pages": 2,
+      "pageMm": {
+        "width": 91,
+        "height": 61
+      },
+      "pagePx": {
+        "width": 344,
+        "height": 231
+      }
+    },
+    {
+      "path": "print/rzut-letterhead.pdf",
+      "bytes": 22127,
+      "type": "pdf",
+      "group": "print",
+      "pages": 1,
+      "pageMm": {
+        "width": 209.9,
+        "height": 297
+      },
+      "pagePx": {
+        "width": 793,
+        "height": 1123
+      }
+    },
+    {
+      "path": "rzut-brandbook.pdf",
+      "bytes": 1639091,
+      "type": "pdf",
+      "group": "brandbook",
+      "pages": 29,
+      "pageMm": {
+        "width": 508,
+        "height": 285.8
+      },
+      "pagePx": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "path": "rzut-identyfikacja.zip",
+      "bytes": 1664252,
+      "type": "zip",
+      "group": "zip"
+    },
+    {
+      "path": "social/rzut-avatar.png",
+      "bytes": 6089,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1080,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/rzut-post-1.png",
+      "bytes": 39207,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/rzut-post-2.png",
+      "bytes": 28228,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/rzut-post-3.png",
+      "bytes": 41067,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    }
+  ],
+  "palette": [
+    {
+      "id": "czern",
+      "name": "Czerń",
+      "group": "primary",
+      "role": "tekst, rysunek, ciemne tło",
+      "hex": "#0A0A0A",
+      "rgb": "10 10 10",
+      "oklch": "oklch(14.5% 0 0)",
+      "cmykApprox": "C 0 M 0 Y 0 K 96"
+    },
+    {
+      "id": "biel",
+      "name": "Biel",
+      "group": "primary",
+      "role": "tło strony i arkusza",
+      "hex": "#FFFFFF",
+      "rgb": "255 255 255",
+      "oklch": "oklch(100% 0 0)",
+      "cmykApprox": "C 0 M 0 Y 0 K 0"
+    },
+    {
+      "id": "kobalt",
+      "name": "Kobalt",
+      "group": "accent",
+      "role": "jedyny kolor sygnałowy: znak, linki, wyróżnienia",
+      "hex": "#1F4BFF",
+      "rgb": "31 75 255",
+      "oklch": "oklch(52.2% 0.267 265.5)",
+      "cmykApprox": "C 88 M 71 Y 0 K 0"
+    },
+    {
+      "id": "papier",
+      "name": "Papier",
+      "group": "neutral",
+      "role": "tło sekcji i pól",
+      "hex": "#F4F4F2",
+      "rgb": "244 244 242",
+      "oklch": "oklch(96.7% 0.003 0)",
+      "cmykApprox": "C 0 M 0 Y 1 K 4"
+    },
+    {
+      "id": "mgla",
+      "name": "Mgła",
+      "group": "neutral",
+      "role": "tło tabel i kart",
+      "hex": "#E6E6E3",
+      "rgb": "230 230 227",
+      "oklch": "oklch(92.4% 0.004 106.5)",
+      "cmykApprox": "C 0 M 0 Y 1 K 10"
+    },
+    {
+      "id": "szary",
+      "name": "Szary",
+      "group": "neutral",
+      "role": "linie siatki i podziałów, bez tekstu",
+      "hex": "#BDBDB9",
+      "rgb": "189 189 185",
+      "oklch": "oklch(79.7% 0.006 106.5)",
+      "cmykApprox": "C 0 M 0 Y 2 K 26"
+    },
+    {
+      "id": "beton",
+      "name": "Beton",
+      "group": "neutral",
+      "role": "linie pomocnicze, podpisy na czerni",
+      "hex": "#8A8A86",
+      "rgb": "138 138 134",
+      "oklch": "oklch(63.2% 0.006 106.6)",
+      "cmykApprox": "C 0 M 0 Y 3 K 46"
+    },
+    {
+      "id": "grafit",
+      "name": "Grafit",
+      "group": "neutral",
+      "role": "tekst drugorzędny",
+      "hex": "#5A5A57",
+      "rgb": "90 90 87",
+      "oklch": "oklch(46.7% 0.005 106.6)",
+      "cmykApprox": "C 0 M 0 Y 3 K 65"
+    },
+    {
+      "id": "asfalt",
+      "name": "Asfalt",
+      "group": "neutral",
+      "role": "ciemne pola i obrysy",
+      "hex": "#2B2B2A",
+      "rgb": "43 43 42",
+      "oklch": "oklch(28.9% 0.002 0)",
+      "cmykApprox": "C 0 M 0 Y 2 K 83"
+    }
+  ],
+  "contrast": [
+    {
+      "id": "czern-biel",
+      "use": "tekst podstawowy na tle strony i arkusza",
+      "foreground": "#0A0A0A",
+      "background": "#FFFFFF",
+      "kind": "text",
+      "ratio": 19.8,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "czern-papier",
+      "use": "tekst na polach i w sekcjach",
+      "foreground": "#0A0A0A",
+      "background": "#F4F4F2",
+      "kind": "text",
+      "ratio": 17.98,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "czern-mgla",
+      "use": "tekst w tabelach i kartach",
+      "foreground": "#0A0A0A",
+      "background": "#E6E6E3",
+      "kind": "text",
+      "ratio": 15.83,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "grafit-biel",
+      "use": "tekst drugorzędny, podpisy",
+      "foreground": "#5A5A57",
+      "background": "#FFFFFF",
+      "kind": "text",
+      "ratio": 6.92,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "grafit-papier",
+      "use": "podpisy na polach",
+      "foreground": "#5A5A57",
+      "background": "#F4F4F2",
+      "kind": "text",
+      "ratio": 6.28,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "grafit-mgla",
+      "use": "podpisy w tabelach",
+      "foreground": "#5A5A57",
+      "background": "#E6E6E3",
+      "kind": "text",
+      "ratio": 5.53,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kobalt-biel",
+      "use": "linki i wyróżnienia w tekście",
+      "foreground": "#1F4BFF",
+      "background": "#FFFFFF",
+      "kind": "text",
+      "ratio": 5.99,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kobalt-papier",
+      "use": "linki i numery na polach",
+      "foreground": "#1F4BFF",
+      "background": "#F4F4F2",
+      "kind": "text",
+      "ratio": 5.43,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kobalt-mgla",
+      "use": "numery i akcenty w tabelach",
+      "foreground": "#1F4BFF",
+      "background": "#E6E6E3",
+      "kind": "text",
+      "ratio": 4.79,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "biel-kobalt",
+      "use": "tekst na polu w kolorze kobaltu i na przycisku",
+      "foreground": "#FFFFFF",
+      "background": "#1F4BFF",
+      "kind": "text",
+      "ratio": 5.99,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "biel-czern",
+      "use": "negatyw: jasny tekst na czerni",
+      "foreground": "#FFFFFF",
+      "background": "#0A0A0A",
+      "kind": "text",
+      "ratio": 19.8,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "biel-asfalt",
+      "use": "jasny tekst na asfalcie",
+      "foreground": "#FFFFFF",
+      "background": "#2B2B2A",
+      "kind": "text",
+      "ratio": 14.17,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "beton-czern",
+      "use": "podpisy i indeksy na czerni",
+      "foreground": "#8A8A86",
+      "background": "#0A0A0A",
+      "kind": "text",
+      "ratio": 5.71,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "szary-czern",
+      "use": "tekst drugorzędny na czerni",
+      "foreground": "#BDBDB9",
+      "background": "#0A0A0A",
+      "kind": "text",
+      "ratio": 10.51,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "czern-biel-large",
+      "use": "duże nagłówki i liczby",
+      "foreground": "#0A0A0A",
+      "background": "#FFFFFF",
+      "kind": "large",
+      "ratio": 19.8,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "kobalt-czern-ui",
+      "use": "znak w kobalcie na czarnym tle (negatyw)",
+      "foreground": "#1F4BFF",
+      "background": "#0A0A0A",
+      "kind": "ui",
+      "ratio": 3.31,
+      "required": 3,
+      "level": "AA large",
+      "pass": true,
+      "note": "sama figura znaku, bez tekstu"
+    },
+    {
+      "id": "kobalt-biel-ui",
+      "use": "obrys fokusu i aktywne przełączniki",
+      "foreground": "#1F4BFF",
+      "background": "#FFFFFF",
+      "kind": "ui",
+      "ratio": 5.99,
+      "required": 3,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "beton-biel-ui",
+      "use": "obrysy pól formularza i suwaków",
+      "foreground": "#8A8A86",
+      "background": "#FFFFFF",
+      "kind": "ui",
+      "ratio": 3.47,
+      "required": 3,
+      "level": "AA large",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "szary-biel",
+      "use": "linie siatki modułowej",
+      "foreground": "#BDBDB9",
+      "background": "#FFFFFF",
+      "kind": "decorative",
+      "ratio": 1.88,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    },
+    {
+      "id": "mgla-biel",
+      "use": "pola siatki i wypełnienia wzoru",
+      "foreground": "#E6E6E3",
+      "background": "#FFFFFF",
+      "kind": "decorative",
+      "ratio": 1.25,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "dekoracja bez tekstu"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "text",
+      "role": "nagłówki i tekst",
+      "family": "Instrument Sans",
+      "css": "Rzut Sans",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/InstrumentSans-400.woff2",
+      "bytes": 23296
+    },
+    {
+      "id": "text",
+      "role": "nagłówki i tekst",
+      "family": "Instrument Sans",
+      "css": "Rzut Sans",
+      "weight": 500,
+      "style": "normal",
+      "file": "fonts/InstrumentSans-500.woff2",
+      "bytes": 24020
+    },
+    {
+      "id": "text",
+      "role": "nagłówki i tekst",
+      "family": "Instrument Sans",
+      "css": "Rzut Sans",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/InstrumentSans-700.woff2",
+      "bytes": 23728
+    },
+    {
+      "id": "condensed",
+      "role": "liczby, indeksy i podpisy",
+      "family": "Instrument Sans",
+      "css": "Rzut Condensed",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/InstrumentSans-400-w75.woff2",
+      "bytes": 22256
+    },
+    {
+      "id": "condensed",
+      "role": "liczby, indeksy i podpisy",
+      "family": "Instrument Sans",
+      "css": "Rzut Condensed",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/InstrumentSans-700-w75.woff2",
+      "bytes": 22892
+    }
+  ]
+}
