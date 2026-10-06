@@ -3,3 +3,4 @@ dist
 .astro-cache
 .vite-cache
 node_modules
+public/identyfikacja
