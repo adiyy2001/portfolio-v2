@@ -76,3 +76,23 @@ Left as is (shared code, for the merge step):
 - The file list shows "PNG 460, 512, 919, 1024, 1838, 2048 px" for the logo group because `lib/manifest.mjs` `summarize` lists the real widths of the PNGs (the vertical variant is 460 px wide at 512 px height). Grouping by the nominal size would read better.
 - `ContrastTable.astro` prints a sample "Aa" for UI and decorative pairs too.
 - The brand book pages 5 and 7 keep a calm lower third (Swiss whitespace by design).
+
+## Review round 1 repair
+
+Fixes after the independent review (craft 3, sales value 3, everything else 4 or 5):
+
+- Typography: one filter (`sites/src/identyfikacja/rzut/lib/typo.ts`) ties every single letter word (a, i, o, u, w, z) to the next word with a no-break space. It runs over `content`, `extras` and `contact`, over all text nodes of the page (`Typo.astro`) and over the brand book body. A scan of the built page finds 0 loose single letters.
+- Icon labels show Polish letters (Działka, Przekrój) on the page and in the brand book; file names stay ASCII.
+- Brand book: the animation page shows four large frames with times (0,7 s, 1,5 s, 2,2 s, 3,0 s) and captions, separate from a new dark contact page (29 pages). The repeated "Trzy poprawki" page is removed. Icon captions, value cards and the photo style text are larger.
+- Clear space and construction figures: labels are 20 to 22 units, about 11 px on a 390 px screen.
+- Applications gallery has no holes: cards 6 + 6, board and letterhead share one height, the e-mail signature sits beside a "Do druku i do wysyłki" panel with the PDF and HTML downloads. Mockups open full size on click and carry width and height.
+- Business card PDF has TrimBox 85 x 55 mm and BleedBox 91 x 61 mm.
+- 320 px: the icon grid no longer overflows.
+- Sales: the hero is a poster of the system (big name, tablica budowy mockup with the index number, ZIP button, link to the offer), a sticky section bar with the ZIP link, a live SVG and WAAPI logo animation (plays once when visible, static with reduced motion, replay button), video files only as downloads. The file list shows dimensions in the group headers and says which groups are in the ZIP; the intro no longer claims that everything is in one package (mockups and animation are separate). The construction drawing moved to the logo section.
+- Consistency: the cobalt rule now reads "one large field per spread, small numbers and links may be cobalt" on the page, in the brand book and in the layout rules.
+- Pattern is a regular lattice (fixed order of cobalt squares, mist squares and doors) instead of scattered cells.
+- Accessibility: the WCAG contrast table is open by default, tables carry a horizontal scroll hint on phones.
+
+Shared change (smallest fix): `studio/identyfikacja/scripts/zip.mjs` README now uses the right Polish plural ("1 plik", "3 pliki", "5 plików"). Other brands get it when they rebuild their ZIP.
+
+Not changed: the second shared-page item from the review, the shared hero skeleton of other brands, is theirs to fix.
