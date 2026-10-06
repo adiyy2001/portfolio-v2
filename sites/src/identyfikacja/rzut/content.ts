@@ -95,7 +95,7 @@ export const content: CaseContent = {
     {
       title: 'Liczby zamiast przymiotników',
       text: 'Opisujemy budynek wymiarami i faktami.',
-      yes: 'Dom 168 m², dwie kondygnacje, siatka 1,2 m.',
+      yes: 'Dom 168 mkw., dwie kondygnacje, siatka 1,2 m.',
       no: 'Przestronny, nowoczesny dom z duszą.',
     },
     {
