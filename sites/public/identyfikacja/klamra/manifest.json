@@ -1,0 +1,1324 @@
+{
+  "brand": {
+    "slug": "klamra",
+    "name": "Klamra",
+    "style": "Neobrutalizm",
+    "styleId": "I2",
+    "trade": "szkoła programowania online",
+    "city": "cała Polska"
+  },
+  "base": "/wzornik/identyfikacja/klamra/",
+  "totalBytes": 4368018,
+  "totalHuman": "4.2 MB",
+  "zip": {
+    "path": "klamra-identyfikacja.zip",
+    "bytes": 1599868
+  },
+  "groups": [
+    {
+      "id": "logo",
+      "title": "Logo",
+      "count": 30,
+      "bytes": 437720,
+      "formats": "SVG, PDF, PNG, PNG 512, 1024, 2048 px",
+      "files": [
+        "logo/klamra-horizontal.svg",
+        "logo/klamra-mono-black.svg",
+        "logo/klamra-negative.svg",
+        "logo/klamra-primary.svg",
+        "logo/klamra-symbol.svg",
+        "logo/klamra-vertical.svg",
+        "logo/pdf/klamra-horizontal.pdf",
+        "logo/pdf/klamra-mono-black.pdf",
+        "logo/pdf/klamra-negative.pdf",
+        "logo/pdf/klamra-primary.pdf",
+        "logo/pdf/klamra-symbol.pdf",
+        "logo/pdf/klamra-vertical.pdf",
+        "logo/png/klamra-horizontal-1024.png",
+        "logo/png/klamra-horizontal-2048.png",
+        "logo/png/klamra-horizontal-512.png",
+        "logo/png/klamra-mono-black-1024.png",
+        "logo/png/klamra-mono-black-2048.png",
+        "logo/png/klamra-mono-black-512.png",
+        "logo/png/klamra-negative-1024.png",
+        "logo/png/klamra-negative-2048.png",
+        "logo/png/klamra-negative-512.png",
+        "logo/png/klamra-primary-1024.png",
+        "logo/png/klamra-primary-2048.png",
+        "logo/png/klamra-primary-512.png",
+        "logo/png/klamra-symbol-1024.png",
+        "logo/png/klamra-symbol-2048.png",
+        "logo/png/klamra-symbol-512.png",
+        "logo/png/klamra-vertical-1024.png",
+        "logo/png/klamra-vertical-2048.png",
+        "logo/png/klamra-vertical-512.png"
+      ]
+    },
+    {
+      "id": "favicon",
+      "title": "Ikona strony",
+      "count": 3,
+      "bytes": 3968,
+      "formats": "PNG, ICO, SVG, PNG 180 px",
+      "files": [
+        "apple-touch-icon.png",
+        "favicon.ico",
+        "favicon.svg"
+      ]
+    },
+    {
+      "id": "colors",
+      "title": "Kolor",
+      "count": 2,
+      "bytes": 8375,
+      "formats": "JSON, CSS",
+      "files": [
+        "colors/klamra-palette.json",
+        "colors/klamra-tokens.css"
+      ]
+    },
+    {
+      "id": "fonts",
+      "title": "Kroje",
+      "count": 9,
+      "bytes": 156925,
+      "formats": "WOFF2, TXT",
+      "files": [
+        "fonts/Epilogue-500.woff2",
+        "fonts/Epilogue-700.woff2",
+        "fonts/Epilogue-800.woff2",
+        "fonts/Epilogue-900.woff2",
+        "fonts/JetBrainsMono-400.woff2",
+        "fonts/JetBrainsMono-700.woff2",
+        "fonts/JetBrainsMono-800.woff2",
+        "fonts/OFL-Epilogue.txt",
+        "fonts/OFL-JetBrainsMono.txt"
+      ]
+    },
+    {
+      "id": "pattern",
+      "title": "Wzór",
+      "count": 1,
+      "bytes": 597,
+      "formats": "SVG",
+      "files": [
+        "pattern/klamra-pattern.svg"
+      ]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 13,
+      "bytes": 2749,
+      "formats": "SVG",
+      "files": [
+        "icons/klamra-icons.svg",
+        "icons/svg/klamra-icon-blad.svg",
+        "icons/svg/klamra-icon-certyfikat.svg",
+        "icons/svg/klamra-icon-commit.svg",
+        "icons/svg/klamra-icon-galaz.svg",
+        "icons/svg/klamra-icon-grupa.svg",
+        "icons/svg/klamra-icon-kalendarz.svg",
+        "icons/svg/klamra-icon-kod.svg",
+        "icons/svg/klamra-icon-kontakt.svg",
+        "icons/svg/klamra-icon-laptop.svg",
+        "icons/svg/klamra-icon-mentor.svg",
+        "icons/svg/klamra-icon-projekt.svg",
+        "icons/svg/klamra-icon-terminal.svg"
+      ]
+    },
+    {
+      "id": "print",
+      "title": "Druk",
+      "count": 2,
+      "bytes": 34690,
+      "formats": "PDF",
+      "files": [
+        "print/klamra-business-card.pdf",
+        "print/klamra-letterhead.pdf"
+      ]
+    },
+    {
+      "id": "social",
+      "title": "Media społecznościowe",
+      "count": 4,
+      "bytes": 128932,
+      "formats": "PNG, PNG 1080 px",
+      "files": [
+        "social/klamra-avatar.png",
+        "social/klamra-post-1.png",
+        "social/klamra-post-2.png",
+        "social/klamra-post-3.png"
+      ]
+    },
+    {
+      "id": "email",
+      "title": "Podpis e-mail",
+      "count": 1,
+      "bytes": 1330,
+      "formats": "HTML",
+      "files": [
+        "email/klamra-email-signature.html"
+      ]
+    },
+    {
+      "id": "mockups",
+      "title": "Makiety",
+      "count": 5,
+      "bytes": 641909,
+      "formats": "JPG",
+      "files": [
+        "mockups/klamra-application.jpg",
+        "mockups/klamra-card-back.jpg",
+        "mockups/klamra-card-front.jpg",
+        "mockups/klamra-email-signature.jpg",
+        "mockups/klamra-letterhead.jpg"
+      ]
+    },
+    {
+      "id": "animation",
+      "title": "Animacja logo",
+      "count": 2,
+      "bytes": 111986,
+      "formats": "MP4, WEBM",
+      "files": [
+        "animation/klamra-logo.mp4",
+        "animation/klamra-logo.webm"
+      ]
+    },
+    {
+      "id": "brandbook",
+      "title": "Brand book",
+      "count": 1,
+      "bytes": 1214356,
+      "formats": "PDF",
+      "files": [
+        "klamra-brandbook.pdf"
+      ]
+    },
+    {
+      "id": "zip",
+      "title": "Wszystko w jednym pliku",
+      "count": 1,
+      "bytes": 1599868,
+      "formats": "ZIP",
+      "files": [
+        "klamra-identyfikacja.zip"
+      ]
+    },
+    {
+      "id": "meta",
+      "title": "Pozostałe",
+      "count": 7,
+      "bytes": 24613,
+      "formats": "SVG, PNG, PNG 1200 px",
+      "files": [
+        "figures/clearspace.svg",
+        "figures/direction-k.svg",
+        "figures/direction-klamry.svg",
+        "figures/direction-terminal.svg",
+        "figures/wordmark-default.svg",
+        "figures/wordmark-kerned.svg",
+        "og.png"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "animation/klamra-logo.mp4",
+      "bytes": 50749,
+      "type": "mp4",
+      "group": "animation",
+      "codec": "h264",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "animation/klamra-logo.webm",
+      "bytes": 61237,
+      "type": "webm",
+      "group": "animation",
+      "codec": "vp9",
+      "width": 1080,
+      "height": 1080,
+      "duration": 3.03
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "bytes": 1821,
+      "type": "png",
+      "group": "favicon",
+      "width": 180,
+      "height": 180,
+      "hasAlpha": true
+    },
+    {
+      "path": "colors/klamra-palette.json",
+      "bytes": 8093,
+      "type": "json",
+      "group": "colors"
+    },
+    {
+      "path": "colors/klamra-tokens.css",
+      "bytes": 282,
+      "type": "css",
+      "group": "colors"
+    },
+    {
+      "path": "email/klamra-email-signature.html",
+      "bytes": 1330,
+      "type": "html",
+      "group": "email"
+    },
+    {
+      "path": "favicon.ico",
+      "bytes": 1748,
+      "type": "ico",
+      "group": "favicon",
+      "sizes": [
+        16,
+        32,
+        48
+      ]
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 399,
+      "type": "svg",
+      "group": "favicon",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "figures/clearspace.svg",
+      "bytes": 2273,
+      "type": "svg",
+      "group": "meta",
+      "width": 693,
+      "height": 244
+    },
+    {
+      "path": "figures/direction-k.svg",
+      "bytes": 333,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/direction-klamry.svg",
+      "bytes": 438,
+      "type": "svg",
+      "group": "meta",
+      "width": 164,
+      "height": 164
+    },
+    {
+      "path": "figures/direction-terminal.svg",
+      "bytes": 1216,
+      "type": "svg",
+      "group": "meta",
+      "width": 200,
+      "height": 200
+    },
+    {
+      "path": "figures/wordmark-default.svg",
+      "bytes": 1713,
+      "type": "svg",
+      "group": "meta",
+      "width": 491,
+      "height": 190
+    },
+    {
+      "path": "figures/wordmark-kerned.svg",
+      "bytes": 1719,
+      "type": "svg",
+      "group": "meta",
+      "width": 491,
+      "height": 190
+    },
+    {
+      "path": "fonts/Epilogue-500.woff2",
+      "bytes": 20364,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Epilogue-700.woff2",
+      "bytes": 20428,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Epilogue-800.woff2",
+      "bytes": 20392,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/Epilogue-900.woff2",
+      "bytes": 19580,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/JetBrainsMono-400.woff2",
+      "bytes": 22176,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/JetBrainsMono-700.woff2",
+      "bytes": 23084,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/JetBrainsMono-800.woff2",
+      "bytes": 22108,
+      "type": "woff2",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-Epilogue.txt",
+      "bytes": 4394,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "fonts/OFL-JetBrainsMono.txt",
+      "bytes": 4399,
+      "type": "txt",
+      "group": "fonts"
+    },
+    {
+      "path": "icons/klamra-icons.svg",
+      "bytes": 111,
+      "type": "svg",
+      "group": "icons"
+    },
+    {
+      "path": "icons/svg/klamra-icon-blad.svg",
+      "bytes": 226,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-certyfikat.svg",
+      "bytes": 220,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-commit.svg",
+      "bytes": 204,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-galaz.svg",
+      "bytes": 282,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-grupa.svg",
+      "bytes": 239,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-kalendarz.svg",
+      "bytes": 232,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-kod.svg",
+      "bytes": 210,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-kontakt.svg",
+      "bytes": 207,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-laptop.svg",
+      "bytes": 190,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-mentor.svg",
+      "bytes": 207,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-projekt.svg",
+      "bytes": 207,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "icons/svg/klamra-icon-terminal.svg",
+      "bytes": 214,
+      "type": "svg",
+      "group": "icons",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "path": "klamra-brandbook.pdf",
+      "bytes": 1214356,
+      "type": "pdf",
+      "group": "brandbook",
+      "pages": 28,
+      "pageMm": {
+        "width": 508,
+        "height": 285.8
+      },
+      "pagePx": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "path": "klamra-identyfikacja.zip",
+      "bytes": 1599868,
+      "type": "zip",
+      "group": "zip"
+    },
+    {
+      "path": "logo/klamra-horizontal.svg",
+      "bytes": 1953,
+      "type": "svg",
+      "group": "logo",
+      "width": 563,
+      "height": 164
+    },
+    {
+      "path": "logo/klamra-mono-black.svg",
+      "bytes": 1883,
+      "type": "svg",
+      "group": "logo",
+      "width": 613,
+      "height": 164
+    },
+    {
+      "path": "logo/klamra-negative.svg",
+      "bytes": 1984,
+      "type": "svg",
+      "group": "logo",
+      "width": 613,
+      "height": 164
+    },
+    {
+      "path": "logo/klamra-primary.svg",
+      "bytes": 1992,
+      "type": "svg",
+      "group": "logo",
+      "width": 613,
+      "height": 164
+    },
+    {
+      "path": "logo/klamra-symbol.svg",
+      "bytes": 437,
+      "type": "svg",
+      "group": "logo",
+      "width": 164,
+      "height": 164
+    },
+    {
+      "path": "logo/klamra-vertical.svg",
+      "bytes": 1980,
+      "type": "svg",
+      "group": "logo",
+      "width": 367,
+      "height": 276
+    },
+    {
+      "path": "logo/pdf/klamra-horizontal.pdf",
+      "bytes": 2314,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 29.3
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 111
+      }
+    },
+    {
+      "path": "logo/pdf/klamra-mono-black.pdf",
+      "bytes": 2309,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 26.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 101
+      }
+    },
+    {
+      "path": "logo/pdf/klamra-negative.pdf",
+      "bytes": 2343,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 26.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 101
+      }
+    },
+    {
+      "path": "logo/pdf/klamra-primary.pdf",
+      "bytes": 2336,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 26.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 101
+      }
+    },
+    {
+      "path": "logo/pdf/klamra-symbol.pdf",
+      "bytes": 1129,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 99.8
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 377
+      }
+    },
+    {
+      "path": "logo/pdf/klamra-vertical.pdf",
+      "bytes": 2318,
+      "type": "pdf",
+      "group": "logo",
+      "pages": 1,
+      "pageMm": {
+        "width": 99.8,
+        "height": 75.1
+      },
+      "pagePx": {
+        "width": 377,
+        "height": 284
+      }
+    },
+    {
+      "path": "logo/png/klamra-horizontal-1024.png",
+      "bytes": 16746,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 298,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-horizontal-2048.png",
+      "bytes": 39695,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 597,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-horizontal-512.png",
+      "bytes": 7547,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 149,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-mono-black-1024.png",
+      "bytes": 15884,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 274,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-mono-black-2048.png",
+      "bytes": 34100,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 548,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-mono-black-512.png",
+      "bytes": 7737,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 137,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-negative-1024.png",
+      "bytes": 12900,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 274,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-negative-2048.png",
+      "bytes": 31671,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 548,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-negative-512.png",
+      "bytes": 6000,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 137,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-primary-1024.png",
+      "bytes": 13934,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 274,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-primary-2048.png",
+      "bytes": 31624,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 548,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-primary-512.png",
+      "bytes": 6056,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 137,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-symbol-1024.png",
+      "bytes": 17290,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 1024,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-symbol-2048.png",
+      "bytes": 54974,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 2048,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-symbol-512.png",
+      "bytes": 8127,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 512,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-vertical-1024.png",
+      "bytes": 30237,
+      "type": "png",
+      "group": "logo",
+      "width": 1024,
+      "height": 770,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-vertical-2048.png",
+      "bytes": 67053,
+      "type": "png",
+      "group": "logo",
+      "width": 2048,
+      "height": 1540,
+      "hasAlpha": true
+    },
+    {
+      "path": "logo/png/klamra-vertical-512.png",
+      "bytes": 13167,
+      "type": "png",
+      "group": "logo",
+      "width": 512,
+      "height": 385,
+      "hasAlpha": true
+    },
+    {
+      "path": "mockups/klamra-application.jpg",
+      "bytes": 220742,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/klamra-card-back.jpg",
+      "bytes": 110027,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/klamra-card-front.jpg",
+      "bytes": 85418,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/klamra-email-signature.jpg",
+      "bytes": 85392,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "mockups/klamra-letterhead.jpg",
+      "bytes": 140330,
+      "type": "jpg",
+      "group": "mockups"
+    },
+    {
+      "path": "og.png",
+      "bytes": 16921,
+      "type": "png",
+      "group": "meta",
+      "width": 1200,
+      "height": 630,
+      "hasAlpha": false
+    },
+    {
+      "path": "pattern/klamra-pattern.svg",
+      "bytes": 597,
+      "type": "svg",
+      "group": "pattern",
+      "width": 160,
+      "height": 160
+    },
+    {
+      "path": "print/klamra-business-card.pdf",
+      "bytes": 15785,
+      "type": "pdf",
+      "group": "print",
+      "pages": 2,
+      "pageMm": {
+        "width": 91,
+        "height": 61
+      },
+      "pagePx": {
+        "width": 344,
+        "height": 231
+      }
+    },
+    {
+      "path": "print/klamra-letterhead.pdf",
+      "bytes": 18905,
+      "type": "pdf",
+      "group": "print",
+      "pages": 1,
+      "pageMm": {
+        "width": 209.9,
+        "height": 297
+      },
+      "pagePx": {
+        "width": 793,
+        "height": 1123
+      }
+    },
+    {
+      "path": "social/klamra-avatar.png",
+      "bytes": 11440,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1080,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/klamra-post-1.png",
+      "bytes": 43119,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/klamra-post-2.png",
+      "bytes": 40494,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    },
+    {
+      "path": "social/klamra-post-3.png",
+      "bytes": 33879,
+      "type": "png",
+      "group": "social",
+      "width": 1080,
+      "height": 1350,
+      "hasAlpha": false
+    }
+  ],
+  "palette": [
+    {
+      "id": "atrament",
+      "name": "Atrament",
+      "group": "primary",
+      "role": "tekst, obrysy, cienie i znak",
+      "hex": "#111111",
+      "rgb": "17 17 17",
+      "oklch": "oklch(17.8% 0 0)",
+      "cmykApprox": "C 0 M 0 Y 0 K 93"
+    },
+    {
+      "id": "cytryna",
+      "name": "Cytryna",
+      "group": "primary",
+      "role": "kolor marki, tło znaku i pierwszego planu",
+      "hex": "#FFE14A",
+      "rgb": "255 225 74",
+      "oklch": "oklch(90.9% 0.165 97.6)",
+      "cmykApprox": "C 0 M 12 Y 71 K 0"
+    },
+    {
+      "id": "roz",
+      "name": "Róż",
+      "group": "accent",
+      "role": "akcent, kursor, ostrzeżenia, wypełnienia",
+      "hex": "#FF5FA8",
+      "rgb": "255 95 168",
+      "oklch": "oklch(71.3% 0.205 355.3)",
+      "cmykApprox": "C 0 M 63 Y 34 K 0"
+    },
+    {
+      "id": "mieta",
+      "name": "Mięta",
+      "group": "accent",
+      "role": "akcent, potwierdzenia, wypełnienia",
+      "hex": "#3DDC97",
+      "rgb": "61 220 151",
+      "oklch": "oklch(79.7% 0.164 159.7)",
+      "cmykApprox": "C 72 M 0 Y 31 K 14"
+    },
+    {
+      "id": "niebo",
+      "name": "Niebo",
+      "group": "accent",
+      "role": "akcent, odnośniki w ramkach, wypełnienia",
+      "hex": "#5CC8FF",
+      "rgb": "92 200 255",
+      "oklch": "oklch(79.1% 0.126 233.7)",
+      "cmykApprox": "C 64 M 22 Y 0 K 0"
+    },
+    {
+      "id": "biel",
+      "name": "Biel",
+      "group": "neutral",
+      "role": "tło strony i kart, jedyny jasny tekst na atramencie",
+      "hex": "#FFFFFF",
+      "rgb": "255 255 255",
+      "oklch": "oklch(100% 0 0)",
+      "cmykApprox": "C 0 M 0 Y 0 K 0"
+    },
+    {
+      "id": "mgla",
+      "name": "Mgła",
+      "group": "neutral",
+      "role": "tło tabel i pól kodu",
+      "hex": "#F2F2F2",
+      "rgb": "242 242 242",
+      "oklch": "oklch(96.1% 0 0)",
+      "cmykApprox": "C 0 M 0 Y 0 K 5"
+    },
+    {
+      "id": "beton",
+      "name": "Beton",
+      "group": "neutral",
+      "role": "linie pomocnicze, wyłączone pola, bez tekstu",
+      "hex": "#D9D9D9",
+      "rgb": "217 217 217",
+      "oklch": "oklch(88.5% 0 0)",
+      "cmykApprox": "C 0 M 0 Y 0 K 15"
+    },
+    {
+      "id": "kamien",
+      "name": "Kamień",
+      "group": "neutral",
+      "role": "ramki pomocnicze, bez tekstu",
+      "hex": "#8F8F8F",
+      "rgb": "143 143 143",
+      "oklch": "oklch(65% 0 0)",
+      "cmykApprox": "C 0 M 0 Y 0 K 44"
+    },
+    {
+      "id": "grafit",
+      "name": "Grafit",
+      "group": "neutral",
+      "role": "tekst drugorzędny",
+      "hex": "#4A4A4A",
+      "rgb": "74 74 74",
+      "oklch": "oklch(40.9% 0 0)",
+      "cmykApprox": "C 0 M 0 Y 0 K 71"
+    }
+  ],
+  "contrast": [
+    {
+      "id": "atrament-biel",
+      "use": "tekst podstawowy na tle strony i na kartach",
+      "foreground": "#111111",
+      "background": "#FFFFFF",
+      "kind": "text",
+      "ratio": 18.88,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-mgla",
+      "use": "tekst w tabelach i polach kodu",
+      "foreground": "#111111",
+      "background": "#F2F2F2",
+      "kind": "text",
+      "ratio": 16.87,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-cytryna",
+      "use": "tekst na kolorze marki i na znaku",
+      "foreground": "#111111",
+      "background": "#FFE14A",
+      "kind": "text",
+      "ratio": 14.5,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-roz",
+      "use": "tekst na różowych blokach i naklejkach",
+      "foreground": "#111111",
+      "background": "#FF5FA8",
+      "kind": "text",
+      "ratio": 6.7,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-mieta",
+      "use": "tekst na miętowych blokach i naklejkach",
+      "foreground": "#111111",
+      "background": "#3DDC97",
+      "kind": "text",
+      "ratio": 10.68,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-niebo",
+      "use": "tekst na niebieskich blokach i naklejkach",
+      "foreground": "#111111",
+      "background": "#5CC8FF",
+      "kind": "text",
+      "ratio": 10.04,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "biel-atrament",
+      "use": "negatyw: biały tekst na atramencie",
+      "foreground": "#FFFFFF",
+      "background": "#111111",
+      "kind": "text",
+      "ratio": 18.88,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "cytryna-atrament",
+      "use": "etykiety i akcenty na atramencie",
+      "foreground": "#FFE14A",
+      "background": "#111111",
+      "kind": "text",
+      "ratio": 14.5,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "grafit-biel",
+      "use": "tekst drugorzędny, podpisy",
+      "foreground": "#4A4A4A",
+      "background": "#FFFFFF",
+      "kind": "text",
+      "ratio": 8.86,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "grafit-mgla",
+      "use": "podpisy w tabelach i na polach kodu",
+      "foreground": "#4A4A4A",
+      "background": "#F2F2F2",
+      "kind": "text",
+      "ratio": 7.92,
+      "required": 4.5,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "grafit-cytryna",
+      "use": "tekst drugorzędny na kolorze marki",
+      "foreground": "#4A4A4A",
+      "background": "#FFE14A",
+      "kind": "text",
+      "ratio": 6.8,
+      "required": 4.5,
+      "level": "AA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-biel-large",
+      "use": "duże nagłówki i napisy na plakatach",
+      "foreground": "#111111",
+      "background": "#FFFFFF",
+      "kind": "large",
+      "ratio": 18.88,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-cytryna-ui",
+      "use": "obrys fokusu i ramki na kolorze marki",
+      "foreground": "#111111",
+      "background": "#FFE14A",
+      "kind": "ui",
+      "ratio": 14.5,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "atrament-biel-ui",
+      "use": "obrysy kart, pól formularza i przycisków",
+      "foreground": "#111111",
+      "background": "#FFFFFF",
+      "kind": "ui",
+      "ratio": 18.88,
+      "required": 3,
+      "level": "AAA",
+      "pass": true,
+      "note": null
+    },
+    {
+      "id": "roz-biel",
+      "use": "kursor w znaku, kształty wzoru i naklejki",
+      "foreground": "#FF5FA8",
+      "background": "#FFFFFF",
+      "kind": "decorative",
+      "ratio": 2.82,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "wypełnienie bez tekstu, zawsze z obrysem w atramencie"
+    },
+    {
+      "id": "mieta-biel",
+      "use": "kształty wzoru i naklejki",
+      "foreground": "#3DDC97",
+      "background": "#FFFFFF",
+      "kind": "decorative",
+      "ratio": 1.77,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "wypełnienie bez tekstu, zawsze z obrysem w atramencie"
+    },
+    {
+      "id": "niebo-biel",
+      "use": "kształty wzoru i naklejki",
+      "foreground": "#5CC8FF",
+      "background": "#FFFFFF",
+      "kind": "decorative",
+      "ratio": 1.88,
+      "required": 0,
+      "level": "fail",
+      "pass": true,
+      "note": "wypełnienie bez tekstu, zawsze z obrysem w atramencie"
+    },
+    {
+      "id": "kamien-biel",
+      "use": "linie pomocnicze na planszach",
+      "foreground": "#8F8F8F",
+      "background": "#FFFFFF",
+      "kind": "decorative",
+      "ratio": 3.23,
+      "required": 0,
+      "level": "AA large",
+      "pass": true,
+      "note": "bez tekstu"
+    }
+  ],
+  "fonts": [
+    {
+      "id": "display",
+      "role": "nagłówki",
+      "family": "Epilogue",
+      "css": "Klamra Display",
+      "weight": 800,
+      "style": "normal",
+      "file": "fonts/Epilogue-800.woff2",
+      "bytes": 20392
+    },
+    {
+      "id": "display",
+      "role": "nagłówki",
+      "family": "Epilogue",
+      "css": "Klamra Display",
+      "weight": 900,
+      "style": "normal",
+      "file": "fonts/Epilogue-900.woff2",
+      "bytes": 19580
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Epilogue",
+      "css": "Klamra Text",
+      "weight": 500,
+      "style": "normal",
+      "file": "fonts/Epilogue-500.woff2",
+      "bytes": 20364
+    },
+    {
+      "id": "text",
+      "role": "tekst",
+      "family": "Epilogue",
+      "css": "Klamra Text",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/Epilogue-700.woff2",
+      "bytes": 20428
+    },
+    {
+      "id": "mono",
+      "role": "etykiety i kod",
+      "family": "JetBrains Mono",
+      "css": "Klamra Mono",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/JetBrainsMono-400.woff2",
+      "bytes": 22176
+    },
+    {
+      "id": "mono",
+      "role": "etykiety i kod",
+      "family": "JetBrains Mono",
+      "css": "Klamra Mono",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/JetBrainsMono-700.woff2",
+      "bytes": 23084
+    },
+    {
+      "id": "mono",
+      "role": "etykiety i kod",
+      "family": "JetBrains Mono",
+      "css": "Klamra Mono",
+      "weight": 800,
+      "style": "normal",
+      "file": "fonts/JetBrainsMono-800.woff2",
+      "bytes": 22108
+    }
+  ]
+}
