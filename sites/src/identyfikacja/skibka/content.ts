@@ -43,11 +43,18 @@ export const content: CaseContent = {
       'Sąsiedzi z Kazimierza i Podgórza, którzy kupują chleb dwa lub trzy razy w tygodniu i chcą wiedzieć, co jest w środku, oraz kawiarnie, które zamawiają bochenki na rano.',
     values: [
       { title: 'Wolno', text: 'Bochenek dojrzewa 36 godzin i nikt go nie poganiał.' },
-      { title: 'Z mąki i wody', text: 'Mąka, woda, sól i zakwas. Nic więcej nie trafia do ciasta.' },
-      { title: 'Po sąsiedzku', text: 'Piekarka stoi w oknie, zna imiona i odkłada bochenek na później.' },
+      {
+        title: 'Z mąki i wody',
+        text: 'Mąka, woda, sól i zakwas. Nic więcej nie trafia do ciasta.',
+      },
+      {
+        title: 'Po sąsiedzku',
+        text: 'Piekarka stoi w oknie, zna imiona i odkłada bochenek na później.',
+      },
     ],
     personality: ['ciepła', 'uczciwa', 'trochę niedoskonała'],
-    avoids: 'idealnej geometrii, błyszczącej techniki, neonów i wszystkiego, co wygląda jak sieć sklepów',
+    avoids:
+      'idealnej geometrii, błyszczącej techniki, neonów i wszystkiego, co wygląda jak sieć sklepów',
     positioning:
       'Skibka piecze chleb na własnym zakwasie w małym piecu na Podgórzu, wolno i bez dodatków, dla ludzi, którzy lubią wiedzieć, co jedzą.',
   },
@@ -119,14 +126,46 @@ export const content: CaseContent = {
     },
   ],
   applications: [
-    { id: 'karta-awers', title: 'Wizytówka, awers', caption: 'Kraft i pieczątka. Druk 85 na 55 mm, spad 3 mm.', image: 'mockups/skibka-card-front.jpg', alt: 'Awers wizytówki Skibki: brązowa pieczątka na papierze kraft.' },
-    { id: 'karta-rewers', title: 'Wizytówka, rewers', caption: 'Dane kontaktowe na mące, bez ozdób.', image: 'mockups/skibka-card-back.jpg', alt: 'Rewers wizytówki Skibki z nazwiskiem, adresem i telefonem.' },
-    { id: 'papier', title: 'Papier firmowy A4', caption: 'Pieczątka w rogu, adres w stopce, szeroki margines.', image: 'mockups/skibka-letterhead.jpg', alt: 'Papier firmowy Skibki w formacie A4 z krótkim listem.' },
-    { id: 'torba', title: 'Torba i etykieta w oknie', caption: 'Zastosowanie dla piekarni: papierowa torba na chleb i karta z dzisiejszymi bochenkami.', image: 'mockups/skibka-application.jpg', alt: 'Papierowa torba kraft z pieczątką Skibki i etykieta z listą dzisiejszych bochenków.' },
-    { id: 'podpis', title: 'Podpis e-mail', caption: 'HTML bez obrazków w tle, logo z hostingu, tekst w czcionkach systemowych.', image: 'mockups/skibka-email-signature.jpg', alt: 'Podpis e-mail Skibki z poziomym logo, telefonem i adresem.' },
+    {
+      id: 'karta-awers',
+      title: 'Wizytówka, awers',
+      caption: 'Kraft i pieczątka. Druk 85 na 55 mm, spad 3 mm.',
+      image: 'mockups/skibka-card-front.jpg',
+      alt: 'Awers wizytówki Skibki: brązowa pieczątka na papierze kraft.',
+    },
+    {
+      id: 'karta-rewers',
+      title: 'Wizytówka, rewers',
+      caption: 'Dane kontaktowe na mące, bez ozdób.',
+      image: 'mockups/skibka-card-back.jpg',
+      alt: 'Rewers wizytówki Skibki z nazwiskiem, adresem i telefonem.',
+    },
+    {
+      id: 'papier',
+      title: 'Papier firmowy A4',
+      caption: 'Pieczątka w rogu, adres w stopce, szeroki margines.',
+      image: 'mockups/skibka-letterhead.jpg',
+      alt: 'Papier firmowy Skibki w formacie A4 z krótkim listem.',
+    },
+    {
+      id: 'torba',
+      title: 'Torba i etykieta w oknie',
+      caption:
+        'Zastosowanie dla piekarni: papierowa torba na chleb i karta z dzisiejszymi bochenkami.',
+      image: 'mockups/skibka-application.jpg',
+      alt: 'Papierowa torba kraft z pieczątką Skibki i etykieta z listą dzisiejszych bochenków.',
+    },
+    {
+      id: 'podpis',
+      title: 'Podpis e-mail',
+      caption: 'HTML bez obrazków w tle, logo z hostingu, tekst w czcionkach systemowych.',
+      image: 'mockups/skibka-email-signature.jpg',
+      alt: 'Podpis e-mail Skibki z poziomym logo, telefonem i adresem.',
+    },
   ],
   deliverables: {
-    intro: 'Wszystko, co dostaje piekarnia, leży w jednej paczce ZIP i osobno na liście poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
+    intro:
+      'Wszystko, co dostaje piekarnia, leży w jednej paczce ZIP i osobno na liście poniżej. Rozwiń grupę, żeby zobaczyć pliki z wymiarami.',
     note: 'CMYK w tabeli kolorów jest przybliżony. Do druku zamów próbny wydruk. Odpowiedników Pantone nie podajemy.',
   },
   cta: {
@@ -137,18 +176,40 @@ export const content: CaseContent = {
 
 export const extras = {
   typeScale: [
-    { name: 'Tytuł', font: 'display', size: 56, line: 1.05, use: 'okładki, hasła, nagłówek strony' },
+    {
+      name: 'Tytuł',
+      font: 'display',
+      size: 56,
+      line: 1.05,
+      use: 'okładki, hasła, nagłówek strony',
+    },
     { name: 'Nagłówek', font: 'display', size: 34, line: 1.12, use: 'sekcje i karty' },
     { name: 'Podtytuł', font: 'text', weight: 700, size: 20, line: 1.3, use: 'wstępy i lead' },
     { name: 'Tekst', font: 'text', weight: 400, size: 17, line: 1.55, use: 'akapity, opisy, menu' },
-    { name: 'Podpis', font: 'text', weight: 500, size: 14, line: 1.4, use: 'podpisy, etykiety, adresy' },
+    {
+      name: 'Podpis',
+      font: 'text',
+      weight: 500,
+      size: 14,
+      line: 1.4,
+      use: 'podpisy, etykiety, adresy',
+    },
   ],
   specimen: 'Mąka, woda, sól i zakwas. Chleb dojrzewa trzydzieści sześć godzin.',
   glyphs: 'ĄĆĘŁŃÓŚŹŻ ąćęłńóśźż 0123456789 „”·×',
   graphics: [
-    { title: 'Wzór z odcisków', text: 'Nieregularne nacięcia, ziarna i kropki rozsypane bez rytmu. Wzór nie ma osi, a szew kafla jest niewidoczny.' },
-    { title: 'Faktura papieru', text: 'Drobne ziarno z szumu, nałożone na mąkę i kraft. Tylko na ekranie i w druku z rastra, nigdy w plikach logo.' },
-    { title: 'Karty z krzywym brzegiem', text: 'Każda karta jest lekko przechylona, o jeden do dwóch stopni, a jej brzeg jest nierówny jak rwany papier.' },
+    {
+      title: 'Wzór z odcisków',
+      text: 'Nieregularne nacięcia, ziarna i kropki rozsypane bez rytmu. Wzór nie ma osi, a szew kafla jest niewidoczny.',
+    },
+    {
+      title: 'Faktura papieru',
+      text: 'Drobne ziarno z szumu, nałożone na mąkę i kraft. Tylko na ekranie i w druku z rastra, nigdy w plikach logo.',
+    },
+    {
+      title: 'Karty z krzywym brzegiem',
+      text: 'Każda karta jest lekko przechylona, o jeden do dwóch stopni, a jej brzeg jest nierówny jak rwany papier.',
+    },
   ],
   layoutRules: [
     'Jedna kolumna tekstu, szerokość do 62 znaków.',
@@ -158,12 +219,33 @@ export const extras = {
   ],
   photoStyle:
     'Zdjęć w tym projekcie nie generujemy. Opis stylu dla fotografa: światło dzienne z okna, boczne i miękkie. Bochenki w całości i w przekroju, na drewnie, kraftowym papierze lub lnianej ściereczce. Mąka na blacie jest widoczna i nieuprzątnięta. Ręce w kadrze są prawdziwe, bez rękawiczek i bez pozowania. Kolory ciepłe, bez filtrów i bez wysokiego kontrastu. Zdjęcia kadrujemy od góry albo z wysokości blatu, nigdy z perspektywy żabiej.',
-  animation: 'Pieczątka opada na papier, tusz rozlewa się odrobinę i brzeg się uspokaja. Całość trwa trzy sekundy. Przy ustawieniu ograniczenia ruchu strona pokazuje nieruchome logo.',
-  clearSpace: 'Pole ochronne jest równe wysokości litery S z napisu Skibka. Żaden tekst ani brzeg strony nie wchodzi w ten obszar.',
-  minimum: { symbol: '16 px na ekranie, 6 mm w druku (uproszczony sygnet)', fullStamp: '48 px na ekranie, 18 mm w druku', primary: '120 px szerokości, 32 mm w druku' },
+  animation:
+    'Pieczątka opada na papier, tusz rozlewa się odrobinę i brzeg się uspokaja. Całość trwa trzy sekundy. Przy ustawieniu ograniczenia ruchu strona pokazuje nieruchome logo.',
+  clearSpace:
+    'Pole ochronne jest równe wysokości litery S z napisu Skibka. Żaden tekst ani brzeg strony nie wchodzi w ten obszar.',
+  minimum: {
+    symbol: '16 px na ekranie, 6 mm w druku (uproszczony sygnet)',
+    fullStamp: '48 px na ekranie, 18 mm w druku',
+    primary: '120 px szerokości, 32 mm w druku',
+  },
   social: [
-    { id: 'post-1', headline: 'Dziś w oknie', body: 'Żytni na zakwasie, pszenny, bułki. Do 14:00.', foot: 'ul. Piecowa 7' },
-    { id: 'post-2', headline: 'Mąka, woda, sól.', body: 'I trzydzieści sześć godzin.', foot: 'Skibka, Kraków' },
-    { id: 'post-3', headline: 'Piekarnia czynna', body: 'wt do pt 7:00 do 17:00, sobota 7:00 do 14:00', foot: 'Niedziela i poniedziałek: odpoczywamy' },
+    {
+      id: 'post-1',
+      headline: 'Dziś w oknie',
+      body: 'Żytni na zakwasie, pszenny, bułki. Do 14:00.',
+      foot: 'ul. Piecowa 7',
+    },
+    {
+      id: 'post-2',
+      headline: 'Mąka, woda, sól.',
+      body: 'I trzydzieści sześć godzin.',
+      foot: 'Skibka, Kraków',
+    },
+    {
+      id: 'post-3',
+      headline: 'Piekarnia czynna',
+      body: 'wt do pt 7:00 do 17:00, sobota 7:00 do 14:00',
+      foot: 'Niedziela i poniedziałek: odpoczywamy',
+    },
   ],
 } as const;

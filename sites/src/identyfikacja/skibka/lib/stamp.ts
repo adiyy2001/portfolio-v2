@@ -63,7 +63,16 @@ interface RingOptions {
   cy?: number;
 }
 
-const ringPoints = ({ radius, points, amplitude, fine, phases, rng, cx = stamp.center, cy = stamp.center }: RingOptions): Point[] =>
+const ringPoints = ({
+  radius,
+  points,
+  amplitude,
+  fine,
+  phases,
+  rng,
+  cx = stamp.center,
+  cy = stamp.center,
+}: RingOptions): Point[] =>
   Array.from({ length: points }, (_, i) => {
     const theta = (i / points) * Math.PI * 2;
     const low =
@@ -75,8 +84,22 @@ const ringPoints = ({ radius, points, amplitude, fine, phases, rng, cx = stamp.c
   });
 
 const band = (rng: Rng, outer: number, inner: number, phases: number[], pointsOuter = 36) => {
-  const a = ringPoints({ radius: outer, points: pointsOuter, amplitude: 2.3, fine: 0.8, phases, rng });
-  const b = ringPoints({ radius: inner, points: Math.round(pointsOuter * 0.75), amplitude: 2.0, fine: 0.8, phases, rng });
+  const a = ringPoints({
+    radius: outer,
+    points: pointsOuter,
+    amplitude: 2.3,
+    fine: 0.8,
+    phases,
+    rng,
+  });
+  const b = ringPoints({
+    radius: inner,
+    points: Math.round(pointsOuter * 0.75),
+    amplitude: 2.0,
+    fine: 0.8,
+    phases,
+    rng,
+  });
   return `${smoothClosed(a)}${smoothClosed(b)}`;
 };
 
@@ -110,7 +133,8 @@ export const stampArt = (seed: number): StampArt => {
   const rng = mulberry32(seed);
   const phases = [rng() * 6.28, rng() * 6.28, rng() * 6.28];
   const bandPath = band(rng, stamp.bandOuter, stamp.bandInner, phases);
-  const thinPoints = (radius: number) => ringPoints({ radius, points: 22, amplitude: 0.9, fine: 0.35, phases, rng });
+  const thinPoints = (radius: number) =>
+    ringPoints({ radius, points: 22, amplitude: 0.9, fine: 0.35, phases, rng });
   const thin = `${smoothClosed(thinPoints(stamp.thinOuter))}${smoothClosed(thinPoints(stamp.thinInner))}`;
   const specks = `${specksPath(rng, 7, stamp.bandInner + 1, stamp.bandOuter - 1)}${specksPath(rng, 3, stamp.thinInner - 0.5, stamp.thinOuter)}`;
   return { band: bandPath, thin, specks };
@@ -143,9 +167,18 @@ export const loafParts = (seed: number, scale = 1): LoafParts => {
   const phases = [rng() * 6.28, rng() * 6.28, rng() * 6.28];
   const bodyPoints: Point[] = Array.from({ length: 32 }, (_, i) => {
     const theta = (i / 32) * Math.PI * 2;
-    const wobble = 1 + 0.018 * Math.sin(2 * theta + phases[0]) + 0.012 * Math.sin(3 * theta + phases[1]) + (rng() - 0.5) * 0.012;
+    const wobble =
+      1 +
+      0.018 * Math.sin(2 * theta + phases[0]) +
+      0.012 * Math.sin(3 * theta + phases[1]) +
+      (rng() - 0.5) * 0.012;
     const flat = 1 - 0.07 * Math.max(0, Math.sin(theta)) ** 2;
-    return rotate([cx + rx * wobble * Math.cos(theta), cy + ry * wobble * flat * Math.sin(theta)], tilt, cx, cy);
+    return rotate(
+      [cx + rx * wobble * Math.cos(theta), cy + ry * wobble * flat * Math.sin(theta)],
+      tilt,
+      cx,
+      cy,
+    );
   });
   const lens = (center: Point, length: number, width: number, angle: number) => {
     const half = length / 2;
@@ -158,7 +191,12 @@ export const loafParts = (seed: number, scale = 1): LoafParts => {
   let cuts = '';
   [-1, 0, 1].forEach((k, index) => {
     const offset: Point = [cx + k * rx * 0.46 + (rng() - 0.5) * 2, cy + (rng() - 0.5) * 2 - 1];
-    const [p0, top, p1, bottom] = lens(offset, ry * 1.12, 5.2 + index * 0.4, 62 + (rng() - 0.5) * 6);
+    const [p0, top, p1, bottom] = lens(
+      offset,
+      ry * 1.12,
+      5.2 + index * 0.4,
+      62 + (rng() - 0.5) * 6,
+    );
     const r0 = rotate(p0, tilt, cx, cy);
     const r1 = rotate(p1, tilt, cx, cy);
     const rt = rotate(top, tilt, cx, cy);
