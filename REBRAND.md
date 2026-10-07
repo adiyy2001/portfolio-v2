@@ -14,6 +14,7 @@ Working state of the portfolio rebrand. Every session and every agent starts her
 - Blog (2026-10-03): articles published automatically by Command Center, canonical on this site, cross-posted to dev.to, with LinkedIn redistribution. The site side is built and stays invisible until the first article lands in `content/blog/`. How it works and what Command Center writes: `BLOG.md`; the shared plan is `~/root/side_projects/command-center/docs/content-engine.md`.
 - Domain (2026-10-03): the site is live at `https://adrianturbinski.pl/` (commit `d04bb1e`, HTTPS enforced, `www` redirects, the old `adiyy2001.github.io/portfolio-v2/` address redirects to the new one). DNS is at Hostinger (A records to GitHub Pages, `www` CNAME, mail records untouched; mailbox `contact@adrianturbinski.pl`). Also owned: `adrianturbinski.org`, `adrianturbinski.online`, both forwarded with a 301 to `https://adrianturbinski.pl/` by Hostinger domain forwarding (2026-10-06, http and https checked). No `pathPrefix` any more, Astro `base` is `/wzornik`, privacy policy at `/en/privacy/`. Older sections of this file still show the old address.
 - Roadmap run (2026-10-03, late evening): Adrian said to do everything without waiting for his approval, decide alone, and put what only he can provide into Command Center tasks for 2026-10-04 (seven tasks: GoatCounter account, Search Console, the `.org` and `.online` redirects, the GitHub cleanup writes, the commit e-mail, photo and TailorCloth material, a review of the decisions taken for him). Order: the six repos, then the Wzornik extension (`briefs/agent-runs/wzornik-status.md`), then the Dependabot alerts. The weekly limit stood at 75% (renews 6.10 at 16:00), so the work runs in waves. The auto mode classifier blocked rewriting the commit identity and every write on GitHub (visibility, archive, profile): those are Adrian's tasks, do not retry them. Adrian, 2026-10-04 at 09:00: finish the six repos, record the work and update this roadmap, then stop. The Wzornik extension and the Dependabot alerts wait for his go.
+- Repos live (2026-10-06): flagtide, gridtwin and coschema are at v1.0.0 with live demos on `https://flagtide.adrianturbinski.pl/`, `https://gridtwin.adrianturbinski.pl/` (home server through Cloudflare Tunnel) and `https://coschema.adrianturbinski.pl/` (GitHub Pages of the coschema repo). `@flagtide/core` and `@flagtide/angular` 1.0.0 are on npm. DNS for the domain moved from Hostinger to Cloudflare the same day; the apex and `www` still point to this site's Pages and the mail records were copied unchanged. Command Center has three "Why I built ..." articles queued for the blog and dev.to (13.10 flagtide, 20.10 gridtwin, 27.10 coschema) and one LinkedIn post per project. Next for this site: the recruiter case studies, see "Recruiter case studies".
 - Branch: `rebrand-2026`. Pushed to the public repo `adiyy2001/portfolio-v2` with Adrian's OK ("wypychamy"), notes included. Push after each commit on this branch is fine from now on.
 - Wzornik identyfikacja (2026-10-07): the six identity case studies (cuvee, klamra, nosna, rzut, skibka, wolnobieg) and the identity index under `/wzornik/identyfikacja/` are built, reviewed and merged locally on `wzornik-merge` (base `rebrand-2026` at 86eb7bd, no conflicts), waiting for Adrian's fast forward and push. Checks on the merge: lint, Gatsby build, sites check, 120 test files and 1275 tests, sites build, and 194 pages answer 200 under `gatsby serve`; rerun on 2026-10-07 after the review round 4 merges and the Nośna repairs (1281 tests, no horizontal scroll on the six pages from 320 to 1440 px). The review point R is still open: Nośna scored 3 in craft in round 4 and its brand book and scroll defects were fixed afterwards without a fifth review (`studio/identyfikacja/PLAN.md`, decision 34). The email signature pages point at `adrianturbinski.pl` for the logo PNG, so they load it only after the deploy. App preview and ASO are still to merge.
 
@@ -28,6 +29,7 @@ For a fresh session (Adrian resets the chat to keep the context small):
 5. The Phase 1 prototypes, the logo sheet and the Playwright verification scripts were in `rebrand-explorations/`, deleted in `715807d`. Read them from history, for example `git show d126616:rebrand-explorations/b-na-miare/index.html`. The prototype screenshots were never committed. The Python venv with fonttools, brotli, uharfbuzz and Pillow lived in the session scratchpad; recreate it when fonts need subsetting.
 6. Next: the GitHub repos (see Status). The restart notes (state of each repo, how to start a new run, what went wrong on 2026-10-03) are kept with the briefs in `~/root/side_projects/briefs/`, outside this repo. Each repo folder also has `PLAN.md` with the ticked milestones and its own `git log`, so a new run continues from there. Paused on 2026-10-04: start the next run only when Adrian says so, with the args in `repos-status.md` ("How to continue"), and stop after the six repos.
 7. After the repos: the Wzornik extension, 18 more sample projects in three briefs (visual identity, app preview, ASO), saved on 2026-10-03 in `~/root/side_projects/briefs/` as `wzornik-identyfikacja.md`, `wzornik-app-preview.md` and `wzornik-aso.md`, with a summary in that folder's `README.md`. Their mode line says „autonomicznie” since 2026-10-03, so they run without the plan checkpoint, through `briefs/agent-runs/wzornik-workflow.js` in three worktrees (see `wzornik-status.md`). The identyfikacja brief is done and merged on `wzornik-merge` (2026-10-07), waiting for Adrian's `git merge --ff-only wzornik-merge` on `rebrand-2026` and a push; app-preview and aso are the remaining two briefs, then the Dependabot alerts.
+8. Recruiter case studies (Adrian, 2026-10-06): one page per public repo on the recruiter edition, each a five minute read. Spec in "Recruiter case studies". Start with flagtide, gridtwin and coschema; the other three repos get a page when they are published.
 
 ## Goal
 
@@ -746,6 +748,24 @@ The recruiter repos question (whether the six concepts are right, GoJS for repo 
 - Not done, needs Adrian: Google Business Profile (the main lever for the local pack, saved as a Command Center task for later) and local backlinks (Clutch, GoWork, WroclawIT, LinkedIn headline with Wrocław).
 - Commits in this repo use `adrian.turbinski@gmail.com` only. The last commit was force-pushed once to fix that; the older commit `0225870` keeps the company address and stays as it is (Adrian, 2026-10-06).
 
+## Recruiter case studies (planned 2026-10-06)
+
+Adrian, 2026-10-06: every portfolio repo gets its own case study on the recruiter edition, so a recruiter or a hiring engineer gets the project's "five minutes": what it does, why it exists, the features, the decisions and what was left out.
+
+- Projects: flagtide, gridtwin, coschema now; signal-timeline, eventhorizon and fieldline when they are public.
+- Routes: same pattern as TailorCloth, `/archive/<repo>/` and `/en/archive/<repo>/`, listed on the Work index and linked from the recruiter edition (`/dla-rekrutera/`, `/en/for-recruiters/`). Body copy PL and EN like the rest of the site.
+- Each page, in this order, readable in about five minutes:
+  1. One sentence on what it is, the demo GIF from the repo (`docs/media/demo.gif`), buttons to the live demo and the repository (npm too for flagtide).
+  2. Why it exists: the problem and the goal, from the README's "Why I built this", in Adrian's words.
+  3. What it does: four to six features a visitor can try in the demo, each with one line on how to see it.
+  4. Three hard parts or decisions with the trade-off and the alternative that lost, linked to the ADRs.
+  5. Numbers: only measured ones from the README and `bench/results` (tests, coverage, benchmarks, propagation or frame times), with what they were measured on.
+  6. What is not built and why (the README limits and the "not built" ADR), and what would come next.
+  7. Stack chips that map to the CV technologies, and the related blog article once Command Center publishes it.
+- Facts come only from the repos (README, ADRs, results files) and `NOTES_FOR_ADRIAN.md`; nothing invented. Copy follows "Rules for the material about Adrian" and the avoid list.
+- Open Graph card and JSON-LD `SoftwareSourceCode` (or `CreativeWork`) per page, sitemap entries, and Lighthouse 100 on mobile and desktop like the other routes.
+- Media: the repo GIFs are large, so convert them to a short muted looping video or a poster plus video, lazy loaded below the hero.
+
 ## Pages
 
 - [x] Phase 2 system (tokens, fonts, global styles, motion, Lenis, shell, nav, footer, transitions), approved
@@ -761,4 +781,8 @@ The recruiter repos question (whether the six concepts are right, GoJS for repo 
 - [x] Phase 4: sample websites under `/wzornik/`, `llms.txt`, final Lighthouse, delete `/rebrand-explorations`
 - [x] Wzornik identyfikacja: six case studies and the index, merged on `wzornik-merge`, push pending
 - [ ] Wzornik app preview and ASO case studies
+- [ ] Recruiter case studies: flagtide (`/archive/flagtide/`, PL and EN)
+- [ ] Recruiter case studies: gridtwin (`/archive/gridtwin/`, PL and EN)
+- [ ] Recruiter case studies: coschema (`/archive/coschema/`, PL and EN)
+- [ ] Recruiter case studies: signal-timeline, eventhorizon, fieldline (when published)
 - [ ] GitHub repos: the six from Adrian's briefs, outside this repo (see Status)
