@@ -132,10 +132,11 @@ export const lockups = colors => {
   return { primary, horizontal, vertical, symbol: { viewBox: [0, 0, 400, 400], body: badge(full) } };
 };
 
-export const faviconMarkup = colors => badge({ rim: colors.rim, ring1: colors.ring1, ring2: colors.ring2 }, { simple: true });
+export const faviconMarkup = colors =>
+  `<g transform="translate(200 200) scale(.9) translate(-200 -200)"><path fill="${colors.halo}" stroke="${colors.halo}" stroke-width="44" stroke-linejoin="round" d="${cogPath(200, 200, 12, 198, 170, 8)}"/>${badge({ rim: colors.rim, ring1: colors.ring1, ring2: colors.ring2 }, { simple: true })}</g>`;
 
 export const colorSets = c => ({
-  color: { word: c.brazowy, rim: c.brazowy, ring1: c.pomarancz, ring2: c.musztarda, hub: c.brazowy, s1: c.pomarancz, s2: c.musztarda, s3: c.brazowy, note: c.kawa },
+  color: { halo: c['krem-jasny'], word: c.brazowy, rim: c.brazowy, ring1: c.pomarancz, ring2: c.musztarda, hub: c.brazowy, s1: c.pomarancz, s2: c.musztarda, s3: c.brazowy, note: c.kawa },
   mono: { word: '#000000', rim: '#000000', ring1: '#000000', ring2: '#000000', hub: '#000000', s1: '#000000', s2: '#000000', s3: '#000000', note: '#000000' },
   negative: { word: c.krem, rim: c.krem, ring1: c.pomarancz, ring2: c.musztarda, hub: c.krem, s1: c.pomarancz, s2: c.musztarda, s3: c.krem, note: c.krem },
 });

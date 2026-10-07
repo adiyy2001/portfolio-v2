@@ -159,7 +159,7 @@ export const clampParams = (params: StripeParams): StripeParams => ({
   wear: Boolean(params.wear),
 });
 
-export const composerBox = { width: 600, height: 360 };
+export const composerBox = { width: 600, height: 440 };
 
 export const composerStripes = (input: StripeParams): DrawnStripe[] => {
   const params = clampParams(input);
@@ -168,17 +168,24 @@ export const composerStripes = (input: StripeParams): DrawnStripe[] => {
   const gap = 9;
   const pitch = stripeWidth + gap;
   const innerRadius = 2400 - params.curvature * 2160;
-  const reach = Math.min(width / 2, innerRadius * Math.sin((80 * Math.PI) / 180));
-  const sag = innerRadius - Math.sqrt(innerRadius * innerRadius - reach * reach);
-  const peak = height * 0.5 + ((params.count - 1) * pitch - sag - stripeWidth) / 2;
+  const spreadOf = (radius: number) =>
+    Math.min(80, (Math.asin(Math.min(1, (width / 2 - 28) / radius)) * 180) / Math.PI);
+  const radii = Array.from(
+    { length: params.count },
+    (_, index) => innerRadius + (params.count - 1 - index) * pitch,
+  );
+  const top = -(radii[0] - innerRadius) - stripeWidth / 2;
+  const bottom = Math.max(
+    ...radii.map(
+      radius =>
+        innerRadius - radius * Math.cos((spreadOf(radius) * Math.PI) / 180) + stripeWidth / 2,
+    ),
+  );
+  const peak = (height - (bottom - top)) / 2 - top;
   const cx = width / 2;
   const cy = peak + innerRadius;
-  return Array.from({ length: params.count }, (_, index) => {
-    const radius = innerRadius + (params.count - 1 - index) * pitch;
-    const spread = Math.min(
-      80,
-      (Math.asin(Math.min(1, (width / 2 + 40) / radius)) * 180) / Math.PI,
-    );
+  return radii.map((radius, index) => {
+    const spread = spreadOf(radius);
     const id = params.colors[index] ?? 'pomarancz';
     const color = stripeColors.find(item => item.id === id)?.hex ?? '#EC7424';
     return {

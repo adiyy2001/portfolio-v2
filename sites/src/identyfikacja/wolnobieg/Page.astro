@@ -90,14 +90,6 @@ const picks = [
         </div>
         <div class="hero__text">
           <p class="hero__lead">{content.lead}</p>
-          <dl class="hero__facts">
-            {content.client.facts.slice(0, 3).map(([term, text]) => (
-              <div>
-                <dt>{term}</dt>
-                <dd>{text}</dd>
-              </div>
-            ))}
-          </dl>
         </div>
         <figure class="hero__art">
           <svg viewBox="0 0 600 600" aria-hidden="true" focusable="false">
@@ -406,8 +398,8 @@ const picks = [
                 <img
                   src={asset(`icons/svg/wolnobieg-icon-${name}.svg`)}
                   alt=""
-                  width="40"
-                  height="40"
+                  width="72"
+                  height="72"
                   loading="lazy"
                 />
                 <span>{extras.iconLabels[name] ?? name}</span>
@@ -588,6 +580,14 @@ const picks = [
       <div class="wrap cta">
         <h2 id="t-cta">{content.cta.title}</h2>
         <p>{content.cta.text}</p>
+        <ul class="cta__steps">
+          {extras.engagement.map(([term, text]) => (
+            <li>
+              <strong>{term}</strong>
+              <span>{text}</span>
+            </li>
+          ))}
+        </ul>
         <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
           Zobacz ofertę dla klientów
         </a>
@@ -610,3 +610,21 @@ const picks = [
     </p>
   </footer>
 </Shell>
+
+<script>
+  const film = document.querySelector<HTMLVideoElement>('.film__video');
+  if (
+    film &&
+    'IntersectionObserver' in window &&
+    !matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    new IntersectionObserver(
+      entries =>
+        entries.forEach(entry => {
+          if (entry.isIntersecting) film.play().catch(() => undefined);
+          else film.pause();
+        }),
+      { threshold: 0.5 },
+    ).observe(film);
+  }
+</script>
