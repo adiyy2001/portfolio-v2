@@ -8,7 +8,6 @@ const coschema = {
   demo: 'https://coschema.adrianturbinski.pl/',
   results: `${repo}/tree/main/bench/results`,
   languages: ['TypeScript'],
-  line: 'Angular, TypeScript, Signals, Node.js, WebSockets, Yjs',
   video: { width: 820, height: 564 },
   blog: {
     slug: 'how-i-test-that-collaborative-edits-converge',
@@ -20,8 +19,6 @@ const coschema = {
       'Edytor diagramów do pracy w kilka osób naraz: kursory na żywo, praca offline, cofanie tylko własnych zmian i symulator zbieżności. Demo, kod i liczby z pomiarów.',
     meta: 'Wspólna edycja diagramów',
     lead: 'Edytor diagramów do pracy w kilka osób naraz, z kursorami na żywo, edycją offline, cofaniem tylko własnych zmian i symulatorem sieci, który sprawdza, że każdy klient kończy z tym samym, poprawnym diagramem.',
-    summary:
-      'Edytor diagramów do pracy w kilka osób naraz. Angular, własny serwer synchronizacji na Yjs i symulator, który sprawdza zbieżność na 5000 przebiegów.',
     clip: 'Dwa edytory obok siebie. Ada przechodzi offline, oboje edytują, łącze wraca i kopie się scalają. Potem kursory na żywo i tryb śledzenia.',
     note: 'Demo otwiera stronę /demo. Pokój działa w twojej przeglądarce, więc nic nie trafia na serwer.',
     why: [
@@ -151,8 +148,6 @@ const coschema = {
       'A real-time collaborative diagram editor: live cursors, offline editing, per-user undo and a convergence simulator. Live demo, code and measured numbers.',
     meta: 'Collaborative diagram editing',
     lead: 'A real-time collaborative diagram editor with live cursors, offline editing, per-user undo and a network simulator that checks every client ends up with the same, valid diagram.',
-    summary:
-      'A real-time collaborative diagram editor. Angular, a sync server of my own on Yjs, and a simulator that checks convergence over 5,000 runs.',
     clip: 'Two editors side by side. Ada goes offline, both edit, the link comes back and the copies merge. Then live cursors and follow mode.',
     note: 'The demo opens the /demo page. The room runs inside your browser, so nothing is sent to a server.',
     why: [

@@ -12,7 +12,6 @@ const flagtide = {
     { name: '@flagtide/angular', href: 'https://www.npmjs.com/package/@flagtide/angular' },
   ],
   languages: ['Java', 'TypeScript'],
-  line: 'Angular, TypeScript, RxJS, Java, Quarkus, WebSockets',
   video: { width: 960, height: 540 },
   pl: {
     title: 'flagtide: feature flagi w Angularze i Quarkusie, Adrian Turbiński',
@@ -20,8 +19,6 @@ const flagtide = {
       'Samodzielnie hostowane feature flagi: Quarkus wypycha zmiany przez WebSockety, a SDK w Angularze liczy je lokalnie. Demo na żywo, kod i liczby z pomiarów.',
     meta: 'Feature flagi w czasie rzeczywistym',
     lead: 'Samodzielnie hostowany serwis feature flag: Quarkus wypycha zmiany do każdej otwartej przeglądarki przez WebSockety, a SDK w Angularze liczy flagi lokalnie z tym samym wynikiem co serwer.',
-    summary:
-      'Serwis feature flag z propagacją na żywo. Back-end w Quarkusie, SDK w Angularze na npm, ten sam wynik w Javie i TypeScripcie.',
     clip: 'Po lewej admin, po prawej sklep demo. Flaga zostaje wyłączona i włączona, rollout idzie z 20 na 60 i z powrotem na 30 procent, a na końcu monitor propagacji pokazuje p50, p95 i p99.',
     note: 'Demo na żywo to admin i sklep obok siebie, na tych samych obrazach produkcyjnych. Każdy może edytować flagi, a dane wracają do stanu startowego co godzinę.',
     why: [
@@ -155,8 +152,6 @@ const flagtide = {
       'Self-hosted feature flags: Quarkus pushes changes over WebSockets and an Angular SDK evaluates them locally. Live demo, code and measured numbers.',
     meta: 'Real-time feature flags',
     lead: 'A self-hosted feature flag service: a Quarkus back end pushes flag changes to every open browser over WebSockets, and an Angular SDK evaluates the flags locally with the same result as the server.',
-    summary:
-      'A feature flag service with live propagation. A Quarkus back end, an Angular SDK on npm, the same answer in Java and TypeScript.',
     clip: 'The admin on the left and the demo shop on the right. A flag is switched off and on, a rollout goes from 20 to 60 and back to 30 percent, then the propagation monitor shows p50, p95 and p99.',
     note: 'The live demo is the admin and the shop side by side, on the same production images. Anyone can edit the flags, and the data goes back to the seed every hour.',
     why: [
