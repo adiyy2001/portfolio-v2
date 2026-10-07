@@ -1,0 +1,32 @@
+{
+  "name": "app-preview",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Production tooling for the Wzornik app preview case studies. Not part of the site build.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.534",
+    "@remotion/cli": "4.0.534",
+    "@remotion/paths": "4.0.534",
+    "@remotion/renderer": "4.0.534",
+    "@remotion/shapes": "4.0.534",
+    "@remotion/transitions": "4.0.534",
+    "qrcode-generator": "^2.0.4",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.534"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "typescript": "^5.9.0"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"lib/*.test.mjs\"",
+    "pipeline": "node scripts/pipeline.mjs"
+  }
+}
