@@ -4,6 +4,7 @@ export const routes = {
   cli: { pl: '/dla-klienta/', en: '/en/for-clients/' },
   work: { pl: '/archive/', en: '/en/archive/' },
   case: { pl: '/archive/tailorcloth/', en: '/en/archive/tailorcloth/' },
+  flagtide: { pl: '/archive/flagtide/', en: '/en/archive/flagtide/' },
 };
 
 export const ui = {
@@ -24,6 +25,7 @@ export const ui = {
       cli: 'dla klienta',
       work: 'projekty',
       case: 'TailorCloth',
+      flagtide: 'flagtide',
       blog: 'blog',
     },
   },
@@ -44,6 +46,7 @@ export const ui = {
       cli: 'for clients',
       work: 'projects',
       case: 'TailorCloth',
+      flagtide: 'flagtide',
       blog: 'blog',
     },
   },

@@ -4,6 +4,7 @@ import './src/styles/client.css';
 import './src/styles/case.css';
 import './src/styles/wzornik.css';
 import './src/styles/work.css';
+import './src/styles/repo.css';
 import './src/styles/notfound.css';
 import './src/styles/blog.css';
 import { keepScroll } from './src/components/layout';
