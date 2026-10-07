@@ -1,0 +1,22 @@
+{
+  "name": "aso-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Production tooling for the Wzornik app store screenshot case studies. Not part of the site build.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "fflate": "^0.8.3",
+    "fontkit": "^2.0.4",
+    "playwright": "1.63.0",
+    "roughjs": "^4.6.6",
+    "sharp": "^0.34.5",
+    "subset-font": "^2.9.0"
+  },
+  "scripts": {
+    "test": "node --test \"lib/*.test.mjs\""
+  }
+}
