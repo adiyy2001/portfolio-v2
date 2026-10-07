@@ -6,6 +6,7 @@ export const routes = {
   case: { pl: '/archive/tailorcloth/', en: '/en/archive/tailorcloth/' },
   flagtide: { pl: '/archive/flagtide/', en: '/en/archive/flagtide/' },
   gridtwin: { pl: '/archive/gridtwin/', en: '/en/archive/gridtwin/' },
+  coschema: { pl: '/archive/coschema/', en: '/en/archive/coschema/' },
 };
 
 export const ui = {
@@ -28,6 +29,7 @@ export const ui = {
       case: 'TailorCloth',
       flagtide: 'flagtide',
       gridtwin: 'gridtwin',
+      coschema: 'coschema',
       blog: 'blog',
     },
   },
@@ -50,6 +52,7 @@ export const ui = {
       case: 'TailorCloth',
       flagtide: 'flagtide',
       gridtwin: 'gridtwin',
+      coschema: 'coschema',
       blog: 'blog',
     },
   },
