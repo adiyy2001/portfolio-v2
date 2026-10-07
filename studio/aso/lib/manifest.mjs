@@ -14,7 +14,7 @@ const formatsOf = files => {
 const prettify = async text => {
   const prettier = createRequire(join(sitesRoot, 'package.json'))('prettier');
   const config = (await prettier.resolveConfig(join(sitesRoot, 'public', 'manifest.json'))) ?? {};
-  return prettier.format(text, { ...config, parser: 'json' });
+  return prettier.format(text, { ...config, plugins: [], overrides: [], parser: 'json' });
 };
 
 export const buildManifest = async (app, fontsBuilt = []) => {

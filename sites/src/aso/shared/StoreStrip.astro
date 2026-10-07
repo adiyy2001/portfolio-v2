@@ -1,0 +1,30 @@
+---
+import type { Shot } from './types';
+
+interface Props {
+  shots: Shot[];
+  label: string;
+  class?: string;
+  eager?: boolean;
+  sizes?: string;
+}
+
+const { shots, label, class: className, eager = false, sizes } = Astro.props;
+---
+
+<ul class:list={['strip', className]} aria-label={label} tabindex="0">
+  {shots.map((shot, i) => (
+    <li class="strip__item">
+      <img
+        class="strip__img"
+        src={shot.src}
+        alt={shot.alt}
+        width={shot.width}
+        height={shot.height}
+        loading={eager && i < 3 ? 'eager' : 'lazy'}
+        decoding="async"
+        sizes={sizes}
+      />
+    </li>
+  ))}
+</ul>

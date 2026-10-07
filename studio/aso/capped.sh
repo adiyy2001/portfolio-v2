@@ -1,2 +1,7 @@
 #!/bin/sh
-exec systemd-run --user --scope --quiet --collect -p MemoryMax="${ASO_MEM:-4G}" -p MemorySwapMax=0 "$@"
+export NODE_OPTIONS="${NODE_OPTIONS:---max-old-space-size=4096}"
+if [ -n "$HTTPS_PROXY" ]; then
+  export NODE_USE_ENV_PROXY=1
+  [ -f /root/.ccr/ca-bundle.crt ] && export NODE_EXTRA_CA_CERTS=/root/.ccr/ca-bundle.crt
+fi
+exec "$@"

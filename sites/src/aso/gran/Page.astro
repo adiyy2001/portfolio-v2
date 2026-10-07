@@ -1,0 +1,447 @@
+---
+import { link, portfolio } from '../../shared/link';
+import AbPair from '../shared/AbPair.astro';
+import Downloads from '../shared/Downloads.astro';
+import LangFiles from '../shared/LangFiles.astro';
+import LangSwitch from '../shared/LangSwitch.tsx';
+import SampleLine from '../shared/SampleLine.astro';
+import SearchMock from '../shared/SearchMock.astro';
+import Shell from '../shared/Shell.astro';
+import StoreStrip from '../shared/StoreStrip.astro';
+import {
+  assetUrl,
+  featureOf,
+  fontFaceCss,
+  preloadFonts,
+  readManifest,
+  shotsOf,
+} from '../shared/manifest';
+import type { AsoCopy } from '../shared/types';
+import { glue } from '../shared/typography';
+import { app } from './app';
+import { content } from './content';
+import en from './copy/en.json';
+import pl from './copy/pl.json';
+import { css } from './styles';
+import { ridgeLayers, twoDigits } from './view';
+
+const manifest = readManifest('gran');
+const copies = { pl: pl as AsoCopy, en: en as AsoCopy };
+const sets = {
+  pl: {
+    appstore: shotsOf(manifest, copies.pl, 'appstore'),
+    play: shotsOf(manifest, copies.pl, 'play'),
+  },
+  en: {
+    appstore: shotsOf(manifest, copies.en, 'appstore'),
+    play: shotsOf(manifest, copies.en, 'play'),
+  },
+};
+const variantA = sets.pl.appstore[0];
+const variantB = shotsOf(manifest, copies.pl, 'appstore', { variant: 'b' })[0];
+const variantPlayA = sets.pl.play[0];
+const variantPlayB = shotsOf(manifest, copies.pl, 'play', { variant: 'b' })[0];
+const features = [featureOf(manifest, copies.pl), featureOf(manifest, copies.en)];
+const icon = assetUrl('gran', 'icons/icon-256.png');
+const ridges = ridgeLayers();
+const palette = manifest.palette;
+const navigation = [
+  ['zadanie', 'Zadanie'],
+  ['kierunek', 'Kierunek'],
+  ['sekwencja', 'Sekwencja'],
+  ['zestaw', 'PL i EN'],
+  ['test', 'Test A/B'],
+  ['pliki', 'Pliki'],
+];
+---
+
+<Shell
+  app={app}
+  title={content.title}
+  description={content.description}
+  css={fontFaceCss(manifest) + css}
+  preload={preloadFonts(manifest, [900])}
+  bodyClass="gran">
+  <header class="top">
+    <a href={link('/aso/')}>Wzornik, screenshoty</a>
+    <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero__text">
+        <p class="mark">
+          <span class="trail" aria-hidden="true"></span>
+          <span>
+            Screenshoty do sklepów
+            <span class="dot" aria-hidden="true">
+              ·
+            </span>
+            {manifest.app.style}
+          </span>
+        </p>
+        <h1 id="hero-title">Grań</h1>
+        <p class="hero__lead">{content.lead}</p>
+        <nav class="hero__nav" aria-label="Sekcje">
+          {navigation.map(([id, label]) => (
+            <a href={`#${id}`}>{label}</a>
+          ))}
+        </nav>
+      </div>
+      <svg
+        class="hero__ridges"
+        viewBox="0 0 1440 160"
+        preserveAspectRatio="none"
+        aria-hidden="true">
+        {ridges.map(layer => (
+          <path d={layer.d} fill={layer.fill} />
+        ))}
+      </svg>
+      <div class="hero__band">
+        <div class="wrap">
+          <p class="hero__caption">
+            App Store, iPhone 6,9″, wersja polska. Przewiń, żeby przejść całą trasę.
+          </p>
+        </div>
+        <StoreStrip
+          shots={sets.pl.appstore}
+          label="Zestaw sześciu screenshotów do App Store, wersja polska"
+          class="strip--hero"
+          eager
+        />
+        <dl class="wrap facts">
+          {content.facts.map(([term, text]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{text}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section id="zadanie" class="section wrap" aria-labelledby="zadanie-title">
+      <p class="mark">
+        <span class="trail" aria-hidden="true"></span>
+        <span>
+          01
+          <span class="dot" aria-hidden="true">
+            ·
+          </span>
+          Klient i zadanie
+        </span>
+      </p>
+      <h2 id="zadanie-title">Trasa na premierę w dwóch sklepach</h2>
+      <div class="cols">
+        {content.client.map(text => (
+          <p class="body">{text}</p>
+        ))}
+      </div>
+    </section>
+
+    <section id="kierunek" class="section wrap" aria-labelledby="kierunek-title">
+      <p class="mark">
+        <span class="trail" aria-hidden="true"></span>
+        <span>
+          02
+          <span class="dot" aria-hidden="true">
+            ·
+          </span>
+          Kierunek
+        </span>
+      </p>
+      <h2 id="kierunek-title">{content.direction.title}</h2>
+      <div class="direction">
+        <div class="direction__text">
+          {content.direction.paragraphs.map(text => (
+            <p class="body">{text}</p>
+          ))}
+          <ul class="chips" aria-label="Słowa kluczowe kierunku">
+            {content.direction.keywords.map(word => (
+              <li>{word}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="direction__side">
+          <ul class="swatches" aria-label="Paleta">
+            {palette.map(color => (
+              <li style={`--c:${color.hex}`}>
+                <span class="swatches__chip" />
+                <span class="swatches__name">{color.name}</span>
+                <span class="swatches__hex">{color.hex}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="type">
+            <p class="type__sample">Śnieżka 1603 m</p>
+            <p class="type__meta">Overpass 400, 600, 800 i 900, cyfry tabelaryczne</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sekwencja" class="section wrap" aria-labelledby="sekwencja-title">
+      <p class="mark">
+        <span class="trail" aria-hidden="true"></span>
+        <span>
+          03
+          <span class="dot" aria-hidden="true">
+            ·
+          </span>
+          Historia sekwencji
+        </span>
+      </p>
+      <h2 id="sekwencja-title">Jeden dzień na szlaku w sześciu kadrach</h2>
+      <p class="body body--wide">{content.sequence.intro}</p>
+      <ol class="story">
+        {sets.pl.appstore.map((shot, i) => (
+          <li class:list={['story__item', { 'story__item--first': i < 3 }]}>
+            <img
+              src={shot.src}
+              alt=""
+              width={shot.width}
+              height={shot.height}
+              loading="lazy"
+              decoding="async"
+            />
+            <div>
+              <p class="story__num">
+                {twoDigits(i + 1)}
+                {i < 3 ? <span class="story__flag">widać w wynikach</span> : null}
+              </p>
+              <p class="story__head">{glue(shot.headline)}</p>
+              <p class="story__role">{content.sequence.roles[i]}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p class="callout">{content.sequence.firstThree}</p>
+    </section>
+
+    <section id="wyszukiwanie" class="section wrap" aria-labelledby="wyszukiwanie-title">
+      <p class="mark">
+        <span class="trail" aria-hidden="true"></span>
+        <span>
+          04
+          <span class="dot" aria-hidden="true">
+            ·
+          </span>
+          W wynikach wyszukiwania
+        </span>
+      </p>
+      <h2 id="wyszukiwanie-title">Trzy kadry, jeden widok</h2>
+      <p class="body body--wide">{content.search.note}</p>
+      <div class="searches">
+        <SearchMock
+          name="Grań"
+          subtitle={content.search.subtitle}
+          icon={icon}
+          query={content.search.query}
+          shots={sets.pl.appstore}
+          store="Makieta wyników w sklepie z aplikacjami na iPhone'a"
+          class="search--ios"
+        />
+        <SearchMock
+          name="Grań"
+          subtitle={content.search.subtitle}
+          icon={icon}
+          query={content.search.query}
+          shots={sets.pl.play}
+          store="Makieta wyników w sklepie z aplikacjami na Androida"
+          class="search--android"
+        />
+      </div>
+    </section>
+
+    <section id="zestaw" class="section section--band" aria-labelledby="zestaw-title">
+      <div class="wrap">
+        <p class="mark mark--light">
+          <span class="trail" aria-hidden="true"></span>
+          <span>
+            05
+            <span class="dot" aria-hidden="true">
+              ·
+            </span>
+            Cały zestaw
+          </span>
+        </p>
+        <h2 id="zestaw-title">Polski i angielski, oba sklepy</h2>
+        <p class="body body--wide">{content.switchNote}</p>
+      </div>
+      <LangSwitch
+        client:visible
+        sets={sets}
+        storeLabels={{ appstore: 'App Store', play: 'Google Play' }}
+        langLabels={{ pl: 'Polski', en: 'English' }}
+        panorama
+        panoramaLabel="Połącz kadry w panoramę"
+      />
+    </section>
+
+    <section id="test" class="section wrap" aria-labelledby="test-title">
+      <p class="mark">
+        <span class="trail" aria-hidden="true"></span>
+        <span>
+          06
+          <span class="dot" aria-hidden="true">
+            ·
+          </span>
+          Wariant A i B
+        </span>
+      </p>
+      <h2 id="test-title">Dokładny czas czy twoje tempo</h2>
+      <p class="body body--wide">{content.ab.intro}</p>
+      <div class="abs">
+        <AbPair a={variantA} b={variantB} hypothesis={content.ab.hypothesis} class="ab--store" />
+        <div class="ab ab--play" aria-label="Wariant A i B w Google Play">
+          <figure class="ab__item">
+            <img
+              src={variantPlayA.src}
+              alt={variantPlayA.alt}
+              width={variantPlayA.width}
+              height={variantPlayA.height}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <span class="ab__tag">A</span>Google Play
+            </figcaption>
+          </figure>
+          <figure class="ab__item">
+            <img
+              src={variantPlayB.src}
+              alt={variantPlayB.alt}
+              width={variantPlayB.width}
+              height={variantPlayB.height}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <span class="ab__tag">B</span>Google Play
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="grafiki" class="section wrap" aria-labelledby="grafiki-title">
+      <p class="mark">
+        <span class="trail" aria-hidden="true"></span>
+        <span>
+          07
+          <span class="dot" aria-hidden="true">
+            ·
+          </span>
+          Feature graphic i ikony
+        </span>
+      </p>
+      <h2 id="grafiki-title">Grań bez telefonu</h2>
+      <div class="features">
+        {features.map((feature, i) => (
+          <figure class="feature">
+            <img
+              src={feature.src}
+              alt={feature.alt}
+              width={feature.width}
+              height={feature.height}
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>{i === 0 ? 'Wersja polska' : 'Wersja angielska'}, 1024×500 px</figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="body body--wide">{content.feature.caption}</p>
+      <div class="icons">
+        <figure class="icon">
+          <img
+            class="icon__img icon__img--square"
+            src={icon}
+            alt="Ikona Grań jako pełny kwadrat, tak jak trafia do sklepu"
+            width="256"
+            height="256"
+            loading="lazy"
+          />
+          <figcaption>Plik źródłowy, pełny kwadrat</figcaption>
+        </figure>
+        <figure class="icon">
+          <img
+            class="icon__img icon__img--ios"
+            src={icon}
+            alt="Ikona Grań z zaokrągleniem, jakie nakłada iPhone"
+            width="256"
+            height="256"
+            loading="lazy"
+          />
+          <figcaption>Po masce na iPhonie</figcaption>
+        </figure>
+        <figure class="icon">
+          <img
+            class="icon__img icon__img--play"
+            src={icon}
+            alt="Ikona Grań z zaokrągleniem, jakie nakłada Google Play"
+            width="256"
+            height="256"
+            loading="lazy"
+          />
+          <figcaption>Po masce w Google Play</figcaption>
+        </figure>
+      </div>
+      <p class="body body--wide">{content.feature.icons}</p>
+    </section>
+
+    <section id="pliki" class="section wrap" aria-labelledby="pliki-title">
+      <p class="mark">
+        <span class="trail" aria-hidden="true"></span>
+        <span>
+          08
+          <span class="dot" aria-hidden="true">
+            ·
+          </span>
+          Co dostaje klient
+        </span>
+      </p>
+      <h2 id="pliki-title">Paczka gotowa do wysłania</h2>
+      <p class="body body--wide">{content.deliverables.intro}</p>
+      <Downloads manifest={manifest} />
+      <p class="note">{content.deliverables.specs}</p>
+    </section>
+
+    <section id="jezyki" class="section wrap" aria-labelledby="jezyki-title">
+      <p class="mark">
+        <span class="trail" aria-hidden="true"></span>
+        <span>
+          09
+          <span class="dot" aria-hidden="true">
+            ·
+          </span>
+          Kolejne języki
+        </span>
+      </p>
+      <h2 id="jezyki-title">{content.language.title}</h2>
+      <p class="body body--wide">{content.language.text}</p>
+      <LangFiles
+        files={[
+          { name: 'copy/pl.json', copy: copies.pl },
+          { name: 'copy/en.json', copy: copies.en },
+        ]}
+      />
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="wrap">
+        <h2 id="cta-title">{content.cta.title}</h2>
+        <p class="body">{content.cta.text}</p>
+        <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
+          {content.cta.link}
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <SampleLine name="Grań" />
+    </div>
+  </footer>
+</Shell>

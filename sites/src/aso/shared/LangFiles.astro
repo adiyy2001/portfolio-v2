@@ -1,0 +1,20 @@
+---
+import { copyExcerpt } from './excerpt';
+import type { AsoCopy } from './types';
+
+interface Props {
+  files: { name: string; copy: AsoCopy }[];
+  class?: string;
+}
+
+const { files, class: className } = Astro.props;
+---
+
+<div class:list={['files', className]}>
+  {files.map(file => (
+    <figure class="files__item">
+      <figcaption class="files__name">{file.name}</figcaption>
+      <pre class="files__code"><code>{copyExcerpt(file.copy)}</code></pre>
+    </figure>
+  ))}
+</div>

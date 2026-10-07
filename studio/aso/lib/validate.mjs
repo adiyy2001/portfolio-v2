@@ -122,8 +122,8 @@ export const validateApp = async (app, { boxes = true, zip = true } = {}) => {
     if (!full) continue;
     info.files += 1;
     info.bytes += bytesOf(full);
+    counts[item.group] = (counts[item.group] ?? 0) + 1;
     if (item.type === 'png' || item.type === 'jpg') {
-      counts[item.group] = (counts[item.group] ?? 0) + 1;
       await checkImage({ path: item.path, full }, imageSpec(item, app), errors);
     } else if (item.type === 'svg') {
       if (!readFileSync(full, 'utf8').includes('<svg')) errors.push(`${item.path}: not an SVG`);
@@ -134,7 +134,7 @@ export const validateApp = async (app, { boxes = true, zip = true } = {}) => {
     }
   }
 
-  const perStore = app.ipad ? { appstore: 12, play: 12, variantB: 4, feature: 2, icons: 5, ipad: 12 } : { appstore: 12, play: 12, variantB: 4, feature: 2, icons: 5 };
+  const perStore = { appstore: 12, play: 12, variantB: 4, feature: 2, icons: 5, texts: 3, ...(app.ipad ? { ipad: 12 } : {}) };
   for (const [group, count] of Object.entries(perStore)) {
     if ((counts[group] ?? 0) !== count) errors.push(`group ${group}: ${counts[group] ?? 0} files, expected ${count}`);
   }

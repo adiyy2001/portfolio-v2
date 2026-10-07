@@ -2,8 +2,8 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import * as fontkit from 'fontkit';
-import { chromium } from 'playwright';
-import { fetchFamily, polish } from '../../identyfikacja/scripts/fonts-check.mjs';
+import { launch } from '../lib/browser.mjs';
+import { fetchFamily, polish } from '../lib/fontsrc.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const studio = resolve(here, '..', '..');
@@ -134,8 +134,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const wantSheet = args.includes('--sheet');
   const apps = args.filter(a => !a.startsWith('--'));
   const chosen = apps.length ? apps : Object.keys(families);
-  for (const dir of new Set(chosen.flatMap(app => families[app].map(f => f.dir))))
-    await fetchFamily(dir);
+  for (const family of chosen.flatMap(app => families[app])) await fetchFamily(family.dir, [family.file]);
   const rows = chosen.flatMap(verifyApp);
   for (const r of rows)
     console.log(
@@ -145,7 +144,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     mkdirSync(outDir, { recursive: true });
     const file = join(outDir, 'sheet.html');
     writeFileSync(file, sheet(rows));
-    const browser = await chromium.launch({ args: ['--force-color-profile=srgb'] });
+    const browser = await launch();
     const page = await browser.newPage({ viewport: { width: 1400, height: 800 } });
     await page.goto(pathToFileURL(file).href);
     await page.evaluate(() => document.fonts.ready);

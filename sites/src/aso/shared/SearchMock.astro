@@ -1,0 +1,62 @@
+---
+import type { Shot } from './types';
+
+interface Props {
+  name: string;
+  subtitle: string;
+  icon: string;
+  query: string;
+  shots: Shot[];
+  store: string;
+  class?: string;
+}
+
+const { name, subtitle, icon, query, shots, store, class: className } = Astro.props;
+---
+
+<figure class:list={['search', className]}>
+  <div class="search__screen" aria-hidden="true">
+    <div class="search__field">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round">
+        <circle cx="8.5" cy="8.5" r="6"></circle>
+        <path d="m13 13 5 5"></path>
+      </svg>
+      <span>{query}</span>
+    </div>
+    <div class="search__result">
+      <img class="search__icon" src={icon} alt="" width="256" height="256" />
+      <div class="search__meta">
+        <span class="search__name">{name}</span>
+        <span class="search__sub">{subtitle}</span>
+      </div>
+      <span class="search__btn">Zobacz</span>
+    </div>
+    <div class="search__shots">
+      {shots.slice(0, 3).map(shot => (
+        <img
+          src={shot.src}
+          alt=""
+          width={shot.width}
+          height={shot.height}
+          loading="lazy"
+          decoding="async"
+        />
+      ))}
+    </div>
+    <div class="search__ghost">
+      <span class="search__ghost-icon"></span>
+      <span class="search__ghost-lines">
+        <span></span>
+        <span></span>
+      </span>
+    </div>
+  </div>
+  <figcaption class="search__caption">{store}</figcaption>
+</figure>

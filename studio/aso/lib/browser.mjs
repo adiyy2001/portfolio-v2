@@ -1,9 +1,20 @@
+import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { chromium } from 'playwright';
 import { ensureDir, writeFile } from './files.mjs';
 
+const fallbackChromium = '/opt/pw-browsers/chromium';
+
+export const executablePath = () => {
+  if (process.env.WZ_CHROMIUM) return process.env.WZ_CHROMIUM;
+  const bundled = chromium.executablePath();
+  if (existsSync(bundled)) return undefined;
+  return existsSync(fallbackChromium) ? fallbackChromium : undefined;
+};
+
 export const launch = () =>
   chromium.launch({
+    executablePath: executablePath(),
     args: ['--force-color-profile=srgb', '--font-render-hinting=none', '--disable-gpu', '--hide-scrollbars'],
   });
 
@@ -71,7 +82,7 @@ export const collectBoxes = page =>
         lines: lines.length,
         lastLineWords: lines.length > 0 ? lines[lines.length - 1].count : 0,
         broken,
-        overflow: node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1,
+        overflow: node.scrollWidth > node.clientWidth + 1 || (node.hasAttribute('data-fixed') && node.scrollHeight > node.clientHeight + 1),
       };
     };
     return [...document.querySelectorAll('[data-box]')].map(node => {

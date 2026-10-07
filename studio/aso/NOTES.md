@@ -199,3 +199,44 @@ Bangers and Modak need care: Bangers' acute accents on capitals (`Ś`, `Ź`, `Ć
 ## Name checks
 
 Real web searches on 2026-10-07 (WebSearch, US based, thin for small Polish firms), each name with its category in Polish and English, plus one query limited to `apps.apple.com` and `play.google.com`. Results are in `PLAN.md` per app. This is evidence of absence, not a legal clearance.
+
+## How to build an app (written after Grań, the foundation)
+
+### Environment (cloud session, 2026-10-07)
+
+- Node 22 at `/opt/node22/bin` works (the scripts use `import.meta.main`, present since Node 22.18; `studio/aso/package.json` now says `>=22`). Install with `yarn --cwd studio/aso install --frozen-lockfile --ignore-engines --mutex file:/tmp/yarn-portfolio.lock` and the same for `sites`; set `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1`.
+- Chromium: `lib/browser.mjs` uses Playwright's own browser if it exists, otherwise `/opt/pw-browsers/chromium`, or `WZ_CHROMIUM` if set.
+- `capped.sh` caps the Node heap (`NODE_OPTIONS=--max-old-space-size=4096`) and turns on the proxy for Node `fetch` (`NODE_USE_ENV_PROXY=1` and the proxy CA). `systemd-run` does not work in the cloud and `prlimit --as` breaks Node (WebAssembly reserves address space) and Chromium, so the cap is the heap limit only. Wrap every heavy step in `flock /tmp/wz-heavy.lock`.
+- Fonts come from `raw.githubusercontent.com/google/fonts` through `lib/fontsrc.mjs` (no `gh` login needed) into `studio/out/fonts-src/`.
+
+### Files an app owns
+
+- `studio/aso/apps/<slug>/app.json`: name, style, format (`png` or `jpg`), `background` (flatten colour), `themeColor`, palette, fonts (`dir`, `file`, `instances`), `strip: true` only for a panorama, `ipad: true` only for Kruszec.
+- `studio/aso/apps/<slug>/theme.css`: the mini design system used by the screens.
+- `studio/aso/apps/<slug>/screens.mjs`: the UI screens as functions `(ui, { lang, store, landscape }) => html`, drawn at 390 x 844 CSS px (844 x 390 in landscape). The kit adds the status bar (50 px for App Store, 36 px neutral for Play), so screens start their content below it.
+- `studio/aso/apps/<slug>/compose.mjs` exports:
+  - `jobs(app)`: render jobs `{ id, store, lang, variant?, width, height, scale, frames?, frameWidth?, css, body, outputs: [{ slot, variant?, frame }] }`. One job per store and language, one per variant B (its body differs only in frame 1), one per feature graphic. A non panorama app uses `frames: 1` and one job per screenshot, or a strip of six frames placed side by side; both work.
+  - `iconSvg(layer, size)`: `full`, `background` and `foreground` SVG at 1024.
+  - `sheets(app)` (optional): review sheets, rendered to `studio/out/aso/<slug>/sheets/`.
+  - `ogSource()` (optional): which screenshots make `og.png`.
+- `sites/src/aso/<slug>/copy/pl.json`, `en.json`: headlines, alt texts, variant B, feature line and every UI string. Same shape as Grań's. Run Prettier on them.
+- `sites/src/aso/<slug>/`: `Page.astro`, `Tile.astro`, `app.ts`, `content.ts` (wrap in `glueDeep`), `styles.ts`, a test; the route `sites/src/pages/aso/<slug>/index.astro`.
+
+### Kit (`studio/aso/kit/kit.mjs`)
+
+`phone({ screen, width, x, y, rotate, landscape })` draws the generic phone (graphite body, pill camera, side buttons, no brand); `card({ ... })` the frameless Play screen card; `statusBar('ios' | 'neutral')`; `headline({ value, lang, x, y, width, size, align, className })` marks the box with `data-box="headline"` and glues one letter words; anything else that must stay inside its frame gets `data-box="fg"`. `glue()` and `esc()` for text. Headlines get `text-wrap: balance`.
+
+### Order of steps
+
+`node scripts/pipeline.mjs <slug> [--from step] [--only a,b] [--skip a,b]` runs `fonts, render, export, web, zip, manifest, validate, board, thumbs, seams`. Then `node scripts/distinct.mjs`, Prettier over `sites/src/aso`, `sites/src/pages/aso` and `sites/public/aso`, `yarn --cwd sites run check`, `yarn --cwd sites test`, `yarn --cwd sites build`, `node scripts/screens.mjs <slug> --port <port>` (page slices plus the scroll probe at 320 to 1440 px; `--index` shoots `/aso/`), `node scripts/guard.mjs --app <slug>` and `node --test "lib/*.test.mjs"`.
+
+Look at: `sheets/ui-<lang>.png` (all screens), `boards/*.png`, `thumbs/*.png` (first three at 200 px), `seams/*.png` (Grań only), `shots/page-*.png`.
+
+### Lessons from Grań
+
+- The validator found real problems every time: seam margins after rotation (a rotated phone's box grows by about 25 px), one word last lines, a Play ledge that crossed a seam and was cut by the front layer (the seam column check caught it at 22 times the baseline). Run it before looking at anything.
+- One word last lines: with 5 or 6 word headlines, aim for two lines at a size the longest headline of both languages fits; Overpass 900 needs about 23 px per character at 41 px. Rephrase rather than shrink one headline alone.
+- A headline box's vertical overflow is ignored (accents above capitals overflow a tight line height on purpose); horizontal overflow is an error. Give `data-fixed` to a box whose height must hold.
+- Things that sit in front of phones (meadow strips, rocks, clouds) live in a second SVG layer above the devices; whole terrain bands go into that layer clipped to whole frames, so the clip edge always falls on a seam and stays invisible.
+- Prettier resolves `prettier-plugin-astro` from the working directory; the manifest step formats JSON with `plugins: []`.
+- The page needs `scroll-padding-inline` on the strips, `glue()` on every headline shown outside the images, and the kicker text wrapped in its own span inside flex rows.

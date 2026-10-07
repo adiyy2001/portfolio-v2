@@ -3,7 +3,7 @@
 Brief: `/home/adrian/root/side_projects/briefs/wzornik-aso.md`. Run rules: `/home/adrian/root/side_projects/briefs/agent-runs/wzornik-common.md` and `wzornik-run2.md` (base branch `main`). Recon, store specifications, tooling, folder layout, file names, validator and the parallel build rules: `NOTES.md`. Mode: autonomous, no checkpoint; every decision worth Adrian's review is under "Decisions for Adrian" at the end. Written on 2026-10-07.
 
 ```
-- [ ] F foundation, with the first brand end to end (B1 Grań)
+- [x] F foundation, with the first brand end to end (B1 Grań)
 - [ ] B2 Szyld
 - [ ] B3 Margines
 - [ ] B4 Chochla
@@ -430,3 +430,8 @@ Taken without asking, in the autonomous mode. App agents add their own to `STATU
 17. **Variant B** is rendered for both stores and both languages (4 files per app) and maps to Product Page Optimization and Play store listing experiments, which the page names.
 18. **Case study pages are Polish**, `noindex`, like the other Wzornik pages; the screenshot sets on them switch between PL and EN.
 19. **Publishing** happens only in phase P: one block in `#wzornik` and `#swatch-book`, one link on the `/wzornik/` index, plus `static/llms.txt`, `sites/README.md` and `REBRAND.md`. The branch is merged into `main` by the merge agent; nothing is pushed by a Wzornik agent.
+20. **Grań headline 4 (PL)** is "Każde podejście widać już w domu" instead of "Każde podejście widać przed wyjściem": the planned line could only break with a one word last line at the set's headline size. The benefit is unchanged. App Store headlines are two lines at 41 CSS px in both languages, with no per language layout overrides.
+21. **Grań has one sun**, low over the open slope of frame 3. The six frames are one picture, so the sunset of frame 6 is a warm sky band, not a second sun.
+22. **The seam check is numeric as well as visual**: for every seam (and variant B against frame 2) the colour step across the cut is compared with the step between neighbouring columns; a ledge cut by the front layer in the Play strip was caught this way and fixed. Crops at 400 percent are in `studio/out/aso/gran/seams/`.
+23. **Cloud session tooling**: the studio runs on Node 22 (`engines` lowered to `>=22`, installs use `--ignore-engines`), Chromium falls back to `/opt/pw-browsers/chromium`, and `capped.sh` now caps the Node heap instead of calling `systemd-run`, which the cloud container lacks. Fonts are fetched from the public `google/fonts` repository without `gh`.
+24. **Case study page sections** follow the brief, plus a palette and type card in "Kierunek", the variant B pair for Google Play next to the App Store pair, the masked icon previews and a "Połącz kadry w panoramę" switch in the PL and EN island, which shows that the six files are cut from one picture.

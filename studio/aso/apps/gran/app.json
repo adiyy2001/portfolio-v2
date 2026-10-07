@@ -1,0 +1,35 @@
+{
+  "slug": "gran",
+  "name": "Grań",
+  "styleId": "S1",
+  "style": "Panorama ilustracyjna",
+  "category": "szlaki górskie w Sudetach",
+  "storeCategory": { "appstore": "Nawigacja", "play": "Mapy i nawigacja" },
+  "format": "png",
+  "themeColor": "#2E5446",
+  "background": "#F5EBDD",
+  "strip": true,
+  "palette": [
+    { "id": "mgla", "name": "Mgła", "hex": "#F5EBDD", "role": "niebo i tło" },
+    { "id": "swit", "name": "Świt", "hex": "#F4CDA5", "role": "ciepły pas nieba" },
+    { "id": "dal", "name": "Dal", "hex": "#AFC3CB", "role": "daleki grzbiet" },
+    { "id": "grzbiet", "name": "Grzbiet", "hex": "#6E8F9B", "role": "środkowy grzbiet" },
+    { "id": "las", "name": "Las", "hex": "#2E5446", "role": "las i przyciski" },
+    { "id": "glab", "name": "Głąb", "hex": "#17302A", "role": "tekst" },
+    { "id": "laka", "name": "Łąka", "hex": "#A7BF73", "role": "łąka" },
+    { "id": "znak", "name": "Znak", "hex": "#C8352B", "role": "szlak, jedyna czerwień" },
+    { "id": "slonce", "name": "Słońce", "hex": "#F2A93B", "role": "słońce" },
+    { "id": "biel", "name": "Biel", "hex": "#FFFDF8", "role": "biel znaku i powierzchnie" }
+  ],
+  "fonts": [
+    {
+      "id": "overpass",
+      "role": "nagłówki i interfejs",
+      "family": "Overpass",
+      "css": "Overpass",
+      "dir": "overpass",
+      "file": "Overpass[wght].ttf",
+      "instances": [{ "weight": 400 }, { "weight": 600 }, { "weight": 800 }, { "weight": 900 }]
+    }
+  ]
+}
