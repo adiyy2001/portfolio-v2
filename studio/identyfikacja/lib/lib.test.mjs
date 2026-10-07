@@ -47,7 +47,7 @@ test('logo svg check rejects text and missing viewBox', () => {
 });
 
 test('guard finds dashes and comments', () => {
-  assert.equal(findDashes('a\nb — c').length, 1);
+  assert.equal(findDashes('a\nb \u2014 c').length, 1);
   assert.equal(findDashes('plain text').length, 0);
   assert.equal(findComments('x.mjs', 'const a = 1; // note').length, 1);
   assert.equal(findComments('x.mjs', 'const a = "//";').length, 0);
