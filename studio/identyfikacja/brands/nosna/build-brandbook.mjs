@@ -162,13 +162,13 @@ const variantTiles = [
   ['primary', 'Główne', c.papier, c.atrament],
   ['horizontal', 'Poziome', c.kosc, c.atrament],
   ['vertical', 'Pionowe', c.papier, c.atrament],
-  ['symbol', 'Sygnet', c.kosc, c.atrament],
+  ['symbol', 'Sygnet', c.papier, c.atrament],
   ['mono-black', 'Jednokolorowe', '#ffffff', c.atrament],
   ['negative', 'Negatyw', c.atrament, c.kosc],
 ];
 sheet(
   'Warianty logo',
-  `${head('Warianty i ikona strony')}<div class="tiles">${variantTiles.map(([variant, name, bg, fg]) => `<figure style="background:${bg};color:${fg}">${logoImg(variant, 'max-height:56%;max-width:76%')}<figcaption>${name}</figcaption></figure>`).join('')}<figure style="background:${c.atrament};color:${c.kosc}"><img src="${svgUri('favicon.svg')}" alt="" style="height:140px"><figcaption>Ikona strony</figcaption></figure><figure class="note-tile" style="background:${c.piatek}"><p>Do 24 px używamy wyłącznie ikony strony, uproszczonej pochodnej sygnetu: soczewki z nośną i pierścieniem. Od 48 px pełnego sygnetu.</p></figure></div>`,
+  `${head('Warianty i ikona strony')}<div class="tiles">${variantTiles.map(([variant, name, bg, fg]) => `<figure style="background:${bg};color:${fg}">${logoImg(variant, 'max-height:56%;max-width:76%')}<figcaption>${name}</figcaption></figure>`).join('')}<figure style="background:${c.atrament};color:${c.kosc}"><img src="${svgUri('favicon.svg')}" alt="" style="height:140px"><figcaption>Ikona strony</figcaption></figure><figure class="note-tile" style="background:${c.piatek}"><p>Do 24 px tylko ikona strony. Od 48 px pełny sygnet.</p></figure></div>`,
 );
 
 sheet(
@@ -387,7 +387,7 @@ blockquote{margin:0;font:800 38px/1.25 'Nosna Display'}
 .tiles figure{margin:0;padding-bottom:40px;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
 .tiles figcaption{position:absolute;left:22px;bottom:18px;font:700 22px/1 'Nosna Mono'}
 .note-tile{padding:36px;align-items:flex-start!important;justify-content:flex-end!important}
-.note-tile p{font:700 30px/1.3 'Nosna Display';color:${c.atrament}}
+.note-tile p{font:700 28px/1.3 'Nosna Display';color:${c.atrament};margin:0}
 .grid12{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,minmax(0,1fr));gap:18px;flex:1;min-height:0}
 .grid12 figure{margin:0;display:grid;place-items:center;padding-bottom:42px;position:relative;color:${c.atrament}}
 .grid12 figcaption{position:absolute;left:20px;right:12px;bottom:16px;white-space:nowrap;font:700 16px/1 'Nosna Mono'}
@@ -421,7 +421,7 @@ blockquote{margin:0;font:800 38px/1.25 'Nosna Display'}
 .four{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;flex:1}
 .misuse{margin:0;display:flex;flex-direction:column}
 .misuse div{flex:1;background:${c.papier};display:grid;place-items:center}
-.misuse figcaption{font:800 28px/1.3 'Nosna Display';margin-top:18px}
+.misuse figcaption{font:800 28px/1.3 'Nosna Display';margin-top:18px;height:110px}
 .swatches{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(2,1fr);gap:26px 22px;flex:1}
 .swatches figure{margin:0;display:flex;flex-direction:column}
 .chip{flex:1;min-height:90px;box-shadow:inset 0 0 0 2px ${c.mgla}}
@@ -458,7 +458,7 @@ blockquote{margin:0;font:800 38px/1.25 'Nosna Display'}
 .tone b{font:700 20px/1 'Nosna Mono';letter-spacing:.1em;text-transform:uppercase;margin-right:14px}
 .tone .no{text-decoration:line-through;text-decoration-thickness:2px}
 .tone li > p:nth-of-type(1){grid-column:2 / span 2}
-.paper-grid{display:grid;grid-template-columns:580px 640px 1fr;gap:40px;flex:1;align-items:start;margin-top:-20px}
+.paper-grid{display:grid;grid-template-columns:520px 600px minmax(0,1fr);gap:40px;flex:1;align-items:start;margin-top:-20px}
 .cards{display:grid;gap:20px}
 .cards .mock,.letter .mock{width:100%;height:auto;display:block}
 .paper-grid .side{align-self:stretch;display:flex;flex-direction:column;justify-content:center}

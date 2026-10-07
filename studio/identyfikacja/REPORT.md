@@ -42,14 +42,15 @@ Kolejność kryteriów: wierność stylowi, rzemiosło, spójność systemu, dop
 
 - Definicja ukończenia "wszystkie oceny co najmniej 4" nie jest spełniona tylko dla Nośnej. Punkt R w PLAN.md zostaje otwarty. Nośna po czterech rundach ma 3 z 5 w rzemiośle (Wolnobieg po rundzie 4 ma najniżej 4).
   - Nośna (runda 4): usterki układu na stronach 11, 16 i 26 brand booku oraz poziome przewijanie, szczegóły w decyzji 33 w PLAN.md.
+  - Po rundzie 4 sesja sterująca poprawiła sama strony 11, 16 i 26 brand booku oraz poziome przewijanie (Nośna przy 320, 768 i 1024 px, Klamra przy 320 px) bez piątej recenzji, więc ocena 3 pochodzi sprzed poprawek; zostały jednowyrazowe ostatnie wiersze. Szczegóły w decyzji 34 w PLAN.md.
 - Rzut: favicon.ico 16 i 32 px to zwykłe pomniejszenia, bez przyciągania do pikseli (ocena 4).
 - Nic nie wypchnięto i nie zmergowano do głównego checkoutu. To krok osoby scalającej.
 
 ## Decyzje dla Adriana
 
-Pełna lista (33 pozycje, z markami) jest w `studio/identyfikacja/PLAN.md` w "Decisions for Adrian". Najważniejsze:
+Pełna lista (34 pozycje, z markami) jest w `studio/identyfikacja/PLAN.md` w "Decisions for Adrian". Najważniejsze:
 
-1. R otwarte: Nośna na 3 w rzemiośle po czterech rundach (strony 11, 16, 26 brand booku). Zdecyduj, czy akceptujesz, czy zlecasz kolejną rundę. Wolnobieg doszedł do 4.
+1. R otwarte: Nośna na 3 w rzemiośle po czterech rundach. Strony 11, 16, 26 brand booku i poziome przewijanie są już poprawione bez ponownej recenzji (decyzja 34). Zdecyduj, czy akceptujesz, czy zlecasz piątą recenzję. Wolnobieg doszedł do 4.
 2. Nazwy sprawdzone wyszukiwarką w USA, więc to brak dowodu konfliktu, nie czystka prawna. Odrzucone: Zakwasownia, Zaczyn (Kraków), Grona.
 3. Skibka waży 13 MB (budżet 12 MB, limit 16 MB).
 4. Rzut ma kobalt zamiast szwajcarskiej czerwieni, bo Rozwaga ma już czerń, biel i czerwień.

@@ -41,8 +41,9 @@ body.klamra{margin:0;background:var(--biel);color:var(--atrament);font:500 17px/
 .hero__stickers{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;justify-content:center;padding:6px 0}
 .hero__stickers div{flex:none}
 .hero__stickers svg{display:block;width:100%;height:auto}
-.hero__nav ul{display:grid;gap:8px;grid-template-columns:repeat(2,1fr)}
-.hero__nav a{display:flex;gap:10px;align-items:baseline;padding:10px 12px;background:var(--atrament);color:var(--biel);border:3px solid var(--biel);text-decoration:none;font:800 15px/1.2 var(--mono);text-transform:uppercase}
+.hero__nav ul{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.hero__nav li{min-width:0}
+.hero__nav a{display:flex;gap:10px;align-items:baseline;min-width:0;overflow-wrap:anywhere;padding:10px 12px;background:var(--atrament);color:var(--biel);border:3px solid var(--biel);text-decoration:none;font:800 15px/1.2 var(--mono);text-transform:uppercase}
 .hero__nav a span{color:var(--cytryna)}
 .hero__nav a:hover{background:var(--roz);color:var(--atrament)}
 .hero__nav a:hover span{color:var(--atrament)}
