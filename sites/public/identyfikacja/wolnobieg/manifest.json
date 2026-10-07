@@ -8,11 +8,11 @@
     "city": "Gdańsk"
   },
   "base": "/wzornik/identyfikacja/wolnobieg/",
-  "totalBytes": 7740469,
-  "totalHuman": "7.4 MB",
+  "totalBytes": 9430923,
+  "totalHuman": "9.0 MB",
   "zip": {
     "path": "wolnobieg-identyfikacja.zip",
-    "bytes": 3222665
+    "bytes": 4072166
   },
   "groups": [
     {
@@ -20,7 +20,7 @@
       "title": "Logo",
       "count": 30,
       "bytes": 1064563,
-      "formats": "PDF, PNG, SVG, PNG 512, 1024, 2048 px",
+      "formats": "PDF, PNG 512, 1024, 2048 px, SVG",
       "files": [
         "logo/pdf/wolnobieg-horizontal.pdf",
         "logo/pdf/wolnobieg-mono-black.pdf",
@@ -58,8 +58,8 @@
       "id": "favicon",
       "title": "Ikona strony",
       "count": 3,
-      "bytes": 11449,
-      "formats": "PNG, ICO, SVG, PNG 180 px",
+      "bytes": 14409,
+      "formats": "PNG 180 px, ICO, SVG",
       "files": [
         "apple-touch-icon.png",
         "favicon.ico",
@@ -106,7 +106,7 @@
       "id": "icons",
       "title": "Ikony",
       "count": 13,
-      "bytes": 7605,
+      "bytes": 8416,
       "formats": "SVG",
       "files": [
         "icons/svg/wolnobieg-icon-adres.svg",
@@ -128,7 +128,7 @@
       "id": "print",
       "title": "Druk",
       "count": 2,
-      "bytes": 89323,
+      "bytes": 89324,
       "formats": "PDF",
       "files": [
         "print/wolnobieg-business-card.pdf",
@@ -139,8 +139,8 @@
       "id": "social",
       "title": "Media społecznościowe",
       "count": 4,
-      "bytes": 254381,
-      "formats": "PNG, PNG 1080 px",
+      "bytes": 249225,
+      "formats": "PNG 1080 px",
       "files": [
         "social/wolnobieg-avatar.png",
         "social/wolnobieg-post-1.png",
@@ -176,7 +176,7 @@
       "id": "animation",
       "title": "Animacja logo",
       "count": 2,
-      "bytes": 518813,
+      "bytes": 505553,
       "formats": "MP4, WEBM",
       "files": [
         "animation/wolnobieg-logo.mp4",
@@ -187,7 +187,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 1867842,
+      "bytes": 2723421,
       "formats": "PDF",
       "files": [
         "wolnobieg-brandbook.pdf"
@@ -197,7 +197,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 3222665,
+      "bytes": 4072166,
       "formats": "ZIP",
       "files": [
         "wolnobieg-identyfikacja.zip"
@@ -207,8 +207,8 @@
       "id": "meta",
       "title": "Pozostałe",
       "count": 8,
-      "bytes": 85081,
-      "formats": "JPG, SVG, PNG, PNG 1200 px",
+      "bytes": 85099,
+      "formats": "JPG, SVG, PNG 1200 px",
       "files": [
         "figures/animation-poster.jpg",
         "figures/clearspace.svg",
@@ -224,7 +224,7 @@
   "files": [
     {
       "path": "animation/wolnobieg-logo.mp4",
-      "bytes": 223048,
+      "bytes": 218265,
       "type": "mp4",
       "group": "animation",
       "codec": "h264",
@@ -234,7 +234,7 @@
     },
     {
       "path": "animation/wolnobieg-logo.webm",
-      "bytes": 295765,
+      "bytes": 287288,
       "type": "webm",
       "group": "animation",
       "codec": "vp9",
@@ -244,7 +244,7 @@
     },
     {
       "path": "apple-touch-icon.png",
-      "bytes": 6025,
+      "bytes": 7084,
       "type": "png",
       "group": "favicon",
       "width": 180,
@@ -271,7 +271,7 @@
     },
     {
       "path": "favicon.ico",
-      "bytes": 4248,
+      "bytes": 5305,
       "type": "ico",
       "group": "favicon",
       "sizes": [
@@ -282,7 +282,7 @@
     },
     {
       "path": "favicon.svg",
-      "bytes": 1176,
+      "bytes": 2020,
       "type": "svg",
       "group": "favicon",
       "width": 400,
@@ -290,7 +290,7 @@
     },
     {
       "path": "figures/animation-poster.jpg",
-      "bytes": 28653,
+      "bytes": 28671,
       "type": "jpg",
       "group": "meta"
     },
@@ -380,7 +380,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-adres.svg",
-      "bytes": 312,
+      "bytes": 347,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -388,7 +388,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-detka.svg",
-      "bytes": 332,
+      "bytes": 344,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -396,7 +396,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-dzwonek.svg",
-      "bytes": 306,
+      "bytes": 286,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -404,7 +404,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-kask.svg",
-      "bytes": 284,
+      "bytes": 295,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -412,7 +412,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-klucz.svg",
-      "bytes": 343,
+      "bytes": 354,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -420,7 +420,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-kolo.svg",
-      "bytes": 396,
+      "bytes": 444,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -428,7 +428,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-lampka.svg",
-      "bytes": 306,
+      "bytes": 358,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -436,7 +436,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-pompka.svg",
-      "bytes": 328,
+      "bytes": 359,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -444,7 +444,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-rower.svg",
-      "bytes": 361,
+      "bytes": 376,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -452,7 +452,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-telefon.svg",
-      "bytes": 302,
+      "bytes": 334,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -460,7 +460,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-zebatka.svg",
-      "bytes": 746,
+      "bytes": 478,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -468,7 +468,7 @@
     },
     {
       "path": "icons/svg/wolnobieg-icon-zegar.svg",
-      "bytes": 257,
+      "bytes": 285,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -476,7 +476,7 @@
     },
     {
       "path": "icons/wolnobieg-icons.svg",
-      "bytes": 3332,
+      "bytes": 4156,
       "type": "svg",
       "group": "icons",
       "width": 24,
@@ -831,7 +831,7 @@
     },
     {
       "path": "print/wolnobieg-business-card.pdf",
-      "bytes": 53149,
+      "bytes": 53150,
       "type": "pdf",
       "group": "print",
       "pages": 2,
@@ -879,7 +879,7 @@
     },
     {
       "path": "social/wolnobieg-post-2.png",
-      "bytes": 70048,
+      "bytes": 65063,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -888,7 +888,7 @@
     },
     {
       "path": "social/wolnobieg-post-3.png",
-      "bytes": 61168,
+      "bytes": 60997,
       "type": "png",
       "group": "social",
       "width": 1080,
@@ -897,10 +897,10 @@
     },
     {
       "path": "wolnobieg-brandbook.pdf",
-      "bytes": 1867842,
+      "bytes": 2723421,
       "type": "pdf",
       "group": "brandbook",
-      "pages": 28,
+      "pages": 30,
       "pageMm": {
         "width": 508,
         "height": 285.8
@@ -912,7 +912,7 @@
     },
     {
       "path": "wolnobieg-identyfikacja.zip",
-      "bytes": 3222665,
+      "bytes": 4072166,
       "type": "zip",
       "group": "zip"
     }

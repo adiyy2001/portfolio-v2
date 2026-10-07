@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { colorTable, contrastTable } from '../../lib/brand.mjs';
 import { htmlToPdf, withBrowser } from '../../lib/browser.mjs';
@@ -13,7 +13,7 @@ const svgUri = path => dataUri(readPub(path));
 const palette = colorTable(brand);
 const contrast = contrastTable(brand);
 const colorName = id => palette.find(entry => entry.id === id)?.name ?? id;
-const total = 28;
+const total = 30;
 const light = { '#5b2f14': c['krem-jasny'] };
 const onOrange = { '#5b2f14': c.kakao, '#ec7424': c['krem-jasny'] };
 
@@ -46,13 +46,13 @@ const arcs = (corner, options = {}) => arcsSvg({ w: 1920, h: 1080, corner, width
 sheets.push(`<section class="page cover">${arcs('br', { width: 70, gap: 26, start: 420, colors: [c.kakao, c.musztarda, c['krem-jasny']] })}<div class="cover-badge">${logoIn('symbol', onOrange, 'width:100%;height:auto')}</div><div class="cover-text"><p class="kicker">Księga identyfikacji wizualnej</p><h1>Wolnobieg</h1><p class="lead">${content.lead}</p><p class="small">Serwis i sklep rowerowy, Gdańsk. Projekt przykładowy: Wolnobieg to zmyślona firma.</p></div></section>`);
 
 const tocRows = [
-  ['Klient i zadanie', 3], ['Kierunek i strategia', 4], ['Proces', 7], ['Logo', 9], ['Kolor', 14], ['Typografia', 18], ['Ikony, wzór i grafika', 21], ['Zdjęcia i ton głosu', 24], ['Zastosowania', 26], ['Animacja i kontakt', 28],
+  ['Klient i zadanie', 3], ['Kierunek i strategia', 4], ['Proces', 7], ['Logo', 9], ['Kolor', 14], ['Typografia', 18], ['Ikony, wzór i grafika', 21], ['Zdjęcia i ton głosu', 24], ['Zastosowania', 26], ['Animacja i kontakt', 30],
 ];
 sheet('Spis treści', `<div class="toc-left"><h2>Co jest w środku</h2><div class="toc-bike">${bikeSvg({ frame: c.musztarda, tire: c['krem-jasny'], accent: c.pomarancz, style: 'width:100%;height:auto;display:block' })}</div></div><ol class="toc">${tocRows.map(([name, page], i) => `<li class="t${i % 3}"><b>${i + 1}</b><span>${name}</span><i>${String(page).padStart(2, '0')}</i></li>`).join('')}</ol>`, { tone: 'brown' });
 
 sheet('Klient i zadanie', `${titleBlock('Klient i zadanie', 'Warsztat z tablicą ze sprayu')}<div class="cols"><div class="prose">${content.client.paragraphs.map(text => `<p>${text}</p>`).join('')}</div><dl class="tags">${content.client.facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl></div>`, { tone: 'orange' });
 
-sheet('Kierunek', `${titleBlock('Kierunek', content.direction.title)}<div class="cols"><div class="prose">${content.direction.paragraphs.map(text => `<p>${text}</p>`).join('')}</div><div class="words">${content.direction.keywords.map(word => `<span>${word}</span>`).join('')}</div></div>`, { tone: 'mustard' });
+sheet('Kierunek', `${titleBlock('Kierunek', content.direction.title)}<div class="cols dir"><div class="prose">${content.direction.paragraphs.map(text => `<p>${text}</p>`).join('')}</div><div class="words">${content.direction.keywords.map(word => `<span>${word}</span>`).join('')}</div></div>`, { tone: 'mustard' });
 
 sheet('Strategia', `${titleBlock('Strategia', 'Dla kogo i o czym', content.strategy.audience)}<div class="coins">${content.strategy.values.map((value, i) => `<article class="coin c${i}"><h3>${value.title}</h3><p>${value.text}</p></article>`).join('')}</div>`);
 
@@ -79,30 +79,37 @@ sheet('Kerning', `${titleBlock('Logo', 'Ręczny kerning', content.process.refine
 sheet('Pole ochronne', `${titleBlock('Logo', 'Pole ochronne i rozmiar', extras.clearSpace)}<div class="cols"><div class="stage small" style="background:${c.krem}"><img src="${svgUri('figures/clearspace.svg')}" alt="" style="width:80%;height:auto"></div><dl class="facts"><div><dt>Sygnet</dt><dd>${extras.minimum.symbol}</dd></div><div><dt>Pełna odznaka</dt><dd>${extras.minimum.fullBadge}</dd></div><div><dt>Logo główne</dt><dd>${extras.minimum.primary}</dd></div><div><dt>Logo pionowe</dt><dd>${extras.minimum.vertical}</dd></div></dl></div>`);
 
 const misuse = [
-  ['Nie rozciągamy', 'transform:scaleX(1.5)'],
-  ['Nie obracamy', 'transform:rotate(24deg)'],
-  ['Nie zmieniamy koloru', 'filter:hue-rotate(150deg) saturate(2)'],
-  ['Nie dodajemy cienia', 'filter:drop-shadow(10px 14px 6px rgba(0,0,0,.45))'],
+  ['Nie rozciągamy', 'transform:scaleX(1.5)', ''],
+  ['Nie ściskamy', 'transform:scaleY(.62)', ''],
+  ['Nie obracamy', 'transform:rotate(24deg)', ''],
+  ['Nie zmieniamy koloru', 'filter:hue-rotate(150deg) saturate(2)', ''],
+  ['Nie dodajemy cienia', 'filter:drop-shadow(10px 14px 6px rgba(0,0,0,.45))', ''],
+  ['Nie kładziemy na wzorze', '', `background:${c.krem} url('${dataUri(patternSvg({ size: 160, cells: [10, 6] }))}') 0 0/160px`],
 ];
-sheet('Czego nie robić', `${titleBlock('Logo', 'Czego nie robimy')}<div class="four">${misuse.map(([text, style]) => `<figure class="misuse"><div>${logoIn('symbol', {}, `height:260px;width:auto;${style}`)}</div><figcaption>${text}</figcaption></figure>`).join('')}</div>`, { tone: 'brown' });
+sheet('Czego nie robić', `${titleBlock('Logo', 'Czego nie robimy')}<div class="six">${misuse.map(([text, style, ground]) => `<figure class="misuse"><div style="${ground}">${logoIn('symbol', {}, `height:210px;width:auto;${style}`)}</div><figcaption>${text}</figcaption></figure>`).join('')}</div>`, { tone: 'brown' });
 
 sheet('Paleta', `${titleBlock('Kolor', 'Paleta', 'Trzynaście kolorów. Wartości CMYK są przybliżone, do druku zamów próbę.')}<div class="swatches">${palette.map(entry => `<figure><div class="chip-c" style="background:${entry.hex}"></div><figcaption><b>${entry.name}</b><span>${entry.hex}</span><span>${entry.rgbCss}</span><span>${entry.cmykApproxText}</span><em>${entry.role}</em></figcaption></figure>`).join('')}</div>`);
 
-const contrastRows = rows => `<table class="contrast"><thead><tr><th>Użycie</th><th>Tekst</th><th>Tło</th><th>Stosunek</th><th>Poziom</th></tr></thead><tbody>${rows.map(row => `<tr><td>${row.use}</td><td><i style="background:${row.fgHex}"></i>${colorName(row.fg)}</td><td><i style="background:${row.bgHex}"></i>${colorName(row.bg)}</td><td>${row.ratio.toFixed(1)}:1</td><td>${row.kind === 'decorative' ? 'dekoracja' : row.level}</td></tr>`).join('')}</tbody></table>`;
+const contrastRows = rows => `<table class="contrast"><thead><tr><th>Użycie</th><th>Tekst</th><th>Tło</th><th>Stosunek</th><th>Poziom</th></tr></thead><tbody>${rows.map(row => `<tr><td>${row.use}</td><td><i style="background:${row.fgHex}"></i>${colorName(row.fg)}</td><td><i style="background:${row.bgHex}"></i>${colorName(row.bg)}</td><td>${row.ratio.toFixed(1).replace('.', ',')}:1</td><td>${row.kind === 'decorative' ? 'dekoracja' : row.level}</td></tr>`).join('')}</tbody></table>`;
 const contrastSplit = Math.ceil(contrast.length / 2);
 sheet('Kontrast', `${titleBlock('Kolor', 'Kontrast tekstu')}${contrastRows(contrast.slice(0, contrastSplit))}`, { tone: 'sand' });
 sheet('Kontrast, ciąg dalszy', `${titleBlock('Kolor', 'Kontrast, ciąg dalszy', 'Tekst zwykły wymaga 4,5:1, duży napis i elementy interfejsu 3:1, dekoracja nie niesie tekstu.')}${contrastRows(contrast.slice(contrastSplit))}`, { tone: 'sand' });
 
+const grounds = [
+  ['Na kremie', c.krem, {}, 'wszystkie pierścienie w kolorze'],
+  ['Na pomarańczu', c.pomarancz, onOrange, 'pomarańczowy pierścień zamieniamy na krem'],
+  ['Na kakao', c.kakao, light, 'obręcz kremowa, pierścienie zostają'],
+];
 const shares = [['krem-jasny', 36], ['brazowy', 20], ['pomarancz', 18], ['musztarda', 12], ['awokado', 8], ['kakao', 6]];
-sheet('Proporcje', `${titleBlock('Kolor', 'Proporcje użycia', 'Krem niesie stronę, brąz niesie tekst, pomarańcz i musztarda dają ciepło pasów. Awokado pojawia się rzadko, jak detal na ramie.')}<div class="bar">${shares.map(([id, w]) => `<div style="flex:${w};background:${c[id]}"></div>`).join('')}</div><ul class="legend">${shares.map(([id, w]) => `<li><i style="background:${c[id]}"></i>${colorName(id)} ${w}%</li>`).join('')}</ul>`, { tone: 'orange' });
+sheet('Proporcje', `${titleBlock('Kolor', 'Proporcje użycia', 'Krem niesie stronę, brąz niesie tekst, pomarańcz i musztarda dają ciepło pasów. Awokado pojawia się rzadko, jak detal na ramie.')}<div class="bar">${shares.map(([id, w]) => `<div style="flex:${w};background:${c[id]}"></div>`).join('')}</div><ul class="legend">${shares.map(([id, w]) => `<li><i style="background:${c[id]}"></i>${colorName(id)} ${w}%</li>`).join('')}</ul><ul class="grounds">${grounds.map(([name, bg, map, note]) => `<li><span style="background:${bg}">${logoIn('symbol', map, 'width:70%;height:auto')}</span><p><b>${name}</b>${note}</p></li>`).join('')}</ul>`, { tone: 'orange' });
 
 sheet('Kroje', `${titleBlock('Typografia', 'Dwa kroje')}<div class="cols"><div class="face"><p class="mega display">Rammetto One</p><p class="specimen display">${extras.specimen}</p><p class="small">Nagłówki i napis logo. Jedna grubość, 400.</p></div><div class="face"><p class="mega text">Baloo 2</p><p class="specimen text">${extras.specimen}</p><p class="small">Tekst. Grubości 400, 600 i 800.</p></div></div>`, { tone: 'brown' });
 
-sheet('Skala', `${titleBlock('Typografia', 'Skala pisma')}<div class="scale">${extras.typeScale.map(row => `<div><span class="${row.font}" style="font-size:${Math.min(row.size * 2, 120)}px;font-weight:${row.weight ?? 400};line-height:1.1">${row.name}</span><span class="small">${row.size} px, interlinia ${row.line}. ${row.use}</span></div>`).join('')}</div>`);
+sheet('Skala', `${titleBlock('Typografia', 'Skala pisma')}<div class="scale">${extras.typeScale.map(row => `<div><span class="${row.font}" style="font-size:${Math.min(row.size * 2.6, 150)}px;font-weight:${row.weight ?? 400};line-height:${row.line}">${row.name}</span><span class="small">${row.size} px, interlinia ${String(row.line).replace('.', ',')}. ${row.use}</span></div>`).join('')}</div>`);
 
 sheet('Polskie znaki', `${titleBlock('Typografia', 'Polskie znaki', 'Oba kroje mają komplet polskich liter, cudzysłowy drukarskie i kropkę środkową.')}<p class="glyphs display">${extras.glyphs}</p><p class="glyphs text">${extras.glyphs}</p>`, { tone: 'mustard' });
 
-sheet('Ikony', `${titleBlock('Ikony', 'Dwanaście ikon', 'Rysowane kreską 2,1 px na siatce 24 px, z okrągłymi końcami.')}<div class="icons">${brand.iconNames.map(name => `<figure><img src="${dataUri(iconSvg(name, c.kakao))}" alt=""><figcaption>${extras.iconLabels[name] ?? name}</figcaption></figure>`).join('')}</div>`);
+sheet('Ikony', `${titleBlock('Ikony', 'Dwanaście ikon', 'Kreska 3 px na siatce 24 px, okrągłe końce i jedno kolorowe wypełnienie w każdej ikonie.')}<div class="icons">${brand.iconNames.map(name => `<figure><img src="${dataUri(iconSvg(name, c.kakao))}" alt=""><figcaption>${extras.iconLabels[name] ?? name}</figcaption></figure>`).join('')}</div>`);
 
 sheets.push(`<section class="page bare patternpage" style="background-color:${c.krem};background-image:url('${dataUri(patternSvg({ size: 420, cells: [10, 6] }))}')"><header><span class="chip">Wzór</span></header><span class="pageno">${sheets.length + 1}</span><div class="plate"><p class="kicker">Wzór</p><h2>Wzór z łuków</h2><p class="lead">${extras.graphics[0].text}</p></div><footer>Wolnobieg, księga identyfikacji. Projekt przykładowy.</footer></section>`);
 
@@ -112,9 +119,12 @@ sheet('Zdjęcia', `${arcs('br', { width: 60, gap: 22, start: 300, colors: [c.mus
 
 sheet('Ton głosu', `${titleBlock('Ton głosu', 'Cztery zasady')}<div class="tone">${content.tone.map((rule, i) => `<article class="leaf${i % 2}"><h3>${rule.title}</h3><p>${rule.text}</p><p class="yes"><b>Tak</b>${rule.yes}</p><p class="no"><b>Nie</b>${rule.no}</p></article>`).join('')}</div>`);
 
-const mock = path => `<img class="mock" src="${jpeg(path)}" alt="">`;
-sheet('Wizytówka i papier', `${titleBlock('Zastosowania', 'Wizytówka i papier firmowy')}<div class="mocks">${mock(file.cardFront)}${mock(file.cardBack)}${mock(file.letterhead)}</div>`, { tone: 'brown' });
-sheet('Szyld i cyfra', `${titleBlock('Zastosowania', 'Szyld, przywieszka i e-mail')}<div class="mocks wide">${mock(file.application)}${mock(file.emailMock)}</div>`, { tone: 'mustard' });
+const mock = (path, style = '') => `<img class="mock" src="${jpeg(path)}" alt="" style="${style}">`;
+const factList = rows => `<dl class="facts">${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>`;
+sheet('Wizytówka', `${titleBlock('Zastosowania', 'Wizytówka 85 na 55 mm')}<div class="mocks duo">${mock(file.cardFront)}${mock(file.cardBack)}</div><p class="caption slim">Awers jest pomarańczowy z odznaką i logo głównym, rewers kremowy z danymi. PDF do druku ma format 91 na 61 mm, czyli spad 3 mm z każdej strony.</p>`, { tone: 'brown' });
+sheet('Papier firmowy', `${titleBlock('Zastosowania', 'Papier firmowy A4')}<div class="mocks side">${mock(file.letterhead)}${factList([['Format', 'A4, PDF wektorowy z osadzonymi krojami'], ['Pasy', 'trzy łuki w prawym górnym rogu, trzy linie nad stopką'], ['Tekst', 'Baloo 2, 11 pt, interlinia 1,5, kolumna węższa niż strona'], ['Druk', 'bez filtrów i trybów mieszania, same płaskie kolory']])}</div>`, { tone: 'mustard' });
+sheet('Szyld i przywieszka', `${titleBlock('Zastosowania', 'Szyld i przywieszka')}<div class="mocks side">${mock(file.application)}${factList([['Szyld', 'brązowa tablica z jasnym logo poziomym i dopiskiem'], ['Drzwi', 'łuk w kształcie koła, godziny otwarcia na żółtej szybie'], ['Przywieszka', 'numer zlecenia, termin i koszt, przy kierownicy każdego roweru']])}</div>`, { tone: 'cream' });
+sheet('E-mail', `${titleBlock('Zastosowania', 'Podpis w wiadomości')}<div class="mocks side wide">${mock(file.emailMock)}${factList([['Format', 'tabela HTML, bez skryptów, szerokość logo 210 px'], ['Krój', 'Georgia i Arial, bo skrzynki pocztowe nie wczytują własnych krojów'], ['Plik', 'podpis jest w paczce jako gotowy plik HTML']])}</div>`, { tone: 'orange' });
 
 sheet('Animacja i kontakt', `${arcs('br', { width: 60, gap: 22, start: 330 })}${titleBlock('Animacja', 'Odznaka toczy się na miejsce', extras.animation)}<div class="end"><div>${logoIn('negative', {}, 'height:330px;width:auto')}</div><dl class="facts"><div><dt>Adres</dt><dd>${contact.street}, ${contact.city}</dd></div><div><dt>Telefon</dt><dd>${contact.phone}</dd></div><div><dt>E-mail</dt><dd>${contact.email}</dd></div></dl></div>`, { tone: 'dark', bare: true });
 
@@ -202,12 +212,12 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 .pick .disc{width:210px;aspect-ratio:1;border-radius:50%;background:${c.krem};display:grid;place-items:center;margin-bottom:26px}
 .pick .disc img{width:66%}
 .pick.chosen .disc{box-shadow:0 0 0 10px ${c.pomarancz},0 0 0 20px ${c.musztarda}}
-.pick p{font:400 27px/1.45 'Wolnobieg Text'}
+.pick p{font:400 26px/1.42 'Wolnobieg Text'}
 .stage{height:520px;display:grid;place-items:center;border-radius:0 120px 0 120px}
 .stage.small{height:500px}
 .caption{font:600 30px/1.5 'Wolnobieg Text';margin-top:30px;max-width:1500px}
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.tiles figure{margin:0;height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;position:relative;border-radius:0 80px 0 80px;overflow:hidden}
+.tiles figure{margin:0;height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;position:relative;border-radius:0 80px 0 80px;overflow:hidden}
 .tiles figure:nth-child(2n){border-radius:80px 0 80px 0}
 .tiles figcaption{position:absolute;left:30px;bottom:22px;font:800 26px/1 'Wolnobieg Text'}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:40px}
@@ -226,10 +236,10 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 .swatches em{font:600 19px/1.25 'Wolnobieg Text';color:${c.kawa};font-style:normal}
 .contrast{width:100%;border-collapse:collapse;font:400 24px/1.15 'Wolnobieg Text'}
 .contrast th{text-align:left;font:800 19px/1 'Wolnobieg Text';letter-spacing:.1em;text-transform:uppercase;padding:0 10px 10px;color:${c.kakao}}
-.contrast td{padding:4px 10px;border-top:2px solid ${c.tyton}}
+.contrast td{padding:3px 10px;border-top:2px solid ${c.tyton}}
 .contrast i{display:inline-block;width:24px;height:24px;border-radius:50%;margin-right:10px;vertical-align:-3px;border:2px solid ${c.kakao}}
-.bar{display:flex;height:350px;border:6px solid ${c.kakao};border-radius:175px;overflow:hidden}
-.legend{list-style:none;margin:44px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:20px 40px;font:800 30px/1 'Wolnobieg Text'}
+.bar{display:flex;height:260px;border:6px solid ${c.kakao};border-radius:175px;overflow:hidden}
+.legend{list-style:none;margin:34px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:20px 40px;font:800 30px/1 'Wolnobieg Text'}
 .legend li{display:flex;align-items:center;gap:14px}
 .legend i{width:38px;height:38px;border-radius:50%;box-shadow:inset 0 0 0 3px ${c.kakao}}
 .face .mega{font-size:104px;line-height:1.1;margin-bottom:34px;white-space:nowrap}
@@ -238,12 +248,12 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 .text{font-family:'Wolnobieg Text',sans-serif}
 .scale{display:grid;gap:30px}
 .scale div{display:grid;grid-template-columns:640px 1fr;align-items:baseline;gap:40px;border-top:3px solid ${c.len};padding-top:20px}
-.glyphs{font-size:112px;line-height:1.25;margin:20px 0}
-.icons{display:grid;grid-template-columns:repeat(6,1fr);gap:50px 20px}
-.icons figure{margin:0;aspect-ratio:1;max-height:262px;margin-inline:auto;width:262px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border-radius:50%;background:${c.piasek}}
-.icons figure:nth-child(3n+2){background:${c.musztarda}}
-.icons figure:nth-child(3n){background:${c.pomarancz}}
-.icons img{width:116px}
+.glyphs{font-size:104px;line-height:1.25;margin:20px 0}
+.icons{display:grid;grid-template-columns:repeat(6,1fr);gap:40px 20px}
+.icons figure{margin:0;aspect-ratio:1;max-height:250px;margin-inline:auto;width:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;border-radius:50%;background:${c['krem-jasny']};box-shadow:inset 0 0 0 10px ${c.piasek}}
+.icons figure:nth-child(3n+2){box-shadow:inset 0 0 0 10px ${c.musztarda}}
+.icons figure:nth-child(3n){box-shadow:inset 0 0 0 10px ${c.pomarancz}}
+.icons img{width:150px}
 .icons figcaption{font:800 30px/1 'Wolnobieg Text';color:${c.kakao}}
 .patternpage{--pill:${c.brazowy};--pill-ink:${c.krem};--r1:${c.pomarancz};--r2:${c.musztarda};--r3:${c.brazowy};background-size:2100px 1260px;background-repeat:no-repeat;background-position:0 0;padding:0}
 .plate{position:absolute;left:140px;top:170px;width:1060px;padding:60px 70px 56px;background:${c['krem-jasny']};color:${c.kakao};border-radius:0 140px 0 140px}
@@ -252,8 +262,8 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 .patternpage footer{left:140px;color:${c.kakao};background:${c['krem-jasny']};padding:10px 20px;border-radius:99px;bottom:60px}
 .rules{margin:0;padding:0;list-style:none;display:grid;gap:22px}
 .rules li{font:400 32px/1.4 'Wolnobieg Text';border-top:3px solid ${c.brazowy};padding-top:16px}
-.tone{display:grid;grid-template-columns:1fr 1fr;gap:34px 60px}
-.tone article{background:${c.krem};color:${c.kakao};padding:28px 44px;border-radius:0 70px 0 70px}
+.tone{display:grid;grid-template-columns:1fr 1fr;gap:28px 60px}
+.tone article{background:${c.krem};color:${c.kakao};padding:22px 44px;border-radius:0 70px 0 70px}
 .tone article.leaf1{border-radius:70px 0 70px 0}
 .tone h3{font-size:36px;margin-bottom:8px}
 .tone p{font:400 27px/1.4 'Wolnobieg Text'}
@@ -262,6 +272,31 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 .tone .no{color:${c.kawa};text-decoration:line-through;text-decoration-color:${c.pomarancz}}
 .tone b{display:inline-block;margin-right:12px;padding:5px 12px;border-radius:99px;font:800 18px/1 'Wolnobieg Text';letter-spacing:.1em;text-transform:uppercase;color:${c['krem-jasny']};background:${c.kawa};text-decoration:none}
 .tone .yes b{background:${c.oliwka}}
+.dir{grid-template-columns:1.7fr 1fr;gap:60px}
+.dir .prose p{font-size:27px;line-height:1.4;margin-bottom:12px;max-width:1040px}
+.dir .words span{font-size:112px}
+.dir .words span:nth-child(2){padding-left:50px}
+.dir .words span:nth-child(3){padding-left:100px}
+.three .card p{font-size:31px}
+.three .card h3{font-size:42px}
+.grounds{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.grounds li{display:flex;align-items:center;gap:26px}
+.grounds span{flex:none;display:grid;place-items:center;width:150px;height:150px;border-radius:50%;box-shadow:inset 0 0 0 4px ${c.kakao}}
+.grounds p{font:400 26px/1.35 'Wolnobieg Text'}
+.grounds b{display:block;font:800 26px/1.3 'Wolnobieg Text'}
+.six{display:grid;grid-template-columns:repeat(3,1fr);gap:46px 60px}
+.six .misuse{display:flex;align-items:center;gap:30px}
+.six .misuse div{flex:none;width:270px;height:270px}
+.six .misuse figcaption{margin:0;text-align:left;font-size:36px}
+.mocks.duo{justify-content:space-between;min-height:0}
+.mocks.duo .mock{width:calc(46% - 20px);height:auto}
+.mocks.duo{margin-bottom:0}
+.caption.slim{font-size:27px;margin-top:22px}
+.mocks.side{align-items:center;justify-content:flex-start;gap:70px;min-height:0}
+.mocks.side .mock{height:600px;width:auto;flex:none}
+.mocks.side.wide .mock{height:auto;width:1080px}
+.mocks.side .facts{flex:1}
+.mocks.side .facts dd{font-size:28px}
 .mocks{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:600px}
 .mocks .mock{height:430px;width:auto;border-radius:0 40px 0 40px;display:block}
 .mocks.wide .mock{height:470px}
@@ -280,5 +315,6 @@ blockquote{margin:0;font:400 46px/1.3 'Wolnobieg Display';border-left:10px solid
 
 const html = `<!doctype html><html lang="pl"><meta charset="utf-8"><title>Wolnobieg, księga identyfikacji</title><style>${css}</style><body>${sheets.join('')}</body></html>`;
 
+writeFileSync(join(brand.paths.out, 'brandbook.html'), html);
 await withBrowser(browser => htmlToPdf(browser, { outDir: brand.paths.out, name: 'brandbook', html, out: pub(file.brandbook), width: 1920, height: 1080 }));
 console.log(`  ${file.brandbook} (${sheets.length} pages)`);

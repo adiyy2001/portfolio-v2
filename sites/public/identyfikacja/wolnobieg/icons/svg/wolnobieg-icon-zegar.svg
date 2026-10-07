@@ -1,1 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#3f2411" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1" viewBox="0 0 24 24"><title>zegar</title><path d="M4 12a8 8 0 1 0 16 0 8 8 0 1 0-16 0"/><path d="M12 7.4V12l3.2 2"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" stroke="#3f2411" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" viewBox="0 0 24 24"><title>zegar</title><path fill="#e9a81d" d="M3.2 12a8.8 8.8 0 1 0 17.6 0 8.8 8.8 0 1 0-17.6 0"/><path fill="none" d="M12 7v5.2l3.6 2.2"/></svg>

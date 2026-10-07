@@ -178,6 +178,14 @@ export const content: CaseContent = {
 };
 
 export const extras = {
+  engagement: [
+    [
+      'Od ciebie',
+      'kilka zdań o firmie, o ludziach, którzy ją znają, i o miejscach, gdzie ma być widać znak',
+    ],
+    ['Najpierw', 'trzy szkice logo i jeden wybrany kierunek, zanim cokolwiek zostanie dopracowane'],
+    ['Na końcu', 'komplet plików, brand book i makiety, tak jak w paczce powyżej'],
+  ] as [string, string][],
   iconLabels: {
     rower: 'rower',
     kolo: 'koło',
@@ -197,10 +205,10 @@ export const extras = {
       name: 'Tytuł',
       font: 'display',
       size: 56,
-      line: 1.05,
+      line: 1.25,
       use: 'okładki, hasła, nagłówek strony',
     },
-    { name: 'Nagłówek', font: 'display', size: 34, line: 1.12, use: 'sekcje i karty' },
+    { name: 'Nagłówek', font: 'display', size: 34, line: 1.2, use: 'sekcje i karty' },
     { name: 'Podtytuł', font: 'text', weight: 800, size: 22, line: 1.25, use: 'wstępy i lead' },
     {
       name: 'Tekst',
