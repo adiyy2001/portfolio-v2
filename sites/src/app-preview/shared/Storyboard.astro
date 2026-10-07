@@ -1,0 +1,66 @@
+---
+import { assetUrl, formatSeconds } from './manifest';
+import type { Manifest } from './types';
+
+interface Props {
+  manifest: Manifest;
+  alt: string;
+}
+
+const { manifest, alt } = Astro.props;
+const sb = manifest.storyboard;
+---
+
+<figure class="board">
+  <img
+    src={assetUrl(manifest.app.slug, sb.board)}
+    alt={alt}
+    width="1400"
+    height="1580"
+    loading="lazy"
+    decoding="async"
+  />
+</figure>
+<div class="shots">
+  <table>
+    <caption class="sr-only">Tabela ujęć wersji sklepowej</caption>
+    <thead>
+      <tr>
+        <th scope="col">Ujęcie</th>
+        <th scope="col">Klatki</th>
+        <th scope="col">Czas</th>
+        <th scope="col">Co się dzieje</th>
+        <th scope="col">Napis</th>
+      </tr>
+    </thead>
+    <tbody>
+      {sb.shots.map((shot, i) => (
+        <tr>
+          <th scope="row">
+            {i + 1}. {shot.name}
+          </th>
+          <td class="num" data-label="Klatki">
+            {shot.from} do {shot.to}
+          </td>
+          <td class="num" data-label="Czas">
+            {formatSeconds(shot.seconds[0])} do {formatSeconds(shot.seconds[1])}
+          </td>
+          <td data-label="Co się dzieje">{shot.action}</td>
+          <td data-label="Napis">
+            {shot.overlay ? (
+              <>
+                „{shot.overlay.text}”
+                <span class="dim">
+                  {' '}
+                  klatki {shot.overlay.from} do {shot.overlay.to}
+                </span>
+              </>
+            ) : (
+              <span class="dim">bez napisu</span>
+            )}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

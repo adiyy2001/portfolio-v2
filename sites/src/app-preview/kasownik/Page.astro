@@ -1,0 +1,356 @@
+---
+import { link, portfolio } from '../../shared/link';
+import CurveLab from '../shared/CurveLab.tsx';
+import FileTable from '../shared/FileTable.astro';
+import LoopVideo from '../shared/LoopVideo.astro';
+import SampleLine from '../shared/SampleLine.astro';
+import Shell from '../shared/Shell.astro';
+import Storyboard from '../shared/Storyboard.astro';
+import { assetUrl, nb, presetValue, readManifest } from '../shared/manifest';
+import type { BezierPreset, SpringPreset } from '../shared/types';
+import { app } from './app';
+import { content } from './content';
+import { styles } from './styles';
+
+const manifest = readManifest('kasownik');
+const asset = (path: string) => assetUrl('kasownik', path);
+const font = manifest.fonts[0];
+const fontCss = `@font-face{font-family:'Onest';src:url(${asset(font.file)}) format('woff2');font-weight:${font.weight};font-style:normal;font-display:swap}`;
+const sheet = manifest.motion.find(item => item.id === 'sheet') as SpringPreset;
+const fade = manifest.motion.find(item => item.id === 'fade') as BezierPreset;
+const sections = [
+  ['zadanie', 'Zadanie'],
+  ['kierunek', 'Kierunek'],
+  ['storyboard', 'Storyboard'],
+  ['ruch', 'Ruch'],
+  ['ekrany', 'Ekrany'],
+  ['formaty', 'Formaty'],
+  ['pliki', 'Pliki'],
+] as const;
+const textColors = manifest.palette.filter(item =>
+  ['ink', 'secondary', 'brand', 'brandDeep'].includes(item.id),
+);
+const ratio = (value: number) => value.toFixed(2).replace('.', ',');
+const weights = [
+  [800, 'Bilety', 'tytuł duży 34/41'],
+  [700, 'Bilet 45 minut', 'tytuł 22/28 i zegar 56'],
+  [600, 'Zapłać 4,60 zł', 'przyciski i nagłówki 17/22'],
+  [500, 'Strefa A · kupiony 7:47', 'objaśnienia 16/21'],
+  [400, 'Zażółć gęślą jaźń, Rondo Śródka', 'tekst 17/22'],
+] as const;
+---
+
+<Shell
+  app={app}
+  title="App preview aplikacji z biletami komunikacji miejskiej"
+  description="Natywny iOS w ruchu: podgląd zmyślonej aplikacji Kasownik z biletami na tramwaj i autobus w Poznaniu. Wersja do App Store, trzy formaty social, pętle na stronę, storyboard i zasady ruchu."
+  css={fontCss + styles}
+  preload={[asset(font.file)]}
+  bodyClass="kas">
+  <header class="top">
+    <a href={link('/app-preview/')}>Wzornik, app preview</a>
+    <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="t-hero">
+      <div>
+        <p class="kicker">{content.kicker}</p>
+        <img
+          class="hero__icon"
+          src={asset(manifest.icons.rounded)}
+          alt=""
+          width="512"
+          height="512"
+        />
+        <h1 id="t-hero">Kasownik</h1>
+        <p class="lead">{content.lead}</p>
+        <dl class="group rows">
+          {content.facts.map(([term, value]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{nb(value)}</dd>
+            </div>
+          ))}
+        </dl>
+        <nav class="toc" aria-label="Sekcje">
+          {sections.map(([id, label]) => (
+            <a href={`#${id}`}>{label}</a>
+          ))}
+        </nav>
+      </div>
+      <figure class="stage stage--hero">
+        <LoopVideo
+          manifest={manifest}
+          variant="hero"
+          class="hero__wide"
+          label="Wersja marketingowa 16:9: telefon z aplikacją Kasownik i nagłówki trzech funkcji"
+        />
+        <LoopVideo
+          manifest={manifest}
+          variant="hero-9x16"
+          class="hero__tall"
+          label="Wersja marketingowa 9:16: nagłówek nad telefonem z aplikacją Kasownik"
+        />
+        <figcaption>{content.heroCaption}</figcaption>
+      </figure>
+    </section>
+
+    <section class="sec" id="zadanie" aria-labelledby="t-zadanie">
+      <div class="sec__head">
+        <p class="sec__num">01 Klient i zadanie</p>
+        <h2 id="t-zadanie">Bilet kupiony i skasowany, zanim tramwaj ruszy</h2>
+      </div>
+      <div class="cols">
+        <div class="prose">
+          {content.client.paragraphs.map(text => (
+            <p>{text}</p>
+          ))}
+        </div>
+        <dl class="group rows rows--stack">
+          {content.client.facts.map(([term, value]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{nb(value)}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="sec" id="kierunek" aria-labelledby="t-kierunek">
+      <div class="sec__head">
+        <p class="sec__num">02 Kierunek</p>
+        <h2 id="t-kierunek">{content.direction.title}</h2>
+      </div>
+      <div class="cols">
+        <div>
+          <div class="prose">
+            {content.direction.paragraphs.map(text => (
+              <p>{text}</p>
+            ))}
+          </div>
+          <ul class="chips">
+            {content.direction.keywords.map(word => (
+              <li>{word}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="card type" aria-label="Krój Onest w użytych wagach">
+          <h3>Onest, jeden krój w pięciu wagach</h3>
+          {weights.map(([weight, sample, use]) => (
+            <p style={`font-weight:${weight};font-size:${weight === 800 ? 34 : 22}px`}>
+              {sample}
+              <small>
+                {weight}, {use}
+              </small>
+            </p>
+          ))}
+        </div>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <h3>Jeden kolor marki i szarości systemu</h3>
+        <ul class="swatches">
+          {manifest.palette.map(item => (
+            <li class="swatch">
+              <span class="swatch__chip" style={`background:${item.hex}`}></span>
+              <b>{item.name}</b>
+              <span>{item.hex.toUpperCase()}</span>
+              <span>{item.role}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="intro" style="margin-top:18px;font-size:15px">
+          Kontrast na bieli:{' '}
+          {textColors.map((item, i) => (
+            <>
+              {i > 0 && ', '}
+              {item.name.toLowerCase()} {ratio(item.onSurface)}:1
+            </>
+          ))}
+          . Szary {manifest.palette.find(item => item.id === 'tertiary')?.hex.toUpperCase()} służy
+          tylko do dużych znaków i elementów nieaktywnych.
+        </p>
+      </div>
+    </section>
+
+    <section class="sec" id="storyboard" aria-labelledby="t-storyboard">
+      <div class="sec__head">
+        <p class="sec__num">03 Storyboard</p>
+        <h2 id="t-storyboard">23 sekundy, osiem ujęć, jeden ciągły ruch</h2>
+        <p class="intro">{content.storyboard.intro}</p>
+      </div>
+      <ul class="list">
+        {content.storyboard.rules.map(rule => (
+          <li>{nb(rule)}</li>
+        ))}
+      </ul>
+      <Storyboard manifest={manifest} alt={content.storyboard.alt} />
+    </section>
+
+    <section class="sec" id="ruch" aria-labelledby="t-ruch">
+      <div class="sec__head">
+        <p class="sec__num">04 Zasady ruchu</p>
+        <h2 id="t-ruch">Sprężyny zamiast stopera</h2>
+        <p class="intro">{nb(content.motion.intro)}</p>
+      </div>
+      <CurveLab
+        client:visible
+        spring={{
+          kind: 'spring',
+          label: `Sprężyna sheet, masa ${sheet.mass}, sztywność ${sheet.stiffness}`,
+          mass: sheet.mass,
+          stiffness: sheet.stiffness,
+          damping: sheet.damping,
+        }}
+        other={{
+          kind: 'bezier',
+          label: `Krzywa cubic-bezier(${fade.points.join(', ')}), 400 ms`,
+          points: fade.points,
+          ms: 400,
+        }}
+        dampingMin={8}
+        dampingMax={40}
+        caption={nb(content.motion.caption)}
+      />
+      <div class="cols" style="margin-top:20px">
+        <dl class="group presets">
+          {manifest.motion.map(preset => (
+            <div>
+              <dt>
+                {preset.id} <span>· {preset.use}</span>
+              </dt>
+              <dd>
+                <code>{presetValue(preset)}</code>
+              </dd>
+              <dd>{nb(preset.note)}</dd>
+            </div>
+          ))}
+        </dl>
+        <dl class="group rows rows--stack">
+          {content.motion.rules.map(([term, value]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{nb(value)}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="sec" id="ekrany" aria-labelledby="t-ekrany">
+      <div class="sec__head">
+        <p class="sec__num">05 Ekrany</p>
+        <h2 id="t-ekrany">Siedem ekranów z jednego systemu</h2>
+        <p class="intro">{content.screensIntro}</p>
+      </div>
+      <div class="gallery">
+        {manifest.gallery.map(item => (
+          <figure>
+            <img
+              src={asset(item.file)}
+              alt={`Ekran ${item.title}`}
+              width="443"
+              height="960"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <b>
+                {item.n}. {item.title}
+              </b>
+              <span>{item.caption}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="sec" id="formaty" aria-labelledby="t-formaty">
+      <div class="sec__head">
+        <p class="sec__num">06 Wersja sklepowa i formaty</p>
+        <h2 id="t-formaty">Sklep pokazuje aplikację, social sprzedaje</h2>
+        <p class="intro">{content.formats.intro}</p>
+      </div>
+      <div class="formats">
+        <figure>
+          <div class="stage">
+            <LoopVideo
+              manifest={manifest}
+              variant="store"
+              label="Wersja sklepowa: sam interfejs Kasownika na pełnym ekranie"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.store}</b>886×1920, 23 s, H.264
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="stage">
+            <LoopVideo
+              manifest={manifest}
+              variant="hero-9x16"
+              label="Wersja 9:16 z nagłówkiem nad telefonem"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.portrait}</b>1080×1920, 21 s
+          </figcaption>
+        </figure>
+        <div class="fmt--side fmt--wide">
+          <figure>
+            <div class="stage">
+              <LoopVideo
+                manifest={manifest}
+                variant="social-1x1"
+                label="Wersja kwadratowa z nagłówkiem nad telefonem"
+              />
+            </div>
+            <figcaption>
+              <b>{content.formats.square}</b>1080×1080, 21 s
+            </figcaption>
+          </figure>
+          <figure>
+            <div class="stage">
+              <LoopVideo
+                manifest={manifest}
+                variant="hero"
+                label="Wersja 16:9 z telefonem po prawej i nagłówkiem po lewej"
+              />
+            </div>
+            <figcaption>
+              <b>{content.formats.wide}</b>1920×1080, 21 s
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="pliki" aria-labelledby="t-pliki">
+      <div class="sec__head">
+        <p class="sec__num">07 Co dostaje klient</p>
+        <h2 id="t-pliki">Pliki gotowe do wgrania, z parametrami</h2>
+        <p class="intro">{content.deliverables.intro}</p>
+      </div>
+      <FileTable manifest={manifest} />
+      <dl class="group rows rows--stack" style="margin-top:16px">
+        {content.deliverables.extras.map(([term, value]) => (
+          <div>
+            <dt>{term}</dt>
+            <dd>{nb(value)}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="cta" aria-labelledby="t-cta">
+      <h2 id="t-cta">{content.cta.title}</h2>
+      <p>{content.cta.text}</p>
+      <a href={portfolio('/dla-klienta/#wzornik')}>{content.cta.link}</a>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <SampleLine name="Kasownik" />
+  </footer>
+</Shell>

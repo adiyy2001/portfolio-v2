@@ -1,0 +1,55 @@
+---
+import { baseCss } from './base';
+import { assetUrl, pageUrl } from './manifest';
+import type { AppMeta } from './types';
+
+interface Props {
+  app: AppMeta;
+  title: string;
+  description: string;
+  css: string;
+  preload?: string[];
+  bodyClass?: string;
+}
+
+const { app, title, description, css, preload = [], bodyClass } = Astro.props;
+const canonical = new URL(pageUrl(app.slug), Astro.site).href;
+const ogImage = new URL(assetUrl(app.slug, 'og.png'), Astro.site).href;
+const fullTitle = `${title} | ${app.name}`;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content={app.themeColor} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={assetUrl(app.slug, 'favicon.svg')} />
+    <link rel="apple-touch-icon" href={assetUrl(app.slug, 'apple-touch-icon.png')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={app.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={app.ogAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {preload.map(href => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin="anonymous" />
+    ))}
+    <style set:html={baseCss + css}></style>
+  </head>
+  <body class={bodyClass}>
+    <a class="skip" href="#main">
+      Przejdź do treści
+    </a>
+    <slot />
+  </body>
+</html>

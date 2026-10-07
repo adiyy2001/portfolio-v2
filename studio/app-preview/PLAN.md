@@ -3,7 +3,7 @@
 Brief: `/home/adrian/root/side_projects/briefs/wzornik-app-preview.md`. Run rules: `/home/adrian/root/side_projects/briefs/agent-runs/wzornik-common.md` and `wzornik-run2.md` (base branch `main`, yarn mutex, root `yarn.lock` frozen). Recon, specs, license and tool findings: `NOTES.md`. Mode: autonomous, no checkpoint; every decision worth Adrian's review is under "Decisions for Adrian" at the end. Written on 2026-10-07.
 
 ```
-- [ ] F foundation, with the first brand end to end (B1 Kasownik)
+- [x] F foundation, with the first brand end to end (B1 Kasownik)
 - [ ] B2 Sztanga
 - [ ] B3 Rygiel
 - [ ] B4 Kiełek
@@ -572,3 +572,11 @@ Q runs after all six are merged: ffprobe table for every file (store cut exact t
 13. Rygiel's breach story uses a made up service ("Forum Wędkarskie Mazury"); no real breach or company is named.
 14. Południe's prices are labelled "przykładowe" on screen and on the page; the numbers add up but do not claim real savings.
 15. No ZIP download for app previews (identity had one): the deliverables are videos whose masters are too heavy to publish; the page lists every file the client gets.
+16. Step F ran in a cloud session, not on the WSL machine: Node 22 (the package now accepts `>=22`), the Playwright Chromium 1194 headless shell for Remotion and Chromium 1194 for page shots, fonts fetched from raw.githubusercontent.com because `gh` has no token there. Render times: store 705 frames in about 3 minutes, the three marketing formats about 9 minutes together.
+17. The store web loop is 442x960, not 443x960: H.264 and VP9 in yuv420p need even sizes. The store master and the App Store file stay exactly 886x1920.
+18. The store master and the marketing masters are rendered once with the loop bridge; the App Store file and the social files are the same masters cut to length, so the loops and the deliverables can never drift apart.
+19. The social files (9:16, 1:1, 16:9) also carry a silent stereo AAC track, like the store file, for platforms that refuse video without audio. Nothing is audible.
+20. Kasownik's fourth overlay reads „Przesiadka? Zostanie 27 minut” (the plan said „Zostało”): at the transfer at 8:06 the ticket validated at 7:48:10 has 27 minutes left, and the route sheet says the same.
+21. Kasownik's hook overlay runs 2.3 s (frames 4 to 72) instead of 1.8 s, so its five words meet the reading time rule.
+22. The app preview index uses the portfolio's own fonts and colours, like the identity index, so both Wzornik indexes look like one family; each tile carries its app's look.
+23. The page lists the full quality files with real ffprobe values but publishes only the web loops (11 MB for Kasownik); the App Store file alone is 31 MB at the 11.5 Mbps Apple asks for.

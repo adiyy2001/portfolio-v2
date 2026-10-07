@@ -78,3 +78,16 @@ Source: App Store Connect Help, "App preview specifications" (developer.apple.co
 - One heavy job at a time per worktree. Renders across all app preview worktrees are serialized with `flock -w 5400 /tmp/wz-app-preview-render.lock <command>`; Remotion runs with `--concurrency=4`.
 - If a tool call is stopped by a hook message that starts with "Straż subskrypcji": stop at once, return status `interrupted`.
 - Published files stay under 50 MB each; budget per app 14 MB published, hard cap 18 MB (details in `PLAN.md`). Masters never enter git.
+
+## Foundation tooling (step F, 2026-10-07, cloud session)
+
+Built and proven end to end on Kasownik. Every later app uses the same commands; heavy ones run under the shared lock (`flock /tmp/wz-heavy.lock ...`) with `NODE_OPTIONS=--max-old-space-size=4096`.
+
+- Cloud facts: Node 22.22 at `/opt/node22/bin` (the package `engines` field now says `>=22`), Playwright Chromium 1194 at `/opt/pw-browsers` (the identity studio pins Playwright 1.63, so scripts pass `executablePath` `/opt/pw-browsers/chromium`; Remotion uses the headless shell `/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell`, override with `WZ_HEADLESS` and `WZ_CHROMIUM`). `gh` has no valid token here, so `scripts/fonts.mjs` downloads Google Fonts files straight from `raw.githubusercontent.com/google/fonts/main/ofl/<dir>/<file>`; the older `fonts-verify.mjs` still needs `gh`.
+- Install: `yarn --cwd studio/app-preview install --frozen-lockfile --mutex file:/tmp/yarn-portfolio.lock` (own `yarn.lock`, Remotion 4.0.534 exact), plus `studio` and `sites` installs for Playwright, subset-font and the site.
+- One app = `src/apps/<slug>/` with `index.ts` (compositions `<slug>-store`, `<slug>-marketing`, `<slug>-tile`, stills `<slug>-screen`, `<slug>-icon`, `<slug>-board`, `<slug>-og`) and `meta.ts` (the only module scripts read: app, gallery, palette, type, motion presets, storyboard, marketing beats, tile, icon SVG, font files). `Root.tsx` finds every app through `require.context`, so adding an app touches no shared file.
+- Animation is a pure function of the frame: `Scene.tsx` takes `frame` and returns the interface state, so the store cut, the phone in the marketing cut, the tile, the storyboard board and the stills all reuse it.
+- `node scripts/pipeline.mjs <slug>` runs fonts, render, encode, sheets, validate and manifest (`--only render,encode` and so on). Single steps: `fonts.mjs`, `render.mjs <slug> --only stills,store,marketing,tile --concurrency 3`, `encode.mjs <slug> --only final,web,posters,images`, `sheets.mjs`, `validate.mjs`, `manifest.mjs`, `screens.mjs <slug> --port 432x` (page shots at 390 and 1440, overflow at 320, 768, 1024, reduced motion).
+- Loops: the store and marketing masters are rendered once with the loop bridge appended; the store final and the social finals are the same masters cut to the storyboard length, the web loops keep the bridge. Store web loop is 442x960 (H.264 needs even sizes; 443 is odd).
+- Render times on 4 cores, concurrency 3: store 705 frames at 886x1920 in about 200 s; each marketing format about 6 minutes (the headless shell rasterizes through SwiftShader); stills about 20 s.
+- Masters from Remotion are full range (`yuvj420p`); every encode converts to limited range BT.709 through `scale=...:out_range=tv`.
