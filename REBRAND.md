@@ -722,10 +722,10 @@ Update 2026-10-03 (late evening): items 1, 5, 11, 12 and 13 are Command Center t
 
 Open:
 
-1. Analytics: a GA4 measurement ID (UA-45666519-2 is dead since 2023; Vercel Web Analytics is out with GitHub Pages).
+1. Analytics: done. GoatCounter (`adrianturbinski`) is live on the site and the Command Center API token reads the stats (checked 2026-10-07: 33 hits since 2026-10-01). GA4 is not used.
 2. Sample websites, later: live sites at their own addresses, or screenshots only. Decided on 2026-10-03: live, under `/portfolio-v2/wzornik/<slug>/`.
 3. Decided on 2026-10-06 (Adrian): the handover line is softened to "Na koniec przekazuję ci kod i dostępy." (EN: "At the end I hand over the code and the access to you."), because not every engagement ends with the client owning everything. Working remotely is not worth stating (Adrian: everyone does).
-4. Decided on 2026-10-03: the print of the English recruiter edition replaced the file. Still open: the old file is in the public git history. `/resume.pdf` is outdated. The new CV is newer: the PDF file of it, or the print of the recruiter edition, or drop the link. Blocker before Pages switches to the Gatsby build: `static/resume.pdf` holds a phone-like number (found by a pattern count, the number itself was not read), and the build copies it to `/portfolio-v2/resume.pdf`.
+4. Resume: checked on 2026-10-07, a fresh print of `/en/for-recruiters/` has the same text as `static/resume.pdf` (two pages, no phone number), so the file is current. Still open and only Adrian can do it: the older file with the phone number stays in the public git history; removing it needs a history rewrite of `main`, a force push and a GitHub Support request for cached views.
 5. The photo is 400x400. A larger original of the same shot, if it exists, for any frame above about 300 px.
 6. Decided on 2026-10-06 (Adrian): "Oferty i zlecenia" stays public while he is employed at PSE Innowacje. He invoices B2B (own business); the client edition lead says so.
 7. Decided on 2026-10-06 (Adrian): the EAA sentence in "Pasuje na każdego." stays.
@@ -734,8 +734,8 @@ Open:
 10. The footer now links "Projekty" on every page, Home included. Kept (2026-10-03).
 11. TailorCloth: more material from his own archive (screenshots of the modules he built, the order flow), so the case page says more. Another agency maintains the site now, so today's screenshots may show their work.
 12. Done on 2026-10-06: Search Console has a Domain property for `adrianturbinski.pl`, verified by a TXT record on `@` in the Hostinger zone (next to the SPF record), so nothing goes into `seo.js`. Sitemap to submit: `sitemap-index.xml`.
-13. Git identity: the commits here and in the six repos use the e-mail from the global git config, a company address. If he prefers GitHub's noreply address, the six local repos can be rewritten before their first push; the commits already pushed here would need a history rewrite.
-14. Dependabot lists 154 alerts for `main`, which still has the old template's dependencies. They are rechecked once `rebrand-2026` is merged.
+13. Git identity: done on 2026-10-07. The published repos (flagtide, gridtwin, coschema) already used `Adrian Turbiński <adrian.turbinski@gmail.com>`; `signal-timeline` (80 commits) and `eventhorizon` (41) were rewritten with `git filter-repo --mailmap` before any push and got that identity in their local git config. Bundles from before the rewrite: `~/repo-backups/identity-20261007-*`. `fieldline` has no repo yet.
+14. Dependabot: on 2026-10-07 the root `yarn.lock` was refreshed and `resolutions` in `package.json` pin patched versions inside the APIs Gatsby 5 expects (154 open alerts down to 11 by a local check against the alert ranges). Left on purpose: `file-type` and `decode-uri-component` (fixes are ESM only), `sharp` 0.35 (gatsby-plugin-sharp 5 needs 0.32), `@parcel/reporter-dev-server`, `@graphql-tools/utils` and `webpack-dev-middleware` (new majors, build or develop time only), `braces` and `sprintf-js` (no fix published). `sites/yarn.lock` has one alert without a fix (`http-cache-semantics`).
 15. Done on 2026-10-07: `rebrand-2026` fast-forwarded into `main` (Adrian's OK), Pages and the blog publisher moved to `main`.
 
 The recruiter repos question (whether the six concepts are right, GoJS for repo 4) is closed: Adrian's six briefs replace them and allow only permissive dependencies, so no GoJS.

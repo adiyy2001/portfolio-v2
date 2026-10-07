@@ -31,6 +31,6 @@ Status on 2026-10-03: the site side is built (blog pages, feed, SEO, navigation,
 
 ## Open items
 
-- Choose the GoatCounter code and add it to the site (Adrian creates the account).
-- Lighthouse round on a real article after the first publish.
+- GoatCounter: done (code `adrianturbinski`, Command Center reads it with an API token).
+- Lighthouse on a real article, done 2026-10-07 on `/blog/how-i-test-that-collaborative-edits-converge/`: mobile performance 97 to 98 (one cold first run gave 89), accessibility 100, best practices 96, SEO 100; desktop 100, 100, 96, 100. CLS 0.071 on mobile.
 - Domain: the site moves to `https://adrianturbinski.pl/` (registered 2026-10-03, mailbox `contact@adrianturbinski.pl`), so blog canonical URLs are final from the first article. The `/portfolio-v2` prefix is gone. Privacy policy: `/en/privacy/`.
