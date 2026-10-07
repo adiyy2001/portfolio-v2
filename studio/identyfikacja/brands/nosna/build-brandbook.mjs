@@ -426,11 +426,11 @@ blockquote{margin:0;font:800 38px/1.25 'Nosna Display'}
 .swatches figure{margin:0;display:flex;flex-direction:column}
 .chip{flex:1;min-height:90px;box-shadow:inset 0 0 0 2px ${c.mgla}}
 .swatches figcaption{display:grid;gap:3px;padding-top:12px;font:500 18px/1.25 'Nosna Mono'}
-.swatches b{font:800 26px/1.1 'Nosna Display'}
+.swatches b{font:800 22px/1.1 'Nosna Display';white-space:nowrap}
 .tablebox{padding:26px 40px}
-.contrast{width:100%;border-collapse:collapse;font:500 24px/1.2 'Nosna Display'}
+.contrast{width:100%;border-collapse:collapse;font:500 22px/1.2 'Nosna Display'}
 .contrast th{text-align:left;font:700 18px/1 'Nosna Mono';letter-spacing:.08em;text-transform:uppercase;padding:0 10px 12px}
-.contrast td{padding:10px 10px;border-top:2px solid ${c.mgla}}
+.contrast td{padding:7px 10px;border-top:2px solid ${c.mgla}}
 .contrast i{display:inline-block;width:20px;height:20px;border-radius:50%;margin-right:10px;vertical-align:-3px;border:2px solid ${c.atrament}}
 .faces{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;flex:1}
 .faces .panel{display:flex;flex-direction:column;justify-content:center}

@@ -48,9 +48,9 @@ Kolejność kryteriów: wierność stylowi, rzemiosło, spójność systemu, dop
 
 ## Decyzje dla Adriana
 
-Pełna lista (34 pozycje, z markami) jest w `studio/identyfikacja/PLAN.md` w "Decisions for Adrian". Najważniejsze:
+Pełna lista (35 pozycji, z markami) jest w `studio/identyfikacja/PLAN.md` w "Decisions for Adrian". Najważniejsze:
 
-1. R otwarte: Nośna na 3 w rzemiośle po czterech rundach. Strony 11, 16, 26 brand booku i poziome przewijanie są już poprawione bez ponownej recenzji (decyzja 34). Zdecyduj, czy akceptujesz, czy zlecasz piątą recenzję. Wolnobieg doszedł do 4.
+1. R otwarte: Nośna na 3 w rzemiośle i wartości sprzedażowej w piątej recenzji (regresja palety po przebudowie manifestu i łamanie nagłówków, oba naprawione po recenzji, decyzja 35; wcześniej Strony 11, 16, 26 brand booku i poziome przewijanie są już poprawione bez ponownej recenzji (decyzja 34). Zdecyduj, czy akceptujesz, czy zlecasz piątą recenzję. Wolnobieg doszedł do 4.
 2. Nazwy sprawdzone wyszukiwarką w USA, więc to brak dowodu konfliktu, nie czystka prawna. Odrzucone: Zakwasownia, Zaczyn (Kraków), Grona.
 3. Skibka waży 13 MB (budżet 12 MB, limit 16 MB).
 4. Rzut ma kobalt zamiast szwajcarskiej czerwieni, bo Rozwaga ma już czerń, biel i czerwień.
