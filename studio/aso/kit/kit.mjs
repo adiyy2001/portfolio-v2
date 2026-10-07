@@ -76,6 +76,8 @@ export const phone = ({
   shadow = true,
   className = '',
   body = '#22262A',
+  box = 'fg',
+  transform,
 }) => {
   const g = phoneGeometry(width, landscape);
   const radius = (landscape ? g.height : g.width) * 0.15;
@@ -89,13 +91,13 @@ export const phone = ({
     ? `<span class="kit-phone__btn" style="${styleOf({ top: -2.2 * g.scale * 2, left: g.width * 0.22, width: g.width * 0.07, height: 3 * g.scale * 2 })}"></span><span class="kit-phone__btn" style="${styleOf({ top: -2.2 * g.scale * 2, left: g.width * 0.32, width: g.width * 0.07, height: 3 * g.scale * 2 })}"></span><span class="kit-phone__btn" style="${styleOf({ bottom: -2.2 * g.scale * 2, left: g.width * 0.3, width: g.width * 0.11, height: 3 * g.scale * 2 })}"></span>`
     : `<span class="kit-phone__btn" style="${styleOf({ left: -2.2 * g.scale * 2, top: g.height * 0.2, width: 3 * g.scale * 2, height: g.height * 0.07 })}"></span><span class="kit-phone__btn" style="${styleOf({ left: -2.2 * g.scale * 2, top: g.height * 0.3, width: 3 * g.scale * 2, height: g.height * 0.07 })}"></span><span class="kit-phone__btn" style="${styleOf({ right: -2.2 * g.scale * 2, top: g.height * 0.26, width: 3 * g.scale * 2, height: g.height * 0.11 })}"></span>`;
   const statusHtml = status ? statusBar(status, { color: statusColor, background: statusBackground }) : '';
-  return `<div class="kit-phone ${className}${shadow ? ' kit-phone--shadow' : ''}" data-box="fg" data-name="${esc(name)}" style="${styleOf({
+  return `<div class="kit-phone ${className}${shadow ? ' kit-phone--shadow' : ''}" data-box="${box}" data-name="${esc(name)}" style="${styleOf({
     left: x,
     top: y,
     width: g.width,
     height: g.height,
     'border-radius': px(radius),
-    transform: rotate ? `rotate(${rotate}deg)` : undefined,
+    transform: transform ?? (rotate ? `rotate(${rotate}deg)` : undefined),
     background: body,
   })}">${buttons}<div class="kit-phone__glass" style="${styleOf({
     left: g.bezel,
@@ -110,18 +112,18 @@ export const phone = ({
   })}">${landscape ? '' : statusHtml}${screen}</div></div>${island}</div>`;
 };
 
-export const card = ({ screen, width, x, y, rotate = 0, landscape = false, name = 'card', status = 'neutral', statusColor = '#111', statusBackground = 'transparent', radius = 22, className = '', shadow = true }) => {
+export const card = ({ screen, width, x, y, rotate = 0, landscape = false, name = 'card', status = 'neutral', statusColor = '#111', statusBackground = 'transparent', radius = 22, className = '', shadow = true, box = 'fg', transform }) => {
   const screenW = landscape ? SCREEN.height : SCREEN.width;
   const screenH = landscape ? SCREEN.width : SCREEN.height;
   const scale = width / screenW;
   const height = screenH * scale;
-  return `<div class="kit-card ${className}${shadow ? ' kit-card--shadow' : ''}" data-box="fg" data-name="${esc(name)}" style="${styleOf({
+  return `<div class="kit-card ${className}${shadow ? ' kit-card--shadow' : ''}" data-box="${box}" data-name="${esc(name)}" style="${styleOf({
     left: x,
     top: y,
     width,
     height,
     'border-radius': px(radius * scale * 1.6),
-    transform: rotate ? `rotate(${rotate}deg)` : undefined,
+    transform: transform ?? (rotate ? `rotate(${rotate}deg)` : undefined),
   })}"><div class="kit-screen${landscape ? ' kit-screen--landscape' : ''}" style="${styleOf({ width: screenW, height: screenH, transform: `scale(${scale})` })}">${status && !landscape ? statusBar(status, { color: statusColor, background: statusBackground }) : ''}${screen}</div></div>`;
 };
 

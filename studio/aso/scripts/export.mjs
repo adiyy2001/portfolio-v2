@@ -17,7 +17,7 @@ export const runExport = async app => {
     if (!['appstore', 'play', 'variantB', 'feature', 'ipad'].includes(item.group)) continue;
     const name = frameName({ store: item.store, lang: item.lang }, { slot: item.slot, variant: item.variant });
     const source = readFileSync(join(frames, `${name}.png`));
-    const buffer = await flattenImage(source, { format: app.format, background: app.background, width: item.width, height: item.height });
+    const buffer = await flattenImage(source, { format: app.format, background: app.background, width: item.width, height: item.height, quality: app.jpegQuality });
     writeFile(join(dir, item.path), buffer);
     count += 1;
   }

@@ -53,6 +53,7 @@ export const settle = async (page, fontChecks = []) => {
 export const collectBoxes = page =>
   page.evaluate(() => {
     const analyse = node => {
+      const vertical = node.hasAttribute('data-vertical');
       const tops = [];
       let broken = false;
       const walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
@@ -66,7 +67,7 @@ export const collectBoxes = page =>
           range.setEnd(text, match.index + match[0].length);
           const rects = [...range.getClientRects()].filter(rect => rect.width > 0);
           if (rects.length > 1) broken = true;
-          if (rects.length > 0) tops.push(Math.round(rects[0].top));
+          if (rects.length > 0) tops.push(Math.round(vertical ? rects[0].left : rects[0].top));
           match = pattern.exec(text.data);
         }
       }

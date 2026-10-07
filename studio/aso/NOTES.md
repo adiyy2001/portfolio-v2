@@ -240,3 +240,13 @@ Look at: `sheets/ui-<lang>.png` (all screens), `boards/*.png`, `thumbs/*.png` (f
 - Things that sit in front of phones (meadow strips, rocks, clouds) live in a second SVG layer above the devices; whole terrain bands go into that layer clipped to whole frames, so the clip edge always falls on a seam and stays invisible.
 - Prettier resolves `prettier-plugin-astro` from the working directory; the manifest step formats JSON with `plugins: []`.
 - The page needs `scroll-padding-inline` on the strips, `glue()` on every headline shown outside the images, and the kicker text wrapped in its own span inside flex rows.
+
+### Lessons from Szyld (B2)
+
+- 3D perspective: put each device in its own perspective stage (`perspective` on a full frame wrapper, `transform` on the device through `kit.phone({ transform })`). Do not use `transform-style: preserve-3d` with things standing on a tilted screen: Chromium then rasterises the tilted screen at low resolution and may sort a child behind the screen plane. Draw such overlays in 2D and place them with a small inline script on points projected from markers inside the screen (`getBoundingClientRect` of an SVG `rect` in the screen gives the projected position).
+- A device that bleeds off the frame takes `box: 'device'`, so the canvas check ignores it; everything that must stay whole (tags, badges, cards) keeps `data-box="fg"`.
+- A headline rotated by -90 degrees gets `data-vertical`, so the one word last line check groups words by column.
+- A nested `<svg>` icon inside an SVG `<g>` needs explicit `width` and `height`, or it fills the parent SVG.
+- Grain from `feTurbulence` (base frequency 0.8 to 0.85 per CSS px, overlay at about 0.38) costs about 0.5 MB per App Store JPEG at quality 90; the whole set with 30 images stays at 13 MB.
+- The texts files in the ZIP are copies of `copy/*.json`: run Prettier on the copy files before the export step, or the validator reports the ZIP as stale after formatting.
+

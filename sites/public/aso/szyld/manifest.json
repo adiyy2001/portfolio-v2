@@ -1,0 +1,570 @@
+{
+  "app": {
+    "slug": "szyld",
+    "name": "Szyld",
+    "style": "Mocne gradienty z przechylonymi urządzeniami",
+    "styleId": "S2",
+    "category": "zakupy w lokalnych sklepach z odbiorem osobistym",
+    "format": "jpg",
+    "ipad": false
+  },
+  "base": "/wzornik/aso/szyld/",
+  "totalBytes": 13695482,
+  "totalHuman": "13.1 MB",
+  "zip": { "path": "szyld-aso.zip", "bytes": 13686271 },
+  "groups": [
+    {
+      "id": "appstore",
+      "title": "App Store, iPhone 6,9″",
+      "count": 12,
+      "bytes": 7289999,
+      "formats": "JPEG",
+      "files": [
+        "app-store/pl/szyld-appstore-pl-01.jpg",
+        "app-store/pl/szyld-appstore-pl-02.jpg",
+        "app-store/pl/szyld-appstore-pl-03.jpg",
+        "app-store/pl/szyld-appstore-pl-04.jpg",
+        "app-store/pl/szyld-appstore-pl-05.jpg",
+        "app-store/pl/szyld-appstore-pl-06.jpg",
+        "app-store/en/szyld-appstore-en-01.jpg",
+        "app-store/en/szyld-appstore-en-02.jpg",
+        "app-store/en/szyld-appstore-en-03.jpg",
+        "app-store/en/szyld-appstore-en-04.jpg",
+        "app-store/en/szyld-appstore-en-05.jpg",
+        "app-store/en/szyld-appstore-en-06.jpg"
+      ]
+    },
+    {
+      "id": "play",
+      "title": "Google Play, telefon",
+      "count": 12,
+      "bytes": 4359903,
+      "formats": "JPEG",
+      "files": [
+        "google-play/pl/szyld-play-pl-01.jpg",
+        "google-play/pl/szyld-play-pl-02.jpg",
+        "google-play/pl/szyld-play-pl-03.jpg",
+        "google-play/pl/szyld-play-pl-04.jpg",
+        "google-play/pl/szyld-play-pl-05.jpg",
+        "google-play/pl/szyld-play-pl-06.jpg",
+        "google-play/en/szyld-play-en-01.jpg",
+        "google-play/en/szyld-play-en-02.jpg",
+        "google-play/en/szyld-play-en-03.jpg",
+        "google-play/en/szyld-play-en-04.jpg",
+        "google-play/en/szyld-play-en-05.jpg",
+        "google-play/en/szyld-play-en-06.jpg"
+      ]
+    },
+    {
+      "id": "variantB",
+      "title": "Wariant B pierwszego screenshotu",
+      "count": 4,
+      "bytes": 1730501,
+      "formats": "JPEG",
+      "files": [
+        "variant-b/szyld-appstore-pl-01b.jpg",
+        "variant-b/szyld-play-pl-01b.jpg",
+        "variant-b/szyld-appstore-en-01b.jpg",
+        "variant-b/szyld-play-en-01b.jpg"
+      ]
+    },
+    {
+      "id": "feature",
+      "title": "Google Play, feature graphic",
+      "count": 2,
+      "bytes": 209011,
+      "formats": "JPEG",
+      "files": ["feature-graphic/szyld-feature-pl.jpg", "feature-graphic/szyld-feature-en.jpg"]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 5,
+      "bytes": 84479,
+      "formats": "PNG, SVG",
+      "files": [
+        "icons/szyld-icon-appstore-1024.png",
+        "icons/szyld-icon-play-512.png",
+        "icons/szyld-icon.svg",
+        "icons/layers/szyld-icon-background.png",
+        "icons/layers/szyld-icon-foreground.png"
+      ]
+    },
+    {
+      "id": "texts",
+      "title": "Teksty nagłówków",
+      "count": 3,
+      "bytes": 21589,
+      "formats": "CSV, JSON",
+      "files": ["szyld-teksty.csv", "teksty/pl.json", "teksty/en.json"]
+    }
+  ],
+  "files": [
+    {
+      "path": "app-store/pl/szyld-appstore-pl-01.jpg",
+      "bytes": 540962,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "01",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/szyld-play-pl-01.jpg",
+      "bytes": 315855,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "01",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/szyld-appstore-pl-02.jpg",
+      "bytes": 605321,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "02",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/szyld-play-pl-02.jpg",
+      "bytes": 381791,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "02",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/szyld-appstore-pl-03.jpg",
+      "bytes": 595056,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "03",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/szyld-play-pl-03.jpg",
+      "bytes": 366347,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "03",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/szyld-appstore-pl-04.jpg",
+      "bytes": 722505,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "04",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/szyld-play-pl-04.jpg",
+      "bytes": 426244,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "04",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/szyld-appstore-pl-05.jpg",
+      "bytes": 506458,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "05",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/szyld-play-pl-05.jpg",
+      "bytes": 287084,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "05",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/szyld-appstore-pl-06.jpg",
+      "bytes": 681318,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "06",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/szyld-play-pl-06.jpg",
+      "bytes": 407934,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "06",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "variant-b/szyld-appstore-pl-01b.jpg",
+      "bytes": 549878,
+      "type": "jpg",
+      "group": "variantB",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "01",
+      "variant": "b",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "variant-b/szyld-play-pl-01b.jpg",
+      "bytes": 330705,
+      "type": "jpg",
+      "group": "variantB",
+      "store": "play",
+      "lang": "pl",
+      "slot": "01",
+      "variant": "b",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "feature-graphic/szyld-feature-pl.jpg",
+      "bytes": 105066,
+      "type": "jpg",
+      "group": "feature",
+      "store": "feature",
+      "lang": "pl",
+      "width": 1024,
+      "height": 500
+    },
+    {
+      "path": "app-store/en/szyld-appstore-en-01.jpg",
+      "bytes": 539696,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "01",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/szyld-play-en-01.jpg",
+      "bytes": 316144,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "01",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/szyld-appstore-en-02.jpg",
+      "bytes": 600890,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "02",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/szyld-play-en-02.jpg",
+      "bytes": 378817,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "02",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/szyld-appstore-en-03.jpg",
+      "bytes": 589121,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "03",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/szyld-play-en-03.jpg",
+      "bytes": 355299,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "03",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/szyld-appstore-en-04.jpg",
+      "bytes": 713986,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "04",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/szyld-play-en-04.jpg",
+      "bytes": 418286,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "04",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/szyld-appstore-en-05.jpg",
+      "bytes": 510540,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "05",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/szyld-play-en-05.jpg",
+      "bytes": 290085,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "05",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/szyld-appstore-en-06.jpg",
+      "bytes": 684146,
+      "type": "jpg",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "06",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/szyld-play-en-06.jpg",
+      "bytes": 416017,
+      "type": "jpg",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "06",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "variant-b/szyld-appstore-en-01b.jpg",
+      "bytes": 531105,
+      "type": "jpg",
+      "group": "variantB",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "01",
+      "variant": "b",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "variant-b/szyld-play-en-01b.jpg",
+      "bytes": 318813,
+      "type": "jpg",
+      "group": "variantB",
+      "store": "play",
+      "lang": "en",
+      "slot": "01",
+      "variant": "b",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "feature-graphic/szyld-feature-en.jpg",
+      "bytes": 103945,
+      "type": "jpg",
+      "group": "feature",
+      "store": "feature",
+      "lang": "en",
+      "width": 1024,
+      "height": 500
+    },
+    {
+      "path": "icons/szyld-icon-appstore-1024.png",
+      "bytes": 26686,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "icons/szyld-icon-play-512.png",
+      "bytes": 18907,
+      "type": "png",
+      "group": "icons",
+      "width": 512,
+      "height": 512
+    },
+    { "path": "icons/szyld-icon.svg", "bytes": 1121, "type": "svg", "group": "icons" },
+    {
+      "path": "icons/layers/szyld-icon-background.png",
+      "bytes": 21751,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "icons/layers/szyld-icon-foreground.png",
+      "bytes": 16014,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    { "path": "szyld-teksty.csv", "bytes": 5424, "type": "csv", "group": "texts" },
+    { "path": "teksty/pl.json", "bytes": 8187, "type": "json", "group": "texts" },
+    { "path": "teksty/en.json", "bytes": 7978, "type": "json", "group": "texts" }
+  ],
+  "web": [
+    { "path": "web/appstore-en-01.webp", "bytes": 43306, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01b.webp", "bytes": 39366, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-02.webp", "bytes": 49128, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-03.webp", "bytes": 51726, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-04.webp", "bytes": 42194, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-05.webp", "bytes": 39854, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-06.webp", "bytes": 41202, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01.webp", "bytes": 43848, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01b.webp", "bytes": 42542, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-02.webp", "bytes": 50250, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-03.webp", "bytes": 54022, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-04.webp", "bytes": 45234, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-05.webp", "bytes": 38600, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-06.webp", "bytes": 41382, "width": 480, "height": 1043 },
+    { "path": "web/feature-en.webp", "bytes": 49120, "width": 1024, "height": 500 },
+    { "path": "web/feature-pl.webp", "bytes": 49886, "width": 1024, "height": 500 },
+    { "path": "web/play-en-01.webp", "bytes": 26246, "width": 400, "height": 711 },
+    { "path": "web/play-en-01b.webp", "bytes": 26330, "width": 400, "height": 711 },
+    { "path": "web/play-en-02.webp", "bytes": 29668, "width": 400, "height": 711 },
+    { "path": "web/play-en-03.webp", "bytes": 33858, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 27034, "width": 400, "height": 711 },
+    { "path": "web/play-en-05.webp", "bytes": 24858, "width": 400, "height": 711 },
+    { "path": "web/play-en-06.webp", "bytes": 27080, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01.webp", "bytes": 26724, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01b.webp", "bytes": 29646, "width": 400, "height": 711 },
+    { "path": "web/play-pl-02.webp", "bytes": 30390, "width": 400, "height": 711 },
+    { "path": "web/play-pl-03.webp", "bytes": 35442, "width": 400, "height": 711 },
+    { "path": "web/play-pl-04.webp", "bytes": 28320, "width": 400, "height": 711 },
+    { "path": "web/play-pl-05.webp", "bytes": 24206, "width": 400, "height": 711 },
+    { "path": "web/play-pl-06.webp", "bytes": 27546, "width": 400, "height": 711 }
+  ],
+  "fonts": [
+    {
+      "id": "mona-expanded",
+      "role": "nagłówki, szerokość 125",
+      "family": "Mona Sans",
+      "css": "Mona Sans Expanded",
+      "weight": 800,
+      "style": "normal",
+      "file": "fonts/MonaSans-800-w125.woff2",
+      "bytes": 23688
+    },
+    {
+      "id": "mona-expanded",
+      "role": "nagłówki, szerokość 125",
+      "family": "Mona Sans",
+      "css": "Mona Sans Expanded",
+      "weight": 900,
+      "style": "normal",
+      "file": "fonts/MonaSans-900-w125.woff2",
+      "bytes": 23192
+    },
+    {
+      "id": "mona",
+      "role": "interfejs, szerokość 100",
+      "family": "Mona Sans",
+      "css": "Mona Sans",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/MonaSans-400.woff2",
+      "bytes": 23500
+    },
+    {
+      "id": "mona",
+      "role": "interfejs, szerokość 100",
+      "family": "Mona Sans",
+      "css": "Mona Sans",
+      "weight": 600,
+      "style": "normal",
+      "file": "fonts/MonaSans-600.woff2",
+      "bytes": 23100
+    },
+    {
+      "id": "mona",
+      "role": "interfejs, szerokość 100",
+      "family": "Mona Sans",
+      "css": "Mona Sans",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/MonaSans-700.woff2",
+      "bytes": 23072
+    }
+  ],
+  "palette": [
+    { "id": "butelka", "name": "Butelka", "hex": "#0B4A3D", "role": "tło i nagłówki" },
+    {
+      "id": "limonka",
+      "name": "Limonka",
+      "hex": "#D5F25C",
+      "role": "akcja i druga barwa gradientu"
+    },
+    { "id": "grejpfrut", "name": "Grejpfrut", "hex": "#FF5A36", "role": "druga para gradientów" },
+    { "id": "mleko", "name": "Mleko", "hex": "#F7F4EA", "role": "powierzchnie interfejsu" },
+    { "id": "smola", "name": "Smoła", "hex": "#0E1E1A", "role": "tekst" },
+    { "id": "szron", "name": "Szron", "hex": "#DCE3DF", "role": "linie i tła pól" },
+    { "id": "lupek", "name": "Łupek", "hex": "#5E6B66", "role": "tekst pomocniczy" }
+  ]
+}

@@ -4,7 +4,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-aso.md`. Run rules: `/hom
 
 ```
 - [x] F foundation, with the first brand end to end (B1 Grań)
-- [ ] B2 Szyld
+- [x] B2 Szyld
 - [ ] B3 Margines
 - [ ] B4 Chochla
 - [ ] B5 Kruszec
@@ -435,3 +435,8 @@ Taken without asking, in the autonomous mode. App agents add their own to `STATU
 22. **The seam check is numeric as well as visual**: for every seam (and variant B against frame 2) the colour step across the cut is compared with the step between neighbouring columns; a ledge cut by the front layer in the Play strip was caught this way and fixed. Crops at 400 percent are in `studio/out/aso/gran/seams/`.
 23. **Cloud session tooling**: the studio runs on Node 22 (`engines` lowered to `>=22`, installs use `--ignore-engines`), Chromium falls back to `/opt/pw-browsers/chromium`, and `capped.sh` now caps the Node heap instead of calling `systemd-run`, which the cloud container lacks. Fonts are fetched from the public `google/fonts` repository without `gh`.
 24. **Case study page sections** follow the brief, plus a palette and type card in "Kierunek", the variant B pair for Google Play next to the App Store pair, the masked icon previews and a "Połącz kadry w panoramę" switch in the PL and EN island, which shows that the six files are cut from one picture.
+25. **Szyld screenshot 1** shows the Gotowe screen (three shops on one walk home) instead of the Koszyk screen, so the basket appears once (frame 3, with the route) and the first frame shows the promise itself.
+26. **Szyld headlines rephrased** so no line ends with one word at the set's size (48 CSS px App Store, 31 Play, Mona Sans width 125 weight 900): PL 4 "Godzina odbioru, jaka ci pasuje" (was "Odbiór o godzinie, którą wybierasz"), PL 5 "Pokaż kod, zakupy w ręku" (was "Kod przy ladzie i po sprawie"), EN 2 "Your street's shops on one map" (was "Every shop on your street, mapped"). The only per language layout values are the decorative giant time ("17:30" and "5:30") and word ("SOBOTA" and "SATURDAY"), sized to fill the frame.
+27. **Szyld exports JPEG at quality 90** with 4:4:4 chroma (the foundation default stays 92): the ZIP is 13 MB, under the 15 MB cap, with no visible loss at 100 percent. The EN set keeps the Poznań world (shop names, Jeżyce, prices in zł) written for an English speaking resident; five invented shop names were searched on 2026-10-07 and none exists.
+28. **Foundation additions during B2**, backward compatible and checked by re-rendering Grań pixel for pixel: `box` and `transform` options on the kit phone and card (a device may bleed off the frame and take a 3D transform), vertical headlines (`data-vertical`) in the line check, and `jpegQuality` in `app.json`.
+

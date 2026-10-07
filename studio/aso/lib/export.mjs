@@ -1,12 +1,12 @@
 import sharp from 'sharp';
 import { isJpeg, pngInfo } from './png.mjs';
 
-export const flattenImage = async (input, { format, background, width, height }) => {
+export const flattenImage = async (input, { format, background, width, height, quality = 92 }) => {
   let image = sharp(input).flatten({ background }).removeAlpha().toColourspace('srgb');
   const meta = await sharp(input).metadata();
   if (meta.width !== width || meta.height !== height) image = image.resize(width, height, { fit: 'fill' });
   if (format === 'jpg') {
-    return image.jpeg({ quality: 92, mozjpeg: true, chromaSubsampling: '4:4:4' }).toBuffer();
+    return image.jpeg({ quality, mozjpeg: true, chromaSubsampling: '4:4:4' }).toBuffer();
   }
   return image.png({ compressionLevel: 9, adaptiveFiltering: true, palette: false }).toBuffer();
 };

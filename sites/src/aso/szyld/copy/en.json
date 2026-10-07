@@ -1,0 +1,245 @@
+{
+  "lang": "en",
+  "label": "English",
+  "app": {
+    "name": "Szyld",
+    "tagline": "Order local, collect on your way"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "gotowe",
+      "headline": "Order local, collect on your way",
+      "alt": "Szyld pickup screen: a bakery, a greengrocer and a florist lined up on one walk through Jeżyce, phone tilted in perspective."
+    },
+    {
+      "id": "02",
+      "screen": "okolica",
+      "headline": "Your street's shops on one map",
+      "alt": "Map of Jeżyce with shop pins floating above the screen: bakery, greengrocer, florist, hardware shop and bookshop."
+    },
+    {
+      "id": "03",
+      "screen": "koszyk",
+      "headline": "One basket, three shops, one route",
+      "alt": "A basket split across three shops with the pickup order and a 1.1 km walk. Shop tags fly out of the phone."
+    },
+    {
+      "id": "04",
+      "screen": "godzina",
+      "headline": "Pick up when it suits you",
+      "alt": "Choosing a pickup time at each shop, 5:30 pm selected. Giant outlined numbers 5:30 sit behind the phone."
+    },
+    {
+      "id": "05",
+      "screen": "kod",
+      "headline": "Show your code at the counter",
+      "alt": "Pickup code SZ 4827 with a drawn scan pattern and a note for the shop assistant. The code card slides out in front of the phone."
+    },
+    {
+      "id": "06",
+      "screen": "stale",
+      "headline": "Saturday bread that orders itself",
+      "alt": "A standing Saturday order: rye loaf and six rolls every week at 8:30 am, with a skip option. The word SATURDAY behind the phone."
+    }
+  ],
+  "variantB": {
+    "screen": "sklep",
+    "headline": "They set it aside for you",
+    "alt": "A bakery page with today's stock and how many are left. A badge saying it is held until 7 pm pops out of the screen."
+  },
+  "feature": {
+    "headline": "Order local, collect on your way",
+    "alt": "Green to lime gradient with grain, the name Szyld, the line about ordering local and three shop tags in perspective."
+  },
+  "ui": {
+    "tabs": ["Nearby", "Basket", "Pickups", "Repeats"],
+    "place": "Jeżyce, Poznań",
+    "shops": {
+      "piekarnia": {
+        "name": "Piekarnia Na Zakręcie",
+        "short": "Bakery",
+        "kind": "bakery",
+        "street": "Jackowskiego 21",
+        "hours": "open till 7 pm"
+      },
+      "warzywniak": {
+        "name": "Warzywniak Pod Kasztanem",
+        "short": "Greengrocer",
+        "kind": "fruit and veg",
+        "street": "Rynek Jeżycki 4",
+        "hours": "open till 6 pm"
+      },
+      "kwiaciarnia": {
+        "name": "Kwiaciarnia Kalina",
+        "short": "Florist",
+        "kind": "flowers",
+        "street": "Szamarzewskiego 15",
+        "hours": "open till 7 pm"
+      },
+      "srubka": {
+        "name": "Śrubka i Syn",
+        "short": "Hardware",
+        "kind": "hardware",
+        "street": "Kraszewskiego 8",
+        "hours": "open till 6 pm"
+      },
+      "ksiegarnia": {
+        "name": "Księgarnia Dwie Półki",
+        "short": "Books",
+        "kind": "bookshop",
+        "street": "Dąbrowskiego 40",
+        "hours": "open till 8 pm"
+      }
+    },
+    "okolica": {
+      "title": "Nearby",
+      "search": "Bread, flowers, a light bulb",
+      "filters": ["Open now", "Bakeries", "Fruit and veg", "Flowers"],
+      "open": "open",
+      "streets": [
+        "Dąbrowskiego",
+        "Kraszewskiego",
+        "Jackowskiego",
+        "Szamarzewskiego",
+        "Rynek Jeżycki"
+      ],
+      "you": "You",
+      "sheetTitle": "5 shops within a 10 minute walk",
+      "list": [
+        { "shop": "piekarnia", "distance": "250 m", "note": "bread until 7 pm" },
+        { "shop": "warzywniak", "distance": "400 m", "note": "heirloom tomatoes today" },
+        { "shop": "kwiaciarnia", "distance": "550 m", "note": "tulips in this morning" }
+      ]
+    },
+    "sklep": {
+      "back": "Nearby",
+      "today": "On the shelf today",
+      "updated": "as of 4:42 pm",
+      "hold": "Held for you until 7 pm",
+      "holdNote": "Order now, collect after work. Nobody else can buy it.",
+      "left": "left",
+      "items": [
+        {
+          "name": "Sourdough rye loaf",
+          "unit": "800 g",
+          "price": "14.50 zł",
+          "left": "4",
+          "low": true
+        },
+        { "name": "Kaiser roll", "unit": "60 g", "price": "1.20 zł", "left": "22" },
+        {
+          "name": "Challah with crumble",
+          "unit": "450 g",
+          "price": "11.00 zł",
+          "left": "3",
+          "low": true
+        },
+        { "name": "Cheese danish", "unit": "each", "price": "5.50 zł", "left": "9" }
+      ],
+      "button": "Add to basket"
+    },
+    "koszyk": {
+      "title": "Basket",
+      "summary": "3 shops, 6 items",
+      "route": "Pickup route",
+      "routeMeta": "1.1 km, about 15 min on foot",
+      "start": "From: Kościelna 12",
+      "groups": [
+        {
+          "shop": "piekarnia",
+          "time": "5:30",
+          "items": [
+            ["Sourdough rye loaf", "1", "14.50 zł"],
+            ["Kaiser rolls", "4", "4.80 zł"]
+          ]
+        },
+        {
+          "shop": "warzywniak",
+          "time": "5:40",
+          "items": [
+            ["Heirloom tomatoes", "0.5 kg", "8.45 zł"],
+            ["Dill", "1 bunch", "3.00 zł"]
+          ]
+        },
+        {
+          "shop": "kwiaciarnia",
+          "time": "5:50",
+          "items": [
+            ["Yellow tulips", "7", "42.00 zł"],
+            ["Kraft paper wrap", "1", "2.00 zł"]
+          ]
+        }
+      ],
+      "totalLabel": "Total, pay when you collect",
+      "total": "74.75 zł",
+      "button": "Order for 5:30 pm"
+    },
+    "godzina": {
+      "title": "Pickup time",
+      "lead": "Each shop gets your order ready for the time you pick.",
+      "day": "Today, Wednesday 7 October",
+      "rows": [
+        { "shop": "piekarnia", "slots": ["5:00", "5:30", "6:00", "6:30"], "active": 1 },
+        { "shop": "warzywniak", "slots": ["5:15", "5:40", "5:55"], "active": 1 },
+        { "shop": "kwiaciarnia", "slots": ["5:30", "5:50", "6:20"], "active": 1 }
+      ],
+      "note": "Running late? The shop keeps your order until closing.",
+      "button": "Confirm 5:30 pm"
+    },
+    "kod": {
+      "title": "Pickup code",
+      "shop": "piekarnia",
+      "code": "SZ 4827",
+      "label": "Show this at the counter",
+      "name": "Order for: Ania K.",
+      "ready": "On the shelf since 5:22 pm",
+      "counterTitle": "Note for the shop",
+      "counter": "Please slice the loaf, rolls in a separate bag.",
+      "items": "2 items, 19.30 zł",
+      "next": "Next: Warzywniak Pod Kasztanem, 3 min"
+    },
+    "stale": {
+      "title": "Standing order",
+      "name": "Saturday bread",
+      "every": "Every Saturday, pick up at 8:30 am",
+      "items": [
+        ["Sourdough rye loaf", "1", "14.50 zł"],
+        ["Kaiser rolls", "6", "7.20 zł"]
+      ],
+      "total": "21.70 zł",
+      "upcomingTitle": "Coming Saturdays",
+      "upcoming": [
+        { "date": "10 Oct", "state": "ordered" },
+        { "date": "17 Oct", "state": "skipped" },
+        { "date": "24 Oct", "state": "ordered" },
+        { "date": "31 Oct", "state": "ordered" }
+      ],
+      "skipped": 1,
+      "remind": "Reminder on Friday at 8 pm",
+      "pause": "Pause",
+      "skip": "Skip a Saturday"
+    },
+    "gotowe": {
+      "title": "On your way home",
+      "lead": "Your walk from work, 1.1 km",
+      "stops": [
+        { "shop": "piekarnia", "state": "Waiting on the shelf", "time": "5:30", "ready": true },
+        { "shop": "warzywniak", "state": "Being packed", "time": "5:40" },
+        { "shop": "kwiaciarnia", "state": "Order received", "time": "5:50" }
+      ],
+      "readyLabel": "ready",
+      "button": "Walk me to the first shop",
+      "codeHint": "Pickup code: SZ 4827"
+    },
+    "tags": {
+      "piekarnia": "2 items",
+      "warzywniak": "2 items",
+      "kwiaciarnia": "2 items"
+    },
+    "big": {
+      "time": "5:30",
+      "day": "SATURDAY"
+    }
+  }
+}
