@@ -2,7 +2,7 @@ name: Pages
 
 on:
   push:
-    branches: [rebrand-2026]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

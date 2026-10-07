@@ -24,7 +24,7 @@ Status on 2026-10-03: the site side is built (blog pages, feed, SEO, navigation,
 ## How Command Center publishes
 
 - It writes only inside `content/blog/` through the GitHub API, with a fine-grained token limited to this repository. The article and its image go in one commit (Git Data API). The commit message follows the repo style (lowercase, one line, for example `publish the post on ...`).
-- The deploy runs from the branch used by `.github/workflows/pages.yml` (`rebrand-2026` today). After the rebrand branch is merged into `main`, the target branch is changed in the Command Center setting.
+- The deploy runs from the branch used by `.github/workflows/pages.yml` (`main` since 2026-10-07, when `rebrand-2026` was merged into it). The Command Center setting `content.branch` is `main` too.
 - It waits for the page to answer HTTP 200 before cross-posting, so the canonical URL always resolves.
 - Rollback removes the article folder with a commit and unpublishes the dev.to copy.
 - Local clones: run `git pull` before starting any work on this branch, because article commits arrive from outside.
