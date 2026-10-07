@@ -20,5 +20,8 @@
 ## Work
 
 - [TailorCloth](https://adrianturbinski.pl/en/archive/tailorcloth/): a website on Odoo with custom product management modules for a tailoring company from Kraków, built with the team he led at Media Hunters; another agency maintains it today
+- [flagtide](https://adrianturbinski.pl/en/archive/flagtide/): a self-hosted feature flag service, a Quarkus back end that pushes changes over WebSockets and an Angular SDK on npm; live demo, source on GitHub, measured numbers
+- [gridtwin](https://adrianturbinski.pl/en/archive/gridtwin/): an educational digital twin of a small transmission network, an AC power flow checked against MATPOWER, a single-line diagram and a 3D substation in Angular, a Java and Quarkus back end; live demo and source on GitHub
+- [coschema](https://adrianturbinski.pl/en/archive/coschema/): a real-time collaborative diagram editor in Angular with offline editing, per-user undo and a convergence simulator; live demo and source on GitHub
 - [Sample websites](https://adrianturbinski.pl/wzornik/): nine websites for made-up businesses, each with its own typeface, palette and signature element; every page says the business is made up; in Polish, Kminek and Przęsło also in English
 - [Projects](https://adrianturbinski.pl/en/archive/): the index of the work above

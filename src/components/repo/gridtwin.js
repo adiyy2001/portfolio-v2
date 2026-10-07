@@ -8,7 +8,6 @@ const gridtwin = {
   demo: 'https://gridtwin.adrianturbinski.pl/',
   results: `${repo}/tree/main/bench/results`,
   languages: ['Java', 'TypeScript'],
-  line: 'Angular, TypeScript, Three.js, Java, Quarkus, WebSockets',
   video: { width: 900, height: 563 },
   pl: {
     title: 'gridtwin: cyfrowy bliźniak sieci w Angularze i Javie, Adrian Turbiński',
@@ -18,8 +17,6 @@ const gridtwin = {
     lead: 'Cyfrowy bliźniak małej sieci przesyłowej w przeglądarce: otwierasz wyłącznik w stacji 3D albo na schemacie jednokreskowym i patrzysz, jak rozpływ mocy AC rozkłada obciążenie na nowo, przeciąża linię, a jeśli pójdziesz dalej, kończy się kaskadową awarią.',
     model:
       'To model edukacyjny na publicznych sieciach testowych IEEE 14 i IEEE 30. Stacja w miejscu szyny 4 jest zmyślona i nic tu nie opisuje prawdziwej sieci.',
-    summary:
-      'Cyfrowy bliźniak sieci przesyłowej. Rozpływ mocy zgodny z MATPOWER, schemat jednokreskowy i stacja 3D w Angularze, back-end w Javie i Quarkusie.',
     clip: 'Otwarcie sprzęgła szyn, przeciążona linia, tabela N-1 i odtworzenie kaskady.',
     note: 'Demo działa w jednym kontenerze na moim domowym serwerze. Sesje żyją w pamięci, a kontener restartuje się co godzinę, więc twoje przełączenia potem znikają.',
     why: [
@@ -159,8 +156,6 @@ const gridtwin = {
     lead: 'A digital twin of a small transmission network in the browser: open a breaker in a 3D substation or its single-line diagram and watch an AC power flow redistribute the load, overload a line and, if you keep going, cascade into an outage.',
     model:
       'It is an educational model on the public IEEE 14-bus and IEEE 30-bus test cases. The substation that replaces bus 4 is made up, and nothing here describes a real grid.',
-    summary:
-      'A digital twin of a transmission network. A power flow that matches MATPOWER, a single-line diagram and a 3D substation in Angular, a Java and Quarkus back end.',
     clip: 'Opening the bus coupler, the overloaded line, the N-1 table and a cascade replay.',
     note: 'The demo runs in one container on my home server. Sessions live in memory and the container restarts every hour, so whatever you switched is gone after that.',
     why: [
