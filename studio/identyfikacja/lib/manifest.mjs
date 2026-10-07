@@ -37,11 +37,9 @@ export const probeFile = async (pub, path) => {
 };
 
 const summarize = files => {
-  const formats = [...new Set(files.map(file => file.type.toUpperCase()))];
   const pngWidths = [...new Set(files.filter(file => file.type === 'png').map(file => file.width))].sort((a, b) => a - b);
-  const parts = [formats.join(', ')];
-  if (pngWidths.length > 0) parts.push(`PNG ${pngWidths.join(', ')} px`);
-  return parts.join(', ');
+  const formats = [...new Set(files.map(file => file.type.toUpperCase()))].map(format => (format === 'PNG' && pngWidths.length > 0 ? `PNG ${pngWidths.join(', ')} px` : format));
+  return formats.join(', ');
 };
 
 export const buildManifest = async (brand, { colors, fonts }) => {

@@ -8,11 +8,11 @@
     "city": "Łódź"
   },
   "base": "/wzornik/identyfikacja/nosna/",
-  "totalBytes": 10832425,
-  "totalHuman": "10.3 MB",
+  "totalBytes": 10969164,
+  "totalHuman": "10.5 MB",
   "zip": {
     "path": "nosna-identyfikacja.zip",
-    "bytes": 4376797
+    "bytes": 4430227
   },
   "groups": [
     {
@@ -120,7 +120,7 @@
       "id": "icons",
       "title": "Ikony",
       "count": 13,
-      "bytes": 2502,
+      "bytes": 4164,
       "formats": "SVG",
       "files": [
         "icons/nosna-icons.svg",
@@ -142,7 +142,7 @@
       "id": "print",
       "title": "Druk",
       "count": 2,
-      "bytes": 38444,
+      "bytes": 38489,
       "formats": "PDF",
       "files": [
         "print/nosna-business-card.pdf",
@@ -176,7 +176,7 @@
       "id": "mockups",
       "title": "Makiety",
       "count": 5,
-      "bytes": 547284,
+      "bytes": 547361,
       "formats": "JPG",
       "files": [
         "mockups/nosna-application.jpg",
@@ -201,7 +201,7 @@
       "id": "brandbook",
       "title": "Brand book",
       "count": 1,
-      "bytes": 2081702,
+      "bytes": 2136346,
       "formats": "PDF",
       "files": [
         "nosna-brandbook.pdf"
@@ -211,7 +211,7 @@
       "id": "zip",
       "title": "Wszystko w jednym pliku",
       "count": 1,
-      "bytes": 4376797,
+      "bytes": 4430227,
       "formats": "ZIP",
       "files": [
         "nosna-identyfikacja.zip"
@@ -220,8 +220,8 @@
     {
       "id": "meta",
       "title": "Pozostałe",
-      "count": 9,
-      "bytes": 77736,
+      "count": 10,
+      "bytes": 104617,
       "formats": "SVG, PNG, PNG 1200 px",
       "files": [
         "figures/clearspace.svg",
@@ -230,6 +230,7 @@
         "figures/direction-nitki.svg",
         "figures/direction-nosna.svg",
         "figures/grid-12.svg",
+        "figures/kerning-zoom.svg",
         "figures/wordmark-default.svg",
         "figures/wordmark-kerned.svg",
         "og.png"
@@ -313,11 +314,11 @@
     },
     {
       "path": "figures/days-envelope.svg",
-      "bytes": 1339,
+      "bytes": 1981,
       "type": "svg",
       "group": "meta",
       "width": 300,
-      "height": 90
+      "height": 150
     },
     {
       "path": "figures/direction-akcent.svg",
@@ -350,6 +351,14 @@
       "group": "meta",
       "width": 2600,
       "height": 890
+    },
+    {
+      "path": "figures/kerning-zoom.svg",
+      "bytes": 26239,
+      "type": "svg",
+      "group": "meta",
+      "width": 932,
+      "height": 224
     },
     {
       "path": "figures/wordmark-default.svg",
@@ -417,9 +426,11 @@
     },
     {
       "path": "icons/nosna-icons.svg",
-      "bytes": 88,
+      "bytes": 1750,
       "type": "svg",
-      "group": "icons"
+      "group": "icons",
+      "width": 24,
+      "height": 24
     },
     {
       "path": "icons/svg/nosna-icon-bilet.svg",
@@ -933,7 +944,7 @@
     },
     {
       "path": "mockups/nosna-email-signature.jpg",
-      "bytes": 70614,
+      "bytes": 70691,
       "type": "jpg",
       "group": "mockups"
     },
@@ -945,7 +956,7 @@
     },
     {
       "path": "nosna-brandbook.pdf",
-      "bytes": 2081702,
+      "bytes": 2136346,
       "type": "pdf",
       "group": "brandbook",
       "pages": 28,
@@ -960,7 +971,7 @@
     },
     {
       "path": "nosna-identyfikacja.zip",
-      "bytes": 4376797,
+      "bytes": 4430227,
       "type": "zip",
       "group": "zip"
     },
@@ -983,7 +994,7 @@
     },
     {
       "path": "print/nosna-business-card.pdf",
-      "bytes": 14875,
+      "bytes": 14889,
       "type": "pdf",
       "group": "print",
       "pages": 2,
@@ -998,7 +1009,7 @@
     },
     {
       "path": "print/nosna-letterhead.pdf",
-      "bytes": 23569,
+      "bytes": 23600,
       "type": "pdf",
       "group": "print",
       "pages": 1,

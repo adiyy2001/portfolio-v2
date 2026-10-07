@@ -45,6 +45,16 @@ describe('stripe composer', () => {
     expect(composerSvg({ ...defaultParams, wear: true })).toContain('feTurbulence');
   });
 
+  it('keeps every stripe inside the stage for every count and curve', () => {
+    [2, 3, 4, 5].forEach(count =>
+      [0, 0.5, 1].forEach(curvature => {
+        const stripes = composerStripes({ ...defaultParams, count, curvature });
+        expect(stripes).toHaveLength(count);
+        stripes.forEach(stripe => expect(stripe.d).not.toMatch(/NaN/));
+      }),
+    );
+  });
+
   it('describes the stripes in Polish with the right plural', () => {
     expect(describeParams(defaultParams)).toMatch(/^3 pasy: Pomarańcz, Musztarda, Brąz/);
     expect(describeParams({ ...defaultParams, count: 5 })).toMatch(/^5 pasów/);
@@ -80,6 +90,10 @@ describe('case study content', () => {
   it('gives alt text for every application and three social posts', () => {
     content.applications.forEach(item => expect(item.alt.length).toBeGreaterThan(20));
     expect(extras.social).toHaveLength(3);
+  });
+
+  it('states what the client provides and what comes back', () => {
+    expect(extras.engagement).toHaveLength(3);
   });
 
   it('lists the six logo variants', () => {

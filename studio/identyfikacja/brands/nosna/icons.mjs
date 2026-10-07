@@ -4,7 +4,10 @@ import { writeFile } from '../../lib/files.mjs';
 import { brand, c, file } from './theme.mjs';
 
 export const icons = {
-  bilet: ['M3 7h18v3.5a1.5 1.5 0 0 0 0 3V17H3v-3.5a1.5 1.5 0 0 0 0-3Z', 'M15 8.5v1.5M15 11.25v1.5M15 14v1.5'],
+  bilet: [
+    'M3 7h18v3.5a1.5 1.5 0 0 0 0 3V17H3v-3.5a1.5 1.5 0 0 0 0-3Z',
+    'M15 8.5v1.5M15 11.25v1.5M15 14v1.5',
+  ],
   scena: ['M3 17.5h18V21H3Z', 'M12 3v7', 'M12 10l-5 7.5M12 10l5 7.5'],
   glosnik: ['M6 3h12v18H6Z', 'M12 11.5a3.5 3.5 0 1 0 .01 0Z', 'M12 6.6h.01'],
   sluchawki: ['M4 15v-3a8 8 0 0 1 16 0v3', 'M4 14h3.5v6H4Z', 'M16.5 14H20v6h-3.5Z'],
@@ -32,6 +35,14 @@ export const buildIcons = () => {
     if (!icons[name]) throw new Error(`no drawing for icon ${name}`);
     writeFile(join(brand.paths.pub, file.icon(name)), `${optimizeSvg(iconSvg(name))}\n`);
   }
-  const symbols = brand.iconNames.map(name => `<symbol id="${name}" viewBox="0 0 24 24">${icons[name].map(d => `<path d="${d}"/>`).join('')}</symbol>`).join('');
-  writeFile(join(brand.paths.pub, file.iconsSprite), `${optimizeSvg(`<svg xmlns="http://www.w3.org/2000/svg" ${attrs} stroke="${c.atrament}">${symbols}</svg>`)}\n`);
+  const symbols = brand.iconNames
+    .map(
+      name =>
+        `<symbol id="${name}" viewBox="0 0 24 24">${icons[name].map(d => `<path d="${d}"/>`).join('')}</symbol>`,
+    )
+    .join('');
+  writeFile(
+    join(brand.paths.pub, file.iconsSprite),
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" ${attrs} stroke="${c.atrament}">${symbols}</svg>\n`,
+  );
 };

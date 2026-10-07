@@ -6,7 +6,9 @@
 html,body{margin:0;width:1080px;height:1080px;overflow:hidden;background:#f8edd5}
 .stage{position:relative;width:1080px;height:1080px;background:#f8edd5;overflow:hidden}
 img{position:absolute;display:block}
-#badge{left:290px;top:290px;width:500px;height:500px;transform-origin:50% 50%}
+#badge{position:absolute;left:290px;top:290px;width:500px;height:500px;transform-origin:50% 50%}
+#badge img{left:0;top:0;width:500px;height:500px}
+#disc{position:absolute;left:58px;top:58px;width:384px;height:384px;border-radius:50%;background:#f8edd5}
 #lockup{left:140px;top:230px;width:800px;opacity:0;clip-path:inset(282px 0 0 0)}
 #trail{position:absolute;left:0;top:0}
 #roll{position:absolute;left:0;top:0;width:1080px;height:1080px}
@@ -18,7 +20,7 @@ img{position:absolute;display:block}
 <path id="t2" pathLength="1" stroke="#e9a81d" stroke-dasharray="1 1" stroke-dashoffset="1" d="M-60 540C150 576 360 556 540 540"/>
 <path id="t3" pathLength="1" stroke="#5b2f14" stroke-dasharray="1 1" stroke-dashoffset="1" d="M-60 596C150 632 360 612 540 596"/>
 </svg>
-<img id="badge" alt="" src="../../../../../sites/public/identyfikacja/wolnobieg/logo/wolnobieg-symbol.svg"></div>
+<div id="badge"><div id="disc"></div><img alt="" src="../../../../../sites/public/identyfikacja/wolnobieg/logo/wolnobieg-symbol.svg"></div></div>
 <img id="lockup" alt="" src="../../../../../sites/public/identyfikacja/wolnobieg/logo/wolnobieg-vertical.svg">
 </div>
 <script>

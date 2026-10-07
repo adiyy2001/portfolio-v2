@@ -98,3 +98,26 @@ Scores before: style 3, sales 3, craft 4, system 4, accessibility 4, distinctnes
 - Checks: studio validate 64 of 64, guard 0 problems, `yarn --cwd sites run check` 0 errors, `yarn --cwd sites test` 1262 tests pass, `yarn --cwd sites build` 185 pages, screens at 390 and 1440 px 0 problems, brand book pages 6, 7, 14, 22, 27, 28 viewed.
 
 Still open and shared (change requests for the merging agent, unchanged): the ZIP README plural in `scripts/zip.mjs`, the doubled PNG in `lib/manifest.mjs` `summarize`, no MP4, WebM and mockups in the ZIP (`convention.mjs` `zipExcludes`), the 404 for `/fonts/schibsted-grotesk.woff2`, `/fonts/bespoke-serif-700.woff2` and `/favicon.svg` on the index page under `/wzornik`. Not done on purpose: moving the cinnabar hero away from the Wolnobieg orange (they are not shown side by side).
+
+## Review round 3 repairs
+
+Scores before: craft 3, system 4, accessibility 4, sales 4, style 5, fit 5, distinctness 5. Branch wzornik-identyfikacja-b2, after merging the current wzornik-identyfikacja.
+
+- Typesetting. One function, `sites/src/identyfikacja/nosna/lib/tie.ts` (`tie`, `tieHtml`), glues every one letter word, number plus unit (BPM, px, mm, KB, MB) and short abbreviations with U+00A0. The page wraps its whole body in `Tied.astro`, which renders the slot and ties the text nodes only (tags, attributes, scripts, svg and the hydrated generator island are skipped). The brand book HTML and every scene (mockups, posters, print PDFs) go through the same function. A rendered scan of line ends at 390 and 1440 px finds 0 dangling one letter words (was 33 and 36); the built HTML has no plain "letter + space" pair left. Unit tests cover the function.
+- Brand book p23: the heading no longer uses nowrap, is 50 px and fits the card with its padding; 22 px between the lead and the first rule.
+- Brand book p12: no longer full bleed; page margin, a title and the running header, captions on one line at 16 px, marks sit above the captions.
+- Icon sprite: `icons/nosna-icons.svg` is no longer passed through SVGO, which removed every symbol. It holds 12 symbols and a viewBox (a test checks this). The same empty sprite exists in the skibka, klamra and cuvee folders; those brands are not touched here (see notes).
+- Kerning proof: the pairs are corrected by 2 to 6 thousandths of an em, invisible at word size. New figure `figures/kerning-zoom.svg` shows the four joints No, oś, śn, na at about 2000 percent with the old outline in cinnabar over the corrected word; used on the page (full width under the two word figures) and on brand book p14. The page row for the kerning text is now a single column so the figures are wider.
+- Days envelope: redrawn at 300 x 150 with a peak dot and guide per day, a legend under it (Piątek: szczyt bliżej początku, Sobota: szczyt pośrodku pola, Niedziela: szczyt bliżej końca) and a one line caption, on the page and on brand book p10; the empty block is gone. The legend says "bliżej" because the peaks sit at 0.33, 0.5 and 0.66 of the field.
+- README in the ZIP: plurals come from the shared `zip.mjs` fix that arrived with the merge (1 plik, 2 pliki, 5 plików); the ZIP is rebuilt.
+- Day band descriptors: right aligned on desktop (min width 900 px) for all three days, under the title on mobile.
+- System: brand book p16 now says "Nie obracamy poza wersją pionową"; the icon lead no longer claims round caps and a ring (icons use butt caps, mitre joins, no ring) and says what they are; the favicon is described as a reduced derivative of the symbol on the page (the legibility test text) and on brand book p11.
+- Accessibility: the mockups, the avatar and the social posts are links to their full size file (opens in a new tab); the footer and hero links have at least 24 px of hit area; the hero line "Co dostaniesz" ends with a link to the file list (#pliki).
+
+Not changed, with reasons:
+
+- The index page line "wszystko w jednej paczce ZIP" and the ZIP contents (no animation, no mockups) are shared (index page, `zip.mjs`); a reword to "logo, kolory, kroje, ikony i druki w jednej paczce ZIP" is the cheaper fix there.
+- Posters are shown at one size per day, not three; the plan text promised three sizes and was not edited (PLAN.md is shared).
+- The default hero stays on Piątek; the type, shapes and structure already separate it from Wolnobieg.
+
+Checks after the repairs: `node identyfikacja/scripts/pipeline.mjs nosna --from zip` validate 64 of 64, `yarn --cwd sites run check` exit 0, `yarn --cwd sites test` 120 files and 1279 tests, `yarn --cwd sites build` 185 pages, `yarn --cwd studio test` 8 pass, guard 74 files and 0 problems. Page screens at 390 and 1440 px: 0 problems, generator still hydrates and responds (day change updates the readout, no console messages).

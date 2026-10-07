@@ -106,3 +106,21 @@ Not done: the simplified sign on a browser tab mockup, ZIP with mockups and anim
 Known and harmless: `screens.mjs` reports one `net::ERR_ABORTED` for the WebM, the browser cancels the first range request of the video after reading the metadata; the video loads (readyState 4).
 
 Checks: `validate.mjs` 64 of 64, `guard.mjs` 0 problems, no en or em dashes, `yarn --cwd sites run check` 0 errors, `yarn --cwd sites test` 1260 passed, `yarn --cwd sites build` 185 pages, `yarn --cwd studio test` ok, `screens.mjs` no console errors, no overflow, one h1 at 390 and 1440 px, brand book 28 pages.
+
+## Review round 3 repairs
+
+Scores before: craft 3; coherence, legibility and accessibility, sales value 4; fidelity, fit, distinctness 5. Fixed:
+
+- Brand book (now 30 pages): page 4 copy fits with at least 54 px above the footer; a DOM check of every page measures the last content line against the footer and the smallest gap is 41 px; page 8 cards have larger type; page 13 shows six misuse examples in two rows (added "Nie ściskamy" and "Nie kładziemy na wzorze"); the business card, letterhead, sign with tag and e-mail mock-ups each have their own page at 2 to 3 times the earlier size with a short spec column, so mock-up text is no longer about 9 px; the sygnet on cream, orange and cocoa is on the proportions page (page 17) so no ring disappears; type scale samples are bigger; contrast and type tables use comma decimals.
+- Social posts: post 3 headline is 50 px above the first card, post 2 cog moved right and down so the footer stays clear of the teeth.
+- Logo animation: an opaque cream disc inside the badge hides the roll stripes, so they run only behind the badge; MP4, WebM and the poster rebuilt, frames at 0.4, 0.8, 1.2 and 1.6 s checked in both.
+- Stripe composer: the stage is 600 by 440 and the stripes are centred on their real extent, so five stripes at 100 percent no longer touch the top; the arcs end inside the stage with round caps.
+- Icons redrawn: 3 px stroke, round terminals, one filled palette accent per icon, dętka drawn as a tube with a valve, lampka as a headlight with beams; 72 px on the page inside cream discs with a coloured ring, 150 px in the brand book. ZIP and manifest rebuilt.
+- Type scale on the page, in the brand book and in the data now says the real line heights (1,25 for Tytuł, 1,2 for Nagłówek).
+- Favicon: a cream halo around the cog, so the brown rim holds on a dark browser tab.
+- Page: speckle texture on the brown and olive bands is much weaker behind text; the phone nav pill row hides the mark, fades at the right edge to show it scrolls; the hero no longer repeats Branża, Miejsce and Zakres; the muted logo loop plays when it is half in view (not with reduced motion); the CTA lists what the client provides and what comes back.
+- Download summary reads "PNG 1080 px" for the social media group: small fix in the shared `summarize` in `studio/identyfikacja/lib/manifest.mjs` (the format is listed once, with its widths).
+
+Not done: ZIP with mockups and animation (the convention excludes them and the page says so), an extra short horizontal lockup for 48 px headers.
+
+Checks: `validate.mjs` 64 of 64, `guard.mjs` 0 problems, no en or em dashes, `yarn --cwd sites run check` 0 errors, `yarn --cwd sites test` 1262 passed, `yarn --cwd sites build` 185 pages, `yarn --cwd studio test` ok, `screens.mjs` at 390 and 1440 px (also reduced motion) no overflow, one h1, only the known WebM range abort.

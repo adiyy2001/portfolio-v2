@@ -21,36 +21,35 @@ Linki: blok "Identyfikacja wizualna" z sześcioma linkami i indeksem w `#wzornik
 
 ## Weryfikacja publikacji
 
-- `yarn lint` przechodzi (naprawiono 6 nieużywanych zmiennych w skryptach studio), `yarn gatsby clean && yarn build`, `yarn --cwd sites run check` (0 błędów), `yarn --cwd sites test` (1275 testów), `yarn --cwd sites build` (185 stron).
-- `sites/dist` skopiowane do `public/wzornik`, serwowane na 127.0.0.1:4310: 515 plików w `wzornik/identyfikacja` (54 PDF, 6 ZIP, 6 MP4, 6 WebM, 144 PNG, 177 SVG, 6 ICO) odpowiada 200 pod finalnymi ścieżkami. Dwie edycje klienta, indeks i sześć stron: brak błędów w konsoli. Jedyny nieudany request to zewnętrzny `gc.zgo.at/count.js` (GoatCounter, błąd certyfikatu w tym środowisku), niezwiązany z tą pracą.
-- Rozmiary: największy plik poniżej 50 MB, całość identyfikacji 47 MB, cały `wzornik` 59 MB, daleko od limitu 300 MB.
+- `yarn lint` przechodzi (naprawiono 6 nieużywanych zmiennych w skryptach studio), `yarn gatsby clean && yarn build`, `yarn --cwd sites run check` (0 błędów), `yarn --cwd sites test` (1281 testów), `yarn --cwd sites build` (185 stron).
+- `sites/dist` skopiowane do `public/wzornik`, serwowane na 127.0.0.1:4310: 503 pliki w `wzornik/identyfikacja` (pliki bez HTML: PDF, ZIP, MP4, WebM, PNG, SVG, ICO) odpowiada 200 pod finalnymi ścieżkami. Dwie edycje klienta, indeks i sześć stron: brak błędów w konsoli. Jedyne nieudane requesty: zewnętrzny `gc.zgo.at/count.js` (GoatCounter, błąd certyfikatu w tym środowisku), niezwiązany z tą pracą, oraz przerwane przez Chromium bez kodeka żądania WebM w Cuvée i Wolnobiegu (pliki same odpowiadają 200).
+- Rozmiary: największy plik 5,2 MB (limit 50 MB), cały `wzornik` 60 MB, daleko od limitu 300 MB.
 
 ## Oceny rubryki (7 kryteriów, 1 do 5), najniższa ocena przed i po poprawkach
 
 | Marka | Rundy | Najniższa po rundzie 1 | Najniższa na końcu | Oceny końcowe |
 |---|---|---|---|---|
 | Skibka | 2 | 3 (rzemiosło, wartość sprzedażowa lub odrębność) | 4 | 5,4,5,5,4,4,5 |
-| Nośna | 3 | 3 | 3 | 5,3,4,5,4,4,5 |
+| Nośna | 4 | 3 | 3 | 5,3,4,5,4,4,4 |
 | Rzut | 2 | 3 | 4 | 5,4,5,5,4,4,5 |
 | Klamra | 2 | 3 | 4 | 5,4,5,5,4,4,5 |
 | Cuvée | 2 | 3 | 4 | 5,4,4,5,4,4,5 |
-| Wolnobieg | 3 | 3 | 3 | 5,3,4,5,4,4,5 |
+| Wolnobieg | 4 | 3 | 4 | 5,4,5,4,4,4,5 |
 
 Kolejność kryteriów: wierność stylowi, rzemiosło, spójność systemu, dopasowanie do branży, czytelność i dostępność, wartość sprzedażowa, odrębność. Pełne wyniki rund: `/home/adrian/root/side_projects/briefs/agent-runs/wzornik-audits/identyfikacja-b*-r*.json`. Oceny po rundzie 1: B1 4,3,4,5,4,4,3; B2 5,4,4,5,4,4,3; B3 4,3,4,5,4,3,4; B4 5,3,5,5,4,4,4; B5 5,3,4,5,4,3,4; B6 5,3,4,5,3,3,5.
 
 ## Czego nie zrobiono i dlaczego
 
-- Definicja ukończenia "wszystkie oceny co najmniej 4" nie jest spełniona. Punkt R w PLAN.md zostaje otwarty. Nośna i Wolnobieg po trzech rundach mają 3 z 5 w rzemiośle.
-  - Nośna: wiszące jednoliterowe spójniki na końcach wierszy (33 przy 1440 px, 36 przy 390 px) i w tekście zostały zwykłe spacje po jednoliterowych słowach.
-  - Wolnobieg: nakładanie się ostatniej linii body copy na stopkę na stronie 4 brand booku, zetknięcie descendera z kartą w poście 3, stopka posta 2 dotykająca zębów koła, widoczne proste pasy w klatkach animacji 0,5 do 1,5 s.
+- Definicja ukończenia "wszystkie oceny co najmniej 4" nie jest spełniona tylko dla Nośnej. Punkt R w PLAN.md zostaje otwarty. Nośna po czterech rundach ma 3 z 5 w rzemiośle (Wolnobieg po rundzie 4 ma najniżej 4).
+  - Nośna (runda 4): usterki układu na stronach 11, 16 i 26 brand booku oraz poziome przewijanie, szczegóły w decyzji 33 w PLAN.md.
 - Rzut: favicon.ico 16 i 32 px to zwykłe pomniejszenia, bez przyciągania do pikseli (ocena 4).
 - Nic nie wypchnięto i nie zmergowano do głównego checkoutu. To krok osoby scalającej.
 
 ## Decyzje dla Adriana
 
-Pełna lista (32 pozycje, z markami) jest w `studio/identyfikacja/PLAN.md` w "Decisions for Adrian". Najważniejsze:
+Pełna lista (33 pozycje, z markami) jest w `studio/identyfikacja/PLAN.md` w "Decisions for Adrian". Najważniejsze:
 
-1. R otwarte: Nośna i Wolnobieg na 3 w rzemiośle po trzech rundach. Zdecyduj, czy akceptujesz, czy zlecasz czwartą rundę (poprawki wdów w Nośnej, strona 4 brand booku i klatki animacji Wolnobiegu).
+1. R otwarte: Nośna na 3 w rzemiośle po czterech rundach (strony 11, 16, 26 brand booku). Zdecyduj, czy akceptujesz, czy zlecasz kolejną rundę. Wolnobieg doszedł do 4.
 2. Nazwy sprawdzone wyszukiwarką w USA, więc to brak dowodu konfliktu, nie czystka prawna. Odrzucone: Zakwasownia, Zaczyn (Kraków), Grona.
 3. Skibka waży 13 MB (budżet 12 MB, limit 16 MB).
 4. Rzut ma kobalt zamiast szwajcarskiej czerwieni, bo Rozwaga ma już czerń, biel i czerwień.

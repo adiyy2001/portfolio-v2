@@ -4,6 +4,7 @@ import { loadBrand } from '../../lib/brand.mjs';
 import { names } from '../../lib/convention.mjs';
 import { pinnedFaceCss } from '../../lib/fonts.mjs';
 import { content, contact, extras } from '../../../../sites/src/identyfikacja/nosna/content.ts';
+import { tieHtml } from '../../../../sites/src/identyfikacja/nosna/lib/tie.ts';
 
 export const brand = loadBrand('nosna');
 export const file = names('nosna');
@@ -13,8 +14,10 @@ export { content, contact, extras };
 export const fontCss = () => pinnedFaceCss(brand, { mode: 'data' });
 export const readPub = path => readFileSync(join(brand.paths.pub, path), 'utf8');
 export const logo = variant => readPub(file.logoSvg(variant));
-export const dataUri = (svg, type = 'image/svg+xml') => `data:${type};charset=utf-8,${encodeURIComponent(svg)}`;
-export const recolor = (svg, map) => Object.entries(map).reduce((acc, [from, to]) => acc.replaceAll(from, to), svg);
+export const dataUri = (svg, type = 'image/svg+xml') =>
+  `data:${type};charset=utf-8,${encodeURIComponent(svg)}`;
+export const recolor = (svg, map) =>
+  Object.entries(map).reduce((acc, [from, to]) => acc.replaceAll(from, to), svg);
 export const sized = (svg, style) => svg.replace('<svg ', `<svg style="${style}" `);
 
 export const baseCss = () => `
@@ -28,4 +31,6 @@ h1,h2,h3{font-family:'Nosna Display',system-ui,sans-serif;font-weight:800;line-h
 `;
 
 export const scene = (body, { width, height, css = '', background = c.kosc }) =>
-  `<!doctype html><html lang="pl"><meta charset="utf-8"><style>${baseCss()}html,body{margin:0;width:${width}px;height:${height}px;overflow:hidden;background:${background}}${css}</style><body>${body}</body></html>`;
+  tieHtml(
+    `<!doctype html><html lang="pl"><meta charset="utf-8"><style>${baseCss()}html,body{margin:0;width:${width}px;height:${height}px;overflow:hidden;background:${background}}${css}</style><body>${body}</body></html>`,
+  );
