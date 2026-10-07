@@ -1,0 +1,599 @@
+{
+  "app": {
+    "slug": "sztanga",
+    "name": "Sztanga",
+    "category": "Dziennik treningu siłowego",
+    "city": "cała Polska",
+    "zone": "tydzień 3 z 4, dzień B",
+    "tagline": "Plan, talerze, przerwa i rekordy w liczbach widocznych z ławki."
+  },
+  "generatedAt": "2026-10-07",
+  "storyboard": {
+    "fps": 30,
+    "duration": 660,
+    "bridge": 15,
+    "poster": 500,
+    "defaultPoster": 150,
+    "shots": [
+      {
+        "id": "hook",
+        "name": "Hak",
+        "from": 0,
+        "to": 59,
+        "key": 58,
+        "action": "Od pierwszej klatki 140 kg na całą szerokość ekranu. Na drugim i trzecim uderzeniu liczba zmienia szerokość, na czwartym wbijają się KG i SERIA 3/5.",
+        "overlay": {
+          "text": "Liczby, które widać z ławki",
+          "from": 4,
+          "to": 72,
+          "top": 712
+        },
+        "seconds": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": "plan",
+        "name": "Plan i talerze",
+        "from": 60,
+        "to": 179,
+        "key": 150,
+        "action": "Plan dnia B: trzy boje wchodzą po jednym na uderzenie. Cięcie na talerze: 25, 25 i 10 kg na stronę, klocek po klocku co pół uderzenia.",
+        "seconds": [
+          2,
+          6
+        ]
+      },
+      {
+        "id": "done",
+        "name": "Seria zaliczona",
+        "from": 180,
+        "to": 299,
+        "key": 245,
+        "action": "Stuknięcie w ZALICZONA odwraca przycisk na jedno uderzenie. Cięcie na przerwę: minutnik 3:00, cyfry tną się co sekundę.",
+        "overlay": {
+          "text": "Przerwa liczona za ciebie",
+          "from": 190,
+          "to": 252,
+          "top": 712
+        },
+        "seconds": [
+          6,
+          10
+        ]
+      },
+      {
+        "id": "lapse",
+        "name": "Przyspieszenie",
+        "from": 300,
+        "to": 419,
+        "key": 395,
+        "action": "Minutnik w przyspieszeniu schodzi do 0:00. Seria 4/5, potem ekran odwraca się na pomarańcz: SERIA 5/5, ostatnia.",
+        "seconds": [
+          10,
+          14
+        ]
+      },
+      {
+        "id": "record",
+        "name": "Rekord",
+        "from": 420,
+        "to": 569,
+        "key": 505,
+        "action": "Martwy ciąg 185 kg zaliczony. Ekran odwraca się na pomarańcz, REKORD wbija się litera po literze, potem 185 × 2 i 1RM ≈ 197 KG. Na koniec historia ośmiu tygodni.",
+        "overlay": {
+          "text": "Nowy rekord? Sztanga zauważy.",
+          "from": 450,
+          "to": 516,
+          "top": 712
+        },
+        "seconds": [
+          14,
+          19
+        ]
+      },
+      {
+        "id": "end",
+        "name": "Zakończenie",
+        "from": 570,
+        "to": 659,
+        "key": 640,
+        "action": "Ekran startowy: SZTANGA ściska się z szerokości 150 do 100, ikona wchodzi na uderzeniu, pod spodem kategoria.",
+        "seconds": [
+          19,
+          22
+        ]
+      }
+    ],
+    "board": "sztanga-storyboard.png"
+  },
+  "marketing": {
+    "duration": 600,
+    "bridge": 15,
+    "outro": 525,
+    "poster": 150,
+    "beats": [
+      {
+        "from": 0,
+        "to": 179,
+        "word": "CIĘŻAR",
+        "line": "Plan dnia i talerze policzone na stronę."
+      },
+      {
+        "from": 180,
+        "to": 299,
+        "word": "SERIE",
+        "line": "Seria zaliczona jednym stuknięciem."
+      },
+      {
+        "from": 300,
+        "to": 419,
+        "word": "PRZERWA",
+        "line": "Minutnik czytelny z ławki."
+      },
+      {
+        "from": 420,
+        "to": 524,
+        "word": "REKORD",
+        "line": "Szacowane 1RM liczy się samo."
+      }
+    ]
+  },
+  "palette": [
+    {
+      "id": "ground",
+      "name": "Czerń",
+      "role": "tło każdego ekranu, tekst na pomarańczu",
+      "hex": "#000000",
+      "onSurface": 1,
+      "onGrouped": 1.14
+    },
+    {
+      "id": "raised",
+      "name": "Grafit",
+      "role": "przyciski drugorzędne, podniesione pola",
+      "hex": "#141414",
+      "onSurface": 1.14,
+      "onGrouped": 1
+    },
+    {
+      "id": "divider",
+      "name": "Linia",
+      "role": "separatory, puste znaczniki serii",
+      "hex": "#2A2A2A",
+      "onSurface": 1.46,
+      "onGrouped": 1.28
+    },
+    {
+      "id": "secondary",
+      "name": "Popiół",
+      "role": "etykiety i tekst drugorzędny",
+      "hex": "#8C8C8C",
+      "onSurface": 6.25,
+      "onGrouped": 5.48
+    },
+    {
+      "id": "ink",
+      "name": "Biel",
+      "role": "liczby, nazwy ćwiczeń, tekst główny",
+      "hex": "#FFFFFF",
+      "onSurface": 21,
+      "onGrouped": 18.42
+    },
+    {
+      "id": "signal",
+      "name": "Sygnał",
+      "role": "jedyny kolor: przycisk, rekord, odwrócenia",
+      "hex": "#FF5A00",
+      "onSurface": 6.71,
+      "onGrouped": 5.89
+    }
+  ],
+  "type": {
+    "hero": {
+      "size": 300,
+      "line": 0.82,
+      "weight": 900,
+      "width": "50 do 150"
+    },
+    "display": {
+      "size": 56,
+      "line": 0.9,
+      "weight": 900,
+      "width": "75 do 150"
+    },
+    "title": {
+      "size": 40,
+      "line": 1,
+      "weight": 900,
+      "width": "100"
+    },
+    "label": {
+      "size": 15,
+      "line": 1.2,
+      "weight": 700,
+      "width": "75"
+    },
+    "body": {
+      "size": 17,
+      "line": 1.3,
+      "weight": 600,
+      "width": "100"
+    },
+    "small": {
+      "size": 14,
+      "line": 1.3,
+      "weight": 500,
+      "width": "100"
+    }
+  },
+  "fonts": [
+    {
+      "family": "Anybody",
+      "file": "fonts/anybody-variable.woff2",
+      "license": "fonts/OFL-anybody.txt",
+      "weight": "500 900",
+      "used": [
+        500,
+        600,
+        700,
+        800,
+        900
+      ],
+      "role": "cały interfejs, liczby, słowa w wideo i strona; oś szerokości od 50 do 150",
+      "bytes": 45228
+    }
+  ],
+  "motion": [
+    {
+      "id": "beat",
+      "use": "siatka rytmu dla każdego cięcia i wejścia",
+      "kind": "steps",
+      "steps": 1,
+      "ms": 500,
+      "note": "120 BPM przy 30 kl./s, czyli cięcie co 15 klatek; każde ujęcie zaczyna się na wielokrotności 15"
+    },
+    {
+      "id": "slam",
+      "use": "wejście słów i liczb",
+      "kind": "bezier",
+      "points": [
+        0.9,
+        0,
+        0.1,
+        1
+      ],
+      "ms": 267,
+      "note": "8 klatek, ze skali 140% do 100%, pojawia się od razu, bez przenikania"
+    },
+    {
+      "id": "stretch",
+      "use": "oś szerokości kroju",
+      "kind": "bezier",
+      "points": [
+        0.16,
+        1,
+        0.3,
+        1
+      ],
+      "ms": 400,
+      "note": "szerokość od 50 do 150 w 12 klatek, zawsze na uderzeniu; rozmiar dopasowuje się tak, żeby liczba trzymała szerokość ekranu"
+    },
+    {
+      "id": "punch",
+      "use": "uderzenie kamery w wersji marketingowej",
+      "kind": "bezier",
+      "points": [
+        0.2,
+        0.9,
+        0.1,
+        1
+      ],
+      "ms": 133,
+      "note": "skala od 1 do 1,12 w 4 klatki i powrót w 10, co czwarte uderzenie"
+    },
+    {
+      "id": "invert",
+      "use": "odwrócenie kolorów na akcentach",
+      "kind": "steps",
+      "steps": 1,
+      "ms": 500,
+      "note": "czerń i pomarańcz zamieniają się twardym cięciem na dokładnie 15 klatek"
+    },
+    {
+      "id": "count",
+      "use": "cyfry minutnika",
+      "kind": "steps",
+      "steps": 1,
+      "ms": 1000,
+      "note": "każda cyfra tnie się bez przejścia; w przyspieszeniu minutnik skacze o 2 do 3 sekund na klatkę"
+    }
+  ],
+  "gallery": [
+    {
+      "n": 1,
+      "title": "Seria",
+      "caption": "Ciężar na całą szerokość ekranu, numer serii i powtórzenia. Jeden duży przycisk po serii.",
+      "file": "screens/sztanga-screen-1.webp"
+    },
+    {
+      "n": 2,
+      "title": "Plan dnia",
+      "caption": "Trzy boje dnia B jako trzy linie, każda dopasowana osią szerokości do ekranu.",
+      "file": "screens/sztanga-screen-2.webp"
+    },
+    {
+      "n": 3,
+      "title": "Talerze",
+      "caption": "Ile i jakich talerzy założyć na stronę, policzone za ciebie: 25, 25 i 10 kg.",
+      "file": "screens/sztanga-screen-3.webp"
+    },
+    {
+      "n": 4,
+      "title": "Przerwa",
+      "caption": "Minutnik 3:00 czytelny z ławki i podgląd następnej serii.",
+      "file": "screens/sztanga-screen-4.webp"
+    },
+    {
+      "n": 5,
+      "title": "Rekord",
+      "caption": "Ekran odwraca się na pomarańcz: 185 × 2 w martwym ciągu, szacowane 1RM 197 kg.",
+      "file": "screens/sztanga-screen-5.webp"
+    },
+    {
+      "n": 6,
+      "title": "Historia",
+      "caption": "Osiem tygodni szacowanego 1RM w martwym ciągu, od 176 do 197 kg.",
+      "file": "screens/sztanga-screen-6.webp"
+    }
+  ],
+  "videos": {
+    "hero": {
+      "webm": {
+        "path": "sztanga-hero.webm",
+        "bytes": 1110801,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 615,
+        "duration": 20.5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 433483,
+        "audio": null
+      },
+      "mp4": {
+        "path": "sztanga-hero.mp4",
+        "bytes": 949924,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 615,
+        "duration": 20.5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 370702,
+        "audio": null
+      },
+      "poster": "posters/sztanga-hero.jpg"
+    },
+    "hero-9x16": {
+      "webm": {
+        "path": "sztanga-hero-9x16.webm",
+        "bytes": 673011,
+        "width": 540,
+        "height": 960,
+        "fps": 30,
+        "frames": 615,
+        "duration": 20.5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 262638,
+        "audio": null
+      },
+      "mp4": {
+        "path": "sztanga-hero-9x16.mp4",
+        "bytes": 651533,
+        "width": 540,
+        "height": 960,
+        "fps": 30,
+        "frames": 615,
+        "duration": 20.5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 254256,
+        "audio": null
+      },
+      "poster": "posters/sztanga-hero-9x16.jpg"
+    },
+    "social-1x1": {
+      "webm": {
+        "path": "sztanga-social-1x1.webm",
+        "bytes": 874897,
+        "width": 720,
+        "height": 720,
+        "fps": 30,
+        "frames": 615,
+        "duration": 20.5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 341423,
+        "audio": null
+      },
+      "mp4": {
+        "path": "sztanga-social-1x1.mp4",
+        "bytes": 737812,
+        "width": 720,
+        "height": 720,
+        "fps": 30,
+        "frames": 615,
+        "duration": 20.5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 287926,
+        "audio": null
+      },
+      "poster": "posters/sztanga-social-1x1.jpg"
+    },
+    "store": {
+      "webm": {
+        "path": "sztanga-store.webm",
+        "bytes": 436963,
+        "width": 442,
+        "height": 960,
+        "fps": 30,
+        "frames": 675,
+        "duration": 22.5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 155364,
+        "audio": null
+      },
+      "mp4": {
+        "path": "sztanga-store.mp4",
+        "bytes": 438129,
+        "width": 442,
+        "height": 960,
+        "fps": 30,
+        "frames": 675,
+        "duration": 22.5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 155779,
+        "audio": null
+      },
+      "poster": "posters/sztanga-store.jpg"
+    },
+    "tile": {
+      "webm": {
+        "path": "sztanga-tile.webm",
+        "bytes": 65605,
+        "width": 480,
+        "height": 600,
+        "fps": 30,
+        "frames": 120,
+        "duration": 4,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 131210,
+        "audio": null
+      },
+      "mp4": {
+        "path": "sztanga-tile.mp4",
+        "bytes": 54691,
+        "width": 480,
+        "height": 600,
+        "fps": 30,
+        "frames": 120,
+        "duration": 4,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 109382,
+        "audio": null
+      },
+      "poster": "posters/sztanga-tile.jpg"
+    }
+  },
+  "finals": [
+    {
+      "kind": "store",
+      "title": "Wersja sklepowa",
+      "note": "App Store Connect, podgląd aplikacji na iPhone",
+      "name": "sztanga-store-886x1920.mp4",
+      "path": "sztanga-store-886x1920.mp4",
+      "bytes": 31370889,
+      "width": 886,
+      "height": 1920,
+      "fps": 30,
+      "frames": 660,
+      "duration": 22,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 11407596,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "9x16",
+      "title": "Wersja marketingowa 9:16",
+      "note": "Reels, TikTok, Shorts",
+      "name": "sztanga-social-1080x1920.mp4",
+      "path": "sztanga-social-1080x1920.mp4",
+      "bytes": 2115801,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "frames": 600,
+      "duration": 20,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 846320,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "1x1",
+      "title": "Wersja marketingowa 1:1",
+      "note": "post w kanale",
+      "name": "sztanga-social-1080x1080.mp4",
+      "path": "sztanga-social-1080x1080.mp4",
+      "bytes": 1866681,
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "frames": 600,
+      "duration": 20,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 746672,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "16x9",
+      "title": "Wersja marketingowa 16:9",
+      "note": "YouTube, link w Google Play",
+      "name": "sztanga-social-1920x1080.mp4",
+      "path": "sztanga-social-1920x1080.mp4",
+      "bytes": 2377384,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frames": 600,
+      "duration": 20,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 950953,
+      "audio": "AAC, stereo, 48 kHz"
+    }
+  ],
+  "icons": {
+    "full": "sztanga-icon-1024.png",
+    "rounded": "sztanga-icon-512.png"
+  },
+  "renderSeconds": {
+    "stills": 11,
+    "store": 44,
+    "marketing-9x16": 60,
+    "marketing-1x1": 50,
+    "marketing-16x9": 73,
+    "tile": 5
+  },
+  "validation": true,
+  "published": {
+    "totalBytes": 6600411,
+    "count": 29
+  }
+}

@@ -1,0 +1,365 @@
+---
+import { link, portfolio } from '../../shared/link';
+import FileTable from '../shared/FileTable.astro';
+import LoopVideo from '../shared/LoopVideo.astro';
+import SampleLine from '../shared/SampleLine.astro';
+import Shell from '../shared/Shell.astro';
+import Storyboard from '../shared/Storyboard.astro';
+import { assetUrl, nb, presetValue, readManifest } from '../shared/manifest';
+import type { BezierPreset } from '../shared/types';
+import Metronome from './Metronome.tsx';
+import { app } from './app';
+import { content } from './content';
+import { styles } from './styles';
+
+const manifest = readManifest('sztanga');
+const asset = (path: string) => assetUrl('sztanga', path);
+const font = manifest.fonts[0];
+const fontCss = `@font-face{font-family:'Anybody';src:url(${asset(font.file)}) format('woff2');font-weight:${font.weight};font-stretch:50% 150%;font-style:normal;font-display:swap}`;
+const slam = manifest.motion.find(item => item.id === 'slam') as BezierPreset;
+const sections = [
+  ['zadanie', 'Zadanie'],
+  ['kierunek', 'Kierunek'],
+  ['storyboard', 'Storyboard'],
+  ['ruch', 'Ruch'],
+  ['ekrany', 'Ekrany'],
+  ['formaty', 'Formaty'],
+  ['pliki', 'Pliki'],
+] as const;
+const ratio = (value: number) => value.toFixed(2).replace('.', ',');
+const contrastOn = (id: string) => manifest.palette.find(item => item.id === id)?.onSurface ?? 0;
+const widths = [
+  [50, 'szerokość 50: liczby na ekranie serii i minutnik'],
+  [100, 'szerokość 100: nazwy ćwiczeń i przyciski'],
+  [150, 'szerokość 150: KG, słowa w wersji marketingowej'],
+] as const;
+const weights = [
+  [900, 'PRZYSIAD 140 KG', 'liczby, nazwy, przyciski'],
+  [800, 'Martwy ciąg, rekord', 'etykiety mocne'],
+  [700, 'TYDZIEŃ 3 Z 4 · DZIEŃ B', 'etykiety, szerokość 75'],
+  [600, 'Plan dnia i talerze policzone na stronę.', 'zdania w wideo'],
+  [500, 'Zażółć gęślą jaźń, 92,5 kg', 'tekst na stronie'],
+] as const;
+---
+
+<Shell
+  app={app}
+  title="App preview dziennika treningu siłowego"
+  description="Kinetyczna typografia w ruchu: podgląd zmyślonej aplikacji Sztanga do zapisywania treningu siłowego. Wersja do App Store, trzy formaty social, pętle na stronę, storyboard na siatce 120 BPM i zasady ruchu."
+  css={fontCss + styles}
+  preload={[asset(font.file)]}
+  bodyClass="szt">
+  <header class="top">
+    <a href={link('/app-preview/')}>Wzornik, app preview</a>
+    <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="t-hero">
+      <p class="kicker">{content.kicker}</p>
+      <img class="hero__icon" src={asset(manifest.icons.rounded)} alt="" width="512" height="512" />
+      <h1 id="t-hero" class="wide">
+        Sztanga
+      </h1>
+      <div class="hero__grid">
+        <div>
+          <p class="lead">{content.lead}</p>
+          <dl class="rows">
+            {content.facts.map(([term, value]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{nb(value)}</dd>
+              </div>
+            ))}
+          </dl>
+          <nav class="toc" aria-label="Sekcje">
+            {sections.map(([id, label]) => (
+              <a href={`#${id}`}>{label}</a>
+            ))}
+          </nav>
+        </div>
+        <figure class="stage stage--hero">
+          <LoopVideo
+            manifest={manifest}
+            variant="hero"
+            class="hero__wide"
+            label="Wersja marketingowa 16:9: ogromne słowa CIĘŻAR, SERIE, PRZERWA i REKORD obok telefonu z aplikacją Sztanga"
+          />
+          <LoopVideo
+            manifest={manifest}
+            variant="hero-9x16"
+            class="hero__tall"
+            label="Wersja marketingowa 9:16: słowo nad telefonem z aplikacją Sztanga"
+          />
+          <figcaption>{content.heroCaption}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sec" id="zadanie" aria-labelledby="t-zadanie">
+      <div class="sec__head">
+        <p class="sec__num">01 Klient i zadanie</p>
+        <h2 id="t-zadanie" class="wide">
+          Liczby czytelne z ławki
+        </h2>
+      </div>
+      <div class="cols">
+        <div class="prose">
+          {content.client.paragraphs.map(text => (
+            <p>{text}</p>
+          ))}
+        </div>
+        <dl class="rows rows--stack">
+          {content.client.facts.map(([term, value]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{nb(value)}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="sec" id="kierunek" aria-labelledby="t-kierunek">
+      <div class="sec__head">
+        <p class="sec__num">02 Kierunek</p>
+        <h2 id="t-kierunek" class="wide">
+          {content.direction.title}
+        </h2>
+      </div>
+      <div class="cols">
+        <div>
+          <div class="prose">
+            {content.direction.paragraphs.map(text => (
+              <p>{text}</p>
+            ))}
+          </div>
+          <ul class="chips">
+            {content.direction.keywords.map(word => (
+              <li>{word}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="card" aria-label="Krój Anybody na osi szerokości">
+          <h3>Anybody, jeden krój i oś szerokości</h3>
+          <div class="axis">
+            {widths.map(([wdth, use]) => (
+              <p style={`font-stretch:${wdth}%`}>
+                140 KG
+                <small>{use}</small>
+              </p>
+            ))}
+          </div>
+          <div class="weights">
+            {weights.map(([weight, sample, use]) => (
+              <p style={`font-weight:${weight}`}>
+                {sample}
+                <small>
+                  {weight}, {use}
+                </small>
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:24px">
+        <h3>Czerń, biel i jeden pomarańcz</h3>
+        <ul class="swatches">
+          {manifest.palette.map(item => (
+            <li class="swatch">
+              <span class="swatch__chip" style={`background:${item.hex}`}></span>
+              <b>{item.name}</b>
+              <span>{item.hex.toUpperCase()}</span>
+              <span>{item.role}</span>
+            </li>
+          ))}
+        </ul>
+        <p style="margin-top:18px;font-size:15px">
+          Kontrast na czerni: biel {ratio(contrastOn('ink'))}:1, pomarańcz{' '}
+          {ratio(contrastOn('signal'))}:1, popiół {ratio(contrastOn('secondary'))}:1. Czarny tekst
+          na pomarańczu ma tyle samo co pomarańcz na czerni, więc odwrócony ekran rekordu jest
+          równie czytelny.
+        </p>
+      </div>
+    </section>
+
+    <section class="sec" id="storyboard" aria-labelledby="t-storyboard">
+      <div class="sec__head">
+        <p class="sec__num">03 Storyboard</p>
+        <h2 id="t-storyboard" class="wide">
+          22 sekundy, 44 uderzenia
+        </h2>
+        <p class="intro">{content.storyboard.intro}</p>
+      </div>
+      <ul class="list">
+        {content.storyboard.rules.map(rule => (
+          <li>{nb(rule)}</li>
+        ))}
+      </ul>
+      <Storyboard manifest={manifest} alt={content.storyboard.alt} />
+    </section>
+
+    <section class="sec" id="ruch" aria-labelledby="t-ruch">
+      <div class="sec__head">
+        <p class="sec__num">04 Zasady ruchu</p>
+        <h2 id="t-ruch" class="wide">
+          Ruch, który ląduje na uderzeniu
+        </h2>
+        <p class="intro">{nb(content.motion.intro)}</p>
+      </div>
+      <Metronome
+        client:visible
+        points={slam.points}
+        slamMs={slam.ms}
+        beatMs={500}
+        caption={nb(content.motion.caption)}
+      />
+      <div class="cols" style="margin-top:28px">
+        <dl class="presets">
+          {manifest.motion.map(preset => (
+            <div>
+              <dt>
+                {preset.id} <span>· {preset.use}</span>
+              </dt>
+              <dd>
+                <code>{presetValue(preset)}</code>
+              </dd>
+              <dd>{nb(preset.note)}</dd>
+            </div>
+          ))}
+        </dl>
+        <dl class="rows rows--stack">
+          {content.motion.rules.map(([term, value]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{nb(value)}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="sec" id="ekrany" aria-labelledby="t-ekrany">
+      <div class="sec__head">
+        <p class="sec__num">05 Ekrany</p>
+        <h2 id="t-ekrany" class="wide">
+          Sześć ekranów, jeden krój
+        </h2>
+        <p class="intro">{content.screensIntro}</p>
+      </div>
+      <div class="gallery">
+        {manifest.gallery.map(item => (
+          <figure>
+            <img
+              src={asset(item.file)}
+              alt={`Ekran ${item.title}`}
+              width="443"
+              height="960"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <b>
+                {item.n}. {item.title}
+              </b>
+              <span>{nb(item.caption)}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="sec" id="formaty" aria-labelledby="t-formaty">
+      <div class="sec__head">
+        <p class="sec__num">06 Wersja sklepowa i formaty</p>
+        <h2 id="t-formaty" class="wide">
+          Sklep pokazuje aplikację, social gra głośno
+        </h2>
+        <p class="intro">{content.formats.intro}</p>
+      </div>
+      <div class="formats">
+        <figure>
+          <div class="stage">
+            <LoopVideo
+              manifest={manifest}
+              variant="store"
+              label="Wersja sklepowa: sam interfejs Sztangi na pełnym ekranie"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.store}</b>886×1920, 22 s, H.264
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="stage">
+            <LoopVideo
+              manifest={manifest}
+              variant="hero-9x16"
+              label="Wersja 9:16 ze słowem nad telefonem"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.portrait}</b>1080×1920, 20 s
+          </figcaption>
+        </figure>
+        <div class="fmt--wide">
+          <figure>
+            <div class="stage">
+              <LoopVideo
+                manifest={manifest}
+                variant="social-1x1"
+                label="Wersja kwadratowa ze słowem nad telefonem"
+              />
+            </div>
+            <figcaption>
+              <b>{content.formats.square}</b>1080×1080, 20 s
+            </figcaption>
+          </figure>
+          <figure>
+            <div class="stage">
+              <LoopVideo
+                manifest={manifest}
+                variant="hero"
+                label="Wersja 16:9 ze słowem po lewej i telefonem po prawej"
+              />
+            </div>
+            <figcaption>
+              <b>{content.formats.wide}</b>1920×1080, 20 s
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="pliki" aria-labelledby="t-pliki">
+      <div class="sec__head">
+        <p class="sec__num">07 Co dostaje klient</p>
+        <h2 id="t-pliki" class="wide">
+          Pliki gotowe do wgrania
+        </h2>
+        <p class="intro">{content.deliverables.intro}</p>
+      </div>
+      <FileTable manifest={manifest} />
+      <dl class="rows rows--stack" style="margin-top:20px">
+        {content.deliverables.extras.map(([term, value]) => (
+          <div>
+            <dt>{term}</dt>
+            <dd>{nb(value)}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="cta" aria-labelledby="t-cta">
+      <h2 id="t-cta" class="wide">
+        {content.cta.title}
+      </h2>
+      <p>{content.cta.text}</p>
+      <a href={portfolio('/dla-klienta/#wzornik')}>{content.cta.link}</a>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <SampleLine name="Sztanga" />
+  </footer>
+</Shell>

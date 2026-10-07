@@ -4,7 +4,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-app-preview.md`. Run rule
 
 ```
 - [x] F foundation, with the first brand end to end (B1 Kasownik)
-- [ ] B2 Sztanga
+- [x] B2 Sztanga
 - [ ] B3 Rygiel
 - [ ] B4 Kiełek
 - [ ] B5 Poziomka
@@ -580,3 +580,9 @@ Q runs after all six are merged: ffprobe table for every file (store cut exact t
 21. Kasownik's hook overlay runs 2.3 s (frames 4 to 72) instead of 1.8 s, so its five words meet the reading time rule.
 22. The app preview index uses the portfolio's own fonts and colours, like the identity index, so both Wzornik indexes look like one family; each tile carries its app's look.
 23. The page lists the full quality files with real ffprobe values but publishes only the web loops (11 MB for Kasownik); the App Store file alone is 31 MB at the 11.5 Mbps Apple asks for.
+24. Sztanga's squat is 5 × 3 at 140 kg instead of 3 × 5, so the set counter 3/5 to 5/5 is consistent, and day B ends with the deadlift (1 × 2 at 185 kg) instead of rows, so the record comes from the same session. The history screen shows the deadlift estimated 1RM, which continues the record story.
+25. Sztanga's store poster is frame 500 (16.7 s, the orange record screen with 185 × 2 and 1RM ≈ 197 kg) instead of 450, because REKORD now slams in letter by letter from frame 450.
+26. Sztanga's time lapse runs about 2.4 s of rest per frame; the plan's 0.1 s per frame could not bring 3:00 to 0:00 inside one shot.
+27. Sztanga's marketing cut is 20 s (600 frames), shorter than Kasownik's 21 s, so it stays a whole number of beats (40) before the outro and the bridge.
+28. On the Sztanga page the heading width axis steps with the viewport in five media query steps (62% to 150%), not continuously, because CSS cannot turn a viewport length into a `font-stretch` number without script.
+
