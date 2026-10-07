@@ -6,7 +6,7 @@ const locales = { pl: 'pl_PL', en: 'en_US' };
 
 const pageTypes = { rec: 'ProfilePage', work: 'CollectionPage', blog: 'CollectionPage' };
 
-const graph = ({ url, lang, view, title, description, canonical, image, post }) => {
+const graph = ({ url, lang, view, title, description, canonical, image, post, code }) => {
   const person = {
     '@type': 'Person',
     '@id': url('/#adrian'),
@@ -86,6 +86,23 @@ const graph = ({ url, lang, view, title, description, canonical, image, post }) 
       about: { '@type': 'Organization', name: 'TailorCloth', url: 'https://tailorcloth.com/' },
     });
   }
+  if (code) {
+    const work = `${url(canonical)}#code`;
+    page.mainEntity = { '@id': work };
+    nodes.push({
+      '@type': 'SoftwareSourceCode',
+      '@id': work,
+      name: code.name,
+      description,
+      inLanguage: lang,
+      url: url(canonical),
+      codeRepository: code.repo,
+      programmingLanguage: code.languages,
+      license: 'https://opensource.org/licenses/MIT',
+      author: { '@id': person['@id'] },
+      mainEntityOfPage: { '@id': page['@id'] },
+    });
+  }
   if (post) {
     page['@type'] = 'WebPage';
     nodes.push({
@@ -108,7 +125,7 @@ const graph = ({ url, lang, view, title, description, canonical, image, post }) 
   return { '@context': 'https://schema.org', '@graph': nodes };
 };
 
-export default function Seo({ lang, view, path, title, description, noindex, post }) {
+export default function Seo({ lang, view, path, title, description, noindex, post, code }) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -171,7 +188,7 @@ export default function Seo({ lang, view, path, title, description, noindex, pos
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(
-              graph({ url, lang, view, title, description, canonical, image, post }),
+              graph({ url, lang, view, title, description, canonical, image, post, code }),
             ).replace(/</g, '\\u003c'),
           }}
         />

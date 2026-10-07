@@ -20,6 +20,7 @@ const copy = {
     recHint: 'Napisz, jaki to zespół, jaki produkt i jaki stack.',
     recMail2: 'Napisz do mnie',
     recPrint2: 'CV do druku',
+    repoCv: 'Doświadczenie i CV',
     recCross: 'Masz projekt do zrobienia? Jest też edycja dla klienta.',
     cliId: 'kontakt',
     cliSubject: 'Projekt',
@@ -34,6 +35,7 @@ const copy = {
     recHint: 'Tell me about the team, the product and the stack.',
     recMail2: 'Write to me',
     recPrint2: 'Printable resume',
+    repoCv: 'Experience and resume',
     recCross: "Got a project to build? There's a client edition too.",
     cliId: 'contact',
     cliSubject: 'Project',
@@ -118,10 +120,15 @@ export default function Close({ lang, edition = 'rec' }) {
             <Magnet className="btn" href={mailto}>
               {tie(text.cta)}
             </Magnet>
-            {!cli && (
+            {edition === 'rec' && (
               <button type="button" className="btn btn--line" onClick={() => window.print()}>
                 {tie(t.recPrint2)}
               </button>
+            )}
+            {edition === 'repo' && (
+              <Link className="btn btn--line" to={routes.rec[lang]}>
+                {tie(t.repoCv)}
+              </Link>
             )}
           </div>
         </div>
