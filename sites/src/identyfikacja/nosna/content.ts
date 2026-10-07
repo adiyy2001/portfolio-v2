@@ -94,7 +94,7 @@ export const content: CaseContent = {
       },
       {
         title: 'Test czytelności',
-        text: 'Pełny sygnet czyta się od 48 pikseli. Poniżej zastępuje go uproszczony znak w kwadracie: jedna soczewka, nośna i pierścień na atramencie, czytelny w karcie przeglądarki.',
+        text: 'Pełny sygnet czyta się od 48 pikseli. Poniżej zastępuje go uproszczony znak w kwadracie: jedna soczewka, nośna i pierścień na atramencie, czytelny w karcie przeglądarki. Ikona strony jest uproszczoną pochodną sygnetu, a nie osobnym znakiem.',
       },
     ],
   },
@@ -232,6 +232,14 @@ export const extras = {
     'Pierścień odbiornika po prawej, zawsze w tym samym miejscu.',
     'Pole zaczyna się i kończy na nośnej, nigdy jej nie opuszcza.',
   ],
+  envelope: [
+    { id: 'piatek', text: 'Piątek: szczyt bliżej początku' },
+    { id: 'sobota', text: 'Sobota: szczyt pośrodku pola' },
+    { id: 'niedziela', text: 'Niedziela: szczyt bliżej końca' },
+  ],
+  envelopeCaption: 'Obwiednia pola od początku do końca nośnej. Kropka to szczyt energii.',
+  kerningZoomCaption:
+    'Złącza par No, oś, śn i na w dużym powiększeniu. Czerwony kontur to rozstaw bez korekty, czarny napis to rozstaw po korekcie.',
   graphics: [
     {
       title: 'Wzór z interferencji',
