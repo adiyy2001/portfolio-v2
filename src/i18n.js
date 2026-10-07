@@ -5,6 +5,7 @@ export const routes = {
   work: { pl: '/archive/', en: '/en/archive/' },
   case: { pl: '/archive/tailorcloth/', en: '/en/archive/tailorcloth/' },
   flagtide: { pl: '/archive/flagtide/', en: '/en/archive/flagtide/' },
+  gridtwin: { pl: '/archive/gridtwin/', en: '/en/archive/gridtwin/' },
 };
 
 export const ui = {
@@ -26,6 +27,7 @@ export const ui = {
       work: 'projekty',
       case: 'TailorCloth',
       flagtide: 'flagtide',
+      gridtwin: 'gridtwin',
       blog: 'blog',
     },
   },
@@ -47,6 +49,7 @@ export const ui = {
       work: 'projects',
       case: 'TailorCloth',
       flagtide: 'flagtide',
+      gridtwin: 'gridtwin',
       blog: 'blog',
     },
   },
