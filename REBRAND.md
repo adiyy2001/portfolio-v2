@@ -2,6 +2,15 @@
 
 Working state of the portfolio rebrand. Every session and every agent starts here: read this file and `git log` before doing anything else.
 
+## Pierwsze w kolejności
+
+First in line for the next session, local or Claude Code on the web (Adrian, 2026-10-07, 23:10): finish the Wzornik extension, the last 12 sample projects. Nothing else on this list starts before it.
+
+1. App preview, six animated app previews in Remotion (A1 to A6: Kasownik, Sztanga, Rygiel, Kiełek, Poziomka, Południe). Branch `wzornik-app-preview`. Everything the session needs is on that branch in `studio/app-preview/`: `BRIEF.md` (the spec), `RUN.md` (run rules), `PLAN.md` (checklist and decisions), `NOTES.md` (recon, Remotion license checked: free for Adrian).
+2. ASO, six sets of App Store and Google Play screenshots (S1 to S6: Grań, Szyld, Margines, Chochla, Kruszec, Bis). Branch `wzornik-aso`, files in `studio/aso/` the same way.
+
+State: phases 0 and 1 (recon and plan) are done on both branches; the foundation (F, first brand end to end) had just started. Next per brief: F, B2 to B6, Q, R (independent review, every score at least 4), P (publication and the Polish final report), then merge both branches into `main` and push. Plan and review need the strongest model; the rest can run on a lighter one. Do not change the root `yarn.lock` in these branches.
+
 ## Status
 
 - Phase 0 (recon): done.
@@ -28,7 +37,7 @@ For a fresh session (Adrian resets the chat to keep the context small):
 4. Sample websites: one Astro 7 project in `sites/` with its own `yarn.lock`. `yarn --cwd sites install`, then `yarn --cwd sites run check` (astro check and Prettier; plain `yarn check` runs Yarn's built-in check instead), `yarn --cwd sites test` and `yarn --cwd sites build`. For the deploy layout, copy `sites/dist` to `public/wzornik` after the Gatsby build, as `pages.yml` does.
 5. The Phase 1 prototypes, the logo sheet and the Playwright verification scripts were in `rebrand-explorations/`, deleted in `715807d`. Read them from history, for example `git show d126616:rebrand-explorations/b-na-miare/index.html`. The prototype screenshots were never committed. The Python venv with fonttools, brotli, uharfbuzz and Pillow lived in the session scratchpad; recreate it when fonts need subsetting.
 6. Next: the GitHub repos (see Status). The restart notes (state of each repo, how to start a new run, what went wrong on 2026-10-03) are kept with the briefs in `~/root/side_projects/briefs/`, outside this repo. Each repo folder also has `PLAN.md` with the ticked milestones and its own `git log`, so a new run continues from there. Paused on 2026-10-04: start the next run only when Adrian says so, with the args in `repos-status.md` ("How to continue"), and stop after the six repos.
-7. After the repos: the Wzornik extension, 18 more sample projects in three briefs (visual identity, app preview, ASO), saved on 2026-10-03 in `~/root/side_projects/briefs/` as `wzornik-identyfikacja.md`, `wzornik-app-preview.md` and `wzornik-aso.md`, with a summary in that folder's `README.md`. Their mode line says „autonomicznie” since 2026-10-03, so they run without the plan checkpoint, through `briefs/agent-runs/wzornik-workflow.js` in three worktrees (see `wzornik-status.md`). The identyfikacja brief is done and merged on `wzornik-merge` (2026-10-07), waiting for Adrian's `git merge --ff-only wzornik-merge` on `rebrand-2026` and a push; app-preview and aso are the remaining two briefs, then the Dependabot alerts.
+7. See "Pierwsze w kolejności" at the top. After the repos: the Wzornik extension, 18 more sample projects in three briefs (visual identity, app preview, ASO), saved on 2026-10-03 in `~/root/side_projects/briefs/` as `wzornik-identyfikacja.md`, `wzornik-app-preview.md` and `wzornik-aso.md`, with a summary in that folder's `README.md`. Their mode line says „autonomicznie” since 2026-10-03, so they run without the plan checkpoint, through `briefs/agent-runs/wzornik-workflow.js` in three worktrees (see `wzornik-status.md`). The identyfikacja brief is done and merged on `wzornik-merge` (2026-10-07), waiting for Adrian's `git merge --ff-only wzornik-merge` on `rebrand-2026` and a push; app-preview and aso are the remaining two briefs, then the Dependabot alerts.
 8. Recruiter case studies (Adrian, 2026-10-06): one page per public repo on the recruiter edition, each a five minute read. Spec in "Recruiter case studies". Start with flagtide, gridtwin and coschema; the other three repos get a page when they are published.
 
 ## Goal
