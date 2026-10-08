@@ -98,6 +98,7 @@ export const css = `
 .kruszec .ledger__flag{display:inline-block;margin:10px 0 0;padding:3px 10px;border:1px solid rgba(143,212,182,.4);border-radius:10px;color:var(--szalwia);font-weight:600;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
 .kruszec .ledger__role{margin:10px 0 0;max-width:36em;font-size:15.5px;line-height:1.6;color:var(--tekst2)}
 @media (max-width:560px){.kruszec .ledger__item{grid-template-columns:minmax(0,96px) minmax(0,1fr)}.kruszec .ledger__n{grid-column:1/-1}}
+@media (max-width:399px){.kruszec .ledger__img{grid-column:1;grid-row:1}.kruszec .ledger__n{grid-column:2;grid-row:1}.kruszec .ledger__text{grid-column:1/-1;grid-row:2}}
 .kruszec .quiet{margin:28px 0 0;max-width:40em;padding-left:18px;border-left:2px solid var(--szalwia);font-family:'Instrument Serif',Georgia,serif;font-size:clamp(22px,2.2vw,28px);line-height:1.3;color:var(--platyna)}
 
 .kruszec .searches{display:grid;gap:24px;margin-top:22px}

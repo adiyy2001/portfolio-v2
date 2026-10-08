@@ -95,6 +95,7 @@ export const css = `
 .szyld .story__item--first .story__head{color:var(--limonka)}
 .szyld .story__role{margin:0;font-size:15px;line-height:1.5;color:var(--lupek)}
 .szyld .story__item--first .story__role{color:var(--szron)}
+@media (max-width:399px){.szyld .story__item{grid-template-columns:104px 1fr;grid-template-areas:'img n' 'text text';gap:14px 16px}.szyld .story__img{width:104px}}
 .szyld .callout{margin:28px 0 0;padding:20px 24px;max-width:48em;border-radius:22px;background:var(--limonka);font-weight:600;font-size:18px}
 
 .szyld .searches{display:grid;gap:28px;margin-top:28px;padding:clamp(18px,3vw,36px);border-radius:32px;background:linear-gradient(150deg in oklab,var(--grejpfrut) 0%,#FF9A3E 55%,var(--limonka) 100%)}
