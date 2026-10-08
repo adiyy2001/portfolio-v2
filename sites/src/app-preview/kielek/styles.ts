@@ -31,6 +31,8 @@ body.kie{background:var(--ground);color:var(--ink);font:500 17px/1.6 var(--round
 .stage{position:relative;background:var(--ground);border-radius:28px;overflow:hidden;box-shadow:var(--clay)}
 .stage video{display:block;width:100%;height:auto;background:var(--ground)}
 .stage--hero .hero__tall{display:none}
+.stage--hero .hero__square{display:none}
+@media (min-width:960px){.stage--hero .hero__wide{display:none}.stage--hero .hero__square{display:block}}
 @media (max-width:700px){.stage--hero .hero__wide{display:none}.stage--hero .hero__tall{display:block}.hero__media{max-width:420px;margin:0 auto;width:100%}}
 .hero__media figcaption{padding:12px 4px 0;font-size:14px;color:var(--soft)}
 .sec{padding:clamp(44px,7vw,88px) 0;scroll-margin-top:12px}

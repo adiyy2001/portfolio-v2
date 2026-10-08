@@ -1,8 +1,7 @@
 export const content = {
   kicker: 'Wzornik, app preview. A1, natywny iOS',
   lead: 'Podgląd aplikacji z biletami komunikacji miejskiej: wersja do App Store, trzy formaty na social media i lekkie pętle na stronę. Wszystko z jednego projektu, w jednym rytmie.',
-  heroCaption:
-    'Wersja marketingowa 16:9, pętla na stronę. Na telefonie odtwarza się pionowa wersja 9:16.',
+  heroCaption: 'Pętla marketingowa: 1:1 na komputerze, 16:9 na tablecie, 9:16 na telefonie.',
   facts: [
     ['Wersja sklepowa', '23 s, 886×1920, 30 kl./s'],
     ['Formaty social', '9:16, 1:1 i 16:9'],

@@ -1,8 +1,7 @@
 export const content = {
   kicker: 'Wzornik, app preview. A4, claymorphism pastelowy',
   lead: 'Podgląd aplikacji do pielęgnacji roślin domowych: wersja do App Store, trzy formaty na social media i lekkie pętle na stronę. Miękkie, napompowane kształty, ciepłe pastele i maskotka, która gra razem z interfejsem.',
-  heroCaption:
-    'Wersja marketingowa 16:9, pętla na stronę. Na telefonie odtwarza się pionowa wersja 9:16.',
+  heroCaption: 'Pętla marketingowa: 1:1 na komputerze, 16:9 na tablecie, 9:16 na telefonie.',
   facts: [
     ['Wersja sklepowa', '21 s, 886×1920, 30 kl./s'],
     ['Ruch', 'sprężyny z odbiciem, zgniecenie, krople'],

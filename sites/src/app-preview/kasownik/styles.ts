@@ -29,6 +29,8 @@ body.kas{background:var(--ground);color:var(--ink);font:400 17px/1.55 var(--font
 .stage{position:relative;border-radius:28px;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
 .stage video{display:block;width:100%;height:auto;background:var(--ground)}
 .stage .hero__tall{display:none}
+.stage .hero__square{display:none}
+@media (min-width:960px){.stage .hero__wide{display:none}.stage .hero__square{display:block}}
 @media (max-width:700px){.stage .hero__wide{display:none}.stage .hero__tall{display:block}.stage--hero{max-width:420px;margin:0 auto;width:100%}}
 .stage figcaption{padding:12px 18px;font-size:14px;color:var(--sec);border-top:1px solid var(--line)}
 .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
