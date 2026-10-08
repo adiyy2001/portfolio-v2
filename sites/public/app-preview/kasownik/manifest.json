@@ -23,9 +23,9 @@
         "key": 20,
         "action": "Od pierwszej klatki skasowany bilet na pełnym ekranie: pasek ważności płynie, zegar odlicza, przez kod przechodzi fala.",
         "overlay": {
-          "text": "Skasowany bilet. Widać, że ważny.",
-          "from": 4,
-          "to": 72,
+          "text": "Widać, że bilet ważny.",
+          "from": 0,
+          "to": 63,
           "top": 818
         },
         "seconds": [
@@ -427,7 +427,7 @@
     "hero": {
       "webm": {
         "path": "kasownik-hero.webm",
-        "bytes": 1592475,
+        "bytes": 1588537,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -436,12 +436,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 592548,
+        "bitrate": 591083,
         "audio": null
       },
       "mp4": {
         "path": "kasownik-hero.mp4",
-        "bytes": 1282653,
+        "bytes": 1272737,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -450,7 +450,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 477266,
+        "bitrate": 473576,
         "audio": null
       },
       "poster": "posters/kasownik-hero.jpg"
@@ -458,7 +458,7 @@
     "hero-9x16": {
       "webm": {
         "path": "kasownik-hero-9x16.webm",
-        "bytes": 1430565,
+        "bytes": 1087465,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -467,12 +467,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 532303,
+        "bitrate": 404638,
         "audio": null
       },
       "mp4": {
         "path": "kasownik-hero-9x16.mp4",
-        "bytes": 1290245,
+        "bytes": 921708,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -481,7 +481,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 480091,
+        "bitrate": 342961,
         "audio": null
       },
       "poster": "posters/kasownik-hero-9x16.jpg"
@@ -489,7 +489,7 @@
     "social-1x1": {
       "webm": {
         "path": "kasownik-social-1x1.webm",
-        "bytes": 1399546,
+        "bytes": 1400863,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -498,12 +498,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 520761,
+        "bitrate": 521251,
         "audio": null
       },
       "mp4": {
         "path": "kasownik-social-1x1.mp4",
-        "bytes": 1152047,
+        "bytes": 1145034,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -512,7 +512,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 428668,
+        "bitrate": 426059,
         "audio": null
       },
       "poster": "posters/kasownik-social-1x1.jpg"
@@ -520,7 +520,7 @@
     "store": {
       "webm": {
         "path": "kasownik-store.webm",
-        "bytes": 991057,
+        "bytes": 973994,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -529,12 +529,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 337381,
+        "bitrate": 331572,
         "audio": null
       },
       "mp4": {
         "path": "kasownik-store.mp4",
-        "bytes": 980925,
+        "bytes": 965002,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -543,7 +543,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 333931,
+        "bitrate": 328511,
         "audio": null
       },
       "poster": "posters/kasownik-store.jpg"
@@ -551,7 +551,7 @@
     "tile": {
       "webm": {
         "path": "kasownik-tile.webm",
-        "bytes": 212649,
+        "bytes": 210656,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -560,12 +560,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 340238,
+        "bitrate": 337049,
         "audio": null
       },
       "mp4": {
         "path": "kasownik-tile.mp4",
-        "bytes": 169185,
+        "bytes": 166937,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -574,7 +574,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 270696,
+        "bitrate": 267099,
         "audio": null
       },
       "poster": "posters/kasownik-tile.jpg"
@@ -587,7 +587,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "kasownik-store-886x1920.mp4",
       "path": "kasownik-store-886x1920.mp4",
-      "bytes": 32808548,
+      "bytes": 32808474,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -596,7 +596,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11411668,
+      "bitrate": 11411643,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -605,7 +605,7 @@
       "note": "Reels, TikTok i Shorts",
       "name": "kasownik-social-1080x1920.mp4",
       "path": "kasownik-social-1080x1920.mp4",
-      "bytes": 6001296,
+      "bytes": 4533935,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -614,7 +614,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 2286208,
+      "bitrate": 1727213,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -623,7 +623,7 @@
       "note": "post w kanale",
       "name": "kasownik-social-1080x1080.mp4",
       "path": "kasownik-social-1080x1080.mp4",
-      "bytes": 3844043,
+      "bytes": 3830566,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -632,7 +632,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1464397,
+      "bitrate": 1459263,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -641,7 +641,7 @@
       "note": "YouTube, link w Google Play",
       "name": "kasownik-social-1920x1080.mp4",
       "path": "kasownik-social-1920x1080.mp4",
-      "bytes": 4194666,
+      "bytes": 4125445,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -650,7 +650,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1597968,
+      "bitrate": 1571598,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -659,16 +659,16 @@
     "rounded": "kasownik-icon-512.png"
   },
   "renderSeconds": {
-    "stills": 28,
-    "store": 256,
-    "marketing-9x16": 243,
-    "marketing-1x1": 121,
-    "marketing-16x9": 158,
-    "tile": 19
+    "stills": 30,
+    "store": 224,
+    "marketing-9x16": 226,
+    "marketing-1x1": 184,
+    "marketing-16x9": 235,
+    "tile": 26
   },
   "validation": true,
   "published": {
-    "totalBytes": 11436183,
+    "totalBytes": 10659845,
     "count": 30
   }
 }

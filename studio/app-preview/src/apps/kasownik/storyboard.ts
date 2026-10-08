@@ -15,7 +15,7 @@ export const storyboard: Storyboard = {
       key: 20,
       action:
         'Od pierwszej klatki skasowany bilet na pełnym ekranie: pasek ważności płynie, zegar odlicza, przez kod przechodzi fala.',
-      overlay: { text: 'Skasowany bilet. Widać, że ważny.', from: 0, to: 63, top: 818 },
+      overlay: { text: 'Widać, że bilet ważny.', from: 0, to: 63, top: 818 },
     },
     {
       id: 'home',

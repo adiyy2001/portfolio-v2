@@ -24,3 +24,10 @@ None.
 ## Open issues
 
 - None blocking. Independent review (step R) still to come.
+
+## Review round 1 (2026-10-08)
+
+- Motion: the tab bar of Moje bilety slides out on the `hero` spring while the card grows to the full screen ticket (an iOS full screen modal has no tab bar) and stays hidden; it used to vanish for 13 frames at 10,9 s and pop back.
+- The button label and the band label no longer cross-fade: the old label leaves in 4 frames, the new one enters after a short gap (11 frames in total), so no "Bilet skasowany | skasować" ghost.
+- The hook overlay runs 0 to 63 and is gone before the price list slides in.
+- Marketing 9:16: phone at scale 0.95 with its bottom at about 80% of the frame, headline 130 px.
