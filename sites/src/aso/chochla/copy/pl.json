@@ -1,0 +1,316 @@
+{
+  "lang": "pl",
+  "label": "Polski",
+  "app": {
+    "name": "Chochla",
+    "tagline": "Obiady na cały tydzień zaplanowane"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "tydzien",
+      "headline": "Obiady na cały tydzień zaplanowane",
+      "alt": "Plan obiadów od poniedziałku do niedzieli, a dorsz właśnie wjeżdża na piątek. Pomidor z buźką mówi nagłówek w dymku."
+    },
+    {
+      "id": "02",
+      "screen": "zakupy",
+      "headline": "Lista zakupów pisze się sama",
+      "alt": "Dwa komiksowe kadry: kartka z listą mówi nagłówek, a niżej telefon z listą zakupów pogrupowaną według działów sklepu."
+    },
+    {
+      "id": "03",
+      "screen": "lodowka",
+      "headline": "Ugotuj z tego, co masz",
+      "alt": "Jajko, cukinia, ser i cebula z kształtów wskazują telefon, w którym z tych produktów wychodzą trzy przepisy na obiad."
+    },
+    {
+      "id": "04",
+      "screen": "przepis",
+      "headline": "Porcje dla dwojga albo piątki",
+      "alt": "Przepis na pierogi ruskie przeliczony na 5 osób. Obok rastrowe koła z napisami ×2 i ×5, a pieróg z buźką mówi nagłówek."
+    },
+    {
+      "id": "05",
+      "screen": "gotowanie",
+      "headline": "Krok po kroku, z minutnikiem",
+      "alt": "Tryb gotowania leczo, krok 3 z 6 z minutnikiem na 12 minut. Za telefonem wybuch w stylu pop-art, nagłówek mówi patelnia."
+    },
+    {
+      "id": "06",
+      "screen": "kolekcje",
+      "headline": "Rodzinne przepisy w jednym miejscu",
+      "alt": "Komiksowa plansza: karta z pierogami babci Haliny, karta z sernikiem mamy i telefon z rodzinnymi kolekcjami przepisów."
+    }
+  ],
+  "variantB": {
+    "screen": "dzis",
+    "headline": "Koniec z pytaniem, co na obiad",
+    "alt": "Ekran Dziś: leczo z kaszą jaglaną i wszystko w domu. Garnek z buźką mówi nagłówek, a znaki zapytania odlatują na boki."
+  },
+  "feature": {
+    "headline": "Obiady na cały tydzień zaplanowane",
+    "alt": "Kremowe tło z memphisowym konfetti, dymek z nazwą Chochla i obietnicą, a obok pomidor, pieróg i jajko z buźkami."
+  },
+  "notes": {
+    "burst": "Dzyń!",
+    "times": ["×2", "×5"],
+    "timesLabel": ["dla dwojga", "dla piątki"],
+    "cards": [
+      {
+        "title": "Pierogi babci Haliny",
+        "line": "ziemniaki, twaróg, dużo cebulki",
+        "food": "pierogi"
+      },
+      {
+        "title": "Sernik mamy",
+        "line": "na kruchym spodzie, bez rodzynek",
+        "food": "sernik"
+      }
+    ]
+  },
+  "ui": {
+    "tabs": ["Tydzień", "Zakupy", "Przepisy", "Kolekcje"],
+    "tydzien": {
+      "title": "Ten tydzień",
+      "range": "5 do 11 października",
+      "people": "4 osoby",
+      "planned": "6 z 7 obiadów",
+      "days": [
+        {
+          "d": "Pon",
+          "n": "5",
+          "dish": "Zupa pomidorowa z ryżem",
+          "time": "35 min",
+          "food": "zupa"
+        },
+        {
+          "d": "Wt",
+          "n": "6",
+          "dish": "Placki z cukinii",
+          "time": "30 min",
+          "food": "placki"
+        },
+        {
+          "d": "Śr",
+          "n": "7",
+          "dish": "Pierogi ruskie",
+          "time": "70 min",
+          "food": "pierogi"
+        },
+        {
+          "d": "Czw",
+          "n": "8",
+          "dish": "Leczo z kaszą jaglaną",
+          "time": "40 min",
+          "food": "leczo",
+          "today": true
+        },
+        {
+          "d": "Pt",
+          "n": "9",
+          "empty": "Upuść tu przepis"
+        },
+        {
+          "d": "Sob",
+          "n": "10",
+          "dish": "Gulasz wołowy z kopytkami",
+          "time": "2 h",
+          "food": "gulasz"
+        },
+        {
+          "d": "Nd",
+          "n": "11",
+          "dish": "Rosół z makaronem",
+          "time": "3 h",
+          "food": "rosol"
+        }
+      ],
+      "dragging": {
+        "dish": "Dorsz z ziemniakami",
+        "time": "45 min",
+        "food": "dorsz"
+      },
+      "today": "dziś",
+      "list": "Lista zakupów: 18 produktów"
+    },
+    "zakupy": {
+      "title": "Lista zakupów",
+      "sub": "Z 6 obiadów na ten tydzień",
+      "done": "9 z 18 w koszyku",
+      "share": 50,
+      "aisles": [
+        {
+          "name": "Warzywa i owoce",
+          "items": [
+            ["Pomidory", "1,5 kg", true, "zupa, leczo"],
+            ["Cukinia", "3 szt.", true, "placki, leczo"],
+            ["Papryka czerwona", "3 szt.", false, "leczo"],
+            ["Cebula", "6 szt.", true, "4 przepisy"],
+            ["Ziemniaki", "2 kg", false, "pierogi, dorsz"]
+          ]
+        },
+        {
+          "name": "Nabiał i jajka",
+          "items": [
+            ["Twaróg półtłusty", "300 g", false, "pierogi"],
+            ["Jajka", "6 szt.", true, "placki, kopytka"],
+            ["Śmietana 18%", "200 g", false, "placki"]
+          ]
+        },
+        {
+          "name": "Mięso i ryby",
+          "items": [
+            ["Wołowina gulaszowa", "800 g", false, "gulasz"],
+            ["Filet z dorsza", "600 g", false, "dorsz"]
+          ]
+        }
+      ],
+      "more": "Sypkie i przyprawy: 8 produktów"
+    },
+    "lodowka": {
+      "title": "Co masz w lodówce?",
+      "sub": "Zaznacz, a podpowiemy obiad",
+      "search": "Dodaj produkt",
+      "picked": ["Jajka", "Cukinia", "Ser żółty", "Cebula"],
+      "other": ["Pomidory", "Kasza", "Twaróg", "Ziemniaki", "Papryka"],
+      "resultsTitle": "Pasują 3 przepisy",
+      "results": [
+        {
+          "name": "Placki z cukinii",
+          "time": "30 min",
+          "have": "Masz wszystko",
+          "match": 6,
+          "of": 6,
+          "food": "placki"
+        },
+        {
+          "name": "Frittata z cukinią i serem",
+          "time": "25 min",
+          "have": "Masz wszystko",
+          "match": 5,
+          "of": 5,
+          "food": "frittata"
+        },
+        {
+          "name": "Zapiekanka z cukinii",
+          "time": "45 min",
+          "have": "Brakuje: pomidory",
+          "match": 6,
+          "of": 7,
+          "food": "zapiekanka"
+        }
+      ]
+    },
+    "przepis": {
+      "title": "Pierogi ruskie",
+      "from": "Od babci Haliny",
+      "meta": ["70 min", "średnie", "około 40 sztuk"],
+      "portionsLabel": "Porcje",
+      "portions": "5 osób",
+      "groups": [
+        {
+          "name": "Ciasto",
+          "items": [
+            ["mąka pszenna", "625 g"],
+            ["ciepła woda", "300 ml"],
+            ["olej", "3 łyżki"]
+          ]
+        },
+        {
+          "name": "Farsz",
+          "items": [
+            ["ziemniaki", "750 g"],
+            ["twaróg półtłusty", "375 g"],
+            ["cebula", "2 szt."],
+            ["sól i pieprz", "do smaku"]
+          ]
+        }
+      ],
+      "add": "Dodaj do listy",
+      "cook": "Gotuj"
+    },
+    "gotowanie": {
+      "title": "Leczo z kaszą jaglaną",
+      "step": "Krok 3 z 6",
+      "steps": 6,
+      "current": 3,
+      "text": "Dodaj paprykę i cukinię pokrojone w kostkę. Duś pod przykryciem, aż zmiękną.",
+      "uses": ["papryka, 3 szt.", "cukinia, 1 szt."],
+      "timerLabel": "Duszenie",
+      "timer": "08:24",
+      "timerOf": "z 12:00",
+      "share": 30,
+      "pause": "Pauza",
+      "plus": "+1 min",
+      "next": "Dalej: dodaj pomidory i wędzoną paprykę"
+    },
+    "kolekcje": {
+      "title": "Kolekcje",
+      "family": "Rodzina Nowaków, 4 osoby",
+      "items": [
+        {
+          "name": "Od babci Haliny",
+          "count": "14 przepisów",
+          "color": "pomidor",
+          "food": "pierogi"
+        },
+        {
+          "name": "Ulubione dzieci",
+          "count": "9 przepisów",
+          "color": "musztarda",
+          "food": "placki"
+        },
+        {
+          "name": "Szybkie w tygodniu",
+          "count": "21 przepisów",
+          "color": "turkus",
+          "food": "frittata"
+        },
+        {
+          "name": "Na święta",
+          "count": "8 przepisów",
+          "color": "roz",
+          "food": "sernik"
+        }
+      ],
+      "recentTitle": "Ostatnio dodane",
+      "recent": [
+        {
+          "name": "Sernik mamy",
+          "who": "dodała Kasia, wczoraj",
+          "food": "sernik"
+        },
+        {
+          "name": "Gulasz taty",
+          "who": "dodał Marek, w niedzielę",
+          "food": "gulasz"
+        }
+      ],
+      "add": "Przepisz przepis z kartki"
+    },
+    "dzis": {
+      "date": "Czwartek, 8 października",
+      "hello": "Dzień dobry, Kasia",
+      "label": "Dziś na obiad",
+      "dish": "Leczo z kaszą jaglaną",
+      "meta": "40 min, 4 porcje",
+      "ready": "Wszystko masz w domu",
+      "start": "Zaczynamy gotować",
+      "next": [
+        {
+          "when": "Jutro",
+          "dish": "Dorsz z ziemniakami",
+          "note": "Wyjmij rybę z zamrażarki wieczorem",
+          "food": "dorsz"
+        },
+        {
+          "when": "Sobota",
+          "dish": "Gulasz wołowy z kopytkami",
+          "note": "Zakupy w piątek, lista gotowa",
+          "food": "gulasz"
+        }
+      ]
+    }
+  }
+}

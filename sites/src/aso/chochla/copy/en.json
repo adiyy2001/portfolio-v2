@@ -1,0 +1,270 @@
+{
+  "lang": "en",
+  "label": "English",
+  "app": { "name": "Chochla", "tagline": "A whole week of dinners, sorted" },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "tydzien",
+      "headline": "A whole week of dinners, sorted",
+      "alt": "A dinner plan from Monday to Sunday, with baked cod being dragged onto Friday. A smiling tomato says the headline in a bubble."
+    },
+    {
+      "id": "02",
+      "screen": "zakupy",
+      "headline": "The shopping list writes itself",
+      "alt": "Two comic panels: a paper list says the headline, and below it a phone shows the shopping list grouped by supermarket aisle."
+    },
+    {
+      "id": "03",
+      "screen": "lodowka",
+      "headline": "Cook with what you've got",
+      "alt": "An egg, a courgette, cheese and an onion made of shapes point at a phone that turns them into three dinner recipes."
+    },
+    {
+      "id": "04",
+      "screen": "przepis",
+      "headline": "Portions for two or five",
+      "alt": "Potato and cheese pierogi scaled to 5 people. Halftone circles read ×2 and ×5, and a smiling pierog says the headline."
+    },
+    {
+      "id": "05",
+      "screen": "gotowanie",
+      "headline": "Step by step, timers included",
+      "alt": "Cook mode for lentil chilli, step 3 of 6 with a 12 minute timer. A pop art burst behind the phone, a frying pan says the headline."
+    },
+    {
+      "id": "06",
+      "screen": "kolekcje",
+      "headline": "Family recipes, all in one place",
+      "alt": "A comic page: Grandma Rose's pierogi card, Mum's cheesecake card and a phone with the family recipe collections."
+    }
+  ],
+  "variantB": {
+    "screen": "dzis",
+    "headline": "Never ask what's for dinner again",
+    "alt": "The Today screen: lentil chilli and everything already at home. A smiling pot says the headline as question marks fly away."
+  },
+  "feature": {
+    "headline": "A whole week of dinners, sorted",
+    "alt": "Cream ground with Memphis confetti, a speech bubble with the name Chochla and its promise, and a smiling tomato, pierog and egg."
+  },
+  "notes": {
+    "burst": "Ding!",
+    "times": ["×2", "×5"],
+    "timesLabel": ["for two", "for five"],
+    "cards": [
+      {
+        "title": "Grandma Rose's pierogi",
+        "line": "potato, cheese and lots of onion",
+        "food": "pierogi"
+      },
+      { "title": "Mum's cheesecake", "line": "on a biscuit base, no raisins", "food": "sernik" }
+    ]
+  },
+  "ui": {
+    "tabs": ["Week", "Shopping", "Recipes", "Collections"],
+    "tydzien": {
+      "title": "This week",
+      "range": "5 to 11 October",
+      "people": "4 people",
+      "planned": "6 of 7 dinners",
+      "days": [
+        { "d": "Mon", "n": "5", "dish": "Tomato soup with rice", "time": "35 min", "food": "zupa" },
+        { "d": "Tue", "n": "6", "dish": "Courgette fritters", "time": "30 min", "food": "placki" },
+        {
+          "d": "Wed",
+          "n": "7",
+          "dish": "Potato and cheese pierogi",
+          "time": "70 min",
+          "food": "pierogi"
+        },
+        {
+          "d": "Thu",
+          "n": "8",
+          "dish": "Lentil chilli",
+          "time": "40 min",
+          "food": "leczo",
+          "today": true
+        },
+        { "d": "Fri", "n": "9", "empty": "Drop a recipe here" },
+        {
+          "d": "Sat",
+          "n": "10",
+          "dish": "Beef stew with dumplings",
+          "time": "2 h",
+          "food": "gulasz"
+        },
+        { "d": "Sun", "n": "11", "dish": "Chicken noodle soup", "time": "90 min", "food": "rosol" }
+      ],
+      "dragging": { "dish": "Baked cod with potatoes", "time": "45 min", "food": "dorsz" },
+      "today": "today",
+      "list": "Shopping list: 18 items"
+    },
+    "zakupy": {
+      "title": "Shopping list",
+      "sub": "From 6 dinners this week",
+      "done": "9 of 18 in the trolley",
+      "share": 50,
+      "aisles": [
+        {
+          "name": "Fruit and veg",
+          "items": [
+            ["Tomatoes", "1.5 kg", true, "soup, chilli"],
+            ["Courgettes", "3", true, "fritters, chilli"],
+            ["Red peppers", "3", false, "chilli"],
+            ["Onions", "6", true, "4 recipes"],
+            ["Potatoes", "2 kg", false, "pierogi, cod"]
+          ]
+        },
+        {
+          "name": "Dairy and eggs",
+          "items": [
+            ["Mature cheddar", "200 g", false, "pierogi"],
+            ["Eggs", "6", true, "fritters, dumplings"],
+            ["Soured cream", "200 ml", false, "fritters"]
+          ]
+        },
+        {
+          "name": "Meat and fish",
+          "items": [
+            ["Stewing beef", "800 g", false, "stew"],
+            ["Cod fillets", "600 g", false, "cod"]
+          ]
+        }
+      ],
+      "more": "Cupboard and spices: 8 items"
+    },
+    "lodowka": {
+      "title": "What's in your fridge?",
+      "sub": "Tick it and we'll find dinner",
+      "search": "Add an ingredient",
+      "picked": ["Eggs", "Courgette", "Cheddar", "Onion"],
+      "other": ["Tomatoes", "Lentils", "Rice", "Potatoes", "Peppers"],
+      "resultsTitle": "3 recipes match",
+      "results": [
+        {
+          "name": "Courgette fritters",
+          "time": "30 min",
+          "have": "You've got it all",
+          "match": 6,
+          "of": 6,
+          "food": "placki"
+        },
+        {
+          "name": "Courgette and cheese frittata",
+          "time": "25 min",
+          "have": "You've got it all",
+          "match": 5,
+          "of": 5,
+          "food": "frittata"
+        },
+        {
+          "name": "Shakshuka",
+          "time": "35 min",
+          "have": "Missing: tomatoes, peppers",
+          "match": 5,
+          "of": 7,
+          "food": "zapiekanka"
+        }
+      ]
+    },
+    "przepis": {
+      "title": "Potato and cheese pierogi",
+      "from": "From Grandma Rose",
+      "meta": ["70 min", "medium", "about 40"],
+      "portionsLabel": "Portions",
+      "portions": "5 people",
+      "groups": [
+        {
+          "name": "Dough",
+          "items": [
+            ["plain flour", "625 g"],
+            ["warm water", "300 ml"],
+            ["oil", "3 tbsp"]
+          ]
+        },
+        {
+          "name": "Filling",
+          "items": [
+            ["potatoes", "750 g"],
+            ["mature cheddar", "250 g"],
+            ["onions", "2"],
+            ["salt and pepper", "to taste"]
+          ]
+        }
+      ],
+      "add": "Add to list",
+      "cook": "Cook"
+    },
+    "gotowanie": {
+      "title": "Lentil chilli",
+      "step": "Step 3 of 6",
+      "steps": 6,
+      "current": 3,
+      "text": "Add the diced peppers and courgette. Cover and simmer until soft.",
+      "uses": ["peppers, 3", "courgette, 1"],
+      "timerLabel": "Simmer",
+      "timer": "08:24",
+      "timerOf": "of 12:00",
+      "share": 30,
+      "pause": "Pause",
+      "plus": "+1 min",
+      "next": "Next: stir in the lentils and smoked paprika"
+    },
+    "kolekcje": {
+      "title": "Collections",
+      "family": "The Hughes family, 4 people",
+      "items": [
+        {
+          "name": "From Grandma Rose",
+          "count": "14 recipes",
+          "color": "pomidor",
+          "food": "pierogi"
+        },
+        {
+          "name": "Kids' favourites",
+          "count": "9 recipes",
+          "color": "musztarda",
+          "food": "placki"
+        },
+        {
+          "name": "Quick weeknights",
+          "count": "21 recipes",
+          "color": "turkus",
+          "food": "frittata"
+        },
+        { "name": "Christmas", "count": "8 recipes", "color": "roz", "food": "sernik" }
+      ],
+      "recentTitle": "Recently added",
+      "recent": [
+        { "name": "Mum's cheesecake", "who": "added by Kate, yesterday", "food": "sernik" },
+        { "name": "Dad's beef stew", "who": "added by Mark, on Sunday", "food": "gulasz" }
+      ],
+      "add": "Copy a recipe from a card"
+    },
+    "dzis": {
+      "date": "Thursday, 8 October",
+      "hello": "Morning, Kate",
+      "label": "Tonight's dinner",
+      "dish": "Lentil chilli",
+      "meta": "40 min, 4 portions",
+      "ready": "You've got everything",
+      "start": "Let's start cooking",
+      "next": [
+        {
+          "when": "Tomorrow",
+          "dish": "Baked cod with potatoes",
+          "note": "Take the fish out of the freezer tonight",
+          "food": "dorsz"
+        },
+        {
+          "when": "Saturday",
+          "dish": "Beef stew with dumplings",
+          "note": "Shop on Friday, the list is ready",
+          "food": "gulasz"
+        }
+      ]
+    }
+  }
+}

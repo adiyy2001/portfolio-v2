@@ -6,7 +6,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-aso.md`. Run rules: `/hom
 - [x] F foundation, with the first brand end to end (B1 Grań)
 - [x] B2 Szyld
 - [x] B3 Margines
-- [ ] B4 Chochla
+- [x] B4 Chochla
 - [ ] B5 Kruszec
 - [ ] B6 Bis
 - [ ] Q quality control
@@ -442,3 +442,6 @@ Taken without asking, in the autonomous mode. App agents add their own to `STATU
 29. **Margines headlines rephrased** so no line ends with one word at the set's size (Caveat 700, 58 CSS px App Store, 38 Play): PL 2 "Powtórka w porę, zanim zapomnisz" (was "Powtórka tuż przed zapomnieniem"), EN 1 and the EN feature line "Words that keep their sentence" (was "Learn words with the sentence attached"). The benefit of each is unchanged.
 30. **Margines invented titles**: "The Long Way Home" exists (several novels), so the PL book deck is "Salt on the Windowsill", the series "Night Shift on Harbour Street"; the EN set (an English speaker learning Polish) uses "Lato na Kazimierzu", "Sąsiedzi z trzeciego piętra" and a trip to Kraków. All four were searched on 2026-10-07 and none was found. Variant B gets its own screen state ("Z twoich notatek", a photographed notebook page turned into nine cards) in place of the planned Wymowa screen, so the B frame shows its own promise.
 31. **Margines annotations are measured, not placed by hand**: each marker stroke (rough.js, fixed seed) is drawn in the page after the fonts load, from the box of the UI element it points at, so a new language with longer text gets a bigger circle without layout work. Foundation change for this: `settle` awaits `window.wzReady` when a page defines it; Grań and Szyld re-rendered pixel identical. UI text uses darker shades of the marker colours (`#C2302A`, `#1F7A45`), the bright ones are strokes only.
+32. **Chochla variant B** gets its own screen state, "Dziś" (tonight's dinner, everything at home), instead of the Tydzień screen of frame 1, so the A and B frames show different screens and B shows the answer to "co na obiad". All twelve planned headlines are used unchanged.
+33. **Chochla bubbles and confetti are laid out in the page**: each speech bubble is drawn around the measured headline after the fonts load and aimed at its character, confetti drops any piece that would touch a bubble, and the render fails if a pattern enters the 16 px margin around a phone or a bubble or character touches it. Frame 6 uses a narration box and frames 2 and 6 comic panels, so the six frames do not repeat one bubble skeleton.
+34. **Chochla content**: no prices (the shopping list shows quantities and the dinners that need them); the palette has no green, so Turkus draws the tomato calyx and the courgette; the EN set is a British home kitchen written anew (courgette fritters, lentil chilli, Grandma Rose).

@@ -258,3 +258,12 @@ Look at: `sheets/ui-<lang>.png` (all screens), `boards/*.png`, `thumbs/*.png` (f
 - Rotated pieces (deck cards, scraps) grow their bounding box; the canvas check catches a corner leaving the frame.
 - Caveat at 58 CSS px holds about 15 characters per line in a 360 px box; three line headlines are fine, but check the one word last line in both languages before drawing anything around the headline.
 - The heavy lock is shared with the app preview session; a Remotion render can hold it for many minutes, so batch Playwright work into one pipeline run.
+
+### Lessons from Chochla (B4)
+
+- `styleOf` turns every number into px: pass unitless values (`line-height`, `font-weight`) as strings, or they are silently dropped.
+- Shapes that depend on text (speech bubbles) are drawn in the page after the fonts load, around `Range.getBoundingClientRect()` of the headline, as one closed path with the tail, so a longer language gets a bigger bubble. A superellipse with exponent 4 to 6 encloses the text box when scaled by `2^(1/n)`; account for that growth in the frame width.
+- Let the page fail the render: a short check after layout that writes `console.error` when decoration touches a device margin turns a layout rule into a validator. A soft mode (`CHOCHLA_SOFT=1`) that records the problems on `body` instead makes iterating possible.
+- Bangers needs `text-transform: uppercase`, line height 1.2 and a little top padding for the accents; its width is about 0.46 em per letter, so check two line breaks against the box width before drawing.
+- On the page, a light title over a starburst disappears where the letters leave the burst body; give the title an outline (`-webkit-text-stroke` with `paint-order: stroke fill`) and keep its padding inside the inner radius. `text-wrap: pretty` on paragraphs removes most one word last lines.
+
