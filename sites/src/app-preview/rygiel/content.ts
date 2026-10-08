@@ -29,7 +29,7 @@ export const content = {
     ] as [string, string][],
     alert: {
       label: 'Alert wycieku',
-      title: 'Twój adres e-mail pojawił się w wycieku',
+      title: 'Twój adres e-mail pojawił się w\u00a0wycieku',
       rows: [
         ['Serwis', 'Forum Wędkarskie Mazury'],
         ['Wyciek', '2.10.2026'],

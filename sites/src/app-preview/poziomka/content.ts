@@ -73,7 +73,7 @@ export const content = {
     ],
   },
   motion: {
-    title: 'Kroki zamiast krzywych',
+    title: 'Ruch krokami, bez krzywych',
     intro:
       'Poziomka jako jedyna z sześciu realizacji nie ma żadnego wygładzania. Każdy ruch to seria póz, a nowa poza wchodzi co 4 klatki, czyli 7,5 razy na sekundę. Te same wartości napędzają wideo i laboratorium poniżej.',
     caption:
@@ -98,7 +98,7 @@ export const content = {
     ] as [string, string][],
   },
   screens: {
-    title: 'Sześć ekranów z jednej palety',
+    title: 'Sześć ekranów z\u00a0jednej palety',
     intro:
       'Sześć ekranów zbudowanych z jednego zestawu części: panele z obrysem, paski XP, monety, kafle i zakładki. Projekt w siatce 221×480 pikseli rysunku, każdy piksel powiększony dokładnie cztery razy, co daje 884×1920. Pasek o szerokości 2 pikseli z prawej domyka 886, bo tej szerokości nie da się podzielić na całe piksele.',
   },
@@ -112,7 +112,7 @@ export const content = {
     wide: 'YouTube i link w Google Play, 16:9',
   },
   deliverables: {
-    title: 'Pliki gotowe do wgrania, z parametrami',
+    title: 'Pliki gotowe do wgrania, z\u00a0parametrami',
     intro:
       'Klient dostaje pliki gotowe do wgrania, z parametrami sprawdzonymi przez ffprobe. Wersja sklepowa w pełnej jakości jest za duża na stronę, dlatego tutaj odtwarzają się lekkie pętle bez dźwięku, w formacie WebM i MP4. Pikselowa grafika kompresuje się tak dobrze, że pętle zostają w pełnej rozdzielczości, więc żaden piksel nie jest skalowany.',
     extras: [

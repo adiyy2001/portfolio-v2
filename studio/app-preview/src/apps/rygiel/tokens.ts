@@ -21,7 +21,7 @@ export const palette = [
   { id: 'dim', name: 'Obrys przygaszony', role: 'obrysy kart i pól w spoczynku', hex: color.dim },
   { id: 'cyan', name: 'Neon cyjan', role: 'bezpiecznie, fokus, przycisk główny, linia skanu', hex: color.cyan },
   { id: 'text', name: 'Tekst', role: 'tekst główny', hex: color.text },
-  { id: 'muted', name: 'Tekst przygaszony', role: 'etykiety, daty, objaśnienia', hex: color.muted },
+  { id: 'muted', name: 'Tekst przygaszony', role: 'etykiety, daty i krótkie opisy', hex: color.muted },
   { id: 'alert', name: 'Alarm', role: 'tylko wyciek: karta alertu, to, co wyciekło', hex: color.alert },
   { id: 'warn', name: 'Ostrzeżenie', role: 'hasła słabe i powtórzone', hex: color.warn },
 ] as const;

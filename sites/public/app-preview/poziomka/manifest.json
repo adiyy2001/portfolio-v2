@@ -188,7 +188,7 @@
     {
       "id": "berryLight",
       "name": "Jasna poziomka",
-      "role": "blask na owocu, zaznaczenie",
+      "role": "blask owocu i zaznaczenia",
       "hex": "#FF8F8F",
       "onSurface": 1.97,
       "onGrouped": 1.43
@@ -220,7 +220,7 @@
     {
       "id": "leaf",
       "name": "Liść",
-      "role": "liście, trawa, odhaczone zadanie",
+      "role": "liście, trawa i zrobione zadania",
       "hex": "#4FA34A",
       "onSurface": 2.83,
       "onGrouped": 2.06
@@ -585,7 +585,7 @@
     {
       "kind": "9x16",
       "title": "Wersja marketingowa 9:16",
-      "note": "Reels, TikTok, Shorts",
+      "note": "Reels, TikTok i Shorts",
       "name": "poziomka-social-1080x1920.mp4",
       "path": "poziomka-social-1080x1920.mp4",
       "bytes": 1298563,

@@ -11,7 +11,7 @@ export const styles = `
 body.poz{background:var(--sky);color:var(--ink);font:400 16px/24px var(--mini);-webkit-font-smoothing:none;font-smooth:never}
 .poz :where(h1,h2,h3,p,figure,dl,dd,ul,ol,table,fieldset){margin:0}
 .poz :where(ul,ol){padding:0;list-style:none}
-.poz :where(p,dd,li,figcaption,td){text-wrap:pretty}
+.poz :where(p,dd,li,figcaption,td){text-wrap:balance}
 [data-scale='down'] :is(video,img){image-rendering:auto}
 .poz a{color:var(--ink);text-underline-offset:4px;text-decoration-thickness:2px}
 .poz a:focus-visible,.poz button:focus-visible,.poz input:focus-visible,.poz [tabindex]:focus-visible{outline:4px solid var(--ink);outline-offset:2px}
@@ -106,9 +106,9 @@ body.poz{background:var(--sky);color:var(--ink);font:400 16px/24px var(--mini);-
 @media (min-resolution:2dppx) and (min-width:700px){.poz .board img{image-rendering:pixelated}}
 .shots,.files{margin-top:24px;overflow:hidden;background:var(--cream);border:2px solid var(--ink);clip-path:var(--notch)}
 .shots table,.files table{width:100%;border-collapse:collapse}
-@media (max-width:760px){.shots thead,.files thead{display:none}.shots table,.shots tbody,.shots tr,.shots th,.shots td,.files table,.files tbody,.files tr,.files th,.files td{display:block}.shots tr,.files tr{padding:12px 4px;border-top:2px dotted var(--dusk)}.shots tr:first-child,.files tr:first-child{border-top:0}.poz .shots th,.poz .shots td,.poz .files th,.poz .files td{border-top:0;padding:4px 16px}.shots td[data-label]::before,.files td[data-label]::before{content:attr(data-label);display:block;margin-top:4px;color:var(--dusk)}.num{white-space:normal}}
+@media (max-width:960px){.shots thead,.files thead{display:none}.shots table,.shots tbody,.shots tr,.shots th,.shots td,.files table,.files tbody,.files tr,.files th,.files td{display:block}.shots tr,.files tr{padding:12px 4px;border-top:2px dotted var(--dusk)}.shots tr:first-child,.files tr:first-child{border-top:0}.poz .shots th,.poz .shots td,.poz .files th,.poz .files td{border-top:0;padding:4px 16px}.shots td[data-label]::before,.files td[data-label]::before{content:attr(data-label);display:block;margin-top:4px;color:var(--dusk)}.num{white-space:normal}}
 .files caption{text-align:left;padding:16px 16px 4px;font:400 37.3333px/40px var(--pixel)}
-@media (max-width:760px){.files caption{display:block;width:auto}}
+@media (max-width:960px){.files caption{display:block;width:auto}}
 .poz th,.poz td{text-align:left;vertical-align:top;padding:10px 14px;border-top:2px dotted var(--dusk);font-weight:400}
 .poz thead th{border-top:0;color:var(--dusk)}
 .poz tbody th{color:var(--ink)}

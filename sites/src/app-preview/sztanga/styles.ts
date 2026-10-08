@@ -55,8 +55,8 @@ body.szt{background:var(--ground);color:var(--ink);font:500 17px/1.55 var(--font
 .swatch b{font-size:15px}
 .swatch span:not(.swatch__chip){color:var(--sec)}
 .axis{display:grid;gap:6px}
-.axis p{font-weight:900;font-size:clamp(34px,7vw,64px);line-height:.95;white-space:nowrap;overflow:hidden}
-.axis small{display:block;font:700 13px/1.4 var(--font);font-stretch:75%;letter-spacing:.06em;color:var(--sec);margin-bottom:8px}
+.axis p{font-weight:900;font-size:clamp(28px,7vw,64px);line-height:.95;white-space:nowrap;overflow:hidden}
+.axis small{display:block;font:700 13px/1.4 var(--font);font-stretch:75%;letter-spacing:.06em;color:var(--sec);margin-bottom:8px;white-space:normal}
 .weights{display:grid;gap:4px;margin-top:18px;padding-top:16px;border-top:2px solid var(--line)}
 .weights p{font-size:19px;line-height:1.3}
 .weights small{color:var(--sec);font-size:13px;font-weight:600;margin-left:8px}
@@ -67,9 +67,9 @@ body.szt{background:var(--ground);color:var(--ink);font:500 17px/1.55 var(--font
 .board img{width:100%;background:#000;box-shadow:0 0 0 2px var(--line)}
 .shots,.files{background:var(--raised);margin-top:16px;overflow:hidden}
 .shots table,.files table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
-@media (max-width:760px){.shots thead,.files thead{display:none}.shots table,.shots tbody,.shots tr,.shots th,.shots td,.files table,.files tbody,.files tr,.files th,.files td{display:block}.shots tr,.files tr{padding:12px 4px;border-top:2px solid var(--line)}.shots tr:first-child,.files tr:first-child{border-top:0}.szt .shots th,.szt .shots td,.szt .files th,.szt .files td{border-top:0;padding:4px 16px}.shots td[data-label]::before,.files td[data-label]::before{content:attr(data-label);display:block;margin-top:4px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);font-weight:800;font-stretch:75%}.num{white-space:normal}}
+@media (max-width:960px){.shots thead,.files thead{display:none}.shots table,.shots tbody,.shots tr,.shots th,.shots td,.files table,.files tbody,.files tr,.files th,.files td{display:block}.shots tr,.files tr{padding:12px 4px;border-top:2px solid var(--line)}.shots tr:first-child,.files tr:first-child{border-top:0}.szt .shots th,.szt .shots td,.szt .files th,.szt .files td{border-top:0;padding:4px 16px}.shots td[data-label]::before,.files td[data-label]::before{content:attr(data-label);display:block;margin-top:4px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);font-weight:800;font-stretch:75%}.num{white-space:normal}}
 .files caption{text-align:left;padding:16px 16px 6px;font-weight:900;font-size:18px;text-transform:uppercase}
-@media (max-width:760px){.files caption{display:block;width:auto}}
+@media (max-width:960px){.files caption{display:block;width:auto}}
 .szt th,.szt td{text-align:left;vertical-align:top;padding:11px 14px;border-top:2px solid var(--line)}
 .szt thead th{border-top:0;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);font-weight:800;font-stretch:75%}
 .szt tbody th{font-weight:800}
@@ -114,7 +114,7 @@ body.szt{background:var(--ground);color:var(--ink);font:500 17px/1.55 var(--font
 @media (min-width:900px){.formats{grid-template-columns:minmax(0,.9fr) minmax(0,.9fr) minmax(0,1.3fr);align-items:start}}
 .formats figure{display:grid;gap:10px;align-content:start}
 .formats figcaption{font-size:14px;color:var(--sec)}
-.formats figcaption b{display:block;color:var(--ink);font-size:16px;font-weight:900;text-transform:uppercase}
+.formats figcaption b{display:block;color:var(--ink);font-size:16px;font-weight:900;text-transform:uppercase;font-stretch:75%}
 .fmt--wide{grid-column:1/-1;display:grid;gap:20px}
 @media (min-width:900px){.fmt--wide{grid-column:auto}}
 .cta{margin:clamp(24px,5vw,56px) 0 0;padding:clamp(24px,4vw,48px);background:var(--signal);color:var(--ground);display:grid;gap:18px}

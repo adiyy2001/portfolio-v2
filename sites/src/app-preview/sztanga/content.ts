@@ -28,7 +28,7 @@ export const content = {
     ] as [string, string][],
   },
   direction: {
-    title: 'Liczba zamiast ikony, cięcie zamiast przenikania',
+    title: 'Liczba zamiast ikony, cięcie bez przenikania',
     paragraphs: [
       'Na treningu liczą się trzy rzeczy: ciężar, seria i czas przerwy. Dlatego interfejs jest typograficzny. Ciężar zajmuje całą szerokość ekranu, a krój Anybody zmienia szerokość znaków od 50 do 150, więc ta sama liczba może być wąska i wysoka albo szeroka i niska, zawsze od krawędzi do krawędzi.',
       'Ruch idzie za muzyką z siłowni: 120 uderzeń na minutę, cięcie co 15 klatek, żadnych przenikań i sprężyn, które się kołyszą. Kolor jest jeden: pomarańcz na czerni. Gdy pada rekord, cały ekran odwraca się na jedno uderzenie.',

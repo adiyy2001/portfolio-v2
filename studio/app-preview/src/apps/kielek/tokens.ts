@@ -24,7 +24,7 @@ export const palette = [
   { id: 'leaf', name: 'Liść', role: 'liście maskotki i drobne akcenty, nigdy pod tekstem', hex: color.leaf },
   { id: 'butter', name: 'Masło', role: 'dziś, wybrane, aktywna zakładka', hex: color.butter },
   { id: 'blush', name: 'Róż', role: 'roślina potrzebuje uwagi, obudowa telefonu', hex: color.blush },
-  { id: 'terracotta', name: 'Terakota', role: 'doniczki, tylko dekoracja', hex: color.terracotta },
+  { id: 'terracotta', name: 'Terakota', role: 'doniczki, tylko jako dekoracja', hex: color.terracotta },
   { id: 'water', name: 'Woda', role: 'krople, wilgotność, ilość wody', hex: color.water },
   { id: 'ink', name: 'Śliwkowy brąz', role: 'tekst, oczy maskotki, ikony', hex: color.ink },
   { id: 'inkSoft', name: 'Brąz łagodny', role: 'objaśnienia na brzoskwini, śmietance, maśle i wodzie', hex: color.inkSoft },

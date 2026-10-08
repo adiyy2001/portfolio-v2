@@ -34,7 +34,7 @@ const media = (file, root) => {
 
 const finalNotes = {
   store: 'App Store Connect, podgląd aplikacji na iPhone',
-  '9x16': 'Reels, TikTok, Shorts',
+  '9x16': 'Reels, TikTok i Shorts',
   '1x1': 'post w kanale',
   '16x9': 'YouTube, link w Google Play',
 };

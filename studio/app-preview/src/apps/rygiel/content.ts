@@ -150,7 +150,7 @@ export const log = [
 
 export const gallery = [
   { n: 1, title: 'Alert wycieku', caption: 'Karta w kolorze alarmu: serwis, data wycieku, godzina wykrycia i co wyciekło. Jeden przycisk prowadzi do zmiany hasła.' },
-  { n: 2, title: 'Szczegóły wycieku', caption: 'Oś czasu od wycieku do wykrycia, lista tego, co wyciekło i co nie, oraz wpis z sejfu, którego to dotyczy.' },
+  { n: 2, title: 'Wyciek z bliska', caption: 'Oś czasu od wycieku do wykrycia, lista tego, co wyciekło i co nie, oraz wpis z sejfu, którego to dotyczy.' },
   { n: 3, title: 'Generator', caption: '20 znaków z czterech klas, około 131 bitów. Każdy znak w osobnym polu, więc hasło da się przepisać z ekranu.' },
   { n: 4, title: 'Sejf', caption: 'Lista wpisów z filtrami słabych i powtórzonych haseł. Wpis forum ma już znacznik „zmienione dziś”.' },
   { n: 5, title: 'Zdrowie sejfu', caption: 'Wynik 96 na 100 po jednym wieczorze: żadnego hasła z wycieku, żadnego powtórzonego, jedno słabe do zmiany.' },

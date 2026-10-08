@@ -87,7 +87,7 @@ export const content = {
     ] as [string, string][],
   },
   cta: {
-    title: 'Masz aplikację, która potrzebuje podglądu?',
+    title: 'Masz aplikację do pokazania?',
     text: 'Napisz, co robi Twoja aplikacja i kto jej używa. Zaproponuję storyboard, styl ruchu i komplet plików do App Store, Google Play i mediów społecznościowych.',
     link: 'Zobacz ofertę dla klientów',
   },

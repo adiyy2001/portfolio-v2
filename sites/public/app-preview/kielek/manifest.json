@@ -196,7 +196,7 @@
     {
       "id": "terracotta",
       "name": "Terakota",
-      "role": "doniczki, tylko dekoracja",
+      "role": "doniczki, tylko jako dekoracja",
       "hex": "#E8896B",
       "onSurface": 2.38,
       "onGrouped": 2.13
@@ -573,7 +573,7 @@
     {
       "kind": "9x16",
       "title": "Wersja marketingowa 9:16",
-      "note": "Reels, TikTok, Shorts",
+      "note": "Reels, TikTok i Shorts",
       "name": "kielek-social-1080x1920.mp4",
       "path": "kielek-social-1080x1920.mp4",
       "bytes": 5861652,

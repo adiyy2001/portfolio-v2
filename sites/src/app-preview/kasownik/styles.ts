@@ -61,9 +61,9 @@ body.kas{background:var(--ground);color:var(--ink);font:400 17px/1.55 var(--font
 .board img{width:100%;border-radius:var(--r);box-shadow:var(--shadow);background:#fff}
 .shots,.files{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);margin-top:16px;overflow:hidden}
 .shots table,.files table{width:100%;border-collapse:collapse;font-size:15px;line-height:1.45}
-@media (max-width:760px){.shots thead,.files thead{display:none}.shots table,.shots tbody,.shots tr,.shots th,.shots td,.files table,.files tbody,.files tr,.files th,.files td{display:block}.shots tr,.files tr{padding:12px 4px;border-top:1px solid var(--line)}.shots tr:first-child,.files tr:first-child{border-top:0}.kas .shots th,.kas .shots td,.kas .files th,.kas .files td{border-top:0;padding:4px 18px}.shots td[data-label]::before,.files td[data-label]::before{content:attr(data-label);display:block;margin-top:4px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--sec);font-weight:700}.num{white-space:normal}}
+@media (max-width:960px){.shots thead,.files thead{display:none}.shots table,.shots tbody,.shots tr,.shots th,.shots td,.files table,.files tbody,.files tr,.files th,.files td{display:block}.shots tr,.files tr{padding:12px 4px;border-top:1px solid var(--line)}.shots tr:first-child,.files tr:first-child{border-top:0}.kas .shots th,.kas .shots td,.kas .files th,.kas .files td{border-top:0;padding:4px 18px}.shots td[data-label]::before,.files td[data-label]::before{content:attr(data-label);display:block;margin-top:4px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--sec);font-weight:700}.num{white-space:normal}}
 .files caption{text-align:left;padding:16px 18px 6px;font-weight:700;font-size:17px}
-@media (max-width:760px){.files caption{display:block;width:auto}}
+@media (max-width:960px){.files caption{display:block;width:auto}}
 .kas th,.kas td{text-align:left;vertical-align:top;padding:11px 14px;border-top:1px solid var(--line)}
 .kas thead th{border-top:0;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--sec);font-weight:700}
 .kas tbody th{font-weight:700}

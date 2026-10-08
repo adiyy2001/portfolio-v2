@@ -119,7 +119,14 @@ const weights = [
         </div>
         <div class="card card--alert alert" aria-label="Przykładowy alert o wycieku">
           <p class="alert__label">{content.client.alert.label}</p>
-          <p class="alert__title">{content.client.alert.title}</p>
+          <p class="alert__title">
+            {content.client.alert.title.split(' ').map((word, i) => (
+              <>
+                {i > 0 && ' '}
+                <span class="nowrap">{word}</span>
+              </>
+            ))}
+          </p>
           <dl>
             {content.client.alert.rows.map(([term, value], i) => (
               <div>

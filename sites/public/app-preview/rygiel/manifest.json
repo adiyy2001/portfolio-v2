@@ -192,7 +192,7 @@
     {
       "id": "muted",
       "name": "Tekst przygaszony",
-      "role": "etykiety, daty, objaśnienia",
+      "role": "etykiety, daty i krótkie opisy",
       "hex": "#7FA6B0",
       "onSurface": 7.66,
       "onGrouped": 7.26
@@ -353,7 +353,7 @@
     },
     {
       "n": 2,
-      "title": "Szczegóły wycieku",
+      "title": "Wyciek z bliska",
       "caption": "Oś czasu od wycieku do wykrycia, lista tego, co wyciekło i co nie, oraz wpis z sejfu, którego to dotyczy.",
       "file": "screens/rygiel-screen-2.webp"
     },
@@ -561,7 +561,7 @@
     {
       "kind": "9x16",
       "title": "Wersja marketingowa 9:16",
-      "note": "Reels, TikTok, Shorts",
+      "note": "Reels, TikTok i Shorts",
       "name": "rygiel-social-1080x1920.mp4",
       "path": "rygiel-social-1080x1920.mp4",
       "bytes": 17766370,

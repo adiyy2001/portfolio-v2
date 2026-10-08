@@ -40,7 +40,7 @@ export const content = {
     ['Dźwięk', 'brak, wszystko czytelne bez niego'],
   ] as [string, string][],
   client: {
-    title: 'Prąd z dachu, policzony co do kilowatogodziny',
+    title: 'Prąd z\u00a0dachu, policzony co do kilowatogodziny',
     paragraphs: [
       'Południe to aplikacja dla rodzin, które mają na dachu od 6 do 10 kWp i magazyn energii. Falownik pokazuje im surowe liczby, a pralka i tak chodzi wieczorem, kiedy prąd trzeba kupić. Aplikacja ma pokazać, dokąd płynie energia teraz, jak wyglądał cały dzień i kiedy włączyć duże urządzenia.',
       'Zadanie: podgląd do App Store, który w pierwszych dwóch sekundach pokaże dom z płynącym prądem i jedną dużą liczbą, trzy formaty na kampanię w mediach społecznościowych, pętle na stronę i storyboard. Bez dźwięku, bo sklep i feed startują wyciszone.',
@@ -73,7 +73,7 @@ export const content = {
     keywords: ['Izometria', 'Przepływ', 'Rysowanie w czasie', 'Wąskie liczby', 'Bilans'],
   },
   storyboard: {
-    title: '25 sekund, sześć ujęć, jedna liczba w każdym',
+    title: '25 sekund, sześć ujęć, jedna liczba w\u00a0każdym',
     intro:
       'Sześć ujęć w 750 klatkach. Hak to dom z płynącym prądem i liczba 6,4 kW z dachu od pierwszej klatki, bo w sklepie pierwsza klatka musi sprzedawać bez dźwięku. Potem magazyn, cały dzień na wykresie, porada na jutro i bilans, a na końcu ekran startowy z ikoną.',
     alt: 'Plansza sześciu klatek kluczowych wersji sklepowej z numerami ujęć, czasami i osią czasu',
@@ -124,7 +124,7 @@ export const content = {
     wide: 'YouTube i link w Google Play, 16:9',
   },
   deliverables: {
-    title: 'Pliki gotowe do wgrania, z parametrami',
+    title: 'Pliki gotowe do wgrania, z\u00a0parametrami',
     intro:
       'Klient dostaje pliki gotowe do wgrania, z parametrami sprawdzonymi przez ffprobe. Wersje pełnej jakości są za duże na stronę, dlatego tutaj odtwarzają się lekkie pętle bez dźwięku, w formacie WebM i MP4.',
     extras: [

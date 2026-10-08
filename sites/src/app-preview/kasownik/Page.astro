@@ -99,7 +99,7 @@ const weights = [
     <section class="sec" id="zadanie" aria-labelledby="t-zadanie">
       <div class="sec__head">
         <p class="sec__num">01 Klient i zadanie</p>
-        <h2 id="t-zadanie">Bilet kupiony i skasowany, zanim tramwaj ruszy</h2>
+        <h2 id="t-zadanie">Bilet kupiony i&nbsp;skasowany, zanim tramwaj ruszy</h2>
       </div>
       <div class="cols">
         <div class="prose">
@@ -137,7 +137,7 @@ const weights = [
           </ul>
         </div>
         <div class="card type" aria-label="Krój Onest w użytych wagach">
-          <h3>Onest, jeden krój w pięciu wagach</h3>
+          <h3>Onest, jeden krój w&nbsp;pięciu wagach</h3>
           {weights.map(([weight, sample, use]) => (
             <p style={`font-weight:${weight};font-size:${weight === 800 ? 34 : 22}px`}>
               {sample}
@@ -149,7 +149,7 @@ const weights = [
         </div>
       </div>
       <div class="card" style="margin-top:20px">
-        <h3>Jeden kolor marki i szarości systemu</h3>
+        <h3>Jeden kolor marki i&nbsp;szarości systemu</h3>
         <ul class="swatches">
           {manifest.palette.map(item => (
             <li class="swatch">
@@ -241,7 +241,7 @@ const weights = [
     <section class="sec" id="ekrany" aria-labelledby="t-ekrany">
       <div class="sec__head">
         <p class="sec__num">05 Ekrany</p>
-        <h2 id="t-ekrany">Siedem ekranów z jednego systemu</h2>
+        <h2 id="t-ekrany">Siedem ekranów z&nbsp;jednego systemu</h2>
         <p class="intro">{content.screensIntro}</p>
       </div>
       <div class="gallery">
@@ -329,7 +329,7 @@ const weights = [
     <section class="sec" id="pliki" aria-labelledby="t-pliki">
       <div class="sec__head">
         <p class="sec__num">07 Co dostaje klient</p>
-        <h2 id="t-pliki">Pliki gotowe do wgrania, z parametrami</h2>
+        <h2 id="t-pliki">Pliki gotowe do wgrania, z&nbsp;parametrami</h2>
         <p class="intro">{content.deliverables.intro}</p>
       </div>
       <FileTable manifest={manifest} />

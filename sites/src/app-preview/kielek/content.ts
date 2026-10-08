@@ -42,7 +42,7 @@ export const content = {
     },
   },
   direction: {
-    title: 'Miękko, ciepło i z charakterem',
+    title: 'Miękko, ciepło i\u00a0z\u00a0charakterem',
     paragraphs: [
       'Rośliny kojarzą się z czymś żywym i miękkim, a nie z tabelką. Dlatego interfejs wygląda jak ulepiony z plasteliny: karty są napompowane, mają jasny brzeg u góry i miękki cień pod spodem. Nie ma ostrych narożników ani zimnych szarości, a promień nigdy nie spada poniżej 18 pikseli.',
       'Paleta jest ciepła: brzoskwiniowe tło, pistacja dla zdrowych roślin, masło dla dzisiejszych zadań, róż dla tych, które potrzebują uwagi, i woda w kroplach. Maskotka Kiełek to kiełek w doniczce zbudowany z kilku brył. Cieszy się po podlaniu, martwi się przy diagnozie i kiwa głową, gdy znajdzie rozwiązanie.',
@@ -50,7 +50,7 @@ export const content = {
     keywords: ['Plastelina', 'Ciepłe pastele', 'Zaokrąglony krój', 'Maskotka', 'Odbicie'],
   },
   storyboard: {
-    title: '21 sekund, sześć ujęć, każde ląduje z odbiciem',
+    title: '21 sekund, sześć ujęć, każde ląduje z\u00a0odbiciem',
     intro:
       'Sześć ujęć w 630 klatkach. Hak to maskotka, która od pierwszej klatki siedzi w doniczce i podskakuje, bo w sklepie pierwsza klatka musi sprzedawać bez dźwięku. Potem podlewanie, kalendarz, który sam zmienia się z porą roku, diagnoza i pokoje, a na końcu ekran startowy z ikoną.',
     alt: 'Plansza sześciu klatek kluczowych wersji sklepowej z numerami ujęć, czasami i osią czasu',
@@ -86,7 +86,7 @@ export const content = {
     ] as [string, string][],
   },
   screens: {
-    title: 'Sześć ekranów z jednej plasteliny',
+    title: 'Sześć ekranów z\u00a0jednej plasteliny',
     intro:
       'Sześć ekranów zbudowanych jako komponenty z jednego mini design systemu: kolory, krój w trzech wagach, odstępy, promienie i trzy poziomy cienia. Projekt w kanwie 443×960, render w skali 2, czyli dokładnie 886×1920.',
   },
@@ -100,7 +100,7 @@ export const content = {
     wide: 'YouTube i link w Google Play, 16:9',
   },
   deliverables: {
-    title: 'Pliki gotowe do wgrania, z parametrami',
+    title: 'Pliki gotowe do wgrania, z\u00a0parametrami',
     intro:
       'Klient dostaje pliki gotowe do wgrania, z parametrami sprawdzonymi przez ffprobe. Wersje pełnej jakości są za duże na stronę, dlatego tutaj odtwarzają się lekkie pętle bez dźwięku, w formacie WebM i MP4.',
     extras: [
