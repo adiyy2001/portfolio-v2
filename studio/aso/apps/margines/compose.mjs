@@ -123,7 +123,7 @@ const layouts = {
         notes: [{ id: 'note-1', key: '01', x: 12, y: 730, w: 124, rotate: -4 }],
         stickers: [{ id: 'sticker-lang', kind: 'lang', x: 118, y: 290, w: 92, h: 40, rotate: -9 }],
         marks: [
-          { t: 'circle', q: '[data-mark="sentence"]', dev: true, color: c.flamaster, padX: 12, padY: 8, grow: 1.22, seed: 3, width: 3.4 },
+          { t: 'circle', q: '[data-mark="sentence"]', dev: true, color: c.flamaster, padX: 16, padY: 3, grow: 1.22, seed: 3, width: 3.4 },
           { t: 'arrow', from: { q: '#note-1', side: 'top', gap: 6, dx: 10 }, to: { q: '[data-mark="sentence"]', dev: true, side: 'left', gap: 26, dy: 20 }, color: c.flamaster, seed: 5, width: 3, bend: -0.25 },
         ],
       },
@@ -198,8 +198,8 @@ const layouts = {
         notes: [{ id: 'note-1', key: '01', x: 8, y: 470, w: 112, rotate: -4 }],
         stickers: [{ id: 'sticker-lang', kind: 'lang', x: 124, y: 156, w: 74, h: 32, rotate: -9 }],
         marks: [
-          { t: 'circle', q: '[data-mark="sentence"]', dev: true, color: c.flamaster, padX: 4, padY: 6, grow: 1.2, seed: 3, width: 2.8 },
-          { t: 'arrow', from: { q: '#note-1', side: 'top', gap: 6, dx: 10 }, to: { q: '[data-mark="sentence"]', dev: true, side: 'bottom', gap: 10, dx: -46 }, color: c.flamaster, seed: 5, width: 2.6, bend: -0.25, head: 12 },
+          { t: 'circle', q: '[data-mark="sentence"]', dev: true, color: c.flamaster, padX: 12, padY: 2, grow: 1.22, seed: 3, width: 2.8 },
+          { t: 'arrow', from: { q: '#note-1', side: 'top', gap: 6, dx: 10 }, to: { q: '[data-mark="sentence"]', dev: true, side: 'left', gap: 22, dy: 18 }, color: c.flamaster, seed: 5, width: 2.6, bend: -0.25, head: 12 },
         ],
       },
       {

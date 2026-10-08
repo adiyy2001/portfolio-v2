@@ -112,7 +112,7 @@ const przod = (data, ctx) => {
 <div class="m-small" style="margin-top:4px">${text(k.pos, lang)}</div>
 <div style="margin-top:64px" class="m-kicker">${lang === 'pl' ? 'Zdanie' : 'Sentence'}</div>
 <p data-mark="sentence" style="margin:10px 0 0;font-size:22px;line-height:1.55">${esc(k.before)}<span class="m-mark">${esc(k.mark)}</span>${text(k.after, lang)}</p>
-<div class="m-small" style="margin-top:14px">${text(k.source, lang)}</div>
+<div class="m-small" style="margin-top:30px">${text(k.source, lang)}</div>
 <div class="m-small" style="position:absolute;left:34px;bottom:22px;display:flex;align-items:center;gap:8px">${icons.flip.replace('<svg ', '<svg width="18" height="18" ')}${lang === 'pl' ? 'Stuknij, aby odwrócić' : 'Tap to flip'}</div>
 </div>
 <div class="m-btn" data-mark="show" style="position:absolute;left:20px;right:20px;bottom:36px">${text(k.show, lang)}</div>
@@ -170,7 +170,7 @@ const dodaj = (data, ctx) => {
   return `<div class="m-scr"><div class="m-body">
 <div class="m-pad" style="padding-top:14px;display:flex;align-items:center;justify-content:space-between"><h1 class="m-h1">${text(a.title, lang)}</h1><span class="m-x">${icons.close.replace('<svg ', '<svg width="18" height="18" ')}</span></div>
 <div class="m-pad m-small" style="margin-top:6px">${text(a.source, lang)}</div>
-<div class="m-card m-card--rule" style="margin:16px 20px 0;padding:18px 20px 22px 38px"><p style="margin:0;font-size:18px;line-height:2.05">${text(a.before, lang)}<span class="m-sel" data-mark="word">${esc(a.mark)}<b style="left:-5px;top:-9px"></b><b style="right:-5px;bottom:-9px"></b></span>${text(a.after, lang)}</p></div>
+<div class="m-card m-card--rule" style="margin:16px 20px 0;padding:18px 20px 22px 38px"><p style="margin:0;font-size:18px;line-height:2.4">${text(a.before, 'pl')}<span class="m-sel" data-mark="word">${esc(a.mark)}<b style="left:-5px;top:-9px"></b><b style="right:-5px;bottom:-9px"></b></span>${text(a.after, 'pl')}</p></div>
 <div class="m-sheet" data-mark="sheet" style="bottom:82px">
 <div class="m-handle"></div>
 <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><div><div style="font-weight:700;font-size:24px">${esc(a.word)}</div><div style="font-size:16px;color:${c.olowek}">${text(a.meaning, lang)}</div></div><span class="m-lang">${esc(deck.lang)}</span></div>

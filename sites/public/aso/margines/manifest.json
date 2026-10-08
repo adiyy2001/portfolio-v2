@@ -9,15 +9,15 @@
     "ipad": false
   },
   "base": "/wzornik/aso/margines/",
-  "totalBytes": 9229942,
+  "totalBytes": 9226700,
   "totalHuman": "8.8 MB",
-  "zip": { "path": "margines-aso.zip", "bytes": 9221354 },
+  "zip": { "path": "margines-aso.zip", "bytes": 9218112 },
   "groups": [
     {
       "id": "appstore",
       "title": "App Store, iPhone 6,9″",
       "count": 12,
-      "bytes": 4576397,
+      "bytes": 4575092,
       "formats": "PNG",
       "files": [
         "app-store/pl/margines-appstore-pl-01.png",
@@ -38,7 +38,7 @@
       "id": "play",
       "title": "Google Play, telefon",
       "count": 12,
-      "bytes": 3058310,
+      "bytes": 3056373,
       "formats": "PNG",
       "files": [
         "google-play/pl/margines-play-pl-01.png",
@@ -105,7 +105,7 @@
   "files": [
     {
       "path": "app-store/pl/margines-appstore-pl-01.png",
-      "bytes": 373212,
+      "bytes": 372583,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -116,7 +116,7 @@
     },
     {
       "path": "google-play/pl/margines-play-pl-01.png",
-      "bytes": 243244,
+      "bytes": 242503,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -171,7 +171,7 @@
     },
     {
       "path": "app-store/pl/margines-appstore-pl-04.png",
-      "bytes": 285951,
+      "bytes": 285780,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -182,7 +182,7 @@
     },
     {
       "path": "google-play/pl/margines-play-pl-04.png",
-      "bytes": 195312,
+      "bytes": 195261,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -271,7 +271,7 @@
     },
     {
       "path": "app-store/en/margines-appstore-en-01.png",
-      "bytes": 370348,
+      "bytes": 369618,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -282,7 +282,7 @@
     },
     {
       "path": "google-play/en/margines-play-en-01.png",
-      "bytes": 242803,
+      "bytes": 241722,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -337,7 +337,7 @@
     },
     {
       "path": "app-store/en/margines-appstore-en-04.png",
-      "bytes": 283284,
+      "bytes": 283509,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -348,7 +348,7 @@
     },
     {
       "path": "google-play/en/margines-play-en-04.png",
-      "bytes": 194493,
+      "bytes": 194429,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -473,34 +473,34 @@
     { "path": "teksty/en.json", "bytes": 6400, "type": "json", "group": "texts" }
   ],
   "web": [
-    { "path": "web/appstore-en-01.webp", "bytes": 47894, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01.webp", "bytes": 47810, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-01b.webp", "bytes": 46452, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-02.webp", "bytes": 46614, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-03.webp", "bytes": 41080, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-04.webp", "bytes": 41048, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-04.webp", "bytes": 40986, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-05.webp", "bytes": 42346, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-06.webp", "bytes": 49430, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-01.webp", "bytes": 48810, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01.webp", "bytes": 48738, "width": 480, "height": 1043 },
     { "path": "web/appstore-pl-01b.webp", "bytes": 46576, "width": 480, "height": 1043 },
     { "path": "web/appstore-pl-02.webp", "bytes": 48410, "width": 480, "height": 1043 },
     { "path": "web/appstore-pl-03.webp", "bytes": 45898, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-04.webp", "bytes": 41096, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-04.webp", "bytes": 41318, "width": 480, "height": 1043 },
     { "path": "web/appstore-pl-05.webp", "bytes": 44686, "width": 480, "height": 1043 },
     { "path": "web/appstore-pl-06.webp", "bytes": 50572, "width": 480, "height": 1043 },
     { "path": "web/feature-en.webp", "bytes": 41242, "width": 1024, "height": 500 },
     { "path": "web/feature-pl.webp", "bytes": 42412, "width": 1024, "height": 500 },
-    { "path": "web/play-en-01.webp", "bytes": 30242, "width": 400, "height": 711 },
+    { "path": "web/play-en-01.webp", "bytes": 30288, "width": 400, "height": 711 },
     { "path": "web/play-en-01b.webp", "bytes": 30154, "width": 400, "height": 711 },
     { "path": "web/play-en-02.webp", "bytes": 30516, "width": 400, "height": 711 },
     { "path": "web/play-en-03.webp", "bytes": 26992, "width": 400, "height": 711 },
-    { "path": "web/play-en-04.webp", "bytes": 28502, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 28596, "width": 400, "height": 711 },
     { "path": "web/play-en-05.webp", "bytes": 27314, "width": 400, "height": 711 },
     { "path": "web/play-en-06.webp", "bytes": 31336, "width": 400, "height": 711 },
-    { "path": "web/play-pl-01.webp", "bytes": 30926, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01.webp", "bytes": 30828, "width": 400, "height": 711 },
     { "path": "web/play-pl-01b.webp", "bytes": 30092, "width": 400, "height": 711 },
     { "path": "web/play-pl-02.webp", "bytes": 31476, "width": 400, "height": 711 },
     { "path": "web/play-pl-03.webp", "bytes": 30180, "width": 400, "height": 711 },
-    { "path": "web/play-pl-04.webp", "bytes": 28746, "width": 400, "height": 711 },
+    { "path": "web/play-pl-04.webp", "bytes": 29064, "width": 400, "height": 711 },
     { "path": "web/play-pl-05.webp", "bytes": 28544, "width": 400, "height": 711 },
     { "path": "web/play-pl-06.webp", "bytes": 32026, "width": 400, "height": 711 }
   ],
