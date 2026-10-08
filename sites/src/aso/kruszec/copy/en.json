@@ -18,7 +18,7 @@
       "screen": "budzet",
       "headline": "Know what's safe to spend",
       "accent": "safe",
-      "alt": "October's budget on the phone, with a glass card in front: £38 is safe to spend today, as £570 is left for 15 days."
+      "alt": "October's budget on a large glass card: £38 is safe to spend today, as £570 is left for 15 days. Spending below."
     },
     {
       "id": "03",
@@ -30,8 +30,8 @@
     {
       "id": "04",
       "screen": "alokacja",
-      "headline": "Keep your portfolio on plan",
-      "accent": "on plan",
+      "headline": "Keep your portfolio on track",
+      "accent": "on track",
       "alt": "A glass allocation ring around the phone: shares, bonds and cash next to your own 70, 20 and 10 plan."
     },
     {
@@ -39,7 +39,7 @@
       "screen": "cel",
       "headline": "Every deposit brings the goal closer",
       "accent": "closer",
-      "alt": "A glass timeline crosses the frame behind the phone, each house deposit payment is a dot. £10,680 of £20,000 saved."
+      "alt": "A glass timeline above the phone, each house deposit payment is a dot. £10,680 of £20,000 saved."
     },
     {
       "id": "06",
@@ -51,8 +51,8 @@
   ],
   "variantB": {
     "screen": "konta",
-    "headline": "Budget and investments in one place",
-    "accent": "one place",
+    "headline": "Spending and investments side by side",
+    "accent": "side by side",
     "alt": "The accounts list on the phone, with glass cards beside it: current account, savings, ISA, pension and gilts. Sample data."
   },
   "feature": {

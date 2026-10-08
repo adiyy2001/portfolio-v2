@@ -1,6 +1,6 @@
 import { card, esc, glue, phone, statusBar, styleOf } from '../../kit/kit.mjs';
 import { stores } from '../../lib/convention.mjs';
-import { colors as c, decimal, gaugeSvg, icons, money, renderScreen, renderTablet, ringSvg, screenOrder, t, TABLET } from './screens.mjs';
+import { budgetList, budgetSafe, colors as c, decimal, gaugeSvg, head as screenHead, icons, money, renderScreen, renderTablet, ringSvg, screenOrder, t, TABLET } from './screens.mjs';
 import { seriesFor, shape } from './series.mjs';
 
 const css = `
@@ -216,8 +216,8 @@ const timeline = (ui, lang, notes, { x0, x1, y, h, dot, size, todayX }) => {
   return { band, dots: dots.join(''), title, endX: todayX + futureStep * (futureCount - 0.5) };
 };
 
-const flag = (notes, ui, lang, { x, y, size, name }) =>
-  `<div class="kg" data-box="fg" data-name="${esc(name)}" style="${styleOf({ left: x, top: y, padding: `${size * 0.55}px ${size * 0.75}px`, 'border-radius': size * 0.9 })}"><div class="kg__k" style="${styleOf({ 'font-size': size * 0.72 })}">${t(ui.cel.title, lang)}</div><div class="kg__num" style="${styleOf({ 'font-size': size * 2, 'margin-top': size * 0.3 })}">${money(ui.cel.target, lang)}</div><div class="kg__sub" style="${styleOf({ 'font-size': size * 0.82, 'margin-top': size * 0.25 })}">${t(notes.timelineEnd, lang)}</div></div>`;
+const flag = (notes, ui, lang, { x, r, y, size, name }) =>
+  `<div class="kg" data-box="fg" data-name="${esc(name)}" style="${styleOf({ left: x, right: r, top: y, padding: `${size * 0.55}px ${size * 0.75}px`, 'border-radius': size * 0.9 })}"><div class="kg__k" style="${styleOf({ 'font-size': size * 0.72 })}">${t(ui.cel.title, lang)}</div><div class="kg__num" style="${styleOf({ 'font-size': size * 2, 'margin-top': size * 0.3 })}">${money(ui.cel.target, lang)}</div><div class="kg__sub" style="${styleOf({ 'font-size': size * 0.82, 'margin-top': size * 0.25 })}">${t(notes.timelineEnd, lang)}</div></div>`;
 
 const accountChips = (ui, lang, { x, y, gap, size, w, offsets }) => {
   const items = ui.konta.groups.flatMap(g => g.items).filter((_, i) => [0, 1, 2, 3, 5].includes(i));
@@ -229,24 +229,40 @@ const accountChips = (ui, lang, { x, y, gap, size, w, offsets }) => {
     .join('');
 };
 
+const budgetPanel = (ui, lang, { x, y, w, h, rows, big, name }) => {
+  const b = ui.budzet;
+  const scale = w / 390;
+  const shown = rows ? b.categories.slice(0, rows) : b.categories;
+  return glassCard({
+    x,
+    y,
+    w,
+    h,
+    name,
+    r: 34 * scale,
+    style: { overflow: 'hidden' },
+    inner: `<div style="${styleOf({ width: 390, transform: `scale(${scale})`, 'transform-origin': '0 0', 'padding-top': 8, 'font-size': 15, 'line-height': '1.3', 'font-weight': '500' })}">${screenHead(b.title, ui, lang, b.date)}<div class="k-pad" style="margin-top:16px">${budgetSafe(ui, lang, { big })}</div><div class="k-pad" style="margin-top:18px"><div class="k-between" style="padding:0 4px 8px"><span class="k-kicker">${t(b.spentLabel, lang)}</span><span class="k-muted">${money(shown.reduce((s, item) => s + item.spent, 0), lang)} / ${money(shown.reduce((s, item) => s + item.limit, 0), lang)}</span></div>${budgetList(ui, lang, { rows })}</div></div>`,
+  });
+};
+
 const L = {
   appstore: {
     head: 56,
     majatek: { h: { x: 30, y: 62, w: 384 }, d: { width: 300, x: 120, y: 270 }, glow: { x: 200, y: 560, r: 300 }, line: { width: 2.6, blur: 5, labelGap: 14, maxStart: 30, size: 13 } },
-    budzet: { h: { x: 30, y: 694, w: 380 }, d: { width: 276, x: 26, y: 46, soft: 0.5 }, card: { x: 196, y: 404, w: 218, h: 196, size: 62 }, glow: { x: 300, y: 500, r: 260 } },
+    budzet: { h: { x: 30, y: 62, w: 380 }, panel: { x: 22, y: 232, w: 396, h: 690, big: 72 }, glow: { x: 300, y: 420, r: 300 } },
     poduszka: { h: { x: 30, y: 62, w: 370 }, d: { width: 268, x: 150, y: 270, soft: 2.4 }, card: { x: 26, y: 400, w: 300, h: 372, size: 270 }, glow: { x: 180, y: 600, r: 300 } },
     alokacja: { h: { x: 40, y: 58, w: 360, align: 'center' }, d: { width: 236, x: 102, y: 330 }, ring: { cx: 220, cy: 578, r: 182, stroke: 22 }, pills: { size: 10.5, at: [[6, 614, 'r'], [6, 478], [14, 276]] }, glow: { x: 220, y: 580, r: 260 } },
-    cel: { h: { x: 30, y: 62, w: 370 }, d: { width: 236, x: 186, y: 290 }, tl: { x0: 6, x1: 430, y: 640, h: 70, dot: 7, size: 12, todayX: 170 }, flag: { x: 250, y: 724, size: 13 }, glow: { x: 120, y: 640, r: 220 } },
+    cel: { h: { x: 30, y: 62, w: 370 }, d: { width: 236, x: 30, y: 424 }, tl: { x0: 6, x1: 430, y: 336, h: 70, dot: 7, size: 12, todayX: 170 }, flag: { anchor: 'end', y: 452, size: 13 }, glow: { x: 160, y: 600, r: 260 } },
     raport: { h: { x: 30, y: 62, w: 384 }, back: { width: 230, x: 18, y: 300, rotate: -7, soft: 1.2 }, front: { width: 254, x: 166, y: 330, rotate: 4 }, glow: { x: 280, y: 620, r: 260 } },
     konta: { h: { x: 30, y: 62, w: 370 }, d: { width: 262, x: 186, y: 300 }, chips: { x: 14, y: 412, gap: 14, size: 12.5, w: 216, offsets: [0, 8, 0, 10, 4] }, glow: { x: 160, y: 560, r: 260 } },
   },
   play: {
     head: 34,
     majatek: { h: { x: 24, y: 34, w: 300 }, d: { width: 214, x: 106, y: 150 }, glow: { x: 170, y: 360, r: 220 }, line: { width: 2, blur: 4, labelGap: 10, maxStart: 40, size: 11 } },
-    budzet: { h: { x: 24, y: 548, w: 312 }, d: { width: 196, x: 22, y: 24, soft: 0.4 }, card: { x: 168, y: 296, w: 172, h: 154, size: 48 }, glow: { x: 250, y: 360, r: 200 } },
+    budzet: { h: { x: 24, y: 34, w: 312 }, panel: { x: 16, y: 126, w: 328, h: 496, rows: 4, big: 64 }, glow: { x: 250, y: 300, r: 220 } },
     poduszka: { h: { x: 24, y: 34, w: 312 }, d: { width: 190, x: 152, y: 140, soft: 2 }, card: { x: 22, y: 230, w: 230, h: 288, size: 206 }, glow: { x: 140, y: 380, r: 220 } },
     alokacja: { h: { x: 30, y: 30, w: 300, align: 'center' }, d: { width: 168, x: 96, y: 178 }, ring: { cx: 180, cy: 360, r: 146, stroke: 18 }, pills: { size: 9.5, at: [[6, 388, 'r'], [4, 278], [8, 126]] }, glow: { x: 180, y: 360, r: 200 } },
-    cel: { h: { x: 24, y: 34, w: 312 }, d: { width: 176, x: 166, y: 150 }, tl: { x0: 6, x1: 352, y: 420, h: 56, dot: 5.5, size: 10, todayX: 150 }, flag: { x: 196, y: 480, size: 10.5 }, glow: { x: 100, y: 420, r: 180 } },
+    cel: { h: { x: 24, y: 34, w: 312 }, d: { width: 176, x: 22, y: 262 }, tl: { x0: 6, x1: 352, y: 196, h: 56, dot: 5.5, size: 10, todayX: 150 }, flag: { anchor: 'end', y: 292, size: 10.5 }, glow: { x: 140, y: 380, r: 200 } },
     raport: { h: { x: 24, y: 34, w: 312 }, back: { width: 170, x: 14, y: 150, rotate: -7, soft: 1 }, front: { width: 190, x: 152, y: 168, rotate: 4 }, glow: { x: 240, y: 420, r: 200 } },
     konta: { h: { x: 24, y: 34, w: 312 }, d: { width: 190, x: 166, y: 150 }, chips: { x: 8, y: 252, gap: 10, size: 10, w: 170, offsets: [0, 6, 0, 8, 3] }, glow: { x: 140, y: 380, r: 200 } },
   },
@@ -257,7 +273,7 @@ const L = {
     poduszka: { h: { x: 72, y: 96, w: 880 }, d: { width: 760, x: 236, y: 380, soft: 3.2 }, card: { x: 96, y: 520, w: 560, h: 700, size: 500 }, glow: { x: 400, y: 900, r: 600 } },
     alokacja: { h: { x: 96, y: 86, w: 840, align: 'center' }, d: { width: 560, x: 236, y: 420 }, ring: { cx: 516, cy: 790, r: 446, stroke: 40 }, pills: { size: 22, at: [[24, 900, 'r'], [20, 560], [40, 296]] }, glow: { x: 516, y: 790, r: 600 } },
     cel: { h: { x: 72, y: 96, w: 880 }, d: { width: 600, x: 390, y: 360 }, tl: { x0: 20, x1: 1010, y: 1000, h: 116, dot: 12, size: 20, todayX: 370 }, flag: { x: 690, y: 1110, size: 21 }, glow: { x: 220, y: 1000, r: 420 } },
-    raport: { h: { x: 72, y: 96, w: 880 }, back: { width: 760, x: -60, y: 420, soft: 1.6 }, front: { width: 330, x: 640, y: 560, rotate: 4 }, glow: { x: 760, y: 900, r: 500 } },
+    raport: { h: { x: 72, y: 96, w: 880 }, d: { width: 820, x: 106, y: 360, rotate: 3 }, glow: { x: 760, y: 900, r: 500 } },
   },
 };
 
@@ -287,6 +303,8 @@ const compose = (app, store, lang, slotIndex, variant) => {
     front.push(o.layer, o.label);
     if (spec.chip) front.push(worthChip(notes, ui, lang, spec.chip));
     script = o.script;
+  } else if (screenId === 'budzet' && spec.panel) {
+    front.push(budgetPanel(ui, lang, { ...spec.panel, name: 'budget-panel' }));
   } else if (screenId === 'budzet') {
     parts.push(dev(spec.d));
     front.push(safeCard(notes, ui, lang, { ...spec.card, name: 'safe' }));
@@ -303,11 +321,11 @@ const compose = (app, store, lang, slotIndex, variant) => {
     back.push(tl.band, layer(w, h, tl.dots), tl.title);
     parts.push(dev(spec.d));
     front.push(layer(w, h, `<line x1="${tl.endX.toFixed(1)}" x2="${tl.endX.toFixed(1)}" y1="${spec.tl.y + spec.tl.dot}" y2="${spec.flag.y}" stroke="${c.platyna}" stroke-opacity=".6" stroke-width="1.2"/><circle cx="${tl.endX.toFixed(1)}" cy="${spec.tl.y}" r="${spec.tl.dot * 0.75}" fill="${c.platyna}"/>`));
-    front.push(flag(notes, ui, lang, { ...spec.flag, name: 'goal' }));
+    const flagAt = spec.flag.anchor === 'end' ? { r: Math.max(8, w - tl.endX - spec.tl.dot * 2.5) } : { x: spec.flag.x };
+    front.push(flag(notes, ui, lang, { ...spec.flag, ...flagAt, name: 'goal' }));
   } else if (screenId === 'raport') {
     if (store === 'ipad') {
-      parts.push(dev(spec.back, 'majatek', `device-${n}-back`));
-      parts.push(device('appstore', { ui, lang, screenId: 'raport', ...spec.front, name: `device-${n}` }));
+      parts.push(dev(spec.d, 'raport'));
     } else {
       parts.push(dev(spec.back, 'konta', `device-${n}-back`));
       parts.push(dev(spec.front, 'raport'));

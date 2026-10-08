@@ -18,7 +18,7 @@
       "screen": "budzet",
       "headline": "Wiesz, ile możesz dziś wydać",
       "accent": "dziś",
-      "alt": "Budżet października w telefonie, a przed nim szklana karta: dziś możesz wydać 142 zł, bo na 15 dni zostało 2 130 zł."
+      "alt": "Budżet października na dużej szklanej karcie: dziś możesz wydać 142 zł, bo na 15 dni zostało 2 130 zł. Pod spodem wydatki."
     },
     {
       "id": "03",
@@ -39,7 +39,7 @@
       "screen": "cel",
       "headline": "Każda wpłata przybliża cel",
       "accent": "cel",
-      "alt": "Szklana oś czasu przecina kadr za telefonem, wpłaty na wkład własny to kropki. Zebrane 31 680 z 60 000 zł."
+      "alt": "Szklana oś czasu nad telefonem, wpłaty na wkład własny to kropki. Zebrane 31 680 z 60 000 zł."
     },
     {
       "id": "06",
@@ -51,8 +51,8 @@
   ],
   "variantB": {
     "screen": "konta",
-    "headline": "Budżet i inwestycje w jednym miejscu",
-    "accent": "w jednym miejscu",
+    "headline": "Budżet i inwestycje obok siebie",
+    "accent": "obok siebie",
     "alt": "Lista kont w telefonie, a obok szklane karty: konto osobiste, oszczędnościowe, IKE, IKZE i obligacje. Dane przykładowe."
   },
   "feature": {

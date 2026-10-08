@@ -60,10 +60,10 @@ export const content = glueDeep({
       'W wynikach wyszukiwania widać trzy pierwsze kadry. Razem mówią, czym jest Kruszec: pokazuje cały majątek, pilnuje budżetu na dziś i liczy, na ile miesięcy wystarczy poduszka.',
     roles: [
       'Obietnica w jednym obrazie. Linia majątku z trzech lat wychodzi z telefonu i biegnie w lewo aż do 2021 roku.',
-      'Telefon wysoko, a przed nim szklana karta z kwotą na dziś, ostrzejsza niż ekran za nią.',
+      'Jedyny kadr bez telefonu. Budżet miesiąca wypełnia kadr jako duża szklana karta, a kwota na dziś jest na niej największą liczbą.',
       'Duży miernik poduszki na szklanej karcie, a za nim rozmyty telefon, jak przy małej głębi ostrości.',
       'Jedyny kadr z telefonem na środku. Pierścień alokacji otacza telefon i pokazuje, jak portfel stoi obok twojego planu.',
-      'Szklana oś czasu przecina kadr za telefonem. Wpłaty to kropki, które idą do celu, licząc same wpłaty.',
+      'Szklana oś czasu biegnie nad telefonem. Wpłaty to kropki, które idą do celu, licząc same wpłaty, a na końcu osi czeka karta z kwotą wkładu.',
       'Dwa telefony jeden na drugim: lista kont z tyłu i spokojny raport za wrzesień z przodu.',
     ],
   },
@@ -89,7 +89,7 @@ export const content = glueDeep({
     intro:
       'Wariant B zmienia tylko pierwszy kadr, w obu sklepach i obu językach. W App Store można go puścić jako test strony produktu, w Google Play jako eksperyment na karcie aplikacji.',
     hypothesis:
-      'Ludzie, którzy prowadzą budżet w jednej aplikacji, a inwestycje w arkuszu, mocniej zareagują na obietnicę „wszystko w jednym miejscu” niż na sam wykres. Wariant B pokazuje listę kont zamiast linii majątku.',
+      'Ludzie, którzy prowadzą budżet w jednej aplikacji, a inwestycje w arkuszu, mocniej zareagują na obietnicę „budżet i inwestycje obok siebie” niż na sam wykres. Wariant B pokazuje listę kont zamiast linii majątku.',
   },
   feature: {
     title: 'Linia bez telefonu',

@@ -99,7 +99,7 @@ export const chartSvg = ({ total, lang, w, h, padL = 0, padR = 52, padT = 14, pa
   return `<svg class="k-chart" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true" style="display:block;overflow:visible"><defs><linearGradient id="${id}-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${c.szalwia}" stop-opacity=".2"/><stop offset="1" stop-color="${c.szalwia}" stop-opacity="0"/></linearGradient><filter id="${id}-glow" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation="4"/></filter></defs>${grid}${years}${fill ? `<path d="${area}" fill="url(#${id}-fill)"/>` : ''}<path d="${d}" fill="none" stroke="${c.szalwia}" stroke-width="4" stroke-opacity=".45" filter="url(#${id}-glow)"/><path d="${d}" fill="none" stroke="${c.szalwia}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="${last[0].toFixed(2)}" cy="${last[1].toFixed(2)}" r="9" fill="${c.szalwia}" fill-opacity=".18"/><circle cx="${last[0].toFixed(2)}" cy="${last[1].toFixed(2)}" r="4" fill="${c.szalwia}"/>${marks ? `<circle data-chart="a" data-i="${from}" data-v="${values[0]}" cx="${pts[0][0].toFixed(2)}" cy="${pts[0][1].toFixed(2)}" r="0.5" fill="none"/><circle data-chart="b" data-i="${all.length - 1}" data-v="${values[values.length - 1]}" cx="${last[0].toFixed(2)}" cy="${last[1].toFixed(2)}" r="0.5" fill="none"/>` : ''}</svg>`;
 };
 
-const head = (title, ui, lang, kicker) =>
+export const head = (title, ui, lang, kicker) =>
   `<div class="k-head"><div style="min-width:0">${kicker ? `<div class="k-kicker">${t(kicker, lang)}</div>` : ''}<h1 class="k-h1"${kicker ? ' style="margin-top:2px"' : ''}>${t(title, lang)}</h1></div>${sample(ui, lang)}</div>`;
 
 export const groupsCard = (ui, lang, { compact = false } = {}) => {
