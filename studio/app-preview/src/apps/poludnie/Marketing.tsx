@@ -185,27 +185,37 @@ const Washer3d = ({ f, frame }: { f: number; frame: number }) => {
   );
 };
 
-const Columns = ({ f, size }: { f: number; size: number }) => {
+const balanceCols = [
+  { x: 216, v: facts.day.fromRoof, top: color.sunTint, left: color.sun, right: color.sunText, hueId: 'sun' as Hue, label: 'z dachu', dx: -72, dy: -46 },
+  { x: 233, v: facts.day.fromBattery, top: color.batteryTint, left: color.battery, right: color.batteryText, hueId: 'battery' as Hue, label: 'z magazynu', dx: 30, dy: -86 },
+  { x: 250, v: facts.day.fromGrid, top: color.left, left: color.grid, right: color.gridText, hueId: 'grid' as Hue, label: 'z sieci', dx: 74, dy: -20 },
+];
+
+const Columns = ({ f }: { f: number }) => {
   const b = marketingBeats[4];
   if (f < b.from) return null;
-  const cols = [
-    { x: 216, v: facts.day.fromRoof, top: color.sunTint, left: color.sun, right: color.sunText, hueId: 'sun' as Hue, label: 'z dachu', dx: -64, dy: -46 },
-    { x: 233, v: facts.day.fromBattery, top: color.batteryTint, left: color.battery, right: color.batteryText, hueId: 'battery' as Hue, label: 'z magazynu', dx: 30, dy: -86 },
-    { x: 250, v: facts.day.fromGrid, top: color.left, left: color.grid, right: color.gridText, hueId: 'grid' as Hue, label: 'z sieci', dx: 74, dy: -20 },
-  ];
   return (
     <g>
-      {cols.map((col, i) => {
+      {balanceCols.map((col, i) => {
         const h = countAt(f, b.from + 10 + i * 4, 0, col.v * 8, 30);
         return <Box key={col.label} x={col.x} y={168} z={0} dx={13} dy={14} dz={Math.max(0.5, h)} top={col.top} left={col.left} right={col.right} />;
       })}
-      {cols.map((col, i) => {
-        const at = P(col.x + 6.5, 175, col.v * 8);
-        const o = progress(f, b.from + 34 + i * 4, 10);
-        return <TagSvg key={col.label} tag={{ hue: col.hueId, value: `${col.v.toFixed(1).replace('.', ',')} kWh`, label: col.label, at, dx: col.dx, dy: col.dy, opacity: o }} size={size} />;
-      })}
     </g>
   );
+};
+
+const columnTagsAt = (f: number): Tag[] => {
+  const b = marketingBeats[4];
+  if (f < b.from) return [];
+  return balanceCols.map((col, i) => ({
+    hue: col.hueId,
+    value: `${col.v.toFixed(1).replace('.', ',')} kWh`,
+    label: col.label,
+    at: P(col.x + 6.5, 175, col.v * 8),
+    dx: col.dx,
+    dy: col.dy,
+    opacity: progress(f, b.from + 34 + i * 4, 10),
+  }));
 };
 
 const TagSvg = ({ tag, size }: { tag: Tag; size: number }) => {
@@ -322,12 +332,16 @@ const Stage = ({ f, clock, format }: { f: number; clock: number; format: Format 
         extra={
           <>
             <Washer3d f={f} frame={clock} />
-            <Columns f={f} size={layout.tag} />
-            {tagsAt(f).map(tag => (tag.opacity && tag.opacity > 0.01 ? <TagSvg key={tag.label} tag={tag} size={layout.tag} /> : null))}
+            <Columns f={f} />
           </>
         }
       />
       <Wire from={hub} to={target} mode={layout.wire} clock={clock} opacity={1} />
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ position: 'absolute', overflow: 'visible', left: layout.world.cx - width / 2, top: layout.world.cy - height / 2 }}>
+        <g transform={`translate(${width / 2} ${height / 2}) scale(${cam.scale}) translate(${-cam.x} ${-cam.y})`}>
+          {[...columnTagsAt(f), ...tagsAt(f)].map(tag => (tag.opacity && tag.opacity > 0.01 ? <TagSvg key={tag.label} tag={tag} size={layout.tag} /> : null))}
+        </g>
+      </svg>
       <div style={{ position: 'absolute', left: p.left, top: p.top }}>
         <PhoneFrame scale={p.scale} theme={phoneTheme}>
           <StoreFrame frame={sf} clock={clock} overlays={false} />

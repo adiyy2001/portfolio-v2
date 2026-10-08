@@ -73,7 +73,7 @@ export const marketingBeats = [
   { from: 120, to: 269, store: [75, 224], part: 'battery', kicker: 'Magazyn', title: 'Pełny o 13:40.', line: 'Bateria ładuje się w południe, gdy słońca jest najwięcej.' },
   { from: 270, to: 419, store: [225, 374], part: 'chart', kicker: 'Dzień', title: '47,8 kWh z dachu.', line: 'Szczyt 6,4 kW o 13:10. Dom zużył 15,3 kWh.' },
   { from: 420, to: 569, store: [375, 524], part: 'washer', kicker: 'Jutro', title: 'Pralka o 12:30.', line: 'Wtedy dach ma 4,1 kW nadwyżki.' },
-  { from: 570, to: 719, store: [525, 674], part: 'grid', kicker: 'Bilans dnia', title: '92% prądu z własnego dachu.', line: 'Z sieci tylko 1,2 kWh. Wartość dnia 23,10 zł w cenach przykładowych.' },
+  { from: 570, to: 719, store: [525, 674], part: 'grid', kicker: 'Bilans dnia', title: '92% prądu z\u00a0własnego dachu.', line: 'Z sieci tylko 1,2 kWh. Wartość dnia 23,10 zł w\u00a0cenach przykładowych.' },
 ] as const;
 
 export const marketing = { duration: 795, bridge: 20, outro: 720, poster: 60 } as const;
