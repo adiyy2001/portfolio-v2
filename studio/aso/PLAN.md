@@ -7,7 +7,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-aso.md`. Run rules: `/hom
 - [x] B2 Szyld
 - [x] B3 Margines
 - [x] B4 Chochla
-- [ ] B5 Kruszec
+- [x] B5 Kruszec
 - [ ] B6 Bis
 - [ ] Q quality control
 - [ ] R independent review, every rubric score at least 4
@@ -445,3 +445,6 @@ Taken without asking, in the autonomous mode. App agents add their own to `STATU
 32. **Chochla variant B** gets its own screen state, "Dziś" (tonight's dinner, everything at home), instead of the Tydzień screen of frame 1, so the A and B frames show different screens and B shows the answer to "co na obiad". All twelve planned headlines are used unchanged.
 33. **Chochla bubbles and confetti are laid out in the page**: each speech bubble is drawn around the measured headline after the fonts load and aimed at its character, confetti drops any piece that would touch a bubble, and the render fails if a pattern enters the 16 px margin around a phone or a bubble or character touches it. Frame 6 uses a narration box and frames 2 and 6 comic panels, so the six frames do not repeat one bubble skeleton.
 34. **Chochla content**: no prices (the shopping list shows quantities and the dinners that need them); the palette has no green, so Turkus draws the tomato calyx and the courgette; the EN set is a British home kitchen written anew (courgette fritters, lentil chilli, Grandma Rose).
+35. **Kruszec exports JPEG** at quality 90 with 4:4:4 chroma: the PNG set (glows, blur, the twelve iPad files) made a 42 MB ZIP; the JPEG ZIP is 8.2 MB and the published folder 9.7 MB.
+36. **Kruszec EN is a British saver** written anew (pounds, Stocks and Shares ISA, workplace pension, gilts) instead of IKE and IKZE; no institution, fund or ticker is named in either language. Goals and the safety net are projected from deposits only, the allocation note is arithmetic against the user's own plan, every screen carries "Dane przykładowe" / "Sample data", and the copy check bans gain and return words in both languages.
+37. **Kruszec frame 1 line is measured**: the page reads two markers on the in-screen chart after the fonts load and draws the earlier months out to the frame edge in the same scale, so the line joins the screen chart in every language and store. Headlines carry one italic sage accent phrase (`accent` in the copy file); all twelve planned headlines are used unchanged.

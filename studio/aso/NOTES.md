@@ -267,3 +267,11 @@ Look at: `sheets/ui-<lang>.png` (all screens), `boards/*.png`, `thumbs/*.png` (f
 - Bangers needs `text-transform: uppercase`, line height 1.2 and a little top padding for the accents; its width is about 0.46 em per letter, so check two line breaks against the box width before drawing.
 - On the page, a light title over a starburst disappears where the letters leave the burst body; give the title an outline (`-webkit-text-stroke` with `paint-order: stroke fill`) and keep its padding inside the inner radius. `text-wrap: pretty` on paragraphs removes most one word last lines.
 
+### Lessons from Kruszec (B5)
+
+- Blur, glow and the iPad set make PNG heavy (42 MB ZIP); JPEG at 90 with 4:4:4 took it to 8.2 MB. Measure the PNG ZIP first, then switch `format` in `app.json`.
+- A line that continues a chart out of the device is drawn in the page from two invisible markers in the screen chart (`data-chart`, `data-i`, `data-v`): their `getBoundingClientRect` gives the x per month and y per value after scaling, so any device size or language lines up. Let the page `console.error` when the line does not reach the frame edge.
+- `backdrop-filter` and `filter: blur()` render in headless Chromium; a blurred device (`--blur`) behind a sharp glass card gives depth of field without extra art.
+- The iPad set needs its own device frame (in the app folder) and a smaller logical screen (900 x 1200 points) scaled into it, or the dashboard text is too small and half the screen stays empty.
+- Floating pills around a ring: `translateX(-50%)` pills near the frame edge fail the canvas check; nudge them inward per store.
+

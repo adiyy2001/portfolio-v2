@@ -1,0 +1,322 @@
+{
+  "lang": "pl",
+  "label": "Polski",
+  "app": {
+    "name": "Kruszec",
+    "tagline": "Cały majątek na jednym wykresie"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "majatek",
+      "headline": "Cały majątek na jednym wykresie",
+      "accent": "jednym wykresie",
+      "alt": "Wykres majątku netto z ostatnich trzech lat wychodzi z telefonu i biegnie przez cały kadr. Dane przykładowe, 186 420 zł."
+    },
+    {
+      "id": "02",
+      "screen": "budzet",
+      "headline": "Wiesz, ile możesz dziś wydać",
+      "accent": "dziś",
+      "alt": "Budżet października w telefonie, a przed nim szklana karta: dziś możesz wydać 142 zł, bo na 15 dni zostało 2 130 zł."
+    },
+    {
+      "id": "03",
+      "screen": "poduszka",
+      "headline": "Poduszka finansowa liczona w miesiącach",
+      "accent": "w miesiącach",
+      "alt": "Duża szklana karta z miernikiem: poduszka starcza na 5,2 miesiąca wydatków, cel to 6. Za nią rozmyty telefon."
+    },
+    {
+      "id": "04",
+      "screen": "alokacja",
+      "headline": "Portfel trzyma się twojego planu",
+      "accent": "twojego planu",
+      "alt": "Szklany pierścień alokacji wokół telefonu: akcje, obligacje i gotówka obok twojego planu 70, 20 i 10."
+    },
+    {
+      "id": "05",
+      "screen": "cel",
+      "headline": "Każda wpłata przybliża cel",
+      "accent": "cel",
+      "alt": "Szklana oś czasu przecina kadr za telefonem, wpłaty na wkład własny to kropki. Zebrane 31 680 z 60 000 zł."
+    },
+    {
+      "id": "06",
+      "screen": "raport",
+      "headline": "Miesiąc w jednym spokojnym raporcie",
+      "accent": "spokojnym",
+      "alt": "Dwa telefony jeden na drugim: z przodu raport za wrzesień w trzech zdaniach i trzech liczbach, z tyłu lista kont."
+    }
+  ],
+  "variantB": {
+    "screen": "konta",
+    "headline": "Budżet i inwestycje w jednym miejscu",
+    "accent": "w jednym miejscu",
+    "alt": "Lista kont w telefonie, a obok szklane karty: konto osobiste, oszczędnościowe, IKE, IKZE i obligacje. Dane przykładowe."
+  },
+  "feature": {
+    "headline": "Cały majątek na jednym wykresie",
+    "accent": "jednym wykresie",
+    "alt": "Granatowe tło, przez które biegnie spokojna linia majątku z delikatną poświatą, nazwa Kruszec i obietnica aplikacji."
+  },
+  "notes": {
+    "sample": "Dane przykładowe",
+    "safeCard": "możesz dziś wydać",
+    "safeSub": "2 130 zł na 15 dni",
+    "gaugeTitle": "Poduszka finansowa",
+    "gaugeUnit": "miesiąca",
+    "gaugeOf": "z 6 miesięcy",
+    "ringTitle": "Twój plan",
+    "timelineTitle": "Wpłaty na wkład własny",
+    "timelineEnd": "maj 2028",
+    "chartFrom": "2021",
+    "chartLabel": "majątek netto"
+  },
+  "ui": {
+    "currency": "zł",
+    "tabs": ["Majątek", "Budżet", "Cele", "Raport"],
+    "sample": "Dane przykładowe",
+    "majatek": {
+      "title": "Majątek netto",
+      "updated": "Stan na 17 października 2026",
+      "total": 186420,
+      "ranges": ["Rok", "3 lata", "Wszystko"],
+      "active": 1,
+      "axis": ["2024", "2025", "2026"],
+      "groups": [
+        {
+          "name": "Oszczędności",
+          "value": 48200,
+          "tone": "lod"
+        },
+        {
+          "name": "Inwestycje",
+          "value": 121900,
+          "tone": "szalwia"
+        },
+        {
+          "name": "Obligacje",
+          "value": 16320,
+          "tone": "platyna"
+        }
+      ],
+      "deposits": {
+        "label": "Wpłaty w 2026",
+        "value": 29500
+      }
+    },
+    "budzet": {
+      "title": "Październik",
+      "date": "sobota, 17 października",
+      "safeLabel": "Możesz dziś wydać",
+      "safe": 142,
+      "left": 2130,
+      "days": 15,
+      "leftLabel": "Zostało 2 130 zł na 15 dni",
+      "note": "po odłożeniu 2 900 zł na cele",
+      "spentLabel": "Wydane",
+      "categories": [
+        {
+          "name": "Jedzenie",
+          "spent": 1180,
+          "limit": 1800
+        },
+        {
+          "name": "Mieszkanie",
+          "spent": 2450,
+          "limit": 2450
+        },
+        {
+          "name": "Transport",
+          "spent": 310,
+          "limit": 600
+        },
+        {
+          "name": "Przyjemności",
+          "spent": 260,
+          "limit": 700
+        },
+        {
+          "name": "Zdrowie",
+          "spent": 90,
+          "limit": 400
+        },
+        {
+          "name": "Inne",
+          "spent": 140,
+          "limit": 610
+        }
+      ]
+    },
+    "poduszka": {
+      "title": "Poduszka finansowa",
+      "months": 5.2,
+      "monthsLabel": "miesiąca wydatków",
+      "target": 6,
+      "targetLabel": "Cel: 6 miesięcy",
+      "amount": 26000,
+      "amountLabel": "Na koncie oszczędnościowym",
+      "monthly": 5000,
+      "monthlyLabel": "Średnie wydatki z 12 miesięcy",
+      "missing": 4000,
+      "missingLabel": "Do celu brakuje",
+      "deposit": 500,
+      "depositLabel": "Wpłata co miesiąc",
+      "eta": "Sześć miesięcy w czerwcu 2027, licząc same wpłaty."
+    },
+    "alokacja": {
+      "title": "Alokacja",
+      "sub": "Inwestycje, obligacje i gotówka na cele",
+      "total": 153580,
+      "items": [
+        {
+          "name": "Akcje",
+          "sub": "ETF na indeks światowy",
+          "value": 121900,
+          "share": 79,
+          "target": 70,
+          "tone": "szalwia"
+        },
+        {
+          "name": "Obligacje",
+          "sub": "obligacje skarbowe",
+          "value": 16320,
+          "share": 11,
+          "target": 20,
+          "tone": "lod"
+        },
+        {
+          "name": "Gotówka",
+          "sub": "konto oszczędnościowe",
+          "value": 15360,
+          "share": 10,
+          "target": 10,
+          "tone": "platyna"
+        }
+      ],
+      "planLabel": "plan",
+      "nowLabel": "teraz",
+      "note": "Do twojego planu brakuje 14 400 zł w obligacjach."
+    },
+    "cel": {
+      "title": "Wkład własny",
+      "sub": "na mieszkanie",
+      "savedLabel": "Zebrane",
+      "saved": 31680,
+      "target": 60000,
+      "share": 53,
+      "monthly": 1500,
+      "monthlyLabel": "co miesiąc",
+      "eta": "maj 2028",
+      "etaLabel": "Przy tej wpłacie",
+      "etaNote": "licząc same wpłaty, bez założenia wzrostu",
+      "historyLabel": "Ostatnie wpłaty",
+      "deposits": [
+        {
+          "m": "maj",
+          "v": 1500
+        },
+        {
+          "m": "cze",
+          "v": 1500
+        },
+        {
+          "m": "lip",
+          "v": 2000
+        },
+        {
+          "m": "sie",
+          "v": 1500
+        },
+        {
+          "m": "wrz",
+          "v": 1500
+        },
+        {
+          "m": "paź",
+          "v": 1500
+        }
+      ]
+    },
+    "raport": {
+      "title": "Wrzesień",
+      "sub": "Miesiąc w trzech zdaniach",
+      "sentences": [
+        "Wydatki wyniosły **4 860 zł**, o 240 zł mniej niż w sierpniu.",
+        "Odłożone **2 900 zł**: 1 500 zł na wkład własny, 900 zł do IKE i 500 zł na poduszkę.",
+        "Poduszka starcza na **5,2 miesiąca** wydatków."
+      ],
+      "numbers": [
+        {
+          "label": "Wydatki",
+          "value": "4 860 zł"
+        },
+        {
+          "label": "Odłożone",
+          "value": "2 900 zł"
+        },
+        {
+          "label": "Poduszka",
+          "value": "5,2 mies."
+        }
+      ],
+      "next": "Następny raport 1 listopada"
+    },
+    "konta": {
+      "title": "Konta",
+      "total": 186420,
+      "totalLabel": "Razem",
+      "groups": [
+        {
+          "name": "Na co dzień",
+          "items": [
+            {
+              "name": "Konto osobiste",
+              "sub": "wpisane ręcznie",
+              "value": 6840,
+              "icon": "wallet"
+            },
+            {
+              "name": "Konto oszczędnościowe",
+              "sub": "import CSV, 14 października",
+              "value": 41360,
+              "icon": "safe"
+            }
+          ]
+        },
+        {
+          "name": "Inwestycje",
+          "items": [
+            {
+              "name": "IKE",
+              "sub": "ETF na indeks światowy",
+              "value": 78450,
+              "icon": "chart"
+            },
+            {
+              "name": "IKZE",
+              "sub": "ETF na indeks światowy",
+              "value": 23180,
+              "icon": "chart"
+            },
+            {
+              "name": "Rachunek maklerski",
+              "sub": "ETF na indeks światowy",
+              "value": 20270,
+              "icon": "chart"
+            },
+            {
+              "name": "Obligacje skarbowe",
+              "sub": "wpisane ręcznie",
+              "value": 16320,
+              "icon": "bond"
+            }
+          ]
+        }
+      ],
+      "import": "Importuj plik CSV",
+      "add": "Dodaj ręcznie"
+    }
+  }
+}
