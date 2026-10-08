@@ -38,5 +38,6 @@ export const sparkles = [
 
 export const keepLast = (text: string) => {
   const at = text.lastIndexOf(' ');
-  return at < 0 ? text : `${text.slice(0, at)} ${text.slice(at + 1)}`;
+  if (at < 0 || text.slice(at + 1).includes(' ')) return text;
+  return `${text.slice(0, at)} ${text.slice(at + 1)}`;
 };

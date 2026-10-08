@@ -30,7 +30,7 @@ export const content = glueDeep({
     caption: 'Kierunek',
     paragraphs: [
       'Odbiorcy Bis mają od osiemnastu do trzydziestu pięciu lat i właśnie odkrywają estetykę początku wieku: chromowane litery z płyt, holograficzne naklejki, gwiazdki i błyszczące bąbelki. Ten styl pasuje do muzyki, bo pochodzi z okładek i plakatów, a w sklepie z ciemnymi ikonami jasne srebro od razu się wyróżnia.',
-      'Chromowane są tylko kluczowe słowa nagłówków. Skrypt mierzy je po załadowaniu fontów i rysuje na nich warstwy: cień, ciemną krawędź i gradient z odbiciem nieba, horyzontu i ciepłej ziemi. Reszta nagłówka jest w atramencie, więc kadr da się przeczytać w miniaturze.',
+      'W kadrach od czwartego kluczowe słowa nagłówków są chromowane. Skrypt mierzy je po załadowaniu fontów i rysuje na nich warstwy: cień, ciemną krawędź i gradient z odbiciem nieba, horyzontu i ciepłej ziemi. W trzech pierwszych kadrach, widocznych w wynikach wyszukiwania, kluczowe słowo zostaje w atramencie na holograficznej naklejce, bo chrom w miniaturze traci kształt liter.',
       'Tło zostaje srebrne, a iryzacja żyje w plamach na brzegach i na naklejkach, dlatego zestaw nie zamienia się w fioletowo niebieski gradient. Telefon ma chromowaną obudowę i przechyla się tylko w płaszczyźnie kadru. Okładki płyt są zbudowane z kół, gwiazd i pasów, bez zdjęć i bez prawdziwych wydawnictw.',
     ],
     keywords: [
@@ -57,7 +57,7 @@ export const content = glueDeep({
       'W wynikach wyszukiwania widać trzy pierwsze kadry. Razem mówią, czym jest Bis: znajdzie koncerty twoich artystów, pokaże nowych wykonawców w okolicy i nie pozwoli przegapić biletów.',
     roles: [
       'Obietnica w jednym obrazie. Lista koncertów w tym tygodniu, a wokół telefonu błyszczące naklejki z okładkami artystów z biblioteki.',
-      'Z telefonu wysuwają się holograficzne karty wykonawców, jak karty kolekcjonerskie. Każda ma gatunek, dzień i klub.',
+      'Holograficzne karty wykonawców wiszą nad nagłówkiem jak karty kolekcjonerskie, a pod nim stoi telefon z ekranem Odkrywaj. Każda karta ma gatunek, dzień i klub.',
       'Powiadomienie o biletach wychodzi z ekranu i staje się dużą chromowaną ramką. Obok dzwonek i okładka koncertu jako naklejki.',
       'Jedyny kadr z telefonem na środku. Wokół niego krąży holograficzny pierścień z bąbelkami znajomych, którzy idą albo może pójdą.',
       'Kalendarz w telefonie, a obok holograficzne kafelki z dniami koncertów. Limonkowe to te, na które masz bilet.',
@@ -69,7 +69,7 @@ export const content = glueDeep({
     caption: 'Wyniki wyszukiwania',
     query: 'koncerty warszawa',
     subtitle: 'Koncerty artystów, których słuchasz',
-    text: 'Neutralna makieta wyników wyszukiwania w obu sklepach. Chrom łatwo traci czytelność w małej miniaturze, więc chromowane słowo ma ciemną krawędź i cień, a reszta nagłówka jest w atramencie. Srebrne tło odcina się od ciemnych ikon konkurencji.',
+    text: 'Neutralna makieta wyników wyszukiwania w obu sklepach. Chrom łatwo traci czytelność w małej miniaturze, więc w trzech pierwszych kadrach kluczowe słowo jest w atramencie na holograficznej naklejce, a chrom wraca od czwartego kadru. Srebrne tło odcina się od ciemnych ikon konkurencji.',
   },
   switchNote:
     'Przełącznik podmienia cały zestaw: język i sklep. Wersja angielska zostaje w Warszawie, z tymi samymi wykonawcami i klubami, ale teksty są napisane od nowa, z godzinami w zapisie 8 pm i datami po brytyjsku.',
@@ -84,7 +84,7 @@ export const content = glueDeep({
   feature: {
     title: 'Napis, który błyszczy',
     caption: 'Grafiki',
-    text: 'Feature graphic do Google Play: srebro z holograficznymi plamami na brzegach, chromowany napis Bis po lewej i obietnica po prawej. Telefonu nie ma, a środek, w którym sklep może położyć przycisk odtwarzania, zajmuje błysk na holograficznym krążku, bez tekstu.',
+    text: 'Feature graphic do Google Play: srebro z holograficznymi plamami na brzegach, chromowany napis Bis po lewej i obietnica w atramencie po prawej. Telefonu nie ma, a środek, w którym sklep może położyć przycisk odtwarzania, zajmuje błysk na holograficznym krążku, bez tekstu.',
     icons:
       'Ikona to chromowana czteroramienna gwiazdka na holograficznym krążku i srebrnym tle. Do App Store kwadrat 1024 px bez przezroczystości, do Google Play 512 px. W paczce są też osobne warstwy tła i gwiazdki do Icon Composer.',
   },
@@ -98,7 +98,7 @@ export const content = glueDeep({
   language: {
     title: 'Nowy język to jeden nowy plik',
     caption: 'Języki',
-    text: 'Nagłówki, chromowane słowo, teksty alternatywne i wszystkie dane w interfejsie leżą w jednym pliku na język. Skrypt sam mierzy, gdzie w nowym języku wypada chromowane słowo, i rysuje na nim chrom. Kolejny język to jeden nowy plik i ponowny eksport.',
+    text: 'Nagłówki, kluczowe słowo, teksty alternatywne i wszystkie dane w interfejsie leżą w jednym pliku na język. Skrypt sam mierzy, gdzie w nowym języku wypada kluczowe słowo, i rysuje na nim chrom albo holograficzną naklejkę. Kolejny język to jeden nowy plik i ponowny eksport.',
   },
   names: {
     title: 'Wykonawcy, których nie ma',

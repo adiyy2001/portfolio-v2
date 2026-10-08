@@ -16,9 +16,9 @@
     {
       "id": "02",
       "screen": "odkrywaj",
-      "headline": "Świeże brzmienia grają tuż obok",
-      "accent": "tuż obok",
-      "alt": "Z telefonu wysuwają się holograficzne karty wykonawców: Ola Ćma, Tygrys z Kartonu i Neon Babci, każdy z koncertem w Warszawie."
+      "headline": "Nowi wykonawcy grają tuż obok",
+      "accent": "wykonawcy",
+      "alt": "Nad telefonem holograficzne karty wykonawców: Ola Ćma, Tygrys z Kartonu i Neon Babci, każdy z koncertem w Warszawie."
     },
     {
       "id": "03",
@@ -30,8 +30,8 @@
     {
       "id": "04",
       "screen": "znajomi",
-      "headline": "Zobacz, kto ze znajomych idzie",
-      "accent": "znajomych",
+      "headline": "Zobacz, którzy znajomi idą",
+      "accent": "znajomi",
       "alt": "Wokół telefonu krążą bąbelki z awatarami znajomych. Na Brokat Express w sobotę idą cztery osoby, dwie może."
     },
     {

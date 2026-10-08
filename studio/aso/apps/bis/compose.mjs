@@ -11,6 +11,8 @@ const chromeBody = 'linear-gradient(135deg,#FFFFFF 0%,#C5CCD8 16%,#7E8798 34%,#F
 const css = `
 .bh{font-family:'Modak',sans-serif;font-weight:400;line-height:.98;letter-spacing:.005em;color:${c.atrament};text-shadow:0 3px 0 rgba(255,255,255,.9)}
 .bh .chr{color:transparent;text-shadow:none;white-space:nowrap}
+.bh .hl{white-space:nowrap}
+.b-holo{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .b-ground{position:absolute;left:0;top:0;overflow:hidden}
 .b-layer{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
 .b-chrome{position:absolute;left:0;top:0;overflow:visible;pointer-events:none;z-index:20}
@@ -47,19 +49,19 @@ const lastGlue = value => {
   return `${value.slice(0, at)}\u00a0${value.slice(at + 1)}`;
 };
 
-const accented = (value, accent, lang, { last = true } = {}) => {
+const accented = (value, accent, lang, { last = true, mode = 'chrome' } = {}) => {
   const plain = last ? lastGlue(glue(value, lang)) : glue(value, lang);
   if (!accent) return esc(plain);
   const flat = plain.replace(/\u00a0/g, ' ');
   const at = flat.indexOf(accent);
   if (at < 0) throw new Error(`bis: accent "${accent}" not in "${value}"`);
   const words = plain.slice(at, at + accent.length).split(/([ \u00a0])/);
-  const marked = words.map(part => (/^[ \u00a0]$/.test(part) || part === '' ? part : `<span class="chr" data-chrome>${esc(part)}</span>`)).join('');
+  const marked = words.map(part => (/^[ \u00a0]$/.test(part) || part === '' ? part : mode === 'holo' ? `<span class="hl" data-holo>${esc(part)}</span>` : `<span class="chr" data-chrome>${esc(part)}</span>`)).join('');
   return `${esc(plain.slice(0, at))}${marked}${esc(plain.slice(at + accent.length))}`;
 };
 
-const headline = ({ slot, lang, x, y, w, size, align = 'left', name }) =>
-  `<div class="kit-headline bh" data-box="headline" data-name="${esc(name)}" style="${styleOf({ left: x, top: y, width: w, 'font-size': size, 'text-align': align })}">${accented(slot.headline, slot.accent, lang)}</div>`;
+const headline = ({ slot, lang, x, y, w, size, align = 'left', name, mode = 'chrome' }) =>
+  `<div class="kit-headline bh" data-box="headline" data-name="${esc(name)}" style="${styleOf({ left: x, top: y, width: w, 'font-size': size, 'text-align': align })}">${accented(slot.headline, slot.accent, lang, { mode })}</div>`;
 
 const chromeScript = () => `<script>(${chromeText.toString()})();</script>`;
 
@@ -78,8 +80,8 @@ function chromeText() {
     const ratio = (pb.bottom - tr.top) / tr.height;
     probe.remove();
     const svg = document.getElementById('chrome');
-    const spans = [...document.querySelectorAll('[data-chrome]')];
-    if (spans.length === 0) console.error('no chrome words in the frame');
+    const spans = [...document.querySelectorAll('[data-chrome],[data-holo]')];
+    if (spans.length === 0) console.error('no chrome or holo words in the frame');
     const defs = document.createElementNS(NS, 'defs');
     svg.appendChild(defs);
     let n = 0;
@@ -96,7 +98,7 @@ function chromeText() {
           r.setStart(node, m.index);
           r.setEnd(node, m.index + m[0].length);
           const rect = [...r.getClientRects()].find(item => item.width > 0);
-          if (rect) words.push({ word: m[0], x: rect.left, top: rect.top, right: rect.right, base: rect.top + ratio * rect.height, size, spark: span.hasAttribute('data-nospark') ? 0 : 1 });
+          if (rect) words.push({ word: m[0], x: rect.left, top: rect.top, right: rect.right, base: rect.top + ratio * rect.height, size, spark: span.hasAttribute('data-nospark') ? 0 : 1, holo: span.hasAttribute('data-holo') });
           m = re.exec(node.data);
         }
       }
@@ -108,7 +110,18 @@ function chromeText() {
       return el;
     };
     const stops = window.wzChromeStops;
-    for (const w of words) {
+    const holo = document.getElementById('holo');
+    if (holo) {
+      holo.insertAdjacentHTML('afterbegin', `<defs><linearGradient id="holo-fill" x1="0" y1="0" x2="1" y2="0">${window.wzHoloStops}</linearGradient></defs>`);
+      for (const w of words.filter(item => item.holo)) {
+        const pad = w.size * 0.12;
+        const top = w.base - w.size * 0.72;
+        const height = w.size * 0.86;
+        make('rect', { x: w.x - pad, y: top + w.size * 0.06, width: w.right - w.x + pad * 2, height, rx: height * 0.32, fill: '#111217' }, holo);
+        make('rect', { x: w.x - pad, y: top, width: w.right - w.x + pad * 2, height, rx: height * 0.32, fill: 'url(#holo-fill)', stroke: '#111217', 'stroke-width': Math.max(2, w.size * 0.045) }, holo);
+      }
+    }
+    for (const w of words.filter(item => !item.holo)) {
       n += 1;
       const id = `chr${n}`;
       const top = w.base - 0.7 * w.size;
@@ -278,15 +291,15 @@ const L = {
       sparks: [[110, 270, 16], [404, 400, 12], [182, 905, 13], [418, 760, 18], [30, 520, 10]],
     },
     odkrywaj: {
-      h: { x: 26, y: 790, w: 388, size: 48 },
-      d: { width: 250, x: 18, y: 64, rotate: -6 },
-      blobs: [blob(420, 220, 230, c.cyjan), blob(20, 620, 220, c.brzoskwinia), blob(360, 700, 200, c.roz, 0.6)],
+      h: { x: 26, y: 300, w: 388, size: 48, align: 'center' },
+      d: { width: 282, x: 79, y: 486, rotate: -3 },
+      blobs: [blob(420, 160, 230, c.cyjan), blob(20, 420, 220, c.brzoskwinia), blob(380, 820, 220, c.roz, 0.6)],
       cards: [
-        { k: 'card', x: 236, y: 84, w: 156, rot: 8 },
-        { k: 0, x: 264, y: 318, w: 150, rot: 15 },
-        { k: 1, x: 222, y: 540, w: 150, rot: -5 },
+        { k: 'card', x: 22, y: 52, w: 128, rot: -9 },
+        { k: 0, x: 156, y: 34, w: 128, rot: 3 },
+        { k: 1, x: 290, y: 58, w: 128, rot: 10 },
       ],
-      sparks: [[214, 100, 16], [412, 290, 12], [410, 760, 15], [34, 690, 11]],
+      sparks: [[150, 40, 14], [416, 270, 12], [24, 520, 13], [412, 640, 15], [30, 300, 10]],
     },
     koncert: {
       h: { x: 26, y: 50, w: 388, size: 48 },
@@ -344,15 +357,15 @@ const L = {
       sparks: [[90, 160, 11], [340, 300, 9], [140, 610, 10], [338, 520, 13]],
     },
     odkrywaj: {
-      h: { x: 20, y: 536, w: 320, size: 37 },
-      d: { width: 182, x: 14, y: 30, rotate: -6 },
-      blobs: [blob(340, 140, 170, c.cyjan), blob(20, 420, 160, c.brzoskwinia), blob(300, 480, 150, c.roz, 0.6)],
+      h: { x: 20, y: 196, w: 320, size: 37, align: 'center' },
+      d: { width: 210, x: 75, y: 340, rotate: -3 },
+      blobs: [blob(340, 110, 170, c.cyjan), blob(20, 300, 160, c.brzoskwinia), blob(320, 560, 160, c.roz, 0.6)],
       cards: [
-        { k: 'card', x: 196, y: 28, w: 116, rot: 8 },
-        { k: 0, x: 226, y: 196, w: 110, rot: 15 },
-        { k: 1, x: 194, y: 356, w: 110, rot: -5 },
+        { k: 'card', x: 18, y: 30, w: 100, rot: -9 },
+        { k: 0, x: 130, y: 16, w: 100, rot: 3 },
+        { k: 1, x: 242, y: 34, w: 100, rot: 10 },
       ],
-      sparks: [[180, 40, 11], [344, 190, 9], [340, 500, 11], [24, 500, 8]],
+      sparks: [[120, 26, 10], [344, 190, 9], [20, 380, 9], [340, 460, 11]],
     },
     koncert: {
       h: { x: 20, y: 24, w: 320, size: 37 },
@@ -449,7 +462,9 @@ const compose = (app, store, lang, slotIndex, variant) => {
     front.push(pill({ ...spec.pill, text: `${sized(icons.calendar, spec.pill.size * 1.2)}${t(notes[spec.pill.key], lang)}`, name: 'plays' }));
   }
 
-  return [ground(w, h, spec.blobs, id), back.join(''), parts.join(''), front.join(''), sparkles(w, h, spec.sparks, `${id}s`), headline({ slot, lang, ...spec.h, name: `headline-${n}` }), `<svg class="b-chrome" id="chrome" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"></svg>`, `<script>window.wzChromeStops=${JSON.stringify(letterStops)};</script>`, chromeScript()].join('');
+  const first = variant === 'b' || slotIndex < 3;
+  const holoLayer = first ? `<svg class="b-holo" id="holo" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"></svg>` : '';
+  return [ground(w, h, spec.blobs, id), back.join(''), parts.join(''), front.join(''), sparkles(w, h, spec.sparks, `${id}s`), holoLayer, headline({ slot, lang, ...spec.h, name: `headline-${n}`, mode: first ? 'holo' : 'chrome' }), `<svg class="b-chrome" id="chrome" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"></svg>`, `<script>window.wzChromeStops=${JSON.stringify(letterStops)};window.wzHoloStops=${JSON.stringify(holoStops)};</script>`, chromeScript()].join('');
 };
 
 const featureBody = (app, lang) => {
@@ -457,11 +472,11 @@ const featureBody = (app, lang) => {
   const w = 512;
   const h = 250;
   const blobs = [blob(0, 0, 150, c.roz), blob(512, 250, 160, c.cyjan), blob(500, 10, 110, c.limonka, 0.6), blob(10, 250, 120, c.brzoskwinia)];
-  const disc = layer(w, h, `<circle cx="258" cy="125" r="48" fill="url(#fd)" stroke="${c.atrament}" stroke-width="2"/><circle cx="258" cy="125" r="48" fill="url(#fg)"/><path d="${starPath(258, 125, 40, 0.26)}" fill="url(#fc)" stroke="${c.atrament}" stroke-width="2.2"/>`, `<linearGradient id="fd" x1="0" y1="0" x2="1" y2="1">${holoStops}</linearGradient><radialGradient id="fg" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".8"/><stop offset=".5" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><linearGradient id="fc" x1="0" y1="0" x2="0" y2="1">${chromeStops}</linearGradient>`);
+  const disc = layer(w, h, `<circle cx="266" cy="125" r="44" fill="url(#fd)" stroke="${c.atrament}" stroke-width="2"/><circle cx="266" cy="125" r="44" fill="url(#fg)"/><path d="${starPath(266, 125, 37, 0.26)}" fill="url(#fc)" stroke="${c.atrament}" stroke-width="2.2"/>`, `<linearGradient id="fd" x1="0" y1="0" x2="1" y2="1">${holoStops}</linearGradient><radialGradient id="fg" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".8"/><stop offset=".5" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><linearGradient id="fc" x1="0" y1="0" x2="0" y2="1">${chromeStops}</linearGradient>`);
   const stickers = [sticker({ id: 'mira', x: 404, y: 150, s: 56, rot: 10, name: 'f-mira' }), sticker({ id: 'brokat', x: 448, y: 46, s: 46, rot: -8, name: 'f-brokat' })];
   return `${ground(w, h, blobs, 'fg')}${disc}${stickers.join('')}${sparkles(w, h, [[200, 60, 9], [318, 196, 8], [30, 40, 7], [482, 128, 7]], 'fgs')}
-<div class="kit-headline bh fg-name" data-box="headline" data-name="feature-name" style="left:30px;top:70px;width:166px;font-size:104px;text-align:center"><span class="chr" data-chrome>Bis</span></div>
-<div class="kit-headline bh fg-h" data-box="headline" data-name="feature-tagline" style="left:318px;top:84px;width:146px;font-size:17.5px">${accented(copy.feature.headline, copy.feature.accent, lang).replace('data-chrome', 'data-chrome data-nospark')}</div>
+<div class="kit-headline bh fg-name" data-box="headline" data-name="feature-name" style="left:70px;top:76px;width:140px;font-size:92px;text-align:center"><span class="chr" data-chrome>Bis</span></div>
+<div class="kit-headline bh fg-h" data-box="headline" data-name="feature-tagline" style="left:318px;top:82px;width:143px;font-size:16px">${accented(copy.feature.headline, null, lang)}</div>
 <svg class="b-chrome" id="chrome" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"></svg><script>window.wzChromeStops=${JSON.stringify(letterStops)};</script>${chromeScript()}`;
 };
 
