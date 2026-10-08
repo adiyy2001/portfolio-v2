@@ -21,6 +21,12 @@ const css = `
 .kg__sub{color:${c.tekst2};line-height:1.35}
 .k-pill{position:absolute;display:flex;align-items:center;gap:8px;padding:0 14px;border-radius:999px;white-space:nowrap;font-weight:600}
 .k-pill i{display:block;flex:none;border-radius:50%}
+.k-tag2{position:absolute;white-space:nowrap;line-height:1.3}
+.k-tag2__name{display:flex;align-items:center;gap:.5em;font-weight:600}
+.k-tag2 i{display:block;flex:none;border-radius:50%}
+.k-tag2__num{margin-top:.2em;padding-left:1.1em;display:flex;gap:.35em;align-items:baseline}
+.k-tag2__num b{font-weight:700;color:${c.tekst}}
+.k-tag2__num span{font-weight:500;color:${c.tekst2}}
 .k-soft{filter:blur(var(--blur,2px)) brightness(.82) saturate(.9)}
 .k-mark{position:absolute;font-family:'Manrope',sans-serif;font-weight:600;color:${c.tekst2};white-space:nowrap}
 `;
@@ -146,8 +152,8 @@ const outerParts = (store, ui, lang, { width, blur, labelGap, maxStart, size }) 
   };
 };
 
-const worthChip = (notes, ui, lang, { x, y, size }) =>
-  `<div class="kg" data-box="fg" data-name="worth" style="${styleOf({ left: x, top: y, padding: `${size * 0.7}px ${size * 0.9}px`, 'border-radius': size * 0.8 })}"><div class="kg__k" style="${styleOf({ 'font-size': size * 0.55 })}">${t(notes.chartLabel, lang)}</div><div class="kg__num" style="${styleOf({ 'font-size': size * 2.2, 'margin-top': size * 0.3 })}">${money(ui.majatek.total, lang)}</div><div class="kg__sub" style="${styleOf({ 'font-size': size * 0.6, 'margin-top': size * 0.3 })}">${t(notes.sample, lang)}</div></div>`;
+const worthChip = (notes, ui, lang, { x, r, y, size }) =>
+  `<div class="kg" data-box="fg" data-name="worth" style="${styleOf({ left: x, right: r, top: y, padding: `${size * 0.7}px ${size * 0.9}px`, 'border-radius': size * 0.8 })}"><div class="kg__k" style="${styleOf({ 'font-size': size * 0.55 })}">${t(notes.chartLabel, lang)}</div><div class="kg__num" style="${styleOf({ 'font-size': size * 2.2, 'margin-top': size * 0.3 })}">${money(ui.majatek.total, lang)}</div><div class="kg__sub" style="${styleOf({ 'font-size': size * 0.6, 'margin-top': size * 0.3 })}">${t(notes.sample, lang)}</div></div>`;
 
 const safeCard = (notes, ui, lang, { x, y, w, h, size, name }) =>
   glassCard({
@@ -179,23 +185,14 @@ const ringBack = (ui, { cx, cy, r, stroke }) => {
   return `<div style="${styleOf({ position: 'absolute', left: cx - size / 2, top: cy - size / 2, width: size, height: size, filter: `drop-shadow(0 0 ${stroke * 0.8}px rgba(143,212,182,.18))` })}">${ringSvg({ items: ui.alokacja.items, size, stroke, id: 'big', gap: 0.02 })}</div>`;
 };
 
-const ringPills = (ui, lang, { cx, cy, r, size, nudge = [] }) => {
-  const items = ui.alokacja.items;
-  let acc = -Math.PI / 2;
-  return items
+const ringPills = (ui, lang, { size, at }) =>
+  ui.alokacja.items
     .map((item, i) => {
-      const sweep = (item.share / 100) * Math.PI * 2;
-      const mid = acc + sweep / 2;
-      acc += sweep;
-      const [dx, dy] = nudge[i] ?? [0, 0];
-      const px = cx + r * Math.cos(mid) + dx;
-      const py = cy + r * Math.sin(mid) + dy;
+      const [x, y, side] = at[i];
       const tone = { szalwia: c.szalwia, lod: c.lod, platyna: c.platyna }[item.tone];
-      const h = size * 2.3;
-      return `<div class="kg k-pill" data-box="fg" data-name="pill-${i}" style="${styleOf({ left: px, top: py - h / 2, height: h, 'font-size': size, transform: 'translateX(-50%)' })}"><i style="${styleOf({ width: size * 0.6, height: size * 0.6, background: tone })}"></i>${t(item.name, lang)}<b style="${styleOf({ 'font-weight': '700', color: c.tekst })}">${item.share}%</b><span style="${styleOf({ color: c.tekst2, 'font-weight': '500' })}">/ ${item.target}%</span></div>`;
+      return `<div class="kg k-tag2" data-box="fg" data-name="pill-${i}" style="${styleOf({ [side === 'r' ? 'right' : 'left']: x, top: y, 'font-size': size, padding: `${size * 0.62}px ${size * 0.95}px`, 'border-radius': size * 1.1 })}"><div class="k-tag2__name"><i style="${styleOf({ width: size * 0.6, height: size * 0.6, background: tone })}"></i>${t(item.name, lang)}</div><div class="k-tag2__num"><b>${item.share}%</b><span>/ ${item.target}%</span></div></div>`;
     })
     .join('');
-};
 
 const timeline = (ui, lang, notes, { x0, x1, y, h, dot, size, todayX }) => {
   const g = ui.cel;
@@ -238,27 +235,27 @@ const L = {
     majatek: { h: { x: 30, y: 62, w: 384 }, d: { width: 300, x: 120, y: 270 }, glow: { x: 200, y: 560, r: 300 }, line: { width: 2.6, blur: 5, labelGap: 14, maxStart: 30, size: 13 } },
     budzet: { h: { x: 30, y: 694, w: 380 }, d: { width: 276, x: 26, y: 46, soft: 0.5 }, card: { x: 196, y: 404, w: 218, h: 196, size: 62 }, glow: { x: 300, y: 500, r: 260 } },
     poduszka: { h: { x: 30, y: 62, w: 370 }, d: { width: 268, x: 150, y: 270, soft: 2.4 }, card: { x: 26, y: 400, w: 300, h: 372, size: 270 }, glow: { x: 180, y: 600, r: 300 } },
-    alokacja: { h: { x: 40, y: 58, w: 360, align: 'center' }, d: { width: 236, x: 102, y: 330 }, ring: { cx: 220, cy: 578, r: 182, stroke: 22 }, pills: { r: 182, size: 13, nudge: [[-8, 0], [46, 24], [-44, -76]] }, glow: { x: 220, y: 580, r: 260 } },
+    alokacja: { h: { x: 40, y: 58, w: 360, align: 'center' }, d: { width: 236, x: 102, y: 330 }, ring: { cx: 220, cy: 578, r: 182, stroke: 22 }, pills: { size: 10.5, at: [[6, 614, 'r'], [6, 478], [14, 276]] }, glow: { x: 220, y: 580, r: 260 } },
     cel: { h: { x: 30, y: 62, w: 370 }, d: { width: 236, x: 186, y: 290 }, tl: { x0: 6, x1: 430, y: 640, h: 70, dot: 7, size: 12, todayX: 170 }, flag: { x: 250, y: 724, size: 13 }, glow: { x: 120, y: 640, r: 220 } },
     raport: { h: { x: 30, y: 62, w: 384 }, back: { width: 230, x: 18, y: 300, rotate: -7, soft: 1.2 }, front: { width: 254, x: 166, y: 330, rotate: 4 }, glow: { x: 280, y: 620, r: 260 } },
-    konta: { h: { x: 30, y: 62, w: 370 }, d: { width: 262, x: 166, y: 300 }, chips: { x: 18, y: 360, gap: 14, size: 14, w: 224, offsets: [0, 18, 0, 26, 8] }, glow: { x: 160, y: 560, r: 260 } },
+    konta: { h: { x: 30, y: 62, w: 370 }, d: { width: 262, x: 186, y: 300 }, chips: { x: 14, y: 412, gap: 14, size: 12.5, w: 216, offsets: [0, 8, 0, 10, 4] }, glow: { x: 160, y: 560, r: 260 } },
   },
   play: {
     head: 34,
     majatek: { h: { x: 24, y: 34, w: 300 }, d: { width: 214, x: 106, y: 150 }, glow: { x: 170, y: 360, r: 220 }, line: { width: 2, blur: 4, labelGap: 10, maxStart: 40, size: 11 } },
     budzet: { h: { x: 24, y: 548, w: 312 }, d: { width: 196, x: 22, y: 24, soft: 0.4 }, card: { x: 168, y: 296, w: 172, h: 154, size: 48 }, glow: { x: 250, y: 360, r: 200 } },
     poduszka: { h: { x: 24, y: 34, w: 312 }, d: { width: 190, x: 152, y: 140, soft: 2 }, card: { x: 22, y: 230, w: 230, h: 288, size: 206 }, glow: { x: 140, y: 380, r: 220 } },
-    alokacja: { h: { x: 30, y: 30, w: 300, align: 'center' }, d: { width: 168, x: 96, y: 178 }, ring: { cx: 180, cy: 360, r: 146, stroke: 18 }, pills: { r: 146, size: 11, nudge: [[-4, -4], [40, 20], [-34, -56]] }, glow: { x: 180, y: 360, r: 200 } },
+    alokacja: { h: { x: 30, y: 30, w: 300, align: 'center' }, d: { width: 168, x: 96, y: 178 }, ring: { cx: 180, cy: 360, r: 146, stroke: 18 }, pills: { size: 9.5, at: [[6, 388, 'r'], [4, 278], [8, 126]] }, glow: { x: 180, y: 360, r: 200 } },
     cel: { h: { x: 24, y: 34, w: 312 }, d: { width: 176, x: 166, y: 150 }, tl: { x0: 6, x1: 352, y: 420, h: 56, dot: 5.5, size: 10, todayX: 150 }, flag: { x: 196, y: 480, size: 10.5 }, glow: { x: 100, y: 420, r: 180 } },
     raport: { h: { x: 24, y: 34, w: 312 }, back: { width: 170, x: 14, y: 150, rotate: -7, soft: 1 }, front: { width: 190, x: 152, y: 168, rotate: 4 }, glow: { x: 240, y: 420, r: 200 } },
-    konta: { h: { x: 24, y: 34, w: 312 }, d: { width: 190, x: 150, y: 150 }, chips: { x: 12, y: 210, gap: 10, size: 11, w: 180, offsets: [0, 12, 0, 18, 6] }, glow: { x: 140, y: 380, r: 200 } },
+    konta: { h: { x: 24, y: 34, w: 312 }, d: { width: 190, x: 166, y: 150 }, chips: { x: 8, y: 252, gap: 10, size: 10, w: 170, offsets: [0, 6, 0, 8, 3] }, glow: { x: 140, y: 380, r: 200 } },
   },
   ipad: {
     head: 104,
-    majatek: { h: { x: 72, y: 96, w: 820 }, d: { width: 840, x: -40, y: 400 }, chip: { x: 690, y: 1010, size: 26 }, glow: { x: 420, y: 860, r: 620 }, line: { width: 4, blur: 8, labelGap: 22, maxStart: 90, size: 22 } },
+    majatek: { h: { x: 72, y: 96, w: 820 }, d: { width: 840, x: -40, y: 400 }, chip: { r: 22, y: 610, size: 26 }, glow: { x: 420, y: 860, r: 620 }, line: { width: 4, blur: 8, labelGap: 22, maxStart: 90, size: 22 } },
     budzet: { h: { x: 72, y: 1104, w: 880 }, d: { width: 760, x: -150, y: 70, soft: 0.6 }, card: { x: 560, y: 600, w: 420, h: 360, size: 112 }, glow: { x: 760, y: 760, r: 520 } },
     poduszka: { h: { x: 72, y: 96, w: 880 }, d: { width: 760, x: 236, y: 380, soft: 3.2 }, card: { x: 96, y: 520, w: 560, h: 700, size: 500 }, glow: { x: 400, y: 900, r: 600 } },
-    alokacja: { h: { x: 96, y: 86, w: 840, align: 'center' }, d: { width: 560, x: 236, y: 420 }, ring: { cx: 516, cy: 790, r: 446, stroke: 40 }, pills: { r: 446, size: 24, nudge: [[-30, 0], [40, 40], [-40, -10]] }, glow: { x: 516, y: 790, r: 600 } },
+    alokacja: { h: { x: 96, y: 86, w: 840, align: 'center' }, d: { width: 560, x: 236, y: 420 }, ring: { cx: 516, cy: 790, r: 446, stroke: 40 }, pills: { size: 22, at: [[24, 900, 'r'], [20, 560], [40, 296]] }, glow: { x: 516, y: 790, r: 600 } },
     cel: { h: { x: 72, y: 96, w: 880 }, d: { width: 600, x: 390, y: 360 }, tl: { x0: 20, x1: 1010, y: 1000, h: 116, dot: 12, size: 20, todayX: 370 }, flag: { x: 690, y: 1110, size: 21 }, glow: { x: 220, y: 1000, r: 420 } },
     raport: { h: { x: 72, y: 96, w: 880 }, back: { width: 760, x: -60, y: 420, soft: 1.6 }, front: { width: 330, x: 640, y: 560, rotate: 4 }, glow: { x: 760, y: 900, r: 500 } },
   },
@@ -299,7 +296,7 @@ const compose = (app, store, lang, slotIndex, variant) => {
   } else if (screenId === 'alokacja') {
     back.push(ringBack(ui, spec.ring));
     parts.push(dev(spec.d));
-    front.push(ringPills(ui, lang, { cx: spec.ring.cx, cy: spec.ring.cy, ...spec.pills }));
+    front.push(ringPills(ui, lang, spec.pills));
     glows.push({ x: spec.ring.cx, y: spec.ring.cy, r: spec.ring.r * 0.9, color: ice(0.05) });
   } else if (screenId === 'cel') {
     const tl = timeline(ui, lang, notes, spec.tl);
