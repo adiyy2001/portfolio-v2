@@ -352,7 +352,7 @@
     "hero": {
       "webm": {
         "path": "sztanga-hero.webm",
-        "bytes": 1082650,
+        "bytes": 1087184,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -361,12 +361,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 422497,
+        "bitrate": 424266,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-hero.mp4",
-        "bytes": 934229,
+        "bytes": 929366,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -375,7 +375,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 364577,
+        "bitrate": 362679,
         "audio": null
       },
       "poster": "posters/sztanga-hero.jpg"
@@ -383,7 +383,7 @@
     "hero-9x16": {
       "webm": {
         "path": "sztanga-hero-9x16.webm",
-        "bytes": 655040,
+        "bytes": 656869,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -392,12 +392,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 255625,
+        "bitrate": 256339,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-hero-9x16.mp4",
-        "bytes": 638565,
+        "bytes": 637896,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -406,7 +406,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 249196,
+        "bitrate": 248935,
         "audio": null
       },
       "poster": "posters/sztanga-hero-9x16.jpg"
@@ -414,7 +414,7 @@
     "social-1x1": {
       "webm": {
         "path": "sztanga-social-1x1.webm",
-        "bytes": 854235,
+        "bytes": 855797,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -423,12 +423,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 333360,
+        "bitrate": 333969,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-social-1x1.mp4",
-        "bytes": 726677,
+        "bytes": 727149,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -437,7 +437,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 283581,
+        "bitrate": 283765,
         "audio": null
       },
       "poster": "posters/sztanga-social-1x1.jpg"
@@ -445,7 +445,7 @@
     "store": {
       "webm": {
         "path": "sztanga-store.webm",
-        "bytes": 433444,
+        "bytes": 435878,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -454,12 +454,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 154113,
+        "bitrate": 154978,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-store.mp4",
-        "bytes": 435109,
+        "bytes": 435518,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -468,7 +468,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 154705,
+        "bitrate": 154850,
         "audio": null
       },
       "poster": "posters/sztanga-store.jpg"
@@ -476,7 +476,7 @@
     "tile": {
       "webm": {
         "path": "sztanga-tile.webm",
-        "bytes": 65605,
+        "bytes": 66002,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -485,12 +485,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 131210,
+        "bitrate": 132004,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-tile.mp4",
-        "bytes": 54691,
+        "bytes": 54717,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -499,7 +499,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 109382,
+        "bitrate": 109434,
         "audio": null
       },
       "poster": "posters/sztanga-tile.jpg"
@@ -512,7 +512,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "sztanga-store-886x1920.mp4",
       "path": "sztanga-store-886x1920.mp4",
-      "bytes": 31370930,
+      "bytes": 31371009,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -521,7 +521,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11407610,
+      "bitrate": 11407639,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -530,7 +530,7 @@
       "note": "Reels, TikTok i Shorts",
       "name": "sztanga-social-1080x1920.mp4",
       "path": "sztanga-social-1080x1920.mp4",
-      "bytes": 2087226,
+      "bytes": 2079121,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -539,7 +539,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 834890,
+      "bitrate": 831648,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -548,7 +548,7 @@
       "note": "post w kanale",
       "name": "sztanga-social-1080x1080.mp4",
       "path": "sztanga-social-1080x1080.mp4",
-      "bytes": 1834685,
+      "bytes": 1845658,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -557,7 +557,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 733874,
+      "bitrate": 738263,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -566,7 +566,7 @@
       "note": "YouTube, link w Google Play",
       "name": "sztanga-social-1920x1080.mp4",
       "path": "sztanga-social-1920x1080.mp4",
-      "bytes": 2337182,
+      "bytes": 2345300,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -575,7 +575,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 934872,
+      "bitrate": 938120,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -585,15 +585,15 @@
   },
   "renderSeconds": {
     "stills": 20,
-    "store": 74,
-    "marketing-9x16": 95,
-    "marketing-1x1": 75,
-    "marketing-16x9": 112,
-    "tile": 5
+    "store": 69,
+    "marketing-9x16": 92,
+    "marketing-1x1": 70,
+    "marketing-16x9": 106,
+    "tile": 6
   },
   "validation": true,
   "published": {
-    "totalBytes": 6485763,
+    "totalBytes": 6491969,
     "count": 29
   }
 }

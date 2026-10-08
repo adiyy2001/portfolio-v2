@@ -26,6 +26,13 @@ const advanceAt = (ch: string, wdth: number) => {
 
 export const emWidth = (text: string, wdth: number) => [...text].reduce((sum, ch) => sum + advanceAt(ch, wdth), 0);
 
+const dot = { size: 0.121, rise: 0.7565 };
+
+const dotCentres = (text: string, wdth: number) => {
+  const chars = [...text];
+  return chars.flatMap((ch, i) => (ch === 'Ż' ? [emWidth(chars.slice(0, i).join(''), wdth) + advanceAt(ch, wdth) / 2] : []));
+};
+
 export const fitSize = (text: string, wdth: number, maxWidth: number, maxCap = Infinity) =>
   Math.min(maxWidth / (emWidth(text, wdth) * 1.015), maxCap / capRatio);
 
@@ -102,8 +109,23 @@ export const Cap = ({
         color: fill,
         ...vf(wght, wdth),
       }}>
-      {text}
+      {wdth > 100 ? text.replace(/Ż/g, 'Z') : text}
     </span>
+    {wdth > 100 &&
+      dotCentres(text, wdth).map(x => (
+        <div
+          key={x}
+          style={{
+            position: 'absolute',
+            left: (x - dot.size / 2) * size,
+            top: (capRatio - dot.rise - dot.size / 2) * size,
+            width: dot.size * size,
+            height: dot.size * size,
+            borderRadius: '50%',
+            background: fill,
+          }}
+        />
+      ))}
   </div>
 );
 

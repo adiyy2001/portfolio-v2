@@ -50,7 +50,7 @@ export const SetScreen = ({ lift, set, done, wdth, number = 1, kg = 1, setRow = 
       )}
       <Abs style={{ left: side, right: side, top: 404, height: 2, background: inverted ? color.ground : color.divider }} />
       {setRow > 0 && (
-        <div style={{ position: 'absolute', inset: 0, transform: `scale(${setRow})`, transformOrigin: '221px 490px' }}>
+        <div style={{ position: 'absolute', inset: 0, transform: `scale(${setRow})`, transformOrigin: '68px 490px' }}>
           <Abs style={{ left: side, top: 424 }}>
             <Label fill={dim}>{setScreen.set}</Label>
           </Abs>
