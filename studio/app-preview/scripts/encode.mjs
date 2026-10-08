@@ -47,11 +47,11 @@ const encodeFinals = (slug, paths, meta) => {
   }
 };
 
-const encodeWeb = (slug, paths, variants) => {
+const encodeWeb = (slug, paths, variants, meta) => {
   ensureDir(paths.pub);
   const report = {};
   for (const variant of variants) {
-    const spec = webTargets[variant];
+    const spec = { ...webTargets[variant], target: meta.webTargets?.[variant] ?? webTargets[variant].target };
     const source = join(paths.masters, masterName(spec.source, spec.source !== 'tile'));
     const filter = toTv(spec.width, spec.height);
     const webm = join(paths.pub, webName(slug, variant, 'webm'));
@@ -114,7 +114,7 @@ export const encode = async (slug, { only = steps, variants = Object.keys(webTar
   const meta = await loadMeta(slug);
   const report = {};
   if (only.includes('final')) encodeFinals(slug, paths, meta);
-  if (only.includes('web')) report.web = encodeWeb(slug, paths, variants);
+  if (only.includes('web')) report.web = encodeWeb(slug, paths, variants, meta);
   if (only.includes('posters')) encodePosters(slug, paths, meta, variants);
   if (only.includes('images')) encodeImages(slug, paths, meta);
   ensureDir(paths.qa);

@@ -5,7 +5,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-app-preview.md`. Run rule
 ```
 - [x] F foundation, with the first brand end to end (B1 Kasownik)
 - [x] B2 Sztanga
-- [ ] B3 Rygiel
+- [x] B3 Rygiel
 - [ ] B4 Kiełek
 - [ ] B5 Poziomka
 - [ ] B6 Południe
@@ -585,4 +585,9 @@ Q runs after all six are merged: ffprobe table for every file (store cut exact t
 26. Sztanga's time lapse runs about 2.4 s of rest per frame; the plan's 0.1 s per frame could not bring 3:00 to 0:00 inside one shot.
 27. Sztanga's marketing cut is 20 s (600 frames), shorter than Kasownik's 21 s, so it stays a whole number of beats (40) before the outro and the bridge.
 28. On the Sztanga page the heading width axis steps with the viewport in five media query steps (62% to 150%), not continuously, because CSS cannot turn a viewport length into a `font-stretch` number without script.
-
+29. Rygiel's breach story counts two other services that still used the leaked password ("hasło z wycieku") instead of "1 in a breach", so the morning fix and the evening health check agree: health 68 to 96, weak 9 to 1, reused 4 to 0, from the leak 2 to 0, 14 passwords fixed and one weak left.
+30. Rygiel's three overlays decrypt in about half a second and stay up 2.4 to 2.7 s (frames 4 to 75, 186 to 265, 496 to 575) instead of the plan's 6 to 59 for the hook.
+31. Rygiel's marketing cut is 23 s (690 frames) with four headlines instead of three: the vault unlock (Sejf otwarty.) got its own beat, and the outro needs 3 s for the bolt to draw, slide shut and the name to decrypt.
+32. Rygiel's vault rows decrypt at 0.5 frames per character (the plan's 2 frames stays for the password, overlays aside, and the launch name), so eight rows finish inside their shot.
+33. On the Rygiel page the "too fast" glow pulse in the lab runs at 2.5 Hz, below the three flashes per second limit, and the headings decrypt once on entering the viewport with the real text kept for screen readers; under reduced motion nothing scrambles.
+34. The shared encoder now accepts an optional per-app web size target (`webTargets` in an app's `meta.ts`); Rygiel's 16:9 hero loop targets 2.2 MB instead of 3 MB so the app stays inside the 14 MB budget (13.6 MB). Kasownik and Sztanga do not set it and were re-validated unchanged.
