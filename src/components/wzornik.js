@@ -66,6 +66,11 @@ const copy = {
       lead: 'Sześć realizacji z logo, kolorem, typografią, makietami, animacją i brand bookiem. Każda ze stylem dobranym do branży, z plikami do pobrania.',
       all: 'Wszystkie realizacje',
     },
+    appPreview: {
+      title: 'App preview',
+      lead: 'Sześć animowanych podglądów aplikacji mobilnych dla zmyślonych firm: wersja do App Store, trzy formaty social, pętle na stronę i storyboard. Każdy w innym stylu i z własnym systemem ruchu.',
+      all: 'Wszystkie podglądy',
+    },
     law: {
       trade: 'kancelaria prawna',
       kind: 'strona firmowa',
@@ -157,6 +162,11 @@ const copy = {
       title: 'Visual identity',
       lead: 'Six identity case studies with a logo, colour, typography, mockups, animation and a brand book, each in a style matched to its trade, with downloadable files. The pages are in Polish.',
       all: 'All case studies, in Polish',
+    },
+    appPreview: {
+      title: 'App previews',
+      lead: 'Six animated previews of mobile apps for made-up businesses: an App Store cut, three social formats, website loops and a storyboard, each in its own style with its own motion system. The pages are in Polish.',
+      all: 'All previews, in Polish',
     },
     law: {
       trade: 'law firm',
@@ -259,6 +269,45 @@ const identity = [
   { slug: 'klamra', name: 'Klamra', trade: 'szkoła programowania online', style: 'neobrutalizm' },
   { slug: 'cuvee', name: 'Cuvée', trade: 'hotel z winnicą', style: 'luksusowy edytorial' },
   { slug: 'wolnobieg', name: 'Wolnobieg', trade: 'serwis rowerowy', style: 'retro lata 70.' },
+];
+
+const appPreview = [
+  {
+    slug: 'kasownik',
+    name: 'Kasownik',
+    trade: 'bilety komunikacji miejskiej',
+    style: 'natywny iOS, jasny i czysty',
+  },
+  {
+    slug: 'sztanga',
+    name: 'Sztanga',
+    trade: 'dziennik treningu siłowego',
+    style: 'kinetyczna typografia',
+  },
+  {
+    slug: 'rygiel',
+    name: 'Rygiel',
+    trade: 'menedżer haseł z alertami wycieków',
+    style: 'ciemny neon i cyber',
+  },
+  {
+    slug: 'kielek',
+    name: 'Kiełek',
+    trade: 'pielęgnacja roślin domowych',
+    style: 'claymorphism pastelowy',
+  },
+  {
+    slug: 'poziomka',
+    name: 'Poziomka',
+    trade: 'tracker nawyków z grywalizacją',
+    style: 'pixel art 8-bit',
+  },
+  {
+    slug: 'poludnie',
+    name: 'Południe',
+    trade: 'domowa fotowoltaika i magazyn energii',
+    style: 'izometryczny dashboard danych',
+  },
 ];
 
 const noop = () => () => {};
@@ -377,6 +426,27 @@ export default function Wzornik({ lang }) {
         <p className="wz-id__all">
           <a className="link" href={withPrefix('/wzornik/identyfikacja/')}>
             {t.identity.all}
+          </a>
+        </p>
+      </div>
+      <div className="wz-id">
+        <h3 className="wz-id__h">{t.appPreview.title}</h3>
+        <p className="wz-id__lead">{tie(t.appPreview.lead)}</p>
+        <ul className="wz-id__list">
+          {appPreview.map(({ slug, name, trade, style }) => (
+            <li key={slug}>
+              <a className="link" href={withPrefix(`/wzornik/app-preview/${slug}/`)}>
+                {name}
+              </a>
+              <span>
+                {trade}, {style}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="wz-id__all">
+          <a className="link" href={withPrefix('/wzornik/app-preview/')}>
+            {t.appPreview.all}
           </a>
         </p>
       </div>
