@@ -9,7 +9,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-app-preview.md`. Run rule
 - [x] B4 Kiełek
 - [x] B5 Poziomka
 - [x] B6 Południe
-- [ ] Q quality control
+- [x] Q quality control
 - [ ] R independent review, every rubric score at least 4
 - [ ] P publication and final report
 ```
@@ -610,3 +610,8 @@ Q runs after all six are merged: ffprobe table for every file (store cut exact t
 51. In Południe's marketing cut the headlines sit on white slab tiles, so the camera can move the isometric world behind them without text crossing the pole or the roof.
 52. Południe's gallery has seven screens (Teraz, Magazyn, Dzień, Kiedy włączyć, Bilans dnia, Miesiąc, Instalacja); the store cut shows the first five.
 53. Południe's tile loop quantises the dash speeds so that each path moves a whole number of dash periods in 150 frames; the loop has no seam, the speeds differ from 1 px per kW by under 0,06 px per frame.
+54. QA moved Kasownik's purchase overlay from top 292 to 320 so it no longer sits on the edge of the suggested ticket card; it now covers only the small "Wszystkie bilety" label, which the sheet hides a moment later.
+55. QA gave each Poziomka overlay its own height (art rows 366, 300 and 62): the hook stays above the DALEJ button, the streak line sits between the reward panel and the hopping strawberry, the garden line sits in the sky above the plant. One shared height had put the last two over the strawberry and the plant.
+56. QA draws Południe's marketing value tags (6,4 kW, 95%, the washing machine window and the three balance columns) in a layer above the amber wire to the phone, so the wire never crosses a number. The "92% prądu z własnego dachu." headline binds the one letter words to the next word.
+57. QA softened the slam of Sztanga's marketing support line to 8% (headline words keep the 40% slam), because at 40% the sentence ran past the frame edge for four frames, and set the one long store caption („Nowy rekord? Sztanga zauważy.”) at width 62 so it keeps clear margins.
+58. QA set balanced wrapping on all six pages and the index (no one word last lines in headings, captions and short copy), stacks the file tables below 960 px instead of 760 px so they never clip at tablet widths, and adds a link to the full size storyboard PNG under each board.

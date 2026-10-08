@@ -91,3 +91,22 @@ Built and proven end to end on Kasownik. Every later app uses the same commands;
 - Loops: the store and marketing masters are rendered once with the loop bridge appended; the store final and the social finals are the same masters cut to the storyboard length, the web loops keep the bridge. Store web loop is 442x960 (H.264 needs even sizes; 443 is odd).
 - Render times on 4 cores, concurrency 3: store 705 frames at 886x1920 in about 200 s; each marketing format about 6 minutes (the headless shell rasterizes through SwiftShader); stills about 20 s.
 - Masters from Remotion are full range (`yuvj420p`); every encode converts to limited range BT.709 through `scale=...:out_range=tv`.
+
+## Quality control (step Q, 2026-10-08, cloud session)
+
+Checked:
+
+- `validate.mjs` for all six: spec of every store file (886x1920, 30/1, exact frame count, 20 to 25 s, H.264 High@4.0, yuv420p limited range BT.709, 11.4 Mbps CBR, silent stereo AAC 48 kHz), social finals, web loops under 4 MB with seam SSIM, posters, screens, storyboard board, icons, og, budget (largest Rygiel 13.58 MB of 14) and every file under 50 MB.
+- Frame sheets of every store and 9:16 marketing cut, the first 2 s of all twelve cuts frame by frame, every overlay frame, the 25% thumbnail sheets and a distinctness board of three store and three marketing frames per app (`studio/out/app-preview/qa/distinct.png`).
+- Pages and index in the sites build and in the deploy layout (Gatsby build plus `sites/dist` in `public/wzornik`, `gatsby serve` on 4320): full page shots at 320, 390, 768, 1024 and 1440, horizontal overflow, console errors, failed requests, fonts, links and video sources (HEAD), reduced motion (no video request), a word level check for one word last lines and words broken across lines, clipped boxes.
+- Content: no e-mail or phone, no real brands, Adrian only in the footer line, no en or em dashes.
+
+Fixed:
+
+- Kasownik: the purchase overlay sat on the edge of the suggested ticket card; moved to top 320.
+- Sztanga: the 9:16 support line slammed in at 140% and ran past the frame edge for four frames; its slam is now 8%. The long store caption is set at width 62.
+- Poziomka: the streak and garden overlays covered the hopping strawberry and the plant; each overlay now has its own height.
+- Południe: the amber wire to the phone crossed the 95% and balance tags in all three marketing formats; tags now draw above it. One letter words in the last headline are bound.
+- Pages: file tables clipped at 768 to 1024 px (they now stack below 960 px); one word last lines in headings, captions, swatch notes and top bars (balanced wrapping, rewording, bound one letter words); Rygiel's alert title broke "e-mail" at 320 px; a full size link under every storyboard board.
+
+Final results: `validate.mjs` all checks passed for all six; `yarn --cwd sites run check` 0 errors, 0 warnings, Prettier clean; `yarn --cwd sites test` 127 files, 1358 tests passed; `yarn --cwd sites build` 192 pages; `yarn gatsby clean && yarn build` exit 0; deploy layout: every page 200, fonts, favicon and all videos load, no console errors, no horizontal scroll from 320 to 1440 px, reduced motion loads no video, index shows six real tiles. Published app preview files 58.7 MB, the whole `/wzornik/` 117 MB, largest file far under 50 MB. Left as is: at 320 px a few long gallery captions in two column galleries end on one word (body text, five or more lines), and file names in the file tables break at their hyphens.
