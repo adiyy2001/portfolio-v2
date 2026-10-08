@@ -1,0 +1,561 @@
+{
+  "app": {
+    "slug": "chochla",
+    "name": "Chochla",
+    "style": "Memphis i pop-art",
+    "styleId": "S4",
+    "category": "przepisy i planowanie posiłków",
+    "format": "png",
+    "ipad": false
+  },
+  "base": "/wzornik/aso/chochla/",
+  "totalBytes": 11176847,
+  "totalHuman": "10.7 MB",
+  "zip": { "path": "chochla-aso.zip", "bytes": 11166753 },
+  "groups": [
+    {
+      "id": "appstore",
+      "title": "App Store, iPhone 6,9″",
+      "count": 12,
+      "bytes": 5209654,
+      "formats": "PNG",
+      "files": [
+        "app-store/pl/chochla-appstore-pl-01.png",
+        "app-store/pl/chochla-appstore-pl-02.png",
+        "app-store/pl/chochla-appstore-pl-03.png",
+        "app-store/pl/chochla-appstore-pl-04.png",
+        "app-store/pl/chochla-appstore-pl-05.png",
+        "app-store/pl/chochla-appstore-pl-06.png",
+        "app-store/en/chochla-appstore-en-01.png",
+        "app-store/en/chochla-appstore-en-02.png",
+        "app-store/en/chochla-appstore-en-03.png",
+        "app-store/en/chochla-appstore-en-04.png",
+        "app-store/en/chochla-appstore-en-05.png",
+        "app-store/en/chochla-appstore-en-06.png"
+      ]
+    },
+    {
+      "id": "play",
+      "title": "Google Play, telefon",
+      "count": 12,
+      "bytes": 3580555,
+      "formats": "PNG",
+      "files": [
+        "google-play/pl/chochla-play-pl-01.png",
+        "google-play/pl/chochla-play-pl-02.png",
+        "google-play/pl/chochla-play-pl-03.png",
+        "google-play/pl/chochla-play-pl-04.png",
+        "google-play/pl/chochla-play-pl-05.png",
+        "google-play/pl/chochla-play-pl-06.png",
+        "google-play/en/chochla-play-en-01.png",
+        "google-play/en/chochla-play-en-02.png",
+        "google-play/en/chochla-play-en-03.png",
+        "google-play/en/chochla-play-en-04.png",
+        "google-play/en/chochla-play-en-05.png",
+        "google-play/en/chochla-play-en-06.png"
+      ]
+    },
+    {
+      "id": "variantB",
+      "title": "Wariant B pierwszego screenshotu",
+      "count": 4,
+      "bytes": 2066065,
+      "formats": "PNG",
+      "files": [
+        "variant-b/chochla-appstore-pl-01b.png",
+        "variant-b/chochla-play-pl-01b.png",
+        "variant-b/chochla-appstore-en-01b.png",
+        "variant-b/chochla-play-en-01b.png"
+      ]
+    },
+    {
+      "id": "feature",
+      "title": "Google Play, feature graphic",
+      "count": 2,
+      "bytes": 169165,
+      "formats": "PNG",
+      "files": ["feature-graphic/chochla-feature-pl.png", "feature-graphic/chochla-feature-en.png"]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 5,
+      "bytes": 128425,
+      "formats": "PNG, SVG",
+      "files": [
+        "icons/chochla-icon-appstore-1024.png",
+        "icons/chochla-icon-play-512.png",
+        "icons/chochla-icon.svg",
+        "icons/layers/chochla-icon-background.png",
+        "icons/layers/chochla-icon-foreground.png"
+      ]
+    },
+    {
+      "id": "texts",
+      "title": "Teksty nagłówków",
+      "count": 3,
+      "bytes": 22983,
+      "formats": "CSV, JSON",
+      "files": ["chochla-teksty.csv", "teksty/pl.json", "teksty/en.json"]
+    }
+  ],
+  "files": [
+    {
+      "path": "app-store/pl/chochla-appstore-pl-01.png",
+      "bytes": 451603,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "01",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/chochla-play-pl-01.png",
+      "bytes": 320009,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "01",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/chochla-appstore-pl-02.png",
+      "bytes": 603214,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "02",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/chochla-play-pl-02.png",
+      "bytes": 394643,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "02",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/chochla-appstore-pl-03.png",
+      "bytes": 374425,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "03",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/chochla-play-pl-03.png",
+      "bytes": 275666,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "03",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/chochla-appstore-pl-04.png",
+      "bytes": 360481,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "04",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/chochla-play-pl-04.png",
+      "bytes": 240432,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "04",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/chochla-appstore-pl-05.png",
+      "bytes": 422235,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "05",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/chochla-play-pl-05.png",
+      "bytes": 293298,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "05",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/chochla-appstore-pl-06.png",
+      "bytes": 421000,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "06",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/chochla-play-pl-06.png",
+      "bytes": 285290,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "06",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "variant-b/chochla-appstore-pl-01b.png",
+      "bytes": 630133,
+      "type": "png",
+      "group": "variantB",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "01",
+      "variant": "b",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "variant-b/chochla-play-pl-01b.png",
+      "bytes": 401384,
+      "type": "png",
+      "group": "variantB",
+      "store": "play",
+      "lang": "pl",
+      "slot": "01",
+      "variant": "b",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "feature-graphic/chochla-feature-pl.png",
+      "bytes": 84613,
+      "type": "png",
+      "group": "feature",
+      "store": "feature",
+      "lang": "pl",
+      "width": 1024,
+      "height": 500
+    },
+    {
+      "path": "app-store/en/chochla-appstore-en-01.png",
+      "bytes": 445628,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "01",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/chochla-play-en-01.png",
+      "bytes": 315248,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "01",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/chochla-appstore-en-02.png",
+      "bytes": 585929,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "02",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/chochla-play-en-02.png",
+      "bytes": 378662,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "02",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/chochla-appstore-en-03.png",
+      "bytes": 377417,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "03",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/chochla-play-en-03.png",
+      "bytes": 280692,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "03",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/chochla-appstore-en-04.png",
+      "bytes": 350434,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "04",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/chochla-play-en-04.png",
+      "bytes": 233540,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "04",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/chochla-appstore-en-05.png",
+      "bytes": 404863,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "05",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/chochla-play-en-05.png",
+      "bytes": 280867,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "05",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/chochla-appstore-en-06.png",
+      "bytes": 412425,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "06",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/chochla-play-en-06.png",
+      "bytes": 282208,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "06",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "variant-b/chochla-appstore-en-01b.png",
+      "bytes": 632774,
+      "type": "png",
+      "group": "variantB",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "01",
+      "variant": "b",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "variant-b/chochla-play-en-01b.png",
+      "bytes": 401774,
+      "type": "png",
+      "group": "variantB",
+      "store": "play",
+      "lang": "en",
+      "slot": "01",
+      "variant": "b",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "feature-graphic/chochla-feature-en.png",
+      "bytes": 84552,
+      "type": "png",
+      "group": "feature",
+      "store": "feature",
+      "lang": "en",
+      "width": 1024,
+      "height": 500
+    },
+    {
+      "path": "icons/chochla-icon-appstore-1024.png",
+      "bytes": 39328,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "icons/chochla-icon-play-512.png",
+      "bytes": 39636,
+      "type": "png",
+      "group": "icons",
+      "width": 512,
+      "height": 512
+    },
+    { "path": "icons/chochla-icon.svg", "bytes": 1118, "type": "svg", "group": "icons" },
+    {
+      "path": "icons/layers/chochla-icon-background.png",
+      "bytes": 15463,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "icons/layers/chochla-icon-foreground.png",
+      "bytes": 32880,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    { "path": "chochla-teksty.csv", "bytes": 5492, "type": "csv", "group": "texts" },
+    { "path": "teksty/pl.json", "bytes": 9014, "type": "json", "group": "texts" },
+    { "path": "teksty/en.json", "bytes": 8477, "type": "json", "group": "texts" }
+  ],
+  "web": [
+    { "path": "web/appstore-en-01.webp", "bytes": 52152, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01b.webp", "bytes": 57924, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-02.webp", "bytes": 55838, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-03.webp", "bytes": 44622, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-04.webp", "bytes": 48776, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-05.webp", "bytes": 51292, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-06.webp", "bytes": 54944, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01.webp", "bytes": 53650, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01b.webp", "bytes": 56856, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-02.webp", "bytes": 57686, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-03.webp", "bytes": 43612, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-04.webp", "bytes": 49774, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-05.webp", "bytes": 53074, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-06.webp", "bytes": 56076, "width": 480, "height": 1043 },
+    { "path": "web/feature-en.webp", "bytes": 32546, "width": 1024, "height": 500 },
+    { "path": "web/feature-pl.webp", "bytes": 33244, "width": 1024, "height": 500 },
+    { "path": "web/play-en-01.webp", "bytes": 36636, "width": 400, "height": 711 },
+    { "path": "web/play-en-01b.webp", "bytes": 36746, "width": 400, "height": 711 },
+    { "path": "web/play-en-02.webp", "bytes": 34780, "width": 400, "height": 711 },
+    { "path": "web/play-en-03.webp", "bytes": 32052, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 32064, "width": 400, "height": 711 },
+    { "path": "web/play-en-05.webp", "bytes": 35556, "width": 400, "height": 711 },
+    { "path": "web/play-en-06.webp", "bytes": 36340, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01.webp", "bytes": 37358, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01b.webp", "bytes": 36480, "width": 400, "height": 711 },
+    { "path": "web/play-pl-02.webp", "bytes": 36820, "width": 400, "height": 711 },
+    { "path": "web/play-pl-03.webp", "bytes": 31396, "width": 400, "height": 711 },
+    { "path": "web/play-pl-04.webp", "bytes": 32404, "width": 400, "height": 711 },
+    { "path": "web/play-pl-05.webp", "bytes": 36598, "width": 400, "height": 711 },
+    { "path": "web/play-pl-06.webp", "bytes": 36874, "width": 400, "height": 711 }
+  ],
+  "fonts": [
+    {
+      "id": "bangers",
+      "role": "nagłówki w dymkach",
+      "family": "Bangers",
+      "css": "Bangers",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/Bangers-400.woff2",
+      "bytes": 24768
+    },
+    {
+      "id": "figtree",
+      "role": "interfejs",
+      "family": "Figtree",
+      "css": "Figtree",
+      "weight": 500,
+      "style": "normal",
+      "file": "fonts/Figtree-500.woff2",
+      "bytes": 11648
+    },
+    {
+      "id": "figtree",
+      "role": "interfejs",
+      "family": "Figtree",
+      "css": "Figtree",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/Figtree-700.woff2",
+      "bytes": 11516
+    },
+    {
+      "id": "figtree",
+      "role": "interfejs",
+      "family": "Figtree",
+      "css": "Figtree",
+      "weight": 800,
+      "style": "normal",
+      "file": "fonts/Figtree-800.woff2",
+      "bytes": 11472
+    }
+  ],
+  "palette": [
+    { "id": "krem", "name": "Krem", "hex": "#FFF3DD", "role": "tło i powierzchnie" },
+    { "id": "pomidor", "name": "Pomidor", "hex": "#EE4B2B", "role": "akcja i bohaterowie" },
+    {
+      "id": "musztarda",
+      "name": "Musztarda",
+      "hex": "#F6B400",
+      "role": "pasy, raster, zaznaczenia"
+    },
+    { "id": "kobalt", "name": "Kobalt", "hex": "#2547C8", "role": "przyciski i plamy" },
+    { "id": "turkus", "name": "Turkus", "hex": "#19B3A3", "role": "gotowe i dopasowane" },
+    { "id": "roz", "name": "Róż", "hex": "#F7A8C9", "role": "wzory i akcenty" },
+    { "id": "kontur", "name": "Kontur", "hex": "#1A1714", "role": "kontury i tekst" },
+    { "id": "dymek", "name": "Dymek", "hex": "#FFFFFF", "role": "dymki i karty" }
+  ]
+}

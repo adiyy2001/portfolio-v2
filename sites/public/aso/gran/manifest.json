@@ -1,0 +1,558 @@
+{
+  "app": {
+    "slug": "gran",
+    "name": "Grań",
+    "style": "Panorama ilustracyjna",
+    "styleId": "S1",
+    "category": "szlaki górskie w Sudetach",
+    "format": "png",
+    "ipad": false
+  },
+  "base": "/wzornik/aso/gran/",
+  "totalBytes": 9985356,
+  "totalHuman": "9.5 MB",
+  "zip": { "path": "gran-aso.zip", "bytes": 9974208 },
+  "groups": [
+    {
+      "id": "appstore",
+      "title": "App Store, iPhone 6,9″",
+      "count": 12,
+      "bytes": 4863164,
+      "formats": "PNG",
+      "files": [
+        "app-store/pl/gran-appstore-pl-01.png",
+        "app-store/pl/gran-appstore-pl-02.png",
+        "app-store/pl/gran-appstore-pl-03.png",
+        "app-store/pl/gran-appstore-pl-04.png",
+        "app-store/pl/gran-appstore-pl-05.png",
+        "app-store/pl/gran-appstore-pl-06.png",
+        "app-store/en/gran-appstore-en-01.png",
+        "app-store/en/gran-appstore-en-02.png",
+        "app-store/en/gran-appstore-en-03.png",
+        "app-store/en/gran-appstore-en-04.png",
+        "app-store/en/gran-appstore-en-05.png",
+        "app-store/en/gran-appstore-en-06.png"
+      ]
+    },
+    {
+      "id": "play",
+      "title": "Google Play, telefon",
+      "count": 12,
+      "bytes": 3415585,
+      "formats": "PNG",
+      "files": [
+        "google-play/pl/gran-play-pl-01.png",
+        "google-play/pl/gran-play-pl-02.png",
+        "google-play/pl/gran-play-pl-03.png",
+        "google-play/pl/gran-play-pl-04.png",
+        "google-play/pl/gran-play-pl-05.png",
+        "google-play/pl/gran-play-pl-06.png",
+        "google-play/en/gran-play-en-01.png",
+        "google-play/en/gran-play-en-02.png",
+        "google-play/en/gran-play-en-03.png",
+        "google-play/en/gran-play-en-04.png",
+        "google-play/en/gran-play-en-05.png",
+        "google-play/en/gran-play-en-06.png"
+      ]
+    },
+    {
+      "id": "variantB",
+      "title": "Wariant B pierwszego screenshotu",
+      "count": 4,
+      "bytes": 1429404,
+      "formats": "PNG",
+      "files": [
+        "variant-b/gran-appstore-pl-01b.png",
+        "variant-b/gran-play-pl-01b.png",
+        "variant-b/gran-appstore-en-01b.png",
+        "variant-b/gran-play-en-01b.png"
+      ]
+    },
+    {
+      "id": "feature",
+      "title": "Google Play, feature graphic",
+      "count": 2,
+      "bytes": 144400,
+      "formats": "PNG",
+      "files": ["feature-graphic/gran-feature-pl.png", "feature-graphic/gran-feature-en.png"]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 5,
+      "bytes": 109301,
+      "formats": "PNG, SVG",
+      "files": [
+        "icons/gran-icon-appstore-1024.png",
+        "icons/gran-icon-play-512.png",
+        "icons/gran-icon.svg",
+        "icons/layers/gran-icon-background.png",
+        "icons/layers/gran-icon-foreground.png"
+      ]
+    },
+    {
+      "id": "texts",
+      "title": "Teksty nagłówków",
+      "count": 3,
+      "bytes": 23502,
+      "formats": "CSV, JSON",
+      "files": ["gran-teksty.csv", "teksty/pl.json", "teksty/en.json"]
+    }
+  ],
+  "files": [
+    {
+      "path": "app-store/pl/gran-appstore-pl-01.png",
+      "bytes": 522586,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "01",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/gran-play-pl-01.png",
+      "bytes": 372493,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "01",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/gran-appstore-pl-02.png",
+      "bytes": 507939,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "02",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/gran-play-pl-02.png",
+      "bytes": 333687,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "02",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/gran-appstore-pl-03.png",
+      "bytes": 417577,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "03",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/gran-play-pl-03.png",
+      "bytes": 299145,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "03",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/gran-appstore-pl-04.png",
+      "bytes": 315098,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "04",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/gran-play-pl-04.png",
+      "bytes": 219266,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "04",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/gran-appstore-pl-05.png",
+      "bytes": 251280,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "05",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/gran-play-pl-05.png",
+      "bytes": 196943,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "05",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/gran-appstore-pl-06.png",
+      "bytes": 442395,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "06",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/gran-play-pl-06.png",
+      "bytes": 307347,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "06",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "variant-b/gran-appstore-pl-01b.png",
+      "bytes": 423076,
+      "type": "png",
+      "group": "variantB",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "01",
+      "variant": "b",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "variant-b/gran-play-pl-01b.png",
+      "bytes": 297754,
+      "type": "png",
+      "group": "variantB",
+      "store": "play",
+      "lang": "pl",
+      "slot": "01",
+      "variant": "b",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "feature-graphic/gran-feature-pl.png",
+      "bytes": 72408,
+      "type": "png",
+      "group": "feature",
+      "store": "feature",
+      "lang": "pl",
+      "width": 1024,
+      "height": 500
+    },
+    {
+      "path": "app-store/en/gran-appstore-en-01.png",
+      "bytes": 514109,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "01",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/gran-play-en-01.png",
+      "bytes": 367581,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "01",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/gran-appstore-en-02.png",
+      "bytes": 497583,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "02",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/gran-play-en-02.png",
+      "bytes": 323862,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "02",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/gran-appstore-en-03.png",
+      "bytes": 397705,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "03",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/gran-play-en-03.png",
+      "bytes": 279339,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "03",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/gran-appstore-en-04.png",
+      "bytes": 307643,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "04",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/gran-play-en-04.png",
+      "bytes": 214512,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "04",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/gran-appstore-en-05.png",
+      "bytes": 257797,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "05",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/gran-play-en-05.png",
+      "bytes": 200986,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "05",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/gran-appstore-en-06.png",
+      "bytes": 431452,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "06",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/gran-play-en-06.png",
+      "bytes": 300424,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "06",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "variant-b/gran-appstore-en-01b.png",
+      "bytes": 418570,
+      "type": "png",
+      "group": "variantB",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "01",
+      "variant": "b",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "variant-b/gran-play-en-01b.png",
+      "bytes": 290004,
+      "type": "png",
+      "group": "variantB",
+      "store": "play",
+      "lang": "en",
+      "slot": "01",
+      "variant": "b",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "feature-graphic/gran-feature-en.png",
+      "bytes": 71992,
+      "type": "png",
+      "group": "feature",
+      "store": "feature",
+      "lang": "en",
+      "width": 1024,
+      "height": 500
+    },
+    {
+      "path": "icons/gran-icon-appstore-1024.png",
+      "bytes": 33621,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "icons/gran-icon-play-512.png",
+      "bytes": 31655,
+      "type": "png",
+      "group": "icons",
+      "width": 512,
+      "height": 512
+    },
+    { "path": "icons/gran-icon.svg", "bytes": 1373, "type": "svg", "group": "icons" },
+    {
+      "path": "icons/layers/gran-icon-background.png",
+      "bytes": 19253,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "icons/layers/gran-icon-foreground.png",
+      "bytes": 23399,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    { "path": "gran-teksty.csv", "bytes": 5507, "type": "csv", "group": "texts" },
+    { "path": "teksty/pl.json", "bytes": 9102, "type": "json", "group": "texts" },
+    { "path": "teksty/en.json", "bytes": 8893, "type": "json", "group": "texts" }
+  ],
+  "web": [
+    { "path": "web/appstore-en-01.webp", "bytes": 31874, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01b.webp", "bytes": 27294, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-02.webp", "bytes": 33542, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-03.webp", "bytes": 31122, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-04.webp", "bytes": 23400, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-05.webp", "bytes": 21512, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-06.webp", "bytes": 29946, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01.webp", "bytes": 32454, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01b.webp", "bytes": 28560, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-02.webp", "bytes": 35196, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-03.webp", "bytes": 34506, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-04.webp", "bytes": 24384, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-05.webp", "bytes": 20684, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-06.webp", "bytes": 31992, "width": 480, "height": 1043 },
+    { "path": "web/feature-en.webp", "bytes": 26304, "width": 1024, "height": 500 },
+    { "path": "web/feature-pl.webp", "bytes": 26318, "width": 1024, "height": 500 },
+    { "path": "web/play-en-01.webp", "bytes": 23212, "width": 400, "height": 711 },
+    { "path": "web/play-en-01b.webp", "bytes": 20726, "width": 400, "height": 711 },
+    { "path": "web/play-en-02.webp", "bytes": 23230, "width": 400, "height": 711 },
+    { "path": "web/play-en-03.webp", "bytes": 22390, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 16332, "width": 400, "height": 711 },
+    { "path": "web/play-en-05.webp", "bytes": 16966, "width": 400, "height": 711 },
+    { "path": "web/play-en-06.webp", "bytes": 21558, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01.webp", "bytes": 23688, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01b.webp", "bytes": 21674, "width": 400, "height": 711 },
+    { "path": "web/play-pl-02.webp", "bytes": 24632, "width": 400, "height": 711 },
+    { "path": "web/play-pl-03.webp", "bytes": 24234, "width": 400, "height": 711 },
+    { "path": "web/play-pl-04.webp", "bytes": 17164, "width": 400, "height": 711 },
+    { "path": "web/play-pl-05.webp", "bytes": 16452, "width": 400, "height": 711 },
+    { "path": "web/play-pl-06.webp", "bytes": 22754, "width": 400, "height": 711 }
+  ],
+  "fonts": [
+    {
+      "id": "overpass",
+      "role": "nagłówki i interfejs",
+      "family": "Overpass",
+      "css": "Overpass",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/Overpass-400.woff2",
+      "bytes": 17100
+    },
+    {
+      "id": "overpass",
+      "role": "nagłówki i interfejs",
+      "family": "Overpass",
+      "css": "Overpass",
+      "weight": 600,
+      "style": "normal",
+      "file": "fonts/Overpass-600.woff2",
+      "bytes": 17824
+    },
+    {
+      "id": "overpass",
+      "role": "nagłówki i interfejs",
+      "family": "Overpass",
+      "css": "Overpass",
+      "weight": 800,
+      "style": "normal",
+      "file": "fonts/Overpass-800.woff2",
+      "bytes": 17740
+    },
+    {
+      "id": "overpass",
+      "role": "nagłówki i interfejs",
+      "family": "Overpass",
+      "css": "Overpass",
+      "weight": 900,
+      "style": "normal",
+      "file": "fonts/Overpass-900.woff2",
+      "bytes": 17512
+    }
+  ],
+  "palette": [
+    { "id": "mgla", "name": "Mgła", "hex": "#F5EBDD", "role": "niebo i tło" },
+    { "id": "swit", "name": "Świt", "hex": "#F4CDA5", "role": "ciepły pas nieba" },
+    { "id": "dal", "name": "Dal", "hex": "#AFC3CB", "role": "daleki grzbiet" },
+    { "id": "grzbiet", "name": "Grzbiet", "hex": "#6E8F9B", "role": "środkowy grzbiet" },
+    { "id": "las", "name": "Las", "hex": "#2E5446", "role": "las i przyciski" },
+    { "id": "glab", "name": "Głąb", "hex": "#17302A", "role": "tekst" },
+    { "id": "laka", "name": "Łąka", "hex": "#A7BF73", "role": "łąka" },
+    { "id": "znak", "name": "Znak", "hex": "#C8352B", "role": "szlak, jedyna czerwień" },
+    { "id": "slonce", "name": "Słońce", "hex": "#F2A93B", "role": "słońce" },
+    { "id": "biel", "name": "Biel", "hex": "#FFFDF8", "role": "biel znaku i powierzchnie" }
+  ]
+}

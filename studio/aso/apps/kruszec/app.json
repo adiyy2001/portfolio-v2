@@ -1,0 +1,57 @@
+{
+  "slug": "kruszec",
+  "name": "Kruszec",
+  "styleId": "S5",
+  "style": "Ciemne szkło premium",
+  "category": "budżet osobisty i inwestowanie",
+  "storeCategory": { "appstore": "Finanse", "play": "Finanse" },
+  "format": "jpg",
+  "jpegQuality": 90,
+  "ipad": true,
+  "themeColor": "#0A1020",
+  "background": "#0A1020",
+  "ogBackground": "#0A1020",
+  "bannedExtra": ["zysk", "zarob", "stopa zwrotu", "zwrot", "return", "profit", "earn", "gain", "yield", "rentown", "procent składany"],
+  "palette": [
+    { "id": "glebia", "name": "Głębia", "hex": "#0A1020", "role": "tło" },
+    { "id": "granat", "name": "Granat", "hex": "#131D33", "role": "powierzchnie" },
+    { "id": "szklo", "name": "Szkło", "hex": "#1F283C", "role": "matowe karty, biel 6 procent na granacie" },
+    { "id": "tekst", "name": "Tekst", "hex": "#EDF1F7", "role": "tekst i liczby" },
+    { "id": "tekst2", "name": "Tekst 2", "hex": "#9AA7BB", "role": "opisy i osie" },
+    { "id": "szalwia", "name": "Szałwia", "hex": "#8FD4B6", "role": "linia majątku i poświata" },
+    { "id": "lod", "name": "Lód", "hex": "#B8CBE6", "role": "druga seria" },
+    { "id": "platyna", "name": "Platyna", "hex": "#DCE1E8", "role": "akcent nagłówków" },
+    { "id": "koral", "name": "Koral", "hex": "#E8998B", "role": "rzadka wartość ujemna" }
+  ],
+  "fonts": [
+    {
+      "id": "instrument",
+      "role": "nagłówki i duże liczby",
+      "family": "Instrument Serif",
+      "css": "Instrument Serif",
+      "dir": "instrumentserif",
+      "file": "InstrumentSerif-Regular.ttf",
+      "variable": false,
+      "instances": [{ "weight": 400 }]
+    },
+    {
+      "id": "instrument-italic",
+      "role": "akcenty w nagłówkach",
+      "family": "Instrument Serif",
+      "css": "Instrument Serif",
+      "dir": "instrumentserif",
+      "file": "InstrumentSerif-Italic.ttf",
+      "variable": false,
+      "instances": [{ "weight": 400, "style": "italic" }]
+    },
+    {
+      "id": "manrope",
+      "role": "interfejs, cyfry tabelaryczne",
+      "family": "Manrope",
+      "css": "Manrope",
+      "dir": "manrope",
+      "file": "Manrope[wght].ttf",
+      "instances": [{ "weight": 400 }, { "weight": 500 }, { "weight": 600 }, { "weight": 700 }]
+    }
+  ]
+}

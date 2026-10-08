@@ -1,0 +1,43 @@
+{
+  "slug": "chochla",
+  "name": "Chochla",
+  "styleId": "S4",
+  "style": "Memphis i pop-art",
+  "category": "przepisy i planowanie posiłków",
+  "storeCategory": { "appstore": "Jedzenie i picie", "play": "Jedzenie i napoje" },
+  "format": "png",
+  "themeColor": "#EE4B2B",
+  "background": "#FFF3DD",
+  "ogBackground": "#FFF3DD",
+  "palette": [
+    { "id": "krem", "name": "Krem", "hex": "#FFF3DD", "role": "tło i powierzchnie" },
+    { "id": "pomidor", "name": "Pomidor", "hex": "#EE4B2B", "role": "akcja i bohaterowie" },
+    { "id": "musztarda", "name": "Musztarda", "hex": "#F6B400", "role": "pasy, raster, zaznaczenia" },
+    { "id": "kobalt", "name": "Kobalt", "hex": "#2547C8", "role": "przyciski i plamy" },
+    { "id": "turkus", "name": "Turkus", "hex": "#19B3A3", "role": "gotowe i dopasowane" },
+    { "id": "roz", "name": "Róż", "hex": "#F7A8C9", "role": "wzory i akcenty" },
+    { "id": "kontur", "name": "Kontur", "hex": "#1A1714", "role": "kontury i tekst" },
+    { "id": "dymek", "name": "Dymek", "hex": "#FFFFFF", "role": "dymki i karty" }
+  ],
+  "fonts": [
+    {
+      "id": "bangers",
+      "role": "nagłówki w dymkach",
+      "family": "Bangers",
+      "css": "Bangers",
+      "dir": "bangers",
+      "file": "Bangers-Regular.ttf",
+      "variable": false,
+      "instances": [{ "weight": 400 }]
+    },
+    {
+      "id": "figtree",
+      "role": "interfejs",
+      "family": "Figtree",
+      "css": "Figtree",
+      "dir": "figtree",
+      "file": "Figtree[wght].ttf",
+      "instances": [{ "weight": 500 }, { "weight": 700 }, { "weight": 800 }]
+    }
+  ]
+}

@@ -1,0 +1,584 @@
+{
+  "app": {
+    "slug": "margines",
+    "name": "Margines",
+    "style": "Odręczne adnotacje",
+    "styleId": "S3",
+    "category": "fiszki do nauki języków",
+    "format": "png",
+    "ipad": false
+  },
+  "base": "/wzornik/aso/margines/",
+  "totalBytes": 9226700,
+  "totalHuman": "8.8 MB",
+  "zip": { "path": "margines-aso.zip", "bytes": 9218112 },
+  "groups": [
+    {
+      "id": "appstore",
+      "title": "App Store, iPhone 6,9″",
+      "count": 12,
+      "bytes": 4575092,
+      "formats": "PNG",
+      "files": [
+        "app-store/pl/margines-appstore-pl-01.png",
+        "app-store/pl/margines-appstore-pl-02.png",
+        "app-store/pl/margines-appstore-pl-03.png",
+        "app-store/pl/margines-appstore-pl-04.png",
+        "app-store/pl/margines-appstore-pl-05.png",
+        "app-store/pl/margines-appstore-pl-06.png",
+        "app-store/en/margines-appstore-en-01.png",
+        "app-store/en/margines-appstore-en-02.png",
+        "app-store/en/margines-appstore-en-03.png",
+        "app-store/en/margines-appstore-en-04.png",
+        "app-store/en/margines-appstore-en-05.png",
+        "app-store/en/margines-appstore-en-06.png"
+      ]
+    },
+    {
+      "id": "play",
+      "title": "Google Play, telefon",
+      "count": 12,
+      "bytes": 3056373,
+      "formats": "PNG",
+      "files": [
+        "google-play/pl/margines-play-pl-01.png",
+        "google-play/pl/margines-play-pl-02.png",
+        "google-play/pl/margines-play-pl-03.png",
+        "google-play/pl/margines-play-pl-04.png",
+        "google-play/pl/margines-play-pl-05.png",
+        "google-play/pl/margines-play-pl-06.png",
+        "google-play/en/margines-play-en-01.png",
+        "google-play/en/margines-play-en-02.png",
+        "google-play/en/margines-play-en-03.png",
+        "google-play/en/margines-play-en-04.png",
+        "google-play/en/margines-play-en-05.png",
+        "google-play/en/margines-play-en-06.png"
+      ]
+    },
+    {
+      "id": "variantB",
+      "title": "Wariant B pierwszego screenshotu",
+      "count": 4,
+      "bytes": 1256145,
+      "formats": "PNG",
+      "files": [
+        "variant-b/margines-appstore-pl-01b.png",
+        "variant-b/margines-play-pl-01b.png",
+        "variant-b/margines-appstore-en-01b.png",
+        "variant-b/margines-play-en-01b.png"
+      ]
+    },
+    {
+      "id": "feature",
+      "title": "Google Play, feature graphic",
+      "count": 2,
+      "bytes": 176293,
+      "formats": "PNG",
+      "files": [
+        "feature-graphic/margines-feature-pl.png",
+        "feature-graphic/margines-feature-en.png"
+      ]
+    },
+    {
+      "id": "icons",
+      "title": "Ikony",
+      "count": 5,
+      "bytes": 143826,
+      "formats": "PNG, SVG",
+      "files": [
+        "icons/margines-icon-appstore-1024.png",
+        "icons/margines-icon-play-512.png",
+        "icons/margines-icon.svg",
+        "icons/layers/margines-icon-background.png",
+        "icons/layers/margines-icon-foreground.png"
+      ]
+    },
+    {
+      "id": "texts",
+      "title": "Teksty nagłówków",
+      "count": 3,
+      "bytes": 18971,
+      "formats": "CSV, JSON",
+      "files": ["margines-teksty.csv", "teksty/pl.json", "teksty/en.json"]
+    }
+  ],
+  "files": [
+    {
+      "path": "app-store/pl/margines-appstore-pl-01.png",
+      "bytes": 372583,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "01",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/margines-play-pl-01.png",
+      "bytes": 242503,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "01",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/margines-appstore-pl-02.png",
+      "bytes": 400718,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "02",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/margines-play-pl-02.png",
+      "bytes": 269425,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "02",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/margines-appstore-pl-03.png",
+      "bytes": 434224,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "03",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/margines-play-pl-03.png",
+      "bytes": 296532,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "03",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/margines-appstore-pl-04.png",
+      "bytes": 285780,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "04",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/margines-play-pl-04.png",
+      "bytes": 195261,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "04",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/margines-appstore-pl-05.png",
+      "bytes": 393525,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "05",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/margines-play-pl-05.png",
+      "bytes": 252334,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "05",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/pl/margines-appstore-pl-06.png",
+      "bytes": 441832,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "06",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/pl/margines-play-pl-06.png",
+      "bytes": 298808,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "pl",
+      "slot": "06",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "variant-b/margines-appstore-pl-01b.png",
+      "bytes": 376213,
+      "type": "png",
+      "group": "variantB",
+      "store": "appstore",
+      "lang": "pl",
+      "slot": "01",
+      "variant": "b",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "variant-b/margines-play-pl-01b.png",
+      "bytes": 252507,
+      "type": "png",
+      "group": "variantB",
+      "store": "play",
+      "lang": "pl",
+      "slot": "01",
+      "variant": "b",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "feature-graphic/margines-feature-pl.png",
+      "bytes": 89600,
+      "type": "png",
+      "group": "feature",
+      "store": "feature",
+      "lang": "pl",
+      "width": 1024,
+      "height": 500
+    },
+    {
+      "path": "app-store/en/margines-appstore-en-01.png",
+      "bytes": 369618,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "01",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/margines-play-en-01.png",
+      "bytes": 241722,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "01",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/margines-appstore-en-02.png",
+      "bytes": 386214,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "02",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/margines-play-en-02.png",
+      "bytes": 262058,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "02",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/margines-appstore-en-03.png",
+      "bytes": 400377,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "03",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/margines-play-en-03.png",
+      "bytes": 274861,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "03",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/margines-appstore-en-04.png",
+      "bytes": 283509,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "04",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/margines-play-en-04.png",
+      "bytes": 194429,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "04",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/margines-appstore-en-05.png",
+      "bytes": 379931,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "05",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/margines-play-en-05.png",
+      "bytes": 241965,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "05",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "app-store/en/margines-appstore-en-06.png",
+      "bytes": 426781,
+      "type": "png",
+      "group": "appstore",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "06",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "google-play/en/margines-play-en-06.png",
+      "bytes": 286475,
+      "type": "png",
+      "group": "play",
+      "store": "play",
+      "lang": "en",
+      "slot": "06",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "variant-b/margines-appstore-en-01b.png",
+      "bytes": 375583,
+      "type": "png",
+      "group": "variantB",
+      "store": "appstore",
+      "lang": "en",
+      "slot": "01",
+      "variant": "b",
+      "width": 1320,
+      "height": 2868
+    },
+    {
+      "path": "variant-b/margines-play-en-01b.png",
+      "bytes": 251842,
+      "type": "png",
+      "group": "variantB",
+      "store": "play",
+      "lang": "en",
+      "slot": "01",
+      "variant": "b",
+      "width": 1080,
+      "height": 1920
+    },
+    {
+      "path": "feature-graphic/margines-feature-en.png",
+      "bytes": 86693,
+      "type": "png",
+      "group": "feature",
+      "store": "feature",
+      "lang": "en",
+      "width": 1024,
+      "height": 500
+    },
+    {
+      "path": "icons/margines-icon-appstore-1024.png",
+      "bytes": 44232,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "icons/margines-icon-play-512.png",
+      "bytes": 35636,
+      "type": "png",
+      "group": "icons",
+      "width": 512,
+      "height": 512
+    },
+    { "path": "icons/margines-icon.svg", "bytes": 4988, "type": "svg", "group": "icons" },
+    {
+      "path": "icons/layers/margines-icon-background.png",
+      "bytes": 18559,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "path": "icons/layers/margines-icon-foreground.png",
+      "bytes": 40411,
+      "type": "png",
+      "group": "icons",
+      "width": 1024,
+      "height": 1024
+    },
+    { "path": "margines-teksty.csv", "bytes": 5867, "type": "csv", "group": "texts" },
+    { "path": "teksty/pl.json", "bytes": 6704, "type": "json", "group": "texts" },
+    { "path": "teksty/en.json", "bytes": 6400, "type": "json", "group": "texts" }
+  ],
+  "web": [
+    { "path": "web/appstore-en-01.webp", "bytes": 47810, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01b.webp", "bytes": 46452, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-02.webp", "bytes": 46614, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-03.webp", "bytes": 41080, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-04.webp", "bytes": 40986, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-05.webp", "bytes": 42346, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-06.webp", "bytes": 49430, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01.webp", "bytes": 48738, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01b.webp", "bytes": 46576, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-02.webp", "bytes": 48410, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-03.webp", "bytes": 45898, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-04.webp", "bytes": 41318, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-05.webp", "bytes": 44686, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-06.webp", "bytes": 50572, "width": 480, "height": 1043 },
+    { "path": "web/feature-en.webp", "bytes": 41242, "width": 1024, "height": 500 },
+    { "path": "web/feature-pl.webp", "bytes": 42412, "width": 1024, "height": 500 },
+    { "path": "web/play-en-01.webp", "bytes": 30288, "width": 400, "height": 711 },
+    { "path": "web/play-en-01b.webp", "bytes": 30154, "width": 400, "height": 711 },
+    { "path": "web/play-en-02.webp", "bytes": 30516, "width": 400, "height": 711 },
+    { "path": "web/play-en-03.webp", "bytes": 26992, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 28596, "width": 400, "height": 711 },
+    { "path": "web/play-en-05.webp", "bytes": 27314, "width": 400, "height": 711 },
+    { "path": "web/play-en-06.webp", "bytes": 31336, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01.webp", "bytes": 30828, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01b.webp", "bytes": 30092, "width": 400, "height": 711 },
+    { "path": "web/play-pl-02.webp", "bytes": 31476, "width": 400, "height": 711 },
+    { "path": "web/play-pl-03.webp", "bytes": 30180, "width": 400, "height": 711 },
+    { "path": "web/play-pl-04.webp", "bytes": 29064, "width": 400, "height": 711 },
+    { "path": "web/play-pl-05.webp", "bytes": 28544, "width": 400, "height": 711 },
+    { "path": "web/play-pl-06.webp", "bytes": 32026, "width": 400, "height": 711 }
+  ],
+  "fonts": [
+    {
+      "id": "caveat",
+      "role": "nagłówki i notatki odręczne",
+      "family": "Caveat",
+      "css": "Caveat",
+      "weight": 500,
+      "style": "normal",
+      "file": "fonts/Caveat-500.woff2",
+      "bytes": 51284
+    },
+    {
+      "id": "caveat",
+      "role": "nagłówki i notatki odręczne",
+      "family": "Caveat",
+      "css": "Caveat",
+      "weight": 600,
+      "style": "normal",
+      "file": "fonts/Caveat-600.woff2",
+      "bytes": 51708
+    },
+    {
+      "id": "caveat",
+      "role": "nagłówki i notatki odręczne",
+      "family": "Caveat",
+      "css": "Caveat",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/Caveat-700.woff2",
+      "bytes": 51536
+    },
+    {
+      "id": "lexend",
+      "role": "interfejs",
+      "family": "Lexend",
+      "css": "Lexend",
+      "weight": 400,
+      "style": "normal",
+      "file": "fonts/Lexend-400.woff2",
+      "bytes": 13984
+    },
+    {
+      "id": "lexend",
+      "role": "interfejs",
+      "family": "Lexend",
+      "css": "Lexend",
+      "weight": 500,
+      "style": "normal",
+      "file": "fonts/Lexend-500.woff2",
+      "bytes": 14368
+    },
+    {
+      "id": "lexend",
+      "role": "interfejs",
+      "family": "Lexend",
+      "css": "Lexend",
+      "weight": 700,
+      "style": "normal",
+      "file": "fonts/Lexend-700.woff2",
+      "bytes": 14384
+    }
+  ],
+  "palette": [
+    { "id": "papier", "name": "Papier", "hex": "#FBF8F0", "role": "tło i powierzchnie" },
+    { "id": "kratka", "name": "Kratka", "hex": "#CFE0EE", "role": "linie kratki" },
+    { "id": "atrament", "name": "Atrament", "hex": "#1E2A5E", "role": "tekst i nagłówki" },
+    {
+      "id": "flamaster",
+      "name": "Flamaster",
+      "hex": "#E2433B",
+      "role": "obwódki, margines, Jeszcze raz"
+    },
+    { "id": "zakreslacz", "name": "Zakreślacz", "hex": "#FFE45E", "role": "zakreślenia" },
+    { "id": "zielen", "name": "Zieleń", "hex": "#2E9E5B", "role": "Pamiętam, drugi flamaster" },
+    { "id": "olowek", "name": "Ołówek", "hex": "#6B7080", "role": "tekst pomocniczy" },
+    { "id": "mieta", "name": "Mięta", "hex": "#B8EBD0", "role": "naklejki" }
+  ]
+}

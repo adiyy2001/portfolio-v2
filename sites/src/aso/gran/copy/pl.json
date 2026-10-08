@@ -1,0 +1,304 @@
+{
+  "lang": "pl",
+  "label": "Polski",
+  "app": {
+    "name": "Grań",
+    "tagline": "Szlaki Sudetów z czasem przejścia"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "mapa",
+      "headline": "Szlaki Sudetów z czasem przejścia",
+      "alt": "Mapa Karkonoszy w aplikacji Grań z kolorowymi szlakami i czasem przejścia między skrzyżowaniami, w tle dolina o świcie."
+    },
+    {
+      "id": "02",
+      "screen": "offline",
+      "headline": "Mapa działa tam, gdzie brak zasięgu",
+      "alt": "Lista map offline: Karkonosze i Góry Stołowe pobrane, Masyw Śnieżnika w trakcie pobierania. Telefon stoi wysoko na grzbiecie."
+    },
+    {
+      "id": "03",
+      "screen": "zmrok",
+      "headline": "Wrócisz na dół przed zmrokiem",
+      "alt": "Ekran powrotu przed zmrokiem: zawróć najpóźniej o 13:55, zachód słońca o 16:18, alarm włączony."
+    },
+    {
+      "id": "04",
+      "screen": "profil",
+      "headline": "Każde podejście widać już w domu",
+      "alt": "Profil wysokości trasy na Śnieżkę w poziomie, strome odcinki zaznaczone na czerwono, za telefonem grzbiet o tym samym kształcie."
+    },
+    {
+      "id": "05",
+      "screen": "grani",
+      "headline": "Wiatr i widoczność na grani",
+      "alt": "Warunki na grani: wiatr 38 km/h, porywy do 62 km/h, widoczność 2 km, podstawa chmur 1450 m. Przez kadr płyną chmury."
+    },
+    {
+      "id": "06",
+      "screen": "dziennik",
+      "headline": "Zdobyte szczyty w jednym dzienniku",
+      "alt": "Dziennik zdobytych szczytów: Śnieżka, Śnieżnik, Szrenica, Wielka Sowa i Szczeliniec Wielki z datą i trasą, w tle zachód słońca."
+    }
+  ],
+  "variantB": {
+    "screen": "trasa",
+    "headline": "Szlak dobrany do twojego tempa",
+    "alt": "Plan trasy z otwartym ustawieniem tempa: czas liczony z ostatnich wyjść, 3 godziny 10 minut zamiast 2 godzin 50 minut ze znaków."
+  },
+  "feature": {
+    "headline": "Szlaki Sudetów z czasem przejścia",
+    "alt": "Grzbiet Sudetów o zachodzie słońca z czerwonym szlakiem, nazwa Grań i hasło o szlakach z czasem przejścia."
+  },
+  "ui": {
+    "tabs": ["Mapa", "Trasy", "Offline", "Dziennik"],
+    "units": {
+      "km": "km",
+      "m": "m",
+      "up": "w górę",
+      "h": "h",
+      "min": "min"
+    },
+    "mapa": {
+      "search": "Szczyt, przełęcz, miejscowość",
+      "range": "Karkonosze",
+      "layer": "Szlaki",
+      "points": [
+        {
+          "id": "start",
+          "name": "Karpacz, Biały Jar",
+          "height": "840 m"
+        },
+        {
+          "id": "kociol",
+          "name": "Kocioł Łomniczki",
+          "height": "1010 m"
+        },
+        {
+          "id": "przelecz",
+          "name": "Przełęcz pod Śnieżką",
+          "height": "1394 m"
+        },
+        {
+          "id": "szczyt",
+          "name": "Śnieżka",
+          "height": "1603 m"
+        },
+        {
+          "id": "kopa",
+          "name": "Kopa",
+          "height": "1377 m"
+        }
+      ],
+      "times": ["0:55", "1:30", "0:45", "0:35"],
+      "route": "Biały Jar na Śnieżkę",
+      "routeNote": "w twoim tempie",
+      "stats": [
+        ["3 h 10 min", "czas"],
+        ["6,8 km", "dystans"],
+        ["790 m", "w górę"]
+      ],
+      "button": "Rozpocznij",
+      "trails": "czerwony, niebieski, czarny"
+    },
+    "trasa": {
+      "back": "Trasy",
+      "title": "Biały Jar na Śnieżkę",
+      "date": "sobota, 7 listopada",
+      "total": "3 h 10 min",
+      "totalNote": "ze znaków 2 h 50 min",
+      "stats": [
+        ["6,8 km", "dystans"],
+        ["790 m", "w górę"],
+        ["40 m", "w dół"]
+      ],
+      "paceTitle": "Twoje tempo",
+      "paceValue": "112% czasu ze znaków",
+      "paceNote": "Liczone z 6 ostatnich wyjść, pod górę wolniej, w dół jak na znakach.",
+      "paceOptions": ["Spokojne", "Moje", "Jak na znakach"],
+      "paceActive": 1,
+      "uphill": ["Pod górę", "120%"],
+      "downhill": ["W dół", "100%"],
+      "breaks": ["Postoje", "10 min co 2 h"],
+      "legs": [
+        {
+          "trail": "black",
+          "from": "Karpacz, Biały Jar",
+          "height": "840 m",
+          "sign": "",
+          "you": "start 9:00"
+        },
+        {
+          "trail": "black",
+          "from": "Kocioł Łomniczki",
+          "height": "1010 m",
+          "sign": "znaki 0:50",
+          "you": "ty 0:55"
+        },
+        {
+          "trail": "red",
+          "from": "Przełęcz pod Śnieżką",
+          "height": "1394 m",
+          "sign": "znaki 1:20",
+          "you": "ty 1:30"
+        },
+        {
+          "trail": "red",
+          "from": "Śnieżka",
+          "height": "1603 m",
+          "sign": "znaki 0:40",
+          "you": "ty 0:45"
+        }
+      ],
+      "save": "Zapisz trasę"
+    },
+    "offline": {
+      "title": "Mapy offline",
+      "lead": "Mapa, szlaki i twoja pozycja działają bez zasięgu.",
+      "storage": "Zajęte 278 MB, wolne 41,2 GB",
+      "ranges": [
+        {
+          "name": "Karkonosze",
+          "size": "182 MB",
+          "state": "done",
+          "note": "pobrane 2 listopada"
+        },
+        {
+          "name": "Góry Stołowe",
+          "size": "96 MB",
+          "state": "done",
+          "note": "pobrane 18 października"
+        },
+        {
+          "name": "Masyw Śnieżnika",
+          "size": "88 MB",
+          "state": "progress",
+          "note": "pobieranie 62%",
+          "progress": 62
+        },
+        {
+          "name": "Góry Sowie",
+          "size": "74 MB",
+          "state": "get",
+          "note": "Wielka Sowa, Kalenica"
+        },
+        {
+          "name": "Góry Izerskie",
+          "size": "69 MB",
+          "state": "get",
+          "note": "Wysoka Kopa, Stóg Izerski"
+        },
+        {
+          "name": "Rudawy Janowickie",
+          "size": "41 MB",
+          "state": "get",
+          "note": "Skalnik, Sokolik"
+        }
+      ],
+      "doneLabel": "Gotowe",
+      "getLabel": "Pobierz",
+      "noSignal": "Brak zasięgu",
+      "gps": "GPS działa"
+    },
+    "zmrok": {
+      "title": "Powrót przed zmrokiem",
+      "where": "Jesteś przy Przełęczy pod Śnieżką, 12:10",
+      "turnLabel": "Zawróć najpóźniej o",
+      "turn": "13:55",
+      "turnNote": "Zejście zajmie ci 2 h 05 min",
+      "down": ["Na dole", "16:00"],
+      "sunset": ["Zachód słońca", "16:18"],
+      "dusk": ["Zmierzch", "16:55"],
+      "timeline": ["9:00", "12:10", "13:55", "16:18"],
+      "timelineLabels": ["start", "teraz", "zawróć", "zachód"],
+      "alarm": "Alarm zawrócenia",
+      "alarmNote": "Wibracja 20 minut przed czasem",
+      "headlamp": "Czołówka w plecaku",
+      "headlampNote": "Przypomnij przy pakowaniu"
+    },
+    "profil": {
+      "title": "Profil trasy",
+      "route": "Biały Jar na Śnieżkę",
+      "axis": ["0 km", "2 km", "4 km", "6,8 km"],
+      "heights": ["800 m", "1200 m", "1600 m"],
+      "steep": "stromo",
+      "steepNotes": [
+        {
+          "label": "Kocioł Łomniczki",
+          "value": "do 24%"
+        },
+        {
+          "label": "Stożek Śnieżki",
+          "value": "do 26%"
+        }
+      ],
+      "summary": [
+        ["790 m", "w górę"],
+        ["40 m", "w dół"],
+        ["1,7 km", "stromo"]
+      ]
+    },
+    "grani": {
+      "title": "Na grani",
+      "place": "Śnieżka i Kopa, 1400 do 1603 m",
+      "time": "dziś 13:00",
+      "wind": ["Wiatr", "38", "km/h", "z zachodu"],
+      "gust": ["Porywy", "62", "km/h"],
+      "visibility": ["Widoczność", "2", "km"],
+      "cloud": ["Podstawa chmur", "1450", "m"],
+      "temp": ["Temperatura", "3°", "odczuwalna −4°"],
+      "hours": ["11", "12", "13", "14", "15", "16"],
+      "hourWind": [24, 31, 38, 44, 40, 33],
+      "advice": "Na stożku Śnieżki porywy do 62 km/h. Rozważ zejście przez Kopę.",
+      "hoursLabel": "Wiatr na grani, km/h"
+    },
+    "dziennik": {
+      "title": "Dziennik",
+      "year": "2026",
+      "summary": [
+        ["9", "szczytów"],
+        ["142 km", "na szlaku"],
+        ["6120 m", "w górę"]
+      ],
+      "entries": [
+        {
+          "peak": "Śnieżka",
+          "height": "1603 m",
+          "date": "7 listopada",
+          "route": "z Białego Jaru, 3 h 05 min",
+          "range": "Karkonosze"
+        },
+        {
+          "peak": "Śnieżnik",
+          "height": "1425 m",
+          "date": "11 października",
+          "route": "z Międzygórza, 2 h 40 min",
+          "range": "Masyw Śnieżnika"
+        },
+        {
+          "peak": "Szrenica",
+          "height": "1362 m",
+          "date": "20 września",
+          "route": "ze Szklarskiej Poręby, 2 h 15 min",
+          "range": "Karkonosze"
+        },
+        {
+          "peak": "Wielka Sowa",
+          "height": "1015 m",
+          "date": "30 sierpnia",
+          "route": "z Przełęczy Jugowskiej, 1 h 10 min",
+          "range": "Góry Sowie"
+        },
+        {
+          "peak": "Szczeliniec Wielki",
+          "height": "919 m",
+          "date": "9 sierpnia",
+          "route": "z Karłowa, 50 min",
+          "range": "Góry Stołowe"
+        }
+      ]
+    }
+  }
+}

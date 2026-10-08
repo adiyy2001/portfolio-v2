@@ -1,0 +1,48 @@
+{
+  "slug": "szyld",
+  "name": "Szyld",
+  "styleId": "S2",
+  "style": "Mocne gradienty z przechylonymi urządzeniami",
+  "category": "zakupy w lokalnych sklepach z odbiorem osobistym",
+  "storeCategory": { "appstore": "Zakupy", "play": "Zakupy" },
+  "format": "jpg",
+  "jpegQuality": 90,
+  "themeColor": "#0B4A3D",
+  "background": "#0B4A3D",
+  "palette": [
+    { "id": "butelka", "name": "Butelka", "hex": "#0B4A3D", "role": "tło i nagłówki" },
+    { "id": "limonka", "name": "Limonka", "hex": "#D5F25C", "role": "akcja i druga barwa gradientu" },
+    { "id": "grejpfrut", "name": "Grejpfrut", "hex": "#FF5A36", "role": "druga para gradientów" },
+    { "id": "mleko", "name": "Mleko", "hex": "#F7F4EA", "role": "powierzchnie interfejsu" },
+    { "id": "smola", "name": "Smoła", "hex": "#0E1E1A", "role": "tekst" },
+    { "id": "szron", "name": "Szron", "hex": "#DCE3DF", "role": "linie i tła pól" },
+    { "id": "lupek", "name": "Łupek", "hex": "#5E6B66", "role": "tekst pomocniczy" }
+  ],
+  "fonts": [
+    {
+      "id": "mona-expanded",
+      "role": "nagłówki, szerokość 125",
+      "family": "Mona Sans",
+      "css": "Mona Sans Expanded",
+      "dir": "monasans",
+      "file": "MonaSans[wdth,wght].ttf",
+      "instances": [
+        { "weight": 800, "axes": { "wdth": 125 } },
+        { "weight": 900, "axes": { "wdth": 125 } }
+      ]
+    },
+    {
+      "id": "mona",
+      "role": "interfejs, szerokość 100",
+      "family": "Mona Sans",
+      "css": "Mona Sans",
+      "dir": "monasans",
+      "file": "MonaSans[wdth,wght].ttf",
+      "instances": [
+        { "weight": 400, "axes": { "wdth": 100 } },
+        { "weight": 600, "axes": { "wdth": 100 } },
+        { "weight": 700, "axes": { "wdth": 100 } }
+      ]
+    }
+  ]
+}

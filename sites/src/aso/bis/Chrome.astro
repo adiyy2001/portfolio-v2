@@ -1,0 +1,89 @@
+---
+import { chromeStops, starPath } from './view';
+
+interface Props {
+  text: string;
+  id: string;
+  size: number;
+  width: number;
+  advance: number;
+  sparks?: [number, number, number][];
+}
+
+const { text, id, size, width, advance, sparks = [] } = Astro.props;
+const top = size * 0.34;
+const base = top + size * 0.66;
+const height = Math.round(base + size * 0.3);
+const x = width / 2;
+const left = x - (advance * size) / 2;
+const right = x + (advance * size) / 2;
+---
+
+<svg
+  viewBox={`0 0 ${width} ${height}`}
+  width={width}
+  height={height}
+  aria-hidden="true"
+  focusable="false">
+  <defs>
+    <linearGradient
+      id={`${id}-fill`}
+      gradientUnits="userSpaceOnUse"
+      x1="0"
+      y1={base - size * 0.7}
+      x2="0"
+      y2={base + size * 0.12}>
+      {chromeStops.map(([offset, color]) => (
+        <stop offset={offset} stop-color={color} />
+      ))}
+    </linearGradient>
+    <radialGradient id={`${id}-glow`}>
+      <stop offset="0" stop-color="#fff" stop-opacity=".95"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+    </radialGradient>
+  </defs>
+  <g font-family="Modak, system-ui, sans-serif" font-size={size} text-anchor="middle">
+    <text x={x} y={base + size * 0.075} fill="#3B4250">
+      {text}
+    </text>
+    <text
+      x={x}
+      y={base + size * 0.075}
+      fill="none"
+      stroke="#111217"
+      stroke-width={size * 0.1}
+      stroke-linejoin="round">
+      {text}
+    </text>
+    <text
+      x={x}
+      y={base}
+      fill="none"
+      stroke="#111217"
+      stroke-width={size * 0.1}
+      stroke-linejoin="round">
+      {text}
+    </text>
+    <text x={x} y={base} fill={`url(#${id}-fill)`}>
+      {text}
+    </text>
+  </g>
+  <circle
+    cx={right - size * 0.06}
+    cy={base - size * 0.68}
+    r={size * 0.16}
+    fill={`url(#${id}-glow)`}></circle>
+  <path
+    d={starPath(right - size * 0.06, base - size * 0.68, size * 0.24, 0.16)}
+    fill="#fff"
+    stroke="#111217"
+    stroke-width={size * 0.016}></path>
+  {sparks.map(([sx, sy, r]) => (
+    <path
+      d={starPath(left + sx * size, base + sy * size, r * size, 0.16)}
+      fill="#fff"
+      stroke="#111217"
+      stroke-width={size * 0.012}
+    />
+  ))}
+</svg>

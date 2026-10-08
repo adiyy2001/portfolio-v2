@@ -1,0 +1,245 @@
+{
+  "lang": "pl",
+  "label": "Polski",
+  "app": {
+    "name": "Szyld",
+    "tagline": "Zamów z ulicy, odbierz po drodze"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "gotowe",
+      "headline": "Zamów z ulicy, odbierz po drodze",
+      "alt": "Ekran gotowych zamówień w aplikacji Szyld: piekarnia, warzywniak i kwiaciarnia na jednej trasie po Jeżycach, telefon przechylony."
+    },
+    {
+      "id": "02",
+      "screen": "okolica",
+      "headline": "Sklepy z twojej okolicy na mapie",
+      "alt": "Mapa Jeżyc z pinezkami sklepów, które unoszą się nad ekranem: piekarnia, warzywniak, kwiaciarnia, sklep żelazny i księgarnia."
+    },
+    {
+      "id": "03",
+      "screen": "koszyk",
+      "headline": "Jeden koszyk, trzy sklepy, jedna trasa",
+      "alt": "Koszyk podzielony na trzy sklepy z kolejnością odbioru i trasą 1,1 km. Nad telefonem etykiety trzech sklepów."
+    },
+    {
+      "id": "04",
+      "screen": "godzina",
+      "headline": "Godzina odbioru, jaka ci pasuje",
+      "alt": "Wybór godziny odbioru w każdym sklepie, zaznaczona 17:30. Za telefonem ogromne cyfry 17:30 w konturze."
+    },
+    {
+      "id": "05",
+      "screen": "kod",
+      "headline": "Pokaż kod, zakupy w ręku",
+      "alt": "Kod odbioru SZ 4827 z rysowanym wzorem do zeskanowania i notatką dla sprzedawcy. Karta z kodem wysuwa się przed telefon."
+    },
+    {
+      "id": "06",
+      "screen": "stale",
+      "headline": "Sobotni chleb zamówi się sam",
+      "alt": "Stałe zamówienie na sobotę: chleb żytni i sześć kajzerek co tydzień o 8:30, z opcją pominięcia. Za telefonem napis SOBOTA."
+    }
+  ],
+  "variantB": {
+    "screen": "sklep",
+    "headline": "Sklep odłoży, ty odbierzesz",
+    "alt": "Strona piekarni z dzisiejszym towarem i liczbą sztuk na półce. Odznaka z godziną odłożenia do 19:00 wychodzi z ekranu."
+  },
+  "feature": {
+    "headline": "Zamów z ulicy, odbierz po drodze",
+    "alt": "Zielono-limonkowy gradient z ziarnem, nazwa Szyld, hasło o zamawianiu z ulicy i trzy etykiety sklepów w perspektywie."
+  },
+  "ui": {
+    "tabs": ["Okolica", "Koszyk", "Odbiory", "Stałe"],
+    "place": "Jeżyce, Poznań",
+    "shops": {
+      "piekarnia": {
+        "name": "Piekarnia Na Zakręcie",
+        "short": "Piekarnia",
+        "kind": "piekarnia",
+        "street": "Jackowskiego 21",
+        "hours": "otwarte do 19:00"
+      },
+      "warzywniak": {
+        "name": "Warzywniak Pod Kasztanem",
+        "short": "Warzywniak",
+        "kind": "warzywa i owoce",
+        "street": "Rynek Jeżycki 4",
+        "hours": "otwarte do 18:00"
+      },
+      "kwiaciarnia": {
+        "name": "Kwiaciarnia Kalina",
+        "short": "Kwiaciarnia",
+        "kind": "kwiaty",
+        "street": "Szamarzewskiego 15",
+        "hours": "otwarte do 19:00"
+      },
+      "srubka": {
+        "name": "Śrubka i Syn",
+        "short": "Żelazny",
+        "kind": "sklep żelazny",
+        "street": "Kraszewskiego 8",
+        "hours": "otwarte do 18:00"
+      },
+      "ksiegarnia": {
+        "name": "Księgarnia Dwie Półki",
+        "short": "Księgarnia",
+        "kind": "książki",
+        "street": "Dąbrowskiego 40",
+        "hours": "otwarte do 20:00"
+      }
+    },
+    "okolica": {
+      "title": "W okolicy",
+      "search": "Chleb, kwiaty, żarówka",
+      "filters": ["Otwarte teraz", "Piekarnie", "Warzywa", "Kwiaty"],
+      "open": "otwarte",
+      "streets": [
+        "Dąbrowskiego",
+        "Kraszewskiego",
+        "Jackowskiego",
+        "Szamarzewskiego",
+        "Rynek Jeżycki"
+      ],
+      "you": "Ty",
+      "sheetTitle": "5 sklepów w 10 minut pieszo",
+      "list": [
+        { "shop": "piekarnia", "distance": "250 m", "note": "chleb do 19:00" },
+        { "shop": "warzywniak", "distance": "400 m", "note": "dziś pomidory malinowe" },
+        { "shop": "kwiaciarnia", "distance": "550 m", "note": "tulipany z rana" }
+      ]
+    },
+    "sklep": {
+      "back": "Okolica",
+      "today": "Dziś na półce",
+      "updated": "stan z 16:42",
+      "hold": "Odłożymy do 19:00",
+      "holdNote": "Zamów teraz, odbierz po pracy. Nie sprzeda się nikomu innemu.",
+      "left": "zostało",
+      "items": [
+        {
+          "name": "Chleb żytni na zakwasie",
+          "unit": "800 g",
+          "price": "14,50 zł",
+          "left": "4 szt.",
+          "low": true
+        },
+        { "name": "Kajzerka", "unit": "60 g", "price": "1,20 zł", "left": "22 szt." },
+        {
+          "name": "Chałka z kruszonką",
+          "unit": "450 g",
+          "price": "11,00 zł",
+          "left": "3 szt.",
+          "low": true
+        },
+        { "name": "Drożdżówka z serem", "unit": "1 szt.", "price": "5,50 zł", "left": "9 szt." }
+      ],
+      "button": "Dodaj do koszyka"
+    },
+    "koszyk": {
+      "title": "Koszyk",
+      "summary": "3 sklepy, 6 produktów",
+      "route": "Trasa odbioru",
+      "routeMeta": "1,1 km, około 15 min pieszo",
+      "start": "Start: Kościelna 12",
+      "groups": [
+        {
+          "shop": "piekarnia",
+          "time": "17:30",
+          "items": [
+            ["Chleb żytni na zakwasie", "1 szt.", "14,50 zł"],
+            ["Kajzerka", "4 szt.", "4,80 zł"]
+          ]
+        },
+        {
+          "shop": "warzywniak",
+          "time": "17:40",
+          "items": [
+            ["Pomidory malinowe", "0,5 kg", "8,45 zł"],
+            ["Koperek", "1 pęczek", "3,00 zł"]
+          ]
+        },
+        {
+          "shop": "kwiaciarnia",
+          "time": "17:50",
+          "items": [
+            ["Tulipany, żółte", "7 szt.", "42,00 zł"],
+            ["Papier pakowy", "1 szt.", "2,00 zł"]
+          ]
+        }
+      ],
+      "totalLabel": "Razem, płatność przy odbiorze",
+      "total": "74,75 zł",
+      "button": "Zamów na 17:30"
+    },
+    "godzina": {
+      "title": "Godzina odbioru",
+      "lead": "Sklepy przygotują zamówienie na wybraną godzinę.",
+      "day": "Dziś, środa 7 października",
+      "rows": [
+        { "shop": "piekarnia", "slots": ["17:00", "17:30", "18:00", "18:30"], "active": 1 },
+        { "shop": "warzywniak", "slots": ["17:15", "17:40", "17:55"], "active": 1 },
+        { "shop": "kwiaciarnia", "slots": ["17:30", "17:50", "18:20"], "active": 1 }
+      ],
+      "note": "Spóźnisz się? Sklep trzyma zamówienie do zamknięcia.",
+      "button": "Potwierdź 17:30"
+    },
+    "kod": {
+      "title": "Kod odbioru",
+      "shop": "piekarnia",
+      "code": "SZ 4827",
+      "label": "Pokaż przy ladzie",
+      "name": "Zamówienie dla: Ania K.",
+      "ready": "Czeka na półce od 17:22",
+      "counterTitle": "Notatka dla sprzedawcy",
+      "counter": "Chleb pokroić, kajzerki osobno.",
+      "items": "2 produkty, 19,30 zł",
+      "next": "Dalej: Warzywniak Pod Kasztanem, 3 min"
+    },
+    "stale": {
+      "title": "Stałe zamówienie",
+      "name": "Chleb na sobotę",
+      "every": "Co sobotę, odbiór 8:30",
+      "items": [
+        ["Chleb żytni na zakwasie", "1 szt.", "14,50 zł"],
+        ["Kajzerka", "6 szt.", "7,20 zł"]
+      ],
+      "total": "21,70 zł",
+      "upcomingTitle": "Najbliższe soboty",
+      "upcoming": [
+        { "date": "10 paź", "state": "zamówione" },
+        { "date": "17 paź", "state": "pominięta" },
+        { "date": "24 paź", "state": "zamówione" },
+        { "date": "31 paź", "state": "zamówione" }
+      ],
+      "skipped": 1,
+      "remind": "Przypomnienie w piątek o 20:00",
+      "pause": "Wstrzymaj",
+      "skip": "Pomiń sobotę"
+    },
+    "gotowe": {
+      "title": "Dziś po drodze",
+      "lead": "Trasa z pracy do domu, 1,1 km",
+      "stops": [
+        { "shop": "piekarnia", "state": "Czeka na półce", "time": "17:30", "ready": true },
+        { "shop": "warzywniak", "state": "Pakujemy", "time": "17:40" },
+        { "shop": "kwiaciarnia", "state": "Przyjęte", "time": "17:50" }
+      ],
+      "readyLabel": "gotowe",
+      "button": "Prowadź do pierwszego sklepu",
+      "codeHint": "Kod odbioru: SZ 4827"
+    },
+    "tags": {
+      "piekarnia": "2 produkty",
+      "warzywniak": "2 produkty",
+      "kwiaciarnia": "2 produkty"
+    },
+    "big": {
+      "time": "17:30",
+      "day": "SOBOTA"
+    }
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "lang": "en",
+  "label": "English",
+  "app": {
+    "name": "Kruszec",
+    "tagline": "Your net worth on one chart"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "majatek",
+      "headline": "Your net worth on one chart",
+      "accent": "one chart",
+      "alt": "A net worth chart covering three years runs out of the phone and across the whole frame. Sample data, £64,180."
+    },
+    {
+      "id": "02",
+      "screen": "budzet",
+      "headline": "Know what's safe to spend",
+      "accent": "safe",
+      "alt": "October's budget on a large glass card: £38 is safe to spend today, as £570 is left for 15 days. Spending below."
+    },
+    {
+      "id": "03",
+      "screen": "poduszka",
+      "headline": "Your safety net, counted in months",
+      "accent": "in months",
+      "alt": "A large glass gauge card: the safety net covers 5.2 months of spending, the goal is 6. A blurred phone sits behind it."
+    },
+    {
+      "id": "04",
+      "screen": "alokacja",
+      "headline": "Keep your portfolio on track",
+      "accent": "on track",
+      "alt": "A glass allocation ring around the phone: shares, bonds and cash next to your own 70, 20 and 10 plan."
+    },
+    {
+      "id": "05",
+      "screen": "cel",
+      "headline": "Every deposit brings the goal closer",
+      "accent": "closer",
+      "alt": "A glass timeline above the phone, each house deposit payment is a dot. £10,680 of £20,000 saved."
+    },
+    {
+      "id": "06",
+      "screen": "raport",
+      "headline": "Your month in one calm report",
+      "accent": "calm",
+      "alt": "Two overlapping phones: the September report in three sentences and three numbers in front, the accounts list behind."
+    }
+  ],
+  "variantB": {
+    "screen": "konta",
+    "headline": "Spending and investments side by side",
+    "accent": "side by side",
+    "alt": "The accounts list on the phone, with glass cards beside it: current account, savings, ISA, pension and gilts. Sample data."
+  },
+  "feature": {
+    "headline": "Your net worth on one chart",
+    "accent": "one chart",
+    "alt": "A deep navy background crossed by a calm net worth line with a soft glow, the name Kruszec and the app's promise."
+  },
+  "notes": {
+    "sample": "Sample data",
+    "safeCard": "safe to spend today",
+    "safeSub": "£570 left for 15 days",
+    "gaugeTitle": "Safety net",
+    "gaugeUnit": "months",
+    "gaugeOf": "of 6 months",
+    "ringTitle": "Your plan",
+    "timelineTitle": "House deposit payments",
+    "timelineEnd": "Oct 2028",
+    "chartFrom": "2021",
+    "chartLabel": "net worth"
+  },
+  "ui": {
+    "currency": "£",
+    "tabs": ["Net worth", "Budget", "Goals", "Report"],
+    "sample": "Sample data",
+    "majatek": {
+      "title": "Net worth",
+      "updated": "As of 17 October 2026",
+      "total": 64180,
+      "ranges": ["1 year", "3 years", "All"],
+      "active": 1,
+      "axis": ["2024", "2025", "2026"],
+      "groups": [
+        {
+          "name": "Cash and savings",
+          "value": 17200,
+          "tone": "lod"
+        },
+        {
+          "name": "Investments",
+          "value": 42160,
+          "tone": "szalwia"
+        },
+        {
+          "name": "Bonds",
+          "value": 4820,
+          "tone": "platyna"
+        }
+      ],
+      "deposits": {
+        "label": "Paid in this year",
+        "value": 8100
+      }
+    },
+    "budzet": {
+      "title": "October",
+      "date": "Saturday 17 October",
+      "safeLabel": "Safe to spend today",
+      "safe": 38,
+      "left": 570,
+      "days": 15,
+      "leftLabel": "£570 left for the next 15 days",
+      "note": "after £800 set aside for goals",
+      "spentLabel": "Spent",
+      "categories": [
+        {
+          "name": "Groceries",
+          "spent": 310,
+          "limit": 420
+        },
+        {
+          "name": "Rent and bills",
+          "spent": 1150,
+          "limit": 1150
+        },
+        {
+          "name": "Getting around",
+          "spent": 85,
+          "limit": 160
+        },
+        {
+          "name": "Going out",
+          "spent": 70,
+          "limit": 180
+        },
+        {
+          "name": "Health",
+          "spent": 25,
+          "limit": 60
+        },
+        {
+          "name": "Everything else",
+          "spent": 40,
+          "limit": 280
+        }
+      ]
+    },
+    "poduszka": {
+      "title": "Safety net",
+      "months": 5.2,
+      "monthsLabel": "months of spending",
+      "target": 6,
+      "targetLabel": "Goal: 6 months",
+      "amount": 9000,
+      "amountLabel": "In your easy access savings",
+      "monthly": 1730,
+      "monthlyLabel": "Average monthly spending, last 12 months",
+      "missing": 1380,
+      "missingLabel": "Still to go",
+      "deposit": 200,
+      "depositLabel": "Paid in every month",
+      "eta": "Six months reached in May 2027, counting deposits only."
+    },
+    "alokacja": {
+      "title": "Allocation",
+      "sub": "Investments, bonds and cash for goals",
+      "total": 52840,
+      "items": [
+        {
+          "name": "Shares",
+          "sub": "global index fund",
+          "value": 42160,
+          "share": 80,
+          "target": 70,
+          "tone": "szalwia"
+        },
+        {
+          "name": "Bonds",
+          "sub": "UK government gilts",
+          "value": 4820,
+          "share": 9,
+          "target": 20,
+          "tone": "lod"
+        },
+        {
+          "name": "Cash",
+          "sub": "easy access savings",
+          "value": 5860,
+          "share": 11,
+          "target": 10,
+          "tone": "platyna"
+        }
+      ],
+      "planLabel": "plan",
+      "nowLabel": "now",
+      "note": "Your plan is £5,750 short on bonds."
+    },
+    "cel": {
+      "title": "House deposit",
+      "sub": "for a first flat",
+      "savedLabel": "Saved so far",
+      "saved": 10680,
+      "target": 20000,
+      "share": 53,
+      "monthly": 400,
+      "monthlyLabel": "every month",
+      "eta": "October 2028",
+      "etaLabel": "At this pace",
+      "etaNote": "counting deposits only, no growth assumed",
+      "historyLabel": "Recent payments",
+      "deposits": [
+        {
+          "m": "May",
+          "v": 400
+        },
+        {
+          "m": "Jun",
+          "v": 400
+        },
+        {
+          "m": "Jul",
+          "v": 500
+        },
+        {
+          "m": "Aug",
+          "v": 400
+        },
+        {
+          "m": "Sep",
+          "v": 400
+        },
+        {
+          "m": "Oct",
+          "v": 400
+        }
+      ]
+    },
+    "raport": {
+      "title": "September",
+      "sub": "Your month in three sentences",
+      "sentences": [
+        "You spent **£1,790**, £60 less than in August.",
+        "You put away **£800**: £400 for the house deposit, £200 into your ISA and £200 into the safety net.",
+        "Your safety net covers **5.2 months** of spending."
+      ],
+      "numbers": [
+        {
+          "label": "Spent",
+          "value": "£1,790"
+        },
+        {
+          "label": "Put away",
+          "value": "£800"
+        },
+        {
+          "label": "Safety net",
+          "value": "5.2 mo"
+        }
+      ],
+      "next": "Next report on 1 November"
+    },
+    "konta": {
+      "title": "Accounts",
+      "total": 64180,
+      "totalLabel": "Total",
+      "groups": [
+        {
+          "name": "Everyday",
+          "items": [
+            {
+              "name": "Current account",
+              "sub": "entered by hand",
+              "value": 2340,
+              "icon": "wallet"
+            },
+            {
+              "name": "Easy access savings",
+              "sub": "CSV import, 14 October",
+              "value": 14860,
+              "icon": "safe"
+            }
+          ]
+        },
+        {
+          "name": "Investments",
+          "items": [
+            {
+              "name": "Stocks and Shares ISA",
+              "sub": "global index fund",
+              "value": 28450,
+              "icon": "chart"
+            },
+            {
+              "name": "Workplace pension",
+              "sub": "global index fund",
+              "value": 11240,
+              "icon": "chart"
+            },
+            {
+              "name": "General account",
+              "sub": "global index ETF",
+              "value": 2470,
+              "icon": "chart"
+            },
+            {
+              "name": "Government bonds",
+              "sub": "gilts, entered by hand",
+              "value": 4820,
+              "icon": "bond"
+            }
+          ]
+        }
+      ],
+      "import": "Import a CSV file",
+      "add": "Add by hand"
+    }
+  }
+}

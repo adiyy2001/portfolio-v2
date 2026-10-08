@@ -1,0 +1,47 @@
+---
+import { glue } from './typography';
+import type { Shot } from './types';
+
+interface Props {
+  a: Shot;
+  b: Shot;
+  hypothesis: string;
+  class?: string;
+}
+
+const { a, b, hypothesis, class: className } = Astro.props;
+---
+
+<div class:list={['ab', className]}>
+  <figure class="ab__item">
+    <img
+      src={a.src}
+      alt={a.alt}
+      width={a.width}
+      height={a.height}
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>
+      <span class="ab__tag">A</span>
+      {glue(a.headline)}
+    </figcaption>
+  </figure>
+  <figure class="ab__item">
+    <img
+      src={b.src}
+      alt={b.alt}
+      width={b.width}
+      height={b.height}
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>
+      <span class="ab__tag">B</span>
+      {glue(b.headline)}
+    </figcaption>
+  </figure>
+  <p class="ab__hypothesis">
+    <strong>Hipoteza.</strong> {glue(hypothesis)}
+  </p>
+</div>

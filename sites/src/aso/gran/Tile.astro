@@ -1,0 +1,103 @@
+---
+import { asoApp } from '../apps';
+import { readManifest, shotsOf } from '../shared/manifest';
+import type { AsoCopy } from '../shared/types';
+import pl from './copy/pl.json';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = asoApp('gran');
+const shots = shotsOf(readManifest('gran'), pl as AsoCopy, 'appstore').slice(0, 3);
+---
+
+<a class="gran-tile" href={href}>
+  <span class="gran-tile__shots">
+    {shots.map(shot => (
+      <img
+        src={shot.src}
+        alt=""
+        width={shot.width}
+        height={shot.height}
+        loading="lazy"
+        decoding="async"
+      />
+    ))}
+  </span>
+  <span class="gran-tile__style">{meta.style}</span>
+  <span class="gran-tile__name">{meta.name}</span>
+  <span class="gran-tile__trade">{meta.category}</span>
+  <span class="gran-tile__go">Zobacz zestaw</span>
+</a>
+
+<style is:global>
+  .gran-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 16px 22px;
+    border-radius: 18px;
+    background: #2e5446;
+    color: #fffdf8;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+
+  .gran-tile:hover,
+  .gran-tile:focus-visible {
+    transform: translateY(-3px);
+  }
+
+  .gran-tile__shots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .gran-tile__shots img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .gran-tile__style {
+    align-self: flex-start;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: #fffdf8;
+    color: #2e5446;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .gran-tile__name {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .gran-tile__trade {
+    font-size: 15px;
+    color: #afc3cb;
+  }
+
+  .gran-tile__go {
+    margin-top: 8px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gran-tile {
+      transition: none;
+    }
+  }
+</style>

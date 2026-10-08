@@ -1,0 +1,304 @@
+{
+  "lang": "en",
+  "label": "English",
+  "app": {
+    "name": "Grań",
+    "tagline": "Sudetes trails with real walking times"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "mapa",
+      "headline": "Sudetes trails with real walking times",
+      "alt": "Grań map of the Karkonosze with colour coded trails and walking times between junctions, a valley at dawn behind the phone."
+    },
+    {
+      "id": "02",
+      "screen": "offline",
+      "headline": "Maps that work with no signal",
+      "alt": "Offline maps list: Karkonosze and Góry Stołowe downloaded, Śnieżnik Massif downloading. The phone stands high on the ridge."
+    },
+    {
+      "id": "03",
+      "screen": "zmrok",
+      "headline": "Get down before dark",
+      "alt": "Back before dark screen: turn back by 13:55, sunset at 16:18, turnaround alarm switched on."
+    },
+    {
+      "id": "04",
+      "screen": "profil",
+      "headline": "See every climb before you go",
+      "alt": "Elevation profile of the Śnieżka route in landscape, steep sections in red, the ridge behind the phone has the same shape."
+    },
+    {
+      "id": "05",
+      "screen": "grani",
+      "headline": "Wind and visibility on the ridge",
+      "alt": "Ridge conditions: wind 38 km/h, gusts up to 62 km/h, visibility 2 km, cloud base 1450 m. Clouds drift across the frame."
+    },
+    {
+      "id": "06",
+      "screen": "dziennik",
+      "headline": "Every summit in one logbook",
+      "alt": "Summit logbook: Śnieżka, Śnieżnik, Szrenica, Wielka Sowa and Szczeliniec Wielki with dates and routes, a sunset behind."
+    }
+  ],
+  "variantB": {
+    "screen": "trasa",
+    "headline": "Trails matched to your pace",
+    "alt": "Route plan with the pace setting open: time based on your recent hikes, 3 hr 10 min instead of 2 hr 50 min from the signposts."
+  },
+  "feature": {
+    "headline": "Sudetes trails with real walking times",
+    "alt": "A Sudetes ridge at sunset with a red marked trail, the name Grań and the line about trails with real walking times."
+  },
+  "ui": {
+    "tabs": ["Map", "Routes", "Offline", "Logbook"],
+    "units": {
+      "km": "km",
+      "m": "m",
+      "up": "up",
+      "h": "hr",
+      "min": "min"
+    },
+    "mapa": {
+      "search": "Peak, pass or town",
+      "range": "Karkonosze",
+      "layer": "Trails",
+      "points": [
+        {
+          "id": "start",
+          "name": "Karpacz, Biały Jar",
+          "height": "840 m"
+        },
+        {
+          "id": "kociol",
+          "name": "Łomniczka Cirque",
+          "height": "1010 m"
+        },
+        {
+          "id": "przelecz",
+          "name": "Śnieżka Pass",
+          "height": "1394 m"
+        },
+        {
+          "id": "szczyt",
+          "name": "Śnieżka",
+          "height": "1603 m"
+        },
+        {
+          "id": "kopa",
+          "name": "Kopa",
+          "height": "1377 m"
+        }
+      ],
+      "times": ["0:55", "1:30", "0:45", "0:35"],
+      "route": "Biały Jar to Śnieżka",
+      "routeNote": "at your pace",
+      "stats": [
+        ["3 hr 10 min", "time"],
+        ["6.8 km", "distance"],
+        ["790 m", "climb"]
+      ],
+      "button": "Start",
+      "trails": "red, blue, black"
+    },
+    "trasa": {
+      "back": "Routes",
+      "title": "Biały Jar to Śnieżka",
+      "date": "Saturday 7 November",
+      "total": "3 hr 10 min",
+      "totalNote": "signposts say 2 hr 50 min",
+      "stats": [
+        ["6.8 km", "distance"],
+        ["790 m", "climb"],
+        ["40 m", "descent"]
+      ],
+      "paceTitle": "Your pace",
+      "paceValue": "112% of signpost time",
+      "paceNote": "Based on your last 6 hikes: slower uphill, signpost speed on the way down.",
+      "paceOptions": ["Easy", "Mine", "Signpost"],
+      "paceActive": 1,
+      "uphill": ["Uphill", "120%"],
+      "downhill": ["Downhill", "100%"],
+      "breaks": ["Breaks", "10 min every 2 hr"],
+      "legs": [
+        {
+          "trail": "black",
+          "from": "Karpacz, Biały Jar",
+          "height": "840 m",
+          "sign": "",
+          "you": "start 9:00"
+        },
+        {
+          "trail": "black",
+          "from": "Łomniczka Cirque",
+          "height": "1010 m",
+          "sign": "signs 0:50",
+          "you": "you 0:55"
+        },
+        {
+          "trail": "red",
+          "from": "Śnieżka Pass",
+          "height": "1394 m",
+          "sign": "signs 1:20",
+          "you": "you 1:30"
+        },
+        {
+          "trail": "red",
+          "from": "Śnieżka",
+          "height": "1603 m",
+          "sign": "signs 0:40",
+          "you": "you 0:45"
+        }
+      ],
+      "save": "Save route"
+    },
+    "offline": {
+      "title": "Offline maps",
+      "lead": "The map, the trails and your position work with no signal.",
+      "storage": "278 MB used, 41.2 GB free",
+      "ranges": [
+        {
+          "name": "Karkonosze",
+          "size": "182 MB",
+          "state": "done",
+          "note": "saved 2 November"
+        },
+        {
+          "name": "Góry Stołowe",
+          "size": "96 MB",
+          "state": "done",
+          "note": "saved 18 October"
+        },
+        {
+          "name": "Śnieżnik Massif",
+          "size": "88 MB",
+          "state": "progress",
+          "note": "downloading 62%",
+          "progress": 62
+        },
+        {
+          "name": "Góry Sowie",
+          "size": "74 MB",
+          "state": "get",
+          "note": "Wielka Sowa, Kalenica"
+        },
+        {
+          "name": "Jizera Mountains",
+          "size": "69 MB",
+          "state": "get",
+          "note": "Wysoka Kopa, Stóg Izerski"
+        },
+        {
+          "name": "Rudawy Janowickie",
+          "size": "41 MB",
+          "state": "get",
+          "note": "Skalnik, Sokolik"
+        }
+      ],
+      "doneLabel": "Saved",
+      "getLabel": "Get",
+      "noSignal": "No signal",
+      "gps": "GPS on"
+    },
+    "zmrok": {
+      "title": "Back before dark",
+      "where": "You are at Śnieżka Pass, 12:10",
+      "turnLabel": "Turn back by",
+      "turn": "13:55",
+      "turnNote": "The way down takes you 2 hr 5 min",
+      "down": ["Back at the car", "16:00"],
+      "sunset": ["Sunset", "16:18"],
+      "dusk": ["Dusk", "16:55"],
+      "timeline": ["9:00", "12:10", "13:55", "16:18"],
+      "timelineLabels": ["start", "now", "turn", "sunset"],
+      "alarm": "Turnaround alarm",
+      "alarmNote": "Buzz 20 minutes before",
+      "headlamp": "Headtorch in the pack",
+      "headlampNote": "Remind me when packing"
+    },
+    "profil": {
+      "title": "Elevation profile",
+      "route": "Biały Jar to Śnieżka",
+      "axis": ["0 km", "2 km", "4 km", "6.8 km"],
+      "heights": ["800 m", "1200 m", "1600 m"],
+      "steep": "steep",
+      "steepNotes": [
+        {
+          "label": "Łomniczka Cirque",
+          "value": "up to 24%"
+        },
+        {
+          "label": "Śnieżka cone",
+          "value": "up to 26%"
+        }
+      ],
+      "summary": [
+        ["790 m", "climb"],
+        ["40 m", "descent"],
+        ["1.7 km", "steep"]
+      ]
+    },
+    "grani": {
+      "title": "On the ridge",
+      "place": "Śnieżka and Kopa, 1400 to 1603 m",
+      "time": "today 13:00",
+      "wind": ["Wind", "38", "km/h", "from the west"],
+      "gust": ["Gusts", "62", "km/h"],
+      "visibility": ["Visibility", "2", "km"],
+      "cloud": ["Cloud base", "1450", "m"],
+      "temp": ["Temperature", "3°", "feels like −4°"],
+      "hours": ["11", "12", "13", "14", "15", "16"],
+      "hourWind": [24, 31, 38, 44, 40, 33],
+      "advice": "Gusts up to 62 km/h on the Śnieżka cone. Consider coming down via Kopa.",
+      "hoursLabel": "Wind on the ridge, km/h"
+    },
+    "dziennik": {
+      "title": "Logbook",
+      "year": "2026",
+      "summary": [
+        ["9", "summits"],
+        ["142 km", "on the trail"],
+        ["6120 m", "climbed"]
+      ],
+      "entries": [
+        {
+          "peak": "Śnieżka",
+          "height": "1603 m",
+          "date": "7 November",
+          "route": "from Biały Jar, 3 hr 5 min",
+          "range": "Karkonosze"
+        },
+        {
+          "peak": "Śnieżnik",
+          "height": "1425 m",
+          "date": "11 October",
+          "route": "from Międzygórze, 2 hr 40 min",
+          "range": "Śnieżnik Massif"
+        },
+        {
+          "peak": "Szrenica",
+          "height": "1362 m",
+          "date": "20 September",
+          "route": "from Szklarska Poręba, 2 hr 15 min",
+          "range": "Karkonosze"
+        },
+        {
+          "peak": "Wielka Sowa",
+          "height": "1015 m",
+          "date": "30 August",
+          "route": "from Jugowska Pass, 1 hr 10 min",
+          "range": "Góry Sowie"
+        },
+        {
+          "peak": "Szczeliniec Wielki",
+          "height": "919 m",
+          "date": "9 August",
+          "route": "from Karłów, 50 min",
+          "range": "Góry Stołowe"
+        }
+      ]
+    }
+  }
+}

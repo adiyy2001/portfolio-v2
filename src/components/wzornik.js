@@ -66,6 +66,11 @@ const copy = {
       lead: 'Sześć realizacji z logo, kolorem, typografią, makietami, animacją i brand bookiem. Każda ze stylem dobranym do branży, z plikami do pobrania.',
       all: 'Wszystkie realizacje',
     },
+    aso: {
+      title: 'Screenshoty do sklepów',
+      lead: 'Sześć zestawów screenshotów do App Store i Google Play dla zmyślonych aplikacji, po polsku i po angielsku. Każdy w innym stylu, z wariantem do testu A/B, ikonami i paczką plików.',
+      all: 'Wszystkie zestawy',
+    },
     law: {
       trade: 'kancelaria prawna',
       kind: 'strona firmowa',
@@ -157,6 +162,11 @@ const copy = {
       title: 'Visual identity',
       lead: 'Six identity case studies with a logo, colour, typography, mockups, animation and a brand book, each in a style matched to its trade, with downloadable files. The pages are in Polish.',
       all: 'All case studies, in Polish',
+    },
+    aso: {
+      title: 'App store screenshots',
+      lead: 'Six App Store and Google Play screenshot sets for made-up apps, each in its own style, with an A/B test variant, icons and a ZIP of files. The pages are in Polish, while every set switches between Polish and English.',
+      all: 'All sets, in Polish',
     },
     law: {
       trade: 'law firm',
@@ -259,6 +269,40 @@ const identity = [
   { slug: 'klamra', name: 'Klamra', trade: 'szkoła programowania online', style: 'neobrutalizm' },
   { slug: 'cuvee', name: 'Cuvée', trade: 'hotel z winnicą', style: 'luksusowy edytorial' },
   { slug: 'wolnobieg', name: 'Wolnobieg', trade: 'serwis rowerowy', style: 'retro lata 70.' },
+];
+
+const aso = [
+  {
+    slug: 'gran',
+    name: 'Grań',
+    trade: 'szlaki górskie w Sudetach',
+    style: 'panorama ilustracyjna',
+  },
+  {
+    slug: 'szyld',
+    name: 'Szyld',
+    trade: 'zakupy w lokalnych sklepach',
+    style: 'gradienty i przechylone urządzenia',
+  },
+  {
+    slug: 'margines',
+    name: 'Margines',
+    trade: 'fiszki do nauki języków',
+    style: 'odręczne adnotacje',
+  },
+  {
+    slug: 'chochla',
+    name: 'Chochla',
+    trade: 'przepisy i plan posiłków',
+    style: 'memphis i pop-art',
+  },
+  {
+    slug: 'kruszec',
+    name: 'Kruszec',
+    trade: 'budżet i inwestowanie',
+    style: 'ciemne szkło premium',
+  },
+  { slug: 'bis', name: 'Bis', trade: 'muzyka i koncerty', style: 'Y2K holograficzny chrom' },
 ];
 
 const noop = () => () => {};
@@ -377,6 +421,27 @@ export default function Wzornik({ lang }) {
         <p className="wz-id__all">
           <a className="link" href={withPrefix('/wzornik/identyfikacja/')}>
             {t.identity.all}
+          </a>
+        </p>
+      </div>
+      <div className="wz-id">
+        <h3 className="wz-id__h">{t.aso.title}</h3>
+        <p className="wz-id__lead">{tie(t.aso.lead)}</p>
+        <ul className="wz-id__list">
+          {aso.map(({ slug, name, trade, style }) => (
+            <li key={slug}>
+              <a className="link" href={withPrefix(`/wzornik/aso/${slug}/`)}>
+                {name}
+              </a>
+              <span>
+                {trade}, {style}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="wz-id__all">
+          <a className="link" href={withPrefix('/wzornik/aso/')}>
+            {t.aso.all}
           </a>
         </p>
       </div>

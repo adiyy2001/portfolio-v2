@@ -1,0 +1,348 @@
+---
+import { link, portfolio } from '../../shared/link';
+import { asoApps } from '../../aso/apps';
+import TileStub from '../../aso/shared/TileStub.astro';
+import { baseCss } from '../../aso/shared/base';
+
+const tileModules = import.meta.glob('../../aso/*/Tile.astro', { eager: true }) as Record<
+  string,
+  { default: (props: { href: string }) => unknown }
+>;
+const entries = asoApps.map(app => {
+  const tile = tileModules[`../../aso/${app.slug}/Tile.astro`];
+  return { app, Tile: tile ? tile.default : null, href: link(`/aso/${app.slug}/`) };
+});
+const ready = entries.filter(entry => entry.Tile).length;
+
+const faces = [
+  ['Bespoke Serif', 'bespoke-serif-700', '700'],
+  ['Schibsted Grotesk', 'schibsted-grotesk', '400 600'],
+]
+  .map(
+    ([family, file, weight]) =>
+      `@font-face{font-family:'${family}';src:url(${portfolio(`/fonts/${file}.woff2`)}) format('woff2');font-weight:${weight};font-display:swap}`,
+  )
+  .join('');
+
+const gets = [
+  [
+    'Historia na sześć kadrów',
+    'kolejność, w której pierwsze trzy screenshoty same mówią, po co jest aplikacja',
+  ],
+  [
+    'Dwa sklepy, osobne kompozycje',
+    'App Store 1320×2868 i Google Play 1080×1920, bez skalowania jednego do drugiego',
+  ],
+  [
+    'Polski i angielski',
+    'każdy język w jednym pliku tekstowym, więc kolejna wersja to jeden nowy plik',
+  ],
+  ['Wariant B do testu', 'inna obietnica w pierwszym kadrze, z hipotezą do testu w obu sklepach'],
+  [
+    'Feature graphic i ikony',
+    'grafika 1024×500 do Google Play i ikony w specyfikacjach obu sklepów',
+  ],
+  ['Paczka ZIP', 'foldery według sklepu i języka, pliki sprawdzone walidatorem i teksty nagłówków'],
+];
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Screenshoty do sklepów: sześć realizacji | Wzornik</title>
+    <meta
+      name="description"
+      content="Sześć zestawów screenshotów do App Store i Google Play dla zmyślonych aplikacji, każdy w innym stylu, po polsku i po angielsku, z wariantem do testu A/B."
+    />
+    <meta name="theme-color" content="#e9ece6" />
+    <link rel="canonical" href={new URL(link('/aso/'), Astro.site)} />
+    <link rel="icon" type="image/svg+xml" href={portfolio('/favicon.svg')} />
+    <style is:inline set:html={faces + baseCss}></style>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Przejdź do treści
+    </a>
+    <header class="top">
+      <a href={link('/')}>Wzornik</a>
+      <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="intro">
+        <p class="kicker">Wzornik · screenshoty do sklepów</p>
+        <h1>
+          Sześć aplikacji, których nie ma, i sześć zestawów screenshotów gotowych do wysłania.
+        </h1>
+        <p class="lead">
+          Każdy zestaw ma własny styl i własną historię na sześć kadrów, jakby zrobiło je sześć
+          różnych pracowni. Pod spodem jest ten sam komplet, który dostaje klient: oba sklepy, dwa
+          języki, wariant do testu, feature graphic, ikony i paczka sprawdzonych plików.
+        </p>
+      </section>
+
+      <section class="gets" aria-labelledby="gets-title">
+        <h2 id="gets-title">Co dostaje klient</h2>
+        <dl>
+          {gets.map(([term, text]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{text}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="works" aria-labelledby="works-title">
+        <h2 id="works-title">Realizacje</h2>
+        {ready < asoApps.length && (
+          <p class="progress">
+            Gotowych jest {ready} z {asoApps.length}. Pozostałe są w budowie.
+          </p>
+        )}
+        <ul class="grid">
+          {entries.map(({ app, Tile, href }) => (
+            <li class="cell">
+              {Tile ? (
+                <Tile href={href} />
+              ) : (
+                <TileStub name={app.name} style={app.style} category={app.category} />
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cta">
+        <h2>Potrzebujesz screenshotów do swojej aplikacji?</h2>
+        <p>
+          Napisz, co robi twoja aplikacja i do kogo trafia. Zaproponuję historię na sześć kadrów,
+          zaprojektuję zestaw do obu sklepów i przygotuję pliki, które przejdą walidację za
+          pierwszym razem.
+        </p>
+        <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
+          Zobacz ofertę dla klientów
+        </a>
+      </section>
+    </main>
+    <footer class="foot">
+      <p>
+        Projekty przykładowe. Aplikacje na tych stronach są zmyślone. Projekt i wykonanie:{' '}
+        <a href={portfolio('/dla-klienta/#wzornik')}>Adrian Turbiński</a>.
+      </p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: light;
+    --ground: #e9ece6;
+    --ink: #1c1a17;
+    --muted: #5b564d;
+    --accent: #24453b;
+    --line: #1c1a17;
+    --skip-bg: #24453b;
+    --gut: clamp(16px, 4vw, 48px);
+  }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font:
+      400 17px/1.55 'Schibsted Grotesk',
+      system-ui,
+      'Segoe UI',
+      Arial,
+      sans-serif;
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px var(--gut);
+    font-size: 15px;
+  }
+
+  .top a {
+    color: var(--ink);
+    text-underline-offset: 3px;
+  }
+
+  main {
+    display: block;
+    padding: 0 var(--gut);
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .intro {
+    padding: clamp(32px, 7vw, 96px) 0 clamp(32px, 5vw, 64px);
+    max-width: 62rem;
+  }
+
+  .kicker {
+    margin: 0 0 20px;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1 {
+    margin: 0 0 24px;
+    color: var(--accent);
+    font:
+      700 clamp(34px, 6.2vw, 76px) / 1.04 'Bespoke Serif',
+      Georgia,
+      serif;
+    text-wrap: balance;
+  }
+
+  .lead {
+    margin: 0;
+    max-width: 40em;
+    font-size: clamp(17px, 1.6vw, 20px);
+  }
+
+  h2 {
+    margin: 0 0 20px;
+    font:
+      700 clamp(24px, 3vw, 34px) / 1.1 'Bespoke Serif',
+      Georgia,
+      serif;
+    color: var(--accent);
+  }
+
+  .gets {
+    padding: 28px 0 56px;
+    border-top: 1px solid var(--line);
+  }
+
+  .gets dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px 32px;
+    margin: 0;
+  }
+
+  .gets dt {
+    font-weight: 600;
+  }
+
+  .gets dd {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .works {
+    padding: 28px 0 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .progress {
+    margin: -8px 0 24px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 760px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+  }
+
+  .cell {
+    display: flex;
+    min-width: 0;
+  }
+
+  .cell > * {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .stub {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 220px;
+    padding: 24px;
+    border: 2px dashed #8a8478;
+    color: var(--muted);
+  }
+
+  .stub p {
+    margin: 0;
+  }
+
+  .stub__name {
+    font:
+      700 32px/1.1 'Bespoke Serif',
+      Georgia,
+      serif;
+    color: var(--ink);
+  }
+
+  .stub__state {
+    margin-top: auto !important;
+    font-size: 14px;
+  }
+
+  .cta {
+    margin: 40px 0 0;
+    padding: 40px 0 64px;
+    border-top: 1px solid var(--line);
+    max-width: 48rem;
+  }
+
+  .cta p {
+    margin: 0 0 24px;
+  }
+
+  .cta__link {
+    display: inline-block;
+    padding: 14px 22px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .foot {
+    padding: 24px var(--gut) 40px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .foot p {
+    margin: 0;
+    max-width: 1320px;
+    margin-inline: auto;
+  }
+
+  .foot a {
+    color: var(--ink);
+  }
+
+  a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+</style>

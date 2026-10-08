@@ -1,0 +1,44 @@
+{
+  "slug": "bis",
+  "name": "Bis",
+  "styleId": "S6",
+  "style": "Y2K holograficzny chrom",
+  "category": "odkrywanie muzyki i koncertów",
+  "storeCategory": { "appstore": "Muzyka", "play": "Muzyka i audio" },
+  "format": "jpg",
+  "jpegQuality": 90,
+  "themeColor": "#EEF1F6",
+  "background": "#EEF1F6",
+  "ogBackground": "#DDE2EA",
+  "palette": [
+    { "id": "chromJasny", "name": "Chrom jasny", "hex": "#EEF1F6", "role": "tło i powierzchnie" },
+    { "id": "chrom", "name": "Chrom", "hex": "#AAB2C0", "role": "metal, ramki i linie" },
+    { "id": "grafit", "name": "Grafit", "hex": "#3B4250", "role": "tekst pomocniczy i cień liter" },
+    { "id": "atrament", "name": "Atrament", "hex": "#111217", "role": "tekst i krawędź chromu" },
+    { "id": "holoRoz", "name": "Holo róż", "hex": "#FF8AD0", "role": "iryzacja i naklejki" },
+    { "id": "holoCyjan", "name": "Holo cyjan", "hex": "#72EFFF", "role": "iryzacja i naklejki" },
+    { "id": "holoLimonka", "name": "Holo limonka", "hex": "#D7FF63", "role": "akcja i aktywna zakładka" },
+    { "id": "holoBrzoskwinia", "name": "Holo brzoskwinia", "hex": "#FFC7A0", "role": "iryzacja i ciepły odblask" }
+  ],
+  "fonts": [
+    {
+      "id": "modak",
+      "role": "chromowane nagłówki i słowa",
+      "family": "Modak",
+      "css": "Modak",
+      "dir": "modak",
+      "file": "Modak-Regular.ttf",
+      "variable": false,
+      "instances": [{ "weight": 400 }]
+    },
+    {
+      "id": "quicksand",
+      "role": "interfejs",
+      "family": "Quicksand",
+      "css": "Quicksand",
+      "dir": "quicksand",
+      "file": "Quicksand[wght].ttf",
+      "instances": [{ "weight": 500 }, { "weight": 600 }, { "weight": 700 }]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+---
+import { asoApp } from '../apps';
+import { assetUrl, readManifest, shotsOf } from '../shared/manifest';
+import type { AsoCopy } from '../shared/types';
+import Chrome from './Chrome.astro';
+import pl from './copy/pl.json';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = asoApp('bis');
+const shots = shotsOf(readManifest('bis'), pl as AsoCopy, 'appstore').slice(0, 3);
+const face = `@font-face{font-family:'Modak';src:url(${assetUrl('bis', 'fonts/Modak-400.woff2')}) format('woff2');font-weight:400;font-display:swap}`;
+---
+
+<style is:inline set:html={face}></style>
+<a class="bis-tile" href={href}>
+  <span class="bis-tile__shots">
+    {shots.map(shot => (
+      <img
+        src={shot.src}
+        alt=""
+        width={shot.width}
+        height={shot.height}
+        loading="lazy"
+        decoding="async"
+      />
+    ))}
+  </span>
+  <span class="bis-tile__style">{meta.style}</span>
+  <span class="bis-tile__name">
+    <span class="sr-only">{meta.name}</span>
+    <Chrome text="Bis" id="tile" size={120} width={240} advance={1.43} />
+  </span>
+  <span class="bis-tile__trade">{meta.category}</span>
+  <span class="bis-tile__go">Zobacz zestaw</span>
+</a>
+
+<style is:global>
+  .bis-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 18px 22px;
+    border: 3px solid transparent;
+    border-radius: 28px;
+    background:
+      radial-gradient(260px 180px at 100% 0, rgba(114, 239, 255, 0.45), transparent 70%) padding-box,
+      radial-gradient(260px 180px at 0 100%, rgba(255, 138, 208, 0.4), transparent 70%) padding-box,
+      linear-gradient(180deg, #f6f8fb, #e3e8ef) padding-box,
+      linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #c5ccd8 16%,
+          #7e8798 34%,
+          #f4f6fa 50%,
+          #a3abbb 66%,
+          #eef1f5 82%,
+          #7f889a 100%
+        )
+        border-box;
+    box-shadow: 0 26px 50px -36px rgba(17, 18, 23, 0.6);
+    color: #111217;
+    text-decoration: none;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .bis-tile:hover {
+    box-shadow:
+      0 0 0 3px #d7ff63,
+      0 26px 50px -36px rgba(17, 18, 23, 0.6);
+  }
+
+  .bis-tile:focus-visible {
+    outline: 3px solid #111217;
+    outline-offset: 3px;
+  }
+
+  .bis-tile__shots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .bis-tile__shots img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow:
+      0 0 0 2px #fff,
+      0 0 0 3px rgba(17, 18, 23, 0.14);
+  }
+
+  .bis-tile__style {
+    align-self: flex-start;
+    margin-top: 12px;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: linear-gradient(115deg, #ff8ad0 0%, #ffc7a0 34%, #d7ff63 64%, #72efff 100%);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .bis-tile__name {
+    display: block;
+    width: 150px;
+    margin: 2px 0 -4px -8px;
+  }
+
+  .bis-tile__name svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .bis-tile__trade {
+    color: #3b4250;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .bis-tile__go {
+    margin-top: 6px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: #ff8ad0;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+</style>
