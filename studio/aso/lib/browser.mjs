@@ -31,6 +31,7 @@ export const settle = async (page, fontChecks = []) => {
   const result = await page.evaluate(async checks => {
     await Promise.all(checks.map(spec => document.fonts.load(spec)));
     await document.fonts.ready;
+    if (window.wzReady) await window.wzReady;
     await Promise.all(
       [...document.images].map(img =>
         img.complete

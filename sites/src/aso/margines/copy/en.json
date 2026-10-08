@@ -1,0 +1,204 @@
+{
+  "lang": "en",
+  "label": "English",
+  "app": {
+    "name": "Margines",
+    "tagline": "Words that keep their sentence"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "przod",
+      "headline": "Words that keep their sentence",
+      "alt": "A flashcard for the Polish verb spóźnić się with the sentence from a book circled in red marker and a margin note pointing at it."
+    },
+    {
+      "id": "02",
+      "screen": "dzis",
+      "headline": "Review right before you forget",
+      "alt": "The Today screen with 18 cards in about 6 minutes, highlighted in yellow. A hand drawn forgetting curve points at tomorrow's review."
+    },
+    {
+      "id": "03",
+      "screen": "tyl",
+      "headline": "Draw a hint, make it stick",
+      "alt": "The back of the card with the meaning and the translated sentence. The tram doodle is pulled out and taped to the graph paper."
+    },
+    {
+      "id": "04",
+      "screen": "dodaj",
+      "headline": "Save words straight from the text",
+      "alt": "A pasted Polish paragraph with the word szczęśliwa selected and underlined twice in marker, and the add card sheet with a plus sticker."
+    },
+    {
+      "id": "05",
+      "screen": "postep",
+      "headline": "A daily set in six minutes",
+      "alt": "The progress screen: 412 words known and a week of minutes. The 6 minute average is circled in green, with a pencil chart beside it."
+    },
+    {
+      "id": "06",
+      "screen": "talie",
+      "headline": "Decks from books, shows and trips",
+      "alt": "Decks from a Polish novel, a Polish series and a trip to Kraków. Three paper cards with little doodles fan out of the phone."
+    }
+  ],
+  "variantB": {
+    "screen": "notatki",
+    "headline": "Flashcards from your own notes",
+    "alt": "A notebook page with a handwritten list of Polish words and an arrow into the phone, which turns the list into nine flashcards."
+  },
+  "feature": {
+    "headline": "Words that keep their sentence",
+    "alt": "Graph paper, the name Margines handwritten and underlined in red, and a flashcard with a tram doodle that an arrow points to."
+  },
+  "notes": {
+    "01": "the whole sentence stays on the card",
+    "02": "review just before the drop",
+    "02b": "memory",
+    "03": "your doodle, your memory hook",
+    "04": "one tap and it's a card",
+    "05": "shorter than a bus ride",
+    "06": ["from a book", "from a show", "from a trip"],
+    "b": "a photo of your notebook page",
+    "sticker": "PL / EN"
+  },
+  "ui": {
+    "tabs": ["Today", "Decks", "Add", "Progress"],
+    "decks": {
+      "ksiazka": {
+        "name": "Lato na Kazimierzu",
+        "kind": "From a book",
+        "lang": "PL",
+        "total": "124 cards",
+        "known": 88,
+        "count": 124,
+        "due": "9 due"
+      },
+      "serial": {
+        "name": "Sąsiedzi z trzeciego piętra",
+        "kind": "From a series",
+        "lang": "PL",
+        "total": "86 cards",
+        "known": 61,
+        "count": 86,
+        "due": "5 due"
+      },
+      "wyjazd": {
+        "name": "Trip to Kraków",
+        "kind": "From a trip",
+        "lang": "PL",
+        "total": "52 cards",
+        "known": 23,
+        "count": 52,
+        "due": "4 due"
+      }
+    },
+    "dzis": {
+      "date": "Wednesday, 7 October",
+      "hello": "Morning, Sam",
+      "setLabel": "Today's review",
+      "count": "18 cards",
+      "time": "about 6 min",
+      "split": [
+        ["4", "new"],
+        ["14", "to review"]
+      ],
+      "start": "Start",
+      "dueTitle": "Due today",
+      "due": [
+        ["ksiazka", "9 cards"],
+        ["serial", "5 cards"],
+        ["wyjazd", "4 cards"]
+      ],
+      "nextLabel": "Next review",
+      "nextValue": "tomorrow, 12 cards",
+      "nextNote": "7 words start slipping on Thursday"
+    },
+    "card": {
+      "progress": "5 of 18",
+      "deck": "ksiazka",
+      "word": "spóźnić się",
+      "pos": "verb, perfective",
+      "before": "Znowu ",
+      "mark": "spóźniłam się",
+      "after": " na tramwaj, więc poszłam pieszo.",
+      "source": "ch. 2, p. 18",
+      "show": "Show answer",
+      "front": "Front",
+      "back": "Back",
+      "meaning": "to be late",
+      "translation": "I was late for the tram again, so I walked.",
+      "hintLabel": "Your hint",
+      "hintNote": "the tram leaves without me",
+      "again": ["Again", "1 min"],
+      "hard": ["Hard", "2 days"],
+      "good": ["Got it", "6 days"],
+      "doodle": "tram"
+    },
+    "add": {
+      "title": "Add from text",
+      "source": "Pasted from: Lato na Kazimierzu, ch. 5",
+      "before": "Na Kazimierzu było już ciemno. Ola kupiła zapiekankę, usiadła na ławce przy Placu Nowym i była ",
+      "mark": "szczęśliwa",
+      "after": ", że wreszcie nikt do niej nie dzwoni.",
+      "word": "szczęśliwa",
+      "meaning": "happy (feminine form)",
+      "deckLabel": "Deck",
+      "button": "Add card",
+      "keep": "The sentence goes on the card with the word",
+      "added": "Added today: 3 words"
+    },
+    "notatki": {
+      "title": "From your notes",
+      "source": "Photo of a notebook page",
+      "found": "Words found: 9",
+      "items": [
+        ["szczęście", "luck, happiness"],
+        ["spóźnić się", "to be late"],
+        ["dworzec", "train station"],
+        ["reszta", "change (money)"],
+        ["smacznego", "enjoy your meal"],
+        ["zapiekanka", "open baguette toastie"]
+      ],
+      "more": "and 3 more",
+      "deckLabel": "Deck",
+      "button": "Create 9 cards"
+    },
+    "notebook": [
+      "szczęście = luck",
+      "spóźnić się",
+      "dworzec = station",
+      "reszta = change",
+      "smacznego!",
+      "zapiekanka"
+    ],
+    "postep": {
+      "title": "Progress",
+      "known": "412",
+      "knownLabel": "words you know",
+      "streak": "12 days in a row",
+      "weekTitle": "Last 7 days",
+      "days": ["Th", "Fr", "Sa", "Su", "Mo", "Tu", "We"],
+      "minutes": [6, 5, 7, 4, 8, 6, 6],
+      "today": 6,
+      "avg": "6 min",
+      "avgLabel": "a day on average",
+      "calendarTitle": "Coming up",
+      "calendar": [
+        ["Th", "8", "12"],
+        ["Fr", "9", "9"],
+        ["Sa", "10", "15"],
+        ["Su", "11", "6"],
+        ["Mo", "12", "11"]
+      ],
+      "unit": "cards"
+    },
+    "talie": {
+      "title": "Decks",
+      "filters": ["All", "Polish", "Due today"],
+      "knownLabel": "known",
+      "newDeck": "New deck"
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "lang": "pl",
+  "label": "Polski",
+  "app": {
+    "name": "Margines",
+    "tagline": "Słówka zapamiętane razem ze zdaniem"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "przod",
+      "headline": "Słówka zapamiętane razem ze zdaniem",
+      "alt": "Fiszka ze słowem reluctant i zdaniem z książki, które ktoś obwiódł czerwonym flamastrem. Notatka na marginesie wskazuje zdanie."
+    },
+    {
+      "id": "02",
+      "screen": "dzis",
+      "headline": "Powtórka w porę, zanim zapomnisz",
+      "alt": "Ekran Dziś z powtórką 18 kart w około 6 minut, zakreśloną na żółto. Obok odręczna krzywa zapominania wskazuje jutrzejszą powtórkę."
+    },
+    {
+      "id": "03",
+      "screen": "tyl",
+      "headline": "Narysuj skojarzenie, zostanie w głowie",
+      "alt": "Tył fiszki ze znaczeniem i tłumaczeniem zdania. Rysunek latarni z karty wyjęty z telefonu i przyklejony taśmą do kartki w kratkę."
+    },
+    {
+      "id": "04",
+      "screen": "dodaj",
+      "headline": "Dodaj słowo prosto z tekstu",
+      "alt": "Wklejony akapit z książki z zaznaczonym słowem squinting, podkreślonym dwa razy flamastrem, i okienkiem dodawania fiszki z naklejką plus."
+    },
+    {
+      "id": "05",
+      "screen": "postep",
+      "headline": "Dzienna porcja na sześć minut",
+      "alt": "Ekran postępu: 412 zapamiętanych słówek i wykres minut z tygodnia. Średnie 6 minut obwiedzione na zielono, obok ołówkowy wykres."
+    },
+    {
+      "id": "06",
+      "screen": "talie",
+      "headline": "Talie z książek, seriali i podróży",
+      "alt": "Lista talii: książka po angielsku, serial i wyjazd do Walencji po hiszpańsku. Trzy papierowe karty z rysunkami wychodzą z telefonu."
+    }
+  ],
+  "variantB": {
+    "screen": "notatki",
+    "headline": "Fiszki z twoich własnych notatek",
+    "alt": "Kartka z zeszytu z odręczną listą hiszpańskich słówek, a strzałka prowadzi do telefonu, który robi z niej dziewięć fiszek."
+  },
+  "feature": {
+    "headline": "Słówka zapamiętane razem ze zdaniem",
+    "alt": "Papier w kratkę, odręczny napis Margines podkreślony na czerwono i fiszka z rysunkiem latarni, do której prowadzi strzałka."
+  },
+  "notes": {
+    "01": "całe zdanie z książki zostaje na karcie",
+    "02": "powtórka tuż przed spadkiem",
+    "02b": "pamięć",
+    "03": "twój rysunek, twoje skojarzenie",
+    "04": "jedno stuknięcie i jest fiszka",
+    "05": "krócej niż jazda tramwajem",
+    "06": ["z książki", "z serialu", "z podróży"],
+    "b": "zdjęcie strony z zeszytu",
+    "sticker": "EN / PL"
+  },
+  "ui": {
+    "tabs": ["Dziś", "Talie", "Dodaj", "Postęp"],
+    "decks": {
+      "ksiazka": {
+        "name": "Salt on the Windowsill",
+        "kind": "Z książki",
+        "lang": "EN",
+        "total": "124 karty",
+        "known": 88,
+        "count": 124,
+        "due": "9 do powtórki"
+      },
+      "serial": {
+        "name": "Night Shift on Harbour Street",
+        "kind": "Z serialu",
+        "lang": "EN",
+        "total": "86 kart",
+        "known": 61,
+        "count": 86,
+        "due": "5 do powtórki"
+      },
+      "wyjazd": {
+        "name": "Wyjazd do Walencji",
+        "kind": "Z podróży",
+        "lang": "ES",
+        "total": "52 karty",
+        "known": 23,
+        "count": 52,
+        "due": "4 do powtórki"
+      }
+    },
+    "dzis": {
+      "date": "Środa, 7 października",
+      "hello": "Dzień dobry, Ola",
+      "setLabel": "Dzisiejsza powtórka",
+      "count": "18 kart",
+      "time": "ok. 6 min",
+      "split": [
+        ["4", "nowe"],
+        ["14", "do powtórki"]
+      ],
+      "start": "Zaczynam",
+      "dueTitle": "Do powtórki dziś",
+      "due": [
+        ["ksiazka", "9 kart"],
+        ["serial", "5 kart"],
+        ["wyjazd", "4 karty"]
+      ],
+      "nextLabel": "Następna powtórka",
+      "nextValue": "jutro, 12 kart",
+      "nextNote": "7 słówek zacznie ci uciekać w czwartek"
+    },
+    "card": {
+      "progress": "5 z 18",
+      "deck": "ksiazka",
+      "word": "reluctant",
+      "pos": "przymiotnik",
+      "before": "She was ",
+      "mark": "reluctant",
+      "after": " to leave the lighthouse after dark.",
+      "source": "rozdz. 4, s. 61",
+      "show": "Pokaż odpowiedź",
+      "front": "Przód",
+      "back": "Tył",
+      "meaning": "niechętny, ociągający się",
+      "translation": "Niechętnie wychodziła z latarni po zmroku.",
+      "hintLabel": "Twoje skojarzenie",
+      "hintNote": "latarnia nocą, nikt nie chce wyjść",
+      "again": ["Jeszcze raz", "1 min"],
+      "hard": ["Trudne", "2 dni"],
+      "good": ["Pamiętam", "6 dni"],
+      "doodle": "lighthouse"
+    },
+    "add": {
+      "title": "Dodaj z tekstu",
+      "source": "Wklejone z: Salt on the Windowsill, rozdz. 7",
+      "before": "The ferry was late again, and Nora stood at the rail, ",
+      "mark": "squinting",
+      "after": " at the grey line of the harbour. Her coat smelled of salt and diesel, and the gulls were louder than the engine.",
+      "word": "squinting",
+      "meaning": "mrużąc oczy",
+      "deckLabel": "Talia",
+      "button": "Dodaj fiszkę",
+      "keep": "Zdanie trafi na kartę razem ze słowem",
+      "added": "Dziś dodane: 3 słówka"
+    },
+    "notatki": {
+      "title": "Z twoich notatek",
+      "source": "Zdjęcie strony z zeszytu",
+      "found": "Rozpoznane słówka: 9",
+      "items": [
+        ["madrugar", "wstawać o świcie"],
+        ["la sobremesa", "rozmowa przy stole po obiedzie"],
+        ["el atasco", "korek"],
+        ["quedar", "umówić się"],
+        ["la merienda", "podwieczorek"],
+        ["el andén", "peron"]
+      ],
+      "more": "i jeszcze 3",
+      "deckLabel": "Talia",
+      "button": "Utwórz 9 fiszek"
+    },
+    "notebook": [
+      "madrugar",
+      "la sobremesa",
+      "el atasco = korek",
+      "quedar = umówić się",
+      "la merienda",
+      "el andén = peron"
+    ],
+    "postep": {
+      "title": "Postęp",
+      "known": "412",
+      "knownLabel": "słówek zapamiętanych",
+      "streak": "12 dni z rzędu",
+      "weekTitle": "Ostatnie 7 dni",
+      "days": ["cz", "pt", "sb", "nd", "pn", "wt", "śr"],
+      "minutes": [6, 5, 7, 4, 8, 6, 6],
+      "today": 6,
+      "avg": "6 min",
+      "avgLabel": "średnio dziennie",
+      "calendarTitle": "Najbliższe powtórki",
+      "calendar": [
+        ["cz", "8", "12"],
+        ["pt", "9", "9"],
+        ["sb", "10", "15"],
+        ["nd", "11", "6"],
+        ["pn", "12", "11"]
+      ],
+      "unit": "kart"
+    },
+    "talie": {
+      "title": "Talie",
+      "filters": ["Wszystkie", "Angielski", "Hiszpański"],
+      "knownLabel": "zapamiętane",
+      "newDeck": "Nowa talia"
+    }
+  }
+}

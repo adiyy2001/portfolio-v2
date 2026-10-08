@@ -5,7 +5,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-aso.md`. Run rules: `/hom
 ```
 - [x] F foundation, with the first brand end to end (B1 Grań)
 - [x] B2 Szyld
-- [ ] B3 Margines
+- [x] B3 Margines
 - [ ] B4 Chochla
 - [ ] B5 Kruszec
 - [ ] B6 Bis
@@ -439,4 +439,6 @@ Taken without asking, in the autonomous mode. App agents add their own to `STATU
 26. **Szyld headlines rephrased** so no line ends with one word at the set's size (48 CSS px App Store, 31 Play, Mona Sans width 125 weight 900): PL 4 "Godzina odbioru, jaka ci pasuje" (was "Odbiór o godzinie, którą wybierasz"), PL 5 "Pokaż kod, zakupy w ręku" (was "Kod przy ladzie i po sprawie"), EN 2 "Your street's shops on one map" (was "Every shop on your street, mapped"). The only per language layout values are the decorative giant time ("17:30" and "5:30") and word ("SOBOTA" and "SATURDAY"), sized to fill the frame.
 27. **Szyld exports JPEG at quality 90** with 4:4:4 chroma (the foundation default stays 92): the ZIP is 13 MB, under the 15 MB cap, with no visible loss at 100 percent. The EN set keeps the Poznań world (shop names, Jeżyce, prices in zł) written for an English speaking resident; five invented shop names were searched on 2026-10-07 and none exists.
 28. **Foundation additions during B2**, backward compatible and checked by re-rendering Grań pixel for pixel: `box` and `transform` options on the kit phone and card (a device may bleed off the frame and take a 3D transform), vertical headlines (`data-vertical`) in the line check, and `jpegQuality` in `app.json`.
-
+29. **Margines headlines rephrased** so no line ends with one word at the set's size (Caveat 700, 58 CSS px App Store, 38 Play): PL 2 "Powtórka w porę, zanim zapomnisz" (was "Powtórka tuż przed zapomnieniem"), EN 1 and the EN feature line "Words that keep their sentence" (was "Learn words with the sentence attached"). The benefit of each is unchanged.
+30. **Margines invented titles**: "The Long Way Home" exists (several novels), so the PL book deck is "Salt on the Windowsill", the series "Night Shift on Harbour Street"; the EN set (an English speaker learning Polish) uses "Lato na Kazimierzu", "Sąsiedzi z trzeciego piętra" and a trip to Kraków. All four were searched on 2026-10-07 and none was found. Variant B gets its own screen state ("Z twoich notatek", a photographed notebook page turned into nine cards) in place of the planned Wymowa screen, so the B frame shows its own promise.
+31. **Margines annotations are measured, not placed by hand**: each marker stroke (rough.js, fixed seed) is drawn in the page after the fonts load, from the box of the UI element it points at, so a new language with longer text gets a bigger circle without layout work. Foundation change for this: `settle` awaits `window.wzReady` when a page defines it; Grań and Szyld re-rendered pixel identical. UI text uses darker shades of the marker colours (`#C2302A`, `#1F7A45`), the bright ones are strokes only.

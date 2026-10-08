@@ -1,0 +1,42 @@
+{
+  "slug": "margines",
+  "name": "Margines",
+  "styleId": "S3",
+  "style": "Odręczne adnotacje",
+  "category": "fiszki do nauki języków",
+  "storeCategory": { "appstore": "Edukacja", "play": "Edukacja" },
+  "format": "png",
+  "themeColor": "#1E2A5E",
+  "background": "#FBF8F0",
+  "ogBackground": "#FBF8F0",
+  "palette": [
+    { "id": "papier", "name": "Papier", "hex": "#FBF8F0", "role": "tło i powierzchnie" },
+    { "id": "kratka", "name": "Kratka", "hex": "#CFE0EE", "role": "linie kratki" },
+    { "id": "atrament", "name": "Atrament", "hex": "#1E2A5E", "role": "tekst i nagłówki" },
+    { "id": "flamaster", "name": "Flamaster", "hex": "#E2433B", "role": "obwódki, margines, Jeszcze raz" },
+    { "id": "zakreslacz", "name": "Zakreślacz", "hex": "#FFE45E", "role": "zakreślenia" },
+    { "id": "zielen", "name": "Zieleń", "hex": "#2E9E5B", "role": "Pamiętam, drugi flamaster" },
+    { "id": "olowek", "name": "Ołówek", "hex": "#6B7080", "role": "tekst pomocniczy" },
+    { "id": "mieta", "name": "Mięta", "hex": "#B8EBD0", "role": "naklejki" }
+  ],
+  "fonts": [
+    {
+      "id": "caveat",
+      "role": "nagłówki i notatki odręczne",
+      "family": "Caveat",
+      "css": "Caveat",
+      "dir": "caveat",
+      "file": "Caveat[wght].ttf",
+      "instances": [{ "weight": 500 }, { "weight": 600 }, { "weight": 700 }]
+    },
+    {
+      "id": "lexend",
+      "role": "interfejs",
+      "family": "Lexend",
+      "css": "Lexend",
+      "dir": "lexend",
+      "file": "Lexend[wght].ttf",
+      "instances": [{ "weight": 400 }, { "weight": 500 }, { "weight": 700 }]
+    }
+  ]
+}

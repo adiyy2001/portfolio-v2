@@ -250,3 +250,11 @@ Look at: `sheets/ui-<lang>.png` (all screens), `boards/*.png`, `thumbs/*.png` (f
 - Grain from `feTurbulence` (base frequency 0.8 to 0.85 per CSS px, overlay at about 0.38) costs about 0.5 MB per App Store JPEG at quality 90; the whole set with 30 images stays at 13 MB.
 - The texts files in the ZIP are copies of `copy/*.json`: run Prettier on the copy files before the export step, or the validator reports the ZIP as stale after formatting.
 
+
+### Lessons from Margines (B3)
+
+- Annotations that point at UI must be measured, not guessed: `apps/margines/ink.mjs` inlines rough.js into the page, waits for the fonts, reads `getBoundingClientRect` of the `data-mark` element and its untransformed size (`offsetWidth` times the device scale), draws in a rotated frame and resolves `window.wzReady`; `settle` waits for it. Stickers are placed the same way (`places`).
+- A circle around a text block needs the ellipse about 1.1 to 1.2 times the block, or it cuts the first and last letters of a multi line sentence. Leave more than 6 CSS px under a word for a double underline (the paragraph line height went to 2.05).
+- Rotated pieces (deck cards, scraps) grow their bounding box; the canvas check catches a corner leaving the frame.
+- Caveat at 58 CSS px holds about 15 characters per line in a 360 px box; three line headlines are fine, but check the one word last line in both languages before drawing anything around the headline.
+- The heavy lock is shared with the app preview session; a Remotion render can hold it for many minutes, so batch Playwright work into one pipeline run.
