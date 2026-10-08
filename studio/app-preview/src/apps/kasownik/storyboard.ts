@@ -34,7 +34,7 @@ export const storyboard: Storyboard = {
       key: 160,
       action:
         'Stuknięcie w kartę wysuwa arkusz zakupu. Drugie stuknięcie płaci, przycisk zwija się w znacznik, arkusz odjeżdża.',
-      overlay: { text: 'Dwa stuknięcia, bez kolejki', from: 140, to: 204, top: 292 },
+      overlay: { text: 'Dwa stuknięcia, bez kolejki', from: 140, to: 204, top: 320 },
     },
     {
       id: 'mine',

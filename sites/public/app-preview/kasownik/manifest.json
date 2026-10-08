@@ -7,7 +7,7 @@
     "zone": "Poznań, strefa A",
     "tagline": "Bilet na tramwaj i autobus w dwóch stuknięciach."
   },
-  "generatedAt": "2026-10-07",
+  "generatedAt": "2026-10-08",
   "storyboard": {
     "fps": 30,
     "duration": 690,
@@ -56,7 +56,7 @@
           "text": "Dwa stuknięcia, bez kolejki",
           "from": 140,
           "to": 204,
-          "top": 292
+          "top": 320
         },
         "seconds": [
           4.5,
@@ -520,7 +520,7 @@
     "store": {
       "webm": {
         "path": "kasownik-store.webm",
-        "bytes": 985482,
+        "bytes": 991057,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -529,12 +529,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 335483,
+        "bitrate": 337381,
         "audio": null
       },
       "mp4": {
         "path": "kasownik-store.mp4",
-        "bytes": 989581,
+        "bytes": 980925,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -543,7 +543,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 336878,
+        "bitrate": 333931,
         "audio": null
       },
       "poster": "posters/kasownik-store.jpg"
@@ -587,7 +587,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "kasownik-store-886x1920.mp4",
       "path": "kasownik-store-886x1920.mp4",
-      "bytes": 32808475,
+      "bytes": 32808548,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -596,7 +596,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11411643,
+      "bitrate": 11411668,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -659,8 +659,8 @@
     "rounded": "kasownik-icon-512.png"
   },
   "renderSeconds": {
-    "stills": 19,
-    "store": 183,
+    "stills": 28,
+    "store": 256,
     "marketing-9x16": 243,
     "marketing-1x1": 121,
     "marketing-16x9": 158,
@@ -668,7 +668,7 @@
   },
   "validation": true,
   "published": {
-    "totalBytes": 11439394,
+    "totalBytes": 11436183,
     "count": 30
   }
 }
