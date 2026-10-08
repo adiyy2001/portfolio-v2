@@ -1,0 +1,100 @@
+---
+import LoopVideo from '../shared/LoopVideo.astro';
+import { previewApp } from '../shared/apps';
+import { readManifest } from '../shared/manifest';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = previewApp('kielek');
+const manifest = readManifest('kielek');
+---
+
+<a class="kie-tile" href={href}>
+  <span class="kie-tile__media">
+    <LoopVideo
+      manifest={manifest}
+      variant="tile"
+      mode="hover"
+      label="Pętla: kropla spada na monsterę Zdzisię, karta robi się pistacjowa, a Kiełek cieszy się w doniczce"
+    />
+  </span>
+  <span class="kie-tile__body">
+    <span class="kie-tile__style">
+      {meta.styleId}, {meta.style}
+    </span>
+    <span class="kie-tile__name">{meta.name}</span>
+    <span class="kie-tile__trade">
+      {meta.trade}, {meta.city}
+    </span>
+    <span class="kie-tile__go">Zobacz realizację</span>
+  </span>
+</a>
+
+<style is:global>
+  .kie-tile {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    height: 100%;
+    color: #4a2c2a;
+    background: #ffe6d6;
+    border-radius: 28px;
+    overflow: hidden;
+    text-decoration: none;
+    font-family: 'Schibsted Grotesk', system-ui, Arial, sans-serif;
+    box-shadow:
+      inset 5px 5px 10px rgba(255, 255, 255, 0.7),
+      inset -5px -7px 12px rgba(74, 44, 42, 0.12),
+      0 8px 24px rgba(74, 44, 42, 0.18);
+  }
+
+  .kie-tile__media video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 50% 15%;
+    background: #ffe6d6;
+  }
+
+  .kie-tile__body {
+    display: grid;
+    gap: 4px;
+    padding: 18px 22px 22px;
+    background: #fff5ee;
+  }
+
+  .kie-tile__style {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #7a5650;
+    font-weight: 600;
+  }
+
+  .kie-tile__name {
+    font-size: 34px;
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  .kie-tile__trade {
+    font-size: 15px;
+    color: #7a5650;
+  }
+
+  .kie-tile__go {
+    margin-top: 8px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .kie-tile:hover .kie-tile__go,
+  .kie-tile:focus-visible .kie-tile__go {
+    color: #7a5650;
+  }
+</style>

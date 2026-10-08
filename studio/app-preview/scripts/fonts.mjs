@@ -14,10 +14,10 @@ export const webCharacters = `${latin}ąćęłńóśźżĄĆĘŁŃÓŚŹŻ„”
 const raw = (dir, file) =>
   `https://raw.githubusercontent.com/google/fonts/main/ofl/${dir}/${encodeURIComponent(file)}`;
 
-const download = async (dir, file) => {
+const download = async (dir, file, url = raw(dir, file)) => {
   const target = join(ensureDir(join(fontsSrc, dir)), file);
   if (existsSync(target)) return target;
-  const res = await fetch(raw(dir, file));
+  const res = await fetch(url);
   if (!res.ok) throw new Error(`${dir}/${file}: HTTP ${res.status}`);
   writeFileSync(target, Buffer.from(await res.arrayBuffer()));
   return target;
@@ -30,7 +30,7 @@ export const prepareFonts = async slug => {
   const rows = [];
   for (const font of meta.fontFiles) {
     const src = await download(font.source.dir, font.source.file);
-    const ofl = await download(font.source.dir, 'OFL.txt');
+    const ofl = await download(font.source.dir, 'OFL.txt', font.source.ofl);
     const remotionTarget = join(remotionPublic, font.remotion);
     ensureDir(join(remotionTarget, '..'));
     copyFileSync(src, remotionTarget);

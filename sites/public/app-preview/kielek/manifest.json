@@ -1,0 +1,645 @@
+{
+  "app": {
+    "slug": "kielek",
+    "name": "Kiełek",
+    "category": "Pielęgnacja roślin domowych",
+    "city": "cała Polska",
+    "zone": "7 roślin w 3 pokojach",
+    "tagline": "Plan podlewania, który zmienia się z porą roku, diagnoza po liściach i pokoje, w których każda roślina stoi na swoim miejscu."
+  },
+  "generatedAt": "2026-10-08",
+  "storyboard": {
+    "fps": 30,
+    "duration": 630,
+    "bridge": 20,
+    "poster": 30,
+    "defaultPoster": 150,
+    "shots": [
+      {
+        "id": "hook",
+        "name": "Hak",
+        "from": 0,
+        "to": 59,
+        "key": 30,
+        "action": "Od pierwszej klatki Kiełek siedzi w doniczce na środku ekranu. Podskakuje, ląduje ze zgnieceniem i mruga, a pod nim wydmuchuje się karta Dziś podlej 3 rośliny.",
+        "overlay": {
+          "text": "Rośliny podlane na czas",
+          "from": 4,
+          "to": 66,
+          "top": 772
+        },
+        "seconds": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": "today",
+        "name": "Dziś",
+        "from": 60,
+        "to": 209,
+        "key": 160,
+        "action": "Kiełek przeskakuje do karty, która dojeżdża na górę. Trzy karty roślin wskakują co 5 klatek. Stuknięcie Podlane przy Zdzisi: kropla spada, zgniata się, karta robi się pistacjowa, licznik spada do 2, Kiełek się cieszy.",
+        "seconds": [
+          2,
+          7
+        ]
+      },
+      {
+        "id": "calendar",
+        "name": "Kalendarz",
+        "from": 210,
+        "to": 329,
+        "key": 318,
+        "action": "Zakładka przeskakuje na Kalendarz. Tygodnie wjeżdżają po kolei, krople lądują na 8, 15, 22 i 29 października. Przełącznik przechodzi na zimę i krople przeskakują na 20 października i 1 listopada.",
+        "overlay": {
+          "text": "Plan dopasowany do pory roku",
+          "from": 220,
+          "to": 292,
+          "top": 772
+        },
+        "seconds": [
+          7,
+          11
+        ]
+      },
+      {
+        "id": "diagnosis",
+        "name": "Diagnoza",
+        "from": 330,
+        "to": 479,
+        "key": 470,
+        "action": "Stuknięcie Żółte dolne liście, potem Mokra. Karta odpowiedzi nadmuchuje się: za dużo wody, odstaw konewkę na 10 dni. Kiełek najpierw się martwi, potem kiwa głową.",
+        "overlay": {
+          "text": "Podpowie, co dolega liściom",
+          "from": 344,
+          "to": 412,
+          "top": 772
+        },
+        "seconds": [
+          11,
+          16
+        ]
+      },
+      {
+        "id": "rooms",
+        "name": "Pokoje",
+        "from": 480,
+        "to": 569,
+        "key": 562,
+        "action": "Trzy kafle pokoi. Sypialnia dostaje różową obwódkę, pasek wilgotności rośnie do 41%, przy 60% pojawia się Kalina lubi 60%, a pod spodem rada: przestaw ją do kuchni.",
+        "seconds": [
+          16,
+          19
+        ]
+      },
+      {
+        "id": "end",
+        "name": "Zakończenie",
+        "from": 570,
+        "to": 629,
+        "key": 622,
+        "action": "Ekran startowy: ikona nadmuchuje się na sprężynie bounce, pod nią napis Kiełek i Pielęgnacja roślin. Kiełek mruga w ikonie.",
+        "seconds": [
+          19,
+          21
+        ]
+      }
+    ],
+    "board": "kielek-storyboard.png"
+  },
+  "marketing": {
+    "duration": 630,
+    "bridge": 20,
+    "outro": 560,
+    "poster": 160,
+    "beats": [
+      {
+        "from": 0,
+        "to": 209,
+        "kicker": "Dziś, 7:52",
+        "title": "Podlewasz, kiedy trzeba.",
+        "line": "Kiełek zna każdą roślinę: ile wody i kiedy."
+      },
+      {
+        "from": 210,
+        "to": 329,
+        "kicker": "Kalendarz",
+        "title": "Zimą rzadziej.",
+        "line": "Od połowy października Zdzisia pije co 12 dni."
+      },
+      {
+        "from": 330,
+        "to": 479,
+        "kicker": "Diagnoza",
+        "title": "Liście mówią, co jest nie tak.",
+        "line": "Żółte i mokro? Konewka odpoczywa 10 dni."
+      },
+      {
+        "from": 480,
+        "to": 559,
+        "kicker": "Pokoje",
+        "title": "Każda roślina na swoim miejscu.",
+        "line": "Kalina lubi 60%, w sypialni jest 41%."
+      }
+    ]
+  },
+  "palette": [
+    {
+      "id": "ground",
+      "name": "Brzoskwinia",
+      "role": "tło każdego ekranu i sceny",
+      "hex": "#FFE6D6",
+      "onSurface": 1.11,
+      "onGrouped": 1
+    },
+    {
+      "id": "card",
+      "name": "Śmietanka",
+      "role": "karty, pola, kafle dni",
+      "hex": "#FFF5EE",
+      "onSurface": 1,
+      "onGrouped": 1.11
+    },
+    {
+      "id": "pistachio",
+      "name": "Pistacja",
+      "role": "roślina zdrowa, podlane, głowa maskotki",
+      "hex": "#BFE29A",
+      "onSurface": 1.34,
+      "onGrouped": 1.2
+    },
+    {
+      "id": "leaf",
+      "name": "Liść",
+      "role": "liście maskotki i drobne akcenty, nigdy pod tekstem",
+      "hex": "#7DBE5A",
+      "onSurface": 2.08,
+      "onGrouped": 1.87
+    },
+    {
+      "id": "butter",
+      "name": "Masło",
+      "role": "dziś, wybrane, aktywna zakładka",
+      "hex": "#FFE07A",
+      "onSurface": 1.21,
+      "onGrouped": 1.08
+    },
+    {
+      "id": "blush",
+      "name": "Róż",
+      "role": "roślina potrzebuje uwagi, obudowa telefonu",
+      "hex": "#FFC2CC",
+      "onSurface": 1.41,
+      "onGrouped": 1.27
+    },
+    {
+      "id": "terracotta",
+      "name": "Terakota",
+      "role": "doniczki, tylko dekoracja",
+      "hex": "#E8896B",
+      "onSurface": 2.38,
+      "onGrouped": 2.13
+    },
+    {
+      "id": "water",
+      "name": "Woda",
+      "role": "krople, wilgotność, ilość wody",
+      "hex": "#AEE3D3",
+      "onSurface": 1.33,
+      "onGrouped": 1.19
+    },
+    {
+      "id": "ink",
+      "name": "Śliwkowy brąz",
+      "role": "tekst, oczy maskotki, ikony",
+      "hex": "#4A2C2A",
+      "onSurface": 11.6,
+      "onGrouped": 10.41
+    },
+    {
+      "id": "inkSoft",
+      "name": "Brąz łagodny",
+      "role": "objaśnienia na brzoskwini, śmietance, maśle i wodzie",
+      "hex": "#7A5650",
+      "onSurface": 5.97,
+      "onGrouped": 5.36
+    }
+  ],
+  "type": {
+    "display": {
+      "family": "M PLUS Rounded 1c",
+      "size": 40,
+      "line": 44,
+      "weight": 900
+    },
+    "title": {
+      "family": "M PLUS Rounded 1c",
+      "size": 28,
+      "line": 34,
+      "weight": 900
+    },
+    "headline": {
+      "family": "M PLUS Rounded 1c",
+      "size": 18,
+      "line": 24,
+      "weight": 800
+    },
+    "body": {
+      "family": "M PLUS Rounded 1c",
+      "size": 15,
+      "line": 21,
+      "weight": 500
+    },
+    "label": {
+      "family": "M PLUS Rounded 1c",
+      "size": 13,
+      "line": 17,
+      "weight": 800
+    }
+  },
+  "fonts": [
+    {
+      "family": "M PLUS Rounded 1c",
+      "file": "fonts/mplus-rounded-1c-500.woff2",
+      "license": "fonts/OFL-mplusrounded1c.txt",
+      "weight": "500",
+      "used": [
+        500
+      ],
+      "role": "tekst, objaśnienia i zdania pod nagłówkami",
+      "bytes": 11812
+    },
+    {
+      "family": "M PLUS Rounded 1c",
+      "file": "fonts/mplus-rounded-1c-800.woff2",
+      "license": "fonts/OFL-mplusrounded1c.txt",
+      "weight": "800",
+      "used": [
+        800
+      ],
+      "role": "etykiety, chipy, przyciski i pigułki",
+      "bytes": 11924
+    },
+    {
+      "family": "M PLUS Rounded 1c",
+      "file": "fonts/mplus-rounded-1c-900.woff2",
+      "license": "fonts/OFL-mplusrounded1c.txt",
+      "weight": "900",
+      "used": [
+        900
+      ],
+      "role": "tytuły, liczby, nazwa Kiełek i nagłówki strony",
+      "bytes": 11576
+    }
+  ],
+  "motion": [
+    {
+      "id": "bounce",
+      "use": "karty, przyciski, wejście maskotki",
+      "kind": "spring",
+      "mass": 1,
+      "stiffness": 180,
+      "damping": 12,
+      "note": "wyraźne przestrzelenie, około 20%, i dwa miękkie odbicia, spokój po około 0,86 s; każda karta dojeżdża jak napompowana"
+    },
+    {
+      "id": "squash",
+      "use": "lądowanie",
+      "kind": "bezier",
+      "points": [
+        0.33,
+        1,
+        0.68,
+        1
+      ],
+      "ms": 133,
+      "note": "przy zetknięciu skala pionowa 0,88 i pozioma 1,1 przez 4 klatki, potem powrót na sprężynie bounce"
+    },
+    {
+      "id": "puff",
+      "use": "chipy, znaczniki, napisy",
+      "kind": "spring",
+      "mass": 1,
+      "stiffness": 260,
+      "damping": 14,
+      "note": "skala od 0 do 1, cień rośnie razem z kształtem przez 6 klatek"
+    },
+    {
+      "id": "drop",
+      "use": "krople wody",
+      "kind": "bezier",
+      "points": [
+        0.55,
+        0,
+        1,
+        0.45
+      ],
+      "ms": 467,
+      "note": "spadek z przyspieszeniem w 14 klatek, a po zetknięciu squash i trzy kropelki rozprysku"
+    },
+    {
+      "id": "wiggle",
+      "use": "liście w spoczynku",
+      "kind": "spring",
+      "mass": 1,
+      "stiffness": 120,
+      "damping": 6,
+      "note": "obrót o ±4° co 50 klatek, liście maskotki nigdy nie stoją zupełnie nieruchomo"
+    },
+    {
+      "id": "stagger",
+      "use": "listy i siatki",
+      "kind": "steps",
+      "steps": 1,
+      "ms": 167,
+      "note": "5 klatek odstępu między elementami listy, każdy wjeżdża na sprężynie bounce; w kalendarzu 5 klatek między tygodniami"
+    }
+  ],
+  "gallery": [
+    {
+      "n": 1,
+      "title": "Dziś",
+      "caption": "Kiełek wita i mówi, co podlać: trzy rośliny, razem 800 ml. Po stuknięciu Podlane karta robi się pistacjowa, a licznik spada.",
+      "file": "screens/kielek-screen-1.webp"
+    },
+    {
+      "n": 2,
+      "title": "Roślina",
+      "caption": "Monstera Zdzisia: pierścień do następnego podlewania, 400 ml co 7 dni latem i co 12 zimą, światło, wilgotność i historia.",
+      "file": "screens/kielek-screen-2.webp"
+    },
+    {
+      "n": 3,
+      "title": "Kalendarz",
+      "caption": "Miesiąc w kroplach. Od połowy października plan sam przechodzi z 7 na 12 dni i przesuwa krople.",
+      "file": "screens/kielek-screen-3.webp"
+    },
+    {
+      "n": 4,
+      "title": "Diagnoza",
+      "caption": "Objaw i stan ziemi wystarczą do odpowiedzi: żółte dolne liście i mokra ziemia to przelanie, więc konewka odpoczywa 10 dni.",
+      "file": "screens/kielek-screen-4.webp"
+    },
+    {
+      "n": 5,
+      "title": "Pokoje",
+      "caption": "Każdy pokój ma okno, światło i wilgotność. W sypialni jest 41%, a Kalina lubi 60%, więc Kiełek podpowiada kuchnię.",
+      "file": "screens/kielek-screen-5.webp"
+    },
+    {
+      "n": 6,
+      "title": "Dodaj roślinę",
+      "caption": "Wyszukiwarka gatunków z krótką instrukcją przy każdym wyniku i wyborem pokoju, do którego trafi roślina.",
+      "file": "screens/kielek-screen-6.webp"
+    }
+  ],
+  "videos": {
+    "hero": {
+      "webm": {
+        "path": "kielek-hero.webm",
+        "bytes": 955400,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 650,
+        "duration": 21.666,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 352773,
+        "audio": null
+      },
+      "mp4": {
+        "path": "kielek-hero.mp4",
+        "bytes": 1087954,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 650,
+        "duration": 21.667,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 401706,
+        "audio": null
+      },
+      "poster": "posters/kielek-hero.jpg"
+    },
+    "hero-9x16": {
+      "webm": {
+        "path": "kielek-hero-9x16.webm",
+        "bytes": 738098,
+        "width": 540,
+        "height": 960,
+        "fps": 30,
+        "frames": 650,
+        "duration": 21.666,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 272536,
+        "audio": null
+      },
+      "mp4": {
+        "path": "kielek-hero-9x16.mp4",
+        "bytes": 899043,
+        "width": 540,
+        "height": 960,
+        "fps": 30,
+        "frames": 650,
+        "duration": 21.667,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 331954,
+        "audio": null
+      },
+      "poster": "posters/kielek-hero-9x16.jpg"
+    },
+    "social-1x1": {
+      "webm": {
+        "path": "kielek-social-1x1.webm",
+        "bytes": 634639,
+        "width": 720,
+        "height": 720,
+        "fps": 30,
+        "frames": 650,
+        "duration": 21.666,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 234335,
+        "audio": null
+      },
+      "mp4": {
+        "path": "kielek-social-1x1.mp4",
+        "bytes": 740918,
+        "width": 720,
+        "height": 720,
+        "fps": 30,
+        "frames": 650,
+        "duration": 21.667,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 273569,
+        "audio": null
+      },
+      "poster": "posters/kielek-social-1x1.jpg"
+    },
+    "store": {
+      "webm": {
+        "path": "kielek-store.webm",
+        "bytes": 744323,
+        "width": 442,
+        "height": 960,
+        "fps": 30,
+        "frames": 650,
+        "duration": 21.666,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 274835,
+        "audio": null
+      },
+      "mp4": {
+        "path": "kielek-store.mp4",
+        "bytes": 777621,
+        "width": 442,
+        "height": 960,
+        "fps": 30,
+        "frames": 650,
+        "duration": 21.667,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 287121,
+        "audio": null
+      },
+      "poster": "posters/kielek-store.jpg"
+    },
+    "tile": {
+      "webm": {
+        "path": "kielek-tile.webm",
+        "bytes": 161564,
+        "width": 480,
+        "height": 600,
+        "fps": 30,
+        "frames": 150,
+        "duration": 5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 258502,
+        "audio": null
+      },
+      "mp4": {
+        "path": "kielek-tile.mp4",
+        "bytes": 168578,
+        "width": 480,
+        "height": 600,
+        "fps": 30,
+        "frames": 150,
+        "duration": 5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 269724,
+        "audio": null
+      },
+      "poster": "posters/kielek-tile.jpg"
+    }
+  },
+  "finals": [
+    {
+      "kind": "store",
+      "title": "Wersja sklepowa",
+      "note": "App Store Connect, podgląd aplikacji na iPhone",
+      "name": "kielek-store-886x1920.mp4",
+      "path": "kielek-store-886x1920.mp4",
+      "bytes": 29931936,
+      "width": 886,
+      "height": 1920,
+      "fps": 30,
+      "frames": 630,
+      "duration": 21,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 11402642,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "9x16",
+      "title": "Wersja marketingowa 9:16",
+      "note": "Reels, TikTok, Shorts",
+      "name": "kielek-social-1080x1920.mp4",
+      "path": "kielek-social-1080x1920.mp4",
+      "bytes": 5861652,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "frames": 630,
+      "duration": 21,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 2233010,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "1x1",
+      "title": "Wersja marketingowa 1:1",
+      "note": "post w kanale",
+      "name": "kielek-social-1080x1080.mp4",
+      "path": "kielek-social-1080x1080.mp4",
+      "bytes": 3487862,
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "frames": 630,
+      "duration": 21,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 1328709,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "16x9",
+      "title": "Wersja marketingowa 16:9",
+      "note": "YouTube, link w Google Play",
+      "name": "kielek-social-1920x1080.mp4",
+      "path": "kielek-social-1920x1080.mp4",
+      "bytes": 4934473,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frames": 630,
+      "duration": 21,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 1879799,
+      "audio": "AAC, stereo, 48 kHz"
+    }
+  ],
+  "icons": {
+    "full": "kielek-icon-1024.png",
+    "rounded": "kielek-icon-512.png"
+  },
+  "renderSeconds": {
+    "stills": 41,
+    "marketing-9x16": 718,
+    "marketing-1x1": 379,
+    "marketing-16x9": 582,
+    "tile": 159,
+    "store": 602
+  },
+  "validation": true,
+  "published": {
+    "totalBytes": 8495670,
+    "count": 31
+  }
+}

@@ -6,7 +6,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-app-preview.md`. Run rule
 - [x] F foundation, with the first brand end to end (B1 Kasownik)
 - [x] B2 Sztanga
 - [x] B3 Rygiel
-- [ ] B4 Kiełek
+- [x] B4 Kiełek
 - [ ] B5 Poziomka
 - [ ] B6 Południe
 - [ ] Q quality control
@@ -591,3 +591,8 @@ Q runs after all six are merged: ffprobe table for every file (store cut exact t
 32. Rygiel's vault rows decrypt at 0.5 frames per character (the plan's 2 frames stays for the password, overlays aside, and the launch name), so eight rows finish inside their shot.
 33. On the Rygiel page the "too fast" glow pulse in the lab runs at 2.5 Hz, below the three flashes per second limit, and the headings decrypt once on entering the viewport with the real text kept for screen readers; under reduced motion nothing scrambles.
 34. The shared encoder now accepts an optional per-app web size target (`webTargets` in an app's `meta.ts`); Rygiel's 16:9 hero loop targets 2.2 MB instead of 3 MB so the app stays inside the 14 MB budget (13.6 MB). Kasownik and Sztanga do not set it and were re-validated unchanged.
+35. Kiełek's font M PLUS Rounded 1c has no `OFL.txt` in its google/fonts folder; the licence text is taken from the upstream M+ project (`coz-m/MPLUS_FONTS`). The shared `fonts.mjs` now accepts an optional `source.ofl` URL for such families; the other apps are unaffected and re-validated.
+36. Kiełek's `bounce` spring (mass 1, stiffness 180, damping 12) overshoots about 20%, not the 12% the plan wrote; the values stay, the note on the page states the real number, and the drop lab shows it.
+37. Kiełek's story runs on Thursday 8 October 2026 and shows the season switch on screen: drops on 8, 15, 22 and 29 October hop to 20 October and 1 November when the plan moves from 7 to 12 days.
+38. Kiełek's loops (store and marketing) carry a 20 frame bridge, so each loop is 650 frames, 13 periods of the 50 frame leaf wiggle; overlays run 4 to 66, 220 to 292 and 344 to 412 for their reading time.
+39. In Kiełek's marketing cut the mascot hops out of the screen onto the edge of the clay phone at the watering moment and back before the next screen; the 1:1 cut keeps only kicker and headline so the mascot has room.
