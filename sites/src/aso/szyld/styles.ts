@@ -177,7 +177,7 @@ export const css = `
 .szyld .files__item{margin:0;min-width:0}
 .szyld .files__name{display:inline-block;margin-bottom:8px;padding:4px 12px;border-radius:999px;background:var(--grejpfrut);color:var(--smola);font-weight:700;font-size:14px}
 .szyld .files__item+.files__item .files__name{background:var(--limonka)}
-.szyld .files__code{margin:0;padding:16px 18px;border-radius:20px;background:var(--smola);color:#E6EFD0;font:500 13px/1.6 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
+.szyld .files__code{margin:0;padding:16px 18px;border-radius:20px;background:var(--smola);color:#E6EFD0;font:500 13px/1.6 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre-wrap;overflow-wrap:break-word}
 
 .szyld .cta{margin-top:clamp(64px,9vw,128px);padding-block:clamp(56px,8vw,104px);background:linear-gradient(120deg in oklab,var(--limonka) 0%,var(--limonka) 40%,#FF9A3E 100%)}
 .szyld .cta h2{font-size:clamp(34px,6vw,76px);max-width:14em}

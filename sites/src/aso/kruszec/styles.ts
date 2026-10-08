@@ -183,7 +183,7 @@ export const css = `
 @media (min-width:1000px){.kruszec .files{grid-template-columns:1fr 1fr}}
 .kruszec .files__item{margin:0;min-width:0;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:rgba(5,8,16,.5);overflow:hidden}
 .kruszec .files__name{display:block;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.1);color:var(--szalwia);font-weight:600;font-size:14px}
-.kruszec .files__code{margin:0;padding:16px;color:var(--tekst);font:500 13px/1.7 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
+.kruszec .files__code{margin:0;padding:16px;color:var(--tekst);font:500 13px/1.7 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre-wrap;overflow-wrap:break-word}
 
 .kruszec .cta{position:relative;margin:clamp(40px,6vw,80px) 0 0;padding:clamp(28px,5vw,64px);border-radius:32px;${glass};background:radial-gradient(700px 300px at 85% 110%,rgba(143,212,182,.16),transparent 70%),linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.03))}
 .kruszec .cta h2{font-size:clamp(36px,5vw,64px);max-width:14em}

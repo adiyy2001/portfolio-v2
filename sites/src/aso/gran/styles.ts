@@ -146,7 +146,7 @@ export const css = `
 @media (min-width:900px){.gran .files{grid-template-columns:1fr 1fr}}
 .gran .files__item{margin:0;min-width:0}
 .gran .files__name{display:inline-block;margin-bottom:8px;padding:4px 10px;border-radius:8px;background:var(--las);color:var(--biel);font-weight:800;font-size:14px}
-.gran .files__code{margin:0;padding:16px 18px;border-radius:14px;background:var(--glab);color:#E9F0EC;font:500 13px/1.6 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
+.gran .files__code{margin:0;padding:16px 18px;border-radius:14px;background:var(--glab);color:#E9F0EC;font:500 13px/1.6 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre-wrap;overflow-wrap:break-word}
 
 .gran .cta{margin-top:clamp(64px,9vw,120px);padding-block:clamp(48px,7vw,88px);background:var(--swit)}
 .gran .cta h2{color:var(--las)}

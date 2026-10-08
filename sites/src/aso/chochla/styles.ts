@@ -186,7 +186,7 @@ export const css = `
 .chochla .files__item{margin:0;min-width:0;border:var(--line);background:var(--krem)}
 .chochla .files__name{display:block;padding:8px 14px;border-bottom:var(--line);background:var(--musztarda);font-weight:800;font-size:15px}
 .chochla .files__item+.files__item .files__name{background:var(--roz)}
-.chochla .files__code{margin:0;padding:14px;color:var(--kontur);font:500 13px/1.7 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
+.chochla .files__code{margin:0;padding:14px;color:var(--kontur);font:500 13px/1.7 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre-wrap;overflow-wrap:break-word}
 
 .chochla .cta{position:relative;margin:clamp(40px,6vw,80px) 0 0;padding:clamp(36px,6vw,72px) clamp(20px,4vw,56px);border:var(--line);background:${dots('rgba(26,23,20,.18)', 12, 2)},var(--pomidor);overflow:hidden}
 .chochla .cta__inner{position:relative;max-width:44em;padding:clamp(20px,3vw,32px);border:var(--line);border-radius:40px;background:#fff}

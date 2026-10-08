@@ -190,7 +190,7 @@ export const css = `
 @media (min-width:1000px){.bis .files{grid-template-columns:1fr 1fr}}
 .bis .files__item{margin:0;min-width:0;border-radius:22px;background:var(--atrament);overflow:hidden}
 .bis .files__name{display:block;padding:10px 18px;background:var(--holo);color:var(--atrament);font-weight:700;font-size:14px}
-.bis .files__code{margin:0;padding:16px 18px;color:#F2F4F8;font:500 13px/1.7 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
+.bis .files__code{margin:0;padding:16px 18px;color:#F2F4F8;font:500 13px/1.7 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre-wrap;overflow-wrap:break-word}
 
 .bis .cta{position:relative;margin:clamp(40px,6vw,80px) 0 0;padding:clamp(28px,5vw,64px);border-radius:36px;background:radial-gradient(500px 300px at 100% 0,rgba(114,239,255,.6),transparent 70%),radial-gradient(500px 300px at 0 100%,rgba(255,138,208,.55),transparent 70%),#fff;box-shadow:0 0 0 4px #fff,0 0 0 5px rgba(17,18,23,.14),0 30px 60px -40px rgba(17,18,23,.5);overflow:hidden}
 .bis .cta h2{max-width:13em}

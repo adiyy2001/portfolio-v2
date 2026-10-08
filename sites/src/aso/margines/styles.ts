@@ -200,7 +200,7 @@ export const css = `
 .margines .files__item:nth-child(odd){transform:rotate(-.6deg)}
 .margines .files__item:nth-child(even){transform:rotate(.6deg)}
 .margines .files__name{display:block;margin-bottom:8px;font-family:'Caveat',cursive;font-weight:700;font-size:26px;line-height:1.1;color:var(--flamaster-ui)}
-.margines .files__code{margin:0;color:var(--atrament);font:400 13px/1.7 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre}
+.margines .files__code{margin:0;color:var(--atrament);font:400 13px/1.7 ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;overflow-x:auto;white-space:pre-wrap;overflow-wrap:break-word}
 
 .margines .cta .margin,.margines .cta .page{padding-top:clamp(56px,8vw,104px);padding-bottom:clamp(48px,7vw,88px)}
 .margines .cta__arrow{display:none}
