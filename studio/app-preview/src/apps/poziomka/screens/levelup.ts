@@ -61,8 +61,8 @@ export const drawLevelUp = (fb: FB, f: number, opts: { coins?: boolean } = {}) =
   }
   fb.panel(16, 266, W - 32, 46, C.cream, C.ink, C.gold);
   text(fb, 26, 274, 'POZIOM 8', { color: C.ink });
-  text(fb, W - 26, 274, `${level.to} / ${level.to} XP`, { color: C.dusk, align: 'right' });
-  xpBar(fb, 26, 288, 169, 169, blinkOn((((f + 6) % 48) + 48) % 48, 0, 4));
+  text(fb, W - 26, 274, `${level.to} / ${level.nextTo} XP`, { color: C.dusk, align: 'right' });
+  xpBar(fb, 26, 288, blinkOn((((f + 6) % 48) + 48) % 48, 0, 4) ? 2 : 0, 169);
   text(fb, 26, 300, 'Do poziomu 9: 200 XP', { color: C.dusk });
   fb.panel(16, 318, W - 32, 40, C.plum, C.ink);
   fb.sprite(26, 328, S.plantStages.sadzonka.slice(2, 14), S.ink);
