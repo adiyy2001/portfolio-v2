@@ -9,7 +9,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-aso.md`. Run rules: `/hom
 - [x] B4 Chochla
 - [x] B5 Kruszec
 - [x] B6 Bis
-- [ ] Q quality control
+- [x] Q quality control
 - [ ] R independent review, every rubric score at least 4
 - [ ] P publication and final report
 ```
@@ -398,6 +398,28 @@ Story: 1 to 3 say what it is (your artists live, new ones nearby, never miss the
 
 Validator green for every file of every set; every board looked at (alignment, text against UI, orphans, consistency between frames); the first three at about 200 px wide readable with the benefit clear in 3 seconds; Grań seams at 400 percent; PL and EN boards compared, nothing cut or squeezed; page shots at 390 and 1440 px looked at and fixed, no console errors, no horizontal scroll from 320 to 1440 px; the distinctness board of the first three of all six, and if two sets look like one template in other colours the weaker one is rebuilt; an independent reviewer with no knowledge of the process scores the rubric (readability in the thumbnail, clarity of the benefit in the first three, story of the sequence, fidelity to the style, UI quality, compliance with the specs, quality of the EN version, sales value of the page, distinctness from the other five), and everything below 4 is fixed and scored again.
 
+## Quality control (Q, 2026-10-08)
+
+Checked on all six sets, both languages, both stores, the iPad set and the index:
+
+- Validator: 0 errors for all six (dimensions, RGB without alpha, truecolour PNG or JPEG, file sizes, Play aspect, counts, ZIP against the manifest, headline word counts, banned words, Play headline box under 20 percent, seam margins). Studio unit tests 19 of 19.
+- Every board looked at (App Store, Play, A and B, feature graphics, icons, iPad), PL against EN, the thumbnails of the first three at 200 px, the distinctness board of all six (no two sets read as one template) and all 24 Grań seams (column check passes, crops looked at at 400 percent).
+- Pages: slices at 390 and 1440 px of the six case studies and the index looked at; scroll width equal to the viewport at 320, 360, 390, 768, 1024, 1280 and 1440 px; no console errors. In the deploy layout (Gatsby build plus `sites/dist` in `public/wzornik`, `gatsby serve` on 4330): every page at 320, 390, 768, 1024 and 1440 px without horizontal scroll, console errors, failed requests, font errors or broken images; fonts and favicons load (the index uses the portfolio's fonts and favicon, which 404 only in the standalone sites server); no running animation with reduced motion; the PL and EN and store switch swaps the whole set on all six; all six ZIPs, `/wzornik/` and `/dla-klienta/` resolve.
+- Content: no real brands, invented names as listed, nothing about Adrian beyond the footer line, no en or em dash.
+- Size: `sites/public/aso` is 72 MB (largest file the Szyld ZIP, 13.7 MB), well under 300 MB and 50 MB per file.
+
+Fixed:
+
+1. Kruszec iPad: the six tablet dashboards were half empty and account names ended in an ellipsis. Every dashboard now fills both columns with real modules (net worth chart across the full width on frame 1, accounts by group, allocation, goal, cushion, budget, report), and names and sublines wrap on the tablet instead of being cut. The net worth chip on iPad frame 1 moved next to the end of the line, clear of the device.
+2. Kruszec frame 4 (all stores): the allocation pills sat on the ring and over the phone. They are now two line glass tags placed clear of the device and the ring, the right one anchored to the frame edge so longer names grow inward.
+3. Kruszec variant B: the account chips covered the row labels of the screen behind them; the phone moved right and the chips are smaller.
+4. Margines App Store frame 4: the double marker underline crossed the next line of the sentence (line height raised, Polish one letter words glued in the EN set too). Play frame 1: the circle cut the first and last letters of the sentence and touched the source line, and the arrow ran over the text; the circle is wider and flatter, the source line has more room and the arrow ends at the circle's edge.
+5. Bis frame 4: the friends orbit and its bubbles covered the list of friends on the screen; the orbit sits lower and wider, so the bubbles circle the phone below the list.
+6. Bis chrome words were hard to read at thumbnail size (white top band on a silver ground); the letter gradient is darker in its upper half and the dark edge thicker, using only palette colours.
+7. Pages: the PL and EN file excerpts were cut on the right at 390 px; they now wrap on all six pages.
+
+Final results: validator 0 errors for all six; `yarn --cwd sites run check` 0 errors, 0 warnings, Prettier clean; `yarn --cwd sites test` 127 files, 1334 tests passed; `yarn --cwd sites build` 192 pages; root `yarn install --frozen-lockfile` passed on the second try (the first stopped with yarn's ECOMPROMISED mutex error), root `yarn.lock` unchanged; `yarn gatsby clean && yarn build` exit 0; deploy layout check green. Not changed: Bis keeps chrome only on the key words, so the thumbnail reads through the ink words; the reviewer may still mark the chrome words as the weakest point of thumbnail readability.
+
 ## Directory structure and URLs
 
 The tree, ownership, file names, the validator and the budgets are in `NOTES.md` ("Parallel build", "Folder layout", "Deliverables and file names per app", "Validator"). URLs:
@@ -451,3 +473,6 @@ Taken without asking, in the autonomous mode. App agents add their own to `STATU
 38. **Bis chrome words are measured, not set as images**: the headline is real text, and after the fonts load the page draws four SVG layers on each key word (shadow, dark edge under the fill, the chrome gradient), so a new language needs no layout work and the line checks still read the text. The last two words of every Bis headline are joined, so no line ends with one word; all fourteen planned headlines are used as written.
 39. **Bis names**: Hala Pogłos (a real Warsaw club is called Pogłos) and Zorza i Psy (the Polish band Zørza exists) were dropped; the clubs are Przelot, Scena Bąbel and Strych Mewa, the artists Mira Szum, Brokat Express, Pola Ołówek, Lisie Radio, Szklane Kolano, Ola Ćma, Tygrys z Kartonu and Neon Babci, all searched on 2026-10-08. The EN set stays in Warsaw with the same names, written anew (8 pm, Sat 17 Oct, kilometres).
 40. **Bis variant B and feature graphic**: variant B gets its own screen, the 30 second preview player, instead of repeating the Odkrywaj screen; the feature graphic puts the chrome name left and the promise right and keeps the centre for a sparkle without text, instead of the planned centred name, so the play button never covers the name.
+41. **Kruszec tablet dashboards are fuller than the phone screens**: the iPad set shows the whole app in two columns (accounts, allocation, goal, cushion, budget, report around the hero module of each frame) instead of the phone modules alone, because a half empty tablet undersold the larger canvas. Account names wrap on the tablet instead of being cut.
+42. **Kruszec allocation tags** sit beside the ring as two line glass tags (name, then current and planned share) instead of pills on the ring, so they never cover the ring or the phone in any store or language.
+43. **Bis chrome letters are darker** (a sky band from pale ice to steel, the dark horizon line, then palette pink and peach) with a thicker ink edge, so the chrome words hold at thumbnail size; the icon and the feature graphic keep the brighter chrome.

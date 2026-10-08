@@ -28,7 +28,9 @@ None. No foundation file was changed, so the earlier sets were not re-rendered.
 
 ## Open issues
 
-None known. Q and R still review the set.
+None known. R still reviews the set.
+
+Fixed in Q (2026-10-08): the frame 4 orbit covered the friends list, chrome words were weak at thumbnail size. See the QA section of `PLAN.md`.
 
 ## Review scores
 

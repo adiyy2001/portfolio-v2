@@ -29,7 +29,9 @@ Applied in the foundation (backward compatible, Grań and Szyld re-rendered pixe
 
 ## Open issues
 
-None known. Q and R still review the set.
+None known. R still reviews the set.
+
+Fixed in Q (2026-10-08): the frame 4 double underline crossed the next line, the Play frame 1 circle cut the sentence and the arrow crossed it. See the QA section of `PLAN.md`.
 
 ## Review scores
 
