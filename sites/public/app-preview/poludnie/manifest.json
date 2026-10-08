@@ -171,8 +171,8 @@
         ],
         "part": "grid",
         "kicker": "Bilans dnia",
-        "title": "92% prądu z własnego dachu.",
-        "line": "Z sieci tylko 1,2 kWh. Wartość dnia 23,10 zł w cenach przykładowych."
+        "title": "92% prądu z własnego dachu.",
+        "line": "Z sieci tylko 1,2 kWh. Wartość dnia 23,10 zł w cenach przykładowych."
       }
     ]
   },
@@ -499,7 +499,7 @@
     "hero": {
       "webm": {
         "path": "poludnie-hero.webm",
-        "bytes": 1591950,
+        "bytes": 1590031,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -508,12 +508,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 468806,
+        "bitrate": 468241,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-hero.mp4",
-        "bytes": 1630428,
+        "bytes": 1619540,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -522,7 +522,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 480126,
+        "bitrate": 476919,
         "audio": null
       },
       "poster": "posters/poludnie-hero.jpg"
@@ -530,7 +530,7 @@
     "hero-9x16": {
       "webm": {
         "path": "poludnie-hero-9x16.webm",
-        "bytes": 952689,
+        "bytes": 951526,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -539,12 +539,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 280553,
+        "bitrate": 280210,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-hero-9x16.mp4",
-        "bytes": 941571,
+        "bytes": 942788,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -553,7 +553,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 277272,
+        "bitrate": 277630,
         "audio": null
       },
       "poster": "posters/poludnie-hero-9x16.jpg"
@@ -561,7 +561,7 @@
     "social-1x1": {
       "webm": {
         "path": "poludnie-social-1x1.webm",
-        "bytes": 1168678,
+        "bytes": 1165548,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -570,12 +570,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 344159,
+        "bitrate": 343237,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-social-1x1.mp4",
-        "bytes": 1185963,
+        "bytes": 1177871,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -584,7 +584,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 349240,
+        "bitrate": 346857,
         "audio": null
       },
       "poster": "posters/poludnie-social-1x1.jpg"
@@ -659,7 +659,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "poludnie-store-886x1920.mp4",
       "path": "poludnie-store-886x1920.mp4",
-      "bytes": 35687840,
+      "bytes": 35687841,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -668,7 +668,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11420108,
+      "bitrate": 11420109,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -677,7 +677,7 @@
       "note": "Reels, TikTok, Shorts",
       "name": "poludnie-social-1080x1920.mp4",
       "path": "poludnie-social-1080x1920.mp4",
-      "bytes": 5273432,
+      "bytes": 5282487,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -686,7 +686,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1591979,
+      "bitrate": 1594713,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -695,7 +695,7 @@
       "note": "post w kanale",
       "name": "poludnie-social-1080x1080.mp4",
       "path": "poludnie-social-1080x1080.mp4",
-      "bytes": 4713996,
+      "bytes": 4675022,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -704,7 +704,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1423093,
+      "bitrate": 1411327,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -713,7 +713,7 @@
       "note": "YouTube, link w Google Play",
       "name": "poludnie-social-1920x1080.mp4",
       "path": "poludnie-social-1920x1080.mp4",
-      "bytes": 6373648,
+      "bytes": 6358645,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -722,7 +722,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1924120,
+      "bitrate": 1919590,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -733,14 +733,14 @@
   "renderSeconds": {
     "stills": 29,
     "store": 198,
-    "marketing-9x16": 577,
-    "marketing-1x1": 442,
-    "marketing-16x9": 631,
+    "marketing-9x16": 668,
+    "marketing-1x1": 513,
+    "marketing-16x9": 697,
     "tile": 21
   },
   "validation": true,
   "published": {
-    "totalBytes": 9869021,
+    "totalBytes": 9845375,
     "count": 30
   }
 }
