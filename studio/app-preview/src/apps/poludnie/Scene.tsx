@@ -17,8 +17,8 @@ export const liveFlows: Flows = { sun: facts.now.prod, home: facts.now.home, bat
 
 export const cameras = {
   hook: { x: 60, y: 84, scale: 1.62 },
-  now: { x: 12, y: 96, scale: 1.3 },
-  battery: { x: 104, y: 120, scale: 1.6 },
+  now: { x: -8, y: 96, scale: 1.24 },
+  battery: { x: 72, y: 80, scale: 1.34 },
 } as const;
 
 const timeAt = (f: number) => (f < T.day + outFrames ? facts.now.time : f < T.tip + outFrames ? facts.day.time : f < T.balance + outFrames ? facts.tip.time : facts.month.time);

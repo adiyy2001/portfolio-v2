@@ -59,7 +59,7 @@ const layouts: Record<Format, Layout> = {
   },
   '1x1': {
     copy: { left: 64, top: 56, width: 700, title: 64, line: null, kicker: 22 },
-    world: { cx: 420, cy: 650, scale: 1.95 },
+    world: { cx: 446, cy: 660, scale: 1.72 },
     phone: { scale: 0.5, left: 806, top: 500 },
     wire: 'right',
     outro: { cy: 470, icon: 210, name: 112, tagline: 32 },

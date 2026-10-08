@@ -499,7 +499,7 @@
     "hero": {
       "webm": {
         "path": "poludnie-hero.webm",
-        "bytes": 1627096,
+        "bytes": 1628325,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -508,12 +508,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 507159,
+        "bitrate": 507543,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-hero.mp4",
-        "bytes": 1588922,
+        "bytes": 1602238,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -522,7 +522,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 495248,
+        "bitrate": 499398,
         "audio": null
       },
       "poster": "posters/poludnie-hero.jpg"
@@ -530,7 +530,7 @@
     "hero-9x16": {
       "webm": {
         "path": "poludnie-hero-9x16.webm",
-        "bytes": 973218,
+        "bytes": 965899,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -539,12 +539,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 303348,
+        "bitrate": 301067,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-hero-9x16.mp4",
-        "bytes": 934773,
+        "bytes": 931377,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -553,7 +553,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 291357,
+        "bitrate": 290299,
         "audio": null
       },
       "poster": "posters/poludnie-hero-9x16.jpg"
@@ -561,7 +561,7 @@
     "social-1x1": {
       "webm": {
         "path": "poludnie-social-1x1.webm",
-        "bytes": 1195434,
+        "bytes": 1155189,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -570,12 +570,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 372612,
+        "bitrate": 360068,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-social-1x1.mp4",
-        "bytes": 1162824,
+        "bytes": 1111657,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -584,7 +584,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 362438,
+        "bitrate": 346490,
         "audio": null
       },
       "poster": "posters/poludnie-social-1x1.jpg"
@@ -592,7 +592,7 @@
     "store": {
       "webm": {
         "path": "poludnie-store.webm",
-        "bytes": 728239,
+        "bytes": 719708,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -601,12 +601,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 226989,
+        "bitrate": 224330,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-store.mp4",
-        "bytes": 638811,
+        "bytes": 641322,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -615,7 +615,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 199109,
+        "bitrate": 199892,
         "audio": null
       },
       "poster": "posters/poludnie-store.jpg"
@@ -623,7 +623,7 @@
     "tile": {
       "webm": {
         "path": "poludnie-tile.webm",
-        "bytes": 107462,
+        "bytes": 108224,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -632,12 +632,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 171939,
+        "bitrate": 173158,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-tile.mp4",
-        "bytes": 91747,
+        "bytes": 90966,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -646,7 +646,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 146795,
+        "bitrate": 145545,
         "audio": null
       },
       "poster": "posters/poludnie-tile.jpg"
@@ -659,7 +659,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "poludnie-store-886x1920.mp4",
       "path": "poludnie-store-886x1920.mp4",
-      "bytes": 35687895,
+      "bytes": 35687771,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -668,7 +668,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11420126,
+      "bitrate": 11420086,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -677,7 +677,7 @@
       "note": "Reels, TikTok i Shorts",
       "name": "poludnie-social-1080x1920.mp4",
       "path": "poludnie-social-1080x1920.mp4",
-      "bytes": 5003113,
+      "bytes": 4987326,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -686,7 +686,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1600996,
+      "bitrate": 1595944,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -695,7 +695,7 @@
       "note": "post w kanale",
       "name": "poludnie-social-1080x1080.mp4",
       "path": "poludnie-social-1080x1080.mp4",
-      "bytes": 4492132,
+      "bytes": 4314383,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -704,7 +704,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1437482,
+      "bitrate": 1380602,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -713,7 +713,7 @@
       "note": "YouTube, link w Google Play",
       "name": "poludnie-social-1920x1080.mp4",
       "path": "poludnie-social-1920x1080.mp4",
-      "bytes": 6106450,
+      "bytes": 6147858,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -722,7 +722,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1954064,
+      "bitrate": 1967314,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -731,16 +731,16 @@
     "rounded": "poludnie-icon-512.png"
   },
   "renderSeconds": {
-    "stills": 29,
-    "store": 198,
-    "marketing-9x16": 668,
-    "marketing-1x1": 469,
-    "marketing-16x9": 651,
+    "stills": 32,
+    "store": 228,
+    "marketing-9x16": 644,
+    "marketing-1x1": 478,
+    "marketing-16x9": 643,
     "tile": 21
   },
   "validation": true,
   "published": {
-    "totalBytes": 10032303,
+    "totalBytes": 9935424,
     "count": 30
   }
 }
