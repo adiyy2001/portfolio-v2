@@ -46,10 +46,22 @@ export const content = {
       'Zadanie: podgląd do App Store, który w pierwszych dwóch sekundach pokaże dom z płynącym prądem i jedną dużą liczbą, trzy formaty na kampanię w mediach społecznościowych, pętle na stronę i storyboard. Bez dźwięku, bo sklep i feed startują wyciszone.',
     ],
     facts: [
-      ['Użytkownik', 'rodzina w domu jednorodzinnym, instalacja z magazynem, rozliczenie net-billing'],
-      ['Trzy funkcje', 'przepływ energii na żywo, profil dnia z produkcją i zużyciem, porada, kiedy włączyć pralkę, z bilansem w złotówkach'],
-      ['Instalacja w historii', '8,2 kWp, czyli 20 paneli po 410 W, falownik hybrydowy 8 kW, magazyn 10,2 kWh z rezerwą 30%'],
-      ['Liczby', 'zmyślone, ale policzone z modelu dnia; ceny przykładowe: zakup 1,08 zł, sprzedaż 0,24 zł za kWh'],
+      [
+        'Użytkownik',
+        'rodzina w domu jednorodzinnym, instalacja z magazynem, rozliczenie net-billing',
+      ],
+      [
+        'Trzy funkcje',
+        'przepływ energii na żywo, profil dnia z produkcją i zużyciem, porada, kiedy włączyć pralkę, z bilansem w złotówkach',
+      ],
+      [
+        'Instalacja w historii',
+        '8,2 kWp, czyli 20 paneli po 410 W, falownik hybrydowy 8 kW, magazyn 10,2 kWh z rezerwą 30%',
+      ],
+      [
+        'Liczby',
+        'zmyślone, ale policzone z modelu dnia; ceny przykładowe: zakup 1,08 zł, sprzedaż 0,24 zł za kWh',
+      ],
     ] as [string, string][],
   },
   direction: {
@@ -79,10 +91,22 @@ export const content = {
     caption:
       'Ta sama krzywa produkcji i ta sama liczba 47,8 kWh. Po lewej krzywa draw i licznik count, po prawej oba liniowo. Ruch liniowy wygląda mechanicznie, a licznik długo pokazuje liczby, których nikt nie powinien czytać. Zmień długość, żeby zobaczyć, kiedy rysowanie robi się nerwowe.',
     rules: [
-      ['Jedna informacja na ujęcie', 'kolor wiodący zostaje w 100%, pozostałe przepływy i wiersze schodzą do 40% w 12 klatek'],
-      ['Przepływ', 'kreska 8, przerwa 10, 1 piksel na klatkę na każdy kilowat: 6,4 kW z dachu biegnie prawie trzynaście razy szybciej niż 0,5 kW do domu'],
-      ['Stopniowanie', 'nagłówek, liczba i karta wjeżdżają co 4 klatki, linia zużycia rysuje się dopiero po produkcji'],
-      ['Kamera', 'w wersji marketingowej jedzie po osiach izometrii pod kątem 30 stopni: dach, magazyn, tablica z wykresem, pralka, słupki bilansu'],
+      [
+        'Jedna informacja na ujęcie',
+        'kolor wiodący zostaje w 100%, pozostałe przepływy i wiersze schodzą do 40% w 12 klatek',
+      ],
+      [
+        'Przepływ',
+        'kreska 8, przerwa 10, 1 piksel na klatkę na każdy kilowat: 6,4 kW z dachu biegnie prawie trzynaście razy szybciej niż 0,5 kW do domu',
+      ],
+      [
+        'Stopniowanie',
+        'nagłówek, liczba i karta wjeżdżają co 4 klatki, linia zużycia rysuje się dopiero po produkcji',
+      ],
+      [
+        'Kamera',
+        'w wersji marketingowej jedzie po osiach izometrii pod kątem 30 stopni: dach, magazyn, tablica z wykresem, pralka, słupki bilansu',
+      ],
     ] as [string, string][],
   },
   screens: {

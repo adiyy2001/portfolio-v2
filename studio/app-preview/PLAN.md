@@ -8,7 +8,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-app-preview.md`. Run rule
 - [x] B3 Rygiel
 - [x] B4 Kiełek
 - [x] B5 Poziomka
-- [ ] B6 Południe
+- [x] B6 Południe
 - [ ] Q quality control
 - [ ] R independent review, every rubric score at least 4
 - [ ] P publication and final report
@@ -603,3 +603,10 @@ Q runs after all six are merged: ffprobe table for every file (store cut exact t
 44. Poziomka's week bars grow 3 art px per frame (the plan said 1), so the chart fills inside its 2 s shot.
 45. The Poziomka page sizes its videos and screens with a small script to whole device pixel multiples of their art grid, with `image-rendering: pixelated`, and falls back to smooth scaling only when the space allows nothing but a downscale. Body text is Tiny5 at 16 px, headings Jersey 10 at whole multiples of its grid.
 46. Poziomka's panels use inner bevels and dithered shades instead of hard offset shadows, to keep clear of the neobrutalist look.
+47. Południe's numbers come from one model of the day at 5 minute steps (production bell with 6,4 kW at 13:10, a house load profile, a battery plan with a 30% reserve and full at 13:40). Where the plan's starting values did not close physically, the model wins: use 15,3 kWh (plan 15,6), roof to house 7,5 (6,8), to battery 7,5 (8,4), to grid 32,8 (32,6), from battery 6,6 (7,6), from grid 1,2; self sufficiency stays 92%, the value of the day is 23,10 zł (plan 23,37). Every split adds up on screen, on the board and on the page, and the site tests check the sums.
+48. Południe's story runs on a clock: the house and the battery at 13:10, the day chart and the balance counted until 21:40 the same evening, and the appliance tip is for tomorrow (forecast 41,8 kWh, peak 5,6 kW, average surplus 4,1 kW between 12:30 and 14:00).
+49. Południe's battery charges on a plan to be full at 13:40 (exporting in the morning, storing around noon) instead of filling as fast as possible, so at 13:10 it is at 95%, not the plan's 80%. The battery shot replays the charge curve from the 30% reserve at 6:15 to 95% now, and the battery cabinet in the scene follows the curve.
+50. Południe's marketing cut is 26,5 s (795 frames, five beats plus the outro), longer than the 25 s store cut, because each beat gets a part of the isometric world (roof, battery, a billboard with the day chart, the washing machine, three columns of the balance) and a headline that can be read.
+51. In Południe's marketing cut the headlines sit on white slab tiles, so the camera can move the isometric world behind them without text crossing the pole or the roof.
+52. Południe's gallery has seven screens (Teraz, Magazyn, Dzień, Kiedy włączyć, Bilans dnia, Miesiąc, Instalacja); the store cut shows the first five.
+53. Południe's tile loop quantises the dash speeds so that each path moves a whole number of dash periods in 150 frames; the loop has no seam, the speeds differ from 1 px per kW by under 0,06 px per frame.

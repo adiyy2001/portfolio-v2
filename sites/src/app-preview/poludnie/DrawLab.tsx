@@ -30,10 +30,19 @@ const Lane = ({
     <div class="lab__count">
       <span>{counter(total * count)}</span> kWh
     </div>
-    <svg class="lab__plot" viewBox={`-4 -8 ${W + 8} ${H + 16}`} role="img" aria-label={`Wykres produkcji: ${title}`}>
+    <svg
+      class="lab__plot"
+      viewBox={`-4 -8 ${W + 8} ${H + 16}`}
+      role="img"
+      aria-label={`Wykres produkcji: ${title}`}>
       <line x1="0" x2={W} y1={H} y2={H} class="lab__axis" />
       <path d={path} class="lab__ghost" />
-      <path d={path} class="lab__line" pathLength={1} style={{ strokeDasharray: '1 1', strokeDashoffset: 1 - draw }} />
+      <path
+        d={path}
+        class="lab__line"
+        pathLength={1}
+        style={{ strokeDasharray: '1 1', strokeDashoffset: 1 - draw }}
+      />
     </svg>
     <figcaption>
       <b>{title}</b>

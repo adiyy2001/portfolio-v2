@@ -1,0 +1,746 @@
+{
+  "app": {
+    "slug": "poludnie",
+    "name": "Południe",
+    "category": "Domowa fotowoltaika i magazyn energii",
+    "city": "dom pod Opolem",
+    "zone": "8,2 kWp, magazyn 10,2 kWh",
+    "tagline": "Przepływ energii na żywo, dzień na jednym wykresie i porada, kiedy włączyć pralkę, żeby prąd szedł prosto z dachu."
+  },
+  "generatedAt": "2026-10-08",
+  "storyboard": {
+    "fps": 30,
+    "duration": 750,
+    "bridge": 20,
+    "poster": 45,
+    "defaultPoster": 150,
+    "shots": [
+      {
+        "id": "hook",
+        "name": "Hak",
+        "from": 0,
+        "to": 74,
+        "key": 45,
+        "action": "Od pierwszej klatki izometryczny dom z płynącą energią i duża liczba 6,4 kW z dachu. Kreski na ścieżkach biegną z prędkością zależną od mocy, przepływ ze słońca prowadzi, reszta czeka na 40%. Po panelach przesuwa się refleks.",
+        "overlay": {
+          "text": "Prąd z dachu na żywo",
+          "from": 4,
+          "to": 72,
+          "top": 798
+        },
+        "seconds": [
+          0,
+          2.5
+        ]
+      },
+      {
+        "id": "battery",
+        "name": "Magazyn",
+        "from": 75,
+        "to": 224,
+        "key": 190,
+        "action": "Stuknięcie w wiersz Magazyn. Kamera jedzie wzdłuż osi izometrii do baterii i przybliża ją, przepływ do magazynu przejmuje kolor wiodący. Krzywa naładowania rysuje się od rezerwy 30% o 6:15 do 95% teraz, poziom w bryle i liczba idą razem z nią. Na końcu plan: pełny o 13:40.",
+        "seconds": [
+          2.5,
+          7.5
+        ]
+      },
+      {
+        "id": "day",
+        "name": "Dzień",
+        "from": 225,
+        "to": 374,
+        "key": 366,
+        "action": "Zakładka Dzień, wieczór. Krzywa produkcji rysuje się przez cały dzień, liczba dochodzi do 47,8 kWh. Potem linia zużycia, pole nadwyżki i znacznik szczytu 6,4 kW o 13:10. Na dole bilans: dokąd poszła energia z dachu i skąd przyszła ta w domu.",
+        "overlay": {
+          "text": "Cały dzień na jednym wykresie",
+          "from": 240,
+          "to": 312,
+          "top": 798
+        },
+        "seconds": [
+          7.5,
+          12.5
+        ]
+      },
+      {
+        "id": "tip",
+        "name": "Kiedy włączyć",
+        "from": 375,
+        "to": 524,
+        "key": 512,
+        "action": "Zakładka Porady. Prognoza na jutro rysuje się, okno od 12:30 do 14:00 rozjaśnia się na krzywej. Karta pralki wjeżdża od dołu, nadwyżka liczy się do 4,1 kW, potem zmywarka i grzałka w bojlerze dostają swoje okna.",
+        "overlay": {
+          "text": "Pralka wtedy, gdy świeci",
+          "from": 390,
+          "to": 456,
+          "top": 798
+        },
+        "seconds": [
+          12.5,
+          17.5
+        ]
+      },
+      {
+        "id": "balance",
+        "name": "Bilans",
+        "from": 525,
+        "to": 674,
+        "key": 664,
+        "action": "Zakładka Bilans. Pierścień samowystarczalności rysuje się do 92%: najpierw część z dachu, potem z magazynu, a 8% z sieci zostaje szare. Pod spodem wartość dnia liczy się do 23,10 zł, w cenach przykładowych.",
+        "seconds": [
+          17.5,
+          22.5
+        ]
+      },
+      {
+        "id": "end",
+        "name": "Zakończenie",
+        "from": 675,
+        "to": 749,
+        "key": 740,
+        "action": "Ekran startowy: sześcian z ikony unosi się na sprężynie rise, na górnej ścianie wypełnia się tarcza słońca, pod spodem nazwa Południe.",
+        "seconds": [
+          22.5,
+          25
+        ]
+      }
+    ],
+    "board": "poludnie-storyboard.png"
+  },
+  "marketing": {
+    "duration": 795,
+    "bridge": 20,
+    "outro": 720,
+    "poster": 60,
+    "beats": [
+      {
+        "from": 0,
+        "to": 119,
+        "store": [
+          0,
+          74
+        ],
+        "part": "roof",
+        "kicker": "Teraz, 13:10",
+        "title": "6,4 kW prosto z dachu.",
+        "line": "Widać, dokąd płynie prąd: do domu, do magazynu i do sieci."
+      },
+      {
+        "from": 120,
+        "to": 269,
+        "store": [
+          75,
+          224
+        ],
+        "part": "battery",
+        "kicker": "Magazyn",
+        "title": "Pełny o 13:40.",
+        "line": "Bateria ładuje się w południe, gdy słońca jest najwięcej."
+      },
+      {
+        "from": 270,
+        "to": 419,
+        "store": [
+          225,
+          374
+        ],
+        "part": "chart",
+        "kicker": "Dzień",
+        "title": "47,8 kWh z dachu.",
+        "line": "Szczyt 6,4 kW o 13:10. Dom zużył 15,3 kWh."
+      },
+      {
+        "from": 420,
+        "to": 569,
+        "store": [
+          375,
+          524
+        ],
+        "part": "washer",
+        "kicker": "Jutro",
+        "title": "Pralka o 12:30.",
+        "line": "Wtedy dach ma 4,1 kW nadwyżki."
+      },
+      {
+        "from": 570,
+        "to": 719,
+        "store": [
+          525,
+          674
+        ],
+        "part": "grid",
+        "kicker": "Bilans dnia",
+        "title": "92% prądu z własnego dachu.",
+        "line": "Z sieci tylko 1,2 kWh. Wartość dnia 23,10 zł w cenach przykładowych."
+      }
+    ]
+  },
+  "palette": [
+    {
+      "id": "ground",
+      "name": "Mgła",
+      "role": "tło ekranów i sceny izometrycznej",
+      "hex": "#EEF2F6",
+      "onSurface": 1.12,
+      "onGrouped": 1
+    },
+    {
+      "id": "card",
+      "name": "Biel",
+      "role": "górne ściany brył, karty, pola",
+      "hex": "#FFFFFF",
+      "onSurface": 1,
+      "onGrouped": 1.12
+    },
+    {
+      "id": "left",
+      "name": "Cień lewy",
+      "role": "lewe ściany brył, linie siatki wykresu",
+      "hex": "#DCE3EB",
+      "onSurface": 1.29,
+      "onGrouped": 1.15
+    },
+    {
+      "id": "right",
+      "name": "Cień prawy",
+      "role": "prawe ściany brył, krawędzie kart",
+      "hex": "#C3CEDA",
+      "onSurface": 1.6,
+      "onGrouped": 1.42
+    },
+    {
+      "id": "ink",
+      "name": "Grafit",
+      "role": "tekst główny i duże liczby",
+      "hex": "#15202B",
+      "onSurface": 16.49,
+      "onGrouped": 14.66
+    },
+    {
+      "id": "secondary",
+      "name": "Łupek",
+      "role": "opisy, osie, jednostki",
+      "hex": "#4E5D6C",
+      "onSurface": 6.76,
+      "onGrouped": 6.01
+    },
+    {
+      "id": "sun",
+      "name": "Słońce",
+      "role": "produkcja: linie, kreski przepływu, tarcza słońca",
+      "hex": "#F2A100",
+      "onSurface": 2.13,
+      "onGrouped": 1.89
+    },
+    {
+      "id": "sunText",
+      "name": "Słońce, tekst",
+      "role": "liczby i etykiety produkcji na bieli",
+      "hex": "#965E00",
+      "onSurface": 5.39,
+      "onGrouped": 4.79
+    },
+    {
+      "id": "sunTint",
+      "name": "Słońce, tło",
+      "role": "pole nadwyżki, okno czasu w poradzie",
+      "hex": "#FCEAC7",
+      "onSurface": 1.18,
+      "onGrouped": 1.05
+    },
+    {
+      "id": "battery",
+      "name": "Magazyn",
+      "role": "poziom baterii, ładowanie, przepływ do magazynu",
+      "hex": "#2E9F5B",
+      "onSurface": 3.37,
+      "onGrouped": 3
+    },
+    {
+      "id": "batteryText",
+      "name": "Magazyn, tekst",
+      "role": "liczby i etykiety magazynu na bieli",
+      "hex": "#1F7A43",
+      "onSurface": 5.35,
+      "onGrouped": 4.76
+    },
+    {
+      "id": "batteryTint",
+      "name": "Magazyn, tło",
+      "role": "pole pod krzywą naładowania",
+      "hex": "#D5ECDE",
+      "onSurface": 1.24,
+      "onGrouped": 1.11
+    },
+    {
+      "id": "home",
+      "name": "Dom",
+      "role": "zużycie: linia, przepływ do domu, liczby",
+      "hex": "#3A6FD8",
+      "onSurface": 4.72,
+      "onGrouped": 4.2
+    },
+    {
+      "id": "homeTint",
+      "name": "Dom, tło",
+      "role": "pola zużycia i karta porady",
+      "hex": "#D8E2F7",
+      "onSurface": 1.3,
+      "onGrouped": 1.16
+    },
+    {
+      "id": "grid",
+      "name": "Sieć",
+      "role": "przepływ do sieci, słup, linie",
+      "hex": "#6B7C8F",
+      "onSurface": 4.28,
+      "onGrouped": 3.81
+    },
+    {
+      "id": "gridText",
+      "name": "Sieć, tekst",
+      "role": "liczby i etykiety sieci na bieli",
+      "hex": "#5F6F82",
+      "onSurface": 5.14,
+      "onGrouped": 4.57
+    },
+    {
+      "id": "panel",
+      "name": "Panel",
+      "role": "ogniwa paneli na dachu i w ikonie",
+      "hex": "#2A3F5A",
+      "onSurface": 10.73,
+      "onGrouped": 9.54
+    }
+  ],
+  "type": {
+    "hero": {
+      "family": "Archivo",
+      "size": 88,
+      "line": 84,
+      "weight": 800,
+      "width": 75
+    },
+    "number": {
+      "family": "Archivo",
+      "size": 40,
+      "line": 42,
+      "weight": 800,
+      "width": 75
+    },
+    "title": {
+      "family": "Archivo",
+      "size": 30,
+      "line": 36,
+      "weight": 700,
+      "width": 100
+    },
+    "headline": {
+      "family": "Archivo",
+      "size": 17,
+      "line": 22,
+      "weight": 600,
+      "width": 87.5
+    },
+    "body": {
+      "family": "Archivo",
+      "size": 15,
+      "line": 21,
+      "weight": 400,
+      "width": 100
+    },
+    "label": {
+      "family": "Archivo",
+      "size": 13,
+      "line": 17,
+      "weight": 500,
+      "width": 100
+    }
+  },
+  "fonts": [
+    {
+      "family": "Archivo",
+      "file": "fonts/archivo-variable.woff2",
+      "license": "fonts/OFL-archivo.txt",
+      "weight": "400 800",
+      "used": [
+        400,
+        500,
+        600,
+        700,
+        800
+      ],
+      "role": "cały interfejs, liczby w wąskiej szerokości 75, wideo i strona; oś szerokości od 75 do 100",
+      "bytes": 72316
+    }
+  ],
+  "motion": [
+    {
+      "id": "draw",
+      "use": "linie wykresów i ścieżki energii",
+      "kind": "bezier",
+      "points": [
+        0.65,
+        0,
+        0.35,
+        1
+      ],
+      "ms": 1333,
+      "note": "pathLength od 0 do 1 w 40 klatek; linia rusza powoli, przyspiesza w środku dnia i dojeżdża łagodnie"
+    },
+    {
+      "id": "count",
+      "use": "liczby",
+      "kind": "bezier",
+      "points": [
+        0.22,
+        1,
+        0.36,
+        1
+      ],
+      "ms": 1000,
+      "note": "30 klatek, szybki start i długie dojście; wynik stoi potem co najmniej 45 klatek, żeby dało się go przeczytać"
+    },
+    {
+      "id": "rise",
+      "use": "bryły izometryczne i karty",
+      "kind": "spring",
+      "mass": 1,
+      "stiffness": 200,
+      "damping": 24,
+      "note": "wjazd o 12 pikseli wzdłuż pionu izometrii, bez widocznego odbicia; kolejne karty co 4 klatki"
+    },
+    {
+      "id": "track",
+      "use": "kamera między częściami sceny",
+      "kind": "bezier",
+      "points": [
+        0.45,
+        0,
+        0.55,
+        1
+      ],
+      "ms": 800,
+      "note": "24 klatki wzdłuż osi izometrii pod kątem 30 stopni, nigdy na skos ekranu"
+    },
+    {
+      "id": "focus",
+      "use": "jedna informacja na ujęcie",
+      "kind": "bezier",
+      "points": [
+        0.33,
+        1,
+        0.68,
+        1
+      ],
+      "ms": 400,
+      "note": "kolor wiodący zostaje w 100%, pozostałe przepływy i karty schodzą do 40% w 12 klatek"
+    },
+    {
+      "id": "flow",
+      "use": "kreski na ścieżkach energii",
+      "kind": "bezier",
+      "points": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "ms": 600,
+      "note": "kreska 8, przerwa 10, prędkość 1 piksel na klatkę na każdy kilowat; jedyny ruch liniowy, bo pokazuje moc"
+    }
+  ],
+  "gallery": [
+    {
+      "n": 1,
+      "title": "Teraz",
+      "caption": "Izometryczny dom z czterema przepływami: 6,4 kW z dachu dzieli się na 0,5 kW do domu, 1,3 kW do magazynu i 4,6 kW do sieci.",
+      "file": "screens/poludnie-screen-1.webp"
+    },
+    {
+      "n": 2,
+      "title": "Magazyn",
+      "caption": "Bateria 10,2 kWh naładowana w 95%. Krzywa pokazuje dzień od rezerwy 30% o 6:15 do teraz i plan: pełny o 13:40.",
+      "file": "screens/poludnie-screen-2.webp"
+    },
+    {
+      "n": 3,
+      "title": "Dzień",
+      "caption": "Produkcja i zużycie na jednym wykresie, szczyt 6,4 kW o 13:10. Pod spodem bilans: 47,8 kWh z dachu to 7,5 do domu, 7,5 do magazynu i 32,8 do sieci.",
+      "file": "screens/poludnie-screen-3.webp"
+    },
+    {
+      "n": 4,
+      "title": "Kiedy włączyć",
+      "caption": "Prognoza na jutro i okno dla pralki od 12:30 do 14:00, kiedy dach ma 4,1 kW nadwyżki. Zmywarka i bojler dostają swoje okna.",
+      "file": "screens/poludnie-screen-4.webp"
+    },
+    {
+      "n": 5,
+      "title": "Bilans dnia",
+      "caption": "Samowystarczalność 92%: 7,5 kWh z dachu, 6,6 z magazynu i tylko 1,2 z sieci. Wartość dnia 23,10 zł w cenach przykładowych.",
+      "file": "screens/poludnie-screen-5.webp"
+    },
+    {
+      "n": 6,
+      "title": "Miesiąc",
+      "caption": "Maj dzień po dniu: 462,4 kWh z dachu, 81% samowystarczalności i 255,36 zł wartości w cenach przykładowych.",
+      "file": "screens/poludnie-screen-6.webp"
+    },
+    {
+      "n": 7,
+      "title": "Instalacja",
+      "caption": "Dane systemu w jednym miejscu: 20 paneli po 410 W, falownik hybrydowy 8 kW, magazyn 10,2 kWh z rezerwą 30%.",
+      "file": "screens/poludnie-screen-7.webp"
+    }
+  ],
+  "videos": {
+    "hero": {
+      "webm": {
+        "path": "poludnie-hero.webm",
+        "bytes": 1591950,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 815,
+        "duration": 27.166,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 468806,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poludnie-hero.mp4",
+        "bytes": 1630428,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 815,
+        "duration": 27.167,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 480126,
+        "audio": null
+      },
+      "poster": "posters/poludnie-hero.jpg"
+    },
+    "hero-9x16": {
+      "webm": {
+        "path": "poludnie-hero-9x16.webm",
+        "bytes": 952689,
+        "width": 540,
+        "height": 960,
+        "fps": 30,
+        "frames": 815,
+        "duration": 27.166,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 280553,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poludnie-hero-9x16.mp4",
+        "bytes": 941571,
+        "width": 540,
+        "height": 960,
+        "fps": 30,
+        "frames": 815,
+        "duration": 27.167,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 277272,
+        "audio": null
+      },
+      "poster": "posters/poludnie-hero-9x16.jpg"
+    },
+    "social-1x1": {
+      "webm": {
+        "path": "poludnie-social-1x1.webm",
+        "bytes": 1168678,
+        "width": 720,
+        "height": 720,
+        "fps": 30,
+        "frames": 815,
+        "duration": 27.166,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 344159,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poludnie-social-1x1.mp4",
+        "bytes": 1185963,
+        "width": 720,
+        "height": 720,
+        "fps": 30,
+        "frames": 815,
+        "duration": 27.167,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 349240,
+        "audio": null
+      },
+      "poster": "posters/poludnie-social-1x1.jpg"
+    },
+    "store": {
+      "webm": {
+        "path": "poludnie-store.webm",
+        "bytes": 670148,
+        "width": 442,
+        "height": 960,
+        "fps": 30,
+        "frames": 770,
+        "duration": 25.666,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 208882,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poludnie-store.mp4",
+        "bytes": 566930,
+        "width": 442,
+        "height": 960,
+        "fps": 30,
+        "frames": 770,
+        "duration": 25.667,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 176705,
+        "audio": null
+      },
+      "poster": "posters/poludnie-store.jpg"
+    },
+    "tile": {
+      "webm": {
+        "path": "poludnie-tile.webm",
+        "bytes": 107462,
+        "width": 480,
+        "height": 600,
+        "fps": 30,
+        "frames": 150,
+        "duration": 5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 171939,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poludnie-tile.mp4",
+        "bytes": 91747,
+        "width": 480,
+        "height": 600,
+        "fps": 30,
+        "frames": 150,
+        "duration": 5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 146795,
+        "audio": null
+      },
+      "poster": "posters/poludnie-tile.jpg"
+    }
+  },
+  "finals": [
+    {
+      "kind": "store",
+      "title": "Wersja sklepowa",
+      "note": "App Store Connect, podgląd aplikacji na iPhone",
+      "name": "poludnie-store-886x1920.mp4",
+      "path": "poludnie-store-886x1920.mp4",
+      "bytes": 35687840,
+      "width": 886,
+      "height": 1920,
+      "fps": 30,
+      "frames": 750,
+      "duration": 25,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 11420108,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "9x16",
+      "title": "Wersja marketingowa 9:16",
+      "note": "Reels, TikTok, Shorts",
+      "name": "poludnie-social-1080x1920.mp4",
+      "path": "poludnie-social-1080x1920.mp4",
+      "bytes": 5273432,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "frames": 795,
+      "duration": 26.5,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 1591979,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "1x1",
+      "title": "Wersja marketingowa 1:1",
+      "note": "post w kanale",
+      "name": "poludnie-social-1080x1080.mp4",
+      "path": "poludnie-social-1080x1080.mp4",
+      "bytes": 4713996,
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "frames": 795,
+      "duration": 26.5,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 1423093,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "16x9",
+      "title": "Wersja marketingowa 16:9",
+      "note": "YouTube, link w Google Play",
+      "name": "poludnie-social-1920x1080.mp4",
+      "path": "poludnie-social-1920x1080.mp4",
+      "bytes": 6373648,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frames": 795,
+      "duration": 26.5,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 1924120,
+      "audio": "AAC, stereo, 48 kHz"
+    }
+  ],
+  "icons": {
+    "full": "poludnie-icon-1024.png",
+    "rounded": "poludnie-icon-512.png"
+  },
+  "renderSeconds": {
+    "stills": 29,
+    "store": 198,
+    "marketing-9x16": 577,
+    "marketing-1x1": 442,
+    "marketing-16x9": 631,
+    "tile": 21
+  },
+  "validation": true,
+  "published": {
+    "totalBytes": 9869021,
+    "count": 30
+  }
+}

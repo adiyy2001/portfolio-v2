@@ -132,6 +132,7 @@ describe('poludnie content', () => {
   it('labels prices as examples and carries no ratings or download counts', () => {
     const text = JSON.stringify(content).toLowerCase();
     expect(text).toContain('przykładowe');
-    for (const word of ['ocena', 'gwiazd', 'pobrań', 'nagrod', 'opinie']) expect(text).not.toContain(word);
+    for (const word of ['ocena', 'gwiazd', 'pobrań', 'nagrod', 'opinie'])
+      expect(text).not.toContain(word);
   });
 });

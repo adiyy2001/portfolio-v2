@@ -47,7 +47,12 @@ const weights = [
   [800, 75, '47,8 kWh · 92%', 'ExtraBold 800, szerokość 75: duże liczby'],
   [700, 100, 'Kiedy włączyć pralkę', 'Bold 700: tytuły ekranów'],
   [600, 87.5, 'Magazyn, pełny o 13:40', 'SemiBold 600, szerokość 87,5: etykiety i przyciski'],
-  [400, 100, 'Zażółć gęślą jaźń, nadwyżka z dachu 4,1 kW', 'Regular 400 i Medium 500: tekst i opisy'],
+  [
+    400,
+    100,
+    'Zażółć gęślą jaźń, nadwyżka z dachu 4,1 kW',
+    'Regular 400 i Medium 500: tekst i opisy',
+  ],
 ] as const;
 const chartW = 340;
 const chartH = 120;
@@ -79,17 +84,17 @@ const peakY = chartH - (production(13 + 10 / 60) / 7) * chartH;
           </div>
           <p class="lead">{pl(content.lead)}</p>
           <dl class="rows">
-            {
-              content.facts.map(([term, value]) => (
-                <div>
-                  <dt>{term}</dt>
-                  <dd>{pl(value)}</dd>
-                </div>
-              ))
-            }
+            {content.facts.map(([term, value]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{pl(value)}</dd>
+              </div>
+            ))}
           </dl>
           <nav class="toc" aria-label="Sekcje">
-            {sections.map(([id, label]) => <a href={`#${id}`}>{label}</a>)}
+            {sections.map(([id, label]) => (
+              <a href={`#${id}`}>{label}</a>
+            ))}
           </nav>
         </div>
         <figure class="hero__media">
@@ -120,17 +125,17 @@ const peakY = chartH - (production(13 + 10 / 60) / 7) * chartH;
       <div class="cols">
         <div>
           <div class="prose">
-            {content.client.paragraphs.map(text => <p>{pl(text)}</p>)}
+            {content.client.paragraphs.map(text => (
+              <p>{pl(text)}</p>
+            ))}
           </div>
           <dl class="rows rows--stack" style="margin-top:24px">
-            {
-              content.client.facts.map(([term, value]) => (
-                <div>
-                  <dt>{term}</dt>
-                  <dd>{pl(value)}</dd>
-                </div>
-              ))
-            }
+            {content.client.facts.map(([term, value]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{pl(value)}</dd>
+              </div>
+            ))}
           </dl>
         </div>
         <div class="card ledger" data-draw aria-label="Bilans przykładowego dnia">
@@ -141,23 +146,25 @@ const peakY = chartH - (production(13 + 10 / 60) / 7) * chartH;
             viewBox={`-30 -14 ${chartW + 44} ${chartH + 36}`}
             role="img"
             aria-label="Krzywa produkcji w ciągu dnia ze szczytem 6,4 kW o 13:10">
-            {
-              [0, 2, 4, 6].map(v => (
-                <g>
-                  <line class="axis" x1="0" x2={chartW} y1={chartH - (v / 7) * chartH} y2={chartH - (v / 7) * chartH} />
-                  <text x="-8" y={chartH - (v / 7) * chartH + 4} text-anchor="end">
-                    {v}
-                  </text>
-                </g>
-              ))
-            }
-            {
-              [0, 6, 12, 18, 24].map(h => (
-                <text x={(h / 24) * chartW} y={chartH + 18} text-anchor="middle">
-                  {`${h}:00`}
+            {[0, 2, 4, 6].map(v => (
+              <g>
+                <line
+                  class="axis"
+                  x1="0"
+                  x2={chartW}
+                  y1={chartH - (v / 7) * chartH}
+                  y2={chartH - (v / 7) * chartH}
+                />
+                <text x="-8" y={chartH - (v / 7) * chartH + 4} text-anchor="end">
+                  {v}
                 </text>
-              ))
-            }
+              </g>
+            ))}
+            {[0, 6, 12, 18, 24].map(h => (
+              <text x={(h / 24) * chartW} y={chartH + 18} text-anchor="middle">
+                {`${h}:00`}
+              </text>
+            ))}
             <path class="fill" d={`${bell} L${chartW} ${chartH} L0 ${chartH} Z`} />
             <path class="line" d={bell} pathLength="1" />
             <circle class="peak" cx={peakX} cy={peakY} r="5" />
@@ -165,32 +172,30 @@ const peakY = chartH - (production(13 + 10 / 60) / 7) * chartH;
               6,4 kW o 13:10
             </text>
           </svg>
-          {
-            [
-              ['Dokąd poszła energia z dachu', day.prod, day.prodSplit],
-              ['Skąd przyszła energia w domu', day.use, day.useSplit],
-            ].map(([title, total, parts]) => (
-              <div class="split">
-                <div class="split__head">
-                  <span>{title as string}</span>
-                  <span class="num">{dec(total as number)} kWh</span>
-                </div>
-                <div class="bar" aria-hidden="true">
-                  {(parts as [string, number, string][]).map(([, value, hue]) => (
-                    <span style={`flex:${value};--c:${hues[hue]}`} />
-                  ))}
-                </div>
-                <p class="split__legend">
-                  {(parts as [string, number, string][]).map(([name, value, hue]) => (
-                    <span style={`--c:${hues[hue]}`}>
-                      <i />
-                      <b>{dec(value)}</b> {name}
-                    </span>
-                  ))}
-                </p>
+          {[
+            ['Dokąd poszła energia z dachu', day.prod, day.prodSplit],
+            ['Skąd przyszła energia w domu', day.use, day.useSplit],
+          ].map(([title, total, parts]) => (
+            <div class="split">
+              <div class="split__head">
+                <span>{title as string}</span>
+                <span class="num">{dec(total as number)} kWh</span>
               </div>
-            ))
-          }
+              <div class="bar" aria-hidden="true">
+                {(parts as [string, number, string][]).map(([, value, hue]) => (
+                  <span style={`flex:${value};--c:${hues[hue]}`} />
+                ))}
+              </div>
+              <p class="split__legend">
+                {(parts as [string, number, string][]).map(([name, value, hue]) => (
+                  <span style={`--c:${hues[hue]}`}>
+                    <i />
+                    <b>{dec(value)}</b> {name}
+                  </span>
+                ))}
+              </p>
+            </div>
+          ))}
           <p class="sum">
             <b>{day.selfSufficiency}% samowystarczalności</b>, wartość dnia{' '}
             <b>{dec(day.valueZl, 2)}&nbsp;zł</b>: {dec(day.notBought)}&nbsp;kWh nie kupione po{' '}
@@ -203,46 +208,48 @@ const peakY = chartH - (production(13 + 10 / 60) / 7) * chartH;
 
     <section class="sec" id="kierunek" aria-labelledby="t-kierunek">
       <div class="sec__head">
-        <p class="sec__num" style="--dot:var(--bat)">02 Kierunek</p>
+        <p class="sec__num" style="--dot:var(--bat)">
+          02 Kierunek
+        </p>
         <h2 id="t-kierunek">{content.direction.title}</h2>
       </div>
       <div class="cols">
         <div>
           <div class="prose">
-            {content.direction.paragraphs.map(text => <p>{pl(text)}</p>)}
+            {content.direction.paragraphs.map(text => (
+              <p>{pl(text)}</p>
+            ))}
           </div>
           <ul class="chips">
-            {content.direction.keywords.map(word => <li>{word}</li>)}
+            {content.direction.keywords.map(word => (
+              <li>{word}</li>
+            ))}
           </ul>
         </div>
         <div class="card type" aria-label="Krój Archivo w kilku odmianach">
           <h3>Archivo, jeden plik zmienny, OFL</h3>
-          {
-            weights.map(([weight, width, sample, use]) => (
-              <div class="type__row">
-                <p
-                  style={`font-weight:${weight};font-stretch:${width}%;font-size:${weight === 800 ? 40 : 21}px`}>
-                  {pl(sample)}
-                </p>
-                <small>{use}</small>
-              </div>
-            ))
-          }
+          {weights.map(([weight, width, sample, use]) => (
+            <div class="type__row">
+              <p
+                style={`font-weight:${weight};font-stretch:${width}%;font-size:${weight === 800 ? 40 : 21}px`}>
+                {pl(sample)}
+              </p>
+              <small>{use}</small>
+            </div>
+          ))}
         </div>
       </div>
       <div class="card" style="margin-top:24px">
         <h3>Siedemnaście kolorów, cztery dla danych</h3>
         <ul class="swatches">
-          {
-            manifest.palette.map(item => (
-              <li class="swatch">
-                <span class="swatch__chip" style={`background:${item.hex}`} />
-                <b>{item.name}</b>
-                <span>{item.hex.toUpperCase()}</span>
-                <span>{item.role}</span>
-              </li>
-            ))
-          }
+          {manifest.palette.map(item => (
+            <li class="swatch">
+              <span class="swatch__chip" style={`background:${item.hex}`} />
+              <b>{item.name}</b>
+              <span>{item.hex.toUpperCase()}</span>
+              <span>{item.role}</span>
+            </li>
+          ))}
         </ul>
         <p class="contrast">
           Kontrast na bieli: grafit {ratio(on('ink', 'onSurface'))}:1, łupek{' '}
@@ -262,80 +269,82 @@ const peakY = chartH - (production(13 + 10 / 60) / 7) * chartH;
         <p class="intro">{pl(content.storyboard.intro)}</p>
       </div>
       <ul class="list">
-        {content.storyboard.rules.map(rule => <li>{pl(rule)}</li>)}
+        {content.storyboard.rules.map(rule => (
+          <li>{pl(rule)}</li>
+        ))}
       </ul>
       <Storyboard manifest={manifest} alt={content.storyboard.alt} />
     </section>
 
     <section class="sec" id="ruch" aria-labelledby="t-ruch">
       <div class="sec__head">
-        <p class="sec__num" style="--dot:var(--home)">04 Zasady ruchu</p>
+        <p class="sec__num" style="--dot:var(--home)">
+          04 Zasady ruchu
+        </p>
         <h2 id="t-ruch">{content.motion.title}</h2>
         <p class="intro">{pl(content.motion.intro)}</p>
       </div>
       <DrawLab client:visible total={day.prod} caption={pl(content.motion.caption)} />
       <div class="cols" style="margin-top:28px">
         <dl class="presets">
-          {
-            manifest.motion.map(preset => (
-              <div>
-                <dt>
-                  {preset.id} <span>· {preset.use}</span>
-                </dt>
-                <dd>
-                  <code>{presetValue(preset)}</code>
-                </dd>
-                <dd>{pl(preset.note)}</dd>
-              </div>
-            ))
-          }
+          {manifest.motion.map(preset => (
+            <div>
+              <dt>
+                {preset.id} <span>· {preset.use}</span>
+              </dt>
+              <dd>
+                <code>{presetValue(preset)}</code>
+              </dd>
+              <dd>{pl(preset.note)}</dd>
+            </div>
+          ))}
         </dl>
         <dl class="rows rows--stack">
-          {
-            content.motion.rules.map(([term, value]) => (
-              <div>
-                <dt>{term}</dt>
-                <dd>{pl(value)}</dd>
-              </div>
-            ))
-          }
+          {content.motion.rules.map(([term, value]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{pl(value)}</dd>
+            </div>
+          ))}
         </dl>
       </div>
     </section>
 
     <section class="sec" id="ekrany" aria-labelledby="t-ekrany">
       <div class="sec__head">
-        <p class="sec__num" style="--dot:var(--bat)">05 Ekrany</p>
+        <p class="sec__num" style="--dot:var(--bat)">
+          05 Ekrany
+        </p>
         <h2 id="t-ekrany">{content.screens.title}</h2>
         <p class="intro">{pl(content.screens.intro)}</p>
       </div>
       <div class="gallery">
-        {
-          manifest.gallery.map(item => (
-            <figure>
-              <img
-                src={asset(item.file)}
-                alt={`Ekran ${item.title}`}
-                width="443"
-                height="960"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>
-                <b>
-                  {item.n}. {item.title}
-                </b>
-                <span>{pl(item.caption)}</span>
-              </figcaption>
-            </figure>
-          ))
-        }
+        {manifest.gallery.map(item => (
+          <figure>
+            <img
+              src={asset(item.file)}
+              alt={`Ekran ${item.title}`}
+              width="443"
+              height="960"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <b>
+                {item.n}. {item.title}
+              </b>
+              <span>{pl(item.caption)}</span>
+            </figcaption>
+          </figure>
+        ))}
       </div>
     </section>
 
     <section class="sec" id="formaty" aria-labelledby="t-formaty">
       <div class="sec__head">
-        <p class="sec__num" style="--dot:var(--home)">06 Wersja sklepowa i formaty</p>
+        <p class="sec__num" style="--dot:var(--home)">
+          06 Wersja sklepowa i formaty
+        </p>
         <h2 id="t-formaty">{content.formats.title}</h2>
         <p class="intro">{pl(content.formats.intro)}</p>
       </div>
@@ -395,20 +404,20 @@ const peakY = chartH - (production(13 + 10 / 60) / 7) * chartH;
 
     <section class="sec" id="pliki" aria-labelledby="t-pliki">
       <div class="sec__head">
-        <p class="sec__num" style="--dot:var(--grid)">07 Co dostaje klient</p>
+        <p class="sec__num" style="--dot:var(--grid)">
+          07 Co dostaje klient
+        </p>
         <h2 id="t-pliki">{content.deliverables.title}</h2>
         <p class="intro">{pl(content.deliverables.intro)}</p>
       </div>
       <FileTable manifest={manifest} />
       <dl class="rows rows--stack" style="margin-top:20px">
-        {
-          content.deliverables.extras.map(([term, value]) => (
-            <div>
-              <dt>{term}</dt>
-              <dd>{pl(value)}</dd>
-            </div>
-          ))
-        }
+        {content.deliverables.extras.map(([term, value]) => (
+          <div>
+            <dt>{term}</dt>
+            <dd>{pl(value)}</dd>
+          </div>
+        ))}
       </dl>
     </section>
 
