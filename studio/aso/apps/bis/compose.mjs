@@ -299,8 +299,8 @@ const L = {
     },
     znajomi: {
       h: { x: 26, y: 50, w: 388, size: 48, align: 'center' },
-      d: { width: 246, x: 97, y: 214, rotate: 0 },
-      ring: { cx: 220, cy: 496, rx: 166, ry: 132, rot: -10 },
+      d: { width: 270, x: 85, y: 214, rotate: 0 },
+      ring: { cx: 220, cy: 530, rx: 172, ry: 150, rot: -10 },
       orbit: { size: 62, label: 14, angles: [208, 332, 150, 30, 112, 68] },
       blobs: [blob(30, 360, 220, c.cyjan), blob(420, 380, 220, c.brzoskwinia), blob(220, 900, 260, c.roz, 0.55)],
       sparks: [[60, 250, 13], [384, 240, 15], [404, 870, 12], [40, 860, 16], [70, 470, 10]],
@@ -365,8 +365,8 @@ const L = {
     },
     znajomi: {
       h: { x: 20, y: 24, w: 320, size: 37, align: 'center' },
-      d: { width: 176, x: 92, y: 140, rotate: 0 },
-      ring: { cx: 180, cy: 334, rx: 134, ry: 100, rot: -10 },
+      d: { width: 196, x: 82, y: 140, rotate: 0 },
+      ring: { cx: 180, cy: 356, rx: 140, ry: 112, rot: -10 },
       orbit: { size: 46, label: 11, angles: [208, 332, 150, 30, 112, 68] },
       blobs: [blob(20, 240, 160, c.cyjan), blob(350, 260, 160, c.brzoskwinia), blob(180, 620, 190, c.roz, 0.55)],
       sparks: [[50, 160, 10], [314, 150, 11], [334, 600, 9], [30, 600, 11]],

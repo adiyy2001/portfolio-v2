@@ -275,3 +275,11 @@ Look at: `sheets/ui-<lang>.png` (all screens), `boards/*.png`, `thumbs/*.png` (f
 - The iPad set needs its own device frame (in the app folder) and a smaller logical screen (900 x 1200 points) scaled into it, or the dashboard text is too small and half the screen stays empty.
 - Floating pills around a ring: `translateX(-50%)` pills near the frame edge fail the canvas check; nudge them inward per store.
 
+
+### Lessons from Bis (B6)
+
+- Chrome lettering: keep the headline as HTML text with the key words in transparent spans, then draw SVG `<text>` on top of each word from `Range.getClientRects()`. The baseline is `top + ratio * height`, with the ratio measured once in the page from a zero size inline block. Draw the dark edge as a separate stroked copy under the gradient fill, so overlapping contours never show and the edge stays outside the letter.
+- Modak is wide (about 0.55 em per character, "Przypomnimy," is 6.65 em): measure candidate lines with `fontkit` `layout().advanceWidth` before picking the size, then glue the last two words so balance cannot leave one word alone. Do not glue across a word that already holds a no-break space, or the last line gets too long.
+- A multi word accent must be split into one span per word, or `white-space:nowrap` on the span blocks the line break and the headline overflows.
+- `\S` in JavaScript treats a no-break space as whitespace, so glued words still count as two words in the line check.
+- Avatars on an orbit: give the ellipse enough height (ry about 0.55 of rx) or the bubbles on one side stack and hide each other's names.

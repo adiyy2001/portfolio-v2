@@ -8,7 +8,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-aso.md`. Run rules: `/hom
 - [x] B3 Margines
 - [x] B4 Chochla
 - [x] B5 Kruszec
-- [ ] B6 Bis
+- [x] B6 Bis
 - [ ] Q quality control
 - [ ] R independent review, every rubric score at least 4
 - [ ] P publication and final report
@@ -448,3 +448,6 @@ Taken without asking, in the autonomous mode. App agents add their own to `STATU
 35. **Kruszec exports JPEG** at quality 90 with 4:4:4 chroma: the PNG set (glows, blur, the twelve iPad files) made a 42 MB ZIP; the JPEG ZIP is 8.2 MB and the published folder 9.7 MB.
 36. **Kruszec EN is a British saver** written anew (pounds, Stocks and Shares ISA, workplace pension, gilts) instead of IKE and IKZE; no institution, fund or ticker is named in either language. Goals and the safety net are projected from deposits only, the allocation note is arithmetic against the user's own plan, every screen carries "Dane przykładowe" / "Sample data", and the copy check bans gain and return words in both languages.
 37. **Kruszec frame 1 line is measured**: the page reads two markers on the in-screen chart after the fonts load and draws the earlier months out to the frame edge in the same scale, so the line joins the screen chart in every language and store. Headlines carry one italic sage accent phrase (`accent` in the copy file); all twelve planned headlines are used unchanged.
+38. **Bis chrome words are measured, not set as images**: the headline is real text, and after the fonts load the page draws four SVG layers on each key word (shadow, dark edge under the fill, the chrome gradient), so a new language needs no layout work and the line checks still read the text. The last two words of every Bis headline are joined, so no line ends with one word; all fourteen planned headlines are used as written.
+39. **Bis names**: Hala Pogłos (a real Warsaw club is called Pogłos) and Zorza i Psy (the Polish band Zørza exists) were dropped; the clubs are Przelot, Scena Bąbel and Strych Mewa, the artists Mira Szum, Brokat Express, Pola Ołówek, Lisie Radio, Szklane Kolano, Ola Ćma, Tygrys z Kartonu and Neon Babci, all searched on 2026-10-08. The EN set stays in Warsaw with the same names, written anew (8 pm, Sat 17 Oct, kilometres).
+40. **Bis variant B and feature graphic**: variant B gets its own screen, the 30 second preview player, instead of repeating the Odkrywaj screen; the feature graphic puts the chrome name left and the promise right and keeps the centre for a sparkle without text, instead of the planned centred name, so the play button never covers the name.
