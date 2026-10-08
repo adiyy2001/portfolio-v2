@@ -1,7 +1,6 @@
 import type { Storyboard } from '../../shared/types';
 
-export const overlayArtTop = 372;
-export const overlayTop = overlayArtTop * 2;
+export const overlayArtTops = { hook: 366, streak: 300, garden: 62 } as const;
 
 export const storyboard: Storyboard = {
   fps: 30,
@@ -18,7 +17,7 @@ export const storyboard: Storyboard = {
       key: 30,
       action:
         'Baner POZIOM 8! stoi już w pierwszej klatce. Poziomka skacze w rytmie 7,5 klatki na sekundę, pasek XP mruga pełny, a z boków wyskakują monety.',
-      overlay: { text: 'Nawyki, za które rośnie poziom', from: 4, to: 72, top: overlayTop },
+      overlay: { text: 'Nawyki, za które rośnie poziom', from: 4, to: 72, top: overlayArtTops.hook * 2 },
     },
     {
       id: 'quests',
@@ -37,7 +36,7 @@ export const storyboard: Storyboard = {
       key: 318,
       action:
         'Kalendarz 21 dni od 18 września. Kafle odwracają się po kolei co 4 klatki, licznik rośnie razem z nimi, a na końcu mruga PASSA: 21 DNI.',
-      overlay: { text: 'Passa 21 dni i rośnie', from: 220, to: 290, top: overlayTop },
+      overlay: { text: 'Passa 21 dni i rośnie', from: 220, to: 290, top: overlayArtTops.streak * 2 },
     },
     {
       id: 'garden',
@@ -47,7 +46,7 @@ export const storyboard: Storyboard = {
       key: 466,
       action:
         'Ogródek: kwiat w trzech pozach zamienia się w owoc, wskaźnik etapu przeskakuje na 5 z 5. Skrzynia otwiera się w trzech krokach i wypuszcza miedzianą konewkę.',
-      overlay: { text: 'Ogródek rośnie z każdą passą', from: 345, to: 412, top: overlayTop },
+      overlay: { text: 'Ogródek rośnie z każdą passą', from: 345, to: 412, top: overlayArtTops.garden * 2 },
     },
     {
       id: 'week',

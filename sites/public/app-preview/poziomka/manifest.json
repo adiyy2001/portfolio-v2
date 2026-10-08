@@ -26,7 +26,7 @@
           "text": "Nawyki, za które rośnie poziom",
           "from": 4,
           "to": 72,
-          "top": 744
+          "top": 732
         },
         "seconds": [
           0,
@@ -56,7 +56,7 @@
           "text": "Passa 21 dni i rośnie",
           "from": 220,
           "to": 290,
-          "top": 744
+          "top": 600
         },
         "seconds": [
           7,
@@ -74,7 +74,7 @@
           "text": "Ogródek rośnie z każdą passą",
           "from": 345,
           "to": 412,
-          "top": 744
+          "top": 124
         },
         "seconds": [
           11,
@@ -503,7 +503,7 @@
     "store": {
       "webm": {
         "path": "poziomka-store.webm",
-        "bytes": 574664,
+        "bytes": 617832,
         "width": 884,
         "height": 1920,
         "fps": 30,
@@ -512,12 +512,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 223898,
+        "bitrate": 240717,
         "audio": null
       },
       "mp4": {
         "path": "poziomka-store.mp4",
-        "bytes": 455284,
+        "bytes": 482025,
         "width": 884,
         "height": 1920,
         "fps": 30,
@@ -526,7 +526,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 177383,
+        "bitrate": 187801,
         "audio": null
       },
       "poster": "posters/poziomka-store.jpg"
@@ -570,7 +570,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "poziomka-store-886x1920.mp4",
       "path": "poziomka-store-886x1920.mp4",
-      "bytes": 28493541,
+      "bytes": 28493557,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -579,7 +579,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11397416,
+      "bitrate": 11397422,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -642,8 +642,8 @@
     "rounded": "poziomka-icon-512.png"
   },
   "renderSeconds": {
-    "stills": 12,
-    "store": 47,
+    "stills": 15,
+    "store": 60,
     "marketing-9x16": 62,
     "marketing-1x1": 47,
     "marketing-16x9": 65,
@@ -651,7 +651,7 @@
   },
   "validation": true,
   "published": {
-    "totalBytes": 7723589,
+    "totalBytes": 7793907,
     "count": 31
   }
 }

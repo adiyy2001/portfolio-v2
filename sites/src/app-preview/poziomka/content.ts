@@ -68,7 +68,7 @@ export const content = {
     alt: 'Plansza sześciu klatek kluczowych wersji sklepowej z numerami ujęć, czasami, osią czasu i paletą 16 kolorów',
     rules: [
       'Trzy napisy w kroju Poziomka Pixel, każdy najwyżej sześć słów i co najmniej 2,2 s na ekranie.',
-      'Napisy pojawiają się i znikają w dwóch krokach ditheringu, bez przenikania. Siedzą nad paskiem zakładek, poza górnymi 120 i dolnymi 160 pikselami.',
+      'Napisy pojawiają się i znikają w dwóch krokach ditheringu, bez przenikania. Każdy siedzi w wolnym miejscu swojego ekranu, nad sceną albo między panelami, poza górnymi 120 i dolnymi 160 pikselami.',
       'Plakat sklepowy to klatka 30: baner POZIOM 8 i poziomka w skoku. Domyślna klatka z piątej sekundy, moneta +30 XP nad spacerem, też się broni.',
     ],
   },
