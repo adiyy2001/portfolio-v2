@@ -9,15 +9,15 @@
     "ipad": false
   },
   "base": "/wzornik/aso/bis/",
-  "totalBytes": 10904516,
+  "totalBytes": 10955936,
   "totalHuman": "10.4 MB",
-  "zip": { "path": "bis-aso.zip", "bytes": 10888973 },
+  "zip": { "path": "bis-aso.zip", "bytes": 10940393 },
   "groups": [
     {
       "id": "appstore",
       "title": "App Store, iPhone 6,9″",
       "count": 12,
-      "bytes": 5387851,
+      "bytes": 5414132,
       "formats": "JPEG",
       "files": [
         "app-store/pl/bis-appstore-pl-01.jpg",
@@ -38,7 +38,7 @@
       "id": "play",
       "title": "Google Play, telefon",
       "count": 12,
-      "bytes": 3623511,
+      "bytes": 3644019,
       "formats": "JPEG",
       "files": [
         "google-play/pl/bis-play-pl-01.jpg",
@@ -59,7 +59,7 @@
       "id": "variantB",
       "title": "Wariant B pierwszego screenshotu",
       "count": 4,
-      "bytes": 1281785,
+      "bytes": 1285741,
       "formats": "JPEG",
       "files": [
         "variant-b/bis-appstore-pl-01b.jpg",
@@ -72,7 +72,7 @@
       "id": "feature",
       "title": "Google Play, feature graphic",
       "count": 2,
-      "bytes": 139049,
+      "bytes": 139724,
       "formats": "JPEG",
       "files": ["feature-graphic/bis-feature-pl.jpg", "feature-graphic/bis-feature-en.jpg"]
     },
@@ -102,7 +102,7 @@
   "files": [
     {
       "path": "app-store/pl/bis-appstore-pl-01.jpg",
-      "bytes": 461658,
+      "bytes": 462198,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -113,7 +113,7 @@
     },
     {
       "path": "google-play/pl/bis-play-pl-01.jpg",
-      "bytes": 309361,
+      "bytes": 310103,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -124,7 +124,7 @@
     },
     {
       "path": "app-store/pl/bis-appstore-pl-02.jpg",
-      "bytes": 505151,
+      "bytes": 505674,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -135,7 +135,7 @@
     },
     {
       "path": "google-play/pl/bis-play-pl-02.jpg",
-      "bytes": 343422,
+      "bytes": 343333,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -146,7 +146,7 @@
     },
     {
       "path": "app-store/pl/bis-appstore-pl-03.jpg",
-      "bytes": 414718,
+      "bytes": 415968,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -157,7 +157,7 @@
     },
     {
       "path": "google-play/pl/bis-play-pl-03.jpg",
-      "bytes": 282690,
+      "bytes": 284037,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -168,7 +168,7 @@
     },
     {
       "path": "app-store/pl/bis-appstore-pl-04.jpg",
-      "bytes": 393192,
+      "bytes": 404796,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -179,7 +179,7 @@
     },
     {
       "path": "google-play/pl/bis-play-pl-04.jpg",
-      "bytes": 267615,
+      "bytes": 275614,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -190,7 +190,7 @@
     },
     {
       "path": "app-store/pl/bis-appstore-pl-05.jpg",
-      "bytes": 455483,
+      "bytes": 456493,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -201,7 +201,7 @@
     },
     {
       "path": "google-play/pl/bis-play-pl-05.jpg",
-      "bytes": 307959,
+      "bytes": 308435,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -212,7 +212,7 @@
     },
     {
       "path": "app-store/pl/bis-appstore-pl-06.jpg",
-      "bytes": 497750,
+      "bytes": 497655,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -223,7 +223,7 @@
     },
     {
       "path": "google-play/pl/bis-play-pl-06.jpg",
-      "bytes": 326625,
+      "bytes": 326776,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -234,7 +234,7 @@
     },
     {
       "path": "variant-b/bis-appstore-pl-01b.jpg",
-      "bytes": 383973,
+      "bytes": 384508,
       "type": "jpg",
       "group": "variantB",
       "store": "appstore",
@@ -246,7 +246,7 @@
     },
     {
       "path": "variant-b/bis-play-pl-01b.jpg",
-      "bytes": 257493,
+      "bytes": 259214,
       "type": "jpg",
       "group": "variantB",
       "store": "play",
@@ -258,7 +258,7 @@
     },
     {
       "path": "feature-graphic/bis-feature-pl.jpg",
-      "bytes": 71002,
+      "bytes": 71421,
       "type": "jpg",
       "group": "feature",
       "store": "feature",
@@ -268,7 +268,7 @@
     },
     {
       "path": "app-store/en/bis-appstore-en-01.jpg",
-      "bytes": 439648,
+      "bytes": 439967,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -279,7 +279,7 @@
     },
     {
       "path": "google-play/en/bis-play-en-01.jpg",
-      "bytes": 292769,
+      "bytes": 293060,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -290,7 +290,7 @@
     },
     {
       "path": "app-store/en/bis-appstore-en-02.jpg",
-      "bytes": 505753,
+      "bytes": 506258,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -301,7 +301,7 @@
     },
     {
       "path": "google-play/en/bis-play-en-02.jpg",
-      "bytes": 341305,
+      "bytes": 342339,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -312,7 +312,7 @@
     },
     {
       "path": "app-store/en/bis-appstore-en-03.jpg",
-      "bytes": 399725,
+      "bytes": 400216,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -323,7 +323,7 @@
     },
     {
       "path": "google-play/en/bis-play-en-03.jpg",
-      "bytes": 271289,
+      "bytes": 272127,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -334,7 +334,7 @@
     },
     {
       "path": "app-store/en/bis-appstore-en-04.jpg",
-      "bytes": 390689,
+      "bytes": 400897,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -345,7 +345,7 @@
     },
     {
       "path": "google-play/en/bis-play-en-04.jpg",
-      "bytes": 264929,
+      "bytes": 272738,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -356,7 +356,7 @@
     },
     {
       "path": "app-store/en/bis-appstore-en-05.jpg",
-      "bytes": 440632,
+      "bytes": 440893,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -367,7 +367,7 @@
     },
     {
       "path": "google-play/en/bis-play-en-05.jpg",
-      "bytes": 299526,
+      "bytes": 299453,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -378,7 +378,7 @@
     },
     {
       "path": "app-store/en/bis-appstore-en-06.jpg",
-      "bytes": 483452,
+      "bytes": 483117,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -389,7 +389,7 @@
     },
     {
       "path": "google-play/en/bis-play-en-06.jpg",
-      "bytes": 316021,
+      "bytes": 316004,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -400,7 +400,7 @@
     },
     {
       "path": "variant-b/bis-appstore-en-01b.jpg",
-      "bytes": 382906,
+      "bytes": 383674,
       "type": "jpg",
       "group": "variantB",
       "store": "appstore",
@@ -412,7 +412,7 @@
     },
     {
       "path": "variant-b/bis-play-en-01b.jpg",
-      "bytes": 257413,
+      "bytes": 258345,
       "type": "jpg",
       "group": "variantB",
       "store": "play",
@@ -424,7 +424,7 @@
     },
     {
       "path": "feature-graphic/bis-feature-en.jpg",
-      "bytes": 68047,
+      "bytes": 68303,
       "type": "jpg",
       "group": "feature",
       "store": "feature",
@@ -470,36 +470,36 @@
     { "path": "teksty/en.json", "bytes": 10915, "type": "json", "group": "texts" }
   ],
   "web": [
-    { "path": "web/appstore-en-01.webp", "bytes": 49498, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-01b.webp", "bytes": 42508, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01.webp", "bytes": 49536, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01b.webp", "bytes": 42522, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-02.webp", "bytes": 59404, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-03.webp", "bytes": 47838, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-04.webp", "bytes": 39208, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-05.webp", "bytes": 48934, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-06.webp", "bytes": 47778, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-01.webp", "bytes": 54398, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-01b.webp", "bytes": 42970, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-02.webp", "bytes": 60072, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-03.webp", "bytes": 50608, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-04.webp", "bytes": 39392, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-05.webp", "bytes": 51308, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-06.webp", "bytes": 49752, "width": 480, "height": 1043 },
-    { "path": "web/feature-en.webp", "bytes": 27156, "width": 1024, "height": 500 },
-    { "path": "web/feature-pl.webp", "bytes": 28920, "width": 1024, "height": 500 },
-    { "path": "web/play-en-01.webp", "bytes": 34954, "width": 400, "height": 711 },
-    { "path": "web/play-en-01b.webp", "bytes": 30688, "width": 400, "height": 711 },
-    { "path": "web/play-en-02.webp", "bytes": 42402, "width": 400, "height": 711 },
-    { "path": "web/play-en-03.webp", "bytes": 34164, "width": 400, "height": 711 },
-    { "path": "web/play-en-04.webp", "bytes": 28462, "width": 400, "height": 711 },
-    { "path": "web/play-en-05.webp", "bytes": 34602, "width": 400, "height": 711 },
-    { "path": "web/play-en-06.webp", "bytes": 33024, "width": 400, "height": 711 },
-    { "path": "web/play-pl-01.webp", "bytes": 37540, "width": 400, "height": 711 },
-    { "path": "web/play-pl-01b.webp", "bytes": 31134, "width": 400, "height": 711 },
-    { "path": "web/play-pl-02.webp", "bytes": 42694, "width": 400, "height": 711 },
-    { "path": "web/play-pl-03.webp", "bytes": 36106, "width": 400, "height": 711 },
-    { "path": "web/play-pl-04.webp", "bytes": 28708, "width": 400, "height": 711 },
-    { "path": "web/play-pl-05.webp", "bytes": 36216, "width": 400, "height": 711 },
-    { "path": "web/play-pl-06.webp", "bytes": 34046, "width": 400, "height": 711 }
+    { "path": "web/appstore-en-03.webp", "bytes": 48124, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-04.webp", "bytes": 40910, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-05.webp", "bytes": 49014, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-06.webp", "bytes": 47862, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01.webp", "bytes": 54282, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01b.webp", "bytes": 42960, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-02.webp", "bytes": 60218, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-03.webp", "bytes": 50660, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-04.webp", "bytes": 41334, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-05.webp", "bytes": 51124, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-06.webp", "bytes": 49820, "width": 480, "height": 1043 },
+    { "path": "web/feature-en.webp", "bytes": 27148, "width": 1024, "height": 500 },
+    { "path": "web/feature-pl.webp", "bytes": 28956, "width": 1024, "height": 500 },
+    { "path": "web/play-en-01.webp", "bytes": 34866, "width": 400, "height": 711 },
+    { "path": "web/play-en-01b.webp", "bytes": 30854, "width": 400, "height": 711 },
+    { "path": "web/play-en-02.webp", "bytes": 42424, "width": 400, "height": 711 },
+    { "path": "web/play-en-03.webp", "bytes": 34222, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 29684, "width": 400, "height": 711 },
+    { "path": "web/play-en-05.webp", "bytes": 34598, "width": 400, "height": 711 },
+    { "path": "web/play-en-06.webp", "bytes": 33050, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01.webp", "bytes": 38030, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01b.webp", "bytes": 31092, "width": 400, "height": 711 },
+    { "path": "web/play-pl-02.webp", "bytes": 42738, "width": 400, "height": 711 },
+    { "path": "web/play-pl-03.webp", "bytes": 36084, "width": 400, "height": 711 },
+    { "path": "web/play-pl-04.webp", "bytes": 29948, "width": 400, "height": 711 },
+    { "path": "web/play-pl-05.webp", "bytes": 36142, "width": 400, "height": 711 },
+    { "path": "web/play-pl-06.webp", "bytes": 34120, "width": 400, "height": 711 }
   ],
   "fonts": [
     {

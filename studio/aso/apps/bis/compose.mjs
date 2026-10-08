@@ -1,6 +1,6 @@
 import { card, esc, glue, phone, statusBar, styleOf } from '../../kit/kit.mjs';
 import { stores } from '../../lib/convention.mjs';
-import { avatar, chromeStops, colors as c, cover, holoStops, rimStops, sparkle, sparkleDefs, starPath, tones } from './art.mjs';
+import { avatar, chromeStops, colors as c, cover, holoStops, letterStops, rimStops, sparkle, sparkleDefs, starPath, tones } from './art.mjs';
 import { icons, logo, renderScreen, screenOrder, sized, stub, t, waveBars } from './screens.mjs';
 
 const W = { appstore: 440, play: 360 };
@@ -117,8 +117,8 @@ function chromeText() {
       const g = make('g', {}, svg);
       const common = { x: w.x, y: w.base, 'font-family': 'Modak', 'font-size': w.size };
       make('text', { ...common, y: w.base + w.size * 0.075, fill: '#3B4250' }, g).textContent = w.word;
-      make('text', { ...common, y: w.base + w.size * 0.075, fill: 'none', stroke: '#111217', 'stroke-width': w.size * 0.1, 'stroke-linejoin': 'round' }, g).textContent = w.word;
-      make('text', { ...common, fill: 'none', stroke: '#111217', 'stroke-width': w.size * 0.1, 'stroke-linejoin': 'round' }, g).textContent = w.word;
+      make('text', { ...common, y: w.base + w.size * 0.075, fill: 'none', stroke: '#111217', 'stroke-width': w.size * 0.12, 'stroke-linejoin': 'round' }, g).textContent = w.word;
+      make('text', { ...common, fill: 'none', stroke: '#111217', 'stroke-width': w.size * 0.12, 'stroke-linejoin': 'round' }, g).textContent = w.word;
       make('text', { ...common, fill: `url(#${id})` }, g).textContent = w.word;
     }
     const last = words.filter(w => w.spark).slice(-1)[0];
@@ -300,7 +300,7 @@ const L = {
     znajomi: {
       h: { x: 26, y: 50, w: 388, size: 48, align: 'center' },
       d: { width: 270, x: 85, y: 214, rotate: 0 },
-      ring: { cx: 220, cy: 530, rx: 172, ry: 150, rot: -10 },
+      ring: { cx: 220, cy: 640, rx: 176, ry: 196, rot: -6 },
       orbit: { size: 62, label: 14, angles: [208, 332, 150, 30, 112, 68] },
       blobs: [blob(30, 360, 220, c.cyjan), blob(420, 380, 220, c.brzoskwinia), blob(220, 900, 260, c.roz, 0.55)],
       sparks: [[60, 250, 13], [384, 240, 15], [404, 870, 12], [40, 860, 16], [70, 470, 10]],
@@ -366,7 +366,7 @@ const L = {
     znajomi: {
       h: { x: 20, y: 24, w: 320, size: 37, align: 'center' },
       d: { width: 196, x: 82, y: 140, rotate: 0 },
-      ring: { cx: 180, cy: 356, rx: 140, ry: 112, rot: -10 },
+      ring: { cx: 180, cy: 446, rx: 150, ry: 140, rot: -6 },
       orbit: { size: 46, label: 11, angles: [208, 332, 150, 30, 112, 68] },
       blobs: [blob(20, 240, 160, c.cyjan), blob(350, 260, 160, c.brzoskwinia), blob(180, 620, 190, c.roz, 0.55)],
       sparks: [[50, 160, 10], [314, 150, 11], [334, 600, 9], [30, 600, 11]],
@@ -449,7 +449,7 @@ const compose = (app, store, lang, slotIndex, variant) => {
     front.push(pill({ ...spec.pill, text: `${sized(icons.calendar, spec.pill.size * 1.2)}${t(notes[spec.pill.key], lang)}`, name: 'plays' }));
   }
 
-  return [ground(w, h, spec.blobs, id), back.join(''), parts.join(''), front.join(''), sparkles(w, h, spec.sparks, `${id}s`), headline({ slot, lang, ...spec.h, name: `headline-${n}` }), `<svg class="b-chrome" id="chrome" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"></svg>`, `<script>window.wzChromeStops=${JSON.stringify(chromeStops)};</script>`, chromeScript()].join('');
+  return [ground(w, h, spec.blobs, id), back.join(''), parts.join(''), front.join(''), sparkles(w, h, spec.sparks, `${id}s`), headline({ slot, lang, ...spec.h, name: `headline-${n}` }), `<svg class="b-chrome" id="chrome" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"></svg>`, `<script>window.wzChromeStops=${JSON.stringify(letterStops)};</script>`, chromeScript()].join('');
 };
 
 const featureBody = (app, lang) => {
@@ -462,7 +462,7 @@ const featureBody = (app, lang) => {
   return `${ground(w, h, blobs, 'fg')}${disc}${stickers.join('')}${sparkles(w, h, [[200, 60, 9], [318, 196, 8], [30, 40, 7], [482, 128, 7]], 'fgs')}
 <div class="kit-headline bh fg-name" data-box="headline" data-name="feature-name" style="left:30px;top:70px;width:166px;font-size:104px;text-align:center"><span class="chr" data-chrome>Bis</span></div>
 <div class="kit-headline bh fg-h" data-box="headline" data-name="feature-tagline" style="left:318px;top:84px;width:146px;font-size:17.5px">${accented(copy.feature.headline, copy.feature.accent, lang).replace('data-chrome', 'data-chrome data-nospark')}</div>
-<svg class="b-chrome" id="chrome" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"></svg><script>window.wzChromeStops=${JSON.stringify(chromeStops)};</script>${chromeScript()}`;
+<svg class="b-chrome" id="chrome" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" aria-hidden="true"></svg><script>window.wzChromeStops=${JSON.stringify(letterStops)};</script>${chromeScript()}`;
 };
 
 const featureCss = `

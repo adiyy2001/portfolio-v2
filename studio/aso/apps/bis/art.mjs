@@ -24,6 +24,8 @@ export const starPath = (cx, cy, r, pinch = 0.16) => {
 
 export const chromeStops = `<stop offset="0" stop-color="#FFFFFF"/><stop offset=".16" stop-color="#E2FAFF"/><stop offset=".42" stop-color="#9DB9D2"/><stop offset=".47" stop-color="#F7F9FC"/><stop offset=".5" stop-color="#2F3542"/><stop offset=".58" stop-color="#737C8F"/><stop offset=".76" stop-color="#FFA9DA"/><stop offset=".92" stop-color="#FFE1C9"/><stop offset="1" stop-color="#FFFFFF"/>`;
 
+export const letterStops = `<stop offset="0" stop-color="#F4FBFF"/><stop offset=".18" stop-color="#B9D3E6"/><stop offset=".44" stop-color="#6F88A6"/><stop offset=".48" stop-color="#DCE3EE"/><stop offset=".52" stop-color="#262B36"/><stop offset=".62" stop-color="#5B6478"/><stop offset=".8" stop-color="#FF8AD0"/><stop offset=".94" stop-color="#FFC7A0"/><stop offset="1" stop-color="#FFE9DA"/>`;
+
 export const rimStops = `<stop offset="0" stop-color="#FFFFFF"/><stop offset=".3" stop-color="#C3CAD6"/><stop offset=".5" stop-color="#6D7586"/><stop offset=".62" stop-color="#E9EDF3"/><stop offset=".82" stop-color="#9AA3B4"/><stop offset="1" stop-color="#F7F8FB"/>`;
 
 export const holoStops = `<stop offset="0" stop-color="${c.roz}"/><stop offset=".34" stop-color="${c.brzoskwinia}"/><stop offset=".62" stop-color="${c.limonka}"/><stop offset="1" stop-color="${c.cyjan}"/>`;
