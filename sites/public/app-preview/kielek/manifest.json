@@ -21,10 +21,10 @@
         "from": 0,
         "to": 59,
         "key": 30,
-        "action": "Od pierwszej klatki Kiełek siedzi w doniczce na środku ekranu. Podskakuje, ląduje ze zgnieceniem i mruga, a pod nim wydmuchuje się karta Dziś podlej 3 rośliny.",
+        "action": "Od pierwszej klatki Kiełek siedzi w doniczce, a pod nim stoi karta Dziś podlej 3 rośliny. Kiełek podskakuje, ląduje ze zgnieceniem, karta ugina się razem z nim, potem mrugnięcie.",
         "overlay": {
           "text": "Rośliny podlane na czas",
-          "from": 4,
+          "from": 0,
           "to": 66,
           "top": 772
         },
@@ -398,7 +398,7 @@
     "hero": {
       "webm": {
         "path": "kielek-hero.webm",
-        "bytes": 955400,
+        "bytes": 949701,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -407,12 +407,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 352773,
+        "bitrate": 350669,
         "audio": null
       },
       "mp4": {
         "path": "kielek-hero.mp4",
-        "bytes": 1087954,
+        "bytes": 1084335,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -421,7 +421,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 401706,
+        "bitrate": 400369,
         "audio": null
       },
       "poster": "posters/kielek-hero.jpg"
@@ -429,7 +429,7 @@
     "hero-9x16": {
       "webm": {
         "path": "kielek-hero-9x16.webm",
-        "bytes": 738098,
+        "bytes": 735242,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -438,12 +438,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 272536,
+        "bitrate": 271482,
         "audio": null
       },
       "mp4": {
         "path": "kielek-hero-9x16.mp4",
-        "bytes": 899043,
+        "bytes": 893772,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -452,7 +452,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 331954,
+        "bitrate": 330008,
         "audio": null
       },
       "poster": "posters/kielek-hero-9x16.jpg"
@@ -460,7 +460,7 @@
     "social-1x1": {
       "webm": {
         "path": "kielek-social-1x1.webm",
-        "bytes": 634639,
+        "bytes": 633161,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -469,12 +469,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 234335,
+        "bitrate": 233789,
         "audio": null
       },
       "mp4": {
         "path": "kielek-social-1x1.mp4",
-        "bytes": 740918,
+        "bytes": 745033,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -483,7 +483,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 273569,
+        "bitrate": 275089,
         "audio": null
       },
       "poster": "posters/kielek-social-1x1.jpg"
@@ -491,7 +491,7 @@
     "store": {
       "webm": {
         "path": "kielek-store.webm",
-        "bytes": 744323,
+        "bytes": 725345,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -500,12 +500,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 274835,
+        "bitrate": 267827,
         "audio": null
       },
       "mp4": {
         "path": "kielek-store.mp4",
-        "bytes": 777621,
+        "bytes": 805165,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -514,7 +514,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 287121,
+        "bitrate": 297291,
         "audio": null
       },
       "poster": "posters/kielek-store.jpg"
@@ -522,7 +522,7 @@
     "tile": {
       "webm": {
         "path": "kielek-tile.webm",
-        "bytes": 161564,
+        "bytes": 161701,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -531,12 +531,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 258502,
+        "bitrate": 258721,
         "audio": null
       },
       "mp4": {
         "path": "kielek-tile.mp4",
-        "bytes": 168578,
+        "bytes": 167763,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -545,7 +545,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 269724,
+        "bitrate": 268420,
         "audio": null
       },
       "poster": "posters/kielek-tile.jpg"
@@ -558,7 +558,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "kielek-store-886x1920.mp4",
       "path": "kielek-store-886x1920.mp4",
-      "bytes": 29931936,
+      "bytes": 29931906,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -567,7 +567,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11402642,
+      "bitrate": 11402630,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -576,7 +576,7 @@
       "note": "Reels, TikTok i Shorts",
       "name": "kielek-social-1080x1920.mp4",
       "path": "kielek-social-1080x1920.mp4",
-      "bytes": 5861652,
+      "bytes": 5835536,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -585,7 +585,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 2233010,
+      "bitrate": 2223061,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -594,7 +594,7 @@
       "note": "post w kanale",
       "name": "kielek-social-1080x1080.mp4",
       "path": "kielek-social-1080x1080.mp4",
-      "bytes": 3487862,
+      "bytes": 3478721,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -603,7 +603,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1328709,
+      "bitrate": 1325227,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -612,7 +612,7 @@
       "note": "YouTube, link w Google Play",
       "name": "kielek-social-1920x1080.mp4",
       "path": "kielek-social-1920x1080.mp4",
-      "bytes": 4934473,
+      "bytes": 4883897,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -621,7 +621,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1879799,
+      "bitrate": 1860532,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -630,16 +630,16 @@
     "rounded": "kielek-icon-512.png"
   },
   "renderSeconds": {
-    "stills": 41,
-    "marketing-9x16": 718,
-    "marketing-1x1": 379,
-    "marketing-16x9": 582,
-    "tile": 159,
-    "store": 602
+    "stills": 51,
+    "marketing-9x16": 897,
+    "marketing-1x1": 446,
+    "marketing-16x9": 672,
+    "tile": 189,
+    "store": 734
   },
   "validation": true,
   "published": {
-    "totalBytes": 8495670,
+    "totalBytes": 8491688,
     "count": 31
   }
 }

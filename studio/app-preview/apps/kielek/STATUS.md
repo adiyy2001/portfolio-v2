@@ -32,3 +32,8 @@ Built on 2026-10-08 in a cloud session, on the foundation from step F. One backw
 ## Open issues
 
 - None blocking. Independent review (step R) still to come.
+
+## Review round 1 (2026-10-08)
+
+- Hook: the Dziś podlej 3 rośliny card (now 375x196, count at 56 px) is on screen from frame 0 and squashes with Kiełek's landing; the loop bridge pops it in after the launch screen, so the seam holds. Overlay 0 to 66.
+- Tab changes are a spring push instead of a dissolve: the old screen slides 150 px left and fades in 6 frames, the new one slides in from the right on `bounce` with a slight squash, and its heading only appears once the old screen is gone.
