@@ -50,8 +50,8 @@ export const content = glueDeep({
     roles: [
       'Obietnica w jednym zdaniu. Trzy sklepy na jednej trasie, a telefon wjeżdża w kadr z prawej, jakby ktoś szedł z nim ulicą.',
       'Telefon leży jak na stole, a pinezki sklepów wstają nad mapą. Widać, że to sklepy z sąsiedztwa, a nie magazyn.',
-      'Jeden koszyk, trzy sklepy. Etykiety wylatują z ekranu, a nagłówek biegnie pionowo wzdłuż krawędzi.',
-      'Godzina odbioru, którą wybiera klient. Ogromne 17:30 w konturze stoi za telefonem jak cyfry na zegarze dworcowym.',
+      'Jeden koszyk, trzy sklepy. Etykiety sklepów lecą jedna pod drugą w stronę koszyka, a nagłówek stoi w prawym górnym rogu.',
+      'Godzina odbioru, którą wybiera klient. Nagłówek biegnie pionowo wzdłuż krawędzi, a ogromne 17:30 w konturze stoi za telefonem jak cyfry na zegarze dworcowym.',
       'Kod przy ladzie. Karta z kodem wysuwa się przed telefon, a na ekranie zostaje po niej puste miejsce.',
       'Stałe zamówienie na sobotę. Telefon wyrasta z dolnej krawędzi, za nim słowo SOBOTA na całą szerokość.',
     ],

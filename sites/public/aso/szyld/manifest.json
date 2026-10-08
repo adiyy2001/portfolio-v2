@@ -9,15 +9,15 @@
     "ipad": false
   },
   "base": "/wzornik/aso/szyld/",
-  "totalBytes": 13695482,
-  "totalHuman": "13.1 MB",
-  "zip": { "path": "szyld-aso.zip", "bytes": 13686271 },
+  "totalBytes": 13631056,
+  "totalHuman": "13.0 MB",
+  "zip": { "path": "szyld-aso.zip", "bytes": 13621794 },
   "groups": [
     {
       "id": "appstore",
       "title": "App Store, iPhone 6,9″",
       "count": 12,
-      "bytes": 7289999,
+      "bytes": 7228184,
       "formats": "JPEG",
       "files": [
         "app-store/pl/szyld-appstore-pl-01.jpg",
@@ -38,7 +38,7 @@
       "id": "play",
       "title": "Google Play, telefon",
       "count": 12,
-      "bytes": 4359903,
+      "bytes": 4351832,
       "formats": "JPEG",
       "files": [
         "google-play/pl/szyld-play-pl-01.jpg",
@@ -59,7 +59,7 @@
       "id": "variantB",
       "title": "Wariant B pierwszego screenshotu",
       "count": 4,
-      "bytes": 1730501,
+      "bytes": 1735773,
       "formats": "JPEG",
       "files": [
         "variant-b/szyld-appstore-pl-01b.jpg",
@@ -72,7 +72,7 @@
       "id": "feature",
       "title": "Google Play, feature graphic",
       "count": 2,
-      "bytes": 209011,
+      "bytes": 209160,
       "formats": "JPEG",
       "files": ["feature-graphic/szyld-feature-pl.jpg", "feature-graphic/szyld-feature-en.jpg"]
     },
@@ -94,7 +94,7 @@
       "id": "texts",
       "title": "Teksty nagłówków",
       "count": 3,
-      "bytes": 21589,
+      "bytes": 21628,
       "formats": "CSV, JSON",
       "files": ["szyld-teksty.csv", "teksty/pl.json", "teksty/en.json"]
     }
@@ -102,7 +102,7 @@
   "files": [
     {
       "path": "app-store/pl/szyld-appstore-pl-01.jpg",
-      "bytes": 540962,
+      "bytes": 532439,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -113,7 +113,7 @@
     },
     {
       "path": "google-play/pl/szyld-play-pl-01.jpg",
-      "bytes": 315855,
+      "bytes": 314725,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -124,7 +124,7 @@
     },
     {
       "path": "app-store/pl/szyld-appstore-pl-02.jpg",
-      "bytes": 605321,
+      "bytes": 605807,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -135,7 +135,7 @@
     },
     {
       "path": "google-play/pl/szyld-play-pl-02.jpg",
-      "bytes": 381791,
+      "bytes": 381768,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -146,7 +146,7 @@
     },
     {
       "path": "app-store/pl/szyld-appstore-pl-03.jpg",
-      "bytes": 595056,
+      "bytes": 594076,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -157,7 +157,7 @@
     },
     {
       "path": "google-play/pl/szyld-play-pl-03.jpg",
-      "bytes": 366347,
+      "bytes": 369371,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -168,7 +168,7 @@
     },
     {
       "path": "app-store/pl/szyld-appstore-pl-04.jpg",
-      "bytes": 722505,
+      "bytes": 704816,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -179,7 +179,7 @@
     },
     {
       "path": "google-play/pl/szyld-play-pl-04.jpg",
-      "bytes": 426244,
+      "bytes": 426624,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -190,7 +190,7 @@
     },
     {
       "path": "app-store/pl/szyld-appstore-pl-05.jpg",
-      "bytes": 506458,
+      "bytes": 507314,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -201,7 +201,7 @@
     },
     {
       "path": "google-play/pl/szyld-play-pl-05.jpg",
-      "bytes": 287084,
+      "bytes": 284805,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -212,7 +212,7 @@
     },
     {
       "path": "app-store/pl/szyld-appstore-pl-06.jpg",
-      "bytes": 681318,
+      "bytes": 680913,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -223,7 +223,7 @@
     },
     {
       "path": "google-play/pl/szyld-play-pl-06.jpg",
-      "bytes": 407934,
+      "bytes": 408243,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -234,7 +234,7 @@
     },
     {
       "path": "variant-b/szyld-appstore-pl-01b.jpg",
-      "bytes": 549878,
+      "bytes": 540548,
       "type": "jpg",
       "group": "variantB",
       "store": "appstore",
@@ -246,7 +246,7 @@
     },
     {
       "path": "variant-b/szyld-play-pl-01b.jpg",
-      "bytes": 330705,
+      "bytes": 331621,
       "type": "jpg",
       "group": "variantB",
       "store": "play",
@@ -258,7 +258,7 @@
     },
     {
       "path": "feature-graphic/szyld-feature-pl.jpg",
-      "bytes": 105066,
+      "bytes": 105291,
       "type": "jpg",
       "group": "feature",
       "store": "feature",
@@ -268,7 +268,7 @@
     },
     {
       "path": "app-store/en/szyld-appstore-en-01.jpg",
-      "bytes": 539696,
+      "bytes": 530627,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -279,7 +279,7 @@
     },
     {
       "path": "google-play/en/szyld-play-en-01.jpg",
-      "bytes": 316144,
+      "bytes": 313755,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -290,7 +290,7 @@
     },
     {
       "path": "app-store/en/szyld-appstore-en-02.jpg",
-      "bytes": 600890,
+      "bytes": 601198,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -301,7 +301,7 @@
     },
     {
       "path": "google-play/en/szyld-play-en-02.jpg",
-      "bytes": 378817,
+      "bytes": 378418,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -312,7 +312,7 @@
     },
     {
       "path": "app-store/en/szyld-appstore-en-03.jpg",
-      "bytes": 589121,
+      "bytes": 580500,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -323,7 +323,7 @@
     },
     {
       "path": "google-play/en/szyld-play-en-03.jpg",
-      "bytes": 355299,
+      "bytes": 358801,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -334,7 +334,7 @@
     },
     {
       "path": "app-store/en/szyld-appstore-en-04.jpg",
-      "bytes": 713986,
+      "bytes": 695183,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -345,7 +345,7 @@
     },
     {
       "path": "google-play/en/szyld-play-en-04.jpg",
-      "bytes": 418286,
+      "bytes": 415824,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -356,7 +356,7 @@
     },
     {
       "path": "app-store/en/szyld-appstore-en-05.jpg",
-      "bytes": 510540,
+      "bytes": 510845,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -367,7 +367,7 @@
     },
     {
       "path": "google-play/en/szyld-play-en-05.jpg",
-      "bytes": 290085,
+      "bytes": 287877,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -378,7 +378,7 @@
     },
     {
       "path": "app-store/en/szyld-appstore-en-06.jpg",
-      "bytes": 684146,
+      "bytes": 684466,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -389,7 +389,7 @@
     },
     {
       "path": "google-play/en/szyld-play-en-06.jpg",
-      "bytes": 416017,
+      "bytes": 411621,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -400,7 +400,7 @@
     },
     {
       "path": "variant-b/szyld-appstore-en-01b.jpg",
-      "bytes": 531105,
+      "bytes": 538230,
       "type": "jpg",
       "group": "variantB",
       "store": "appstore",
@@ -412,7 +412,7 @@
     },
     {
       "path": "variant-b/szyld-play-en-01b.jpg",
-      "bytes": 318813,
+      "bytes": 325374,
       "type": "jpg",
       "group": "variantB",
       "store": "play",
@@ -424,7 +424,7 @@
     },
     {
       "path": "feature-graphic/szyld-feature-en.jpg",
-      "bytes": 103945,
+      "bytes": 103869,
       "type": "jpg",
       "group": "feature",
       "store": "feature",
@@ -465,41 +465,41 @@
       "width": 1024,
       "height": 1024
     },
-    { "path": "szyld-teksty.csv", "bytes": 5424, "type": "csv", "group": "texts" },
+    { "path": "szyld-teksty.csv", "bytes": 5450, "type": "csv", "group": "texts" },
     { "path": "teksty/pl.json", "bytes": 8187, "type": "json", "group": "texts" },
-    { "path": "teksty/en.json", "bytes": 7978, "type": "json", "group": "texts" }
+    { "path": "teksty/en.json", "bytes": 7991, "type": "json", "group": "texts" }
   ],
   "web": [
-    { "path": "web/appstore-en-01.webp", "bytes": 43306, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-01b.webp", "bytes": 39366, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-02.webp", "bytes": 49128, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-03.webp", "bytes": 51726, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-04.webp", "bytes": 42194, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-05.webp", "bytes": 39854, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-06.webp", "bytes": 41202, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-01.webp", "bytes": 43848, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-01b.webp", "bytes": 42542, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-02.webp", "bytes": 50250, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-03.webp", "bytes": 54022, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-04.webp", "bytes": 45234, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-05.webp", "bytes": 38600, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-06.webp", "bytes": 41382, "width": 480, "height": 1043 },
-    { "path": "web/feature-en.webp", "bytes": 49120, "width": 1024, "height": 500 },
-    { "path": "web/feature-pl.webp", "bytes": 49886, "width": 1024, "height": 500 },
-    { "path": "web/play-en-01.webp", "bytes": 26246, "width": 400, "height": 711 },
-    { "path": "web/play-en-01b.webp", "bytes": 26330, "width": 400, "height": 711 },
-    { "path": "web/play-en-02.webp", "bytes": 29668, "width": 400, "height": 711 },
-    { "path": "web/play-en-03.webp", "bytes": 33858, "width": 400, "height": 711 },
-    { "path": "web/play-en-04.webp", "bytes": 27034, "width": 400, "height": 711 },
-    { "path": "web/play-en-05.webp", "bytes": 24858, "width": 400, "height": 711 },
-    { "path": "web/play-en-06.webp", "bytes": 27080, "width": 400, "height": 711 },
-    { "path": "web/play-pl-01.webp", "bytes": 26724, "width": 400, "height": 711 },
-    { "path": "web/play-pl-01b.webp", "bytes": 29646, "width": 400, "height": 711 },
-    { "path": "web/play-pl-02.webp", "bytes": 30390, "width": 400, "height": 711 },
-    { "path": "web/play-pl-03.webp", "bytes": 35442, "width": 400, "height": 711 },
-    { "path": "web/play-pl-04.webp", "bytes": 28320, "width": 400, "height": 711 },
-    { "path": "web/play-pl-05.webp", "bytes": 24206, "width": 400, "height": 711 },
-    { "path": "web/play-pl-06.webp", "bytes": 27546, "width": 400, "height": 711 }
+    { "path": "web/appstore-en-01.webp", "bytes": 43576, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01b.webp", "bytes": 42458, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-02.webp", "bytes": 49122, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-03.webp", "bytes": 47172, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-04.webp", "bytes": 45204, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-05.webp", "bytes": 40702, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-06.webp", "bytes": 41220, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01.webp", "bytes": 45052, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01b.webp", "bytes": 43656, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-02.webp", "bytes": 50156, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-03.webp", "bytes": 49152, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-04.webp", "bytes": 48352, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-05.webp", "bytes": 39360, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-06.webp", "bytes": 41238, "width": 480, "height": 1043 },
+    { "path": "web/feature-en.webp", "bytes": 49208, "width": 1024, "height": 500 },
+    { "path": "web/feature-pl.webp", "bytes": 49890, "width": 1024, "height": 500 },
+    { "path": "web/play-en-01.webp", "bytes": 27680, "width": 400, "height": 711 },
+    { "path": "web/play-en-01b.webp", "bytes": 29116, "width": 400, "height": 711 },
+    { "path": "web/play-en-02.webp", "bytes": 29584, "width": 400, "height": 711 },
+    { "path": "web/play-en-03.webp", "bytes": 31414, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 28370, "width": 400, "height": 711 },
+    { "path": "web/play-en-05.webp", "bytes": 25008, "width": 400, "height": 711 },
+    { "path": "web/play-en-06.webp", "bytes": 27072, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01.webp", "bytes": 27860, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01b.webp", "bytes": 29994, "width": 400, "height": 711 },
+    { "path": "web/play-pl-02.webp", "bytes": 30380, "width": 400, "height": 711 },
+    { "path": "web/play-pl-03.webp", "bytes": 33106, "width": 400, "height": 711 },
+    { "path": "web/play-pl-04.webp", "bytes": 30162, "width": 400, "height": 711 },
+    { "path": "web/play-pl-05.webp", "bytes": 24420, "width": 400, "height": 711 },
+    { "path": "web/play-pl-06.webp", "bytes": 27534, "width": 400, "height": 711 }
   ],
   "fonts": [
     {

@@ -3,7 +3,7 @@ import { stores } from '../../lib/convention.mjs';
 import { codeCard, colors as c, glyph, mapPins, renderScreen, screenOrder } from './screens.mjs';
 
 const css = `
-.sh{font-family:'Mona Sans Expanded','Mona Sans',sans-serif;font-weight:900;line-height:.98;letter-spacing:-.025em;color:${c.mleko}}
+.sh{font-family:'Mona Sans Expanded','Mona Sans',sans-serif;font-weight:900;line-height:.98;letter-spacing:-.025em;word-spacing:.08em;color:${c.mleko}}
 .sh--ink{color:${c.smola}}
 .sh--play{line-height:1;letter-spacing:-.02em}
 .sv{position:absolute;transform-origin:0 0;transform:rotate(-90deg);hyphens:none;overflow-wrap:normal;word-break:keep-all;text-wrap:balance}
@@ -109,7 +109,7 @@ const layouts = {
       {
         bg: { tone: 'a', angle: 158, mid: 30, glow: { x: 420, y: 900, r: 420, color: 'rgba(213,242,92,.55)' } },
         head: { x: 26, y: 60, w: 392, size: 48 },
-        device: { width: 336, x: 112, y: 330, transform: 'rotateY(-20deg) rotateZ(7deg)' },
+        device: { width: 336, x: 72, y: 330, transform: 'rotateY(-20deg) rotateZ(7deg)' },
         perspective: 1000,
         origin: '20% 40%',
         streaks: [[-40, 520, 220, -26, 16, 0.85], [-30, 580, 170, -26, 10, 0.6], [-20, 630, 120, -26, 6, 0.45]],
@@ -122,26 +122,26 @@ const layouts = {
         origin: '50% 10%',
       },
       {
-        bg: { tone: 'a', angle: 100, mid: 26, glow: { x: 440, y: 120, r: 300, color: 'rgba(213,242,92,.5)' } },
-        vhead: { x: 26, bottom: 930, length: 900, size: 60 },
-        device: { width: 300, x: 160, y: 392, transform: 'rotateY(-18deg) rotateZ(-4deg)' },
+        bg: { tone: 'a', angle: 196, mid: 34, glow: { x: 0, y: 900, r: 320, color: 'rgba(213,242,92,.5)' } },
+        head: { x: 26, y: 60, w: 392, size: 48, align: 'right' },
+        device: { width: 300, x: 124, y: 470, transform: 'rotateY(-18deg) rotateZ(-4deg)' },
         perspective: 1000,
         origin: '70% 60%',
         tags: [
-          { id: 'piekarnia', x: 156, y: 70, rotate: -7 },
-          { id: 'warzywniak', x: 132, y: 176, rotate: 3 },
-          { id: 'kwiaciarnia', x: 168, y: 284, rotate: -3 },
+          { id: 'piekarnia', x: 30, y: 236, rotate: -7 },
+          { id: 'warzywniak', x: 18, y: 330, rotate: 3 },
+          { id: 'kwiaciarnia', x: 40, y: 424, rotate: -3 },
         ],
-        trails: [[190, 134, 3], [180, 244, 3], [196, 346, 2]],
+        trails: [[70, 292, 2], [64, 386, 2]],
         tagScale: 1,
       },
       {
         bg: { tone: 'b', angle: 140, mid: 20 },
-        head: { x: 26, y: 60, w: 392, size: 48, ink: true, align: 'right' },
-        big: { size: { pl: 134, en: 156 }, y: 452, x: 226, stroke: c.smola, strokeWidth: 3.2 },
-        device: { width: 330, x: -40, y: 470, transform: 'rotateY(22deg) rotateZ(-6deg)' },
+        vhead: { x: 26, bottom: 930, length: 900, size: 60, ink: true },
+        big: { size: { pl: 98, en: 124 }, y: 236, x: 290, stroke: c.smola, strokeWidth: 3 },
+        device: { width: 280, x: 156, y: 300, transform: 'rotateY(-20deg) rotateZ(4deg)' },
         perspective: 1000,
-        origin: '10% 60%',
+        origin: '80% 60%',
       },
       {
         bg: { tone: 'a', angle: 205, mid: 30 },
@@ -149,7 +149,7 @@ const layouts = {
         device: { width: 300, x: 26, y: 318, transform: 'rotateZ(-9deg) rotateY(9deg)', hideCode: true },
         perspective: 1200,
         origin: '30% 50%',
-        code: { width: 262, x: 158, y: 506, transform: 'rotate(5deg)' },
+        code: { width: 250, x: 168, y: 372, transform: 'rotate(5deg)' },
       },
       {
         bg: { tone: 'b', angle: 180, mid: 18 },
@@ -164,7 +164,7 @@ const layouts = {
     variantB: {
       bg: { tone: 'a', angle: 158, mid: 30, glow: { x: 420, y: 900, r: 420, color: 'rgba(213,242,92,.55)' } },
       head: { x: 26, y: 60, w: 392, size: 48 },
-      device: { width: 336, x: 118, y: 360, transform: 'rotateY(-20deg) rotateZ(7deg)' },
+      device: { width: 336, x: 80, y: 360, transform: 'rotateY(-20deg) rotateZ(7deg)' },
       perspective: 1000,
       origin: '20% 40%',
       badge: { x: 30, y: 520, rotate: -6 },
@@ -178,7 +178,7 @@ const layouts = {
       {
         bg: { tone: 'a', angle: 158, mid: 30, glow: { x: 350, y: 600, r: 300, color: 'rgba(213,242,92,.55)' } },
         head: { x: 22, y: 34, w: 300, size: 31 },
-        device: { width: 250, x: 112, y: 214, transform: 'rotateY(-20deg) rotateZ(7deg)' },
+        device: { width: 250, x: 82, y: 214, transform: 'rotateY(-20deg) rotateZ(7deg)' },
         perspective: 800,
         origin: '20% 40%',
         streaks: [[-30, 360, 170, -26, 12, 0.85], [-24, 404, 130, -26, 8, 0.6]],
@@ -191,34 +191,34 @@ const layouts = {
         origin: '50% 10%',
       },
       {
-        bg: { tone: 'a', angle: 100, mid: 26, glow: { x: 360, y: 80, r: 220, color: 'rgba(213,242,92,.5)' } },
-        vhead: { x: 20, bottom: 620, length: 580, size: 36 },
-        device: { width: 228, x: 128, y: 262, transform: 'rotateY(-18deg) rotateZ(-4deg)' },
+        bg: { tone: 'a', angle: 196, mid: 34, glow: { x: 0, y: 600, r: 220, color: 'rgba(213,242,92,.5)' } },
+        head: { x: 22, y: 34, w: 316, size: 31, align: 'right' },
+        device: { width: 216, x: 124, y: 316, transform: 'rotateY(-18deg) rotateZ(-4deg)' },
         perspective: 800,
         origin: '70% 60%',
         tags: [
-          { id: 'piekarnia', x: 112, y: 40, rotate: -7 },
-          { id: 'warzywniak', x: 108, y: 118, rotate: 4 },
-          { id: 'kwiaciarnia', x: 120, y: 196, rotate: -3 },
+          { id: 'piekarnia', x: 18, y: 150, rotate: -7 },
+          { id: 'warzywniak', x: 10, y: 214, rotate: 4 },
+          { id: 'kwiaciarnia', x: 24, y: 278, rotate: -3 },
         ],
         tagScale: 0.78,
-        trails: [[140, 88, 2, 0.75], [134, 168, 2, 0.75], [146, 244, 2, 0.75]],
+        trails: [[46, 192, 2, 0.6], [42, 256, 2, 0.6]],
       },
       {
         bg: { tone: 'b', angle: 140, mid: 20 },
-        head: { x: 22, y: 34, w: 316, size: 31, ink: true, align: 'right' },
-        big: { size: { pl: 108, en: 126 }, y: 290, x: 184, stroke: c.smola, strokeWidth: 2.6 },
-        device: { width: 250, x: -30, y: 300, transform: 'rotateY(22deg) rotateZ(-6deg)' },
+        vhead: { x: 20, bottom: 620, length: 580, size: 36, ink: true },
+        big: { size: { pl: 80, en: 98 }, y: 156, x: 230, stroke: c.smola, strokeWidth: 2.4 },
+        device: { width: 206, x: 128, y: 196, transform: 'rotateY(-20deg) rotateZ(4deg)' },
         perspective: 800,
-        origin: '10% 60%',
+        origin: '80% 60%',
       },
       {
         bg: { tone: 'a', angle: 205, mid: 30 },
         head: { x: 22, y: 34, w: 316, size: 31 },
-        device: { width: 226, x: 20, y: 186, transform: 'rotateZ(-9deg) rotateY(9deg)', hideCode: true },
+        device: { width: 226, x: 34, y: 186, transform: 'rotateZ(-9deg) rotateY(9deg)', hideCode: true },
         perspective: 900,
         origin: '30% 50%',
-        code: { width: 196, x: 142, y: 334, transform: 'rotate(5deg)' },
+        code: { width: 186, x: 154, y: 248, transform: 'rotate(5deg)' },
       },
       {
         bg: { tone: 'b', angle: 180, mid: 18 },
@@ -233,7 +233,7 @@ const layouts = {
     variantB: {
       bg: { tone: 'a', angle: 158, mid: 30, glow: { x: 350, y: 600, r: 300, color: 'rgba(213,242,92,.55)' } },
       head: { x: 22, y: 34, w: 300, size: 31 },
-      device: { width: 250, x: 112, y: 214, transform: 'rotateY(-20deg) rotateZ(7deg)' },
+      device: { width: 250, x: 82, y: 214, transform: 'rotateY(-20deg) rotateZ(7deg)' },
       perspective: 800,
       origin: '20% 40%',
       badge: { x: 20, y: 338, rotate: -6, scale: 0.8 },

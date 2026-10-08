@@ -22,7 +22,7 @@
       "id": "03",
       "screen": "koszyk",
       "headline": "One basket, three shops, one route",
-      "alt": "A basket split across three shops with the pickup order and a 1.1 km walk. Shop tags fly out of the phone."
+      "alt": "A basket split across three shops with the pickup order and a 1.1 km walk. Three shop tags float above the phone."
     },
     {
       "id": "04",
@@ -45,7 +45,7 @@
   ],
   "variantB": {
     "screen": "sklep",
-    "headline": "They set it aside for you",
+    "headline": "Kept behind the counter for you",
     "alt": "A bakery page with today's stock and how many are left. A badge saying it is held until 7 pm pops out of the screen."
   },
   "feature": {
