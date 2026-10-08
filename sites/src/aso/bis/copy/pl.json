@@ -1,0 +1,418 @@
+{
+  "lang": "pl",
+  "label": "Polski",
+  "app": {
+    "name": "Bis",
+    "tagline": "Koncerty artystów, których słuchasz"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "wokolicy",
+      "headline": "Koncerty artystów, których słuchasz",
+      "accent": "Koncerty",
+      "alt": "Telefon z listą koncertów w Warszawie na ten tydzień, wokół błyszczące naklejki z okładkami Mira Szum, Lisie Radio i Brokat Express."
+    },
+    {
+      "id": "02",
+      "screen": "odkrywaj",
+      "headline": "Świeże brzmienia grają tuż obok",
+      "accent": "tuż obok",
+      "alt": "Z telefonu wysuwają się holograficzne karty wykonawców: Ola Ćma, Tygrys z Kartonu i Neon Babci, każdy z koncertem w Warszawie."
+    },
+    {
+      "id": "03",
+      "screen": "koncert",
+      "headline": "Przypomnimy, zanim ruszy sprzedaż biletów",
+      "accent": "Przypomnimy",
+      "alt": "Koncert Szklane Kolano w telefonie i duże chromowane powiadomienie: bilety jutro o 10:00, przypomnimy 15 minut wcześniej."
+    },
+    {
+      "id": "04",
+      "screen": "znajomi",
+      "headline": "Zobacz, kto ze znajomych idzie",
+      "accent": "znajomych",
+      "alt": "Wokół telefonu krążą bąbelki z awatarami znajomych. Na Brokat Express w sobotę idą cztery osoby, dwie może."
+    },
+    {
+      "id": "05",
+      "screen": "kalendarz",
+      "headline": "Cały miesiąc grania w kalendarzu",
+      "accent": "miesiąc grania",
+      "alt": "Kalendarz października w telefonie, a obok holograficzne kafelki z dniami koncertów: 15, 17, 22, 23 i 30 października."
+    },
+    {
+      "id": "06",
+      "screen": "kolekcja",
+      "headline": "Każdy bilet zostaje jako naklejka",
+      "accent": "naklejka",
+      "alt": "Kolaż naklejek z biletami z koncertów tego roku nad małym telefonem z kolekcją: 23 koncerty w 2026."
+    }
+  ],
+  "variantB": {
+    "screen": "podglad",
+    "headline": "Poznaj zespół, zanim zagra u ciebie",
+    "accent": "Poznaj zespół",
+    "alt": "Odtwarzacz z 30 sekundami utworu Neon Babci, za nim chromowana fala dźwięku i naklejka: grają w piątek na Scenie Bąbel."
+  },
+  "feature": {
+    "headline": "Koncerty artystów, których słuchasz",
+    "accent": "Koncerty",
+    "alt": "Srebrne tło z holograficznymi plamami, chromowany napis Bis, gwiazdki i obietnica aplikacji."
+  },
+  "notes": {
+    "week": "ten tydzień",
+    "fromLibrary": "z twojej biblioteki",
+    "near": "tuż obok",
+    "previewBadge": "30 s",
+    "going": "idą",
+    "goingCount": "4 idą",
+    "maybeCount": "2 może",
+    "calendarTitle": "Październik",
+    "collectionCount": "23 koncerty w 2026",
+    "playsHere": "gra u ciebie w piątek"
+  },
+  "ui": {
+    "city": "Warszawa",
+    "tabs": ["Odkrywaj", "W okolicy", "Kalendarz", "Kolekcja"],
+    "artists": {
+      "mira": {
+        "name": "Mira Szum",
+        "genre": "dream pop",
+        "track": "Pianka na księżycu"
+      },
+      "lisie": {
+        "name": "Lisie Radio",
+        "genre": "indie folk",
+        "track": "Antena w lesie"
+      },
+      "brokat": {
+        "name": "Brokat Express",
+        "genre": "electro pop",
+        "track": "Taksówka do świtu"
+      },
+      "pola": {
+        "name": "Pola Ołówek",
+        "genre": "piosenka",
+        "track": "Notes z Pragi"
+      },
+      "szklane": {
+        "name": "Szklane Kolano",
+        "genre": "noise rock",
+        "track": "Szkło i sól"
+      },
+      "olacma": {
+        "name": "Ola Ćma",
+        "genre": "synth soul",
+        "track": "Lampa w oknie"
+      },
+      "tygrys": {
+        "name": "Tygrys z Kartonu",
+        "genre": "garage",
+        "track": "Karton na deszczu"
+      },
+      "neonbabci": {
+        "name": "Neon Babci",
+        "genre": "italo disco",
+        "track": "Kaseta z balkonu"
+      }
+    },
+    "venues": {
+      "przelot": {
+        "name": "Przelot",
+        "area": "Śródmieście",
+        "dist": "2,1 km"
+      },
+      "babel": {
+        "name": "Scena Bąbel",
+        "area": "Praga Północ",
+        "dist": "3,4 km"
+      },
+      "mewa": {
+        "name": "Strych Mewa",
+        "area": "Mokotów",
+        "dist": "4,8 km"
+      }
+    },
+    "odkrywaj": {
+      "title": "Odkrywaj",
+      "sub": "Nowe dla ciebie, grają w Warszawie",
+      "chips": ["Dla ciebie", "Elektronika", "Gitary", "Soul"],
+      "card": {
+        "artist": "olacma",
+        "venue": "mewa",
+        "when": "śr 22 paź, 20:30",
+        "match": "Brzmi jak Mira Szum i Lisie Radio",
+        "listeners": "1 240 słuchaczy w Warszawie"
+      },
+      "deck": [
+        {
+          "artist": "tygrys",
+          "venue": "przelot",
+          "when": "pt 30 paź"
+        },
+        {
+          "artist": "neonbabci",
+          "venue": "babel",
+          "when": "pt 23 paź"
+        }
+      ],
+      "preview": "Posłuchaj 30 s",
+      "skip": "Pomiń",
+      "follow": "Obserwuj"
+    },
+    "wokolicy": {
+      "title": "W okolicy",
+      "sub": "Warszawa, 15 do 18 października",
+      "filters": ["Z twojej biblioteki", "Wszystkie"],
+      "list": [
+        {
+          "artist": "mira",
+          "venue": "przelot",
+          "day": "czw",
+          "date": "15",
+          "month": "paź",
+          "time": "20:00",
+          "note": "12 utworów w bibliotece",
+          "tag": "dziś"
+        },
+        {
+          "artist": "lisie",
+          "venue": "babel",
+          "day": "pt",
+          "date": "16",
+          "month": "paź",
+          "time": "19:30",
+          "note": "słuchasz od marca"
+        },
+        {
+          "artist": "brokat",
+          "venue": "przelot",
+          "day": "sob",
+          "date": "17",
+          "month": "paź",
+          "time": "21:00",
+          "note": "masz bilet",
+          "tag": "idziesz"
+        },
+        {
+          "artist": "pola",
+          "venue": "mewa",
+          "day": "nd",
+          "date": "18",
+          "month": "paź",
+          "time": "18:00",
+          "note": "7 utworów w bibliotece"
+        }
+      ],
+      "more": "I jeszcze 9 koncertów w tym tygodniu",
+      "soon": {
+        "label": "Wkrótce w sprzedaży",
+        "artist": "szklane",
+        "venue": "babel",
+        "when": "sob 28 lis",
+        "sales": "pt, 10:00"
+      }
+    },
+    "koncert": {
+      "artist": "szklane",
+      "venue": "babel",
+      "date": "sobota, 28 listopada",
+      "time": "20:00",
+      "doors": "drzwi 19:00",
+      "support": "Przed nimi Pola Ołówek",
+      "salesLabel": "Sprzedaż biletów",
+      "salesWhen": "piątek, 16 października, 10:00",
+      "remind": "Przypomnij o biletach",
+      "remindSub": "15 minut przed startem sprzedaży",
+      "watching": "Obserwuje 3 znajomych",
+      "about": "Głośno, szybko i ze szklanymi dzwonkami. Pierwsza trasa po płycie „Szkło i sól”.",
+      "notification": {
+        "app": "Bis",
+        "time": "teraz",
+        "title": "Jutro o 10:00 bilety na Szklane Kolano",
+        "body": "Scena Bąbel, 28 listopada. Przypomnimy 15 minut wcześniej."
+      },
+      "follow": "Obserwujesz",
+      "addCal": "Do kalendarza"
+    },
+    "znajomi": {
+      "title": "Kto idzie",
+      "artist": "brokat",
+      "venue": "przelot",
+      "when": "sob 17 paź, 21:00",
+      "goingLabel": "Idą",
+      "maybeLabel": "Może",
+      "people": [
+        {
+          "name": "Zuza",
+          "state": "going",
+          "shape": "star",
+          "tone": "roz"
+        },
+        {
+          "name": "Kuba",
+          "state": "going",
+          "shape": "drop",
+          "tone": "cyjan"
+        },
+        {
+          "name": "Maja",
+          "state": "going",
+          "shape": "flower",
+          "tone": "limonka"
+        },
+        {
+          "name": "Igor",
+          "state": "going",
+          "shape": "moon",
+          "tone": "brzoskwinia"
+        },
+        {
+          "name": "Ania",
+          "state": "maybe",
+          "shape": "heart",
+          "tone": "cyjan"
+        },
+        {
+          "name": "Bartek",
+          "state": "maybe",
+          "shape": "bolt",
+          "tone": "roz"
+        }
+      ],
+      "stateLabels": {
+        "going": "idzie",
+        "maybe": "może"
+      },
+      "you": "Ty",
+      "youState": "masz bilet",
+      "meet": "Zbiórka 20:30 przy wejściu, pisze Zuza",
+      "invite": "Zaproś znajomych"
+    },
+    "kalendarz": {
+      "title": "Październik 2026",
+      "weekdays": ["pn", "wt", "śr", "czw", "pt", "sob", "nd"],
+      "offset": 3,
+      "days": 31,
+      "today": 15,
+      "selected": 17,
+      "marks": [
+        {
+          "day": 15,
+          "artist": "mira",
+          "venue": "przelot",
+          "time": "20:00"
+        },
+        {
+          "day": 16,
+          "artist": "lisie",
+          "venue": "babel",
+          "time": "19:30"
+        },
+        {
+          "day": 17,
+          "artist": "brokat",
+          "venue": "przelot",
+          "time": "21:00",
+          "going": true
+        },
+        {
+          "day": 18,
+          "artist": "pola",
+          "venue": "mewa",
+          "time": "18:00"
+        },
+        {
+          "day": 22,
+          "artist": "olacma",
+          "venue": "mewa",
+          "time": "20:30",
+          "going": true
+        },
+        {
+          "day": 23,
+          "artist": "neonbabci",
+          "venue": "babel",
+          "time": "21:00"
+        },
+        {
+          "day": 30,
+          "artist": "tygrys",
+          "venue": "przelot",
+          "time": "20:00"
+        }
+      ],
+      "legend": {
+        "going": "idziesz",
+        "watch": "obserwujesz"
+      },
+      "summary": "7 koncertów, na 2 masz bilety"
+    },
+    "kolekcja": {
+      "title": "Kolekcja",
+      "sub": "23 koncerty w 2026",
+      "chips": ["2026", "2025", "2024"],
+      "tickets": [
+        {
+          "artist": "mira",
+          "venue": "przelot",
+          "date": "12 września"
+        },
+        {
+          "artist": "lisie",
+          "venue": "mewa",
+          "date": "29 sierpnia"
+        },
+        {
+          "artist": "pola",
+          "venue": "babel",
+          "date": "2 sierpnia"
+        },
+        {
+          "artist": "brokat",
+          "venue": "babel",
+          "date": "18 lipca"
+        },
+        {
+          "artist": "szklane",
+          "venue": "przelot",
+          "date": "6 czerwca"
+        },
+        {
+          "artist": "tygrys",
+          "venue": "mewa",
+          "date": "23 maja"
+        }
+      ],
+      "stats": [
+        {
+          "value": "23",
+          "label": "koncerty"
+        },
+        {
+          "value": "14",
+          "label": "wykonawców"
+        },
+        {
+          "value": "3",
+          "label": "kluby"
+        }
+      ]
+    },
+    "podglad": {
+      "label": "Podgląd 30 s",
+      "artist": "neonbabci",
+      "venue": "babel",
+      "elapsed": "0:12",
+      "total": "0:30",
+      "progress": 0.4,
+      "gigLabel": "Gra u ciebie",
+      "gigWhen": "pt 23 paź, 21:00",
+      "similar": "Podobne do Brokat Express, którego słuchasz",
+      "follow": "Obserwuj",
+      "remind": "Przypomnij o biletach",
+      "next": "Następny podgląd: Tygrys z Kartonu"
+    }
+  }
+}

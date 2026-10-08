@@ -1,0 +1,418 @@
+{
+  "lang": "en",
+  "label": "English",
+  "app": {
+    "name": "Bis",
+    "tagline": "Gigs by the artists you play"
+  },
+  "slots": [
+    {
+      "id": "01",
+      "screen": "wokolicy",
+      "headline": "Gigs by the artists you play",
+      "accent": "Gigs",
+      "alt": "A phone listing this week's gigs in Warsaw, with glossy cover stickers for Mira Szum, Lisie Radio and Brokat Express around it."
+    },
+    {
+      "id": "02",
+      "screen": "odkrywaj",
+      "headline": "Fresh sounds playing near you",
+      "accent": "Fresh sounds",
+      "alt": "Holographic artist cards fan out of the phone: Ola Ćma, Tygrys z Kartonu and Neon Babci, each with a show in Warsaw."
+    },
+    {
+      "id": "03",
+      "screen": "koncert",
+      "headline": "Heads-up before ticket sales open",
+      "accent": "Heads-up",
+      "alt": "The Szklane Kolano gig on the phone and a large chrome alert: tickets are released tomorrow at 10 am, with a reminder 15 minutes before."
+    },
+    {
+      "id": "04",
+      "screen": "znajomi",
+      "headline": "See which friends are going",
+      "accent": "friends",
+      "alt": "Friends' avatar bubbles orbit the phone. Four are going to Brokat Express on Saturday and two might."
+    },
+    {
+      "id": "05",
+      "screen": "kalendarz",
+      "headline": "A month of gigs, one calendar",
+      "accent": "one calendar",
+      "alt": "October's calendar on the phone, with holographic tiles for the gig days beside it: 15, 17, 22, 23 and 30 October."
+    },
+    {
+      "id": "06",
+      "screen": "kolekcja",
+      "headline": "Every ticket becomes a sticker",
+      "accent": "sticker",
+      "alt": "A collage of ticket stickers from this year's gigs above a small phone showing the collection: 23 gigs in 2026."
+    }
+  ],
+  "variantB": {
+    "screen": "podglad",
+    "headline": "Meet the band before they play",
+    "accent": "Meet the band",
+    "alt": "A 30 second preview of a Neon Babci track, a chrome sound wave behind it and a sticker: they play Scena Bąbel on Friday."
+  },
+  "feature": {
+    "headline": "Gigs by the artists you play",
+    "accent": "Gigs",
+    "alt": "A silver background with holographic blobs, the name Bis in chrome bubble letters, sparkles and the app's promise."
+  },
+  "notes": {
+    "week": "this week",
+    "fromLibrary": "from your library",
+    "near": "close by",
+    "previewBadge": "30 sec",
+    "going": "going",
+    "goingCount": "4 going",
+    "maybeCount": "2 maybe",
+    "calendarTitle": "October",
+    "collectionCount": "23 gigs in 2026",
+    "playsHere": "playing near you Friday"
+  },
+  "ui": {
+    "city": "Warsaw",
+    "tabs": ["Discover", "Nearby", "Calendar", "Collection"],
+    "artists": {
+      "mira": {
+        "name": "Mira Szum",
+        "genre": "dream pop",
+        "track": "Pianka na księżycu"
+      },
+      "lisie": {
+        "name": "Lisie Radio",
+        "genre": "indie folk",
+        "track": "Antena w lesie"
+      },
+      "brokat": {
+        "name": "Brokat Express",
+        "genre": "electro pop",
+        "track": "Taksówka do świtu"
+      },
+      "pola": {
+        "name": "Pola Ołówek",
+        "genre": "singer songwriter",
+        "track": "Notes z Pragi"
+      },
+      "szklane": {
+        "name": "Szklane Kolano",
+        "genre": "noise rock",
+        "track": "Szkło i sól"
+      },
+      "olacma": {
+        "name": "Ola Ćma",
+        "genre": "synth soul",
+        "track": "Lampa w oknie"
+      },
+      "tygrys": {
+        "name": "Tygrys z Kartonu",
+        "genre": "garage",
+        "track": "Karton na deszczu"
+      },
+      "neonbabci": {
+        "name": "Neon Babci",
+        "genre": "italo disco",
+        "track": "Kaseta z balkonu"
+      }
+    },
+    "venues": {
+      "przelot": {
+        "name": "Przelot",
+        "area": "City Centre",
+        "dist": "2.1 km"
+      },
+      "babel": {
+        "name": "Scena Bąbel",
+        "area": "Praga North",
+        "dist": "3.4 km"
+      },
+      "mewa": {
+        "name": "Strych Mewa",
+        "area": "Mokotów",
+        "dist": "4.8 km"
+      }
+    },
+    "odkrywaj": {
+      "title": "Discover",
+      "sub": "Artists you haven't heard, playing Warsaw",
+      "chips": ["For you", "Electronic", "Guitars", "Soul"],
+      "card": {
+        "artist": "olacma",
+        "venue": "mewa",
+        "when": "Wed 22 Oct, 8:30 pm",
+        "match": "Sounds like Mira Szum and Lisie Radio",
+        "listeners": "1,240 listeners in Warsaw"
+      },
+      "deck": [
+        {
+          "artist": "tygrys",
+          "venue": "przelot",
+          "when": "Fri 30 Oct"
+        },
+        {
+          "artist": "neonbabci",
+          "venue": "babel",
+          "when": "Fri 23 Oct"
+        }
+      ],
+      "preview": "Play 30 sec",
+      "skip": "Skip",
+      "follow": "Follow"
+    },
+    "wokolicy": {
+      "title": "Nearby",
+      "sub": "Warsaw, 15 to 18 October",
+      "filters": ["From your library", "Everything"],
+      "list": [
+        {
+          "artist": "mira",
+          "venue": "przelot",
+          "day": "Thu",
+          "date": "15",
+          "month": "Oct",
+          "time": "8 pm",
+          "note": "12 tracks in your library",
+          "tag": "tonight"
+        },
+        {
+          "artist": "lisie",
+          "venue": "babel",
+          "day": "Fri",
+          "date": "16",
+          "month": "Oct",
+          "time": "7:30 pm",
+          "note": "on repeat since March"
+        },
+        {
+          "artist": "brokat",
+          "venue": "przelot",
+          "day": "Sat",
+          "date": "17",
+          "month": "Oct",
+          "time": "9 pm",
+          "note": "you have a ticket",
+          "tag": "going"
+        },
+        {
+          "artist": "pola",
+          "venue": "mewa",
+          "day": "Sun",
+          "date": "18",
+          "month": "Oct",
+          "time": "6 pm",
+          "note": "7 tracks in your library"
+        }
+      ],
+      "more": "Plus 9 more gigs this week",
+      "soon": {
+        "label": "Tickets soon",
+        "artist": "szklane",
+        "venue": "babel",
+        "when": "Sat 28 Nov",
+        "sales": "Fri, 10 am"
+      }
+    },
+    "koncert": {
+      "artist": "szklane",
+      "venue": "babel",
+      "date": "Saturday 28 November",
+      "time": "8 pm",
+      "doors": "doors 7 pm",
+      "support": "Support from Pola Ołówek",
+      "salesLabel": "Ticket release",
+      "salesWhen": "Friday 16 October, 10 am",
+      "remind": "Remind me about tickets",
+      "remindSub": "15 minutes before sales open",
+      "watching": "3 friends are following",
+      "about": "Loud, fast and full of glass chimes. Their first tour since the album Szkło i sól.",
+      "notification": {
+        "app": "Bis",
+        "time": "now",
+        "title": "Szklane Kolano tickets open tomorrow at 10 am",
+        "body": "Scena Bąbel, 28 November. We'll nudge you 15 minutes before."
+      },
+      "follow": "Following",
+      "addCal": "Add to calendar"
+    },
+    "znajomi": {
+      "title": "Who's going",
+      "artist": "brokat",
+      "venue": "przelot",
+      "when": "Sat 17 Oct, 9 pm",
+      "goingLabel": "Going",
+      "maybeLabel": "Maybe",
+      "people": [
+        {
+          "name": "Zuza",
+          "state": "going",
+          "shape": "star",
+          "tone": "roz"
+        },
+        {
+          "name": "Kuba",
+          "state": "going",
+          "shape": "drop",
+          "tone": "cyjan"
+        },
+        {
+          "name": "Maja",
+          "state": "going",
+          "shape": "flower",
+          "tone": "limonka"
+        },
+        {
+          "name": "Igor",
+          "state": "going",
+          "shape": "moon",
+          "tone": "brzoskwinia"
+        },
+        {
+          "name": "Ania",
+          "state": "maybe",
+          "shape": "heart",
+          "tone": "cyjan"
+        },
+        {
+          "name": "Bartek",
+          "state": "maybe",
+          "shape": "bolt",
+          "tone": "roz"
+        }
+      ],
+      "stateLabels": {
+        "going": "going",
+        "maybe": "maybe"
+      },
+      "you": "You",
+      "youState": "ticket saved",
+      "meet": "Meet at the door at 8:30, says Zuza",
+      "invite": "Invite friends"
+    },
+    "kalendarz": {
+      "title": "October 2026",
+      "weekdays": ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+      "offset": 3,
+      "days": 31,
+      "today": 15,
+      "selected": 17,
+      "marks": [
+        {
+          "day": 15,
+          "artist": "mira",
+          "venue": "przelot",
+          "time": "8 pm"
+        },
+        {
+          "day": 16,
+          "artist": "lisie",
+          "venue": "babel",
+          "time": "7:30 pm"
+        },
+        {
+          "day": 17,
+          "artist": "brokat",
+          "venue": "przelot",
+          "time": "9 pm",
+          "going": true
+        },
+        {
+          "day": 18,
+          "artist": "pola",
+          "venue": "mewa",
+          "time": "6 pm"
+        },
+        {
+          "day": 22,
+          "artist": "olacma",
+          "venue": "mewa",
+          "time": "8:30 pm",
+          "going": true
+        },
+        {
+          "day": 23,
+          "artist": "neonbabci",
+          "venue": "babel",
+          "time": "9 pm"
+        },
+        {
+          "day": 30,
+          "artist": "tygrys",
+          "venue": "przelot",
+          "time": "8 pm"
+        }
+      ],
+      "legend": {
+        "going": "going",
+        "watch": "following"
+      },
+      "summary": "7 gigs, tickets for 2"
+    },
+    "kolekcja": {
+      "title": "Collection",
+      "sub": "23 gigs in 2026",
+      "chips": ["2026", "2025", "2024"],
+      "tickets": [
+        {
+          "artist": "mira",
+          "venue": "przelot",
+          "date": "12 Sept"
+        },
+        {
+          "artist": "lisie",
+          "venue": "mewa",
+          "date": "29 Aug"
+        },
+        {
+          "artist": "pola",
+          "venue": "babel",
+          "date": "2 Aug"
+        },
+        {
+          "artist": "brokat",
+          "venue": "babel",
+          "date": "18 July"
+        },
+        {
+          "artist": "szklane",
+          "venue": "przelot",
+          "date": "6 June"
+        },
+        {
+          "artist": "tygrys",
+          "venue": "mewa",
+          "date": "23 May"
+        }
+      ],
+      "stats": [
+        {
+          "value": "23",
+          "label": "gigs"
+        },
+        {
+          "value": "14",
+          "label": "artists"
+        },
+        {
+          "value": "3",
+          "label": "venues"
+        }
+      ]
+    },
+    "podglad": {
+      "label": "30 sec preview",
+      "artist": "neonbabci",
+      "venue": "babel",
+      "elapsed": "0:12",
+      "total": "0:30",
+      "progress": 0.4,
+      "gigLabel": "Playing near you",
+      "gigWhen": "Fri 23 Oct, 9 pm",
+      "similar": "Close to Brokat Express, who you play a lot",
+      "follow": "Follow",
+      "remind": "Remind me about tickets",
+      "next": "Next preview: Tygrys z Kartonu"
+    }
+  }
+}
