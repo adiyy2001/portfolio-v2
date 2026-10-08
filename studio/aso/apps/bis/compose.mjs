@@ -1,6 +1,6 @@
 import { card, esc, glue, phone, statusBar, styleOf } from '../../kit/kit.mjs';
 import { stores } from '../../lib/convention.mjs';
-import { avatar, chromeStops, colors as c, cover, holoStops, letterStops, rimStops, sparkle, sparkleDefs, starPath, tones } from './art.mjs';
+import { avatar, chromeStops, colors as c, cover, holoStops, letterStops, sparkle, sparkleDefs, starPath, tones } from './art.mjs';
 import { icons, logo, renderScreen, screenOrder, sized, stub, t, waveBars } from './screens.mjs';
 
 const W = { appstore: 440, play: 360 };
@@ -91,7 +91,7 @@ function chromeText() {
       const walker = document.createTreeWalker(span, NodeFilter.SHOW_TEXT);
       while (walker.nextNode()) {
         const node = walker.currentNode;
-        const re = /[^\s ]+/g;
+        const re = /[^\s\u00a0]+/g;
         let m = re.exec(node.data);
         while (m) {
           const r = document.createRange();
@@ -217,7 +217,6 @@ const playSticker = ({ x, y, s, rot = 0 }) =>
 
 const orbit = (ui, lang, { cx, cy, rx, ry, rot, size, angles, label }) => {
   const people = ui.znajomi.people;
-  const z = ui.znajomi;
   const rad = (rot * Math.PI) / 180;
   return people
     .map((p, i) => {

@@ -288,7 +288,6 @@ const compose = (app, store, lang, slotIndex, variant) => {
   const spec = S[screenId];
   const w = W[store];
   const h = H[store];
-  const k = w / 440;
   const parts = [];
   const back = [];
   const front = [];

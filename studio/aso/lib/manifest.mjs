@@ -73,7 +73,7 @@ export const buildManifest = async (app, fontsBuilt = []) => {
     groups,
     files,
     web,
-    fonts: fontsBuilt.map(({ pinned, ...rest }) => rest),
+    fonts: fontsBuilt.map(font => Object.fromEntries(Object.entries(font).filter(([key]) => key !== 'pinned'))),
     palette: app.palette,
   };
   const text = await prettify(JSON.stringify(manifest));

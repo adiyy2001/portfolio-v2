@@ -73,7 +73,7 @@ const covers = {
     defs: `${lin(`${u}-bg`, c.grafit, c.roz, 0, 1)}<radialGradient id="${u}-lamp" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="${c.limonka}" stop-opacity=".95"/><stop offset="1" stop-color="${c.limonka}" stop-opacity="0"/></radialGradient>`,
     body: `<rect width="100" height="100" fill="url(#${u}-bg)"/><circle cx="50" cy="30" r="26" fill="url(#${u}-lamp)"/><circle cx="50" cy="30" r="8" fill="${c.limonka}"/><g fill="${c.chromJasny}" stroke="${c.atrament}" stroke-width="2.4"><ellipse cx="36" cy="58" rx="14" ry="11" transform="rotate(-25 36 58)"/><ellipse cx="64" cy="58" rx="14" ry="11" transform="rotate(25 64 58)"/><ellipse cx="40" cy="76" rx="9" ry="7" transform="rotate(20 40 76)" fill="${c.cyjan}"/><ellipse cx="60" cy="76" rx="9" ry="7" transform="rotate(-20 60 76)" fill="${c.cyjan}"/></g><rect x="47" y="54" width="6" height="30" rx="3" fill="${c.atrament}"/>`,
   }),
-  tygrys: u => ({
+  tygrys: () => ({
     defs: '',
     body: `<rect width="100" height="100" fill="${c.limonka}"/>${[14, 38, 62, 86].map((y, i) => `<path d="M-4 ${y}l12 -8 12 8 12 -8 12 8 12 -8 12 8 12 -8 12 8 12 -8" fill="none" stroke="${i % 2 ? c.roz : c.atrament}" stroke-width="6" stroke-linejoin="round"/>`).join('')}<rect x="30" y="30" width="40" height="40" rx="6" fill="${c.brzoskwinia}" stroke="${c.atrament}" stroke-width="3"/><path d="M30 44h40M50 30v14" stroke="${c.atrament}" stroke-width="3"/>`,
   }),

@@ -137,8 +137,6 @@ function pageComic(cfg) {
 
 const script = cfg => `<script>(${pageComic.toString()})(${JSON.stringify({ ...cfg, soft: process.env.CHOCHLA_SOFT === '1' })});</script>`;
 
-const avoidOf = (items, m) => items.map(r => grow(r, m));
-
 const times = ({ x, y, r, fill, label, sub, size }) =>
   `<div data-box="fg" data-name="times-${esc(label)}" style="${styleOf({ position: 'absolute', left: x - r - 4, top: y - r - 4, width: 2 * r + 8, height: 2 * r + 8 })}">${layer(2 * r + 8, 2 * r + 8, halftoneDisc({ cx: r + 4, cy: r + 4, r, fill }))}<div class="c-times" style="${styleOf({ left: 0, top: 0, width: 2 * r + 8, height: 2 * r + 8 })}"><span style="${styleOf({ 'font-size': size, color: c.kontur, 'padding-top': size * 0.08, background: c.biel, border: `3px solid ${c.kontur}`, 'border-radius': 12, padding: `${size * 0.12}px ${size * 0.18}px ${size * 0.02}px` })}">${esc(label)}</span><span style="${styleOf({ 'margin-top': 6, 'font-family': "'Figtree',sans-serif", 'font-weight': '800', 'font-size': size * 0.26, background: c.kontur, color: c.krem, padding: '3px 8px', 'border-radius': 6, 'white-space': 'nowrap' })}">${esc(sub)}</span></div></div>`;
 

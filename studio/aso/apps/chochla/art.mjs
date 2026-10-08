@@ -151,7 +151,6 @@ export const character = (kind, { x, y, size = 120, point, flip = false, name })
   const make = characters[kind];
   if (!make) throw new Error(`chochla: unknown character ${kind}`);
   const { svg, mouth } = make({ point });
-  const k = size / 120;
   const mx = flip ? 120 - mouth[0] : mouth[0];
   const inner = flip ? `<g transform="translate(120 0) scale(-1 1)">${svg}</g>` : svg;
   return {

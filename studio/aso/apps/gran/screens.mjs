@@ -40,7 +40,7 @@ export const mapPoints = {
   kopa: [132, 214],
 };
 
-const mapSvg = (ui, lang) => {
+const mapSvg = ui => {
   const p = mapPoints;
   const pts = Object.fromEntries(ui.mapa.points.map(item => [item.id, item]));
   const contour = (cx, cy, rings, rx, ry, wobble) =>
@@ -151,7 +151,7 @@ ${marks.map((m, i) => `<span style="position:absolute;top:8px;left:${m * 100}%;w
 
 export const landscapeChart = { offset: 64, width: 754, padLeft: 56, padRight: 8 };
 
-export const profileChart = ({ width, height, labels = true, ui, lang }) => {
+export const profileChart = ({ width, height, labels = true, ui }) => {
   const pad = { l: labels ? 56 : 0, r: 8, t: 10, b: labels ? 24 : 0 };
   const w = width - pad.l - pad.r;
   const h = height - pad.t - pad.b;

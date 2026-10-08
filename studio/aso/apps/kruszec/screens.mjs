@@ -170,7 +170,7 @@ export const cushionRows = (ui, lang) => {
   return `<div class="k-glass" style="padding:4px 0"><div class="k-list">${rows.map(([label, value]) => `<div class="k-li" style="min-height:48px"><span class="k-li__main" style="color:${c.tekst2};font-size:13.5px;white-space:normal">${t(label, lang)}</span><span class="k-li__val">${value}</span></div>`).join('')}</div></div>`;
 };
 
-export const ringSvg = ({ items, size = 220, stroke = 22, id = 'r', gap = 0.035 }) => {
+export const ringSvg = ({ items, size = 220, stroke = 22, gap = 0.035 }) => {
   const r = (size - stroke) / 2;
   const cx = size / 2;
   let acc = -Math.PI / 2;

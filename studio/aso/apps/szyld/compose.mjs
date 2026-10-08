@@ -1,6 +1,6 @@
 import { card, esc, headline, phone, phoneGeometry, SCREEN, statusBar, styleOf, text } from '../../kit/kit.mjs';
 import { stores } from '../../lib/convention.mjs';
-import { codeCard, colors as c, glyph, mapPins, renderScreen, screenOrder } from './screens.mjs';
+import { codeCard, colors as c, glyph, renderScreen, screenOrder } from './screens.mjs';
 
 const css = `
 .sh{font-family:'Mona Sans Expanded','Mona Sans',sans-serif;font-weight:900;line-height:.98;letter-spacing:-.025em;word-spacing:.08em;color:${c.mleko}}
@@ -61,14 +61,6 @@ const device = (store, { screen, screenId, width, x, y, transform, name, box = '
 };
 
 const deviceHeight = (store, width) => (store === 'appstore' ? phoneGeometry(width).height : (SCREEN.height * width) / SCREEN.width);
-
-const screenArea = (store, width) => {
-  if (store === 'appstore') {
-    const g = phoneGeometry(width);
-    return { left: g.bezel, top: g.bezel, scale: g.scale };
-  }
-  return { left: 0, top: 0, scale: width / SCREEN.width };
-};
 
 const stage = (inner, { perspective = 1100, origin = '50% 50%', w, h }) =>
   `<div class="s-stage" style="${styleOf({ width: w, height: h, perspective: `${perspective}px`, 'perspective-origin': origin })}">${inner}</div>`;
