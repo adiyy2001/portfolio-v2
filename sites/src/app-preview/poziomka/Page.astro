@@ -1,0 +1,411 @@
+---
+import { link, portfolio } from '../../shared/link';
+import FileTable from '../shared/FileTable.astro';
+import LoopVideo from '../shared/LoopVideo.astro';
+import SampleLine from '../shared/SampleLine.astro';
+import Shell from '../shared/Shell.astro';
+import Storyboard from '../shared/Storyboard.astro';
+import { assetUrl, nb, presetValue, readManifest } from '../shared/manifest';
+import StepLab from './StepLab.tsx';
+import { app } from './app';
+import { content } from './content';
+import { styles } from './styles';
+
+const manifest = readManifest('poziomka');
+const asset = (path: string) => assetUrl('poziomka', path);
+const fontCss = manifest.fonts
+  .map(
+    font =>
+      `@font-face{font-family:'${font.family}';src:url(${asset(font.file)}) format('woff2');font-weight:400;font-style:normal;font-display:swap}`,
+  )
+  .join('');
+const sections = [
+  ['zadanie', 'Zadanie'],
+  ['kierunek', 'Kierunek'],
+  ['storyboard', 'Storyboard'],
+  ['ruch', 'Ruch'],
+  ['ekrany', 'Ekrany'],
+  ['formaty', 'Formaty'],
+  ['pliki', 'Pliki'],
+] as const;
+const pl = (text: string) =>
+  nb(text)
+    .replace(/(?<=^|[\s („])([aiouwzAIOUWZ]) /g, '$1 ')
+    .replace(/(\d) (dni|klatek|klatki|pikseli|piksele|kolorów|razy|XP|stron)/g, '$1 $2')
+    .replace(/(POZIOM|PASSA:) (\d+)/g, '$1\u00a0$2');
+const ratio = (value: number) => value.toFixed(1).replace('.', ',');
+const onCream = (id: string) => manifest.palette.find(item => item.id === id)?.onSurface ?? 0;
+const onSky = (id: string) => manifest.palette.find(item => item.id === id)?.onGrouped ?? 0;
+const videos = manifest.videos;
+const total = content.client.quests.rows
+  .filter(row => row[3])
+  .reduce((sum, row) => sum + row[2], 0);
+---
+
+<Shell
+  app={app}
+  title="App preview trackera nawyków"
+  description="Pixel art 8-bit w ruchu: podgląd zmyślonego trackera nawyków Poziomka z punktami doświadczenia, poziomami i passą. Wersja do App Store, trzy formaty social, pętle na stronę, storyboard i zasady ruchu z laboratorium kroków."
+  css={fontCss + styles}
+  preload={manifest.fonts.map(font => asset(font.file))}
+  bodyClass="poz">
+  <div class="band">
+    <header class="top">
+      <a href={link('/app-preview/')}>Wzornik, app preview</a>
+      <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+    </header>
+    <div class="band__dither"></div>
+    <div class="band__mid"></div>
+    <div class="band__dither2"></div>
+  </div>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="t-hero">
+      <div class="hero__grid">
+        <div>
+          <p class="kicker">{content.kicker}</p>
+          <div class="brand">
+            <img src={asset(manifest.icons.rounded)} alt="" width="512" height="512" />
+            <h1 id="t-hero">Poziomka</h1>
+          </div>
+          <p class="lead">{pl(content.lead)}</p>
+        </div>
+        <div>
+          <dl class="rows">
+            {content.facts.map(([term, value]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{pl(value)}</dd>
+              </div>
+            ))}
+          </dl>
+          <nav class="toc" aria-label="Sekcje">
+            {sections.map(([id, label]) => (
+              <a href={`#${id}`}>{label}</a>
+            ))}
+          </nav>
+        </div>
+      </div>
+      <figure class="screen fit-box">
+        <div class="screen__frame">
+          <div
+            class="hero__wide"
+            data-art={videos.hero.mp4.width / 2}
+            data-natural={videos.hero.mp4.width}
+            data-pad="20">
+            <LoopVideo
+              manifest={manifest}
+              variant="hero"
+              class="px"
+              label="Wersja marketingowa 16:9: pikselowy świat z chmurami i ogródkiem, telefon z aplikacją Poziomka, nagłówki czterech funkcji i monety wyskakujące z ekranu"
+            />
+          </div>
+          <div
+            class="hero__tall"
+            data-art={videos['hero-9x16'].mp4.width / 2}
+            data-natural={videos['hero-9x16'].mp4.width}
+            data-pad="20">
+            <LoopVideo
+              manifest={manifest}
+              variant="hero-9x16"
+              class="px"
+              label="Wersja marketingowa 9:16: nagłówek nad pikselowym telefonem z aplikacją Poziomka"
+            />
+          </div>
+        </div>
+        <figcaption>{content.heroCaption}</figcaption>
+      </figure>
+    </section>
+
+    <section class="sec" id="zadanie" aria-labelledby="t-zadanie">
+      <div class="sec__head">
+        <p class="sec__num">01 Klient i zadanie</p>
+        <h2 id="t-zadanie">{content.client.title}</h2>
+      </div>
+      <div class="cols">
+        <div>
+          <div class="prose">
+            {content.client.paragraphs.map(text => (
+              <p>{pl(text)}</p>
+            ))}
+          </div>
+          <dl class="rows rows--stack" style="margin-top:24px">
+            {content.client.facts.map(([term, value]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{pl(value)}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="panel quests" aria-label="Przykładowa lista zadań na dziś">
+          <p class="quests__label">{content.client.quests.label}</p>
+          <p class="quests__title">{content.client.quests.title}</p>
+          <ul>
+            {content.client.quests.rows.map(([name, when, xp, done]) => (
+              <li class={done ? 'done' : undefined}>
+                <span>
+                  <span>{pl(name)}</span>
+                  <small>
+                    {when}
+                    {done ? ', zrobione' : ''}
+                  </small>
+                </span>
+                <span class="xp">+{xp}&nbsp;XP</span>
+              </li>
+            ))}
+          </ul>
+          <p class="quests__total">
+            {pl(`Rano +${total} XP: z 1160 robi się 1200 XP i poziom 8.`)}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="kierunek" aria-labelledby="t-kierunek">
+      <div class="sec__head">
+        <p class="sec__num">02 Kierunek</p>
+        <h2 id="t-kierunek">{content.direction.title}</h2>
+      </div>
+      <div class="cols">
+        <div>
+          <div class="prose">
+            {content.direction.paragraphs.map(text => (
+              <p>{pl(text)}</p>
+            ))}
+          </div>
+          <ul class="chips">
+            {content.direction.keywords.map(word => (
+              <li>{word}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="panel type" aria-label="Dwa kroje pikselowe">
+          {content.type.map((item, i) => (
+            <div class="type__row">
+              <p class={i === 0 ? 'type__big' : 'type__mini'}>
+                {item.sample.map(line => (
+                  <span>{line}</span>
+                ))}
+              </p>
+              <small>
+                {item.family} (OFL), w wideo jako bitmapa {item.bitmap}: {item.note}
+              </small>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="panel" style="margin-top:24px">
+        <h3>Szesnaście kolorów i nic więcej</h3>
+        <ul class="swatches">
+          {manifest.palette.map(item => (
+            <li class="swatch">
+              <span class="swatch__chip" style={`background:${item.hex}`} />
+              <span style="color:var(--ink)">{item.name}</span>
+              <span>{item.hex.toUpperCase()}</span>
+              <span>{item.role}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="contrast">
+          {pl(
+            `Kontrast: atrament na kremie ${ratio(onCream('ink'))}:1, na jasnym błękicie ${ratio(onSky('ink'))}:1. Zmierzch na kremie ${ratio(onCream('dusk'))}:1, na błękicie ${ratio(onSky('dusk'))}:1. Złoto i krem stoją na śliwce, a kamień, liść i poziomka służą tylko do rysunku.`,
+          )}
+        </p>
+      </div>
+    </section>
+
+    <section class="sec" id="storyboard" aria-labelledby="t-storyboard">
+      <div class="sec__head">
+        <p class="sec__num">03 Storyboard</p>
+        <h2 id="t-storyboard">{content.storyboard.title}</h2>
+        <p class="intro">{pl(content.storyboard.intro)}</p>
+      </div>
+      <ul class="list">
+        {content.storyboard.rules.map(rule => (
+          <li>{pl(rule)}</li>
+        ))}
+      </ul>
+      <Storyboard manifest={manifest} alt={content.storyboard.alt} />
+    </section>
+
+    <section class="sec" id="ruch" aria-labelledby="t-ruch">
+      <div class="sec__head">
+        <p class="sec__num">04 Zasady ruchu</p>
+        <h2 id="t-ruch">{content.motion.title}</h2>
+        <p class="intro">{pl(content.motion.intro)}</p>
+      </div>
+      <StepLab client:visible caption={pl(content.motion.caption)} />
+      <div class="cols" style="margin-top:32px">
+        <dl class="presets">
+          {manifest.motion.map(preset => (
+            <div>
+              <dt>
+                {preset.id} <span>· {preset.use}</span>
+              </dt>
+              <dd>
+                <code>{presetValue(preset)}</code>
+              </dd>
+              <dd>{pl(preset.note)}</dd>
+            </div>
+          ))}
+        </dl>
+        <dl class="rows rows--stack">
+          {content.motion.rules.map(([term, value]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{pl(value)}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="sec" id="ekrany" aria-labelledby="t-ekrany">
+      <div class="sec__head">
+        <p class="sec__num">05 Ekrany</p>
+        <h2 id="t-ekrany">{content.screens.title}</h2>
+        <p class="intro">{pl(content.screens.intro)}</p>
+      </div>
+      <div
+        class="gallery fit-box"
+        role="region"
+        aria-label="Galeria ekranów, przewiń w bok"
+        tabindex="0">
+        {manifest.gallery.map(item => (
+          <figure>
+            <div class="shot" data-art="221" data-natural="442" data-max="442">
+              <img
+                src={asset(item.file)}
+                alt={`Ekran ${item.title}`}
+                width="442"
+                height="960"
+                loading="lazy"
+                decoding="async"
+                style="width:100%"
+              />
+            </div>
+            <figcaption>
+              <b>
+                {item.n}. {item.title}
+              </b>
+              <span>{pl(item.caption)}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="hint">Przewiń w bok, żeby zobaczyć wszystkie sześć ekranów.</p>
+    </section>
+
+    <section class="sec" id="formaty" aria-labelledby="t-formaty">
+      <div class="sec__head">
+        <p class="sec__num">06 Wersja sklepowa i formaty</p>
+        <h2 id="t-formaty">{content.formats.title}</h2>
+        <p class="intro">{pl(content.formats.intro)}</p>
+      </div>
+      <div class="formats">
+        <figure class="fit-box">
+          <div class="shot" data-art="221" data-natural={videos.store.mp4.width}>
+            <LoopVideo
+              manifest={manifest}
+              variant="store"
+              class="px"
+              label="Wersja sklepowa: sam interfejs Poziomki na pełnym ekranie"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.store}</b>886×1920, 20 s, H.264
+          </figcaption>
+        </figure>
+        <figure class="fit-box">
+          <div
+            class="shot"
+            data-art={videos['hero-9x16'].mp4.width / 2}
+            data-natural={videos['hero-9x16'].mp4.width}>
+            <LoopVideo
+              manifest={manifest}
+              variant="hero-9x16"
+              class="px"
+              label="Wersja 9:16 z nagłówkiem nad pikselowym telefonem"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.portrait}</b>1080×1920, 20 s
+          </figcaption>
+        </figure>
+        <figure class="fit-box">
+          <div
+            class="shot"
+            data-art={videos['social-1x1'].mp4.width / 2}
+            data-natural={videos['social-1x1'].mp4.width}>
+            <LoopVideo
+              manifest={manifest}
+              variant="social-1x1"
+              class="px"
+              label="Wersja kwadratowa: nagłówek po lewej, telefon po prawej, poziomka skacze w trawie"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.square}</b>1080×1080, 20 s
+          </figcaption>
+        </figure>
+        <figure class="fit-box fmt--wide">
+          <div
+            class="shot"
+            data-art={videos.hero.mp4.width / 2}
+            data-natural={videos.hero.mp4.width}>
+            <LoopVideo
+              manifest={manifest}
+              variant="hero"
+              class="px"
+              label="Wersja 16:9 z licznikiem XP, nagłówkiem po lewej i telefonem po prawej"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.wide}</b>1920×1080, 20 s
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sec" id="pliki" aria-labelledby="t-pliki">
+      <div class="sec__head">
+        <p class="sec__num">07 Co dostaje klient</p>
+        <h2 id="t-pliki">{content.deliverables.title}</h2>
+        <p class="intro">{pl(content.deliverables.intro)}</p>
+      </div>
+      <FileTable manifest={manifest} />
+      <dl class="rows rows--stack" style="margin-top:24px">
+        {content.deliverables.extras.map(([term, value]) => (
+          <div>
+            <dt>{term}</dt>
+            <dd>{pl(value)}</dd>
+          </div>
+        ))}
+      </dl>
+      <p style="margin-top:16px">
+        Licencje krojów: <a href={asset('fonts/OFL-jersey10.txt')}>Jersey 10, OFL</a> i{' '}
+        <a href={asset('fonts/OFL-tiny5.txt')}>Tiny5, OFL</a>.
+      </p>
+    </section>
+
+    <section class="cta panel panel--plum" aria-labelledby="t-cta">
+      <h2 id="t-cta">{content.cta.title}</h2>
+      <p>{pl(content.cta.text)}</p>
+      <a href={portfolio('/dla-klienta/#wzornik')}>{content.cta.link}</a>
+    </section>
+  </main>
+
+  <div class="ground">
+    <div class="ground__edge"></div>
+    <footer class="foot">
+      <SampleLine name="Poziomka" />
+    </footer>
+  </div>
+</Shell>
+
+<script>
+  import { watchFit } from './pixelfit';
+
+  watchFit();
+</script>

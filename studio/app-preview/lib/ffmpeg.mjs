@@ -16,8 +16,8 @@ export const searchQuality = ({ start, step, max, encode, file, target }) => {
   }
 };
 
-export const toTv = (width, height) =>
-  `scale=${width}:${height}:flags=lanczos:in_range=auto:out_range=tv,format=yuv420p`;
+export const toTv = (width, height, { flags = 'lanczos', crop } = {}) =>
+  `${crop ? `crop=${crop},` : ''}scale=${width}:${height}:flags=${flags}:in_range=auto:out_range=tv,format=yuv420p`;
 
 export const ssimFrames = (file, a, b) => {
   const graph = `[0]trim=start_frame=${a}:end_frame=${a + 1},setpts=PTS-STARTPTS[x];[1]trim=start_frame=${b}:end_frame=${b + 1},setpts=PTS-STARTPTS[y];[x][y]ssim`;

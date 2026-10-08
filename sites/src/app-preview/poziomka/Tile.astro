@@ -1,0 +1,127 @@
+---
+import LoopVideo from '../shared/LoopVideo.astro';
+import { previewApp } from '../shared/apps';
+import { readManifest } from '../shared/manifest';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = previewApp('poziomka');
+const manifest = readManifest('poziomka');
+---
+
+<a class="poz-tile" href={href}>
+  <span class="poz-tile__media fit-box">
+    <span class="poz-tile__fit" data-art="120" data-natural={manifest.videos.tile.mp4.width}>
+      <LoopVideo
+        manifest={manifest}
+        variant="tile"
+        mode="hover"
+        class="poz-tile__video"
+        label="Pętla: pikselowa poziomka skacze pod banerem POZIOM 8, a obok wyskakują monety z punktami"
+      />
+    </span>
+  </span>
+  <span class="poz-tile__body">
+    <span class="poz-tile__style">
+      {meta.styleId}, {meta.style}
+    </span>
+    <span class="poz-tile__name">{meta.name}</span>
+    <span class="poz-tile__trade">
+      {meta.trade}, {meta.city}
+    </span>
+    <span class="poz-tile__go">Zobacz realizację</span>
+  </span>
+</a>
+
+<script>
+  import { watchFit } from './pixelfit';
+
+  watchFit();
+</script>
+
+<style is:global>
+  .poz-tile {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    height: 100%;
+    color: #140c1c;
+    background: #fff3c4;
+    border: 2px solid #140c1c;
+    text-decoration: none;
+    font-family: 'Schibsted Grotesk', system-ui, Arial, sans-serif;
+    clip-path: polygon(
+      4px 0,
+      calc(100% - 4px) 0,
+      100% 4px,
+      100% calc(100% - 4px),
+      calc(100% - 4px) 100%,
+      4px 100%,
+      0 calc(100% - 4px),
+      0 4px
+    );
+  }
+
+  .poz-tile__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background: #9ed8ff;
+    border-bottom: 2px solid #140c1c;
+  }
+
+  .poz-tile__fit {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .poz-tile__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    image-rendering: pixelated;
+    background: #9ed8ff;
+  }
+
+  .poz-tile__body {
+    display: grid;
+    gap: 4px;
+    padding: 18px 22px 22px;
+  }
+
+  .poz-tile__style {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #6b3e5e;
+    font-weight: 600;
+  }
+
+  .poz-tile__name {
+    font-size: 34px;
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  .poz-tile__trade {
+    font-size: 15px;
+    color: #6b3e5e;
+    text-wrap: balance;
+  }
+
+  .poz-tile__go {
+    margin-top: 8px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .poz-tile:hover .poz-tile__go,
+  .poz-tile:focus-visible .poz-tile__go {
+    color: #a23b4e;
+  }
+</style>

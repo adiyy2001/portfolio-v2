@@ -7,7 +7,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-app-preview.md`. Run rule
 - [x] B2 Sztanga
 - [x] B3 Rygiel
 - [x] B4 Kiełek
-- [ ] B5 Poziomka
+- [x] B5 Poziomka
 - [ ] B6 Południe
 - [ ] Q quality control
 - [ ] R independent review, every rubric score at least 4
@@ -596,3 +596,10 @@ Q runs after all six are merged: ffprobe table for every file (store cut exact t
 37. Kiełek's story runs on Thursday 8 October 2026 and shows the season switch on screen: drops on 8, 15, 22 and 29 October hop to 20 October and 1 November when the plan moves from 7 to 12 days.
 38. Kiełek's loops (store and marketing) carry a 20 frame bridge, so each loop is 650 frames, 13 periods of the 50 frame leaf wiggle; overlays run 4 to 66, 220 to 292 and 344 to 412 for their reading time.
 39. In Kiełek's marketing cut the mascot hops out of the screen onto the edge of the clay phone at the watering moment and back before the next screen; the 1:1 cut keeps only kicker and headline so the mascot has room.
+40. Poziomka draws every frame into a 16 colour framebuffer at art resolution and shows it on a canvas scaled by whole numbers; Jersey 10 and Tiny5 become bitmap fonts ("Poziomka Pixel", "Poziomka Mini") sampled on their own pixel grids. Validation checks that lossless stills are 100% flat 4x4 cells in the palette and that the App Store file stays flat within the codec tolerance.
+41. The shared scripts take optional per app `pixel` options in `meta.ts`: PNG frames instead of JPEG, web sizes with crop and poster size, nearest neighbour scaling, lossless gallery screens and the grid check. Apps without them render, encode and validate exactly as before; Kasownik, Sztanga, Rygiel and Kiełek were re-validated green.
+42. Poziomka's art grid starts at x 0 with a 2 px ink strip on the right (the plan said 1 px on each side), so the 4 px art pixels line up with the chroma blocks of yuv420p.
+43. Poziomka's web loops keep the full resolution (1920x1080, 1080x1920, 1080x1080, 884x1920) because any other downscale blurs pixel art; it still publishes only 7.4 MB.
+44. Poziomka's week bars grow 3 art px per frame (the plan said 1), so the chart fills inside its 2 s shot.
+45. The Poziomka page sizes its videos and screens with a small script to whole device pixel multiples of their art grid, with `image-rendering: pixelated`, and falls back to smooth scaling only when the space allows nothing but a downscale. Body text is Tiny5 at 16 px, headings Jersey 10 at whole multiples of its grid.
+46. Poziomka's panels use inner bevels and dithered shades instead of hard offset shadows, to keep clear of the neobrutalist look.

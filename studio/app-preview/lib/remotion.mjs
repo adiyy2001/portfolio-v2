@@ -39,7 +39,7 @@ export const frameStill = async (serveUrl, { id, props = {}, output, frame, scal
   return output;
 };
 
-export const video = async (serveUrl, { id, props = {}, output, scale = 1, concurrency = 3, crf = 12, label = id }) => {
+export const video = async (serveUrl, { id, props = {}, output, scale = 1, concurrency = 3, crf = 12, label = id, imageFormat = 'jpeg' }) => {
   const composition = await selectComposition({ serveUrl, id, inputProps: props, ...browserOptions });
   const started = Date.now();
   let last = -1;
@@ -52,8 +52,8 @@ export const video = async (serveUrl, { id, props = {}, output, scale = 1, concu
     scale,
     crf,
     concurrency,
-    imageFormat: 'jpeg',
-    jpegQuality: 96,
+    imageFormat,
+    jpegQuality: imageFormat === 'jpeg' ? 96 : undefined,
     pixelFormat: 'yuv420p',
     muted: true,
     ...browserOptions,

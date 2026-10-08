@@ -1,7 +1,7 @@
 import { copyFileSync, existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { listFlag, requireSlug } from '../lib/args.mjs';
-import { finalName, formatsOrder, limits, masterName, posterName, screenName, webName, webTargets } from '../lib/convention.mjs';
+import { finalName, formatsOrder, limits, masterName, posterName, screenName, webName, webSpec, webTargets } from '../lib/convention.mjs';
 import { ffmpeg, searchQuality, size, toTv } from '../lib/ffmpeg.mjs';
 import { loadMeta } from '../lib/meta.mjs';
 import { appPaths, ensureDir } from '../lib/paths.mjs';
@@ -51,9 +51,9 @@ const encodeWeb = (slug, paths, variants, meta) => {
   ensureDir(paths.pub);
   const report = {};
   for (const variant of variants) {
-    const spec = { ...webTargets[variant], target: meta.webTargets?.[variant] ?? webTargets[variant].target };
+    const spec = webSpec(variant, meta);
     const source = join(paths.masters, masterName(spec.source, spec.source !== 'tile'));
-    const filter = toTv(spec.width, spec.height);
+    const filter = toTv(spec.width, spec.height, { flags: meta.pixel?.scaleFlags, crop: spec.crop });
     const webm = join(paths.pub, webName(slug, variant, 'webm'));
     const mp4 = join(paths.pub, webName(slug, variant, 'mp4'));
     const vp9 = searchQuality({
@@ -73,13 +73,14 @@ const encodeWeb = (slug, paths, variants, meta) => {
 const encodePosters = (slug, paths, meta, variants) => {
   ensureDir(join(paths.pub, 'posters'));
   for (const variant of variants) {
-    const spec = webTargets[variant];
+    const spec = webSpec(variant, meta);
     const frame = variant === 'store' ? meta.storyboard.poster : variant === 'tile' ? meta.tile.poster : meta.marketing.poster;
     const source = join(paths.masters, masterName(spec.source, spec.source !== 'tile'));
     const out = join(paths.pub, posterName(slug, variant));
+    const [pw, ph] = spec.poster ?? [spec.width, spec.height];
     const result = searchQuality({
       start: 3, step: 1, max: 12, file: out, target: limits.poster,
-      encode: q => ffmpeg(['-i', source, '-vf', `select=eq(n\\,${frame}),scale=${spec.width}:${spec.height}:flags=lanczos`, '-frames:v', '1', '-q:v', String(q), out]),
+      encode: q => ffmpeg(['-i', source, '-vf', `select=eq(n\\,${frame}),${spec.crop ? `crop=${spec.crop},` : ''}scale=${pw}:${ph}:flags=${meta.pixel?.scaleFlags ?? 'lanczos'}`, '-frames:v', '1', '-q:v', String(q), out]),
     });
     console.log(`poster ${variant} frame ${frame}: q ${result.q} ${result.bytes} B`);
   }
@@ -91,7 +92,8 @@ const encodeImages = (slug, paths, meta) => {
     const out = join(paths.pub, screenName(slug, n));
     const result = searchQuality({
       start: 86, step: -6, max: -1, file: out, target: limits.screen,
-      encode: q => ffmpeg(['-i', join(paths.stills, `screen-${n}.png`), '-vf', 'scale=443:960:flags=lanczos', '-c:v', 'libwebp', '-quality', String(Math.max(40, q)), '-compression_level', '6', out]),
+      encode: q =>
+        ffmpeg(['-i', join(paths.stills, `screen-${n}.png`), '-vf', meta.pixel?.screen ? `crop=${meta.pixel.screen.crop},scale=${meta.pixel.screen.width}:960:flags=${meta.pixel.scaleFlags}` : 'scale=443:960:flags=lanczos', '-c:v', 'libwebp', ...(meta.pixel ? ['-lossless', '1'] : ['-quality', String(Math.max(40, q))]), '-compression_level', '6', out]),
     });
     console.log(`screen ${n}: ${result.bytes} B`);
   }
@@ -103,7 +105,7 @@ const encodeImages = (slug, paths, meta) => {
   console.log(`storyboard ${size(board)} B`);
   ffmpeg(['-i', join(paths.stills, 'icon-1024.png'), '-pix_fmt', 'rgb24', join(paths.pub, `${slug}-icon-1024.png`)]);
   copyFileSync(join(paths.stills, 'icon-512.png'), join(paths.pub, `${slug}-icon-512.png`));
-  ffmpeg(['-i', join(paths.stills, 'icon-1024.png'), '-vf', 'scale=180:180:flags=lanczos', '-pix_fmt', 'rgb24', join(paths.pub, 'apple-touch-icon.png')]);
+  ffmpeg(['-i', join(paths.stills, 'icon-1024.png'), '-vf', `scale=180:180:flags=${meta.pixel?.scaleFlags ?? 'lanczos'}`, '-pix_fmt', 'rgb24', join(paths.pub, 'apple-touch-icon.png')]);
   ffmpeg(['-i', join(paths.stills, 'og.png'), '-pix_fmt', 'rgb24', join(paths.pub, 'og.png')]);
   writeFileSync(join(paths.pub, 'favicon.svg'), `${meta.iconSvg({ rounded: true, id: 'fav' }).replace(' width="100%" height="100%"', '')}\n`);
   console.log('icons, og and favicon written');

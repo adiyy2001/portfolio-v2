@@ -17,6 +17,12 @@ export const webTargets = {
   tile: { source: 'tile', width: 480, height: 600, target: 400 * KB, hard: 4 * MB },
 };
 
+export const webSpec = (variant, meta = {}) => ({
+  ...webTargets[variant],
+  ...(meta.pixel?.web?.[variant] ?? {}),
+  target: meta.webTargets?.[variant] ?? webTargets[variant].target,
+});
+
 export const limits = {
   poster: 150 * KB,
   storyboard: 900 * KB,

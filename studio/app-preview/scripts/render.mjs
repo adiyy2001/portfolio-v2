@@ -17,6 +17,7 @@ export const render = async (slug, { only = parts, concurrency = 3, formats = fo
   ensureDir(paths.qa);
   const timings = existsSync(timingsFile) ? JSON.parse(readFileSync(timingsFile, 'utf8')) : {};
   const serveUrl = await makeBundle();
+  const imageFormat = meta.pixel?.imageFormat ?? 'jpeg';
   if (only.includes('stills')) {
     const started = Date.now();
     await still(serveUrl, { id: `${slug}-icon`, props: { rounded: false }, output: join(paths.stills, 'icon-1024.png') });
@@ -37,6 +38,7 @@ export const render = async (slug, { only = parts, concurrency = 3, formats = fo
       output: join(paths.masters, masterName('store')),
       scale: 2,
       concurrency,
+      imageFormat,
     });
     timings.store = result.seconds;
     console.log(`store ${result.frames} frames in ${result.seconds} s`);
@@ -48,13 +50,14 @@ export const render = async (slug, { only = parts, concurrency = 3, formats = fo
         props: { format, loop: true },
         output: join(paths.masters, masterName(`marketing-${format}`)),
         concurrency,
+        imageFormat,
       });
       timings[`marketing-${format}`] = result.seconds;
       console.log(`marketing ${format} ${result.frames} frames in ${result.seconds} s`);
     }
   }
   if (only.includes('tile')) {
-    const result = await video(serveUrl, { id: `${slug}-tile`, output: join(paths.masters, masterName('tile', false)), concurrency });
+    const result = await video(serveUrl, { id: `${slug}-tile`, output: join(paths.masters, masterName('tile', false)), concurrency, imageFormat });
     timings.tile = result.seconds;
     console.log(`tile ${result.frames} frames in ${result.seconds} s`);
   }

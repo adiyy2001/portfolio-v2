@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { finalName, publishedNames, screenName, webName, webTargets } from './convention.mjs';
+import { finalName, publishedNames, screenName, webName, webSpec, webTargets } from './convention.mjs';
 import { contrast } from './contrast.mjs';
 import { appPaths, slugs } from './paths.mjs';
 import { parseArgs } from './args.mjs';
@@ -33,4 +33,13 @@ test('paths and args', () => {
   assert.throws(() => appPaths('trzask'));
   assert.ok(appPaths('kasownik').pub.endsWith('sites/public/app-preview/kasownik'));
   assert.deepEqual(parseArgs(['kasownik', '--only', 'web', '--port=4321']), { positional: ['kasownik'], flags: { only: 'web', port: '4321' } });
+});
+
+test('web spec keeps the defaults and takes per app overrides', () => {
+  assert.deepEqual(webSpec('hero'), webTargets.hero);
+  assert.equal(webSpec('hero', { webTargets: { hero: 1000 } }).target, 1000);
+  const pixel = webSpec('store', { pixel: { web: { store: { width: 884, height: 1920, crop: '884:1920:0:0' } } } });
+  assert.equal(pixel.width, 884);
+  assert.equal(pixel.crop, '884:1920:0:0');
+  assert.equal(pixel.source, 'store');
 });

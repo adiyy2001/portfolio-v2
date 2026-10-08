@@ -1,7 +1,8 @@
 import { existsSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { requireSlug } from '../lib/args.mjs';
-import { finalName, formatSizes, formatsOrder, limits, posterName, publishedNames, screenName, webName, webTargets } from '../lib/convention.mjs';
+import { finalName, formatSizes, formatsOrder, limits, posterName, publishedNames, screenName, webName, webSpec, webTargets } from '../lib/convention.mjs';
+import { gridReport, rawFrame } from '../lib/pixelcheck.mjs';
 import { ssimFrames } from '../lib/ffmpeg.mjs';
 import { probe } from '../lib/ffprobe.mjs';
 import { loadTs } from '../lib/load-ts.mjs';
@@ -45,7 +46,8 @@ export const validate = async slug => {
   }
 
   const web = [];
-  for (const [variant, spec] of Object.entries(webTargets)) {
+  for (const variant of Object.keys(webTargets)) {
+    const spec = webSpec(variant, meta);
     for (const ext of ['webm', 'mp4']) {
       const file = join(paths.pub, webName(slug, variant, ext));
       if (!existsSync(file)) {
@@ -70,6 +72,21 @@ export const validate = async slug => {
     const file = join(paths.pub, screenName(slug, n));
     check(`screen ${n}`, existsSync(file) && statSync(file).size <= limits.screen, existsSync(file) ? `${statSync(file).size} B` : 'missing');
   }
+  if (meta.pixel?.grid?.store) {
+    const { cell, width } = meta.pixel.grid.store;
+    const grid = { cell, cols: width / cell, rows: 1920 / cell, palette: meta.pixel.palette };
+    for (const { n } of meta.gallery.slice(0, 2)) {
+      const still = join(paths.stills, `screen-${n}.png`);
+      if (!existsSync(still)) continue;
+      const r = gridReport(rawFrame(still, 0), { ...grid, tolerance: 0 });
+      check(`pixel grid lossless screen ${n}`, r.flat === 1 && r.inPalette === 1, `${r.cells} cells of ${cell}x${cell}, flat ${(r.flat * 100).toFixed(2)}%, palette ${(r.inPalette * 100).toFixed(2)}%`);
+    }
+    for (const frame of [sb.poster, sb.defaultPoster, sb.shots.at(-1).key]) {
+      const r = gridReport(rawFrame(join(paths.final, finalName(slug, 'store')), frame), { ...grid, tolerance: 24 });
+      check(`pixel grid store frame ${frame}`, r.flat >= 0.99 && r.inPalette >= 0.99, `flat ${(r.flat * 100).toFixed(2)}%, palette ${(r.inPalette * 100).toFixed(2)}%, worst spread ${r.worst}`);
+    }
+  }
+
   const board = join(paths.pub, `${slug}-storyboard.png`);
   check('storyboard board', existsSync(board) && statSync(board).size <= limits.storyboard, existsSync(board) ? `${statSync(board).size} B` : 'missing');
   const icon = probe(join(paths.pub, `${slug}-icon-1024.png`));
