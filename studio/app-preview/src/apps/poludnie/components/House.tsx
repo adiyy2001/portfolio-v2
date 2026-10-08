@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { color, fontFamily, hue, num, type Hue } from '../tokens';
-import { P, faces, pathOf, pts, type V3 } from './iso';
+import { P, faces, pathOf, pointOn, pts, type V3 } from './iso';
 
 export interface Camera {
   x: number;
@@ -225,6 +225,33 @@ export const TagView = ({ tag, size }: { tag: Tag; size: number }) => {
   );
 };
 
+const Pulse = ({ route, t, hueId }: { route: V3[]; t: number; hueId: Hue }) => {
+  if (t <= 0 || t >= 1) return null;
+  const [x, y] = pointOn(route, t);
+  const o = Math.min(1, t * 6, (1 - t) * 6);
+  return (
+    <g opacity={o}>
+      <circle cx={x} cy={y} r={9} fill={hue[hueId].line} opacity={0.28} />
+      <circle cx={x} cy={y} r={4.6} fill={hue[hueId].line} />
+      <circle cx={x} cy={y} r={1.8} fill={color.card} />
+    </g>
+  );
+};
+
+const Pulses = ({ pulse }: { pulse: number }) => {
+  const split = 0.42;
+  const first = pulse / split;
+  const second = (pulse - split) / (1 - split);
+  return (
+    <g>
+      <Pulse route={routes.sun} t={first} hueId="sun" />
+      <Pulse route={routes.battery} t={second} hueId="battery" />
+      <Pulse route={routes.home} t={second} hueId="home" />
+      <Pulse route={routes.grid} t={second} hueId="grid" />
+    </g>
+  );
+};
+
 export const HouseScene = ({
   width,
   height,
@@ -241,6 +268,8 @@ export const HouseScene = ({
   back,
   sunAt,
   style,
+  ramp = 1,
+  pulse = 0,
 }: {
   width: number;
   height: number;
@@ -257,7 +286,10 @@ export const HouseScene = ({
   back?: ReactNode;
   sunAt?: [number, number];
   style?: CSSProperties;
+  ramp?: number;
+  pulse?: number;
 }) => {
+  const run = frame * ramp;
   const plate = faces({ x: 0, y: 0, z: -10, dx: 262, dy: 196, dz: 10 });
   const [sx, sy] = sunAt ?? P(150, 60, 150);
   return (
@@ -268,18 +300,19 @@ export const HouseScene = ({
         <polygon points={plate.top} fill={color.card} />
         {back}
         <Sun x={sx} y={sy} angle={sunAngle} weight={focus.sun} />
-        <Flow route={routes.grid} kw={flows.grid} frame={frame} hueId="grid" weight={focus.grid} />
-        <Flow route={routes.home} kw={flows.home} frame={frame} hueId="home" weight={focus.home} />
-        <Flow route={routes.battery} kw={flows.battery} frame={frame} hueId="battery" weight={focus.battery} />
+        <Flow route={routes.grid} kw={flows.grid} frame={run} hueId="grid" weight={focus.grid} />
+        <Flow route={routes.home} kw={flows.home} frame={run} hueId="home" weight={focus.home} />
+        <Flow route={routes.battery} kw={flows.battery} frame={run} hueId="battery" weight={focus.battery} />
         <House focus={focus} />
         <g opacity={0.55 + 0.45 * focus.sun}>
           <Panels glint={glint} />
         </g>
-        <Flow route={routes.sun} kw={flows.sun} frame={frame} hueId="sun" weight={focus.sun} />
+        <Flow route={routes.sun} kw={flows.sun} frame={run} hueId="sun" weight={focus.sun} />
         <Pole focus={focus} />
         <Battery level={level} focus={focus} frame={frame} />
         <Box x={198} y={146} z={0} dx={16} dy={16} dz={20} />
         <polygon points={pts([[201, 162, 12], [211, 162, 12], [211, 162, 15], [201, 162, 15]])} fill={color.sun} opacity={0.4 + 0.6 * focus.sun} />
+        {pulse > 0 && pulse < 1 && <Pulses pulse={pulse} />}
         {extra}
         {tags.map(tag => (
           <TagView key={tag.label} tag={tag} size={tagSize} />

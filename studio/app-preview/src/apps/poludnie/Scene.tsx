@@ -3,9 +3,9 @@ import { bridgeT } from '../../shared/loop';
 import { storyboard } from './storyboard';
 import { T, outFrames } from './timeline';
 import { facts, socAt } from './data';
-import { HouseScene, type Flows, type Weights } from './components/House';
+import { HouseScene, allOn, type Flows, type Weights } from './components/House';
 import { Screen, TabBar } from './components/ui';
-import { easeIn, fadeOut, focusAt, mixN, progress, trackAt } from './components/motion';
+import { countAt, easeIn, easeOut, fadeOut, focusAt, mixN, progress, trackAt } from './components/motion';
 import { NowBody, nowLayout } from './screens/Now';
 import { BatteryBody, batteryLayout, batteryLevel } from './screens/Battery';
 import { DayBody } from './screens/Day';
@@ -16,18 +16,25 @@ import { LaunchBody, launchIcon } from './screens/Launch';
 export const liveFlows: Flows = { sun: facts.now.prod, home: facts.now.home, battery: facts.now.battery, grid: facts.now.grid };
 
 export const cameras = {
-  now: { x: 30, y: 98, scale: 1.04 },
+  hook: { x: 60, y: 84, scale: 1.62 },
+  now: { x: 12, y: 96, scale: 1.3 },
   battery: { x: 104, y: 120, scale: 1.6 },
 } as const;
 
-const timeAt = (f: number) => (f < T.day ? facts.now.time : f < T.tip ? facts.day.time : f < T.balance ? facts.tip.time : facts.month.time);
+const timeAt = (f: number) => (f < T.day + outFrames ? facts.now.time : f < T.tip + outFrames ? facts.day.time : f < T.balance + outFrames ? facts.tip.time : facts.month.time);
 
-export const hookWeights: Weights = { sun: 1, battery: 0.4, home: 0.4, grid: 0.4 };
+export const hookWeights: Weights = allOn;
 
 export const liveWeights = (f: number): Weights => {
   const b = focusAt(f, T.track + 4);
-  return { sun: mixN(1, 0.4, b), battery: mixN(0.4, 1, b), home: 0.4, grid: 0.4 };
+  return { sun: mixN(1, 0.4, b), battery: 1, home: mixN(1, 0.4, b), grid: mixN(1, 0.4, b) };
 };
+
+export const hookCount = (f: number) => countAt(f, 0, 0, 1, 20);
+
+export const hookSettle = (f: number) => progress(f, 0, 54, easeOut);
+
+export const pulseAt = (f: number) => (f < 40 ? (f - 2) / 36 : (f - 42) / 36);
 
 export const storeSun: [number, number] = [150, -30];
 
@@ -36,14 +43,20 @@ export const glintAt = (f: number) => progress(f, 18, 34);
 export const LiveScene = ({ f, clock, t, still = false, weights }: { f: number; clock: number; t: number; still?: boolean; weights: Weights }) => {
   const top = mixN(nowLayout.sceneTop, batteryLayout.sceneTop, t);
   const height = mixN(nowLayout.sceneHeight, batteryLayout.sceneHeight, t);
+  const h = still ? 1 : hookSettle(f);
+  const base = {
+    x: mixN(cameras.hook.x, cameras.now.x, h),
+    y: mixN(cameras.hook.y, cameras.now.y, h),
+    scale: mixN(cameras.hook.scale, cameras.now.scale, h),
+  };
   const camera = {
-    x: mixN(cameras.now.x, cameras.battery.x, t),
-    y: mixN(cameras.now.y, cameras.battery.y, t),
-    scale: mixN(cameras.now.scale, cameras.battery.scale, t),
+    x: mixN(base.x, cameras.battery.x, t),
+    y: mixN(base.y, cameras.battery.y, t),
+    scale: mixN(base.scale, cameras.battery.scale, t),
   };
   return (
     <div style={{ position: 'absolute', left: 0, top, width: 443, height, overflow: 'hidden' }}>
-      <HouseScene width={443} height={height} camera={camera} frame={clock} level={still ? socAt(13 + 10 / 60) : batteryLevel(f)} flows={liveFlows} focus={weights} sunAngle={clock * 0.3} glint={still ? 0 : glintAt(f)} sunAt={storeSun} />
+      <HouseScene width={443} height={height} camera={camera} frame={clock} level={still ? socAt(13 + 10 / 60) : batteryLevel(f)} flows={liveFlows} focus={weights} sunAngle={clock * 0.3} glint={still ? 0 : glintAt(f)} sunAt={storeSun} ramp={still ? 1 : hookCount(f)} pulse={still ? 0 : pulseAt(f)} />
     </div>
   );
 };
@@ -52,8 +65,8 @@ const Out = ({ f, at, children }: { f: number; at: number; children: ReactNode }
   f < at + outFrames ? <div style={{ position: 'absolute', inset: 0, ...fadeOut(f, at, outFrames) }}>{children}</div> : null;
 
 const rowsAt = (f: number) => (hueId: string) => {
-  if (hueId !== 'battery') return 0.4;
-  return mixN(0.4, 1, focusAt(f, T.tap));
+  if (hueId === 'battery') return 1;
+  return mixN(1, 0.4, focusAt(f, T.tap));
 };
 
 const pressAt = (f: number) => {
@@ -68,7 +81,7 @@ const Live = ({ f, clock }: { f: number; clock: number }) => {
   return (
     <>
       <LiveScene f={f} clock={clock} t={t} weights={f < T.track ? hookWeights : liveWeights(f)} />
-      {f < T.track + 10 && <NowBody f={f} leaveAt={T.track} rows={rowsAt(f)} press={pressAt(f)} />}
+      {f < T.track + 10 && <NowBody f={f} leaveAt={T.track} rows={rowsAt(f)} press={pressAt(f)} count={hookCount(f)} />}
       {f >= T.track && <BatteryBody f={f} />}
     </>
   );
@@ -86,7 +99,7 @@ const Bridge = ({ f }: { f: number }) => {
     <Screen time={t < 0.5 ? facts.month.time : facts.now.time}>
       <div style={{ position: 'absolute', inset: 0, opacity: show, transform: `translateY(${(1 - show) * 12}px)` }}>
         <LiveScene f={0} clock={clock} t={0} weights={hookWeights} />
-        <NowBody f={0} rows={rowsAt(0)} />
+        <NowBody f={0} rows={rowsAt(0)} count={hookCount(0)} />
       </div>
       <div style={{ position: 'absolute', inset: 0, transform: `translate(0px, ${shrink * 90}px) scale(${1 - 0.45 * shrink})`, transformOrigin: `${launchIcon.x + launchIcon.size / 2}px ${launchIcon.y + launchIcon.size / 2}px` }}>
         <LaunchBody f={T.end - 1} words={words} iconOpacity={icon} />

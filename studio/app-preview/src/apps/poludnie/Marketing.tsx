@@ -96,7 +96,7 @@ const cameraAt = (f: number, layout: Layout) => {
 };
 
 const phoneFrameAt = (f: number) => {
-  if (f >= marketing.outro) return T.balance + 149;
+  if (f >= marketing.outro) return marketingBeats[marketingBeats.length - 1].store[1];
   const beat = marketingBeats[beatAt(f)];
   return beat.store[0] + Math.min(f - beat.from, beat.store[1] - beat.store[0]);
 };

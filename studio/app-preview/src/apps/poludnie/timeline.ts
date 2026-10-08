@@ -41,4 +41,4 @@ export const T = {
   end: 750,
 } as const;
 
-export const outFrames = 8;
+export const outFrames = 4;

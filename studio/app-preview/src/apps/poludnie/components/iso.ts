@@ -43,3 +43,19 @@ export const faces = ({ x, y, z, dx, dy, dz }: Box) => {
 };
 
 export const rect = (list: V3[]) => pts(list);
+
+export const pointOn = (list: V3[], t: number): [number, number] => {
+  const total = lengthOf(list);
+  let left = Math.max(0, Math.min(1, t)) * total;
+  for (let i = 1; i < list.length; i += 1) {
+    const [a, b] = P(...list[i - 1]);
+    const [c, d] = P(...list[i]);
+    const seg = Math.hypot(c - a, d - b);
+    if (left <= seg || i === list.length - 1) {
+      const k = seg ? Math.min(1, left / seg) : 0;
+      return [a + (c - a) * k, b + (d - b) * k];
+    }
+    left -= seg;
+  }
+  return P(...list[list.length - 1]);
+};
