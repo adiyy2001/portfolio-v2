@@ -9,15 +9,15 @@
     "ipad": false
   },
   "base": "/wzornik/aso/chochla/",
-  "totalBytes": 11156598,
-  "totalHuman": "10.6 MB",
-  "zip": { "path": "chochla-aso.zip", "bytes": 11146479 },
+  "totalBytes": 11176847,
+  "totalHuman": "10.7 MB",
+  "zip": { "path": "chochla-aso.zip", "bytes": 11166753 },
   "groups": [
     {
       "id": "appstore",
       "title": "App Store, iPhone 6,9″",
       "count": 12,
-      "bytes": 5194044,
+      "bytes": 5209654,
       "formats": "PNG",
       "files": [
         "app-store/pl/chochla-appstore-pl-01.png",
@@ -38,7 +38,7 @@
       "id": "play",
       "title": "Google Play, telefon",
       "count": 12,
-      "bytes": 3575892,
+      "bytes": 3580555,
       "formats": "PNG",
       "files": [
         "google-play/pl/chochla-play-pl-01.png",
@@ -94,7 +94,7 @@
       "id": "texts",
       "title": "Teksty nagłówków",
       "count": 3,
-      "bytes": 23007,
+      "bytes": 22983,
       "formats": "CSV, JSON",
       "files": ["chochla-teksty.csv", "teksty/pl.json", "teksty/en.json"]
     }
@@ -290,7 +290,7 @@
     },
     {
       "path": "app-store/en/chochla-appstore-en-02.png",
-      "bytes": 573460,
+      "bytes": 585929,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -301,7 +301,7 @@
     },
     {
       "path": "google-play/en/chochla-play-en-02.png",
-      "bytes": 376618,
+      "bytes": 378662,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -334,7 +334,7 @@
     },
     {
       "path": "app-store/en/chochla-appstore-en-04.png",
-      "bytes": 347293,
+      "bytes": 350434,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -345,7 +345,7 @@
     },
     {
       "path": "google-play/en/chochla-play-en-04.png",
-      "bytes": 230921,
+      "bytes": 233540,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -465,16 +465,16 @@
       "width": 1024,
       "height": 1024
     },
-    { "path": "chochla-teksty.csv", "bytes": 5508, "type": "csv", "group": "texts" },
+    { "path": "chochla-teksty.csv", "bytes": 5492, "type": "csv", "group": "texts" },
     { "path": "teksty/pl.json", "bytes": 9014, "type": "json", "group": "texts" },
-    { "path": "teksty/en.json", "bytes": 8485, "type": "json", "group": "texts" }
+    { "path": "teksty/en.json", "bytes": 8477, "type": "json", "group": "texts" }
   ],
   "web": [
     { "path": "web/appstore-en-01.webp", "bytes": 52152, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-01b.webp", "bytes": 57924, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-02.webp", "bytes": 55606, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-02.webp", "bytes": 55838, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-03.webp", "bytes": 44622, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-04.webp", "bytes": 48074, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-04.webp", "bytes": 48776, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-05.webp", "bytes": 51292, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-06.webp", "bytes": 54944, "width": 480, "height": 1043 },
     { "path": "web/appstore-pl-01.webp", "bytes": 53650, "width": 480, "height": 1043 },
@@ -488,9 +488,9 @@
     { "path": "web/feature-pl.webp", "bytes": 33244, "width": 1024, "height": 500 },
     { "path": "web/play-en-01.webp", "bytes": 36636, "width": 400, "height": 711 },
     { "path": "web/play-en-01b.webp", "bytes": 36746, "width": 400, "height": 711 },
-    { "path": "web/play-en-02.webp", "bytes": 35436, "width": 400, "height": 711 },
+    { "path": "web/play-en-02.webp", "bytes": 34780, "width": 400, "height": 711 },
     { "path": "web/play-en-03.webp", "bytes": 32052, "width": 400, "height": 711 },
-    { "path": "web/play-en-04.webp", "bytes": 31918, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 32064, "width": 400, "height": 711 },
     { "path": "web/play-en-05.webp", "bytes": 35556, "width": 400, "height": 711 },
     { "path": "web/play-en-06.webp", "bytes": 36340, "width": 400, "height": 711 },
     { "path": "web/play-pl-01.webp", "bytes": 37358, "width": 400, "height": 711 },
