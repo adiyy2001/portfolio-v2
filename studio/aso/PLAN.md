@@ -10,7 +10,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-aso.md`. Run rules: `/hom
 - [x] B5 Kruszec
 - [x] B6 Bis
 - [x] Q quality control
-- [ ] R independent review, every rubric score at least 4
+- [x] R independent review, every rubric score at least 4 (second independent review, all scores at least 4)
 - [ ] P publication and final report
 ```
 
