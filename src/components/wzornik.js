@@ -300,12 +300,12 @@ const appPreview = [
     slug: 'poziomka',
     name: 'Poziomka',
     trade: 'tracker nawyków z grywalizacją',
-    style: 'pixel art 8-bit',
+    style: 'ośmiobitowy pixel art',
   },
   {
     slug: 'poludnie',
     name: 'Południe',
-    trade: 'domowa fotowoltaika i magazyn energii',
+    trade: 'fotowoltaika i magazyn energii',
     style: 'izometryczny dashboard danych',
   },
 ];
