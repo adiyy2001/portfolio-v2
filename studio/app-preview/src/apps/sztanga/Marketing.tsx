@@ -88,7 +88,8 @@ const Word = ({ f, layout }: { f: number; layout: Layout }) => {
   const gap = Math.max(line.gap, size * 0.28);
   const top = word.anchor === 'center' ? word.top - cap / 2 - (gap + line.size) / 2 : word.top;
   const scale = i === 0 && start === 0 ? 1 : slamScale(f, start);
-  const lineScale = slamScale(f, start + 15);
+  const lineSlam = slamScale(f, start + 15);
+  const lineScale = lineSlam === 0 ? 0 : 1 + (lineSlam - 1) * 0.2;
   return (
     <>
       <div style={{ position: 'absolute', left: word.left, top }}>

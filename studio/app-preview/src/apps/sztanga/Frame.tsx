@@ -16,6 +16,8 @@ export const AppRoot = ({ children, background = color.ground }: { children: Rea
   );
 };
 
+const captionWidth = (text: string) => (text.length > 28 ? 62 : 75);
+
 export const Caption = ({ overlay, frame }: { overlay: Overlay; frame: number }) => {
   const frames = overlay.to - overlay.from + 1;
   if (wordCount(overlay.text) > overlayRules.maxWords) throw new Error(`overlay too long: ${overlay.text}`);
@@ -28,7 +30,7 @@ export const Caption = ({ overlay, frame }: { overlay: Overlay; frame: number })
         style={{
           background: color.ink,
           color: color.ground,
-          ...vf(900, 75),
+          ...vf(900, captionWidth(overlay.text)),
           fontSize: 25,
           lineHeight: '30px',
           letterSpacing: 0.4,
