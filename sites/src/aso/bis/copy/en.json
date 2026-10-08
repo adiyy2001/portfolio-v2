@@ -16,7 +16,7 @@
     {
       "id": "02",
       "screen": "odkrywaj",
-      "headline": "Bands you've never heard, playing nearby",
+      "headline": "Bands you don't know, playing nearby",
       "accent": "Bands",
       "alt": "Holographic artist cards above the phone: Ola Ćma, Tygrys z Kartonu and Neon Babci, each with a show in Warsaw."
     },
@@ -136,7 +136,7 @@
     },
     "odkrywaj": {
       "title": "Discover",
-      "sub": "Artists you haven't heard, playing Warsaw",
+      "sub": "Artists you don't know, playing Warsaw",
       "chips": ["For you", "Electronic", "Guitars", "Soul"],
       "card": {
         "artist": "olacma",
