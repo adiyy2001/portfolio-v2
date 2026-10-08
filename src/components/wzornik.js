@@ -68,7 +68,7 @@ const copy = {
     },
     appPreview: {
       title: 'App preview',
-      lead: 'Sześć animowanych podglądów aplikacji mobilnych dla zmyślonych firm: wersja do App Store, trzy formaty social, pętle na stronę i storyboard. Każdy w innym stylu i z własnym systemem ruchu.',
+      lead: 'Sześć animowanych podglądów aplikacji mobilnych dla zmyślonych firm: wersja do App Store, trzy formaty social, pętle na stronę i storyboard. Każdy w innym stylu, z własnym systemem ruchu.',
       all: 'Wszystkie podglądy',
     },
     law: {
