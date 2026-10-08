@@ -11,7 +11,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-aso.md`. Run rules: `/hom
 - [x] B6 Bis
 - [x] Q quality control
 - [x] R independent review, every rubric score at least 4 (second independent review, all scores at least 4)
-- [ ] P publication and final report
+- [x] P publication and final report
 ```
 
 Every app agent writes status and decisions to `studio/aso/apps/<slug>/STATUS.md`. The merge step ticks the lines above and copies the decisions into this file.
