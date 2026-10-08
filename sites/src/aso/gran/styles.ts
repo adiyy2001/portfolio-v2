@@ -120,8 +120,8 @@ export const css = `
 .gran .icons{display:flex;flex-wrap:wrap;gap:24px 40px;margin:28px 0 20px}
 .gran .icon{margin:0;width:150px}
 .gran .icon__img{display:block;width:128px;height:128px}
-.gran .icon__img--ios{border-radius:22.5%}
-.gran .icon__img--play{border-radius:30%;box-shadow:0 4px 10px rgba(23,48,42,.25)}
+.gran .icon__img--ios{border-radius:22.5%;box-shadow:0 0 0 1px rgba(23,48,42,.28),0 4px 10px rgba(23,48,42,.18)}
+.gran .icon__img--play{border-radius:30%;box-shadow:0 0 0 1px rgba(23,48,42,.28),0 4px 10px rgba(23,48,42,.25)}
 .gran .icon figcaption{margin-top:10px;font-size:14px;font-weight:600;color:var(--muted)}
 
 .gran .dl{margin-top:24px}

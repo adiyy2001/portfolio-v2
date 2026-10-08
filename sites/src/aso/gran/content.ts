@@ -6,7 +6,7 @@ export const content = glueDeep({
     'Panorama ilustracyjna w praktyce: sześć screenshotów aplikacji Grań, które razem tworzą jeden krajobraz Sudetów. Zestaw do App Store i Google Play, po polsku i po angielsku, z wariantem do testu A/B.',
   lead: 'Sześć screenshotów, które razem tworzą jeden krajobraz: od doliny o świcie, przez szczyt, po zejście o zachodzie. Zestaw do App Store i Google Play, po polsku i po angielsku.',
   facts: [
-    ['Kategoria', 'Nawigacja, Mapy i nawigacja'],
+    ['Kategoria', 'Mapy i nawigacja'],
     ['Dla kogo', 'turyści weekendowi w Sudetach, 25 do 55 lat'],
     ['Zakres', '6 kadrów w 2 sklepach i 2 językach, wariant B, feature graphic, ikony'],
     ['Pliki', 'PNG bez kanału alfa, 1320×2868 i 1080×1920'],

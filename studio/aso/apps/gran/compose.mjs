@@ -62,8 +62,8 @@ const layouts = {
     rock: { x: 1134, y: 872, w: 156, h: 250 },
     ledge: { x: 1334, y: 742, w: 404 },
     clouds: {
-      back: [[1262, 318, 160], [2140, 342, 150]],
-      front: [[1748, 400, 230], [1990, 476, 280], [2186, 398, 210]],
+      back: [[1262, 318, 160], [2140, 342, 150], [1990, 476, 280]],
+      front: [[1748, 400, 230], [2186, 398, 210]],
     },
     winds: [[1690, 270, 150], [2130, 296, 140], [2070, 216, 96], [1560, 336, 90]],
     forests: [
@@ -72,7 +72,7 @@ const layouts = {
       { seed: 13, from: 2470, to: 2660, count: 26, minH: 30, maxH: 56, depth: 160, offset: 90, tone: 1 },
     ],
     zones: { forest: { from: 380, to: 900, inner: 6, ramp: 150 }, pine: { from: 1500, to: 2160, inner: 34, ramp: 190 } },
-    frontFrames: [1, 4],
+    frontFrames: [1],
     village: [[34, 1.25], [62, 1.1], [92, 1.3], [118, 1], [76, 0.9]],
   },
   play: {
@@ -117,7 +117,7 @@ const layouts = {
     ledge: { x: 1094, y: 488, w: 322 },
     clouds: {
       back: [[1050, 212, 110], [1790, 226, 110]],
-      front: [[1450, 250, 170], [1700, 424, 170], [1806, 168, 90]],
+      front: [[1450, 250, 170], [1806, 168, 90], [1712, 466, 150]],
     },
     winds: [[1390, 176, 110], [1790, 140, 100], [1500, 110, 70]],
     forests: [
@@ -126,7 +126,7 @@ const layouts = {
       { seed: 23, from: 2020, to: 2180, count: 20, minH: 22, maxH: 40, depth: 110, offset: 70, tone: 1 },
     ],
     zones: { forest: { from: 310, to: 740, inner: 5, ramp: 120 }, pine: { from: 1230, to: 1780, inner: 24, ramp: 150 } },
-    frontFrames: [1, 4],
+    frontFrames: [],
     village: [[30, 1], [54, 0.9], [78, 1.05], [100, 0.85]],
   },
 };
