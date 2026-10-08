@@ -16,8 +16,8 @@ export const storyboard: Storyboard = {
       to: 59,
       key: 30,
       action:
-        'Od pierwszej klatki Kiełek siedzi w doniczce na środku ekranu. Podskakuje, ląduje ze zgnieceniem i mruga, a pod nim wydmuchuje się karta Dziś podlej 3 rośliny.',
-      overlay: { text: 'Rośliny podlane na czas', from: 4, to: 66, top: overlayTop },
+        'Od pierwszej klatki Kiełek siedzi w doniczce, a pod nim stoi karta Dziś podlej 3 rośliny. Kiełek podskakuje, ląduje ze zgnieceniem, karta ugina się razem z nim, potem mrugnięcie.',
+      overlay: { text: 'Rośliny podlane na czas', from: 0, to: 66, top: overlayTop },
     },
     {
       id: 'today',

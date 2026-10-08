@@ -7,7 +7,7 @@ import { Box, Drop, DropGlyph, Mascot, Pill, PlantAvatar, Splash, Text, Touch } 
 import { arc, blinkAt, combine, dropFall, enter, hop, inOut, landing, leave, pressAt, progress, puffAt, puffIn, rest, wiggleAt, type Body } from '../components/motion';
 import type { Mood } from '../components/art';
 
-export const hookCard = { x: 56, y: 466, w: 331, h: 170 } as const;
+export const hookCard = { x: 34, y: 430, w: 375, h: 196 } as const;
 export const heroCard = { x: 24, y: 136, w: 395, h: 176 } as const;
 export const mascotBig = { x: 103, y: 146, w: 236 } as const;
 export const mascotSmall = { x: 284, y: 151, w: 124 } as const;
@@ -141,6 +141,7 @@ export const TodayScreen = ({
   greet = 1,
   content = 1,
   settled = false,
+  cardShow = 1,
 }: {
   settled?: boolean;
   f: number;
@@ -149,10 +150,12 @@ export const TodayScreen = ({
   hideMascot?: boolean;
   greet?: number;
   content?: number;
+  cardShow?: number;
 }) => {
   const r = rect(f, still || done || settled);
   const hookText = still || done || settled ? 0 : 1 - progress(f, T.hookTextOut, 5);
-  const cardIn = still || done || settled ? 1 : puffAt(f, T.hookCard);
+  const cardIn = still || done || settled ? 1 : cardShow;
+  const nudge = still || done || settled || f >= T.compact ? rest : landing(f, T.hookHop + 17);
   const counted = done || (!still && f >= T.count + 2);
   const count = counted ? today.countTo : today.countFrom;
   const ml = counted ? today.mlTo : today.mlFrom;
@@ -183,16 +186,16 @@ export const TodayScreen = ({
             w={r.w}
             h={r.h}
             tone="butter"
-            style={{ transform: `scale(${cardIn * (1 + (r.body.sx - 1) * 0.5)}, ${cardIn * (1 + (r.body.sy - 1) * 0.5)})`, transformOrigin: '50% 0%', opacity: Math.min(1, cardIn * 3) }}>
+            style={{ transform: `scale(${cardIn * (1 + (r.body.sx - 1) * 0.5) * (1 + (nudge.sx - 1) * 0.4)}, ${cardIn * (1 + (r.body.sy - 1) * 0.5) * (1 + (nudge.sy - 1) * 0.4)})`, transformOrigin: '50% 0%', opacity: Math.min(1, cardIn * 3) }}>
             {hookText > 0.01 && (
               <div style={{ position: 'absolute', inset: 0, opacity: hookText, textAlign: 'center' }}>
-                <Text x={0} y={24} w={r.w} align="center" size={18} weight={800} tone={color.inkSoft}>
+                <Text x={0} y={24} w={r.w} align="center" size={20} weight={800} tone={color.inkSoft}>
                   {today.kicker}
                 </Text>
-                <Text x={0} y={48} w={r.w} align="center" size={46} weight={900} line={1.1}>
+                <Text x={0} y={50} w={r.w} align="center" size={56} weight={900} line={1.1}>
                   {today.countFrom} {plural(today.countFrom)}
                 </Text>
-                <Text x={0} y={114} w={r.w} align="center" size={15} weight={800} tone={color.inkSoft}>
+                <Text x={0} y={132} w={r.w} align="center" size={16} weight={800} tone={color.inkSoft}>
                   {today.hookLine}
                 </Text>
               </div>

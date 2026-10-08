@@ -55,4 +55,4 @@ export const T = {
   end: 630,
 } as const;
 
-export const leaveFrames = 8;
+export const leaveFrames = 6;

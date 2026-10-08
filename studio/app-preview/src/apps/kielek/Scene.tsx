@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react';
+import { Easing } from 'remotion';
 import { mix } from '../../shared/motion';
 import { bridgeT } from '../../shared/loop';
 import { storyboard } from './storyboard';
 import { T, leaveFrames } from './timeline';
 import { today } from './content';
 import { Mascot, Screen, TabBar } from './components/ui';
-import { arc, easeIn, inOut, leave, progress, wiggleAt } from './components/motion';
+import { arc, bounceAt, easeIn, inOut, progress, wiggleAt } from './components/motion';
 import { TodayScreen, mascotBig } from './screens/TodayScreen';
 import { CalendarScreen } from './screens/CalendarScreen';
 import { DiagnosisScreen } from './screens/DiagnosisScreen';
@@ -14,8 +15,27 @@ import { LaunchScreen, launchMascot } from './screens/LaunchScreen';
 
 const timeAt = (f: number) => (f < T.calendar ? today.time : f < T.diagnosis ? '7:53' : f < T.rooms ? '7:55' : '7:56');
 
-const Out = ({ f, at, children }: { f: number; at: number; children: ReactNode }) =>
-  f < at + leaveFrames ? <div style={{ position: 'absolute', inset: 0, ...leave(f, at, leaveFrames) }}>{children}</div> : null;
+const cardPop = Easing.out(Easing.back(1.6));
+
+const Out = ({ f, at, children }: { f: number; at: number; children: ReactNode }) => {
+  if (f >= at + leaveFrames) return null;
+  const t = progress(f, at, leaveFrames, easeIn);
+  return (
+    <div style={{ position: 'absolute', inset: 0, opacity: 1 - t, transform: `translateX(${-150 * t}px) scale(${1 - 0.06 * t}, ${1 - 0.03 * t})`, transformOrigin: '0% 50%' }}>
+      {children}
+    </div>
+  );
+};
+
+const In = ({ f, at, children }: { f: number; at: number; children: ReactNode }) => {
+  const s = bounceAt(f, at);
+  const squash = Math.max(0, s - 1);
+  return (
+    <div style={{ position: 'absolute', inset: 0, transform: `translateX(${(1 - s) * 190}px) scale(${1 - squash * 0.25}, ${1 + squash * 0.2})`, transformOrigin: '100% 50%' }}>
+      {children}
+    </div>
+  );
+};
 
 const Bridge = ({ f }: { f: number }) => {
   const t = bridgeT(f, storyboard.duration, storyboard.bridge);
@@ -28,7 +48,7 @@ const Bridge = ({ f }: { f: number }) => {
   return (
     <Screen time={today.time}>
       <LaunchScreen f={T.end - 1} hideMascot words={words} tile={tile} />
-      <TodayScreen f={0} hideMascot greet={greet} />
+      <TodayScreen f={0} hideMascot greet={greet} cardShow={cardPop(progress(t, 0.35, 0.65, x => x))} />
       <TabBar f={0} from="today" to="today" at={0} style={{ transform: `translateY(${(1 - bar) * 130}px)` }} />
       <Mascot
         x={mix(from.x, mascotBig.x, u)}
@@ -64,7 +84,9 @@ export const Scene = ({ frame, hideMascot = false, settled = false }: { frame: n
         <Out f={f} at={T.calendar}>
           <TodayScreen f={f} hideMascot={hideMascot} />
         </Out>
-        <CalendarScreen f={f} />
+        <In f={f} at={T.calendar}>
+          <CalendarScreen f={f} />
+        </In>
       </>
     );
   else if (f < T.rooms)
@@ -73,7 +95,9 @@ export const Scene = ({ frame, hideMascot = false, settled = false }: { frame: n
         <Out f={f} at={T.diagnosis}>
           <CalendarScreen f={f} />
         </Out>
-        <DiagnosisScreen f={f} />
+        <In f={f} at={T.diagnosis}>
+          <DiagnosisScreen f={f} />
+        </In>
       </>
     );
   else if (f < T.launch)
@@ -82,7 +106,9 @@ export const Scene = ({ frame, hideMascot = false, settled = false }: { frame: n
         <Out f={f} at={T.rooms}>
           <DiagnosisScreen f={f} />
         </Out>
-        <RoomsScreen f={f} />
+        <In f={f} at={T.rooms}>
+          <RoomsScreen f={f} />
+        </In>
       </>
     );
   else

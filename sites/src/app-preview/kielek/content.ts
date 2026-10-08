@@ -52,7 +52,7 @@ export const content = {
   storyboard: {
     title: '21 sekund, sześć ujęć, każde ląduje z\u00a0odbiciem',
     intro:
-      'Sześć ujęć w 630 klatkach. Hak to maskotka, która od pierwszej klatki siedzi w doniczce i podskakuje, bo w sklepie pierwsza klatka musi sprzedawać bez dźwięku. Potem podlewanie, kalendarz, który sam zmienia się z porą roku, diagnoza i pokoje, a na końcu ekran startowy z ikoną.',
+      'Sześć ujęć w 630 klatkach. Hak to maskotka w doniczce i karta Dziś podlej 3 rośliny, obie na ekranie od pierwszej klatki, bo w sklepie pierwsza klatka musi sprzedawać bez dźwięku i od razu mówić, do czego jest aplikacja. Potem podlewanie, kalendarz, który sam zmienia się z porą roku, diagnoza i pokoje, a na końcu ekran startowy z ikoną.',
     alt: 'Plansza sześciu klatek kluczowych wersji sklepowej z numerami ujęć, czasami i osią czasu',
     rules: [
       'Trzy napisy, każdy najwyżej pięć słów i co najmniej 2 s na ekranie.',
@@ -78,6 +78,10 @@ export const content = {
       [
         'Stopniowanie',
         'karty roślin co 5 klatek, tygodnie kalendarza co 5 klatek, słowa nagłówków co 3 klatki',
+      ],
+      [
+        'Zmiana zakładki',
+        'stary ekran odjeżdża w lewo w 6 klatek, nowy wjeżdża z prawej na sprężynie bounce i ugina się przy hamowaniu, a nagłówek wchodzi dopiero, gdy poprzedni ekran zniknie',
       ],
       [
         'Kamera w wersji marketingowej',
