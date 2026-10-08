@@ -67,6 +67,7 @@ export const css = `
 .gran .story__flag{padding:2px 8px;border-radius:999px;background:var(--las);color:var(--biel);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
 .gran .story__head{margin:4px 0 6px;font-weight:900;font-size:18px;line-height:1.2;text-wrap:balance}
 .gran .story__role{margin:0;font-size:15px;line-height:1.5;color:var(--muted)}
+@media (max-width:399px){.gran .story__item{grid-template-columns:1fr;gap:12px}.gran .story__item img{width:112px}}
 .gran .callout{margin:24px 0 0;padding:18px 22px;max-width:46em;border-left:6px solid var(--znak);background:var(--biel);font-weight:600}
 
 .gran .searches{display:grid;gap:28px;margin-top:28px}

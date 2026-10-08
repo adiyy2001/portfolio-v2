@@ -9,15 +9,15 @@
     "ipad": false
   },
   "base": "/wzornik/aso/gran/",
-  "totalBytes": 9983243,
+  "totalBytes": 9985356,
   "totalHuman": "9.5 MB",
-  "zip": { "path": "gran-aso.zip", "bytes": 9972102 },
+  "zip": { "path": "gran-aso.zip", "bytes": 9974208 },
   "groups": [
     {
       "id": "appstore",
       "title": "App Store, iPhone 6,9″",
       "count": 12,
-      "bytes": 4862010,
+      "bytes": 4863164,
       "formats": "PNG",
       "files": [
         "app-store/pl/gran-appstore-pl-01.png",
@@ -38,7 +38,7 @@
       "id": "play",
       "title": "Google Play, telefon",
       "count": 12,
-      "bytes": 3414860,
+      "bytes": 3415585,
       "formats": "PNG",
       "files": [
         "google-play/pl/gran-play-pl-01.png",
@@ -72,7 +72,7 @@
       "id": "feature",
       "title": "Google Play, feature graphic",
       "count": 2,
-      "bytes": 144174,
+      "bytes": 144400,
       "formats": "PNG",
       "files": ["feature-graphic/gran-feature-pl.png", "feature-graphic/gran-feature-en.png"]
     },
@@ -94,7 +94,7 @@
       "id": "texts",
       "title": "Teksty nagłówków",
       "count": 3,
-      "bytes": 23494,
+      "bytes": 23502,
       "formats": "CSV, JSON",
       "files": ["gran-teksty.csv", "teksty/pl.json", "teksty/en.json"]
     }
@@ -201,7 +201,7 @@
     },
     {
       "path": "google-play/pl/gran-play-pl-05.png",
-      "bytes": 196770,
+      "bytes": 196943,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -268,7 +268,7 @@
     },
     {
       "path": "app-store/en/gran-appstore-en-01.png",
-      "bytes": 512955,
+      "bytes": 514109,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -279,7 +279,7 @@
     },
     {
       "path": "google-play/en/gran-play-en-01.png",
-      "bytes": 368108,
+      "bytes": 367581,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -367,7 +367,7 @@
     },
     {
       "path": "google-play/en/gran-play-en-05.png",
-      "bytes": 199907,
+      "bytes": 200986,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -424,7 +424,7 @@
     },
     {
       "path": "feature-graphic/gran-feature-en.png",
-      "bytes": 71766,
+      "bytes": 71992,
       "type": "png",
       "group": "feature",
       "store": "feature",
@@ -465,12 +465,12 @@
       "width": 1024,
       "height": 1024
     },
-    { "path": "gran-teksty.csv", "bytes": 5503, "type": "csv", "group": "texts" },
+    { "path": "gran-teksty.csv", "bytes": 5507, "type": "csv", "group": "texts" },
     { "path": "teksty/pl.json", "bytes": 9102, "type": "json", "group": "texts" },
-    { "path": "teksty/en.json", "bytes": 8889, "type": "json", "group": "texts" }
+    { "path": "teksty/en.json", "bytes": 8893, "type": "json", "group": "texts" }
   ],
   "web": [
-    { "path": "web/appstore-en-01.webp", "bytes": 31586, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01.webp", "bytes": 31874, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-01b.webp", "bytes": 27294, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-02.webp", "bytes": 33542, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-03.webp", "bytes": 31122, "width": 480, "height": 1043 },
@@ -484,21 +484,21 @@
     { "path": "web/appstore-pl-04.webp", "bytes": 24384, "width": 480, "height": 1043 },
     { "path": "web/appstore-pl-05.webp", "bytes": 20684, "width": 480, "height": 1043 },
     { "path": "web/appstore-pl-06.webp", "bytes": 31992, "width": 480, "height": 1043 },
-    { "path": "web/feature-en.webp", "bytes": 26262, "width": 1024, "height": 500 },
+    { "path": "web/feature-en.webp", "bytes": 26304, "width": 1024, "height": 500 },
     { "path": "web/feature-pl.webp", "bytes": 26318, "width": 1024, "height": 500 },
-    { "path": "web/play-en-01.webp", "bytes": 23106, "width": 400, "height": 711 },
+    { "path": "web/play-en-01.webp", "bytes": 23212, "width": 400, "height": 711 },
     { "path": "web/play-en-01b.webp", "bytes": 20726, "width": 400, "height": 711 },
     { "path": "web/play-en-02.webp", "bytes": 23230, "width": 400, "height": 711 },
     { "path": "web/play-en-03.webp", "bytes": 22390, "width": 400, "height": 711 },
     { "path": "web/play-en-04.webp", "bytes": 16332, "width": 400, "height": 711 },
-    { "path": "web/play-en-05.webp", "bytes": 16634, "width": 400, "height": 711 },
+    { "path": "web/play-en-05.webp", "bytes": 16966, "width": 400, "height": 711 },
     { "path": "web/play-en-06.webp", "bytes": 21558, "width": 400, "height": 711 },
     { "path": "web/play-pl-01.webp", "bytes": 23688, "width": 400, "height": 711 },
     { "path": "web/play-pl-01b.webp", "bytes": 21674, "width": 400, "height": 711 },
     { "path": "web/play-pl-02.webp", "bytes": 24632, "width": 400, "height": 711 },
     { "path": "web/play-pl-03.webp", "bytes": 24234, "width": 400, "height": 711 },
     { "path": "web/play-pl-04.webp", "bytes": 17164, "width": 400, "height": 711 },
-    { "path": "web/play-pl-05.webp", "bytes": 16024, "width": 400, "height": 711 },
+    { "path": "web/play-pl-05.webp", "bytes": 16452, "width": 400, "height": 711 },
     { "path": "web/play-pl-06.webp", "bytes": 22754, "width": 400, "height": 711 }
   ],
   "fonts": [

@@ -3,13 +3,13 @@
   "label": "English",
   "app": {
     "name": "Grań",
-    "tagline": "Sudety trails with real walking times"
+    "tagline": "Sudetes trails with real walking times"
   },
   "slots": [
     {
       "id": "01",
       "screen": "mapa",
-      "headline": "Sudety trails with real walking times",
+      "headline": "Sudetes trails with real walking times",
       "alt": "Grań map of the Karkonosze with colour coded trails and walking times between junctions, a valley at dawn behind the phone."
     },
     {
@@ -49,8 +49,8 @@
     "alt": "Route plan with the pace setting open: time based on your recent hikes, 3 hr 10 min instead of 2 hr 50 min from the signposts."
   },
   "feature": {
-    "headline": "Sudety trails with real walking times",
-    "alt": "A Sudety ridge at sunset with a red marked trail, the name Grań and the line about trails with real walking times."
+    "headline": "Sudetes trails with real walking times",
+    "alt": "A Sudetes ridge at sunset with a red marked trail, the name Grań and the line about trails with real walking times."
   },
   "ui": {
     "tabs": ["Map", "Routes", "Offline", "Logbook"],
