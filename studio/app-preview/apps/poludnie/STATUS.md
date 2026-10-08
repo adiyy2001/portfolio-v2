@@ -30,3 +30,10 @@ None.
 ## Open issues
 
 - None blocking. Independent review (step R) still to come.
+
+## Review round 1 (2026-10-08)
+
+- Hook rebuilt: the camera opens at scale 1.62 on the house and settles to 1.3 (was 1.04) by frame 54, 6,4 kW counts up from 0 in 20 frames with the three row values, the flow dashes speed up with the count, and two energy pulses run from the roof through the hub to the battery, the house and the grid. All flows and rows are at full strength in the hook.
+- No 40% opacity on text: rows out of focus turn to palette colours (name Łupek #4E5D6C, 6,8:1; value Sieć tekst #5F6F82, 5,1:1 on white) and drop to 24 px and a lighter weight.
+- Tab changes: the old screen fades out in 4 frames before the new heading rises; the status bar clock changes with the new screen.
+- Marketing cut is 25,0 s (750 frames): the Bilans beat holds 120 frames instead of 150 and the outro 60 instead of 75.

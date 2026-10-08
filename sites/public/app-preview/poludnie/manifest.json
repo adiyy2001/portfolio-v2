@@ -109,9 +109,9 @@
     "board": "poludnie-storyboard.png"
   },
   "marketing": {
-    "duration": 795,
+    "duration": 750,
     "bridge": 20,
-    "outro": 720,
+    "outro": 690,
     "poster": 60,
     "beats": [
       {
@@ -164,10 +164,10 @@
       },
       {
         "from": 570,
-        "to": 719,
+        "to": 689,
         "store": [
           525,
-          674
+          644
         ],
         "part": "grid",
         "kicker": "Bilans dnia",
@@ -499,30 +499,30 @@
     "hero": {
       "webm": {
         "path": "poludnie-hero.webm",
-        "bytes": 1590031,
+        "bytes": 1627096,
         "width": 1280,
         "height": 720,
         "fps": 30,
-        "frames": 815,
-        "duration": 27.166,
+        "frames": 770,
+        "duration": 25.666,
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 468241,
+        "bitrate": 507159,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-hero.mp4",
-        "bytes": 1619540,
+        "bytes": 1588922,
         "width": 1280,
         "height": 720,
         "fps": 30,
-        "frames": 815,
-        "duration": 27.167,
+        "frames": 770,
+        "duration": 25.667,
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 476919,
+        "bitrate": 495248,
         "audio": null
       },
       "poster": "posters/poludnie-hero.jpg"
@@ -530,30 +530,30 @@
     "hero-9x16": {
       "webm": {
         "path": "poludnie-hero-9x16.webm",
-        "bytes": 951526,
+        "bytes": 973218,
         "width": 540,
         "height": 960,
         "fps": 30,
-        "frames": 815,
-        "duration": 27.166,
+        "frames": 770,
+        "duration": 25.666,
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 280210,
+        "bitrate": 303348,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-hero-9x16.mp4",
-        "bytes": 942788,
+        "bytes": 934773,
         "width": 540,
         "height": 960,
         "fps": 30,
-        "frames": 815,
-        "duration": 27.167,
+        "frames": 770,
+        "duration": 25.667,
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 277630,
+        "bitrate": 291357,
         "audio": null
       },
       "poster": "posters/poludnie-hero-9x16.jpg"
@@ -561,30 +561,30 @@
     "social-1x1": {
       "webm": {
         "path": "poludnie-social-1x1.webm",
-        "bytes": 1165548,
+        "bytes": 1195434,
         "width": 720,
         "height": 720,
         "fps": 30,
-        "frames": 815,
-        "duration": 27.166,
+        "frames": 770,
+        "duration": 25.666,
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 343237,
+        "bitrate": 372612,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-social-1x1.mp4",
-        "bytes": 1177871,
+        "bytes": 1162824,
         "width": 720,
         "height": 720,
         "fps": 30,
-        "frames": 815,
-        "duration": 27.167,
+        "frames": 770,
+        "duration": 25.667,
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 346857,
+        "bitrate": 362438,
         "audio": null
       },
       "poster": "posters/poludnie-social-1x1.jpg"
@@ -592,7 +592,7 @@
     "store": {
       "webm": {
         "path": "poludnie-store.webm",
-        "bytes": 670148,
+        "bytes": 728239,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -601,12 +601,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 208882,
+        "bitrate": 226989,
         "audio": null
       },
       "mp4": {
         "path": "poludnie-store.mp4",
-        "bytes": 566930,
+        "bytes": 638811,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -615,7 +615,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 176705,
+        "bitrate": 199109,
         "audio": null
       },
       "poster": "posters/poludnie-store.jpg"
@@ -659,7 +659,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "poludnie-store-886x1920.mp4",
       "path": "poludnie-store-886x1920.mp4",
-      "bytes": 35687841,
+      "bytes": 35687895,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -668,7 +668,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11420109,
+      "bitrate": 11420126,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -677,16 +677,16 @@
       "note": "Reels, TikTok i Shorts",
       "name": "poludnie-social-1080x1920.mp4",
       "path": "poludnie-social-1080x1920.mp4",
-      "bytes": 5282487,
+      "bytes": 5003113,
       "width": 1080,
       "height": 1920,
       "fps": 30,
-      "frames": 795,
-      "duration": 26.5,
+      "frames": 750,
+      "duration": 25,
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1594713,
+      "bitrate": 1600996,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -695,16 +695,16 @@
       "note": "post w kanale",
       "name": "poludnie-social-1080x1080.mp4",
       "path": "poludnie-social-1080x1080.mp4",
-      "bytes": 4675022,
+      "bytes": 4492132,
       "width": 1080,
       "height": 1080,
       "fps": 30,
-      "frames": 795,
-      "duration": 26.5,
+      "frames": 750,
+      "duration": 25,
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1411327,
+      "bitrate": 1437482,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -713,16 +713,16 @@
       "note": "YouTube, link w Google Play",
       "name": "poludnie-social-1920x1080.mp4",
       "path": "poludnie-social-1920x1080.mp4",
-      "bytes": 6358645,
+      "bytes": 6106450,
       "width": 1920,
       "height": 1080,
       "fps": 30,
-      "frames": 795,
-      "duration": 26.5,
+      "frames": 750,
+      "duration": 25,
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1919590,
+      "bitrate": 1954064,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -734,13 +734,13 @@
     "stills": 29,
     "store": 198,
     "marketing-9x16": 668,
-    "marketing-1x1": 513,
-    "marketing-16x9": 697,
+    "marketing-1x1": 469,
+    "marketing-16x9": 651,
     "tile": 21
   },
   "validation": true,
   "published": {
-    "totalBytes": 9845375,
+    "totalBytes": 10032303,
     "count": 30
   }
 }
