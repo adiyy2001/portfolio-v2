@@ -38,3 +38,7 @@ Built on 2026-10-08 in a cloud session, on the foundation from step F. Backward 
 ## Open issues
 
 - None blocking. Independent review (step R) still to come.
+
+## Review round 1 (2026-10-08)
+
+- The level up screen shows POZIOM 8 with 1200 / 1400 XP and an empty bar whose first pixels blink, consistent with "Do poziomu 9: 200 XP" and the task screen after levelling.

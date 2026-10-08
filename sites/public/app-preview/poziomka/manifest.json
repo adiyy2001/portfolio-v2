@@ -410,7 +410,7 @@
     "hero": {
       "webm": {
         "path": "poziomka-hero.webm",
-        "bytes": 1370289,
+        "bytes": 1370317,
         "width": 1920,
         "height": 1080,
         "fps": 30,
@@ -419,12 +419,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 533887,
+        "bitrate": 533898,
         "audio": null
       },
       "mp4": {
         "path": "poziomka-hero.mp4",
-        "bytes": 883321,
+        "bytes": 882125,
         "width": 1920,
         "height": 1080,
         "fps": 30,
@@ -433,7 +433,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 344151,
+        "bitrate": 343685,
         "audio": null
       },
       "poster": "posters/poziomka-hero.jpg"
@@ -441,7 +441,7 @@
     "hero-9x16": {
       "webm": {
         "path": "poziomka-hero-9x16.webm",
-        "bytes": 1348969,
+        "bytes": 1344185,
         "width": 1080,
         "height": 1920,
         "fps": 30,
@@ -450,12 +450,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 525580,
+        "bitrate": 523716,
         "audio": null
       },
       "mp4": {
         "path": "poziomka-hero-9x16.mp4",
-        "bytes": 902678,
+        "bytes": 901508,
         "width": 1080,
         "height": 1920,
         "fps": 30,
@@ -464,7 +464,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 351692,
+        "bitrate": 351236,
         "audio": null
       },
       "poster": "posters/poziomka-hero-9x16.jpg"
@@ -472,7 +472,7 @@
     "social-1x1": {
       "webm": {
         "path": "poziomka-social-1x1.webm",
-        "bytes": 902976,
+        "bytes": 902108,
         "width": 1080,
         "height": 1080,
         "fps": 30,
@@ -481,12 +481,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 351814,
+        "bitrate": 351476,
         "audio": null
       },
       "mp4": {
         "path": "poziomka-social-1x1.mp4",
-        "bytes": 619496,
+        "bytes": 618433,
         "width": 1080,
         "height": 1080,
         "fps": 30,
@@ -495,7 +495,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 241362,
+        "bitrate": 240947,
         "audio": null
       },
       "poster": "posters/poziomka-social-1x1.jpg"
@@ -503,7 +503,7 @@
     "store": {
       "webm": {
         "path": "poziomka-store.webm",
-        "bytes": 617832,
+        "bytes": 615771,
         "width": 884,
         "height": 1920,
         "fps": 30,
@@ -512,12 +512,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 240717,
+        "bitrate": 239914,
         "audio": null
       },
       "mp4": {
         "path": "poziomka-store.mp4",
-        "bytes": 482025,
+        "bytes": 479917,
         "width": 884,
         "height": 1920,
         "fps": 30,
@@ -526,7 +526,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 187801,
+        "bitrate": 186980,
         "audio": null
       },
       "poster": "posters/poziomka-store.jpg"
@@ -588,7 +588,7 @@
       "note": "Reels, TikTok i Shorts",
       "name": "poziomka-social-1080x1920.mp4",
       "path": "poziomka-social-1080x1920.mp4",
-      "bytes": 1298563,
+      "bytes": 1297860,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -597,7 +597,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 519425,
+      "bitrate": 519144,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -606,7 +606,7 @@
       "note": "post w kanale",
       "name": "poziomka-social-1080x1080.mp4",
       "path": "poziomka-social-1080x1080.mp4",
-      "bytes": 843322,
+      "bytes": 841822,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -615,7 +615,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 337328,
+      "bitrate": 336728,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -624,7 +624,7 @@
       "note": "YouTube, link w Google Play",
       "name": "poziomka-social-1920x1080.mp4",
       "path": "poziomka-social-1920x1080.mp4",
-      "bytes": 1239584,
+      "bytes": 1239981,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -633,7 +633,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 495833,
+      "bitrate": 495992,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -643,15 +643,15 @@
   },
   "renderSeconds": {
     "stills": 15,
-    "store": 60,
-    "marketing-9x16": 62,
-    "marketing-1x1": 47,
-    "marketing-16x9": 65,
+    "store": 63,
+    "marketing-9x16": 74,
+    "marketing-1x1": 55,
+    "marketing-16x9": 74,
     "tile": 4
   },
   "validation": true,
   "published": {
-    "totalBytes": 7793907,
+    "totalBytes": 7778954,
     "count": 31
   }
 }
