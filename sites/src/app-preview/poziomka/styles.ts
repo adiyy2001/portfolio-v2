@@ -34,6 +34,7 @@ body.poz{background:var(--sky);color:var(--ink);font:400 16px/24px var(--mini);-
 .hero{padding:40px 0 56px}
 .hero__grid{display:grid;gap:24px 48px;align-items:end}
 @media (min-width:960px){.hero__grid{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}}
+@media (max-width:959px){.hero{display:flex;flex-direction:column}.hero__grid{display:contents}.hero__more{order:2;margin-top:24px}.hero .screen{margin-top:24px}}
 .kicker{color:var(--dusk);margin-bottom:16px}
 .brand{display:flex;align-items:center;gap:24px;margin-bottom:20px}
 .brand img{width:96px}

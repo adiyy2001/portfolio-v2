@@ -11,7 +11,8 @@ body.kas{background:var(--ground);color:var(--ink);font:400 17px/1.55 var(--font
 .top a:hover{text-decoration:underline}
 .kas main{display:block;max-width:1160px;margin:0 auto;padding:0 var(--gut)}
 .hero{display:grid;gap:clamp(24px,4vw,48px);padding:clamp(16px,4vw,48px) 0 clamp(40px,6vw,72px);align-items:center}
-@media (min-width:960px){.hero{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+@media (min-width:960px){.hero{grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:1fr auto auto 1fr;row-gap:0}.hero__intro{grid-column:1;grid-row:2}.hero__more{grid-column:1;grid-row:3}.hero .stage--hero{grid-column:2;grid-row:1/5}}
+@media (max-width:959px){.hero__intro>:last-child{margin-bottom:0}}
 .kicker{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--deep);margin-bottom:12px}
 .hero__icon{width:clamp(56px,7vw,76px);height:auto;border-radius:22%;box-shadow:0 8px 20px rgba(0,134,79,.22);margin-bottom:18px}
 .hero h1{font-size:clamp(46px,10vw,76px);line-height:1;font-weight:800;letter-spacing:-.035em;margin-bottom:20px}

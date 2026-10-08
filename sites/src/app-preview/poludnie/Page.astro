@@ -76,26 +76,13 @@ const peakY = chartH - (production(13 + 10 / 60) / 7) * chartH;
   <main id="main" tabindex="-1">
     <section class="hero" aria-labelledby="t-hero">
       <div class="hero__grid">
-        <div>
+        <div class="hero__intro">
           <p class="kicker">{content.kicker}</p>
           <div class="brand">
             <img src={asset(manifest.icons.rounded)} alt="" width="512" height="512" />
             <h1 id="t-hero">Południe</h1>
           </div>
           <p class="lead">{pl(content.lead)}</p>
-          <dl class="rows">
-            {content.facts.map(([term, value]) => (
-              <div>
-                <dt>{term}</dt>
-                <dd>{pl(value)}</dd>
-              </div>
-            ))}
-          </dl>
-          <nav class="toc" aria-label="Sekcje">
-            {sections.map(([id, label]) => (
-              <a href={`#${id}`}>{label}</a>
-            ))}
-          </nav>
         </div>
         <figure class="hero__media">
           <div class="stage stage--hero">
@@ -114,6 +101,21 @@ const peakY = chartH - (production(13 + 10 / 60) / 7) * chartH;
           </div>
           <figcaption>{content.heroCaption}</figcaption>
         </figure>
+        <div class="hero__more">
+          <dl class="rows">
+            {content.facts.map(([term, value]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{pl(value)}</dd>
+              </div>
+            ))}
+          </dl>
+          <nav class="toc" aria-label="Sekcje">
+            {sections.map(([id, label]) => (
+              <a href={`#${id}`}>{label}</a>
+            ))}
+          </nav>
+        </div>
       </div>
     </section>
 

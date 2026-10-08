@@ -61,7 +61,7 @@ export const content = {
     ],
   },
   motion: {
-    title: 'Odbicie zamiast zatrzymania',
+    title: 'Odbicie zamiast\u00a0zatrzymania',
     intro:
       'Każdy ruch ma nazwę i wartość zapisaną w tokenach projektu. Te same liczby napędzają wideo i laboratorium kropli poniżej.',
     caption:

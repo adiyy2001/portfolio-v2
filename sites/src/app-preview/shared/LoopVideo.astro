@@ -49,6 +49,10 @@ const main = manifest.videos[variant];
     arm(video);
     video.play().catch(() => undefined);
   };
+  const rest = (video: HTMLVideoElement) => {
+    video.pause();
+    if (video.dataset.armed) video.load();
+  };
   const videos = [...document.querySelectorAll<HTMLVideoElement>('video[data-loop]')];
   if (!reduced.matches) {
     const observer = new IntersectionObserver(
@@ -68,8 +72,8 @@ const main = manifest.videos[variant];
         const host = video.closest('a') ?? video;
         host.addEventListener('pointerenter', () => canHover.matches && play(video));
         host.addEventListener('focusin', () => play(video));
-        host.addEventListener('pointerleave', () => canHover.matches && video.pause());
-        host.addEventListener('focusout', () => video.pause());
+        host.addEventListener('pointerleave', () => canHover.matches && rest(video));
+        host.addEventListener('focusout', () => rest(video));
       }
     }
   } else {

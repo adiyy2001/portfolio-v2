@@ -135,7 +135,7 @@ export const content = {
     ] as [string, string][],
   },
   cta: {
-    title: 'Twoje dane też mogą opowiadać historię',
+    title: 'Twoje dane też mogą opowiadać\u00a0historię',
     text: 'Napisz, co robi Twoja aplikacja i kto jej używa. Zaproponuję storyboard, styl ruchu i komplet plików do App Store, Google Play i mediów społecznościowych.',
     link: 'Zobacz ofertę dla klientów',
   },

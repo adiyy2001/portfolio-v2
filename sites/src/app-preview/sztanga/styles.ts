@@ -20,7 +20,8 @@ body.szt{background:var(--ground);color:var(--ink);font:500 17px/1.55 var(--font
 .hero__icon{width:clamp(56px,8vw,96px);border-radius:22%;box-shadow:0 0 0 2px var(--line);margin-bottom:clamp(16px,2.4vw,28px)}
 .hero h1{font-size:calc((min(100vw,1240px) - 2 * var(--gut)) / var(--k));white-space:nowrap;margin-bottom:clamp(20px,3vw,36px)}
 .hero__grid{display:grid;gap:clamp(24px,4vw,40px);align-items:start}
-@media (min-width:960px){.hero__grid{grid-template-columns:minmax(0,4fr) minmax(0,7fr)}}
+@media (min-width:960px){.hero__grid{grid-template-columns:minmax(0,4fr) minmax(0,7fr);grid-template-rows:auto auto 1fr;row-gap:0}.hero__intro{grid-column:1;grid-row:1}.hero__more{grid-column:1;grid-row:2}.hero__grid .stage--hero{grid-column:2;grid-row:1/4}}
+@media (max-width:959px){.hero__intro>:last-child{margin-bottom:0}}
 .lead{font-size:clamp(18px,1.9vw,21px);line-height:1.5;max-width:34em;margin-bottom:24px;text-wrap:pretty}
 .rows>div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-top:2px solid var(--line)}
 .rows dt{color:var(--sec);font-weight:700;font-stretch:75%;text-transform:uppercase;letter-spacing:.06em;font-size:14px;padding-top:2px}

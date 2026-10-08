@@ -12,7 +12,8 @@ body.ryg{background-color:var(--void);background-image:linear-gradient(var(--gri
 .ryg main{display:block;max-width:1240px;margin:0 auto;padding:0 var(--gut)}
 .hero{padding:clamp(28px,5vw,64px) 0 clamp(40px,6vw,72px)}
 .hero__grid{display:grid;gap:clamp(28px,4vw,48px);align-items:start}
-@media (min-width:960px){.hero__grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}}
+@media (min-width:960px){.hero__grid{grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-rows:auto auto 1fr;row-gap:0}.hero__intro{grid-column:1;grid-row:1}.hero__more{grid-column:1;grid-row:2}.hero__media{grid-column:2;grid-row:1/4}}
+@media (max-width:959px){.hero__intro>:last-child{margin-bottom:0}}
 .kicker{text-wrap:balance;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
 .brand{display:flex;align-items:center;gap:clamp(14px,2vw,22px);margin-bottom:clamp(18px,2.4vw,28px)}
 .brand img{width:clamp(56px,7vw,84px);border-radius:22%;box-shadow:0 0 0 1.5px var(--dim)}
