@@ -132,10 +132,11 @@ export const Scene = ({ frame, hideCard = false }: { frame: number; hideCard?: b
     const touch = bezierAt(fade, f, T.touch) * (1 - bezierAt(fade, f, T.holdTo + 4));
     const hold = interpolate(f, [T.holdFrom, T.holdTo], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: inOut });
     const validated = bezierAt(fade, f, T.holdTo);
+    const swap = interpolate(f, [T.holdTo, T.holdTo + 11], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: inOut });
     const bump = tap(f, T.holdTo);
     return (
       <div style={layer}>
-        <MyTickets time="" land={land} bump={bump} card={{ frame: f, hold, validated, touch }} />
+        <MyTickets time="" land={land} bump={bump} card={{ frame: f, hold, validated, touch, swap }} />
         {bar}
       </div>
     );
@@ -156,7 +157,7 @@ export const Scene = ({ frame, hideCard = false }: { frame: number; hideCard?: b
     const minutes = Math.round(mix(45, route.pillMinutes, bezierAt(live, f, T.pill)));
     return (
       <div style={layer}>
-        {e < 1 && <MyTickets time="" land={1} hideCard />}
+        {f < T.hero + 30 && <MyTickets time="" land={1} hideCard tabHide={e / 0.85} />}
         <div style={{ ...layer, opacity: Math.min(1, e * 1.4) }}>
           <LiveTicket time="" card={card} hideCard chrome={window01(e, 0.5, 1)} pressInspector={tap(f, T.inspectorPress)} />
         </div>

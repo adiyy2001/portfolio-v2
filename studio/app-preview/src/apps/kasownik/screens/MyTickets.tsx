@@ -14,12 +14,14 @@ export const MyTickets = ({
   land = 1,
   hideCard = false,
   bump = 0,
+  tabHide = 0,
   card,
 }: {
   time: string;
   land?: number;
   hideCard?: boolean;
   bump?: number;
+  tabHide?: number;
   card?: ComponentProps<typeof TicketCard>;
 }) => {
   const shift = mix(0, compactCard.height + 28, Math.min(1, land));
@@ -50,7 +52,7 @@ export const MyTickets = ({
           ))}
         </Abs>
       </Abs>
-      <TabBar active="Moje" />
+      <TabBar active="Moje" hide={tabHide} />
       <HomeIndicator color={color.ink} />
     </ScreenBase>
   );

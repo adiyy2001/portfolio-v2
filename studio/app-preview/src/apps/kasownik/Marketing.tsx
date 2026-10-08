@@ -41,9 +41,9 @@ const layouts: Record<Format, Layout> = {
     glide: 28,
   },
   '9x16': {
-    phone: { scale: 1.32, left: 226, top: 610 },
-    text: { left: 80, top: 250, width: 860, align: 'left', kicker: 34, title: 100 },
-    breakout: { cx: 520, cy: 1180, height: 1110 },
+    phone: { scale: 0.95, left: 314, top: 570 },
+    text: { left: 80, top: 210, width: 920, align: 'left', kicker: 40, title: 130 },
+    breakout: { cx: 540, cy: 1040, height: 900 },
     outro: { cy: 860, icon: 240, name: 128, tagline: 40, width: 860 },
     glide: 22,
   },

@@ -2,7 +2,7 @@ import { color, radius, shadow } from '../tokens';
 import { liveTicket, myTickets } from '../content';
 import { Abs, LiveBand, QrCode, Ring, clockText, fontFamily, text } from './ui';
 import { Check } from './glyphs';
-import { mix } from '../../../shared/motion';
+import { mix, window01 } from '../../../shared/motion';
 
 export const compactCard = { width: 411, height: 200 } as const;
 export const fullCard = { width: 411, height: 560, qr: 232, qrTop: 72 } as const;
@@ -19,6 +19,7 @@ export const TicketCard = ({
   hideQr = false,
   hideClock = false,
   touch = 0,
+  swap,
 }: {
   frame: number;
   expand?: number;
@@ -31,7 +32,9 @@ export const TicketCard = ({
   hideQr?: boolean;
   hideClock?: boolean;
   touch?: number;
+  swap?: number;
 }) => {
+  const label = swap ?? validated;
   const bandHeight = mix(36, 46, expand);
   const compactOpacity = Math.max(0, 1 - expand * 2.6);
   const fullOpacity = Math.min(1, Math.max(0, (expand - 0.4) / 0.45));
@@ -57,7 +60,7 @@ export const TicketCard = ({
               display: 'flex',
               alignItems: 'center',
               color: color.brandDeep,
-              opacity: (1 - validated) * (1 - live),
+              opacity: (1 - window01(validated, 0, 0.45)) * (1 - live),
               ...text('caption', { fontWeight: 700, letterSpacing: 1.1, textTransform: 'uppercase' }),
             }}>
             {myTickets.ready}
@@ -71,7 +74,7 @@ export const TicketCard = ({
               alignItems: 'center',
               gap: 6,
               color: '#fff',
-              opacity: validated * (1 - live),
+              opacity: window01(validated, 0.55, 1) * (1 - live),
               ...text('caption', { fontWeight: 700, letterSpacing: 1.1, textTransform: 'uppercase' }),
             }}>
             <Check size={16} progress={validated} width={3.4} />
@@ -104,8 +107,28 @@ export const TicketCard = ({
             }}>
             <Ring progress={hold} />
             <span style={{ position: 'relative', flex: 1, height: 22 }}>
-              <span style={{ position: 'absolute', left: 0, top: 0, opacity: 1 - validated }}>{myTickets.hold}</span>
-              <span style={{ position: 'absolute', left: 0, top: 0, opacity: validated }}>{myTickets.done}</span>
+              <span
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  whiteSpace: 'nowrap',
+                  opacity: 1 - window01(label, 0, 0.4),
+                  transform: `translateY(${-6 * window01(label, 0, 0.4)}px)`,
+                }}>
+                {myTickets.hold}
+              </span>
+              <span
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  whiteSpace: 'nowrap',
+                  opacity: window01(label, 0.55, 1),
+                  transform: `translateY(${6 * (1 - window01(label, 0.55, 1))}px)`,
+                }}>
+                {myTickets.done}
+              </span>
             </span>
           </Abs>
           {touch > 0 && (

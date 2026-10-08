@@ -35,9 +35,10 @@ export const ScreenBase = ({ background, children, style }: { background: string
   </div>
 );
 
-export const TabBar = ({ active }: { active: (typeof tabs)[number] }) => (
+export const TabBar = ({ active, hide = 0 }: { active: (typeof tabs)[number]; hide?: number }) => (
   <Abs
     style={{
+      transform: `translateY(${Math.min(1, Math.max(0, hide)) * 100}px)`,
       left: 0,
       right: 0,
       bottom: 0,
