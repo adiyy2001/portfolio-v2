@@ -11,7 +11,7 @@ Brief: `/home/adrian/root/side_projects/briefs/wzornik-app-preview.md`. Run rule
 - [x] B6 Południe
 - [x] Q quality control
 - [x] R independent review, every rubric score at least 4 (second independent review, all scores at least 4)
-- [ ] P publication and final report
+- [x] P publication and final report
 ```
 
 Every app agent writes status and decisions to `studio/app-preview/apps/<slug>/STATUS.md`, never to this file. The merge step ticks the lines above and copies the decisions into "Decisions for Adrian".
