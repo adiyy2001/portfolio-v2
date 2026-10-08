@@ -1,0 +1,16 @@
+---
+interface Props {
+  name: string;
+  style: string;
+  trade: string;
+}
+
+const { name, style, trade } = Astro.props;
+---
+
+<div class="stub">
+  <p class="stub__style">{style}</p>
+  <p class="stub__name">{name}</p>
+  <p class="stub__trade">{trade}</p>
+  <p class="stub__state">Realizacja w przygotowaniu</p>
+</div>

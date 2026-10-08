@@ -1,0 +1,426 @@
+---
+import { link, portfolio } from '../../shared/link';
+import FileTable from '../shared/FileTable.astro';
+import LoopVideo from '../shared/LoopVideo.astro';
+import SampleLine from '../shared/SampleLine.astro';
+import Shell from '../shared/Shell.astro';
+import Storyboard from '../shared/Storyboard.astro';
+import { assetUrl, nb, presetValue, readManifest } from '../shared/manifest';
+import Heading from './Heading.astro';
+import ScrambleLab from './ScrambleLab.tsx';
+import { app } from './app';
+import { content } from './content';
+import { styles } from './styles';
+
+const manifest = readManifest('rygiel');
+const asset = (path: string) => assetUrl('rygiel', path);
+const [monoFont, displayFont] = manifest.fonts;
+const fontCss = [
+  `@font-face{font-family:'Azeret Mono';src:url(${asset(monoFont.file)}) format('woff2');font-weight:${monoFont.weight};font-style:normal;font-display:swap}`,
+  `@font-face{font-family:'Oxanium';src:url(${asset(displayFont.file)}) format('woff2');font-weight:${displayFont.weight};font-style:normal;font-display:swap}`,
+].join('');
+const sections = [
+  ['zadanie', 'Zadanie'],
+  ['kierunek', 'Kierunek'],
+  ['storyboard', 'Storyboard'],
+  ['ruch', 'Ruch'],
+  ['ekrany', 'Ekrany'],
+  ['formaty', 'Formaty'],
+  ['pliki', 'Pliki'],
+] as const;
+const pl = (text: string) => nb(text).replace(/(?<=^|[\s\u00a0(„])([aiouwzAIOUWZ]) /g, '$1\u00a0');
+const ratio = (value: number) => value.toFixed(1).replace('.', ',');
+const onVoid = (id: string) => manifest.palette.find(item => item.id === id)?.onSurface ?? 0;
+const onPanel = (id: string) => manifest.palette.find(item => item.id === id)?.onGrouped ?? 0;
+const password = 'k7#Vq2!rTz9pL$w4Hn8e';
+const weights = [
+  [700, 'Twój adres e-mail pojawił się w wycieku', 'Azeret Mono 700: tytuły i przyciski'],
+  [500, 'Wykryty 6.10.2026, 07:12', 'Azeret Mono 500: etykiety, hasło, napisy w wideo'],
+  [400, 'Zażółć gęślą jaźń, 214 wpisów', 'Azeret Mono 400: tekst i objaśnienia'],
+] as const;
+---
+
+<Shell
+  app={app}
+  title="App preview menedżera haseł z alertami wycieków"
+  description="Ciemny neon w ruchu: podgląd zmyślonego menedżera haseł Rygiel z alertami o wyciekach. Wersja do App Store, trzy formaty social, pętle na stronę, storyboard i zasady ruchu z laboratorium odszyfrowania."
+  css={fontCss + styles}
+  preload={[asset(monoFont.file), asset(displayFont.file)]}
+  bodyClass="ryg">
+  <header class="top">
+    <a href={link('/app-preview/')}>Wzornik, app preview</a>
+    <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="t-hero">
+      <p class="kicker">{content.kicker}</p>
+      <div class="brand">
+        <img src={asset(manifest.icons.rounded)} alt="" width="512" height="512" />
+        <h1 id="t-hero">Rygiel</h1>
+      </div>
+      <div class="hero__grid">
+        <div class="hero__intro">
+          <p class="lead">{pl(content.lead)}</p>
+        </div>
+        <figure class="hero__media">
+          <div class="stage stage--neon stage--hero">
+            <LoopVideo
+              manifest={manifest}
+              variant="hero"
+              class="hero__wide"
+              label="Wersja marketingowa 16:9: nagłówki Wyciek wykryty, Hasło zmienione, Sejf otwarty i Sejf zdrowy obok neonowego telefonu z aplikacją Rygiel"
+            />
+            <LoopVideo
+              manifest={manifest}
+              variant="hero-9x16"
+              class="hero__tall"
+              label="Wersja marketingowa 9:16: nagłówek nad neonowym telefonem z aplikacją Rygiel"
+            />
+          </div>
+          <figcaption>{content.heroCaption}</figcaption>
+        </figure>
+        <div class="hero__more">
+          <dl class="rows">
+            {content.facts.map(([term, value]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{pl(value)}</dd>
+              </div>
+            ))}
+          </dl>
+          <nav class="toc" aria-label="Sekcje">
+            {sections.map(([id, label]) => (
+              <a href={`#${id}`}>{label}</a>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="zadanie" aria-labelledby="t-zadanie">
+      <div class="sec__head">
+        <p class="sec__num">01 Klient i zadanie</p>
+        <Heading id="t-zadanie" text={content.client.title} />
+      </div>
+      <div class="cols">
+        <div>
+          <div class="prose">
+            {content.client.paragraphs.map(text => (
+              <p>{pl(text)}</p>
+            ))}
+          </div>
+          <dl class="rows rows--stack" style="margin-top:24px">
+            {content.client.facts.map(([term, value]) => (
+              <div>
+                <dt>{term}</dt>
+                <dd>{pl(value)}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div class="card card--alert alert" aria-label="Przykładowy alert o wycieku">
+          <p class="alert__label">{content.client.alert.label}</p>
+          <p class="alert__title">
+            {content.client.alert.title.split(' ').map((word, i) => (
+              <>
+                {i > 0 && ' '}
+                <span class="nowrap">{word}</span>
+              </>
+            ))}
+          </p>
+          <dl>
+            {content.client.alert.rows.map(([term, value], i) => (
+              <div>
+                <dt>{term}</dt>
+                <dd class={i === 3 ? 'is-alert' : undefined}>{value}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="alert__note">{pl(content.client.alert.note)}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="kierunek" aria-labelledby="t-kierunek">
+      <div class="sec__head">
+        <p class="sec__num">02 Kierunek</p>
+        <Heading id="t-kierunek" text={content.direction.title} />
+      </div>
+      <div class="cols">
+        <div>
+          <div class="prose">
+            {content.direction.paragraphs.map(text => (
+              <p>{pl(text)}</p>
+            ))}
+          </div>
+          <ul class="chips">
+            {content.direction.keywords.map(word => (
+              <li>{word}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="card type" aria-label="Kroje Azeret Mono i Oxanium">
+          <h3>Dwa kroje, oba OFL</h3>
+          <p class="type__wordmark">RYGIEL</p>
+          <p class="dim" style="font-size:13px">
+            Oxanium 800 i 600: znak, duże liczby, wynik 96 na 100
+          </p>
+          {weights.map(([weight, sample, use]) => (
+            <div class="type__row">
+              <p style={`font-weight:${weight}`}>{sample}</p>
+              <small>{use}</small>
+            </div>
+          ))}
+          <div class="type__row">
+            <small>Każdy znak hasła w osobnym polu, cyfry i symbole w cyjanie</small>
+            <div class="pass" aria-label={`Hasło ${password}`} role="img">
+              {[...password].map(ch => (
+                <span class={/[a-zA-Z]/.test(ch) ? undefined : 'is-sym'}>{ch}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:24px">
+        <h3>Dziewięć kolorów, dwa sygnały</h3>
+        <ul class="swatches">
+          {manifest.palette.map(item => (
+            <li class="swatch">
+              <span class="swatch__chip" style={`background:${item.hex}`}></span>
+              <b>{item.name}</b>
+              <span>{item.hex.toUpperCase()}</span>
+              <span>{item.role}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="contrast">
+          Kontrast na próżni: tekst {ratio(onVoid('text'))}:1, cyjan {ratio(onVoid('cyan'))}:1,
+          alarm {ratio(onVoid('alert'))}:1, bursztyn {ratio(onVoid('warn'))}:1. Tekst przygaszony na
+          panelu {ratio(onPanel('muted'))}:1. Każda para przechodzi AA dla małego tekstu, a poświata
+          nigdy nie leży pod tekstem.
+        </p>
+      </div>
+    </section>
+
+    <section class="sec" id="storyboard" aria-labelledby="t-storyboard">
+      <div class="sec__head">
+        <p class="sec__num">03 Storyboard</p>
+        <Heading id="t-storyboard" text={content.storyboard.title} />
+        <p class="intro">{pl(content.storyboard.intro)}</p>
+      </div>
+      <ul class="list">
+        {content.storyboard.rules.map(rule => (
+          <li>{pl(rule)}</li>
+        ))}
+      </ul>
+      <Storyboard manifest={manifest} alt={content.storyboard.alt} />
+    </section>
+
+    <section class="sec" id="ruch" aria-labelledby="t-ruch">
+      <div class="sec__head">
+        <p class="sec__num">04 Zasady ruchu</p>
+        <Heading id="t-ruch" text={content.motion.title} />
+        <p class="intro">{pl(content.motion.intro)}</p>
+      </div>
+      <ScrambleLab
+        client:visible
+        sample="Twój adres e-mail pojawił się w wycieku"
+        password={password}
+        period={36}
+        low={0.35}
+        high={0.6}
+        caption={pl(
+          `Czytelny preset odsłania znak co 2 klatki, a każdy znak losuje przez 6 do 10 klatek, zmieniając się co drugą klatkę. Oko nadąża za nim od lewej do prawej, a gotowe hasło stoi potem na ekranie. Za szybki preset kończy się prawie od razu i przez ułamek sekundy tylko miga. Puls poświaty ma okres 36 klatek, czyli 1,2 s: oddycha, ale nie błyska.`,
+        )}
+      />
+      <div class="cols" style="margin-top:28px">
+        <dl class="presets">
+          {manifest.motion.map(preset => (
+            <div>
+              <dt>
+                {preset.id} <span>· {preset.use}</span>
+              </dt>
+              <dd>
+                <code>{presetValue(preset)}</code>
+              </dd>
+              <dd>{pl(preset.note)}</dd>
+            </div>
+          ))}
+        </dl>
+        <dl class="rows rows--stack">
+          {content.motion.rules.map(([term, value]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{pl(value)}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="sec" id="ekrany" aria-labelledby="t-ekrany">
+      <div class="sec__head">
+        <p class="sec__num">05 Ekrany</p>
+        <Heading id="t-ekrany" text={content.screens.title} />
+        <p class="intro">{pl(content.screens.intro)}</p>
+      </div>
+      <div class="gallery">
+        {manifest.gallery.map(item => (
+          <figure>
+            <img
+              src={asset(item.file)}
+              alt={`Ekran ${item.title}`}
+              width="443"
+              height="960"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <b>
+                {item.n}. {item.title}
+              </b>
+              <span>{pl(item.caption)}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="sec" id="formaty" aria-labelledby="t-formaty">
+      <div class="sec__head">
+        <p class="sec__num">06 Wersja sklepowa i formaty</p>
+        <Heading id="t-formaty" text={content.formats.title} />
+        <p class="intro">{pl(content.formats.intro)}</p>
+      </div>
+      <div class="formats">
+        <figure>
+          <div class="stage">
+            <LoopVideo
+              manifest={manifest}
+              variant="store"
+              label="Wersja sklepowa: sam interfejs Rygla na pełnym ekranie"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.store}</b>886×1920, 24 s, H.264
+          </figcaption>
+        </figure>
+        <figure>
+          <div class="stage">
+            <LoopVideo
+              manifest={manifest}
+              variant="hero-9x16"
+              label="Wersja 9:16 z nagłówkiem nad neonowym telefonem"
+            />
+          </div>
+          <figcaption>
+            <b>{content.formats.portrait}</b>1080×1920, 23 s
+          </figcaption>
+        </figure>
+        <div class="fmt--wide">
+          <figure>
+            <div class="stage">
+              <LoopVideo
+                manifest={manifest}
+                variant="social-1x1"
+                label="Wersja kwadratowa z nagłówkiem nad telefonem"
+              />
+            </div>
+            <figcaption>
+              <b>{content.formats.square}</b>1080×1080, 23 s
+            </figcaption>
+          </figure>
+          <figure>
+            <div class="stage">
+              <LoopVideo
+                manifest={manifest}
+                variant="hero"
+                label="Wersja 16:9 z nagłówkiem i dziennikiem zdarzeń po lewej, telefonem po prawej"
+              />
+            </div>
+            <figcaption>
+              <b>{content.formats.wide}</b>1920×1080, 23 s
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="pliki" aria-labelledby="t-pliki">
+      <div class="sec__head">
+        <p class="sec__num">07 Co dostaje klient</p>
+        <Heading id="t-pliki" text={content.deliverables.title} />
+        <p class="intro">{pl(content.deliverables.intro)}</p>
+      </div>
+      <FileTable manifest={manifest} />
+      <dl class="rows rows--stack" style="margin-top:20px">
+        {content.deliverables.extras.map(([term, value]) => (
+          <div>
+            <dt>{term}</dt>
+            <dd>{pl(value)}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="cta" aria-labelledby="t-cta">
+      <Heading id="t-cta" text={content.cta.title} />
+      <p>{pl(content.cta.text)}</p>
+      <a href={portfolio('/dla-klienta/#wzornik')}>{content.cta.link}</a>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <SampleLine name="Rygiel" />
+  </footer>
+</Shell>
+
+<script>
+  import { presets, scramble } from './scramble';
+
+  const heading = { ...presets.readable, step: 0.5, min: 4, max: 8 };
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const targets = [...document.querySelectorAll<HTMLElement>('[data-scramble]')];
+
+  const render = (el: HTMLElement, text: string, frame: number) => {
+    const glyphs = scramble(text, frame, heading);
+    if (glyphs.every(g => g.state === 'done')) {
+      el.textContent = text;
+      return true;
+    }
+    el.replaceChildren(
+      ...glyphs.map(g => {
+        const span = document.createElement('span');
+        span.textContent = g.ch;
+        if (g.state === 'hidden') span.style.color = 'transparent';
+        if (g.state === 'cycling') span.style.color = 'var(--cyan)';
+        return span;
+      }),
+    );
+    return false;
+  };
+
+  const run = (el: HTMLElement) => {
+    const text = (el.textContent ?? '').trim();
+    const start = performance.now();
+    const tick = (now: number) => {
+      if (!render(el, text, ((now - start) / 1000) * 30)) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  if (!reduced && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          observer.unobserve(entry.target);
+          run(entry.target as HTMLElement);
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px' },
+    );
+    for (const el of targets) observer.observe(el);
+  }
+</script>

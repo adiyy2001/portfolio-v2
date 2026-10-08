@@ -4,3 +4,4 @@ dist
 .vite-cache
 node_modules
 public/identyfikacja
+public/app-preview

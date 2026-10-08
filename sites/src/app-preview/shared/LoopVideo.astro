@@ -1,0 +1,82 @@
+---
+import { assetUrl } from './manifest';
+import type { Manifest } from './types';
+
+type Variant = keyof Manifest['videos'];
+
+interface Props {
+  manifest: Manifest;
+  variant: Variant;
+  label: string;
+  mode?: 'view' | 'hover';
+  class?: string;
+}
+
+const { manifest, variant, label, mode = 'view', class: className } = Astro.props;
+const slug = manifest.app.slug;
+const main = manifest.videos[variant];
+---
+
+<video
+  class:list={['loop', className]}
+  muted
+  loop
+  playsinline
+  autoplay={mode === 'view'}
+  preload="none"
+  width={main.mp4.width}
+  height={main.mp4.height}
+  poster={assetUrl(slug, main.poster)}
+  aria-label={label}
+  data-loop={mode}>
+  <source data-src={assetUrl(slug, main.webm.path)} type="video/webm" />
+  <source data-src={assetUrl(slug, main.mp4.path)} type="video/mp4" />
+</video>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const canHover = window.matchMedia('(hover: hover)');
+  const arm = (video: HTMLVideoElement) => {
+    if (video.dataset.armed) return;
+    video.dataset.armed = '1';
+    video.querySelectorAll('source').forEach(source => {
+      const src = source.dataset.src;
+      if (src) source.src = src;
+    });
+    video.load();
+  };
+  const play = (video: HTMLVideoElement) => {
+    arm(video);
+    video.play().catch(() => undefined);
+  };
+  const rest = (video: HTMLVideoElement) => {
+    video.pause();
+    if (video.dataset.armed) video.load();
+  };
+  const videos = [...document.querySelectorAll<HTMLVideoElement>('video[data-loop]')];
+  if (!reduced.matches) {
+    const observer = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          const video = entry.target as HTMLVideoElement;
+          const hover = video.dataset.loop === 'hover' && canHover.matches;
+          if (entry.isIntersecting && !hover) play(video);
+          else if (!entry.isIntersecting) video.pause();
+        }
+      },
+      { rootMargin: '120px 0px', threshold: 0.35 },
+    );
+    for (const video of videos) {
+      observer.observe(video);
+      if (video.dataset.loop === 'hover') {
+        const host = video.closest('a') ?? video;
+        host.addEventListener('pointerenter', () => canHover.matches && play(video));
+        host.addEventListener('focusin', () => play(video));
+        host.addEventListener('pointerleave', () => canHover.matches && rest(video));
+        host.addEventListener('focusout', () => rest(video));
+      }
+    }
+  } else {
+    for (const video of videos) video.removeAttribute('autoplay');
+  }
+</script>

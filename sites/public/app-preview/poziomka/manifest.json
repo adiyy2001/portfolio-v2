@@ -1,0 +1,657 @@
+{
+  "app": {
+    "slug": "poziomka",
+    "name": "Poziomka",
+    "category": "Tracker nawyków z grywalizacją",
+    "city": "cała Polska",
+    "zone": "4 nawyki, poziom 7, passa 21 dni",
+    "tagline": "Codzienne nawyki jako zadania z punktami doświadczenia, poziomy, passa, która hoduje ogródek, i tydzień w słupkach."
+  },
+  "generatedAt": "2026-10-08",
+  "storyboard": {
+    "fps": 30,
+    "duration": 600,
+    "bridge": 16,
+    "poster": 30,
+    "defaultPoster": 150,
+    "shots": [
+      {
+        "id": "hook",
+        "name": "Poziom w górę",
+        "from": 0,
+        "to": 59,
+        "key": 30,
+        "action": "Baner POZIOM 8! stoi już w pierwszej klatce. Poziomka skacze w rytmie 7,5 klatki na sekundę, pasek XP mruga pełny, a z boków wyskakują monety.",
+        "overlay": {
+          "text": "Nawyki, za które rośnie poziom",
+          "from": 4,
+          "to": 72,
+          "top": 732
+        },
+        "seconds": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": "quests",
+        "name": "Zadania",
+        "from": 60,
+        "to": 209,
+        "key": 150,
+        "action": "Szachownica odsłania zadania na dziś. Odhaczona woda daje +10 XP, spacer +30 XP, monety podskakują, a pasek rośnie po pikselu, aż dobija do 1200 XP i mruga. Odznaka zmienia się na POZIOM 8.",
+        "seconds": [
+          2,
+          7
+        ]
+      },
+      {
+        "id": "streak",
+        "name": "Passa",
+        "from": 210,
+        "to": 329,
+        "key": 318,
+        "action": "Kalendarz 21 dni od 18 września. Kafle odwracają się po kolei co 4 klatki, licznik rośnie razem z nimi, a na końcu mruga PASSA: 21 DNI.",
+        "overlay": {
+          "text": "Passa 21 dni i rośnie",
+          "from": 220,
+          "to": 290,
+          "top": 600
+        },
+        "seconds": [
+          7,
+          11
+        ]
+      },
+      {
+        "id": "garden",
+        "name": "Ogródek",
+        "from": 330,
+        "to": 479,
+        "key": 466,
+        "action": "Ogródek: kwiat w trzech pozach zamienia się w owoc, wskaźnik etapu przeskakuje na 5 z 5. Skrzynia otwiera się w trzech krokach i wypuszcza miedzianą konewkę.",
+        "overlay": {
+          "text": "Ogródek rośnie z każdą passą",
+          "from": 345,
+          "to": 412,
+          "top": 124
+        },
+        "seconds": [
+          11,
+          16
+        ]
+      },
+      {
+        "id": "week",
+        "name": "Tydzień",
+        "from": 480,
+        "to": 539,
+        "key": 536,
+        "action": "Siedem słupków XP od piątku do czwartku rośnie po 3 piksele na klatkę. Pod spodem razem 550 XP, średnio 79 dziennie i tabela: które zadanie którego dnia.",
+        "seconds": [
+          16,
+          18
+        ]
+      },
+      {
+        "id": "end",
+        "name": "Zakończenie",
+        "from": 540,
+        "to": 599,
+        "key": 596,
+        "action": "Ekran startowy: pikselowa ikona z poziomką, napis POZIOMKA wpisuje się literą na każdy takt i podpis Nawyki z poziomami.",
+        "seconds": [
+          18,
+          20
+        ]
+      }
+    ],
+    "board": "poziomka-storyboard.png"
+  },
+  "marketing": {
+    "duration": 600,
+    "bridge": 16,
+    "outro": 540,
+    "poster": 160,
+    "beats": [
+      {
+        "from": 0,
+        "to": 209,
+        "kicker": "Zadania na dziś",
+        "title": "Nawyk to zadanie.",
+        "line": "Woda +10 XP, spacer +30 XP."
+      },
+      {
+        "from": 210,
+        "to": 329,
+        "kicker": "Passa",
+        "title": "21 dni z rzędu.",
+        "line": "Kafel po kaflu, dzień po dniu."
+      },
+      {
+        "from": 330,
+        "to": 479,
+        "kicker": "Ogródek",
+        "title": "Passa daje owoce.",
+        "line": "Za 21 dni miedziana konewka."
+      },
+      {
+        "from": 480,
+        "to": 539,
+        "kicker": "Tydzień",
+        "title": "550 XP w tydzień.",
+        "line": "Średnio 79 XP dziennie."
+      }
+    ]
+  },
+  "palette": [
+    {
+      "id": "ink",
+      "name": "Atrament",
+      "role": "kontury, tekst, ramka telefonu",
+      "hex": "#140C1C",
+      "onSurface": 17.17,
+      "onGrouped": 12.48
+    },
+    {
+      "id": "plum",
+      "name": "Śliwka",
+      "role": "pasek poziomu, zakładki, panele na ciemnym",
+      "hex": "#3B2440",
+      "onSurface": 12.48,
+      "onGrouped": 9.07
+    },
+    {
+      "id": "dusk",
+      "name": "Zmierzch",
+      "role": "drugi poziom tekstu, cień pod sprite’ami",
+      "hex": "#6B3E5E",
+      "onSurface": 7.62,
+      "onGrouped": 5.54
+    },
+    {
+      "id": "berryDeep",
+      "name": "Głęboka poziomka",
+      "role": "cień owocu, skrzynia, miedź konewki",
+      "hex": "#A23B4E",
+      "onSurface": 5.77,
+      "onGrouped": 4.19
+    },
+    {
+      "id": "berry",
+      "name": "Poziomka",
+      "role": "owoc, słupki tygodnia, kolor marki",
+      "hex": "#E0474F",
+      "onSurface": 3.64,
+      "onGrouped": 2.65
+    },
+    {
+      "id": "berryLight",
+      "name": "Jasna poziomka",
+      "role": "blask owocu i zaznaczenia",
+      "hex": "#FF8F8F",
+      "onSurface": 1.97,
+      "onGrouped": 1.43
+    },
+    {
+      "id": "gold",
+      "name": "Złoto",
+      "role": "monety XP, pasek doświadczenia, nagłówki na ciemnym",
+      "hex": "#F7C873",
+      "onSurface": 1.4,
+      "onGrouped": 1.02
+    },
+    {
+      "id": "cream",
+      "name": "Krem",
+      "role": "panele, karty zadań, kafle passy",
+      "hex": "#FFF3C4",
+      "onSurface": 1,
+      "onGrouped": 1.38
+    },
+    {
+      "id": "forest",
+      "name": "Las",
+      "role": "ciemne liście, cień trawy",
+      "hex": "#2D5A3A",
+      "onSurface": 7.16,
+      "onGrouped": 5.21
+    },
+    {
+      "id": "leaf",
+      "name": "Liść",
+      "role": "liście, trawa i zrobione zadania",
+      "hex": "#4FA34A",
+      "onSurface": 2.83,
+      "onGrouped": 2.06
+    },
+    {
+      "id": "sprout",
+      "name": "Kiełek",
+      "role": "jasne liście, znak odhaczenia",
+      "hex": "#A6DE5C",
+      "onSurface": 1.43,
+      "onGrouped": 1.04
+    },
+    {
+      "id": "blueDeep",
+      "name": "Głęboki błękit",
+      "role": "górny pas nieba, cień chmur",
+      "hex": "#2B4C8C",
+      "onSurface": 7.5,
+      "onGrouped": 5.45
+    },
+    {
+      "id": "skyMid",
+      "name": "Błękit",
+      "role": "środkowy pas nieba",
+      "hex": "#4F8FE0",
+      "onSurface": 2.98,
+      "onGrouped": 2.16
+    },
+    {
+      "id": "sky",
+      "name": "Jasny błękit",
+      "role": "tło ekranów i strony",
+      "hex": "#9ED8FF",
+      "onSurface": 1.38,
+      "onGrouped": 1
+    },
+    {
+      "id": "stone",
+      "name": "Kamień",
+      "role": "puste kafle, linie wykresu, tylko grafika",
+      "hex": "#8A7F86",
+      "onSurface": 3.46,
+      "onGrouped": 2.51
+    },
+    {
+      "id": "white",
+      "name": "Biel",
+      "role": "blask, chmury, oczy poziomki",
+      "hex": "#FFFFFF",
+      "onSurface": 1.11,
+      "onGrouped": 1.53
+    }
+  ],
+  "type": {
+    "pixel": {
+      "family": "Poziomka Pixel (bitmapa z Jersey 10)",
+      "size": 10,
+      "line": 14,
+      "weight": 400
+    },
+    "pixelBig": {
+      "family": "Poziomka Pixel ×2",
+      "size": 20,
+      "line": 26,
+      "weight": 400
+    },
+    "mini": {
+      "family": "Poziomka Mini (bitmapa z Tiny5)",
+      "size": 5,
+      "line": 9,
+      "weight": 400
+    }
+  },
+  "fonts": [
+    {
+      "family": "Jersey 10",
+      "file": "fonts/jersey-10.woff2",
+      "license": "fonts/OFL-jersey10.txt",
+      "weight": "400",
+      "used": [
+        400
+      ],
+      "role": "nagłówki, liczby i napisy w wideo; w wideo jako bitmapa Poziomka Pixel, piksel kroju to 75 jednostek",
+      "bytes": 10116
+    },
+    {
+      "family": "Tiny5",
+      "file": "fonts/tiny5.woff2",
+      "license": "fonts/OFL-tiny5.txt",
+      "weight": "400",
+      "used": [
+        400
+      ],
+      "role": "etykiety, opisy i tekst strony; w wideo jako bitmapa Poziomka Mini, 5 pikseli wysokości wersalika",
+      "bytes": 6416
+    }
+  ],
+  "motion": [
+    {
+      "id": "tick",
+      "use": "tempo animacji sprite’ów",
+      "kind": "steps",
+      "steps": 1,
+      "ms": 133,
+      "note": "nowa poza co 4 klatki, czyli 7,5 klatki na sekundę; między pozami nic się nie przesuwa"
+    },
+    {
+      "id": "walk",
+      "use": "skok poziomki",
+      "kind": "steps",
+      "steps": 4,
+      "ms": 533,
+      "note": "4 pozy po 4 klatki, wysokość w całych pikselach: 0, 3, 5 i 3, przy lądowaniu poziomka spłaszcza się o 1 piksel"
+    },
+    {
+      "id": "pop",
+      "use": "monety i +XP",
+      "kind": "steps",
+      "steps": 3,
+      "ms": 533,
+      "note": "moneta obraca się w 3 pozach, liczba rośnie o 1 piksel co 2 klatki przez 16 klatek i znika w 2 krokach ditheringu"
+    },
+    {
+      "id": "fill",
+      "use": "pasek XP",
+      "kind": "steps",
+      "steps": 1,
+      "ms": 33,
+      "note": "1 piksel na klatkę, bez wygładzania; 10 XP to 7 pikseli paska"
+    },
+    {
+      "id": "blink",
+      "use": "zaznaczenie i nowy poziom",
+      "kind": "steps",
+      "steps": 6,
+      "ms": 1200,
+      "note": "6 klatek zapalone, 6 zgaszone, trzy razy"
+    },
+    {
+      "id": "wipe",
+      "use": "zmiana ekranu",
+      "kind": "steps",
+      "steps": 8,
+      "ms": 533,
+      "note": "pas szachownicy wysoki na 16 pikseli schodzi z góry w 8 krokach po 2 klatki"
+    }
+  ],
+  "gallery": [
+    {
+      "n": 1,
+      "title": "Poziom w górę",
+      "caption": "Po 20 minutach spaceru licznik dobija do 1200 XP: baner POZIOM 8, poziomka skacze, a pasek mruga trzy razy.",
+      "file": "screens/poziomka-screen-1.webp"
+    },
+    {
+      "n": 2,
+      "title": "Zadania na dziś",
+      "caption": "Cztery nawyki jako zadania z punktami: woda 10 XP, spacer 30, książka 20, telefon odłożony o 22:30 aż 40.",
+      "file": "screens/poziomka-screen-2.webp"
+    },
+    {
+      "n": 3,
+      "title": "Passa",
+      "caption": "21 dni z rzędu jako kafle kalendarza, od 18 września do dziś. Wystarczy jedno zadanie dziennie, żeby passa trwała.",
+      "file": "screens/poziomka-screen-3.webp"
+    },
+    {
+      "n": 4,
+      "title": "Ogródek",
+      "caption": "Passa hoduje poziomkę: nasionko, listek, sadzonka, kwiat i owoc. Za 21 dni skrzynia oddaje miedzianą konewkę.",
+      "file": "screens/poziomka-screen-4.webp"
+    },
+    {
+      "n": 5,
+      "title": "Tydzień",
+      "caption": "Siedem słupków XP od piątku do czwartku, razem 550 XP, średnio 79 dziennie. Woda trzyma się 7 z 7 dni.",
+      "file": "screens/poziomka-screen-5.webp"
+    },
+    {
+      "n": 6,
+      "title": "Nowy nawyk",
+      "caption": "Nazwa, ikonka z ośmiu, wartość w XP i dni tygodnia. Rozciąganie 10 minut za 20 XP, cztery razy w tygodniu.",
+      "file": "screens/poziomka-screen-6.webp"
+    }
+  ],
+  "videos": {
+    "hero": {
+      "webm": {
+        "path": "poziomka-hero.webm",
+        "bytes": 1370317,
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frames": 616,
+        "duration": 20.533,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 533898,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poziomka-hero.mp4",
+        "bytes": 882125,
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "frames": 616,
+        "duration": 20.533,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 343685,
+        "audio": null
+      },
+      "poster": "posters/poziomka-hero.jpg"
+    },
+    "hero-9x16": {
+      "webm": {
+        "path": "poziomka-hero-9x16.webm",
+        "bytes": 1344185,
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "frames": 616,
+        "duration": 20.533,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 523716,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poziomka-hero-9x16.mp4",
+        "bytes": 901508,
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "frames": 616,
+        "duration": 20.533,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 351236,
+        "audio": null
+      },
+      "poster": "posters/poziomka-hero-9x16.jpg"
+    },
+    "social-1x1": {
+      "webm": {
+        "path": "poziomka-social-1x1.webm",
+        "bytes": 902108,
+        "width": 1080,
+        "height": 1080,
+        "fps": 30,
+        "frames": 616,
+        "duration": 20.533,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 351476,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poziomka-social-1x1.mp4",
+        "bytes": 618433,
+        "width": 1080,
+        "height": 1080,
+        "fps": 30,
+        "frames": 616,
+        "duration": 20.533,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 240947,
+        "audio": null
+      },
+      "poster": "posters/poziomka-social-1x1.jpg"
+    },
+    "store": {
+      "webm": {
+        "path": "poziomka-store.webm",
+        "bytes": 615771,
+        "width": 884,
+        "height": 1920,
+        "fps": 30,
+        "frames": 616,
+        "duration": 20.533,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 239914,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poziomka-store.mp4",
+        "bytes": 479917,
+        "width": 884,
+        "height": 1920,
+        "fps": 30,
+        "frames": 616,
+        "duration": 20.533,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 186980,
+        "audio": null
+      },
+      "poster": "posters/poziomka-store.jpg"
+    },
+    "tile": {
+      "webm": {
+        "path": "poziomka-tile.webm",
+        "bytes": 23319,
+        "width": 480,
+        "height": 360,
+        "fps": 30,
+        "frames": 128,
+        "duration": 4.266,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 43729,
+        "audio": null
+      },
+      "mp4": {
+        "path": "poziomka-tile.mp4",
+        "bytes": 29833,
+        "width": 480,
+        "height": 360,
+        "fps": 30,
+        "frames": 128,
+        "duration": 4.267,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 55936,
+        "audio": null
+      },
+      "poster": "posters/poziomka-tile.jpg"
+    }
+  },
+  "finals": [
+    {
+      "kind": "store",
+      "title": "Wersja sklepowa",
+      "note": "App Store Connect, podgląd aplikacji na iPhone",
+      "name": "poziomka-store-886x1920.mp4",
+      "path": "poziomka-store-886x1920.mp4",
+      "bytes": 28493557,
+      "width": 886,
+      "height": 1920,
+      "fps": 30,
+      "frames": 600,
+      "duration": 20,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 11397422,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "9x16",
+      "title": "Wersja marketingowa 9:16",
+      "note": "Reels, TikTok i Shorts",
+      "name": "poziomka-social-1080x1920.mp4",
+      "path": "poziomka-social-1080x1920.mp4",
+      "bytes": 1297860,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "frames": 600,
+      "duration": 20,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 519144,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "1x1",
+      "title": "Wersja marketingowa 1:1",
+      "note": "post w kanale",
+      "name": "poziomka-social-1080x1080.mp4",
+      "path": "poziomka-social-1080x1080.mp4",
+      "bytes": 841822,
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "frames": 600,
+      "duration": 20,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 336728,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "16x9",
+      "title": "Wersja marketingowa 16:9",
+      "note": "YouTube, link w Google Play",
+      "name": "poziomka-social-1920x1080.mp4",
+      "path": "poziomka-social-1920x1080.mp4",
+      "bytes": 1239981,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frames": 600,
+      "duration": 20,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 495992,
+      "audio": "AAC, stereo, 48 kHz"
+    }
+  ],
+  "icons": {
+    "full": "poziomka-icon-1024.png",
+    "rounded": "poziomka-icon-512.png"
+  },
+  "renderSeconds": {
+    "stills": 15,
+    "store": 63,
+    "marketing-9x16": 74,
+    "marketing-1x1": 55,
+    "marketing-16x9": 74,
+    "tile": 4
+  },
+  "validation": true,
+  "published": {
+    "totalBytes": 7778954,
+    "count": 31
+  }
+}

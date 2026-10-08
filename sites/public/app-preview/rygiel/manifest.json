@@ -1,0 +1,633 @@
+{
+  "app": {
+    "slug": "rygiel",
+    "name": "Rygiel",
+    "category": "Menedżer haseł z alertami wycieków",
+    "city": "cała Polska",
+    "zone": "sejf 214 wpisów",
+    "tagline": "Alert o wycieku w kilka godzin, nowe hasło w trzy sekundy i sejf, który pokazuje, co poprawić."
+  },
+  "generatedAt": "2026-10-08",
+  "storyboard": {
+    "fps": 30,
+    "duration": 720,
+    "bridge": 15,
+    "poster": 30,
+    "defaultPoster": 150,
+    "shots": [
+      {
+        "id": "hook",
+        "name": "Alert",
+        "from": 0,
+        "to": 59,
+        "key": 30,
+        "action": "Od pierwszej klatki karta alertu w kolorze alarmu: serwis, daty i co wyciekło. Przez ekran przechodzi linia skanu, pierścień alertu pulsuje.",
+        "overlay": {
+          "text": "Wiesz o wycieku pierwszy",
+          "from": 4,
+          "to": 75,
+          "top": 724
+        },
+        "seconds": [
+          0,
+          2
+        ]
+      },
+      {
+        "id": "details",
+        "name": "Szczegóły",
+        "from": 60,
+        "to": 179,
+        "key": 150,
+        "action": "Skan odsłania szczegóły. Oś czasu rysuje się węzeł po węźle, godzina wykrycia 07:12 dostaje poświatę, to, co wyciekło, odszyfrowuje się na czerwono.",
+        "seconds": [
+          2,
+          6
+        ]
+      },
+      {
+        "id": "password",
+        "name": "Nowe hasło",
+        "from": 180,
+        "to": 329,
+        "key": 290,
+        "action": "Zmień hasło teraz: generator odszyfrowuje 20 znaków od lewej, segmenty siły zapalają się po kolei, ok. 131 bitów. Użyj tego hasła, hasło zmienione.",
+        "overlay": {
+          "text": "Nowe hasło w trzy sekundy",
+          "from": 186,
+          "to": 265,
+          "top": 724
+        },
+        "seconds": [
+          6,
+          11
+        ]
+      },
+      {
+        "id": "vault",
+        "name": "Sejf",
+        "from": 330,
+        "to": 479,
+        "key": 460,
+        "action": "Sejf zablokowany, rygiel odsuwa się. Skan odsłania listę, wiersze odszyfrowują się z góry na dół, wpis forum ma znacznik „zmienione dziś”.",
+        "seconds": [
+          11,
+          16
+        ]
+      },
+      {
+        "id": "health",
+        "name": "Zdrowie sejfu",
+        "from": 480,
+        "to": 629,
+        "key": 600,
+        "action": "Wieczorem: wynik rośnie od 68 do 96, problemy skreślają się jeden po drugim, liczniki spadają do zera. Na koniec napis Sejf zdrowy.",
+        "overlay": {
+          "text": "Sejf zdrowy w jeden wieczór",
+          "from": 496,
+          "to": 575,
+          "top": 724
+        },
+        "seconds": [
+          16,
+          21
+        ]
+      },
+      {
+        "id": "end",
+        "name": "Zakończenie",
+        "from": 630,
+        "to": 719,
+        "key": 712,
+        "action": "Ekran startowy: obrys ikony rysuje się, rygiel zasuwa się, napis RYGIEL odszyfrowuje się pod spodem.",
+        "seconds": [
+          21,
+          24
+        ]
+      }
+    ],
+    "board": "rygiel-storyboard.png"
+  },
+  "marketing": {
+    "duration": 690,
+    "bridge": 15,
+    "outro": 600,
+    "poster": 45,
+    "beats": [
+      {
+        "from": 0,
+        "to": 179,
+        "title": "Wyciek wykryty.",
+        "line": "Alert w kilka godzin od wycieku, z tym, co wyciekło."
+      },
+      {
+        "from": 180,
+        "to": 329,
+        "title": "Hasło zmienione.",
+        "line": "20 znaków, ok. 131 bitów, jednym stuknięciem."
+      },
+      {
+        "from": 330,
+        "to": 479,
+        "title": "Sejf otwarty.",
+        "line": "214 wpisów odszyfrowanych na Twoim telefonie."
+      },
+      {
+        "from": 480,
+        "to": 599,
+        "title": "Sejf zdrowy.",
+        "line": "Od 68 do 96 punktów w jeden wieczór."
+      }
+    ]
+  },
+  "palette": [
+    {
+      "id": "void",
+      "name": "Próżnia",
+      "role": "tło każdego ekranu, tekst na cyjanie",
+      "hex": "#05070B",
+      "onSurface": 1,
+      "onGrouped": 1.06
+    },
+    {
+      "id": "panel",
+      "name": "Panel",
+      "role": "karty, pola, wiersze listy",
+      "hex": "#0A1018",
+      "onSurface": 1.06,
+      "onGrouped": 1
+    },
+    {
+      "id": "grid",
+      "name": "Siatka",
+      "role": "linie siatki w tle, puste segmenty",
+      "hex": "#12303A",
+      "onSurface": 1.45,
+      "onGrouped": 1.37
+    },
+    {
+      "id": "dim",
+      "name": "Obrys przygaszony",
+      "role": "obrysy kart i pól w spoczynku",
+      "hex": "#1D4A57",
+      "onSurface": 2.08,
+      "onGrouped": 1.97
+    },
+    {
+      "id": "cyan",
+      "name": "Neon cyjan",
+      "role": "bezpiecznie, fokus, przycisk główny, linia skanu",
+      "hex": "#2CF6FF",
+      "onSurface": 15.1,
+      "onGrouped": 14.3
+    },
+    {
+      "id": "text",
+      "name": "Tekst",
+      "role": "tekst główny",
+      "hex": "#D9FBFF",
+      "onSurface": 18.43,
+      "onGrouped": 17.45
+    },
+    {
+      "id": "muted",
+      "name": "Tekst przygaszony",
+      "role": "etykiety, daty i krótkie opisy",
+      "hex": "#7FA6B0",
+      "onSurface": 7.66,
+      "onGrouped": 7.26
+    },
+    {
+      "id": "alert",
+      "name": "Alarm",
+      "role": "tylko wyciek: karta alertu, to, co wyciekło",
+      "hex": "#FF3D71",
+      "onSurface": 5.91,
+      "onGrouped": 5.6
+    },
+    {
+      "id": "warn",
+      "name": "Ostrzeżenie",
+      "role": "hasła słabe i powtórzone",
+      "hex": "#FFB547",
+      "onSurface": 11.47,
+      "onGrouped": 10.86
+    }
+  ],
+  "type": {
+    "display": {
+      "family": "Oxanium",
+      "size": 64,
+      "line": 64,
+      "weight": 800
+    },
+    "title": {
+      "family": "Azeret Mono",
+      "size": 24,
+      "line": 30,
+      "weight": 700
+    },
+    "headline": {
+      "family": "Azeret Mono",
+      "size": 17,
+      "line": 23,
+      "weight": 700
+    },
+    "body": {
+      "family": "Azeret Mono",
+      "size": 15,
+      "line": 22,
+      "weight": 400
+    },
+    "label": {
+      "family": "Azeret Mono",
+      "size": 12,
+      "line": 16,
+      "weight": 500
+    },
+    "password": {
+      "family": "Azeret Mono",
+      "size": 30,
+      "line": 48,
+      "weight": 500
+    }
+  },
+  "fonts": [
+    {
+      "family": "Azeret Mono",
+      "file": "fonts/azeret-mono-variable.woff2",
+      "license": "fonts/OFL-azeretmono.txt",
+      "weight": "400 700",
+      "used": [
+        400,
+        500,
+        700
+      ],
+      "role": "cały interfejs, napisy w wideo, tekst strony; krój o stałej szerokości, więc odszyfrowanie nie przesuwa liter",
+      "bytes": 26264
+    },
+    {
+      "family": "Oxanium",
+      "file": "fonts/oxanium-variable.woff2",
+      "license": "fonts/OFL-oxanium.txt",
+      "weight": "600 800",
+      "used": [
+        600,
+        800
+      ],
+      "role": "znak RYGIEL, duże liczby i nagłówki strony",
+      "bytes": 10036
+    }
+  ],
+  "motion": [
+    {
+      "id": "scramble",
+      "use": "odsłanianie tekstu",
+      "kind": "steps",
+      "steps": 4,
+      "ms": 267,
+      "note": "każdy znak losuje znaki ze swojej klasy przez 6 do 10 klatek, zmiana co 2 klatki, potem staje; od lewej, 2 klatki odstępu na znak; gotowy tekst stoi co najmniej 1,5 s"
+    },
+    {
+      "id": "scan",
+      "use": "odblokowanie, alert i zmiana ekranu",
+      "kind": "bezier",
+      "points": [
+        0.65,
+        0,
+        0.35,
+        1
+      ],
+      "ms": 1000,
+      "note": "linia 2 px w cyjanie z poświatą jedzie z góry na dół w 30 klatek i odsłania to, co pod nią; zmiana ekranu w 20 klatek"
+    },
+    {
+      "id": "pulse",
+      "use": "pierścień alertu i poświata fokusu",
+      "kind": "bezier",
+      "points": [
+        0.37,
+        0,
+        0.63,
+        1
+      ],
+      "ms": 1200,
+      "note": "krycie poświaty od 0,35 do 0,6 i z powrotem, okres 36 klatek, sinusoida"
+    },
+    {
+      "id": "draw",
+      "use": "obrysy, oś czasu, rygiel w ikonie",
+      "kind": "bezier",
+      "points": [
+        0.33,
+        1,
+        0.68,
+        1
+      ],
+      "ms": 600,
+      "note": "kreska rysuje się w 18 klatek"
+    },
+    {
+      "id": "step",
+      "use": "wiersze list",
+      "kind": "steps",
+      "steps": 1,
+      "ms": 100,
+      "note": "3 klatki odstępu między wierszami; wiersz wchodzi przez odszyfrowanie, nigdy przez przesunięcie"
+    },
+    {
+      "id": "drift",
+      "use": "siatka w tle, ruch ciągły",
+      "kind": "steps",
+      "steps": 1,
+      "ms": 133,
+      "note": "1 piksel na 4 klatki, stała prędkość; jedyny ruch liniowy, bo to tło, a nie interfejs"
+    }
+  ],
+  "gallery": [
+    {
+      "n": 1,
+      "title": "Alert wycieku",
+      "caption": "Karta w kolorze alarmu: serwis, data wycieku, godzina wykrycia i co wyciekło. Jeden przycisk prowadzi do zmiany hasła.",
+      "file": "screens/rygiel-screen-1.webp"
+    },
+    {
+      "n": 2,
+      "title": "Wyciek z bliska",
+      "caption": "Oś czasu od wycieku do wykrycia, lista tego, co wyciekło i co nie, oraz wpis z sejfu, którego to dotyczy.",
+      "file": "screens/rygiel-screen-2.webp"
+    },
+    {
+      "n": 3,
+      "title": "Generator",
+      "caption": "20 znaków z czterech klas, około 131 bitów. Każdy znak w osobnym polu, więc hasło da się przepisać z ekranu.",
+      "file": "screens/rygiel-screen-3.webp"
+    },
+    {
+      "n": 4,
+      "title": "Sejf",
+      "caption": "Lista wpisów z filtrami słabych i powtórzonych haseł. Wpis forum ma już znacznik „zmienione dziś”.",
+      "file": "screens/rygiel-screen-4.webp"
+    },
+    {
+      "n": 5,
+      "title": "Zdrowie sejfu",
+      "caption": "Wynik 96 na 100 po jednym wieczorze: żadnego hasła z wycieku, żadnego powtórzonego, jedno słabe do zmiany.",
+      "file": "screens/rygiel-screen-5.webp"
+    },
+    {
+      "n": 6,
+      "title": "Wpis",
+      "caption": "Login, e-mail i hasło odsłonięte przez odszyfrowanie. Data zmiany i siła hasła pod spodem.",
+      "file": "screens/rygiel-screen-6.webp"
+    }
+  ],
+  "videos": {
+    "hero": {
+      "webm": {
+        "path": "rygiel-hero.webm",
+        "bytes": 1828914,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 705,
+        "duration": 23.5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 622609,
+        "audio": null
+      },
+      "mp4": {
+        "path": "rygiel-hero.mp4",
+        "bytes": 2110657,
+        "width": 1280,
+        "height": 720,
+        "fps": 30,
+        "frames": 705,
+        "duration": 23.5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 718521,
+        "audio": null
+      },
+      "poster": "posters/rygiel-hero.jpg"
+    },
+    "hero-9x16": {
+      "webm": {
+        "path": "rygiel-hero-9x16.webm",
+        "bytes": 1305213,
+        "width": 540,
+        "height": 960,
+        "fps": 30,
+        "frames": 705,
+        "duration": 23.5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 444327,
+        "audio": null
+      },
+      "mp4": {
+        "path": "rygiel-hero-9x16.mp4",
+        "bytes": 1513678,
+        "width": 540,
+        "height": 960,
+        "fps": 30,
+        "frames": 705,
+        "duration": 23.5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 515294,
+        "audio": null
+      },
+      "poster": "posters/rygiel-hero-9x16.jpg"
+    },
+    "social-1x1": {
+      "webm": {
+        "path": "rygiel-social-1x1.webm",
+        "bytes": 1359652,
+        "width": 720,
+        "height": 720,
+        "fps": 30,
+        "frames": 705,
+        "duration": 23.5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 462860,
+        "audio": null
+      },
+      "mp4": {
+        "path": "rygiel-social-1x1.mp4",
+        "bytes": 1479369,
+        "width": 720,
+        "height": 720,
+        "fps": 30,
+        "frames": 705,
+        "duration": 23.5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 503614,
+        "audio": null
+      },
+      "poster": "posters/rygiel-social-1x1.jpg"
+    },
+    "store": {
+      "webm": {
+        "path": "rygiel-store.webm",
+        "bytes": 1387273,
+        "width": 442,
+        "height": 960,
+        "fps": 30,
+        "frames": 735,
+        "duration": 24.5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 452987,
+        "audio": null
+      },
+      "mp4": {
+        "path": "rygiel-store.mp4",
+        "bytes": 1374283,
+        "width": 442,
+        "height": 960,
+        "fps": 30,
+        "frames": 735,
+        "duration": 24.5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 448745,
+        "audio": null
+      },
+      "poster": "posters/rygiel-store.jpg"
+    },
+    "tile": {
+      "webm": {
+        "path": "rygiel-tile.webm",
+        "bytes": 234391,
+        "width": 480,
+        "height": 600,
+        "fps": 30,
+        "frames": 150,
+        "duration": 5,
+        "codec": "vp9",
+        "profile": "Profile 0",
+        "pixFmt": "yuv420p",
+        "bitrate": 375025,
+        "audio": null
+      },
+      "mp4": {
+        "path": "rygiel-tile.mp4",
+        "bytes": 247375,
+        "width": 480,
+        "height": 600,
+        "fps": 30,
+        "frames": 150,
+        "duration": 5,
+        "codec": "h264",
+        "profile": "High",
+        "pixFmt": "yuv420p",
+        "bitrate": 395800,
+        "audio": null
+      },
+      "poster": "posters/rygiel-tile.jpg"
+    }
+  },
+  "finals": [
+    {
+      "kind": "store",
+      "title": "Wersja sklepowa",
+      "note": "App Store Connect, podgląd aplikacji na iPhone",
+      "name": "rygiel-store-886x1920.mp4",
+      "path": "rygiel-store-886x1920.mp4",
+      "bytes": 34357571,
+      "width": 886,
+      "height": 1920,
+      "fps": 30,
+      "frames": 720,
+      "duration": 24,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 11452523,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "9x16",
+      "title": "Wersja marketingowa 9:16",
+      "note": "Reels, TikTok i Shorts",
+      "name": "rygiel-social-1080x1920.mp4",
+      "path": "rygiel-social-1080x1920.mp4",
+      "bytes": 17766370,
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "frames": 690,
+      "duration": 23,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 6179606,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "1x1",
+      "title": "Wersja marketingowa 1:1",
+      "note": "post w kanale",
+      "name": "rygiel-social-1080x1080.mp4",
+      "path": "rygiel-social-1080x1080.mp4",
+      "bytes": 11343924,
+      "width": 1080,
+      "height": 1080,
+      "fps": 30,
+      "frames": 690,
+      "duration": 23,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 3945712,
+      "audio": "AAC, stereo, 48 kHz"
+    },
+    {
+      "kind": "16x9",
+      "title": "Wersja marketingowa 16:9",
+      "note": "YouTube, link w Google Play",
+      "name": "rygiel-social-1920x1080.mp4",
+      "path": "rygiel-social-1920x1080.mp4",
+      "bytes": 19549943,
+      "width": 1920,
+      "height": 1080,
+      "fps": 30,
+      "frames": 690,
+      "duration": 23,
+      "codec": "h264",
+      "profile": "High",
+      "pixFmt": "yuv420p",
+      "bitrate": 6799980,
+      "audio": "AAC, stereo, 48 kHz"
+    }
+  ],
+  "icons": {
+    "full": "rygiel-icon-1024.png",
+    "rounded": "rygiel-icon-512.png"
+  },
+  "renderSeconds": {
+    "stills": 18,
+    "store": 170,
+    "marketing-9x16": 443,
+    "marketing-1x1": 265,
+    "marketing-16x9": 420,
+    "tile": 23
+  },
+  "validation": true,
+  "published": {
+    "totalBytes": 14221498,
+    "count": 31
+  }
+}

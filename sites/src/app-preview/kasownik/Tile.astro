@@ -1,0 +1,100 @@
+---
+import LoopVideo from '../shared/LoopVideo.astro';
+import { previewApp } from '../shared/apps';
+import { readManifest } from '../shared/manifest';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = previewApp('kasownik');
+const manifest = readManifest('kasownik');
+---
+
+<a class="kas-tile" href={href}>
+  <span class="kas-tile__media">
+    <LoopVideo
+      manifest={manifest}
+      variant="tile"
+      mode="hover"
+      label="Pętla: karta biletu rośnie do pełnego ekranu i ożywa"
+    />
+  </span>
+  <span class="kas-tile__body">
+    <span class="kas-tile__style">
+      {meta.styleId}, {meta.style}
+    </span>
+    <span class="kas-tile__name">{meta.name}</span>
+    <span class="kas-tile__trade">
+      {meta.trade}, {meta.city}
+    </span>
+    <span class="kas-tile__go">Zobacz realizację</span>
+  </span>
+</a>
+
+<style is:global>
+  .kas-tile {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    height: 100%;
+    color: #101418;
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow:
+      0 1px 2px rgba(16, 20, 24, 0.05),
+      0 8px 28px rgba(16, 20, 24, 0.06);
+    font-family: 'Schibsted Grotesk', system-ui, Arial, sans-serif;
+  }
+
+  .kas-tile__media video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 50% 0;
+    background: #e3f4ec;
+  }
+
+  .kas-tile__body {
+    display: grid;
+    gap: 4px;
+    padding: 18px 22px 22px;
+  }
+
+  .kas-tile__style {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #006b3f;
+    font-weight: 600;
+  }
+
+  .kas-tile__name {
+    font-size: 34px;
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .kas-tile__trade {
+    font-size: 15px;
+    color: #5b6470;
+  }
+
+  .kas-tile__go {
+    margin-top: 8px;
+    font-weight: 600;
+    color: #00864f;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .kas-tile:hover .kas-tile__go,
+  .kas-tile:focus-visible .kas-tile__go {
+    color: #006b3f;
+  }
+</style>

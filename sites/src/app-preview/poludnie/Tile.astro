@@ -1,0 +1,99 @@
+---
+import LoopVideo from '../shared/LoopVideo.astro';
+import { previewApp } from '../shared/apps';
+import { readManifest } from '../shared/manifest';
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+const meta = previewApp('poludnie');
+const manifest = readManifest('poludnie');
+---
+
+<a class="pd-tile" href={href}>
+  <span class="pd-tile__media">
+    <LoopVideo
+      manifest={manifest}
+      variant="tile"
+      mode="hover"
+      label="Pętla: izometryczny dom z panelami, przez który płynie 6,4 kW z dachu do domu, magazynu i sieci"
+    />
+  </span>
+  <span class="pd-tile__body">
+    <span class="pd-tile__style">
+      {meta.styleId}, {meta.style}
+    </span>
+    <span class="pd-tile__name">{meta.name}</span>
+    <span class="pd-tile__trade">
+      {meta.trade}, {meta.city}
+    </span>
+    <span class="pd-tile__go">Zobacz realizację</span>
+  </span>
+</a>
+
+<style is:global>
+  .pd-tile {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    height: 100%;
+    color: #15202b;
+    background: #eef2f6;
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    font-family: 'Schibsted Grotesk', system-ui, Arial, sans-serif;
+    box-shadow:
+      0 4px 0 #c3ceda,
+      0 14px 28px rgba(21, 32, 43, 0.06);
+  }
+
+  .pd-tile__media video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: 50% 50%;
+    background: #eef2f6;
+  }
+
+  .pd-tile__body {
+    display: grid;
+    gap: 4px;
+    padding: 18px 22px 22px;
+    background: #ffffff;
+  }
+
+  .pd-tile__style {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #4e5d6c;
+    font-weight: 600;
+  }
+
+  .pd-tile__name {
+    font-size: 34px;
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  .pd-tile__trade {
+    font-size: 15px;
+    color: #4e5d6c;
+  }
+
+  .pd-tile__go {
+    margin-top: 8px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .pd-tile:hover .pd-tile__go,
+  .pd-tile:focus-visible .pd-tile__go {
+    color: #3a6fd8;
+  }
+</style>

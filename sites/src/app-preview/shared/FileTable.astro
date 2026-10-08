@@ -1,0 +1,99 @@
+---
+import { codecLabel, formatBitrate, formatBytes, formatSeconds } from './manifest';
+import type { Manifest } from './types';
+
+interface Props {
+  manifest: Manifest;
+}
+
+const { manifest } = Astro.props;
+const web = Object.entries(manifest.videos);
+const labels: Record<string, string> = {
+  hero: 'Nagłówek strony, 16:9',
+  'hero-9x16': 'Nagłówek na telefonie, 9:16',
+  'social-1x1': 'Kwadrat, 1:1',
+  store: 'Wersja sklepowa',
+  tile: 'Kafel z pętlą',
+};
+const nbsp = ' ';
+---
+
+<div class="files">
+  <table>
+    <caption>Wersje pełnej&nbsp;jakości</caption>
+    <thead>
+      <tr>
+        <th scope="col">Plik</th>
+        <th scope="col">Do czego</th>
+        <th scope="col">Wymiary</th>
+        <th scope="col">Długość</th>
+        <th scope="col">Kodek</th>
+        <th scope="col">Bitrate</th>
+        <th scope="col">Rozmiar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {manifest.finals.map(file => (
+        <tr>
+          <th scope="row">
+            <span class="file-name">{file.name}</span>
+            <span class="dim">{file.title}</span>
+          </th>
+          <td data-label="Do czego">{file.note}</td>
+          <td class="num" data-label="Wymiary">
+            {`${file.width}×${file.height}, ${file.fps}${nbsp}kl./s`}
+          </td>
+          <td class="num" data-label="Długość">
+            {`${formatSeconds(file.duration)}, ${file.frames}${nbsp}klatek`}
+          </td>
+          <td data-label="Kodek">
+            {codecLabel(file.codec, file.profile, file.pixFmt)}
+            {file.audio && <span class="dim">, cicha ścieżka {file.audio}</span>}
+          </td>
+          <td class="num" data-label="Bitrate">
+            {formatBitrate(file.bitrate)}
+          </td>
+          <td class="num" data-label="Rozmiar">
+            {formatBytes(file.bytes)}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<div class="files">
+  <table>
+    <caption>Pętle na stronę&nbsp;internetową</caption>
+    <thead>
+      <tr>
+        <th scope="col">Pętla</th>
+        <th scope="col">Wymiary</th>
+        <th scope="col">Długość</th>
+        <th scope="col">WebM, VP9</th>
+        <th scope="col">MP4, H.264</th>
+      </tr>
+    </thead>
+    <tbody>
+      {web.map(([variant, video]) => (
+        <tr>
+          <th scope="row">
+            <span class="file-name">{labels[variant] ?? variant}</span>
+            <span class="dim">{video.webm.path.replace('.webm', '')}</span>
+          </th>
+          <td class="num" data-label="Wymiary">
+            {video.mp4.width}×{video.mp4.height}
+          </td>
+          <td class="num" data-label="Długość">
+            {formatSeconds(video.mp4.duration)}
+          </td>
+          <td class="num" data-label="WebM, VP9">
+            {formatBytes(video.webm.bytes)}
+          </td>
+          <td class="num" data-label="MP4, H.264">
+            {formatBytes(video.mp4.bytes)}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,339 @@
+---
+import { link, portfolio } from '../../shared/link';
+import { previewApps } from '../../app-preview/shared/apps';
+import TileStub from '../../app-preview/shared/TileStub.astro';
+import { baseCss } from '../../app-preview/shared/base';
+
+const tileModules = import.meta.glob('../../app-preview/*/Tile.astro', { eager: true }) as Record<
+  string,
+  { default: (props: { href: string }) => unknown }
+>;
+const entries = previewApps.map(brand => {
+  const tile = tileModules[`../../app-preview/${brand.slug}/Tile.astro`];
+  return { brand, Tile: tile ? tile.default : null, href: link(`/app-preview/${brand.slug}/`) };
+});
+const ready = entries.filter(entry => entry.Tile).length;
+
+const faces = [
+  ['Bespoke Serif', 'bespoke-serif-700', '700'],
+  ['Schibsted Grotesk', 'schibsted-grotesk', '400 600'],
+]
+  .map(
+    ([family, file, weight]) =>
+      `@font-face{font-family:'${family}';src:url(${portfolio(`/fonts/${file}.woff2`)}) format('woff2');font-weight:${weight};font-display:swap}`,
+  )
+  .join('');
+
+const gets = [
+  ['Wersja do App Store', '886×1920, 30 kl./s, H.264, 15 do 30 sekund, sam interfejs aplikacji'],
+  [
+    'Trzy formaty social',
+    '9:16 na Reels, TikTok i Shorts, 1:1 do kanału i 16:9 na YouTube i Google Play',
+  ],
+  ['Pętle na stronę', 'WebM i MP4 do 4 MB, bez widocznego szwu, z plakatem zamiast ruchu'],
+  ['Storyboard', 'tabela ujęć z czasem w klatkach i plansza klatek kluczowych'],
+  ['System ruchu', 'sprężyny i krzywe z nazwami, czasy i zasady stopniowania'],
+  ['Ikona i ekrany', 'ikona 1024×1024 i ekrany interfejsu w pełnej rozdzielczości'],
+];
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>App preview: sześć realizacji | Wzornik</title>
+    <meta
+      name="description"
+      content="Sześć animowanych podglądów aplikacji mobilnych dla zmyślonych firm, każdy w innym stylu: wersja do App Store, formaty social, pętle na stronę, storyboard i system ruchu."
+    />
+    <meta name="theme-color" content="#ece8df" />
+    <link rel="canonical" href={new URL(link('/app-preview/'), Astro.site)} />
+    <link rel="icon" type="image/svg+xml" href={portfolio('/favicon.svg')} />
+    <style is:inline set:html={faces + baseCss}></style>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Przejdź do treści
+    </a>
+    <header class="top">
+      <a href={link('/')}>Wzornik</a>
+      <a href={portfolio('/dla-klienta/#wzornik')}>Wróć do portfolio</a>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="intro">
+        <p class="kicker">Wzornik · app preview</p>
+        <h1>
+          Sześć aplikacji, których nie ma, i&nbsp;sześć podglądów, które mogłyby trafić do
+          sklepu&nbsp;jutro.
+        </h1>
+        <p class="lead">
+          Każda realizacja ma własny styl, własny rytm i własny ruch, jakby zrobiło ją sześć różnych
+          studiów. Pod spodem jest ten sam komplet, który dostaje klient: wersja sklepowa zgodna ze
+          specyfikacją Apple, formaty na social media, pętle na stronę i storyboard.
+        </p>
+      </section>
+
+      <section class="gets" aria-labelledby="gets-title">
+        <h2 id="gets-title">Co dostaje klient</h2>
+        <dl>
+          {gets.map(([term, text]) => (
+            <div>
+              <dt>{term}</dt>
+              <dd>{text}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section class="works" aria-labelledby="works-title">
+        <h2 id="works-title">Realizacje</h2>
+        {ready < previewApps.length && (
+          <p class="progress">
+            Gotowych jest {ready} z {previewApps.length}. Pozostałe są w budowie.
+          </p>
+        )}
+        <ul class="grid">
+          {entries.map(({ brand, Tile, href }) => (
+            <li class="cell">
+              {Tile ? (
+                <Tile href={href} />
+              ) : (
+                <TileStub name={brand.name} style={brand.style} trade={brand.trade} />
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cta">
+        <h2>Chcesz taki podgląd dla swojej aplikacji?</h2>
+        <p>
+          Napisz, co robi Twoja aplikacja i kto jej używa. Zaproponuję storyboard i styl ruchu, a
+          potem dowiozę komplet plików do App Store, Google Play i mediów społecznościowych.
+        </p>
+        <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
+          Zobacz ofertę dla klientów
+        </a>
+      </section>
+    </main>
+    <footer class="foot">
+      <p>
+        Projekty przykładowe. Aplikacje na tych stronach są zmyślone. Projekt i wykonanie:{' '}
+        <a href={portfolio('/dla-klienta/#wzornik')}>Adrian Turbiński</a>.
+      </p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    color-scheme: light;
+    --ground: #ece8df;
+    --ink: #1c1a17;
+    --muted: #5b564d;
+    --accent: #5a1424;
+    --line: #1c1a17;
+    --skip-bg: #5a1424;
+    --gut: clamp(16px, 4vw, 48px);
+  }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font:
+      400 17px/1.55 'Schibsted Grotesk',
+      system-ui,
+      'Segoe UI',
+      Arial,
+      sans-serif;
+  }
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px var(--gut);
+    font-size: 15px;
+  }
+
+  .top a {
+    color: var(--ink);
+    text-underline-offset: 3px;
+  }
+
+  main {
+    display: block;
+    padding: 0 var(--gut);
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .intro {
+    padding: clamp(32px, 7vw, 96px) 0 clamp(32px, 5vw, 64px);
+    max-width: 62rem;
+  }
+
+  .kicker {
+    margin: 0 0 20px;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1 {
+    margin: 0 0 24px;
+    color: var(--accent);
+    font:
+      700 clamp(34px, 6.2vw, 76px) / 1.04 'Bespoke Serif',
+      Georgia,
+      serif;
+    text-wrap: balance;
+  }
+
+  .lead {
+    margin: 0;
+    max-width: 40em;
+    font-size: clamp(17px, 1.6vw, 20px);
+  }
+
+  h2 {
+    margin: 0 0 20px;
+    font:
+      700 clamp(24px, 3vw, 34px) / 1.1 'Bespoke Serif',
+      Georgia,
+      serif;
+    color: var(--accent);
+  }
+
+  .gets {
+    padding: 28px 0 56px;
+    border-top: 1px solid var(--line);
+  }
+
+  .gets dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px 32px;
+    margin: 0;
+  }
+
+  .gets dt {
+    font-weight: 600;
+  }
+
+  .gets dd {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .works {
+    padding: 28px 0 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .progress {
+    margin: -8px 0 24px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  @media (min-width: 760px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+  }
+
+  .cell {
+    display: flex;
+    min-width: 0;
+  }
+
+  .cell > * {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .stub {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 220px;
+    padding: 24px;
+    border: 2px dashed #8a8478;
+    color: var(--muted);
+  }
+
+  .stub p {
+    margin: 0;
+  }
+
+  .stub__name {
+    font:
+      700 32px/1.1 'Bespoke Serif',
+      Georgia,
+      serif;
+    color: var(--ink);
+  }
+
+  .stub__state {
+    margin-top: auto !important;
+    font-size: 14px;
+  }
+
+  .cta {
+    margin: 40px 0 0;
+    padding: 40px 0 64px;
+    border-top: 1px solid var(--line);
+    max-width: 48rem;
+  }
+
+  .cta p {
+    margin: 0 0 24px;
+  }
+
+  .cta__link {
+    display: inline-block;
+    padding: 14px 22px;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .foot {
+    padding: 24px var(--gut) 40px;
+    border-top: 1px solid var(--line);
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .foot p {
+    margin: 0;
+    max-width: 1320px;
+    margin-inline: auto;
+  }
+
+  .foot a {
+    color: var(--ink);
+  }
+
+  a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
+</style>
