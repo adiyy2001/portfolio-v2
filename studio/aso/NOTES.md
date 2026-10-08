@@ -283,3 +283,18 @@ Look at: `sheets/ui-<lang>.png` (all screens), `boards/*.png`, `thumbs/*.png` (f
 - A multi word accent must be split into one span per word, or `white-space:nowrap` on the span blocks the line break and the headline overflows.
 - `\S` in JavaScript treats a no-break space as whitespace, so glued words still count as two words in the line check.
 - Avatars on an orbit: give the ellipse enough height (ry about 0.55 of rx) or the bubbles on one side stack and hide each other's names.
+
+## Review round 1 fixes (2026-10-08)
+
+The first independent review is in `REVIEW-1.md` (every score 4 or 5 except Bis thumbnail legibility, 3). Fixed:
+
+1. Bis, frames 1 to 3 and variant B, both stores and languages: the key word is no longer chrome. It is set in ink on a holographic sticker (palette gradient, ink outline and offset shadow) drawn from the measured word, so it reads at 120 px. A darker chrome fill was tried first and still blurred at 120 px. Chrome stays on the key words of frames 4 to 6, on the feature graphic name and on the icon. Checked by scaling the exported files to 120 and 300 px.
+2. Shared frame 2 rhythm: Bis frame 2 now has the artist cards on top, the headline in the middle and the phone below; Kruszec frame 2 has no phone, the budget fills the frame as one large glass card under the headline. Szyld frame 3 is horizontal and right aligned, so its first three no longer share the old frame 3 pattern either.
+3. Pages: the Chochla sequence cards and the A/B pair stack below 380 px; Bis sequence cards use a narrower image column from 521 to 1000 px and `keepLast` no longer glues a third word; the Bis h2 starts at 34 px; the Margines legend uses wider columns. A text scan of every ASO page at 320, 390, 768, 1024 and 1440 px (text outside its block, outside the viewport or inside a clipping ancestor) reports 0 issues in the deploy layout.
+4. Szyld: the vertical headline moved from frame 3 to frame 4; frames 1, 4, 5, variant B and Play 5 moved inward so screen titles, pickup times and the shop note stay in the frame; headlines got 0.08 em word spacing.
+5. Kruszec frame 5: the timeline runs above the phone, the goal card hangs under the end of the line, nothing sits on the tab bar and the frame is filled to the bottom. Grań: the frame 5 cloud is behind the phone, Play frames 2 and 5 show the whole screen (no front terrain on Play), the Play frame 5 cloud sits below the card; seams pass 24 of 24. Bis feature graphic: name and tagline inside the central 80 percent, tagline in ink.
+6. Copy: Kruszec "Keep your portfolio on track", variant B "Budżet i inwestycje obok siebie" / "Spending and investments side by side"; Szyld variant B EN "Kept behind the counter for you"; Bis frame 2 "Nowi wykonawcy grają tuż obok" / "Bands you've never heard, playing nearby"; Bis PL frame 4 "Zobacz, którzy znajomi idą". Alt texts and page descriptions follow the new frames.
+7. The PL and EN switch hydrates on load (`client:load`) on all six pages; a first click that scrolls it into view now switches the set (checked on all six).
+8. Also: Grań category reads "Mapy i nawigacja", Grań icon previews have an outline, Kruszec iPad frame 6 shows the iPad only.
+
+Checks: validator 0 errors for all six, Grań seams 24 of 24, studio tests 19 of 19, `yarn --cwd sites run check` 0 errors, `yarn --cwd sites test` 1334 passed, `yarn --cwd sites build` 192 pages, `yarn gatsby clean && yarn build` exit 0, `sites/dist` copied to `public/wzornik`, root `yarn.lock` unchanged.
