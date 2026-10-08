@@ -79,7 +79,7 @@ export const css = `
 .margines .brief{transform:rotate(-1deg)}
 .margines .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:0 32px}
 .margines .hand-title{margin:22px 0 12px;font-size:34px;line-height:1.1}
-.margines .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px;margin:0;padding:0;list-style:none}
+.margines .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px;margin:0;padding:0;list-style:none}
 .margines .legend li{display:grid;grid-template-columns:96px minmax(0,1fr);grid-template-rows:auto auto;column-gap:12px;align-items:center;padding:12px 14px;border-radius:8px;background:#fff;box-shadow:0 0 0 1px #E7E2D4}
 .margines .legend__mark{grid-row:1/3;display:block}
 .margines .legend__mark svg{display:block;width:96px;height:auto}

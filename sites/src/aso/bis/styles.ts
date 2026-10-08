@@ -56,7 +56,7 @@ export const css = `
 .bis .panel--bare{padding:0;border:0;background:none;box-shadow:none}
 .bis .cap{display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;padding:4px 14px 4px 4px;border-radius:999px;background:var(--atrament);color:#fff;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
 .bis .cap span{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:26px;padding:0 6px;border-radius:999px;background:var(--holo);color:var(--atrament);letter-spacing:0}
-.bis h2{font-size:clamp(40px,5.6vw,72px);margin-bottom:22px;max-width:14em}
+.bis h2{font-size:clamp(34px,5.6vw,72px);margin-bottom:22px;max-width:14em}
 .bis .body{margin:0 0 16px;max-width:40em;font-size:clamp(16px,1.3vw,17.5px);font-weight:500}
 .bis .body--wide{max-width:50em}
 .bis .note{margin:12px 0 0;color:var(--grafit);font-size:15px;font-weight:600}
@@ -102,6 +102,7 @@ export const css = `
 .bis .track__head{margin:6px 0 0;font-weight:700;font-size:18px;line-height:1.25;text-wrap:balance}
 .bis .track__flag{display:inline-block;margin:8px 0 0;padding:2px 10px;border-radius:999px;background:var(--limonka);font-weight:700;font-size:12px;letter-spacing:.04em}
 .bis .track__role{grid-column:2;margin:8px 0 0;font-size:14.5px;line-height:1.55;font-weight:500;color:var(--grafit)}
+@media (min-width:521px) and (max-width:1000px){.bis .track{grid-template-columns:minmax(0,100px) minmax(0,1fr)}.bis .track__head{font-size:17px}}
 @media (max-width:520px){.bis .track{grid-template-columns:minmax(0,96px) minmax(0,1fr);grid-template-rows:auto auto}.bis .track__img{grid-row:1}.bis .track__head{font-size:16px}.bis .track__role{grid-column:1/-1}}
 @media (max-width:400px){.bis .track{grid-template-columns:minmax(0,1fr)}.bis .track__img{max-width:150px}}
 .bis .quiet{margin:28px 0 0;max-width:44em;padding:16px 20px;border-radius:22px;background:var(--atrament);color:#fff;font-weight:600;font-size:clamp(17px,1.6vw,19px);line-height:1.5}

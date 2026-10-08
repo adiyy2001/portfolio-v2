@@ -101,6 +101,7 @@ export const css = `
 .chochla .comic__head{margin:0;font-family:'Bangers',cursive;font-size:clamp(24px,2.4vw,29px);letter-spacing:.02em;text-transform:uppercase;line-height:1.2;text-wrap:balance;padding-top:.08em}
 .chochla .comic__flag{display:inline-block;max-width:100%;margin:8px 0 0;padding:2px 10px;border:3px solid var(--kontur);background:var(--musztarda);font-weight:800;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
 .chochla .comic__role{margin:10px 0 0;font-size:15px;line-height:1.55}
+@media (max-width:379px){.chochla .comic__item{grid-template-columns:minmax(0,1fr)}.chochla .comic__img{max-width:150px}.chochla .comic__flag{white-space:normal}}
 .chochla .shout{position:relative;margin:30px 0 0;max-width:40em;padding:20px 24px;border:var(--line);border-radius:36px;background:var(--musztarda);font-weight:700;font-size:clamp(17px,1.6vw,19px);line-height:1.5}
 
 .chochla .searches{display:grid;gap:24px;margin-top:22px}
@@ -144,6 +145,7 @@ export const css = `
 .chochla .ab__item figcaption{display:flex;gap:10px;align-items:flex-start;margin-top:12px;font-weight:800;font-size:15px;line-height:1.3;text-wrap:balance}
 .chochla .ab__tag{display:inline-flex;align-items:center;justify-content:center;flex:none;width:36px;height:36px;border:3px solid var(--kontur);border-radius:50%;background:var(--musztarda);font-family:'Bangers',cursive;font-weight:400;font-size:22px;padding-top:2px}
 .chochla .ab__item+.ab__item .ab__tag{background:var(--roz)}
+@media (max-width:379px){.chochla .ab{grid-template-columns:minmax(0,1fr)}.chochla .ab__item img{max-width:220px}}
 .chochla .ab__hypothesis{grid-column:1/-1;margin:8px 0 0;padding:18px 22px;border:var(--line);border-radius:30px;background:var(--krem);font-size:16px;line-height:1.6}
 .chochla .ab__hypothesis strong{font-family:'Bangers',cursive;font-weight:400;font-size:24px;letter-spacing:.03em;text-transform:uppercase;color:var(--pomidor-ui)}
 
