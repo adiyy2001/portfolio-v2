@@ -32,7 +32,7 @@ const copy = {
     id: 'accessibility',
     title: 'Fits everyone.',
     lead: 'I check and fix apps against WCAG 2.1 level AA: keyboard use, screen readers, contrast, focus, forms.',
-    body: "I've done it in diagram-heavy interfaces. Since 28 June 2025 the European Accessibility Act covers online shops and banking in the EU, among other services.",
+    body: "I've done it with diagram-heavy interfaces. Since 28 June 2025 the European Accessibility Act covers banking and online shops across the EU amongst other services.",
     cta: 'Ask about accessibility',
     subject: 'Accessibility',
     careLabel: 'What I check',

@@ -147,12 +147,12 @@ const coschema = {
     description:
       'A real-time collaborative diagram editor: live cursors, offline editing, per-user undo and a convergence simulator. Live demo, code and measured numbers.',
     meta: 'Collaborative diagram editing',
-    lead: 'A real-time collaborative diagram editor with live cursors, offline editing, per-user undo and a network simulator that checks every client ends up with the same, valid diagram.',
+    lead: 'A real-time collaborative diagram editor with offline editing support, per-user undo, live cursors and a network simulator that checks all clients end up with the same, valid diagram.',
     clip: 'Two editors side by side. Ada goes offline, both edit, the link comes back and the copies merge. Then live cursors and follow mode.',
     note: 'The demo opens the /demo page. The room runs inside your browser, so nothing is sent to a server.',
     why: [
-      'Diagram editors are my day job. I work on software that generates single-line diagrams of high-voltage electrical substations, with Angular and diagram rendering on the front end and Java and Quarkus behind it. In real teams several people edit the same diagram at the same time.',
-      'I wanted the hard parts of collaboration: keeping a graph valid when two people change it at once, undoing only your own edits, and merging offline work cleanly. The editor is also keyboard operable and announces remote changes to screen readers, because collaborative canvases rarely are.',
+      'I work on a diagram editor as part of my day job. My tool creates single-line diagrams for high-voltage electrical substations. The user interface uses Angular and diagram rendering, while the backend is built on Quarkus and Java. In real teams diagrams are often edited simultaneously by multiple users.',
+      'I wanted the hard parts of collaboration: keeping a graph valid when two people change it at once, undoing only your own edits, and merging offline work cleanly. The editor is also keyboard operable and announces remote changes to screen readers since collaborative canvases rarely are.',
     ],
     tryLead:
       'The demo page has two editors, Ada and Bruno, each behind its own simulated link with latency, jitter, packet loss and an offline switch.',
@@ -163,7 +163,7 @@ const coschema = {
       ],
       [
         'A bad network',
-        'Raise one editor’s latency, jitter or packet loss with the sliders, or pick Slow, Lossy or Chaotic for both. Make a mess takes the links down, edits the same nodes on both sides and brings the links back, so the conflict is real.',
+        'Use the sliders to raise latency, jitter or packet loss for one editor, or select Slow, Lossy or Chaotic for both. When Make a mess is triggered the links are disabled, the same nodes on both ends are edited then the links are re-enabled, giving actual conflict.',
       ],
       [
         'Undo only your own',
@@ -175,53 +175,53 @@ const coschema = {
       ],
       [
         'Keyboard',
-        'Click a node, then N and P walk through the nodes, the arrow keys move them, Enter edits the label and the question mark lists every shortcut.',
+        'Click a node. Using N and P, traverse the nodes. Use the arrow keys to move them. Press Enter to edit the label. Press question mark for a list of all shortcuts.',
       ],
       ['Export', 'The SVG and PNG buttons in the toolbar save the whole diagram.'],
     ],
     calls: [
       {
         name: 'Validity at read time.',
-        text: 'One person connects an edge to a node while another deletes that node. The shared document is allowed to hold that invalid state, and a derived view that never writes hides it. No client repairs anything, so nothing storms.',
+        text: 'One user adds an edge to a node and a second user deletes the node. The shared document is allowed to hold this invalid state and a derived view that never writes hides this. No clients attempt to fix the issue and therefore there is no storming.',
         cost: 'The cost: hidden edges stay in the document until the node comes back or someone deletes them.',
-        lost: 'What lost: repair writes on every client (N clients delete the same dangling edge, and each repair can fight with an undo) and repair writes on the server only (the server becomes a second author, and a restored node would find its edges already gone).',
+        lost: 'Two potential problems with repair writes: 1) Repair writes on every client - each repair can fight with an undo and N clients all delete the same dangling edge 2) Repair writes only on the server - the server acts as a second author. Restored nodes will find their edges deleted.',
         adr: ['ADR 0007', adr('0007-graph-validity-at-read-time')],
       },
       {
         name: 'Undo means my undo.',
-        text: 'Each client has its own undo manager that tracks only local changes, and a drag is one step however many pointer moves it produced. Position and label are separate keys, so undoing my move does not revert someone’s later label edit.',
-        cost: 'The cost: if someone moved the same node after me, my undo of the move does nothing, because my change was already superseded. A test pins that behaviour.',
-        lost: 'What lost: a shared undo stack, which undoes other people’s work, and hand-written inverse operations: more code, and wrong under concurrency in exactly the cases the tests cover.',
+        text: 'Each client has its own undo manager that tracks only local changes. A drag consists of one step but may generate many pointer moves. The label and position keys are stored separately, so undoing my move will not undo a subsequent label change by another user.',
+        cost: 'The problem is that if someone moves the same node after me, then my undo of that move will do nothing, since my change will have been superseded. There is a test for that behavior.',
+        lost: 'We lost the shared undo stack (undoing other people’s work) and hand-written inverse operations: more code, and wrong under concurrency in exactly the cases the tests cover.',
         adr: ['ADR 0008', adr('0008-per-user-undo')],
       },
       {
         name: 'SVG over canvas.',
-        text: '5,000 nodes in SVG at 60 fps: one world transform, a grid index that gives a stable visible window, three levels of detail and a whole-scene overview below zoom 0.25. The benchmark was written first, and the first renderer failed it at the zoom that shows the whole scene, so the renderer changed.',
-        cost: 'The cost: elements outside the window are not in the DOM, so find-in-page and screen reader browse mode do not see them. The keyboard model works from the store, not the DOM, and brings the focused node into view.',
-        lost: 'What lost: canvas or WebGL, faster at scale, while SVG is accessible by construction with focusable elements and ARIA, and content-visibility alone, which helps layout but does not cut the number of Angular views.',
+        text: '60 fps with 5,000 SVG nodes: one world transform, a grid index providing a stable visible window, three levels of detail and an overview of the entire scene at zoom levels under 0.25. A benchmark was created initially and the first renderer failed on the whole-scene view at the corresponding zoom level, so the renderer was modified.',
+        cost: 'The trade-off here is that elements outside of the window are not in the DOM and therefore are not visible during browse mode in screen readers or find-in-page. The keyboard model works from the store, rather than the DOM, and brings the focused node into view.',
+        lost: 'What lost? SVG is accessible by construction with focusable elements and ARIA and only content-visibility (layout is assisted, but not a reduction in the number of Angular views). Canvas or WebGL, faster at scale.',
         adr: ['ADR 0014', adr('0014-svg-rendering-and-culling')],
       },
     ],
     numbers: [
       [
         '5,000',
-        'Seeds of the convergence simulator, 0 failed, in 90.9 s. The simulated network carried 1,756,564 messages, lost 12,715 and duplicated 6,418. After the network heals, every document is compared byte for byte.',
+        'Convergence simulator seeds: 0 failed, 90.9 s. 1,756,564 messages carried by the simulated network, 12,715 lost, 6,418 duplicated. Once the network recovers, all documents are byte-exact compared.',
       ],
       [
         '18 ms',
-        'p95 from the writer’s pointer release to the changed pixels in the reader. Two browser contexts in one room, 200 edits, memory store. 15 ms with PostgreSQL. Target: under 200 ms.',
+        "p95 from the writer's pointer release to pixel change in reader. Two browser contexts in the same room. 200 edits. Memory store. 15 ms using PostgreSQL. Aim < 200 ms.",
       ],
       [
         '60 fps',
-        'Panning a scene of 5,000 nodes: the median and the worst of three runs at each of eight zoom levels, from 1 down to 0.05.',
+        'Panning a scene of 5,000 nodes: worst and median of three runs at 8 levels of zoom, from 1 to 0.05.',
       ],
       [
         '3,987',
-        'Operations per second that one Node process with PostgreSQL sustained, with a delivery p95 of 15.77 ms. At 8,000 offered, the p95 passed 200 ms. These numbers describe one process.',
+        'Sustained Node operations per second using PostgreSQL in a single process with a 15.77 ms p95 delivery. At 8,000 offered the p95 passed 200 ms. This is for one process.',
       ],
       [
         '1,012',
-        'Unit tests: 661 in the packages, the server and the scripts, and 351 in the editor. Plus 40 integration tests against PostgreSQL and 41 Playwright tests. Line coverage: 98.75% in the packages and the server, 96.85% in the editor.',
+        'Unit tests: 661 in packages, server and scripts, 351 in the editor. 40 integration tests against PostgreSQL, and 41 Playwright tests. Line coverage: 98.75% in packages and server, 96.85% in the editor.',
       ],
       [
         '100',
@@ -229,13 +229,13 @@ const coschema = {
       ],
     ],
     machine:
-      'Measured on a laptop: Intel Core i7-12700H, 20 logical cores, 15.5 GiB RAM, Linux under WSL2, Node 24.21, headless Chromium 153, PostgreSQL 18.6. The browser ran on localhost, so these are numbers for this machine.',
+      'On my laptop: Intel Core i7-12700H, 20 logical cores, 15.5 GiB of RAM, PostgreSQL 18.6, Node 24.21, headless Chromium 153, running Linux under WSL2. Test was run with browser running on localhost, so these are numbers for this machine.',
     gapsLead:
       'From the stretch list I built only SVG and PNG export. Tests were never what got cut.',
     gaps: [
       [
         'Versions with restore',
-        'A Yjs document has no “go back to this state” for everyone, so a restore would be a diff applied as new edits. That is the hard part.',
+        'There is no ‘go back to this state’ for all in a Yjs document. So a restore would be a diff that would be applied as new edits. This is the difficult part.',
       ],
       [
         'Comments on nodes',
@@ -243,7 +243,7 @@ const coschema = {
       ],
       [
         'A Quarkus auth service',
-        'The sync server checks the JWT with a dev key. A Java service issuing tokens would be a separate repository’s worth of work and says nothing new about collaboration.',
+        "The sync server uses a dev key to validate the JWT. A Java service that would issue the tokens would be a separate repository's worth of work. It does not add anything new to collaboration.",
       ],
       [
         'Resize and waypoint handles',
@@ -258,7 +258,7 @@ const coschema = {
         'The end-to-end suite and every browser number come from Chromium. Nobody has listened to the editor with NVDA or VoiceOver yet.',
       ],
     ],
-    next: 'First a pub/sub layer so several servers can share rooms, then version snapshots, then the missing editing handles, then tests with NVDA and VoiceOver. In the editor itself, the first thing I would add is live dragging: today other people see a node jump when you let go, not while you drag.',
+    next: 'Pub/sub for multiple servers to share rooms, version snapshots, missing editing handles, and then tests with NVDA and VoiceOver. Within the editor proper, live dragging would be my first feature addition - currently other people see a node jump when you let go, but not while you drag.',
     gapsAdr: ['ADR 0025: what I did not build', adr('0025-scope-cuts-and-what-is-not-built')],
     stack: [
       'Angular',

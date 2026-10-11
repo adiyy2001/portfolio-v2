@@ -28,7 +28,7 @@ const copy = {
     caption: 'The made-to-measure order form, screenshot from tailorcloth.com',
     kind: 'A real project',
     meta: 'A tailoring company from Kraków',
-    desc: 'A website on Odoo with custom product management modules. A secure platform for trusted users, domestic and international invoicing, automated warehouse processes. Plus ordering without prices, for individual offers.',
+    desc: 'Odoo website with custom modules for managing products. Supports domestic and international invoicing. Automated warehouse processes and order without prices (for individual offers). Secure website for trusted users.',
     team: 'Built with the team I led at Media Hunters. Another agency maintains the site today.',
     more: 'More about the project',
   },

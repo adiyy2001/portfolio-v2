@@ -151,16 +151,16 @@ const gridtwin = {
   en: {
     title: 'gridtwin: a grid digital twin in Angular and Java, Adrian Turbiński',
     description:
-      'A digital twin of a small transmission network: a single-line diagram, a 3D substation, an AC power flow, N-1 and a cascade. Live demo, code and measured numbers.',
+      'Digital twin for a small transmission network. Single-line diagram. 3D view of the substation. AC power flow. N-1 study. Cascade study. Live demonstration with code and measured numbers.',
     meta: 'A digital twin of a transmission network',
-    lead: 'A digital twin of a small transmission network in the browser: open a breaker in a 3D substation or its single-line diagram and watch an AC power flow redistribute the load, overload a line and, if you keep going, cascade into an outage.',
+    lead: 'Interactive 3D substation in the browser with small transmission network digital twin. Open a circuit breaker on the single-line diagram or 3D substation and see an AC power flow redistribute the load, overload a line and, if you keep going, cascade into an outage.',
     model:
-      'It is an educational model on the public IEEE 14-bus and IEEE 30-bus test cases. The substation that replaces bus 4 is made up, and nothing here describes a real grid.',
+      'Implementation of an educational model for the public IEEE 14-bus and IEEE 30-bus test cases which models a substation (replacing bus 4) as made up. Nothing here describes a real grid.',
     clip: 'Opening the bus coupler, the overloaded line, the N-1 table and a cascade replay.',
-    note: 'The demo runs in one container on my home server. Sessions live in memory and the container restarts every hour, so whatever you switched is gone after that.',
+    note: 'My home server currently has the demo running in a single container. It uses in-memory sessions and restarts once an hour. Whatever you switched will be lost upon restart.',
     why: [
-      'My day job is software that draws single-line diagrams of high-voltage substations: Angular and diagram rendering in the browser, Java 21 and Quarkus behind it. I wanted to model what those drawings mean electrically, so I built the other half. Open a breaker and the solver tells you where the power goes, which line overloads and how an outage spreads.',
-      'The project also puts my domain knowledge, numerical methods (a sparse Newton-Raphson solver checked against MATPOWER), a Java back end and a 3D front end in one place.',
+      'I work on software that renders single-line diagrams for high-voltage substations in the browser using Angular and diagram rendering. The underpinning technology is Quarkus on Java 21. I have developed the other half of this to model the electrical behaviour of these diagrams. Given an open breaker the solver can indicate which lines overload, how an outage spreads and where power goes.',
+      "I've also combined my domain knowledge, numerical methods (a sparse Newton-Raphson solver checked against MATPOWER), a Java back end and a 3D front end into a single project.",
     ],
     tryLead: 'Every visitor gets a twin of their own, so nobody opens a breaker under your hands.',
     features: [
@@ -170,7 +170,7 @@ const gridtwin = {
       ],
       [
         'Overloaded line',
-        'Select the line that turns red. The inspector shows its loading, active and reactive power, current and losses, and the 3D substation shows the same state.',
+        'Click on the line that turns red. The line state (loading, active power, reactive power, current and losses) is displayed by the inspector and also in the 3D substation.',
       ],
       [
         'System load',
@@ -192,30 +192,30 @@ const gridtwin = {
     calls: [
       {
         name: 'Agreeing with MATPOWER.',
-        text: 'The solver has to agree with MATPOWER to 1e-6 pu in voltage and 1e-4 degrees in angle, and small modelling differences already break that: where the tap sits on a transformer, whether reactive limits convert all violating generators at once, whether the slack generator is limited. I wrote down each convention in an ADR and took MATPOWER’s, and I generated 16 base case reference solutions and 4 N-1 reference files with MATPOWER under GNU Octave in Docker.',
+        text: 'The solver has to agree with MATPOWER to 1e-6 pu in voltage and 1e-4 degrees in angle. However, small modelling differences already break that. For example, where the tap sits on a transformer, whether reactive limits convert all violating generators at once, whether the slack generator is limited. I documented each of these conventions in an ADR and adopted MATPOWER’s. I created 4 N-1 reference files and 16 base case reference solutions using MATPOWER under GNU Octave in Docker.',
         cost: 'The cost: reactive limits do not release again. A generator that hit its limit at 150% load stays a PQ bus for that solve.',
-        lost: 'What lost: a distributed slack, closer to operation practice and further from the reference data, and a rectangular formulation, because the solver is specified in polar form.',
+        lost: 'Lost were a rectangular formulation (due to the solver being specified in polar form) and a distributed slack placed closer to operational practice and away from the reference data.',
         adr: ['ADR 0004', adr('0004-newton-raphson-modelling-choices')],
       },
       {
         name: 'N-1 on a fork-join pool.',
-        text: 'N-1 on IEEE 30 is about 47 independent solves, pure CPU work with no I/O. They run on a dedicated ForkJoinPool with one worker per core. Each task has its own solver and shares nothing but read-only data, and a property test checks that the parallel result equals the sequential one.',
+        text: 'N-1 on IEEE 30 involves about 47 independent solves with no I/O, pure CPU computation. These are executed on a dedicated ForkJoinPool with one worker per core. Each task has its own solver with no data shared across other tasks except for read-only access. A property test verifies that the parallel execution produces the same result as sequential execution.',
         cost: 'The cost: the application layer owns the pool’s lifecycle, from startup to shutdown.',
-        lost: 'What lost: virtual threads, because a thread that computes keeps its carrier as busy as a platform thread and adds no throughput, and parallelStream on the common pool, because a long N-1 run could starve the rest of the Quarkus process.',
+        lost: 'Lost: virtual threads. A computing thread keeps its carrier busy like a platform thread and provides no additional throughput. Also parallelStream on the common pool, because a long N-1 run can starve the rest of the Quarkus process.',
         adr: ['ADR 0009', adr('0009-contingencies-on-a-fork-join-pool')],
       },
       {
         name: 'One twin per session.',
-        text: 'Every visitor gets a session of their own. A command arrives over REST, the interlocks run first, the network is solved once, the version goes up and a WebSocket pushes the full state. A client ignores a message with a version at or below the one it already shows.',
+        text: 'Every visitor gets a session of their own. A REST command is issued, the interlocks are run first, the network is solved once and the version incremented. The full state is sent over a WebSocket. Clients will ignore messages where the version is the same as or less than the current version they already have.',
         cost: 'The cost: the server holds the state of every open session, up to a cap, and a restart drops them all.',
-        lost: 'What lost: one shared twin, because one visitor would open a breaker under another’s hands and parallel end-to-end tests would interfere, and pushing diffs, because the state of these networks is a few kilobytes and a full snapshot means a reconnecting client needs no replay logic.',
+        lost: "What was lost: one shared twin (one visitor would open a breaker under another's hands and parallel end-to-end tests would interfere), and pushing diffs, since the state of these networks is a few kilobytes and a full snapshot allows reconnecting clients to avoid replay logic entirely.",
         adr: ['ADR 0010', adr('0010-one-twin-per-session-and-full-state-push')],
       },
     ],
     numbers: [
       [
         '8.23e-9 pu',
-        'The worst voltage magnitude deviation from MATPOWER 8.1 over everything compared: IEEE 14 and IEEE 30 at load factors 0.5, 1.0, 1.2 and 1.5, with and without reactive limits, plus every N-1 outage that MATPOWER solves. The limit in the tests: 1e-6 pu.',
+        'Among all scenarios tested, the worst deviation in voltage magnitude compared to MATPOWER 8.1 results from IEEE 14 and IEEE 30 systems at load factors 0.5, 1.0, 1.2 and 1.5 with and without reactive limits and all N-1 outages solved by MATPOWER. For the experiments the limit is 1e-6 pu.',
       ],
       [
         '0.67 ms',
@@ -227,11 +227,11 @@ const gridtwin = {
       ],
       [
         '25.5 ms',
-        'Median from the confirm click to the rendered frame, server round trip and 3D scene included, on the integrated Iris Xe GPU under Windows. Target: under 100 ms.',
+        'Median time from the confirm click to the rendered frame (including 3D scene and server round trip) on the integrated Iris Xe GPU running on Windows. Goal: below 100 ms.',
       ],
       [
         '165 fps',
-        'The 3D scene at 1080p on the Iris Xe under Windows, which is the refresh rate of the panel, with none of the 4,951 frames dropped. Through the WSL2 Direct3D 12 layer the same GPU gives 46 to 52 fps, so the 60 fps target is not met there.',
+        'The 3D scene under Windows on Iris Xe at 1080p with none of the 4,951 frames dropped at the panel refresh rate. The same GPU via WSL2 Direct3D 12 renders 46-52 fps so the 60 fps target is not achieved here.',
       ],
       [
         '99.0%',
@@ -239,12 +239,12 @@ const gridtwin = {
       ],
     ],
     machine:
-      'Measured on a laptop: Intel Core i7-12700H, 20 logical cores, 15 GB of memory, Linux 6.6 under WSL2, OpenJDK 21.0.12, headless Chromium 148. I repeated the GPU runs natively on Windows 11 on the same laptop, with Chrome 154 on the Iris Xe. Other builds were running at the same time, so the tails of the timings are noisy.',
+      'On laptop: Intel Core i7-12700H, 20 logical cores, 15 GB of memory. Linux 6.6 with WSL2. OpenJDK 21.0.12. Headless Chromium 148. GPU runs were repeated natively on Windows 11 using Chrome 154 on Iris Xe in the same laptop. There were other builds running concurrently which leads to some noise in the tails of the timing data.',
     gapsLead: 'When the scope grew, stretch goals were cut. Tests and correctness never were.',
     gaps: [
       [
         'IEEE 30 in the app',
-        'IEEE 30 is solved, validated and benchmarked, but it has no substation and no entry in the UI, so the demo offers IEEE 14 only.',
+        'IEEE 30 is solved, validated and benchmarked but lacks a substation and no UI entry. Therefore only IEEE 14 is offered in the demo.',
       ],
       [
         'A fast decoupled power flow',
@@ -260,14 +260,14 @@ const gridtwin = {
       ],
       [
         'A real cascade',
-        'A branch trips the instant it passes 120% of its rating, with no protection timing. The cascade shows an order in which overloads could spread and predicts nothing about a real grid.',
+        'A branch is tripped as soon as it exceeds 120% of its rating with no protection timing. A cascade will indicate the possible sequence of overload propagations but will predict nothing about a real grid.',
       ],
       [
         'Keyboard in the 3D scene',
         'Equipment cannot be operated by keyboard inside the 3D canvas. Everything works in the diagram and the inspector.',
       ],
     ],
-    next: 'First a second substation for IEEE 30 with a network selector, then the fast decoupled solver with an accuracy and speed comparison, and then state estimation from noisy measurements.',
+    next: 'First, a second substation for IEEE 30 with a network selector. Then the fast decoupled solver will be demonstrated with a comparison of speed and accuracy. Finally state estimation using noisy measurements will be shown.',
     gapsAdr: ['ADR 0027: the stretch goals I did not build', adr('0027-stretch-goals-not-built')],
     stack: [
       'Angular',

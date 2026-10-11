@@ -151,27 +151,27 @@ const flagtide = {
     description:
       'Self-hosted feature flags: Quarkus pushes changes over WebSockets and an Angular SDK evaluates them locally. Live demo, code and measured numbers.',
     meta: 'Real-time feature flags',
-    lead: 'A self-hosted feature flag service: a Quarkus back end pushes flag changes to every open browser over WebSockets, and an Angular SDK evaluates the flags locally with the same result as the server.',
-    clip: 'The admin on the left and the demo shop on the right. A flag is switched off and on, a rollout goes from 20 to 60 and back to 30 percent, then the propagation monitor shows p50, p95 and p99.',
-    note: 'The live demo is the admin and the shop side by side, on the same production images. Anyone can edit the flags, and the data goes back to the seed every hour.',
+    lead: 'Self-hosted feature flag service. Uses Quarkus as a backend which pushes flag updates to every open browser via WebSockets and has an Angular SDK which evaluates the flags locally with the same result as the server.',
+    clip: 'Left is the admin and right is the demo shop. Then there is a flag turned off and back on. A rollout changes from 20 to 60 and back to 30 percent. Then there is the propagation monitor showing p50, p95 and p99.',
+    note: 'Live demo shows admin next to the shop using the same production images. Flags can be edited by anyone and the data is reset hourly back to the seed.',
     why: [
-      'Feature flags are part of my daily stack. Two questions kept bothering me. How do you get a flag change to thousands of open browsers in well under a second, and how do you know that Java on the server and TypeScript in the browser give the same answer for the same flag?',
-      'I work mostly in Angular and I also build Java and Quarkus back ends, so this project sits on both sides of that line. I wanted one compact project that shows hexagonal architecture and domain-driven design on a real domain with real rules, not a CRUD toy.',
+      'I use feature flags on a daily basis. I had been wondering about two things. How can a flag update be propagated to thousands of open browsers in well under a second? How do you ensure that the same flag produces the same result in both the TypeScript client and the Java server?',
+      'I primarily develop in Angular but also develop Quarkus and Java back ends. This project straddles this divide. I also wanted one compact project that shows domain-driven design and hexagonal architecture on a real domain with real rules rather than a CRUD toy.',
     ],
     tryLead:
       'The admin writes to one server instance and the shop listens to the other, so every change crosses PostgreSQL.',
     features: [
       [
         'Flag toggle',
-        'Switch promo-banner off in the admin on the left. The banner leaves the shop on the right, although the shop listens to another server instance.',
+        'Zet promo-banner af in de admin naar links. De banner verdwijnt uit de winkel rechts, hoewel de winkel luistert naar een andere instantie van een server.',
       ],
       [
         'Percentage rollout',
-        'Open beta-recommendations and change the percentage of the default rule. The Recommended link in the shop comes or goes, and the Browsing as field in the shop footer switches the visitor.',
+        'Open beta-recommendations and change the percentage in the default rule. The Browsing as field in the shop footer switches the visitor and the Recommended link appears or disappears in the shop.',
       ],
       [
         'Try a context',
-        'In the flag editor, type a key and attributes under Try a context. The draft, unsaved edits included, runs through the same evaluator the browser SDK uses.',
+        'In the flag editor, enter a key and attributes under Try a context. The draft, including unsaved edits, is evaluated by the same evaluator used by the browser SDK.',
       ],
       [
         'Propagation monitor',
@@ -179,27 +179,27 @@ const flagtide = {
       ],
       [
         'Overrides and status',
-        'The Flags panel in the corner of the shop overrides a flag in your browser only. The badge in the header says whether the flags are live, cached or offline.',
+        'The Flags corner panel only overrides browser flags. The status of the flags (live, cached or offline) is indicated by the badge in the header.',
       ],
     ],
     calls: [
       {
         name: 'Two languages, one answer.',
-        text: 'Rollouts hash the context key, and any difference in signed arithmetic, UTF-8 handling or semver ordering sends a user to a different variant on the server than in the browser. The algorithm is a written spec, both engines are my own code, and 616 shared vectors run in both languages in CI. The expected hashes come from an independent Python oracle, so a bug that both engines share cannot pass.',
+        text: 'Rollouts uses hashing on the context key. If there is a difference in signed arithmetic, semver ordering, UTF-8 processing between the browser and server a user will be routed to a different rollouts variant. The algorithm is a written spec and both implementations are written by me. 616 common test vectors are run in both implementations as part of the CI process. An independent Python oracle provides the expected hash values. This means that a fault present in both implementations would be caught.',
         cost: 'The cost: two MurmurHash3 implementations of my own instead of a library, and a spec with a version number.',
-        lost: 'What lost: floating point percentages (rounding differs across languages), library hashes from Guava or npm (they would hide the Unicode and signedness decisions) and expected values generated by the Java engine (a shared bug would pass unnoticed).',
+        lost: 'What was lost: floating point percentages (rounding differs across languages), library hashes from Guava or npm (which would have masked the Unicode and signedness decisions), and expected values generated by the Java engine (enabling an undetected common flaw).',
         adr: ['ADR 0009', adr('0009-evaluation-bucketing-conformance')],
       },
       {
         name: 'Several instances, no broker.',
-        text: 'PostgreSQL NOTIFY is ordered but not durable and carries at most 8,000 bytes. So the payload is only a pointer, every instance reads the change log after the version it has seen, and each listener reconnect triggers a resync. A test kills the listener backend and checks that the next change still arrives.',
-        cost: 'The cost: the instance that wrote a change pays one extra round trip through the database before its own clients see it. In compose that is a few milliseconds.',
-        lost: 'What lost: an external broker (Redis, NATS, Kafka), one more moving part when PostgreSQL already holds the truth; the full change in the payload, which breaks on the 8,000 byte limit; and polling, which adds latency and constant database load.',
+        text: 'PostgreSQL NOTIFY is ordered but not durable and is limited to 8,000 bytes. This means the payload is only a pointer and every instance reads the change log after the version it has already seen. Listeners will also need to resync on reconnect. A test will kill the listener backend and verify the next change still arrives.',
+        cost: 'The cost is that the instance that wrote a change must make one extra round trip through the database before its own clients can view the change. This is a few milliseconds in compose.',
+        lost: 'So, what is lost? An external broker (Kafka, NATS, Redis), an additional moving piece while PostgreSQL already has the data, the full change in the payload, which breaks at the 8,000 byte limit, and polling which causes constant database load and latency.',
         adr: ['ADR 0008', adr('0008-change-log-versions-and-notify')],
       },
       {
         name: '5,000 sockets and a slow one.',
-        text: 'A change is serialized once per instance and the same string goes to every socket. A connection with more than 256 frames waiting gets closed, so one stuck client cannot hold up the rest.',
+        text: 'Changes are serialized once per instance and are delivered to all sockets as the same string. If a connection has more than 256 frames pending, the connection is closed to avoid one stuck client from impacting the others.',
         cost: 'The cost: each instance fans out from one thread, and a client that cannot keep up loses its connection.',
         lost: 'What lost: a frame serialized per client (several times more allocation at 5,000 clients) and a thread per environment (the work per notification is one query and one string, and the fan-out is dominated by socket writes anyway).',
         adr: ['ADR 0017', adr('0017-stream-fan-out-and-load-test')],
@@ -208,7 +208,7 @@ const flagtide = {
     numbers: [
       [
         '77 ms',
-        'p95 from commit to receipt in the client. 5,000 WebSockets on two instances, 30 changes, 150,000 frames, p50 38 ms, p99 90 ms. Target: under 300 ms. Six runs on this machine gave a p95 between 77 and 169 ms.',
+        'p95 from commit to receipt in client. 30 changes, 150,000 frames, 5,000 WebSockets on two instances. p50 38 ms, p99 90 ms. Goal: <300 ms. 6 runs here on this machine with p95 ranging from 77 to 169 ms.',
       ],
       [
         '412 ns',
@@ -224,7 +224,7 @@ const flagtide = {
       ],
       [
         '1,327',
-        'Tests in the server modules. Plus 199 in @flagtide/core, 39 in @flagtide/angular, 200 in the admin and 64 in the shop. Line coverage: 98.7% in @flagtide/core and 99.1% in the server domain.',
+        'Testing in the server modules. 199 tests in @flagtide/core, 39 in @flagtide/angular, 200 in admin and 64 in shop. Line coverage: 98.7% in @flagtide/core and 99.1% in the server domain.',
       ],
       [
         '100',
@@ -232,7 +232,7 @@ const flagtide = {
       ],
     ],
     machine:
-      'Measured on one laptop: Intel Core i7-12700H, 20 logical cores, 15.5 GiB RAM, Linux under WSL2, Docker 29.1.3, Node 24.21. The clients, the servers and PostgreSQL ran on the same machine, so these are numbers for that machine, not for a network between a data center and a phone.',
+      'On one laptop using: Docker 29.1.3, Node 24.21, Linux under WSL2, Intel Core i7-12700H with 20 logical cores and 15.5 GiB of RAM. The clients, the servers and PostgreSQL were all on the same machine. These results are for that machine and do not represent communication between a phone and a data center.',
     gapsLead: 'Stretch goals went first. Tests and correctness never did.',
     gaps: [
       [
@@ -249,18 +249,18 @@ const flagtide = {
       ],
       [
         'An SSE fallback',
-        'A second transport next to WebSockets would double the reconnect and status tests, and the acknowledgements for the propagation monitor travel back on the same socket.',
+        'With a second transport next to WebSockets, reconnect and status testing would double as well. The acknowledgement messages for the propagation monitor travel back on the same socket.',
       ],
       [
         'A login for the admin',
-        'The admin keys reach the browser in a config.json file. Fine for the demo, wrong for a real deployment, which needs a login in front of the admin.',
+        'Admin keys are passed to the browser via a config.json file. This works fine for this demo but is not suitable for a production system which should require login in front of the admin.',
       ],
       [
         'Other browsers',
         'The end-to-end suite and every browser number come from Chrome. Firefox, Safari and screen readers are untested.',
       ],
     ],
-    next: 'First the Oracle adapter, because the contract tests already say what it has to do. Then prerequisites with a cycle check, which means a spec change and new vectors in both languages. Then scheduled changes with a single runner across instances.',
+    next: 'Start with the Oracle adapter. We already have contract tests that specify its requirements. Next, prerequisites with a cycle check. This will generate a spec change and new vectors in both languages. Finally, scheduled changes with a single runner across instances.',
     gapsAdr: ['ADR 0021: what I did not build', adr('0021-what-is-not-built')],
     stack: [
       'Angular',

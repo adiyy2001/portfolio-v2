@@ -100,30 +100,30 @@ const copy = {
     detail: {
       pse: {
         when: 'since January 2025, full-time, Wrocław',
-        desc: 'I led the proof of concept of an app that models and visualizes high-voltage power lines, and now we are growing it into the production system. I lead the architecture of the whole thing, frontend and backend. The frontend is Angular 19 and GoJS, and I drove the migration to GoJS 3. I designed the backend layer in Quarkus: batch processing, REST API, hexagonal architecture, Oracle tuning. In a team of five I onboard new engineers, set standards and the testing strategy, and review code.',
+        desc: 'I have led the proof of concept for an application that models and provides visualisation of high-voltage power lines. This has now been expanded into a production system. I have architected both the frontend and backend. Frontend uses Angular 19 and GoJS. I have been responsible for the migration to GoJS 3. I designed the backend layer in Quarkus with REST API, hexagonal architecture, Oracle tuning and batch processing. Within a five person team I am responsible for onboarding new engineers, setting up standards and testing strategy and code review.',
       },
       mh: {
         when: 'September 2023 to December 2024, self-employed',
-        desc: 'I was responsible for several long-lived web apps, from the code to the architecture decisions. I designed and evolved a multi-tenant SaaS platform. I introduced CI and tests in Jest and Cypress. I built the interfaces to WCAG. I led a small team and reviewed its code.',
+        desc: 'I worked on several long-lived web applications with both code and architecture responsibility. I created and improved a multi-tenant SaaS platform. Implemented testing using both Jest and Cypress and CI. Created accessible UIs to WCAG standards. Managed a small team and performed code review within the team.',
         win: 'projects 30% more efficient through Agile and DevOps',
       },
       ttms: {
         when: 'September 2022 to August 2023, self-employed, remote',
-        desc: 'A sandbox where electricians design and validate complex diagrams, high-voltage towers among them. I kept the graph-shaped UI state in NgRx. I implemented WCAG 2.1 in a diagram-heavy interface: keyboard, screen readers and focus management.',
+        desc: 'Sandbox for electricians to design and validate complex diagrams including high-voltage towers. Used NgRx to store the graph-shaped UI state. Implemented WCAG 2.1 accessibility in a diagram-heavy interface with support for screen readers, keyboard and focus management.',
         win: "electricians' workflows improved by 25%",
       },
       cobiro: {
         when: 'February 2022 to August 2022, self-employed',
-        desc: 'I moved a legacy frontend towards hexagonal architecture in small steps, keeping production stable. I helped introduce CI. I built feature flags for experiments and gradual rollouts with fast rollback.',
+        desc: 'I have moved a legacy frontend gradually towards a hexagonal architecture with minimal impact on production. I have also helped implement CI and implemented feature flags for experiments and gradual rollouts with fast rollback.',
         win: '40% less duplicated code after the move to an Nx monorepo',
       },
       roche: {
         when: 'January 2021 to January 2022, contract, remote',
-        desc: 'Internal apps where researchers analyze and validate clinical data. A regulated environment with little tolerance for errors. I made them faster with route-based lazy loading and leaner API usage.',
+        desc: 'Internal apps used by researchers to analyze and validate clinical data. Very little error tolerance present, a regulated system. Used route-based lazy loading and leaner API usage to make them quicker.',
       },
       brainode: {
         when: 'August 2019 to December 2020, contract, hybrid',
-        desc: 'A high-end shop with real-time 3D product views, in Angular and Three.js. I helped build a custom WebGL rendering layer. I implemented real-time currency exchange over WebSockets that holds up on unstable networks.',
+        desc: 'A high-end shop with real-time 3D product views using Angular and Three.js. Helped build a custom WebGL rendering layer. Added real-time currency exchange using WebSockets that holds up on unstable networks.',
       },
     },
   },
