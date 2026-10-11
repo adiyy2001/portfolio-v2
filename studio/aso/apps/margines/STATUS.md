@@ -14,7 +14,7 @@
 
 ## Decisions
 
-- Headline 2 (PL) reads "Powtórka w porę, zanim zapomnisz" instead of "Powtórka tuż przed zapomnieniem", and headline 1 (EN) reads "Words that keep their sentence" instead of "Learn words with the sentence attached" (also the EN feature line). At the set's headline size (Caveat 700, 58 CSS px App Store, 38 Play) the planned lines could only break with a one word last line; the benefit of each is unchanged.
+- Headline 2 (PL) reads "Powtórka w porę, zanim zapomnisz" instead of "Powtórka tuż przed zapomnieniem", and headline 1 (EN) first read "Words that keep their sentence" and since round 3 reads "Flashcards with the whole sentence" (also the EN feature line and tagline), with PL "Fiszki, w których słówko ma zdanie". At the set's headline size (Caveat 700, 58 CSS px App Store, 38 Play) the planned lines could only break with a one word last line; the benefit of each is unchanged.
 - The planned book title "The Long Way Home" exists (several novels), so the PL book deck is "Salt on the Windowsill"; the series is "Night Shift on Harbour Street". The EN set is an English speaker learning Polish with the book "Lato na Kazimierzu", the series "Sąsiedzi z trzeciego piętra" and a trip to Kraków.
 - Variant B uses its own screen state, "Z twoich notatek" (a photo of a notebook page turned into nine cards), instead of the Dodaj z tekstu screen of frame 4, so the B frame shows the promise it makes and frame 4 keeps its own job.
 - The seventh planned screen (Wymowa, pronunciation) is replaced by that notebook screen; the set uses six screens plus the variant B screen, within the brief's five to eight.
