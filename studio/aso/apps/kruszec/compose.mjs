@@ -4,7 +4,7 @@ import { budgetList, budgetSafe, colors as c, decimal, gaugeSvg, head as screenH
 import { seriesFor, shape } from './series.mjs';
 
 const css = `
-.kh{font-family:'Instrument Serif',serif;font-weight:400;line-height:1.02;letter-spacing:-.008em;color:${c.platyna}}
+.kh{font-family:'Instrument Serif',serif;font-weight:400;line-height:1.02;letter-spacing:-.008em;color:${c.platyna};-webkit-text-stroke:.9px currentColor;paint-order:stroke fill}
 .kh em{font-style:italic;color:${c.szalwia}}
 .k-ground{position:absolute;left:0;top:0;overflow:hidden}
 .k-layer{position:absolute;left:0;top:0;overflow:visible;pointer-events:none}
@@ -17,11 +17,12 @@ const css = `
 .k-tab-dev__cam{position:absolute;width:10px;height:10px;border-radius:50%;background:#0B0D11;box-shadow:0 0 0 1px rgba(255,255,255,.06)}
 .kg{position:absolute;background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.05) 55%,rgba(255,255,255,.07));border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 40px 70px -30px rgba(0,0,0,.75);-webkit-backdrop-filter:blur(18px) saturate(118%);backdrop-filter:blur(18px) saturate(118%);color:${c.tekst};font-family:'Manrope',sans-serif;font-variant-numeric:tabular-nums lining-nums}
 .kg__k{font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:${c.tekst2}}
-.kg__num{font-family:'Instrument Serif',serif;font-weight:400;line-height:1;letter-spacing:-.01em;color:${c.platyna};white-space:nowrap}
+.kg__num{font-family:'Instrument Serif',serif;font-weight:400;line-height:1;letter-spacing:-.01em;color:${c.platyna};white-space:nowrap;-webkit-text-stroke:.6px currentColor;paint-order:stroke fill}
 .kg__sub{color:${c.tekst2};line-height:1.35}
 .k-pill{position:absolute;display:flex;align-items:center;gap:8px;padding:0 14px;border-radius:999px;white-space:nowrap;font-weight:600}
 .k-pill i{display:block;flex:none;border-radius:50%}
 .k-tag2{position:absolute;white-space:nowrap;line-height:1.3}
+.kg.k-tag2{background:linear-gradient(160deg,rgba(31,40,60,.97),rgba(19,29,51,.97));-webkit-backdrop-filter:none;backdrop-filter:none}
 .k-tag2__name{display:flex;align-items:center;gap:.5em;font-weight:600}
 .k-tag2 i{display:block;flex:none;border-radius:50%}
 .k-tag2__num{margin-top:.2em;padding-left:1.1em;display:flex;gap:.35em;align-items:baseline}
@@ -39,14 +40,19 @@ const accented = (value, accent, lang) => {
   if (!accent) return body;
   const a = esc(glue(accent, lang));
   const at = body.indexOf(a);
-  return at < 0 ? body : `${body.slice(0, at)}<em>${a}</em>${body.slice(at + a.length)}`;
+  if (at < 0) return body;
+  const before = body.slice(0, at).replace(/(^|\s)(\p{L}{2}) $/u, '$1$2\u00A0');
+  return `${before}<em>${a}</em>${body.slice(at + a.length)}`;
 };
 
 const headline = ({ slot, lang, x, y, w, size, align = 'left', name }) =>
   `<div class="kit-headline kh" data-box="headline" data-name="${esc(name)}" style="${styleOf({ left: x, top: y, width: w, 'font-size': size, 'text-align': align })}">${accented(slot.headline, slot.accent, lang)}</div>`;
 
-const ground = (w, h, glows = []) => {
-  const layers = [...glows.map(g => `radial-gradient(${g.rx ?? g.r}px ${g.ry ?? g.r}px at ${g.x}px ${g.y}px, ${g.color} 0, transparent 100%)`), `radial-gradient(${w * 1.1}px ${h * 0.7}px at ${w * 0.5}px ${h * 0.08}px, #121C33 0, rgba(18,28,51,0) 100%)`, `linear-gradient(180deg, #0C1324 0%, ${c.glebia} 60%, #080D1A 100%)`];
+const ground = (w, h, glows = [], lifted = false) => {
+  const base = lifted
+    ? [`radial-gradient(${w * 1.2}px ${h * 0.62}px at ${w * 0.5}px ${h * 0.02}px, ${ice(0.36)} 0, rgba(184,203,230,0) 100%)`, `linear-gradient(180deg, ${c.granat} 0%, #0E1628 70%, ${c.glebia} 100%)`]
+    : [`radial-gradient(${w * 1.1}px ${h * 0.7}px at ${w * 0.5}px ${h * 0.08}px, #121C33 0, rgba(18,28,51,0) 100%)`, `linear-gradient(180deg, #0C1324 0%, ${c.glebia} 60%, #080D1A 100%)`];
+  const layers = [...glows.map(g => `radial-gradient(${g.rx ?? g.r}px ${g.ry ?? g.r}px at ${g.x}px ${g.y}px, ${g.color} 0, transparent 100%)`), ...base];
   return `<div class="k-ground" style="${styleOf({ width: w, height: h, background: layers.join(',') })}"></div>`;
 };
 
@@ -104,9 +110,12 @@ function outerLine(cfg) {
     const ib = Number(b.getAttribute('data-i'));
     const va = Number(a.getAttribute('data-v'));
     const vb = Number(b.getAttribute('data-v'));
-    const X = i => ax + ((i - ia) * (bx - ax)) / (ib - ia);
-    const Y = v => ay + ((v - va) * (by - ay)) / (vb - va);
-    const pts = cfg.values.slice(0, ia + 1).map((v, i) => [X(i), Y(v)]);
+    const dx = (bx - ax) / (ib - ia);
+    const dy = (by - ay) / (vb - va);
+    const ramp = i => (ia - i) / ia;
+    const X = i => ax + (i - ia) * dx * (1 + cfg.stretchX * ramp(i));
+    const Y = (v, i) => ay + (v - va) * dy * (1 + cfg.stretchY * ramp(i));
+    const pts = cfg.values.slice(0, ia + 1).map((v, i) => [X(i), Y(v, i)]);
     const d = pts.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(2)} ${y.toFixed(2)}`).join(' ');
     const svg = document.getElementById('outer');
     const NS = 'http://www.w3.org/2000/svg';
@@ -115,6 +124,16 @@ function outerLine(cfg) {
     const defs = document.createElementNS(NS, 'defs');
     defs.innerHTML = `<linearGradient id="og" gradientUnits="userSpaceOnUse" x1="${x0}" y1="0" x2="${x1}" y2="0"><stop offset="0" stop-color="${cfg.color}" stop-opacity="0"/><stop offset=".35" stop-color="${cfg.color}" stop-opacity=".75"/><stop offset="1" stop-color="${cfg.color}" stop-opacity="1"/></linearGradient><filter id="ob" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="${cfg.blur}"/></filter>`;
     svg.appendChild(defs);
+    const areaSvg = document.getElementById('outer-area');
+    if (areaSvg) {
+      const adefs = document.createElementNS(NS, 'defs');
+      adefs.innerHTML = `<linearGradient id="oa" gradientUnits="userSpaceOnUse" x1="0" y1="${Math.min(...pts.map(p => p[1]))}" x2="0" y2="${cfg.height}"><stop offset="0" stop-color="${cfg.color}" stop-opacity=".4"/><stop offset="1" stop-color="${cfg.color}" stop-opacity="0"/></linearGradient>`;
+      areaSvg.appendChild(adefs);
+      const area = document.createElementNS(NS, 'path');
+      area.setAttribute('d', `${d} L${x1.toFixed(2)} ${cfg.height} L${x0.toFixed(2)} ${cfg.height} Z`);
+      area.setAttribute('fill', 'url(#oa)');
+      areaSvg.appendChild(area);
+    }
     const glow = document.createElementNS(NS, 'path');
     glow.setAttribute('d', d);
     glow.setAttribute('fill', 'none');
@@ -136,19 +155,23 @@ function outerLine(cfg) {
       let k = 0;
       while (k < ia && X(k) - label.offsetWidth / 2 < cfg.labelGap) k += 1;
       label.style.left = `${X(k) - label.offsetWidth / 2}px`;
-      label.style.top = `${Y(cfg.values[k]) - cfg.labelGap - label.offsetHeight}px`;
+      label.style.top = `${Y(cfg.values[k], k) - cfg.labelGap - label.offsetHeight}px`;
     }
     if (x0 > cfg.maxStart) console.error(`outer line starts at ${x0.toFixed(1)}, expected at most ${cfg.maxStart}`);
   })();
 }
 
-const outerParts = (store, ui, lang, { width, blur, labelGap, maxStart, size }) => {
+const outerParts = (store, ui, lang, { width, blur, labelGap, maxStart, size, grid, stretchX = 0, stretchY = 0 }) => {
   const values = seriesFor(ui.majatek.total);
   const notes = { pl: 'od 2021', en: 'since 2021' };
+  const gridLines = Array.from({ length: Math.floor((H[store] - grid.from) / grid.step) + 1 }, (_, i) => grid.from + i * grid.step)
+    .map(y => `<line x1="0" x2="${W[store]}" y1="${y}" y2="${y}" stroke="rgba(184,203,230,.12)" stroke-width="1"/>`)
+    .join('');
   return {
+    area: layer(W[store], H[store], gridLines, 'outer-area'),
     layer: layer(W[store], H[store], '', 'outer'),
     label: `<div id="outer-label" class="k-mark" style="${styleOf({ left: 0, top: 0, 'font-size': size })}">${esc(notes[lang])}</div>`,
-    script: outerScript({ values, width, blur, color: c.szalwia, labelGap, maxStart }),
+    script: outerScript({ values, width, blur, color: c.szalwia, labelGap, maxStart, stretchX, stretchY, height: H[store] }),
   };
 };
 
@@ -248,7 +271,7 @@ const budgetPanel = (ui, lang, { x, y, w, h, rows, big, name }) => {
 const L = {
   appstore: {
     head: 56,
-    majatek: { h: { x: 30, y: 62, w: 384 }, d: { width: 300, x: 120, y: 270 }, glow: { x: 200, y: 560, r: 300 }, line: { width: 2.6, blur: 5, labelGap: 14, maxStart: 30, size: 13 } },
+    majatek: { h: { x: 30, y: 62, w: 400 }, d: { width: 290, x: 140, y: 316 }, glow: { x: 200, y: 560, r: 300 }, line: { width: 3, blur: 5, labelGap: 22, maxStart: 30, size: 13, stretchX: 1.3, stretchY: 2.4, grid: { from: 230, step: 90 } } },
     budzet: { h: { x: 30, y: 62, w: 380 }, panel: { x: 22, y: 232, w: 396, h: 690, big: 72 }, glow: { x: 300, y: 420, r: 300 } },
     poduszka: { h: { x: 30, y: 62, w: 370 }, d: { width: 268, x: 150, y: 270, soft: 2.4 }, card: { x: 26, y: 400, w: 300, h: 372, size: 270 }, glow: { x: 180, y: 600, r: 300 } },
     alokacja: { h: { x: 40, y: 58, w: 360, align: 'center' }, d: { width: 236, x: 102, y: 330 }, ring: { cx: 220, cy: 578, r: 182, stroke: 22 }, pills: { size: 10.5, at: [[6, 614, 'r'], [6, 478], [14, 276]] }, glow: { x: 220, y: 580, r: 260 } },
@@ -258,7 +281,7 @@ const L = {
   },
   play: {
     head: 34,
-    majatek: { h: { x: 24, y: 34, w: 300 }, d: { width: 214, x: 106, y: 150 }, glow: { x: 170, y: 360, r: 220 }, line: { width: 2, blur: 4, labelGap: 10, maxStart: 40, size: 11 } },
+    majatek: { h: { x: 24, y: 34, w: 300 }, d: { width: 240, x: 96, y: 190 }, glow: { x: 170, y: 360, r: 220 }, line: { width: 2.4, blur: 4, labelGap: 26, maxStart: 40, size: 11, grid: { from: 130, step: 70 } } },
     budzet: { h: { x: 24, y: 34, w: 312 }, panel: { x: 16, y: 126, w: 328, h: 496, rows: 4, big: 64 }, glow: { x: 250, y: 300, r: 220 } },
     poduszka: { h: { x: 24, y: 34, w: 312 }, d: { width: 190, x: 152, y: 140, soft: 2 }, card: { x: 22, y: 230, w: 230, h: 288, size: 206 }, glow: { x: 140, y: 380, r: 220 } },
     alokacja: { h: { x: 30, y: 30, w: 300, align: 'center' }, d: { width: 168, x: 96, y: 178 }, ring: { cx: 180, cy: 360, r: 146, stroke: 18 }, pills: { size: 9.5, at: [[6, 388, 'r'], [4, 278], [8, 126]] }, glow: { x: 180, y: 360, r: 200 } },
@@ -268,7 +291,7 @@ const L = {
   },
   ipad: {
     head: 104,
-    majatek: { h: { x: 72, y: 96, w: 820 }, d: { width: 840, x: -40, y: 400 }, chip: { r: 22, y: 610, size: 26 }, glow: { x: 420, y: 860, r: 620 }, line: { width: 4, blur: 8, labelGap: 22, maxStart: 90, size: 22 } },
+    majatek: { h: { x: 72, y: 96, w: 820 }, d: { width: 840, x: -40, y: 400 }, chip: { r: 22, y: 610, size: 26 }, glow: { x: 420, y: 860, r: 620 }, line: { width: 4, blur: 8, labelGap: 44, maxStart: 90, size: 22, grid: { from: 380, step: 170 } } },
     budzet: { h: { x: 72, y: 1104, w: 880 }, d: { width: 760, x: -150, y: 70, soft: 0.6 }, card: { x: 560, y: 600, w: 420, h: 360, size: 112 }, glow: { x: 760, y: 760, r: 520 } },
     poduszka: { h: { x: 72, y: 96, w: 880 }, d: { width: 760, x: 236, y: 380, soft: 3.2 }, card: { x: 96, y: 520, w: 560, h: 700, size: 500 }, glow: { x: 400, y: 900, r: 600 } },
     alokacja: { h: { x: 96, y: 86, w: 840, align: 'center' }, d: { width: 560, x: 236, y: 420 }, ring: { cx: 516, cy: 790, r: 446, stroke: 40 }, pills: { size: 22, at: [[24, 900, 'r'], [20, 560], [40, 296]] }, glow: { x: 516, y: 790, r: 600 } },
@@ -299,6 +322,7 @@ const compose = (app, store, lang, slotIndex, variant) => {
   if (screenId === 'majatek') {
     parts.push(dev(spec.d));
     const o = outerParts(store, ui, lang, spec.line);
+    back.push(o.area);
     front.push(o.layer, o.label);
     if (spec.chip) front.push(worthChip(notes, ui, lang, spec.chip));
     script = o.script;
@@ -334,7 +358,7 @@ const compose = (app, store, lang, slotIndex, variant) => {
     front.push(accountChips(ui, lang, spec.chips));
   }
 
-  return [ground(w, h, glows), back.join(''), parts.join(''), front.join(''), head, script].join('');
+  return [ground(w, h, glows, variant !== 'b' && slotIndex >= 3), back.join(''), parts.join(''), front.join(''), head, script].join('');
 };
 
 const featureBody = (app, lang) => {
@@ -378,7 +402,7 @@ export const iconSvg = (layerName = 'full', size = 1024) => {
   const d = values.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join(' ');
   const end = [X(values.length - 1), Y(values[values.length - 1])];
   const bg = `<defs><radialGradient id="ib" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="#18264A"/><stop offset=".55" stop-color="#0F1730"/><stop offset="1" stop-color="${c.glebia}"/></radialGradient><radialGradient id="ig" cx="56%" cy="56%" r="40%"><stop offset="0" stop-color="${c.szalwia}" stop-opacity=".22"/><stop offset="1" stop-color="${c.szalwia}" stop-opacity="0"/></radialGradient></defs><rect width="1024" height="1024" fill="url(#ib)"/><rect width="1024" height="1024" fill="url(#ig)"/>`;
-  const fg = `<defs><linearGradient id="ifg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".2"/><stop offset=".55" stop-color="#FFFFFF" stop-opacity=".07"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".11"/></linearGradient><linearGradient id="ie" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".5"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/></linearGradient><filter id="il" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="14"/></filter></defs><rect x="232" y="232" width="560" height="560" rx="132" fill="url(#ifg)" stroke="url(#ie)" stroke-width="5"/><path d="${d}" fill="none" stroke="${c.szalwia}" stroke-width="30" stroke-opacity=".45" filter="url(#il)"/><path d="${d}" fill="none" stroke="${c.szalwia}" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${end[0].toFixed(1)}" cy="${end[1].toFixed(1)}" r="22" fill="${c.platyna}"/>`;
+  const fg = `<defs><linearGradient id="ifg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".2"/><stop offset=".55" stop-color="#FFFFFF" stop-opacity=".07"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".11"/></linearGradient><linearGradient id="ie" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".5"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".12"/></linearGradient><filter id="il" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="14"/></filter></defs><rect x="232" y="232" width="560" height="560" rx="132" fill="url(#ifg)" stroke="url(#ie)" stroke-width="5"/><path d="${d}" fill="none" stroke="${c.szalwia}" stroke-width="44" stroke-opacity=".45" filter="url(#il)"/><path d="${d}" fill="none" stroke="${c.szalwia}" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${end[0].toFixed(1)}" cy="${end[1].toFixed(1)}" r="27" fill="${c.platyna}"/>`;
   const content = layerName === 'background' ? bg : layerName === 'foreground' ? fg : bg + fg;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 1024 1024">${content}</svg>`;
 };
