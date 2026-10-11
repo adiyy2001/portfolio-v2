@@ -187,5 +187,6 @@ export const css = `
 .szyld .foot{padding:24px 0 40px;background:var(--smola);color:var(--szron);font-size:14px}
 .szyld .foot a{color:var(--limonka)}
 .szyld .sample-note{margin:0}
+@media (max-width:360px){.szyld h2{font-size:26px}}
 @media (prefers-reduced-motion:reduce){.szyld *{scroll-behavior:auto}}
 `;

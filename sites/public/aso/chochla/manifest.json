@@ -9,15 +9,15 @@
     "ipad": false
   },
   "base": "/wzornik/aso/chochla/",
-  "totalBytes": 11176847,
+  "totalBytes": 11237271,
   "totalHuman": "10.7 MB",
-  "zip": { "path": "chochla-aso.zip", "bytes": 11166753 },
+  "zip": { "path": "chochla-aso.zip", "bytes": 11227177 },
   "groups": [
     {
       "id": "appstore",
       "title": "App Store, iPhone 6,9″",
       "count": 12,
-      "bytes": 5209654,
+      "bytes": 5233056,
       "formats": "PNG",
       "files": [
         "app-store/pl/chochla-appstore-pl-01.png",
@@ -38,7 +38,7 @@
       "id": "play",
       "title": "Google Play, telefon",
       "count": 12,
-      "bytes": 3580555,
+      "bytes": 3599110,
       "formats": "PNG",
       "files": [
         "google-play/pl/chochla-play-pl-01.png",
@@ -59,7 +59,7 @@
       "id": "variantB",
       "title": "Wariant B pierwszego screenshotu",
       "count": 4,
-      "bytes": 2066065,
+      "bytes": 2082589,
       "formats": "PNG",
       "files": [
         "variant-b/chochla-appstore-pl-01b.png",
@@ -72,7 +72,7 @@
       "id": "feature",
       "title": "Google Play, feature graphic",
       "count": 2,
-      "bytes": 169165,
+      "bytes": 171108,
       "formats": "PNG",
       "files": ["feature-graphic/chochla-feature-pl.png", "feature-graphic/chochla-feature-en.png"]
     },
@@ -102,7 +102,7 @@
   "files": [
     {
       "path": "app-store/pl/chochla-appstore-pl-01.png",
-      "bytes": 451603,
+      "bytes": 453946,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -113,7 +113,7 @@
     },
     {
       "path": "google-play/pl/chochla-play-pl-01.png",
-      "bytes": 320009,
+      "bytes": 322071,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -124,7 +124,7 @@
     },
     {
       "path": "app-store/pl/chochla-appstore-pl-02.png",
-      "bytes": 603214,
+      "bytes": 606131,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -135,7 +135,7 @@
     },
     {
       "path": "google-play/pl/chochla-play-pl-02.png",
-      "bytes": 394643,
+      "bytes": 396364,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -146,7 +146,7 @@
     },
     {
       "path": "app-store/pl/chochla-appstore-pl-03.png",
-      "bytes": 374425,
+      "bytes": 375335,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -157,7 +157,7 @@
     },
     {
       "path": "google-play/pl/chochla-play-pl-03.png",
-      "bytes": 275666,
+      "bytes": 277176,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -168,7 +168,7 @@
     },
     {
       "path": "app-store/pl/chochla-appstore-pl-04.png",
-      "bytes": 360481,
+      "bytes": 361273,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -179,7 +179,7 @@
     },
     {
       "path": "google-play/pl/chochla-play-pl-04.png",
-      "bytes": 240432,
+      "bytes": 241432,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -190,7 +190,7 @@
     },
     {
       "path": "app-store/pl/chochla-appstore-pl-05.png",
-      "bytes": 422235,
+      "bytes": 426191,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -201,7 +201,7 @@
     },
     {
       "path": "google-play/pl/chochla-play-pl-05.png",
-      "bytes": 293298,
+      "bytes": 295686,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -212,7 +212,7 @@
     },
     {
       "path": "app-store/pl/chochla-appstore-pl-06.png",
-      "bytes": 421000,
+      "bytes": 421536,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -223,7 +223,7 @@
     },
     {
       "path": "google-play/pl/chochla-play-pl-06.png",
-      "bytes": 285290,
+      "bytes": 286365,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -234,7 +234,7 @@
     },
     {
       "path": "variant-b/chochla-appstore-pl-01b.png",
-      "bytes": 630133,
+      "bytes": 635374,
       "type": "png",
       "group": "variantB",
       "store": "appstore",
@@ -246,7 +246,7 @@
     },
     {
       "path": "variant-b/chochla-play-pl-01b.png",
-      "bytes": 401384,
+      "bytes": 404160,
       "type": "png",
       "group": "variantB",
       "store": "play",
@@ -258,7 +258,7 @@
     },
     {
       "path": "feature-graphic/chochla-feature-pl.png",
-      "bytes": 84613,
+      "bytes": 85585,
       "type": "png",
       "group": "feature",
       "store": "feature",
@@ -268,7 +268,7 @@
     },
     {
       "path": "app-store/en/chochla-appstore-en-01.png",
-      "bytes": 445628,
+      "bytes": 449004,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -279,7 +279,7 @@
     },
     {
       "path": "google-play/en/chochla-play-en-01.png",
-      "bytes": 315248,
+      "bytes": 317974,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -290,7 +290,7 @@
     },
     {
       "path": "app-store/en/chochla-appstore-en-02.png",
-      "bytes": 585929,
+      "bytes": 587397,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -301,7 +301,7 @@
     },
     {
       "path": "google-play/en/chochla-play-en-02.png",
-      "bytes": 378662,
+      "bytes": 379851,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -312,7 +312,7 @@
     },
     {
       "path": "app-store/en/chochla-appstore-en-03.png",
-      "bytes": 377417,
+      "bytes": 379825,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -323,7 +323,7 @@
     },
     {
       "path": "google-play/en/chochla-play-en-03.png",
-      "bytes": 280692,
+      "bytes": 282141,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -334,7 +334,7 @@
     },
     {
       "path": "app-store/en/chochla-appstore-en-04.png",
-      "bytes": 350434,
+      "bytes": 351805,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -345,7 +345,7 @@
     },
     {
       "path": "google-play/en/chochla-play-en-04.png",
-      "bytes": 233540,
+      "bytes": 233971,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -356,7 +356,7 @@
     },
     {
       "path": "app-store/en/chochla-appstore-en-05.png",
-      "bytes": 404863,
+      "bytes": 407676,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -367,7 +367,7 @@
     },
     {
       "path": "google-play/en/chochla-play-en-05.png",
-      "bytes": 280867,
+      "bytes": 283683,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -378,7 +378,7 @@
     },
     {
       "path": "app-store/en/chochla-appstore-en-06.png",
-      "bytes": 412425,
+      "bytes": 412937,
       "type": "png",
       "group": "appstore",
       "store": "appstore",
@@ -389,7 +389,7 @@
     },
     {
       "path": "google-play/en/chochla-play-en-06.png",
-      "bytes": 282208,
+      "bytes": 282396,
       "type": "png",
       "group": "play",
       "store": "play",
@@ -400,7 +400,7 @@
     },
     {
       "path": "variant-b/chochla-appstore-en-01b.png",
-      "bytes": 632774,
+      "bytes": 637668,
       "type": "png",
       "group": "variantB",
       "store": "appstore",
@@ -412,7 +412,7 @@
     },
     {
       "path": "variant-b/chochla-play-en-01b.png",
-      "bytes": 401774,
+      "bytes": 405387,
       "type": "png",
       "group": "variantB",
       "store": "play",
@@ -424,7 +424,7 @@
     },
     {
       "path": "feature-graphic/chochla-feature-en.png",
-      "bytes": 84552,
+      "bytes": 85523,
       "type": "png",
       "group": "feature",
       "store": "feature",
@@ -470,36 +470,36 @@
     { "path": "teksty/en.json", "bytes": 8477, "type": "json", "group": "texts" }
   ],
   "web": [
-    { "path": "web/appstore-en-01.webp", "bytes": 52152, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-01b.webp", "bytes": 57924, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-02.webp", "bytes": 55838, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-03.webp", "bytes": 44622, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-04.webp", "bytes": 48776, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-05.webp", "bytes": 51292, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-06.webp", "bytes": 54944, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-01.webp", "bytes": 53650, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-01b.webp", "bytes": 56856, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-02.webp", "bytes": 57686, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-03.webp", "bytes": 43612, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-04.webp", "bytes": 49774, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-05.webp", "bytes": 53074, "width": 480, "height": 1043 },
-    { "path": "web/appstore-pl-06.webp", "bytes": 56076, "width": 480, "height": 1043 },
-    { "path": "web/feature-en.webp", "bytes": 32546, "width": 1024, "height": 500 },
-    { "path": "web/feature-pl.webp", "bytes": 33244, "width": 1024, "height": 500 },
-    { "path": "web/play-en-01.webp", "bytes": 36636, "width": 400, "height": 711 },
-    { "path": "web/play-en-01b.webp", "bytes": 36746, "width": 400, "height": 711 },
-    { "path": "web/play-en-02.webp", "bytes": 34780, "width": 400, "height": 711 },
-    { "path": "web/play-en-03.webp", "bytes": 32052, "width": 400, "height": 711 },
-    { "path": "web/play-en-04.webp", "bytes": 32064, "width": 400, "height": 711 },
-    { "path": "web/play-en-05.webp", "bytes": 35556, "width": 400, "height": 711 },
-    { "path": "web/play-en-06.webp", "bytes": 36340, "width": 400, "height": 711 },
-    { "path": "web/play-pl-01.webp", "bytes": 37358, "width": 400, "height": 711 },
-    { "path": "web/play-pl-01b.webp", "bytes": 36480, "width": 400, "height": 711 },
-    { "path": "web/play-pl-02.webp", "bytes": 36820, "width": 400, "height": 711 },
-    { "path": "web/play-pl-03.webp", "bytes": 31396, "width": 400, "height": 711 },
-    { "path": "web/play-pl-04.webp", "bytes": 32404, "width": 400, "height": 711 },
-    { "path": "web/play-pl-05.webp", "bytes": 36598, "width": 400, "height": 711 },
-    { "path": "web/play-pl-06.webp", "bytes": 36874, "width": 400, "height": 711 }
+    { "path": "web/appstore-en-01.webp", "bytes": 52872, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-01b.webp", "bytes": 58568, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-02.webp", "bytes": 56354, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-03.webp", "bytes": 44990, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-04.webp", "bytes": 48958, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-05.webp", "bytes": 51682, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-06.webp", "bytes": 55474, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01.webp", "bytes": 54166, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-01b.webp", "bytes": 57440, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-02.webp", "bytes": 58450, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-03.webp", "bytes": 43936, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-04.webp", "bytes": 49944, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-05.webp", "bytes": 53544, "width": 480, "height": 1043 },
+    { "path": "web/appstore-pl-06.webp", "bytes": 56604, "width": 480, "height": 1043 },
+    { "path": "web/feature-en.webp", "bytes": 34046, "width": 1024, "height": 500 },
+    { "path": "web/feature-pl.webp", "bytes": 34816, "width": 1024, "height": 500 },
+    { "path": "web/play-en-01.webp", "bytes": 37062, "width": 400, "height": 711 },
+    { "path": "web/play-en-01b.webp", "bytes": 37038, "width": 400, "height": 711 },
+    { "path": "web/play-en-02.webp", "bytes": 34882, "width": 400, "height": 711 },
+    { "path": "web/play-en-03.webp", "bytes": 32462, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 32478, "width": 400, "height": 711 },
+    { "path": "web/play-en-05.webp", "bytes": 35664, "width": 400, "height": 711 },
+    { "path": "web/play-en-06.webp", "bytes": 36776, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01.webp", "bytes": 37504, "width": 400, "height": 711 },
+    { "path": "web/play-pl-01b.webp", "bytes": 36862, "width": 400, "height": 711 },
+    { "path": "web/play-pl-02.webp", "bytes": 37096, "width": 400, "height": 711 },
+    { "path": "web/play-pl-03.webp", "bytes": 31408, "width": 400, "height": 711 },
+    { "path": "web/play-pl-04.webp", "bytes": 32890, "width": 400, "height": 711 },
+    { "path": "web/play-pl-05.webp", "bytes": 37000, "width": 400, "height": 711 },
+    { "path": "web/play-pl-06.webp", "bytes": 37178, "width": 400, "height": 711 }
   ],
   "fonts": [
     {

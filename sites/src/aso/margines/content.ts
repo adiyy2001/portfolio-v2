@@ -62,7 +62,7 @@ export const content = glueDeep({
     title: 'Trzy kadry w miniaturze',
     note: 'czytelne przy 100 px',
     query: 'fiszki angielski',
-    subtitle: 'Słówka zapamiętane razem ze zdaniem',
+    subtitle: 'Fiszki, w których słówko ma zdanie',
     text: 'Neutralna makieta wyników wyszukiwania w obu sklepach. W miniaturze ręczne pismo dalej czyta się jako pierwsze, a czerwona obwódka i żółty zakreślacz od razu mówią, na co patrzeć.',
   },
   switchNote:

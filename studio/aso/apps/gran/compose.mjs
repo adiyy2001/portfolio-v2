@@ -29,7 +29,7 @@ const layouts = {
     headPlay: false,
     phones: [
       { x: 150, y: 398, w: 262 },
-      { x: 564, y: 150, w: 196 },
+      { x: 540, y: 104, w: 240 },
       { x: 930, y: 350, w: 232, rotate: 6 },
       { x: 1350, y: 562, w: 382, landscape: true },
       { x: 1880, y: 70, w: 200 },
@@ -83,7 +83,7 @@ const layouts = {
     headPlay: true,
     cards: [
       { x: 136, y: 176, w: 196 },
-      { x: 386, y: 34, w: 182 },
+      { x: 462, y: 22, w: 208 },
       { x: 766, y: 150, w: 196, rotate: 5 },
       { x: 1106, y: 340, w: 308, landscape: true },
       { x: 1584, y: 26, w: 176 },

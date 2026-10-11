@@ -73,9 +73,7 @@ const gets = [
     <main id="main" tabindex="-1">
       <section class="intro">
         <p class="kicker">Wzornik · screenshoty do sklepów</p>
-        <h1>
-          Sześć aplikacji, których nie ma, i sześć zestawów screenshotów gotowych do wysłania.
-        </h1>
+        <h1>Sześć aplikacji, których nie ma, i&nbsp;sześć&nbsp;zestawów.</h1>
         <p class="lead">
           Każdy zestaw ma własny styl i własną historię na sześć kadrów, jakby zrobiło je sześć
           różnych pracowni. Pod spodem jest ten sam komplet, który dostaje klient: oba sklepy, dwa
@@ -120,7 +118,7 @@ const gets = [
         <p>
           Napisz, co robi twoja aplikacja i do kogo trafia. Zaproponuję historię na sześć kadrów,
           zaprojektuję zestaw do obu sklepów i przygotuję pliki, które przejdą walidację za
-          pierwszym razem.
+          pierwszym&nbsp;razem.
         </p>
         <a class="cta__link" href={portfolio('/dla-klienta/#wzornik')}>
           Zobacz ofertę dla klientów
@@ -186,6 +184,7 @@ const gets = [
   }
 
   .kicker {
+    text-wrap: balance;
     margin: 0 0 20px;
     font-size: 14px;
     letter-spacing: 0.08em;
@@ -210,6 +209,7 @@ const gets = [
   }
 
   h2 {
+    text-wrap: balance;
     margin: 0 0 20px;
     font:
       700 clamp(24px, 3vw, 34px) / 1.1 'Bespoke Serif',
@@ -232,6 +232,11 @@ const gets = [
 
   .gets dt {
     font-weight: 600;
+  }
+
+  .gets dd,
+  .works p {
+    text-wrap: pretty;
   }
 
   .gets dd {
@@ -313,6 +318,7 @@ const gets = [
 
   .cta p {
     margin: 0 0 24px;
+    text-wrap: pretty;
   }
 
   .cta__link {

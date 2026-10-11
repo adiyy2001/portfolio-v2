@@ -197,5 +197,6 @@ export const css = `
 .chochla .cta__link:hover{background:var(--turkus)}
 .chochla .foot{max-width:1320px;margin:0 auto;padding:24px var(--gut) 40px;font-size:14px;font-weight:600}
 .chochla .sample-note{margin:0}
+@media (max-width:360px){.chochla h2,.chochla .cta h2{font-size:32px}}
 @media (prefers-reduced-motion:reduce){.chochla *{scroll-behavior:auto}}
 `;

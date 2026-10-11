@@ -135,7 +135,7 @@ const tyl = (data, ctx) => {
 <div data-mark="meaning" style="margin-top:4px;font-weight:700;font-size:27px;line-height:1.15;letter-spacing:-.01em">${text(k.meaning, lang)}</div>
 <p style="margin:14px 0 0;font-size:16px;line-height:1.45">${esc(k.before)}<b>${esc(k.mark)}</b>${text(k.after, lang)}</p>
 <p style="margin:6px 0 0;font-size:15px;line-height:1.45;color:${c.olowek}">${text(k.translation, lang)}</p>
-<div style="margin-top:18px">${ctx.hideHint ? `<div data-mark="hint" style="height:262px;border-radius:12px;border:2px dashed #E3D9B5;background:#FFFDF4"></div>` : hintCard(data, lang)}</div>
+<div style="margin-top:18px">${ctx.hideHint ? `<div data-mark="hint" style="height:262px;border-radius:12px;border:2px dashed #E3D9B5;background:#FFFDF4;display:flex;align-items:center;justify-content:center"><div style="opacity:.7">${doodle(k.doodle, { seed: 11, width: 220, height: 146 })}</div></div>` : hintCard(data, lang)}</div>
 </div>
 <div style="position:absolute;left:20px;right:20px;bottom:30px;display:flex;gap:10px">${grade(k.again[0], k.again[1], 'm-btn--again')}${grade(k.hard[0], k.hard[1], 'm-btn--soft')}${grade(k.good[0], k.good[1], 'm-btn--good')}</div>
 </div></div>`;
