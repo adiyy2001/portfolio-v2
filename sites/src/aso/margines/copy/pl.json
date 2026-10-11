@@ -3,13 +3,13 @@
   "label": "Polski",
   "app": {
     "name": "Margines",
-    "tagline": "Słówka zapamiętane razem ze zdaniem"
+    "tagline": "Fiszki, w których słówko ma zdanie"
   },
   "slots": [
     {
       "id": "01",
       "screen": "przod",
-      "headline": "Słówka zapamiętane razem ze zdaniem",
+      "headline": "Fiszki, w których słówko ma zdanie",
       "alt": "Fiszka ze słowem reluctant i zdaniem z książki, które ktoś obwiódł czerwonym flamastrem. Notatka na marginesie wskazuje zdanie."
     },
     {
@@ -49,7 +49,7 @@
     "alt": "Kartka z zeszytu z odręczną listą hiszpańskich słówek, a strzałka prowadzi do telefonu, który robi z niej dziewięć fiszek."
   },
   "feature": {
-    "headline": "Słówka zapamiętane razem ze zdaniem",
+    "headline": "Fiszki, w których słówko ma zdanie",
     "alt": "Papier w kratkę, odręczny napis Margines podkreślony na czerwono i fiszka z rysunkiem latarni, do której prowadzi strzałka."
   },
   "notes": {

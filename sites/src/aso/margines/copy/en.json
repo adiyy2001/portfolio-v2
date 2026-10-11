@@ -3,13 +3,13 @@
   "label": "English",
   "app": {
     "name": "Margines",
-    "tagline": "Words that keep their sentence"
+    "tagline": "Flashcards with the whole sentence"
   },
   "slots": [
     {
       "id": "01",
       "screen": "przod",
-      "headline": "Words that keep their sentence",
+      "headline": "Flashcards with the whole sentence",
       "alt": "A flashcard for the Polish verb spóźnić się with the sentence from a book circled in red marker and a margin note pointing at it."
     },
     {
@@ -49,7 +49,7 @@
     "alt": "A notebook page with a handwritten list of Polish words and an arrow into the phone, which turns the list into nine flashcards."
   },
   "feature": {
-    "headline": "Words that keep their sentence",
+    "headline": "Flashcards with the whole sentence",
     "alt": "Graph paper, the name Margines handwritten and underlined in red, and a flashcard with a tram doodle that an arrow points to."
   },
   "notes": {

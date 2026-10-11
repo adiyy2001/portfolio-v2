@@ -61,6 +61,37 @@ function pageInk(cfg) {
   window.wzReady = (async () => {
     await Promise.all(cfg.fonts.map(spec => document.fonts.load(spec)));
     await document.fonts.ready;
+    const headEl = document.querySelector('.mh');
+    if (headEl && cfg.patch) {
+      const range = document.createRange();
+      range.selectNodeContents(headEl);
+      const rects = [...range.getClientRects()].filter(r => r.width > 1);
+      const pad = cfg.patch.pad;
+      const left = Math.min(...rects.map(r => r.left)) - pad;
+      const right = Math.max(...rects.map(r => r.right)) + pad;
+      const top = Math.min(...rects.map(r => r.top)) - pad * 0.7;
+      const bottom = Math.max(...rects.map(r => r.bottom)) + pad * 0.7;
+      const w = right - left;
+      const h = bottom - top;
+      const tooth = pad * 0.5;
+      const edge = (n, base, sign, seed) => Array.from({ length: n + 1 }, (_, i) => {
+        const j = Math.abs(Math.sin((i + 1) * 12.9898 + seed * 78.233)) * tooth;
+        return [(i / n) * w, base + sign * j];
+      });
+      const nx = Math.max(4, Math.round(w / (pad * 1.3)));
+      const ny = Math.max(2, Math.round(h / (pad * 1.5)));
+      const topEdge = edge(nx, 0, 1, 1);
+      const bottomEdge = edge(nx, h, -1, 2).reverse();
+      const leftEdge = Array.from({ length: ny - 1 }, (_, i) => [Math.abs(Math.sin((i + 3) * 7.7)) * tooth * 0.6, h - ((i + 1) / ny) * h]);
+      const rightEdge = Array.from({ length: ny - 1 }, (_, i) => [w - Math.abs(Math.sin((i + 5) * 5.3)) * tooth * 0.6, ((i + 1) / ny) * h]);
+      const poly = [...topEdge, ...rightEdge, ...bottomEdge, ...leftEdge].map(([x, y]) => `${x.toFixed(1)}px ${y.toFixed(1)}px`).join(',');
+      const wrap = document.createElement('div');
+      wrap.className = 'm-patch';
+      wrap.style.cssText = `left:${left}px;top:${top}px;width:${w}px;height:${h}px;transform:rotate(${cfg.patch.rotate}deg)`;
+      wrap.innerHTML = `<i style="clip-path:polygon(${poly})"></i>`;
+      headEl.parentNode.insertBefore(wrap, headEl);
+      if (left < 0 || top < 0 || right > cfg.patch.W || bottom > cfg.patch.H) console.error(`headline patch leaves the frame: ${left.toFixed(1)} ${top.toFixed(1)} ${right.toFixed(1)} ${bottom.toFixed(1)}`);
+    }
     const gen = rough.generator();
     const layers = { ink: document.getElementById('ink'), hl: document.getElementById('hl') };
     const rad = d => (d * Math.PI) / 180;

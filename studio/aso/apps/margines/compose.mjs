@@ -6,7 +6,9 @@ import { colors as c, doodle, hintCard, icons, renderScreen, screenOrder } from 
 const fonts = ['500 20px "Caveat"', '600 20px "Caveat"', '700 20px "Caveat"', '400 16px "Lexend"', '500 16px "Lexend"', '700 16px "Lexend"'];
 
 const css = `
-.mh{font-family:'Caveat',cursive;font-weight:700;line-height:.96;letter-spacing:-.005em;color:${c.atrament}}
+.mh{font-family:'Caveat',cursive;font-weight:700;line-height:.96;letter-spacing:-.005em;color:${c.atrament};-webkit-text-stroke:.7px ${c.atrament}}
+.m-patch{position:absolute;filter:drop-shadow(0 8px 8px rgba(30,42,94,.2)) drop-shadow(0 0 1px rgba(30,42,94,.35))}
+.m-patch i{display:block;width:100%;height:100%;background:#FFFEF9}
 .m-ground{position:absolute;left:0;top:0;overflow:hidden;background-color:${c.papier}}
 .m-note{position:absolute;font-family:'Caveat',cursive;font-weight:600;line-height:1.02;color:${c.atrament};hyphens:none;text-wrap:balance}
 .m-sticker{position:absolute;display:flex;align-items:center;justify-content:center;font-family:'Lexend',sans-serif;font-weight:700;color:${c.atrament};border:4px solid #fff;box-shadow:0 6px 12px -6px rgba(30,42,94,.45),0 0 0 1px rgba(30,42,94,.08);white-space:nowrap}
@@ -326,7 +328,7 @@ const frameBody = (app, store, lang, spec, { slotIndex, variant }) => {
   parts.push(front.join(''));
   parts.push(svgLayer(W, H, '').replace('<svg ', '<svg id="ink" '));
   parts.push(headline({ value, lang, x: spec.head.x, y: spec.head.y, width: spec.head.w, size: L.head, align: spec.head.align ?? 'left', className: 'mh', name: `headline-${slotIndex + 1}` }));
-  parts.push(inkScript({ fonts, marks, places }));
+  parts.push(inkScript({ fonts, marks, places, patch: { pad: play ? 10 : 14, rotate: spec.head.tilt ?? -0.8, W, H } }));
   return parts.join('');
 };
 
