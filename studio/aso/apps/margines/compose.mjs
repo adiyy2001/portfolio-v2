@@ -149,7 +149,7 @@ const layouts = {
       {
         head: { x: 40, y: 54, w: 360, align: 'center' },
         device: { width: 280, x: 80, y: 330, rotate: 0 },
-        notes: [{ id: 'note-4', key: '04', x: 236, y: 230, w: 190, rotate: -3, align: 'right' }],
+        notes: [{ id: 'note-4', key: '04', x: 236, y: 266, w: 190, rotate: -3, align: 'right' }],
         stickers: [{ id: 'sticker-plus', kind: 'plus', w: 50, h: 50, rotate: -12, place: { q: '[data-mark="addbtn"]', dev: true, side: 'left', dx: -4 } }],
         marks: [
           { t: 'underline', q: '[data-mark="word"]', dev: true, color: c.flamaster, double: true, off: 4, gap: 8, ext: 4, seed: 31, width: 2.6 },

@@ -154,8 +154,15 @@ function outerLine(cfg) {
     if (label) {
       let k = 0;
       while (k < ia && X(k) - label.offsetWidth / 2 < cfg.labelGap) k += 1;
-      label.style.left = `${X(k) - label.offsetWidth / 2}px`;
-      label.style.top = `${Y(cfg.values[k], k) - cfg.labelGap - label.offsetHeight}px`;
+      const left = X(k) - label.offsetWidth / 2;
+      const right = left + label.offsetWidth + cfg.labelGap;
+      const lineTop = Math.min(...pts.filter(p => p[0] >= left - cfg.labelGap && p[0] <= right).map(p => p[1]));
+      label.style.left = `${left}px`;
+      let top = lineTop - cfg.labelGap - label.offsetHeight;
+      for (let y = cfg.grid.from; y < cfg.height; y += cfg.grid.step) {
+        if (y > top - 6 && y < top + label.offsetHeight + 6) top = y - label.offsetHeight - 8;
+      }
+      label.style.top = `${top}px`;
     }
     if (x0 > cfg.maxStart) console.error(`outer line starts at ${x0.toFixed(1)}, expected at most ${cfg.maxStart}`);
   })();
@@ -171,7 +178,7 @@ const outerParts = (store, ui, lang, { width, blur, labelGap, maxStart, size, gr
     area: layer(W[store], H[store], gridLines, 'outer-area'),
     layer: layer(W[store], H[store], '', 'outer'),
     label: `<div id="outer-label" class="k-mark" style="${styleOf({ left: 0, top: 0, 'font-size': size })}">${esc(notes[lang])}</div>`,
-    script: outerScript({ values, width, blur, color: c.szalwia, labelGap, maxStart, stretchX, stretchY, height: H[store] }),
+    script: outerScript({ values, width, blur, color: c.szalwia, labelGap, maxStart, stretchX, stretchY, grid, height: H[store] }),
   };
 };
 

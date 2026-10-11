@@ -67,8 +67,9 @@ function pageInk(cfg) {
       range.selectNodeContents(headEl);
       const rects = [...range.getClientRects()].filter(r => r.width > 1);
       const pad = cfg.patch.pad;
-      const left = Math.min(...rects.map(r => r.left)) - pad;
-      const right = Math.max(...rects.map(r => r.right)) + pad;
+      const padX = pad * 1.9;
+      const left = Math.max(Math.min(...rects.map(r => r.left)) - padX, 3);
+      const right = Math.min(Math.max(...rects.map(r => r.right)) + padX, cfg.patch.W - 3);
       const top = Math.min(...rects.map(r => r.top)) - pad * 0.7;
       const bottom = Math.max(...rects.map(r => r.bottom)) + pad * 0.7;
       const w = right - left;
