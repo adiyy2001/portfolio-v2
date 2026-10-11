@@ -134,21 +134,43 @@ function outerLine(cfg) {
       area.setAttribute('fill', 'url(#oa)');
       areaSvg.appendChild(area);
     }
+    const inner = a.ownerSVGElement;
+    const innerScale = inner ? inner.getBoundingClientRect().width / Number(inner.getAttribute('width')) : 1;
+    const innerWidth = 2.2 * innerScale;
+    const innerGlowWidth = 4 * innerScale;
+    const taperLength = 260;
+    const along = [0];
+    for (let k = 1; k < pts.length; k += 1) along.push(along[k - 1] + Math.hypot(pts[k][0] - pts[k - 1][0], pts[k][1] - pts[k - 1][1]));
+    const total = along[along.length - 1];
+    const weight = k => {
+      const t = Math.min(1, (total - along[k]) / taperLength);
+      return t * t * (3 - 2 * t);
+    };
+    const ribbon = (full, narrow) => {
+      const half = pts.map((_, k) => (narrow + (full - narrow) * weight(k)) / 2);
+      const left = [];
+      const right = [];
+      pts.forEach(([x, y], k) => {
+        const [px, py] = pts[Math.max(0, k - 1)];
+        const [nx, ny] = pts[Math.min(pts.length - 1, k + 1)];
+        const len = Math.hypot(nx - px, ny - py) || 1;
+        const ox = (-(ny - py) / len) * half[k];
+        const oy = ((nx - px) / len) * half[k];
+        left.push([x + ox, y + oy]);
+        right.push([x - ox, y - oy]);
+      });
+      const edge = left.concat(right.reverse());
+      return edge.map(([x, y], k) => `${k ? 'L' : 'M'}${x.toFixed(2)} ${y.toFixed(2)}`).join(' ') + ' Z';
+    };
     const glow = document.createElementNS(NS, 'path');
-    glow.setAttribute('d', d);
-    glow.setAttribute('fill', 'none');
-    glow.setAttribute('stroke', 'url(#og)');
-    glow.setAttribute('stroke-width', String(cfg.width * 3));
-    glow.setAttribute('stroke-opacity', '.5');
+    glow.setAttribute('d', ribbon(cfg.width * 3, innerGlowWidth));
+    glow.setAttribute('fill', 'url(#og)');
+    glow.setAttribute('fill-opacity', '.5');
     glow.setAttribute('filter', 'url(#ob)');
     svg.appendChild(glow);
     const path = document.createElementNS(NS, 'path');
-    path.setAttribute('d', d);
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', 'url(#og)');
-    path.setAttribute('stroke-width', String(cfg.width));
-    path.setAttribute('stroke-linecap', 'round');
-    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('d', ribbon(cfg.width, innerWidth));
+    path.setAttribute('fill', 'url(#og)');
     svg.appendChild(path);
     const label = document.getElementById('outer-label');
     if (label) {

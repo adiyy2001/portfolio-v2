@@ -9,15 +9,15 @@
     "ipad": false
   },
   "base": "/wzornik/aso/bis/",
-  "totalBytes": 11070286,
+  "totalBytes": 11068568,
   "totalHuman": "10.6 MB",
-  "zip": { "path": "bis-aso.zip", "bytes": 11054773 },
+  "zip": { "path": "bis-aso.zip", "bytes": 11053055 },
   "groups": [
     {
       "id": "appstore",
       "title": "App Store, iPhone 6,9″",
       "count": 12,
-      "bytes": 5459132,
+      "bytes": 5457443,
       "formats": "JPEG",
       "files": [
         "app-store/pl/bis-appstore-pl-01.jpg",
@@ -38,7 +38,7 @@
       "id": "play",
       "title": "Google Play, telefon",
       "count": 12,
-      "bytes": 3680706,
+      "bytes": 3680677,
       "formats": "JPEG",
       "files": [
         "google-play/pl/bis-play-pl-01.jpg",
@@ -290,7 +290,7 @@
     },
     {
       "path": "app-store/en/bis-appstore-en-02.jpg",
-      "bytes": 485432,
+      "bytes": 483743,
       "type": "jpg",
       "group": "appstore",
       "store": "appstore",
@@ -345,7 +345,7 @@
     },
     {
       "path": "google-play/en/bis-play-en-04.jpg",
-      "bytes": 276338,
+      "bytes": 276309,
       "type": "jpg",
       "group": "play",
       "store": "play",
@@ -472,7 +472,7 @@
   "web": [
     { "path": "web/appstore-en-01.webp", "bytes": 49584, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-01b.webp", "bytes": 42756, "width": 480, "height": 1043 },
-    { "path": "web/appstore-en-02.webp", "bytes": 54490, "width": 480, "height": 1043 },
+    { "path": "web/appstore-en-02.webp", "bytes": 54470, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-03.webp", "bytes": 47698, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-04.webp", "bytes": 41050, "width": 480, "height": 1043 },
     { "path": "web/appstore-en-05.webp", "bytes": 49116, "width": 480, "height": 1043 },
@@ -490,7 +490,7 @@
     { "path": "web/play-en-01b.webp", "bytes": 31232, "width": 400, "height": 711 },
     { "path": "web/play-en-02.webp", "bytes": 37214, "width": 400, "height": 711 },
     { "path": "web/play-en-03.webp", "bytes": 34678, "width": 400, "height": 711 },
-    { "path": "web/play-en-04.webp", "bytes": 29790, "width": 400, "height": 711 },
+    { "path": "web/play-en-04.webp", "bytes": 29840, "width": 400, "height": 711 },
     { "path": "web/play-en-05.webp", "bytes": 34704, "width": 400, "height": 711 },
     { "path": "web/play-en-06.webp", "bytes": 33322, "width": 400, "height": 711 },
     { "path": "web/play-pl-01.webp", "bytes": 37998, "width": 400, "height": 711 },

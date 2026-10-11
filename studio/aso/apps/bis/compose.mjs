@@ -312,7 +312,7 @@ const L = {
       blobs: [blob(420, 160, 230, c.cyjan), blob(20, 420, 220, c.brzoskwinia), blob(380, 820, 220, c.roz, 0.6)],
       cards: [
         { k: 'card', x: 22, y: 52, w: 128, rot: -9 },
-        { k: 0, x: 156, y: 34, w: 128, rot: 3 },
+        { k: 0, x: 156, y: 34, w: 128, rot: 3, dx: { en: 14 } },
         { k: 1, x: 290, y: 58, w: 128, rot: 10 },
       ],
       sparks: [[150, 40, 14], [416, 270, 12], [24, 520, 13], [412, 640, 15], [30, 300, 10]],
@@ -452,7 +452,7 @@ const compose = (app, store, lang, slotIndex, variant) => {
     const o = ui.odkrywaj;
     spec.cards.forEach((cd, i) => {
       const item = cd.k === 'card' ? { artist: o.card.artist, venue: o.card.venue, when: o.card.when.split(',')[0] } : o.deck[cd.k];
-      front.push(tradeCard(ui, item, lang, { ...cd, name: `trade-${i}` }));
+      front.push(tradeCard(ui, item, lang, { ...cd, x: cd.x + (cd.dx?.[lang] ?? 0), name: `trade-${i}` }));
     });
   } else if (screenId === 'koncert') {
     parts.push(dev(spec.d));
