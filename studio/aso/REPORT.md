@@ -28,7 +28,7 @@ Kruszec ma dodatkowo 12 plików iPad 2064×2752.
 
 ## Wynik walidatora
 
-0 błędów we wszystkich sześciu zestawach: Grań 38 plików, Szyld 38, Margines 38, Chochla 38, Kruszec 50, Bis 38. Łącznie opublikowane 70,7 MB. Łączenia panoramy Grani: 24 z 24 zgodne.
+0 błędów we wszystkich sześciu zestawach: Grań 38 plików, Szyld 38, Margines 38, Chochla 38, Kruszec 50, Bis 38. Łącznie opublikowane 73,0 MB (po rundzie 3). Łączenia panoramy Grani: 24 z 24 zgodne.
 
 ## Oceny z rubryki
 
@@ -82,18 +82,25 @@ Wszystkie 54 oceny wynoszą co najmniej 4. Blokada spoza rubryki z rundy 2, czyl
 - Scalenia z `main` i wdrożenia (zgodnie z ustaleniem robimy to razem).
 - Wpisów w `llms.txt`, `sites/README.md` i `REBRAND.md` (brief identyfikacji też ich nie dodawał).
 - Pliku `.icon` z Icon Composera (są warstwy ikon).
-- Uwag z rundy 2 uznanych za ryzykowne przy ocenach już powyżej progu, zapisanych w `PLAN.md` w punkcie 52:
-  - kadr 1 i rytm kadrów 4 do 6 w Kruszcu, grubszy szeryf i linia ikony
-  - cięższe nagłówki Marginesu, „fiszki” w kadrze 1, szkic w kadrze 3
-  - otwór po kodzie w kadrze 5 Szyldu i bardziej grejpfrutowy kadr 1
-  - błyski Bis na literach i telefon w kadrze 1 Google Play
-  - większy telefon w kadrze 2 Grani
-  - kontur dymka w feature graphic Chochli
-  - etykiety w kadrze 4 EN Kruszca i „na” na końcu wiersza w kadrze 1
-  - etykieta Marginesu przy 768 px
-  - krótszy nagłówek indeksu
+- Uwag z rundy 2 zapisanych w `PLAN.md` w punkcie 52: wszystkie wykonane w rundzie 3 (punkt 53), poza tym, co jest niżej.
+- Pojedyncze słowa w ostatnim wierszu w kilku nagłówkach przy 320 px i w części akapitów (istniały wcześniej, nagłówka nie da się skleić bez wyjścia poza ekran).
+- Pełnego budowania Gatsby w układzie wdrożenia nie powtarzano w rundzie 3; użyto statycznego serwera z `sites/dist` pod `/wzornik/` i `static` portfolio w korzeniu.
 
-## Decyzje do przeglądu (pełne w `PLAN.md`, 52 punkty)
+## Runda 3: poprawki z punktu 52
+
+Gałąź `wzornik-aso-r2` (z `main` 7accb02), dziesięć commitów, bez pusha i bez scalenia. Wszystkie zestawy przerenderowane dla obu sklepów i wszystkich języków, zasoby w `sites/public/aso/` i strony zaktualizowane.
+
+- Kruszec: wykres w kadrze 1 jako bohater całego kadru (linia wydłużona i pochylona, z wypełnieniem i siatką), jaśniejszy ton w kadrach 4 do 6, cięższy szeryf i linia ikony, kryjące etykiety w kadrze 4 EN, „na” przyklejone do akcentu w kadrze 1.
+- Margines: nagłówki na jednej zmierzonej, rwanej kartce, „fiszki” w nagłówku kadru 1 (PL i EN), szkic w polu rysunkowym kadru 3, etykieta „Odręczne adnotacje” w osobnym wierszu przy 768 px.
+- Szyld: pusty otwór po kodzie w kadrze 5 wypełniony cieniem kodu, bardziej grejpfrutowy kadr 1 (też wariant B).
+- Bis: błyski odsunięte od liter w kadrach 4 do 6 (App Store i Play), telefon w kadrze 1 Play 30 px niżej.
+- Grań: większy telefon w kadrze 2 (240 px w App Store, 208 px w Play), łączenia 24 z 24.
+- Chochla: gładki kontur ogonów dymków, także w feature graphic.
+- Indeks: krótszy nagłówek, balans tekstu w nagłówkach i akapitach.
+
+Kontrole: walidator 0 błędów w sześciu zestawach (Bis 38 plików, 12,5 MB opublikowane, całe ASO 73,0 MB), `guard` czysty we wszystkich sześciu, `distinct` bez zmian, testy studia 19 z 19, `astro check` 0 błędów, Prettier czysty, testy witryny 1411 z 1411, build 199 stron, główny `yarn.lock` bez zmian. Wszystkie strony przy 320, 390, 768, 1024 i 1440 px: bez poziomego przewijania, bez błędów konsoli, bez zepsutych obrazków. Wszystkie przerenderowane plansze i zrzuty zmienionych stron obejrzane.
+
+## Decyzje do przeglądu (pełne w `PLAN.md`, 53 punkty)
 
 1. Nazwy sprawdzone w wyszukiwarce; to nie jest analiza prawna.
 2. Adresy pod `/wzornik/aso/`.
@@ -151,7 +158,7 @@ Wszystkie 54 oceny wynoszą co najmniej 4. Blokada spoza rubryki z rundy 2, czyl
 ## Co może dostarczyć tylko Adrian
 
 - Zgodę na scalenie z `main` i wdrożenie.
-- Wybór poprawek z listy na później (punkt 52).
+- Przegląd decyzji z punktu 53 (runda 3).
 - Ewentualne sprawdzenie prawne nazw.
 - Akceptację decyzji, zwłaszcza 4, 8 i 18.
 
