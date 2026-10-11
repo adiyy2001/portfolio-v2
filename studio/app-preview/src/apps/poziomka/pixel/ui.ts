@@ -88,8 +88,9 @@ export const fadeLevel = (t: number, from: number, to: number) => {
   if (t < from || t > to) return 0;
   const a = t - from;
   const b = to - t;
-  if (a < 2 || b < 2) return 6;
-  if (a < 4 || b < 4) return 11;
+  const resolved = from === 0;
+  if ((!resolved && a < 2) || b < 2) return 6;
+  if ((!resolved && a < 4) || b < 4) return 11;
   return 16;
 };
 

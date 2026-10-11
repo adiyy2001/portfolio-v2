@@ -1,5 +1,6 @@
 export const T = {
   hookCoins: [6, 26],
+  hookRoll: 12,
   quests: 60,
   tapWater: 86,
   tapWalk: 136,

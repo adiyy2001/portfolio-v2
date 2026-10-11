@@ -59,11 +59,15 @@ export const drawLevelUp = (fb: FB, f: number, opts: { coins?: boolean } = {}) =
     coinPop(fb, 30, 176, cycle(f - a), '+30 XP');
     coinPop(fb, 160, 148, cycle(f - b), '+10 XP');
   }
-  fb.panel(16, 266, W - 32, 46, C.cream, C.ink, C.gold);
-  text(fb, 26, 274, 'POZIOM 8', { color: C.ink });
-  text(fb, W - 26, 274, `${level.to} / ${level.nextTo} XP`, { color: C.dusk, align: 'right' });
-  xpBar(fb, 26, 288, blinkOn((((f + 6) % 48) + 48) % 48, 0, 4) ? 2 : 0, 169);
-  text(fb, 26, 300, 'Do poziomu 9: 200 XP', { color: C.dusk });
+  const rolled = f >= T.hookRoll;
+  const flash = f >= T.hookRoll && f < T.hookRoll + 4 && Math.floor((f - T.hookRoll) / 2) % 2 === 0;
+  const drain = Math.max(0, 169 - Math.floor((f - T.hookRoll - 4) / 3) * 56);
+  const bar = f < T.hookRoll ? 169 : f < T.hookRoll + 4 ? 169 : drain > 2 ? drain : blinkOn((((f + 6) % 48) + 48) % 48, 0, 4) ? 2 : 0;
+  fb.panel(16, 266, W - 32, 46, flash ? C.gold : C.cream, C.ink, C.gold);
+  text(fb, 26, 274, rolled ? 'POZIOM 8' : 'POZIOM 7', { color: C.ink });
+  text(fb, W - 26, 274, rolled ? `${level.to} / ${level.nextTo} XP` : `${level.to} / ${level.to} XP`, { color: C.dusk, align: 'right' });
+  xpBar(fb, 26, 288, bar, 169);
+  text(fb, 26, 300, rolled ? 'Do poziomu 9: 200 XP' : 'Do poziomu 8: 0 XP', { color: C.dusk });
   fb.panel(16, 318, W - 32, 40, C.plum, C.ink);
   fb.sprite(26, 328, S.plantStages.sadzonka.slice(2, 14), S.ink);
   text(fb, 48, 326, 'NAGRODA ZA POZIOM 8', { color: C.gold });
