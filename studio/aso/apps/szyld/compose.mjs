@@ -30,6 +30,7 @@ const grainSvg = (w, h, { freq = 0.8, opacity = 0.38, seed = 7 } = {}) =>
 
 const duotones = {
   a: (angle, mid = 34) => `linear-gradient(${angle}deg in oklab, ${c.butelka} 0%, ${c.butelka} ${mid}%, #3F8A4E ${mid + 30}%, ${c.limonka} 100%)`,
+  c: (angle, mid = 24) => `linear-gradient(${angle}deg in oklab, ${c.butelka} 0%, ${c.butelka} ${mid}%, ${c.grejpfrut} ${mid + 36}%, #FF9A3E ${mid + 52}%, ${c.limonka} 100%)`,
   b: (angle, mid = 22) => `linear-gradient(${angle}deg in oklab, ${c.grejpfrut} 0%, ${c.grejpfrut} ${mid}%, #FF9A3E ${mid + 34}%, ${c.limonka} 100%)`,
 };
 
@@ -99,7 +100,7 @@ const layouts = {
     head: 50,
     frames: [
       {
-        bg: { tone: 'a', angle: 158, mid: 30, glow: { x: 420, y: 900, r: 420, color: 'rgba(213,242,92,.55)' } },
+        bg: { tone: 'c', angle: 158, mid: 20, glow: { x: 420, y: 900, r: 420, color: 'rgba(213,242,92,.55)' } },
         head: { x: 26, y: 60, w: 392, size: 48 },
         device: { width: 336, x: 72, y: 330, transform: 'rotateY(-20deg) rotateZ(7deg)' },
         perspective: 1000,
@@ -154,7 +155,7 @@ const layouts = {
       },
     ],
     variantB: {
-      bg: { tone: 'a', angle: 158, mid: 30, glow: { x: 420, y: 900, r: 420, color: 'rgba(213,242,92,.55)' } },
+      bg: { tone: 'c', angle: 158, mid: 20, glow: { x: 420, y: 900, r: 420, color: 'rgba(213,242,92,.55)' } },
       head: { x: 26, y: 60, w: 392, size: 48 },
       device: { width: 336, x: 80, y: 360, transform: 'rotateY(-20deg) rotateZ(7deg)' },
       perspective: 1000,
@@ -168,7 +169,7 @@ const layouts = {
     head: 31,
     frames: [
       {
-        bg: { tone: 'a', angle: 158, mid: 30, glow: { x: 350, y: 600, r: 300, color: 'rgba(213,242,92,.55)' } },
+        bg: { tone: 'c', angle: 158, mid: 20, glow: { x: 350, y: 600, r: 300, color: 'rgba(213,242,92,.55)' } },
         head: { x: 22, y: 34, w: 300, size: 31 },
         device: { width: 250, x: 82, y: 214, transform: 'rotateY(-20deg) rotateZ(7deg)' },
         perspective: 800,
@@ -223,7 +224,7 @@ const layouts = {
       },
     ],
     variantB: {
-      bg: { tone: 'a', angle: 158, mid: 30, glow: { x: 350, y: 600, r: 300, color: 'rgba(213,242,92,.55)' } },
+      bg: { tone: 'c', angle: 158, mid: 20, glow: { x: 350, y: 600, r: 300, color: 'rgba(213,242,92,.55)' } },
       head: { x: 22, y: 34, w: 300, size: 31 },
       device: { width: 250, x: 82, y: 214, transform: 'rotateY(-20deg) rotateZ(7deg)' },
       perspective: 800,
