@@ -47,7 +47,7 @@ export const MyTickets = ({
             <div key={item.title} style={{ position: 'relative', height: 64, padding: '11px 16px', boxSizing: 'border-box' }}>
               <div style={text('body', { fontWeight: 500, color: color.secondary })}>{item.title}</div>
               <div style={text('caption', { fontWeight: 400, color: color.secondary })}>{item.meta}</div>
-              {i === 0 && <Abs style={{ left: 16, right: 0, bottom: 0, height: 1, background: color.separator }} />}
+              {i < myTickets.used.length - 1 && <Abs style={{ left: 16, right: 0, bottom: 0, height: 1, background: color.separator }} />}
             </div>
           ))}
         </Abs>

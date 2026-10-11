@@ -30,7 +30,7 @@ const hookCard = (f: number) => ({
   live: 1,
   validated: 1,
   remaining: hookRemaining - f / 30,
-  shimmer: interpolate(f, [8, 44], [-0.25, 1.25], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: inOut }),
+  shimmer: interpolate(f, [0, 38], [0.1, 1.25], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: inOut }),
 });
 
 export const liveCardAt = (f: number) => ({
@@ -44,12 +44,14 @@ export const liveCardAt = (f: number) => ({
 
 const timeAt = (f: number) => (f < T.dismiss ? times.hook : f < 225 ? times.buy : times.validate);
 
-const HookScreen = ({ f, time }: { f: number; time: string }) => (
-  <LiveTicket time={time} card={hookCard(f)} />
+const HookScreen = ({ f, time, next }: { f: number; time: string; next: number }) => (
+  <LiveTicket time={time} card={hookCard(f)} next={next} />
 );
 
-export const Scene = ({ frame, hideCard = false }: { frame: number; hideCard?: boolean }) => {
+export const Scene = ({ frame, hideCard = false, overlays = false }: { frame: number; hideCard?: boolean; overlays?: boolean }) => {
   const f = frame;
+  const covered = overlays && (f <= 66 || f >= storyboard.duration || (f >= 326 && f <= 394));
+  const next = covered ? 0 : 1;
   const time = timeAt(f);
   const bar = <StatusBar time={time} color={color.ink} fontFamily={fontFamily} />;
 
@@ -66,7 +68,7 @@ export const Scene = ({ frame, hideCard = false }: { frame: number; hideCard?: b
     return (
       <div style={layer}>
         <div style={layer}>
-          <HookScreen f={0} time="" />
+          <HookScreen f={0} time="" next={next} />
         </div>
         <div style={{ ...layer, opacity: 1 - show }}>
           <Launch icon={1} name={Math.max(0, 1 - t * 2.5)} />
@@ -88,7 +90,7 @@ export const Scene = ({ frame, hideCard = false }: { frame: number; hideCard?: b
   if (f < T.dismiss) {
     return (
       <div style={layer}>
-        <HookScreen f={f} time="" />
+        <HookScreen f={f} time="" next={next} />
         {bar}
       </div>
     );
@@ -119,7 +121,7 @@ export const Scene = ({ frame, hideCard = false }: { frame: number; hideCard?: b
         )}
         {d < 1 && (
           <div style={{ ...layer, transform: `translateY(${d * 960}px)` }}>
-            <HookScreen f={f} time="" />
+            <HookScreen f={f} time="" next={next} />
           </div>
         )}
         {bar}
@@ -159,7 +161,7 @@ export const Scene = ({ frame, hideCard = false }: { frame: number; hideCard?: b
       <div style={layer}>
         {f < T.hero + 30 && <MyTickets time="" land={1} hideCard tabHide={e / 0.85} />}
         <div style={{ ...layer, opacity: Math.min(1, e * 1.4) }}>
-          <LiveTicket time="" card={card} hideCard chrome={window01(e, 0.5, 1)} pressInspector={tap(f, T.inspectorPress)} />
+          <LiveTicket time="" card={card} hideCard chrome={window01(e, 0.5, 1)} pressInspector={tap(f, T.inspectorPress)} next={next} />
         </div>
         {!hideCard && (
           <div style={{ position: 'absolute', ...rect }}>
@@ -173,18 +175,20 @@ export const Scene = ({ frame, hideCard = false }: { frame: number; hideCard?: b
     );
   }
 
-  if (f < T.white + 15) {
+  if (f < T.white + 14) {
     const p = springAt(hero, f, T.inspector);
     const bloom = Math.sin(Math.PI * window01(f, T.inspector, T.inspector + 32)) * 0.55;
-    const white = bezierAt(fade, f, T.white);
+    const w = inOut(window01(f, T.white, T.white + 12));
     return (
       <div style={layer}>
-        <LiveTicket time="" card={{ ...card, hideQr: true, hideClock: true }} chrome={1 - p} />
-        <div style={{ ...layer, background: `rgba(255,255,255,${Math.min(1, p)})` }} />
-        <Inspector time="" progress={p} frame={f} remaining={remainingAt(f)} solid={false} />
-        <div style={{ ...layer, background: `radial-gradient(circle at 50% 40%, rgba(255,255,255,${bloom}) 0%, rgba(255,255,255,${bloom * 0.5}) 70%)` }} />
+        {f >= T.white && <Launch icon={springAt(hero, f, T.launchIcon)} name={bezierAt(fade, f, T.launchName)} />}
+        <div style={{ ...layer, opacity: 1 - w, transform: `scale(${mix(1, 0.7, w)})`, transformOrigin: '50% 34%' }}>
+          <LiveTicket time="" card={{ ...card, hideQr: true, hideClock: true }} chrome={1 - p} />
+          <div style={{ ...layer, background: `rgba(255,255,255,${Math.min(1, p)})` }} />
+          <Inspector time="" progress={p} frame={f} remaining={remainingAt(f)} solid={false} />
+          <div style={{ ...layer, background: `radial-gradient(circle at 50% 40%, rgba(255,255,255,${bloom}) 0%, rgba(255,255,255,${bloom * 0.5}) 70%)` }} />
+        </div>
         {bar}
-        <div style={{ ...layer, background: `rgba(255,255,255,${white})` }} />
       </div>
     );
   }

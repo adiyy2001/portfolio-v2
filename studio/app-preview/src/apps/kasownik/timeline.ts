@@ -23,8 +23,8 @@ export const T = {
   inspectorPress: 542,
   inspector: 550,
   white: 600,
-  launchIcon: 618,
-  launchName: 634,
+  launchIcon: 604,
+  launchName: 620,
   end: 690,
 } as const;
 

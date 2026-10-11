@@ -17,7 +17,7 @@ export const OverlayLabel = ({
   if (wordCount(overlay.text) > overlayRules.maxWords) throw new Error(`overlay too long: ${overlay.text}`);
   if (overlay.to - overlay.from + 1 < overlayRules.minFrames) throw new Error(`overlay too short: ${overlay.text}`);
   if (frame < overlay.from || frame > overlay.to) return null;
-  const inT = ease(interpolate(frame, [overlay.from, overlay.from + 8], [0, 1], { extrapolateRight: 'clamp' }));
+  const inT = overlay.from === 0 ? 1 : ease(interpolate(frame, [overlay.from, overlay.from + 8], [0, 1], { extrapolateRight: 'clamp' }));
   const outT = ease(interpolate(frame, [overlay.to - 6, overlay.to], [0, 1], { extrapolateLeft: 'clamp' }));
   const opacity = Math.min(inT, 1 - outT);
   return (
