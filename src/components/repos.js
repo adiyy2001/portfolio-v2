@@ -38,8 +38,8 @@ const list = [
   {
     id: 'fieldline',
     line: 'Angular, TypeScript, WebGPU, WGSL, NgRx SignalStore, Web Workers',
-    pl: 'Pole elektryczne i magnetyczne wokół linii wysokiego napięcia liczone na GPU, z konturami ekspozycji i optymalizatorem faz. Model 2D odtwarza 13 z 14 wysokości z opublikowanego badania.',
-    en: 'The electric and magnetic field around a high-voltage line computed on the GPU, with exposure contours and a phasing optimizer. The 2D model reproduces 13 of 14 heights from a published study.',
+    pl: 'Pole elektryczne i magnetyczne wokół linii wysokiego napięcia liczone na GPU, z konturami ekspozycji i optymalizatorem faz. Model 2D odtwarza 13 z 14 przypadków z opublikowanego badania.',
+    en: 'The electric and magnetic field around a high-voltage line computed on the GPU, with exposure contours and a phasing optimizer. The 2D model reproduces 13 of 14 cases from a published study.',
   },
 ];
 
