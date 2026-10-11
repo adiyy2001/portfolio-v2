@@ -90,7 +90,7 @@ export const Scramble = ({
   );
 };
 
-export const Label = ({ children, fill = color.muted, size = 12, style }: { children: ReactNode; fill?: string; size?: number; style?: CSSProperties }) => (
+export const Label = ({ children, fill = color.muted, size = 13, style }: { children: ReactNode; fill?: string; size?: number; style?: CSSProperties }) => (
   <span style={{ fontFamily: fontMono, fontWeight: 500, fontSize: size, lineHeight: `${Math.round(size * 1.35)}px`, letterSpacing: size * 0.12, textTransform: 'uppercase', color: fill, ...style }}>
     {children}
   </span>
@@ -252,7 +252,7 @@ export const Tag = ({ text, tone, style }: { text: string; tone: string; style?:
         boxShadow: `inset 0 0 0 1px ${tone === 'muted' ? color.dim : c}`,
         fontFamily: fontMono,
         fontWeight: 500,
-        fontSize: 11,
+        fontSize: 12,
         letterSpacing: 0.3,
         color: c,
         whiteSpace: 'nowrap',

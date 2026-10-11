@@ -23,7 +23,8 @@ export const Caption = ({ overlay, frame }: { overlay: Overlay; frame: number })
   if (wordCount(overlay.text) > overlayRules.maxWords) throw new Error(`overlay too long: ${overlay.text}`);
   if (frames < overlayRules.minFrames || frames < readingFrames(overlay.text)) throw new Error(`overlay too short: ${overlay.text}`);
   if (frame < overlay.from || frame > overlay.to) return null;
-  const box = progress(frame, overlay.from, 6, inOut);
+  const resolved = overlay.from === 0;
+  const box = resolved ? 1 : progress(frame, overlay.from, 6, inOut);
   const out = progress(frame, overlay.to - 5, 6, inOut);
   return (
     <div style={{ position: 'absolute', left: 0, right: 0, top: overlay.top, display: 'flex', justifyContent: 'center', zIndex: 80, opacity: 1 - out }}>
@@ -35,8 +36,8 @@ export const Caption = ({ overlay, frame }: { overlay: Overlay; frame: number })
           padding: '13px 20px 12px',
           fontFamily: fontMono,
           fontWeight: 500,
-          fontSize: 19,
-          lineHeight: '24px',
+          fontSize: 21,
+          lineHeight: '26px',
           color: color.text,
           whiteSpace: 'nowrap',
           clipPath: `inset(0 ${(1 - box) * 50}% 0 ${(1 - box) * 50}%)`,
@@ -45,7 +46,7 @@ export const Caption = ({ overlay, frame }: { overlay: Overlay; frame: number })
           gap: 12,
         }}>
         <span style={{ width: 8, height: 18, background: color.cyan, boxShadow: glow(color.cyan, 0.5, 6) }} />
-        <Scramble text={overlay.text} f={frame} start={overlay.from + 3} opts={overlayOpts} />
+        <Scramble text={overlay.text} f={frame} start={resolved ? -999 : overlay.from + 3} opts={overlayOpts} />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { alert, user } from '../content';
 import { color, rgba } from '../tokens';
+import { T } from '../timeline';
 import { Abs, Button, Dot, Label, Panel, Screen, Wordmark, inner, pulseAt, side } from '../components/ui';
 
 export const alertRing = { cx: 221.5, cy: 190, r: 62 } as const;
@@ -7,7 +8,8 @@ export const alertRing = { cx: 221.5, cy: 190, r: 62 } as const;
 const rows: [string, string][] = [['Konto', user.email], ...alert.rows];
 
 export const AlertScreen = ({ f, press = 0 }: { f: number; press?: number }) => {
-  const p = pulseAt(f);
+  const scanning = f >= T.hookScan && f <= T.hookScan + T.hookScanFrames;
+  const p = scanning ? 0.5 : pulseAt(f);
   const { cx, cy, r } = alertRing;
   return (
     <Screen time={alert.time}>
@@ -38,12 +40,12 @@ export const AlertScreen = ({ f, press = 0 }: { f: number; press?: number }) => 
           {alert.kicker}
         </Label>
       </Abs>
-      <Abs style={{ left: side, right: side, top: 300, textAlign: 'center', fontWeight: 700, fontSize: 24, lineHeight: '31px', color: color.text }}>
+      <Abs style={{ left: side, right: side, top: 296, textAlign: 'center', fontWeight: 700, fontSize: 28, lineHeight: '35px', color: color.text }}>
         Twój adres e-mail
         <br />
         pojawił się w wycieku
       </Abs>
-      <Panel style={{ left: side, top: 386, width: inner, height: 292 }} outline={color.alert} glowAlpha={p * 0.8}>
+      <Panel style={{ left: side, top: 392, width: inner, height: 292 }} outline={color.alert} glowAlpha={p * 0.8}>
         {rows.map(([term, value], i) => (
           <div
             key={term}
@@ -60,7 +62,7 @@ export const AlertScreen = ({ f, press = 0 }: { f: number; press?: number }) => 
               borderTop: i ? `1px solid ${rgba(color.alert, 0.28)}` : undefined,
             }}>
             <Label>{term}</Label>
-            <span style={{ fontSize: i === 1 ? 15 : 14, fontWeight: i === 1 ? 700 : 500, color: i === 4 ? color.alert : color.text, textAlign: 'right' }}>{value}</span>
+            <span style={{ fontSize: i === 1 ? 16 : 15, fontWeight: i === 1 ? 700 : 500, color: i === 4 ? color.alert : color.text, textAlign: 'right' }}>{value}</span>
           </div>
         ))}
       </Panel>

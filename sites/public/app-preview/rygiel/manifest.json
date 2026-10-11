@@ -7,7 +7,7 @@
     "zone": "sejf 214 wpisów",
     "tagline": "Alert o wycieku w kilka godzin, nowe hasło w trzy sekundy i sejf, który pokazuje, co poprawić."
   },
-  "generatedAt": "2026-10-08",
+  "generatedAt": "2026-10-11",
   "storyboard": {
     "fps": 30,
     "duration": 720,
@@ -24,7 +24,7 @@
         "action": "Od pierwszej klatki karta alertu w kolorze alarmu: serwis, daty i co wyciekło. Przez ekran przechodzi linia skanu, pierścień alertu pulsuje.",
         "overlay": {
           "text": "Wiesz o wycieku pierwszy",
-          "from": 4,
+          "from": 0,
           "to": 75,
           "top": 724
         },
@@ -386,7 +386,7 @@
     "hero": {
       "webm": {
         "path": "rygiel-hero.webm",
-        "bytes": 1828914,
+        "bytes": 1835830,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -395,12 +395,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 622609,
+        "bitrate": 624963,
         "audio": null
       },
       "mp4": {
         "path": "rygiel-hero.mp4",
-        "bytes": 2110657,
+        "bytes": 2113071,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -409,7 +409,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 718521,
+        "bitrate": 719343,
         "audio": null
       },
       "poster": "posters/rygiel-hero.jpg"
@@ -417,7 +417,7 @@
     "hero-9x16": {
       "webm": {
         "path": "rygiel-hero-9x16.webm",
-        "bytes": 1305213,
+        "bytes": 1381887,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -426,12 +426,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 444327,
+        "bitrate": 470429,
         "audio": null
       },
       "mp4": {
         "path": "rygiel-hero-9x16.mp4",
-        "bytes": 1513678,
+        "bytes": 1571115,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -440,7 +440,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 515294,
+        "bitrate": 534847,
         "audio": null
       },
       "poster": "posters/rygiel-hero-9x16.jpg"
@@ -448,7 +448,7 @@
     "social-1x1": {
       "webm": {
         "path": "rygiel-social-1x1.webm",
-        "bytes": 1359652,
+        "bytes": 1176684,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -457,12 +457,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 462860,
+        "bitrate": 400573,
         "audio": null
       },
       "mp4": {
         "path": "rygiel-social-1x1.mp4",
-        "bytes": 1479369,
+        "bytes": 1302997,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -471,7 +471,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 503614,
+        "bitrate": 443573,
         "audio": null
       },
       "poster": "posters/rygiel-social-1x1.jpg"
@@ -479,7 +479,7 @@
     "store": {
       "webm": {
         "path": "rygiel-store.webm",
-        "bytes": 1387273,
+        "bytes": 1422757,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -488,12 +488,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 452987,
+        "bitrate": 464573,
         "audio": null
       },
       "mp4": {
         "path": "rygiel-store.mp4",
-        "bytes": 1374283,
+        "bytes": 1401331,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -502,7 +502,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 448745,
+        "bitrate": 457577,
         "audio": null
       },
       "poster": "posters/rygiel-store.jpg"
@@ -510,7 +510,7 @@
     "tile": {
       "webm": {
         "path": "rygiel-tile.webm",
-        "bytes": 234391,
+        "bytes": 245793,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -519,12 +519,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 375025,
+        "bitrate": 393268,
         "audio": null
       },
       "mp4": {
         "path": "rygiel-tile.mp4",
-        "bytes": 247375,
+        "bytes": 257291,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -533,7 +533,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 395800,
+        "bitrate": 411665,
         "audio": null
       },
       "poster": "posters/rygiel-tile.jpg"
@@ -546,7 +546,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "rygiel-store-886x1920.mp4",
       "path": "rygiel-store-886x1920.mp4",
-      "bytes": 34357571,
+      "bytes": 34262951,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -555,7 +555,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11452523,
+      "bitrate": 11420983,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -564,7 +564,7 @@
       "note": "Reels, TikTok i Shorts",
       "name": "rygiel-social-1080x1920.mp4",
       "path": "rygiel-social-1080x1920.mp4",
-      "bytes": 17766370,
+      "bytes": 18924945,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -573,7 +573,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 6179606,
+      "bitrate": 6582589,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -582,7 +582,7 @@
       "note": "post w kanale",
       "name": "rygiel-social-1080x1080.mp4",
       "path": "rygiel-social-1080x1080.mp4",
-      "bytes": 11343924,
+      "bytes": 12873595,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -591,7 +591,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 3945712,
+      "bitrate": 4477772,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -600,7 +600,7 @@
       "note": "YouTube, link w Google Play",
       "name": "rygiel-social-1920x1080.mp4",
       "path": "rygiel-social-1920x1080.mp4",
-      "bytes": 19549943,
+      "bytes": 20236312,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -609,7 +609,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 6799980,
+      "bitrate": 7038717,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -618,16 +618,16 @@
     "rounded": "rygiel-icon-512.png"
   },
   "renderSeconds": {
-    "stills": 18,
-    "store": 170,
-    "marketing-9x16": 443,
-    "marketing-1x1": 265,
-    "marketing-16x9": 420,
-    "tile": 23
+    "stills": 16,
+    "store": 92,
+    "marketing-9x16": 207,
+    "marketing-1x1": 146,
+    "marketing-16x9": 189,
+    "tile": 10
   },
   "validation": true,
   "published": {
-    "totalBytes": 14221498,
+    "totalBytes": 14159428,
     "count": 31
   }
 }

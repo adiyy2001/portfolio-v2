@@ -36,13 +36,13 @@ const layouts: Record<Format, Layout> = {
     outro: { cy: 520, icon: 200, name: 120, tagline: 30 },
   },
   '9x16': {
-    phone: { scale: 1.16, left: 264, top: 548 },
-    text: { left: 80, top: 236, width: 860, size: 74, line: 32, kicker: 24, align: 'left' },
+    phone: { scale: 1.32, left: 226, top: 520 },
+    text: { left: 80, top: 190, width: 920, size: 70, line: 32, kicker: 26, align: 'left' },
     outro: { cy: 900, icon: 240, name: 128, tagline: 32 },
   },
   '1x1': {
-    phone: { scale: 0.74, left: 364, top: 330 },
-    text: { left: 60, top: 64, width: 960, size: 64, line: 27, kicker: 20, align: 'center' },
+    phone: { scale: 1.2, left: 484, top: 48 },
+    text: { left: 56, top: 84, width: 420, size: 54, line: 24, kicker: 20, align: 'left' },
     outro: { cy: 500, icon: 180, name: 104, tagline: 26 },
   },
 };
@@ -104,6 +104,29 @@ const Phone = ({ f, layout }: { f: number; layout: Layout }) => {
       <PhoneFrame scale={scale} theme={phoneTheme}>
         <StoreFrame frame={Math.min(f, marketing.outro + 20)} overlays={false} gridFrame={f} gridTotal={loopTotal} />
       </PhoneFrame>
+      {[0, 1, 2, 3].map(k => {
+        const m = 26;
+        const len = 56 * Math.max(1, scale);
+        const w = 4;
+        const right = k % 2 === 1;
+        const bottom = k > 1;
+        return (
+          <div
+            key={k}
+            style={{
+              position: 'absolute',
+              [right ? 'right' : 'left']: -m,
+              [bottom ? 'bottom' : 'top']: -m,
+              width: len,
+              height: len,
+              [`border${bottom ? 'Bottom' : 'Top'}`]: `${w}px solid ${color.cyan}`,
+              [`border${right ? 'Right' : 'Left'}`]: `${w}px solid ${color.cyan}`,
+              filter: `drop-shadow(0 0 6px ${color.cyan})`,
+              opacity: 0.85,
+            }}
+          />
+        );
+      })}
       <div
         style={{
           position: 'absolute',
@@ -125,16 +148,24 @@ const Copy = ({ f, layout }: { f: number; layout: Layout }) => {
   const start = first ? -999 : beat.from;
   const { text } = layout;
   const fill = first ? color.alert : color.cyan;
+  const out = first ? 0 : progress(f, beat.from + 2, 8, inOut);
+  const into = first ? 1 : progress(f, beat.from + 12, 8, inOut);
+  const lineOf = (k: number, o: number) => (
+    <div style={{ position: 'absolute', left: 0, right: 0, top: 0, opacity: o }}>{marketingBeats[k].line}</div>
+  );
   return (
     <div style={{ position: 'absolute', left: text.left, top: text.top, width: text.width, textAlign: text.align }}>
       <div style={{ fontSize: text.kicker, lineHeight: 1.3, fontWeight: 500, letterSpacing: text.kicker * 0.14, color: color.muted }}>
-        <Morph text={kickers[i]} prev={first ? '' : kickers[i - 1]} f={f} start={start} fill={color.muted} step={0.5} />
+        <Morph text={kickers[i]} prev={first ? '' : kickers[i - 1]} f={f} start={first ? -999 : start + 22} fill={color.muted} step={0.5} />
       </div>
       <div style={{ marginTop: text.kicker * 0.8, fontSize: text.size, lineHeight: 1.08, fontWeight: 700, letterSpacing: -text.size * 0.02 }}>
+        <span style={{ color: color.cyan }}>{'> '}</span>
         <Morph text={beat.title} prev={prev} f={f} start={start + 2} fill={fill} />
+        <span style={{ display: 'inline-block', width: '0.5em', height: '0.78em', marginLeft: '0.12em', background: color.cyan, verticalAlign: '-0.04em', opacity: f % 30 < 18 ? 1 : 0 }} />
       </div>
-      <div style={{ marginTop: text.size * 0.3, fontSize: text.line, lineHeight: 1.35, fontWeight: 400, color: color.text, minHeight: text.line * 2.7 }}>
-        <Morph text={beat.line} prev={i > 0 ? marketingBeats[i - 1].line : ''} f={f} start={start + 16} fill={color.text} step={0.5} />
+      <div style={{ position: 'relative', marginTop: text.size * 0.3, fontSize: text.line, lineHeight: 1.35, fontWeight: 400, color: color.text, minHeight: text.line * 2.7 }}>
+        {i > 0 && lineOf(i - 1, 1 - out)}
+        {lineOf(i, first ? 1 : into)}
       </div>
     </div>
   );
