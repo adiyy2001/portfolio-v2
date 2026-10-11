@@ -60,7 +60,7 @@ const eventhorizon = {
         name: 'Jeden znak decyduje, która strona dysku jest jasna.',
         text: 'Promienie biegną wstecz od kamery, więc foton porusza się w kierunku przeciwnym do stycznej, którą śledzę. Zły znak momentu pędu zamienia jasną i ciemną stronę dysku, a obraz nadal wygląda wiarygodnie. Znak ma ręcznie policzone testy i test fizyczny: strona zbliżająca się do kamery musi wyjść jaśniejsza i bardziej niebieska. Jeden czynnik g obejmuje przesunięcie grawitacyjne, dopplerowskie i dylatację czasu, a dwa przełączniki mnożą go przez różne jego części.',
         cost: 'Cena: „Doppler beaming” wyłącza razem beaming i poprzeczną dylatację czasu, a tekst pomocy to zaznacza.',
-        lost: 'Przegrały: jeden przełącznik „relatywistyczne przesunięcie”, moment pędu liczony z kierunku fotonu do przodu bez odwrócenia znaku oraz skala jasności dysku według luminancji w paśmie widzialnym zamiast (T/6500)^4 (bliższa temu, co rejestruje kamera, ale model dysku przyjmuje g^4).',
+        lost: 'Przegrały: jeden przełącznik „relatywistyczne przesunięcie” oraz moment pędu liczony z kierunku fotonu do przodu bez odwrócenia znaku.',
         adr: ['ADR 0007', adr('0007-disk-model-and-redshift-factor')],
       },
       {
@@ -190,7 +190,7 @@ const eventhorizon = {
         name: 'One sign decides which side of the disk is bright.',
         text: 'The tracer runs backwards from the camera. A wrong sign of the angular momentum swaps the bright and dim sides and still looks plausible. The sign has hand-computed unit tests and a physical test: the side moving towards the camera must come out brighter and bluer. One factor g covers redshift, Doppler shift and time dilation, and the two switches multiply it by different parts.',
         cost: 'The cost: “Doppler beaming” removes the beaming and the transverse time dilation together, and the help text says so.',
-        lost: 'What lost: a single “relativistic shift” switch, an angular momentum from the forward photon direction with no sign flip, and disk brightness scaled by visible-band luminance (closer to a camera, but the disk model uses g^4).',
+        lost: 'What lost: a single “relativistic shift” switch and an angular momentum from the forward photon direction with no sign flip.',
         adr: ['ADR 0007', adr('0007-disk-model-and-redshift-factor')],
       },
       {

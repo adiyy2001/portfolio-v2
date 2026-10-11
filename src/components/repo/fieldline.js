@@ -104,7 +104,7 @@ const fieldline = {
     gaps: [
       [
         'Ziemia i przewody odgromowe',
-        'Prądy powrotne przez ziemię i prądy w przewodach odgromowych są pominięte. Oszacowanie dla niezrównoważonej reszty to 0,2 µT przy ziemi, a pominięcie przewodów odgromowych zawyża B.',
+        'Prądy powrotne przez ziemię i prądy w przewodach odgromowych są pominięte. Dla niezrównoważonej reszty równej pełnym 1000 A oszacowanie daje 0,2 µT przy ziemi, a pominięcie przewodów odgromowych zawyża B.',
       ],
       [
         'Jedna linia, płaski teren',
@@ -123,7 +123,7 @@ const fieldline = {
         'Kreski konturów na GPU idą wzdłuż dominującej osi gradientu, więc na bardzo stromych konturach ich długość nie jest dokładnie stała.',
       ],
     ],
-    next: 'Najpierw obraz zespolony Deriego dla prądów powrotnych przez ziemię, potem krótsze segmenty przy słupach, a potem pomiary na średniej klasy dyskretnym GPU.',
+    next: 'Trzy rzeczy: obraz zespolony Deriego dla prądów powrotnych przez ziemię, krótsze segmenty przy słupach i pomiary na średniej klasy dyskretnym GPU.',
     gapsAdr: ['ADR 0025: pominięte dodatki', adr('0025-stretch-goals-left-out')],
     stack: [
       'Angular',
@@ -235,7 +235,7 @@ const fieldline = {
     gaps: [
       [
         'Earth return and shield wires',
-        'Earth return and shield wire currents are ignored. The estimate for an unbalanced remainder is 0.2 µT at the ground, and leaving out the shield wires errs high for B.',
+        'Earth return and shield wire currents are ignored. The estimate for an unbalanced remainder of a full 1000 A is 0.2 µT at the ground, and leaving out the shield wires errs high for B.',
       ],
       [
         'One line, flat ground',
@@ -254,7 +254,7 @@ const fieldline = {
         'On the GPU the contour dashes follow the dominant axis of the gradient, so on very steep contours their length is not exactly constant.',
       ],
     ],
-    next: 'First Deri’s complex image for earth return, then shorter segments next to the towers, then measurements on a mid-range discrete GPU.',
+    next: 'Three things: Deri’s complex image for earth return, shorter segments next to the towers and measurements on a mid-range discrete GPU.',
     gapsAdr: ['ADR 0025: the extras left out', adr('0025-stretch-goals-left-out')],
     stack: [
       'Angular',
