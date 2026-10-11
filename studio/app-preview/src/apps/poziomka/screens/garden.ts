@@ -59,12 +59,12 @@ const chest = (fb: FB, f: number, still: boolean) => {
     fb.sprite(cx - 16, base - 18, S.chestBase, S.ink, { scale: 2 });
   }
   if (still || f >= T.canRise) {
-    if (still || f < T.newItem || blinkOn(f, T.newItem, 2)) text(fb, 80, 284, 'NOWY PRZEDMIOT', { color: C.gold });
-    text(fb, 80, 298, 'Miedziana', { font: 'pixel', color: C.cream });
-    text(fb, 80, 314, 'konewka', { font: 'pixel', color: C.cream });
-    text(fb, 80, 330, garden.unlockNote, { color: C.berryLight });
+    if (still || f < T.newItem || blinkOn(f, T.newItem, 2)) text(fb, 80, 279, 'NOWY PRZEDMIOT', { font: 'pixel', color: C.gold });
+    text(fb, 80, 293, 'Miedziana', { font: 'pixel', color: C.cream });
+    text(fb, 80, 307, 'konewka', { font: 'pixel', color: C.cream });
+    text(fb, 80, 321, garden.unlockNote, { font: 'pixel', color: C.berryLight });
   } else {
-    text(fb, 80, 290, 'SKRZYNIA ZA PASSĘ', { color: C.gold });
+    text(fb, 80, 288, 'SKRZYNIA ZA PASSĘ', { font: 'pixel', color: C.gold });
     text(fb, 80, 304, '21 DNI', { font: 'pixel', color: C.cream });
   }
 };
@@ -73,7 +73,7 @@ export const drawGarden = (fb: FB, f: number, opts: { still?: boolean } = {}) =>
   const still = Boolean(opts.still);
   fb.rect(0, 0, W, fb.h, C.sky);
   statusBar(fb, garden.time);
-  header(fb, garden.title, 'Passa 21 dni: poziomka owocuje');
+  header(fb, garden.title, 'Passa 21 dni');
   const pose = plantPose(f, still);
   fb.rect(8, 54, 205, 156, C.ink);
   gardenScene(fb, 9, 55, 203, 154, f, pose);
@@ -84,12 +84,12 @@ export const drawGarden = (fb: FB, f: number, opts: { still?: boolean } = {}) =>
     const sx = 13 + i * 40;
     const on = i === stage;
     if (on) fb.panel(sx - 2, 218, 38, 46, C.gold, C.ink);
-    fb.sprite(sx + 9, 222, S.plantStages[item.id], S.ink);
-    text(fb, sx + 17, 252, item.label, { color: on ? C.ink : C.dusk, align: 'center' });
+    fb.sprite(sx + 9, 221, S.plantStages[item.id], S.ink);
+    if (on) text(fb, sx + 17, 247, item.label, { font: 'pixel', color: C.ink, align: 'center' });
   });
   chest(fb, f, still);
   fb.panel(8, 346, 205, 84, C.cream, C.ink, C.gold);
-  text(fb, 16, 353, 'PRZEDMIOTY W OGRÓDKU', { color: C.dusk });
+  text(fb, 16, 350, 'W OGRÓDKU', { font: 'pixel', color: C.dusk });
   const icons = [S.rake, S.fence, S.can];
   garden.items.forEach((item, i) => {
     const y = 366 + i * 21;
@@ -98,8 +98,8 @@ export const drawGarden = (fb: FB, f: number, opts: { still?: boolean } = {}) =>
     fb.panel(14, y, 22, 18, owned ? C.sky : C.cream, owned ? C.ink : C.stone);
     if (owned) fb.sprite(25 - Math.floor(icons[i][0].length / 2), y + 9 - Math.floor(icons[i].length / 2), icons[i], S.ink);
     else fb.sprite(22, y + 5, S.lock, S.ink);
-    text(fb, 42, y + 6, item.name, { color: owned ? C.ink : C.dusk });
-    text(fb, 205, y + 6, `${item.days} dni`, { color: C.dusk, align: 'right' });
+    text(fb, 42, y + 4, item.name, { font: 'pixel', color: owned ? C.ink : C.dusk });
+    text(fb, 205, y + 4, `${item.days} dni`, { font: 'pixel', color: C.dusk, align: 'right' });
   });
   tabBar(fb, 'garden');
 };

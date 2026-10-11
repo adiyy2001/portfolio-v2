@@ -58,7 +58,7 @@ export const TipsBody = ({ f, still = false, id = 'tip' }: { f: number; still?: 
           {`${pl(m.kwh)} kWh ze słońca, około ${m.savedZl.toFixed(2).replace('.', ',')} zł taniej`}
         </Txt>
       </Card>
-      <Card x={16} y={604} w={411} h={132}>
+      <Card x={16} y={604} w={411} h={132} style={riseIn(f, T.more[0] - 4, still)}>
         {tips.more.map((item, i) => (
           <div key={item.name} style={{ position: 'absolute', left: 0, right: 0, top: 6 + i * 60, height: 60, display: 'flex', alignItems: 'center', padding: '0 18px', boxShadow: i ? `inset 0 1px 0 ${color.left}` : undefined, ...riseIn(f, T.more[i], still) }}>
             <Dot hueId="home" size={10} />

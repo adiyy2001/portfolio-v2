@@ -6,7 +6,7 @@ import { bezierAt, mix, springAt, window01 } from '../../shared/motion';
 import { bridgeT } from '../../shared/loop';
 import { formats } from '../../shared/formats';
 import { color, fade, hero, push, shadow } from './tokens';
-import { app } from './content';
+import { app, liveTicket } from './content';
 import { marketing, marketingBeats } from './storyboard';
 import { AppRoot, StoreFrame } from './Frame';
 import { TicketCard } from './components/TicketCard';
@@ -27,6 +27,7 @@ export const phoneTheme: PhoneTheme = {
 interface Layout {
   phone: { scale: number; left: number; top: number };
   text: { left: number; top: number; width: number; align: 'left' | 'center'; kicker: number; title: number };
+  line: { x: number; y: number; length: number; vertical: boolean; label: number };
   breakout: { cx: number; cy: number; height: number };
   outro: { cy: number; icon: number; name: number; tagline: number; width: number };
   glide: number;
@@ -35,22 +36,25 @@ interface Layout {
 const layouts: Record<Format, Layout> = {
   '16x9': {
     phone: { scale: 0.9, left: 1200, top: 92 },
-    text: { left: 150, top: 390, width: 900, align: 'left', kicker: 30, title: 108 },
+    text: { left: 150, top: 410, width: 900, align: 'left', kicker: 30, title: 108 },
+    line: { x: 150, y: 330, length: 860, vertical: false, label: 30 },
     breakout: { cx: 1414, cy: 540, height: 980 },
     outro: { cy: 500, icon: 200, name: 120, tagline: 38, width: 1400 },
     glide: 28,
   },
   '9x16': {
-    phone: { scale: 0.95, left: 314, top: 570 },
-    text: { left: 80, top: 210, width: 920, align: 'left', kicker: 40, title: 130 },
-    breakout: { cx: 540, cy: 1040, height: 900 },
-    outro: { cy: 860, icon: 240, name: 128, tagline: 40, width: 860 },
+    phone: { scale: 1.044, left: 292, top: 500 },
+    text: { left: 80, top: 238, width: 920, align: 'left', kicker: 40, title: 116 },
+    line: { x: 80, y: 168, length: 920, vertical: false, label: 32 },
+    breakout: { cx: 540, cy: 983, height: 910 },
+    outro: { cy: 960, icon: 240, name: 128, tagline: 40, width: 860 },
     glide: 22,
   },
   '1x1': {
-    phone: { scale: 0.95, left: 314, top: 280 },
-    text: { left: 60, top: 64, width: 960, align: 'center', kicker: 28, title: 82 },
-    breakout: { cx: 540, cy: 665, height: 820 },
+    phone: { scale: 1.2, left: 484, top: 56 },
+    text: { left: 52, top: 80, width: 400, align: 'left', kicker: 28, title: 62 },
+    line: { x: 60, y: 520, length: 270, vertical: true, label: 28 },
+    breakout: { cx: 770, cy: 560, height: 860 },
     outro: { cy: 470, icon: 180, name: 104, tagline: 34, width: 900 },
     glide: 24,
   },
@@ -84,7 +88,7 @@ const Headline = ({ f, layout, first }: { f: number; layout: Layout; first: bool
       {marketingBeats.map((beat, i) => {
         if (f < beat.from - 2 || f > beat.to + 1) return null;
         const enter = i === 0 && first ? 1 : ease(window01(f, beat.from, beat.from + 12));
-        const exit = ease(window01(f, beat.to - 9, beat.to));
+        const exit = ease(window01(f, beat.to - 4, beat.to - 1));
         const opacity = Math.min(enter, 1 - exit);
         const style: CSSProperties = {
           position: 'absolute',
@@ -97,9 +101,6 @@ const Headline = ({ f, layout, first }: { f: number; layout: Layout; first: bool
         };
         return (
           <div key={beat.title} style={style}>
-            <div style={{ fontFamily, fontSize: text.kicker, fontWeight: 700, color: color.brandDeep, letterSpacing: 0.5, marginBottom: text.kicker * 0.6 }}>
-              {beat.kicker}
-            </div>
             <div style={{ fontFamily, fontSize: text.title, lineHeight: 1.02, fontWeight: 800, color: color.ink, letterSpacing: -text.title * 0.03, textWrap: 'balance' }}>
               {beat.title}
             </div>
@@ -107,6 +108,93 @@ const Headline = ({ f, layout, first }: { f: number; layout: Layout; first: bool
         );
       })}
     </>
+  );
+};
+
+const RouteLine = ({ f, layout, out }: { f: number; layout: Layout; out: number }) => {
+  const { line } = layout;
+  const count = marketingBeats.length;
+  const i = beatIndex(Math.min(f, marketing.outro - 1));
+  const from = i === 0 ? 0 : i - 1;
+  const p = mix(from, i, springAt(push, Math.min(f, marketing.outro - 1), marketingBeats[i].from));
+  const step = line.vertical ? line.length / (count - 1) : (line.length - 200) / (count - 1);
+  const at = (k: number) => (line.vertical ? { x: line.x, y: line.y + k * step } : { x: line.x + k * step, y: line.y });
+  const head = at(p);
+  const tail = at(0);
+  const thick = line.vertical ? 8 : 10;
+  const dot = line.vertical ? 24 : 28;
+  return (
+    <div style={{ position: 'absolute', left: 0, top: 0, opacity: 1 - out }}>
+      <div
+        style={{
+          position: 'absolute',
+          left: line.vertical ? line.x - thick / 2 : tail.x,
+          top: line.vertical ? line.y : line.y - thick / 2,
+          width: line.vertical ? thick : step * (count - 1),
+          height: line.vertical ? step * (count - 1) : thick,
+          background: color.separator,
+          borderRadius: thick,
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          left: line.vertical ? line.x - thick / 2 : tail.x,
+          top: line.vertical ? line.y : line.y - thick / 2,
+          width: line.vertical ? thick : head.x - tail.x,
+          height: line.vertical ? head.y - tail.y : thick,
+          background: color.brand,
+          borderRadius: thick,
+        }}
+      />
+      {marketingBeats.map((beat, k) => {
+        const c = at(k);
+        const passed = p >= k - 0.001;
+        const active = Math.abs(p - k) < 0.5;
+        return (
+          <div key={beat.kicker}>
+            <div
+              style={{
+                position: 'absolute',
+                left: c.x - dot / 2,
+                top: c.y - dot / 2,
+                width: dot,
+                height: dot,
+                borderRadius: dot / 2,
+                background: passed ? color.brand : color.grouped,
+                border: `${thick * 0.55}px solid ${passed ? color.brand : '#C9CED4'}`,
+                boxSizing: 'border-box',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                left: line.vertical ? c.x + dot : c.x - dot / 2,
+                top: line.vertical ? c.y - line.label * 0.62 : c.y + dot * 0.75,
+                fontFamily,
+                fontSize: line.label,
+                lineHeight: 1.2,
+                fontWeight: active ? 800 : 600,
+                color: active ? color.ink : color.secondary,
+                whiteSpace: 'nowrap',
+              }}>
+              {beat.kicker}
+            </div>
+          </div>
+        );
+      })}
+      <div
+        style={{
+          position: 'absolute',
+          left: head.x - dot,
+          top: head.y - dot,
+          width: dot * 2,
+          height: dot * 2,
+          borderRadius: dot,
+          background: 'rgba(0,134,79,0.18)',
+        }}
+      />
+    </div>
   );
 };
 
@@ -148,6 +236,7 @@ const Stage = ({ f, layout, first }: { f: number; layout: Layout; first: boolean
   return (
     <>
       <Headline f={f} layout={layout} first={first} />
+      <RouteLine f={f} layout={layout} out={out} />
       <div
         style={{
           position: 'absolute',
@@ -183,20 +272,54 @@ const Stage = ({ f, layout, first }: { f: number; layout: Layout; first: boolean
 
 const Outro = ({ f, layout }: { f: number; layout: Layout }) => {
   const { outro } = layout;
-  const icon = springAt(hero, f, marketing.outro + 5);
-  const name = bezierAt(fade, f, marketing.outro + 14);
-  const tagline = bezierAt(fade, f, marketing.outro + 24);
+  const rise = springAt(hero, f, marketing.outro + 2);
+  const icon = springAt(hero, f, marketing.outro + 10);
+  const name = bezierAt(fade, f, marketing.outro + 18);
+  const tagline = bezierAt(fade, f, marketing.outro + 28);
+  const stripe = ((f - marketing.outro) * 1.6) % 56;
+  const width = outro.width;
+  const k = outro.icon / 240;
+  const bandH = 64 * k + 18;
+  const notch = 34 * k + 8;
+  const body = outro.icon + outro.name * 0.5 + 150 * k + outro.tagline * 3;
+  const top = outro.cy - (bandH + body) / 2 + (1 - rise) * 500;
+  const cut = bandH + outro.icon + outro.name * 1.15 + 100 * k;
   return (
-    <div style={{ position: 'absolute', left: 0, right: 0, top: outro.cy - outro.icon, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div
-        style={{ width: outro.icon, height: outro.icon, transform: `scale(${icon})`, opacity: Math.min(1, icon * 2), filter: 'drop-shadow(0 18px 30px rgba(0,134,79,0.22))' }}
-        dangerouslySetInnerHTML={{ __html: iconSvg({ rounded: true, id: 'outro' }) }}
-      />
-      <div style={{ marginTop: outro.icon * 0.16, fontFamily, fontSize: outro.name, lineHeight: 1, fontWeight: 800, letterSpacing: -outro.name * 0.03, color: color.ink, opacity: name, transform: `translateY(${(1 - name) * 16}px)` }}>
-        {app.name}
-      </div>
-      <div style={{ marginTop: outro.tagline * 0.7, maxWidth: outro.width, textAlign: 'center', fontFamily, fontSize: outro.tagline, lineHeight: 1.25, fontWeight: 500, color: color.secondary, opacity: tagline, transform: `translateY(${(1 - tagline) * 12}px)` }}>
-        {app.category}. {app.zone}.
+    <div style={{ position: 'absolute', left: 0, right: 0, top, display: 'flex', justifyContent: 'center', opacity: Math.min(1, rise * 3) }}>
+      <div style={{ position: 'relative', width, background: color.surface, borderRadius: 36 * k + 12, boxShadow: shadow.lift, overflow: 'hidden', paddingBottom: 40 * k + 10 }}>
+        <div
+          style={{
+            height: bandH,
+            background: color.brand,
+            backgroundImage: `repeating-linear-gradient(115deg, rgba(255,255,255,0.14) 0 ${28}px, rgba(255,255,255,0) ${28}px 56px)`,
+            backgroundPosition: `${stripe}px 0`,
+            color: '#fff',
+            fontFamily,
+            fontWeight: 800,
+            fontSize: outro.tagline * 0.78,
+            letterSpacing: 1,
+            display: 'flex',
+            alignItems: 'center',
+            paddingLeft: 40 * k + 10,
+          }}>
+          {liveTicket.band}
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: 44 * k + 10 }}>
+          <div
+            style={{ width: outro.icon, height: outro.icon, transform: `scale(${icon})`, opacity: Math.min(1, icon * 2), filter: 'drop-shadow(0 14px 24px rgba(0,134,79,0.2))' }}
+            dangerouslySetInnerHTML={{ __html: iconSvg({ rounded: true, id: 'outro' }) }}
+          />
+          <div style={{ marginTop: outro.icon * 0.14, fontFamily, fontSize: outro.name, lineHeight: 1, fontWeight: 800, letterSpacing: -outro.name * 0.03, color: color.ink, opacity: name, transform: `translateY(${(1 - name) * 16}px)` }}>
+            {app.name}
+          </div>
+        </div>
+        <div style={{ position: 'absolute', left: notch, right: notch, top: cut, borderTop: `4px dashed ${color.separator}` }} />
+        <div style={{ position: 'absolute', left: -notch / 2, top: cut - notch / 2 + 2, width: notch, height: notch, borderRadius: notch / 2, background: color.grouped }} />
+        <div style={{ position: 'absolute', right: -notch / 2, top: cut - notch / 2 + 2, width: notch, height: notch, borderRadius: notch / 2, background: color.grouped }} />
+        <div style={{ marginTop: 40 * k + 10, textAlign: 'center', fontFamily, fontSize: outro.tagline, lineHeight: 1.3, fontWeight: 600, color: color.secondary, opacity: tagline, transform: `translateY(${(1 - tagline) * 12}px)` }}>
+          <div>{app.category}</div>
+          <div style={{ color: color.brandDeep, fontWeight: 800 }}>{app.zone}</div>
+        </div>
       </div>
     </div>
   );

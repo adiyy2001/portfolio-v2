@@ -71,7 +71,7 @@ export const CalendarScreen = ({ f, still = false }: { f: number; still?: boolea
         <Text x={82} y={106} size={18} weight={900}>
           {calendar.plant.name}
         </Text>
-        <Text x={82} y={130} size={13} tone={color.inkSoft}>
+        <Text x={82} y={130} size={15} weight={800} tone={color.inkSoft}>
           {calendar.plant.species} · {calendar.plant.ml} ml
         </Text>
       </div>
@@ -81,7 +81,7 @@ export const CalendarScreen = ({ f, still = false }: { f: number; still?: boolea
         {[calendar.summer, calendar.winter].map((season, i) => (
           <div key={season.label} style={{ position: 'absolute', left: 29 + i * 192, top: 176, width: 190, textAlign: 'center' }}>
             <div style={{ fontSize: 15, fontWeight: 900, lineHeight: '20px' }}>{season.label}</div>
-            <div style={{ fontSize: 12, fontWeight: 800, lineHeight: '17px', color: color.inkSoft }}>{season.every}</div>
+            <div style={{ fontSize: 15, fontWeight: 800, lineHeight: '19px', color: color.inkSoft }}>{season.every}</div>
           </div>
         ))}
       </div>
@@ -90,7 +90,7 @@ export const CalendarScreen = ({ f, still = false }: { f: number; still?: boolea
           {calendar.month}
         </Text>
         {calendar.weekdays.map((d, c) => (
-          <Text key={d} x={col(c)} y={268} w={pill.w} align="center" size={12} weight={800} tone={color.inkSoft}>
+          <Text key={d} x={col(c)} y={268} w={pill.w} align="center" size={15} weight={800} tone={color.inkSoft}>
             {d}
           </Text>
         ))}
@@ -102,7 +102,7 @@ export const CalendarScreen = ({ f, still = false }: { f: number; still?: boolea
         return (
           <div key={day} style={enter(f, T.calRows + r * T.rowStep + c * 0.6, still, 22, row(r) + pill.h / 2)}>
             <Box x={col(c)} y={row(r)} w={pill.w} h={pill.h} r={18} tone={isToday ? 'butter' : 'card'} lift={0.35}>
-              <div style={{ position: 'absolute', left: 0, right: 0, top: 5, textAlign: 'center', fontSize: 14, fontWeight: 900, color: muted ? color.inkSoft : color.ink }}>{dayLabel(day)}</div>
+              <div style={{ position: 'absolute', left: 0, right: 0, top: 5, textAlign: 'center', fontSize: 17, fontWeight: 900, color: muted ? color.inkSoft : color.ink }}>{dayLabel(day)}</div>
             </Box>
           </div>
         );
@@ -110,17 +110,19 @@ export const CalendarScreen = ({ f, still = false }: { f: number; still?: boolea
       {drops(f, still).map(d => (
         <Drop key={d.key} x={d.x} y={d.y} w={20} id={`cal-${d.key}`} body={d.body} style={{ opacity: d.opacity, zIndex: 10 }} />
       ))}
-      <div style={still ? {} : puffIn(f, T.note, false, '221px 640px')}>
+      <div style={enter(f, T.calRows + 14, still, 34, 640)}>
         <Box x={24} y={570} w={395} h={140} tone="water">
           <div style={{ position: 'absolute', left: 20, top: 22, width: 46, height: 46, borderRadius: 23, background: color.card, boxShadow: clay(0.3, 0.7), display: 'grid', placeItems: 'center' }}>
             <DropGlyph size={18} id="note-drop" />
           </div>
-          <Text x={80} y={20} size={19} weight={900}>
-            {calendar.noteTitle}
-          </Text>
-          <Text x={80} y={50} w={290} size={14} tone={color.inkSoft} line={1.45}>
-            {calendar.note}
-          </Text>
+          <div style={{ position: 'absolute', inset: 0, ...(still || f >= T.note ? puffIn(f, T.note, still, '221px 70px') : {}) }}>
+            <Text x={80} y={20} size={19} weight={900}>
+              {still || f >= T.note ? calendar.noteTitle : calendar.summerNoteTitle}
+            </Text>
+            <Text x={80} y={50} w={300} size={16} weight={800} tone={color.inkSoft} line={1.4}>
+              {still || f >= T.note ? calendar.note : calendar.summerNote}
+            </Text>
+          </div>
         </Box>
       </div>
     </>

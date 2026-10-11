@@ -89,7 +89,7 @@ export const GeneratorScreen = ({ f, press = 0, done = 0, still = false }: { f: 
       <div style={{ position: 'absolute', left: side, top: 494, width: inner, height: 2, background: color.dim }} />
       <div style={{ position: 'absolute', left: side, top: 494, width: inner * sliderT, height: 2, background: color.cyan, boxShadow: glow(color.cyan, 0.4, 6) }} />
       <div style={{ position: 'absolute', left: side + inner * sliderT - 10, top: 485, width: 20, height: 20, borderRadius: 3, background: color.void, boxShadow: `inset 0 0 0 2px ${color.cyan}, ${glow(color.cyan, 0.45, 10)}` }} />
-      <Abs style={{ left: side, right: side, top: 512, display: 'flex', justifyContent: 'space-between', fontSize: 11, color: color.muted }}>
+      <Abs style={{ left: side, right: side, top: 512, display: 'flex', justifyContent: 'space-between', fontSize: 12, color: color.muted }}>
         <span>8</span>
         <span>32</span>
       </Abs>

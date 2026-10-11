@@ -16,8 +16,8 @@ export const storyboard: Storyboard = {
       to: 59,
       key: 30,
       action:
-        'Baner POZIOM 8! stoi już w pierwszej klatce. Poziomka skacze w rytmie 7,5 klatki na sekundę, pasek XP mruga pełny, a z boków wyskakują monety.',
-      overlay: { text: 'Nawyki, za które rośnie poziom', from: 4, to: 72, top: overlayArtTops.hook * 2 },
+        'Baner POZIOM 8! stoi już w pierwszej klatce. Poziomka skacze w rytmie 7,5 klatki na sekundę. Pasek XP stoi pełny, po 12 klatkach panel błyska, pasek opada w trzech krokach, a licznik przechodzi z POZIOM 7 na POZIOM 8. Z obu boków ekranu wyskakują monety.',
+      overlay: { text: 'Nawyki, za które rośnie poziom', from: 0, to: 72, top: overlayArtTops.hook * 2 },
     },
     {
       id: 'quests',

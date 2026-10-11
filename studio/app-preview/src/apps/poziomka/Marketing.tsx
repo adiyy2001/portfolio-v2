@@ -67,7 +67,7 @@ interface Layout {
 }
 
 const layouts: Record<Format, Layout> = {
-  '9x16': { w: 540, h: 960, phone: [152, 344], panel: { x: 40, y: 120, w: 420, title: 3 }, hud: false, ground: 818, berry: [76, 818, 3], outro: { icon: 6, y: 250, name: 4 } },
+  '9x16': { w: 540, h: 960, phone: [152, 84], panel: { x: 40, y: 620, w: 460, title: 3 }, hud: false, ground: 818, berry: [76, 818, 3], outro: { icon: 6, y: 250, name: 4 } },
   '1x1': { w: 540, h: 540, phone: [284, 22], panel: { x: 18, y: 40, w: 248, title: 2 }, hud: false, ground: 456, berry: [108, 456, 3], outro: { icon: 4, y: 70, name: 3 } },
   '16x9': { w: 960, h: 540, phone: [628, 22], panel: { x: 60, y: 92, w: 480, title: 4 }, hud: true, ground: 456, berry: [176, 456, 5], outro: { icon: 5, y: 60, name: 4 } },
 };
@@ -124,6 +124,11 @@ const headline = (fb: FB, f: number, layout: Layout) => {
     left -= [...line].length + 1;
   });
   const done = typed >= [...beat.title].length + 2;
+  if (done && layout.h > layout.w && Math.floor(f / 14) % 2 === 0) {
+    const ax = x + w - 30;
+    const ay = y + h - 22;
+    for (let r = 0; r < 5; r += 1) fb.rect(ax + r, ay + r, 14 - r * 2, 1, C.ink);
+  }
   if (done)
     lineLines.forEach((line, i) => text(fb, x + 16, y + 46 + titleLines.length * step + i * 20, line, { color: C.dusk, scale: 2 }));
 };

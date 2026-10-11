@@ -33,6 +33,14 @@ const pl = (text: string) =>
     .replace(/(?<=^|[\s („])([aiouwzAIOUWZ]) /g, '$1 ')
     .replace(/(\d) (dni|klatek|klatki|pikseli|piksele|kolorów|razy|XP|stron)/g, '$1 $2')
     .replace(/(POZIOM|PASSA:) (\d+)/g, '$1\u00a0$2');
+const tie = (text: string) => pl(text).replace(/ (\S+)$/, '\u00a0$1');
+const tieShort = (text: string) => {
+  const joined = pl(text);
+  const match = joined.match(/(\S+) (\S+)$/);
+  return match && match[0].length <= 16
+    ? `${joined.slice(0, match.index)}${match[1]}\u00a0${match[2]}`
+    : joined;
+};
 const ratio = (value: number) => value.toFixed(1).replace('.', ',');
 const onCream = (id: string) => manifest.palette.find(item => item.id === id)?.onSurface ?? 0;
 const onSky = (id: string) => manifest.palette.find(item => item.id === id)?.onGrouped ?? 0;
@@ -68,7 +76,7 @@ const total = content.client.quests.rows
             <img src={asset(manifest.icons.rounded)} alt="" width="512" height="512" />
             <h1 id="t-hero">Poziomka</h1>
           </div>
-          <p class="lead">{pl(content.lead)}</p>
+          <p class="lead">{tie(content.lead)}</p>
         </div>
         <div class="hero__more">
           <dl class="rows">
@@ -146,12 +154,12 @@ const total = content.client.quests.rows
               <li class={done ? 'done' : undefined}>
                 <span>
                   <span>{pl(name)}</span>
-                  <small>
-                    {when}
-                    {done ? ',\u00a0zrobione' : ''}
-                  </small>
+                  <small>{when}</small>
                 </span>
-                <span class="xp">+{xp}&nbsp;XP</span>
+                <span class="quests__side">
+                  <span class="xp">+{xp}&nbsp;XP</span>
+                  {done && <small>zrobione</small>}
+                </span>
               </li>
             ))}
           </ul>
@@ -201,14 +209,14 @@ const total = content.client.quests.rows
           {manifest.palette.map(item => (
             <li class="swatch">
               <span class="swatch__chip" style={`background:${item.hex}`} />
-              <span style="color:var(--ink)">{item.name}</span>
+              <span style="color:var(--ink)">{tieShort(item.name)}</span>
               <span>{item.hex.toUpperCase()}</span>
-              <span>{item.role}</span>
+              <span>{tieShort(item.role)}</span>
             </li>
           ))}
         </ul>
         <p class="contrast">
-          {pl(
+          {tie(
             `Kontrast: atrament na kremie ${ratio(onCream('ink'))}:1, na jasnym błękicie ${ratio(onSky('ink'))}:1. Zmierzch na kremie ${ratio(onCream('dusk'))}:1, na błękicie ${ratio(onSky('dusk'))}:1. Złoto i krem stoją na śliwce, a kamień, liść i poziomka służą tylko do rysunku.`,
           )}
         </p>
@@ -223,7 +231,7 @@ const total = content.client.quests.rows
       </div>
       <ul class="list">
         {content.storyboard.rules.map(rule => (
-          <li>{pl(rule)}</li>
+          <li>{tie(rule)}</li>
         ))}
       </ul>
       <Storyboard manifest={manifest} alt={content.storyboard.alt} />
@@ -391,7 +399,7 @@ const total = content.client.quests.rows
 
     <section class="cta panel panel--plum" aria-labelledby="t-cta">
       <h2 id="t-cta">{content.cta.title}</h2>
-      <p>{pl(content.cta.text)}</p>
+      <p>{tie(content.cta.text)}</p>
       <a href={portfolio('/dla-klienta/#wzornik')}>{content.cta.link}</a>
     </section>
   </main>

@@ -117,7 +117,7 @@ export const content = {
   formats: {
     title: 'Sklep pokazuje aplikację, social pokazuje dom',
     intro:
-      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. W marketingowej izometryczny dom stoi obok telefonu, przewód z falownika prowadzi prąd prosto do ekranu, a kamera przejeżdża od dachu przez magazyn i tablicę z wykresem do słupków bilansu.',
+      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. W marketingowej izometryczny dom zajmuje cały kadr, a telefon jest dużą wstawką z boku, przewód z falownika prowadzi prąd prosto do ekranu, a kamera przejeżdża od dachu przez magazyn i tablicę z wykresem do słupków bilansu, a zakończenie to ten sam dom o zmierzchu z nazwą aplikacji.',
     store: 'Wersja sklepowa, sam interfejs',
     portrait: 'Reels, TikTok, Shorts, 9:16',
     square: 'Post w kanale, 1:1',

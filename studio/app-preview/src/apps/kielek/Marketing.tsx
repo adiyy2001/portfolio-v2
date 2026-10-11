@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { useCurrentFrame } from 'remotion';
 import type { Format } from '../../shared/types';
 import { PhoneFrame, phone, type PhoneTheme } from '../../shared/PhoneFrame';
@@ -14,6 +14,9 @@ import { dropSvg, iconSvg, plantSvg } from './components/art';
 import { arc, bounceAt, combine, easeIn, easeOut, enter, hop, inOut, landing, leave, progress, puffIn, rest, wiggleAt, type Body } from './components/motion';
 import { mascotPose, mascotSmall } from './screens/TodayScreen';
 import type { Species } from './content';
+import { T } from './timeline';
+
+const T_HOOK_HOP = T.hookHop;
 
 export const loopTotal = marketing.duration + marketing.bridge;
 const pad = 22;
@@ -32,6 +35,8 @@ interface Layout {
   phone: { scale: number; left: number; top: number };
   text: { left: number; top: number; width: number; title: number; line: number | null; kicker: number; align: 'left' | 'center' };
   seat: { x: number; w: number };
+  host: { x: number; y: number; w: number; from?: number };
+  swing: number;
   outro: { cy: number; icon: number; name: number; tagline: number };
   props: Prop[];
 }
@@ -51,50 +56,55 @@ interface Prop {
 
 const layouts: Record<Format, Layout> = {
   '16x9': {
-    phone: { scale: 0.8, left: 350, top: 206 },
-    text: { left: 960, top: 340, width: 840, title: 96, line: 36, kicker: 26, align: 'left' },
-    seat: { x: 0.68, w: 140 },
+    phone: { scale: 0.8, left: 1010, top: 210 },
+    text: { left: 120, top: 280, width: 800, title: 96, line: 36, kicker: 26, align: 'left' },
+    seat: { x: 0.66, w: 140 },
+    host: { x: 1530, y: 590, w: 340, from: 0 },
+    swing: 60,
     outro: { cy: 500, icon: 230, name: 128, tagline: 38 },
     props: [
-      { kind: 'blob', x: 470, y: 560, size: 760, depth: 0.15, phase: 0, tone: 'card' },
-      { kind: 'blob', x: 1640, y: 160, size: 300, depth: 0.25, phase: 2, tone: 'butter' },
-      { kind: 'pot', x: 150, y: 820, size: 190, depth: 0.9, phase: 1, species: 'monstera' },
-      { kind: 'pot', x: 1790, y: 860, size: 150, depth: 0.7, phase: 3, species: 'sansevieria' },
-      { kind: 'drop', x: 210, y: 240, size: 70, depth: 1.1, phase: 0.5 },
-      { kind: 'drop', x: 900, y: 140, size: 46, depth: 0.6, phase: 2.2 },
-      { kind: 'leaf', x: 860, y: 900, size: 110, depth: 1.3, phase: 1.6, rot: -30, front: true },
-      { kind: 'leaf', x: 1520, y: 980, size: 90, depth: 0.8, phase: 4, rot: 20 },
-      { kind: 'drop', x: 1840, y: 470, size: 54, depth: 1.2, phase: 3.3, front: true },
+      { kind: 'blob', x: 1230, y: 620, size: 900, depth: 0.15, phase: 0, tone: 'card' },
+      { kind: 'blob', x: 120, y: 130, size: 260, depth: 0.25, phase: 2, tone: 'butter' },
+      { kind: 'pot', x: 150, y: 860, size: 190, depth: 0.9, phase: 1, species: 'monstera' },
+      { kind: 'pot', x: 780, y: 930, size: 150, depth: 0.7, phase: 3, species: 'sansevieria' },
+      { kind: 'drop', x: 52, y: 600, size: 66, depth: 0.5, phase: 0.5 },
+      { kind: 'drop', x: 880, y: 150, size: 46, depth: 0.6, phase: 2.2 },
+      { kind: 'leaf', x: 520, y: 990, size: 110, depth: 1.3, phase: 1.6, rot: -30, front: true },
+      { kind: 'leaf', x: 1010, y: 1010, size: 90, depth: 0.8, phase: 4, rot: 20 },
+      { kind: 'drop', x: 1860, y: 300, size: 54, depth: 1.2, phase: 3.3, front: true },
     ],
   },
   '9x16': {
-    phone: { scale: 1, left: (1080 - phone.width - pad * 2) / 2, top: 790 },
-    text: { left: 80, top: 236, width: 860, title: 92, line: 36, kicker: 28, align: 'left' },
-    seat: { x: 0.7, w: 170 },
+    phone: { scale: 0.98, left: 541, top: 520 },
+    text: { left: 80, top: 190, width: 720, title: 84, line: 34, kicker: 28, align: 'left' },
+    seat: { x: 0.66, w: 170 },
+    host: { x: 10, y: 1110, w: 420, from: 0 },
+    swing: 60,
     outro: { cy: 900, icon: 280, name: 150, tagline: 42 },
     props: [
-      { kind: 'blob', x: 540, y: 1300, size: 980, depth: 0.15, phase: 0, tone: 'card' },
-      { kind: 'blob', x: 930, y: 180, size: 300, depth: 0.25, phase: 2, tone: 'butter' },
-      { kind: 'pot', x: 130, y: 1500, size: 190, depth: 0.9, phase: 1, species: 'monstera', front: true },
-      { kind: 'pot', x: 960, y: 1700, size: 160, depth: 0.7, phase: 3, species: 'calathea', front: true },
-      { kind: 'drop', x: 150, y: 860, size: 70, depth: 1.1, phase: 0.5 },
-      { kind: 'drop', x: 960, y: 1040, size: 54, depth: 1.2, phase: 3.3, front: true },
-      { kind: 'leaf', x: 110, y: 1180, size: 110, depth: 1.3, phase: 1.6, rot: -30, front: true },
-      { kind: 'leaf', x: 860, y: 640, size: 80, depth: 0.6, phase: 4, rot: 30 },
+      { kind: 'blob', x: 640, y: 1040, size: 1000, depth: 0.15, phase: 0, tone: 'card' },
+      { kind: 'blob', x: 960, y: 170, size: 280, depth: 0.25, phase: 2, tone: 'butter' },
+      { kind: 'pot', x: 975, y: 1800, size: 150, depth: 0.7, phase: 3, species: 'calathea', front: true },
+      { kind: 'drop', x: 90, y: 760, size: 64, depth: 1.1, phase: 0.5 },
+      { kind: 'drop', x: 1010, y: 1580, size: 50, depth: 1.2, phase: 3.3, front: true },
+      { kind: 'leaf', x: 470, y: 1690, size: 100, depth: 1.3, phase: 1.6, rot: -30, front: true },
+      { kind: 'leaf', x: 900, y: 660, size: 80, depth: 0.6, phase: 4, rot: 30 },
     ],
   },
   '1x1': {
-    phone: { scale: 0.62, left: (1080 - (phone.width + pad * 2) * 0.62) / 2, top: 400 },
-    text: { left: 60, top: 50, width: 960, title: 66, line: null, kicker: 24, align: 'center' },
+    phone: { scale: 1, left: 520, top: 170 },
+    text: { left: 56, top: 90, width: 430, title: 60, line: null, kicker: 24, align: 'left' },
     seat: { x: 0.72, w: 112 },
+    host: { x: 36, y: 700, w: 250 },
+    swing: 40,
     outro: { cy: 500, icon: 200, name: 112, tagline: 32 },
     props: [
-      { kind: 'blob', x: 540, y: 760, size: 760, depth: 0.15, phase: 0, tone: 'card' },
-      { kind: 'pot', x: 150, y: 880, size: 170, depth: 0.9, phase: 1, species: 'monstera' },
-      { kind: 'pot', x: 930, y: 900, size: 150, depth: 0.7, phase: 3, species: 'sansevieria' },
-      { kind: 'drop', x: 170, y: 520, size: 64, depth: 1.1, phase: 0.5 },
-      { kind: 'drop', x: 920, y: 560, size: 50, depth: 1.2, phase: 3.3, front: true },
-      { kind: 'leaf', x: 860, y: 1030, size: 90, depth: 1.3, phase: 1.6, rot: -30, front: true },
+      { kind: 'blob', x: 780, y: 640, size: 820, depth: 0.15, phase: 0, tone: 'card' },
+      { kind: 'blob', x: 120, y: 80, size: 240, depth: 0.25, phase: 2, tone: 'butter' },
+      { kind: 'pot', x: 260, y: 520, size: 140, depth: 0.7, phase: 3, species: 'sansevieria' },
+      { kind: 'drop', x: 440, y: 640, size: 54, depth: 1.1, phase: 0.5 },
+      { kind: 'drop', x: 1030, y: 590, size: 46, depth: 1.2, phase: 3.3, front: true },
+      { kind: 'leaf', x: 430, y: 1030, size: 90, depth: 1.3, phase: 1.6, rot: -30, front: true },
     ],
   },
 };
@@ -138,14 +148,14 @@ const Copy = ({ f, layout }: { f: number; layout: Layout }) => {
   return (
     <>
       {marketingBeats.map((beat, i) => {
-        if (f < beat.from || f > beat.to) return null;
+        if (f < beat.from || f > (i < marketingBeats.length - 1 ? beat.to + 4 : beat.to)) return null;
         const first = i === 0;
-        const start = first ? -999 : beat.from + 2;
-        const out = i < marketingBeats.length - 1 ? leave(f, beat.to - 7, 7) : {};
+        const start = first ? -999 : beat.from - 1;
+        const out = i < marketingBeats.length - 1 ? leave(f, beat.to - 1, 5) : {};
         const words = beat.title.split(' ');
         return (
           <div key={beat.title} style={{ position: 'absolute', left: text.left, top: text.top, width: text.width, textAlign: text.align, ...out }}>
-            <div style={{ display: 'flex', justifyContent: text.align === 'center' ? 'center' : 'flex-start', ...puffIn(f, start, first, '0% 50%') }}>
+            <div style={{ display: 'flex', justifyContent: text.align === 'center' ? 'center' : 'flex-start', ...puffIn(f, start, first, '0% 50%'), ...(f > beat.to ? { opacity: 0 } : {}) }}>
               <span style={{ display: 'inline-block', padding: `${text.kicker * 0.45}px ${text.kicker * 0.9}px`, borderRadius: text.kicker * 2, background: color.butter, boxShadow: clay(0.6, 0.9), fontSize: text.kicker, fontWeight: 800, lineHeight: 1 }}>{beat.kicker}</span>
             </div>
             <div style={{ marginTop: text.kicker * 0.9, fontSize: text.title, lineHeight: 1.06, fontWeight: 900, letterSpacing: -text.title * 0.015, textWrap: 'balance' }}>
@@ -164,6 +174,31 @@ const Copy = ({ f, layout }: { f: number; layout: Layout }) => {
         );
       })}
     </>
+  );
+};
+
+const beatOf = (f: number) => {
+  const i = marketingBeats.findIndex(beat => f >= beat.from && f <= beat.to);
+  return i < 0 ? marketingBeats.length - 1 : i;
+};
+const swingDirections = [0, -1, 1, -1, 1] as const;
+const swingAt = (f: number, layout: Layout) => {
+  const i = beatOf(f);
+  if (i === 0 || f >= marketing.outro) return 0;
+  return (1 - bounceAt(f, marketingBeats[i].from)) * swingDirections[i] * layout.swing;
+};
+
+const Host = ({ f, layout }: { f: number; layout: Layout }) => {
+  const { host } = layout;
+  const from = host.from ?? marketingBeats[1].from - 5;
+  if (host.w === 0 || f < from || f >= marketing.outro + 10) return null;
+  const hops = [...(host.from === 0 ? [T_HOOK_HOP] : []), ...marketingBeats.slice(1).map(beat => beat.from)];
+  const body = hops.reduce<Body>((acc, at) => (f >= at - 2 && f < at + 40 ? combine(acc, combine(landing(f, at + 14), hop(f, at, 44))) : acc), rest);
+  const enterT = from === 0 ? 1 : progress(f, from, 16, easeOut);
+  const sink = f >= marketing.outro ? progress(f, marketing.outro, 10, easeIn) : 0;
+  const pose = mascotPose(f, 'host');
+  return (
+    <Mascot x={host.x} y={host.y + (1 - enterT) * 320 + sink * 400} w={host.w} body={body} pose={{ ...pose, mood: hops.some(at => f >= at && f < at + 36) ? 'cheer' : 'smile' }} style={{ zIndex: 25 }} />
   );
 };
 
@@ -234,19 +269,54 @@ const Stage = ({ f, format }: { f: number; format: Format }) => {
   const po = orbit(f, 0.4);
   const sink = f >= marketing.outro ? progress(f, marketing.outro, 12, easeIn) : 0;
   const hidden = f >= breakout.out && f < breakout.home;
+  const swing = swingAt(f, layout);
   return (
     <>
       <div style={{ position: 'absolute', inset: 0, transform: `translate(${po.x}px, ${po.y}px)` }}>
-        <div style={{ position: 'absolute', left: p.left, top: p.top, transform: `translateY(${sink * 500}px)`, opacity: 1 - sink }}>
+        <div style={{ position: 'absolute', left: p.left, top: p.top, transform: `translate(${swing}px, ${sink * 500}px)`, opacity: 1 - sink }}>
           <ClayPhone scale={p.scale} frame={Math.min(f, marketing.outro + 11)} hideMascot={hidden} />
         </div>
         <MascotOut f={f} layout={layout} />
+        <Host f={f} layout={layout} />
       </div>
       <div style={{ position: 'absolute', inset: 0, opacity: 1 - sink }}>
         <Copy f={Math.min(f, marketing.outro - 1)} layout={layout} />
       </div>
     </>
   );
+};
+
+const Pattern = ({ f, format }: { f: number; format: Format }) => {
+  const { width, height } = formats[format];
+  const { outro } = layouts[format];
+  const o = marketing.outro;
+  const step = format === '1x1' ? 170 : 190;
+  const rows = Math.ceil(height / (step * 0.9)) + 1;
+  const cols = Math.ceil(width / step) + 1;
+  const items: ReactNode[] = [];
+  for (let r = 0; r < rows; r += 1) {
+    for (let c = 0; c < cols; c += 1) {
+      const x = (c + (r % 2 ? 0.5 : 0)) * step;
+      const y = r * step * 0.9 + step * 0.3;
+      const clearX = Math.abs(x - width / 2) < outro.name * 2.7;
+      const clearY = y > outro.cy - outro.icon - 40 && y < outro.cy + outro.name * 1.25 + outro.tagline * 2.2;
+      if (clearX && clearY) continue;
+      const k = r * cols + c;
+      const dist = Math.hypot(x - width / 2, y - outro.cy);
+      const pop = bounceAt(f, o + 4 + dist * 0.05);
+      const rot = ((k * 37) % 70) - 35 + Math.sin((2 * Math.PI * f) / 90 + k) * 4;
+      const leaf = (r * 7 + c * 3) % 3 !== 0;
+      const size = leaf ? 84 : 42;
+      items.push(
+        <div
+          key={k}
+          style={{ position: 'absolute', left: x - size / 2, top: y - (leaf ? size * 0.3 : size * 0.65), width: size, height: leaf ? size * 0.6 : size * 1.3, opacity: Math.min(1, pop * 2), transform: `rotate(${rot}deg) scale(${pop})` }}
+          dangerouslySetInnerHTML={{ __html: leaf ? leafSvg(`pat-${format}-${k}`) : dropSvg(`pat-${format}-${k}`) }}
+        />,
+      );
+    }
+  }
+  return <div style={{ position: 'absolute', inset: 0 }}>{items}</div>;
 };
 
 const Outro = ({ f, format }: { f: number; format: Format }) => {
@@ -256,6 +326,7 @@ const Outro = ({ f, format }: { f: number; format: Format }) => {
   const top = outro.cy - outro.icon;
   return (
     <>
+      <Pattern f={f} format={format} />
       <div style={{ position: 'absolute', left: 0, right: 0, top, display: 'flex', justifyContent: 'center' }}>
         <div style={{ position: 'relative', width: outro.icon, height: outro.icon, transform: `scale(${s})`, opacity: Math.min(1, s * 3) }}>
           <div style={{ position: 'absolute', inset: 0, borderRadius: outro.icon * 0.2227, boxShadow: clay(outro.icon / 110) }} />

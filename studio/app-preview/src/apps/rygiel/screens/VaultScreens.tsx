@@ -58,7 +58,7 @@ export const VaultScreen = ({ f, still = false, tagGlow = 0 }: { f: number; stil
         return (
           <div key={item.label} style={{ position: 'absolute', left: side + i * (w + 6), top: 170, width: w, height: 62, borderRadius: 4, background: color.panel, boxShadow: `inset 0 0 0 1px ${i === 0 ? color.cyan : color.grid}`, padding: '8px 10px', boxSizing: 'border-box' }}>
             <div style={{ fontFamily: "'Oxanium', sans-serif", fontWeight: 600, fontSize: 22, lineHeight: '24px', color: toneColor(item.tone) }}>{item.count}</div>
-            <div style={{ fontSize: 10.5, lineHeight: '16px', marginTop: 4, color: color.muted, whiteSpace: 'nowrap' }}>{item.label.toLowerCase()}</div>
+            <div style={{ fontSize: 12, lineHeight: '16px', marginTop: 4, color: color.muted, whiteSpace: 'nowrap' }}>{item.label.toLowerCase()}</div>
           </div>
         );
       })}

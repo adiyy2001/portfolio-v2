@@ -47,6 +47,7 @@ export const myTickets = {
   used: [
     { title: '90 minut, normalny', meta: 'Wczoraj, 17:12 do 18:42' },
     { title: '24 godziny, normalny', meta: 'Poniedziałek, 6:58 do wtorku 6:58' },
+    { title: '15 minut, normalny', meta: 'Sobota, 11:20 do 11:35' },
   ],
 };
 
@@ -66,6 +67,7 @@ export const liveTicket = {
   number: 'Nr 2610 0748 3361',
   inspector: 'Pokaż kontrolerowi',
   route: 'Trasa',
+  nextStop: { label: 'Przesiadka', name: 'Rondo Kaponiera', meta: 'linia 5 o 8:06' },
   qr: 'KASOWNIK.EXAMPLE/B/261007483361',
 };
 

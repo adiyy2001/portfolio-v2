@@ -47,6 +47,7 @@ export const today = {
   list: [plants.zdzisia, plants.kalina, plants.szabla],
   button: 'Podlane',
   done: 'Podlane o 7:52',
+  tomorrow: { label: 'Jutro, piątek', names: 'Lolek i Bazylia', meta: 'razem 400 ml', list: [plants.lolek, plants.bazylia] },
 };
 
 export const plural = (n: number) => (n === 1 ? 'roślina' : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 'rośliny' : 'roślin');
@@ -71,6 +72,8 @@ export const calendar = {
   today: 8,
   summer: { label: 'Lato', every: 'co 7 dni', days: [8, 15, 22, 29] },
   winter: { label: 'Jesień i zima', every: 'co 12 dni', days: [8, 20, 32] },
+  summerNoteTitle: 'Latem: co 7 dni',
+  summerNote: 'Zdzisia dostaje 400 ml co tydzień. Następne podlewanie w czwartek, 15 października.',
   noteTitle: 'Zimą: co 12 dni',
   note: 'Dni są krótsze, więc Zdzisia pije rzadziej. Następne podlewanie we wtorek, 20 października.',
 };

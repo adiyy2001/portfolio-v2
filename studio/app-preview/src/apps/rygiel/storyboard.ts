@@ -17,7 +17,7 @@ export const storyboard: Storyboard = {
       key: 30,
       action:
         'Od pierwszej klatki karta alertu w kolorze alarmu: serwis, daty i co wyciekło. Przez ekran przechodzi linia skanu, pierścień alertu pulsuje.',
-      overlay: { text: 'Wiesz o wycieku pierwszy', from: 4, to: 75, top: overlayTop },
+      overlay: { text: 'Wiesz o wycieku pierwszy', from: 0, to: 75, top: overlayTop },
     },
     {
       id: 'details',

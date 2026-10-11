@@ -96,7 +96,7 @@ export const content = {
   formats: {
     title: 'Sklep pokazuje aplikację, social pokazuje Kiełka',
     intro:
-      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. Marketingowa ma różowy telefon z plasteliny, unoszące się doniczki i krople, a w chwili podlewania Kiełek wyskakuje z ekranu i siada na krawędzi telefonu.',
+      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. Marketingowa ma różowy telefon z plasteliny, unoszące się doniczki i krople, Kiełek prowadzi opowieść: przy każdym akcie podskakuje obok telefonu jako gospodarz, a w chwili podlewania wychodzi z ekranu i siada na jego krawędzi. Sam telefon wjeżdża z boku na sprężynie.',
     store: 'Wersja sklepowa, sam interfejs',
     portrait: 'Reels, TikTok, Shorts, 9:16',
     square: 'Post w kanale, 1:1',

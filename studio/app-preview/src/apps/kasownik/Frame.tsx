@@ -35,7 +35,7 @@ const ease = Easing.bezier(0.25, 0.1, 0.25, 1);
 
 export const StoreFrame = ({ frame, hideCard = false, overlays = true }: { frame: number; hideCard?: boolean; overlays?: boolean }) => (
   <div style={{ position: 'absolute', left: 0, top: 0, width: 443, height: 960, overflow: 'hidden', background: color.surface }}>
-    <Scene frame={frame} hideCard={hideCard} />
+    <Scene frame={frame} hideCard={hideCard} overlays={overlays} />
     {overlays &&
       storyboard.shots.map(shot =>
         shot.overlay ? <OverlayLabel key={shot.id} overlay={shot.overlay} frame={frame} ease={ease} style={overlayStyle} /> : null,

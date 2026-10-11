@@ -62,7 +62,7 @@ export const HealthScreen = ({ f, still = false }: { f: number; still?: boolean 
         return (
           <div key={item.label} style={{ position: 'absolute', left: side + i * (w + 8), top: 368, width: w, height: 70, borderRadius: 4, background: color.panel, boxShadow: `inset 0 0 0 1px ${value === 0 ? color.dim : c}`, padding: '10px 12px', boxSizing: 'border-box' }}>
             <div style={{ fontFamily: "'Oxanium', sans-serif", fontWeight: 600, fontSize: 28, lineHeight: '30px', color: c }}>{value}</div>
-            <div style={{ fontSize: 11, lineHeight: '16px', marginTop: 4, color: color.muted }}>{item.label.toLowerCase()}</div>
+            <div style={{ fontSize: 12, lineHeight: '16px', marginTop: 4, color: color.muted }}>{item.label.toLowerCase()}</div>
           </div>
         );
       })}
@@ -76,9 +76,9 @@ export const HealthScreen = ({ f, still = false }: { f: number; still?: boolean 
         const c = toneColor(item.tone);
         return (
           <div key={item.name} style={{ position: 'absolute', left: side, top: listTop + i * rowH, width: inner, height: rowH, borderBottom: `1px solid ${color.grid}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-            <span style={{ position: 'relative', fontSize: 14, fontWeight: 700, color: done ? color.muted : color.text, whiteSpace: 'nowrap' }}>
+            <span style={{ position: 'relative', fontSize: 14, fontWeight: 700, color: color.text, whiteSpace: 'nowrap' }}>
               {item.name}
-              <span style={{ position: 'absolute', left: -2, right: -2, top: '50%', height: 1.5, background: color.muted, transform: `scaleX(${strike})`, transformOrigin: '0 50%' }} />
+              <span style={{ position: 'absolute', left: -2, right: -2, top: '50%', height: 2, background: color.cyan, boxShadow: glow(color.cyan, 0.5, 1), transform: `scaleX(${strike})`, transformOrigin: '0 50%' }} />
             </span>
             {done ? (
               <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: color.cyan }}>

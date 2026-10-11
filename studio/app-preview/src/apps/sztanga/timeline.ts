@@ -1,8 +1,8 @@
 export const T = {
   stretchA: 15,
   stretchB: 30,
-  slamKg: 45,
-  slamSet: 52,
+  slamKg: 18,
+  slamSet: 24,
   plan: 60,
   planRows: [60, 75, 90],
   plates: 120,

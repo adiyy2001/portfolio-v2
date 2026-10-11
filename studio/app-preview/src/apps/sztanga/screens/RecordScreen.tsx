@@ -20,6 +20,8 @@ export const RecordScreen = ({ frame, start, letterStep, lift, result, rm, previ
   const size = fitSize(record.title, recordWdth, W, 130);
   const letters = [...record.title];
   let x = 0;
+  const inner = W - side * 2;
+  const liftPeak = 1.12;
   const liftSize = 52;
   const rmSize = 54;
   return (
@@ -39,7 +41,7 @@ export const RecordScreen = ({ frame, start, letterStep, lift, result, rm, previ
       </Abs>
       {lift > 0 && (
         <Abs style={{ left: side, top: 256 }}>
-          <Cap text={record.lift} size={liftSize} wdth={fitWdth(record.lift, liftSize, W)} fill={ink} scale={lift} origin="left center" />
+          <Cap text={record.lift} size={liftSize} wdth={Math.min(100, fitWdth(record.lift, liftSize, inner / liftPeak))} fill={ink} scale={1 + (lift - 1) * (liftPeak - 1) / 0.4} origin="left center" />
         </Abs>
       )}
       {result > 0 && (
@@ -49,7 +51,7 @@ export const RecordScreen = ({ frame, start, letterStep, lift, result, rm, previ
       )}
       {rm > 0 && (
         <Abs style={{ left: side, top: 470 }}>
-          <Cap text={record.oneRm} size={rmSize} wdth={fitWdth(record.oneRm, rmSize, W)} fill={ink} scale={rm} origin="left center" />
+          <Cap text={record.oneRm} size={rmSize} wdth={Math.min(100, fitWdth(record.oneRm, rmSize, inner))} fill={ink} scale={rm} origin="left center" />
         </Abs>
       )}
       {previous && (

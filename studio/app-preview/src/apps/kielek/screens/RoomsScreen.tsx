@@ -38,7 +38,7 @@ export const RoomsScreen = ({ f, still = false }: { f: number; still?: boolean }
                 <Text x={20} y={16} size={21} weight={900}>
                   {room.name}
                 </Text>
-                <Text x={20} y={46} size={13} tone={color.inkSoft}>
+                <Text x={20} y={46} size={15} weight={800} tone={color.inkSoft}>
                   {room.window} · {room.light}
                 </Text>
                 <div style={{ position: 'absolute', right: 18, top: 16 }}>
@@ -54,7 +54,7 @@ export const RoomsScreen = ({ f, still = false }: { f: number; still?: boolean }
                 </div>
                 {isFocus && (
                   <>
-                    <Text x={20} y={126} size={13} weight={800}>
+                    <Text x={20} y={126} size={15} weight={800}>
                       Wilgotność powietrza
                     </Text>
                     <div style={{ position: 'absolute', left: bar.x, top: bar.y, width: bar.w, height: bar.h, borderRadius: 13, background: color.ground, boxShadow: clayPressed }} />

@@ -27,7 +27,7 @@ export const Caption = ({ overlay, frame }: { overlay: Overlay; frame: number })
     <div style={{ position: 'absolute', left: 0, right: 0, top: overlay.top, display: 'flex', justifyContent: 'center', zIndex: 80 }}>
       <div
         style={{
-          background: color.card,
+          background: color.ink,
           boxShadow: clay(0.9),
           borderRadius: 27,
           height: 54,
@@ -36,8 +36,8 @@ export const Caption = ({ overlay, frame }: { overlay: Overlay; frame: number })
           alignItems: 'center',
           fontFamily,
           fontWeight: 900,
-          fontSize: 21,
-          color: color.ink,
+          fontSize: 22,
+          color: color.card,
           whiteSpace: 'nowrap',
           transform: `scale(${s * (1 - out * 0.4)})`,
           opacity: Math.min(1, (frame - overlay.from) / 3) * (1 - out),

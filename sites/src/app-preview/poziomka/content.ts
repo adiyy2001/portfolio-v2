@@ -31,10 +31,10 @@ export const content = {
       label: 'Czwartek, 8 października',
       title: 'Zadania na dziś',
       rows: [
-        ['Szklanka wody po przebudzeniu', 'rano', 10, true],
-        ['20 minut spaceru', 'przed pracą', 30, true],
+        ['Szklanka wody', 'rano, codziennie', 10, true],
+        ['20 min spaceru', 'przed pracą', 30, true],
         ['15 stron książki', 'wieczorem', 20, false],
-        ['Telefon odłożony o 22:30', 'przed snem', 40, false],
+        ['Telefon od 22:30', 'przed snem', 40, false],
       ] as [string, string, number, boolean][],
       total: 'Rano +40 XP, czyli 1200 XP i poziom 8',
     },
@@ -58,7 +58,7 @@ export const content = {
       family: 'Tiny5',
       bitmap: 'Poziomka Mini',
       sample: ['Szklanka wody +10 XP', 'Zażółć gęślą jaźń'],
-      note: 'etykiety, opisy i tekst tej strony. Wersalik ma 5 pikseli, wszystkie polskie znaki są na miejscu.',
+      note: 'kicker i linia w oknie dialogowym wersji marketingowej oraz podpisy na planszy storyboardu. Tekst tej strony to zwykły krój systemowy. Wersalik ma 5 pikseli, wszystkie polskie znaki są na miejscu.',
     },
   ],
   storyboard: {
@@ -77,7 +77,7 @@ export const content = {
     intro:
       'Poziomka jako jedyna z sześciu realizacji nie ma żadnego wygładzania. Każdy ruch to seria póz, a nowa poza wchodzi co 4 klatki, czyli 7,5 razy na sekundę. Te same wartości napędzają wideo i laboratorium poniżej.',
     caption:
-      'Ta sama poziomka i ten sam skok. Po lewej płynna krzywa ease-in-out w 60 klatkach na sekundę: sprite przesuwa się o ułamki piksela rysunku i wypada z siatki, a ruch wygląda jak animacja interfejsu, nie jak gra. Po prawej kroki: cztery pozy, wysokość 0, 3, 5 i 3 piksele, nowa poza co 4 klatki. Zmień tempo kroków i porównaj, przy jakim skok przestaje wyglądać jak gra.',
+      'Ta sama poziomka i ten sam skok. Po lewej płynna krzywa ease\u2011in\u2011out w 60 klatkach na sekundę: sprite przesuwa się o ułamki piksela rysunku i wypada z siatki, a ruch wygląda jak animacja interfejsu, nie jak gra. Po prawej kroki: cztery pozy, wysokość 0, 3, 5 i 3 piksele, nowa poza co 4 klatki. Zmień tempo kroków i porównaj, przy jakim skok przestaje wyglądać jak gra.',
     rules: [
       [
         'Całe piksele',
@@ -105,7 +105,7 @@ export const content = {
   formats: {
     title: 'Sklep pokazuje aplikację, social pokazuje świat',
     intro:
-      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. Marketingowa to pikselowy świat: pasy nieba z ditheringu, chmury, ogródek ze wszystkimi etapami poziomki, telefon narysowany w tej samej siatce i monety, które wyskakują z ekranu.',
+      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. Marketingowa to pikselowy świat: pasy nieba z ditheringu, chmury, ogródek ze wszystkimi etapami poziomki, telefon narysowany w tej samej siatce, monety, które wyskakują z ekranu, i okno dialogowe jak w grach RPG z migającą strzałką.',
     store: 'Wersja sklepowa, sam interfejs',
     portrait: 'Reels, TikTok, Shorts, 9:16',
     square: 'Post w kanale, 1:1',
