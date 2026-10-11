@@ -365,6 +365,10 @@
     --ts: 14vw;
   }
 
+  .title--repo.title--long {
+    --ts: 12.4vw;
+  }
+
   .hero--repo .hero__text {
     grid-column: 1 / -1;
   }
