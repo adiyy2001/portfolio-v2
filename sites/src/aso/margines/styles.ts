@@ -211,5 +211,6 @@ export const css = `
 .margines .cta__link:hover{background:var(--zakreslacz)}
 .margines .foot{max-width:1320px;margin:0 auto;padding:22px var(--gut) 40px;border-top:2px solid var(--atrament);font-size:14px;color:#3A4466}
 .margines .sample-note{margin:0}
+@media (max-width:360px){.margines h2,.margines .cta h2{font-size:36px}}
 @media (prefers-reduced-motion:reduce){.margines *{scroll-behavior:auto}}
 `;

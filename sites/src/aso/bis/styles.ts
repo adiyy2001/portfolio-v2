@@ -199,5 +199,6 @@ export const css = `
 .bis .cta__link:hover{background:var(--grafit)}
 .bis .foot{max-width:1320px;margin:0 auto;padding:28px var(--gut) 44px;font-size:14px;font-weight:600;color:var(--grafit)}
 .bis .sample-note{margin:0}
+@media (max-width:360px){.bis h2{font-size:30px}}
 @media (prefers-reduced-motion:reduce){.bis *{scroll-behavior:auto}}
 `;

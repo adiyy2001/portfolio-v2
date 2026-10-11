@@ -83,7 +83,7 @@ Wszystkie 54 oceny wynoszą co najmniej 4. Blokada spoza rubryki z rundy 2, czyl
 - Wpisów w `llms.txt`, `sites/README.md` i `REBRAND.md` (brief identyfikacji też ich nie dodawał).
 - Pliku `.icon` z Icon Composera (są warstwy ikon).
 - Uwag z rundy 2 zapisanych w `PLAN.md` w punkcie 52: wszystkie wykonane w rundzie 3 (punkt 53), poza tym, co jest niżej.
-- Pojedyncze słowa w ostatnim wierszu w kilku nagłówkach przy 320 px i w części akapitów (istniały wcześniej, nagłówka nie da się skleić bez wyjścia poza ekran).
+- Pojedyncze słowa w ostatnim wierszu w części akapitów z `text-wrap: pretty`; w nagłówkach i akapicie CTA indeksu usunięte w poprawce po przeglądzie rundy 3.
 - Pełnego budowania Gatsby w układzie wdrożenia nie powtarzano w rundzie 3; użyto statycznego serwera z `sites/dist` pod `/wzornik/` i `static` portfolio w korzeniu.
 
 ## Runda 3: poprawki z punktu 52
@@ -99,6 +99,14 @@ Gałąź `wzornik-aso-r2` (z `main` 7accb02), dziesięć commitów, bez pusha i 
 - Indeks: krótszy nagłówek, balans tekstu w nagłówkach i akapitach.
 
 Kontrole: walidator 0 błędów w sześciu zestawach (Bis 38 plików, 12,5 MB opublikowane, całe ASO 73,0 MB), `guard` czysty we wszystkich sześciu, `distinct` bez zmian, testy studia 19 z 19, `astro check` 0 błędów, Prettier czysty, testy witryny 1411 z 1411, build 199 stron, główny `yarn.lock` bez zmian. Wszystkie strony przy 320, 390, 768, 1024 i 1440 px: bez poziomego przewijania, bez błędów konsoli, bez zepsutych obrazków. Wszystkie przerenderowane plansze i zrzuty zmienionych stron obejrzane.
+
+
+### Poprawka po przeglądzie rundy 3
+
+- Kruszec EN App Store, kadr 1: podpis „since 2021” ustawiany nad linią i poza siatką, już nie dotyka linii ani wypełnienia (ta sama reguła dla wszystkich podpisów wykresu).
+- Margines: kartka pod nagłówkiem ma większy margines boczny (kadr 4 EN, kadr 3 PL), adnotacja w kadrze 4 EN 36 px niżej; przerenderowane obie wersje sklepu, ZIP i pliki stron.
+- Nagłówki: dwa ostatnie słowa sklejone twardą spacją, na wąskich ekranach (do 360 px) nieco mniejszy krój w Bis, Chochli, Szyldzie i Marginesie; akapit CTA w indeksie ma „pierwszym razem” razem. Brak pojedynczych słów w ostatnim wierszu nagłówków przy 320, 360, 390, 768, 1024 i 1440 px.
+- Kontrole: walidator 0 błędów, `guard` czysty, testy studia 19 z 19, `astro check` 0 błędów, Prettier czysty, testy witryny 1411 z 1411, build 199 stron.
 
 ## Decyzje do przeglądu (pełne w `PLAN.md`, 53 punkty)
 
