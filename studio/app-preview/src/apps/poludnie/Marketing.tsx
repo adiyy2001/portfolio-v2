@@ -16,7 +16,7 @@ import { C, P } from './components/iso';
 import { area, line, makeScale, series } from './components/charts';
 import { countAt, drawAt, easeIn, focusAt, mixN, progress, riseAt, riseIn, trackAt } from './components/motion';
 import { batteryLevel } from './screens/Battery';
-import { liveFlows } from './Scene';
+import { hookWeights, liveFlows } from './Scene';
 
 export const loopTotal = marketing.duration + marketing.bridge;
 
@@ -36,7 +36,7 @@ interface Layout {
   world: { cx: number; cy: number; scale: number };
   phone: { scale: number; left: number; top: number };
   wire: 'right' | 'down';
-  outro: { cy: number; icon: number; name: number; tagline: number };
+  outro: { cy: number; icon: number; name: number; tagline: number; box: { left: number; width: number }; house: { cx: number; cy: number; scale: number } };
   tag: number;
 }
 
@@ -46,23 +46,23 @@ const layouts: Record<Format, Layout> = {
     world: { cx: 1030, cy: 610, scale: 2.0 },
     phone: { scale: 0.8, left: 1528, top: 143 },
     wire: 'right',
-    outro: { cy: 480, icon: 230, name: 128, tagline: 38 },
+    outro: { cy: 470, icon: 230, name: 128, tagline: 38, box: { left: 0, width: 1060 }, house: { cx: 1480, cy: 640, scale: 1.9 } },
     tag: 15,
   },
   '9x16': {
     copy: { left: 80, top: 236, width: 900, title: 88, line: 34, kicker: 26 },
-    world: { cx: 540, cy: 860, scale: 2.05 },
-    phone: { scale: 0.62, left: Math.round((1080 - phone.width * 0.62) / 2), top: 1176 },
+    world: { cx: 380, cy: 870, scale: 1.6 },
+    phone: { scale: 1.05, left: Math.round(1080 - phone.width * 1.05 - 36), top: 876 },
     wire: 'down',
-    outro: { cy: 860, icon: 280, name: 150, tagline: 42 },
+    outro: { cy: 640, icon: 280, name: 150, tagline: 42, box: { left: 0, width: 1080 }, house: { cx: 540, cy: 1420, scale: 2.1 } },
     tag: 15,
   },
   '1x1': {
     copy: { left: 64, top: 56, width: 700, title: 64, line: null, kicker: 22 },
-    world: { cx: 446, cy: 660, scale: 1.72 },
-    phone: { scale: 0.5, left: 806, top: 500 },
+    world: { cx: 380, cy: 700, scale: 1.55 },
+    phone: { scale: 0.86, left: 640, top: 200 },
     wire: 'right',
-    outro: { cy: 470, icon: 210, name: 112, tagline: 32 },
+    outro: { cy: 380, icon: 190, name: 104, tagline: 32, box: { left: 0, width: 1080 }, house: { cx: 540, cy: 880, scale: 1.55 } },
     tag: 13,
   },
 };
@@ -354,21 +354,52 @@ const Stage = ({ f, clock, format }: { f: number; clock: number; format: Format 
 
 const Outro = ({ f, format }: { f: number; format: Format }) => {
   const { outro } = layouts[format];
+  const { width, height } = formats[format];
   const o = marketing.outro;
   const s = riseAt(f, o + 6);
   const sun = progress(f, o + 18, 18);
   const top = outro.cy - outro.icon;
+  const dusk = progress(f, o, 14);
+  const rise = progress(f, o + 4, 26);
+  const box = { position: 'absolute' as const, left: outro.box.left, width: outro.box.width, textAlign: 'center' as const };
   return (
-    <>
-      <div style={{ position: 'absolute', left: 0, right: 0, top, display: 'flex', justifyContent: 'center' }}>
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <div style={{ position: 'absolute', inset: 0, background: color.ink, opacity: dusk }} />
+      <svg width={width} height={height} style={{ position: 'absolute', left: 0, top: 0, opacity: dusk }} stroke={color.panel} strokeWidth={1}>
+        {Array.from({ length: Math.ceil((width + height * 2) / 64) * 2 }, (_, i) => {
+          const k = -(width + height * 2) / 2 + i * 64;
+          return (
+            <g key={i}>
+              <line x1={k} y1={0} x2={k + height / 0.57735} y2={height} />
+              <line x1={k} y1={0} x2={k - height / 0.57735} y2={height} />
+            </g>
+          );
+        })}
+      </svg>
+      <div style={{ opacity: dusk, transform: `translateY(${(1 - rise) * 120}px)` }}>
+        <HouseScene
+          width={width}
+          height={height}
+          style={{ left: outro.house.cx - width / 2, top: outro.house.cy - height / 2 }}
+          camera={{ x: 60, y: 84, scale: outro.house.scale }}
+          frame={f}
+          level={0.955}
+          flows={liveFlows}
+          focus={hookWeights}
+          sunAngle={f * 0.3}
+          glint={progress(f, o + 20, 30)}
+          sunAt={[150, -30]}
+        />
+      </div>
+      <div style={{ ...box, top, display: 'flex', justifyContent: 'center' }}>
         <div
-          style={{ width: outro.icon, height: outro.icon, borderRadius: outro.icon * 0.2227, overflow: 'hidden', boxShadow: `0 ${outro.icon * 0.035}px 0 ${color.right}`, opacity: Math.min(1, s * 2), transform: `translateY(${(1 - s) * 40}px)` }}
+          style={{ width: outro.icon, height: outro.icon, borderRadius: outro.icon * 0.2227, overflow: 'hidden', boxShadow: `0 ${outro.icon * 0.035}px 0 ${color.panel}`, opacity: Math.min(1, s * 2), transform: `translateY(${(1 - s) * 40}px)` }}
           dangerouslySetInnerHTML={{ __html: iconSvg({ rounded: true, id: `outro-${format}`, sun, lift: (1 - s) * 60 }).replace('fill="#EEF2F6"', `fill="${color.card}"`) }}
         />
       </div>
-      <div style={{ position: 'absolute', left: 0, right: 0, top: outro.cy + outro.icon * 0.16, textAlign: 'center', fontSize: outro.name, fontWeight: 800, fontStretch: '87.5%', lineHeight: 1.1, ...riseIn(f, o + 20, false, 20) }}>{app.name}</div>
-      <div style={{ position: 'absolute', left: 0, right: 0, top: outro.cy + outro.icon * 0.16 + outro.name * 1.25, textAlign: 'center', fontSize: outro.tagline, ...semi, color: color.secondary, ...riseIn(f, o + 28, false, 16) }}>{app.category}</div>
-    </>
+      <div style={{ ...box, top: outro.cy + outro.icon * 0.16, fontSize: outro.name, fontWeight: 800, fontStretch: '87.5%', lineHeight: 1.1, color: color.card, ...riseIn(f, o + 20, false, 20) }}>{app.name}</div>
+      <div style={{ ...box, top: outro.cy + outro.icon * 0.16 + outro.name * 1.25, fontSize: outro.tagline, ...semi, color: color.left, ...riseIn(f, o + 28, false, 16) }}>{app.category}</div>
+    </div>
   );
 };
 

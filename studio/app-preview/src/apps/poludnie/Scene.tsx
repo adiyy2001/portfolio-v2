@@ -5,7 +5,7 @@ import { T, outFrames } from './timeline';
 import { facts, socAt } from './data';
 import { HouseScene, allOn, type Flows, type Weights } from './components/House';
 import { Screen, TabBar } from './components/ui';
-import { countAt, easeIn, easeOut, fadeOut, focusAt, mixN, progress, trackAt } from './components/motion';
+import { easeIn, easeOut, fadeOut, focusAt, mixN, progress, trackAt } from './components/motion';
 import { NowBody, nowLayout } from './screens/Now';
 import { BatteryBody, batteryLayout, batteryLevel } from './screens/Battery';
 import { DayBody } from './screens/Day';
@@ -29,8 +29,6 @@ export const liveWeights = (f: number): Weights => {
   const b = focusAt(f, T.track + 4);
   return { sun: mixN(1, 0.4, b), battery: 1, home: mixN(1, 0.4, b), grid: mixN(1, 0.4, b) };
 };
-
-export const hookCount = (f: number) => countAt(f, 0, 0, 1, 20);
 
 export const hookSettle = (f: number) => progress(f, 0, 54, easeOut);
 
@@ -56,7 +54,7 @@ export const LiveScene = ({ f, clock, t, still = false, weights }: { f: number; 
   };
   return (
     <div style={{ position: 'absolute', left: 0, top, width: 443, height, overflow: 'hidden' }}>
-      <HouseScene width={443} height={height} camera={camera} frame={clock} level={still ? socAt(13 + 10 / 60) : batteryLevel(f)} flows={liveFlows} focus={weights} sunAngle={clock * 0.3} glint={still ? 0 : glintAt(f)} sunAt={storeSun} ramp={still ? 1 : hookCount(f)} pulse={still ? 0 : pulseAt(f)} />
+      <HouseScene width={443} height={height} camera={camera} frame={clock} level={still ? socAt(13 + 10 / 60) : batteryLevel(f)} flows={liveFlows} focus={weights} sunAngle={clock * 0.3} glint={still ? 0 : glintAt(f)} sunAt={storeSun} ramp={1} pulse={still ? 0 : pulseAt(f)} />
     </div>
   );
 };
@@ -81,7 +79,7 @@ const Live = ({ f, clock }: { f: number; clock: number }) => {
   return (
     <>
       <LiveScene f={f} clock={clock} t={t} weights={f < T.track ? hookWeights : liveWeights(f)} />
-      {f < T.track + 10 && <NowBody f={f} leaveAt={T.track} rows={rowsAt(f)} press={pressAt(f)} count={hookCount(f)} />}
+      {f < T.track + 10 && <NowBody f={f} leaveAt={T.track} rows={rowsAt(f)} press={pressAt(f)} count={1} />}
       {f >= T.track && <BatteryBody f={f} />}
     </>
   );
@@ -99,7 +97,7 @@ const Bridge = ({ f }: { f: number }) => {
     <Screen time={t < 0.5 ? facts.month.time : facts.now.time}>
       <div style={{ position: 'absolute', inset: 0, opacity: show, transform: `translateY(${(1 - show) * 12}px)` }}>
         <LiveScene f={0} clock={clock} t={0} weights={hookWeights} />
-        <NowBody f={0} rows={rowsAt(0)} count={hookCount(0)} />
+        <NowBody f={0} rows={rowsAt(0)} count={1} />
       </div>
       <div style={{ position: 'absolute', inset: 0, transform: `translate(0px, ${shrink * 90}px) scale(${1 - 0.45 * shrink})`, transformOrigin: `${launchIcon.x + launchIcon.size / 2}px ${launchIcon.y + launchIcon.size / 2}px` }}>
         <LaunchBody f={T.end - 1} words={words} iconOpacity={icon} />
