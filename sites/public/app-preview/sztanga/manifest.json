@@ -7,7 +7,7 @@
     "zone": "tydzień 3 z 4, dzień B",
     "tagline": "Plan, talerze, przerwa i rekordy w liczbach widocznych z ławki."
   },
-  "generatedAt": "2026-10-08",
+  "generatedAt": "2026-10-11",
   "storyboard": {
     "fps": 30,
     "duration": 660,
@@ -21,7 +21,7 @@
         "from": 0,
         "to": 59,
         "key": 58,
-        "action": "Od pierwszej klatki 140 kg na całą szerokość ekranu. Na drugim i trzecim uderzeniu liczba zmienia szerokość, na czwartym wbijają się KG i SERIA 3/5.",
+        "action": "Od pierwszej klatki 140 kg na całą szerokość ekranu. Na pierwszym uderzeniu liczba rozciąga się do pełnej szerokości, tuż po nim wbijają się KG i SERIA 3/5, na drugim liczba wraca do szerokości 75.",
         "overlay": {
           "text": "Liczby, które widać z ławki",
           "from": 4,
@@ -352,7 +352,7 @@
     "hero": {
       "webm": {
         "path": "sztanga-hero.webm",
-        "bytes": 1087184,
+        "bytes": 1123712,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -361,12 +361,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 424266,
+        "bitrate": 438521,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-hero.mp4",
-        "bytes": 929366,
+        "bytes": 996536,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -375,7 +375,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 362679,
+        "bitrate": 388892,
         "audio": null
       },
       "poster": "posters/sztanga-hero.jpg"
@@ -383,7 +383,7 @@
     "hero-9x16": {
       "webm": {
         "path": "sztanga-hero-9x16.webm",
-        "bytes": 656869,
+        "bytes": 685515,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -392,12 +392,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 256339,
+        "bitrate": 267518,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-hero-9x16.mp4",
-        "bytes": 637896,
+        "bytes": 667489,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -406,7 +406,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 248935,
+        "bitrate": 260483,
         "audio": null
       },
       "poster": "posters/sztanga-hero-9x16.jpg"
@@ -414,7 +414,7 @@
     "social-1x1": {
       "webm": {
         "path": "sztanga-social-1x1.webm",
-        "bytes": 855797,
+        "bytes": 891458,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -423,12 +423,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 333969,
+        "bitrate": 347886,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-social-1x1.mp4",
-        "bytes": 727149,
+        "bytes": 795217,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -437,7 +437,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 283765,
+        "bitrate": 310328,
         "audio": null
       },
       "poster": "posters/sztanga-social-1x1.jpg"
@@ -445,7 +445,7 @@
     "store": {
       "webm": {
         "path": "sztanga-store.webm",
-        "bytes": 435878,
+        "bytes": 442923,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -454,12 +454,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 154978,
+        "bitrate": 157483,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-store.mp4",
-        "bytes": 435518,
+        "bytes": 444316,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -468,7 +468,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 154850,
+        "bitrate": 157979,
         "audio": null
       },
       "poster": "posters/sztanga-store.jpg"
@@ -476,7 +476,7 @@
     "tile": {
       "webm": {
         "path": "sztanga-tile.webm",
-        "bytes": 66002,
+        "bytes": 71717,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -485,12 +485,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 132004,
+        "bitrate": 143434,
         "audio": null
       },
       "mp4": {
         "path": "sztanga-tile.mp4",
-        "bytes": 54717,
+        "bytes": 63195,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -499,7 +499,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 109434,
+        "bitrate": 126390,
         "audio": null
       },
       "poster": "posters/sztanga-tile.jpg"
@@ -512,7 +512,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "sztanga-store-886x1920.mp4",
       "path": "sztanga-store-886x1920.mp4",
-      "bytes": 31371009,
+      "bytes": 31371025,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -521,7 +521,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11407639,
+      "bitrate": 11407645,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -530,7 +530,7 @@
       "note": "Reels, TikTok i Shorts",
       "name": "sztanga-social-1080x1920.mp4",
       "path": "sztanga-social-1080x1920.mp4",
-      "bytes": 2079121,
+      "bytes": 2549566,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -539,7 +539,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 831648,
+      "bitrate": 1019826,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -548,7 +548,7 @@
       "note": "post w kanale",
       "name": "sztanga-social-1080x1080.mp4",
       "path": "sztanga-social-1080x1080.mp4",
-      "bytes": 1845658,
+      "bytes": 2179844,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -557,7 +557,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 738263,
+      "bitrate": 871937,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -566,7 +566,7 @@
       "note": "YouTube, link w Google Play",
       "name": "sztanga-social-1920x1080.mp4",
       "path": "sztanga-social-1920x1080.mp4",
-      "bytes": 2345300,
+      "bytes": 2727017,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -575,7 +575,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 938120,
+      "bitrate": 1090806,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -584,16 +584,16 @@
     "rounded": "sztanga-icon-512.png"
   },
   "renderSeconds": {
-    "stills": 20,
-    "store": 69,
-    "marketing-9x16": 92,
-    "marketing-1x1": 70,
-    "marketing-16x9": 106,
-    "tile": 6
+    "stills": 9,
+    "store": 28,
+    "marketing-9x16": 34,
+    "marketing-1x1": 21,
+    "marketing-16x9": 33,
+    "tile": 3
   },
   "validation": true,
   "published": {
-    "totalBytes": 6491969,
+    "totalBytes": 6811848,
     "count": 29
   }
 }

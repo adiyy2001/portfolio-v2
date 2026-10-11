@@ -16,7 +16,7 @@ export const storyboard: Storyboard = {
       to: 59,
       key: 58,
       action:
-        'Od pierwszej klatki 140 kg na całą szerokość ekranu. Na drugim i trzecim uderzeniu liczba zmienia szerokość, na czwartym wbijają się KG i SERIA 3/5.',
+        'Od pierwszej klatki 140 kg na całą szerokość ekranu. Na pierwszym uderzeniu liczba rozciąga się do pełnej szerokości, tuż po nim wbijają się KG i SERIA 3/5, na drugim liczba wraca do szerokości 75.',
       overlay: { text: 'Liczby, które widać z ławki', from: 4, to: 72, top: overlayTop },
     },
     {
