@@ -185,6 +185,7 @@
 
 .call__body .link {
   margin-top: 22px;
+  line-height: 1.35;
 }
 
 .repo__nums {
@@ -260,6 +261,13 @@
 .repo__next .link {
   justify-self: start;
   margin-top: 20px;
+  line-height: 1.35;
+}
+
+.repo__sec .h2,
+.repo__nums .h2,
+.repo__h3 {
+  text-wrap: balance;
 }
 
 .repo__stack {
@@ -363,6 +371,10 @@
 @media (max-width: 899px) {
   .title--repo {
     --ts: 14vw;
+  }
+
+  .title--repo.title--long {
+    --ts: 12.4vw;
   }
 
   .hero--repo .hero__text {

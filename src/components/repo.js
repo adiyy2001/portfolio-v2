@@ -58,7 +58,11 @@ export default function Repo({ data, lang }) {
 
   return (
     <>
-      <Hero id={`${key}-h`} title={`${data.name}.`} size="repo">
+      <Hero
+        id={`${key}-h`}
+        title={`${data.name}.`}
+        size="repo"
+        titleClass={data.name.length > 11 ? 'title--long' : undefined}>
         <Link className="proj__back" to={routes.work[lang]} data-rise style={{ '--r': 0 }}>
           <svg viewBox="0 0 28 14" aria-hidden="true">
             <path className="stroke" strokeWidth="1.8" d="M27 7H2M8 1L2 7L8 13" />

@@ -10,7 +10,7 @@ export default function Archive() {
       <Hero id="work-h" sr="Projekty, " title="Z warsztatu." size="work">
         <p className="lead" data-rise style={{ '--r': 0 }}>
           {tie(
-            'Jedno prawdziwe wdrożenie, trzy publiczne repozytoria i dziewięć przykładowych stron.',
+            'Jedno prawdziwe wdrożenie, sześć publicznych repozytoriów i dziewięć przykładowych stron.',
           )}
         </p>
         <p className="lead2" data-rise style={{ '--r': 1 }}>
@@ -29,6 +29,6 @@ export const Head = () => (
     lang="pl"
     view="work"
     title="Projekty, Adrian Turbiński"
-    description="Jedno prawdziwe wdrożenie dla firmy krawieckiej, trzy publiczne repozytoria z demo na żywo i dziewięć przykładowych stron dla zmyślonych firm."
+    description="Jedno prawdziwe wdrożenie dla firmy krawieckiej, sześć publicznych repozytoriów z demo na żywo i dziewięć przykładowych stron dla zmyślonych firm."
   />
 );

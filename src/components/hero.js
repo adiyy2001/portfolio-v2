@@ -2,13 +2,16 @@ import React from 'react';
 import Skew from './skew';
 import Split from './split';
 
-export default function Hero({ id, sr, title, size, contact, aside, children }) {
+export default function Hero({ id, sr, title, size, titleClass, contact, aside, children }) {
   return (
     <section className={`hero hero--${size}`} aria-labelledby={id}>
       <h1 id={id} tabIndex={-1}>
         {sr && <span className="sr">{sr}</span>}
         <Skew>
-          <Split className={`title title--${size}`} text={title} />
+          <Split
+            className={titleClass ? `title title--${size} ${titleClass}` : `title title--${size}`}
+            text={title}
+          />
         </Skew>
       </h1>
       {contact && <p className="print-only">{contact}</p>}
