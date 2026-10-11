@@ -65,7 +65,7 @@ const eventhorizon = {
         adr: ['ADR 0007', adr('0007-disk-model-and-redshift-factor')],
       },
       {
-        name: 'Gwiazdy przy silnym soczewkowaniu.',
+        name: 'Gwiazdy przy silnym\u00a0soczewkowaniu.',
         text: 'Gwiazdy wypieczone w cubemapie rozmywają się, gdy soczewkowanie je powiększa. Dlatego gwiazdy są liczone osobno dla każdego promienia w jego końcowym kierunku i gwiazda przy pierścieniu staje się łukiem, gdy kumuluje się losowe przesunięcie podpikselowe. Po drodze wyszedł błąd: sprzętowe filtrowanie cubemapy zwracało połowę wartości w odległości tysięcznej radiana od krawędzi ściany, co rysowało blade ciemne linie na filmie podglądu. Mgławica jest teraz wypiekana z ramką jednego teksela i czytana jako warstwa tablicy 2D.',
         cost: 'Cena: wyszukanie gwiazdy to dziewięć haszy komórek na każdy promień, który dotarł do nieba.',
         lost: 'Przegrały: gwiazdy wypieczone w cubemapie (soczewkowanie powiększałoby teksele zamiast gwiazd, więc przy pierścieniu byłoby rozmycie zamiast łuków), cubemapa 1024² z mipmapami (cztery razy więcej pamięci bez widocznego zysku na gładkiej mgławicy) i skala jasności zgodna z widzialną luminancją zamiast (T/6500)^4 (bliższa temu, co widzi kamera, ale model dysku definiuje skalę jako g^4).',
@@ -186,7 +186,7 @@ const eventhorizon = {
     ],
     calls: [
       {
-        name: 'One equation, one integrator, a float64 reference.',
+        name: 'One equation, one integrator, a float64\u00a0reference.',
         text: 'The tracer integrates the vector form of the geodesic equation with RK4, where h = |x × x’| is constant along the ray. The step scales with the radius and shrinks where the ray turns fast. I swept the step constants against the capture boundary and the deflection angle, and the row I took keeps the shadow edge more than three orders of magnitude inside the 1e-4 target at about 108 steps per ray. The shader works in float32, and it is checked against the float64 reference and against a Math.fround twin of the shader on the CPU, which shows that the remaining error is rounding and not a porting mistake.',
         cost: 'The cost: a ray that passes within 0.02 of the critical impact parameter winds around the hole and leaves in a direction that depends on the last digits, so float32 cannot agree with float64 there. The parity set leaves those rays out and says so, and the shadow edge itself is checked on the CPU.',
         lost: 'What lost: the Binet form as the main integrator (every ray needs its own plane basis, and the parameterization by angle degenerates at turning points), a Hamiltonian form in Schwarzschild coordinates (singular at the horizon and at the poles) and a symplectic integrator (RK4 at a radius scaled step reaches the accuracy with simpler code).',
@@ -200,7 +200,7 @@ const eventhorizon = {
         adr: ['ADR 0007', adr('0007-disk-model-and-redshift-factor')],
       },
       {
-        name: 'Stars under strong lensing.',
+        name: 'Stars under strong\u00a0lensing.',
         text: 'Stars baked into a cubemap blur when lensing magnifies them. Stars are evaluated per ray at the final direction instead, so a star near the ring becomes an arc once the sub-pixel jitter accumulates. A bug turned up on the way: hardware cube filtering returned half the value within a thousandth of a radian of a face edge, which drew faint dark hairlines in the preview video. The nebula is now baked with a one texel border and read as a 2D array layer.',
         cost: 'The cost: a star lookup is nine cell hashes for every ray that reaches the sky.',
         lost: 'What lost: stars baked into the cubemap (lensing would magnify texels instead of stars, so near the ring there would be blur instead of arcs), a 1024² mipmapped cubemap (four times the memory for no visible gain on a smooth nebula) and visible-band luminance scaling instead of (T/6500)^4 (closer to what a camera records, but the disk model defines the scale as g^4).',

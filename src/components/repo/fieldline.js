@@ -51,7 +51,7 @@ const fieldline = {
     ],
     calls: [
       {
-        name: 'Pole 3D z wiszącego przewodu.',
+        name: 'Pole 3D z wiszącego\u00a0przewodu.',
         text: 'Przewody to krzywe łańcuchowe, więc linia nie jest zbiorem nieskończonych równoległych drutów. Każdy przewód jest cięty na proste odcinki ze stałym ładunkiem, ładunki wynikają z dopasowania potencjału w jednym punkcie kolokacji na odcinek, a pole z zamkniętych wzorów dla skończonych odcinków i ich odbić w ziemi. Macierz zależy tylko od geometrii, więc jest raz rozkładana prawdziwym LU, a każda zmiana napięcia, kąta czy układu faz używa tych samych czynników.',
         cost: 'Cena: reszta potencjału na powierzchni przewodu to 0,27 do 0,42 procent w przęsłach i do 1,8 procent tam, gdzie przewód załamuje się na słupie. Pole zbiega szybciej niż potencjał powierzchni (0,36 procent różnicy między 12 a 48 segmentami), ale krótsze segmenty przy słupach zmniejszyłyby resztę.',
         lost: 'Przegrały: zespolone LU (dwa razy więcej pamięci i około cztery razy więcej arytmetyki, a rzeczywiste czynniki obsługują obie części prawej strony), Cholesky (macierz kolokacji 3D nie jest dokładnie symetryczna), iteracyjny GMRES (dla kilkuset niewiadomych rozwiązanie bezpośrednie jest szybsze i bez pytania o zbieżność) i sformułowanie Galerkina (symetryczna macierz, ale całkowanie numeryczne po parach odcinków).',
@@ -187,7 +187,7 @@ const fieldline = {
     ],
     calls: [
       {
-        name: 'A 3D field from a hanging conductor.',
+        name: 'A 3D field from a hanging\u00a0conductor.',
         text: 'Conductors are catenaries, so the line is not a set of infinite parallel wires. Each conductor is cut into straight segments with uniform charge, the charges follow from matching the potential at one collocation point per segment, and the field comes from closed-form expressions for finite segments and their ground images. The matrix depends on the geometry only, so it is factored once with a real LU and every change of voltage, angle or phasing reuses the factors.',
         cost: 'The cost: the potential residual on the conductor surface is 0.27 to 0.42 percent inside the spans and up to 1.8 percent where the conductor kinks at a tower. The field converges faster than the surface potential (0.36 percent between 12 and 48 segments), but shorter segments next to the towers would reduce the residual.',
         lost: 'What lost: a complex LU (twice the memory and about four times the arithmetic, while the real factors serve both parts of a complex right-hand side), Cholesky (the 3D collocation matrix is not exactly symmetric), an iterative GMRES (for a few hundred unknowns a direct solve is faster and has no convergence question) and a Galerkin formulation (a symmetric matrix, but numerical integration over pairs of segments).',
