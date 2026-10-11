@@ -17,12 +17,19 @@ export const duration = {
 
 export const stagger = {
   words: 0.07,
+  blades: 0.045,
+  cards: 0.07,
 };
 
 export const spring = {
   skew: { stiffness: 400, damping: 40 },
   magnet: { stiffness: 240, damping: 18 },
   tilt: { stiffness: 180, damping: 20 },
+  fan: { stiffness: 150, damping: 17, mass: 0.9 },
+  blade: { stiffness: 380, damping: 26 },
+  stage: { stiffness: 170, damping: 21 },
+  toss: { stiffness: 210, damping: 19, mass: 0.9 },
+  pin: { stiffness: 420, damping: 18 },
 };
 
 export const instant = { duration: 0 };

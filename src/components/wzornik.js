@@ -1,20 +1,20 @@
-import React, { useRef, useState, useSyncExternalStore } from 'react';
-import { withPrefix } from 'gatsby';
+import React, { useRef } from 'react';
 import { m, useReducedMotion } from 'framer-motion';
 import { tie } from '../i18n';
 import { instant } from '../motion';
-import Reveal from './reveal';
 import Split from './split';
 import Acc from './wzornik/acc';
 import Bis from './wzornik/bis';
 import Den from './wzornik/den';
 import Est from './wzornik/est';
+import Fan from './wzornik/fan';
 import Flat from './wzornik/flat';
 import useFaces from './wzornik/fonts';
 import Law from './wzornik/law';
 import Psy from './wzornik/psy';
 import Shop from './wzornik/shop';
 import Stay from './wzornik/stay';
+import Works from './wzornik/works';
 
 const mocks = {
   law: Law,
@@ -61,18 +61,24 @@ const copy = {
     inside: 'W środku',
     cut: 'Krój',
     open: 'Otwórz stronę',
+    pick: 'Przykładowe strony',
+    hint: 'wybierz pasek',
+    more: 'Marki i aplikacje',
+    kinds: 'Rodzaj realizacji',
+    play: 'Odtwórz pętle',
+    pause: 'Zatrzymaj pętle',
     identity: {
-      title: 'Identyfikacja wizualna',
+      tab: 'Identyfikacja',
       lead: 'Sześć realizacji z logo, kolorem, typografią, makietami, animacją i brand bookiem. Każda ze stylem dobranym do branży, z plikami do pobrania.',
       all: 'Wszystkie realizacje',
     },
     aso: {
-      title: 'Screenshoty do sklepów',
+      tab: 'Screenshoty',
       lead: 'Sześć zestawów screenshotów do App Store i Google Play dla zmyślonych aplikacji, po polsku i po angielsku. Każdy w innym stylu, z wariantem do testu A/B, ikonami i paczką plików.',
       all: 'Wszystkie zestawy',
     },
     appPreview: {
-      title: 'App preview',
+      tab: 'App preview',
       lead: 'Sześć animowanych podglądów aplikacji mobilnych dla zmyślonych firm: wersja do App Store, trzy formaty social, pętle na stronę i storyboard. Każdy w innym stylu, z własnym systemem ruchu.',
       all: 'Wszystkie podglądy',
     },
@@ -163,18 +169,24 @@ const copy = {
     cut: 'Cut',
     open: 'Open the website',
     openPl: 'Open the website, in Polish',
+    pick: 'Sample websites',
+    hint: 'pick a strip',
+    more: 'Brands and apps',
+    kinds: 'Kind of work',
+    play: 'Play the loops',
+    pause: 'Pause the loops',
     identity: {
-      title: 'Visual identity',
+      tab: 'Identity',
       lead: 'Six identity case studies with a logo, colour, typography, mockups, animation and a brand book, each in a style matched to its trade, with downloadable files. The pages are in Polish.',
       all: 'All case studies, in Polish',
     },
     aso: {
-      title: 'App store screenshots',
+      tab: 'Store screenshots',
       lead: 'Six App Store and Google Play screenshot sets for made-up apps, each in its own style, with an A/B test variant, icons and a ZIP of files. The pages are in Polish, while every set switches between Polish and English.',
       all: 'All sets, in Polish',
     },
     appPreview: {
-      title: 'App previews',
+      tab: 'App previews',
       lead: 'Six animated previews of mobile apps for made-up businesses: an App Store cut, three social formats, website loops and a storyboard, each in its own style with its own motion system. The pages are in Polish.',
       all: 'All previews, in Polish',
     },
@@ -261,115 +273,143 @@ const identity = [
   {
     slug: 'skibka',
     name: 'Skibka',
-    trade: 'piekarnia na zakwasie',
-    style: 'organiczny rzemieślniczy',
+    pl: 'piekarnia na zakwasie, organiczny rzemieślniczy',
+    en: 'sourdough bakery, organic craft',
+    palette: ['#3A3128', '#8F5530', '#4F5B33', '#C9AD83', '#F2EDE2'],
   },
   {
     slug: 'nosna',
     name: 'Nośna',
-    trade: 'festiwal sztuki nowych mediów',
-    style: 'generatywna identyfikacja',
+    pl: 'festiwal sztuki nowych mediów, generatywna identyfikacja',
+    en: 'new media art festival, generative identity',
+    palette: ['#0E0E12', '#FF3D1F', '#00B3A4', '#FF2D95', '#E9E6DE'],
   },
   {
     slug: 'rzut',
     name: 'Rzut',
-    trade: 'pracownia architektoniczna',
-    style: 'szwajcarski modernizm',
+    pl: 'pracownia architektoniczna, szwajcarski modernizm',
+    en: 'architecture studio, Swiss modernism',
+    palette: ['#0A0A0A', '#FFFFFF', '#1F4BFF', '#BDBDB9', '#5A5A57'],
   },
-  { slug: 'klamra', name: 'Klamra', trade: 'szkoła programowania online', style: 'neobrutalizm' },
-  { slug: 'cuvee', name: 'Cuvée', trade: 'hotel z winnicą', style: 'luksusowy edytorial' },
-  { slug: 'wolnobieg', name: 'Wolnobieg', trade: 'serwis rowerowy', style: 'retro lata 70.' },
+  {
+    slug: 'klamra',
+    name: 'Klamra',
+    pl: 'szkoła programowania online, neobrutalizm',
+    en: 'online coding school, neo-brutalism',
+    palette: ['#111111', '#FFE14A', '#FF5FA8', '#3DDC97', '#5CC8FF'],
+  },
+  {
+    slug: 'cuvee',
+    name: 'Cuvée',
+    pl: 'hotel z winnicą, luksusowy edytorial',
+    en: 'vineyard hotel, luxury editorial',
+    palette: ['#15110E', '#F3ECDD', '#B08D57', '#D7BE8D', '#7A5A2A'],
+  },
+  {
+    slug: 'wolnobieg',
+    name: 'Wolnobieg',
+    pl: 'serwis rowerowy, retro lata 70.',
+    en: 'bike repair shop, 1970s retro',
+    palette: ['#5B2F14', '#EC7424', '#E9A81D', '#7C8A2B', '#A64A0D'],
+  },
 ];
 
 const aso = [
   {
     slug: 'gran',
     name: 'Grań',
-    trade: 'szlaki górskie w Sudetach',
-    style: 'panorama ilustracyjna',
+    pl: 'szlaki górskie w Sudetach, panorama ilustracyjna',
+    en: 'mountain trails in the Sudetes, illustrated panorama',
   },
   {
     slug: 'szyld',
     name: 'Szyld',
-    trade: 'zakupy w lokalnych sklepach',
-    style: 'gradienty i przechylone urządzenia',
+    pl: 'zakupy w lokalnych sklepach, gradienty i przechylone urządzenia',
+    en: 'shopping in local stores, gradients and tilted devices',
   },
   {
     slug: 'margines',
     name: 'Margines',
-    trade: 'fiszki do nauki języków',
-    style: 'odręczne adnotacje',
+    pl: 'fiszki do nauki języków, odręczne adnotacje',
+    en: 'language flashcards, handwritten notes',
   },
   {
     slug: 'chochla',
     name: 'Chochla',
-    trade: 'przepisy i plan posiłków',
-    style: 'memphis i pop-art',
+    pl: 'przepisy i plan posiłków, memphis i pop-art',
+    en: 'recipes and meal plans, Memphis and pop art',
   },
   {
     slug: 'kruszec',
     name: 'Kruszec',
-    trade: 'budżet i inwestowanie',
-    style: 'ciemne szkło premium',
+    pl: 'budżet i inwestowanie, ciemne szkło premium',
+    en: 'budgeting and investing, dark premium glass',
   },
-  { slug: 'bis', name: 'Bis', trade: 'muzyka i koncerty', style: 'Y2K holograficzny chrom' },
+  {
+    slug: 'bis',
+    name: 'Bis',
+    pl: 'muzyka i koncerty, Y2K holograficzny chrom',
+    en: 'music and gigs, Y2K holographic chrome',
+  },
 ];
 
 const appPreview = [
   {
     slug: 'kasownik',
     name: 'Kasownik',
-    trade: 'bilety komunikacji miejskiej',
-    style: 'natywny iOS, jasny i czysty',
+    pl: 'bilety komunikacji miejskiej, natywny iOS, jasny i czysty',
+    en: 'public transport tickets, native iOS, light and clean',
   },
   {
     slug: 'sztanga',
     name: 'Sztanga',
-    trade: 'dziennik treningu siłowego',
-    style: 'kinetyczna typografia',
+    pl: 'dziennik treningu siłowego, kinetyczna typografia',
+    en: 'strength training log, kinetic type',
   },
   {
     slug: 'rygiel',
     name: 'Rygiel',
-    trade: 'menedżer haseł z alertami wycieków',
-    style: 'ciemny neon i cyber',
+    pl: 'menedżer haseł z alertami wycieków, ciemny neon i cyber',
+    en: 'password manager with breach alerts, dark neon cyber',
   },
   {
     slug: 'kielek',
     name: 'Kiełek',
-    trade: 'pielęgnacja roślin domowych',
-    style: 'claymorphism pastelowy',
+    pl: 'pielęgnacja roślin domowych, claymorphism pastelowy',
+    en: 'houseplant care, pastel claymorphism',
   },
   {
     slug: 'poziomka',
     name: 'Poziomka',
-    trade: 'tracker nawyków z grywalizacją',
-    style: 'ośmiobitowy pixel art',
+    pl: 'tracker nawyków z grywalizacją, ośmiobitowy pixel art',
+    en: 'gamified habit tracker, 8-bit pixel art',
   },
   {
     slug: 'poludnie',
     name: 'Południe',
-    trade: 'fotowoltaika i magazyn energii',
-    style: 'izometryczny dashboard danych',
+    pl: 'fotowoltaika i magazyn energii, izometryczny dashboard danych',
+    en: 'solar panels and home battery, isometric data dashboard',
   },
 ];
-
-const noop = () => () => {};
 
 export default function Wzornik({ lang }) {
   const t = copy[lang];
   const reduce = useReducedMotion();
   const section = useRef(null);
-  const hydrated = useSyncExternalStore(
-    noop,
-    () => true,
-    () => false,
-  );
-  const [open, setOpen] = useState({ law: true });
 
   useFaces(section);
 
-  const toggle = id => setOpen(state => ({ ...state, [id]: !state[id] }));
+  const groups = [
+    { id: 'identity', kind: 'id', href: '/wzornik/identyfikacja/', items: identity, ...t.identity },
+    { id: 'aso', kind: 'aso', href: '/wzornik/aso/', items: aso, ...t.aso },
+    {
+      id: 'app-preview',
+      kind: 'ap',
+      href: '/wzornik/app-preview/',
+      items: appPreview,
+      ...t.appPreview,
+    },
+  ];
 
   return (
     <section className="wz" id={t.id} aria-labelledby="wz-h" ref={section}>
@@ -379,142 +419,8 @@ export default function Wzornik({ lang }) {
         </h2>
         <p className="sec-head__side">{tie(t.lead)}</p>
       </div>
-      <Reveal as="ol" className="book">
-        {copy.sites.map(({ id, slug, name, en, chips }, i) => {
-          const s = t[id];
-          const Mock = mocks[id];
-          const isOpen = Boolean(open[id]);
-          return (
-            <li
-              key={id}
-              className={`sw sw--${id}${isOpen ? ' is-open' : ''}`}
-              style={{ '--i': i + 1 }}>
-              <h3 className="sw__h">
-                <button
-                  type="button"
-                  className="sw__btn"
-                  id={`sw-${id}-b`}
-                  aria-expanded={isOpen}
-                  aria-controls={`sw-${id}-p`}
-                  onClick={() => toggle(id)}>
-                  <span className="sw__name">{name}</span>
-                  <span className="sw__trade">{tie(s.trade)}</span>
-                  <span className="sw__kind">{tie(s.kind)}</span>
-                  <span className="sw__ico" aria-hidden="true" />
-                </button>
-              </h3>
-              <div
-                className="sw__panel"
-                id={`sw-${id}-p`}
-                role="region"
-                aria-labelledby={`sw-${id}-b`}
-                inert={hydrated && !isOpen ? '' : undefined}>
-                <div className="sw__in">
-                  <div className="sw__grid">
-                    <div className="sw__shot">
-                      <div className={`mock mk--${id}`} role="img" aria-label={s.alt}>
-                        <div className="mk" lang="pl">
-                          <Mock />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="sw__info">
-                      <div>
-                        <p className="sw__label">{tie(t.who)}</p>
-                        <p className="sw__text">{tie(s.who)}</p>
-                      </div>
-                      <div>
-                        <p className="sw__label">{tie(t.inside)}</p>
-                        <p className="sw__text">{tie(s.inside)}</p>
-                      </div>
-                      <div>
-                        <p className="sw__label">{tie(t.cut)}</p>
-                        <p className="sw__text">{tie(s.cut)}</p>
-                        <p className="sw__chips" aria-hidden="true">
-                          {chips.map(chip => (
-                            <i key={chip} style={{ '--c': chip }} />
-                          ))}
-                        </p>
-                      </div>
-                      <p className="sw__state">
-                        <a
-                          className="link"
-                          href={withPrefix(`/wzornik/${slug}/${lang === 'en' && en ? 'en/' : ''}`)}>
-                          {lang === 'en' && !en ? t.openPl : t.open}
-                          <span className="sr">, {name}</span>
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-          );
-        })}
-      </Reveal>
-      <div className="wz-id">
-        <h3 className="wz-id__h">{t.identity.title}</h3>
-        <p className="wz-id__lead">{tie(t.identity.lead)}</p>
-        <ul className="wz-id__list">
-          {identity.map(({ slug, name, trade, style }) => (
-            <li key={slug}>
-              <a className="link" href={withPrefix(`/wzornik/identyfikacja/${slug}/`)}>
-                {name}
-              </a>
-              <span>
-                {trade}, {style}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <p className="wz-id__all">
-          <a className="link" href={withPrefix('/wzornik/identyfikacja/')}>
-            {t.identity.all}
-          </a>
-        </p>
-      </div>
-      <div className="wz-id">
-        <h3 className="wz-id__h">{t.aso.title}</h3>
-        <p className="wz-id__lead">{tie(t.aso.lead)}</p>
-        <ul className="wz-id__list">
-          {aso.map(({ slug, name, trade, style }) => (
-            <li key={slug}>
-              <a className="link" href={withPrefix(`/wzornik/aso/${slug}/`)}>
-                {name}
-              </a>
-              <span>
-                {trade}, {style}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <p className="wz-id__all">
-          <a className="link" href={withPrefix('/wzornik/aso/')}>
-            {t.aso.all}
-          </a>
-        </p>
-      </div>
-      <div className="wz-id">
-        <h3 className="wz-id__h">{t.appPreview.title}</h3>
-        <p className="wz-id__lead">{tie(t.appPreview.lead)}</p>
-        <ul className="wz-id__list">
-          {appPreview.map(({ slug, name, trade, style }) => (
-            <li key={slug}>
-              <a className="link" href={withPrefix(`/wzornik/app-preview/${slug}/`)}>
-                {name}
-              </a>
-              <span>
-                {trade}, {style}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <p className="wz-id__all">
-          <a className="link" href={withPrefix('/wzornik/app-preview/')}>
-            {t.appPreview.all}
-          </a>
-        </p>
-      </div>
+      <Fan sites={copy.sites} mocks={mocks} t={t} lang={lang} />
+      <Works groups={groups} t={t} lang={lang} />
       <m.p
         className="hand-note"
         initial={{ opacity: 0 }}
