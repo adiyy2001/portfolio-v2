@@ -110,17 +110,19 @@ export const CalendarScreen = ({ f, still = false }: { f: number; still?: boolea
       {drops(f, still).map(d => (
         <Drop key={d.key} x={d.x} y={d.y} w={20} id={`cal-${d.key}`} body={d.body} style={{ opacity: d.opacity, zIndex: 10 }} />
       ))}
-      <div style={still ? {} : puffIn(f, T.note, false, '221px 640px')}>
+      <div style={enter(f, T.calRows + 14, still, 34, 640)}>
         <Box x={24} y={570} w={395} h={140} tone="water">
           <div style={{ position: 'absolute', left: 20, top: 22, width: 46, height: 46, borderRadius: 23, background: color.card, boxShadow: clay(0.3, 0.7), display: 'grid', placeItems: 'center' }}>
             <DropGlyph size={18} id="note-drop" />
           </div>
-          <Text x={80} y={20} size={19} weight={900}>
-            {calendar.noteTitle}
-          </Text>
-          <Text x={80} y={50} w={290} size={14} tone={color.inkSoft} line={1.45}>
-            {calendar.note}
-          </Text>
+          <div style={{ position: 'absolute', inset: 0, ...(still || f >= T.note ? puffIn(f, T.note, still, '221px 70px') : {}) }}>
+            <Text x={80} y={20} size={19} weight={900}>
+              {still || f >= T.note ? calendar.noteTitle : calendar.summerNoteTitle}
+            </Text>
+            <Text x={80} y={50} w={290} size={14} tone={color.inkSoft} line={1.45}>
+              {still || f >= T.note ? calendar.note : calendar.summerNote}
+            </Text>
+          </div>
         </Box>
       </div>
     </>

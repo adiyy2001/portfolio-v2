@@ -32,6 +32,8 @@ interface Layout {
   phone: { scale: number; left: number; top: number };
   text: { left: number; top: number; width: number; title: number; line: number | null; kicker: number; align: 'left' | 'center' };
   seat: { x: number; w: number };
+  host: { x: number; y: number; w: number };
+  swing: number;
   outro: { cy: number; icon: number; name: number; tagline: number };
   props: Prop[];
 }
@@ -54,6 +56,8 @@ const layouts: Record<Format, Layout> = {
     phone: { scale: 0.8, left: 350, top: 206 },
     text: { left: 960, top: 340, width: 840, title: 96, line: 36, kicker: 26, align: 'left' },
     seat: { x: 0.68, w: 140 },
+    host: { x: 150, y: 700, w: 0 },
+    swing: 70,
     outro: { cy: 500, icon: 230, name: 128, tagline: 38 },
     props: [
       { kind: 'blob', x: 470, y: 560, size: 760, depth: 0.15, phase: 0, tone: 'card' },
@@ -68,33 +72,36 @@ const layouts: Record<Format, Layout> = {
     ],
   },
   '9x16': {
-    phone: { scale: 1, left: (1080 - phone.width - pad * 2) / 2, top: 790 },
-    text: { left: 80, top: 236, width: 860, title: 92, line: 36, kicker: 28, align: 'left' },
-    seat: { x: 0.7, w: 170 },
+    phone: { scale: 1.15, left: (1080 - (phone.width + pad * 2) * 1.15) / 2, top: 700 },
+    text: { left: 80, top: 190, width: 720, title: 84, line: 34, kicker: 28, align: 'left' },
+    seat: { x: 0.74, w: 170 },
+    host: { x: 18, y: 1420, w: 215 },
+    swing: 70,
     outro: { cy: 900, icon: 280, name: 150, tagline: 42 },
     props: [
-      { kind: 'blob', x: 540, y: 1300, size: 980, depth: 0.15, phase: 0, tone: 'card' },
-      { kind: 'blob', x: 930, y: 180, size: 300, depth: 0.25, phase: 2, tone: 'butter' },
-      { kind: 'pot', x: 130, y: 1500, size: 190, depth: 0.9, phase: 1, species: 'monstera', front: true },
-      { kind: 'pot', x: 960, y: 1700, size: 160, depth: 0.7, phase: 3, species: 'calathea', front: true },
-      { kind: 'drop', x: 150, y: 860, size: 70, depth: 1.1, phase: 0.5 },
-      { kind: 'drop', x: 960, y: 1040, size: 54, depth: 1.2, phase: 3.3, front: true },
-      { kind: 'leaf', x: 110, y: 1180, size: 110, depth: 1.3, phase: 1.6, rot: -30, front: true },
-      { kind: 'leaf', x: 860, y: 640, size: 80, depth: 0.6, phase: 4, rot: 30 },
+      { kind: 'blob', x: 540, y: 1330, size: 1040, depth: 0.15, phase: 0, tone: 'card' },
+      { kind: 'blob', x: 960, y: 170, size: 280, depth: 0.25, phase: 2, tone: 'butter' },
+      { kind: 'pot', x: 975, y: 1800, size: 150, depth: 0.7, phase: 3, species: 'calathea', front: true },
+      { kind: 'drop', x: 120, y: 900, size: 64, depth: 1.1, phase: 0.5 },
+      { kind: 'drop', x: 985, y: 1150, size: 50, depth: 1.2, phase: 3.3, front: true },
+      { kind: 'leaf', x: 100, y: 1130, size: 100, depth: 1.3, phase: 1.6, rot: -30, front: true },
+      { kind: 'leaf', x: 900, y: 660, size: 80, depth: 0.6, phase: 4, rot: 30 },
     ],
   },
   '1x1': {
-    phone: { scale: 0.62, left: (1080 - (phone.width + pad * 2) * 0.62) / 2, top: 400 },
-    text: { left: 60, top: 50, width: 960, title: 66, line: null, kicker: 24, align: 'center' },
+    phone: { scale: 1, left: 520, top: 170 },
+    text: { left: 56, top: 90, width: 430, title: 60, line: null, kicker: 24, align: 'left' },
     seat: { x: 0.72, w: 112 },
+    host: { x: 36, y: 700, w: 250 },
+    swing: 40,
     outro: { cy: 500, icon: 200, name: 112, tagline: 32 },
     props: [
-      { kind: 'blob', x: 540, y: 760, size: 760, depth: 0.15, phase: 0, tone: 'card' },
-      { kind: 'pot', x: 150, y: 880, size: 170, depth: 0.9, phase: 1, species: 'monstera' },
-      { kind: 'pot', x: 930, y: 900, size: 150, depth: 0.7, phase: 3, species: 'sansevieria' },
-      { kind: 'drop', x: 170, y: 520, size: 64, depth: 1.1, phase: 0.5 },
-      { kind: 'drop', x: 920, y: 560, size: 50, depth: 1.2, phase: 3.3, front: true },
-      { kind: 'leaf', x: 860, y: 1030, size: 90, depth: 1.3, phase: 1.6, rot: -30, front: true },
+      { kind: 'blob', x: 780, y: 640, size: 820, depth: 0.15, phase: 0, tone: 'card' },
+      { kind: 'blob', x: 120, y: 80, size: 240, depth: 0.25, phase: 2, tone: 'butter' },
+      { kind: 'pot', x: 260, y: 520, size: 140, depth: 0.7, phase: 3, species: 'sansevieria' },
+      { kind: 'drop', x: 440, y: 640, size: 54, depth: 1.1, phase: 0.5 },
+      { kind: 'drop', x: 1030, y: 590, size: 46, depth: 1.2, phase: 3.3, front: true },
+      { kind: 'leaf', x: 430, y: 1030, size: 90, depth: 1.3, phase: 1.6, rot: -30, front: true },
     ],
   },
 };
@@ -167,6 +174,31 @@ const Copy = ({ f, layout }: { f: number; layout: Layout }) => {
   );
 };
 
+const beatOf = (f: number) => {
+  const i = marketingBeats.findIndex(beat => f >= beat.from && f <= beat.to);
+  return i < 0 ? marketingBeats.length - 1 : i;
+};
+const swingDirections = [0, -1, 1, -1, 1] as const;
+const swingAt = (f: number, layout: Layout) => {
+  const i = beatOf(f);
+  if (i === 0 || f >= marketing.outro) return 0;
+  return (1 - bounceAt(f, marketingBeats[i].from)) * swingDirections[i] * layout.swing;
+};
+
+const Host = ({ f, layout }: { f: number; layout: Layout }) => {
+  const { host } = layout;
+  const from = marketingBeats[1].from - 5;
+  if (host.w === 0 || f < from || f >= marketing.outro + 10) return null;
+  const hops = marketingBeats.slice(1).map(beat => beat.from);
+  const body = hops.reduce<Body>((acc, at) => (f >= at - 2 && f < at + 40 ? combine(acc, combine(landing(f, at + 14), hop(f, at, 44))) : acc), rest);
+  const enterT = progress(f, from, 16, easeOut);
+  const sink = f >= marketing.outro ? progress(f, marketing.outro, 10, easeIn) : 0;
+  const pose = mascotPose(f, 'host');
+  return (
+    <Mascot x={host.x} y={host.y + (1 - enterT) * 320 + sink * 400} w={host.w} body={body} pose={{ ...pose, mood: hops.some(at => f >= at && f < at + 36) ? 'cheer' : 'smile' }} style={{ zIndex: 25 }} />
+  );
+};
+
 const breakout = { out: 142, seat: 160, cheer: 170, back: 182, home: 200 } as const;
 
 const screenToStage = (layout: Layout, x: number, y: number) => {
@@ -234,13 +266,15 @@ const Stage = ({ f, format }: { f: number; format: Format }) => {
   const po = orbit(f, 0.4);
   const sink = f >= marketing.outro ? progress(f, marketing.outro, 12, easeIn) : 0;
   const hidden = f >= breakout.out && f < breakout.home;
+  const swing = swingAt(f, layout);
   return (
     <>
       <div style={{ position: 'absolute', inset: 0, transform: `translate(${po.x}px, ${po.y}px)` }}>
-        <div style={{ position: 'absolute', left: p.left, top: p.top, transform: `translateY(${sink * 500}px)`, opacity: 1 - sink }}>
+        <div style={{ position: 'absolute', left: p.left, top: p.top, transform: `translate(${swing}px, ${sink * 500}px)`, opacity: 1 - sink }}>
           <ClayPhone scale={p.scale} frame={Math.min(f, marketing.outro + 11)} hideMascot={hidden} />
         </div>
         <MascotOut f={f} layout={layout} />
+        <Host f={f} layout={layout} />
       </div>
       <div style={{ position: 'absolute', inset: 0, opacity: 1 - sink }}>
         <Copy f={Math.min(f, marketing.outro - 1)} layout={layout} />

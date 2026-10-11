@@ -189,13 +189,13 @@ export const TodayScreen = ({
             style={{ transform: `scale(${cardIn * (1 + (r.body.sx - 1) * 0.5) * (1 + (nudge.sx - 1) * 0.4)}, ${cardIn * (1 + (r.body.sy - 1) * 0.5) * (1 + (nudge.sy - 1) * 0.4)})`, transformOrigin: '50% 0%', opacity: Math.min(1, cardIn * 3) }}>
             {hookText > 0.01 && (
               <div style={{ position: 'absolute', inset: 0, opacity: hookText, textAlign: 'center' }}>
-                <Text x={0} y={24} w={r.w} align="center" size={20} weight={800} tone={color.inkSoft}>
+                <Text x={0} y={24} w={r.w} align="center" size={21} weight={900} tone={color.ink}>
                   {today.kicker}
                 </Text>
                 <Text x={0} y={50} w={r.w} align="center" size={56} weight={900} line={1.1}>
                   {today.countFrom} {plural(today.countFrom)}
                 </Text>
-                <Text x={0} y={132} w={r.w} align="center" size={16} weight={800} tone={color.inkSoft}>
+                <Text x={0} y={132} w={r.w} align="center" size={17} weight={900} tone={color.ink}>
                   {today.hookLine}
                 </Text>
               </div>
@@ -231,6 +231,21 @@ export const TodayScreen = ({
         {[0, 1, 2].map(i => (
           <PlantCard key={i} i={i} f={f} still={still} done={done} settled={settled} />
         ))}
+        <div style={{ position: 'absolute', left: 24, top: cardTop(2) + 108, width: 395, height: 82, ...enter(f, T.cards[2] + 6, still || settled || done) }}>
+          <Box x={0} y={0} w={395} h={82} tone="card" lift={0.6}>
+            <PlantAvatar plant={today.tomorrow.list[0]} size={48} id="tmr-0" x={16} y={17} />
+            <PlantAvatar plant={today.tomorrow.list[1]} size={48} id="tmr-1" x={58} y={17} />
+            <Text x={122} y={14} size={13} weight={800} tone={color.inkSoft}>
+              {today.tomorrow.label}
+            </Text>
+            <Text x={122} y={34} size={18} weight={900}>
+              {today.tomorrow.names}
+            </Text>
+            <Text x={122} y={58} size={13} weight={800} tone={color.inkSoft}>
+              {today.tomorrow.meta}
+            </Text>
+          </Box>
+        </div>
         <Touch x={tapAt.x} y={tapAt.y} t={touch} />
         {showDrop && (
           <Drop
