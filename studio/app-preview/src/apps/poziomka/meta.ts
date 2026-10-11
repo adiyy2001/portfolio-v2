@@ -47,7 +47,7 @@ export const meta = {
       web: 'tiny5.woff2',
       weight: '400',
       used: [400],
-      role: 'etykiety, opisy i tekst strony; w wideo jako bitmapa Poziomka Mini, 5 pikseli wysokości wersalika',
+      role: 'kicker i linia w oknie dialogowym wersji marketingowej oraz podpisy na planszy storyboardu, jako bitmapa Poziomka Mini, 5 pikseli wysokości wersalika; tekst strony to zwykły krój systemowy',
     },
   ],
 };

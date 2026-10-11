@@ -34,6 +34,13 @@ const pl = (text: string) =>
     .replace(/(\d) (dni|klatek|klatki|pikseli|piksele|kolorów|razy|XP|stron)/g, '$1 $2')
     .replace(/(POZIOM|PASSA:) (\d+)/g, '$1\u00a0$2');
 const tie = (text: string) => pl(text).replace(/ (\S+)$/, '\u00a0$1');
+const tieShort = (text: string) => {
+  const joined = pl(text);
+  const match = joined.match(/(\S+) (\S+)$/);
+  return match && match[0].length <= 16
+    ? `${joined.slice(0, match.index)}${match[1]}\u00a0${match[2]}`
+    : joined;
+};
 const ratio = (value: number) => value.toFixed(1).replace('.', ',');
 const onCream = (id: string) => manifest.palette.find(item => item.id === id)?.onSurface ?? 0;
 const onSky = (id: string) => manifest.palette.find(item => item.id === id)?.onGrouped ?? 0;
@@ -147,12 +154,12 @@ const total = content.client.quests.rows
               <li class={done ? 'done' : undefined}>
                 <span>
                   <span>{pl(name)}</span>
-                  <small>
-                    {when}
-                    {done ? ',\u00a0zrobione' : ''}
-                  </small>
+                  <small>{when}</small>
                 </span>
-                <span class="xp">+{xp}&nbsp;XP</span>
+                <span class="quests__side">
+                  <span class="xp">+{xp}&nbsp;XP</span>
+                  {done && <small>zrobione</small>}
+                </span>
               </li>
             ))}
           </ul>
@@ -202,9 +209,9 @@ const total = content.client.quests.rows
           {manifest.palette.map(item => (
             <li class="swatch">
               <span class="swatch__chip" style={`background:${item.hex}`} />
-              <span style="color:var(--ink)">{item.name}</span>
+              <span style="color:var(--ink)">{tieShort(item.name)}</span>
               <span>{item.hex.toUpperCase()}</span>
-              <span>{tie(item.role)}</span>
+              <span>{tieShort(item.role)}</span>
             </li>
           ))}
         </ul>

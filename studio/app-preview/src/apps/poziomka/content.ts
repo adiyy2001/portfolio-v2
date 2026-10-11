@@ -129,7 +129,7 @@ export type TabId = (typeof tabs)[number]['id'];
 
 export const gallery = [
   { n: 1, title: 'Poziom w górę', caption: 'Po 20 minutach spaceru licznik dobija do 1200 XP: baner POZIOM 8, poziomka skacze, a pasek mruga trzy razy.' },
-  { n: 2, title: 'Zadania na dziś', caption: 'Cztery nawyki jako zadania z punktami: woda 10 XP, spacer 30, książka 20, telefon odłożony o 22:30 aż 40.' },
+  { n: 2, title: 'Zadania na dziś', caption: 'Cztery nawyki jako zadania z punktami: woda 10 XP, spacer 30, książka 20, telefon od 22:30 aż 40.' },
   { n: 3, title: 'Passa', caption: '21 dni z rzędu jako kafle kalendarza, od 18 września do dziś. Wystarczy jedno zadanie dziennie, żeby passa trwała.' },
   { n: 4, title: 'Ogródek', caption: 'Passa hoduje poziomkę: nasionko, listek, sadzonka, kwiat i owoc. Za 21 dni skrzynia oddaje miedzianą konewkę.' },
   { n: 5, title: 'Tydzień', caption: 'Siedem słupków XP od piątku do czwartku, razem 550 XP, średnio 79 dziennie. Woda trzyma się 7 z 7 dni.' },

@@ -314,7 +314,7 @@
       "used": [
         400
       ],
-      "role": "etykiety, opisy i tekst strony; w wideo jako bitmapa Poziomka Mini, 5 pikseli wysokości wersalika",
+      "role": "kicker i linia w oknie dialogowym wersji marketingowej oraz podpisy na planszy storyboardu, jako bitmapa Poziomka Mini, 5 pikseli wysokości wersalika; tekst strony to zwykły krój systemowy",
       "bytes": 6416
     }
   ],
@@ -378,7 +378,7 @@
     {
       "n": 2,
       "title": "Zadania na dziś",
-      "caption": "Cztery nawyki jako zadania z punktami: woda 10 XP, spacer 30, książka 20, telefon odłożony o 22:30 aż 40.",
+      "caption": "Cztery nawyki jako zadania z punktami: woda 10 XP, spacer 30, książka 20, telefon od 22:30 aż 40.",
       "file": "screens/poziomka-screen-2.webp"
     },
     {
