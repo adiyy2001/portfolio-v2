@@ -73,7 +73,7 @@ Na 4 rdzeniach, Remotion z `--concurrency 3`, ostatnie pełne rendery (stills, w
 
 ## Czego nie udało się zrobić
 
-- Większe uwagi z drugiej recenzji (żadna poniżej 4) czekają na kolejną rundę: wspólny szkielet pięciu wersji marketingowych, za mały telefon w formatach 9:16 i 1:1 (Kasownik, Rygiel, Kiełek, Południe), przejścia ekranów przez prawie puste klatki (Kasownik, Kiełek, Południe), pierwsza klatka wersji sklepowej przed stanem docelowym (Kasownik, Rygiel, Poziomka, Południe), jednoczesny scramble trzech linii w marketingu Rygla, drobne etykiety Rygla, kontrast haka Kiełka, pusta dolna część kilku ekranów, pasek XP w haku Poziomki i tekst ciągły krojem pikselowym na jej stronie, rozciągnięte „MARTWY CIĄG” w Sztandze, płaska karta końcowa Południa. Pełna lista: `PLAN.md`, decyzja 79.
+- Po trzeciej rundzie zostają: drobny tekst pomocniczy w wersjach sklepowych Kiełka i Poziomki (rozmiar wynika z pokazywanego interfejsu), większe o 20% napisy w Sztandze, telefon Południa i Poziomki w 9:16 szerszy niż 44% kadru (pikselowy świat rysowany 1:1 i skalowany całkowicie). Pełna lista: `PLAN.md`, decyzje 80 do 87.
 - Ścieżka `/portfolio-v2/` z briefu nie dotyczy obecnej strony: serwis działa w katalogu głównym domeny, wzornik pod `/wzornik/`.
 - Mastery (wersja sklepowa około 30 MB, formaty social) nie są publikowane; strona pokazuje pętle web i wypisuje pliki mastera z danymi ffprobe. Brak paczki ZIP.
 - Indeks app preview nie ma obrazka Open Graph, tak jak indeksy identyfikacji i ASO; każda z sześciu stron ma własny `og.png` 1200×630.
@@ -99,12 +99,25 @@ Na 4 rdzeniach, Remotion z `--concurrency 3`, ostatnie pełne rendery (stills, w
 16. Publikacja: blok app preview w sekcji Wzornik (PL i EN, branża i styl po polsku jak w pozostałych blokach) i jeden wiersz na `/wzornik/`; `static/llms.txt` i `sites/README.md` bez zmian, jak przy identyfikacji i ASO.
 17. Przy scalaniu z `main` pojawi się konflikt typu „oba dodały” w `src/components/wzornik.js` i `sites/src/pages/index.astro`: zostawić oba bloki, najpierw ASO, potem app preview.
 
-Pełna lista 79 decyzji: `PLAN.md`, sekcja „Decisions for Adrian”.
+Pełna lista 87 decyzji: `PLAN.md`, sekcja „Decisions for Adrian”.
+
+## Runda 3: większe poprawki z drugiej recenzji
+
+Zakres: decyzja 79 w `PLAN.md`. Gałąź `wzornik-app-preview-r3`, bez wypychania i bez scalania z `main`.
+
+- Kasownik: linia tramwajowa z czterema przystankami zamiast osobnej etykiety, telefon 1,32 razy większy w 9:16, karta końcowa jako bilet z perforacją; w sklepie rozwiązany pierwszy napis, fala QR od klatki 0, przejście końcowe bez pustych klatek, karta kolejnego przystanku na dole ekranu biletu.
+- Rygiel: marketing jako terminal z kursorem, trzy linie odszyfrowują się po kolei, telefon jako panel z celownikiem; większe etykiety, pasek skanu i nowe przekreślenia (cyjan zamiast szarości).
+- Kiełek: maskotka prowadzi (gospodarz skacze na każdym akcie, telefon wjeżdża na zmianę z lewej i prawej), większy telefon w 9:16 i 1:1; w sklepie karta Jutro, notka letnia w kalendarzu, kontrast haka, przejścia kart nakładają się, bez pustych klatek.
+- Poziomka: pasek XP w haku pełny w klatce 0, błysk, spadek i przejście z POZIOM 7 na 8; w marketingu okno dialogowe RPG; na stronie tekst ciągły krojem bezszeryfowym systemu, Jersey 10 i Tiny5 zostają w nagłówkach i próbkach interfejsu.
+- Sztanga: „MARTWY CIĄG” w marginesach przy łagodniejszym uderzeniu (1,12 zamiast 1,4); KG i seria wchodzą w klatkach 18 i 24, więc środek ekranu nie jest pusty w 1 s.
+- Południe: pierwsza klatka z 6,4 kW bez liczenia od zera, karty Dzień, Kiedy włączyć i Bilans wchodzą od razu, bez białych kart czekających 2 s; większy telefon jako wstawka, karta końcowa to ten sam dom o zmierzchu.
+- Odrzucony pomysł: przechylanie telefonu Kiełka (obrót warstwy większej niż kadr daje w renderze artefakt kafelkowania), zastąpione przesunięciem w poziomie.
+- Weryfikacja: `tsc --noEmit` w `studio/app-preview`, `validate.mjs` w każdym potoku, `yarn --cwd sites run check` i `test`, `yarn --cwd sites build`, zrzuty stron przy 320, 390, 768, 1024 i 1440 px bez poziomego przewijania i bez błędów konsoli, klatki wyciągnięte ffmpegiem z każdej przerenderowanej pętli.
 
 ## Co może dostarczyć tylko Adrian
 
 - Zgoda na scalenie gałęzi `wzornik-app-preview` z `main`.
-- Decyzja o kolejnej rundzie większych poprawek z drugiej recenzji.
+- Ocena rundy 3 (decyzje 80 do 87 w `PLAN.md`): rozmiar telefonu w 9:16 kontra strefa napisów, zostawienie światów Poziomki i Południa z mniejszymi zmianami konstrukcji.
 - Prawdziwy test wgrania wersji sklepowej do App Store Connect i filmu na YouTube (wymaga jego kont).
 - Sprawdzenie nazw pod kątem znaków towarowych, jeśli miałyby żyć dłużej niż jako przykłady.
 - Ocena gustu: czy sześć kierunków i ton tekstów sprzedają jego usługę tak, jak chce.
