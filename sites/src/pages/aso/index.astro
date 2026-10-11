@@ -73,9 +73,7 @@ const gets = [
     <main id="main" tabindex="-1">
       <section class="intro">
         <p class="kicker">Wzornik · screenshoty do sklepów</p>
-        <h1>
-          Sześć aplikacji, których nie ma, i sześć zestawów screenshotów gotowych do wysłania.
-        </h1>
+        <h1>Sześć aplikacji, których nie ma, i&nbsp;sześć&nbsp;zestawów.</h1>
         <p class="lead">
           Każdy zestaw ma własny styl i własną historię na sześć kadrów, jakby zrobiło je sześć
           różnych pracowni. Pod spodem jest ten sam komplet, który dostaje klient: oba sklepy, dwa
@@ -186,6 +184,7 @@ const gets = [
   }
 
   .kicker {
+    text-wrap: balance;
     margin: 0 0 20px;
     font-size: 14px;
     letter-spacing: 0.08em;
@@ -210,6 +209,7 @@ const gets = [
   }
 
   h2 {
+    text-wrap: balance;
     margin: 0 0 20px;
     font:
       700 clamp(24px, 3vw, 34px) / 1.1 'Bespoke Serif',
@@ -232,6 +232,11 @@ const gets = [
 
   .gets dt {
     font-weight: 600;
+  }
+
+  .gets dd,
+  .works p {
+    text-wrap: pretty;
   }
 
   .gets dd {
