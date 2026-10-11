@@ -69,7 +69,7 @@ export const content = {
     'Siedem ekranów zbudowanych jako komponenty z jednego mini design systemu: kolory, skala typograficzna, odstępy, promienie i cienie. Projekt w kanwie 443×960, render w skali 2, czyli dokładnie 886×1920.',
   formats: {
     intro:
-      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. Marketingowa ma własną ramkę telefonu, nagłówki i ruch kamery, a w chwili kasowania bilet wychodzi poza telefon.',
+      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. Marketingowa ma własną ramkę telefonu, linię tramwajową z czterema przystankami zamiast osobnych etykiet, ruch kamery i zakończenie w kształcie biletu z perforacją, a w chwili kasowania bilet wychodzi poza telefon.',
     store: 'Wersja sklepowa, sam interfejs',
     portrait: 'Reels, TikTok, Shorts, 9:16',
     square: 'Post w kanale, 1:1',

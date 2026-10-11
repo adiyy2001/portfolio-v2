@@ -5,10 +5,10 @@ const notch = (n: number) =>
   `polygon(${n}px 0,calc(100% - ${n}px) 0,100% ${n}px,100% calc(100% - ${n}px),calc(100% - ${n}px) 100%,${n}px 100%,0 calc(100% - ${n}px),0 ${n}px)`;
 
 export const styles = `
-:root{color-scheme:light;--ink:#140c1c;--plum:#3b2440;--dusk:#6b3e5e;--berry-deep:#a23b4e;--berry:#e0474f;--berry-light:#ff8f8f;--gold:#f7c873;--cream:#fff3c4;--forest:#2d5a3a;--leaf:#4fa34a;--sprout:#a6de5c;--blue-deep:#2b4c8c;--sky-mid:#4f8fe0;--sky:#9ed8ff;--stone:#8a7f86;--white:#fff;--skip-bg:#140c1c;--skip-fg:#fff3c4;--gut:16px;--mini:'Tiny5',ui-monospace,monospace;--pixel:'Jersey 10','Tiny5',ui-monospace,monospace;--notch:${notch(2)}}
+:root{color-scheme:light;--ink:#140c1c;--plum:#3b2440;--dusk:#6b3e5e;--berry-deep:#a23b4e;--berry:#e0474f;--berry-light:#ff8f8f;--gold:#f7c873;--cream:#fff3c4;--forest:#2d5a3a;--leaf:#4fa34a;--sprout:#a6de5c;--blue-deep:#2b4c8c;--sky-mid:#4f8fe0;--sky:#9ed8ff;--stone:#8a7f86;--white:#fff;--skip-bg:#140c1c;--skip-fg:#fff3c4;--gut:16px;--mini:'Tiny5',ui-monospace,monospace;--text:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;--pixel:'Jersey 10','Tiny5',ui-monospace,monospace;--notch:${notch(2)}}
 @media (min-width:600px){:root{--gut:32px}}
 @media (min-width:1100px){:root{--gut:48px}}
-body.poz{background:var(--sky);color:var(--ink);font:400 16px/24px var(--mini);-webkit-font-smoothing:none;font-smooth:never}
+body.poz{background:var(--sky);color:var(--ink);font:400 17px/26px var(--text)}
 .poz :where(h1,h2,h3,p,figure,dl,dd,ul,ol,table,fieldset){margin:0}
 .poz :where(ul,ol){padding:0;list-style:none}
 .poz :where(p,dd,li,figcaption,td){text-wrap:balance}

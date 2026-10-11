@@ -105,7 +105,7 @@ export const content = {
   formats: {
     title: 'Sklep pokazuje aplikację, social pokazuje świat',
     intro:
-      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. Marketingowa to pikselowy świat: pasy nieba z ditheringu, chmury, ogródek ze wszystkimi etapami poziomki, telefon narysowany w tej samej siatce i monety, które wyskakują z ekranu.',
+      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, dlatego powstały dwie odrębne wersje. Sklepowa to sam ekran aplikacji. Marketingowa to pikselowy świat: pasy nieba z ditheringu, chmury, ogródek ze wszystkimi etapami poziomki, telefon narysowany w tej samej siatce, monety, które wyskakują z ekranu, i okno dialogowe jak w grach RPG z migającą strzałką.',
     store: 'Wersja sklepowa, sam interfejs',
     portrait: 'Reels, TikTok, Shorts, 9:16',
     square: 'Post w kanale, 1:1',

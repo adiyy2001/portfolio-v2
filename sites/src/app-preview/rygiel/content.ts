@@ -77,7 +77,7 @@ export const content = {
   formats: {
     title: 'Sklep pokazuje aplikację, social opowiada historię',
     intro:
-      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, więc wersja sklepowa to sam ekran aplikacji. Wersja marketingowa ma telefon narysowany neonową linią, dwie warstwy siatki, które płyną z różną prędkością, i nagłówki odszyfrowujące się obok telefonu.',
+      'Apple wymaga, żeby podgląd w sklepie pokazywał prawdziwy interfejs, więc wersja sklepowa to sam ekran aplikacji. Wersja marketingowa ma telefon narysowany neonową linią, dwie warstwy siatki, które płyną z różną prędkością, i terminal, w którym nagłówek, podpis i opis odszyfrowują się po kolei, a telefon stoi obok jako panel w ramce z celownikiem.',
     store: 'Wersja sklepowa, sam interfejs',
     portrait: 'Reels, TikTok, Shorts, 9:16',
     square: 'Post w kanale, 1:1',
