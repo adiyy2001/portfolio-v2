@@ -141,7 +141,24 @@ function chromeText() {
       make('path', { d: `M${x} ${y - r}C${x + k} ${y - k} ${x + k} ${y - k} ${x + r} ${y}C${x + k} ${y + k} ${x + k} ${y + k} ${x} ${y + r}C${x - k} ${y + k} ${x - k} ${y + k} ${x - r} ${y}C${x - k} ${y - k} ${x - k} ${y - k} ${x} ${y - r}Z`, fill: '#FFFFFF', stroke: '#111217', 'stroke-width': r * 0.07 }, svg);
     };
     defs.insertAdjacentHTML('beforeend', '<radialGradient id="chr-glow"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".9"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>');
-    if (last) star(last.right - last.size * 0.08, last.base - last.size * 0.66, last.size * 0.26);
+    const lineRects = w => {
+      const head = document.querySelector('.bh');
+      const r = document.createRange();
+      r.selectNodeContents(head);
+      return [...r.getClientRects()].filter(q => q.width > 0 && Math.abs(q.top - w.top) < 3);
+    };
+    const lineEnd = w => Math.max(w.right, ...lineRects(w).map(q => q.right));
+    const lineStart = w => Math.min(w.x, ...lineRects(w).map(q => q.left));
+    const spot = w => {
+      const r = w.size * 0.26;
+      if (w.holo) return [w.right - w.size * 0.08, w.base - w.size * 0.66, r];
+      const beside = lineEnd(w) + r * 1.4;
+      if (beside + r < window.innerWidth - 6) return [beside, w.base - w.size * 0.5, r];
+      const before = w.x - r * 1.4;
+      if (w.x <= lineStart(w) + 2 && before - r > 8) return [before, w.base - w.size * 0.5, r];
+      return [w.right - r * 0.9, w.base + w.size * 0.2 + r * 1.15, r];
+    };
+    if (last) star(...spot(last));
   })();
 }
 
@@ -345,14 +362,14 @@ const L = {
   play: {
     wokolicy: {
       h: { x: 20, y: 24, w: 320, size: 37, align: 'center' },
-      d: { width: 196, x: 104, y: 150, rotate: 6 },
+      d: { width: 196, x: 104, y: 180, rotate: 6 },
       blobs: [blob(30, 220, 160, c.roz), blob(360, 380, 170, c.cyjan), blob(90, 620, 160, c.limonka, 0.6)],
       stickers: [
         { id: 'mira', x: 10, y: 176, s: 100, rot: -10 },
         { id: 'brokat', x: 266, y: 128, s: 82, rot: 10 },
         { id: 'lisie', x: 18, y: 440, s: 88, rot: 7 },
       ],
-      pill: { x: 196, y: 586, size: 12, key: 'week' },
+      pill: { x: 196, y: 604, size: 12, key: 'week' },
       sparks: [[90, 160, 11], [340, 300, 9], [140, 610, 10], [338, 520, 13]],
     },
     odkrywaj: {
