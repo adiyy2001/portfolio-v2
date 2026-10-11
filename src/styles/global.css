@@ -1105,9 +1105,10 @@ html[lang='en'] .title--home {
 }
 
 .close__h {
-  font-size: clamp(2.4rem, 10vw, 10rem);
+  font-size: clamp(2.2rem, 10vw, 10rem);
   line-height: 0.9;
   letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .close__grid {
