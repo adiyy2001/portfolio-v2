@@ -10,7 +10,7 @@ Shared rules:
 
 ## GitHub repos
 
-On 2026-10-02 Adrian replaced the six recruiter concepts that stood here with full briefs for six repos: `flagwire`, `signal-timeline`, `gridtwin`, `fieldline`, `coschema` and `eventhorizon`. The briefs are the spec and stay outside this repo, in `~/root/side_projects/briefs/`. The build started on 2026-10-03, after the sample websites went live. The old concepts are in this file's git history.
+On 2026-10-02 Adrian replaced the six recruiter concepts that stood here with full briefs for six repos: `flagwire`, `signal-timeline`, `gridtwin`, `fieldline`, `coschema` and `eventhorizon`. The briefs are the spec and stay outside this repo, in `~/root/side_projects/briefs/`. The build started on 2026-10-03, after the sample websites went live. The old concepts are in this file's git history. The case study pages for `signal-timeline`, `eventhorizon` and `fieldline` are built in the site (2026-10-11, branch `recruiter-case-studies-2`) and go live when the repos are public; `flagtide`, `gridtwin` and `coschema` have had theirs since 2026-10-08.
 
 ## Client sample websites
 
