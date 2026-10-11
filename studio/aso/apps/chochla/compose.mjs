@@ -81,12 +81,24 @@ function pageComic(cfg) {
         for (let i = 0; i <= steps; i += 1) pts.push(pt(ang + w + ((2 * Math.PI - 2 * w) * i) / steps));
         const end = pts[pts.length - 1];
         const start = pts[0];
-        const bend = b.bend ?? 0.18;
-        const mx = (end[0] + tx) / 2 + (ty - end[1]) * bend;
-        const my = (end[1] + ty) / 2 - (tx - end[0]) * bend;
-        const mx2 = (start[0] + tx) / 2 + (ty - start[1]) * bend * 0.6;
-        const my2 = (start[1] + ty) / 2 - (tx - start[0]) * bend * 0.6;
-        d = `M${pts.map(fmt).join(' L')} Q${mx.toFixed(2)} ${my.toFixed(2)} ${tx} ${ty} Q${mx2.toFixed(2)} ${my2.toFixed(2)} ${fmt(start)} Z`;
+        const eps = 0.001;
+        const unit = (p, q) => {
+          const dx = q[0] - p[0];
+          const dy = q[1] - p[1];
+          const len = Math.hypot(dx, dy) || 1;
+          return [dx / len, dy / len];
+        };
+        const tEnd = unit(pt(ang - w + 2 * Math.PI - eps), pt(ang - w + 2 * Math.PI + eps));
+        const tStart = unit(pt(ang + w - eps), pt(ang + w + eps));
+        const reach = b.reach ?? 0.12;
+        const lenEnd = Math.hypot(tx - end[0], ty - end[1]) * reach;
+        const lenStart = Math.hypot(tx - start[0], ty - start[1]) * reach;
+        const pull = b.pull ?? 0.45;
+        const c1 = [end[0] + tEnd[0] * lenEnd, end[1] + tEnd[1] * lenEnd];
+        const c2 = [tx + (end[0] - tx) * pull, ty + (end[1] - ty) * pull];
+        const c3 = [tx + (start[0] - tx) * pull, ty + (start[1] - ty) * pull];
+        const c4 = [start[0] - tStart[0] * lenStart, start[1] - tStart[1] * lenStart];
+        d = `M${pts.map(fmt).join(' L')} C${fmt(c1)} ${fmt(c2)} ${tx} ${ty} C${fmt(c3)} ${fmt(c4)} ${fmt(start)} Z`;
       } else {
         const pts = [];
         for (let i = 0; i < steps; i += 1) pts.push(pt((2 * Math.PI * i) / steps));
@@ -304,7 +316,7 @@ const featureBody = (app, lang) => {
   const pieces = confetti({ w: W, h: H, seed: 91, count: 40, size: [12, 20], avoid, edge: 40 });
   return `${ground(W, H)}${layer(W, H, pieces)}${tom.html}${pier.html}${egg.html}${layer(W, H, '', 'bubbles')}
 <div class="fg-wrap" style="left:60px;top:34px;width:170px"><div class="fg-name" data-box="headline" data-name="feature-name">${esc(app.name)}</div><div class="ch fg-h" data-box="headline" data-name="feature-tagline">${text(copy.feature.headline, lang)}</div></div>
-${script({ fonts, bubbles: [{ q: '.fg-wrap', name: 'feature', padX: 14, padTop: 6, padBottom: 10, n: 4, tail: [Math.round(tom.rect.x + 12), Math.round(tom.rect.y + 44)], tailWidth: 0.16, stroke: 3.5 }], margin: 0, W, H, count: 16 })}`;
+${script({ fonts, bubbles: [{ q: '.fg-wrap', name: 'feature', padX: 14, padTop: 6, padBottom: 10, n: 4, tail: [Math.round(tom.rect.x + 12), Math.round(tom.rect.y + 44)], tailWidth: 0.3, stroke: 3.5 }], margin: 0, W, H, count: 16 })}`;
 };
 
 const featureCss = `
