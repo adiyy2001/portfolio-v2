@@ -7,6 +7,7 @@ export const routes = {
   flagtide: { pl: '/archive/flagtide/', en: '/en/archive/flagtide/' },
   gridtwin: { pl: '/archive/gridtwin/', en: '/en/archive/gridtwin/' },
   coschema: { pl: '/archive/coschema/', en: '/en/archive/coschema/' },
+  'signal-timeline': { pl: '/archive/signal-timeline/', en: '/en/archive/signal-timeline/' },
 };
 
 export const ui = {
@@ -30,6 +31,7 @@ export const ui = {
       flagtide: 'flagtide',
       gridtwin: 'gridtwin',
       coschema: 'coschema',
+      'signal-timeline': 'signal-timeline',
       blog: 'blog',
     },
   },
@@ -53,6 +55,7 @@ export const ui = {
       flagtide: 'flagtide',
       gridtwin: 'gridtwin',
       coschema: 'coschema',
+      'signal-timeline': 'signal-timeline',
       blog: 'blog',
     },
   },
