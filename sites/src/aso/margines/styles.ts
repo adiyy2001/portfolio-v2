@@ -44,7 +44,7 @@ export const css = `
 .margines .hero .margin,.margines .hero .page{padding-top:clamp(20px,4vw,48px);padding-bottom:clamp(20px,3vw,36px)}
 .margines .hero__page{display:grid;gap:28px;align-items:start}
 @media (min-width:1080px){.margines .hero__page{grid-template-columns:minmax(0,1fr) 340px;gap:40px}}
-.margines .hero__style{display:inline-block;margin:0;padding:2px 10px;background:linear-gradient(to top,var(--zakreslacz) 0,var(--zakreslacz) 55%,transparent 55%);font-weight:500;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+.margines .hero__style{display:block;width:fit-content;margin:0;padding:2px 10px;background:linear-gradient(to top,var(--zakreslacz) 0,var(--zakreslacz) 55%,transparent 55%);font-weight:500;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
 .margines h1{display:inline-block;position:relative;margin-top:6px}
 .margines .hero__name{display:block;font-size:clamp(76px,14vw,156px);line-height:.95;padding:0 .06em .04em 0}
 .margines .hero__line{display:block;width:100%;height:16px;margin-top:-4px}
@@ -129,9 +129,10 @@ export const css = `
 .margines .search--android .search__icon{border-radius:18px}
 .margines .search__meta{display:flex;flex-direction:column;flex:1;min-width:0}
 .margines .search__name{font-weight:700;font-size:17px}
-.margines .search__sub{font-size:13px;color:#6b6b70}
+.margines .search__sub{font-size:13px;color:#6b6b70;text-wrap:balance}
 .margines .search__btn{padding:6px 16px;border-radius:999px;background:#EFEFF0;font-weight:700;font-size:14px;color:var(--atrament)}
 .margines .search--android .search__btn{background:var(--atrament);color:#fff}
+@media (max-width:400px){.margines .search__result{flex-wrap:wrap;row-gap:10px}.margines .search__meta{flex:1 1 calc(100% - 76px)}.margines .search__btn{margin-left:72px}}
 .margines .search__shots{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .margines .search__shots img{width:100%;height:auto;border-radius:10px;display:block}
 .margines .search--android .search__shots img{border-radius:6px}
