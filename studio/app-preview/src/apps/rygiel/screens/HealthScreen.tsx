@@ -78,7 +78,7 @@ export const HealthScreen = ({ f, still = false }: { f: number; still?: boolean 
           <div key={item.name} style={{ position: 'absolute', left: side, top: listTop + i * rowH, width: inner, height: rowH, borderBottom: `1px solid ${color.grid}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
             <span style={{ position: 'relative', fontSize: 14, fontWeight: 700, color: color.text, whiteSpace: 'nowrap' }}>
               {item.name}
-              <span style={{ position: 'absolute', left: -2, right: -2, top: '50%', height: 2, background: color.cyan, boxShadow: glow(color.cyan, 0.5, 5), transform: `scaleX(${strike})`, transformOrigin: '0 50%' }} />
+              <span style={{ position: 'absolute', left: -2, right: -2, top: '50%', height: 2, background: color.cyan, boxShadow: glow(color.cyan, 0.5, 1), transform: `scaleX(${strike})`, transformOrigin: '0 50%' }} />
             </span>
             {done ? (
               <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: color.cyan }}>

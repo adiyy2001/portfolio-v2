@@ -427,7 +427,7 @@
     "hero": {
       "webm": {
         "path": "kasownik-hero.webm",
-        "bytes": 1711700,
+        "bytes": 1710000,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -436,12 +436,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 636911,
+        "bitrate": 636279,
         "audio": null
       },
       "mp4": {
         "path": "kasownik-hero.mp4",
-        "bytes": 1464500,
+        "bytes": 1464540,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -450,7 +450,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 544930,
+        "bitrate": 544945,
         "audio": null
       },
       "poster": "posters/kasownik-hero.jpg"
@@ -458,7 +458,7 @@
     "hero-9x16": {
       "webm": {
         "path": "kasownik-hero-9x16.webm",
-        "bytes": 1235389,
+        "bytes": 1225056,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -467,12 +467,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 459679,
+        "bitrate": 455834,
         "audio": null
       },
       "mp4": {
         "path": "kasownik-hero-9x16.mp4",
-        "bytes": 1461281,
+        "bytes": 1125489,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -481,7 +481,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 543732,
+        "bitrate": 418786,
         "audio": null
       },
       "poster": "posters/kasownik-hero-9x16.jpg"
@@ -489,7 +489,7 @@
     "social-1x1": {
       "webm": {
         "path": "kasownik-social-1x1.webm",
-        "bytes": 1345515,
+        "bytes": 1365411,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -498,12 +498,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 500656,
+        "bitrate": 508059,
         "audio": null
       },
       "mp4": {
         "path": "kasownik-social-1x1.mp4",
-        "bytes": 1276161,
+        "bytes": 1276754,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -512,7 +512,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 474850,
+        "bitrate": 475071,
         "audio": null
       },
       "poster": "posters/kasownik-social-1x1.jpg"
@@ -587,7 +587,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "kasownik-store-886x1920.mp4",
       "path": "kasownik-store-886x1920.mp4",
-      "bytes": 32808603,
+      "bytes": 32808604,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -605,7 +605,7 @@
       "note": "Reels, TikTok i Shorts",
       "name": "kasownik-social-1080x1920.mp4",
       "path": "kasownik-social-1080x1920.mp4",
-      "bytes": 7037746,
+      "bytes": 5421841,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -614,7 +614,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 2681046,
+      "bitrate": 2065463,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -623,7 +623,7 @@
       "note": "post w kanale",
       "name": "kasownik-social-1080x1080.mp4",
       "path": "kasownik-social-1080x1080.mp4",
-      "bytes": 5171599,
+      "bytes": 5109741,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -632,7 +632,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1970132,
+      "bitrate": 1946568,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -641,7 +641,7 @@
       "note": "YouTube, link w Google Play",
       "name": "kasownik-social-1920x1080.mp4",
       "path": "kasownik-social-1920x1080.mp4",
-      "bytes": 4694281,
+      "bytes": 4608635,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -650,7 +650,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1788297,
+      "bitrate": 1755670,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -661,14 +661,14 @@
   "renderSeconds": {
     "stills": 16,
     "store": 83,
-    "marketing-9x16": 75,
-    "marketing-1x1": 63,
-    "marketing-16x9": 54,
+    "marketing-9x16": 29,
+    "marketing-1x1": 24,
+    "marketing-16x9": 28,
     "tile": 6
   },
   "validation": true,
   "published": {
-    "totalBytes": 11993478,
+    "totalBytes": 11654657,
     "count": 30
   }
 }

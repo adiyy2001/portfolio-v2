@@ -10,7 +10,7 @@ export const TAB_Y = 438;
 
 export const statusBar = (fb: FB, time: string, light = false) => {
   const c = light ? C.cream : C.ink;
-  text(fb, 14, 7, time, { color: c });
+  text(fb, 14, 3, time, { font: 'pixel', color: c });
   const x = 165;
   [2, 3, 4, 5].forEach((h, i) => fb.rect(x + i * 3, 12 - h, 2, h, c));
   const map = { k: c, g: c };
@@ -32,15 +32,15 @@ export const tabBar = (fb: FB, active: TabId) => {
     const cx = x0 + Math.floor(cell / 2);
     const on = tab.id === active;
     if (on) fb.panel(x0 + 4, TAB_Y + 4, cell - 8, 28, C.dusk, C.ink);
-    fb.sprite(cx - 5, TAB_Y + 8, S.tabIcons[tab.id], { ...S.ink, k: C.ink, c: C.cream });
-    text(fb, cx, TAB_Y + 21, tab.label, { color: on ? C.gold : C.cream, align: 'center' });
+    fb.sprite(cx - 5, TAB_Y + 6, S.tabIcons[tab.id], { ...S.ink, k: C.ink, c: C.cream });
+    text(fb, cx, TAB_Y + 19, tab.label, { font: 'pixel', color: on ? C.gold : C.cream, align: 'center' });
   });
   homeIndicator(fb);
 };
 
 export const header = (fb: FB, title: string, kicker?: string) => {
-  if (kicker) text(fb, 12, 22, kicker, { color: C.dusk });
-  text(fb, 12, kicker ? 33 : 26, title, { font: 'pixel', color: C.ink });
+  if (kicker) text(fb, 12, 17, kicker, { font: 'pixel', color: C.dusk });
+  text(fb, 12, kicker ? 31 : 26, title, { font: 'pixel', color: C.ink });
 };
 
 export const xpBar = (fb: FB, x: number, y: number, px: number, width = 140, on = true) => {
@@ -56,16 +56,16 @@ export const levelStrip = (fb: FB, y: number, lvl: number, xpText: string, px: n
   fb.panel(10, y, 201, 34, C.plum, C.ink);
   fb.panel(16, y + 5, 26, 24, flash ? C.cream : C.gold, C.ink, C.berryDeep);
   text(fb, 29, y + 12, String(lvl), { font: 'pixel', color: C.ink, align: 'center' });
-  text(fb, 50, y + 7, `POZIOM ${lvl}`, { color: C.cream });
-  text(fb, 204, y + 7, xpText, { color: C.gold, align: 'right' });
-  xpBar(fb, 50, y + 20, px, 140, on);
-  fb.sprite(197, y + 19, S.coin[0], S.ink);
+  text(fb, 50, y + 4, `POZIOM ${lvl}`, { font: 'pixel', color: C.cream });
+  text(fb, 204, y + 4, xpText, { font: 'pixel', color: C.gold, align: 'right' });
+  xpBar(fb, 50, y + 21, px, 140, on);
+  fb.sprite(197, y + 20, S.coin[0], S.ink);
 };
 
 export const chip = (fb: FB, xRight: number, y: number, label: string, fill: number = C.gold, ink: number = C.ink) => {
-  const w = measure(label) + 8;
-  fb.panel(xRight - w, y, w, 11, fill, C.ink);
-  text(fb, xRight - w + 4, y + 3, label, { color: ink });
+  const w = measure(label, 'pixel') + 8;
+  fb.panel(xRight - w, y, w, 14, fill, C.ink);
+  text(fb, xRight - w + 4, y + 2, label, { font: 'pixel', color: ink });
   return w;
 };
 
@@ -76,9 +76,9 @@ export const coinPop = (fb: FB, x: number, y: number, t: number, label: string, 
   const layer = new FB(fb.w, fb.h);
   const pose = [0, 1, 2, 1][Math.floor(t / 2) % 4];
   layer.sprite(x - 4 * s, y - 10 * s - rise, S.coin[pose], S.ink, { scale: s });
-  const ty = y - 9 * s - rise;
-  if (side === 'right') text(layer, x + 7 * s, ty, label, { color: C.gold, outline: C.ink, scale: s });
-  else text(layer, x - 7 * s, ty, label, { color: C.gold, outline: C.ink, align: 'right', scale: s });
+  const ty = y - 13 * s - rise;
+  if (side === 'right') text(layer, x + 7 * s, ty, label, { font: 'pixel', color: C.gold, outline: C.ink, scale: s });
+  else text(layer, x - 7 * s, ty, label, { font: 'pixel', color: C.gold, outline: C.ink, align: 'right', scale: s });
   if (t < 2) layer.sprite(x - 2 * s, y - 2 * s, S.sparkleSmall, S.ink, { scale: s });
   const level = t >= 20 ? 6 : t >= 18 ? 11 : 16;
   fb.blit(layer, 0, 0, (sx, sy) => dithered(Math.floor(sx / s), Math.floor(sy / s), level));

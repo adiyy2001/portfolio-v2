@@ -31,17 +31,17 @@ interface Layout {
 const layouts: Record<Format, Layout> = {
   '16x9': {
     phone: { scale: 0.94, left: 1250, top: 74 },
-    text: { left: 140, top: 300, width: 980, size: 88, line: 32, kicker: 22, align: 'left' },
-    log: { left: 140, top: 700, width: 940, size: 22, rows: 5 },
+    text: { left: 140, top: 300, width: 1090, size: 88, line: 32, kicker: 22, align: 'left' },
+    log: { left: 140, top: 700, width: 940, size: 26, rows: 5 },
     outro: { cy: 520, icon: 200, name: 120, tagline: 30 },
   },
   '9x16': {
-    phone: { scale: 1.32, left: 226, top: 520 },
+    phone: { scale: 1.08, left: 283, top: 462 },
     text: { left: 80, top: 190, width: 920, size: 70, line: 32, kicker: 26, align: 'left' },
     outro: { cy: 900, icon: 240, name: 128, tagline: 32 },
   },
   '1x1': {
-    phone: { scale: 1.2, left: 484, top: 48 },
+    phone: { scale: 1, left: 562, top: 44 },
     text: { left: 56, top: 84, width: 420, size: 54, line: 24, kicker: 20, align: 'left' },
     outro: { cy: 500, icon: 180, name: 104, tagline: 26 },
   },
@@ -148,20 +148,20 @@ const Copy = ({ f, layout }: { f: number; layout: Layout }) => {
   const start = first ? -999 : beat.from;
   const { text } = layout;
   const fill = first ? color.alert : color.cyan;
-  const out = first ? 0 : progress(f, beat.from + 2, 8, inOut);
-  const into = first ? 1 : progress(f, beat.from + 12, 8, inOut);
+  const out = first ? 0 : progress(f, beat.from, 6, inOut);
+  const into = first ? 1 : progress(f, beat.from + 5, 8, inOut);
   const lineOf = (k: number, o: number) => (
     <div style={{ position: 'absolute', left: 0, right: 0, top: 0, opacity: o }}>{marketingBeats[k].line}</div>
   );
   return (
     <div style={{ position: 'absolute', left: text.left, top: text.top, width: text.width, textAlign: text.align }}>
       <div style={{ fontSize: text.kicker, lineHeight: 1.3, fontWeight: 500, letterSpacing: text.kicker * 0.14, color: color.muted }}>
-        <Morph text={kickers[i]} prev={first ? '' : kickers[i - 1]} f={f} start={first ? -999 : start + 22} fill={color.muted} step={0.5} />
+        <Morph text={kickers[i]} prev={first ? '' : kickers[i - 1]} f={f} start={start} fill={color.muted} step={0.5} />
       </div>
       <div style={{ marginTop: text.kicker * 0.8, fontSize: text.size, lineHeight: 1.08, fontWeight: 700, letterSpacing: -text.size * 0.02 }}>
         <span style={{ color: color.cyan }}>{'> '}</span>
-        <Morph text={beat.title} prev={prev} f={f} start={start + 2} fill={fill} />
-        <span style={{ display: 'inline-block', width: '0.5em', height: '0.78em', marginLeft: '0.12em', background: color.cyan, verticalAlign: '-0.04em', opacity: f % 30 < 18 ? 1 : 0 }} />
+        <Morph text={beat.title} prev={prev} f={f} start={start + 3} fill={fill} />
+        <span style={{ display: 'inline-block', width: '0.5em', height: '0.78em', marginLeft: '0.12em', marginRight: '-0.62em', background: color.cyan, verticalAlign: '-0.04em', opacity: f % 30 < 18 ? 1 : 0 }} />
       </div>
       <div style={{ position: 'relative', marginTop: text.size * 0.3, fontSize: text.line, lineHeight: 1.35, fontWeight: 400, color: color.text, minHeight: text.line * 2.7 }}>
         {i > 0 && lineOf(i - 1, 1 - out)}

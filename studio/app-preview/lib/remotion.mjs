@@ -6,7 +6,7 @@ import { appPreviewRoot, headlessShell, remotionPublic } from './paths.mjs';
 export const browserOptions = {
   browserExecutable: headlessShell,
   chromeMode: 'headless-shell',
-  chromiumOptions: { gl: 'swangle' },
+  chromiumOptions: { gl: process.env.WZ_GL ?? 'swiftshader' },
   logLevel: 'error',
 };
 

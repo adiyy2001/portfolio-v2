@@ -48,7 +48,7 @@ export const DiagnosisScreen = ({ f, still = false }: { f: number; still?: boole
           <Text x={80} y={16} size={18} weight={900}>
             {diagnosis.plant.name}
           </Text>
-          <Text x={80} y={42} size={13} tone={color.inkSoft}>
+          <Text x={80} y={42} size={15} weight={800} tone={color.inkSoft}>
             {diagnosis.plant.species} · {diagnosis.plant.room}
           </Text>
         </Box>
@@ -78,7 +78,7 @@ export const DiagnosisScreen = ({ f, still = false }: { f: number; still?: boole
       {(still || f >= T.answer) && (
         <div style={answerStyle}>
           <Box x={24} y={474} w={395} h={248} tone="blush">
-            <Text x={24} y={24} size={13} weight={800} style={{ letterSpacing: 0.4 }}>
+            <Text x={24} y={24} size={15} weight={800} style={{ letterSpacing: 0.4 }}>
               ODPOWIEDŹ KIEŁKA
             </Text>
             <Text x={24} y={46} size={26} weight={900}>

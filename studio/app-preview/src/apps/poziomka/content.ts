@@ -15,10 +15,10 @@ export interface Habit {
 }
 
 export const habits: Habit[] = [
-  { id: 'water', title: 'Szklanka wody po przebudzeniu', when: 'rano, codziennie', xp: 10 },
-  { id: 'walk', title: '20 minut spaceru', when: 'przed pracą', xp: 30 },
+  { id: 'water', title: 'Szklanka wody', when: 'rano, codziennie', xp: 10 },
+  { id: 'walk', title: '20 min spaceru', when: 'przed pracą', xp: 30 },
   { id: 'book', title: '15 stron książki', when: 'wieczorem', xp: 20 },
-  { id: 'phone', title: 'Telefon odłożony o 22:30', when: 'przed snem', xp: 40 },
+  { id: 'phone', title: 'Telefon od 22:30', when: 'przed snem', xp: 40 },
 ];
 
 export const level = {
@@ -50,7 +50,7 @@ export const streak = {
   first: { day: 18, month: 9 },
   weekdays: ['Pt', 'So', 'Nd', 'Pn', 'Wt', 'Śr', 'Cz'],
   dates: Array.from({ length: 21 }, (_, i) => (i < 13 ? 18 + i : i - 12)),
-  rule: 'Passa trwa, dopóki robisz choć jedno zadanie dziennie.',
+  rule: 'Wystarczy jedno zadanie',
   best: 'Najdłuższa passa: 21 dni',
   next: 'Za 7 dni: złota motyka',
 };
@@ -68,7 +68,7 @@ export const garden = {
   items: [
     { id: 'rake', name: 'Grabki', days: 7 },
     { id: 'fence', name: 'Płotek', days: 14 },
-    { id: 'can', name: 'Miedziana konewka', days: 21 },
+    { id: 'can', name: 'Konewka', days: 21 },
   ],
   unlock: 'Miedziana konewka',
   unlockNote: 'za passę 21 dni',
@@ -119,9 +119,9 @@ export const newHabit = {
 export const launch = { tagline: 'Nawyki z poziomami' };
 
 export const tabs = [
-  { id: 'quests', label: 'Zadania' },
+  { id: 'quests', label: 'Dziś' },
   { id: 'streak', label: 'Passa' },
-  { id: 'garden', label: 'Ogródek' },
+  { id: 'garden', label: 'Ogród' },
   { id: 'week', label: 'Tydzień' },
 ] as const;
 

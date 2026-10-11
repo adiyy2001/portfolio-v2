@@ -21,12 +21,12 @@ export const drawStreak = (fb: FB, f: number, opts: { still?: boolean } = {}) =>
   fb.panel(10, 54, 201, 50, C.plum, C.ink);
   fb.sprite(18, 62, S.tabIcons.streak, { ...S.ink }, { scale: 3 });
   text(fb, 82, 64, String(count), { font: 'pixel', scale: 2, color: C.gold, outline: C.ink, align: 'right' });
-  text(fb, 90, 66, count === 1 ? 'DZIEŃ' : 'DNI', { color: C.gold });
-  text(fb, 90, 78, 'Z RZĘDU', { color: C.cream });
-  text(fb, 204, 66, 'REKORD', { color: C.berryLight, align: 'right' });
-  text(fb, 204, 78, '21 DNI', { color: C.cream, align: 'right' });
+  text(fb, 90, 60, count === 1 ? 'DZIEŃ' : 'DNI', { font: 'pixel', color: C.gold });
+  text(fb, 90, 76, 'Z RZĘDU', { font: 'pixel', color: C.cream });
+  text(fb, 204, 60, 'REKORD', { font: 'pixel', color: C.berryLight, align: 'right' });
+  text(fb, 204, 76, '21 DNI', { font: 'pixel', color: C.cream, align: 'right' });
   fb.panel(6, 110, 209, 116, C.cream, C.ink, C.gold);
-  streak.weekdays.forEach((day, col) => text(fb, tileX(col) + 13, 117, day, { color: C.dusk, align: 'center' }));
+  streak.weekdays.forEach((day, col) => text(fb, tileX(col) + 13, 114, day, { font: 'pixel', color: C.dusk, align: 'center' }));
   streak.dates.forEach((day, i) => {
     const col = i % 7;
     const row = Math.floor(i / 7);
@@ -43,19 +43,19 @@ export const drawStreak = (fb: FB, f: number, opts: { still?: boolean } = {}) =>
     }
     if (!done) {
       fb.panel(x, y, 26, 26, C.sky, C.stone);
-      text(fb, x + 13, y + 10, String(day), { color: C.dusk, align: 'center' });
+      text(fb, x + 13, y + 8, String(day), { font: 'pixel', color: C.dusk, align: 'center' });
       return;
     }
     const lit = isToday && !still && !blinkOn(f, at + 2, 3);
     fb.panel(x, y, 26, 26, isToday ? (lit ? C.cream : C.gold) : C.cream, C.ink, isToday ? C.berryDeep : C.berryLight);
-    fb.sprite(x + 9, y + 3, S.mini, S.ink);
-    text(fb, x + 13, y + 15, String(day), { color: C.ink, align: 'center' });
+    fb.sprite(x + 9, y + 2, S.mini, S.ink);
+    text(fb, x + 13, y + 14, String(day), { font: 'pixel', color: C.ink, align: 'center' });
   });
-  text(fb, 12, 234, streak.rule, { color: C.dusk });
-  fb.panel(10, 248, 201, 36, C.cream, C.ink, C.gold);
-  fb.sprite(20, 258, S.lock, S.ink, { scale: 2 });
-  text(fb, 42, 256, 'NASTĘPNA NAGRODA', { color: C.dusk });
-  text(fb, 42, 268, streak.next, { color: C.ink });
+  text(fb, 12, 231, streak.rule, { font: 'pixel', color: C.dusk });
+  fb.panel(10, 248, 201, 40, C.cream, C.ink, C.gold);
+  fb.sprite(20, 260, S.lock, S.ink, { scale: 2 });
+  text(fb, 42, 252, 'Następna nagroda', { font: 'pixel', color: C.dusk });
+  text(fb, 42, 267, streak.next, { font: 'pixel', color: C.ink });
   const banner = still || f >= T.streakBanner;
   const ground = 430;
   const pose = berryPose(f);

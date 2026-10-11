@@ -15,13 +15,16 @@ import { LaunchScreen, launchMascot } from './screens/LaunchScreen';
 
 const timeAt = (f: number) => (f < T.calendar ? today.time : f < T.diagnosis ? '7:53' : f < T.rooms ? '7:55' : '7:56');
 
+const linear = (t: number) => t;
+
 const cardPop = Easing.out(Easing.back(1.6));
 
 const Out = ({ f, at, children }: { f: number; at: number; children: ReactNode }) => {
   if (f >= at + leaveFrames) return null;
   const t = progress(f, at, leaveFrames, easeIn);
+  const fade = progress(f, at, 3, linear);
   return (
-    <div style={{ position: 'absolute', inset: 0, opacity: 1 - t, transform: `translateX(${-150 * t}px) scale(${1 - 0.06 * t}, ${1 - 0.03 * t})`, transformOrigin: '0% 50%' }}>
+    <div style={{ position: 'absolute', inset: 0, opacity: 1 - fade, transform: `translateX(${-150 * t}px) scale(${1 - 0.06 * t}, ${1 - 0.03 * t})`, transformOrigin: '0% 50%' }}>
       {children}
     </div>
   );
@@ -30,8 +33,9 @@ const Out = ({ f, at, children }: { f: number; at: number; children: ReactNode }
 const In = ({ f, at, children }: { f: number; at: number; children: ReactNode }) => {
   const s = bounceAt(f, at);
   const squash = Math.max(0, s - 1);
+  const show = progress(f, at + 1, 3, linear);
   return (
-    <div style={{ position: 'absolute', inset: 0, transform: `translateX(${(1 - s) * 190}px) scale(${1 - squash * 0.25}, ${1 + squash * 0.2})`, transformOrigin: '100% 50%' }}>
+    <div style={{ position: 'absolute', inset: 0, opacity: show, transform: `translateX(${(1 - s) * 190}px) scale(${1 - squash * 0.25}, ${1 + squash * 0.2})`, transformOrigin: '100% 50%' }}>
       {children}
     </div>
   );

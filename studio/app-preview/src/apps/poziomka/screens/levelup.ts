@@ -37,7 +37,7 @@ export const drawLevelUp = (fb: FB, f: number, opts: { coins?: boolean } = {}) =
   rays(fb, cx, 190, f, C.plum, C.dusk);
   fb.rect(0, 0, W, 18, C.plum);
   statusBar(fb, '7:42', true);
-  text(fb, cx, 40, 'NOWY POZIOM', { color: C.gold, align: 'center' });
+  text(fb, cx, 33, 'NOWY POZIOM', { font: 'pixel', color: C.gold, align: 'center' });
   text(fb, cx + 1, 56, 'POZIOM 8!', { font: 'pixel', scale: 2, color: C.gold, outline: C.ink, align: 'center' });
   sparkles(fb, f, [
     [28, 60],
@@ -63,15 +63,15 @@ export const drawLevelUp = (fb: FB, f: number, opts: { coins?: boolean } = {}) =
   const flash = f >= T.hookRoll && f < T.hookRoll + 4 && Math.floor((f - T.hookRoll) / 2) % 2 === 0;
   const drain = Math.max(0, 169 - Math.floor((f - T.hookRoll - 4) / 3) * 56);
   const bar = f < T.hookRoll ? 169 : f < T.hookRoll + 4 ? 169 : drain > 2 ? drain : blinkOn((((f + 6) % 48) + 48) % 48, 0, 4) ? 2 : 0;
-  fb.panel(16, 266, W - 32, 46, flash ? C.gold : C.cream, C.ink, C.gold);
-  text(fb, 26, 274, rolled ? 'POZIOM 8' : 'POZIOM 7', { color: C.ink });
-  text(fb, W - 26, 274, rolled ? `${level.to} / ${level.nextTo} XP` : `${level.to} / ${level.to} XP`, { color: C.dusk, align: 'right' });
-  xpBar(fb, 26, 288, bar, 169);
-  text(fb, 26, 300, rolled ? 'Do poziomu 9: 200 XP' : 'Do poziomu 8: 0 XP', { color: C.dusk });
-  fb.panel(16, 318, W - 32, 40, C.plum, C.ink);
-  fb.sprite(26, 328, S.plantStages.sadzonka.slice(2, 14), S.ink);
-  text(fb, 48, 326, 'NAGRODA ZA POZIOM 8', { color: C.gold });
-  text(fb, 48, 340, 'Nowa grządka w ogródku', { color: C.cream });
+  fb.panel(16, 264, W - 32, 52, flash ? C.gold : C.cream, C.ink, C.gold);
+  text(fb, 26, 268, rolled ? 'POZIOM 8' : 'POZIOM 7', { font: 'pixel', color: C.ink });
+  text(fb, W - 26, 268, rolled ? `${level.to} / ${level.nextTo} XP` : `${level.to} / ${level.to} XP`, { font: 'pixel', color: C.dusk, align: 'right' });
+  xpBar(fb, 26, 283, bar, 169);
+  text(fb, 26, 296, rolled ? 'Do poziomu 9: 200 XP' : 'Do poziomu 8: 0 XP', { font: 'pixel', color: C.dusk });
+  fb.panel(16, 322, W - 32, 42, C.plum, C.ink);
+  fb.sprite(26, 334, S.plantStages.sadzonka.slice(2, 14), S.ink);
+  text(fb, 48, 326, 'NAGRODA: POZIOM 8', { font: 'pixel', color: C.gold });
+  text(fb, 48, 342, 'Nowa grządka', { font: 'pixel', color: C.cream });
   fb.panel(56, 414, W - 112, 22, C.gold, C.ink, C.berryDeep);
   text(fb, cx, 420, 'DALEJ', { font: 'pixel', color: C.ink, align: 'center' });
   homeIndicator(fb, C.cream);

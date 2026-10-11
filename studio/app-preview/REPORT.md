@@ -114,10 +114,23 @@ Zakres: decyzja 79 w `PLAN.md`. Gałąź `wzornik-app-preview-r3`, bez wypychani
 - Odrzucony pomysł: przechylanie telefonu Kiełka (obrót warstwy większej niż kadr daje w renderze artefakt kafelkowania), zastąpione przesunięciem w poziomie.
 - Weryfikacja: `tsc --noEmit` w `studio/app-preview`, `validate.mjs` w każdym potoku, `yarn --cwd sites run check` i `test`, `yarn --cwd sites build`, zrzuty stron przy 320, 390, 768, 1024 i 1440 px bez poziomego przewijania i bez błędów konsoli, klatki wyciągnięte ffmpegiem z każdej przerenderowanej pętli.
 
+## Runda 3: naprawa po niezależnej recenzji
+
+Zakres: decyzje 88 do 96 w `PLAN.md`, ta sama gałąź `wzornik-app-preview-r3`, bez wypychania i bez scalania.
+
+- Południe, druga warstwa nagłówka w 16:9: przyczyną był silnik GL `swangle` w Chromium (błąd kafelkowania dużej przekształconej warstwy), a nie kod sceny. Ten sam błąd widać też na kodzie `main` w tym środowisku, więc zapis recenzji „nieobecne na main” nie dotyczy tego środowiska. Renderer używa teraz `swiftshader` (`lib/remotion.mjs`, zmiana przez `WZ_GL`); cztery inne silniki dają czyste klatki. Przerenderowane: master 16:9, 9:16 i 1:1, pętla hero, plakat i obraz OG.
+- Południe, karta tekstu: każdy beat ma trwałą, nieprzezroczystą kartę, tekst wewnątrz zmienia się w 3 klatkach. Skrypt policzył wszystkie 690 klatek w 9:16, 1:1 i 16:9: 0 klatek z pustą kartą. Sprostowanie liczb: pusta karta trwała 10 do 13 klatek na granicę beatu (klatki 118 do 127, 268 do 280, 418 do 430, 568 do 577), a nie około 4 klatek, jak podano wcześniej. Napis w wersji sklepowej jest rozwiązany od klatki 0.
+- Dolna krawędź telefonu w 9:16 nie schodzi niżej niż około 80% wysokości: Południe, Rygiel (skala 1,08 zamiast 1,32) i Kasownik (reguła z decyzji 62 przywrócona).
+- Rygiel: w 1:1 cały telefon i celownik mieszczą się w kadrze, w 16:9 kursor bloku nie zawija się sam do drugiej linii, kicker i podlinia zmieniają się razem z cięciem, nie około 25 klatek później.
+- Kiełek: bez podwójnego kickera w klatce 485 (9:16) i bez podwójnej ekspozycji przy zakładkach; własna kompozycja w 9:16 i 16:9 (maskotka gospodarz od klatki 0, telefon w 9:16 kończy się na około 79% wysokości, karta końcowa ze wzorem liści i kropli); tekst strony mówi, że telefon wjeżdża z boku, a nie że się przechyla.
+- Kiełek i Poziomka, wersja sklepowa: drobny tekst dużo większy. Kiełek 14 do 17 px zamiast 12 do 14 na kanwie 443 px. W Poziomce wszystkie drugorzędne napisy (także zegar i zakładki) są teraz w Jersey 10 (wysokość małej litery 16 px na 443 zamiast 8 px), przy krótszych nazwach zadań, mniejszej liczbie podpisów i skróconych zakładkach (Dziś, Passa, Ogród, Tydzień).
+- Poziomka, strona: jednowyrazowe ostatnie linie z powrotem na poziomie `main` lub niżej przy 320, 390, 768, 1024 i 1440 px (policzone skryptem na obu wersjach, tabela w decyzji 95).
+- Weryfikacja: `tsc --noEmit`, `validate.mjs` dla Południa, Poziomki, Kasownika, Rygla i Kiełka (wszystkie testy zaliczone), `yarn --cwd sites run check` (0 błędów), `yarn --cwd sites test` (134 pliki, 1411 testów), `yarn --cwd sites build` (199 stron), `yarn lint`, główny `yarn.lock` bez zmian. Klatki z ffmpeg w klatce 0, na granicach beatów i na końcu każdej przerenderowanej pętli; zrzuty stron przy 320, 390, 768, 1024 i 1440 px dla pięciu przerenderowanych aplikacji: bez poziomego przewijania i bez błędów konsoli.
+
 ## Co może dostarczyć tylko Adrian
 
 - Zgoda na scalenie gałęzi `wzornik-app-preview` z `main`.
-- Ocena rundy 3 (decyzje 80 do 87 w `PLAN.md`): rozmiar telefonu w 9:16 kontra strefa napisów, zostawienie światów Poziomki i Południa z mniejszymi zmianami konstrukcji.
+- Ocena rundy 3 i naprawy po recenzji (decyzje 80 do 96 w `PLAN.md`): rozmiar telefonu w 9:16 kontra strefa napisów, zostawienie światów Poziomki i Południa z mniejszymi zmianami konstrukcji.
 - Prawdziwy test wgrania wersji sklepowej do App Store Connect i filmu na YouTube (wymaga jego kont).
 - Sprawdzenie nazw pod kątem znaków towarowych, jeśli miałyby żyć dłużej niż jako przykłady.
 - Ocena gustu: czy sześć kierunków i ton tekstów sprzedają jego usługę tak, jak chce.

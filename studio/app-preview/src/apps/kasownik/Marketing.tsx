@@ -43,10 +43,10 @@ const layouts: Record<Format, Layout> = {
     glide: 28,
   },
   '9x16': {
-    phone: { scale: 1.32, left: 226, top: 520 },
+    phone: { scale: 1.044, left: 292, top: 500 },
     text: { left: 80, top: 238, width: 920, align: 'left', kicker: 40, title: 116 },
     line: { x: 80, y: 168, length: 920, vertical: false, label: 32 },
-    breakout: { cx: 540, cy: 1130, height: 1150 },
+    breakout: { cx: 540, cy: 983, height: 910 },
     outro: { cy: 960, icon: 240, name: 128, tagline: 40, width: 860 },
     glide: 22,
   },
@@ -88,7 +88,7 @@ const Headline = ({ f, layout, first }: { f: number; layout: Layout; first: bool
       {marketingBeats.map((beat, i) => {
         if (f < beat.from - 2 || f > beat.to + 1) return null;
         const enter = i === 0 && first ? 1 : ease(window01(f, beat.from, beat.from + 12));
-        const exit = ease(window01(f, beat.to - 9, beat.to));
+        const exit = ease(window01(f, beat.to - 4, beat.to - 1));
         const opacity = Math.min(enter, 1 - exit);
         const style: CSSProperties = {
           position: 'absolute',

@@ -398,7 +398,7 @@
     "hero": {
       "webm": {
         "path": "kielek-hero.webm",
-        "bytes": 979134,
+        "bytes": 1133211,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -407,12 +407,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 361537,
+        "bitrate": 418429,
         "audio": null
       },
       "mp4": {
         "path": "kielek-hero.mp4",
-        "bytes": 1140597,
+        "bytes": 1395316,
         "width": 1280,
         "height": 720,
         "fps": 30,
@@ -421,7 +421,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 421143,
+        "bitrate": 515193,
         "audio": null
       },
       "poster": "posters/kielek-hero.jpg"
@@ -429,7 +429,7 @@
     "hero-9x16": {
       "webm": {
         "path": "kielek-hero-9x16.webm",
-        "bytes": 842638,
+        "bytes": 850816,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -438,12 +438,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 311137,
+        "bitrate": 314157,
         "audio": null
       },
       "mp4": {
         "path": "kielek-hero-9x16.mp4",
-        "bytes": 1060569,
+        "bytes": 1077480,
         "width": 540,
         "height": 960,
         "fps": 30,
@@ -452,7 +452,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 391594,
+        "bitrate": 397838,
         "audio": null
       },
       "poster": "posters/kielek-hero-9x16.jpg"
@@ -460,7 +460,7 @@
     "social-1x1": {
       "webm": {
         "path": "kielek-social-1x1.webm",
-        "bytes": 869865,
+        "bytes": 934021,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -469,12 +469,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 321190,
+        "bitrate": 344879,
         "audio": null
       },
       "mp4": {
         "path": "kielek-social-1x1.mp4",
-        "bytes": 1110096,
+        "bytes": 1183283,
         "width": 720,
         "height": 720,
         "fps": 30,
@@ -483,7 +483,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 409881,
+        "bitrate": 436904,
         "audio": null
       },
       "poster": "posters/kielek-social-1x1.jpg"
@@ -491,7 +491,7 @@
     "store": {
       "webm": {
         "path": "kielek-store.webm",
-        "bytes": 799627,
+        "bytes": 825880,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -500,12 +500,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 295255,
+        "bitrate": 304949,
         "audio": null
       },
       "mp4": {
         "path": "kielek-store.mp4",
-        "bytes": 869569,
+        "bytes": 894877,
         "width": 442,
         "height": 960,
         "fps": 30,
@@ -514,7 +514,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 321071,
+        "bitrate": 330416,
         "audio": null
       },
       "poster": "posters/kielek-store.jpg"
@@ -522,7 +522,7 @@
     "tile": {
       "webm": {
         "path": "kielek-tile.webm",
-        "bytes": 170930,
+        "bytes": 176266,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -531,12 +531,12 @@
         "codec": "vp9",
         "profile": "Profile 0",
         "pixFmt": "yuv420p",
-        "bitrate": 273488,
+        "bitrate": 282025,
         "audio": null
       },
       "mp4": {
         "path": "kielek-tile.mp4",
-        "bytes": 189149,
+        "bytes": 199599,
         "width": 480,
         "height": 600,
         "fps": 30,
@@ -545,7 +545,7 @@
         "codec": "h264",
         "profile": "High",
         "pixFmt": "yuv420p",
-        "bitrate": 302638,
+        "bitrate": 319358,
         "audio": null
       },
       "poster": "posters/kielek-tile.jpg"
@@ -558,7 +558,7 @@
       "note": "App Store Connect, podgląd aplikacji na iPhone",
       "name": "kielek-store-886x1920.mp4",
       "path": "kielek-store-886x1920.mp4",
-      "bytes": 29931964,
+      "bytes": 29931877,
       "width": 886,
       "height": 1920,
       "fps": 30,
@@ -567,7 +567,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 11402652,
+      "bitrate": 11402619,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -576,7 +576,7 @@
       "note": "Reels, TikTok i Shorts",
       "name": "kielek-social-1080x1920.mp4",
       "path": "kielek-social-1080x1920.mp4",
-      "bytes": 7055169,
+      "bytes": 6806282,
       "width": 1080,
       "height": 1920,
       "fps": 30,
@@ -585,7 +585,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 2687683,
+      "bitrate": 2592869,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -594,7 +594,7 @@
       "note": "post w kanale",
       "name": "kielek-social-1080x1080.mp4",
       "path": "kielek-social-1080x1080.mp4",
-      "bytes": 5089673,
+      "bytes": 5326358,
       "width": 1080,
       "height": 1080,
       "fps": 30,
@@ -603,7 +603,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 1938923,
+      "bitrate": 2029088,
       "audio": "AAC, stereo, 48 kHz"
     },
     {
@@ -612,7 +612,7 @@
       "note": "YouTube, link w Google Play",
       "name": "kielek-social-1920x1080.mp4",
       "path": "kielek-social-1920x1080.mp4",
-      "bytes": 5321217,
+      "bytes": 6162479,
       "width": 1920,
       "height": 1080,
       "fps": 30,
@@ -621,7 +621,7 @@
       "codec": "h264",
       "profile": "High",
       "pixFmt": "yuv420p",
-      "bitrate": 2027130,
+      "bitrate": 2347611,
       "audio": "AAC, stereo, 48 kHz"
     }
   ],
@@ -630,16 +630,16 @@
     "rounded": "kielek-icon-512.png"
   },
   "renderSeconds": {
-    "stills": 24,
-    "store": 325,
-    "marketing-9x16": 346,
-    "marketing-1x1": 330,
-    "marketing-16x9": 266,
-    "tile": 88
+    "stills": 11,
+    "store": 35,
+    "marketing-9x16": 41,
+    "marketing-1x1": 35,
+    "marketing-16x9": 33,
+    "tile": 5
   },
   "validation": true,
   "published": {
-    "totalBytes": 9677750,
+    "totalBytes": 10438150,
     "count": 31
   }
 }

@@ -22,8 +22,9 @@ export const Caption = ({ overlay, frame }: { overlay: Overlay; frame: number })
   if (wordCount(overlay.text) > overlayRules.maxWords) throw new Error(`overlay too long: ${overlay.text}`);
   if (frames < overlayRules.minFrames || frames < readingFrames(overlay.text)) throw new Error(`overlay too short: ${overlay.text}`);
   if (frame < overlay.from || frame > overlay.to) return null;
-  const s = riseAt(frame, overlay.from);
-  const fade = interpolate(frame, [overlay.from, overlay.from + 6], [0, 1], { extrapolateRight: 'clamp' });
+  const resolved = overlay.from === 0;
+  const s = resolved ? 1 : riseAt(frame, overlay.from);
+  const fade = resolved ? 1 : interpolate(frame, [overlay.from, overlay.from + 6], [0, 1], { extrapolateRight: 'clamp' });
   const out = easeIn(interpolate(frame, [overlay.to - 6, overlay.to], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }));
   return (
     <div style={{ position: 'absolute', left: 0, right: 0, top: overlay.top, display: 'flex', justifyContent: 'center', zIndex: 80 }}>

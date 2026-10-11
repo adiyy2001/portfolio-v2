@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { useCurrentFrame } from 'remotion';
+import type { CSSProperties, ReactNode } from 'react';
+import { interpolate, useCurrentFrame } from 'remotion';
 import type { Format } from '../../shared/types';
 import { PhoneFrame, phone, type PhoneTheme } from '../../shared/PhoneFrame';
 import { formats } from '../../shared/formats';
@@ -17,6 +17,8 @@ import { area, line, makeScale, series } from './components/charts';
 import { countAt, drawAt, easeIn, focusAt, mixN, progress, riseAt, riseIn, trackAt } from './components/motion';
 import { batteryLevel } from './screens/Battery';
 import { hookWeights, liveFlows } from './Scene';
+
+const clamp = { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' } as const;
 
 export const loopTotal = marketing.duration + marketing.bridge;
 
@@ -52,7 +54,7 @@ const layouts: Record<Format, Layout> = {
   '9x16': {
     copy: { left: 80, top: 236, width: 900, title: 88, line: 34, kicker: 26 },
     world: { cx: 380, cy: 870, scale: 1.6 },
-    phone: { scale: 1.05, left: Math.round(1080 - phone.width * 1.05 - 36), top: 876 },
+    phone: { scale: 0.9, left: Math.round(1080 - phone.width * 0.9 - 36), top: 640 },
     wire: 'down',
     outro: { cy: 640, icon: 280, name: 150, tagline: 42, box: { left: 0, width: 1080 }, house: { cx: 540, cy: 1420, scale: 2.1 } },
     tag: 15,
@@ -265,6 +267,14 @@ const Wire = ({ from, to, mode, clock, opacity }: { from: [number, number]; to: 
   );
 };
 
+const swapFrames = 3;
+
+const enter = (f: number, at: number, distance: number): CSSProperties => {
+  if (f < at) return { opacity: 0, transform: `translateY(${distance}px)` };
+  const s = riseAt(f, at);
+  return { opacity: interpolate(f, [at, at + 5], [0.5, 1], clamp), transform: `translateY(${(1 - s) * distance}px)` };
+};
+
 const Copy = ({ f, layout }: { f: number; layout: Layout }) => {
   const { copy } = layout;
   return (
@@ -272,27 +282,32 @@ const Copy = ({ f, layout }: { f: number; layout: Layout }) => {
       {marketingBeats.map((beat, i) => {
         if (f < beat.from || f > beat.to) return null;
         const first = i === 0;
-        const start = first ? -999 : beat.from + 4;
-        const out = i < marketingBeats.length - 1 ? progress(f, beat.to - 8, 8, easeIn) : 0;
+        const last = i === marketingBeats.length - 1;
+        const out = last ? 0 : interpolate(f, [beat.to - swapFrames, beat.to], [0, 0.65], clamp);
         const words = beat.title.split(' ');
+        const still = (distance: number): CSSProperties => (first ? {} : enter(f, beat.from, distance));
+        const wordStyle = (w: number): CSSProperties => (first ? {} : enter(f, beat.from + w * 2, copy.title * 0.25));
+        const textStyle: CSSProperties = { opacity: 1 - out, transform: `translateY(${-out * 10}px)` };
         return (
-          <div key={beat.title} style={{ position: 'absolute', left: copy.left - copy.kicker * 1.2, top: copy.top - copy.kicker * 1.2, width: copy.width + copy.kicker * 2.4, padding: copy.kicker * 1.2, boxSizing: 'border-box', borderRadius: copy.kicker * 0.8, background: color.card, boxShadow: slab(6), opacity: 1 - out, transform: `translateY(${-out * 10}px)` }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: copy.kicker * 0.4, padding: `${copy.kicker * 0.4}px ${copy.kicker * 0.7}px`, borderRadius: copy.kicker * 0.4, background: color.ground, fontSize: copy.kicker, ...semi, ...riseIn(f, start, first) }}>
-              <span style={{ width: copy.kicker * 0.45, height: copy.kicker * 0.45, borderRadius: copy.kicker, background: hue[beatHue[i]].line }} />
-              {beat.kicker}
-            </div>
-            <div style={{ marginTop: copy.kicker * 0.9, fontSize: copy.title, lineHeight: 1, ...num, letterSpacing: -copy.title * 0.01, textWrap: 'balance' }}>
-              {words.map((word, w) => (
-                <span key={w} style={{ display: 'inline-block', marginRight: '0.22em', ...riseIn(f, start + 4 + w * 3, first, copy.title * 0.25) }}>
-                  {word}
-                </span>
-              ))}
-            </div>
-            {copy.line && (
-              <div style={{ marginTop: copy.title * 0.3, fontSize: copy.line, lineHeight: 1.35, color: color.secondary, maxWidth: copy.width * 0.86, textWrap: 'balance', ...riseIn(f, start + 10 + words.length * 3, first) }}>
-                {beat.line}
+          <div key={beat.title} style={{ position: 'absolute', left: copy.left - copy.kicker * 1.2, top: copy.top - copy.kicker * 1.2, width: copy.width + copy.kicker * 2.4, padding: copy.kicker * 1.2, boxSizing: 'border-box', borderRadius: copy.kicker * 0.8, background: color.card, boxShadow: slab(6) }}>
+            <div style={textStyle}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: copy.kicker * 0.4, padding: `${copy.kicker * 0.4}px ${copy.kicker * 0.7}px`, borderRadius: copy.kicker * 0.4, background: color.ground, fontSize: copy.kicker, ...semi, ...still(12) }}>
+                <span style={{ width: copy.kicker * 0.45, height: copy.kicker * 0.45, borderRadius: copy.kicker, background: hue[beatHue[i]].line }} />
+                {beat.kicker}
               </div>
-            )}
+              <div style={{ marginTop: copy.kicker * 0.9, fontSize: copy.title, lineHeight: 1, ...num, letterSpacing: -copy.title * 0.01, textWrap: 'balance' }}>
+                {words.map((word, w) => (
+                  <span key={w} style={{ display: 'inline-block', marginRight: '0.22em', ...wordStyle(w) }}>
+                    {word}
+                  </span>
+                ))}
+              </div>
+              {copy.line && (
+                <div style={{ marginTop: copy.title * 0.3, fontSize: copy.line, lineHeight: 1.35, color: color.secondary, maxWidth: copy.width * 0.86, textWrap: 'balance', ...still(12) }}>
+                  {beat.line}
+                </div>
+              )}
+            </div>
           </div>
         );
       })}

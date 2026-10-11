@@ -17,7 +17,7 @@ export const storyboard: Storyboard = {
       key: 45,
       action:
         'Od pierwszej klatki izometryczny dom z płynącą energią i duża liczba 6,4 kW z dachu. Kreski na ścieżkach biegną z prędkością zależną od mocy, przepływ ze słońca prowadzi, reszta czeka na 40%. Po panelach przesuwa się refleks.',
-      overlay: { text: 'Prąd z dachu na żywo', from: 4, to: 72, top: overlayTop },
+      overlay: { text: 'Prąd z dachu na żywo', from: 0, to: 72, top: overlayTop },
     },
     {
       id: 'battery',
