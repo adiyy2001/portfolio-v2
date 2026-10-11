@@ -9,6 +9,7 @@ export const routes = {
   coschema: { pl: '/archive/coschema/', en: '/en/archive/coschema/' },
   'signal-timeline': { pl: '/archive/signal-timeline/', en: '/en/archive/signal-timeline/' },
   eventhorizon: { pl: '/archive/eventhorizon/', en: '/en/archive/eventhorizon/' },
+  fieldline: { pl: '/archive/fieldline/', en: '/en/archive/fieldline/' },
 };
 
 export const ui = {
@@ -34,6 +35,7 @@ export const ui = {
       coschema: 'coschema',
       'signal-timeline': 'signal-timeline',
       eventhorizon: 'eventhorizon',
+      fieldline: 'fieldline',
       blog: 'blog',
     },
   },
@@ -59,6 +61,7 @@ export const ui = {
       coschema: 'coschema',
       'signal-timeline': 'signal-timeline',
       eventhorizon: 'eventhorizon',
+      fieldline: 'fieldline',
       blog: 'blog',
     },
   },
