@@ -154,7 +154,8 @@ main[data-glide] + .mini {
   align-items: center;
   gap: 12px;
   width: fit-content;
-  padding: 8px 0;
+  padding: 14px 0;
+  margin-block: -6px;
   font: 500 1rem/1 var(--text);
   text-decoration: none;
 }

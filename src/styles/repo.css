@@ -33,6 +33,7 @@
 
 .hero--repo .cta {
   margin-top: 28px;
+  row-gap: 28px;
 }
 
 .demo {
@@ -48,6 +49,10 @@
   position: relative;
   overflow: hidden;
   background: var(--wool-deep);
+}
+
+.demo__frame,
+.repos__shot {
   -webkit-mask:
     conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%,
     conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
@@ -299,68 +304,98 @@
   padding: clamp(80px, 9vw, 140px) var(--pad) clamp(72px, 8vw, 120px);
 }
 
-.repos__list {
-  margin-top: clamp(36px, 5vw, 64px);
-  border-bottom: 1px dashed var(--chalk-blue);
-}
-
-.repos__item {
+.repos__head {
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
-  align-items: center;
-  padding: clamp(22px, 2.6vw, 36px) 0;
-  border-top: 1px dashed var(--chalk-blue);
+  row-gap: 20px;
+}
+
+.repos__head .h2 {
+  grid-column: 1 / span 8;
+}
+
+.repos__lead {
+  grid-column: 1 / span 6;
+  font: 500 clamp(1.125rem, 1.5vw, 1.5rem) / 1.3 var(--display);
+  color: var(--chalk-dim);
+  text-wrap: pretty;
+}
+
+.repos__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(48px, 5vw, 80px) clamp(24px, 2.6vw, 40px);
+  margin-top: clamp(40px, 5vw, 72px);
+}
+
+.repos__grid > li:nth-child(3n + 2) {
+  margin-top: clamp(32px, 4vw, 64px);
+}
+
+.repos__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
   text-decoration: none;
 }
 
+.repos__shot {
+  position: relative;
+  align-self: stretch;
+  aspect-ratio: 16 / 10;
+  margin-bottom: 14px;
+  background: var(--wool-deep);
+  transition: transform 0.45s var(--ease);
+}
+
+.repos__shot img,
+.repos__shot video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 20%;
+}
+
+.repos__shot video {
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+
+.repos__shot video.is-on {
+  opacity: 1;
+}
+
+.repos__card:hover .repos__shot,
+.repos__card:focus-visible .repos__shot {
+  transform: translateY(-6px);
+}
+
 .repos__name {
-  grid-column: 1 / span 4;
-  justify-self: start;
-  font: 700 clamp(2.2rem, 4.4vw, 4.4rem) / 1.05 var(--display);
+  font: 700 clamp(1.9rem, 2.7vw, 2.8rem) / 1.05 var(--display);
   letter-spacing: -0.025em;
   background: linear-gradient(currentColor, currentColor) 0 100% / 0 3px no-repeat;
   transition: background-size 0.45s var(--ease);
 }
 
-.repos__item:hover .repos__name,
-.repos__item:focus-visible .repos__name {
+.repos__card:hover .repos__name,
+.repos__card:focus-visible .repos__name {
   background-size: 100% 3px;
 }
 
-.repos__text {
-  grid-column: 5 / span 6;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .repos__desc {
-  font-size: 1.0625rem;
-  line-height: 1.45;
+  font-size: 1rem;
+  line-height: 1.5;
   text-wrap: pretty;
 }
 
 .repos__tech {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 500;
+  line-height: 1.45;
   color: var(--chalk-dim);
-}
-
-.repos__go {
-  grid-column: 11 / span 2;
-  justify-self: end;
-  display: flex;
-}
-
-.repos__go svg {
-  width: 40px;
-  height: 18px;
-  color: var(--chalk-blue);
-  transition: transform 0.35s var(--ease);
-}
-
-.repos__item:hover .repos__go svg {
-  transform: translateX(8px);
 }
 
 .page[data-glide='out'] .repos {
@@ -393,8 +428,7 @@
   .rows div,
   .call,
   .nums div,
-  .repo__next,
-  .repos__item {
+  .repo__next {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -416,14 +450,53 @@
     margin-bottom: 8px;
   }
 
-  .repo__next .link,
-  .repos__name,
-  .repos__go {
+  .repo__next .link {
     align-self: flex-start;
   }
 
-  .repos__go {
-    margin-top: 6px;
+  .repos__head .h2,
+  .repos__lead {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 1199px) {
+  .repos__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .repos__grid > li:nth-child(3n + 2) {
+    margin-top: 0;
+  }
+
+  .repos__grid > li:nth-child(2n) {
+    margin-top: clamp(32px, 4vw, 64px);
+  }
+}
+
+@media (max-width: 599px) {
+  .repos__grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    gap: 16px;
+    margin-inline: calc(var(--pad) * -1);
+    padding: 8px var(--pad) 20px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--pad);
+    scrollbar-width: none;
+  }
+
+  .repos__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .repos__grid > li,
+  .repos__grid > li:nth-child(2n) {
+    margin-top: 0;
+    scroll-snap-align: start;
   }
 }
 

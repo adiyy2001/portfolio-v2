@@ -41,24 +41,25 @@ function Contents({ sections }) {
   const [active, setActive] = useState(sections[0]?.id);
   const box = useRef(null);
   useEffect(() => {
-    if (window.innerWidth < 900) box.current?.removeAttribute('open');
+    if (window.innerWidth >= 900) box.current?.setAttribute('open', '');
   }, []);
   useEffect(() => {
     const heads = sections.map(({ id }) => document.getElementById(id)).filter(Boolean);
+    if (!heads.length || !('IntersectionObserver' in window)) return undefined;
     const update = () => {
-      let current = heads[0]?.id;
-      heads.forEach(head => {
-        if (head.getBoundingClientRect().top <= window.innerHeight * 0.3) current = head.id;
-      });
-      setActive(current);
+      const line = window.innerHeight * 0.3;
+      const passed = heads.filter(head => head.getBoundingClientRect().top <= line);
+      setActive((passed.pop() ?? heads[0]).id);
     };
-    update();
-    window.addEventListener('scroll', update, { passive: true });
-    return () => window.removeEventListener('scroll', update);
+    const watchers = ['0px 0px -70% 0px', '0px'].map(
+      rootMargin => new IntersectionObserver(update, { rootMargin }),
+    );
+    heads.forEach(head => watchers.forEach(watcher => watcher.observe(head)));
+    return () => watchers.forEach(watcher => watcher.disconnect());
   }, [sections]);
   return (
     <nav className="toc" aria-label="Contents">
-      <details className="toc__box" ref={box} open>
+      <details className="toc__box" ref={box}>
         <summary className="toc__label">In this article</summary>
         <ol className="toc__list">
           {sections.map(({ id, title }) => (

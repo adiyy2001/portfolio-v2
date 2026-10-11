@@ -137,7 +137,9 @@ export default function Close({ lang, edition = 'rec' }) {
             <li key={name}>
               <a href={href} rel="noopener">
                 <span>{name}</span>
-                <span aria-hidden="true">&rarr;</span>
+                <svg viewBox="0 0 40 18" aria-hidden="true">
+                  <path className="stroke" strokeWidth="1.8" d="M1 9H38M30 1L38 9L30 17" />
+                </svg>
               </a>
             </li>
           ))}
