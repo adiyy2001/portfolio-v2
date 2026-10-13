@@ -7,15 +7,17 @@ tags: ["tutorial","typescript","node","testing"]
 ogImage: ./og.png
 ---
 
-A percentage rollout looks trivial until two runtimes disagree about a single user. In a self-hosted feature flag project of mine, rollouts hash the context key. Any difference in signed arithmetic or UTF-8 handling sends the same person to a different variant on the server than in the browser. This tutorial builds the TypeScript half of that idea: a small flag evaluator whose bucketing is sticky per user and specified precisely enough for another runtime to reproduce it.
+A percentage rollout sounds trivial until two runtimes disagree about a single user.  In a self-hosted feature flag project of mine the rollouts hash the context key, a difference in signed arithmetic or UTF-8 handling sends the same person to a different variant on the server than in the browser.  This tutorial builds the TypeScript half of that idea, a small flag evaluator with sticky bucketing per user yet precisely enough specified for another runtime to reproduce it.
 
-You will implement MurmurHash3 with 32 bit integer arithmetic, turn a bucket into a variant with integer weights, evaluate rules in a fixed order, and test the result two ways. Shared JSON conformance vectors pin the behaviour for any language. A seeded property test shows that widening a rollout never removes a user who was already in.
+You will implement MurmurHash3 using 32 bit integer arithmetic, turn a bucket into a variant using integer weights, evaluate rules in a fixed order and test the result two ways.  Shared JSON conformance vectors pin the behaviour for any language.  A seeded property test shows that widening a rollout never removes a user who was already in.
 
-You need Node 24, npm and basic TypeScript. There is no server and no build step, only pure functions and Vitest 3. The complete project, with every test and the vector files, is at https://github.com/adiyy2001/sticky-rollout-evaluator
+You need Node 24, npm and basic TypeScript.  There is no server or build step, just pure functions and Vitest 3.  The complete project including every test and vector files is at https://github.com/adiyy2001/sticky-rollout-evaluator
 
 ## Decide what a bucket is before writing code
 
-The whole design hangs on one pure function: text in, bucket out. Rules, variants and the property test all rest on the promise that the same text gives the same bucket in every runtime.
+The whole design hangs on one pure function: text in, bucket out.  Rules, variants and the property test all depend upon the same text yielding the same bucket each runtime.
+
+![Input text flagKey.salt.userKey becomes UTF-8 bytes, a MurmurHash3 value, a bucket from zero to 99999 and finally a variant chosen by cumulative weights.](/blog-img/build-sticky-percentage-rollouts-with-murmurhash3-in-typescript/pipeline.png)
 
 The rules fit in a list:
 
@@ -53,9 +55,9 @@ The modulo is only safe because `hashText` returns an unsigned number. A signed 
 
 ## Implement MurmurHash3 with 32 bit integer arithmetic
 
-JavaScript has no 32 bit integer type, so the hash has to be coaxed out of doubles. Two things go wrong if you do it naively: multiplication and sign.
+JavaScript has no 32 bit integer type so the hash has to be coaxed out of doubles.  Two things go wrong if you do it naively: multiplication and sign. 
 
-The file is [`src/murmur3.ts`](https://github.com/adiyy2001/sticky-rollout-evaluator/blob/main/src/murmur3.ts). I start with the constants and three helpers.
+The file is [`src/murmur3.ts`](https://github.com/adiyy2001/sticky-rollout-evaluator/blob/main/src/murmur3.ts).  I start with the constants and three helpers.
 
 ```ts
 const C1 = 0xcc9e2d51;
@@ -137,11 +139,11 @@ There is also no Unicode normalization and no case folding. `User` and `user` ar
 
 ## Pick the variant from cumulative weights
 
-A bucket is a whole number from zero up to one below the bucket space. A rollout is a list of variants with integer weights, in thousandths of a percent, so they always sum to 100000.
+A bucket is a whole number from zero up to one below the bucket space.  A rollout is a list of variants with integer weights in thousandths of a percent, so they always sum to 100000.
 
-Integers matter here. With floating point percentages, two runtimes can round a boundary differently and put one bucket on opposite sides of it.
+Integers matter here, with floating point percentages two runtimes could round the same boundary differently placing one bucket on opposite sides of it.
 
-Selection lives in [`src/rollout.ts`](https://github.com/adiyy2001/sticky-rollout-evaluator/blob/main/src/rollout.ts). It walks the entries and serves the first variant whose cumulative weight is greater than the bucket.
+Selection lives in [`src/rollout.ts`](https://github.com/adiyy2001/sticky-rollout-evaluator/blob/main/src/rollout.ts).  It walks the entries and serves the first variant whose cumulative weight exceeds the bucket.
 
 ```ts
 export function pickVariant(entries: readonly RolloutEntry[], bucket: number): string {
@@ -156,11 +158,11 @@ export function pickVariant(entries: readonly RolloutEntry[], bucket: number): s
 }
 ```
 
-The comparison is strict. A bucket equal to the cumulative weight is already out of that variant, and the last bucket below it is still in. A test checks both sides of that boundary.
+The comparison is strict, a bucket equal to the cumulative weight is already out of that variant, while the last bucket below it is still in.  A test checks both sides of that boundary.
 
-The throw at the end only fires for a flag whose weights do not sum to the total. A separate validator rejects such flags before they ship, so this is a guard and not a normal code path.
+The throw at the end only fires for a flag whose weights do not sum to the total.  A separate validator rejects such flags before they ship, this is therefore a guard and not a normal code path.
 
-Most rollouts are a single percentage, so a helper builds the two-entry list.
+Most rollouts are a single percentage so a helper builds that two-entry list.
 
 ```ts
 export const TOTAL_WEIGHT = 100_000;
@@ -187,9 +189,9 @@ The off weight is computed as the remainder and never rounded on its own. That k
 
 ## Evaluate rules in a fixed order
 
-In [`src/evaluator.ts`](https://github.com/adiyy2001/sticky-rollout-evaluator/blob/main/src/evaluator.ts) the order of decisions becomes part of the spec. The kill switch comes first, then a disabled flag, then the rules in order, then the fallthrough.
+In [`src/evaluator.ts`](https://github.com/adiyy2001/sticky-rollout-evaluator/blob/main/src/evaluator.ts) the order of decisions becomes part of the spec.  The kill switch comes first, then a disabled flag, then the rules in order and finally the fallthrough. 
 
-A rule matches when all its conditions match, and the first matching rule wins. A missing attribute, or one of a type the operator cannot use, never matches, even with `negate`. People get that last point wrong, so it has vectors of its own.
+A rule only matches with all of its conditions matching, the first such rule wins.  Any attribute missing or of a type the operator cannot use will never match, even with `negate`.  People get this last point wrong, hence the vectors of its own.
 
 ```ts
 function serve(
@@ -273,6 +275,8 @@ The runner is a function in `test/support.ts` called `differences`. It evaluates
 ## Test that widening never removes a user
 
 Vectors pin exact answers for a few users. They say nothing about the property that makes rollouts safe: going from 10 percent to 50 percent only ever adds people.
+
+![A bucket line from 0 to 99999. Users below 10000 are in at 10% and 50%, users between 10000 and 50000 join when widened, the rest stay out.](/blog-img/build-sticky-percentage-rollouts-with-murmurhash3-in-typescript/widening.png)
 
 That statement covers all users and all pairs of percentages, so it gets a property test. It lives in [`test/rollout.property.test.ts`](https://github.com/adiyy2001/sticky-rollout-evaluator/blob/main/test/rollout.property.test.ts) and starts with three small helpers.
 

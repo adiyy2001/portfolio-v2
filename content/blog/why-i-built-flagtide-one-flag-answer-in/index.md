@@ -27,6 +27,8 @@ This gave me the frame. The interesting parts are the three decisions below.
 
 The most severe kind of risk with flag services is quiet disagreement. A percentage rollout hashes the context key and maps it to a bucket. If the server and the browser differ in one detail, the same user lands in a different variant depending on who evaluated.
 
+![A written spec feeds a Java engine and a TypeScript engine. 616 shared vectors run in CI, with expected hashes computed by a Python oracle.](/blog-img/why-i-built-flagtide-one-flag-answer-in/spec-and-vectors.png)
+
 The details that bite are boring ones. A Java int wraps as a signed 32-bit integer whereas a JavaScript number is a double until you force it back using `Math.imul` or `| 0`. When hashing a string the same UTF-8 bytes must be present on both sides. However, JavaScript strings are UTF-16. Semver comparison needs one ordering rule, written down once.
 
 This means that the algorithm itself is a written spec and both engines are my own code, one in Java and one in TypeScript. I did not wrap a library on one side and hope. Both engines run 616 shared vectors in CI. The expected hashes come from an independent Python oracle, so neither engine can vouch for itself.
@@ -36,6 +38,8 @@ The trade-off is real. Having two engines of my own means twice the code to main
 ## PostgreSQL NOTIFY as a pointer, not a broker
 
 We need coordination between multiple servers on the ordering of change and each server then needs to publish out to its connected sockets. The typical solution is some form of message broker. I've seen that in RabbitMQ in my work and for this situation it was over-complicated rather than required.
+
+![A flag change is written to a versioned log, NOTIFY wakes each instance, each instance reads changes after the last seen version, serializes once and pushes to browsers, where the SDK evaluates locally.](/blog-img/why-i-built-flagtide-one-flag-answer-in/propagation.png)
 
 We already have the data in PostgreSQL and we have LISTEN and NOTIFY. The issue is that NOTIFY is ordered but not durable and only supports 8,000 bytes per payload. If a listener drops at the wrong time then it will miss some notifications.
 
@@ -92,6 +96,8 @@ Our actual server is written in Java. This document is meant to be a translation
 ## What the benchmark said
 
 Target p95 propagation from commit to client: 300 ms
+
+![Propagation latency of 38 ms at p50, 77 ms at p95 and 90 ms at p99, against a target of 300 ms at p95.](/blog-img/why-i-built-flagtide-one-flag-answer-in/benchmark.png)
 
 Test ran with 5,000 WebSocket clients across 2 instances, 30 changes and 150,000 frames. Measured p50 propagation at 38 ms, p95 at 77 ms and p99 at 90 ms. Percentage rollout evaluates in 0.412 µs on average in Node compared to a target of 5 µs.
 
