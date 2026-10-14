@@ -14,8 +14,8 @@ const layoutFeatures = () =>
 
 const copy = {
   layoutId: 'tailorcloth-shot',
-  width: 880,
-  height: 595,
+  width: 1760,
+  height: 1190,
   pl: {
     alt: 'Formularz zamówienia koszuli na miarę w platformie TailorCloth: tkanina główna, tkanina kontrastowa i miejsce kontrastu na kołnierzu',
     caption: 'Formularz zamówienia na miarę, zrzut z tailorcloth.com',
@@ -37,8 +37,8 @@ export default function Shot({ lang, sizes }) {
         childImageSharp {
           gatsbyImageData(
             layout: CONSTRAINED
-            width: 880
-            breakpoints: [440, 660, 880]
+            width: 1760
+            breakpoints: [440, 660, 880, 1100, 1320, 1760]
             quality: 82
             placeholder: NONE
           )

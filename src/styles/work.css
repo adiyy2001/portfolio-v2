@@ -28,6 +28,7 @@
     .work__end,
     .shot__cap,
     .proj__facts,
+    .proj__flow,
     .proj__team,
     .proj__end,
     .close
@@ -57,7 +58,7 @@ main[data-glide] + .mini {
 .shot {
   margin: 0;
   min-width: 0;
-  max-width: 880px;
+  max-width: 1100px;
 }
 
 .shot__frame {
@@ -513,6 +514,94 @@ main[data-glide] + .mini {
   font: 700 clamp(1.4rem, 2.2vw, 2rem) / 1 var(--display);
 }
 
+.proj__flow {
+  position: relative;
+  padding: clamp(24px, 4vw, 60px) var(--pad) clamp(56px, 7vw, 100px);
+}
+
+.proj__step {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  align-items: end;
+  row-gap: 24px;
+  margin-top: clamp(40px, 6vw, 88px);
+}
+
+.proj__fig {
+  grid-column: 1 / span 8;
+  margin: 0;
+  min-width: 0;
+}
+
+.proj__fig picture,
+.proj__fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.proj__fig img {
+  filter: saturate(0.85) contrast(1.02);
+  -webkit-mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  -webkit-mask-composite: source-in;
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%;
+  mask-composite: intersect;
+}
+
+.proj__fig figcaption {
+  margin-top: 12px;
+  font-size: 0.875rem;
+  color: var(--chalk-dim);
+}
+
+.proj__note {
+  grid-column: 9 / span 4;
+  padding: 0 0 34px clamp(16px, 2.6vw, 40px);
+}
+
+.proj__step--odd .proj__fig {
+  grid-column: 5 / span 8;
+  grid-row: 1;
+}
+
+.proj__step--odd .proj__note {
+  grid-column: 1 / span 4;
+  grid-row: 1;
+  padding: 0 clamp(16px, 2.6vw, 40px) 34px 0;
+}
+
+.proj__note .proj__label {
+  color: var(--chalk-dim);
+}
+
+.proj__step-h {
+  margin: 12px 0 14px;
+  font: 700 clamp(1.6rem, 2.4vw, 2.4rem) / 1.05 var(--display);
+  letter-spacing: -0.02em;
+}
+
+.proj__note p:last-child {
+  max-width: 28em;
+  text-wrap: pretty;
+}
+
+@media (max-width: 899px) {
+  .proj__step {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .proj__note,
+  .proj__step--odd .proj__note {
+    padding: 0;
+  }
+}
+
 @media (min-width: 900px) {
   .ws {
     display: grid;
@@ -581,7 +670,7 @@ main[data-glide] + .mini {
 }
 
 @media print {
-  :is(.proj__facts, .proj__team) :is(.sec-head, h2) {
+  :is(.proj__facts, .proj__flow, .proj__team) :is(.sec-head, h2) {
     break-after: avoid;
   }
 }

@@ -13,7 +13,7 @@
 
 .case__swatch {
   grid-column: 1 / span 6;
-  width: min(100%, 560px);
+  width: min(100%, 680px);
   perspective: 900px;
 }
 

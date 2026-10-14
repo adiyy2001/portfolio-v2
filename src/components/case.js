@@ -45,9 +45,9 @@ export default function Case({ lang }) {
         childImageSharp {
           gatsbyImageData(
             layout: CONSTRAINED
-            width: 560
-            outputPixelDensities: [0.5, 0.75, 1, 1.5]
-            sizes: "(min-width: 1230px) 560px, (min-width: 900px) 45.6vw, 91.2vw"
+            width: 680
+            outputPixelDensities: [0.5, 0.75, 1, 1.5, 2]
+            sizes: "(min-width: 1430px) 680px, (min-width: 900px) 47.6vw, 91.2vw"
             formats: [WEBP, AVIF]
             quality: 80
             placeholder: NONE
