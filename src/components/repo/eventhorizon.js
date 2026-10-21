@@ -175,7 +175,7 @@ const eventhorizon = {
       ],
       [
         'Link and physics',
-        'The address holds the whole state of the view, so a link reproduces the same picture. The Physics tab shows every equation with a link to its derivation.',
+        'The URL contains the entire state of the view, so a link brings back the same picture. The Physics tab lists every equation with a link to its derivation.',
       ],
     ],
     calls: [
@@ -183,7 +183,7 @@ const eventhorizon = {
         name: 'One equation, one integrator, a float64 reference.',
         text: 'The tracer integrates the vector geodesic equation with RK4 and a step that scales with the radius. The variant I chose keeps the shadow edge more than three orders of magnitude inside the 1e-4 target at about 108 steps per ray. The float32 shader is validated against both the float64 reference and a Math.fround twin on the CPU, so the remaining error is rounding, not a porting mistake.',
         cost: 'The price: rays within 0.02 of the critical impact parameter spiral around the hole and end in a direction set by the last digits, so float32 cannot match float64 there. The parity set leaves them out.',
-        lost: 'What lost: the Binet form, a Hamiltonian form (singular at the horizon and the poles) and a symplectic integrator (RK4 reaches the accuracy with simpler code).',
+        lost: 'Lost: the Binet form, a Hamiltonian form (singular at the horizon and the poles) and a symplectic integrator (RK4 achieves the same accuracy with simpler code).',
         adr: ['ADR 0002', adr('0002-geodesic-equation-form-and-integrator')],
       },
       {
@@ -204,11 +204,11 @@ const eventhorizon = {
     numbers: [
       [
         '12.1 ms',
-        'GPU time per frame at 1920 by 1080 on an RTX 3070 Ti Laptop (Chrome 154, Windows), the median of 120 orbit frames: 66 frames per second. Intel Iris Xe: 136.6 ms, and 17.7 ms (62 frames per second) with dynamic resolution at scale 0.35. Targets: 60 on a mid-range discrete GPU, 30 on an integrated one.',
+        'GPU time per frame at 1920 by 1080 on an RTX 3070 Ti Laptop (Chrome 154, Windows), median of 120 orbit frames: 66 frames per second. Intel Iris Xe: 136.6 ms, and 17.7 ms (62 frames per second) with dynamic resolution scaling at 0.35. The goals are 60 frames per second on a mid-range discrete GPU and 30 on an integrated one.',
       ],
       [
         '4096',
-        'All 4096 rays of the parity set end the same way on the GPU and in the float64 reference, on the RTX 3070 Ti, the Iris Xe and the SwiftShader software adapter.',
+        'Each of the 4096 rays in the parity set ends identically on the GPU and in the float64 reference, on the RTX 3070 Ti, the Iris Xe and the SwiftShader software adapter.',
       ],
       [
         '3.7e-8',
@@ -216,19 +216,19 @@ const eventhorizon = {
       ],
       [
         '0.017',
-        'Worst mean difference (0 to 255 scale) between the CPU picture and the GPU picture over nine scenarios, on the software adapter. The tolerance is 0.25.',
+        'Maximum mean difference across nine scenarios, comparing the CPU and GPU images on the software adapter. The scale is 0 to 255 and the tolerance is 0.25.',
       ],
       [
         '2.6 s',
-        'A full 512 by 512 picture without WebGPU on eight workers (median of five loads), and 13.0 s on one worker. The machine was busy.',
+        'A full 512 by 512 image rendered without WebGPU across eight workers (median of five loads), compared to 13.0 s on a single worker. The machine was under load.',
       ],
       [
         '797',
-        'Unit tests in the app and 97 for the scripts, plus 89 Playwright specs, with 98.8% line coverage. Lighthouse accessibility, best practices and SEO are 100. Performance is 75 to 88 on the software adapter and 90 to 96 on the CPU path, on a busy machine.',
+        'Unit tests in the app and 97 for the scripts, plus 89 Playwright specs, with 98.8% line coverage. Lighthouse scores for accessibility, best practices and SEO are all 100. Performance scores range from 75 to 88 on the software adapter and 90 to 96 on the CPU path, on a busy machine.',
       ],
     ],
     machine:
-      'Measured on 2026-10-10 on one laptop: an Intel Core i7-12700H under WSL2 with Chromium 153 for the CPU and SwiftShader, and Chrome 154 on Windows for the GPUs, an NVIDIA GeForce RTX 3070 Ti Laptop and an Intel Iris Xe.',
+      'Collected on 2026-10-10 on a single laptop: an Intel Core i7-12700H on WSL2, with Chromium 153 for the CPU and SwiftShader runs, and Chrome 154 on Windows for the GPUs, an NVIDIA GeForce RTX 3070 Ti Laptop and an Intel Iris Xe.',
     gapsLead: 'Of the optional extras I built only the deflection check with elliptic integrals.',
     gaps: [
       [

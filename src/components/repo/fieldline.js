@@ -156,7 +156,7 @@ const fieldline = {
     features: [
       [
         'The field at ground level',
-        'The Ground tab shows the E or the B field at 1 or 1.8 m above ground with exposure contours. The keys E and B switch the field, and Space animates the cycle.',
+        'The Ground tab displays the E or B field at a height of 1 or 1.8 m above ground, with exposure contours. The E and B keys toggle between the fields, and Space animates the cycle.',
       ],
       [
         'A lateral profile',
@@ -164,7 +164,7 @@ const fieldline = {
       ],
       [
         'Phase arrangement',
-        'The Phasing tab compares the 36 phase arrangements of a double circuit in six symmetry classes and explains the winner by the dipole moments that cancel.',
+        'The Phasing tab compares the 36 phase arrangements of a double circuit in six symmetry classes and shows why one of them wins, based on the dipole moments that cancel.',
       ],
       [
         'The 3D views',
@@ -209,27 +209,27 @@ const fieldline = {
       ],
       [
         '50 ms',
-        'Median from a geometry change on the horizontal tower to the frame shown on an RTX 3070 Ti Laptop. The worst case is the double circuit at 124 ms. Target: a median under 200 ms.',
+        'Median from a geometry change on the horizontal tower to the frame shown, on an RTX 3070 Ti Laptop. The worst case was the double circuit at 124 ms. The goal is a median under 200 ms.',
       ],
       [
         '0.999999',
-        'Ratio of the peak E at mid-span in the 3D model to the 2D model for a straight line with an 800 m span. With the default spans it is 0.9936 to 0.9972 across the three towers.',
+        'Ratio of the peak E at mid-span in the 3D model to the 2D model, for a straight line with an 800 m span. Across the three towers, it ranges from 0.9936 to 0.9972 with the default spans.',
       ],
       [
         '13 of 14',
-        'Cases of a published 420 kV study reproduced by the 2D model (26 of 28 limit heights), 0.014 to 0.028 m below the paper. One case is fitted and marked.',
+        'Cases from a published 420 kV study reproduced by the 2D model (26 out of 28 limit heights), 0.014 to 0.028 m below what the paper reports. One case is fitted and marked.',
       ],
       [
         '8 ms',
-        'Median frame interval in almost every view on both real GPUs at 1920 by 1080. It is the frame clock of the headless browser, so it only shows that the views fit inside it. The exception: the E field lines on the Iris Xe, 15.6 ms.',
+        'Median frame interval in nearly every view on both real GPUs at 1920 by 1080. Since it is the frame clock of the headless browser, it only shows that the views fit inside it. The exception is the E field lines view on the Iris Xe, at 15.6 ms.',
       ],
       [
         '902',
-        'Unit tests, 90 script tests and 108 end-to-end tests, with line coverage of 99.3% in the core and 82.2% in the app. Lighthouse accessibility, best practices and SEO are 100. Performance is 76 to 89 on the software adapter and 93 to 100 on the CPU path.',
+        'Unit tests, plus 90 script tests and 108 end-to-end tests, with line coverage of 99.3% for the core and 82.2% for the app. Lighthouse accessibility, best practices and SEO are all 100. Performance is 76 to 89 on the software adapter and 93 to 100 on the CPU path.',
       ],
     ],
     machine:
-      'Measured on 2026-10-11 on one laptop: an Intel Core i7-12700H under WSL2. The software numbers (SwiftShader, the CPU backend) come from Chromium 156, the GPU numbers from headless Chrome 154 on Windows: an NVIDIA GeForce RTX 3070 Ti Laptop and an Intel Iris Xe. I did not measure a mid-range desktop GPU.',
+      'Measured on one laptop, an Intel Core i7-12700H running WSL2, on 2026-10-11. The software numbers (SwiftShader, the CPU backend) come from Chromium 156, and the GPU numbers from headless Chrome 154 on Windows: an NVIDIA GeForce RTX 3070 Ti Laptop and an Intel Iris Xe. I did not measure a mid-range desktop GPU.',
     gapsLead:
       'From the stretch list I built none of the three: Deri’s complex image for earth return, sloped terrain and two parallel lines in a corridor.',
     gaps: [

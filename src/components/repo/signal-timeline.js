@@ -180,7 +180,7 @@ const signalTimeline = {
       ],
       [
         'Reload and keyboard',
-        'Reload the page: the drawing and the whole tree come back from session storage. The editor works with the keyboard alone: Add rectangle, then Tab to the shape and the arrow keys.',
+        'Reload the page, and the drawing and the whole tree come back from session storage. The editor works with the keyboard alone: hit Add rectangle, Tab to the shape, then use the arrow keys.',
       ],
     ],
     calls: [
@@ -213,27 +213,27 @@ const signalTimeline = {
       ],
       [
         '1.2 ms',
-        'Time to compute the patches after changing one entity in a 10,000 entity map, in Node (7.9 ms at 50,000). This is work after the call, and the 0.1 ms target does not cover it.',
+        'Time taken to calculate the patches after one entity changes in a map of 10,000 entities, in Node (7.9 ms at 50,000). This work happens after the call, and the 0.1 ms target does not cover it.',
       ],
       [
         '98.7x',
-        'How much smaller the heap is than with snapshots after 10,000 small edits on a state of 10,000 entities (26.62 MB against 2,626.62 MB). At 100 entities the history takes more memory than snapshots.',
+        'Heap reduction compared to snapshots after 10,000 small edits on a state of 10,000 entities (26.62 MB against 2,626.62 MB). At 100 entities, the history takes more memory than snapshots.',
       ],
       [
         '0.6 ms',
-        'Median of a jump to a random entry: a history of 10,000 entries over 1,000 entities, checkpointEvery 250, Node. Undoing one step takes 0.021 ms.',
+        'Median of a jump to a random entry: a history of 10,000 entries spanning 1,000 entities, checkpointEvery 250, Node. Undoing one step takes 0.021 ms.',
       ],
       [
         '662',
-        'Vitest tests: 548 in the library and 114 in the demo, plus 25 Cypress tests on the production build and 32 checks against the packed tarball. Line coverage: 98.4% for the library and 97.0% for the demo.',
+        'Vitest tests: 548 in the library and 114 in the demo, plus 25 Cypress tests on the production build and 32 checks against the packed tarball. Line coverage is 98.4% for the library and 97.0% for the demo.',
       ],
       [
         '100',
-        'Lighthouse accessibility on the production build of the demo, mobile and desktop. It only sees the empty editor, so Cypress also runs axe with shapes on the canvas.',
+        'Lighthouse accessibility score on the production build of the demo, for mobile and desktop. Since Lighthouse only loads the blank editor, Cypress also runs axe with shapes added to the canvas.',
       ],
     ],
     machine:
-      'Measured on 2026-10-04 on a laptop shared with other jobs, so small differences are noise: Intel Core i7-12700H, 15 GB RAM, WSL2, Node 24.21.0 and Chromium 153 (headless). The Node figures are more precise, because Chromium’s timer resolution is 0.1 ms.',
+      'Measured on 2026-10-04 on a laptop shared with other processes, so tiny differences in timings are just noise: Intel Core i7-12700H, 15 GB RAM, WSL2, Node 24.21.0 and Chromium 153 (headless). The Node numbers are more precise, because Chromium’s timer only has 0.1 ms resolution.',
     gapsLead:
       'Typed migration of persisted history, a Redux DevTools bridge and merging of remote changes were cut.',
     gaps: [

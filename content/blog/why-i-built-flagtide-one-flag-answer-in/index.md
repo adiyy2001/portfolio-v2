@@ -7,7 +7,7 @@ tags: ["angular","java","architecture","typescript"]
 ogImage: ./og.png
 ---
 
-I use feature flags as part of my daily stack. I've used them for gradual rollouts and fast rollback. But I've never been completely satisfied with the way I knew they were working.
+I use feature flags as part of my daily stack. I've used them for gradual rollouts and fast rollback. But I've never been completely satisfied with how well I knew how they work.
 
 I had two questions. How do you manage to change a flag state and have it reach thousands of open browsers in well under a second? And how do you know that Java on the server and TypeScript in the browser give the same answer for the same flag?
 
@@ -99,11 +99,11 @@ Target p95 propagation from commit to client: 300 ms
 
 ![Propagation latency of 38 ms at p50, 77 ms at p95 and 90 ms at p99, against a target of 300 ms at p95.](/blog-img/why-i-built-flagtide-one-flag-answer-in/benchmark.png)
 
-Test ran with 5,000 WebSocket clients across 2 instances, 30 changes and 150,000 frames. Measured p50 propagation at 38 ms, p95 at 77 ms and p99 at 90 ms. Percentage rollout evaluates in 0.412 µs on average in Node compared to a target of 5 µs.
+The test ran with 5,000 WebSocket clients across 2 instances, 30 changes and 150,000 frames. Measured propagation was 38 ms at p50, 77 ms at p95 and 90 ms at p99. A percentage rollout evaluates in 0.412 µs on average in Node, against a target of under 5 µs.
 
 This was run on a single laptop using WSL2. Both clients and servers were on the same machine. This is a useful smoke test but is not a capacity claim. I would not use these results to size a production cluster. Firefox and Safari were not tested.
 
-What I care about though is the margin. By having a target specified prior to the test it creates a comparison rather than a story I told afterwards.
+What I care about, though, is the margin. Because the target was set before the test, the result is a comparison rather than a story I told afterwards.
 
 ## What I left out and what comes next
 
