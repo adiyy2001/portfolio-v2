@@ -145,12 +145,12 @@ const fieldline = {
     description:
       'Electric and magnetic fields around high-voltage lines computed on the GPU with WebGPU: exposure contours and a phasing optimizer. Live demo, code and measured numbers.',
     meta: 'Fields around high-voltage lines',
-    lead: 'Real-time 3D visualization of the electric and magnetic fields around overhead high-voltage lines, computed on the GPU with WebGPU, with exposure contours, lateral profiles and a phase-arrangement optimizer.',
+    lead: 'Real-time 3D visualization of the electric and magnetic fields around overhead high-voltage lines, computed on the GPU with WebGPU. It includes exposure contours, lateral profiles and a phase-arrangement optimizer.',
     clip: 'Field lines over one 50 Hz cycle, the ground field with exposure contours, a phasing change and the lateral profile.',
     note: 'The 3D views need WebGPU, and without it a CPU path with a coarser grid takes over. The demo interface is in English.',
     why: [
-      'I work on software for high-voltage substations, and a question that keeps coming back is how strong the field under a line is when it passes near homes. I wanted to compute it properly, see its three-dimensional shape and check the numbers against analytic solutions instead of trusting a picture.',
-      'It is also a serious WebGPU compute project. The field evaluation, marching cubes and the field line tracer are compute passes, and a float64 TypeScript version of the same math is the reference they are tested against.',
+      'I work on software for high-voltage substations. A recurring question is how strong the field under a line is when it passes near homes. I wanted to calculate it properly, see the 3D shape of the field and check the numbers against analytic solutions instead of trusting a picture.',
+      'This is also a serious WebGPU compute project. Field evaluation, marching cubes and the field line tracer are compute passes, and a float64 TypeScript implementation of the same math is the reference they are tested against.',
     ],
     tryLead: 'The demo has six views in tabs and a panel with the line parameters.',
     features: [
@@ -182,22 +182,22 @@ const fieldline = {
     calls: [
       {
         name: 'A 3D field from a hanging conductor.',
-        text: 'Conductors are catenaries, not infinite parallel wires. Each conductor is cut into straight segments with uniform charge, the charges follow from matching the potential at one collocation point per segment, and the field comes from closed-form expressions. The matrix depends on the geometry only, so it is factored once with a real LU and every change of voltage or phasing reuses the factors.',
-        cost: 'The cost: the potential residual on the conductor surface is 0.27 to 0.42 percent inside the spans and up to 1.8 percent where the conductor kinks at a tower.',
+        text: 'Conductors are modeled as catenaries, not infinite parallel wires. Each conductor is segmented into straight pieces with uniform charge, and the charges come from matching the potential at one collocation point per segment. The field is computed from closed-form expressions. The matrix depends on geometry only, so it is factored once with a real LU decomposition, and every voltage or phasing change reuses the factors.',
+        cost: 'The cost: the potential residual on the conductor surface is 0.27 to 0.42 percent within the spans and up to 1.8 percent where the conductor kinks at a tower.',
         lost: 'What lost: a complex LU (twice the memory), Cholesky (the 3D collocation matrix is not exactly symmetric), an iterative GMRES and a Galerkin formulation.',
         adr: ['ADR 0002', adr('0002-charge-simulation-with-a-real-lu-factored-once')],
       },
       {
         name: 'Float32 on the GPU.',
-        text: 'A coordinate 450 m from the origin has a float32 spacing of 3e-5 m, 0.02 percent of the clamp radius. So segment ends and evaluation points are subtracted from the centre of the region in float64 on the CPU, and only the differences go to the shaders.',
-        cost: 'The cost: the error in the clamp zone is 6.5e-4 against a target of 1e-3, a factor of 1.5. Outside it the error is below 1.2e-4.',
-        lost: 'What lost: evaluating on the GPU in world coordinates (the error would show next to a conductor) and float32 emulation on the CPU (it would miss driver differences).',
+        text: 'A coordinate 450 m away from the origin has a float32 spacing of 3e-5 m, which is 0.02 percent of the clamp radius. So segment ends and evaluation points get subtracted from the centre of the region in float64 on the CPU, and only the differences are passed to the shaders.',
+        cost: 'The cost: the error in the clamp zone is 6.5e-4 against a target of 1e-3, a factor of 1.5. Away from the clamp zone, the error is below 1.2e-4.',
+        lost: 'Lost: GPU-side evaluation in world coordinates (the error would appear next to a conductor) and float32 emulation on the CPU (it would not account for driver differences).',
         adr: ['ADR 0022', adr('0022-field-backends-and-gpu-evaluation')],
       },
       {
         name: 'Knowing the numbers are right.',
-        text: 'Every layer is checked against something outside itself: an analytic solution, the 2D model that the 3D result must approach, a published study of limit heights and the float64 code that the GPU is compared with. The study is Bendík, Cenký and Eleschová, Electricity 2026, 7(2), 39 (CC BY 4.0), and the 2D model reproduces 13 of its 14 cases. The fourteenth, the Portal tower, is fitted and marked.',
-        cost: 'The cost: the study covers 2D, so the 3D model has no published reference, and I check it by its convergence to 2D. My limit heights come out 0.014 to 0.028 m below the published ones, and I did not isolate the cause.',
+        text: 'Every layer is validated against something external to itself: an analytic solution, the 2D model that the 3D result must approach, a published paper on limit heights and the float64 code the GPU is compared with. The paper is Bendík, Cenký and Eleschová, Electricity 2026, 7(2), 39 (CC BY 4.0), and the 2D model reproduces 13 of its 14 cases. The fourteenth, the Portal tower, is fitted and labeled.',
+        cost: 'The limitation: the study is only in 2D, so the 3D model has no published reference, and I validate it through its convergence to 2D. My limit heights are 0.014 to 0.028 m lower than the published ones, and I have not isolated why.',
         lost: 'What lost: an invented reference profile and a comparison with a commercial tool.',
         adr: ['ADR 0017', adr('0017-validation-against-a-published-reference')],
       },
@@ -235,7 +235,7 @@ const fieldline = {
     gaps: [
       [
         'Earth return and shield wires',
-        'Earth return and shield wire currents are ignored. The estimate for an unbalanced remainder of a full 1000 A is 0.2 µT at the ground, and leaving out the shield wires errs high for B.',
+        'Earth return and shield wire currents are neglected. The estimate for an unbalanced remainder of a full 1000 A gives 0.2 µT at the ground, and neglecting the shield wires overestimates B.',
       ],
       [
         'One line, flat ground',
@@ -243,7 +243,7 @@ const fieldline = {
       ],
       [
         'The CPU path',
-        'A full quality update on the CPU backend takes 241 to 429 ms at the median. Only the draft quality drag is under 200 ms.',
+        'A full quality update on the CPU backend takes 241 to 429 ms at the median. The draft quality drag is the only one below 200 ms.',
       ],
       [
         'One laptop',

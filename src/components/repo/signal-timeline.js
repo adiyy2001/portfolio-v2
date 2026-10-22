@@ -148,12 +148,12 @@ const signalTimeline = {
     description:
       'An Angular library with undo, transactions, a branching history tree and time travel for NgRx SignalStore. Live demo, code, npm and measured numbers.',
     meta: 'Undo and history for SignalStore',
-    lead: 'Undo, redo, transactions, a branching undo tree, history shared across stores and a time-travel panel for NgRx SignalStore. History is stored as patches, so memory stays small on large states.',
+    lead: 'Undo and redo, transactions, a branching undo tree, shared history across stores and a time-travel panel for NgRx SignalStore. History is kept as patches, so the memory footprint stays small on large states.',
     clip: 'Drawing shapes in the demo editor, undoing, branching the history, jumping between branches and scrubbing the timeline.',
     note: 'The demo interface is in English.',
     why: [
-      'I work with signals based Angular every day, and the diagram editors I build at work need undo that never loses a step. SignalStore already has linear undo (withUndoRedo in @ngrx-toolkit/core), and for many apps that is enough. An editor wants more. A change after an undo should not destroy the redo history, a gesture touching two stores should undo as one step, and moving through history should not save the document to a server again.',
-      'So this library starts where linear undo stops: a branching tree, transactions, history across several stores, and time travel that leaves side effects alone. Everything is written from scratch, and the demo is a small SVG editor made for this project.',
+      'I use signals based Angular daily, and the diagram editors I build at work require undo that never loses a step. SignalStore already has linear undo (withUndoRedo in @ngrx-toolkit/core), and linear undo is sufficient for many apps. An editor requires more. A change made after an undo should not clobber the redo history. A gesture that touches two stores should undo in one step. And moving through history should not save the document to a server again.',
+      'So this library picks up where linear undo leaves off: a branching tree, transactions, multi-store history and time travel that leaves side effects alone. It is all built from scratch, and the demo is a small SVG editor made specifically for this project.',
     ],
     tryLead:
       'The demo is a vector editor with a history panel: the entry tree, a timeline scrubber and a diff table.',
@@ -186,23 +186,23 @@ const signalTimeline = {
     calls: [
       {
         name: 'Effects must stay quiet during undo.',
-        text: 'An effect that saves the document runs after patchState, in the next change detection pass. A flag that is true only while the timeline writes the state is already false by then. So the timeline keeps a replay window that closes after the next render, which skipReplay and ignoreReplays read. The tests run four kinds of listener through undo, redo, jump and a live change, with and without zone.js, and pnpm negative-controls breaks the helpers on purpose to check that the tests notice.',
-        cost: 'The cost: undo belongs in event handlers and methods. A replay started from inside an effect closes its window one render too late, so the effects it triggers are not skipped.',
-        lost: 'What lost: a boolean set around patchState, which is already false for effects, and asking every effect to compare the state with the previous one.',
+        text: 'An effect that saves the document runs after patchState, during the next change detection pass. By then, a flag that is true only while the timeline is writing the state is already false. So the timeline maintains a replay window that closes after the next render, and skipReplay and ignoreReplays read from it. The tests run four kinds of listener through undo, redo, jump and a live change, with zone.js and without, and pnpm negative-controls breaks the helpers intentionally to check that the tests notice.',
+        cost: 'The price you pay: undo should live inside event handlers and methods. When you start a replay from within an effect, its window closes one render too late, so the effects it triggers are not skipped.',
+        lost: 'What lost: a boolean set around patchState (which is already false for effects) and asking each effect to compare the state to the previous one.',
         adr: ['ADR 0007', adr('0007-replay-marker-and-side-effects')],
       },
       {
         name: 'Recording has to stay cheap on large state.',
-        text: 'patchState is a free function, so the library cannot wrap it and records through watchState. Diffing a 10,000 entity map in that callback would scan it on every write. A new entry keeps only the before and after references, and the patches are computed in a microtask or on demand.',
-        cost: 'The cost: the work moves behind the call. The patch of one entity update in a 10,000 entity map takes about 1.2 ms in Node, because a diff has to look at every key. The 0.1 ms target does not hold for that work.',
+        text: 'patchState is a free function, so the library cannot wrap it and records changes through watchState instead. Diffing a 10,000 entity map in that callback would scan it on every write. A new entry just stores the before and after references, and the patches are calculated in a microtask or on demand.',
+        cost: 'The cost: the work moves behind the call. Computing the patch for a single entity update in a 10,000 entity map takes about 1.2 ms in Node, because the diff has to examine every key. The 0.1 ms target is not met for that work.',
         lost: 'What lost: an eager diff in the watcher (100 to 1,000 times over the target), a store.patch method in place of patchState, and storing snapshots only, where memory grows with the state on every change.',
         adr: ['ADR 0006', adr('0006-recording-through-watchstate-with-deferred-patches')],
       },
       {
         name: 'Jumping on a long history.',
-        text: 'Applying patches from the start is slow, and a snapshot per entry is large. A checkpoint every 250 entries, a reference to a structurally shared state and not a copy, bounds the walk.',
-        cost: 'The cost: maxEntries has to remove history without breaking the tree. The library drops the oldest leaf that is not on the path to the current entry, so whole branches can disappear.',
-        lost: 'What lost: a flat array of entries (no branches), a full snapshot per node (the memory cost the project exists to avoid) and recomputing from the root on every jump (correct, but slow).',
+        text: 'Applying patches from the beginning is slow, and a snapshot for each entry is bulky. A checkpoint every 250 entries bounds the walk, and a checkpoint is a reference to a structurally shared state, not a copy.',
+        cost: 'The tradeoff: maxEntries has to prune history without breaking the tree structure. The library prunes the oldest leaf that is not on the path to the current entry, so entire branches can disappear.',
+        lost: 'Lost: a flat array of entries (no branches), a full snapshot per node (the memory overhead this project exists to avoid) and recomputing from the root on every jump (correct, but slow).',
         adr: ['ADR 0005', adr('0005-history-tree-checkpoints-and-jumping')],
       },
     ],
@@ -247,11 +247,11 @@ const signalTimeline = {
       ],
       [
         'Persistence',
-        'Every save writes the whole history. Persisted history is validated by replaying its forward patches, but I do not check that an inverse patch really inverts its forward patch, so a hand edited payload can make an undo land on the wrong state.',
+        'Each save stores the entire history. Persisted history is validated by replaying its forward patches, but I do not verify that an inverse patch really undoes its forward patch. So if a payload was edited by hand, an undo can land on the wrong state.',
       ],
       [
         'A screen reader and a narrow screen',
-        'I tested the ARIA tree with axe and keyboard tests, not with a screen reader, and role tree on SVG is less uniformly supported than on HTML. The demo is built for a laptop, and shape names are small on a 360 px screen.',
+        'I ran axe and keyboard tests on the ARIA tree, but not a screen reader, and role tree on SVG is less consistently supported than on HTML. The demo was designed with a laptop in mind, and shape names are tiny on a 360 px screen.',
       ],
       [
         'Comparisons with other libraries',

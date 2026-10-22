@@ -143,12 +143,12 @@ const eventhorizon = {
     description:
       'A real-time WebGPU ray tracer for a Schwarzschild black hole: bent light, the photon ring and an accretion disk. Live demo, code and measured numbers.',
     meta: 'A black hole in real time',
-    lead: 'A real-time WebGPU ray tracer for a Schwarzschild black hole: bent light, the photon ring and an accretion disk with Doppler beaming and gravitational redshift, plus switches that show what each effect contributes.',
+    lead: 'A real-time WebGPU ray tracer of a Schwarzschild black hole: bent light, the photon ring and an accretion disk with Doppler beaming and gravitational redshift, plus toggles that show what each effect contributes.',
     clip: 'An orbit around the black hole, then Doppler beaming and lensing switched off and on with the split slider.',
     note: 'Without WebGPU the demo renders more slowly on the CPU in Web Workers. The demo interface is in English.',
     why: [
-      'My day job is software that generates single-line diagrams of high-voltage electrical substations: Angular and diagram rendering on the front end, Java 21 and Quarkus on the back end. This project is a deliberate change of scale from that: one scene, one equation and a result I can check against a textbook.',
-      'It is also a self-contained test of three things I wanted to do end to end: numerical integration, GPU programming and color science. Every pixel has to agree with general relativity, which makes the result easy to check and hard to fake. That is why the project has a float64 reference integrator that the tests, the parity runs and the fallback all share.',
+      'At my day job I work on software that generates single-line diagrams of high-voltage electrical substations: Angular and diagram rendering on the front end, Java 21 and Quarkus on the back end. This project is a deliberate change of scale from that: one scene, one equation and a result I can verify against a textbook.',
+      'It is also a self-contained test of three things I wanted to do end to end: numerical integration, GPU programming and color science. Every pixel has to agree with general relativity, which makes the output easy to check and hard to fake. That is why the project has a float64 reference integrator shared by the tests, the parity runs and the fallback renderer.',
     ],
     tryLead:
       'The demo is the black hole with a panel beside it, with the tabs Controls and Physics.',
@@ -181,23 +181,23 @@ const eventhorizon = {
     calls: [
       {
         name: 'One equation, one integrator, a float64 reference.',
-        text: 'The tracer integrates the vector geodesic equation with RK4 and a step that scales with the radius. The row I took keeps the shadow edge more than three orders of magnitude inside the 1e-4 target at about 108 steps per ray. The float32 shader is checked against the float64 reference and a Math.fround twin on the CPU, so the remaining error is rounding, not a porting mistake.',
-        cost: 'The cost: rays within 0.02 of the critical impact parameter wind around the hole and end in a direction set by the last digits, so float32 cannot agree with float64. The parity set leaves them out.',
+        text: 'The tracer integrates the vector geodesic equation with RK4 and a step that scales with the radius. The variant I chose keeps the shadow edge more than three orders of magnitude inside the 1e-4 target at about 108 steps per ray. The float32 shader is validated against both the float64 reference and a Math.fround twin on the CPU, so the remaining error is rounding, not a porting mistake.',
+        cost: 'The price: rays within 0.02 of the critical impact parameter spiral around the hole and end in a direction set by the last digits, so float32 cannot match float64 there. The parity set leaves them out.',
         lost: 'What lost: the Binet form, a Hamiltonian form (singular at the horizon and the poles) and a symplectic integrator (RK4 reaches the accuracy with simpler code).',
         adr: ['ADR 0002', adr('0002-geodesic-equation-form-and-integrator')],
       },
       {
         name: 'One sign decides which side of the disk is bright.',
-        text: 'The tracer runs backwards from the camera. A wrong sign of the angular momentum swaps the bright and dim sides and still looks plausible. The sign has hand-computed unit tests and a physical test: the side moving towards the camera must come out brighter and bluer. One factor g covers redshift, Doppler shift and time dilation, and the two switches multiply it by different parts.',
+        text: 'The tracer runs backwards from the camera. An incorrect sign of the angular momentum swaps the bright and dim sides but still looks plausible. The sign has hand-derived unit tests and a physical test: the side moving towards the camera must come out brighter and bluer. One factor g covers redshift, Doppler shift and time dilation, and the two switches multiply it by different parts.',
         cost: 'The cost: “Doppler beaming” removes the beaming and the transverse time dilation together, and the help text says so.',
         lost: 'What lost: a single “relativistic shift” switch and an angular momentum from the forward photon direction with no sign flip.',
         adr: ['ADR 0007', adr('0007-disk-model-and-redshift-factor')],
       },
       {
         name: 'Stars under strong lensing.',
-        text: 'Stars baked into a cubemap blur when lensing magnifies them, so stars are evaluated per ray at the final direction instead, and a star near the ring becomes an arc. A bug turned up on the way: hardware cube filtering returned half the value next to a face edge and drew faint dark hairlines in the preview video.',
+        text: 'Stars baked into a cubemap blur when lensing magnifies them. Instead, stars are evaluated per ray at the final direction, and a star near the ring becomes an arc. I also found a bug along the way: hardware cube filtering returned half the value next to a face edge and drew faint dark hairlines in the preview video.',
         cost: 'The cost: a star lookup is nine cell hashes for every ray that reaches the sky.',
-        lost: 'What lost: stars baked into the cubemap (blur instead of arcs) and a 1024² mipmapped cubemap (four times the memory for no gain on a smooth nebula).',
+        lost: 'Lost: stars baked into the cubemap (blur instead of arcs) and a 1024² mipmapped cubemap (quadruple the memory for no improvement on a smooth nebula).',
         adr: ['ADR 0012', adr('0012-background-and-hdr-chain-decisions')],
       },
     ],
@@ -233,11 +233,11 @@ const eventhorizon = {
     gaps: [
       [
         'Kerr and a free-falling observer',
-        'Both were optional. Each needs its own equations, parity run and ADR, and a half-checked mode would weaken the claim that every pixel agrees with the theory.',
+        'Both were optional. Each one requires its own set of equations, parity run and ADR, and a half-checked mode would weaken the claim that every pixel agrees with the theory.',
       ],
       [
         'A simple disk',
-        'Thin, opaque and isotropic, with no limb darkening, no Page and Thorne correction and no returning light. Thick disks and jets are out of scope.',
+        'Thin, opaque and isotropic, ignoring limb darkening. It does not include the Page and Thorne correction or any returning light. Thick disks and jets are out of scope.',
       ],
       [
         'ACES tone mapping',
@@ -249,7 +249,7 @@ const eventhorizon = {
       ],
       [
         'One laptop',
-        'The hardware numbers come from one laptop with a strong GPU, while the 60 frames target is for a mid-range card. The visual baselines come from SwiftShader. I have not run it on other GPUs, on Firefox or on Safari.',
+        'The hardware numbers are from one laptop with a powerful GPU, while the goal of 60 frames is for a mid-range card. SwiftShader provided the visual baselines. I have not tested it on other GPUs, Firefox or Safari.',
       ],
     ],
     next: 'First Kerr, as a separate mode, with a CPU reference before the shader. Then the visual baselines on a hardware GPU in CI, and a new demo recording on other adapters.',
