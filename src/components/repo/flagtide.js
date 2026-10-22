@@ -163,7 +163,7 @@ const flagtide = {
     features: [
       [
         'Flag toggle',
-        'Zet promo-banner af in de admin naar links. De banner verdwijnt uit de winkel rechts, hoewel de winkel luistert naar een andere instantie van een server.',
+        'Switch promo-banner off in the admin on the left. The banner leaves the shop on the right, although the shop listens to another server instance.',
       ],
       [
         'Percentage rollout',
