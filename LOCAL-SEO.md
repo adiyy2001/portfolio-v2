@@ -87,6 +87,14 @@ Source: Google Ads API Keyword Planner (`gsa kw`, exact average monthly searches
 
 The broad "projektowanie stron internetowych" (1900, comp 62) and "strona internetowa dla firmy" (480, comp 73) are national agency phrases; the home title carries them, but ranking there is a long-term goal. Titles, meta descriptions and FAQ questions of the home and service pages were changed to these phrases on 2026-10-26. "programista wrocław" is a job search, so the home title no longer leads with it. Recheck positions in Search Console on 2026-11-23.
 
+Second pass the same day, with the Ads API per page (URL plus seed ideas):
+
+- `/uslugi/strony-internetowe/`: title adds "projektowanie stron" for the low competition local pair "tworzenie stron wrocław" (170, comp 17) and "projektowanie stron wrocław" (140, comp 29); the description adds "strony www" and "strona wizytówka" (390, comp 48), with a FAQ answer for the wizytówka price.
+- `/uslugi/aplikacje-webowe/`: the description adds "system dla firmy" (90, comp 22); a FAQ answer covers "aplikacja webowa a strona internetowa" (50, comp 9) until the Poradnik article exists.
+- `/uslugi/dostepnosc-wcag/`: a FAQ answer for "dostępność cyfrowa" (480, comp 17) and "dostępność cyfrowa co to" (70, comp 23).
+- `/uslugi/utrzymanie/`: title uses "opieka nad stroną www" (140, comp 24) instead of "internetową" (140, comp 59); the description keeps the second form.
+- Not used: "opieka nad stroną wordpress" (110 plus 90 for "cena") until WordPress care is part of the offer; "strony internetowe cennik" (390) stays covered by `/uslugi/`; recruiter phrases have 10 to 30 searches.
+
 ## Audits, 2026-10-26
 
 Done with the `cro` and `ai-seo` skills on the live site after the quote form release. Ordered by expected effect.

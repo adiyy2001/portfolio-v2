@@ -10,7 +10,7 @@ export const services = {
       title: 'Aplikacje | na zamówienie.',
       seoTitle: 'Aplikacja webowa dla firmy na zamówienie, cena, Wrocław, Adrian Turbiński',
       description:
-        'Aplikacja webowa dla firmy z Wrocławia albo z całej Polski: panel klienta, rezerwacje, narzędzie wewnętrzne. Cena od 18 000 zł netto, front, back i wdrożenie od jednej osoby.',
+        'Aplikacja webowa albo system dla firmy na zamówienie: panel klienta, rezerwacje, narzędzie wewnętrzne. Wrocław i zdalnie, od 18 000 zł netto, całość od jednej osoby.',
       lead: 'Panel dla klientów, system rezerwacji albo narzędzie, które zastąpi arkusz krążący mailem. Robię całość: interfejs, serwer, bazę danych i wdrożenie.',
       body: 'Piszę w Angularze i TypeScripcie, serwer w Node.js, dane w PostgreSQL. Aplikacje od 2019 roku, także takie, w których jeden ekran rysuje setki elementów.',
       price: 'od 18 000 zł',
@@ -47,6 +47,10 @@ export const services = {
         [
           'Ile kosztuje aplikacja webowa?',
           'Pierwsza wersja zaczyna się od 18 000 zł netto. Cena rośnie z liczbą ról użytkowników, integracji i ekranów. Po rozmowie dostajesz wycenę na piśmie, z podziałem na etapy.',
+        ],
+        [
+          'Czym aplikacja webowa różni się od strony internetowej?',
+          'Strona internetowa głównie pokazuje treści: ofertę, cennik, kontakt. W aplikacji webowej ludzie pracują: logują się, wprowadzają dane, obsługują zamówienia, rezerwacje albo zgłoszenia. Działa w przeglądarce, więc nikt nie musi niczego instalować.',
         ],
         [
           'Ile trwa zrobienie aplikacji?',
@@ -134,9 +138,9 @@ export const services = {
       name: 'Strony internetowe',
       short: 'Strona firmowa, która ładuje się szybko i da się ją znaleźć.',
       title: 'Strony | skrojone na miarę.',
-      seoTitle: 'Strony internetowe Wrocław, tworzenie stron dla firm, Adrian Turbiński',
+      seoTitle: 'Strony internetowe Wrocław, tworzenie i projektowanie stron, Adrian Turbiński',
       description:
-        'Tworzenie i projektowanie stron internetowych dla firm z Wrocławia: szybkie, dostępne z klawiatury, z SEO i wizytówką Google. Strona firmowa od 3 500 zł netto.',
+        'Projektowanie i tworzenie stron www dla firm z Wrocławia, od strony wizytówki po stronę z blogiem. SEO, WCAG i Profil Firmy w Google w cenie. Od 3 500 zł netto.',
       lead: 'Strona firmowa, która otwiera się w sekundę, działa z klawiatury i czytnika ekranu i którą da się znaleźć w Google. Projekt, kod i wdrożenie.',
       body: 'Kod piszę od zera, bez ciężkich szablonów, więc strona nie zwalnia po roku. Ta strona, którą czytasz, ma 100 punktów wydajności w Lighthouse.',
       price: 'od 3 500 zł',
@@ -173,6 +177,10 @@ export const services = {
         [
           'Ile kosztuje strona internetowa dla firmy?',
           'Strona firmowa do 5 podstron kosztuje od 3 500 zł netto. Rozbudowana strona z blogiem albo w kilku językach od 7 000 zł netto. Domena i hosting to zwykle kilkaset złotych rocznie.',
+        ],
+        [
+          'Ile kosztuje strona wizytówka?',
+          'Prosta strona wizytówka, czyli jedna albo kilka podstron z ofertą i kontaktem, mieści się w cenie strony firmowej: od 3 500 zł netto.',
         ],
         [
           'Ile trwa zrobienie strony?',
@@ -297,6 +305,10 @@ export const services = {
       ],
       faq: [
         [
+          'Czym jest dostępność cyfrowa?',
+          'To takie zbudowanie strony albo aplikacji, żeby korzystały z niej także osoby niewidome, słabowidzące, niesłyszące i te, które obsługują komputer tylko klawiaturą. Miarą jest standard WCAG, w Polsce i w UE zwykle w wersji 2.1 na poziomie AA.',
+        ],
+        [
           'Kogo dotyczy Europejski akt o dostępności?',
           'Od 28 czerwca 2025 między innymi sklepów internetowych, bankowości, transportu pasażerskiego i usług telekomunikacyjnych dla konsumentów w UE. Mikroprzedsiębiorstwa świadczące usługi są z niego zwolnione.',
         ],
@@ -378,7 +390,7 @@ export const services = {
       name: 'Utrzymanie i rozwój',
       short: 'Aktualizacje, poprawki, kopie i nowe funkcje, także w cudzym kodzie.',
       title: 'Utrzymanie | i poprawki.',
-      seoTitle: 'Opieka nad stroną internetową i aplikacją, cennik, Adrian Turbiński',
+      seoTitle: 'Opieka nad stroną www i aplikacją, cennik, Adrian Turbiński',
       description:
         'Opieka nad stroną internetową i utrzymanie aplikacji webowych: aktualizacje, migracje Angulara, poprawki błędów, kopie zapasowe i nowe funkcje. Od 300 zł netto miesięcznie.',
       lead: 'Aktualizacje, poprawki błędów, kopie zapasowe i nowe funkcje. Także w aplikacjach, których nie pisałem, i w starszych wersjach Angulara.',
