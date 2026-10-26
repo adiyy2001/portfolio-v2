@@ -16,7 +16,7 @@ Texts to paste by hand into business directories and the Google Business Profile
 | Services page    | https://adrianturbinski.pl/uslugi/                                                   |
 | Main category    | the same as the GBP main category (check in business.google.com)                     |
 | Other categories | Usługi informatyczne, then whatever the directory offers closest to web design       |
-| Hours            | Adrian fills them in once, then copies the same hours everywhere                     |
+| Hours            | Mon to Fri 9:00 to 18:00, as in the Google Business Profile                          |
 | LinkedIn         | https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6                          |
 | Logo             | `static/favicon.svg`, GBP avatar PNG in `C:\Users\Adrian\Downloads\wizytowka-google` |
 
@@ -41,21 +41,21 @@ I design and build websites and web applications for small and mid-sized compani
 
 ## Directories, in order
 
-Free listings first. Adrian registers each one himself (e-mail confirmation or phone code), then marks the row.
+Free listings first. Status as of 2026-10-26.
 
-| Directory                       | Why                                                  | Link type           | Done |
-| ------------------------------- | ---------------------------------------------------- | ------------------- | ---- |
-| Bing Places                     | feeds Bing Maps and ChatGPT search; import from GBP  | listing             |      |
-| Apple Business Connect          | Apple Maps and Siri                                  | listing             |      |
-| Panorama Firm (panoramafirm.pl) | biggest Polish directory, ranks for "firma + miasto" | nofollow            |      |
-| pkt.pl                          | ranks for local queries, free basic listing          | nofollow            |      |
-| Aleo (aleo.com)                 | pulls CEIDG data, fix and complete it                | dofollow            |      |
-| Oferteo                         | inbound requests for quotes, free profile            | profile             |      |
-| Clutch                          | B2B buyers, reviews later                            | dofollow on profile |      |
-| GoodFirms                       | same audience as Clutch                              | profile             |      |
-| Cylex (cylex-polska.pl)         | citation consistency                                 | nofollow            |      |
-| Facebook page                   | NAP plus a link, used by Bing                        | profile             |      |
-| LinkedIn company page           | NAP, links to services                               | profile             |      |
+| Directory                       | Why                                                  | Link type           | Done                                                   |
+| ------------------------------- | ---------------------------------------------------- | ------------------- | ------------------------------------------------------ |
+| Bing Places                     | feeds Bing Maps and ChatGPT search; import from GBP  | listing             | done 26.10, GBP sync weekly                            |
+| Apple Business Connect          | Apple Maps and Siri                                  | listing             | skipped                                                |
+| Panorama Firm (panoramafirm.pl) | biggest Polish directory, ranks for "firma + miasto" | nofollow            | skipped                                                |
+| pkt.pl                          | ranks for local queries, free basic listing          | nofollow            | skipped                                                |
+| Aleo (aleo.com)                 | pulls CEIDG data, fix and complete it                | dofollow            | skipped                                                |
+| Oferteo                         | inbound requests for quotes, free profile            | profile             | skipped                                                |
+| Clutch                          | B2B buyers, reviews later                            | dofollow on profile | skipped (needs street address)                         |
+| GoodFirms                       | same audience as Clutch                              | profile             | skipped (requires AI tools section)                    |
+| Cylex (cylex-polska.pl)         | citation consistency                                 | nofollow            | skipped                                                |
+| Facebook page                   | NAP plus a link, used by Bing                        | profile             | done 26.10, facebook.com/profile.php?id=61596114922198 |
+| LinkedIn company page           | NAP, links to services                               | profile             | skipped, personal profile is used                      |
 
 Skip paid "premium" packages and directories that ask for a backlink in return.
 
@@ -70,6 +70,22 @@ One post a week, Tuesday morning, button "Więcej informacji" to the linked page
 5. We Wzorniku jest dziewięć przykładowych stron dla zmyślonych firm, między innymi kancelarii, kliniki stomatologicznej i palarni kawy. Każda ma własny krój i paletę. Możesz je przejrzeć, zanim zamówisz swoją. Link: /wzornik/
 
 After post 5, repeat the cycle with a fresh image, or post a finished client project.
+
+## Keywords, 2026-10-26
+
+Source: Google Ads Keyword Planner (inactive account, so volumes come in buckets of 50, 500 and 5,000 a month), Poland, Polish. Competition is the planner's ad index from 0 to 100, a rough proxy for organic difficulty. Raw export: `C:\Users\Adrian\Downloads\kw-ideas-1.csv`.
+
+| Page                          | Main phrase                             | Volume | Comp. | Also                                                                                                 |
+| ----------------------------- | --------------------------------------- | ------ | ----- | ---------------------------------------------------------------------------------------------------- |
+| Poradnik, article 1           | ile kosztuje strona internetowa         | 5000   | 52    | dla firmy, utrzymanie, wordpress, ze sklepem, w 2026                                                 |
+| `/uslugi/strony-internetowe/` | strony internetowe wrocław              | 500    | 48    | tworzenie stron internetowych wrocław, projektowanie stron internetowych wrocław, strony www wrocław |
+| `/uslugi/dostepnosc-wcag/`    | audyt wcag                              | 500    | 65    | audyt dostępności, audyt wcag cena, audyt wcag 2.1, audyt dostępności cyfrowej                       |
+| `/uslugi/aplikacje-webowe/`   | aplikacja webowa                        | 500    | 48    | aplikacja webowa cena, prosta aplikacja webowa                                                       |
+| `/uslugi/utrzymanie/`         | opieka nad stroną internetową           | 500    | 59    | ile kosztuje utrzymanie strony internetowej (500), opieka nad stroną cennik                          |
+| Poradnik, next article        | aplikacja webowa a strona internetowa   | 50     | 9     | aplikacja webowa co to (3), przykłady (10)                                                           |
+| Poradnik, industry article    | strona internetowa dla firmy budowlanej | 500    | 49    | firmy transportowej, dla małej firmy                                                                 |
+
+Titles, meta descriptions and FAQ questions of the home and service pages were changed to these phrases on 2026-10-26. "programista wrocław" is a job search, so the home title no longer leads with it. Recheck positions in Search Console on 2026-11-23.
 
 ## Audits, 2026-10-26
 
