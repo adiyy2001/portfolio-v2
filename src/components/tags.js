@@ -25,7 +25,7 @@ const copy = {
   },
 };
 
-function Tag({ n, tilt, offset, children }) {
+export function Tag({ n, tilt, offset, children }) {
   const reduce = useReducedMotion();
   const rotateX = useSpring(0, spring.tilt);
   const rotateY = useSpring(0, spring.tilt);

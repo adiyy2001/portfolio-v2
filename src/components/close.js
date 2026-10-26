@@ -5,6 +5,7 @@ import Magnet from './magnet';
 import Reveal from './reveal';
 import Split from './split';
 import { routes, tie } from '../i18n';
+import { phone } from '../services';
 import { duration, ease, instant } from '../motion';
 
 const mail = 'adrian.turbinski@gmail.com';
@@ -115,6 +116,11 @@ export default function Close({ lang, edition = 'rec' }) {
           <a className="close__mail" href={mailto}>
             {mail}
           </a>
+          {cli && (
+            <a className="close__tel" href={phone.href}>
+              {lang === 'pl' ? phone.label : phone.intl}
+            </a>
+          )}
           <p className="close__hint">{tie(text.hint)}</p>
           <div className="cta">
             <Magnet className="btn" href={mailto}>

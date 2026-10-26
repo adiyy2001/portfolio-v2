@@ -4,6 +4,7 @@ import { m, useReducedMotion } from 'framer-motion';
 import { usePosts } from './posts';
 import { openConsent } from '../consent';
 import { blogPath, privacyPath, routes, ui } from '../i18n';
+import { phone } from '../services';
 import { duration, ease, instant } from '../motion';
 import { letters, needle, thread } from '../wordmark';
 
@@ -48,6 +49,7 @@ export default function Footer({ lang }) {
       </svg>
       <p>{t.footerName}</p>
       <p className="mini__links">
+        <Link to={routes.services[lang]}>{t.footerServices}</Link>
         <Link to={routes.work[lang]}>{t.footerWork}</Link>
         {hasBlog && (
           <Link to={blogPath} hrefLang="en">
@@ -55,6 +57,7 @@ export default function Footer({ lang }) {
           </Link>
         )}
         <a href="mailto:adrian.turbinski@gmail.com">{t.footerMail}</a>
+        <a href={phone.href}>{lang === 'pl' ? phone.label : phone.intl}</a>
         <a href="https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6" rel="noopener">
           LinkedIn
         </a>

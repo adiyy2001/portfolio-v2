@@ -42,3 +42,15 @@ jobs:
           path: public
       - id: deployment
         uses: actions/deploy-pages@v5
+      - name: Notify IndexNow
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: cd3153f3d154d9d5889f96c15325cdf7
+        run: |
+          grep -o '<loc>[^<]*</loc>' public/sitemap-0.xml | sed 's#</\?loc>##g' \
+            | jq -R . | jq -s --arg key "$INDEXNOW_KEY" \
+              '{host: "adrianturbinski.pl", key: $key, keyLocation: "https://adrianturbinski.pl/\($key).txt", urlList: .}' \
+            > indexnow.json
+          sleep 60
+          curl -sS -o /dev/null -w 'IndexNow %{http_code}\n' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' --data @indexnow.json

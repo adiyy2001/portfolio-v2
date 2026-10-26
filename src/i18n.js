@@ -10,6 +10,11 @@ export const routes = {
   'signal-timeline': { pl: '/archive/signal-timeline/', en: '/en/archive/signal-timeline/' },
   eventhorizon: { pl: '/archive/eventhorizon/', en: '/en/archive/eventhorizon/' },
   fieldline: { pl: '/archive/fieldline/', en: '/en/archive/fieldline/' },
+  services: { pl: '/uslugi/', en: '/en/services/' },
+  'svc-apps': { pl: '/uslugi/aplikacje-webowe/', en: '/en/services/web-applications/' },
+  'svc-sites': { pl: '/uslugi/strony-internetowe/', en: '/en/services/websites/' },
+  'svc-wcag': { pl: '/uslugi/dostepnosc-wcag/', en: '/en/services/wcag-accessibility/' },
+  'svc-care': { pl: '/uslugi/utrzymanie/', en: '/en/services/maintenance/' },
 };
 
 export const ui = {
@@ -24,6 +29,7 @@ export const ui = {
     footerName: 'Adrian Turbiński, Wrocław',
     footerMail: 'E-mail',
     footerWork: 'Projekty',
+    footerServices: 'Usługi',
     footerPrivacy: 'Prywatność',
     footerConsent: 'Ustawienia statystyk',
     words: {
@@ -39,6 +45,11 @@ export const ui = {
       eventhorizon: 'eventhorizon',
       fieldline: 'fieldline',
       blog: 'blog',
+      services: 'usługi',
+      'svc-apps': 'aplikacje',
+      'svc-sites': 'strony',
+      'svc-wcag': 'dostępność',
+      'svc-care': 'utrzymanie',
     },
   },
   en: {
@@ -52,6 +63,7 @@ export const ui = {
     footerName: 'Adrian Turbiński, Wrocław',
     footerMail: 'Email',
     footerWork: 'Projects',
+    footerServices: 'Services',
     footerPrivacy: 'Privacy',
     footerConsent: 'Statistics settings',
     words: {
@@ -67,6 +79,11 @@ export const ui = {
       eventhorizon: 'eventhorizon',
       fieldline: 'fieldline',
       blog: 'blog',
+      services: 'services',
+      'svc-apps': 'web apps',
+      'svc-sites': 'websites',
+      'svc-wcag': 'accessibility',
+      'svc-care': 'upkeep',
     },
   },
 };
