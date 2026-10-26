@@ -12,7 +12,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {
-        excludes: ['/dla-klienta/', '/en/for-clients/'],
+        excludes: ['/dla-klienta/', '/en/for-clients/', '/wycena/wyslano/', '/en/quote/sent/'],
         resolvePages: ({ allSitePage }) => [...allSitePage.nodes, { path: '/wzornik/' }],
       },
     },

@@ -12,16 +12,13 @@ import Tags from '../../components/tags';
 import Wzornik from '../../components/wzornik';
 import { tie } from '../../i18n';
 
-const mail = 'adrian.turbinski@gmail.com';
-
 const copy = {
   title: 'From the first call | to production.',
   lead: 'I build whole web apps for companies: front end, back end and deployment. Usable by everyone, keyboard and screen reader included.',
   lead2:
     'I take on contracts as a freelancer and invoice B2B. From the quote through launch to maintenance, you talk to me.',
-  cta: 'Tell me about the project',
+  cta: 'Get a quote',
   link: 'See the project for a tailor',
-  subject: 'Project',
 };
 
 export default function Client() {
@@ -40,7 +37,7 @@ export default function Client() {
           {tie(copy.lead2)}
         </p>
         <div className="cta" data-rise style={{ '--r': 2 }}>
-          <Magnet className="btn" href={`mailto:${mail}?subject=${copy.subject}`}>
+          <Magnet className="btn" href="#quote" data-cta="hero-quote">
             {tie(copy.cta)}
           </Magnet>
           <a className="link" href="#tailorcloth">

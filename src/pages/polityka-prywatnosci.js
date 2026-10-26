@@ -19,9 +19,21 @@ export default function Privacy() {
         </p>
         <h2>Ta strona</h2>
         <p>
-          Strona nie ma formularzy. Hosting, GitHub Pages, prowadzi standardowe logi serwera z
-          adresami IP według własnej polityki prywatności. Wejścia liczę GoatCounterem, licznikiem
-          bez ciasteczek, który nie zapisuje danych osobowych.
+          Hosting, GitHub Pages, prowadzi standardowe logi serwera z adresami IP według własnej
+          polityki prywatności. Wejścia i kliknięcia w przyciski kontaktu liczę GoatCounterem,
+          licznikiem bez ciasteczek, który nie zapisuje danych osobowych.
+        </p>
+        <h2>Formularz wyceny</h2>
+        <p>
+          Formularz przesyła to, co w nim wpiszesz (usługę, budżet, opis projektu i e-mail lub
+          telefon), przez Cloudflare Workers do mojego prywatnego czatu w Telegramie. Nie zapisuję
+          tych danych w żadnej bazie. Cloudflare i Telegram przetwarzają je jako dostawcy według
+          własnych polityk prywatności, także poza Europejskim Obszarem Gospodarczym.
+        </p>
+        <p>
+          Używam tych danych tylko do odpowiedzi na zapytanie i przygotowania oferty. Podstawą są
+          działania na Twoje żądanie przed zawarciem umowy (art. 6 ust. 1 lit. b RODO). Podanie
+          kontaktu jest dobrowolne, ale bez niego nie odpowiem.
         </p>
         <h2>Google Analytics</h2>
         <p>
@@ -69,6 +81,6 @@ export const Head = () => (
     lang="pl"
     path="/polityka-prywatnosci/"
     title="Polityka prywatności, Adrian Turbiński"
-    description="Co strona i narzędzia do publikacji Adriana Turbińskiego robią z danymi: GoatCounter, Google Analytics za zgodą i prawa osób."
+    description="Co strona i narzędzia do publikacji Adriana Turbińskiego robią z danymi: formularz wyceny, GoatCounter, Google Analytics za zgodą i prawa osób."
   />
 );

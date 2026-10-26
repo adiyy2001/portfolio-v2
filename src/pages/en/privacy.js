@@ -19,9 +19,21 @@ export default function Privacy() {
         </p>
         <h2>This website</h2>
         <p>
-          The website has no forms. Its host, GitHub Pages, keeps standard server logs, including IP
-          addresses, under its own privacy statement. I count visits with GoatCounter, a cookieless
-          counter that stores no personal data.
+          Its host, GitHub Pages, keeps standard server logs, including IP addresses, under its own
+          privacy statement. I count visits and clicks on the contact buttons with GoatCounter, a
+          cookieless counter that stores no personal data.
+        </p>
+        <h2>Quote form</h2>
+        <p>
+          The form sends what you type (service, budget, project description and email or phone)
+          through Cloudflare Workers to my private Telegram chat. I do not store this data in any
+          database. Cloudflare and Telegram process it as providers under their own privacy
+          statements, including outside the European Economic Area.
+        </p>
+        <p>
+          I use this data only to answer your request and prepare an offer. The legal basis is steps
+          taken at your request before entering into a contract (Art. 6(1)(b) GDPR). Giving a
+          contact is voluntary, but without it I cannot reply.
         </p>
         <h2>Google Analytics</h2>
         <p>
