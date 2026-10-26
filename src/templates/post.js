@@ -106,7 +106,7 @@ export default function Post({ data }) {
           <Link className="link" to={routes.rec.en}>
             For recruiters
           </Link>
-          <Link className="link" to={routes.cli.en}>
+          <Link className="link" to={routes.home.en}>
             For clients
           </Link>
           <Link className="link" to={blogPath}>

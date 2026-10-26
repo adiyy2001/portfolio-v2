@@ -108,9 +108,6 @@ export default function NotFound() {
         <Link className="link" to={routes.rec.pl}>
           Szyte dla rekrutera
         </Link>
-        <Link className="link" to={routes.cli.pl}>
-          Szyte dla klienta
-        </Link>
       </div>
       <div className="nf-en" lang="en" data-rise style={{ '--r': 3 }}>
         <h2 className="nf-en__head">No such page.</h2>
@@ -124,7 +121,7 @@ export default function NotFound() {
           <Link className="link" to={routes.rec.en} hrefLang="en">
             Cut for recruiters
           </Link>
-          <Link className="link" to={routes.cli.en} hrefLang="en">
+          <Link className="link" to={routes.home.en} hrefLang="en">
             Cut for clients
           </Link>
         </div>

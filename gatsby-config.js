@@ -12,6 +12,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {
+        excludes: ['/dla-klienta/', '/en/for-clients/'],
         resolvePages: ({ allSitePage }) => [...allSitePage.nodes, { path: '/wzornik/' }],
       },
     },

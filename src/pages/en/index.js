@@ -1,50 +1,59 @@
 import React from 'react';
+import Case from '../../components/case';
+import Close from '../../components/close';
+import Fit from '../../components/fit';
 import Hero from '../../components/hero';
-import Rack from '../../components/rack';
+import Magnet from '../../components/magnet';
+import Scene from '../../components/scene';
 import Seo from '../../components/seo';
-import { routes, tie } from '../../i18n';
+import Steps from '../../components/steps';
+import Tags from '../../components/tags';
+import Wzornik from '../../components/wzornik';
+import { tie } from '../../i18n';
 
-const labels = [
-  {
-    to: routes.rec.en,
-    tilt: -3,
-    for: 'Cut for',
-    who: 'recruiters',
-    what: 'Experience, stack and a printable resume.',
-    go: 'Open',
-    note: ['from', 'LinkedIn?'],
-  },
-  {
-    to: routes.cli.en,
-    tilt: 2.4,
-    for: 'Cut for',
-    who: 'clients',
-    what: 'What I build, how I work, how to start.',
-    go: 'Open',
-    note: ['got a', 'project?'],
-  },
-];
+const mail = 'adrian.turbinski@gmail.com';
 
-export default function Home() {
+const copy = {
+  title: 'From the first call | to production.',
+  lead: 'I build whole web apps for companies: front end, back end and deployment. Usable by everyone, keyboard and screen reader included.',
+  lead2:
+    'I take on contracts as a freelancer and invoice B2B. From the quote through launch to maintenance, you talk to me.',
+  cta: 'Tell me about the project',
+  link: 'See the project for a tailor',
+  subject: 'Project',
+};
+
+export default function Client() {
   return (
-    <Hero
-      id="home-h"
-      sr="Adrian Turbiński, front-end and full-stack developer. "
-      title="Made to | measure."
-      size="home"
-      aside={<Rack labels={labels} />}>
-      <p className="lead" data-rise style={{ '--r': 0 }}>
-        {tie(
-          'Adrian Turbiński, front-end and full-stack developer from Wrocław. Building web apps since 2019, both as an employee and as a contractor.',
-        )}
-      </p>
-      <h2 className="ask" data-rise style={{ '--r': 1 }}>
-        Who&apos;s looking?
-      </h2>
-      <p className="ask__sub" data-rise style={{ '--r': 2 }}>
-        This site comes in two cuts. Pick yours.
-      </p>
-    </Hero>
+    <>
+      <Hero
+        id="cli-h"
+        sr="Adrian Turbiński, "
+        title={copy.title}
+        size="cli"
+        aside={<Tags lang="en" />}>
+        <p className="lead" data-rise style={{ '--r': 0 }}>
+          {tie(copy.lead)}
+        </p>
+        <p className="lead2" data-rise style={{ '--r': 1 }}>
+          {tie(copy.lead2)}
+        </p>
+        <div className="cta" data-rise style={{ '--r': 2 }}>
+          <Magnet className="btn" href={`mailto:${mail}?subject=${copy.subject}`}>
+            {tie(copy.cta)}
+          </Magnet>
+          <a className="link" href="#tailorcloth">
+            {tie(copy.link)}
+          </a>
+        </div>
+      </Hero>
+      <Scene lang="en" />
+      <Fit lang="en" />
+      <Case lang="en" />
+      <Wzornik lang="en" />
+      <Steps lang="en" />
+      <Close lang="en" edition="cli" />
+    </>
   );
 }
 
@@ -52,7 +61,7 @@ export const Head = () => (
   <Seo
     lang="en"
     view="home"
-    title="Front-end and Angular developer in Wrocław, Adrian Turbiński"
-    description="Front-end and full-stack developer from Wrocław. Angular, TypeScript, Node.js, web apps, websites and WCAG accessibility for companies. Editions for recruiters and for clients."
+    title="Freelance web developer in Wrocław: apps and sites, Adrian Turbiński"
+    description="Freelance developer in Wrocław: web apps and websites for companies, from the quote to maintenance. Front end, back end, deployment and WCAG accessibility."
   />
 );

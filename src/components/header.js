@@ -18,17 +18,17 @@ export default function Header({ lang, view }) {
           </g>
         </svg>
       </Link>
-      {view !== 'home' && (
-        <nav className="ed" aria-label={t.edAria}>
-          <span className="ed__for">{t.edFor}</span>
-          <Link to={routes.rec[lang]} aria-current={view === 'rec' ? 'page' : undefined}>
-            {t.edRec}
-          </Link>
-          <Link to={routes.cli[lang]} aria-current={view === 'cli' ? 'page' : undefined}>
-            {t.edCli}
-          </Link>
-        </nav>
-      )}
+      <nav className="ed" aria-label={t.edAria}>
+        <span className="ed__for">{t.edFor}</span>
+        <Link to={routes.rec[lang]} aria-current={view === 'rec' ? 'page' : undefined}>
+          {t.edRec}
+        </Link>
+        <Link
+          to={routes.home[lang]}
+          aria-current={view === 'home' || view === 'cli' ? 'page' : undefined}>
+          {t.edCli}
+        </Link>
+      </nav>
       {hasBlog && (
         <Link
           className="top__blog"
