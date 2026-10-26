@@ -1,6 +1,7 @@
 import React from 'react';
 import { withPrefix } from 'gatsby';
 import { siteMetadata } from './gatsby-config';
+import { consentKey } from './src/consent';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';
 
@@ -25,8 +26,26 @@ const counter = code => (
   />
 );
 
+const consentDefaults = id => `
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments)}
+var stored=null;try{stored=localStorage.getItem('${consentKey}')}catch(e){}
+gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:stored==='granted'?'granted':'denied',wait_for_update:500});
+gtag('set','ads_data_redaction',true);
+gtag('js',new Date());
+gtag('config','${id}');
+`;
+
+const analytics = id => [
+  <script key="gtag-consent" dangerouslySetInnerHTML={{ __html: consentDefaults(id) }} />,
+  <script key="gtag" async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} />,
+];
+
 export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
-  if (siteMetadata.goatcounter) setPostBodyComponents([counter(siteMetadata.goatcounter)]);
+  setPostBodyComponents([
+    ...(siteMetadata.goatcounter ? [counter(siteMetadata.goatcounter)] : []),
+    ...(siteMetadata.analytics ? analytics(siteMetadata.analytics) : []),
+  ]);
   setHeadComponents([
     <link
       key="font-display"

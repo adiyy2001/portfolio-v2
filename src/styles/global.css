@@ -1300,6 +1300,64 @@ html[lang='en'] .title--home {
   background-size: 100% 1px;
 }
 
+.mini__consent {
+  padding: 4px 0;
+  border: 0;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: background-size 0.35s var(--ease);
+}
+
+.mini__consent:hover,
+.mini__consent:focus-visible {
+  background-size: 100% 1px;
+}
+
+.consent {
+  position: fixed;
+  inset: auto var(--pad) var(--pad) auto;
+  z-index: 80;
+  display: grid;
+  gap: 18px;
+  width: min(440px, calc(100vw - 2 * var(--pad)));
+  padding: 22px 24px;
+  background: var(--wool-deep);
+  color: var(--chalk);
+  box-shadow:
+    inset 0 0 0 1px rgba(233, 239, 246, 0.18),
+    0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.consent__text {
+  font: 400 0.95rem/1.5 var(--text);
+}
+
+.consent__text a {
+  color: var(--chalk-blue);
+}
+
+.consent__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.consent__actions .btn {
+  flex: 1 1 auto;
+  padding: 14px 18px;
+  border: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 899px) {
+  .consent {
+    inset: auto 12px 12px;
+    width: auto;
+  }
+}
+
 .swap {
   position: fixed;
   left: 0;

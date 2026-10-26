@@ -19,9 +19,22 @@ export default function Privacy() {
         </p>
         <h2>This website</h2>
         <p>
-          The website sets no cookies and has no forms. Its host, GitHub Pages, keeps standard
-          server logs, including IP addresses, under its own privacy statement. I count visits with
-          GoatCounter, a cookieless counter that stores no personal data.
+          The website has no forms. Its host, GitHub Pages, keeps standard server logs, including IP
+          addresses, under its own privacy statement. I count visits with GoatCounter, a cookieless
+          counter that stores no personal data.
+        </p>
+        <h2>Google Analytics</h2>
+        <p>
+          If you agree in the banner, Google Analytics 4 from Google Ireland Limited sets the
+          cookies _ga and _ga_YPZS4964X7 for up to two years, so I can see which pages get read and
+          where visitors come from. The legal basis is your consent (Article 6(1)(a) GDPR). Google
+          may process the data in the United States under the EU-US Data Privacy Framework. I keep
+          the reports for 14 months, and advertising features stay off.
+        </p>
+        <p>
+          Until you agree, Google Analytics only receives cookieless signals without identifiers.
+          You can change your choice at any time with Statistics settings in the footer; withdrawing
+          consent removes the cookies.
         </p>
         <h2>My publishing tools</h2>
         <p>
@@ -45,7 +58,7 @@ export default function Privacy() {
           contact@adrianturbinski.pl. You can also complain to the Polish data protection authority
           (UODO).
         </p>
-        <p>Last updated: 3 October 2026.</p>
+        <p>Last updated: 26 October 2026.</p>
       </section>
     </>
   );

@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
 import { usePosts } from './posts';
-import { blogPath, routes, ui } from '../i18n';
+import { openConsent } from '../consent';
+import { blogPath, privacyPath, routes, ui } from '../i18n';
 import { duration, ease, instant } from '../motion';
 import { letters, needle, thread } from '../wordmark';
 
@@ -60,6 +61,10 @@ export default function Footer({ lang }) {
         <a href="https://github.com/adiyy2001" rel="noopener">
           GitHub
         </a>
+        <Link to={privacyPath[lang]}>{t.footerPrivacy}</Link>
+        <button type="button" className="mini__consent" onClick={openConsent}>
+          {t.footerConsent}
+        </button>
       </p>
     </footer>
   );
