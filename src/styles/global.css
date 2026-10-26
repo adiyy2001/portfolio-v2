@@ -1456,7 +1456,7 @@ html[lang='en'] .title--home {
 
 @keyframes rise {
   from {
-    opacity: 0;
+    opacity: 0.01;
     transform: translateY(18px);
   }
 }

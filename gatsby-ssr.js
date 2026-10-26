@@ -58,6 +58,14 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       crossOrigin="anonymous"
     />,
     <link
+      key="font-lead"
+      rel="preload"
+      href={font('bespoke-serif-500')}
+      as="font"
+      type="font/woff2"
+      crossOrigin="anonymous"
+    />,
+    <link
       key="font-text"
       rel="preload"
       href={font('schibsted-grotesk')}
