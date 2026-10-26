@@ -36,6 +36,8 @@ gtag('js',new Date());
 gtag('config','${id}');
 `;
 
+const consentKnown = `try{if(localStorage.getItem('${consentKey}'))document.documentElement.classList.add('consent-known')}catch(e){}`;
+
 const analytics = id => [
   <script key="gtag-consent" dangerouslySetInnerHTML={{ __html: consentDefaults(id) }} />,
   <script key="gtag" async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} />,
@@ -64,5 +66,6 @@ export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       crossOrigin="anonymous"
     />,
     <style key="font-faces" dangerouslySetInnerHTML={{ __html: faces() }} />,
+    <script key="consent-known" dangerouslySetInnerHTML={{ __html: consentKnown }} />,
   ]);
 };
