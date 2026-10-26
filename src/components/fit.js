@@ -12,6 +12,7 @@ const copy = {
   pl: {
     id: 'dostepnosc',
     title: 'Pasuje na każdego.',
+    label: 'Dostępność WCAG',
     lead: 'Sprawdzam i poprawiam aplikacje pod WCAG 2.1 na poziomie AA: obsługa z klawiatury, czytniki ekranu, kontrast, fokus, formularze.',
     body: 'Robiłem to w interfejsach pełnych diagramów. Od 28 czerwca 2025 Europejski akt o dostępności obejmuje w UE między innymi sklepy internetowe i bankowość.',
     cta: 'Zapytaj o dostępność',
@@ -29,6 +30,7 @@ const copy = {
   en: {
     id: 'accessibility',
     title: 'Fits everyone.',
+    label: 'WCAG accessibility',
     lead: 'I check and fix apps against WCAG 2.1 level AA: keyboard use, screen readers, contrast, focus, forms.',
     body: "I've done it with diagram-heavy interfaces. Since 28 June 2025 the European Accessibility Act covers banking and online shops across the EU amongst other services.",
     cta: 'Ask about accessibility',
@@ -80,6 +82,7 @@ export default function Fit({ lang }) {
                 />
               </svg>
             </m.span>
+            <span className="h2__label">{t.label}</span>
           </h2>
           <p className="fit__lead">{tie(t.lead)}</p>
           <p className="fit__body">{tie(t.body)}</p>

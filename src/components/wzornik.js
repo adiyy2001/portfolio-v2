@@ -55,6 +55,7 @@ const copy = {
   pl: {
     id: 'wzornik',
     title: 'Wzornik.',
+    label: 'Przykładowe strony dla firm',
     lead: 'Dziewięć przykładowych stron dla zmyślonych firm z różnych branż. Każda skrojona inaczej i każda działa.',
     note: 'firmy zmyślone, projekty moje',
     who: 'Dla kogo',
@@ -163,6 +164,7 @@ const copy = {
   en: {
     id: 'swatch-book',
     title: 'Swatch book.',
+    label: 'Sample websites for companies',
     lead: 'Nine sample websites for made-up businesses in different trades. Each one cut differently, and each one works.',
     note: 'made-up businesses, my designs',
     who: "Who it's for",
@@ -418,6 +420,7 @@ export default function Wzornik({ lang }) {
       <div className="sec-head">
         <h2 className="h2" id="wz-h">
           <Split text={t.title} onView />
+          <span className="h2__label">{t.label}</span>
         </h2>
         <p className="sec-head__side">{tie(t.lead)}</p>
       </div>

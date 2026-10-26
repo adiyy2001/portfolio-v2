@@ -2,9 +2,20 @@ import React from 'react';
 import Skew from './skew';
 import Split from './split';
 
-export default function Hero({ id, sr, title, size, titleClass, contact, aside, children }) {
+export default function Hero({
+  id,
+  sr,
+  kicker,
+  title,
+  size,
+  titleClass,
+  contact,
+  aside,
+  children,
+}) {
   return (
     <section className={`hero hero--${size}`} aria-labelledby={id}>
+      {kicker && <p className="hero__kicker">{kicker}</p>}
       <h1 id={id} tabIndex={-1}>
         {sr && <span className="sr">{sr}</span>}
         <Skew>

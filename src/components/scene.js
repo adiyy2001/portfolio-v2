@@ -61,6 +61,7 @@ const copy = {
   pl: {
     id: 'przod-tyl',
     title: 'Przód i tył szyję sam.',
+    label: 'Front-end, back-end i wdrożenie',
     lead: 'W krawiectwie przód i tył to dwie części kroju. W aplikacji też. Zszywam je w jedną całość.',
     front: 'przód',
     back: 'tył',
@@ -73,6 +74,7 @@ const copy = {
   en: {
     id: 'front-back',
     title: 'I sew the front and the back.',
+    label: 'Front end, back end and deployment',
     lead: 'In tailoring, the front and the back are two pattern pieces. In an app too. I stitch them into one.',
     front: 'front',
     back: 'back',
@@ -266,6 +268,7 @@ export default function Scene({ lang }) {
         <div className="sec-head">
           <h2 className="h2" id="scene-h">
             <Split text={t.title} onView />
+            <span className="h2__label">{t.label}</span>
           </h2>
           <p className="sec-head__side">{tie(t.lead)}</p>
         </div>

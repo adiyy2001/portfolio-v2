@@ -13,6 +13,7 @@ import Wzornik from '../../components/wzornik';
 import { tie } from '../../i18n';
 
 const copy = {
+  kicker: 'Websites and web apps for companies, Wrocław and remote',
   title: 'From the first call | to production.',
   lead: 'I build whole web apps for companies: front end, back end and deployment. Usable by everyone, keyboard and screen reader included.',
   lead2:
@@ -27,6 +28,7 @@ export default function Client() {
       <Hero
         id="cli-h"
         sr="Adrian Turbiński, "
+        kicker={copy.kicker}
         title={copy.title}
         size="cli"
         aside={<Tags lang="en" />}>

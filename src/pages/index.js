@@ -14,6 +14,7 @@ import Wzornik from '../components/wzornik';
 import { tie } from '../i18n';
 
 const copy = {
+  kicker: 'Strony i aplikacje dla firm, Wrocław i zdalnie',
   title: 'Od pierwszej rozmowy | do produkcji.',
   lead: 'Robię całe aplikacje webowe dla firm: front, back i wdrożenie. Dostępne dla każdego, także z klawiatury i czytnika ekranu.',
   lead2:
@@ -28,6 +29,7 @@ export default function Client() {
       <Hero
         id="cli-h"
         sr="Adrian Turbiński, "
+        kicker={copy.kicker}
         title={copy.title}
         size="cli"
         aside={<Tags lang="pl" />}>

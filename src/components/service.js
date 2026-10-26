@@ -25,6 +25,7 @@ const copy = {
     faqTitle: 'Pytania.',
     moreTitle: 'Inne usługi.',
     rackTitle: 'Cennik na wieszaku.',
+    rackLabel: 'Ceny usług',
     rackLead: 'Ceny od, netto, dla typowego zakresu. Dokładną wycenę dostajesz na piśmie.',
     all: 'Wszystkie usługi i ceny',
     price: 'Cena',
@@ -40,6 +41,7 @@ const copy = {
     faqTitle: 'Questions.',
     moreTitle: 'Other services.',
     rackTitle: 'Prices on the rack.',
+    rackLabel: 'Service prices',
     rackLead: 'Starting prices, net, for a typical scope. You get an exact written quote.',
     all: 'All services and prices',
     price: 'Price',
@@ -72,13 +74,14 @@ function Contact({ lang }) {
   );
 }
 
-function Rack({ lang, current, headingId, title, lead, paper, children }) {
+function Rack({ lang, current, headingId, title, label, lead, paper, children }) {
   const keys = serviceKeys.filter(key => key !== current);
   return (
     <section className={paper ? 'paper rack-svc' : 'rack-svc'} aria-labelledby={headingId}>
       <div className="sec-head">
         <h2 className="h2" id={headingId}>
           <Split text={title} onView />
+          {label && <span className="h2__label">{label}</span>}
         </h2>
       </div>
       {lead && <p className="rack-svc__lead">{tie(lead)}</p>}
@@ -106,7 +109,12 @@ function Rack({ lang, current, headingId, title, lead, paper, children }) {
 export function ServiceRack({ lang }) {
   const t = copy[lang];
   return (
-    <Rack lang={lang} headingId="rack-svc-h" title={t.rackTitle} lead={t.rackLead}>
+    <Rack
+      lang={lang}
+      headingId="rack-svc-h"
+      title={t.rackTitle}
+      label={t.rackLabel}
+      lead={t.rackLead}>
       <p className="rack-svc__all">
         <Link className="link" to={routes.services[lang]}>
           {tie(t.all)}

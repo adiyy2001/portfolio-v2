@@ -12,6 +12,7 @@ const copy = {
   tech: 'Odoo, Python, JavaScript, PostgreSQL',
   pl: {
     title: 'Na miarę, dosłownie.',
+    label: 'Realizacja: aplikacja dla firmy krawieckiej',
     lead: 'Aplikację na miarę zrobiliśmy już dla firmy krawieckiej.',
     alt: 'Formularz zamówienia koszuli na miarę w platformie TailorCloth: tkanina główna, tkanina kontrastowa i miejsce kontrastu na kołnierzu',
     caption: 'Formularz zamówienia na miarę, zrzut z tailorcloth.com',
@@ -23,6 +24,7 @@ const copy = {
   },
   en: {
     title: 'Made to measure, literally.',
+    label: 'Case study: an app for a tailoring company',
     lead: "We've already built a made-to-measure app for a tailoring company.",
     alt: 'Made-to-measure shirt order form in the TailorCloth platform: main fabric, contrast fabric and where the contrast goes on the collar',
     caption: 'The made-to-measure order form, screenshot from tailorcloth.com',
@@ -80,6 +82,7 @@ export default function Case({ lang }) {
       <div className="sec-head">
         <h2 className="h2" id="case-h">
           <Split text={t.title} onView />
+          <span className="h2__label">{t.label}</span>
         </h2>
         <p className="sec-head__side">{tie(t.lead)}</p>
       </div>

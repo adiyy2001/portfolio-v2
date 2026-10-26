@@ -8,6 +8,7 @@ import { instant } from '../motion';
 const copy = {
   pl: {
     title: 'Jak to szyjemy.',
+    label: 'Jak wygląda współpraca',
     note: 'przymiarek bywa więcej niż jedna',
     steps: [
       {
@@ -30,6 +31,7 @@ const copy = {
   },
   en: {
     title: 'How we sew it.',
+    label: 'How we work together',
     note: "there's usually more than one fitting",
     steps: [
       {
@@ -62,6 +64,7 @@ export default function Steps({ lang, items, title }) {
       <div className="sec-head">
         <h2 className="h2" id="steps-h">
           <Split text={title ?? t.title} onView />
+          <span className="h2__label">{t.label}</span>
         </h2>
       </div>
       <ol className="steps__list">
