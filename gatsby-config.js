@@ -42,8 +42,9 @@ module.exports = {
                 component
               }
             }
-            allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/content/blog/" } }) {
+            allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/content/(blog|poradnik)/" } }) {
               nodes {
+                fileAbsolutePath
                 frontmatter {
                   slug
                   date
@@ -54,19 +55,26 @@ module.exports = {
           }
         `,
         resolvePages: ({ allSitePage, allMarkdownRemark }) => {
+          const section = file =>
+            /[\\/]content[\\/]poradnik[\\/]/.test(file) ? 'poradnik' : 'blog';
           const posts = new Map(
-            allMarkdownRemark.nodes.map(({ frontmatter: f }) => [
-              `/blog/${f.slug}/`,
+            allMarkdownRemark.nodes.map(({ fileAbsolutePath, frontmatter: f }) => [
+              `/${section(fileAbsolutePath)}/${f.slug}/`,
               f.updated || f.date,
             ]),
           );
-          const newestPost = [...posts.values()].sort().pop();
+          const newest = prefix =>
+            [...posts]
+              .filter(([path]) => path.startsWith(prefix))
+              .map(([, date]) => date)
+              .sort()
+              .pop();
           const pages = allSitePage.nodes.map(({ path, component }) => ({
             path,
             lastmod:
               posts.get(path) ??
-              (path === '/blog/'
-                ? newestPost
+              (path === '/blog/' || path === '/poradnik/'
+                ? newest(path)
                 : servicePaths.test(path)
                   ? lastChange(component, 'src/services.js', 'src/components/service.js')
                   : lastChange(component)),

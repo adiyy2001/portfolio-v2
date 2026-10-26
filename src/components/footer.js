@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
+import { useGuides } from './guides';
 import { usePosts } from './posts';
 import { openConsent } from '../consent';
-import { blogPath, privacyPath, routes, ui } from '../i18n';
+import { blogPath, guidePath, privacyPath, routes, ui } from '../i18n';
 import { phone } from '../services';
 import { duration, ease, instant } from '../motion';
 import { letters, needle, thread } from '../wordmark';
@@ -14,6 +15,7 @@ export default function Footer({ lang }) {
   const t = ui[lang];
   const reduce = useReducedMotion();
   const hasBlog = usePosts().length > 0;
+  const hasGuide = useGuides().length > 0 && lang === 'pl';
   return (
     <footer className="mini">
       <svg
@@ -51,6 +53,7 @@ export default function Footer({ lang }) {
       <p className="mini__links">
         <Link to={routes.services[lang]}>{t.footerServices}</Link>
         <Link to={routes.work[lang]}>{t.footerWork}</Link>
+        {hasGuide && <Link to={guidePath}>Poradnik</Link>}
         {hasBlog && (
           <Link to={blogPath} hrefLang="en">
             Blog

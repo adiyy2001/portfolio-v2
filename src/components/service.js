@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import Case from './case';
 import Close from './close';
+import GuideShelf from './guides';
 import Hero from './hero';
 import Magnet from './magnet';
 import Reveal from './reveal';
@@ -142,6 +143,7 @@ export function ServicesIndex({ lang }) {
         <Contact lang={lang} />
       </Hero>
       <Rack lang={lang} headingId="svc-list-h" title={`${t.label}.`} paper />
+      {lang === 'pl' && <GuideShelf />}
       <Close lang={lang} edition="cli" />
     </>
   );

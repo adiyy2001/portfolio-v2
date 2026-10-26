@@ -8,6 +8,7 @@ import './src/styles/repo.css';
 import './src/styles/notfound.css';
 import './src/styles/blog.css';
 import './src/styles/service.css';
+import './src/styles/guide.css';
 import './src/styles/quote.css';
 import { keepScroll } from './src/components/layout';
 import { trackClicks, watchPage } from './src/track';

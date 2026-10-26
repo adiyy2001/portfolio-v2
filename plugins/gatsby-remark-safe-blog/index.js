@@ -1,7 +1,7 @@
 const safeUrl = /^(?:https?:|mailto:|#|\/(?!\/))/i;
 
 const isBlogPost = markdownNode =>
-  /[\\/]content[\\/]blog[\\/]/.test(markdownNode.fileAbsolutePath || '');
+  /[\\/]content[\\/](?:blog|poradnik)[\\/]/.test(markdownNode.fileAbsolutePath || '');
 
 const clean = node => {
   if (typeof node.url === 'string' && !safeUrl.test(node.url.trim())) node.url = '#';

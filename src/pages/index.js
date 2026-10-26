@@ -2,6 +2,7 @@ import React from 'react';
 import Case from '../components/case';
 import Close from '../components/close';
 import Fit from '../components/fit';
+import GuideShelf from '../components/guides';
 import Hero from '../components/hero';
 import Magnet from '../components/magnet';
 import Scene from '../components/scene';
@@ -51,6 +52,7 @@ export default function Client() {
       <Case lang="pl" />
       <Wzornik lang="pl" />
       <Steps lang="pl" />
+      <GuideShelf />
       <Close lang="pl" edition="cli" />
     </>
   );

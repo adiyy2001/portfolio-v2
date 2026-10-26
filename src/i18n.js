@@ -45,6 +45,7 @@ export const ui = {
       eventhorizon: 'eventhorizon',
       fieldline: 'fieldline',
       blog: 'blog',
+      guide: 'poradnik',
       services: 'usługi',
       'svc-apps': 'aplikacje',
       'svc-sites': 'strony',
@@ -79,6 +80,7 @@ export const ui = {
       eventhorizon: 'eventhorizon',
       fieldline: 'fieldline',
       blog: 'blog',
+      guide: 'guide',
       services: 'services',
       'svc-apps': 'web apps',
       'svc-sites': 'websites',
@@ -90,6 +92,8 @@ export const ui = {
 
 export const blogPath = '/blog/';
 
+export const guidePath = '/poradnik/';
+
 export const privacyPath = { pl: '/polityka-prywatnosci/', en: '/en/privacy/' };
 
 export function locate(path) {
@@ -99,6 +103,7 @@ export function locate(path) {
     }
   }
   if (path.startsWith(blogPath)) return { lang: 'en', view: 'blog' };
+  if (path.startsWith(guidePath)) return { lang: 'pl', view: 'guide' };
   return { lang: path.startsWith('/en/') ? 'en' : 'pl', view: null };
 }
 

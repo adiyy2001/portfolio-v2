@@ -1,17 +1,23 @@
 import React from 'react';
 import { graphql, useStaticQuery, withPrefix } from 'gatsby';
-import { blogPath, routes } from '../i18n';
+import { blogPath, guidePath, routes } from '../i18n';
 import { phone, serviceKeys, services, servicesIndex } from '../services';
 
 const locales = { pl: 'pl_PL', en: 'en_US' };
 
-const pageTypes = { rec: 'ProfilePage', work: 'CollectionPage', blog: 'CollectionPage' };
+const pageTypes = {
+  rec: 'ProfilePage',
+  work: 'CollectionPage',
+  blog: 'CollectionPage',
+  guide: 'CollectionPage',
+};
 
 const crumbLabels = {
   pl: {
     home: 'Strona główna',
     work: 'Archiwum',
     blog: 'Blog',
+    guide: 'Poradnik',
     rec: 'Dla rekrutera',
     cli: 'Dla klienta',
     services: 'Usługi',
@@ -20,6 +26,7 @@ const crumbLabels = {
     home: 'Home',
     work: 'Archive',
     blog: 'Blog',
+    guide: 'Guide',
     rec: 'For recruiters',
     cli: 'For clients',
     services: 'Services',
@@ -29,8 +36,9 @@ const crumbLabels = {
 const crumbTrail = ({ lang, view, title, canonical, post, code }) => {
   const labels = crumbLabels[lang];
   const home = [labels.home, routes.home[lang]];
-  if (post) return [home, [labels.blog, blogPath], [post.headline, canonical]];
-  if (view === 'blog') return [home, [labels.blog, canonical]];
+  const section = view === 'guide' ? [labels.guide, guidePath] : [labels.blog, blogPath];
+  if (post) return [home, section, [post.headline, canonical]];
+  if (view === 'blog' || view === 'guide') return [home, [section[0], canonical]];
   if (code || view === 'case') {
     return [home, [labels.work, routes.work[lang]], [code?.name ?? 'TailorCloth', canonical]];
   }
@@ -46,7 +54,8 @@ const amount = price => Number(price.replace(/\D/g, ''));
 
 const isOffer = view => ['home', 'cli', 'services'].includes(view) || view?.startsWith('svc-');
 
-const ogView = view => (!view ? 'home' : isOffer(view) && view !== 'home' ? 'cli' : view);
+const ogView = view =>
+  !view ? 'home' : (isOffer(view) && view !== 'home') || view === 'guide' ? 'cli' : view;
 
 const graph = ({ url, lang, view, title, description, canonical, image, post, code, service }) => {
   const person = {
@@ -232,7 +241,20 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
       author: { '@id': person['@id'] },
       publisher: { '@id': person['@id'] },
       mainEntityOfPage: { '@id': page['@id'] },
-      isPartOf: { '@id': url('/blog/#page') },
+      isPartOf: { '@id': url(`${view === 'guide' ? guidePath : blogPath}#page`) },
+    });
+  }
+  if (post?.faq?.length) {
+    nodes.push({
+      '@type': 'FAQPage',
+      '@id': `${url(canonical)}#faq`,
+      isPartOf: { '@id': page['@id'] },
+      inLanguage: lang,
+      mainEntity: post.faq.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
     });
   }
   const trail = crumbTrail({ lang, view, title, canonical, post, code });
@@ -275,12 +297,12 @@ export default function Seo({
   const url = to => site.siteMetadata.siteUrl + withPrefix(to);
   const pair = routes[view];
   const blog = view === 'blog';
-  const shared = Boolean(pair || blog);
+  const shared = Boolean(pair || blog || view === 'guide');
   const canonical = pair ? pair[lang] : path;
   const other = lang === 'pl' ? 'en' : 'pl';
   const image = post?.image
     ? site.siteMetadata.siteUrl + post.image
-    : shared && url(`/og/${ogView(pair && view)}-${lang}.jpg`);
+    : shared && url(`/og/${ogView(pair ? view : view === 'guide' && view)}-${lang}.jpg`);
   const shareTitle = post?.headline ?? title;
   return (
     <>

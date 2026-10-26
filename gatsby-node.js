@@ -4,6 +4,10 @@ const path = require('path');
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
   createTypes(`
+    type MarkdownRemarkFrontmatterFaq {
+      q: String
+      a: String
+    }
     type MarkdownRemarkFrontmatter {
       title: String
       slug: String
@@ -17,11 +21,14 @@ exports.createSchemaCustomization = ({ actions }) => {
       ios: String
       android: String
       company: String
+      answer: String
+      service: String
+      faq: [MarkdownRemarkFrontmatterFaq]
     }
   `);
 };
 
-const blogQuery = `
+const postsQuery = folder => `
   query {
     site {
       siteMetadata {
@@ -29,7 +36,7 @@ const blogQuery = `
       }
     }
     allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/content/blog/" }, frontmatter: { draft: { ne: true } } }
+      filter: { fileAbsolutePath: { regex: "/content/${folder}/" }, frontmatter: { draft: { ne: true } } }
       sort: { frontmatter: { date: DESC } }
     ) {
       nodes {
@@ -43,6 +50,12 @@ const blogQuery = `
           updated
           slug
           tags
+          answer
+          service
+          faq {
+            q
+            a
+          }
         }
       }
     }
@@ -65,23 +78,56 @@ const blogProblems = post => {
   return problems;
 };
 
-const blogPosts = async (graphql, reporter) => {
-  const result = await graphql(blogQuery);
+const guideServices = ['apps', 'sites', 'wcag', 'care'];
+
+const guideProblems = post => {
+  const { answer, service, faq } = post.frontmatter;
+  const problems = blogProblems(post);
+  if (!answer) problems.push('answer is missing');
+  if (!guideServices.includes(service))
+    problems.push(`service must be one of ${guideServices.join(', ')}`);
+  if (!faq?.length || faq.some(item => !item?.q || !item?.a))
+    problems.push('faq needs at least one item with q and a');
+  return problems;
+};
+
+const loadPosts = async (graphql, reporter, folder, check) => {
+  const result = await graphql(postsQuery(folder));
   if (result.errors) {
-    reporter.panicOnBuild('Blog query failed', result.errors);
+    reporter.panicOnBuild(`Query for content/${folder} failed`, result.errors);
     return { siteUrl: '', posts: [] };
   }
   const posts = result.data.allMarkdownRemark.nodes;
   posts.forEach(post => {
-    const problems = blogProblems(post);
+    const problems = check(post);
     if (problems.length) {
-      reporter.panicOnBuild(`Blog post ${post.fileAbsolutePath}: ${problems.join(', ')}`);
+      reporter.panicOnBuild(`Post ${post.fileAbsolutePath}: ${problems.join(', ')}`);
     }
   });
   return { siteUrl: result.data.site.siteMetadata.siteUrl, posts };
 };
 
+const blogPosts = (graphql, reporter) => loadPosts(graphql, reporter, 'blog', blogProblems);
+
+const guidePosts = (graphql, reporter) => loadPosts(graphql, reporter, 'poradnik', guideProblems);
+
+const createGuidePages = (posts, actions) => {
+  if (!posts.length) return;
+  actions.createPage({
+    path: '/poradnik/',
+    component: path.resolve(__dirname, 'src/templates/guide.js'),
+  });
+  posts.forEach(post => {
+    actions.createPage({
+      path: `/poradnik/${post.frontmatter.slug}/`,
+      component: path.resolve(__dirname, 'src/templates/guide-post.js'),
+      context: { id: post.id },
+    });
+  });
+};
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
+  createGuidePages((await guidePosts(graphql, reporter)).posts, actions);
   const { posts } = await blogPosts(graphql, reporter);
   if (!posts.length) return;
   actions.createPage({
@@ -155,17 +201,35 @@ const llmsBlog = (posts, siteUrl) =>
     '',
   ].join('\n');
 
+const llmsGuide = (posts, siteUrl) =>
+  [
+    '',
+    '## Poradnik',
+    '',
+    `- [Poradnik](${siteUrl}/poradnik/): Polish answers to the questions clients ask before ordering a website or a web app`,
+    ...posts.map(
+      ({ frontmatter: post }) =>
+        `- [${post.title}](${siteUrl}/poradnik/${post.slug}/): ${post.answer}`,
+    ),
+    '',
+  ].join('\n');
+
+const appendLlms = text => {
+  const llms = path.join(__dirname, 'public', 'llms.txt');
+  if (fs.existsSync(llms)) {
+    fs.writeFileSync(llms, fs.readFileSync(llms, 'utf8').trimEnd() + '\n' + text);
+  }
+};
+
+const writeGuideFiles = ({ posts, siteUrl }) => {
+  if (posts.length) appendLlms(llmsGuide(posts, siteUrl));
+};
+
 const writeBlogFiles = ({ posts, siteUrl }) => {
   if (!posts.length) return;
   const publicDir = path.join(__dirname, 'public');
   fs.writeFileSync(path.join(publicDir, 'blog', 'rss.xml'), feed(posts, siteUrl));
-  const llms = path.join(publicDir, 'llms.txt');
-  if (fs.existsSync(llms)) {
-    fs.writeFileSync(
-      llms,
-      fs.readFileSync(llms, 'utf8').trimEnd() + '\n' + llmsBlog(posts, siteUrl),
-    );
-  }
+  appendLlms(llmsBlog(posts, siteUrl));
 };
 
 const entryScript =
@@ -184,6 +248,7 @@ const htmlFiles = dir =>
 const streamPadding = /\0/g;
 
 exports.onPostBuild = async ({ graphql, reporter }) => {
+  writeGuideFiles(await guidePosts(graphql, reporter));
   writeBlogFiles(await blogPosts(graphql, reporter));
   htmlFiles(path.join(__dirname, 'public')).forEach(file => {
     const sources = [];
