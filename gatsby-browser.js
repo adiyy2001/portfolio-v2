@@ -8,7 +8,9 @@ import './src/styles/repo.css';
 import './src/styles/notfound.css';
 import './src/styles/blog.css';
 import './src/styles/service.css';
+import './src/styles/quote.css';
 import { keepScroll } from './src/components/layout';
+import { trackClicks, watchPage } from './src/track';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';
 
@@ -16,6 +18,7 @@ let popped = false;
 
 export const onClientEntry = () => {
   window.history.scrollRestoration = 'manual';
+  trackClicks();
   window.addEventListener('popstate', () => {
     popped = true;
   });
@@ -45,6 +48,7 @@ export const onInitialClientRender = () => {
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
   if (prevLocation) window.goatcounter?.count?.({ path: location.pathname });
+  watchPage();
 };
 
 export const shouldUpdateScroll = ({ routerProps, prevRouterProps, getSavedScrollPosition }) => {
