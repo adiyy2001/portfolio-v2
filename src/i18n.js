@@ -24,6 +24,8 @@ export const ui = {
     footerName: 'Adrian Turbiński, Wrocław',
     footerMail: 'E-mail',
     footerWork: 'Projekty',
+    footerPrivacy: 'Prywatność',
+    footerConsent: 'Ustawienia statystyk',
     words: {
       home: 'Na miarę',
       rec: 'dla rekrutera',
@@ -50,6 +52,8 @@ export const ui = {
     footerName: 'Adrian Turbiński, Wrocław',
     footerMail: 'Email',
     footerWork: 'Projects',
+    footerPrivacy: 'Privacy',
+    footerConsent: 'Statistics settings',
     words: {
       home: 'Made to measure',
       rec: 'for recruiters',
@@ -68,6 +72,8 @@ export const ui = {
 };
 
 export const blogPath = '/blog/';
+
+export const privacyPath = { pl: '/polityka-prywatnosci/', en: '/en/privacy/' };
 
 export function locate(path) {
   for (const view of Object.keys(routes)) {

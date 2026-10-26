@@ -11,6 +11,7 @@ import React, {
 import { AnimatePresence, usePresence, useReducedMotion } from 'framer-motion';
 import { useAnimate } from 'framer-motion/mini';
 import Header from './header';
+import Consent from './consent';
 import Footer from './footer';
 import { locate, ui } from '../i18n';
 import { duration, ease, enterAfterSwap } from '../motion';
@@ -250,6 +251,7 @@ export default function Layout({ path, children }) {
         </AnimatePresence>
       </main>
       <Footer lang={lang} />
+      <Consent lang={lang} />
       <div className="swap" ref={swap} aria-hidden="true">
         <p className="swap__word">{t.words[view] || t.words.home}</p>
         <svg className="swap__stitch" viewBox="0 0 560 20" preserveAspectRatio="none">
