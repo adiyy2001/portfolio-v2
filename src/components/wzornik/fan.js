@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, useSyncExternalStore } from 'react';
-import { withPrefix } from 'gatsby';
+import { Link, withPrefix } from 'gatsby';
 import { m, useReducedMotion, useSpring } from 'framer-motion';
-import { tie } from '../../i18n';
+import { routes, tie } from '../../i18n';
+import { quoteId } from '../quote';
 import { duration, ease, instant, spring, stagger } from '../../motion';
 
 const top = -84;
@@ -282,6 +283,12 @@ export default function Fan({ sites, mocks, t, lang }) {
                     {lang === 'en' && !site.en ? t.openPl : t.open}
                     <span className="sr">, {site.name}</span>
                   </a>
+                  <Link
+                    className="link stage__order"
+                    to={`${routes['svc-sites'][lang]}#${quoteId[lang]}`}
+                    data-cta="wzornik-order">
+                    {t.order}
+                  </Link>
                 </m.p>
               </div>
             </m.div>
