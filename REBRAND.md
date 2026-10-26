@@ -18,6 +18,19 @@ What is left on this list:
 
 1. Trademark check of the made-up names if they should live longer than as examples; a real App Store Connect upload test (needs Adrian's accounts).
 
+## Local SEO roadmap (Adrian, 2026-10-26, not started)
+
+The service pages are live (`/uslugi/`, `/en/services/`, main `2c47138`). Adrian asked to plan the remaining steps and not to run them yet.
+
+1. Indexing: submit the sitemap with `gsa submit` and request indexing of the ten new service URLs with `gsa chrome index` (skill `google-search-analytics-kit`).
+2. Bing:
+   - Bing Webmaster Tools, imported from Search Console;
+   - Bing Places, imported from the Google Business Profile.
+   Both need Adrian's login in the debug Chrome. ChatGPT search relies on Bing.
+3. Business directories: one NAP text (name, address, phone +48 731 985 567, site, categories, short and long description), written once and pasted by Adrian. Candidates are Panorama Firm, pkt.pl, Aleo, Oferteo and Clutch. Adrian registers himself.
+4. Google Business Profile posts: one a week, through `gsa chrome`. Each post links to a service page and goes through the humanizer.
+5. Two local articles: the first two articles of the Polish client guide planned in `BLOG.md` ("Planned: two audiences"). Start with the website price question and the Google Maps question.
+
 ## Status
 
 - Phase 0 (recon): done.
