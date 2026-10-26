@@ -545,6 +545,11 @@
   object-fit: cover;
 }
 
+video.wk__video {
+  position: absolute;
+  inset: 0;
+}
+
 .wk__pic--poziomka {
   background: #9ed8ff;
 }

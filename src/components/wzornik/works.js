@@ -112,21 +112,31 @@ function Loop({ slug, live }) {
 
   const base = `/wzornik/app-preview/${slug}/${slug}`;
   return (
-    <video
-      ref={video}
-      className="wk__video"
-      width="480"
-      height="600"
-      muted
-      loop
-      playsInline
-      preload="none"
-      poster={withPrefix(`/wzornik/app-preview/${slug}/posters/${slug}-tile.jpg`)}
-      aria-hidden="true"
-      tabIndex={-1}>
-      <source src={withPrefix(`${base}-tile.webm`)} type="video/webm" />
-      <source src={withPrefix(`${base}-tile.mp4`)} type="video/mp4" />
-    </video>
+    <>
+      <img
+        className="wk__video"
+        src={withPrefix(`/wzornik/app-preview/${slug}/posters/${slug}-tile.jpg`)}
+        width="480"
+        height="600"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+      <video
+        ref={video}
+        className="wk__video"
+        width="480"
+        height="600"
+        muted
+        loop
+        playsInline
+        preload="none"
+        aria-hidden="true"
+        tabIndex={-1}>
+        <source src={withPrefix(`${base}-tile.webm`)} type="video/webm" />
+        <source src={withPrefix(`${base}-tile.mp4`)} type="video/mp4" />
+      </video>
+    </>
   );
 }
 
