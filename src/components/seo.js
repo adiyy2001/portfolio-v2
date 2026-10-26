@@ -123,6 +123,7 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
         closes: '18:00',
       },
       sameAs: [
+        'https://maps.google.com/?cid=14709967096891217800',
         'https://www.facebook.com/profile.php?id=61596114922198',
         'https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6',
       ],
