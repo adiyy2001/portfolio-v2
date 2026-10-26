@@ -1,7 +1,7 @@
 import React from 'react';
 import { withPrefix } from 'gatsby';
 import { siteMetadata } from './gatsby-config';
-import { consentKey } from './src/consent';
+import { clarityLoader, consentKey } from './src/consent';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';
 
@@ -34,6 +34,7 @@ gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personali
 gtag('set','ads_data_redaction',true);
 gtag('js',new Date());
 gtag('config','${id}');
+if(stored==='granted')addEventListener('load',function(){${clarityLoader}});
 `;
 
 const consentKnown = `try{if(localStorage.getItem('${consentKey}'))document.documentElement.classList.add('consent-known')}catch(e){}`;

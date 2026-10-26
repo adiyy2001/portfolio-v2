@@ -48,6 +48,20 @@ export default function Privacy() {
           identyfikatorów. Wybór zmienisz w każdej chwili przyciskiem Ustawienia statystyk w stopce;
           wycofanie zgody usuwa ciasteczka.
         </p>
+        <h2>Microsoft Clarity</h2>
+        <p>
+          Jeśli zgodzisz się w banerze, ładuję też Microsoft Clarity od Microsoft Corporation.
+          Clarity zapisuje, jak przewijasz stronę i gdzie klikasz, a ja oglądam z tego mapy kliknięć
+          i nagrania sesji, żeby zobaczyć, które miejsca strony są niejasne. Pola formularzy, w tym
+          cały formularz wyceny, są maskowane, więc to, co wpisujesz, do Clarity nie trafia. Clarity
+          zapisuje ciasteczka _clck (na rok) i _clsk (na dobę), a Microsoft także własne, na
+          przykład MUID (na rok). Podstawą jest Twoja zgoda (art. 6 ust. 1 lit. a RODO). Microsoft
+          może przetwarzać dane w Stanach Zjednoczonych w ramach EU-US Data Privacy Framework.
+        </p>
+        <p>
+          Bez zgody Clarity w ogóle się nie ładuje. Wycofanie zgody przyciskiem Ustawienia statystyk
+          w stopce wyłącza nagrywanie i usuwa ciasteczka _clck i _clsk.
+        </p>
         <h2>Moje narzędzia do publikacji</h2>
         <p>
           Używam prywatnego narzędzia do własnej pracy. Publikuje moje posty na moim profilu
@@ -81,6 +95,6 @@ export const Head = () => (
     lang="pl"
     path="/polityka-prywatnosci/"
     title="Polityka prywatności, Adrian Turbiński"
-    description="Co strona i narzędzia do publikacji Adriana Turbińskiego robią z danymi: formularz wyceny, GoatCounter, Google Analytics za zgodą i prawa osób."
+    description="Co strona i narzędzia do publikacji Adriana Turbińskiego robią z danymi: formularz wyceny, GoatCounter, Google Analytics i Microsoft Clarity za zgodą i prawa osób."
   />
 );

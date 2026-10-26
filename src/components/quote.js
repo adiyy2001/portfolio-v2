@@ -168,6 +168,7 @@ export default function Quote({ lang, service = '' }) {
 
   return (
     <form
+      data-clarity-mask="True"
       className="quote"
       id={id}
       action={endpoint}

@@ -48,6 +48,20 @@ export default function Privacy() {
           You can change your choice at any time with Statistics settings in the footer; withdrawing
           consent removes the cookies.
         </p>
+        <h2>Microsoft Clarity</h2>
+        <p>
+          If you agree in the banner, I also load Microsoft Clarity from Microsoft Corporation. It
+          records how you scroll and where you click, and I look at the resulting click maps and
+          session recordings to find the parts of the site that are unclear. Form fields, including
+          the whole quote form, are masked, so what you type never reaches Clarity. Clarity sets the
+          cookies _clck (one year) and _clsk (one day), and Microsoft sets its own, such as MUID
+          (one year). The legal basis is your consent (Article 6(1)(a) GDPR). Microsoft may process
+          the data in the United States under the EU-US Data Privacy Framework.
+        </p>
+        <p>
+          Without consent Clarity does not load at all. Withdrawing consent with Statistics settings
+          in the footer stops the recording and removes the _clck and _clsk cookies.
+        </p>
         <h2>My publishing tools</h2>
         <p>
           I run a private tool for my own work. It publishes my posts to my LinkedIn profile and my
