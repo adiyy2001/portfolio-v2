@@ -4,6 +4,7 @@ export const serviceKeys = ['apps', 'sites', 'wcag', 'care'];
 
 export const services = {
   apps: {
+    proof: true,
     pl: {
       name: 'Aplikacje webowe',
       short: 'Panele klienta, systemy rezerwacji, narzędzia, które zastąpią arkusz.',
@@ -25,6 +26,14 @@ export const services = {
         'kod i dostępy u ciebie',
       ],
       foot: 'Rozbudowa istniejącej aplikacji: 140 zł netto za godzinę.',
+      whoLead:
+        'Aplikacje robię dla firm z Wrocławia i z całej Polski. Najczęściej wtedy, gdy zespół zaczyna tonąć w arkuszach i mailach.',
+      who: [
+        'Zamówienia albo zgłoszenia krążą w Excelu i w skrzynkach kilku osób.',
+        'Klienci mają sami rezerwować terminy albo sprawdzać status zlecenia.',
+        'Firma potrzebuje panelu administracyjnego do własnych danych.',
+        'Pomysł na produkt trzeba sprawdzić na pierwszej działającej wersji.',
+      ],
       steps: [
         [
           'Miara.',
@@ -91,6 +100,14 @@ export const services = {
         'code and access are yours',
       ],
       foot: 'Extending an existing app: PLN 140 net per hour.',
+      whoLead:
+        'I build applications for companies in Wrocław and across Poland, usually when a team starts drowning in spreadsheets and email.',
+      who: [
+        "Orders or tickets live in Excel and in several people's inboxes.",
+        'Customers should book slots or check an order status on their own.',
+        'The company needs an admin panel for its own data.',
+        'A product idea has to be tested on a first working version.',
+      ],
       steps: [
         [
           'Measure.',
@@ -134,6 +151,7 @@ export const services = {
     },
   },
   sites: {
+    proof: true,
     pl: {
       name: 'Strony internetowe',
       short: 'Strona firmowa, która ładuje się szybko i da się ją znaleźć.',
@@ -155,6 +173,14 @@ export const services = {
         'statystyki z banerem zgody',
       ],
       foot: 'Strona z blogiem albo w kilku językach: od 7 000 zł netto.',
+      whoLead:
+        'Robię strony internetowe dla firm z Wrocławia i Dolnego Śląska, a zdalnie dla całej Polski. We Wrocławiu mogę przyjechać na spotkanie.',
+      who: [
+        'Firma usługowa, której klienci szukają w Google i w Mapach Google.',
+        'Gabinet, kancelaria albo pracownia, której wystarczy strona wizytówka z cennikiem i kontaktem.',
+        'Firma ze starą stroną na szablonie, która wolno się ładuje i źle wygląda na telefonie.',
+        'Firma, którą obejmuje Europejski akt o dostępności.',
+      ],
       steps: [
         [
           'Miara.',
@@ -221,6 +247,14 @@ export const services = {
         'analytics with a consent banner',
       ],
       foot: 'A site with a blog or in several languages: from PLN 7,000 net.',
+      whoLead:
+        'I build websites for companies in Wrocław and Lower Silesia, and remotely for the rest of Poland. In Wrocław I can come to a meeting.',
+      who: [
+        'A service business whose customers search for it on Google and Google Maps.',
+        'A practice, law office or studio that needs a simple site with prices and contact details.',
+        'A company with an old template site that loads slowly and looks bad on a phone.',
+        'A company covered by the European Accessibility Act.',
+      ],
       steps: [
         [
           'Measure.',
@@ -285,6 +319,14 @@ export const services = {
         'ponowny test od 600 zł',
       ],
       foot: 'Poprawki w kodzie: 140 zł netto za godzinę albo wycena po audycie.',
+      whoLead:
+        'Audyty robię zdalnie dla firm i instytucji z całej Polski. Z zespołami z Wrocławia mogę omówić raport na miejscu.',
+      who: [
+        'Sklep internetowy, bank albo przewoźnik, którego obejmuje Europejski akt o dostępności.',
+        'Instytucja publiczna, która musi spełniać ustawę o dostępności cyfrowej.',
+        'Firma, do której klient napisał, że nie może skorzystać ze strony.',
+        'Zespół, który chce, żeby nowe funkcje od razu spełniały WCAG.',
+      ],
       steps: [
         [
           'Miara.',
@@ -347,6 +389,14 @@ export const services = {
         'retest from PLN 600',
       ],
       foot: 'Code fixes: PLN 140 net per hour or a quote after the audit.',
+      whoLead:
+        'I run audits remotely for companies and institutions across Poland. With teams in Wrocław I can go through the report in person.',
+      who: [
+        'An online shop, bank or carrier covered by the European Accessibility Act.',
+        'A public body that has to meet the Polish digital accessibility act.',
+        'A company whose customer wrote that they could not use the site.',
+        'A team that wants new features to meet WCAG from the start.',
+      ],
       steps: [
         [
           'Measure.',
@@ -407,6 +457,13 @@ export const services = {
         'czas reakcji w umowie',
       ],
       foot: 'Kolejne godziny: 140 zł netto. Przegląd cudzego kodu wyceniam osobno.',
+      whoLead: 'Strony i aplikacje utrzymuję zdalnie, dla firm z Wrocławia i z całej Polski.',
+      who: [
+        'Poprzedni wykonawca przestał odpowiadać, a strona dalej musi działać.',
+        'Aplikacja stoi na starszej wersji Angulara i blokuje aktualizacje.',
+        'Strona nie ma kopii zapasowych ani monitoringu błędów.',
+        'Zespołowi brakuje programisty na kilka godzin w miesiącu.',
+      ],
       steps: [
         [
           'Miara.',
@@ -461,6 +518,13 @@ export const services = {
         'response time in the contract',
       ],
       foot: 'Extra hours: PLN 140 net. A review of existing code is quoted separately.',
+      whoLead: 'I maintain websites and apps remotely, for companies in Wrocław and across Poland.',
+      who: [
+        'The previous contractor stopped answering and the site still has to run.',
+        'The app is stuck on an older Angular version that blocks updates.',
+        'The site has no backups and no error monitoring.',
+        'The team needs a developer for a few hours a month.',
+      ],
       steps: [
         [
           'Measure.',
