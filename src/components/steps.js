@@ -52,19 +52,20 @@ const copy = {
   },
 };
 
-export default function Steps({ lang }) {
+export default function Steps({ lang, items, title }) {
   const t = copy[lang];
+  const list = items ? items.map(([name, text]) => ({ name, text })) : t.steps;
   const reduce = useReducedMotion();
 
   return (
     <section className="paper steps" aria-labelledby="steps-h">
       <div className="sec-head">
         <h2 className="h2" id="steps-h">
-          <Split text={t.title} onView />
+          <Split text={title ?? t.title} onView />
         </h2>
       </div>
       <ol className="steps__list">
-        {t.steps.map(({ name, text }) => (
+        {list.map(({ name, text }) => (
           <Reveal as="li" className="step" key={name}>
             <h3 className="step__name">{name}</h3>
             <p className="step__text">{tie(text)}</p>

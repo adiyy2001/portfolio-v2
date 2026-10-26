@@ -1,21 +1,27 @@
 # Adrian Turbiński
 
-> Front-end, Angular and full-stack developer from Wrocław, Poland, available for freelance work in Wrocław, in Lower Silesia and remotely. He has built web applications since 2019, employed and freelance, mostly in Angular, TypeScript, RxJS and Node.js. The site has two editions, one for recruiters and one for clients, each in Polish and English.
+> Freelance web developer from Wrocław, Poland. He builds web applications and websites for companies, audits and fixes accessibility against WCAG 2.1 AA and maintains existing apps, including older Angular versions. He works in Wrocław and Lower Silesia in person and remotely across Poland and the EU, in Polish and English, on a B2B invoice. He has built web applications since 2019, mostly in Angular, TypeScript, RxJS and Node.js.
 
-- Senior frontend developer and tech lead. At PSE Innowacje he builds an app that models and visualizes high-voltage power lines. He designs front-end and back-end architecture, has led a small team and onboards new engineers.
-- As a freelancer he builds complete web apps for companies: front end, back end and deployment, usable with a keyboard and a screen reader. From the quote through deployment to maintenance, clients talk to him directly.
-- Contact: adrian.turbinski@gmail.com, [LinkedIn](https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6), [GitHub](https://github.com/adiyy2001).
+- Senior front-end developer and tech lead. He led a small team, designed front-end and back-end architecture and built an app that models and visualizes high-voltage power lines.
+- Clients talk to him directly from the quote through deployment to maintenance.
+- Contact: adrian.turbinski@gmail.com, phone +48 731 985 567, [LinkedIn](https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6), [GitHub](https://github.com/adiyy2001), [Google Business Profile](https://www.google.com/search?q=Adrian+Turbi%C5%84ski+Wroc%C5%82aw).
 
-## For recruiters
+## Services and prices
 
-- [For recruiters](https://adrianturbinski.pl/en/for-recruiters/): experience since 2019, stack, printable resume
-- [Dla rekrutera](https://adrianturbinski.pl/dla-rekrutera/): the same in Polish
+Starting prices, net of VAT, for a typical scope; an exact quote is written after a call. Hourly work: PLN 140 net.
+
+- [Web applications](https://adrianturbinski.pl/en/services/web-applications/): client portals, booking systems, internal tools; front end, back end and deployment; from PLN 18,000 net, 6 to 12 weeks
+- [Websites](https://adrianturbinski.pl/en/services/websites/): fast company sites with SEO basics, Google Business Profile and WCAG AA; from PLN 3,500 net, 2 to 4 weeks
+- [WCAG accessibility](https://adrianturbinski.pl/en/services/wcag-accessibility/): audits with keyboard and screen reader testing, a prioritized report, fixes, help with the European Accessibility Act; from PLN 1,900 net
+- [Maintenance](https://adrianturbinski.pl/en/services/maintenance/): updates, Angular migrations, bug fixes, backups and new features, also in code written by others; from PLN 300 net per month
+- [All services](https://adrianturbinski.pl/en/services/), [usługi po polsku](https://adrianturbinski.pl/uslugi/)
+
+## Site
+
+- [Home, client edition](https://adrianturbinski.pl/en/): how the work goes, the TailorCloth project, sample websites; [po polsku](https://adrianturbinski.pl/)
+- [For recruiters](https://adrianturbinski.pl/en/for-recruiters/): experience since 2019, stack, printable resume; [po polsku](https://adrianturbinski.pl/dla-rekrutera/)
 - [Resume](https://adrianturbinski.pl/resume.pdf): the English recruiter page as a PDF
-
-## For clients
-
-- [For clients](https://adrianturbinski.pl/en/for-clients/): web apps and websites for companies, how the work goes, accessibility
-- [Dla klienta](https://adrianturbinski.pl/dla-klienta/): the same in Polish
+- [Blog](https://adrianturbinski.pl/blog/): articles in English on Angular, feature flags, collaborative editing and brand work
 
 ## Work
 

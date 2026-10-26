@@ -22,7 +22,7 @@ const copy = {
 
 export default function Consent({ lang }) {
   const t = copy[lang];
-  const open = useSyncExternalStore(subscribeConsent, consentPending, () => false);
+  const open = useSyncExternalStore(subscribeConsent, consentPending, () => true);
 
   if (!open) return null;
 

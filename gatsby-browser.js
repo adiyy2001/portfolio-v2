@@ -7,6 +7,7 @@ import './src/styles/work.css';
 import './src/styles/repo.css';
 import './src/styles/notfound.css';
 import './src/styles/blog.css';
+import './src/styles/service.css';
 import { keepScroll } from './src/components/layout';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';

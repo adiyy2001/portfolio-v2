@@ -39,6 +39,7 @@ function dropAnalyticsCookies() {
 
 export function openConsent() {
   reopened = true;
+  document.documentElement.classList.remove('consent-known');
   window.dispatchEvent(new Event(changeEvent));
 }
 

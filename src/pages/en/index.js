@@ -5,6 +5,7 @@ import Fit from '../../components/fit';
 import Hero from '../../components/hero';
 import Magnet from '../../components/magnet';
 import Scene from '../../components/scene';
+import { ServiceRack } from '../../components/service';
 import Seo from '../../components/seo';
 import Steps from '../../components/steps';
 import Tags from '../../components/tags';
@@ -49,6 +50,7 @@ export default function Client() {
       </Hero>
       <Scene lang="en" />
       <Fit lang="en" />
+      <ServiceRack lang="en" />
       <Case lang="en" />
       <Wzornik lang="en" />
       <Steps lang="en" />
