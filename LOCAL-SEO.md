@@ -47,13 +47,13 @@ Free listings first. Status as of 2026-10-26.
 | ------------------------------- | ---------------------------------------------------- | ------------------- | ------------------------------------------------------ |
 | Bing Places                     | feeds Bing Maps and ChatGPT search; import from GBP  | listing             | done 26.10, GBP sync weekly                            |
 | Apple Business Connect          | Apple Maps and Siri                                  | listing             | skipped                                                |
-| Panorama Firm (panoramafirm.pl) | biggest Polish directory, ranks for "firma + miasto" | nofollow            | skipped                                                |
+| Panorama Firm (panoramafirm.pl) | biggest Polish directory, ranks for "firma + miasto" | nofollow            | waiting: the only checkbox bundles marketing calls      |
 | pkt.pl                          | ranks for local queries, free basic listing          | nofollow            | skipped                                                |
 | Aleo (aleo.com)                 | pulls CEIDG data, fix and complete it                | dofollow            | skipped                                                |
 | Oferteo                         | inbound requests for quotes, free profile            | profile             | skipped                                                |
 | Clutch                          | B2B buyers, reviews later                            | dofollow on profile | skipped (needs street address)                         |
 | GoodFirms                       | same audience as Clutch                              | profile             | skipped (requires AI tools section)                    |
-| Cylex (cylex-polska.pl)         | citation consistency                                 | nofollow            | skipped                                                |
+| Cylex (cylex-polska.pl)         | citation consistency                                 | nofollow            | done 26.10, Facebook login, street hidden, id 14527389 |
 | Facebook page                   | NAP plus a link, used by Bing                        | profile             | done 26.10, facebook.com/profile.php?id=61596114922198 |
 | LinkedIn company page           | NAP, links to services                               | profile             | skipped, personal profile is used                      |
 
@@ -68,6 +68,8 @@ One post a week, Tuesday morning, button "Więcej informacji" to the linked page
 3. Jeśli pół firmy edytuje naraz jeden arkusz Excela, prosta aplikacja webowa z logowaniem, rolami i panelem administracyjnym zwykle się zwraca. Pierwsza wersja kosztuje od 18 000 zł netto, płacisz po etapach. Link: /uslugi/aplikacje-webowe/
 4. Biorę pod opiekę strony i aplikacje, także napisane przez kogoś innego. Aktualizuję zależności, robię kopie zapasowe, pilnuję błędów i wprowadzam drobne zmiany, a czas reakcji zapisujemy w umowie. Pakiet od 300 zł netto miesięcznie. Link: /uslugi/utrzymanie/
 5. We Wzorniku jest dziewięć przykładowych stron dla zmyślonych firm, między innymi kancelarii, kliniki stomatologicznej i palarni kawy. Każda ma własny krój i paletę. Możesz je przejrzeć, zanim zamówisz swoją. Link: /wzornik/
+
+Post 1 went out on 2026-10-25. Posts 2 to 5 are scheduled in the profile for 27.10, 3.11, 10.11 and 17.11 at 09:00. The opening date (3 January 2022) and the Facebook link were added on 2026-10-26 and wait for Google's review.
 
 After post 5, repeat the cycle with a fresh image, or post a finished client project.
 
