@@ -70,3 +70,27 @@ One post a week, Tuesday morning, button "Więcej informacji" to the linked page
 5. We Wzorniku jest dziewięć przykładowych stron dla zmyślonych firm, między innymi kancelarii, kliniki stomatologicznej i palarni kawy. Każda ma własny krój i paletę. Możesz je przejrzeć, zanim zamówisz swoją. Link: /wzornik/
 
 After post 5, repeat the cycle with a fresh image, or post a finished client project.
+
+## Audits, 2026-10-26
+
+Done with the `cro` and `ai-seo` skills on the live site after the quote form release. Ordered by expected effect.
+
+### Conversion
+
+1. There is no social proof on the client pages. TailorCloth is the only proof and it has no client quote. Reviews were put off by Adrian on 2026-10-26; when they come back, one sentence from the TailorCloth owner next to the case and the GBP rating in the closing section are the first two places.
+2. The home H1 "Od pierwszej rozmowy do produkcji." does not say what is sold or to whom; the lead below it does. Proposal: keep the H1 and add "Strony i aplikacje dla firm, Wrocław i zdalnie" as the small line above it.
+3. Section titles are tailoring metaphors ("Pasuje na każdego.", "Przód i tył szyję sam."). They fit the brand, but a skimming reader learns nothing from them. Proposal: a plain one-line label under each (for example "Dostępność WCAG" under "Pasuje na każdego.").
+4. The quote form asks for four things and only the contact is required. Leave it as is until there is data; the GA4 path is `section_view` (closing section) to `form_start` to `generate_lead`, plus `form_error`.
+5. Every project button now leads to the form, and phones get a sticky "Wyceń projekt" bar. Recheck the click share of `hero-quote`, `service-quote`, `dock-quote` and `post-quote` after two weeks of traffic.
+
+### AI search
+
+1. Bing is missing. ChatGPT search and Copilot answer from Bing, so Bing Webmaster Tools and Bing Places come first (Adrian's login).
+2. `robots.txt` allows every crawler, `llms.txt` is current, and the service pages carry `Service`, `Offer` and `FAQPage` data. Nothing to fix there.
+3. Language models cite pages that answer one question directly. The Polish client guide planned in `BLOG.md` is the way to get there; its first two articles (website price, Google Maps) are the next content step.
+4. Third-party mentions are thin: no directory listings and no reviews yet. The directory list above covers this.
+5. Check monthly: ask ChatGPT, Perplexity and Gemini "programista strony internetowe Wrocław" and "audyt WCAG Wrocław" and note whether the site is cited.
+
+## Weekly report
+
+`~/bin/site-weekly-report` on the PC, timer `site-weekly-report.timer` (Mondays 09:00, catches up after the PC was off). It sends Search Console pages and queries and GA4 events from the last 7 days to the owner's Telegram chat through `~/.local/bin/tg-send-owner` on homeserver.
