@@ -34,3 +34,26 @@ Status on 2026-10-03: the site side is built (blog pages, feed, SEO, navigation,
 - GoatCounter: done (code `adrianturbinski`, Command Center reads it with an API token).
 - Lighthouse on a real article, done 2026-10-07 on `/blog/how-i-test-that-collaborative-edits-converge/`: mobile performance 97 to 98 (one cold first run gave 89), accessibility 100, best practices 96, SEO 100; desktop 100, 100, 96, 100. CLS 0.071 on mobile.
 - Domain: the site moves to `https://adrianturbinski.pl/` (registered 2026-10-03, mailbox `contact@adrianturbinski.pl`), so blog canonical URLs are final from the first article. The `/portfolio-v2` prefix is gone. Privacy policy: `/en/privacy/`.
+
+## Planned: two audiences (Adrian, 2026-10-26, not started)
+
+Adrian decided the writing splits by reader. Build it later, on request.
+
+- `/blog/` stays technical and in English, for recruiters and developers. Command Center keeps publishing there and cross-posting to dev.to; nothing changes in `content/blog`.
+- A Polish section for clients, working name `/poradnik/`, with content in `content/poradnik/<slug>/index.md`. It is a separate folder so the Command Center publisher (`BLOG_DIR = "content/blog"`) never cross-posts these articles to dev.to. There is no RSS or dev.to for this section.
+- Topics: sales, marketing and websites. Each article answers one question that clients ask most often, opens with the short answer, links to the matching service page and carries a `FAQPage` node in the JSON-LD.
+- Header link by edition: "Poradnik" in the Polish client views, "Blog" in the recruiter and English views. The client home page and `/uslugi/` show the latest client articles.
+- Design goes through the awwwards skill and keeps Lighthouse performance at the level of the service pages. The text goes through the humanizer and never mentions AI.
+
+Question backlog, from the FAQ sections of Polish agency pages in October 2026. Prices and dates must be checked again before writing.
+
+1. How much does a website cost in 2026, and what drives the price (pages, custom design, content, integrations)?
+2. How much does it cost each year to keep a site running (domain, hosting, SSL, care plan), and how does a one-off payment compare with a subscription?
+3. Who should build the site: a freelancer, an agency or a site builder such as Wix, and who owns the code?
+4. How long does a site take, and what should the client prepare first (brief, content, photos)?
+5. How to show up in Google Maps locally: the Google Business Profile, reviews and service pages.
+6. Does the European Accessibility Act cover my company? The Polish law of 26 April 2024 (Dz.U. 2024 poz. 731) applies from 28 June 2025. Microenterprises that provide services are exempt: fewer than 10 people and turnover up to 2 million euro.
+7. One-page site, landing page or company site: which one sells better?
+8. How to tell whether the site brings clients: analytics, Search Console, calls and forms.
+9. How much does a web application or an MVP cost, and how long does it take?
+10. What to check in the contract: rights to the code, accounts in the client's name, terms of care.
