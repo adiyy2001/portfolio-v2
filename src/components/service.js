@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import Case from './case';
 import Close from './close';
 import Hero from './hero';
 import Magnet from './magnet';
@@ -17,6 +18,8 @@ const copy = {
     call: `Zadzwoń: ${phone.label}`,
     includedTitle: 'Co dostajesz.',
     includedLabel: 'W cenie',
+    whoTitle: 'Dla kogo.',
+    samples: 'Przykładowe strony we Wzorniku',
     stepsTitle: 'Jak to szyjemy.',
     faqTitle: 'Pytania.',
     moreTitle: 'Inne usługi.',
@@ -30,6 +33,8 @@ const copy = {
     call: `Call: ${phone.intl}`,
     includedTitle: 'What you get.',
     includedLabel: 'Included',
+    whoTitle: 'Who it is for.',
+    samples: 'Sample sites in the Wzornik (Polish)',
     stepsTitle: 'How we sew it.',
     faqTitle: 'Questions.',
     moreTitle: 'Other services.',
@@ -183,6 +188,30 @@ export default function Service({ id, lang }) {
           </Reveal>
         </div>
       </section>
+      <section className="who" aria-labelledby="who-h">
+        <div className="sec-head">
+          <h2 className="h2" id="who-h">
+            <Split text={t.whoTitle} onView />
+          </h2>
+          <p className="sec-head__side">{tie(s.whoLead)}</p>
+        </div>
+        <ol className="who__list">
+          {s.who.map((item, i) => (
+            <Reveal as="li" className="who__item" key={item} style={{ '--i': i }}>
+              {tie(item)}
+            </Reveal>
+          ))}
+        </ol>
+        {id === 'sites' && (
+          <p className="who__more">
+            <a className="link" href="/wzornik/">
+              {tie(t.samples)}
+            </a>
+          </p>
+        )}
+      </section>
+      <Steps lang={lang} items={s.steps} title={t.stepsTitle} />
+      {services[id].proof && <Case lang={lang} />}
       <section className="faq" aria-labelledby="faq-h">
         <div className="sec-head">
           <h2 className="h2" id="faq-h">
@@ -198,7 +227,6 @@ export default function Service({ id, lang }) {
           ))}
         </div>
       </section>
-      <Steps lang={lang} items={s.steps} title={t.stepsTitle} />
       <Rack lang={lang} current={id} headingId="svc-more-h" title={t.moreTitle} />
       <Close lang={lang} edition="cli" service={id} />
     </>
