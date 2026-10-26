@@ -1,10 +1,76 @@
 import React from 'react';
 import { graphql, useStaticQuery, withPrefix } from 'gatsby';
-import { routes } from '../i18n';
+import { blogPath, routes } from '../i18n';
 
 const locales = { pl: 'pl_PL', en: 'en_US' };
 
 const pageTypes = { rec: 'ProfilePage', work: 'CollectionPage', blog: 'CollectionPage' };
+
+const services = {
+  pl: [
+    [
+      'Aplikacje webowe',
+      'Całe aplikacje webowe dla firm: front, back, wdrożenie i utrzymanie, rozliczenie na fakturę B2B.',
+    ],
+    [
+      'Strony internetowe',
+      'Strony internetowe dla firm z Wrocławia i całej Polski, szybkie i dostępne z klawiatury.',
+    ],
+    [
+      'Dostępność WCAG',
+      'Audyt i poprawki dostępności według WCAG 2.1 AA: klawiatura, czytniki ekranu, kontrast, fokus i formularze.',
+    ],
+    [
+      'Programowanie Angular',
+      'Aplikacje w Angularze i TypeScripcie, z RxJS i NgRx, od architektury po wdrożenie.',
+    ],
+  ],
+  en: [
+    [
+      'Web applications',
+      'Complete web applications for companies: front end, back end, deployment and maintenance, invoiced B2B.',
+    ],
+    ['Websites', 'Websites for companies, fast and usable from the keyboard.'],
+    [
+      'WCAG accessibility',
+      'Accessibility audits and fixes against WCAG 2.1 AA: keyboard, screen readers, contrast, focus and forms.',
+    ],
+    [
+      'Angular development',
+      'Angular and TypeScript applications with RxJS and NgRx, from architecture to deployment.',
+    ],
+  ],
+};
+
+const crumbLabels = {
+  pl: {
+    home: 'Strona główna',
+    work: 'Archiwum',
+    blog: 'Blog',
+    rec: 'Dla rekrutera',
+    cli: 'Dla klienta',
+  },
+  en: {
+    home: 'Home',
+    work: 'Archive',
+    blog: 'Blog',
+    rec: 'For recruiters',
+    cli: 'For clients',
+  },
+};
+
+const crumbTrail = ({ lang, view, title, canonical, post, code }) => {
+  const labels = crumbLabels[lang];
+  const home = [labels.home, routes.home[lang]];
+  if (post) return [home, [labels.blog, blogPath], [post.headline, canonical]];
+  if (view === 'blog') return [home, [labels.blog, canonical]];
+  if (code || view === 'case') {
+    return [home, [labels.work, routes.work[lang]], [code?.name ?? 'TailorCloth', canonical]];
+  }
+  if (view === 'work') return [home, [labels.work, canonical]];
+  if (view !== 'home' && canonical) return [home, [labels[view] ?? title, canonical]];
+  return null;
+};
 
 const graph = ({ url, lang, view, title, description, canonical, image, post, code }) => {
   const person = {
@@ -30,6 +96,7 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
     sameAs: [
       'https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6',
       'https://github.com/adiyy2001',
+      'https://dev.to/adrian_turbiski_f62044ad',
     ],
   };
   const site = {
@@ -57,8 +124,10 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
     nodes.push({
       '@type': 'ProfessionalService',
       '@id': url('/#service'),
-      name: 'Adrian Turbiński Software',
+      name: 'Adrian Turbiński',
       url: url('/'),
+      logo: url('/apple-touch-icon.png'),
+      image: url(`/og/cli-${lang}.jpg`),
       email: 'mailto:adrian.turbinski@gmail.com',
       founder: { '@id': person['@id'] },
       address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
@@ -72,6 +141,14 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
         lang === 'pl'
           ? ['Aplikacje webowe', 'Strony internetowe', 'Dostępność WCAG', 'Programowanie Angular']
           : ['Web applications', 'Websites', 'WCAG accessibility', 'Angular development'],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: lang === 'pl' ? 'Usługi' : 'Services',
+        itemListElement: services[lang].map(([name, text]) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name, description: text },
+        })),
+      },
     });
   }
   if (view === 'case') {
@@ -120,6 +197,20 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
       publisher: { '@id': person['@id'] },
       mainEntityOfPage: { '@id': page['@id'] },
       isPartOf: { '@id': url('/blog/#page') },
+    });
+  }
+  const trail = crumbTrail({ lang, view, title, canonical, post, code });
+  if (trail) {
+    page.breadcrumb = { '@id': `${url(canonical)}#breadcrumb` };
+    nodes.push({
+      '@type': 'BreadcrumbList',
+      '@id': page.breadcrumb['@id'],
+      itemListElement: trail.map(([name, to], index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name,
+        item: url(to),
+      })),
     });
   }
   return { '@context': 'https://schema.org', '@graph': nodes };

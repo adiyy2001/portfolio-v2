@@ -3,13 +3,24 @@ module.exports = {
     title: 'Adrian Turbiński',
     siteUrl: 'https://adrianturbinski.pl',
     goatcounter: 'adrianturbinski',
+    analytics: 'G-YPZS4964X7',
   },
   plugins: [
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
-    'gatsby-plugin-sitemap',
-    'gatsby-plugin-robots-txt',
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        resolvePages: ({ allSitePage }) => [...allSitePage.nodes, { path: '/wzornik/' }],
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        policy: [{ userAgent: '*', allow: '/', disallow: ['/wzornik/*.pdf$', '/wzornik/*.zip$'] }],
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
