@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
+import Dock from './dock';
 import Magnet from './magnet';
+import Quote from './quote';
 import Reveal from './reveal';
 import Split from './split';
 import { routes, tie } from '../i18n';
@@ -26,8 +28,7 @@ const copy = {
     cliId: 'kontakt',
     cliSubject: 'Projekt',
     cliCloseTitle: 'Masz projekt? Napisz.',
-    cliHint: 'Wystarczy kilka zdań: czym zajmuje się firma, co aplikacja ma robić i na kiedy.',
-    cliCta2: 'Opowiedz o projekcie',
+    cliHint: 'Wolisz bez formularza? Napisz albo zadzwoń, wystarczy kilka zdań o projekcie.',
     cliCross: 'Rekrutujesz? Jest też edycja dla rekrutera.',
     signSmall: 'Adrian Turbiński, programista z Wrocławia',
   },
@@ -41,9 +42,7 @@ const copy = {
     cliId: 'contact',
     cliSubject: 'Project',
     cliCloseTitle: 'Got a project? Write.',
-    cliHint:
-      'A few sentences are enough: what the company does, what the app should do and by when.',
-    cliCta2: 'Tell me about the project',
+    cliHint: 'Prefer no form? Write or call, a few sentences about the project are enough.',
     cliCross: "Hiring? There's a recruiter edition too.",
     signSmall: 'Adrian Turbiński, developer from Wrocław',
   },
@@ -85,7 +84,7 @@ function Sign({ small }) {
   );
 }
 
-export default function Close({ lang, edition = 'rec' }) {
+export default function Close({ lang, edition = 'rec', service }) {
   const t = copy[lang];
   const cli = edition === 'cli';
   const headingId = `${edition}-close-h`;
@@ -94,7 +93,6 @@ export default function Close({ lang, edition = 'rec' }) {
     ? {
         title: t.cliCloseTitle,
         hint: t.cliHint,
-        cta: t.cliCta2,
         cross: t.cliCross,
         to: routes.rec[lang],
       }
@@ -111,7 +109,8 @@ export default function Close({ lang, edition = 'rec' }) {
       <h2 className="h2 close__h" id={headingId}>
         <Split text={text.title} onView />
       </h2>
-      <Reveal className="close__grid">
+      <Reveal className={cli ? 'close__grid close__grid--quote' : 'close__grid'}>
+        {cli && <Quote lang={lang} service={service} />}
         <div className="close__act">
           <a className="close__mail" href={mailto}>
             {mail}
@@ -122,21 +121,23 @@ export default function Close({ lang, edition = 'rec' }) {
             </a>
           )}
           <p className="close__hint">{tie(text.hint)}</p>
-          <div className="cta">
-            <Magnet className="btn" href={mailto}>
-              {tie(text.cta)}
-            </Magnet>
-            {edition === 'rec' && (
-              <button type="button" className="btn btn--line" onClick={() => window.print()}>
-                {tie(t.recPrint2)}
-              </button>
-            )}
-            {edition === 'repo' && (
-              <Link className="btn btn--line" to={routes.rec[lang]}>
-                {tie(t.repoCv)}
-              </Link>
-            )}
-          </div>
+          {!cli && (
+            <div className="cta">
+              <Magnet className="btn" href={mailto}>
+                {tie(text.cta)}
+              </Magnet>
+              {edition === 'rec' && (
+                <button type="button" className="btn btn--line" onClick={() => window.print()}>
+                  {tie(t.recPrint2)}
+                </button>
+              )}
+              {edition === 'repo' && (
+                <Link className="btn btn--line" to={routes.rec[lang]}>
+                  {tie(t.repoCv)}
+                </Link>
+              )}
+            </div>
+          )}
         </div>
         <ul className="close__links">
           {links.map(({ name, href }) => (
@@ -158,6 +159,7 @@ export default function Close({ lang, edition = 'rec' }) {
         </svg>
       </Link>
       {cli && <Sign small={t.signSmall} />}
+      {cli && <Dock lang={lang} />}
     </section>
   );
 }

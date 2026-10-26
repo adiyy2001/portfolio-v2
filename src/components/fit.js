@@ -5,8 +5,7 @@ import { instant } from '../motion';
 import Magnet from './magnet';
 import Reveal from './reveal';
 import Split from './split';
-
-const mail = 'adrian.turbinski@gmail.com';
+import { quoteId } from './quote';
 
 const copy = {
   standard: 'WCAG 2.1 AA',
@@ -16,7 +15,6 @@ const copy = {
     lead: 'Sprawdzam i poprawiam aplikacje pod WCAG 2.1 na poziomie AA: obsługa z klawiatury, czytniki ekranu, kontrast, fokus, formularze.',
     body: 'Robiłem to w interfejsach pełnych diagramów. Od 28 czerwca 2025 Europejski akt o dostępności obejmuje w UE między innymi sklepy internetowe i bankowość.',
     cta: 'Zapytaj o dostępność',
-    subject: 'Dostępność',
     careLabel: 'Co sprawdzam',
     checks: [
       'klawiatura',
@@ -34,7 +32,6 @@ const copy = {
     lead: 'I check and fix apps against WCAG 2.1 level AA: keyboard use, screen readers, contrast, focus, forms.',
     body: "I've done it with diagram-heavy interfaces. Since 28 June 2025 the European Accessibility Act covers banking and online shops across the EU amongst other services.",
     cta: 'Ask about accessibility',
-    subject: 'Accessibility',
     careLabel: 'What I check',
     checks: [
       'keyboard',
@@ -86,9 +83,7 @@ export default function Fit({ lang }) {
           </h2>
           <p className="fit__lead">{tie(t.lead)}</p>
           <p className="fit__body">{tie(t.body)}</p>
-          <Magnet
-            className="btn btn--wool"
-            href={`mailto:${mail}?subject=${encodeURIComponent(t.subject)}`}>
+          <Magnet className="btn btn--wool" href={`#${quoteId[lang]}`} data-cta="fit-quote">
             {tie(t.cta)}
           </Magnet>
         </div>

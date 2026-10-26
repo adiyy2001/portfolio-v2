@@ -9,12 +9,11 @@ import Steps from './steps';
 import { Tag } from './tags';
 import { routes, tie } from '../i18n';
 import { phone, serviceKeys, services, servicesIndex } from '../services';
-
-const mail = 'adrian.turbinski@gmail.com';
+import { quoteId } from './quote';
 
 const copy = {
   pl: {
-    write: 'Napisz o projekcie',
+    write: 'Wyceń projekt',
     call: `Zadzwoń: ${phone.label}`,
     includedTitle: 'Co dostajesz.',
     includedLabel: 'W cenie',
@@ -27,7 +26,7 @@ const copy = {
     price: 'Cena',
   },
   en: {
-    write: 'Tell me about the project',
+    write: 'Get a quote',
     call: `Call: ${phone.intl}`,
     includedTitle: 'What you get.',
     includedLabel: 'Included',
@@ -53,11 +52,11 @@ function PriceTag({ s, n = 0, tilt = -2 }) {
   );
 }
 
-function Contact({ lang, subject }) {
+function Contact({ lang }) {
   const t = copy[lang];
   return (
     <div className="cta" data-rise style={{ '--r': 1 }}>
-      <Magnet className="btn" href={`mailto:${mail}?subject=${encodeURIComponent(subject)}`}>
+      <Magnet className="btn" href={`#${quoteId[lang]}`} data-cta="service-quote">
         {tie(t.write)}
       </Magnet>
       <a className="link" href={phone.href}>
@@ -135,7 +134,7 @@ export function ServicesIndex({ lang }) {
         <p className="lead" data-rise style={{ '--r': 0 }}>
           {tie(t.lead)}
         </p>
-        <Contact lang={lang} subject={t.label} />
+        <Contact lang={lang} />
       </Hero>
       <Rack lang={lang} headingId="svc-list-h" title={`${t.label}.`} paper />
       <Close lang={lang} edition="cli" />
@@ -163,7 +162,7 @@ export default function Service({ id, lang }) {
         <p className="lead" data-rise style={{ '--r': 0 }}>
           {tie(s.lead)}
         </p>
-        <Contact lang={lang} subject={s.name} />
+        <Contact lang={lang} />
       </Hero>
       <section className="paper fit" aria-labelledby="svc-in-h">
         <div className="fit__grid">
@@ -201,7 +200,7 @@ export default function Service({ id, lang }) {
       </section>
       <Steps lang={lang} items={s.steps} title={t.stepsTitle} />
       <Rack lang={lang} current={id} headingId="svc-more-h" title={t.moreTitle} />
-      <Close lang={lang} edition="cli" />
+      <Close lang={lang} edition="cli" service={id} />
     </>
   );
 }

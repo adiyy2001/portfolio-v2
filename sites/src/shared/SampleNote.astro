@@ -10,18 +10,22 @@ interface Props {
 const { name, lang = 'pl', class: className } = Astro.props;
 const back =
   lang === 'pl' ? portfolio('/dla-klienta/#wzornik') : portfolio('/en/for-clients/#swatch-book');
+const order =
+  lang === 'pl'
+    ? portfolio('/uslugi/strony-internetowe/#wycena')
+    : portfolio('/en/services/websites/#quote');
 ---
 
 <p class:list={['sample-note', className]} lang={lang}>
   {lang === 'pl' ? (
     <>
       Strona przykładowa. {name} to zmyślona firma. Projekt i wykonanie:{' '}
-      <a href={back}>Adrian Turbiński</a>.
+      <a href={back}>Adrian Turbiński</a>. <a href={order}>Chcę taką stronę</a>
     </>
   ) : (
     <>
       Sample website. {name} is a made-up business. Designed and built by{' '}
-      <a href={back}>Adrian Turbiński</a>.
+      <a href={back}>Adrian Turbiński</a>. <a href={order}>I want a website like this</a>
     </>
   )}
 </p>

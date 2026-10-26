@@ -96,6 +96,25 @@ export default function Post({ data }) {
           dangerouslySetInnerHTML={{ __html: focusableCode(body) }}
         />
       </div>
+      <aside className="post__hire" aria-labelledby="post-hire-h">
+        <p className="post__hire-tag">Made to measure</p>
+        <h2 className="post__hire-h" id="post-hire-h">
+          {tie('Need something like this built for your company?')}
+        </h2>
+        <p className="post__hire-text">
+          {tie(
+            'I build web apps, websites and accessibility fixes for companies, invoiced B2B. You get a written quote in two working days.',
+          )}
+        </p>
+        <p className="cta">
+          <Link className="btn" to={`${routes.services.en}#quote`} data-cta="post-quote">
+            Get a quote
+          </Link>
+          <Link className="link" to={routes.services.en} data-cta="post-services">
+            Services and prices
+          </Link>
+        </p>
+      </aside>
       <aside className="post__end" aria-label="About the author">
         <p>
           {tie(

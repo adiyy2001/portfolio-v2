@@ -43,6 +43,10 @@ const faces = [
           </li>
         ))}
       </ol>
+      <p class="order">
+        Podoba Ci się któraś? Uszyję podobną dla Twojej firmy.
+        <a href={portfolio('/uslugi/strony-internetowe/#wycena')}>Chcę taką stronę</a>
+      </p>
       <p class="back">
         <a href={link('/identyfikacja/')}>Identyfikacja wizualna: sześć realizacji</a>
       </p>
@@ -127,6 +131,24 @@ const faces = [
   a:focus-visible {
     outline: 3px solid var(--wool);
     outline-offset: 3px;
+  }
+
+  .order {
+    margin: 40px 0 0;
+    padding: 24px;
+    background: var(--wool);
+    color: var(--chalk);
+  }
+
+  .order a {
+    display: inline-block;
+    margin-top: 8px;
+    color: var(--chalk);
+    font-weight: 600;
+  }
+
+  .order a:focus-visible {
+    outline-color: var(--chalk);
   }
 
   .back {
