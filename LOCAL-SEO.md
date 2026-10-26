@@ -47,7 +47,7 @@ Free listings first. Status as of 2026-10-26.
 | ------------------------------- | ---------------------------------------------------- | ------------------- | ------------------------------------------------------ |
 | Bing Places                     | feeds Bing Maps and ChatGPT search; import from GBP  | listing             | done 26.10, GBP sync weekly                            |
 | Apple Business Connect          | Apple Maps and Siri                                  | listing             | skipped                                                |
-| Panorama Firm (panoramafirm.pl) | biggest Polish directory, ranks for "firma + miasto" | nofollow            | waiting: the only checkbox bundles marketing calls      |
+| Panorama Firm (panoramafirm.pl) | biggest Polish directory, ranks for "firma + miasto" | nofollow            | waiting: the only checkbox bundles marketing calls     |
 | pkt.pl                          | ranks for local queries, free basic listing          | nofollow            | skipped                                                |
 | Aleo (aleo.com)                 | pulls CEIDG data, fix and complete it                | dofollow            | skipped                                                |
 | Oferteo                         | inbound requests for quotes, free profile            | profile             | skipped                                                |
@@ -72,6 +72,12 @@ One post a week, Tuesday morning, button "Więcej informacji" to the linked page
 Post 1 went out on 2026-10-25. Posts 2 to 5 are scheduled in the profile for 27.10, 3.11, 10.11 and 17.11 at 09:00. The opening date (3 January 2022) and the Facebook link were added on 2026-10-26 and wait for Google's review.
 
 After post 5, repeat the cycle with a fresh image, or post a finished client project.
+
+Automation since 2026-10-26: `~/bin/gbp-weekly-post` with the user timer `gbp-weekly-post.timer` (Tuesday 08:30, Persistent) reads the list above from `origin/main`, rotates the mockup images and keeps its state in `~/.local/state/gbp-weekly-post/`. Its first automatic post is 2026-11-24, after the scheduled posts 2 to 5. It needs the PC on and the debug Chrome signed in. Post 1 was posted again by hand on 2026-10-26 as a test of the script.
+
+## Microsoft Clarity
+
+Project `z3yqyzew1g`, masking Balanced plus the whole `form` element masked. The script loads only after analytics consent (`src/consent.js`), both privacy policies describe it.
 
 ## Keywords, 2026-10-26
 

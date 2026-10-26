@@ -35,9 +35,11 @@ Status on 2026-10-03: the site side is built (blog pages, feed, SEO, navigation,
 - Lighthouse on a real article, done 2026-10-07 on `/blog/how-i-test-that-collaborative-edits-converge/`: mobile performance 97 to 98 (one cold first run gave 89), accessibility 100, best practices 96, SEO 100; desktop 100, 100, 96, 100. CLS 0.071 on mobile.
 - Domain: the site moves to `https://adrianturbinski.pl/` (registered 2026-10-03, mailbox `contact@adrianturbinski.pl`), so blog canonical URLs are final from the first article. The `/portfolio-v2` prefix is gone. Privacy policy: `/en/privacy/`.
 
-## Planned: two audiences (Adrian, 2026-10-26, not started)
+## Two audiences (Adrian, 2026-10-26, Poradnik built 2026-10-26 on branch `site-growth`)
 
-Adrian decided the writing splits by reader. Build it later, on request.
+Adrian decided the writing splits by reader. The Poradnik section and its first two articles (questions 1 and 9 below, plus "aplikacja webowa co to") are built and wait for deploy. Question 6 (EAA) is the next article.
+
+How it is built: `content/poradnik/<slug>/index.md` with `answer`, `service` (apps, sites, wcag or care) and `faq` in the frontmatter; the build fails when one of them is missing. Templates `src/templates/guide.js` and `guide-post.js`, the shelf with the newest articles in `src/components/guides.js`, styles in `src/styles/guide.css`. JSON-LD BlogPosting plus FAQPage, sitemap with lastmod, a Poradnik section in `llms.txt`. Prices in articles come only from `src/services.js`.
 
 - `/blog/` stays technical and in English, for recruiters and developers. Command Center keeps publishing there and cross-posting to dev.to; nothing changes in `content/blog`.
 - A Polish section for clients, working name `/poradnik/`, with content in `content/poradnik/<slug>/index.md`. It is a separate folder so the Command Center publisher (`BLOG_DIR = "content/blog"`) never cross-posts these articles to dev.to. There is no RSS or dev.to for this section.
