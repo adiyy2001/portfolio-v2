@@ -21,7 +21,7 @@ export const wrapRootElement = ({ element }) => (
 );
 
 const pagePath = ({ location, pageResources }) =>
-  pageResources?.page.path ?? (location.pathname.slice(prefix.length) || '/');
+  (pageResources?.page.path ?? (location.pathname.slice(prefix.length) || '/')).split(/[?#]/)[0];
 
 export const wrapPageElement = ({ element, props }) => (
   <Layout path={pagePath(props)}>{element}</Layout>

@@ -103,7 +103,7 @@ export default function Post({ data }) {
         </h2>
         <p className="post__hire-text">
           {tie(
-            'I build web apps, websites and accessibility fixes for companies, invoiced B2B. You get a written quote in two working days.',
+            'I build websites and web apps for companies and fix accessibility in existing ones. B2B invoice, written quote within two working days.',
           )}
         </p>
         <p className="cta">
