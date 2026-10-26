@@ -8,9 +8,9 @@ export const services = {
       name: 'Aplikacje webowe',
       short: 'Panele klienta, systemy rezerwacji, narzędzia, które zastąpią arkusz.',
       title: 'Aplikacje | na zamówienie.',
-      seoTitle: 'Aplikacje webowe na zamówienie, Wrocław, Adrian Turbiński',
+      seoTitle: 'Aplikacja webowa dla firmy na zamówienie, cena, Wrocław, Adrian Turbiński',
       description:
-        'Aplikacje webowe dla firm z Wrocławia i całej Polski: panel klienta, rezerwacje, narzędzia wewnętrzne. Front, back i wdrożenie od jednej osoby, od 18 000 zł netto.',
+        'Aplikacja webowa dla firmy z Wrocławia albo z całej Polski: panel klienta, rezerwacje, narzędzie wewnętrzne. Cena od 18 000 zł netto, front, back i wdrożenie od jednej osoby.',
       lead: 'Panel dla klientów, system rezerwacji albo narzędzie, które zastąpi arkusz krążący mailem. Robię całość: interfejs, serwer, bazę danych i wdrożenie.',
       body: 'Piszę w Angularze i TypeScripcie, serwer w Node.js, dane w PostgreSQL. Aplikacje od 2019 roku, także takie, w których jeden ekran rysuje setki elementów.',
       price: 'od 18 000 zł',
@@ -134,9 +134,9 @@ export const services = {
       name: 'Strony internetowe',
       short: 'Strona firmowa, która ładuje się szybko i da się ją znaleźć.',
       title: 'Strony | skrojone na miarę.',
-      seoTitle: 'Strony internetowe dla firm, Wrocław, Adrian Turbiński',
+      seoTitle: 'Strony internetowe Wrocław, tworzenie stron dla firm, Adrian Turbiński',
       description:
-        'Strony internetowe dla firm z Wrocławia: szybkie, dostępne z klawiatury, z podstawami SEO i wizytówką Google. Projekt, kod i wdrożenie od 3 500 zł netto.',
+        'Tworzenie i projektowanie stron internetowych dla firm z Wrocławia: szybkie, dostępne z klawiatury, z SEO i wizytówką Google. Strona firmowa od 3 500 zł netto.',
       lead: 'Strona firmowa, która otwiera się w sekundę, działa z klawiatury i czytnika ekranu i którą da się znaleźć w Google. Projekt, kod i wdrożenie.',
       body: 'Kod piszę od zera, bez ciężkich szablonów, więc strona nie zwalnia po roku. Ta strona, którą czytasz, ma 100 punktów wydajności w Lighthouse.',
       price: 'od 3 500 zł',
@@ -171,7 +171,7 @@ export const services = {
       ],
       faq: [
         [
-          'Ile kosztuje strona internetowa?',
+          'Ile kosztuje strona internetowa dla firmy?',
           'Strona firmowa do 5 podstron kosztuje od 3 500 zł netto. Rozbudowana strona z blogiem albo w kilku językach od 7 000 zł netto. Domena i hosting to zwykle kilkaset złotych rocznie.',
         ],
         [
@@ -260,9 +260,9 @@ export const services = {
       name: 'Dostępność WCAG',
       short: 'Audyt i poprawki pod WCAG 2.1 AA i Europejski akt o dostępności.',
       title: 'Dostępność | na każdą figurę.',
-      seoTitle: 'Audyt dostępności WCAG i poprawki, Wrocław, Adrian Turbiński',
+      seoTitle: 'Audyt WCAG i dostępności cyfrowej strony, cena, Wrocław, Adrian Turbiński',
       description:
-        'Audyt dostępności WCAG 2.1 AA stron i aplikacji: test z klawiaturą i czytnikiem ekranu, raport z poprawkami, wsparcie przy Europejskim akcie o dostępności. Od 1 900 zł netto.',
+        'Audyt WCAG 2.1 AA i dostępności cyfrowej stron internetowych i aplikacji: test z klawiaturą i czytnikiem ekranu, raport z poprawkami, Europejski akt o dostępności. Cena od 1 900 zł netto.',
       lead: 'Sprawdzam stronę albo aplikację pod WCAG 2.1 na poziomie AA i poprawiam to, co znajdę. Po teście automatem siadam do klawiatury i czytnika ekranu.',
       body: 'Robiłem to w interfejsach pełnych diagramów i tabel, gdzie automat nie widzi połowy problemów. Raport piszę tak, żeby programista wiedział, co zmienić, a zarząd, co jest pilne.',
       price: 'od 1 900 zł',
@@ -301,7 +301,7 @@ export const services = {
           'Od 28 czerwca 2025 między innymi sklepów internetowych, bankowości, transportu pasażerskiego i usług telekomunikacyjnych dla konsumentów w UE. Mikroprzedsiębiorstwa świadczące usługi są z niego zwolnione.',
         ],
         [
-          'Ile kosztuje audyt WCAG?',
+          'Ile kosztuje audyt WCAG 2.1?',
           'Od 1 900 zł netto za stronę do 10 podstron albo jeden proces, na przykład zamówienie. Większe serwisy i aplikacje wyceniam po przejrzeniu.',
         ],
         [
@@ -378,9 +378,9 @@ export const services = {
       name: 'Utrzymanie i rozwój',
       short: 'Aktualizacje, poprawki, kopie i nowe funkcje, także w cudzym kodzie.',
       title: 'Utrzymanie | i poprawki.',
-      seoTitle: 'Utrzymanie stron i aplikacji, aktualizacje Angulara, Adrian Turbiński',
+      seoTitle: 'Opieka nad stroną internetową i aplikacją, cennik, Adrian Turbiński',
       description:
-        'Utrzymanie i rozwój stron oraz aplikacji webowych: aktualizacje, migracje Angulara, poprawki błędów, kopie zapasowe i nowe funkcje. Od 300 zł netto miesięcznie.',
+        'Opieka nad stroną internetową i utrzymanie aplikacji webowych: aktualizacje, migracje Angulara, poprawki błędów, kopie zapasowe i nowe funkcje. Od 300 zł netto miesięcznie.',
       lead: 'Aktualizacje, poprawki błędów, kopie zapasowe i nowe funkcje. Także w aplikacjach, których nie pisałem, i w starszych wersjach Angulara.',
       body: 'Zaczynam od przeglądu kodu i listy ryzyk, żeby było jasne, co jest pilne, a co może poczekać. Potem pracujemy w stałym, miesięcznym rytmie.',
       price: 'od 300 zł',
@@ -415,7 +415,7 @@ export const services = {
       ],
       faq: [
         [
-          'Ile kosztuje utrzymanie strony albo aplikacji?',
+          'Ile kosztuje utrzymanie strony internetowej albo aplikacji?',
           'Od 300 zł netto miesięcznie z dwiema godzinami prac. Kolejne godziny kosztują 140 zł netto.',
         ],
         [
@@ -488,7 +488,7 @@ export const services = {
 export const servicesIndex = {
   pl: {
     title: 'Usługi | i cennik.',
-    seoTitle: 'Usługi i cennik: aplikacje, strony, WCAG, Wrocław, Adrian Turbiński',
+    seoTitle: 'Cennik stron internetowych i aplikacji webowych, Wrocław, Adrian Turbiński',
     description:
       'Usługi programisty freelancera z Wrocławia: aplikacje webowe, strony internetowe, audyt dostępności WCAG i utrzymanie. Ceny od, netto, faktura B2B.',
     lead: 'Cztery rzeczy, które robię dla firm. Ceny to punkt startowy dla typowego zakresu, dokładną wycenę dostajesz na piśmie po rozmowie.',
