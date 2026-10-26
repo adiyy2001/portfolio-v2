@@ -102,7 +102,7 @@ export default function Close({ lang, edition = 'rec' }) {
         hint: t.recHint,
         cta: t.recMail2,
         cross: t.recCross,
-        to: routes.cli[lang],
+        to: routes.home[lang],
       };
 
   return (

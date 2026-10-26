@@ -174,7 +174,7 @@ export default function Work({ lang }) {
   const t = copy[lang];
   const reduce = useReducedMotion();
   const list = useRef(null);
-  const wzornik = `${routes.cli[lang]}#${t.anchor}`;
+  const wzornik = `${routes.home[lang]}#${t.anchor}`;
   useFaces(list);
 
   return (
