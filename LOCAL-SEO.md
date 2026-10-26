@@ -73,19 +73,19 @@ After post 5, repeat the cycle with a fresh image, or post a finished client pro
 
 ## Keywords, 2026-10-26
 
-Source: Google Ads Keyword Planner (inactive account, so volumes come in buckets of 50, 500 and 5,000 a month), Poland, Polish. Competition is the planner's ad index from 0 to 100, a rough proxy for organic difficulty. Raw export: `C:\Users\Adrian\Downloads\kw-ideas-1.csv`.
+Source: Google Ads API Keyword Planner (`gsa kw`, exact average monthly searches), Poland, Polish. Competition is the planner's ad index from 0 to 100, a rough proxy for organic difficulty.
 
-| Page                          | Main phrase                             | Volume | Comp. | Also                                                                                                 |
-| ----------------------------- | --------------------------------------- | ------ | ----- | ---------------------------------------------------------------------------------------------------- |
-| Poradnik, article 1           | ile kosztuje strona internetowa         | 5000   | 52    | dla firmy, utrzymanie, wordpress, ze sklepem, w 2026                                                 |
-| `/uslugi/strony-internetowe/` | strony internetowe wrocław              | 500    | 48    | tworzenie stron internetowych wrocław, projektowanie stron internetowych wrocław, strony www wrocław |
-| `/uslugi/dostepnosc-wcag/`    | audyt wcag                              | 500    | 65    | audyt dostępności, audyt wcag cena, audyt wcag 2.1, audyt dostępności cyfrowej                       |
-| `/uslugi/aplikacje-webowe/`   | aplikacja webowa                        | 500    | 48    | aplikacja webowa cena, prosta aplikacja webowa                                                       |
-| `/uslugi/utrzymanie/`         | opieka nad stroną internetową           | 500    | 59    | ile kosztuje utrzymanie strony internetowej (500), opieka nad stroną cennik                          |
-| Poradnik, next article        | aplikacja webowa a strona internetowa   | 50     | 9     | aplikacja webowa co to (3), przykłady (10)                                                           |
-| Poradnik, industry article    | strona internetowa dla firmy budowlanej | 500    | 49    | firmy transportowej, dla małej firmy                                                                 |
+| Page                          | Main phrase                             | Volume | Comp. | Also                                                                                       |
+| ----------------------------- | --------------------------------------- | ------ | ----- | ------------------------------------------------------------------------------------------ |
+| Poradnik, article 1           | ile kosztuje strona internetowa         | 1000   | 52    | zrobienie (590), stworzenie (480), utrzymanie (210), dla firmy (140), ze sklepem (110)     |
+| `/uslugi/strony-internetowe/` | strony internetowe wrocław              | 720    | 48    | tworzenie stron internetowych wrocław (260), projektowanie (170), strony www wrocław (140) |
+| `/uslugi/aplikacje-webowe/`   | aplikacja webowa                        | 390    | 48    | aplikacja webowa cena (10)                                                                 |
+| `/uslugi/dostepnosc-wcag/`    | audyt wcag                              | 260    | 65    | audyt dostępności (90), audyt dostępności cyfrowej (70), audyt wcag 2.1 (50), cena (40)    |
+| `/uslugi/utrzymanie/`         | opieka nad stroną internetową           | 140    | 59    | ile kosztuje utrzymanie strony internetowej (210, better as a Poradnik section)            |
+| Poradnik, article 2           | aplikacja webowa co to                  | 90     | 3     | aplikacja webowa a strona internetowa (50, comp 9), przykłady (20)                         |
+| Poradnik, industry article    | strona internetowa dla firmy budowlanej | 90     | 49    | firmy transportowej (50), dla małej firmy (40)                                             |
 
-Titles, meta descriptions and FAQ questions of the home and service pages were changed to these phrases on 2026-10-26. "programista wrocław" is a job search, so the home title no longer leads with it. Recheck positions in Search Console on 2026-11-23.
+The broad "projektowanie stron internetowych" (1900, comp 62) and "strona internetowa dla firmy" (480, comp 73) are national agency phrases; the home title carries them, but ranking there is a long-term goal. Titles, meta descriptions and FAQ questions of the home and service pages were changed to these phrases on 2026-10-26. "programista wrocław" is a job search, so the home title no longer leads with it. Recheck positions in Search Console on 2026-11-23.
 
 ## Audits, 2026-10-26
 
