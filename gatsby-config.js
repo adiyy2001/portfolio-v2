@@ -1,3 +1,19 @@
+const { execFileSync } = require('child_process');
+
+const lastChange = (...paths) => {
+  try {
+    return (
+      execFileSync('git', ['log', '-1', '--format=%cI', '--', ...paths], {
+        encoding: 'utf8',
+      }).trim() || undefined
+    );
+  } catch {
+    return undefined;
+  }
+};
+
+const servicePaths = /^\/(uslugi|en\/services)\//;
+
 module.exports = {
   siteMetadata: {
     title: 'Adrian Turbiński',
@@ -13,7 +29,51 @@ module.exports = {
       resolve: 'gatsby-plugin-sitemap',
       options: {
         excludes: ['/dla-klienta/', '/en/for-clients/', '/wycena/wyslano/', '/en/quote/sent/'],
-        resolvePages: ({ allSitePage }) => [...allSitePage.nodes, { path: '/wzornik/' }],
+        query: `
+          {
+            site {
+              siteMetadata {
+                siteUrl
+              }
+            }
+            allSitePage {
+              nodes {
+                path
+                component
+              }
+            }
+            allMarkdownRemark(filter: { fileAbsolutePath: { regex: "/content/blog/" } }) {
+              nodes {
+                frontmatter {
+                  slug
+                  date
+                  updated
+                }
+              }
+            }
+          }
+        `,
+        resolvePages: ({ allSitePage, allMarkdownRemark }) => {
+          const posts = new Map(
+            allMarkdownRemark.nodes.map(({ frontmatter: f }) => [
+              `/blog/${f.slug}/`,
+              f.updated || f.date,
+            ]),
+          );
+          const newestPost = [...posts.values()].sort().pop();
+          const pages = allSitePage.nodes.map(({ path, component }) => ({
+            path,
+            lastmod:
+              posts.get(path) ??
+              (path === '/blog/'
+                ? newestPost
+                : servicePaths.test(path)
+                  ? lastChange(component, 'src/services.js', 'src/components/service.js')
+                  : lastChange(component)),
+          }));
+          return [...pages, { path: '/wzornik/', lastmod: lastChange('sites') }];
+        },
+        serialize: ({ path, lastmod }) => ({ url: path, lastmod }),
       },
     },
     {
