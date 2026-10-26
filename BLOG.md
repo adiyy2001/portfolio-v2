@@ -57,3 +57,12 @@ Question backlog, from the FAQ sections of Polish agency pages in October 2026. 
 8. How to tell whether the site brings clients: analytics, Search Console, calls and forms.
 9. How much does a web application or an MVP cost, and how long does it take?
 10. What to check in the contract: rights to the code, accounts in the client's name, terms of care.
+
+### Planned: automatic Poradnik flow (Adrian, 2026-10-26, roadmap only)
+
+After the section and the first two articles are live, Poradnik runs on its own, like the English blog:
+
+- Schedule: the flow plans its own calendar, one article a week, and picks the next topic from the backlog above plus new questions it finds.
+- Fresh material: before each article it collects the newest sources (Polish law and EU acts, Google Business Profile and Search changes, current agency price lists, news from the last weeks) and keeps only facts with a date and a URL. Prices and dates in older articles are rechecked and the article gets an `updated` date.
+- Text: written in Polish, passed through the humanizer-plus skill, drift-checked against the sources, never mentions AI.
+- Publishing: commits to `content/poradnik/` only, so the Command Center publisher never cross-posts it to dev.to. Same quality gates and one-tap rollback as the blog.
