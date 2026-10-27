@@ -831,6 +831,8 @@ html[lang='en'] .title--home {
 }
 
 .card__grain {
+  display: block;
+  background: var(--grain-lite);
   position: absolute;
   inset: 0;
   z-index: -1;

@@ -17,15 +17,6 @@ const faces = () => `
 @font-face{font-family:'Schibsted Grotesk fallback';src:local('Arial'),local('ArialMT'),local('Liberation Sans');font-weight:400 600;size-adjust:105%;ascent-override:93.01%;descent-override:24.55%;line-gap-override:0%}
 `;
 
-const counter = code => (
-  <script
-    key="goatcounter"
-    data-goatcounter={`https://${code}.goatcounter.com/count`}
-    async
-    src="https://gc.zgo.at/count.js"
-  />
-);
-
 const consentDefaults = id => `
 window.dataLayer=window.dataLayer||[];
 function gtag(){dataLayer.push(arguments)}
@@ -39,15 +30,48 @@ if(stored==='granted')addEventListener('load',function(){${clarityLoader}});
 
 const consentKnown = `try{if(localStorage.getItem('${consentKey}'))document.documentElement.classList.add('consent-known')}catch(e){}`;
 
-const analytics = id => [
-  <script key="gtag-consent" dangerouslySetInnerHTML={{ __html: consentDefaults(id) }} />,
-  <script key="gtag" async src={`https://www.googletagmanager.com/gtag/js?id=${id}`} />,
+const lateLoader = sources => `
+(function(){
+var started=false;
+function add(item){var s=document.createElement('script');s.async=true;s.src=item.src;if(item.counter)s.setAttribute('data-goatcounter',item.counter);document.head.appendChild(s)}
+function start(){
+if(started)return;
+started=true;
+${JSON.stringify(sources)}.forEach(add);
+}
+addEventListener('load',function(){setTimeout(start,4000)});
+['pointerdown','keydown','scroll','touchstart'].forEach(function(name){addEventListener(name,start,{once:true,passive:true})});
+})();
+`;
+
+const analyticsSources = () => [
+  ...(siteMetadata.analytics
+    ? [{ src: `https://www.googletagmanager.com/gtag/js?id=${siteMetadata.analytics}` }]
+    : []),
+  ...(siteMetadata.goatcounter
+    ? [
+        {
+          src: 'https://gc.zgo.at/count.js',
+          counter: `https://${siteMetadata.goatcounter}.goatcounter.com/count`,
+        },
+      ]
+    : []),
 ];
 
 export const onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
+  const sources = analyticsSources();
   setPostBodyComponents([
-    ...(siteMetadata.goatcounter ? [counter(siteMetadata.goatcounter)] : []),
-    ...(siteMetadata.analytics ? analytics(siteMetadata.analytics) : []),
+    ...(siteMetadata.analytics
+      ? [
+          <script
+            key="gtag-consent"
+            dangerouslySetInnerHTML={{ __html: consentDefaults(siteMetadata.analytics) }}
+          />,
+        ]
+      : []),
+    ...(sources.length
+      ? [<script key="late-analytics" dangerouslySetInnerHTML={{ __html: lateLoader(sources) }} />]
+      : []),
   ]);
   setHeadComponents([
     <link

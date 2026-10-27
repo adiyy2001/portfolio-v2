@@ -50,18 +50,7 @@ export function Tag({ n, tilt, offset, children }) {
       style={{ '--tilt': `${tilt}deg`, '--n': n }}
       onPointerMove={lean}
       onPointerLeave={release}>
-      <svg className="tags__grain" aria-hidden="true" focusable="false">
-        <filter id={`tags-grain-${n}`}>
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.8"
-            numOctaves="2"
-            stitchTiles="stitch"
-          />
-          <feColorMatrix values="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0.3" />
-        </filter>
-        <rect width="100%" height="100%" filter={`url(#tags-grain-${n})`} />
-      </svg>
+      <span className="tags__grain" aria-hidden="true" />
       <m.div className="tags__in" style={{ rotateX, rotateY }}>
         {children}
       </m.div>

@@ -80,18 +80,7 @@ export default function Card({ lang }) {
 
   return (
     <div className="card" onPointerMove={tilt} onPointerLeave={release}>
-      <svg className="card__grain" aria-hidden="true" focusable="false">
-        <filter id="card-grain">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.8"
-            numOctaves="2"
-            stitchTiles="stitch"
-          />
-          <feColorMatrix values="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0.3" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#card-grain)" />
-      </svg>
+      <span className="card__grain" aria-hidden="true" />
       <m.div className="card__in" style={{ rotateX, rotateY }}>
         <div className="card__head">
           <p className="card__title">{tie(t.cardTitle)}</p>
