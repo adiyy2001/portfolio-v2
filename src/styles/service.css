@@ -207,6 +207,10 @@
   margin-top: clamp(32px, 4vw, 48px);
 }
 
+.rack-svc__brief {
+  margin-top: 24px;
+}
+
 @media (hover: none) {
   .rack-svc__link:hover {
     translate: none;

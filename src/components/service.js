@@ -9,7 +9,7 @@ import Reveal from './reveal';
 import Split from './split';
 import Steps from './steps';
 import { Tag } from './tags';
-import { routes, tie } from '../i18n';
+import { briefPath, routes, tie } from '../i18n';
 import { phone, serviceKeys, services, servicesIndex } from '../services';
 import { quoteId } from './quote';
 
@@ -45,8 +45,24 @@ const copy = {
     rackLead: 'Starting prices, net, for a typical scope. You get an exact written quote.',
     all: 'All services and prices',
     price: 'Price',
+    briefLead: 'Preparing to ask for a quote? Fill in the free',
+    briefLink: 'website brief template',
   },
 };
+
+function BriefNote({ lang, className }) {
+  const t = copy[lang];
+  if (!t.briefLead) return null;
+  return (
+    <p className={className}>
+      {tie(t.briefLead)}{' '}
+      <Link className="link" to={briefPath} data-cta="brief-link">
+        {t.briefLink}
+      </Link>
+      .
+    </p>
+  );
+}
 
 function PriceTag({ s, n = 0, tilt = -2 }) {
   return (
@@ -120,6 +136,7 @@ export function ServiceRack({ lang }) {
           {tie(t.all)}
         </Link>
       </p>
+      <BriefNote lang={lang} className="rack-svc__brief" />
     </Rack>
   );
 }
@@ -219,6 +236,7 @@ export default function Service({ id, lang }) {
             </a>
           </p>
         )}
+        {id === 'apps' && <BriefNote lang={lang} className="who__more" />}
       </section>
       <Steps lang={lang} items={s.steps} title={t.stepsTitle} />
       {services[id].proof && <Case lang={lang} />}
