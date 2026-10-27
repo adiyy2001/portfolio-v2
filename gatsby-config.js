@@ -14,6 +14,8 @@ const lastChange = (...paths) => {
 
 const servicePaths = /^\/(uslugi|en\/services)\//;
 
+const briefPage = '/en/website-brief/';
+
 module.exports = {
   siteMetadata: {
     title: 'Adrian Turbiński',
@@ -77,7 +79,9 @@ module.exports = {
                 ? newest(path)
                 : servicePaths.test(path)
                   ? lastChange(component, 'src/services.js', 'src/components/service.js')
-                  : lastChange(component)),
+                  : path === briefPage
+                    ? lastChange(component, 'src/brief.js')
+                    : lastChange(component)),
           }));
           return [...pages, { path: '/wzornik/', lastmod: lastChange('sites') }];
         },

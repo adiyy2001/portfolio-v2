@@ -22,6 +22,7 @@ Starting prices, net of VAT, for a typical scope; an exact quote is written afte
 - [For recruiters](https://adrianturbinski.pl/en/for-recruiters/): experience since 2019, stack, printable resume; [po polsku](https://adrianturbinski.pl/dla-rekrutera/)
 - [Resume](https://adrianturbinski.pl/resume.pdf): the English recruiter page as a PDF
 - [Blog](https://adrianturbinski.pl/blog/): articles in English on Angular, feature flags, collaborative editing and brand work
+- [Website brief template](https://adrianturbinski.pl/en/website-brief/): a free one-page brief, cost sheet and short guide to ordering a company website or web app from a freelance developer, as PDF and CSV downloads
 
 ## Work
 

@@ -26,6 +26,7 @@ const crumbLabels = {
     home: 'Home',
     work: 'Archive',
     blog: 'Blog',
+    brief: 'Website brief',
     guide: 'Guide',
     rec: 'For recruiters',
     cli: 'For clients',
@@ -37,7 +38,7 @@ const crumbTrail = ({ lang, view, title, canonical, post, code }) => {
   const labels = crumbLabels[lang];
   const home = [labels.home, routes.home[lang]];
   const section = view === 'guide' ? [labels.guide, guidePath] : [labels.blog, blogPath];
-  if (post) return [home, section, [post.headline, canonical]];
+  if (post && view !== 'brief') return [home, section, [post.headline, canonical]];
   if (view === 'blog' || view === 'guide') return [home, [section[0], canonical]];
   if (code || view === 'case') {
     return [home, [labels.work, routes.work[lang]], [code?.name ?? 'TailorCloth', canonical]];
@@ -55,7 +56,11 @@ const amount = price => Number(price.replace(/\D/g, ''));
 const isOffer = view => ['home', 'cli', 'services'].includes(view) || view?.startsWith('svc-');
 
 const ogView = view =>
-  !view ? 'home' : (isOffer(view) && view !== 'home') || view === 'guide' ? 'cli' : view;
+  !view
+    ? 'home'
+    : (isOffer(view) && view !== 'home') || view === 'guide' || view === 'brief'
+      ? 'cli'
+      : view;
 
 const graph = ({ url, lang, view, title, description, canonical, image, post, code, service }) => {
   const person = {
@@ -227,8 +232,9 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
   }
   if (post) {
     page['@type'] = 'WebPage';
+    const collection = view === 'guide' ? guidePath : view === 'blog' ? blogPath : null;
     nodes.push({
-      '@type': 'BlogPosting',
+      '@type': post.type ?? 'BlogPosting',
       '@id': `${url(canonical)}#post`,
       headline: post.headline,
       description,
@@ -241,7 +247,7 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
       author: { '@id': person['@id'] },
       publisher: { '@id': person['@id'] },
       mainEntityOfPage: { '@id': page['@id'] },
-      isPartOf: { '@id': url(`${view === 'guide' ? guidePath : blogPath}#page`) },
+      isPartOf: collection ? { '@id': url(`${collection}#page`) } : undefined,
     });
   }
   if (post?.faq?.length) {
@@ -297,12 +303,13 @@ export default function Seo({
   const url = to => site.siteMetadata.siteUrl + withPrefix(to);
   const pair = routes[view];
   const blog = view === 'blog';
-  const shared = Boolean(pair || blog || view === 'guide');
+  const shared = Boolean(pair || blog || view === 'guide' || view === 'brief');
   const canonical = pair ? pair[lang] : path;
   const other = lang === 'pl' ? 'en' : 'pl';
   const image = post?.image
     ? site.siteMetadata.siteUrl + post.image
-    : shared && url(`/og/${ogView(pair ? view : view === 'guide' && view)}-${lang}.jpg`);
+    : shared &&
+      url(`/og/${ogView(pair ? view : ['guide', 'brief'].includes(view) && view)}-${lang}.jpg`);
   const shareTitle = post?.headline ?? title;
   return (
     <>

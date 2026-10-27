@@ -48,7 +48,7 @@ export default function Header({ lang, view }) {
           Blog
         </Link>
       )}
-      {view !== 'blog' && view !== 'guide' && (
+      {!['blog', 'guide', 'brief'].includes(view) && (
         <nav className="lang" aria-label={t.langAria}>
           {['pl', 'en'].map(l => (
             <Link
