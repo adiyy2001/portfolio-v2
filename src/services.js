@@ -27,7 +27,7 @@ export const services = {
       ],
       foot: 'Rozbudowa istniejącej aplikacji: 140 zł netto za godzinę.',
       whoLead:
-        'Aplikacje robię dla firm z Wrocławia i z całej Polski. Najczęściej wtedy, gdy zespół zaczyna tonąć w arkuszach i mailach.',
+        'Aplikacje robię dla firm z Wrocławia i z całej Polski, najczęściej gdy zespół zaczyna tonąć w arkuszach i mailach.',
       who: [
         'Zamówienia albo zgłoszenia krążą w Excelu i w skrzynkach kilku osób.',
         'Klienci mają sami rezerwować terminy albo sprawdzać status zlecenia.',
@@ -55,11 +55,11 @@ export const services = {
       faq: [
         [
           'Ile kosztuje aplikacja webowa?',
-          'Pierwsza wersja zaczyna się od 18 000 zł netto. Cena rośnie z liczbą ról użytkowników, integracji i ekranów. Po rozmowie dostajesz wycenę na piśmie, z podziałem na etapy.',
+          'Pierwsza wersja zaczyna się od 18 000 zł netto. Cena rośnie z liczbą ról użytkowników, integracji i ekranów. Po rozmowie dostajesz wycenę na piśmie, podzieloną na etapy.',
         ],
         [
           'Czym aplikacja webowa różni się od strony internetowej?',
-          'Strona internetowa głównie pokazuje treści: ofertę, cennik, kontakt. W aplikacji webowej ludzie pracują: logują się, wprowadzają dane, obsługują zamówienia, rezerwacje albo zgłoszenia. Działa w przeglądarce, więc nikt nie musi niczego instalować.',
+          'Strona internetowa głównie pokazuje treści: ofertę, cennik, kontakt. W aplikacji webowej ludzie pracują: logują się, wprowadzają dane, obsługują zamówienia, rezerwacje albo zgłoszenia. Działa w przeglądarce, więc niczego nie trzeba instalować.',
         ],
         [
           'Ile trwa zrobienie aplikacji?',
@@ -158,7 +158,7 @@ export const services = {
       title: 'Strony | skrojone na miarę.',
       seoTitle: 'Strony internetowe Wrocław, tworzenie i projektowanie stron, Adrian Turbiński',
       description:
-        'Projektowanie i tworzenie stron www dla firm z Wrocławia, od strony wizytówki po stronę z blogiem. SEO, WCAG i Profil Firmy w Google w cenie. Od 3 500 zł netto.',
+        'Projektuję i tworzę strony www dla firm z Wrocławia, od strony wizytówki po stronę z blogiem. SEO, WCAG i Profil Firmy w Google są w cenie. Od 3 500 zł netto.',
       lead: 'Strona firmowa, która otwiera się w sekundę, działa z klawiatury i czytnika ekranu i którą da się znaleźć w Google. Projekt, kod i wdrożenie.',
       body: 'Kod piszę od zera, bez ciężkich szablonów, więc strona nie zwalnia po roku. Ta strona, którą czytasz, ma 100 punktów wydajności w Lighthouse.',
       price: 'od 3 500 zł',
@@ -348,7 +348,7 @@ export const services = {
       faq: [
         [
           'Czym jest dostępność cyfrowa?',
-          'To takie zbudowanie strony albo aplikacji, żeby korzystały z niej także osoby niewidome, słabowidzące, niesłyszące i te, które obsługują komputer tylko klawiaturą. Miarą jest standard WCAG, w Polsce i w UE zwykle w wersji 2.1 na poziomie AA.',
+          'Chodzi o to, żeby ze strony albo aplikacji mogły korzystać także osoby niewidome, słabowidzące, niesłyszące i te, które obsługują komputer tylko klawiaturą. Miarą jest standard WCAG, w Polsce i w UE zwykle w wersji 2.1 na poziomie AA.',
         ],
         [
           'Kogo dotyczy Europejski akt o dostępności?',
