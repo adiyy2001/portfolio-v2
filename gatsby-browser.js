@@ -11,6 +11,7 @@ import './src/styles/service.css';
 import './src/styles/guide.css';
 import './src/styles/quote.css';
 import { keepScroll } from './src/components/layout';
+import { captureSource } from './src/source';
 import { trackClicks, watchPage } from './src/track';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';
@@ -18,6 +19,7 @@ export { wrapRootElement, wrapPageElement } from './src/wrap';
 let popped = false;
 
 export const onClientEntry = () => {
+  captureSource();
   window.history.scrollRestoration = 'manual';
   trackClicks();
   window.addEventListener('popstate', () => {

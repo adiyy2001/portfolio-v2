@@ -168,6 +168,11 @@
   color: rgba(47, 55, 67, 0.75);
 }
 
+.quote__field--code {
+  max-width: 16rem;
+  letter-spacing: 0.06em;
+}
+
 .quote__field[aria-invalid] {
   border-bottom-color: var(--thread);
   border-bottom-width: 2px;

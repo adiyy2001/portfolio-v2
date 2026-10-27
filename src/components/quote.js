@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'gatsby';
 import { privacyPath, tie } from '../i18n';
 import { phone, serviceKeys, services } from '../services';
+import { readSource } from '../source';
 import { track } from '../track';
 
 const endpoint = 'https://api.adrianturbinski.pl/quote';
@@ -27,6 +28,8 @@ const copy = {
     message: 'Kilka zdań o projekcie',
     messageHint: 'Czym zajmuje się firma, co ma powstać i na kiedy.',
     contact: 'E-mail lub telefon',
+    code: 'Kod',
+    codeHint: 'Jeśli masz kod od mnie, wpisz go tutaj.',
     contactError: 'Podaj e-mail albo numer telefonu, żebym mógł odpowiedzieć.',
     send: 'Wyślij zapytanie',
     sending: 'Wysyłam…',
@@ -50,6 +53,8 @@ const copy = {
     message: 'A few sentences about the project',
     messageHint: 'What the company does, what should be built and by when.',
     contact: 'Email or phone',
+    code: 'Code',
+    codeHint: 'If you have a code from me, enter it here.',
     contactError: 'Add an email or a phone number so I can reply.',
     send: 'Send the request',
     sending: 'Sending…',
@@ -98,6 +103,11 @@ export default function Quote({ lang, service = '' }) {
   const [state, setState] = useState('idle');
   const [invalid, setInvalid] = useState(false);
   const [fallback, setFallback] = useState('');
+  const sourceField = useRef(null);
+
+  useEffect(() => {
+    sourceField.current.value = readSource();
+  }, []);
 
   const serviceOptions = [
     ...serviceKeys.map(key => [services[key][lang].name, services[key][lang].name]),
@@ -126,8 +136,12 @@ export default function Quote({ lang, service = '' }) {
     const lead = {
       ...data,
       service: picked,
+      code: String(data.code ?? '')
+        .trim()
+        .toUpperCase(),
       page: window.location.pathname,
       lang,
+      source: readSource(),
       elapsed: opened.current ? Date.now() - opened.current : 0,
     };
     const ok = await fetch(endpoint, {
@@ -143,6 +157,8 @@ export default function Quote({ lang, service = '' }) {
         service: picked || 'none',
         budget: lead.budget || 'none',
         page: lead.page,
+        lead_source: lead.source,
+        has_code: lead.code ? 'yes' : 'no',
       });
       return;
     }
@@ -231,6 +247,25 @@ export default function Quote({ lang, service = '' }) {
           </p>
         )}
       </div>
+      <div className="quote__row">
+        <label className="quote__label" htmlFor={`${id}-code`}>
+          {t.code}
+        </label>
+        <input
+          className="quote__field quote__field--code"
+          id={`${id}-code`}
+          name="code"
+          type="text"
+          autoComplete="off"
+          autoCapitalize="characters"
+          spellCheck="false"
+          maxLength="20"
+          placeholder={t.codeHint}
+          onInput={event => {
+            event.currentTarget.value = event.currentTarget.value.toUpperCase();
+          }}
+        />
+      </div>
       <div className="quote__trap" aria-hidden="true">
         <label>
           Website
@@ -238,6 +273,7 @@ export default function Quote({ lang, service = '' }) {
         </label>
       </div>
       <input type="hidden" name="lang" value={lang} />
+      <input type="hidden" name="source" ref={sourceField} defaultValue="direct" />
       <div className="quote__foot">
         <button className="btn btn--wool" type="submit" disabled={state === 'sending'}>
           {state === 'sending' ? t.sending : tie(t.send)}

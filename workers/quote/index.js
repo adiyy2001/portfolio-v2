@@ -3,7 +3,15 @@ const origins = new Set([site, 'https://www.adrianturbinski.pl']);
 const mail = 'adrian.turbinski@gmail.com';
 const minFillMs = 2500;
 
-const limits = { service: 40, budget: 40, message: 2000, contact: 200, page: 200 };
+const limits = {
+  service: 40,
+  budget: 40,
+  message: 2000,
+  contact: 200,
+  page: 200,
+  code: 20,
+  source: 120,
+};
 
 const sentPage = { pl: `${site}/wycena/wyslano/`, en: `${site}/en/quote/sent/` };
 
@@ -40,6 +48,13 @@ const clip = (value, max) =>
     .trim()
     .slice(0, max);
 
+const cleanCode = value =>
+  clip(value, limits.code)
+    .toUpperCase()
+    .replace(/[^A-Z0-9_-]/g, '');
+
+const cleanSource = value => clip(value, limits.source).replace(/[^A-Za-z0-9:/._-]/g, '');
+
 const reachable = contact =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) || contact.replace(/\D/g, '').length >= 9;
 
@@ -65,6 +80,8 @@ async function notify(env, lead) {
     `Budżet: ${lead.budget || 'nie podano'}`,
     `Kontakt: ${lead.contact}`,
     `Strona: ${lead.page || 'brak'}`,
+    `Źródło: ${lead.source || 'brak'}`,
+    `Kod: ${lead.code || 'brak'}`,
     '',
     lead.message || '(bez opisu)',
   ];
@@ -105,6 +122,8 @@ export default {
       message: clip(fields.message, limits.message),
       contact: clip(fields.contact, limits.contact),
       page: clip(fields.page, limits.page),
+      code: cleanCode(fields.code),
+      source: cleanSource(fields.source),
     };
     const elapsed = Number(fields.elapsed);
     const bot = Boolean(fields.website) || (Number.isFinite(elapsed) && elapsed < minFillMs);
