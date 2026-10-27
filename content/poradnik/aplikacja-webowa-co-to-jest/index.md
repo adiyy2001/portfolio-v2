@@ -17,15 +17,15 @@ faq:
     a: 'Do Ciebie. Repozytorium, dokumentacja i dostępy są Twoje od pierwszego dnia, więc możesz później przekazać aplikację innemu zespołowi.'
 ---
 
-Klienci często pytają, czy potrzebują strony, czy aplikacji. Granica bywa płynna. W uproszczeniu stronę się czyta, a w aplikacji się pracuje.
+Klienci często pytają mnie, czy potrzebują strony, czy aplikacji. Granica bywa płynna. W skrócie: stronę się czyta, a w aplikacji się pracuje.
 
 ## Aplikacja webowa a strona internetowa
 
-Strona internetowa pokazuje treści: ofertę, cennik, zdjęcia, kontakt. Każdy odwiedzający widzi to samo, a najważniejsze, co może zrobić, to zadzwonić albo wysłać formularz.
+Strona internetowa pokazuje treści: ofertę, cennik, zdjęcia, kontakt. Każdy odwiedzający widzi to samo i najwyżej zadzwoni albo wyśle formularz.
 
 Aplikacja webowa zna użytkownika. Po zalogowaniu każdy widzi swoje dane i może je zmieniać. Klient sprawdza status zamówienia, pracownik przyjmuje zgłoszenie, kierownik ogląda zestawienie z całego miesiąca. Za tym stoi serwer z bazą danych.
 
-W praktyce wiele firm ma jedno i drugie. Strona przyciąga klientów z Google, a aplikacja obsługuje ich, kiedy już są.
+Wiele firm ma jedno i drugie. Strona przyciąga klientów z Google, a aplikacja obsługuje ich, gdy już się pojawią.
 
 |                | Strona internetowa        | Aplikacja webowa                       |
 | -------------- | ------------------------- | -------------------------------------- |
@@ -37,26 +37,26 @@ W praktyce wiele firm ma jedno i drugie. Strona przyciąga klientów z Google, a
 
 ## Przykłady aplikacji webowych
 
-Z aplikacji webowych korzystasz codziennie, choć rzadko się je tak nazywa: bankowość internetowa, poczta w przeglądarce, dokumenty edytowane przez kilka osób naraz, systemy do rezerwacji wizyt.
+Korzystasz z nich codziennie, choć rzadko się je tak nazywa: bankowość internetowa, poczta w przeglądarce, dokumenty edytowane przez kilka osób naraz, systemy do rezerwacji wizyt.
 
-W firmach najczęściej spotykam takie przypadki:
+W firmach najczęściej trafiam na takie przypadki:
 
 - panel klienta, w którym klienci sami sprawdzają status zlecenia, faktury albo terminy,
-- system rezerwacji, gdzie klienci zapisują się na wizytę bez telefonu,
-- narzędzie wewnętrzne, które zastępuje arkusz Excela krążący mailem między kilkoma osobami,
+- system rezerwacji, w którym klienci zapisują się na wizytę bez telefonu,
+- narzędzie wewnętrzne, które zastępuje arkusz Excela wysyłany mailem między kilkoma osobami,
 - panel administracyjny do własnych danych firmy, na przykład produktów, zamówień albo magazynu.
 
-Przykład z mojej pracy to TailorCloth, firma krawiecka z Krakowa. Razem z zespołem, który prowadziłem w Media Hunters, zrobiliśmy platformę na Odoo z własnymi modułami do zarządzania produktami, fakturami krajowymi i zagranicznymi oraz procesami magazynowymi. Klienci zamawiają tam koszule na miarę, wybierając tkaniny i detale w formularzu.
+Z własnej pracy mogę podać TailorCloth, firmę krawiecką z Krakowa. Razem z zespołem, który prowadziłem w Media Hunters, zrobiliśmy tam platformę na Odoo z własnymi modułami do zarządzania produktami, fakturami krajowymi i zagranicznymi oraz procesami magazynowymi. Klienci zamawiają koszule na miarę i w formularzu wybierają tkaniny oraz detale.
 
 ## Aplikacja webowa a aplikacja mobilna
 
-Aplikację mobilną pobiera się ze sklepu Google Play albo App Store i trzeba ją zrobić osobno dla każdego systemu. Aplikacja webowa działa w przeglądarce na każdym urządzeniu, a nową wersję wszyscy dostają od razu, bez aktualizacji w sklepie.
+Aplikację mobilną pobiera się ze sklepu Google Play albo App Store i trzeba ją zrobić osobno na każdy system. Aplikacja webowa działa w przeglądarce na każdym urządzeniu, a nową wersję wszyscy dostają od razu, bez aktualizacji w sklepie.
 
-Dla większości narzędzi firmowych aplikacja webowa wystarcza. Aplikacja mobilna ma sens, gdy program musi mocno korzystać z telefonu, na przykład z aparatu przez cały dzień albo z pracy bez internetu.
+Do większości narzędzi firmowych aplikacja webowa wystarcza. Mobilna ma sens, gdy program mocno korzysta z telefonu, na przykład przez cały dzień używa aparatu albo ma działać bez internetu.
 
 ## Kiedy firmie przyda się aplikacja webowa
 
-Najczęściej wtedy, gdy zespół zaczyna tonąć w arkuszach i mailach. Typowe sygnały:
+Najczęściej wtedy, gdy zespół zaczyna tonąć w arkuszach i mailach. Znaki, że to ten moment:
 
 - zamówienia albo zgłoszenia krążą w Excelu i w skrzynkach kilku osób,
 - klienci mają sami rezerwować terminy albo sprawdzać status zlecenia,
@@ -67,6 +67,6 @@ Najczęściej wtedy, gdy zespół zaczyna tonąć w arkuszach i mailach. Typowe 
 
 Pierwsza wersja aplikacji webowej kosztuje u mnie od 18 000 zł netto. Cena rośnie z liczbą ról użytkowników, integracji i ekranów. Prosty panel zajmuje zwykle 6 do 8 tygodni, większy system 3 do 4 miesięcy.
 
-Zaczynamy od rozmowy o tym, kto będzie używał aplikacji i co ma w niej zrobić. Wycenę dostajesz na piśmie w ciągu dwóch dni roboczych. Potem co tydzień lub dwa widzisz działającą wersję pod adresem testowym. Płacisz po etapach, za to, co już działa. Piszę w Angularze i TypeScripcie, serwer w Node.js, dane trzymam w PostgreSQL, a dostępność według WCAG 2.1 AA jest od startu.
+Zaczynamy od rozmowy o tym, kto będzie używał aplikacji i co ma w niej zrobić. Wycenę dostajesz na piśmie w ciągu dwóch dni roboczych. Potem co tydzień lub dwa oglądasz działającą wersję pod adresem testowym, a płacisz po etapach za to, co już działa. Piszę w Angularze i TypeScripcie, serwer w Node.js, dane trzymam w PostgreSQL. Dostępność według WCAG 2.1 AA jest od startu.
 
 Więcej o zakresie i etapach jest na stronie [aplikacje webowe](/uslugi/aplikacje-webowe/).

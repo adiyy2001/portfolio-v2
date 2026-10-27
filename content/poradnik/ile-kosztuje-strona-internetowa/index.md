@@ -17,48 +17,48 @@ faq:
     a: 'Tak. Mogę podpiąć prosty panel do edycji tekstów i wpisów. Jeśli wolisz, zmiany zostają po mojej stronie w ramach utrzymania.'
 ---
 
-Cena strony zależy głównie od trzech rzeczy: ile ma podstron, czy projekt powstaje pod Twoją markę i co ma się na niej dziać poza czytaniem. Poniżej rozpisuję to na typowe przypadki, z moimi cenami netto.
+Cena strony zależy głównie od trzech rzeczy: ile ma podstron, czy projekt powstaje pod Twoją markę i co ma się na niej dziać poza czytaniem. Rozpisuję to niżej na typowe przypadki. Wszystkie kwoty są netto.
 
 ## Ile kosztuje strona internetowa dla firmy
 
-Strona firmowa do 5 podstron kosztuje u mnie od 3 500 zł netto. To wystarcza większości firm usługowych: strona główna, oferta, cennik, o firmie i kontakt. W tej cenie dostajesz:
+Strona firmowa do 5 podstron kosztuje u mnie od 3 500 zł netto. Wystarczy to większości firm usługowych: strona główna, oferta, cennik, o firmie i kontakt. W tej cenie dostajesz:
 
-- projekt robiony pod Twoją markę,
+- projekt zrobiony pod Twoją markę,
 - kod pisany od zera, bez ciężkich szablonów,
-- podstawy SEO i dane strukturalne, dzięki którym Google rozumie, czym się zajmujesz,
-- podpięcie wizytówki Google, Search Console i statystyk z banerem zgody,
+- podstawy SEO i dane strukturalne, żeby Google wiedziało, czym się zajmujesz,
+- wizytówkę Google, Search Console i statystyki z banerem zgody,
 - zgodność z WCAG 2.1 na poziomie AA, czyli obsługę z klawiatury i czytnika ekranu.
 
-Strona z blogiem albo w kilku językach kosztuje od 7 000 zł netto. Więcej jest tu pracy przy szablonach wpisów, tłumaczeniach i adresach dla każdej wersji językowej.
+Strona z blogiem albo w kilku językach kosztuje od 7 000 zł netto. Dochodzi praca przy szablonach wpisów, tłumaczeniach i adresach dla każdej wersji językowej.
 
-Na cenę najmocniej wpływają:
+Na cenę najbardziej wpływają trzy rzeczy:
 
 1. Liczba i rodzaj podstron. Pięć podobnych podstron to mniej pracy niż trzy, z których każda ma inny układ.
-2. Treści. Jeśli teksty i zdjęcia są gotowe, praca idzie szybciej. Jeśli trzeba je napisać, doliczam na to czas.
-3. Funkcje. Oferta, cennik i dane kontaktowe mieszczą się w cenie. Zapisy, rezerwacje, panel klienta albo integracja z innym systemem to już osobna wycena.
+2. Treści. Gdy teksty i zdjęcia są gotowe, idzie szybciej. Jeśli trzeba je napisać, pomagam i doliczam na to czas.
+3. Funkcje. Oferta, cennik i dane kontaktowe mieszczą się w cenie. Zapisy, rezerwacje, panel klienta albo integracja z innym systemem wyceniam osobno.
 
-Robota trwa zwykle 2 do 4 tygodni od chwili, gdy mamy treści.
+Sama robota trwa zwykle 2 do 4 tygodni od chwili, gdy mamy treści.
 
 ## Ile kosztuje utrzymanie strony internetowej
 
-Strona po starcie dalej kosztuje, choć niewiele. Stałe koszty to domena i hosting, razem zwykle kilkaset złotych rocznie. Konta zakładam na Twoją firmę, więc nie zależysz ode mnie przy przedłużeniu domeny.
+Po starcie strona dalej kosztuje, ale niewiele. Stałe koszty to domena i hosting, razem zwykle kilkaset złotych rocznie. Konta zakładam na Twoją firmę, więc przy przedłużaniu domeny nie zależysz ode mnie.
 
-Do tego możesz wziąć opiekę. U mnie pakiet kosztuje od 300 zł netto miesięcznie i obejmuje dwie godziny prac: aktualizacje, kopie zapasowe, monitoring błędów i drobne zmiany. Kolejne godziny kosztują 140 zł netto. Opieka nie jest obowiązkowa. Strona napisana bez wtyczek potrzebuje mniej aktualizacji niż WordPress, a drobne zmiany możesz zamawiać wtedy, kiedy ich potrzebujesz, rozliczane od godziny.
+Możesz dołożyć opiekę. Pakiet kosztuje od 300 zł netto miesięcznie i obejmuje dwie godziny pracy: aktualizacje, kopie zapasowe, monitoring błędów i drobne zmiany. Kolejne godziny to 140 zł netto. Opieka nie jest obowiązkowa. Strona napisana bez wtyczek potrzebuje mniej aktualizacji niż WordPress, a drobne zmiany możesz zamawiać, kiedy akurat są potrzebne, i płacić od godziny.
 
 Szczegóły pakietu są na stronie [utrzymanie i rozwój](/uslugi/utrzymanie/).
 
 ## Ile kosztuje strona internetowa na WordPressie
 
-WordPressa nie używam, strony piszę od zera, ale klienci często o niego pytają, więc wyjaśniam różnicę. Strona na WordPressie bywa tańsza na starcie, kiedy wykonawca bierze gotowy motyw i zmienia w nim teksty i zdjęcia. Potem wychodzą koszty, których nie widać w pierwszej wycenie: WordPress i jego wtyczki wymagają regularnych aktualizacji, a bez nich strona staje się łatwym celem ataków. Ciężki motyw spowalnia też ładowanie, zwłaszcza na telefonie.
+WordPressa nie używam i piszę strony od zera, ale klienci często o niego pytają, więc tłumaczę, na czym polega różnica. Strona na WordPressie bywa tańsza na starcie, gdy wykonawca bierze gotowy motyw i podmienia w nim teksty oraz zdjęcia. Koszty wychodzą później, a w pierwszej wycenie ich nie widać. WordPress i jego wtyczki trzeba regularnie aktualizować, bo bez tego strona łatwo pada ofiarą ataków. Ciężki motyw spowalnia ładowanie, szczególnie na telefonie.
 
-Jeśli masz już stronę na WordPressie i chcesz ją zostawić, to dobry wybór, gdy sam często dodajesz treści i znasz panel. Jeśli strona ma się po prostu szybko ładować i ściągać klientów z Google, kod pisany od zera zwykle wychodzi taniej w kolejnych latach.
+Jeśli masz już stronę na WordPressie, często sam dodajesz treści i znasz panel, możesz ją spokojnie zostawić. Gdy strona ma się szybko ładować i przyprowadzać klientów z Google, kod pisany od zera zwykle wychodzi taniej w kolejnych latach.
 
 ## Ile kosztuje strona internetowa ze sklepem
 
-Sklep internetowy wyceniam osobno, bo rozrzut jest duży. Na cenę wpływa liczba produktów i ich wariantów, bramka płatności, integracja z kurierami i z księgowością, a także to, czy klienci zakładają konta. Prosty sklep z kilkunastoma produktami to zupełnie inna praca niż katalog z tysiącem pozycji i hurtowymi cenami.
+Sklep wyceniam osobno, bo rozrzut jest duży. O cenie decydują liczba produktów i ich wariantów, bramka płatności, integracja z kurierami i księgowością oraz to, czy klienci zakładają konta. Prosty sklep z kilkunastoma produktami to inna praca niż katalog z tysiącem pozycji i cenami hurtowymi.
 
-Przykład takiej strony możesz obejrzeć we [Wzorniku](/wzornik/): jest tam sklep palarni kawy, jeden z dziewięciu projektów przykładowych dla zmyślonych firm. Wycenę Twojego sklepu dostajesz na piśmie w ciągu dwóch dni roboczych od rozmowy.
+Przykład możesz obejrzeć we [Wzorniku](/wzornik/). Jest tam sklep palarni kawy, jeden z dziewięciu projektów przykładowych dla zmyślonych firm. Wycenę Twojego sklepu dostajesz na piśmie po rozmowie.
 
 ## Jak dostać dokładną wycenę
 
-Napisz albo zadzwoń i powiedz, czym zajmuje się Twoja firma, ile podstron potrzebujesz i co strona ma załatwić: telefon, zapytanie, zapis. Wycenę dostajesz na piśmie w dwa dni robocze, razem z planem podstron. Pełny zakres usługi jest na stronie [strony internetowe](/uslugi/strony-internetowe/).
+Napisz albo zadzwoń i powiedz, czym zajmuje się firma, ile podstron potrzebujesz i co strona ma załatwić: telefon, zapytanie czy zapis. W odpowiedzi dostajesz wycenę i plan podstron. Pełny zakres usługi jest na stronie [strony internetowe](/uslugi/strony-internetowe/).
