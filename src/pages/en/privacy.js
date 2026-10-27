@@ -50,17 +50,19 @@ export default function Privacy() {
         </p>
         <h2>Microsoft Clarity</h2>
         <p>
-          If you agree in the banner, I also load Microsoft Clarity from Microsoft Corporation. It
-          records how you scroll and where you click, and I look at the resulting click maps and
-          session recordings to find the parts of the site that are unclear. Form fields, including
-          the whole quote form, are masked, so what you type never reaches Clarity. Clarity sets the
-          cookies _clck (one year) and _clsk (one day), and Microsoft sets its own, such as MUID
-          (one year). The legal basis is your consent (Article 6(1)(a) GDPR). Microsoft may process
-          the data in the United States under the EU-US Data Privacy Framework.
+          I also use Microsoft Clarity from Microsoft Corporation if you consent in the banner.
+          Clarity collects data on how you scroll and where you click on my website. Based on the
+          generated click heat maps and session replays I try to identify the parts of the site that
+          may need improvement. All form fields, including the entire quote form, are masked in
+          Clarity, so nothing you type is sent to it. Clarity stores the cookies _clck (for one
+          year) and _clsk (for one day). Microsoft also stores cookies of its own, such as MUID (for
+          one year). This processing is based on your consent (Article 6(1)(a) GDPR). Microsoft may
+          process your data in the United States, under the EU-US Data Privacy Framework.
         </p>
         <p>
-          Without consent Clarity does not load at all. Withdrawing consent with Statistics settings
-          in the footer stops the recording and removes the _clck and _clsk cookies.
+          If you do not consent, Clarity is not loaded at all. If you withdraw your consent using
+          Statistics settings in the footer, the data collection stops and the _clck and _clsk
+          cookies are deleted.
         </p>
         <h2>My publishing tools</h2>
         <p>
