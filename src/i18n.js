@@ -99,6 +99,7 @@ export const guidePath = '/poradnik/';
 export const briefPath = '/en/website-brief/';
 
 export const privacyPath = { pl: '/polityka-prywatnosci/', en: '/en/privacy/' };
+export const termsPath = { en: '/en/terms/' };
 
 export function locate(path) {
   for (const view of Object.keys(routes)) {

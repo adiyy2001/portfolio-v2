@@ -66,18 +66,19 @@ export default function Privacy() {
         </p>
         <h2>My publishing tools</h2>
         <p>
-          I run a private tool for my own work. It publishes my posts to my LinkedIn profile and my
-          articles to this website and to DEV Community, and it reads the statistics of my own posts
-          (impressions, reactions, comments, shares) through the official LinkedIn and DEV APIs to
-          plan what I write next.
+          I run a private tool for my own work. It publishes my posts to my LinkedIn profile, my
+          articles to this website and to DEV Community, and my short videos to my own accounts on
+          YouTube, Instagram, Facebook and TikTok. It reads the statistics of my own posts and
+          videos (views, reactions, comments, shares) through the official APIs of these platforms
+          to plan what I make next.
         </p>
         <ul>
           <li>The tool only acts on my own account, with my own authorisation.</li>
-          <li>It does not collect, store or process data about other LinkedIn members.</li>
+          <li>It does not collect, store or process data about other users of these platforms.</li>
           <li>
             The data stays on my own computer. I do not sell it, share it or use it for advertising.
           </li>
-          <li>I can revoke the access at any time in my LinkedIn and DEV account settings.</li>
+          <li>I can revoke the access at any time in the account settings of each platform.</li>
         </ul>
         <h2>Your rights</h2>
         <p>
@@ -86,7 +87,7 @@ export default function Privacy() {
           contact@adrianturbinski.pl. You can also complain to the Polish data protection authority
           (UODO).
         </p>
-        <p>Last updated: 26 October 2026.</p>
+        <p>Last updated: 28 October 2026.</p>
       </section>
     </>
   );

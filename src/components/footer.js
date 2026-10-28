@@ -4,7 +4,7 @@ import { m, useReducedMotion } from 'framer-motion';
 import { useGuides } from './guides';
 import { usePosts } from './posts';
 import { openConsent } from '../consent';
-import { blogPath, guidePath, privacyPath, routes, ui } from '../i18n';
+import { blogPath, guidePath, privacyPath, routes, termsPath, ui } from '../i18n';
 import { phone } from '../services';
 import { duration, ease, instant } from '../motion';
 import { letters, needle, thread } from '../wordmark';
@@ -68,6 +68,7 @@ export default function Footer({ lang }) {
           GitHub
         </a>
         <Link to={privacyPath[lang]}>{t.footerPrivacy}</Link>
+        {termsPath[lang] && <Link to={termsPath[lang]}>Terms</Link>}
         <button type="button" className="mini__consent" onClick={openConsent}>
           {t.footerConsent}
         </button>
