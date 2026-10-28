@@ -66,15 +66,18 @@ export default function Privacy() {
         </p>
         <h2>My publishing tools</h2>
         <p>
-          I run a private tool for my own work. It publishes my posts to my LinkedIn profile, my
-          articles to this website and to DEV Community, and my short videos to my own accounts on
-          YouTube, Instagram, Facebook and TikTok. It reads the statistics of my own posts and
-          videos (views, reactions, comments, shares) through the official APIs of these platforms
-          to plan what I make next.
+          I have a personal tool that serves my needs. It pushes my posts to my LinkedIn, my
+          articles to this site and DEV Community, and my short videos to my own YouTube, Instagram,
+          Facebook and TikTok accounts. My video and post metrics (views, shares, comments,
+          reactions) are pulled from the official APIs of these services to help me decide what to
+          make next.
         </p>
         <ul>
           <li>The tool only acts on my own account, with my own authorisation.</li>
-          <li>It does not collect, store or process data about other users of these platforms.</li>
+          <li>
+            No data about other users of these platforms is collected, stored or processed by the
+            tool.
+          </li>
           <li>
             The data stays on my own computer. I do not sell it, share it or use it for advertising.
           </li>

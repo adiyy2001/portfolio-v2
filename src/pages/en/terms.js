@@ -14,42 +14,43 @@ export default function Terms() {
       <section className="prose" aria-label="Terms of service">
         <h2>Who runs it</h2>
         <p>
-          Adrian Turbiński, a sole proprietor trading as Adrian Turbiński Software, Wrocław, Poland.
-          Contact: contact@adrianturbinski.pl.
+          Adrian Turbiński, sole proprietor trading as Adrian Turbiński Software, Wrocław, Poland.
+          Email: contact@adrianturbinski.pl.
         </p>
-        <h2>This website</h2>
+        <h2>This site</h2>
         <p>
-          You can read, link to and share the pages of this website. The texts, graphics, code
-          samples and downloads stay my property unless a page says otherwise. The free downloads,
-          such as the website brief template and the cost sheet, may be used and edited for your own
-          projects, but not resold as your own product.
+          You are free to view, link to and share any page on this website. Unless stated otherwise,
+          all content on this site (including text, images, code and downloads) is owned by me. The
+          downloads (including the cost sheet and the website brief template) can be modified and
+          used in your own projects, but must not be resold as your own product.
         </p>
         <p>
-          The guides and articles are general information, not legal or financial advice. Prices on
-          the service pages are starting points; the binding price is the one in a written offer.
+          The articles and guides are general information and do not constitute legal or financial
+          advice. The prices on the service pages are starting points. The binding price is the one
+          in a written offer.
         </p>
-        <h2>My publishing tools</h2>
+        <h2>My publishing tool</h2>
         <p>
-          Reels Studio is a private tool I use to publish my own short videos and posts to my own
+          Reels Studio is my personal tool for publishing my own short videos and posts to my own
           accounts on YouTube, Instagram, Facebook, TikTok, LinkedIn and DEV Community. It is not
-          offered to other users and nobody else can sign in to it.
+          available to the public, and no other person can log in to it.
         </p>
         <ul>
-          <li>It acts only on my own accounts, with my own authorisation.</li>
+          <li>It only acts on my own accounts and with my own permission.</li>
           <li>Every video is reviewed and approved by me before it is published.</li>
           <li>It follows the terms and developer policies of each platform it connects to.</li>
           <li>I can revoke its access at any time in the settings of each platform.</li>
         </ul>
         <h2>Liability</h2>
         <p>
-          I take care that the information here is correct and current, but I cannot guarantee that
-          it is free of errors. Links to other websites are provided for convenience; I am not
-          responsible for their content.
+          I try to keep the content on this site accurate and up to date, but I do not guarantee
+          that it is free of errors. Links to external websites are provided for your convenience,
+          and I am not responsible for the content of those sites.
         </p>
-        <h2>Law and contact</h2>
+        <h2>Jurisdiction and contact</h2>
         <p>
-          Polish law applies. Questions about these terms go to contact@adrianturbinski.pl. How I
-          handle data is described in the privacy policy.
+          This site is governed by Polish law. For questions about these terms, email me at
+          contact@adrianturbinski.pl. How I handle data is described in the privacy policy.
         </p>
         <p>Last updated: 28 October 2026.</p>
       </section>
