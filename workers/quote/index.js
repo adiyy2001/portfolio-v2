@@ -73,6 +73,60 @@ async function readFields(request) {
   return { fields: Object.fromEntries(form), html: true };
 }
 
+const hex = buffer =>
+  [...new Uint8Array(buffer)].map(byte => byte.toString(16).padStart(2, '0')).join('');
+
+async function sha256(text) {
+  return hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)));
+}
+
+function sameText(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i += 1) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+async function authorized(request, env) {
+  const header = request.headers.get('Authorization') || '';
+  const token = header.startsWith('Bearer ') ? header.slice(7).trim() : '';
+  const expected = String(env.LEADS_TOKEN_SHA256 || '').toLowerCase();
+  if (!token || expected.length !== 64) return false;
+  return sameText(await sha256(token), expected);
+}
+
+async function store(env, lead, bot) {
+  if (!env.LEADS) return;
+  await env.LEADS.prepare(
+    'INSERT INTO leads (at, lang, service, budget, page, source, code, bot) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+  )
+    .bind(
+      new Date().toISOString(),
+      lead.lang,
+      lead.service,
+      lead.budget,
+      lead.page,
+      lead.source,
+      lead.code,
+      bot ? 1 : 0,
+    )
+    .run();
+}
+
+async function listLeads(request, env, url) {
+  if (!(await authorized(request, env))) return new Response('Unauthorized', { status: 401 });
+  if (!env.LEADS) return new Response('Not configured', { status: 503 });
+  const since = url.searchParams.get('since') || '1970-01-01T00:00:00Z';
+  const { results } = await env.LEADS.prepare(
+    'SELECT id, at, lang, service, budget, page, source, code FROM leads WHERE bot = 0 AND at > ? ORDER BY at',
+  )
+    .bind(since)
+    .all();
+  return new Response(JSON.stringify({ leads: results }), {
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
+  });
+}
+
 async function notify(env, lead) {
   const lines = [
     `Nowe zapytanie o wycenę (${lead.lang.toUpperCase()})`,
@@ -101,6 +155,7 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     const origin = request.headers.get('Origin') || '';
+    if (url.pathname === '/leads' && request.method === 'GET') return listLeads(request, env, url);
     if (url.pathname !== '/quote') return new Response('Not found', { status: 404 });
     if (request.method === 'OPTIONS')
       return new Response(null, { status: 204, headers: cors(origin) });
@@ -133,6 +188,7 @@ export default {
       return json({ ok: false, error: 'contact' }, 422, origin);
     }
 
+    await store(env, lead, bot).catch(() => {});
     const delivered = bot ? true : await notify(env, lead).catch(() => false);
     if (!delivered)
       return html ? failPage(lang) : json({ ok: false, error: 'delivery' }, 502, origin);

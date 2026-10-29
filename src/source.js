@@ -21,8 +21,10 @@ const fromReferrer = () => {
 export function captureSource() {
   try {
     if (window.sessionStorage.getItem(key)) return;
-    const campaign = fromCampaign(new URLSearchParams(window.location.search));
-    const found = campaign.length ? campaign.join('/') : fromReferrer()[0];
+    const params = new URLSearchParams(window.location.search);
+    const campaign = fromCampaign(params);
+    const ref = clean(params.get('ref'));
+    const found = campaign.length ? campaign.join('/') : ref ? `ref:${ref}` : fromReferrer()[0];
     if (found) window.sessionStorage.setItem(key, found);
   } catch {
     return;
