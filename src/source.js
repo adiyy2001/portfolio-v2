@@ -7,7 +7,7 @@ const clean = value =>
     .slice(0, 40);
 
 const fromCampaign = params =>
-  ['utm_source', 'utm_medium', 'utm_campaign'].map(name => clean(params.get(name))).filter(Boolean);
+  ['utm_source', 'utm_medium', 'utm_campaign'].map(name => clean(params.get(name)));
 
 const fromReferrer = () => {
   try {
@@ -24,7 +24,11 @@ export function captureSource() {
     const params = new URLSearchParams(window.location.search);
     const campaign = fromCampaign(params);
     const ref = clean(params.get('ref'));
-    const found = campaign.length ? campaign.join('/') : ref ? `ref:${ref}` : fromReferrer()[0];
+    const found = campaign.some(Boolean)
+      ? campaign.join('/')
+      : ref
+        ? `ref:${ref}`
+        : fromReferrer()[0];
     if (found) window.sessionStorage.setItem(key, found);
   } catch {
     return;
