@@ -1,0 +1,24 @@
+---
+import { Assistant } from './islands/Assistant';
+import './assistant.css';
+---
+
+<section class="section dark assistant-section" id="asystent" aria-labelledby="asystent-title">
+  <div class="container">
+    <h2 id="asystent-title">Zapytaj asystenta</h2>
+    <p class="assistant-section__note">
+      To pokaz. Odpowiedzi są zapisane w scenariuszu. We wdrożeniu odpowiada model językowy z bazy
+      wiedzy serwisu. Nic nie jest wysyłane, dane zostają w tej przeglądarce.
+    </p>
+    <Assistant client:only="preact">
+      <div slot="fallback" class="assistant-fallback">
+        <p>Ładuję asystenta.</p>
+      </div>
+    </Assistant>
+    <noscript>
+      <p class="assistant-section__noscript">
+        Asystent potrzebuje włączonego JavaScriptu. Zadzwoń: 71 000 00 00.
+      </p>
+    </noscript>
+  </div>
+</section>

@@ -1,0 +1,73 @@
+---
+import { hours, site } from './data';
+---
+
+<section class="section hours" id="godziny" aria-labelledby="godziny-title">
+  <div class="container section__inner">
+    <div class="section__head">
+      <h2 id="godziny-title">Godziny</h2>
+    </div>
+    <div class="section__body hours__body">
+      <ul class="hours__list">
+        {hours.map(row => (
+          <li>
+            <span>{row.days}</span> <strong>{row.time}</strong>
+          </li>
+        ))}
+      </ul>
+      <div class="hours__contact" id="kontakt">
+        <h3>Kontakt</h3>
+        <address>
+          {site.street}, {site.postalCity}
+          <br />
+          Telefon: {site.phone}
+        </address>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hours {
+    border-top: 3px solid var(--ink);
+  }
+
+  .hours__body {
+    display: grid;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+
+  .hours__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .hours__list li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+    padding-block: 0.875rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.25rem;
+  }
+
+  .hours__list strong {
+    font-weight: 600;
+  }
+
+  .hours__contact {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.25rem 1.25rem 1.5rem;
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    scroll-margin-top: 1rem;
+  }
+
+  .hours__contact address {
+    font-style: normal;
+  }
+</style>

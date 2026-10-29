@@ -29,6 +29,11 @@ const copy = {
     rackLead: 'Ceny od, netto, dla typowego zakresu. Dokładną wycenę dostajesz na piśmie.',
     all: 'Wszystkie usługi i ceny',
     price: 'Cena',
+    packagesTitle: 'Pakiety.',
+    popular: 'Najczęściej',
+    excludedTitle: 'Poza ceną',
+    measureTitle: 'Co mierzymy.',
+    measureLead: 'Przed startem spisujemy liczby, po miesiącu liczymy je drugi raz.',
   },
   en: {
     write: 'Get a quote',
@@ -45,6 +50,11 @@ const copy = {
     rackLead: 'Starting prices, net, for a typical scope. You get an exact written quote.',
     all: 'All services and prices',
     price: 'Price',
+    packagesTitle: 'Packages.',
+    popular: 'Most often',
+    excludedTitle: 'Not in the price',
+    measureTitle: 'What we measure.',
+    measureLead: 'We write the numbers down before the start and count them again after a month.',
     briefLead: 'Preparing to ask for a quote? Fill in the free',
     briefLink: 'website brief template',
   },
@@ -215,6 +225,50 @@ export default function Service({ id, lang }) {
           </Reveal>
         </div>
       </section>
+      {s.packages && (
+        <section className="packs" aria-labelledby="packs-h">
+          <div className="sec-head">
+            <h2 className="h2" id="packs-h">
+              <Split text={t.packagesTitle} onView />
+            </h2>
+            <p className="sec-head__side">{tie(s.packagesLead)}</p>
+          </div>
+          <ol className="packs__list">
+            {s.packages.map((pack, i) => (
+              <Reveal
+                as="li"
+                className={i === 1 ? 'packs__item packs__item--mid' : 'packs__item'}
+                key={pack.name}
+                style={{ '--i': i }}>
+                {i === 1 && <span className="packs__flag">{tie(t.popular)}</span>}
+                <h3 className="packs__name">{tie(pack.name)}</h3>
+                <p className="packs__price">
+                  {tie(pack.price)}
+                  {pack.monthly && <small>+ {tie(pack.monthly)}</small>}
+                </p>
+                <p className="packs__time">{tie(pack.time)}</p>
+                <p className="packs__text">{tie(pack.text)}</p>
+                <ul className="packs__items">
+                  {pack.items.map(item => (
+                    <li key={item}>{tie(item)}</li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+          </ol>
+          {s.care && <p className="packs__care">{tie(s.care)}</p>}
+          {s.excluded && (
+            <div className="packs__out">
+              <h3 className="packs__out-h">{tie(t.excludedTitle)}</h3>
+              <ul className="packs__out-list">
+                {s.excluded.map(item => (
+                  <li key={item}>{tie(item)}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      )}
       <section className="who" aria-labelledby="who-h">
         <div className="sec-head">
           <h2 className="h2" id="who-h">
@@ -239,6 +293,23 @@ export default function Service({ id, lang }) {
         {id === 'apps' && <BriefNote lang={lang} className="who__more" />}
       </section>
       <Steps lang={lang} items={s.steps} title={t.stepsTitle} />
+      {s.measure && (
+        <section className="measure" aria-labelledby="measure-h">
+          <div className="sec-head">
+            <h2 className="h2" id="measure-h">
+              <Split text={t.measureTitle} onView />
+            </h2>
+            <p className="sec-head__side">{tie(t.measureLead)}</p>
+          </div>
+          <ol className="measure__list">
+            {s.measure.map((item, i) => (
+              <Reveal as="li" className="measure__item" key={item} style={{ '--i': i }}>
+                {tie(item)}
+              </Reveal>
+            ))}
+          </ol>
+        </section>
+      )}
       {services[id].proof && <Case lang={lang} />}
       <section className="faq" aria-labelledby="faq-h">
         <div className="sec-head">

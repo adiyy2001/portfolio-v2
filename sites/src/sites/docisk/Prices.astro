@@ -1,0 +1,47 @@
+---
+import { priceLabel, services } from './data';
+---
+
+<section class="section" id="cennik" aria-labelledby="cennik-title">
+  <div class="container section__inner">
+    <div class="section__head">
+      <h2 id="cennik-title">Usługi i cennik</h2>
+      <p class="section__note">Ceny brutto, części osobno.</p>
+    </div>
+    <div class="section__body">
+      <dl class="price-list" id="uslugi">
+        {services.map(service => (
+          <div class="price-list__row">
+            <dt>{service.name}</dt>
+            <dd>{priceLabel(service)}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .price-list {
+    border-top: 3px solid var(--ink);
+  }
+
+  .price-list__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1.5rem;
+    padding-block: 0.875rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .price-list dt {
+    font-weight: 600;
+  }
+
+  .price-list dd {
+    font: 700 clamp(1.5rem, 1.3rem + 0.9vw, 2rem) / 1 var(--font-display);
+    letter-spacing: 0.01em;
+  }
+</style>

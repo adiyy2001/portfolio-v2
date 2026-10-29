@@ -88,6 +88,14 @@ const copy = {
       fg: '#f4c6dc',
       chips: ['#1c1130', '#ffffff', '#b0245c'],
     },
+    {
+      id: 'car',
+      slug: 'docisk',
+      name: 'Docisk',
+      bg: '#15171a',
+      fg: '#ffd23f',
+      chips: ['#15171a', '#ece9e2', '#ffd23f'],
+    },
   ],
   pl: {
     anchor: 'wzornik',
@@ -97,7 +105,7 @@ const copy = {
     go: 'Zobacz projekt',
     swTitle: 'Wzornik.',
     swLead:
-      'Dziewięć przykładowych stron dla zmyślonych firm z różnych branż. Każda skrojona inaczej i każda działa.',
+      'Dziesięć przykładowych stron dla zmyślonych firm z różnych branż. Każda skrojona inaczej i każda działa.',
     swNote: 'firmy zmyślone, projekty moje',
     status:
       'Firmy są zmyślone, strony działają naprawdę. Koszyk, rezerwacja i formularze niczego nie wysyłają.',
@@ -112,6 +120,7 @@ const copy = {
       'palarnia kawy',
       'biuro nieruchomości',
       'hotel',
+      'serwis samochodowy',
     ],
     kinds: [
       'strona firmowa',
@@ -123,6 +132,7 @@ const copy = {
       'sklep internetowy',
       'wyszukiwarka ofert',
       'strona z rezerwacją, PL i EN',
+      'strona z asystentem AI',
     ],
   },
   en: {
@@ -133,7 +143,7 @@ const copy = {
     go: 'See the project',
     swTitle: 'Swatch book.',
     swLead:
-      'Nine sample websites for made-up businesses in different trades. Each one cut differently, and each one works.',
+      'Ten sample websites for made-up businesses in different trades. Each one cut differently, and each one works.',
     swNote: 'made-up businesses, my designs',
     status:
       'The businesses are made up, the websites really work. The cart, the booking and the forms send nothing.',
@@ -149,6 +159,7 @@ const copy = {
       'coffee roastery',
       'estate agency',
       'hotel',
+      'car service',
     ],
     kinds: [
       'company website',
@@ -160,6 +171,7 @@ const copy = {
       'online shop',
       'listings search',
       'website with booking, PL and EN',
+      'site with an AI assistant',
     ],
   },
 };

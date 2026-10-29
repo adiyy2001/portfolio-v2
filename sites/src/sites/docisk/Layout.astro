@@ -1,0 +1,59 @@
+---
+import './global.css';
+import { link } from '../../shared/link';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import { pageText } from './data';
+import { fontFaceCss, preloadFontUrls } from './fonts';
+
+const canonical = new URL(link('/docisk/'), Astro.site).href;
+const image = new URL(link('/docisk/og.png'), Astro.site).href;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{pageText.title}</title>
+    <meta name="description" content={pageText.description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#15171a" />
+    <link rel="icon" href={link('/docisk/favicon.svg')} type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Docisk" />
+    <meta property="og:title" content={pageText.title} />
+    <meta property="og:description" content={pageText.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={pageText.imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {preloadFontUrls.map(href => (
+      <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />
+    ))}
+    <style is:inline set:html={fontFaceCss}></style>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">
+      Przejdź do treści
+    </a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script>
+  import { initAssistantTriggers } from './request';
+
+  initAssistantTriggers();
+</script>

@@ -1,6 +1,6 @@
 # Adrian Turbiński
 
-> Freelance web developer from Wrocław, Poland. He builds web applications and websites for companies, audits and fixes accessibility against WCAG 2.1 AA and maintains existing apps, including older Angular versions. He works in Wrocław and Lower Silesia in person and remotely across Poland and the EU, in Polish and English, on a B2B invoice. He has built web applications since 2019, mostly in Angular, TypeScript, RxJS and Node.js.
+> Freelance web developer from Wrocław, Poland. He builds web applications and websites for companies, automates business processes and connects systems including KSeF e-invoicing, audits and fixes accessibility against WCAG 2.1 AA and maintains existing apps, including older Angular versions. He works in Wrocław and Lower Silesia in person and remotely across Poland and the EU, in Polish and English, on a B2B invoice. He has built web applications since 2019, mostly in Angular, TypeScript, RxJS and Node.js.
 
 - Senior front-end developer and tech lead. He led a small team, designed front-end and back-end architecture and built an app that models and visualizes high-voltage power lines.
 - Clients talk to him directly from the quote through deployment to maintenance.
@@ -12,6 +12,9 @@ Starting prices, net of VAT, for a typical scope; an exact quote is written afte
 
 - [Web applications](https://adrianturbinski.pl/en/services/web-applications/): client portals, booking systems, internal tools; front end, back end and deployment; from PLN 18,000 net, 6 to 12 weeks
 - [Websites](https://adrianturbinski.pl/en/services/websites/): fast company sites with SEO basics, Google Business Profile and WCAG AA; from PLN 3,500 net, 2 to 4 weeks
+- [Process automation](https://adrianturbinski.pl/en/services/process-automation/): invoices, email, reports and data moved between systems without retyping, n8n on the client's server or custom code, a week of parallel testing; from PLN 3,500 net per process, care from PLN 300 net per month
+- [Integrations and KSeF](https://adrianturbinski.pl/en/services/integrations-ksef/): the Polish KSeF e-invoicing system connected to the client's own software, shop, ERP or Odoo, and integrations between company systems; from PLN 4,900 net
+- [AI website assistant](https://adrianturbinski.pl/en/services/ai-assistant/): answers from the company's knowledge base, books appointments, hands the chat to a person, says it is AI as the EU AI Act requires, data hosted in the EU; from PLN 4,500 net plus from PLN 290 net per month
 - [WCAG accessibility](https://adrianturbinski.pl/en/services/wcag-accessibility/): audits with keyboard and screen reader testing, a prioritized report, fixes, help with the European Accessibility Act; from PLN 1,900 net
 - [Maintenance](https://adrianturbinski.pl/en/services/maintenance/): updates, Angular migrations, bug fixes, backups and new features, also in code written by others; from PLN 300 net per month
 - [All services](https://adrianturbinski.pl/en/services/), [usługi po polsku](https://adrianturbinski.pl/uslugi/)
@@ -33,5 +36,5 @@ Starting prices, net of VAT, for a typical scope; an exact quote is written afte
 - [signal-timeline](https://adrianturbinski.pl/en/archive/signal-timeline/): undo and history for NgRx SignalStore, published on npm, with branches, jumping to any entry and cheap recording; live demo, source on GitHub, measured numbers
 - [eventhorizon](https://adrianturbinski.pl/en/archive/eventhorizon/): a real-time ray tracer for light bent around a Schwarzschild black hole in WebGPU and WGSL, checked against a float64 reference; live demo, source on GitHub, measured numbers
 - [fieldline](https://adrianturbinski.pl/en/archive/fieldline/): the electric and magnetic field around high-voltage lines computed on the GPU in WebGPU, with exposure contours and a phase-arrangement optimizer; live demo, source on GitHub, measured numbers
-- [Sample websites](https://adrianturbinski.pl/wzornik/): nine websites for made-up businesses, each with its own typeface, palette and signature element; every page says the business is made up; in Polish, Kminek and Przęsło also in English
+- [Sample websites](https://adrianturbinski.pl/wzornik/): ten websites for made-up businesses, each with its own typeface, palette and signature element; every page says the business is made up, Docisk shows a working AI assistant demo; in Polish, Kminek and Przęsło also in English
 - [Projects](https://adrianturbinski.pl/en/archive/): the index of the work above

@@ -1,6 +1,8 @@
 export const phone = { href: 'tel:+48731985567', label: '731 985 567', intl: '+48 731 985 567' };
 
-export const serviceKeys = ['apps', 'sites', 'wcag', 'care'];
+export const serviceKeys = ['apps', 'sites', 'flow', 'integ', 'bot', 'wcag', 'care'];
+
+export const automationKeys = ['flow', 'integ', 'bot'];
 
 export const services = {
   apps: {
@@ -561,13 +563,764 @@ export const services = {
   },
 };
 
+export const automation = {
+  flow: {
+    pl: {
+      name: 'Automatyzacja procesów',
+      short: 'Faktury, maile, raporty i dane między systemami bez ręcznego przepisywania.',
+      title: 'Automatyzacja | bez ręcznej roboty.',
+      seoTitle:
+        'Automatyzacja procesów w firmie, n8n i własny kod, cena, Wrocław, Adrian Turbiński',
+      description:
+        'Automatyzacja procesów w małej i średniej firmie: faktury z maila do księgowości, zapytania do CRM, raporty z kilku systemów. n8n na serwerze klienta albo własny kod. Od 3 500 zł netto, opieka od 300 zł miesięcznie.',
+      lead: 'Faktury z maila same trafiają do księgowości. Zapytanie z formularza ląduje w CRM i dostaje odpowiedź. Raport z trzech systemów składa się sam w poniedziałek rano. Buduję to w n8n na twoim serwerze albo we własnym kodzie, kiedy n8n nie wystarcza.',
+      body: 'Przed wdrożeniem mierzymy, ile minut zajmuje jedna operacja ręcznie. Po wdrożeniu liczymy, ile operacji poszło samo i ile razy ktoś musiał wkroczyć. Pracuję na danych osobowych tylko z umową powierzenia, a modele językowe wybieram z rezydencją danych w Unii.',
+      price: 'od 3 500 zł',
+      priceNote: 'netto, jeden proces',
+      time: '1 do 2 tygodni',
+      includes: [
+        'spisany przebieg przed i po',
+        'n8n u ciebie, z kopią zapasową',
+        'tydzień testów równolegle',
+        'instrukcja dla pracownika',
+        '30 dni poprawek',
+        'dostępy i kod u ciebie',
+      ],
+      foot: 'Przegląd procesów: 900 zł netto za dwugodzinną rozmowę i listę procesów z szacunkiem godzin do odzyskania. Kwotę odliczam od wdrożenia.',
+      measure: [
+        'godziny ręcznej pracy tygodniowo, zmierzone stoperem na 20 operacjach przed startem',
+        'liczba operacji wykonanych automatycznie w miesiącu, z dziennika n8n',
+        'liczba błędów, przy których ktoś musiał wkroczyć',
+        'czas od zapytania klienta do odpowiedzi',
+      ],
+      packagesLead:
+        'Trzy wielkości. Każda zaczyna się od spisania procesu i kończy tygodniem, w którym stary i nowy sposób działają obok siebie.',
+      packages: [
+        {
+          name: 'Start',
+          price: 'od 3 500 zł',
+          time: '1 do 2 tygodni',
+          text: 'Jeden proces od początku do końca, do trzech systemów. Na przykład faktury z maila do programu księgowego albo lead z formularza do CRM z odpowiedzią do klienta.',
+          items: [
+            'jeden proces, do trzech systemów',
+            'alerty o błędach na mail',
+            'tydzień testów równolegle',
+          ],
+        },
+        {
+          name: 'Standard',
+          price: 'od 9 000 zł',
+          time: '3 do 5 tygodni',
+          text: 'Trzy procesy, w tym jeden z modelem językowym: klasyfikacja maili, wyciąganie danych z dokumentów, streszczenia. Panel z historią uruchomień i powiadomienia o błędach.',
+          items: ['trzy procesy', 'jeden z modelem językowym', 'panel z historią uruchomień'],
+        },
+        {
+          name: 'Rozszerzony',
+          price: 'od 15 000 zł',
+          time: '5 do 8 tygodni',
+          text: 'Procesy we własnym kodzie tam, gdzie n8n nie wystarcza: kolejki, duże wolumeny, własny panel dla pracowników, systemy bez gotowych wtyczek.',
+          items: ['własny kod i kolejki', 'panel dla pracowników', 'monitoring i dokumentacja'],
+        },
+      ],
+      care: 'Opieka: od 300 zł netto miesięcznie. Monitoring, poprawki po zmianach w systemach i dwie godziny prac w cenie, kolejne po 140 zł.',
+      excluded: [
+        'abonamenty narzędzi: n8n cloud, Make, Zapier',
+        'tokeny modeli językowych, rozliczane po koszcie',
+        'serwer, zwykle twój',
+        'zmiany w samych systemach źródłowych',
+      ],
+      whoLead:
+        'Dla firm od kilku do kilkudziesięciu osób, w których ktoś z biura jest „systemem": przepisuje dane z maili, arkuszy i PDF-ów.',
+      who: [
+        'Faktury kosztowe przychodzą mailem jako PDF i ktoś przepisuje je do programu księgowego.',
+        'Zapytania z formularza, maila i telefonu trafiają do kilku skrzynek i część ginie.',
+        'Raport dla szefa składa się co tydzień z trzech arkuszy, ręcznie.',
+        'Klient dostaje przypomnienie o terminie tylko wtedy, gdy ktoś pamięta, żeby zadzwonić.',
+      ],
+      steps: [
+        [
+          'Miara.',
+          'Dwugodzinna rozmowa o tym, co powtarza się co dzień. Spisuję procesy, mierzę czas jednej operacji i wyceniam na piśmie w dwa dni robocze.',
+        ],
+        [
+          'Przymiarki.',
+          'Buduję pierwszy proces i uruchamiam go obok starego sposobu. Przez tydzień porównujemy wyniki i poprawiam to, co się rozjeżdża.',
+        ],
+        [
+          'Oddanie.',
+          'Proces przechodzi na stałe, pracownik dostaje instrukcję, ty dostajesz dostępy i kopię zapasową. Alerty o błędach przychodzą na wskazany mail.',
+        ],
+        [
+          'Poprawki.',
+          'Przez 30 dni poprawiam to, co wyjdzie w praktyce. Potem opieka miesięczna albo przekazanie twojemu zespołowi.',
+        ],
+      ],
+      faq: [
+        [
+          'Ile kosztuje automatyzacja procesu w firmie?',
+          'Jeden proces od 3 500 zł netto, trzy procesy z modelem językowym od 9 000 zł. Agencje w Polsce liczą od 900 do 4 000 zł za proces, mediana to około 2 500 zł. U mnie dostajesz do tego spisany przebieg, tydzień testów równolegle i umowę powierzenia danych. Tam, gdzie wtyczki nie wystarczą, piszę własny kod.',
+        ],
+        [
+          'n8n, Make czy własny kod?',
+          'n8n, kiedy systemy mają gotowe wtyczki i proces da się narysować w kilkunastu krokach. Stawiam go na twoim serwerze, więc nie płacisz za wykonania. Własny kod, kiedy jest dużo danych, kolejki, nietypowe systemy albo potrzebny jest panel dla pracowników. Make i Zapier zostawiam, gdy już je masz.',
+        ],
+        [
+          'Czy automatyzacja z modelem językowym jest zgodna z RODO?',
+          'Tak, jeśli dane osobowe idą do dostawcy z umową powierzenia i rezydencją danych w Unii, a klient wpisuje to do rejestru czynności. Tak to ustawiam. Dane, które nie muszą opuszczać firmy, zostają u ciebie.',
+        ],
+        [
+          'Co się dzieje, gdy proces się wysypie?',
+          'Dostajesz alert na mail, a proces zatrzymuje się na błędnym elemencie zamiast przepuszczać go dalej. W opiece miesięcznej patrzę w dziennik uruchomień i poprawiam, zanim ktoś zauważy.',
+        ],
+        [
+          'Kiedy automatyzacja się nie opłaca?',
+          'Gdy operacja zdarza się kilka razy w miesiącu albo za każdym razem wygląda inaczej. Wtedy mówię to na przeglądzie procesów i nie sprzedaję wdrożenia.',
+        ],
+        [
+          'Czy mogę potem zmieniać procesy sam?',
+          'Tak. n8n stoi na twoim serwerze, masz do niego dostęp i instrukcję. Własny kod dostajesz w repozytorium z dokumentacją.',
+        ],
+      ],
+    },
+    en: {
+      name: 'Process automation',
+      short: 'Invoices, email, reports and data between systems without retyping.',
+      title: 'Automation | without the hand work.',
+      seoTitle: 'Business process automation with n8n and custom code, Adrian Turbiński',
+      description:
+        'Process automation for small and medium companies: invoices from email to accounting, enquiries into the CRM, reports from several systems. n8n on your server or custom code. From PLN 3,500 net, care from PLN 300 a month.',
+      lead: 'Invoices from email land in accounting on their own. An enquiry from the form goes into the CRM and gets a reply. A report from three systems builds itself on Monday morning. I build it in n8n on your server, or in custom code when n8n is not enough.',
+      body: 'Before the build we time how long one operation takes by hand. After it we count how many ran on their own and how often someone had to step in. Personal data goes only under a data processing agreement, and I pick language models with EU data residency.',
+      price: 'from PLN 3,500',
+      priceNote: 'net, one process',
+      time: '1 to 2 weeks',
+      includes: [
+        'the process written down, before and after',
+        'n8n on your server, with backups',
+        'a week of parallel testing',
+        'a guide for the person who uses it',
+        '30 days of fixes',
+        'access and code are yours',
+      ],
+      foot: 'Process review: PLN 900 net for a two-hour call and a list of processes with the hours you can get back. I deduct it from the build.',
+      measure: [
+        'hours of hand work a week, timed on 20 operations before the start',
+        'operations run automatically each month, from the n8n log',
+        'errors where someone had to step in',
+        'time from a customer enquiry to the reply',
+      ],
+      packagesLead:
+        'Three sizes. Each starts with the process written down and ends with a week in which the old and the new way run side by side.',
+      packages: [
+        {
+          name: 'Start',
+          price: 'from PLN 3,500',
+          time: '1 to 2 weeks',
+          text: 'One process end to end, up to three systems. For example invoices from email into the accounting software, or a lead from the form into the CRM with a reply to the customer.',
+          items: [
+            'one process, up to three systems',
+            'error alerts by email',
+            'a week of parallel testing',
+          ],
+        },
+        {
+          name: 'Standard',
+          price: 'from PLN 9,000',
+          time: '3 to 5 weeks',
+          text: 'Three processes, one of them with a language model: sorting email, pulling data out of documents, summaries. A panel with the run history and error notifications.',
+          items: ['three processes', 'one with a language model', 'a panel with run history'],
+        },
+        {
+          name: 'Extended',
+          price: 'from PLN 15,000',
+          time: '5 to 8 weeks',
+          text: 'Processes in custom code where n8n falls short: queues, large volumes, a panel for your staff, systems without ready connectors.',
+          items: ['custom code and queues', 'a panel for staff', 'monitoring and documentation'],
+        },
+      ],
+      care: 'Care: from PLN 300 net a month. Monitoring, fixes after changes in your systems and two hours of work included, further hours at PLN 140.',
+      excluded: [
+        'tool subscriptions: n8n cloud, Make, Zapier',
+        'language model tokens, billed at cost',
+        'the server, usually yours',
+        'changes inside the source systems',
+      ],
+      whoLead:
+        'For companies of a few to a few dozen people where someone in the office is the system: retyping data from email, spreadsheets and PDFs.',
+      who: [
+        'Supplier invoices arrive by email as PDFs and someone retypes them into the accounting software.',
+        'Enquiries from the form, email and phone end up in several inboxes and some get lost.',
+        'The weekly report for the boss is put together by hand from three spreadsheets.',
+        'Customers get a reminder about their appointment only when someone remembers to call.',
+      ],
+      steps: [
+        [
+          'Measure.',
+          'A two-hour call about what repeats every day. I write the processes down, time one operation and send a written quote within two working days.',
+        ],
+        [
+          'Fittings.',
+          'I build the first process and run it next to the old way. For a week we compare the results and I fix what drifts.',
+        ],
+        [
+          'Handover.',
+          'The process goes live for good, your staff get a guide, you get the access and a backup. Error alerts go to the address you choose.',
+        ],
+        [
+          'Alterations.',
+          'For 30 days I fix whatever practice shows. Then a monthly care plan, or a handover to your team.',
+        ],
+      ],
+      faq: [
+        [
+          'How much does process automation cost?',
+          'One process from PLN 3,500 net, three processes with a language model from PLN 9,000. Polish agencies charge PLN 900 to 4,000 per process, with a median of about 2,500. What you get for the difference is the process written down, a week of parallel testing, a data processing agreement and custom code where connectors run out.',
+        ],
+        [
+          'n8n, Make or custom code?',
+          'n8n when the systems have ready connectors and the process fits in a dozen steps. I host it on your server, so you do not pay per run. Custom code when there is a lot of data, queues, unusual systems or a panel for staff. Make and Zapier stay if you already use them.',
+        ],
+        [
+          'Is automation with a language model GDPR compliant?',
+          'Yes, if personal data goes to a provider under a data processing agreement with EU data residency, and the company records it in its register of processing. That is how I set it up. Data that does not need to leave the company stays with you.',
+        ],
+        [
+          'What happens when a process breaks?',
+          'You get an email alert and the process stops at the faulty item instead of passing it on. Under the care plan I read the run log and fix things before anyone notices.',
+        ],
+        [
+          'When is automation not worth it?',
+          'When the operation happens a few times a month or looks different every time. I say so at the process review and do not sell the build.',
+        ],
+        [
+          'Can I change the processes myself later?',
+          'Yes. n8n runs on your server, you have access and a guide. Custom code comes in a repository with documentation.',
+        ],
+      ],
+    },
+  },
+  integ: {
+    proof: true,
+    pl: {
+      name: 'Integracje i KSeF',
+      short: 'Sklep, ERP, księgowość i własny system połączone z KSeF i między sobą.',
+      title: 'KSeF i integracje | bez przepisywania.',
+      seoTitle:
+        'Integracja KSeF z własnym systemem, sklepem i ERP, cena, Wrocław, Adrian Turbiński',
+      description:
+        'Integracja KSeF z własnym systemem, sklepem internetowym, ERP albo Odoo oraz integracje między systemami firmy. Wysyłka i odbiór faktur, tryb offline24, kody QR. Od 4 900 zł netto, opieka od 300 zł miesięcznie.',
+      lead: 'Faktura wystawiona w twoim systemie sama trafia do KSeF i wraca z numerem i kodem QR. Zamówienie ze sklepu ląduje w magazynie i w księgowości bez przepisywania. Łączę systemy, które już masz, zamiast zmuszać cię do zmiany programu.',
+      body: 'Integracje robię od 2019 roku: Node.js, Java, PostgreSQL, Oracle, Odoo. Dla krawieckiej firmy TailorCloth zbudowałem na Odoo obsługę magazynu i faktur. KSeF 2.0 znam od strony API: uwierzytelnienie, schemat FA(3), tryb offline24, obsługa błędów.',
+      price: 'od 4 900 zł',
+      priceNote: 'netto, jedno połączenie',
+      time: '2 do 3 tygodni',
+      includes: [
+        'spisany zakres i mapowanie pól',
+        'testy na środowisku KSeF',
+        'numer KSeF i kod QR w twoim systemie',
+        'obsługa błędów z powiadomieniem',
+        '30 dni poprawek',
+        'kod i dostępy u ciebie',
+      ],
+      foot: 'Rozbudowa istniejącej integracji albo naprawa cudzej: 140 zł netto za godzinę albo wycena po przeglądzie.',
+      measure: [
+        'faktury wystawione w miesiącu bez ręcznego przepisywania',
+        'faktury odrzucone przez KSeF, cel po pierwszym miesiącu: zero',
+        'czas od zamówienia do faktury',
+        'godziny odzyskane, liczone z próbki przed wdrożeniem',
+      ],
+      packagesLead:
+        'Trzy wielkości, od jednego połączenia po ERP z kilkoma systemami. Każda z testami na środowisku testowym KSeF, zanim pierwsza prawdziwa faktura wyjdzie z firmy.',
+      packages: [
+        {
+          name: 'Start',
+          price: 'od 4 900 zł',
+          time: '2 do 3 tygodni',
+          text: 'Jedno połączenie w jednym kierunku. Wysyłka faktur z twojego systemu do KSeF z numerem i kodem QR z powrotem, albo przepływ zamówień z jednego systemu do drugiego.',
+          items: [
+            'wysyłka do KSeF albo jeden przepływ',
+            'FA(3), tryb offline24, kody QR',
+            'alerty o odrzuconych fakturach',
+          ],
+        },
+        {
+          name: 'Standard',
+          price: 'od 9 900 zł',
+          time: '4 do 6 tygodni',
+          text: 'KSeF w obie strony: wysyłka, odbiór faktur kosztowych, powiadomienia, obsługa awarii. Albo trzy systemy w jednym przepływie, na przykład sklep, magazyn i księgowość.',
+          items: [
+            'wysyłka i odbiór faktur',
+            'albo trzy systemy w jednym przepływie',
+            'obsługa awarii i ponawianie',
+          ],
+        },
+        {
+          name: 'Rozszerzony',
+          price: 'od 18 000 zł',
+          time: '6 do 10 tygodni',
+          text: 'ERP, w tym Odoo, połączony z kilkoma systemami. Kolejki i ponawianie, panel błędów dla pracownika, monitoring, dokumentacja i przekazanie zespołowi.',
+          items: ['ERP z kilkoma systemami', 'kolejki i panel błędów', 'monitoring i dokumentacja'],
+        },
+      ],
+      care: 'Opieka: od 300 zł netto miesięcznie. Monitoring, aktualizacje po zmianach w API KSeF i w twoich systemach, dwie godziny prac w cenie.',
+      excluded: [
+        'licencje systemów, które łączę',
+        'zmiany w samym ERP poza integracją',
+        'poprawność księgowa faktur, to zostaje u księgowej',
+        'certyfikat kwalifikowany i serwer, zwykle twój',
+      ],
+      whoLead:
+        'Dla firm, które mają własny system albo sklep i nie mieszczą się w gotowej bramce KSeF za kilkadziesiąt złotych.',
+      who: [
+        'Faktury powstają w twoim systemie albo sklepie, a do KSeF ktoś wklepuje je drugi raz.',
+        'Hurtownia na BaseLinkerze, Subiekcie albo własnym panelu, w której zamówienie przechodzi przez trzy programy.',
+        'Firma na Odoo albo innym ERP, która potrzebuje KSeF i połączeń ze sklepem i księgowością.',
+        'Biuro rachunkowe z klientem, którego programu nie obsługuje żaden gotowy konektor.',
+      ],
+      steps: [
+        [
+          'Miara.',
+          'Oglądam systemy i faktury, spisuję pola, które trzeba zmapować, i przypadki, które wychodzą poza schemat. Wycena na piśmie w dwa dni robocze.',
+        ],
+        [
+          'Przymiarki.',
+          'Buduję połączenie na środowisku testowym KSeF, na kopii twoich faktur. Pokazuję, jak wygląda faktura po drodze i co się dzieje przy błędzie.',
+        ],
+        [
+          'Oddanie.',
+          'Przełączamy na produkcję przy pierwszych prawdziwych fakturach, razem. Numer KSeF i kod QR wracają do twojego systemu, alerty idą na wskazany mail.',
+        ],
+        [
+          'Poprawki.',
+          'Przez 30 dni poprawiam przypadki, które wyjdą w praktyce. Potem opieka miesięczna z aktualizacjami po zmianach w KSeF.',
+        ],
+      ],
+      faq: [
+        [
+          'Ile kosztuje integracja z KSeF?',
+          'Wysyłka faktur z twojego systemu od 4 900 zł netto, wysyłka i odbiór od 9 900 zł. Firmy integratorskie w Polsce liczą od 4 800 do 12 000 zł za wysyłkę i od 7 600 do 20 000 zł za odbiór. Gotowa bramka za 10 do 100 zł miesięcznie wystarczy, jeśli wystawiasz faktury w popularnym programie, który już ma KSeF.',
+        ],
+        [
+          'Od kiedy KSeF jest obowiązkowy?',
+          'Od 1 lutego 2026 dla firm ze sprzedażą powyżej 200 mln zł, od 1 kwietnia 2026 dla pozostałych czynnych podatników VAT, od 1 stycznia 2027 także dla najmniejszych, do 10 tys. zł sprzedaży miesięcznie. Kary za faktury poza KSeF mają ruszyć 1 stycznia 2027; rządowy projekt z października 2026 przesuwa je na 2028, ale obowiązku nie zmienia.',
+        ],
+        [
+          'Czy mogę podpiąć KSeF do własnego programu albo sklepu?',
+          'Tak. KSeF ma publiczne API i środowisko testowe. Potrzebujesz tokena albo certyfikatu KSeF, który nadajesz w swoim koncie podatnika. Ja nie przechowuję twojego certyfikatu.',
+        ],
+        [
+          'Co z fakturami, gdy KSeF nie działa?',
+          'Tryb offline24: faktura powstaje z kodem QR, a do KSeF trafia do następnego dnia roboczego. Integracja robi to sama i pokazuje, co jeszcze czeka na wysyłkę.',
+        ],
+        [
+          'Czy łączysz też systemy bez KSeF?',
+          'Tak. Sklep z magazynem i księgowością, CRM z fakturowaniem, własny panel z BaseLinkerem albo Odoo. KSeF to najczęstszy powód, ale rzemiosło jest to samo.',
+        ],
+        [
+          'Jak się rozliczamy?',
+          'Na fakturę B2B, połowa przy starcie, połowa po przełączeniu na produkcję. Opieka miesięczna osobno, bez umowy na rok.',
+        ],
+      ],
+    },
+    en: {
+      name: 'Integrations and KSeF',
+      short:
+        'Your shop, ERP, accounting and own system connected to KSeF e-invoicing and to each other.',
+      title: 'KSeF and integrations | without retyping.',
+      seoTitle:
+        'KSeF e-invoicing and system integrations for companies in Poland, Adrian Turbiński',
+      description:
+        'Integration of the Polish KSeF e-invoicing system with your own software, online shop, ERP or Odoo, and integrations between company systems. Sending and receiving invoices, offline24 mode, QR codes. From PLN 4,900 net.',
+      lead: 'An invoice issued in your system goes to KSeF on its own and comes back with its number and QR code. An order from the shop lands in the warehouse and in accounting without retyping. I connect the systems you already have instead of making you switch.',
+      body: 'I have built integrations since 2019: Node.js, Java, PostgreSQL, Oracle, Odoo. For the tailoring company TailorCloth I built warehouse and invoice handling on Odoo. I know KSeF 2.0 from the API side: authentication, the FA(3) schema, offline24 mode, error handling.',
+      price: 'from PLN 4,900',
+      priceNote: 'net, one connection',
+      time: '2 to 3 weeks',
+      includes: [
+        'written scope and field mapping',
+        'tests on the KSeF test environment',
+        'KSeF number and QR code in your system',
+        'error handling with notifications',
+        '30 days of fixes',
+        'code and access are yours',
+      ],
+      foot: 'Extending an existing integration or fixing someone else’s: PLN 140 net per hour or a quote after a review.',
+      measure: [
+        'invoices issued each month without retyping',
+        'invoices rejected by KSeF, target after the first month: zero',
+        'time from order to invoice',
+        'hours won back, counted from a sample taken before the build',
+      ],
+      packagesLead:
+        'Three sizes, from one connection to an ERP with several systems. Each one is tested on the KSeF test environment before the first real invoice leaves the company.',
+      packages: [
+        {
+          name: 'Start',
+          price: 'from PLN 4,900',
+          time: '2 to 3 weeks',
+          text: 'One connection, one direction. Sending invoices from your system to KSeF with the number and QR code coming back, or an order flow from one system to another.',
+          items: [
+            'sending to KSeF or one flow',
+            'FA(3), offline24 mode, QR codes',
+            'alerts for rejected invoices',
+          ],
+        },
+        {
+          name: 'Standard',
+          price: 'from PLN 9,900',
+          time: '4 to 6 weeks',
+          text: 'KSeF both ways: sending, receiving supplier invoices, notifications, outage handling. Or three systems in one flow, for example shop, warehouse and accounting.',
+          items: [
+            'sending and receiving invoices',
+            'or three systems in one flow',
+            'outage handling and retries',
+          ],
+        },
+        {
+          name: 'Extended',
+          price: 'from PLN 18,000',
+          time: '6 to 10 weeks',
+          text: 'An ERP, Odoo included, connected to several systems. Queues and retries, an error panel for staff, monitoring, documentation and a handover to your team.',
+          items: [
+            'ERP with several systems',
+            'queues and an error panel',
+            'monitoring and documentation',
+          ],
+        },
+      ],
+      care: 'Care: from PLN 300 net a month. Monitoring, updates after changes in the KSeF API and in your systems, two hours of work included.',
+      excluded: [
+        'licences of the systems I connect',
+        'changes inside the ERP beyond the integration',
+        'the accounting correctness of invoices, that stays with your accountant',
+        'a qualified certificate and the server, usually yours',
+      ],
+      whoLead:
+        'For companies with their own software or shop that do not fit a ready KSeF gateway costing a few dozen złoty a month.',
+      who: [
+        'Invoices are created in your system or shop and someone types them into KSeF a second time.',
+        'A wholesaler on BaseLinker, Subiekt or its own panel where an order passes through three programs.',
+        'A company on Odoo or another ERP that needs KSeF and links to the shop and accounting.',
+        'An accounting office with a client whose software no ready connector supports.',
+      ],
+      steps: [
+        [
+          'Measure.',
+          'I look at the systems and the invoices, write down the fields to map and the cases that fall outside the schema. Written quote within two working days.',
+        ],
+        [
+          'Fittings.',
+          'I build the connection on the KSeF test environment with a copy of your invoices. I show what an invoice looks like on the way and what happens on an error.',
+        ],
+        [
+          'Handover.',
+          'We switch to production on the first real invoices, together. The KSeF number and QR code come back into your system, alerts go to the address you choose.',
+        ],
+        [
+          'Alterations.',
+          'For 30 days I fix the cases that practice brings up. Then a monthly care plan with updates after KSeF changes.',
+        ],
+      ],
+      faq: [
+        [
+          'What is KSeF?',
+          'Krajowy System e-Faktur, the Polish national e-invoicing system. Since 1 April 2026 almost every VAT payer in Poland has to issue invoices through it, the smallest firms from 1 January 2027. Invoices get a KSeF number and a QR code.',
+        ],
+        [
+          'How much does a KSeF integration cost?',
+          'Sending invoices from your system from PLN 4,900 net, sending and receiving from PLN 9,900. Polish integrators charge PLN 4,800 to 12,000 for sending and 7,600 to 20,000 for receiving. A ready gateway at PLN 10 to 100 a month is enough if you invoice from popular software that already supports KSeF.',
+        ],
+        [
+          'Can you connect KSeF to our own software or shop?',
+          'Yes. KSeF has a public API and a test environment. You need a token or a KSeF certificate issued in your taxpayer account. I do not store your certificate.',
+        ],
+        [
+          'What happens to invoices when KSeF is down?',
+          'Offline24 mode: the invoice is issued with a QR code and reaches KSeF by the next working day. The integration does it on its own and shows what is still waiting.',
+        ],
+        [
+          'Do you also connect systems without KSeF?',
+          'Yes. A shop with the warehouse and accounting, a CRM with invoicing, your own panel with BaseLinker or Odoo. KSeF is the most common reason, but the craft is the same.',
+        ],
+        [
+          'How do we settle?',
+          'B2B invoice, half at the start and half after the switch to production. The care plan is billed monthly, with no annual contract.',
+        ],
+      ],
+    },
+  },
+  bot: {
+    pl: {
+      name: 'Asystent AI na stronę',
+      short: 'Odpowiada z twojej bazy wiedzy, zapisuje na termin i przekazuje rozmowę człowiekowi.',
+      title: 'Asystent AI | na stronę firmy.',
+      seoTitle:
+        'Asystent AI i chatbot na stronę firmy, zapisy i baza wiedzy, cena, Wrocław, Adrian Turbiński',
+      description:
+        'Asystent AI na stronę firmy: odpowiada z bazy wiedzy, zapisuje na termin, zbiera zapytania i przekazuje rozmowę człowiekowi. Przedstawia się jako AI zgodnie z AI Act, dane w Unii, WCAG 2.1 AA. Od 4 500 zł netto plus od 290 zł miesięcznie.',
+      lead: 'Klient pyta o cenę o 22:40 i dostaje odpowiedź z twojego cennika. Zapisuje się na termin bez telefonu. Gdy pytanie wykracza poza bazę wiedzy, asystent mówi to wprost i przekazuje rozmowę tobie. Od pierwszego zdania wiadomo, że to AI.',
+      body: 'Asystent odpowiada tylko z treści, które mu dasz: strona, cennik, FAQ, regulamin. Nie zmyśla, bo przy braku odpowiedzi ma oddać głos człowiekowi. Modele działają z rezydencją danych w Unii, umowę powierzenia podpisujemy, a log rozmów zostaje u ciebie. Widget działa z klawiatury i czytnika ekranu.',
+      price: 'od 4 500 zł',
+      priceNote: 'netto, plus od 290 zł / mies.',
+      time: '1 do 2 tygodni',
+      includes: [
+        'baza wiedzy z twoich treści',
+        'komunikat „rozmawiasz z AI"',
+        'przycisk „wolę człowieka"',
+        'widget WCAG 2.1 AA',
+        'hosting w Unii, umowa powierzenia',
+        '30 dni poprawek',
+      ],
+      foot: 'Abonament obejmuje hosting, tokeny modelu do limitu rozmów, comiesięczną aktualizację bazy wiedzy i raport z pytań bez odpowiedzi.',
+      measure: [
+        'rozmowy poza godzinami pracy',
+        'odsetek pytań zamkniętych bez przekazania do człowieka',
+        'zapisy i zapytania zebrane przez asystenta',
+        'telefony w tygodniu przed i po, z centralki albo zliczane przez tydzień',
+      ],
+      packagesLead:
+        'Trzy wielkości. Każda z komunikatem o AI, przyciskiem do człowieka i logiem rozmów u ciebie.',
+      packages: [
+        {
+          name: 'Start',
+          price: 'od 4 500 zł',
+          monthly: '290 zł / mies.',
+          time: '1 do 2 tygodni',
+          text: 'Asystent na bazie treści strony i dokumentów, do 50 stron. Odpowiada na pytania, zbiera zapytanie i wysyła je mailem do człowieka. Do 500 rozmów miesięcznie.',
+          items: [
+            'baza wiedzy do 50 stron',
+            'zapytanie mailem do ciebie',
+            'do 500 rozmów miesięcznie',
+          ],
+        },
+        {
+          name: 'Standard',
+          price: 'od 8 500 zł',
+          monthly: '490 zł / mies.',
+          time: '3 do 4 tygodni',
+          text: 'Do tego zapisy na termin w kalendarzu Google albo w twoim systemie, formularz z zapisem do CRM lub arkusza, dwa języki i raport miesięczny z pytań bez odpowiedzi. Do 2 000 rozmów.',
+          items: ['zapisy na termin', 'zapis do CRM albo arkusza', 'dwa języki, do 2 000 rozmów'],
+        },
+        {
+          name: 'Rozszerzony',
+          price: 'od 15 000 zł',
+          monthly: '790 zł / mies.',
+          time: '5 do 8 tygodni',
+          text: 'Do tego integracje z systemem rezerwacji, sklepem albo panelem klienta: status zamówienia, dostępność terminów. Własny panel do poprawiania odpowiedzi. Do 5 000 rozmów.',
+          items: [
+            'status zamówienia i dostępność',
+            'panel do poprawiania odpowiedzi',
+            'do 5 000 rozmów',
+          ],
+        },
+      ],
+      care: 'Rozmowy ponad limit rozliczam po koszcie modelu plus 20 procent. Abonament bez umowy na rok.',
+      excluded: [
+        'napisanie treści, których nie masz, na przykład FAQ od zera',
+        'kanały poza stroną: Messenger, WhatsApp, telefon',
+        'rozmowy ponad limit pakietu',
+      ],
+      whoLead:
+        'Dla firm usługowych, w których te same pytania wracają przez telefon i mail, a zapytania po godzinach zostają bez odpowiedzi.',
+      who: [
+        'Gabinet, klinika albo salon, w którym recepcja nie nadąża odbierać telefonów.',
+        'Serwis albo warsztat, do którego w sezonie dzwonią wszyscy naraz z tym samym pytaniem.',
+        'Hotel, pensjonat albo szkoła, gdzie goście pytają o to, co jest na stronie, tylko nie mogą tego znaleźć.',
+        'Sklep z pytaniami o dostawę, zwroty i dostępność, które zabierają czas jednej osobie.',
+      ],
+      steps: [
+        [
+          'Miara.',
+          'Zbieramy pytania, które wracają najczęściej, i treści, z których asystent ma odpowiadać. Ustalamy, kiedy ma oddać rozmowę człowiekowi. Wycena na piśmie w dwa dni robocze.',
+        ],
+        [
+          'Przymiarki.',
+          'Dostajesz asystenta pod adresem testowym i zadajesz mu pytania przez tydzień. To, na co nie umie odpowiedzieć, trafia do bazy wiedzy albo do ścieżki „do człowieka".',
+        ],
+        [
+          'Oddanie.',
+          'Widget wchodzi na stronę, log rozmów i raport miesięczny trafiają do ciebie. Komunikat o AI i umowa powierzenia są gotowe przed startem.',
+        ],
+        [
+          'Poprawki.',
+          'Co miesiąc czytam pytania bez odpowiedzi i uzupełniam bazę. Przez 30 dni od startu poprawki bez limitu.',
+        ],
+      ],
+      faq: [
+        [
+          'Ile kosztuje asystent AI na stronę?',
+          'Od 4 500 zł netto za wdrożenie i od 290 zł miesięcznie za hosting, tokeny modelu i opiekę. Gotowe narzędzia zaczynają się od około 100 zł miesięcznie i są dobrym wyborem, gdy masz mniej niż 50 rozmów w miesiącu. Agencje liczą za asystenta z bazą wiedzy od 5 000 do 15 000 zł.',
+        ],
+        [
+          'Czy asystent musi mówić, że jest AI?',
+          'Tak. Od 2 sierpnia 2026 wymaga tego unijny AI Act: osoba ma wiedzieć, że rozmawia z systemem AI, najpóźniej przy pierwszej wiadomości. Komunikat jest w widgecie na stałe i nie da się go wyłączyć.',
+        ],
+        [
+          'Co z RODO i danymi klientów?',
+          'Dane z rozmów to dane osobowe. Podpisujemy umowę powierzenia, model działa z rezydencją danych w Unii, a log rozmów jest u ciebie i kasuje się po 30 dniach, chyba że ustalimy inaczej.',
+        ],
+        [
+          'Czy asystent może coś zmyślić?',
+          'Odpowiada wyłącznie z treści, które mu dasz, i pokazuje, skąd wziął odpowiedź. Gdy nie ma jej w bazie, mówi to i przekazuje rozmowę człowiekowi. Firma odpowiada za słowa swojego asystenta, dlatego przed startem przechodzimy przez tydzień pytań testowych.',
+        ],
+        [
+          'Co z klientami, którzy nie chcą rozmawiać z botem?',
+          'Przycisk „wolę człowieka" jest widoczny od pierwszej wiadomości. Asystent zbiera numer albo mail i przekazuje sprawę tobie. Z badań wynika, że większość ludzi woli człowieka, więc asystent ma skracać drogę do niego.',
+        ],
+        [
+          'Czy asystent może zapisywać na terminy?',
+          'Tak, od pakietu Standard: do kalendarza Google albo do twojego systemu rezerwacji. Klient wybiera usługę, dzień i godzinę, zostawia telefon i dostaje potwierdzenie.',
+        ],
+        [
+          'Czy działa po angielsku?',
+          'Tak, od pakietu Standard asystent odpowiada w dwóch językach z tej samej bazy wiedzy.',
+        ],
+      ],
+    },
+    en: {
+      name: 'AI website assistant',
+      short: 'Answers from your knowledge base, books appointments and hands the chat to a person.',
+      title: 'AI assistant | for a company website.',
+      seoTitle:
+        'AI website assistant and chatbot with bookings and a knowledge base, Adrian Turbiński',
+      description:
+        'An AI assistant for a company website: answers from your knowledge base, books appointments, collects enquiries and hands the chat to a person. Says it is AI as the EU AI Act requires, data in the EU, WCAG 2.1 AA. From PLN 4,500 net plus from PLN 290 a month.',
+      lead: 'A customer asks about a price at 10:40 pm and gets an answer from your price list. They book an appointment without a phone call. When a question goes beyond the knowledge base, the assistant says so and hands the chat to you. From the first line it is clear this is AI.',
+      body: 'The assistant answers only from the content you give it: the website, price list, FAQ, terms. It does not make things up, because when it has no answer it hands over to a person. Models with EU data residency, a data processing agreement, the chat log stays with you. The widget works with a keyboard and a screen reader.',
+      price: 'from PLN 4,500',
+      priceNote: 'net, plus from PLN 290 / month',
+      time: '1 to 2 weeks',
+      includes: [
+        'a knowledge base from your content',
+        'the “you are talking to AI” notice',
+        'an “I’d rather talk to a person” button',
+        'a WCAG 2.1 AA widget',
+        'EU hosting, data processing agreement',
+        '30 days of fixes',
+      ],
+      foot: 'The subscription covers hosting, model tokens up to the chat limit, a monthly knowledge base update and a report of unanswered questions.',
+      measure: [
+        'chats outside working hours',
+        'share of questions closed without a handover',
+        'bookings and enquiries collected by the assistant',
+        'phone calls a week before and after, from the switchboard or counted for a week',
+      ],
+      packagesLead:
+        'Three sizes. Each with the AI notice, a button to reach a person and the chat log on your side.',
+      packages: [
+        {
+          name: 'Start',
+          price: 'from PLN 4,500',
+          monthly: 'PLN 290 / month',
+          time: '1 to 2 weeks',
+          text: 'An assistant built on your website content and documents, up to 50 pages. It answers questions, collects an enquiry and emails it to a person. Up to 500 chats a month.',
+          items: [
+            'knowledge base up to 50 pages',
+            'enquiries emailed to you',
+            'up to 500 chats a month',
+          ],
+        },
+        {
+          name: 'Standard',
+          price: 'from PLN 8,500',
+          monthly: 'PLN 490 / month',
+          time: '3 to 4 weeks',
+          text: 'Adds bookings into Google Calendar or your own system, a form that writes to the CRM or a spreadsheet, two languages and a monthly report of unanswered questions. Up to 2,000 chats.',
+          items: [
+            'appointment booking',
+            'writes to the CRM or a sheet',
+            'two languages, up to 2,000 chats',
+          ],
+        },
+        {
+          name: 'Extended',
+          price: 'from PLN 15,000',
+          monthly: 'PLN 790 / month',
+          time: '5 to 8 weeks',
+          text: 'Adds integrations with your booking system, shop or client portal: order status, slot availability. A panel of your own for correcting answers. Up to 5,000 chats.',
+          items: [
+            'order status and availability',
+            'a panel for correcting answers',
+            'up to 5,000 chats',
+          ],
+        },
+      ],
+      care: 'Chats above the limit are billed at the model cost plus 20 percent. No annual contract.',
+      excluded: [
+        'writing content you do not have, for example an FAQ from scratch',
+        'channels beyond the website: Messenger, WhatsApp, phone',
+        'chats above the package limit',
+      ],
+      whoLead:
+        'For service companies where the same questions keep coming by phone and email, and enquiries after hours go unanswered.',
+      who: [
+        'A practice, clinic or salon where the front desk cannot keep up with the phone.',
+        'A garage or repair shop where everyone calls at once in season with the same question.',
+        'A hotel, guesthouse or school where guests ask about things that are on the website but cannot find them.',
+        'A shop with questions about delivery, returns and stock that eat one person’s time.',
+      ],
+      steps: [
+        [
+          'Measure.',
+          'We collect the questions that come back most often and the content the assistant should answer from. We agree when it hands over to a person. Written quote within two working days.',
+        ],
+        [
+          'Fittings.',
+          'You get the assistant at a test address and ask it questions for a week. What it cannot answer goes into the knowledge base or the handover path.',
+        ],
+        [
+          'Handover.',
+          'The widget goes on the site, the chat log and the monthly report come to you. The AI notice and the data processing agreement are ready before launch.',
+        ],
+        [
+          'Alterations.',
+          'Every month I read the unanswered questions and fill the gaps. For 30 days after launch, fixes without a limit.',
+        ],
+      ],
+      faq: [
+        [
+          'How much does an AI website assistant cost?',
+          'From PLN 4,500 net for the build and from PLN 290 a month for hosting, model tokens and care. Ready-made tools start at about PLN 100 a month and are the right choice below 50 chats a month. Agencies charge PLN 5,000 to 15,000 for an assistant with a knowledge base.',
+        ],
+        [
+          'Does the assistant have to say it is AI?',
+          'Yes. Since 2 August 2026 the EU AI Act requires it: a person has to know they are talking to an AI system, at the latest at the first message. The notice is built into the widget and cannot be switched off.',
+        ],
+        [
+          'What about GDPR and customer data?',
+          'Chat data is personal data. We sign a data processing agreement, the model runs with EU data residency, and the chat log stays with you and is deleted after 30 days unless we agree otherwise.',
+        ],
+        [
+          'Can the assistant make things up?',
+          'It answers only from the content you give it and shows where the answer came from. When the answer is not in the base, it says so and hands over to a person. A company is liable for what its assistant says, which is why we run a week of test questions before launch.',
+        ],
+        [
+          'What about customers who do not want to talk to a bot?',
+          'The “I’d rather talk to a person” button is visible from the first message. The assistant takes a number or email and passes the matter to you. Research shows most people prefer a person, so the assistant is there to shorten the way to one, not to replace them.',
+        ],
+        [
+          'Can it book appointments?',
+          'Yes, from the Standard package: into Google Calendar or your booking system. The customer picks a service, a day and a time, leaves a phone number and gets a confirmation.',
+        ],
+        [
+          'Does it work in English?',
+          'Yes, from the Standard package the assistant answers in two languages from the same knowledge base.',
+        ],
+      ],
+    },
+  },
+};
+
+Object.assign(services, automation);
+
 export const servicesIndex = {
   pl: {
     title: 'Usługi | i cennik.',
-    seoTitle: 'Cennik stron internetowych i aplikacji webowych, Wrocław, Adrian Turbiński',
+    seoTitle:
+      'Cennik usług: strony, aplikacje, automatyzacje, KSeF, WCAG, Wrocław, Adrian Turbiński',
     description:
-      'Usługi programisty freelancera z Wrocławia: aplikacje webowe, strony internetowe, audyt dostępności WCAG i utrzymanie. Ceny od, netto, faktura B2B.',
-    lead: 'Cztery rzeczy, które robię dla firm. Ceny to punkt startowy dla typowego zakresu, dokładną wycenę dostajesz na piśmie po rozmowie.',
+      'Usługi programisty freelancera z Wrocławia: aplikacje webowe, strony internetowe, automatyzacja procesów, integracje i KSeF, asystent AI, audyt dostępności WCAG i utrzymanie. Ceny od, netto, faktura B2B.',
+    lead: 'Siedem rzeczy, które robię dla firm. Ceny to punkt startowy dla typowego zakresu, dokładną wycenę dostajesz na piśmie po rozmowie.',
     rate: '140 zł / godz.',
     rateNote: 'netto, prace rozliczane godzinowo',
     rateMeta: 'faktura B2B, Wrocław i zdalnie',
@@ -577,10 +1330,10 @@ export const servicesIndex = {
   },
   en: {
     title: 'Services | and prices.',
-    seoTitle: 'Services and prices: web apps, websites, WCAG, Adrian Turbiński',
+    seoTitle: 'Services and prices: web apps, websites, automation, KSeF, WCAG, Adrian Turbiński',
     description:
-      'Services of a freelance developer from Wrocław: web applications, websites, WCAG accessibility audits and maintenance. Starting prices, net, B2B invoice.',
-    lead: 'Four things I do for companies. The prices are a starting point for a typical scope, you get an exact written quote after a call.',
+      'Services of a freelance developer from Wrocław: web applications, websites, process automation, integrations and KSeF e-invoicing, AI assistants, WCAG accessibility audits and maintenance. Starting prices, net, B2B invoice.',
+    lead: 'Seven things I do for companies. The prices are a starting point for a typical scope, you get an exact written quote after a call.',
     rate: 'PLN 140 / hour',
     rateNote: 'net, for hourly work',
     rateMeta: 'B2B invoice, Wrocław and remote',

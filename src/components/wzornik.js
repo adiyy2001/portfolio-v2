@@ -5,6 +5,7 @@ import { instant } from '../motion';
 import Split from './split';
 import Acc from './wzornik/acc';
 import Bis from './wzornik/bis';
+import Car from './wzornik/car';
 import Den from './wzornik/den';
 import Est from './wzornik/est';
 import Fan from './wzornik/fan';
@@ -26,6 +27,7 @@ const mocks = {
   shop: Shop,
   flat: Flat,
   stay: Stay,
+  car: Car,
 };
 
 const copy = {
@@ -51,12 +53,13 @@ const copy = {
       en: true,
       chips: ['#1c1130', '#ffffff', '#b0245c'],
     },
+    { id: 'car', slug: 'docisk', name: 'Docisk', chips: ['#15171a', '#ece9e2', '#ffd23f'] },
   ],
   pl: {
     id: 'wzornik',
     title: 'Wzornik.',
     label: 'Przykładowe strony dla firm',
-    lead: 'Dziewięć przykładowych stron dla zmyślonych firm z różnych branż. Każda skrojona inaczej i każda działa.',
+    lead: 'Dziesięć przykładowych stron dla zmyślonych firm z różnych branż. Każda skrojona inaczej i każda działa.',
     note: 'firmy zmyślone, projekty moje',
     who: 'Dla kogo',
     inside: 'W środku',
@@ -160,12 +163,21 @@ const copy = {
       cut: 'Besley, bakłażan, malina i biel.',
       alt: 'Projekt strony hotelu Przęsło: nagłówek „Dwadzieścia cztery klucze nad Odrą.” i tablica recepcji z kluczami wolnych pokoi.',
     },
+    car: {
+      trade: 'serwis samochodowy',
+      kind: 'strona z asystentem AI',
+      who: 'Warsztat, do którego w sezonie dzwonią wszyscy naraz z tym samym pytaniem.',
+      inside:
+        'Cennik, godziny, kontakt i asystent AI, który odpowiada z cennika, zapisuje na wymianę opon i przekazuje rozmowę człowiekowi. Obok podgląd tego, co robi w tle.',
+      cut: 'Barlow Condensed, kreda i żółć ostrzegawcza.',
+      alt: 'Projekt strony serwisu Docisk: nagłówek „Opony, olej, przegląd. Bez czekania na telefon.” i okno asystenta z pytaniem o wymianę opon.',
+    },
   },
   en: {
     id: 'swatch-book',
     title: 'Swatch book.',
     label: 'Sample websites for companies',
-    lead: 'Nine sample websites for made-up businesses in different trades. Each one cut differently, and each one works.',
+    lead: 'Ten sample websites for made-up businesses in different trades. Each one cut differently, and each one works.',
     note: 'made-up businesses, my designs',
     who: "Who it's for",
     inside: 'Inside',
@@ -269,6 +281,15 @@ const copy = {
         'Rooms, a calendar with prices, booking with extras, my booking, packages, a gift voucher, an English version.',
       cut: 'Besley, aubergine, raspberry and white.',
       alt: 'Design of the Przęsło hotel website: the headline “Dwadzieścia cztery klucze nad Odrą.” (Twenty-four keys by the Oder) and the reception key board with the keys of free rooms.',
+    },
+    car: {
+      trade: 'car service',
+      kind: 'site with an AI assistant',
+      who: 'A garage where everyone calls at once in season with the same question.',
+      inside:
+        'Prices, hours, contact and an AI assistant that answers from the price list, books tyre changes and hands the chat to a person. Next to it, a view of what it does backstage.',
+      cut: 'Barlow Condensed, chalk and safety yellow.',
+      alt: 'Design of the Docisk car service site: the headline “Tyres, oil, inspection. No waiting on the phone.” and an assistant window with a tyre change question.',
     },
   },
 };

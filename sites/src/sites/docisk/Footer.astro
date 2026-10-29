@@ -1,0 +1,73 @@
+---
+import SampleNote from '../../shared/SampleNote.astro';
+import { site } from './data';
+---
+
+<footer class="site-footer dark">
+  <div class="container site-footer__inner">
+    <div>
+      <p class="site-footer__name">{site.name}</p>
+      <p>Serwis samochodowy</p>
+    </div>
+    <address>
+      {site.street}
+      <br />
+      {site.postalCity}
+      <br />
+      Telefon: {site.phone}
+    </address>
+    <p class="site-footer__top">
+      <a href="#main">Wróć na górę</a>
+    </p>
+    <SampleNote name={site.name} lang="pl" />
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    background: var(--ink-raised);
+    border-top: 1px solid var(--line-light);
+  }
+
+  .site-footer__inner {
+    display: grid;
+    gap: 1.5rem 3rem;
+  }
+
+  .site-footer__name {
+    font: 700 2.25rem / 1 var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .site-footer address {
+    font-style: normal;
+  }
+
+  .site-footer a {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    color: var(--chalk);
+  }
+
+  .site-footer :global(.sample-note) {
+    max-width: 52ch;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line-light);
+    font-size: var(--text-small);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 52rem) {
+    .site-footer__inner {
+      grid-template-columns: 1fr 1fr auto;
+      align-items: start;
+    }
+
+    .site-footer :global(.sample-note) {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

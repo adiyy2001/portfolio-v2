@@ -188,6 +188,19 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
             valueAddedTaxIncluded: false,
           },
         },
+        ...(service.packages && {
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: service.name,
+            itemListElement: service.packages.map(pack => ({
+              '@type': 'Offer',
+              name: pack.name,
+              price: amount(pack.price),
+              priceCurrency: 'PLN',
+              description: pack.text,
+            })),
+          },
+        }),
       },
       {
         '@type': 'FAQPage',

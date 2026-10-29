@@ -8,6 +8,7 @@ export const sites = [
   { slug: 'trzask', name: 'Trzask', trade: 'palarnia kawy ze sklepem' },
   { slug: 'prog', name: 'Próg', trade: 'biuro nieruchomości' },
   { slug: 'przeslo', name: 'Przęsło', trade: 'hotel z rezerwacją online' },
+  { slug: 'docisk', name: 'Docisk', trade: 'serwis samochodowy z asystentem AI' },
 ] as const;
 
 export const identityBrands = [
