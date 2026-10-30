@@ -1,0 +1,11 @@
+Skan strony sklep-przyklad.pl został zakończony.
+Potwierdzone błędy: 12, przeskanowane strony: 7.
+
+Raport: https://api.adrianturbinski.pl/r/Xk3mP9qR2sT7vW1yZ4bC6dF8
+Link jest ważny 30 dni, do 29.11.2026.
+
+Raport powstał automatycznie na podstawie testów axe-core i pokazuje tylko te bariery, które da się wykryć maszynowo. Zwykle jest to część problemów z dostępnością strony. Raport nie stwierdza zgodności ani niezgodności strony z WCAG, normą EN 301 549 ani ustawą o zapewnianiu spełniania wymagań dostępności, nie jest audytem dostępności ani opinią prawną. Opisuje stan z dnia skanu dla sprawdzonych podstron wymienionych w raporcie, w widoku desktop i mobile. Pełną ocenę daje audyt z testami manualnymi i udziałem specjalisty.
+
+Administrator danych: Adrian Turbiński, Adrian Turbiński Software, Wrocław, contact@adrianturbinski.pl.
+Polityka prywatności: https://adrianturbinski.pl/polityka-prywatnosci/
+Zgodę na wiadomości marketingowe możesz wycofać tutaj: https://api.adrianturbinski.pl/scan/unsubscribe?t=abc123def456ghi789jkl012mno345pqr678stu90

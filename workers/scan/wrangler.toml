@@ -1,0 +1,20 @@
+name = "scan"
+main = "index.js"
+compatibility_date = "2026-10-01"
+
+routes = [
+  { pattern = "api.adrianturbinski.pl/scan*", zone_name = "adrianturbinski.pl" },
+  { pattern = "api.adrianturbinski.pl/r/*", zone_name = "adrianturbinski.pl" },
+]
+
+[triggers]
+crons = ["17 3 * * *"]
+
+[[d1_databases]]
+binding = "SCANS"
+database_name = "scans"
+database_id = "TBD"
+
+[[r2_buckets]]
+binding = "REPORTS"
+bucket_name = "scan-reports"

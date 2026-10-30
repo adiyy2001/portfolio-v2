@@ -9,7 +9,7 @@ import Reveal from './reveal';
 import Split from './split';
 import Steps from './steps';
 import { Tag } from './tags';
-import { briefPath, routes, tie } from '../i18n';
+import { briefPath, routes, scanPath, tie } from '../i18n';
 import { phone, serviceKeys, services, servicesIndex } from '../services';
 import { quoteId } from './quote';
 
@@ -86,7 +86,7 @@ function PriceTag({ s, n = 0, tilt = -2 }) {
   );
 }
 
-function Contact({ lang }) {
+function Contact({ lang, scan }) {
   const t = copy[lang];
   return (
     <div className="cta" data-rise style={{ '--r': 1 }}>
@@ -96,6 +96,11 @@ function Contact({ lang }) {
       <a className="link" href={phone.href}>
         {t.call}
       </a>
+      {scan && (
+        <Link className="link" to={scanPath} data-cta="service-scan">
+          {tie(scan)}
+        </Link>
+      )}
     </div>
   );
 }
@@ -204,7 +209,7 @@ export default function Service({ id, lang }) {
         <p className="lead" data-rise style={{ '--r': 0 }}>
           {tie(s.lead)}
         </p>
-        <Contact lang={lang} />
+        <Contact lang={lang} scan={s.scan} />
       </Hero>
       <section className="paper fit" aria-labelledby="svc-in-h">
         <div className="fit__grid">

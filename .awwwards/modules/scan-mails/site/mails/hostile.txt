@@ -1,0 +1,8 @@
+Ktoś, najpewniej Ty, poprosił o skan dostępności strony "><script>alert(1)</script>.pl.
+
+Potwierdź swój adres e-mail, a skan ruszy: https://api.adrianturbinski.pl/scan/confirm?t=Qm3vN8xYp2LkR7sTe1WzA5bC9dFgH4jUiOo6PqXyZ0n"><img src=x onerror=alert(1)>
+
+Link jest ważny 24 godziny. Jeśli to nie Ty, zignoruj tę wiadomość, nic się nie wydarzy.
+
+Administrator danych: Adrian Turbiński, Adrian Turbiński Software, Wrocław, contact@adrianturbinski.pl.
+Polityka prywatności: https://adrianturbinski.pl/polityka-prywatnosci/

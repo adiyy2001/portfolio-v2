@@ -34,6 +34,8 @@ export const ui = {
     footerWork: 'Projekty',
     footerServices: 'Usługi',
     footerPrivacy: 'Prywatność',
+    footerScan: 'Skaner dostępności',
+    footerScanTerms: 'Regulamin skanera',
     footerConsent: 'Ustawienia statystyk',
     words: {
       home: 'Na miarę',
@@ -109,6 +111,10 @@ export const briefPath = '/en/website-brief/';
 
 export const privacyPath = { pl: '/polityka-prywatnosci/', en: '/en/privacy/' };
 export const termsPath = { en: '/en/terms/' };
+
+export const scanPath = '/skaner/';
+export const scanTermsPath = '/regulamin-skanera/';
+export const scanPrivacyPath = '/polityka-prywatnosci/#skaner';
 
 export function locate(path) {
   for (const view of Object.keys(routes)) {

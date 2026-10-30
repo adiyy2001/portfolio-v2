@@ -304,6 +304,7 @@ export const services = {
       name: 'Dostępność WCAG',
       short: 'Audyt i poprawki pod WCAG 2.1 AA i Europejski akt o dostępności.',
       title: 'Dostępność | na każdą figurę.',
+      scan: 'Zrób darmowy skan',
       seoTitle: 'Audyt WCAG i dostępności cyfrowej strony, cena, Wrocław, Adrian Turbiński',
       description:
         'Audyt WCAG 2.1 AA i dostępności cyfrowej stron internetowych i aplikacji: test z klawiaturą i czytnikiem ekranu, raport z poprawkami, Europejski akt o dostępności. Cena od 1 900 zł netto.',

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "phaseList": [
+    "read",
+    "idea",
+    "content",
+    "build",
+    "craft",
+    "verify"
+  ],
+  "brief": "widok wyników skanu dostępności: samodzielny raport HTML wysyłany mailem jako link, karta przymiarki strony klienta, PL",
+  "mode": "auto",
+  "createdAt": "2026-10-30T10:34:33.026Z",
+  "phases": {
+    "read": {
+      "status": "done",
+      "startedAt": "2026-10-30T10:34:33.027Z",
+      "doneAt": "2026-10-30T10:43:08.071Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "idea": {
+      "status": "done",
+      "startedAt": "2026-10-30T10:43:08.073Z",
+      "doneAt": "2026-10-30T10:46:59.026Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "content": {
+      "status": "done",
+      "startedAt": "2026-10-30T10:46:59.027Z",
+      "doneAt": "2026-10-30T10:49:15.515Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "build": {
+      "status": "done",
+      "startedAt": "2026-10-30T10:49:15.516Z",
+      "doneAt": "2026-10-30T11:00:44.486Z",
+      "score": 7,
+      "artifacts": []
+    },
+    "craft": {
+      "status": "done",
+      "startedAt": "2026-10-30T11:00:44.486Z",
+      "doneAt": "2026-10-30T11:25:31.353Z",
+      "score": 7.76,
+      "artifacts": []
+    },
+    "verify": {
+      "status": "done",
+      "startedAt": "2026-10-30T11:25:31.353Z",
+      "doneAt": "2026-10-30T11:30:19.196Z",
+      "score": 7.76,
+      "artifacts": []
+    }
+  },
+  "decisions": [
+    {
+      "phase": "idea",
+      "what": "A Karta przymiarki, count chalked on the card stub, cool site tones, no amber",
+      "why": "critic 65/80 vs 45 and 48; fits site ticket tape seam; B and C add decoration or repeat the ticket",
+      "by": "agent",
+      "at": "2026-10-30T10:46:58.961Z"
+    },
+    {
+      "phase": "craft",
+      "what": "Scope list moved into the hero right column, entry seam only on entry head, neutral stitch markers for passes, voice lines in tailoring words",
+      "why": "Jury round 1 7.04 and fit 7.2, round 3 7.76 and fit 8.1",
+      "by": "agent",
+      "at": "2026-10-30T11:30:04.305Z"
+    },
+    {
+      "phase": "craft",
+      "what": "Stayed on feature/wcag-scanner, no design/ branch",
+      "why": "Tree is dirty on purpose",
+      "by": "agent",
+      "at": "2026-10-30T11:30:04.334Z"
+    },
+    {
+      "phase": "craft",
+      "what": "Count repeated on stub, lead, tape and table kept",
+      "why": "Lead text is test required and stub is aria-hidden; open to owner",
+      "by": "agent",
+      "at": "2026-10-30T11:30:04.364Z"
+    }
+  ],
+  "blocked": null,
+  "updatedAt": "2026-10-30T11:30:19.196Z"
+}

@@ -1,0 +1,5 @@
+. {
+    forward . 1.1.1.1 9.9.9.9
+    cache 30
+    errors
+}
