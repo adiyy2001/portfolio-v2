@@ -43,9 +43,9 @@ function solveSafely(net: Network, warm: Solution): Solution {
 }
 ```
 
-A demo for the narrow case where a loose tolerance would have also been acceptable only requires apparent correctness. The most significant issue with my implementation is that 1e-6 pu is unreasonable for an educational toy. I argue that the tolerance is an alarm. Without it, I would not be able to distinguish between a bug and a convention, and the wrong root would still be on screen. It would look like a very bad day for the grid.
+For the narrow case that would have also allowed a loose tolerance, I only need the code to appear correct. The biggest problem with my code is that 1e-6 pu is too strict for an educational toy. I believe the tolerance serves as a warning. Without it, I would not be able to differentiate between a convention and a bug and the wrong root would still be displayed. This would look like a very bad day for the grid.
 
-A match to MATPOWER confirms that I made the same choices as MATPOWER. This does not imply anything about any real grid.
+By matching against MATPOWER I have verified that I have made the same decisions as MATPOWER. This has no implications for an actual grid.
 
 ## Islands and a slack per island
 
@@ -75,40 +75,40 @@ function findIslands(count: number, closed: [number, number][]): number[][] {
 }
 ```
 
-This is a sketch in TypeScript but the actual implementation is in Java. The trade-off is that load shedding is a modelling decision with a visible cost. The load disappears from the balance, and which generator becomes the slack of an island changes who absorbs the mismatch. I documented both choices in an ADR rather than leaving them as defaults in a loop.
+This is a TypeScript sketch, but the implementation is in Java. Load shedding involves a modelling decision, with a visible cost. The load is removed from the balance and the choice of slack generator for an island changes who absorbs the mismatch. Both of these options are documented in an ADR rather than being left as defaults within a loop.
 
-The same idea shows up in interlocks. A line with an open breaker can still be fed from its far end, so the code needs a notion of a live section. Earthing that line is refused.
+Interlocks also exhibit this pattern. A line with an open breaker may still be fed from its far end. There must therefore be a definition of a live portion of the line. Earthing that line is not allowed.
 
 ## A fork-join pool for N-1 contingencies
 
-An N-1 analysis removes one element at a time and asks whether the network still holds. For IEEE 30 this gives 47 outages, each solved using an independent power flow.
+N-1 analysis removes one component from the system and checks if the system remains operative. For the IEEE 30 system 47 outages were generated and each was solved independently using power flow.
 
 ![Comparison of measured median times against targets: IEEE 30 single solve 0.67 ms against 10 ms, and N-1 run of 47 outages on 20 threads 8.22 ms against 500 ms.](https://adrianturbinski.pl/blog-img/why-i-built-gridtwin-the-electrical-half-of/fig-2.png)
 
-I solve these using a fork-join pool. Virtual threads are the modern default in Java 21. I was going to use these, but they make waiting cheap, not computing. Our outage solvers do not wait on anything. They use CPU entirely during their execution. Having more threads than cores does not give benefit. A bounded pool sized to the hardware is the honest choice.
+To solve the outages I use a fork-join pool. In Java 21 virtual threads are the new default. I was initially going to use virtual threads but they enable cheap waiting rather than computation. Our outage solvers do not wait on anything. When our outage solvers run they completely utilise CPU. Beyond the number of cores present there is no benefit to having more threads than cores. A pool bounded to the number of available cores is the correct choice.
 
-Using 20 threads I achieve a median of 8.22 ms for an IEEE 30 N-1 run of 47 outages, compared to a 500 ms target. I intentionally set the target relatively high to leave room for the interactive scenario where each click can trigger a fresh analysis.
+Using 20 threads I observe a median of 8.22 ms to compute 47 outages of the IEEE 30 system, against a target of 500 ms. I have chosen a relatively high target so there is scope for the interactive application where each action can trigger a new analysis.
 
-The scenario in which virtual threads offer benefit is a contingency that has to fetch something per outage, from a database or another service. The threads will then be blocked during each outage and cheap blocking is desired in this scenario.
+Virtual threads provide value in the scenario where each outage requires fetching something from a database or some other system. In this case the virtual threads will be blocked on each outage and cheap blocking is valuable in this situation.
 
-I anticipate the objection that a fixed pool is old-fashioned. Perhaps. But it is a bounded resource, and it is visible in the design rather than hidden within the scheduler. It is also easy to reason about under load. The number comes from one machine, so I treat it as a measured result, not a promise.
+A fixed sized pool can be considered old-fashioned. Maybe it can. However it is bounded and is visible in the design rather than hidden in the scheduling code. Under load the pool is also relatively easy to reason about. The value is also from a single machine and is used as a measured value rather than a guarantee.
 
 ## What I did not build, and where the model stops
 
-I wrote the cuts down in ADR 0027. There is no state estimation or fast decoupled power flow. IEEE 30 is solved and validated but there is no substation visible in the UI.
+I have written down the cuts in ADR 0027. There is no state estimation or fast decoupled power flow. IEEE 30 is solved and tested but there is no substation visible in the UI.
 
-I believe that at this system size the sparse Newton-Raphson solve is well within the computation budget. A faster approximation would require a second solver that would have to stay in agreement with the first solver. State estimation needs measurements. A twin of a public test case does not have any real measurements to estimate from.
+I feel that the sparse Newton-Raphson solve should be well within the computational budget for this system size. A faster approximation would require a second method that would need to agree with the first method. State estimation requires measurements. A twin of a public test system will not have any real measurements to perform state estimation from.
 
-This is an educational model on public IEEE test cases. The substation replacing bus 4 is made up. The cascade is a static simplification. A branch trips the instant it passes 120% of its rating. There is no protection timing. Sessions are stored in memory and the demo resets every hour.
+This educational model is built on public test systems. The substation that replaces bus 4 is made up. The cascade is a static reduction. A branch trips the instant it passes 120% of its rating. There is no protection timing. Sessions are stored in memory and the demo resets every hour.
 
-I do not intend for gridtwin to represent any actual power system and nothing within gridtwin represents an actual power system.
+gridtwin is not intended to represent any real power system and none of gridtwin represents any real power system.
 
 ## Build the half your drawing leaves out
 
-A diagram is a collection of claims about a system. If you only ever draw it, nobody checks the claims.
+A diagram consists of assertions about a system. If you only produce diagrams, no one will verify those assertions.
 
-Creating the other half of the system gave me more insight into the diagrams I create at work than creating the diagrams themselves. I also lost the comfort of a picture that can’t be wrong, and I miss that a little.
+Working on the second half of a system has been more useful to my understanding of the diagrams I make in my job than producing the diagrams themselves. I also lost the safety of a diagram that can’t be wrong, and I miss that a little.
 
-Open the last screen you shipped that draws something from a domain and ask what it would take to check it against an independent reference. If you can name that reference, write the first test this week.
+Now open the most recent screen you shipped that draws something from a domain and ask yourself what it would take to check it against an independent reference. If you can name that reference, write the first test this week.
 
-The code is at [github.com/adiyy2001/gridtwin](https://github.com/adiyy2001/gridtwin), MIT. The live demo is at gridtwin.adrianturbinski.pl.
+Code available at [github.com/adiyy2001/gridtwin](https://github.com/adiyy2001/gridtwin), MIT. Live demo at gridtwin.adrianturbinski.pl.
