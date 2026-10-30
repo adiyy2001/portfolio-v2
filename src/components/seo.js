@@ -85,9 +85,9 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
     ],
     workLocation: { '@type': 'City', name: 'Wrocław' },
     sameAs: [
-      'https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6',
+      'https://www.linkedin.com/in/adrianturbinski',
       'https://github.com/adiyy2001',
-      'https://dev.to/adrian_turbiski_f62044ad',
+      'https://dev.to/adrianturbinski',
     ],
   };
   const site = {
@@ -138,8 +138,11 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
       },
       sameAs: [
         'https://maps.google.com/?cid=14709967096891217800',
-        'https://www.facebook.com/profile.php?id=61596114922198',
-        'https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6',
+        'https://www.facebook.com/adrianturbinskipl',
+        'https://www.linkedin.com/in/adrianturbinski',
+        'https://www.instagram.com/adrianturbinski.pl/',
+        'https://www.tiktok.com/@adrianturbinski',
+        'https://www.youtube.com/@adrianturbinski',
       ],
       serviceType: serviceKeys.map(key => services[key][lang].name),
       hasOfferCatalog: {

@@ -160,7 +160,7 @@ Sources: Adrian's LinkedIn profile (pasted by Adrian on 2026-10-02), `content/jo
 - Old one-liner (hero.js:64): "Software Engineer and Founder at Media Hunters".
 - Email: adrian.turbinski@gmail.com (`src/config.js:2`, resume).
 - GitHub: https://github.com/adiyy2001
-- LinkedIn: https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6
+- LinkedIn: https://www.linkedin.com/in/adrianturbinski
 - Resume: `/resume.pdf`. It links the portfolio as https://portfolio-v2-c19j.vercel.app/
 - Photo: new one confirmed by Adrian on 2026-10-02: `C:\Users\Adrian\Downloads\1772802747790.jpg` (also saved as "(1)"), 400x400, 18 KB, his LinkedIn photo: dark background, glasses, black shirt, low key light. Copy it into `src/images/` in Phase 2. Old `src/images/me.jpg` (200x200, formal, blazer) is retired.
 - Own mark: `src/images/logo.png` ("A" in a brush ring, mint on navy) is dropped. Adrian: "nie miałem pomysłu wtedy".

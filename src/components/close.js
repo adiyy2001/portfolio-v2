@@ -13,7 +13,7 @@ import { duration, ease, instant } from '../motion';
 const mail = 'adrian.turbinski@gmail.com';
 
 const links = [
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6' },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/adrianturbinski' },
   { name: 'GitHub', href: 'https://github.com/adiyy2001' },
 ];
 

@@ -17,7 +17,7 @@ Texts to paste by hand into business directories and the Google Business Profile
 | Main category    | the same as the GBP main category (check in business.google.com)                     |
 | Other categories | Usługi informatyczne, then whatever the directory offers closest to web design       |
 | Hours            | Mon to Fri 9:00 to 18:00, as in the Google Business Profile                          |
-| LinkedIn         | https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6                          |
+| LinkedIn         | https://www.linkedin.com/in/adrianturbinski                          |
 | Logo             | `static/favicon.svg`, GBP avatar PNG in `C:\Users\Adrian\Downloads\wizytowka-google` |
 
 ## Short description (up to 160 characters)
@@ -54,7 +54,7 @@ Free listings first. Status as of 2026-10-26.
 | Clutch                          | B2B buyers, reviews later                            | dofollow on profile | skipped (needs street address)                         |
 | GoodFirms                       | same audience as Clutch                              | profile             | skipped (requires AI tools section)                    |
 | Cylex (cylex-polska.pl)         | citation consistency                                 | nofollow            | done 26.10, Facebook login, street hidden, id 14527389 |
-| Facebook page                   | NAP plus a link, used by Bing                        | profile             | done 26.10, facebook.com/profile.php?id=61596114922198 |
+| Facebook page                   | NAP plus a link, used by Bing                        | profile             | done 26.10, facebook.com/adrianturbinskipl |
 | LinkedIn company page           | NAP, links to services                               | profile             | skipped, personal profile is used                      |
 
 Skip paid "premium" packages and directories that ask for a backlink in return.

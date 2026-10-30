@@ -19,7 +19,7 @@ export default function Recruiter() {
         sr="Adrian Turbiński, "
         title="Senior frontend. | Tech lead."
         size="rec"
-        contact="Wrocław, adrian.turbinski@gmail.com, linkedin.com/in/adrian-turbiński-b266b21a6, github.com/adiyy2001"
+        contact="Wrocław, adrian.turbinski@gmail.com, linkedin.com/in/adrianturbinski, github.com/adiyy2001"
         aside={<Card lang="pl" />}>
         <p className="lead" data-rise style={{ '--r': 0 }}>
           {tie(
@@ -40,7 +40,7 @@ export default function Recruiter() {
           </button>
           <a
             className="link"
-            href="https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6"
+            href="https://www.linkedin.com/in/adrianturbinski"
             rel="noopener">
             LinkedIn
           </a>

@@ -71,7 +71,7 @@ export default function Footer({ lang }) {
         )}
         <a href="mailto:adrian.turbinski@gmail.com">{t.footerMail}</a>
         <a href={phone.href}>{lang === 'pl' ? phone.label : phone.intl}</a>
-        <a href="https://www.linkedin.com/in/adrian-turbi%C5%84ski-b266b21a6" rel="noopener">
+        <a href="https://www.linkedin.com/in/adrianturbinski" rel="noopener">
           LinkedIn
         </a>
         <a href="https://github.com/adiyy2001" rel="noopener">
