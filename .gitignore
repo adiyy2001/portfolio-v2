@@ -12,3 +12,4 @@ package-lock.json
 
 # Wzornik identity studio
 studio/out/
+.awwwards/modules/*/shots/

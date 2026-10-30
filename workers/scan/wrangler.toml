@@ -1,0 +1,22 @@
+name = "scan"
+main = "index.js"
+compatibility_date = "2026-10-01"
+workers_dev = false
+preview_urls = false
+
+routes = [
+  { pattern = "api.adrianturbinski.pl/scan*", zone_name = "adrianturbinski.pl" },
+  { pattern = "api.adrianturbinski.pl/r/*", zone_name = "adrianturbinski.pl" },
+]
+
+[triggers]
+crons = ["17 3 * * *"]
+
+[[d1_databases]]
+binding = "SCANS"
+database_name = "scans"
+database_id = "6f668adf-88dd-4b6c-8a8f-1c8fb34bf204"
+
+[[kv_namespaces]]
+binding = "REPORTS"
+id = "5116269c51494f02bdb775d455f9eeb3"

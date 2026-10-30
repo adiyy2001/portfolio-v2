@@ -1,0 +1,75 @@
+name: a11y-scanner
+
+services:
+  scanner:
+    build:
+      context: ..
+      dockerfile: scanner/Dockerfile
+    init: true
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      SCAN_PROXY: http://smokescreen:4750
+    dns:
+      - 172.29.250.53
+    networks:
+      scan-internal: {}
+    depends_on:
+      - smokescreen
+      - dns
+    read_only: true
+    tmpfs:
+      - /tmp:size=768m,mode=1777
+    shm_size: 512m
+    mem_limit: 2g
+    cpus: 1.5
+    pids_limit: 512
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+      - seccomp=./seccomp_profile.json
+
+  smokescreen:
+    build: ./smokescreen
+    init: true
+    restart: unless-stopped
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 256
+    networks:
+      - scan-internal
+      - scan-egress
+
+  dns:
+    image: coredns/coredns:1.12.1
+    restart: unless-stopped
+    command: ['-conf', '/etc/coredns/Corefile']
+    volumes:
+      - ./dns/Corefile:/etc/coredns/Corefile:ro
+    read_only: true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 128m
+    pids_limit: 128
+    networks:
+      scan-internal:
+        ipv4_address: 172.29.250.53
+      scan-egress: {}
+
+networks:
+  scan-internal:
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.29.250.0/24
+  scan-egress: {}

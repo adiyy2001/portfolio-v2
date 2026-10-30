@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "phaseList": [
+    "read",
+    "idea",
+    "content",
+    "build",
+    "craft",
+    "verify"
+  ],
+  "brief": "strony potwierdzenia adresu, wypisu i błędów workera skanu oraz maile skanera (potwierdzenie, raport, porażka), PL",
+  "mode": "auto",
+  "createdAt": "2026-10-30T12:03:36.872Z",
+  "phases": {
+    "read": {
+      "status": "done",
+      "startedAt": "2026-10-30T12:03:36.873Z",
+      "doneAt": "2026-10-30T12:05:41.151Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "idea": {
+      "status": "done",
+      "startedAt": "2026-10-30T12:05:41.151Z",
+      "doneAt": "2026-10-30T12:06:41.229Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "content": {
+      "status": "done",
+      "startedAt": "2026-10-30T12:06:41.230Z",
+      "doneAt": "2026-10-30T12:06:41.277Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "build": {
+      "status": "done",
+      "startedAt": "2026-10-30T12:06:41.278Z",
+      "doneAt": "2026-10-30T12:30:54.779Z",
+      "score": 7.47,
+      "artifacts": []
+    },
+    "craft": {
+      "status": "done",
+      "startedAt": "2026-10-30T12:30:54.779Z",
+      "doneAt": "2026-10-30T12:30:54.872Z",
+      "score": 7.96,
+      "artifacts": []
+    },
+    "verify": {
+      "status": "done",
+      "startedAt": "2026-10-30T12:30:54.873Z",
+      "doneAt": "2026-10-30T12:30:54.940Z",
+      "score": 7.96,
+      "artifacts": []
+    }
+  },
+  "decisions": [
+    {
+      "phase": "idea",
+      "what": "A: Szew zamknięty, szew przerwany",
+      "why": "one detail (the seam), fits the site's thread language, B needs new facts, C is a second mechanic",
+      "by": "agent",
+      "at": "2026-10-30T12:06:41.177Z"
+    },
+    {
+      "phase": "build",
+      "what": "views.js extracted, wool background, styled report 410/404",
+      "why": "template split keeps index.js logic only; pages the visitor sees",
+      "by": "agent",
+      "at": "2026-10-30T12:30:54.697Z"
+    }
+  ],
+  "blocked": null,
+  "updatedAt": "2026-10-30T12:30:54.940Z"
+}

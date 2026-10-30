@@ -14,8 +14,8 @@ export default function Terms() {
       <section className="prose" aria-label="Terms of service">
         <h2>Who runs it</h2>
         <p>
-          Adrian Turbiński, sole proprietor trading as Adrian Turbiński Software, Wrocław, Poland.
-          Email: contact@adrianturbinski.pl.
+          Adrian Turbiński, sole proprietor registered in CEIDG, ul. Przejazdowa 21C lok. 19, 51-167
+          Wrocław, Poland, tax ID (NIP) 8952236530. Email: contact@adrianturbinski.pl.
         </p>
         <h2>This site</h2>
         <p>
@@ -63,6 +63,6 @@ export const Head = () => (
     lang="en"
     path="/en/terms/"
     title="Terms of service, Adrian Turbiński"
-    description="Terms of use for the website and the publishing tools of Adrian Turbiński Software."
+    description="Terms of use for the website and the publishing tools of Adrian Turbiński."
   />
 );

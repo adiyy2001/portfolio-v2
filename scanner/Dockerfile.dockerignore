@@ -1,0 +1,5 @@
+*
+!scanner/package.json
+!scanner/package-lock.json
+!scanner/src
+!src/scanner/consent.json

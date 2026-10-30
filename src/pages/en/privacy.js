@@ -14,8 +14,8 @@ export default function Privacy() {
       <section className="prose" aria-label="Privacy policy">
         <h2>Who is responsible</h2>
         <p>
-          Adrian Turbiński, a sole proprietor trading as Adrian Turbiński Software, Wrocław, Poland.
-          Contact: contact@adrianturbinski.pl.
+          Adrian Turbiński, a sole proprietor registered in CEIDG, ul. Przejazdowa 21C lok. 19,
+          51-167 Wrocław, Poland, tax ID (NIP) 8952236530. Contact: contact@adrianturbinski.pl.
         </p>
         <h2>This website</h2>
         <p>
@@ -26,14 +26,68 @@ export default function Privacy() {
         <h2>Quote form</h2>
         <p>
           The form sends what you type (service, budget, project description and email or phone)
-          through Cloudflare Workers to my private Telegram chat. I do not store this data in any
-          database. Cloudflare and Telegram process it as providers under their own privacy
-          statements, including outside the European Economic Area.
+          through Cloudflare Workers to my private Telegram chat. In a Cloudflare D1 database I
+          store only the date, language, chosen service, budget, the page the form was sent from,
+          the traffic source and a promo code, to count requests. Your contact details and project
+          description are not stored in any database. Cloudflare and Telegram process the data as
+          providers under their own privacy statements, including outside the European Economic
+          Area.
         </p>
         <p>
           I use this data only to answer your request and prepare an offer. The legal basis is steps
           taken at your request before entering into a contract (Art. 6(1)(b) GDPR). Giving a
           contact is voluntary, but without it I cannot reply.
+        </p>
+        <h2 id="scanner">Accessibility scanner</h2>
+        <p>
+          The free accessibility scanner at /skaner/ is a service governed by its Polish terms at
+          /regulamin-skanera/. I, Adrian Turbiński (ul. Przejazdowa 21C lok. 19, 51-167 Wrocław,
+          contact@adrianturbinski.pl), am the controller.
+        </p>
+        <p>
+          I collect the website address you enter, your email, your IP address, browser user agent,
+          the time you sent the form and pressed the confirmation button on the page opened from the
+          email link, the exact text and SHA-256 version of the terms and consent clauses you saw,
+          the state of both checkboxes and any withdrawal. The report itself holds test results,
+          screenshots and HTML snippets of the scanned site.
+        </p>
+        <p>
+          Purposes and legal bases: confirming your email, running the scan, storing the report and
+          emailing the link rest on the contract for the free service (Art. 6(1)(b) GDPR). Keeping
+          proof of what you accepted rests on my duty to demonstrate consent (Art. 7(1) with Art.
+          6(1)(c) GDPR) and my legitimate interest in defending claims (Art. 6(1)(f) GDPR). Up to 4
+          marketing emails within 14 days about accessibility audits, WCAG and EAA fixes and an
+          invitation to talk are sent only with your separate consent (Art. 6(1)(a) GDPR and Art.
+          398 of the Polish Electronic Communications Law). Rate limits, Cloudflare Turnstile and a
+          short notification to me rest on my legitimate interest in protecting the service (Art.
+          6(1)(f) GDPR).
+        </p>
+        <p>
+          Recipients: Cloudflare, Inc. (Workers, D1, Workers KV) and Resend, run by Plus Five Five,
+          Inc., both in the United States and certified under the EU-US Data Privacy Framework, so
+          transfers rely on the European Commission adequacy decision (Art. 45 GDPR). The scan
+          itself runs on my server in Poland. The Telegram notification carries only the scanned
+          domain, the number of issues and whether you consented to marketing, never your email or
+          IP; Telegram may process it outside the EEA under its own policy.
+        </p>
+        <p>
+          Retention: the report is deleted 30 days after the scan; an order not confirmed with the
+          button within 24 hours is deleted no later than 48 hours after the form was sent; the
+          order record and proof of your choices stay until 31 December of the third calendar year
+          after the year the order was confirmed, matching the limitation period for business claims
+          under Polish law; marketing data stays until you withdraw consent or the last email of the
+          sequence is sent, with proof of consent and withdrawal kept until 31 December of the third
+          calendar year after that. A daily job deletes expired data, so it is gone within a day
+          after each period ends.
+        </p>
+        <p>
+          You have the right to access, rectify, erase, restrict and port your data, to object to
+          processing based on my legitimate interest (Art. 21 GDPR) and to object to marketing at
+          any time, to withdraw consent at any time through the link in every email or by writing to
+          contact@adrianturbinski.pl without affecting earlier processing, and to lodge a complaint
+          with the Polish supervisory authority (UODO). The website address and email are needed to
+          deliver a report; marketing consent is optional. The scanner is automated but does not
+          profile you or take decisions about you within the meaning of Art. 22 GDPR.
         </p>
         <h2>Google Analytics</h2>
         <p>
@@ -90,7 +144,7 @@ export default function Privacy() {
           contact@adrianturbinski.pl. You can also complain to the Polish data protection authority
           (UODO).
         </p>
-        <p>Last updated: 28 October 2026.</p>
+        <p>Last updated: 30 October 2026.</p>
       </section>
     </>
   );
@@ -101,6 +155,6 @@ export const Head = () => (
     lang="en"
     path="/en/privacy/"
     title="Privacy policy, Adrian Turbiński"
-    description="What this website and the publishing tools of Adrian Turbiński Software do with data."
+    description="What this website, the accessibility scanner and the publishing tools of Adrian Turbiński do with data."
   />
 );

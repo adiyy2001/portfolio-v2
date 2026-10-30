@@ -1,0 +1,9 @@
+{
+  "version": "2026-10-30.2",
+  "pl": {
+    "terms": "Akceptuję regulamin skanera dostępności i zamawiam bezpłatny raport dla podanej strony.",
+    "marketing": "Chcę otrzymywać od Adriana Turbińskiego (Wrocław, NIP 8952236530) informacje handlowe e-mailem na podany adres: do 4 wiadomości w ciągu 14 dni o audytach dostępności, wdrażaniu poprawek WCAG i wymagań EAA oraz zaproszenie na rozmowę. Zgodę mogę wycofać w każdej chwili linkiem w każdej wiadomości albo pisząc na contact@adrianturbinski.pl. Brak zgody nie wpływa na wykonanie skanu ani na raport.",
+    "info": "Administratorem Twoich danych jest Adrian Turbiński (ul. Przejazdowa 21C lok. 19, 51-167 Wrocław, NIP 8952236530, contact@adrianturbinski.pl). Adres strony i e-mail przetwarzam, żeby potwierdzić adres, wykonać skan i wysłać raport (wykonanie umowy), zapisać dowód Twoich wyborów i chronić skaner przed nadużyciami (obowiązek prawny i uzasadniony interes), a jeśli zaznaczysz osobną zgodę, żeby wysłać Ci informacje handlowe (zgoda). Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przeniesienia, sprzeciwu, wycofania zgody i skargi do Prezesa UODO. Szczegóły znajdziesz w polityce prywatności i regulaminie skanera, linki są poniżej.",
+    "disclaimer": "Raport powstał automatycznie na podstawie testów axe-core i pokazuje tylko te bariery, które da się wykryć maszynowo. Zwykle jest to część problemów z dostępnością strony. Raport nie stwierdza zgodności ani niezgodności strony z WCAG, normą EN 301 549 ani ustawą o zapewnianiu spełniania wymagań dostępności, nie jest audytem dostępności ani opinią prawną. Opisuje stan z dnia skanu dla sprawdzonych podstron wymienionych w raporcie, w widoku desktop i mobile. Pełną ocenę daje audyt z testami manualnymi i udziałem specjalisty."
+  }
+}

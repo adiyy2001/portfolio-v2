@@ -1,0 +1,1171 @@
+<!doctype html>
+    <html lang="pl">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex" />
+        <title>Raport dostępności: 127.0.0.1</title>
+        <style>
+          
+:root {
+  --paper: #f6f3ee;
+  --paper-hi: #fffdf9;
+  --ink: #1c1a1a;
+  --wool: #5a1424;
+  --wool-deep: #44101c;
+  --chalk: #e9eff6;
+  --chalk-deep: #d3dde9;
+  --linen: #eff2f4;
+  --cream: #efe6cf;
+  --amber: #f0b840;
+  --muted: #4a4545;
+  --rule: #c9c2b8;
+  --serif: "Bespoke Serif", Georgia, "Times New Roman", serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --hand: "Mynerve", "Segoe Script", "Bradley Hand", "Lucida Handwriting", cursive;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --twill: repeating-linear-gradient(45deg, rgba(90, 20, 36, 0.05) 0 2px, transparent 2px 6px);
+  --wool-cloth: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.09) 0 1px, transparent 1px 4px);
+  --pink-top: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg);
+  --pink-bottom: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg);
+}
+* { box-sizing: border-box; }
+html { background: var(--paper); color: var(--ink); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.skip {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  padding: 0.6rem 1rem;
+  background: var(--wool);
+  color: var(--paper);
+  font-weight: 600;
+  z-index: 2;
+}
+.skip:focus { top: 0.5rem; }
+.wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.25rem; }
+a { color: var(--wool); text-decoration: underline; text-underline-offset: 0.15em; }
+a:focus-visible, .skip:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.masthead a:focus-visible, .site-footer a:focus-visible { outline-color: var(--paper); }
+
+h1, h2, h3, h4 { font-family: var(--serif); line-height: 1.2; font-weight: 700; }
+h1 { margin: 0.25rem 0 1.25rem; font-size: clamp(1.9rem, 6vw, 3rem); letter-spacing: -0.015em; color: var(--ink); }
+h2 { margin: 0 0 1.25rem; font-size: clamp(1.6rem, 4.2vw, 2.4rem); letter-spacing: -0.01em; color: var(--wool); }
+h3 { margin: 1.75rem 0 0.6rem; font-size: 1.25rem; }
+h4, .entry h3 { margin: 0 0 0.4rem; font-size: 1.1rem; }
+
+.masthead {
+  position: relative;
+  background: var(--wool-cloth), var(--wool);
+  color: var(--paper);
+  padding: 1.75rem 0 0;
+}
+.masthead a { color: var(--paper); }
+.fitting { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2.25rem; padding-bottom: 1.75rem; }
+.tag {
+  align-self: start;
+  position: relative;
+  margin-top: 2.25rem;
+  padding: 2.25rem 1.5rem 1.5rem;
+  background: var(--paper-hi);
+  color: var(--ink);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25), 0 18px 28px -16px rgba(0, 0, 0, 0.7);
+}
+.tag::before {
+  content: "";
+  position: absolute;
+  inset: 0.5rem;
+  border: 2px dashed var(--wool);
+  pointer-events: none;
+}
+.tag-string { position: absolute; top: -2.9rem; left: 1.4rem; width: 4.5rem; height: 4.5rem; }
+.eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--wool);
+}
+.card-no { margin: 0; font-family: var(--serif); font-size: 1.1rem; font-style: italic; color: var(--muted); }
+.card-no strong {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  border-bottom: 2px dotted var(--wool);
+}
+.meta { display: grid; grid-template-columns: minmax(0, 1fr); margin: 0; }
+.meta dt {
+  margin-top: 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--wool);
+}
+.meta dd { margin: 0; padding-bottom: 0.35rem; border-bottom: 1px dotted var(--rule); }
+.scope { color: var(--paper); align-self: start; }
+.scope .hand { color: var(--chalk); margin: 0 0 0.25rem; }
+.masthead h2 { color: var(--paper); font-size: clamp(1.3rem, 3.4vw, 1.7rem); margin: 0 0 0.6rem; }
+.scope-list { margin: 0 0 1.25rem; padding: 0; list-style: none; }
+.scope-list li { padding: 0.45rem 0; border-bottom: 1px dashed rgba(233, 239, 246, 0.45); font-size: 0.9375rem; }
+.scope .note { margin: 0.5rem 0; font-size: 0.9375rem; color: var(--chalk); }
+.thread { display: flex; align-items: center; height: 2.5rem; overflow: hidden; }
+.thread-line {
+  flex: 1 1 auto;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--chalk) 0 9px, transparent 9px 15px);
+}
+.thread-needle { flex: none; width: 7.5rem; height: 2rem; margin-right: 1rem; }
+@media (min-width: 52rem) {
+  .fitting { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 3.5rem; }
+  .tag { align-self: start; transform: rotate(-0.7deg); padding: 2.5rem 2rem 1.75rem; }
+  .meta { grid-template-columns: max-content minmax(0, 1fr); column-gap: 1.5rem; }
+  .meta dt { margin-top: 0; padding-top: 0.35rem; border-bottom: 1px dotted var(--rule); }
+  .meta dd { padding-top: 0.2rem; }
+}
+
+.hand, .hand-note {
+  font-family: var(--hand);
+  font-size: 1.35rem;
+  line-height: 1.25;
+  color: var(--wool);
+  font-weight: 400;
+}
+.hand-note { display: inline-block; margin: 0 0 0.75rem; transform: rotate(-3deg); }
+
+.toc { position: relative; background: var(--chalk); padding: 0 0 0.35rem; border-bottom: 1px solid var(--rule); }
+.toc::before {
+  content: "";
+  display: block;
+  height: 14px;
+  background:
+    repeating-linear-gradient(90deg, rgba(28, 26, 26, 0.6) 0 1px, transparent 1px 10px) left top / 100% 6px no-repeat,
+    repeating-linear-gradient(90deg, rgba(28, 26, 26, 0.75) 0 1px, transparent 1px 50px) left top / 100% 12px no-repeat;
+}
+.toc ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0 1.5rem; counter-reset: toc; }
+.toc li { counter-increment: toc; }
+.toc a { display: inline-block; padding: 0.45rem 0; }
+.toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  content: counter(toc, decimal-leading-zero) / "";
+  margin-right: 0.4rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-block;
+}
+
+main { padding: 0.5rem 0 3.5rem; counter-reset: seam; }
+main section { position: relative; padding: 3.75rem 0 1rem; counter-increment: seam; }
+main section::before {
+  content: "";
+  position: absolute;
+  top: 1.4rem;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background:
+    repeating-linear-gradient(90deg, var(--wool) 0 7px, transparent 7px 12px) left top / 100% 2px no-repeat,
+    repeating-linear-gradient(90deg, var(--wool) 0 7px, transparent 7px 12px) 6px 7px / 100% 2px no-repeat;
+}
+main section:first-of-type { padding-top: 2.25rem; }
+main section:first-of-type::before { display: none; }
+main h2::before {
+  content: "Szew " counter(seam, decimal-leading-zero);
+  content: "Szew " counter(seam, decimal-leading-zero) / "";
+  display: block;
+  margin-bottom: 0.3rem;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+p { margin: 0.6rem 0; }
+.lead { font-family: var(--serif); font-size: clamp(1.25rem, 3vw, 1.65rem); line-height: 1.35; margin: 0 0 1rem; }
+.small { font-size: 0.9375rem; color: var(--muted); }
+.measured {
+  background: linear-gradient(transparent 58%, var(--amber) 58% 92%, transparent 92%);
+  padding: 0 0.12em;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.tally { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.5rem 2.5rem; align-items: end; margin: 0 0 1.5rem; }
+.tally-count { position: relative; display: flex; flex-direction: column; align-items: flex-start; }
+.tally-count .measured {
+  font-family: var(--sans);
+  font-size: clamp(5.5rem, 22vw, 9.5rem);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  padding: 0 0.08em;
+}
+.tally-cap { margin-top: 0.4rem; font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.tally-count .hand { margin-top: 0.15rem; transform: rotate(-2.5deg); }
+.tally-text .lead { margin-top: 0; }
+@media (min-width: 48rem) {
+  .tally { grid-template-columns: auto minmax(0, 1fr); }
+}
+
+.tape {
+  position: relative;
+  margin: 1.75rem 0 1.5rem;
+  padding: 16px 0 16px 1.4rem;
+  background:
+    repeating-linear-gradient(90deg, rgba(28, 26, 26, 0.65) 0 1px, transparent 1px 8px) left top / 100% 6px no-repeat,
+    repeating-linear-gradient(90deg, rgba(28, 26, 26, 0.8) 0 1px, transparent 1px 40px) left top / 100% 12px no-repeat,
+    repeating-linear-gradient(90deg, rgba(28, 26, 26, 0.65) 0 1px, transparent 1px 8px) 0 100% / 100% 6px no-repeat,
+    repeating-linear-gradient(90deg, rgba(28, 26, 26, 0.8) 0 1px, transparent 1px 40px) 0 100% / 100% 12px no-repeat,
+    var(--cream);
+  border: 1px solid #cdbf98;
+  box-shadow: 0 10px 18px -14px rgba(28, 26, 26, 0.6);
+}
+.tape::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  bottom: -1px;
+  width: 1.1rem;
+  background: #3a3434;
+  border-radius: 3px 0 0 3px;
+}
+.tape-body { display: flex; gap: 3px; height: 2.6rem; }
+.seg {
+  flex: 1 1 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  font-weight: 800;
+  font-size: 1rem;
+}
+.seg-critical { background: var(--wool); color: var(--paper); }
+.seg-serious { background: var(--ink); color: var(--paper); }
+.seg-moderate { background: var(--twill), var(--chalk); color: var(--ink); border: 1px solid var(--ink); }
+.seg-minor { background: var(--paper-hi); color: var(--ink); border: 1px dashed var(--ink); }
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; margin: 0.75rem 0 1.25rem; }
+caption {
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.25rem 0 0.4rem;
+}
+th, td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px dotted var(--ink); }
+thead th {
+  background: var(--chalk);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-top: 2px solid var(--wool);
+  border-bottom: 1px solid var(--wool);
+}
+.num { text-align: right; width: 6.5rem; font-variant-numeric: tabular-nums; font-weight: 700; }
+.table-scroll { overflow-x: auto; }
+.table-scroll:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+@media (max-width: 36rem) {
+  .table-scroll table { min-width: 25rem; }
+  .entry { padding-left: 1.1rem; }
+}
+th { overflow-wrap: normal; word-break: normal; hyphens: none; }
+@media (max-width: 30rem) {
+  .num { width: 5.4rem; }
+  thead th { letter-spacing: 0.04em; padding-left: 0.4rem; padding-right: 0.4rem; }
+}
+
+.weights {
+  background: var(--wool-cloth), var(--wool);
+  color: var(--paper);
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 0.5rem;
+  box-shadow: 0 14px 24px -18px rgba(28, 26, 26, 0.7);
+}
+.weights caption { color: var(--ink); }
+.weights th, .weights td { border-bottom: 1px dashed rgba(233, 239, 246, 0.4); padding: 0.7rem 1rem; vertical-align: middle; }
+.weights thead th { background: transparent; color: var(--chalk); border-top: 0; border-bottom: 1px solid rgba(233, 239, 246, 0.6); }
+.weights tbody tr:last-child th, .weights tbody tr:last-child td { border-bottom: 0; }
+.weights th[scope="row"] { font-size: 1.05rem; color: var(--paper); }
+.weights td.num {  font-family: var(--sans); font-size: 1.75rem; font-weight: 800; line-height: 1; color: var(--amber); }
+.row-label { display: block; font-family: var(--serif); }
+.chalk { display: block; margin-top: 0.3rem; color: var(--chalk); }
+.chalk svg { display: block; max-width: 100%; height: auto; transform-origin: left top; }
+
+.badge {
+  display: inline-block;
+  padding: 0.05rem 0.6rem;
+  border: 1px solid var(--ink);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  vertical-align: 0.15em;
+  background: var(--paper);
+  color: var(--ink);
+  outline: 1px dashed currentColor;
+  outline-offset: -4px;
+}
+.badge-critical { background: var(--wool); color: var(--paper); border-color: var(--wool); }
+.badge-serious { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.badge-moderate { background: var(--chalk); }
+
+.card {
+  position: relative;
+  background: var(--paper-hi);
+  margin: 2.5rem 0;
+  padding: 2.25rem 1.5rem 1.25rem;
+  box-shadow: 0 1px 0 rgba(28, 26, 26, 0.08), 0 18px 30px -20px rgba(28, 26, 26, 0.55);
+  break-inside: avoid;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0.45rem;
+  border: 1.5px dashed rgba(90, 20, 36, 0.75);
+  pointer-events: none;
+}
+.card h3 { margin-top: 0; font-size: clamp(1.25rem, 3vw, 1.6rem); }
+.card-kicker {
+  position: absolute;
+  top: -0.8rem;
+  left: 1.5rem;
+  margin: 0;
+  padding: 0.15rem 0.85rem;
+  background: var(--wool);
+  color: var(--paper);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.top-note { margin-top: -0.25rem; }
+.facts { margin: 0.5rem 0 1rem; padding: 0; list-style: none; }
+.facts li { margin: 0.25rem 0; }
+.facts strong { color: var(--wool); font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; }
+@media (min-width: 52rem) {
+  article.card:nth-of-type(odd) { margin-right: 3rem; }
+  article.card:nth-of-type(even) { margin-left: 3rem; }
+}
+
+.swatch { position: relative; margin: 1.25rem 0 1.5rem; display: flow-root; filter: drop-shadow(0 5px 6px rgba(28, 26, 26, 0.3)); }
+.swatch-cloth {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  padding: 1.35rem 1.1rem;
+  background: var(--twill), var(--chalk-deep);
+  -webkit-mask: var(--pink-top) 50% / 18px 100%, var(--pink-bottom) 50% / 18px 100%;
+  -webkit-mask-composite: source-in;
+  mask: var(--pink-top) 50% / 18px 100%, var(--pink-bottom) 50% / 18px 100%;
+  mask-composite: intersect;
+}
+.swatch-cloth::before {
+  content: "";
+  position: absolute;
+  inset: 0.7rem 0.5rem;
+  border: 1px dashed rgba(90, 20, 36, 0.7);
+  pointer-events: none;
+}
+.swatch img { display: block; max-width: 100%; height: auto; border: 1px solid var(--ink); background: #fff; position: relative; }
+.pin {
+  position: absolute;
+  top: 0.45rem;
+  left: 0.55rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background: var(--wool);
+  box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.35), 0 2px 3px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+figcaption {
+  position: relative;
+  margin-top: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+  padding-left: 1.5rem;
+}
+figcaption::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 1rem;
+  height: 0;
+  border-top: 2px dashed var(--wool);
+}
+
+pre {
+  margin: 0.4rem 0 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--paper-hi);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--mono);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+code { font-family: var(--mono); font-size: 0.9em; }
+.fix { display: grid; gap: 1.5rem; grid-template-columns: minmax(0, 1fr); margin: 1.25rem 0; filter: drop-shadow(0 5px 6px rgba(28, 26, 26, 0.25)); }
+.piece {
+  position: relative;
+  padding: 1.35rem 1rem 1.1rem;
+  -webkit-mask: var(--pink-top) 50% / 18px 100%, var(--pink-bottom) 50% / 18px 100%;
+  -webkit-mask-composite: source-in;
+  mask: var(--pink-top) 50% / 18px 100%, var(--pink-bottom) 50% / 18px 100%;
+  mask-composite: intersect;
+}
+.piece::before {
+  content: "";
+  position: absolute;
+  inset: 0.65rem 0.45rem;
+  border: 1px dashed rgba(90, 20, 36, 0.7);
+  pointer-events: none;
+}
+.piece-before { background: var(--twill), var(--chalk-deep); }
+.piece-after { background: var(--twill), var(--cream); }
+.piece p { position: relative; margin: 0 0 0.2rem; font-family: var(--serif); font-size: 1.05rem; font-weight: 700; color: var(--wool); }
+.piece pre { position: relative; margin-bottom: 0.25rem; }
+@media (min-width: 48rem) { .fix { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+.entry { position: relative; margin: 1.5rem 0 2.25rem; padding-left: 1.6rem; }
+.entry::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  background:
+    repeating-linear-gradient(180deg, rgba(28, 26, 26, 0.6) 0 1px, transparent 1px 8px) 0 0 / 6px 100% no-repeat,
+    repeating-linear-gradient(180deg, rgba(28, 26, 26, 0.8) 0 1px, transparent 1px 40px) 0 0 / 12px 100% no-repeat,
+    linear-gradient(var(--wool), var(--wool)) 0 0 / 2px 100% no-repeat;
+}
+.group-title {
+  margin: 2.5rem 0 1rem;
+  padding: 0.6rem 1rem;
+  background: var(--chalk);
+  border-left: 6px solid var(--wool);
+  font-size: 1.2rem;
+}
+.group-title .small { display: block; font-family: var(--sans); font-weight: 400; }
+@media (min-width: 40rem) {
+  .group-title {
+    padding-right: 2.25rem;
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%);
+  }
+}
+ul.plain { margin: 0.5rem 0 1rem; padding-left: 1.25rem; }
+.examples { list-style: none; padding-left: 0; }
+.examples li { margin-bottom: 0.9rem; padding-top: 0.6rem; border-top: 1px dotted var(--rule); }
+
+.sewn {
+  margin: 2.75rem 0 0.5rem;
+  padding: 3.25rem 1.25rem 1.5rem;
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'120'%20height%3D'10'%20viewBox%3D'0%200%20120%2010'%3E%3Cpath%20d%3D'M3%206.3h15M26%203.7h10M44%205.9h17M69%203.4h9M86%206.5h14M107%204.2h10'%20fill%3D'none'%20stroke%3D'%235a1424'%20stroke-width%3D'2'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E") repeat-x 0 0 / auto 10px,
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'120'%20height%3D'10'%20viewBox%3D'0%200%20120%2010'%3E%3Cpath%20d%3D'M3%206.3h15M26%203.7h10M44%205.9h17M69%203.4h9M86%206.5h14M107%204.2h10'%20fill%3D'none'%20stroke%3D'%235a1424'%20stroke-width%3D'2'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E") repeat-x 0 100% / auto 10px,
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'10'%20height%3D'120'%20viewBox%3D'0%200%2010%20120'%3E%3Cpath%20d%3D'M6.3%203v15M3.7%2026v10M5.9%2044v17M3.4%2069v9M6.5%2086v14M4.2%20107v10'%20fill%3D'none'%20stroke%3D'%235a1424'%20stroke-width%3D'2'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E") repeat-y 0 0 / 10px auto,
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'10'%20height%3D'120'%20viewBox%3D'0%200%2010%20120'%3E%3Cpath%20d%3D'M6.3%203v15M3.7%2026v10M5.9%2044v17M3.4%2069v9M6.5%2086v14M4.2%20107v10'%20fill%3D'none'%20stroke%3D'%235a1424'%20stroke-width%3D'2'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E") repeat-y 100% 0 / 10px auto,
+    var(--linen);
+}
+main section.sewn::before { display: none; }
+.sewn > .hand-note { position: absolute; top: 1.5rem; right: 1.5rem; margin: 0; max-width: 11rem; text-align: right; }
+.sewn h2 { max-width: calc(100% - 9rem); }
+.sewn ul.plain { list-style: none; padding-left: 0; }
+.sewn ul.plain li { position: relative; padding-left: 1.75rem; margin: 0.45rem 0; }
+.sewn ul.plain li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 0.85rem;
+  height: 0.85rem;
+  background: url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'12'%20height%3D'12'%20viewBox%3D'0%200%2012%2012'%3E%3Cpath%20d%3D'M2%202l8%208M10%202l-8%208'%20fill%3D'none'%20stroke%3D'%235a1424'%20stroke-width%3D'2'%20stroke-linecap%3D'round'%2F%3E%3C%2Fsvg%3E") no-repeat center / contain;
+}
+@media (min-width: 40rem) {
+  .sewn { padding: 3.5rem 2rem 1.75rem; }
+}
+@media (max-width: 39.99rem) {
+  .sewn > .hand-note { position: static; max-width: none; text-align: left; margin-bottom: 0.4rem; }
+  .sewn h2 { max-width: none; }
+}
+
+.disclaimer { position: relative; background: var(--paper-hi); padding: 1.25rem 1.5rem; margin-top: 1.5rem; box-shadow: 0 14px 26px -20px rgba(28, 26, 26, 0.5); }
+.disclaimer::before {
+  content: "";
+  position: absolute;
+  inset: 0.4rem;
+  border: 1.5px dashed rgba(90, 20, 36, 0.75);
+  pointer-events: none;
+}
+.disclaimer h3 { margin-top: 0; }
+.disclaimer p { position: relative; }
+
+.site-footer { position: relative; background: var(--wool-cloth), var(--wool); color: var(--paper); padding: 2.5rem 0 2rem; }
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0.9rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--chalk) 0 8px, transparent 8px 14px);
+  opacity: 0.8;
+}
+.site-footer a { color: var(--paper); }
+.site-footer p { margin: 0.35rem 0; }
+.site-footer strong { font-family: var(--serif); font-size: 1.2rem; }
+
+@media print {
+  @page { margin: 16mm; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { background: #fff; }
+  body { font-size: 10.5pt; }
+  .skip, .toc, .thread, .tag-string, .pin { display: none; }
+  .masthead { background: #fff; color: var(--ink); border-bottom: 3px double var(--wool); padding-top: 0; }
+  .masthead a, .masthead h2, .scope, .scope .hand, .scope .note { color: var(--ink); }
+  .scope-list li { border-bottom-color: var(--ink); }
+  .tag { transform: none; box-shadow: none; border: 1px solid var(--ink); margin-top: 0.5rem; }
+  .fitting { gap: 1.25rem; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+  .tape { background: #fff; border-color: var(--ink); box-shadow: none; }
+  .tape::before { background: var(--ink); }
+  .seg-critical { background: #e8d3d7; color: var(--ink); border: 3px solid var(--wool); }
+  .seg-serious { background: #d9d6d6; color: var(--ink); border: 2px solid var(--ink); }
+  .weights { background: #fff; color: var(--ink); border: 1px solid var(--ink); box-shadow: none; }
+  .weights th[scope="row"], .weights thead th, .chalk { color: var(--ink); }
+  .weights td.num { color: var(--ink); }
+  .weights th, .weights td { border-bottom-color: var(--ink); }
+  .badge-critical { background: #e8d3d7; color: var(--ink); border-color: var(--wool); }
+  .badge-serious { background: #d9d6d6; color: var(--ink); border-color: var(--ink); }
+  .card, .disclaimer { box-shadow: none; border: 1px solid var(--rule); }
+  .swatch, .fix { filter: none; }
+  .swatch-cloth, .piece { -webkit-mask: none; mask: none; border: 1px solid var(--ink); }
+  .site-footer { background: #fff; color: var(--ink); border-top: 3px double var(--wool); padding: 1.25rem 0 0; }
+  .site-footer::before { display: none; }
+  .site-footer a { color: var(--ink); }
+  .group-title { clip-path: none; }
+  .card, .swatch, figure, tr, pre, .piece, .entry, .disclaimer, .sewn, .tally, .tape, .weights, .tag { break-inside: avoid; }
+  h2, h3, h4, caption { break-after: avoid; }
+  main section { padding-top: 3rem; }
+  a { text-decoration: underline; }
+}
+
+        </style>
+      </head>
+      <body>
+        <a class="skip" href="#tresc">Przejdź do treści raportu</a>
+        <header class="masthead">
+          <div class="wrap fitting">
+            <div class="tag">
+      <svg class="tag-string" viewBox="0 0 72 72" aria-hidden="true" focusable="false"><path d="M36 58C36 34 8 36 12 6M36 58C40 32 66 30 62 2" fill="none" stroke="#e9eff6" stroke-width="2.6" stroke-linecap="round"/><circle cx="36" cy="58" r="8" fill="#5a1424" stroke="#b9ad98" stroke-width="3"/></svg>
+      <p class="eyebrow">Raport ze skanu dostępności</p>
+      <p class="card-no">Karta przymiarki nr <strong>20261030-3B61</strong></p>
+      <h1>127.0.0.1</h1>
+      <dl class="meta">
+        <dt>Klient</dt>
+        <dd>127.0.0.1</dd>
+        <dt>Adres startowy</dt>
+        <dd>http://127.0.0.1:45241/</dd>
+        <dt>Data skanu</dt>
+        <dd>30 października 2026 11:30</dd>
+        <dt>Wymiary</dt>
+        <dd>
+          desktop 1280 x 800 oraz telefon (mobile, iPhone 13), 7
+          podstron
+        </dd>
+        <dt>Silnik</dt>
+        <dd>axe-core 4.14.0</dd>
+      </dl>
+    </div> <div class="scope">
+      <h2 class="scope-title" id="zakres">Zakres: sprawdzone podstrony</h2>
+      <ul class="scope-list">
+        <li>
+              / (Sklep testowy):
+              desktop tak, mobile tak
+            </li><li>
+              /kontakt (Kontakt):
+              desktop tak, mobile tak
+            </li><li>
+              /regulamin (Regulamin):
+              desktop tak, mobile tak
+            </li><li>
+              /deklaracja-dostepnosci (Deklaracja dostępności):
+              desktop tak, mobile tak
+            </li><li>
+              /o-nas (O nas):
+              desktop tak, mobile tak
+            </li><li>
+              /produkt/123 (Produkt 123):
+              desktop tak, mobile tak
+            </li><li>
+              /blog/wpis-1 (Wpis wpis-1):
+              desktop tak, mobile tak
+            </li>
+      </ul>
+      
+    </div>
+          </div>
+          <div class="thread" aria-hidden="true">
+            <span class="thread-line"></span>
+            <svg class="thread-needle" viewBox="0 0 120 32" aria-hidden="true" focusable="false"><path d="M2 16H8" stroke="#e9eff6" stroke-width="2"/><path d="M8 13.5H98L118 16L98 18.5H8Z" fill="#e9eff6"/><ellipse cx="17" cy="16" rx="6" ry="1.7" fill="#5a1424"/></svg>
+          </div>
+        </header>
+        <nav class="toc" aria-label="Spis treści raportu">
+          <div class="wrap">
+            <ol>
+              <li><a href="#podsumowanie">Podsumowanie</a></li>
+              <li><a href="#top3">Najważniejsze problemy</a></li>
+              <li><a href="#lista">Pełna lista</a></li>
+              <li><a href="#reczne">Do sprawdzenia ręcznie</a></li>
+              <li><a href="#zalecenia">Zalecenia</a></li>
+              <li><a href="#deklaracja">Deklaracja dostępności</a></li>
+              <li><a href="#zakres-limity">Czego nie sprawdzono</a></li>
+              <li><a href="#prawo">Kontekst prawny</a></li>
+            </ol>
+          </div>
+        </nav>
+        <main id="tresc">
+          <div class="wrap">
+            <section aria-labelledby="podsumowanie">
+    <h2 id="podsumowanie">Podsumowanie</h2>
+    <div class="tally">
+      <div class="tally-count" aria-hidden="true">
+        <span class="measured">11</span>
+        <span class="tally-cap">
+          potwierdzonych błędów
+        </span>
+        <span class="hand">zmierzone, nie oszacowane</span>
+      </div>
+      <div class="tally-text">
+        <p class="lead">Znaleziono 11
+        potwierdzonych błędów
+        na 7
+        podstronach, w tym
+        3 krytycznych.</p>
+        <p>
+          Przeskanowano 7
+          podstron w widoku desktop i mobile.
+          Błąd to jedna reguła, która nie została spełniona na jednej podstronie; łącznie daje to
+          29 miejsc w
+          kodzie stron.
+        </p>
+      </div>
+    </div>
+    <div class="tape" aria-hidden="true">
+    <div class="tape-body">
+      <span class="seg seg-critical" style="flex-grow: 3"><span>3</span></span><span class="seg seg-serious" style="flex-grow: 8"><span>8</span></span>
+    </div>
+  </div>
+    <table class="weights">
+      <caption>
+        Błędy według wagi
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Waga</th>
+          <th scope="col" class="num">Liczba</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+              <th scope="row">
+                <span class="row-label">Krytyczne</span>
+                <span class="chalk" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="42.5" height="30" viewBox="0 0 34 24" focusable="false"><path d="M3 3L3.5 21M11 4L10.5 21M19 3L19.5 21" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg></span>
+              </th>
+              <td class="num">3</td>
+            </tr><tr>
+              <th scope="row">
+                <span class="row-label">Poważne</span>
+                <span class="chalk" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="85" height="30" viewBox="0 0 68 24" focusable="false"><path d="M3 3L3.5 21M11 4L10.5 21M19 3L19.5 21M24 4L23.5 21M0 18L29 6M38 3L38.5 20M46 4L45.5 20M51 3L51.5 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" /></svg></span>
+              </th>
+              <td class="num">8</td>
+            </tr><tr>
+              <th scope="row">
+                <span class="row-label">Umiarkowane</span>
+                
+              </th>
+              <td class="num">0</td>
+            </tr><tr>
+              <th scope="row">
+                <span class="row-label">Drobne</span>
+                
+              </th>
+              <td class="num">0</td>
+            </tr>
+      </tbody>
+    </table>
+    <p class="small">
+      Skaner automatyczny wykrywa tylko część problemów z dostępnością. Brak wyników w tej liście
+      nie oznacza, że strona nie ma innych barier. Elementy do ręcznej weryfikacji znajdziesz w
+      osobnej sekcji.
+    </p>
+  </section> <p class="small">Na stronie głównej wykryto baner cookies i zaakceptowano go przyciskiem. Strona główna została sprawdzona przed i po tej zgodzie, pozostałe podstrony po niej.</p> <section aria-labelledby="top3">
+    <h2 id="top3">Trzy najważniejsze problemy</h2>
+    <p class="hand-note" aria-hidden="true">trzy poprawki krawieckie, najpierw te</p>
+    <p>Wybrane według wagi i liczby wystąpień.</p>
+    <article class="card" aria-labelledby="top-label">
+        <p class="card-kicker">Poprawka 1</p>
+        <h3 id="top-label">Pole formularza bez etykiety <span class="badge badge-critical">krytyczny</span></h3>
+        <ul class="facts">
+          <li>
+            <strong>Kryterium:</strong> 4.1.2 Nazwa, rola, wartość (poziom A)
+          </li>
+          <li>
+            <strong>EN 301 549:</strong> 9.4.1.2
+          </li>
+          <li>
+            <strong>Skala:</strong> <span class="measured">2</span>
+            wystąpienia na
+            <span class="measured">2</span>
+            podstronach
+          </li>
+        </ul>
+        <p>Pole nie ma powiązanej etykiety. Osoba korzystająca z czytnika ekranu nie dowie się, co wpisać, a kliknięcie w tekst obok nie ustawi fokusu w polu.</p> <figure class="swatch">
+    <div class="swatch-cloth">
+    <span class="pin" aria-hidden="true"></span>
+    <img
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALkAAAAWCAIAAAAThaowAAAAaklEQVR4nOzaUQ3AIAxFUbagGTRUdYcC9gSckzQ1cNOvzu4eEJhn9t4DrqrqWWudNeDqHJR3QEYrpLRCSiuktEJKK6S0QkorpLRCSiuktEJKK6S0QkorpLRCSiuktEJKK6Se7vZvy6+q+gAAAP//CSrDFgAAAAZJREFUAwAG0xCLLG73IgAAAABJRU5ErkJggg=="
+      alt="Zrzut ekranu elementu, w którym wykryto problem" />
+    </div>
+    <figcaption>
+      Element: <code>input</code> na podstronie /
+    </figcaption>
+  </figure> <div class="fix">
+    <div class="piece piece-before">
+      <p>Przed</p>
+      <pre><code>&lt;input type=&quot;email&quot; name=&quot;email&quot;&gt;</code></pre>
+    </div>
+    <div class="piece piece-after">
+      <p>Po</p>
+      <pre><code>&lt;label for=&quot;email&quot;&gt;Adres e-mail&lt;/label&gt;
+&lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot;&gt;</code></pre>
+    </div>
+  </div>
+      </article><article class="card" aria-labelledby="top-image-alt">
+        <p class="card-kicker">Poprawka 2</p>
+        <h3 id="top-image-alt">Obraz bez tekstu alternatywnego <span class="badge badge-critical">krytyczny</span></h3>
+        <ul class="facts">
+          <li>
+            <strong>Kryterium:</strong> 1.1.1 Treść nietekstowa (poziom A)
+          </li>
+          <li>
+            <strong>EN 301 549:</strong> 9.1.1.1
+          </li>
+          <li>
+            <strong>Skala:</strong> <span class="measured">1</span>
+            wystąpienie na
+            <span class="measured">1</span>
+            podstronie
+          </li>
+        </ul>
+        <p>Obraz nie ma atrybutu alt, więc czytnik ekranu nie powie, co przedstawia. Dla grafiki dekoracyjnej użyj pustego alt.</p> <figure class="swatch">
+    <div class="swatch-cloth">
+    <span class="pin" aria-hidden="true"></span>
+    <img
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAApCAIAAABx1HrXAAAAcklEQVR4nOzQQQ3AMAwAsWgq8SLPUPReNgSf3R3eO3Pv8N43JERHREdER0RHREdER0RHREdER0RHREdER0RHREdER0RHREdER0RHREdER0RHREdER0RHREdER0RHREdER0RHREdER0RHREdER0RHREd+AAAA///L/2+kAAAABklEQVQDAD57BFYYVlKIAAAAAElFTkSuQmCC"
+      alt="Zrzut ekranu elementu, w którym wykryto problem" />
+    </div>
+    <figcaption>
+      Element: <code>img</code> na podstronie /
+    </figcaption>
+  </figure> <div class="fix">
+    <div class="piece piece-before">
+      <p>Przed</p>
+      <pre><code>&lt;img src=&quot;zespol.jpg&quot;&gt;</code></pre>
+    </div>
+    <div class="piece piece-after">
+      <p>Po</p>
+      <pre><code>&lt;img src=&quot;zespol.jpg&quot; alt=&quot;Zespół firmy przy stole w biurze&quot;&gt;</code></pre>
+    </div>
+  </div>
+      </article><article class="card" aria-labelledby="top-target-size">
+        <p class="card-kicker">Poprawka 3</p>
+        <h3 id="top-target-size">Za mały cel kliknięcia <span class="badge badge-serious">poważny</span></h3>
+        <ul class="facts">
+          <li>
+            <strong>Kryterium:</strong> 2.5.8 Rozmiar celu (minimum) (poziom AA)
+          </li>
+          <li>
+            <strong>EN 301 549:</strong> 9.2.5.8 (WCAG 2.2, EN 301 549 V4.1.1)
+          </li>
+          <li>
+            <strong>Skala:</strong> <span class="measured">24</span>
+            wystąpienia na
+            <span class="measured">7</span>
+            podstronach
+          </li>
+        </ul>
+        <p>Przycisk lub link jest mniejszy niż 24 na 24 piksele i nie ma wokół wolnego miejsca. Trudno w niego trafić palcem lub przy drżeniu ręki.</p> <figure class="swatch">
+    <div class="swatch-cloth">
+    <span class="pin" aria-hidden="true"></span>
+    <img
+      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGsAAAARCAIAAABVZMX8AAAGBklEQVR4nOxYPZCkNhYGGmj19Nijy7i6wLpolVnZ4aqrOkIuOqIrQrIjJCQkuICws+MyQsqJCXGVgw4c4IwQZ4Q4GvXs9LSappFFz4x3pnd+a3ddLpdfxDzp09P79PTpTaucc+kP+wBTpD/sw+xXZnCo8yvfogBfFvSX2ud0uSbw3Aq79nXAT2OsT10K0Nu0Hl4yXWnytWtSWT4HaIUxRWhle1fFy8BPWbP1CLWTnt0Ph51Z4Crwrq/dxdHeTD4rYt14dLmHgJ/EeFuwpFWz5dzDj5UXb7JLgt8mB5YU5MyTWHszlZ34tK5hXc5Is3XczfIDjxoqhEyIIT87kVLJWpwmrgqkj2ys2S2r/asgEtuXrbrI5g566nZCQ8FEQXDMTj0aA4bmuZMk6POaW+bz+T8eRAtS7eGh+1RBrNvSy+x1HO+L+CrBc5O8BgdUx1efmyRD6ySzbv54gGkgqN1yxoYyeUvAOXLXgXuB0Sr8ZuMgisnKNFcEncsydbPDCdNd6l9gLERgZfmsEsXL+mJxaRrnJNxd32JWb0PnMMG+DJOBjj7e5pfYoMQcF0TwXIYXyXvq8RDwELNivr06BKXEvsyq+0C2z8N18P/h23gtgF9/vw0sKtYPwkubUOyyRhqaYu2Ib0yx+TYuDmrTdgvvwiQrglfEuaoOwZhwumN2hIzhvKynjZi2gnAVl8ODDPK2GtiZQgzF9GaeKdGGY2+WRiqSZCs+raqzcjn3sXz2Nz20J+NRh1cx1fPqrF7OSMl8oX1Atf2pg26XbLvAucohKKqzZXEae7dyBpUg/7wqz8oMmFD60gPukfQ8BqRd5G1KBJYiaHUaGr3vCdm5WwUTJwTOl/I/wrkA/vvv0yhUv2BDI2lReuITeVt3ftDjxWd1/XnuSYm/yZuhSlnCpll1VtWnkaWwQ3FEznohjdmNiScaoBJAuu+r6LawjyqW06qL08GwT+xRCEaODVN3bQ1KmvkLxQWLS9nLp0Qk1PZZwVGkYrGiMbGIlC33baChe0fSFY3iJBq6d51kwzrxx4/9csEKoKWhBo/P8kGgKMAbvzH6xWlpyN6JMrSsJ1sLqDi+biLZJEMVX1ZADYmoAAmZE4PtymYwGt42fUunCE6cYByiy21eK+5Cx4cNQKJ7hiw+7z6PtwxueZVu/ILXDYfuLI90dDTx3fbF07kDzklojTEY5Q0V95GF9SialCoEHasnbQYK5ff918aqbZRxKwa28UIgF/5Wkq+FXBplZwKlXdMML2/OWrFyK6XRuhjT5BArBpCxo+Ks+wr3/3I0PwA2lscN3AkkQdV8rxu4ZXAqE2+WuJPnQo+lnlI1iW47DzYwSSbuLD7C3mEfgMe1nPVZ1NVYLx56i58CfpAJpRaXcRLEc3IvwLxsQVVsF3H3T6v/XzG3b/IQbcmjj+rrOmpWd9FiMMOZM9bFUC+7Bk4Q5OL82aMgWbz9gPKqeb89uhWEGIyZsP2y2NHngTJEiiGNtX+zK7oXKIRenotsYJm1Q3OvY+NiHQYmxDlJ85P/wCGvOBgDDVX7VGP3KgZFf7AtDS26rhfxWBcDM1THlH9YbJLy0c5LyIeNhiLdNSPNnFJ+QzftF3EPRKtsHrbR9mXNXwK89ufprmVjFRfJrkGaS45yEYLF2/rBo1WQpZG2j6KueTcseo/N7ZsuAsmGIRtEdxDPo+3yhsShbY+7BbUt2SLpW6GD2SZsNc+f4pvC5k3ZLRupZV1WKK6tSiWLsuEn2Is24sAgbw29kCbu4qQJNtFXF9EXCsYTL5r55v0bbWhxOguCjYk2YJQtafVjH8fd/C/bxQ8c0I1jbqSDpAJnHjwP3JFIj9KBBRss/IwDoiXZzDpSKDhxfVX0NLjcBv/V0Xf7lvI867Cnm4YMTZCmgx9e/RVu3mCF2NM40iDksXOxgLLYCbRnmRB6MBEazQLm/HkL3ijImLghcGEnGGt+GvJkg8BM/lS/zbBdbK0za17G2qfRst+KqeI/YunjGed/uvliktAm4/CMftwQvynzPF19l/PHMrrLS9nCQ8MUy1TAXVp/j/YzAAAA//9fufanAAAABklEQVQDAPxdYaMtj9cmAAAAAElFTkSuQmCC"
+      alt="Zrzut ekranu elementu, w którym wykryto problem" />
+    </div>
+    <figcaption>
+      Element: <code>.skip-link</code> na podstronie /
+    </figcaption>
+  </figure> <div class="fix">
+    <div class="piece piece-before">
+      <p>Przed</p>
+      <pre><code>&lt;a href=&quot;/x&quot; style=&quot;display:inline-block;width:16px;height:16px&quot;&gt;x&lt;/a&gt;</code></pre>
+    </div>
+    <div class="piece piece-after">
+      <p>Po</p>
+      <pre><code>&lt;a href=&quot;/x&quot; style=&quot;display:inline-block;min-width:24px;min-height:24px&quot;&gt;x&lt;/a&gt;</code></pre>
+    </div>
+  </div>
+      </article>
+  </section>
+            <section aria-labelledby="lista">
+    <h2 id="lista">Pełna lista błędów według kryteriów</h2>
+    <h3 class="group-title">
+          1.1.1 Treść nietekstowa
+          <span class="small"
+            >(poziom A, EN 301 549
+            9.1.1.1)</span
+          >
+        </h3>
+        <div class="entry">
+              <h4>Obraz bez tekstu alternatywnego <span class="badge badge-critical">krytyczny</span></h4>
+              <p class="small">
+                1
+                wystąpienie na
+                1
+                podstronie. Reguła
+                axe: <code>image-alt</code>
+              </p>
+              <p>Obraz nie ma atrybutu alt, więc czytnik ekranu nie powie, co przedstawia. Dla grafiki dekoracyjnej użyj pustego alt.</p> <div class="table-scroll" role="region" aria-label="Podstrony z problemem: Obraz bez tekstu alternatywnego" tabindex="0">
+  <table>
+    <caption>
+      Podstrony z tym problemem
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Podstrona</th>
+        <th scope="col" class="num">Wystąpień</th>
+        <th scope="col">Widok</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+            <td>/</td>
+            <td class="num"><span class="measured">1</span></td>
+            <td>desktop, mobile</td>
+          </tr>
+      
+    </tbody>
+  </table>
+  </div> <p><strong>Przykładowe elementy</strong></p>
+    <ul class="plain examples">
+      <li>
+            <span class="small">/</span><br />
+            <code>img</code>
+            <pre><code>&lt;img src=&quot;/obraz.png&quot; width=&quot;120&quot; height=&quot;40&quot;&gt;</code></pre>
+            
+          </li>
+    </ul>
+            </div><h3 class="group-title">
+          1.4.3 Kontrast (minimum)
+          <span class="small"
+            >(poziom AA, EN 301 549
+            9.1.4.3)</span
+          >
+        </h3>
+        <div class="entry">
+              <h4>Za niski kontrast tekstu <span class="badge badge-serious">poważny</span></h4>
+              <p class="small">
+                2
+                wystąpienia na
+                1
+                podstronie. Reguła
+                axe: <code>color-contrast</code>
+              </p>
+              <p>Tekst jest zbyt blisko koloru tła. Osoby słabowidzące, a także każdy na słońcu lub starym ekranie, mogą go nie przeczytać. Zwykły tekst potrzebuje kontrastu co najmniej 4,5:1, duży tekst 3:1.</p> <div class="table-scroll" role="region" aria-label="Podstrony z problemem: Za niski kontrast tekstu" tabindex="0">
+  <table>
+    <caption>
+      Podstrony z tym problemem
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Podstrona</th>
+        <th scope="col" class="num">Wystąpień</th>
+        <th scope="col">Widok</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+            <td>/</td>
+            <td class="num"><span class="measured">2</span></td>
+            <td>desktop, mobile</td>
+          </tr>
+      
+    </tbody>
+  </table>
+  </div> <p><strong>Przykładowe elementy</strong></p>
+    <ul class="plain examples">
+      <li>
+            <span class="small">/</span><br />
+            <code>#glowna &gt; p</code>
+            <pre><code>&lt;p style=&quot;color:#bbbbbb;background:#ffffff&quot;&gt;Ten tekst ma za niski kontrast względem tła.&lt;/p&gt;</code></pre>
+            <span class="small"
+                  >Widoczny tylko przed zaakceptowaniem banera cookies.</span
+                >
+          </li><li>
+            <span class="small">/</span><br />
+            <code>#banner-text</code>
+            <pre><code>&lt;p id=&quot;banner-text&quot; style=&quot;color:#dddddd&quot;&gt;Używamy plików cookies.&lt;/p&gt;</code></pre>
+            <span class="small"
+                  >Widoczny tylko przed zaakceptowaniem banera cookies.</span
+                >
+          </li><li>
+            <span class="small">/</span><br />
+            <code>p</code>
+            <pre><code>&lt;p style=&quot;color:#bbbbbb;background:#ffffff&quot;&gt;Ten tekst ma za niski kontrast względem tła.&lt;/p&gt;</code></pre>
+            
+          </li>
+    </ul>
+            </div><h3 class="group-title">
+          2.5.8 Rozmiar celu (minimum)
+          <span class="small"
+            >(poziom AA, EN 301 549
+            9.2.5.8, WCAG 2.2, EN 301 549 V4.1.1)</span
+          >
+        </h3>
+        <div class="entry">
+              <h4>Za mały cel kliknięcia <span class="badge badge-serious">poważny</span></h4>
+              <p class="small">
+                24
+                wystąpienia na
+                7
+                podstronach. Reguła
+                axe: <code>target-size</code>
+              </p>
+              <p>Przycisk lub link jest mniejszy niż 24 na 24 piksele i nie ma wokół wolnego miejsca. Trudno w niego trafić palcem lub przy drżeniu ręki.</p> <div class="table-scroll" role="region" aria-label="Podstrony z problemem: Za mały cel kliknięcia" tabindex="0">
+  <table>
+    <caption>
+      Podstrony z tym problemem
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Podstrona</th>
+        <th scope="col" class="num">Wystąpień</th>
+        <th scope="col">Widok</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+            <td>/</td>
+            <td class="num"><span class="measured">8</span></td>
+            <td>desktop, mobile</td>
+          </tr><tr>
+            <td>/blog/wpis-1</td>
+            <td class="num"><span class="measured">2</span></td>
+            <td>mobile</td>
+          </tr><tr>
+            <td>/deklaracja-dostepnosci</td>
+            <td class="num"><span class="measured">2</span></td>
+            <td>mobile</td>
+          </tr><tr>
+            <td>/kontakt</td>
+            <td class="num"><span class="measured">6</span></td>
+            <td>desktop, mobile</td>
+          </tr><tr>
+            <td>/o-nas</td>
+            <td class="num"><span class="measured">2</span></td>
+            <td>mobile</td>
+          </tr><tr>
+            <td>/produkt/123</td>
+            <td class="num"><span class="measured">2</span></td>
+            <td>mobile</td>
+          </tr><tr>
+            <td>/regulamin</td>
+            <td class="num"><span class="measured">2</span></td>
+            <td>mobile</td>
+          </tr>
+      
+    </tbody>
+  </table>
+  </div> <p><strong>Przykładowe elementy</strong></p>
+    <ul class="plain examples">
+      <li>
+            <span class="small">/</span><br />
+            <code>.skip-link</code>
+            <pre><code>&lt;a href=&quot;#glowna&quot; class=&quot;skip-link&quot;&gt;Przejdź do treści&lt;/a&gt;</code></pre>
+            
+          </li><li>
+            <span class="small">/</span><br />
+            <code>a[href$=&quot;kontakt&quot;]</code>
+            <pre><code>&lt;a href=&quot;/kontakt&quot;&gt;Kontakt&lt;/a&gt;</code></pre>
+            
+          </li><li>
+            <span class="small">/</span><br />
+            <code>a[href$=&quot;o-nas&quot;]</code>
+            <pre><code>&lt;a href=&quot;/o-nas&quot;&gt;O nas&lt;/a&gt;</code></pre>
+            
+          </li>
+    </ul>
+            </div><h3 class="group-title">
+          4.1.2 Nazwa, rola, wartość
+          <span class="small"
+            >(poziom A, EN 301 549
+            9.4.1.2)</span
+          >
+        </h3>
+        <div class="entry">
+              <h4>Pole formularza bez etykiety <span class="badge badge-critical">krytyczny</span></h4>
+              <p class="small">
+                2
+                wystąpienia na
+                2
+                podstronach. Reguła
+                axe: <code>label</code>
+              </p>
+              <p>Pole nie ma powiązanej etykiety. Osoba korzystająca z czytnika ekranu nie dowie się, co wpisać, a kliknięcie w tekst obok nie ustawi fokusu w polu.</p> <div class="table-scroll" role="region" aria-label="Podstrony z problemem: Pole formularza bez etykiety" tabindex="0">
+  <table>
+    <caption>
+      Podstrony z tym problemem
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Podstrona</th>
+        <th scope="col" class="num">Wystąpień</th>
+        <th scope="col">Widok</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+            <td>/</td>
+            <td class="num"><span class="measured">1</span></td>
+            <td>desktop, mobile</td>
+          </tr><tr>
+            <td>/kontakt</td>
+            <td class="num"><span class="measured">1</span></td>
+            <td>desktop, mobile</td>
+          </tr>
+      
+    </tbody>
+  </table>
+  </div> <p><strong>Przykładowe elementy</strong></p>
+    <ul class="plain examples">
+      <li>
+            <span class="small">/</span><br />
+            <code>input</code>
+            <pre><code>&lt;input type=&quot;text&quot; name=&quot;imie&quot;&gt;</code></pre>
+            
+          </li><li>
+            <span class="small">/kontakt</span><br />
+            <code>input</code>
+            <pre><code>&lt;input type=&quot;email&quot; name=&quot;email&quot;&gt;</code></pre>
+            
+          </li>
+    </ul>
+            </div>
+  </section> <section class="sewn" aria-labelledby="reczne">
+    <h2 id="reczne">Do sprawdzenia ręcznie</h2>
+    <p class="hand-note" aria-hidden="true">szyte ręcznie, bez automatu</p>
+    <p>
+      Poniższych rzeczy narzędzie nie potrafiło ocenić jednoznacznie. To nie są potwierdzone błędy,
+      tylko miejsca warte uwagi człowieka.
+    </p>
+    <h3>Elementy, których automat nie rozstrzygnął</h3>
+    <p>Brak pozycji.</p>
+    <h3>Dopasowanie do ekranu (kryterium 1.4.10)</h3>
+    <p>
+          Przy szerokości 320 px (odpowiednik powiększenia do 400%) na żadnej z przeskanowanych
+          podstron nie wykryto poziomego przewijania.
+        </p>
+    <h3>Obsługa klawiaturą na stronie głównej</h3>
+    <ul class="plain">
+    <li>
+      Naciśnięto Tab 12 razy
+      na stronie głównej (widok desktop).
+    </li>
+    <li>
+      Pierwszy Tab trafia w link pomijania nawigacji.
+    </li>
+    <li>
+      Nie wykryto pułapki na klawiaturę w pierwszych naciśnięciach Tab.
+    </li>
+    <li>
+      Styl fokusu zmieniał się dla wszystkich 10 sprawdzonych elementów.
+    </li>
+  </ul>
+  </section>
+            <section aria-labelledby="zalecenia">
+    <h2 id="zalecenia">Zalecenia</h2>
+    <p>
+      Dobre praktyki, które nie są wprost wymaganiami WCAG, ale ułatwiają korzystanie ze strony
+      technologiom asystującym.
+    </p>
+    <p>Narzędzie nie zgłosiło żadnych zaleceń.</p>
+  </section> <section aria-labelledby="deklaracja">
+    <h2 id="deklaracja">Deklaracja dostępności</h2>
+    <p>
+      Znaleziono link do deklaracji dostępności (http://127.0.0.1:45241/deklaracja-dostepnosci). Na stronie deklaracji brakuje
+      elementów o identyfikatorach: a11y-data-aktualizacja.
+    </p>
+    <p class="small">
+      Skan sprawdza obecność linku oraz elementów o identyfikatorach a11y-data-publikacja, a11y-data-aktualizacja, a11y-status, a11y-kontakt.
+      Nie ocenia treści deklaracji.
+    </p>
+  </section>
+            <section class="sewn" aria-labelledby="zakres-limity">
+    <h2 id="zakres-limity">Czego ten skan nie sprawdził</h2>
+    <p class="hand-note" aria-hidden="true">tu miara nie sięga</p>
+    <ul class="plain">
+      <li>Obsługi strony czytnikiem ekranu (NVDA, JAWS, VoiceOver, TalkBack).</li><li>Pełnej obsługi klawiaturą w procesach, takich jak zakup, rejestracja czy formularze wieloetapowe.</li><li>Jakości tekstów alternatywnych: skaner wie, że alt istnieje, ale nie ocenia, czy dobrze opisuje obraz.</li><li>Treści wideo i audio: napisów, transkrypcji i audiodeskrypcji.</li><li>Dokumentów PDF i innych plików do pobrania.</li><li>Stron i funkcji za logowaniem.</li><li>Zrozumiałości języka, czytelności układu i logiki nawigacji.</li>
+    </ul>
+  </section> <section aria-labelledby="prawo">
+    <h2 id="prawo">Kontekst prawny</h2>
+    <p>
+      Ustawa z 26 kwietnia 2024 r. o zapewnianiu spełniania wymagań dostępności niektórych produktów
+      i usług przez podmioty gospodarcze (Dz.U. 2024 poz. 731) dotyczy wybranych usług dla
+      konsumentów, między innymi handlu elektronicznego. Nie dotyczy usług świadczonych przez
+      mikroprzedsiębiorców (art. 4 pkt 1).
+    </p>
+    <p>
+      W raporcie stosujemy WCAG 2.1 na poziomie AA (WCAG 2.1, EN 301 549 V3.2.1) i osobno oznaczamy dodatkowe
+      kryteria WCAG 2.2 (WCAG 2.2, EN 301 549 V4.1.1).
+    </p>
+    <div class="disclaimer">
+      <h3>Zastrzeżenie</h3>
+      <p>Raport powstał automatycznie na podstawie testów axe-core i pokazuje tylko te bariery, które da się wykryć maszynowo. Zwykle jest to część problemów z dostępnością strony. Raport nie stwierdza zgodności ani niezgodności strony z WCAG, normą EN 301 549 ani ustawą o zapewnianiu spełniania wymagań dostępności, nie jest audytem dostępności ani opinią prawną. Opisuje stan z dnia skanu dla sprawdzonych podstron wymienionych w raporcie, w widoku desktop i mobile. Pełną ocenę daje audyt z testami manualnymi i udziałem specjalisty.</p>
+    </div>
+  </section>
+          </div>
+        </main>
+        <footer class="site-footer">
+          <div class="wrap">
+            <p><strong>Adrian Turbiński</strong></p>
+            <p><a href="https://adrianturbinski.pl/">adrianturbinski.pl</a></p>
+            <p>
+              Jeśli chcesz omówić wyniki, napisz:
+              <a href="mailto:contact@adrianturbinski.pl">contact@adrianturbinski.pl</a>
+            </p>
+          </div>
+        </footer>
+      </body>
+    </html> 

@@ -14,8 +14,9 @@ export default function Privacy() {
       <section className="prose" aria-label="Polityka prywatności">
         <h2>Kto odpowiada</h2>
         <p>
-          Adrian Turbiński, jednoosobowa działalność gospodarcza Adrian Turbiński Software, Wrocław.
-          Kontakt: contact@adrianturbinski.pl.
+          Adrian Turbiński, jednoosobowa działalność gospodarcza pod firmą Adrian Turbiński, ul.
+          Przejazdowa 21C lok. 19, 51-167 Wrocław, NIP 8952236530, REGON 520691289. Kontakt:
+          contact@adrianturbinski.pl.
         </p>
         <h2>Ta strona</h2>
         <p>
@@ -26,14 +27,121 @@ export default function Privacy() {
         <h2>Formularz wyceny</h2>
         <p>
           Formularz przesyła to, co w nim wpiszesz (usługę, budżet, opis projektu i e-mail lub
-          telefon), przez Cloudflare Workers do mojego prywatnego czatu w Telegramie. Nie zapisuję
-          tych danych w żadnej bazie. Cloudflare i Telegram przetwarzają je jako dostawcy według
-          własnych polityk prywatności, także poza Europejskim Obszarem Gospodarczym.
+          telefon), przez Cloudflare Workers do mojego prywatnego czatu w Telegramie. W bazie
+          Cloudflare D1 zapisuję tylko datę, język, wybraną usługę, budżet, stronę, z której wysłano
+          formularz, źródło wejścia i kod promocyjny, żeby liczyć zapytania. Twojego kontaktu ani
+          opisu projektu nie zapisuję w żadnej bazie. Cloudflare i Telegram przetwarzają dane jako
+          dostawcy według własnych polityk prywatności, także poza Europejskim Obszarem
+          Gospodarczym.
         </p>
         <p>
           Używam tych danych tylko do odpowiedzi na zapytanie i przygotowania oferty. Podstawą są
           działania na Twoje żądanie przed zawarciem umowy (art. 6 ust. 1 lit. b RODO). Podanie
           kontaktu jest dobrowolne, ale bez niego nie odpowiem.
+        </p>
+        <h2 id="skaner">Skaner dostępności</h2>
+        <p>
+          Bezpłatny skaner dostępności pod adresem /skaner/ to usługa świadczona drogą elektroniczną
+          na zasadach opisanych w <a href="/regulamin-skanera/">regulaminie skanera</a>.
+          Administratorem danych jestem ja, Adrian Turbiński (ul. Przejazdowa 21C lok. 19, 51-167
+          Wrocław, contact@adrianturbinski.pl).
+        </p>
+        <h3>Jakie dane zbieram</h3>
+        <ul>
+          <li>adres strony do skanu i Twój adres e-mail;</li>
+          <li>
+            adres IP, identyfikator przeglądarki (user agent), czas wysłania formularza oraz czas
+            kliknięcia przycisku potwierdzenia na stronie otwartej z linku w mailu;
+          </li>
+          <li>
+            treść i wersję (sumę SHA-256) regulaminu i klauzul, które widziałeś w formularzu, stan
+            obu pól wyboru i ewentualne wycofanie zgody;
+          </li>
+          <li>
+            raport ze skanu: wyniki testów, zrzuty ekranu i fragmenty kodu HTML skanowanej strony,
+            które mogą zawierać dane widoczne publicznie na tej stronie.
+          </li>
+        </ul>
+        <h3>Po co i na jakiej podstawie</h3>
+        <ul>
+          <li>
+            potwierdzenie adresu e-mail, wykonanie skanu, zapisanie raportu i wysłanie linku do
+            niego: wykonanie umowy o bezpłatną usługę (art. 6 ust. 1 lit. b RODO);
+          </li>
+          <li>
+            zapisanie dowodu, że zaakceptowałeś regulamin i jakie zgody wyraziłeś lub wycofałeś:
+            obowiązek wykazania zgody (art. 7 ust. 1 RODO w związku z art. 6 ust. 1 lit. c RODO) i
+            mój uzasadniony interes w obronie przed roszczeniami (art. 6 ust. 1 lit. f RODO);
+          </li>
+          <li>
+            wysyłka informacji handlowych e-mailem, jeśli zaznaczysz osobną zgodę: Twoja zgoda (art.
+            6 ust. 1 lit. a RODO i art. 398 ustawy Prawo komunikacji elektronicznej). To maksymalnie
+            4 wiadomości w ciągu 14 dni o audytach dostępności, wdrażaniu poprawek WCAG i wymagań
+            EAA oraz zaproszenie na rozmowę;
+          </li>
+          <li>
+            bezpieczeństwo skanera, limity (jedna domena rejestrowalna raz na 24 godziny, do 3
+            skanów na dobę z jednego adresu IP lub sieci IPv6 /64 i na jeden ujednolicony adres
+            e-mail), ochrona przed spamem przez Cloudflare Turnstile i krótkie powiadomienie dla
+            mnie o nowym skanie: mój uzasadniony interes w ochronie usługi i sprawnej obsłudze (art.
+            6 ust. 1 lit. f RODO).
+          </li>
+        </ul>
+        <h3>Kto dostaje dane</h3>
+        <p>
+          Formularz, baza i raport działają na Cloudflare Workers, D1 i Workers KV od Cloudflare,
+          Inc. (USA). Maile wysyła Resend, usługa Plus Five Five, Inc. (USA). Sam skan wykonuje mój
+          serwer w Polsce. Powiadomienie o nowym skanie trafia do mojego czatu w Telegramie i
+          zawiera tylko domenę skanowanej strony, liczbę wykrytych błędów i informację, czy
+          wyraziłeś zgodę marketingową; nie zawiera Twojego e-maila ani IP.
+        </p>
+        <p>
+          Cloudflare, Inc. i Plus Five Five, Inc. mogą przetwarzać dane w Stanach Zjednoczonych.
+          Obie firmy są certyfikowane w EU-US Data Privacy Framework, więc przekazanie odbywa się na
+          podstawie decyzji Komisji Europejskiej o odpowiednim stopniu ochrony (art. 45 RODO).
+          Telegram może przetwarzać treść powiadomienia poza Europejskim Obszarem Gospodarczym
+          według własnej polityki prywatności.
+        </p>
+        <h3>Jak długo trzymam dane</h3>
+        <ul>
+          <li>raport: 30 dni od skanu, potem jest usuwany automatycznie;</li>
+          <li>
+            zlecenie niepotwierdzone przyciskiem w ciągu 24 godzin: usuwam je najpóźniej po 48
+            godzinach od wysłania formularza;
+          </li>
+          <li>
+            dane zlecenia i dowód Twoich wyborów (adres strony, e-mail, IP, user agent, czasy, treść
+            i wersja klauzul, stan pól wyboru): do 31 grudnia trzeciego roku kalendarzowego po roku,
+            w którym potwierdzono zlecenie, czyli do upływu przedawnienia roszczeń związanych z
+            działalnością gospodarczą (art. 118 Kodeksu cywilnego);
+          </li>
+          <li>
+            dane do wysyłki marketingowej: do wycofania zgody albo do wysłania ostatniej wiadomości
+            sekwencji; dowód zgody i jej wycofania do 31 grudnia trzeciego roku kalendarzowego po
+            roku, w którym zgodę wycofano albo sekwencja się skończyła.
+          </li>
+        </ul>
+        <p>
+          Usuwanie po tych terminach wykonuje automat raz na dobę, więc dane znikają najpóźniej w
+          ciągu doby po upływie okresu. Na Twoją prośbę usuwam wcześniej to, czego nie muszę
+          zachować jako dowodu.
+        </p>
+        <h3>Twoje prawa</h3>
+        <p>
+          Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania i
+          przeniesienia. Masz prawo wnieść sprzeciw wobec przetwarzania opartego na moim
+          uzasadnionym interesie (art. 21 RODO), a wobec marketingu w każdej chwili i bez podawania
+          przyczyny. Zgodę marketingową możesz wycofać w każdej chwili linkiem w każdej wiadomości
+          albo mailem na contact@adrianturbinski.pl; wycofanie nie wpływa na zgodność z prawem
+          wysyłki sprzed wycofania. Masz też prawo złożyć skargę do Prezesa Urzędu Ochrony Danych
+          Osobowych. Z praw korzystasz, pisząc na contact@adrianturbinski.pl.
+        </p>
+        <h3>Dobrowolność i automatyzacja</h3>
+        <p>
+          Podanie adresu strony i e-maila jest dobrowolne, ale bez nich nie wykonam skanu ani nie
+          wyślę raportu. Zgoda marketingowa jest dobrowolna i nie wpływa na raport. Skaner działa
+          automatycznie, ale nie profiluje Cię i nie podejmuje wobec Ciebie decyzji w rozumieniu
+          art. 22 RODO; ocenia wyłącznie kod strony.
         </p>
         <h2>Google Analytics</h2>
         <p>
@@ -84,7 +192,7 @@ export default function Privacy() {
           Możesz poprosić o jej usunięcie albo o wgląd w to, co o Tobie mam, pisząc na
           contact@adrianturbinski.pl. Możesz też złożyć skargę do Prezesa UODO.
         </p>
-        <p>Ostatnia aktualizacja: 26 października 2026.</p>
+        <p>Ostatnia aktualizacja: 30 października 2026.</p>
       </section>
     </>
   );
@@ -95,6 +203,6 @@ export const Head = () => (
     lang="pl"
     path="/polityka-prywatnosci/"
     title="Polityka prywatności, Adrian Turbiński"
-    description="Co strona i narzędzia do publikacji Adriana Turbińskiego robią z danymi: formularz wyceny, GoatCounter, Google Analytics i Microsoft Clarity za zgodą i prawa osób."
+    description="Co strona i narzędzia Adriana Turbińskiego robią z danymi: formularz wyceny, skaner dostępności, GoatCounter, Google Analytics i Microsoft Clarity za zgodą oraz prawa osób."
   />
 );
