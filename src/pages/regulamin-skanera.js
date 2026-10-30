@@ -19,10 +19,10 @@ export default function ScannerTerms() {
         <h2>1. Kto świadczy usługę</h2>
         <p>
           Usługodawcą jest Adrian Turbiński, prowadzący jednoosobową działalność gospodarczą pod
-          firmą Adrian Turbiński Software, Wrocław, [adres], NIP [NIP], wpisany do CEIDG. Kontakt:
-          contact@adrianturbinski.pl. Ten regulamin jest regulaminem świadczenia usług drogą
-          elektroniczną w rozumieniu art. 8 ustawy z dnia 18 lipca 2002 r. o świadczeniu usług drogą
-          elektroniczną.
+          firmą Adrian Turbiński, ul. Przejazdowa 21C lok. 19, 51-167 Wrocław, NIP 8952236530, REGON
+          520691289, wpisany do CEIDG. Kontakt: contact@adrianturbinski.pl. Ten regulamin jest
+          regulaminem świadczenia usług drogą elektroniczną w rozumieniu art. 8 ustawy z dnia 18
+          lipca 2002 r. o świadczeniu usług drogą elektroniczną.
         </p>
         <h2>2. Słowniczek</h2>
         <ul>
@@ -118,6 +118,10 @@ export default function ScannerTerms() {
             wejścia, gdy zlecenie narusza te zasady albo gdy wygląda na nadużycie. O odmowie
             informuję mailem, jeśli adres został potwierdzony.
           </li>
+          <li>
+            Gdy skaner osiągnie dzienny limit zasobów, z których korzysta, chwilowo nie przyjmuje
+            nowych zleceń i pokazuje o tym komunikat. Zlecenie możesz wtedy ponowić następnego dnia.
+          </li>
         </ul>
         <h2>7. Czym jest raport, a czym nie jest</h2>
         <p>
@@ -156,9 +160,9 @@ export default function ScannerTerms() {
         </p>
         <h2>10. Przechowywanie raportu</h2>
         <p>
-          Raport jest przechowywany przez 30 dni od dnia skanu w Cloudflare R2, a potem usuwany
-          automatycznie. Jeśli chcesz go zachować, zapisz go wcześniej. Na Twoją prośbę usunę raport
-          wcześniej.
+          Raport jest przechowywany przez 30 dni od dnia skanu w Cloudflare Workers KV, a potem
+          usuwany automatycznie. Jeśli chcesz go zachować, zapisz go wcześniej. Na Twoją prośbę
+          usunę raport wcześniej.
         </p>
         <h2>11. Dane osobowe</h2>
         <p>

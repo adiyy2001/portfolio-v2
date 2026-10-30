@@ -1,11 +1,12 @@
-import { test } from 'node:test';
+import { mock, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { DatabaseSync } from 'node:sqlite';
 import worker from './index.js';
 import consent from './consent.js';
-import { confirmMail, failureMail, reportMail } from './views.js';
+import { resetUsageState, scanCost, thresholds } from './usage.js';
+import { confirmMail, failureMail, reportMail, sequenceMail } from './views.js';
 
 const bearer = 'test-scanner-token';
 const digest = createHash('sha256').update(bearer).digest('hex');
@@ -20,45 +21,68 @@ const ago = ms => new Date(Date.now() - ms).toISOString();
 function fakeD1() {
   const db = new DatabaseSync(':memory:');
   db.exec(readFileSync(new URL('./schema.sql', import.meta.url), 'utf8'));
+  const database = { db, sizeAfter: 4096 };
+  const isRead = sql => /^\s*SELECT/i.test(sql);
   const statement = (sql, values = []) => ({
     bind: (...next) => statement(sql, next),
     async run() {
       const result = db.prepare(sql).run(...values);
-      return { meta: { changes: Number(result.changes) } };
+      const changes = Number(result.changes);
+      return {
+        meta: {
+          changes,
+          rows_read: 0,
+          rows_written: changes,
+          size_after: database.sizeAfter,
+        },
+      };
     },
     async first() {
       return db.prepare(sql).get(...values) ?? null;
     },
     async all() {
-      return { results: db.prepare(sql).all(...values) };
+      const results = db.prepare(sql).all(...values);
+      const changes = isRead(sql) ? 0 : Number(db.prepare('SELECT changes() AS n').get().n);
+      return {
+        results,
+        meta: {
+          changes,
+          rows_read: results.length,
+          rows_written: changes,
+          size_after: database.sizeAfter,
+        },
+      };
     },
   });
-  return {
-    db,
+  return Object.assign(database, {
     prepare: sql => statement(sql),
     async batch(list) {
       db.exec('BEGIN');
       try {
-        for (const item of list) await item.run();
+        const done = [];
+        for (const item of list) done.push(await item.all());
         db.exec('COMMIT');
+        return done;
       } catch (error) {
         db.exec('ROLLBACK');
         throw error;
       }
-      return [];
     },
-  };
+  });
 }
 
-function fakeR2() {
+function fakeKv() {
   const objects = new Map();
   return {
     objects,
-    async put(key, body, options) {
-      objects.set(key, { body, ...options });
+    async put(key, value, options) {
+      objects.set(key, { value, ...options });
     },
-    async get(key) {
-      return objects.get(key) ?? null;
+    async getWithMetadata(key) {
+      const entry = objects.get(key);
+      return entry
+        ? { value: entry.value, metadata: entry.metadata ?? null }
+        : { value: null, metadata: null };
     },
     async delete(key) {
       objects.delete(key);
@@ -67,6 +91,7 @@ function fakeR2() {
 }
 
 function setup({ secrets = true, turnstileOk = true, resendOk = true, telegramOk = true } = {}) {
+  resetUsageState();
   const calls = [];
   const mode = { resendOk };
   globalThis.fetch = async (url, init) => {
@@ -81,7 +106,7 @@ function setup({ secrets = true, turnstileOk = true, resendOk = true, telegramOk
   };
   const env = {
     SCANS: fakeD1(),
-    REPORTS: fakeR2(),
+    REPORTS: fakeKv(),
     RESEND_API_KEY: 're_test',
     IP_SALT: 'pepper',
     SCANNER_TOKEN_SHA256: digest,
@@ -539,7 +564,7 @@ test('a job running for over 15 minutes returns to the queue, twice at most', as
   assert.match(mail.subject, /Nie udało się przeskanować: slow-example\.com/);
 });
 
-test('a finished scan is stored in R2, mailed without any offer and reported to Telegram', async () => {
+test('a finished scan is stored in KV, mailed without any offer and reported to Telegram', async () => {
   const ctx = setup();
   const job = await runningJob(ctx, {
     url: 'https://done-example.com/',
@@ -559,11 +584,11 @@ test('a finished scan is stored in R2, mailed without any offer and reported to 
   assert.match(row.report_key, /^[\w-]{32}$/);
   assert.equal(JSON.parse(row.summary_json).violations, 7);
   const object = ctx.env.REPORTS.objects.get(`reports/${row.report_key}.html`);
-  assert.equal(object.body, '<h1>Raport</h1>');
-  assert.match(object.httpMetadata.contentType, /^text\/html/);
-  const days = (Date.parse(object.customMetadata.expires) - Date.now()) / (24 * hour);
+  assert.equal(object.value, '<h1>Raport</h1>');
+  assert.ok(object.expirationTtl >= 30 * 24 * 60 * 60);
+  const days = (Date.parse(object.metadata.expires) - Date.now()) / (24 * hour);
   assert.ok(days > 29.9 && days <= 30);
-  assert.equal(object.customMetadata.expires, row.report_expires);
+  assert.equal(object.metadata.expires, row.report_expires);
 
   const [mail] = ctx.mails().slice(before);
   assert.deepEqual(mail.to, ['wlasciciel@example.com']);
@@ -698,7 +723,7 @@ test('an expired report answers 410 and is deleted', async () => {
   const ctx = setup();
   const row = await reportFor(ctx);
   const key = `reports/${row.report_key}.html`;
-  ctx.env.REPORTS.objects.get(key).customMetadata.expires = ago(1000);
+  ctx.env.REPORTS.objects.get(key).metadata.expires = ago(1000);
   const response = await worker.fetch(new Request(`${base}/r/${row.report_key}`), ctx.env);
   assert.equal(response.status, 410);
   assert.equal(ctx.env.REPORTS.objects.has(key), false);
@@ -827,7 +852,7 @@ const commercial = /oferta|wycen|rabat|cennik|zamów|umów|zapraszam|usług|prom
 test('status pages are standalone: no script, no external resources, a strict policy', async () => {
   const ctx = setup();
   const row = await reportFor(ctx);
-  ctx.env.REPORTS.objects.get(`reports/${row.report_key}.html`).customMetadata.expires = ago(1000);
+  ctx.env.REPORTS.objects.get(`reports/${row.report_key}.html`).metadata.expires = ago(1000);
   const responses = [
     await worker.fetch(new Request(`${base}/scan/confirm?t=nope`), ctx.env),
     await worker.fetch(new Request(`${base}/scan/unsubscribe?t=nope`), ctx.env),
@@ -1283,4 +1308,637 @@ test('the daily cron enforces the privacy policy retention periods', async () =>
   assert.equal(alive(inside), true);
   assert.equal(alive(sequenceRunning), true);
   assert.equal(alive(withdrawnRecently), true);
+});
+
+const dayMs = 24 * hour;
+
+async function finishedScan(ctx, fields = {}) {
+  const job = await runningJob(ctx, { marketing: true, ...fields });
+  const response = await worker.fetch(
+    resultRequest(job.id, { status: 'done', summary, html: '<h1>Raport</h1>' }),
+    ctx.env,
+  );
+  assert.equal(response.status, 200);
+  return scanRow(ctx.env, job.id);
+}
+
+const rewind = (ctx, id, days, sentDaysAgo = null) =>
+  ctx.env.SCANS.db
+    .prepare('UPDATE scans SET confirmed_at = ?, sequence_sent_at = ? WHERE id = ?')
+    .run(
+      ago(days * dayMs + hour),
+      sentDaysAgo === null ? null : ago(sentDaysAgo * dayMs + hour),
+      id,
+    );
+
+const runCron = ctx => worker.scheduled({}, ctx.env);
+const sequenceMails = (ctx, since = 0) =>
+  ctx
+    .mails()
+    .slice(since)
+    .filter(mail => /Wiadomość \d z 4\./.test(mail.text));
+
+const sequenceSubjects = [
+  /^Jak przeczytać raport dla /,
+  /^Czego automatyczny skan nie widzi na /,
+  /^Kogo dotyczy ustawa o dostępności$/,
+  /^Ręczny audyt dostępności dla /,
+];
+
+test('only done, confirmed, marketing scans without a withdrawal receive the sequence', async () => {
+  const ctx = setup();
+  const eligible = await finishedScan(ctx, { email: 'zgoda@example.com' });
+  const declined = await finishedScan(ctx, { marketing: false, email: 'bez-zgody@example.com' });
+  const withdrawn = await finishedScan(ctx, { email: 'wypis@example.com' });
+  const flagged = await finishedScan(ctx, { email: 'flaga@example.com' });
+  const failed = await finishedScan(ctx, { email: 'porazka@example.com' });
+  const queuedId = await confirmed(ctx, { marketing: true, email: 'kolejka@example.com' });
+  const unconfirmed = await submit(ctx.env, {
+    marketing: true,
+    email: 'niepotwierdzony@example.com',
+  });
+  assert.equal(unconfirmed.status, 202);
+
+  const db = ctx.env.SCANS.db;
+  db.prepare('UPDATE scans SET marketing = 0, unsubscribed_at = ? WHERE id = ?').run(
+    ago(hour),
+    withdrawn.id,
+  );
+  db.prepare('UPDATE scans SET unsubscribed_at = ? WHERE id = ?').run(ago(hour), flagged.id);
+  db.prepare("UPDATE scans SET status = 'failed' WHERE id = ?").run(failed.id);
+  for (const id of [eligible.id, declined.id, withdrawn.id, flagged.id, failed.id, queuedId])
+    rewind(ctx, id, 3);
+
+  const before = ctx.mails().length;
+  await runCron(ctx);
+  const sent = sequenceMails(ctx, before);
+  assert.equal(sent.length, 1);
+  assert.deepEqual(sent[0].to, ['zgoda@example.com']);
+  assert.equal(ctx.mails().length, before + 1);
+  assert.equal(scanRow(ctx.env, eligible.id).sequence_step, 1);
+  for (const id of [declined.id, withdrawn.id, flagged.id, failed.id, queuedId])
+    assert.equal(scanRow(ctx.env, id).sequence_step, 0);
+});
+
+test('the sequence goes out on day 2, 5, 9 and 13 after confirmation, one mail per run', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx);
+  const offsets = [2, 5, 9, 13];
+  for (const [index, offset] of offsets.entries()) {
+    const sentAgo = index === 0 ? null : offsets[index] - offsets[index - 1];
+    ctx.env.SCANS.db
+      .prepare('UPDATE scans SET confirmed_at = ?, sequence_sent_at = ? WHERE id = ?')
+      .run(ago(offset * dayMs - hour), sentAgo === null ? null : ago(sentAgo * dayMs), row.id);
+    let before = ctx.mails().length;
+    await runCron(ctx);
+    assert.equal(sequenceMails(ctx, before).length, 0, `nothing before day ${offset}`);
+    assert.equal(scanRow(ctx.env, row.id).sequence_step, index);
+
+    rewind(ctx, row.id, offset, sentAgo);
+    before = ctx.mails().length;
+    await runCron(ctx);
+    const sent = sequenceMails(ctx, before);
+    assert.equal(sent.length, 1, `one mail on day ${offset}`);
+    assert.match(sent[0].subject, sequenceSubjects[index]);
+    assert.equal(scanRow(ctx.env, row.id).sequence_step, index + 1);
+    assert.ok(scanRow(ctx.env, row.id).sequence_sent_at);
+  }
+});
+
+test('a day by day simulation sends exactly four mails and none after day 14', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx);
+  const sentOn = [];
+  let lastSentDay = null;
+  for (let simulatedDay = 0; simulatedDay <= 20; simulatedDay += 1) {
+    rewind(ctx, row.id, simulatedDay, lastSentDay === null ? null : simulatedDay - lastSentDay);
+    const before = ctx.mails().length;
+    await runCron(ctx);
+    if (sequenceMails(ctx, before).length) {
+      sentOn.push(simulatedDay);
+      lastSentDay = simulatedDay;
+    }
+  }
+  assert.deepEqual(sentOn, [2, 5, 9, 13]);
+  assert.equal(scanRow(ctx.env, row.id).sequence_step, 4);
+});
+
+test('nothing is sent after day 14 and a finished sequence never grows past four', async () => {
+  const ctx = setup();
+  const late = await finishedScan(ctx);
+  const lastStep = await finishedScan(ctx);
+  const finished = await finishedScan(ctx);
+  rewind(ctx, late.id, 14.5);
+  rewind(ctx, lastStep.id, 14.5, 5);
+  ctx.env.SCANS.db.prepare('UPDATE scans SET sequence_step = 3 WHERE id = ?').run(lastStep.id);
+  rewind(ctx, finished.id, 13.5, 5);
+  ctx.env.SCANS.db.prepare('UPDATE scans SET sequence_step = 4 WHERE id = ?').run(finished.id);
+
+  const before = ctx.mails().length;
+  await runCron(ctx);
+  await runCron(ctx);
+  assert.equal(sequenceMails(ctx, before).length, 0);
+  assert.equal(scanRow(ctx.env, late.id).sequence_step, 0);
+  assert.equal(scanRow(ctx.env, lastStep.id).sequence_step, 3);
+  assert.equal(scanRow(ctx.env, finished.id).sequence_step, 4);
+});
+
+test('a repeated or parallel cron run does not send the same step twice', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx);
+  rewind(ctx, row.id, 2);
+  const before = ctx.mails().length;
+  await runCron(ctx);
+  await runCron(ctx);
+  assert.equal(sequenceMails(ctx, before).length, 1);
+
+  const other = await finishedScan(ctx);
+  rewind(ctx, other.id, 2);
+  const parallelBefore = ctx.mails().length;
+  let queue = Promise.resolve();
+  const serialized = {
+    ...ctx.env,
+    SCANS: {
+      ...ctx.env.SCANS,
+      prepare: ctx.env.SCANS.prepare,
+      batch: list => (queue = queue.then(() => ctx.env.SCANS.batch(list))),
+    },
+  };
+  await Promise.all([1, 2, 3].map(() => worker.scheduled({}, serialized)));
+  assert.equal(sequenceMails(ctx, parallelBefore).length, 1);
+  assert.equal(scanRow(ctx.env, other.id).sequence_step, 1);
+});
+
+test('a mail provider failure keeps the step and the next run retries', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx);
+  rewind(ctx, row.id, 2);
+  ctx.mode.resendOk = false;
+  const before = ctx.mails().length;
+  await runCron(ctx);
+  assert.equal(ctx.mails().length, before + 1);
+  assert.equal(scanRow(ctx.env, row.id).sequence_step, 0);
+  assert.equal(scanRow(ctx.env, row.id).sequence_sent_at, null);
+
+  ctx.mode.resendOk = true;
+  await runCron(ctx);
+  assert.equal(ctx.mails().length, before + 2);
+  assert.equal(scanRow(ctx.env, row.id).sequence_step, 1);
+  assert.ok(scanRow(ctx.env, row.id).sequence_sent_at);
+
+  await runCron(ctx);
+  assert.equal(ctx.mails().length, before + 2);
+});
+
+test('a failed retry after an earlier mail restores the previous send time', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx);
+  rewind(ctx, row.id, 2);
+  await runCron(ctx);
+  const first = scanRow(ctx.env, row.id).sequence_sent_at;
+  rewind(ctx, row.id, 5, 3);
+  const previous = ago(3 * dayMs + hour);
+  ctx.mode.resendOk = false;
+  await runCron(ctx);
+  const after = scanRow(ctx.env, row.id);
+  assert.equal(after.sequence_step, 1);
+  assert.equal(after.sequence_sent_at, previous);
+  assert.ok(first);
+});
+
+test('unsubscribing from a sequence mail stops every later mail', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx);
+  rewind(ctx, row.id, 2);
+  const before = ctx.mails().length;
+  await runCron(ctx);
+  const [mail] = sequenceMails(ctx, before);
+  const link = mail.headers['List-Unsubscribe'].slice(1, -1);
+  const response = await worker.fetch(new Request(link), ctx.env);
+  assert.equal(response.status, 200);
+  assert.equal(scanRow(ctx.env, row.id).marketing, 0);
+
+  rewind(ctx, row.id, 13, 4);
+  const after = ctx.mails().length;
+  await runCron(ctx);
+  assert.equal(sequenceMails(ctx, after).length, 0);
+  assert.equal(scanRow(ctx.env, row.id).sequence_step, 1);
+});
+
+test('every sequence mail carries the unsubscribe headers, link, sender context and no fear copy', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx, { email: 'adresat@example.com' });
+  const offsets = [2, 5, 9, 13];
+  for (const [index, offset] of offsets.entries()) {
+    rewind(ctx, row.id, offset, index === 0 ? null : offset - offsets[index - 1]);
+    const before = ctx.mails().length;
+    await runCron(ctx);
+    const [mail] = sequenceMails(ctx, before);
+    assert.ok(mail, `mail ${index + 1}`);
+    assert.deepEqual(mail.to, ['adresat@example.com']);
+    assert.equal(mail.reply_to, 'contact@adrianturbinski.pl');
+    const header = mail.headers['List-Unsubscribe'];
+    assert.match(header, /^<https:\/\/api\.adrianturbinski\.pl\/scan\/unsubscribe\?t=[\w-]+>$/);
+    assert.equal(mail.headers['List-Unsubscribe-Post'], 'List-Unsubscribe=One-Click');
+    const link = header.slice(1, -1);
+    assert.ok(mail.text.includes(link));
+    assert.ok(mail.html.includes(link));
+    assert.match(mail.text, new RegExp(`Wiadomość ${index + 1} z 4\\.`));
+    assert.match(mail.text, /Adrian Turbiński, ul\. Przejazdowa 21C lok\. 19, 51-167 Wrocław/);
+    assert.match(mail.text, /polityka-prywatnosci/);
+    assert.match(mail.html, /<table role="presentation"/);
+    assert.doesNotMatch(mail.html, /<script|<img|https?:\/\/[^"']*\.(png|jpg|gif)/);
+    assert.doesNotMatch(
+      `${mail.subject}${mail.text}`,
+      /\u2014|\u2013|\bAI\b|kar[aąęy]\b|grzywn|sankcj|pozw/i,
+    );
+  }
+});
+
+test('mail contents follow the report and stay inside the consent', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx);
+  const reportLink = `https://api.adrianturbinski.pl/r/${row.report_key}`;
+  const mailAt = async (index, offset, sentAgo) => {
+    rewind(ctx, row.id, offset, sentAgo);
+    const before = ctx.mails().length;
+    await runCron(ctx);
+    return sequenceMails(ctx, before)[0];
+  };
+  const first = await mailAt(0, 2, null);
+  assert.ok(first.text.includes(reportLink));
+  assert.match(first.text, /Potwierdzone błędy: 7, przeskanowane strony: 12\./);
+  assert.match(first.text, /Krytyczne: 1, poważne: 2, umiarkowane: 3, drobne: 1\./);
+  assert.match(first.text, /Trzy najważniejsze problemy/);
+
+  const second = await mailAt(1, 5, 3);
+  assert.ok(second.text.includes(`${reportLink}#reczne`));
+  assert.match(second.text, /klawiatur/);
+  assert.match(second.text, /czytnik ekranu/);
+  assert.match(second.text, /kontrast/);
+  assert.match(second.text, /nie rozstrzygnął: 4/);
+
+  const third = await mailAt(2, 9, 4);
+  assert.match(third.text, /26 kwietnia 2024/);
+  assert.match(third.text, /Dz\.U\. 2024 poz\. 731/);
+  assert.match(third.text, /mikroprzedsiębiorców \(art\. 4 pkt 1\)/);
+  assert.match(third.text, /nie porada prawna/);
+
+  const fourth = await mailAt(3, 13, 4);
+  assert.ok(fourth.text.includes('https://adrianturbinski.pl/#kontakt'));
+  assert.ok(fourth.text.includes('contact@adrianturbinski.pl'));
+  assert.match(fourth.text, /audyt/i);
+  assert.match(fourth.text, /ostatnia wiadomość/);
+  assert.doesNotMatch(fourth.text, /\d+\s?(zł|PLN|EUR)/i);
+});
+
+test('an expired report leaves the sequence mail with a new scan link instead', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx);
+  ctx.env.SCANS.db
+    .prepare('UPDATE scans SET report_expires = ? WHERE id = ?')
+    .run(ago(hour), row.id);
+  rewind(ctx, row.id, 2);
+  const before = ctx.mails().length;
+  await runCron(ctx);
+  const [mail] = sequenceMails(ctx, before);
+  assert.ok(!mail.text.includes(row.report_key));
+  assert.ok(mail.text.includes('https://adrianturbinski.pl/skaner/'));
+});
+
+test('sequence mail html escapes the domain and keeps the counts plain', () => {
+  const links = {
+    report: 'https://api.adrianturbinski.pl/r/abc',
+    unsubscribe: 'https://u.example/x',
+  };
+  const mail = sequenceMail(0, { domain: '<b>x</b>.pl' }, summary, links);
+  assert.doesNotMatch(mail.html, /<b>x<\/b>/);
+  assert.match(mail.html, /&lt;b&gt;x&lt;\/b&gt;\.pl/);
+  const clean = sequenceMail(0, { domain: 'ok.pl' }, { ...summary, violations: 0 }, links);
+  assert.match(clean.text, /Skan nie potwierdził błędów/);
+});
+
+test('the cron still cleans up and reports an error when the sequence columns are missing', async () => {
+  const ctx = setup();
+  const row = await finishedScan(ctx);
+  ctx.env.SCANS.db.exec('ALTER TABLE scans DROP COLUMN sequence_step');
+  ctx.env.SCANS.db
+    .prepare('UPDATE scans SET report_expires = ? WHERE id = ?')
+    .run(ago(1000), row.id);
+  const before = ctx.mails().length;
+  await assert.rejects(runCron(ctx), /sequence_step/);
+  assert.equal(ctx.mails().length, before);
+  assert.equal(scanRow(ctx.env, row.id).report_key, null);
+});
+
+const today = () => new Date().toISOString().slice(0, 10);
+const usageValue = (env, metric, at = today()) =>
+  env.SCANS.db.prepare('SELECT value FROM usage WHERE day = ? AND metric = ?').get(at, metric)
+    ?.value;
+const seedUsage = (env, metric, value, at = today()) =>
+  env.SCANS.db
+    .prepare(
+      'INSERT INTO usage (day, metric, value) VALUES (?, ?, ?) ON CONFLICT(day, metric) DO UPDATE SET value = excluded.value',
+    )
+    .run(at, metric, value);
+const seedStoredBytes = (env, bytes) =>
+  env.SCANS.db
+    .prepare(
+      "INSERT INTO scans (id, at, lang, url, domain, email, ip_hash, status, confirm_token_hash, unsubscribe_token_hash, report_key, report_bytes) VALUES ('seed-bytes', ?, 'pl', 'https://seed.example/', 'seed.example', 'seed@example.com', '', 'done', 'seed-confirm', 'seed-unsubscribe', 'seedkey', ?)",
+    )
+    .run(ago(1000), bytes);
+
+const capacityFamilies = [
+  ['kv_writes', 'kv_writes', (env, value) => seedUsage(env, 'kv_writes', value)],
+  ['kv_reads', 'kv_reads', (env, value) => seedUsage(env, 'kv_reads', value)],
+  ['kv_bytes', 'kv_bytes', (env, value) => seedStoredBytes(env, value)],
+  ['d1_rows_written', 'd1_rows_written', (env, value) => seedUsage(env, 'd1_rows_written', value)],
+  ['d1_rows_read', 'd1_rows_read', (env, value) => seedUsage(env, 'd1_rows_read', value)],
+  [
+    'd1_bytes',
+    'd1_bytes',
+    (env, value) => {
+      env.SCANS.sizeAfter = value;
+    },
+  ],
+];
+
+const gateReadSlack = { d1_rows_read: 5 };
+
+for (const [title, metric, seed] of capacityFamilies) {
+  test(`new scans are refused at 80 percent of ${title} and accepted with one scan of headroom below`, async () => {
+    const atLimit = setup();
+    seed(atLimit.env, thresholds[metric]);
+    const refused = await submit(atLimit.env, {});
+    assert.equal(refused.status, 503);
+    assert.deepEqual(await refused.json(), { ok: false, error: 'capacity' });
+    assert.equal(rows(atLimit.env, 'scans').length, metric === 'kv_bytes' ? 1 : 0);
+    assert.equal(rows(atLimit.env, 'consents').length, 0);
+    assert.equal(atLimit.mails().length, 0);
+
+    const noRoom = setup();
+    seed(noRoom.env, thresholds[metric] - scanCost[metric] + 1);
+    assert.equal((await submit(noRoom.env, {})).status, 503);
+
+    const fits = setup();
+    seed(fits.env, thresholds[metric] - scanCost[metric] - (gateReadSlack[metric] ?? 0));
+    const accepted = await submit(fits.env, {});
+    assert.equal(accepted.status, 202);
+    assert.equal(fits.mails().length, 1);
+  });
+}
+
+test('a day without counters accepts scans and yesterday counters do not block', async () => {
+  const ctx = setup();
+  const yesterday = new Date(Date.now() - 24 * hour).toISOString().slice(0, 10);
+  seedUsage(ctx.env, 'kv_writes', 1000, yesterday);
+  seedUsage(ctx.env, 'd1_rows_written', 100000, yesterday);
+  assert.equal((await submit(ctx.env, {})).status, 202);
+});
+
+test('counters are flushed once per request and accumulate over requests', async () => {
+  const ctx = setup();
+  const waiting = [];
+  const run = request => worker.fetch(request, ctx.env, { waitUntil: work => waiting.push(work) });
+  const first = await run(scanRequest());
+  assert.equal(first.status, 202);
+  assert.equal(waiting.length, 1);
+  await Promise.all(waiting);
+  const afterFirst = usageValue(ctx.env, 'd1_rows_written');
+  assert.ok(afterFirst >= 4);
+  assert.ok(usageValue(ctx.env, 'd1_rows_read') >= 0);
+  assert.equal(usageValue(ctx.env, 'd1_bytes'), 4096);
+
+  const second = await run(scanRequest());
+  assert.equal(second.status, 202);
+  await Promise.all(waiting);
+  assert.ok(usageValue(ctx.env, 'd1_rows_written') >= afterFirst + 4);
+  assert.equal(rows(ctx.env, 'usage').filter(row => row.metric === 'd1_rows_written').length, 1);
+});
+
+test('kv puts and deletes count as writes, reads are flushed in batches', async () => {
+  const ctx = setup();
+  const job = await runningJob(ctx, {});
+  const done = await worker.fetch(
+    resultRequest(job.id, { status: 'done', summary, html: '<h1>Raport</h1>' }),
+    ctx.env,
+  );
+  assert.equal(done.status, 200);
+  assert.equal(usageValue(ctx.env, 'kv_writes'), 1);
+  const { report_key: key, report_bytes: bytes } = scanRow(ctx.env, job.id);
+  assert.equal(bytes, new TextEncoder().encode('<h1>Raport</h1>').length);
+
+  for (let i = 0; i < 24; i += 1)
+    assert.equal((await worker.fetch(new Request(`${base}/r/${key}`), ctx.env)).status, 200);
+  assert.equal(usageValue(ctx.env, 'kv_reads'), undefined);
+  assert.equal((await worker.fetch(new Request(`${base}/r/${key}`), ctx.env)).status, 200);
+  assert.equal(usageValue(ctx.env, 'kv_reads'), 25);
+
+  const failing = setup();
+  const failingJob = await runningJob(failing, {});
+  failing.mode.resendOk = false;
+  const failed = await worker.fetch(
+    resultRequest(failingJob.id, { status: 'done', summary, html: '<h1>Raport</h1>' }),
+    failing.env,
+  );
+  assert.equal(failed.status, 502);
+  assert.equal(usageValue(failing.env, 'kv_writes'), 2);
+});
+
+test('stored bytes are the sum of live report sizes and not of expired ones', async () => {
+  const ctx = setup();
+  seedStoredBytes(ctx.env, thresholds.kv_bytes);
+  assert.equal((await submit(ctx.env, {})).status, 503);
+  ctx.env.SCANS.db.prepare("UPDATE scans SET report_key = NULL WHERE id = 'seed-bytes'").run();
+  assert.equal((await submit(ctx.env, {})).status, 202);
+});
+
+test('a result is refused and the scan marked failed when kv writes are at the threshold', async () => {
+  const ctx = setup();
+  const job = await runningJob(ctx, {});
+  seedUsage(ctx.env, 'kv_writes', thresholds.kv_writes - 1);
+  const before = ctx.mails().length;
+  const response = await worker.fetch(
+    resultRequest(job.id, { status: 'done', summary, html: '<h1>Raport</h1>' }),
+    ctx.env,
+  );
+  assert.equal(response.status, 422);
+  assert.deepEqual(await response.json(), { ok: false, error: 'capacity' });
+  const row = scanRow(ctx.env, job.id);
+  assert.equal(row.status, 'failed');
+  assert.equal(row.error, 'capacity');
+  assert.equal(row.report_key, null);
+  assert.equal(ctx.env.REPORTS.objects.size, 0);
+  const sent = ctx.mails().slice(before);
+  assert.equal(sent.length, 1);
+  assert.match(sent[0].subject, /^Nie udało się przeskanować/);
+  assert.match(sent[0].text, /dzienny limit/);
+  assert.equal(usageValue(ctx.env, 'kv_writes'), thresholds.kv_writes - 1);
+});
+
+test('a result is stored just below the kv write threshold and refused when it would not fit in storage', async () => {
+  const fits = setup();
+  const job = await runningJob(fits, {});
+  seedUsage(fits.env, 'kv_writes', thresholds.kv_writes - 2);
+  const stored = await worker.fetch(
+    resultRequest(job.id, { status: 'done', summary, html: '<h1>Raport</h1>' }),
+    fits.env,
+  );
+  assert.equal(stored.status, 200);
+  assert.equal(fits.env.REPORTS.objects.size, 1);
+
+  const full = setup();
+  const fullJob = await runningJob(full, {});
+  seedStoredBytes(full.env, thresholds.kv_bytes - 10);
+  const html = 'x'.repeat(11);
+  const refused = await worker.fetch(
+    resultRequest(fullJob.id, { status: 'done', summary, html }),
+    full.env,
+  );
+  assert.equal(refused.status, 422);
+  assert.equal(scanRow(full.env, fullJob.id).status, 'failed');
+  assert.equal(full.env.REPORTS.objects.size, 0);
+
+  const exact = setup();
+  const exactJob = await runningJob(exact, {});
+  seedStoredBytes(exact.env, thresholds.kv_bytes - 11);
+  const accepted = await worker.fetch(
+    resultRequest(exactJob.id, { status: 'done', summary, html }),
+    exact.env,
+  );
+  assert.equal(accepted.status, 200);
+});
+
+test('a report view past the kv read threshold shows the friendly unavailable page', async () => {
+  const ctx = setup();
+  const job = await runningJob(ctx, {});
+  await worker.fetch(
+    resultRequest(job.id, { status: 'done', summary, html: '<h1>Raport</h1>' }),
+    ctx.env,
+  );
+  const { report_key: key } = scanRow(ctx.env, job.id);
+
+  seedUsage(ctx.env, 'kv_reads', thresholds.kv_reads);
+  resetUsageState();
+  const busy = await worker.fetch(new Request(`${base}/r/${key}`), ctx.env);
+  assert.equal(busy.status, 503);
+  const page = await busy.text();
+  assert.match(page, /chwilowo niedostępny/);
+  assert.match(page, /Spróbuj jutro/);
+  assert.match(page, /<html lang="pl">/);
+  assert.equal(busy.headers.get('Cache-Control'), 'no-store');
+
+  seedUsage(ctx.env, 'kv_reads', thresholds.kv_reads - 1);
+  resetUsageState();
+  const open = await worker.fetch(new Request(`${base}/r/${key}`), ctx.env);
+  assert.equal(open.status, 200);
+  assert.equal(await open.text(), '<h1>Raport</h1>');
+});
+
+test('a malformed report key never touches kv or the usage table', async () => {
+  const ctx = setup();
+  seedUsage(ctx.env, 'kv_reads', thresholds.kv_reads);
+  const response = await worker.fetch(new Request(`${base}/r/short`), ctx.env);
+  assert.equal(response.status, 404);
+});
+
+test('the telegram alert goes out once per metric and day when 80 percent is crossed', async () => {
+  const ctx = setup();
+  mock.timers.enable({ apis: ['Date'], now: Date.now() });
+  try {
+    const id = await confirmedFirst(ctx);
+    assert.ok(id);
+    const alerts = () => ctx.telegram().filter(note => note.text.includes('limit Cloudflare'));
+    assert.equal(alerts().length, 0);
+
+    seedUsage(ctx.env, 'd1_rows_written', thresholds.d1_rows_written - 1);
+    resetUsageState();
+    await worker.fetch(authed('/scan/jobs/next'), ctx.env);
+    assert.equal(alerts().length, 1);
+    assert.match(alerts()[0].text, /d1_rows_written/);
+    assert.equal(usageValue(ctx.env, 'alert:d1_rows_written'), 1);
+
+    await worker.fetch(authed('/scan/jobs/next'), ctx.env);
+    resetUsageState();
+    await worker.fetch(authed('/scan/jobs/next'), ctx.env);
+    assert.equal(alerts().length, 1);
+
+    mock.timers.setTime(Date.now() + 24 * hour);
+    resetUsageState();
+    seedUsage(ctx.env, 'd1_rows_written', thresholds.d1_rows_written - 1);
+    await submit(ctx.env, {});
+    await worker.fetch(authed('/scan/jobs/next'), ctx.env);
+    assert.equal(alerts().length, 2);
+  } finally {
+    mock.timers.reset();
+  }
+});
+
+async function confirmedFirst(ctx) {
+  const response = await submit(ctx.env, {});
+  assert.equal(response.status, 202);
+  const confirm = await confirmPost(ctx.env, tokenIn(ctx.mails().at(-1).text));
+  assert.equal(confirm.status, 200);
+  return rows(ctx.env, 'scans').at(-1).id;
+}
+
+test('the stored size alert fires for a database near its storage limit', async () => {
+  const ctx = setup();
+  ctx.env.SCANS.sizeAfter = thresholds.d1_bytes;
+  await submit(ctx.env, {});
+  const alerts = ctx.telegram().filter(note => note.text.includes('d1_bytes'));
+  assert.equal(alerts.length, 1);
+  assert.equal(usageValue(ctx.env, 'd1_bytes'), thresholds.d1_bytes);
+  const refused = await submit(ctx.env, {});
+  assert.equal(refused.status, 503);
+  assert.equal(ctx.telegram().filter(note => note.text.includes('d1_bytes')).length, 1);
+});
+
+test('the cron deletes usage rows older than 40 days and keeps newer ones', async () => {
+  const ctx = setup();
+  const dayOf = days => new Date(Date.now() - days * 24 * hour).toISOString().slice(0, 10);
+  seedUsage(ctx.env, 'kv_writes', 1, dayOf(41));
+  seedUsage(ctx.env, 'alert:kv_writes', 1, dayOf(41));
+  seedUsage(ctx.env, 'kv_writes', 2, dayOf(39));
+  seedUsage(ctx.env, 'kv_writes', 3, dayOf(0));
+  await worker.scheduled({}, ctx.env);
+  const days = rows(ctx.env, 'usage').map(row => row.day);
+  assert.ok(!days.includes(dayOf(41)));
+  assert.ok(days.includes(dayOf(39)));
+  assert.equal(usageValue(ctx.env, 'kv_writes', dayOf(0)), 3);
+});
+
+test('the cron stops deleting expired reports from kv at the write threshold', async () => {
+  const ctx = setup();
+  const finished = await finishedScan(ctx);
+  ctx.env.SCANS.db
+    .prepare('UPDATE scans SET report_expires = ? WHERE id = ?')
+    .run(ago(1000), finished.id);
+  seedUsage(ctx.env, 'kv_writes', thresholds.kv_writes);
+  await worker.scheduled({}, ctx.env);
+  assert.equal(ctx.env.REPORTS.objects.has(`reports/${finished.report_key}.html`), true);
+  assert.equal(scanRow(ctx.env, finished.id).report_key, finished.report_key);
+
+  seedUsage(ctx.env, 'kv_writes', 0);
+  resetUsageState();
+  await worker.scheduled({}, ctx.env);
+  assert.equal(ctx.env.REPORTS.objects.has(`reports/${finished.report_key}.html`), false);
+  assert.equal(scanRow(ctx.env, finished.id).report_key, null);
+});
+
+test('a database error while reading usage fails closed for new scans', async () => {
+  const ctx = setup();
+  const broken = {
+    ...ctx.env,
+    SCANS: {
+      ...ctx.env.SCANS,
+      prepare: sql => {
+        if (/FROM usage/.test(sql)) throw new Error('down');
+        return ctx.env.SCANS.prepare(sql);
+      },
+    },
+  };
+  const response = await submit(broken, {});
+  assert.equal(response.status, 500);
+  assert.equal(rows(ctx.env, 'scans').length, 0);
 });

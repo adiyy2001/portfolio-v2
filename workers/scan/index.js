@@ -1,10 +1,20 @@
 import consent from './consent.js';
 import {
+  createMeter,
+  maxReportBytes,
+  reportStoreCost,
+  scanCost,
+  snapshotMaxAgeMs,
+  utcDay,
+} from './usage.js';
+import {
   confirmAskPage,
   confirmMail,
   failureMail,
   reportMail,
   replyTo,
+  sequenceLength,
+  sequenceMail,
   site,
   statusPage,
 } from './views.js';
@@ -23,9 +33,14 @@ const day = 24 * hour;
 const confirmTtl = 24 * hour;
 const runningTtl = 15 * 60 * 1000;
 const reportTtl = 30 * day;
+const reportStoreGraceSeconds = 7 * 24 * 60 * 60;
 const pendingRetention = day;
+const usageRetentionDays = 40;
 const retentionYears = 3;
 const sequenceDays = 14;
+const sequenceOffsets = [2, 5, 9, 13];
+const sequenceMinGap = 2 * day;
+const sequenceBatch = 25;
 
 const limits = { url: 2048, email: 254, page: 200, error: 500, summaryText: 60 };
 const perDay = { domain: 1, ip: 3, email: 3 };
@@ -329,7 +344,7 @@ async function notifyTelegram(env, lines) {
 
 const invalidLink = status => statusPage('confirmInvalid', status);
 
-async function handleScan(request, env, origin) {
+async function handleScan(request, env, origin, meter) {
   if (origin && !origins.has(origin)) return json({ ok: false, error: 'origin' }, 403, origin);
   const configured = env.RESEND_API_KEY && env.TURNSTILE_SECRET && env.IP_SALT;
   if (!env.SCANS || (!configured && env.SCAN_DEV !== '1'))
@@ -360,6 +375,12 @@ async function handleScan(request, env, origin) {
   const ip = request.headers.get('CF-Connecting-IP') || '';
   if (!(await verifyTurnstile(env, fields.turnstile, ip)))
     return json({ ok: false, error: 'turnstile' }, 403, origin);
+
+  try {
+    if (await meter.blocked(scanCost)) return json({ ok: false, error: 'capacity' }, 503, origin);
+  } catch {
+    return json({ ok: false, error: 'storage' }, 500, origin);
+  }
 
   const ipHash = ip ? await sha256(`${env.IP_SALT || ''}${ipKey(ip)}`) : '';
   const since = ago(day);
@@ -527,9 +548,12 @@ async function handleUnsubscribe(request, url, env) {
   return statusPage('unsubscribed');
 }
 
-async function finishFailed(env, row) {
+const capacityReason =
+  'Skaner osiągnął dzienny limit zasobów i nie mógł zapisać raportu. Możesz spróbować jutro.';
+
+async function finishFailed(env, row, reason) {
   const host = displayHost(row);
-  await sendMail(env, { to: [row.email], ...failureMail({ ...row, domain: host }) });
+  await sendMail(env, { to: [row.email], ...failureMail({ ...row, domain: host, reason }) });
   await notifyTelegram(env, [
     `Skaner: ${host}`,
     'Status: failed',
@@ -574,7 +598,7 @@ function cleanSummary(raw) {
   return summary;
 }
 
-async function receiveResult(request, env, id) {
+async function receiveResult(request, env, id, meter) {
   if (!(await authorized(request, env))) return new Response('Unauthorized', { status: 401 });
   if (!env.SCANS) return new Response('Not configured', { status: 503 });
   if (!jobIdPattern.test(id)) return plainJson({ ok: false, error: 'id' }, 404);
@@ -610,14 +634,30 @@ async function receiveResult(request, env, id) {
   if (!html) return plainJson({ ok: false, error: 'html' }, 422);
   if (html.length > maxHtmlChars) return plainJson({ ok: false, error: 'size' }, 413);
   if (!env.REPORTS) return plainJson({ ok: false, error: 'storage' }, 503);
+  const htmlBytes = new TextEncoder().encode(html).length;
+  if (htmlBytes > maxReportBytes) return plainJson({ ok: false, error: 'size' }, 413);
+
+  let full;
+  try {
+    full = await meter.blocked({ ...reportStoreCost, kv_bytes: htmlBytes });
+  } catch {
+    return plainJson({ ok: false, error: 'storage' }, 503);
+  }
+  if (full) {
+    await env.SCANS.prepare("UPDATE scans SET status = 'failed', error = 'capacity' WHERE id = ?")
+      .bind(id)
+      .run();
+    await finishFailed(env, row, capacityReason);
+    return plainJson({ ok: false, error: 'capacity' }, 422);
+  }
 
   const summary = cleanSummary(body.summary);
   const reportKey = randomToken(24);
   const objectKey = `reports/${reportKey}.html`;
   const expires = fromNow(reportTtl);
   await env.REPORTS.put(objectKey, html, {
-    httpMetadata: { contentType: 'text/html; charset=utf-8' },
-    customMetadata: { expires },
+    metadata: { expires },
+    expirationTtl: Math.ceil(reportTtl / 1000) + reportStoreGraceSeconds,
   });
 
   const host = displayHost(row);
@@ -632,19 +672,16 @@ async function receiveResult(request, env, id) {
   const mailed = await sendMail(env, {
     to: [row.email],
     ...message,
-    headers: {
-      'List-Unsubscribe': `<${unsubscribeLink}>`,
-      'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
-    },
+    headers: unsubscribeHeaders(unsubscribeLink),
   });
   if (!mailed) {
     await env.REPORTS.delete(objectKey).catch(() => {});
     return plainJson({ ok: false, error: 'mail' }, 502);
   }
   await env.SCANS.prepare(
-    "UPDATE scans SET status = 'done', report_key = ?, report_expires = ?, summary_json = ?, error = NULL WHERE id = ?",
+    "UPDATE scans SET status = 'done', report_key = ?, report_expires = ?, summary_json = ?, error = NULL, report_bytes = ? WHERE id = ?",
   )
-    .bind(reportKey, expires, JSON.stringify(summary), id)
+    .bind(reportKey, expires, JSON.stringify(summary), htmlBytes, id)
     .run();
   await notifyTelegram(env, [
     `Skaner: ${host}`,
@@ -655,21 +692,32 @@ async function receiveResult(request, env, id) {
   return plainJson({ ok: true, mailed: true });
 }
 
-async function serveReport(env, key) {
+async function serveReport(env, key, meter) {
   if (!env.REPORTS || !reportKeyPattern.test(key)) return statusPage('reportUnknown', 404);
+  try {
+    if (await meter.blocked({ kv_reads: 1 }, { maxAgeMs: snapshotMaxAgeMs }))
+      return statusPage('reportBusy', 503);
+  } catch {
+    return statusPage('reportBusy', 503);
+  }
   const objectKey = `reports/${key}.html`;
-  const object = await env.REPORTS.get(objectKey);
-  if (!object) return statusPage('reportUnknown', 404);
-  const expires = Date.parse(object.customMetadata?.expires || '');
+  const { value: html, metadata } = await env.REPORTS.getWithMetadata(objectKey);
+  if (html === null) return statusPage('reportUnknown', 404);
+  const expires = Date.parse(metadata?.expires || '');
   if (Number.isFinite(expires) && expires < Date.now()) {
-    await env.REPORTS.delete(objectKey).catch(() => {});
-    await env.SCANS?.prepare('UPDATE scans SET report_key = NULL WHERE report_key = ?')
-      .bind(key)
-      .run()
-      .catch(() => {});
+    const roomToDelete = !(await meter
+      .blocked({ kv_writes: 1 }, { maxAgeMs: snapshotMaxAgeMs })
+      .catch(() => 'unknown'));
+    if (roomToDelete) {
+      await env.REPORTS.delete(objectKey).catch(() => {});
+      await env.SCANS?.prepare('UPDATE scans SET report_key = NULL WHERE report_key = ?')
+        .bind(key)
+        .run()
+        .catch(() => {});
+    }
     return statusPage('reportExpired', 410);
   }
-  return new Response(object.body, {
+  return new Response(html, {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
       'X-Robots-Tag': 'noindex',
@@ -682,7 +730,7 @@ async function serveReport(env, key) {
   });
 }
 
-async function cleanup(env) {
+async function cleanup(env, meter) {
   if (!env.SCANS) return;
   const now = new Date().toISOString();
   if (env.REPORTS) {
@@ -692,6 +740,7 @@ async function cleanup(env) {
       .bind(now)
       .all();
     for (const row of results) {
+      if (await meter.blocked({ kv_writes: 1 }, { maxAgeMs: snapshotMaxAgeMs })) break;
       await env.REPORTS.delete(`reports/${row.report_key}.html`);
       await env.SCANS.prepare('UPDATE scans SET report_key = NULL WHERE id = ?').bind(row.id).run();
     }
@@ -717,36 +766,134 @@ async function cleanup(env) {
       `DELETE FROM consents WHERE scan_id IN (SELECT scans.id FROM scans WHERE ${expiredScans})`,
     ).bind(lastYear, lastYear, lastYear),
     env.SCANS.prepare(`DELETE FROM scans WHERE ${expiredScans}`).bind(lastYear, lastYear, lastYear),
+    env.SCANS.prepare('DELETE FROM usage WHERE day < ?').bind(
+      utcDay(Date.now() - usageRetentionDays * day),
+    ),
   ]);
 }
 
-export default {
-  async fetch(request, env) {
-    const url = new URL(request.url);
-    const path = url.pathname;
-    const method = request.method;
-    const origin = request.headers.get('Origin') || '';
+function parseSummary(raw) {
+  try {
+    return cleanSummary(JSON.parse(raw));
+  } catch {
+    return cleanSummary(null);
+  }
+}
 
-    if (path === '/scan') {
-      if (method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
-      if (method !== 'POST') return new Response('Method not allowed', { status: 405 });
-      return handleScan(request, env, origin);
+function unsubscribeHeaders(link) {
+  return {
+    'List-Unsubscribe': `<${link}>`,
+    'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+  };
+}
+
+async function sendSequenceMail(env, row, step, now) {
+  const claimed = await env.SCANS.prepare(
+    "UPDATE scans SET sequence_step = ?, sequence_sent_at = ? WHERE id = ? AND sequence_step = ? AND status = 'done' AND marketing = 1 AND unsubscribed_at IS NULL",
+  )
+    .bind(step + 1, now, row.id, step)
+    .run();
+  if (!claimed.meta?.changes) return;
+
+  let delivered = false;
+  try {
+    const unsubscribe = `${api}/scan/unsubscribe?t=${await unsubscribeToken(env, row.id)}`;
+    const live = row.report_key && Date.parse(row.report_expires || '') > Date.now();
+    const message = sequenceMail(
+      step,
+      { domain: displayHost(row) },
+      parseSummary(row.summary_json),
+      { report: live ? `${api}/r/${row.report_key}` : '', unsubscribe },
+    );
+    delivered = await sendMail(env, {
+      to: [row.email],
+      ...message,
+      headers: unsubscribeHeaders(unsubscribe),
+    });
+  } finally {
+    if (!delivered)
+      await env.SCANS.prepare(
+        'UPDATE scans SET sequence_step = ?, sequence_sent_at = ? WHERE id = ? AND sequence_step = ? AND sequence_sent_at = ?',
+      )
+        .bind(step, row.sequence_sent_at, row.id, step + 1, now)
+        .run();
+  }
+}
+
+async function runSequence(env) {
+  if (!env.SCANS) return;
+  const due = sequenceOffsets
+    .map((_, step) => `(sequence_step = ${step} AND confirmed_at <= ?)`)
+    .join(' OR ');
+  const { results } = await env.SCANS.prepare(
+    `SELECT id, url, domain, email, confirmed_at, report_key, report_expires, summary_json, sequence_step, sequence_sent_at
+    FROM scans
+    WHERE marketing = 1 AND status = 'done' AND unsubscribed_at IS NULL
+      AND sequence_step < ${sequenceLength}
+      AND confirmed_at > ?
+      AND (sequence_sent_at IS NULL OR sequence_sent_at <= ?)
+      AND (${due})
+    ORDER BY confirmed_at
+    LIMIT ${sequenceBatch}`,
+  )
+    .bind(
+      ago(sequenceDays * day),
+      ago(sequenceMinGap),
+      ...sequenceOffsets.map(offset => ago(offset * day)),
+    )
+    .all();
+  for (const row of results) {
+    await sendSequenceMail(env, row, row.sequence_step, new Date().toISOString());
+  }
+}
+
+async function dailyJobs(env, meter) {
+  const outcomes = await Promise.allSettled([cleanup(env, meter), runSequence(env)]);
+  const failed = outcomes.find(outcome => outcome.status === 'rejected');
+  if (failed) throw failed.reason;
+}
+
+async function route(request, env, meter) {
+  const url = new URL(request.url);
+  const path = url.pathname;
+  const method = request.method;
+  const origin = request.headers.get('Origin') || '';
+
+  if (path === '/scan') {
+    if (method === 'OPTIONS') return new Response(null, { status: 204, headers: cors(origin) });
+    if (method !== 'POST') return new Response('Method not allowed', { status: 405 });
+    return handleScan(request, env, origin, meter);
+  }
+  if (path === '/scan/confirm' && (method === 'GET' || method === 'POST'))
+    return handleConfirm(request, url, env);
+  if (path === '/scan/unsubscribe' && (method === 'GET' || method === 'POST'))
+    return handleUnsubscribe(request, url, env);
+  if (path === '/scan/jobs/next' && method === 'GET') return nextJob(request, env);
+  const result = path.match(/^\/scan\/jobs\/([^/]+)\/result$/);
+  if (result && method === 'POST') return receiveResult(request, env, result[1], meter);
+  const report = path.match(/^\/r\/([^/]+)$/);
+  if (report && method === 'GET') return serveReport(env, report[1], meter);
+  return new Response('Not found', { status: 404 });
+}
+
+async function settle(ctx, work) {
+  if (ctx?.waitUntil) ctx.waitUntil(work);
+  else await work;
+}
+
+export default {
+  async fetch(request, env, ctx) {
+    const meter = createMeter(env, lines => notifyTelegram(env, lines));
+    try {
+      return await route(request, meter.env, meter);
+    } finally {
+      await settle(ctx, meter.flush());
     }
-    if (path === '/scan/confirm' && (method === 'GET' || method === 'POST'))
-      return handleConfirm(request, url, env);
-    if (path === '/scan/unsubscribe' && (method === 'GET' || method === 'POST'))
-      return handleUnsubscribe(request, url, env);
-    if (path === '/scan/jobs/next' && method === 'GET') return nextJob(request, env);
-    const result = path.match(/^\/scan\/jobs\/([^/]+)\/result$/);
-    if (result && method === 'POST') return receiveResult(request, env, result[1]);
-    const report = path.match(/^\/r\/([^/]+)$/);
-    if (report && method === 'GET') return serveReport(env, report[1]);
-    return new Response('Not found', { status: 404 });
   },
 
   async scheduled(event, env, ctx) {
-    const work = cleanup(env);
-    if (ctx?.waitUntil) ctx.waitUntil(work);
-    else await work;
+    const meter = createMeter(env, lines => notifyTelegram(env, lines));
+    const work = dailyJobs(meter.env, meter).finally(() => meter.flush());
+    await settle(ctx, work);
   },
 };

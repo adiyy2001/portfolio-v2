@@ -38,6 +38,7 @@ const copy = {
       'Na ten adres e-mail zlecono dziś już maksymalną liczbę skanów. Spróbuj jutro albo użyj innego adresu.',
     other: 'Wysłano zbyt wiele zgłoszeń. Spróbuj ponownie jutro.',
   },
+  capacity: 'Skaner jest chwilowo niedostępny, bo osiągnął dzienny limit. Spróbuj jutro.',
   failed: 'Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę albo napisz na',
 };
 
@@ -86,6 +87,7 @@ function loadTurnstile() {
 
 function Failure({ outcome }) {
   if (outcome.kind === 'version') return <>{copy.version}</>;
+  if (outcome.kind === 'capacity') return <>{copy.capacity}</>;
   if (outcome.kind === 'rate') return <>{copy.rate[outcome.reason] ?? copy.rate.other}</>;
   return (
     <>
@@ -227,6 +229,11 @@ export default function ScanForm() {
     if (response?.status === 429) {
       setOutcome({ kind: 'rate', reason: body.reason });
       track('form_error', { reason: `rate_${body.reason ?? 'other'}`, form: 'scan', page: page() });
+      return;
+    }
+    if (response?.status === 503 && body.error === 'capacity') {
+      setOutcome({ kind: 'capacity' });
+      track('form_error', { reason: 'capacity', form: 'scan', page: page() });
       return;
     }
     if (response?.status === 422 && ['url', 'email', 'terms'].includes(body.error)) {

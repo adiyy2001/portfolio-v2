@@ -14,8 +14,9 @@ export default function Privacy() {
       <section className="prose" aria-label="Polityka prywatności">
         <h2>Kto odpowiada</h2>
         <p>
-          Adrian Turbiński, jednoosobowa działalność gospodarcza Adrian Turbiński Software, Wrocław.
-          Kontakt: contact@adrianturbinski.pl.
+          Adrian Turbiński, jednoosobowa działalność gospodarcza pod firmą Adrian Turbiński, ul.
+          Przejazdowa 21C lok. 19, 51-167 Wrocław, NIP 8952236530, REGON 520691289. Kontakt:
+          contact@adrianturbinski.pl.
         </p>
         <h2>Ta strona</h2>
         <p>
@@ -42,8 +43,8 @@ export default function Privacy() {
         <p>
           Bezpłatny skaner dostępności pod adresem /skaner/ to usługa świadczona drogą elektroniczną
           na zasadach opisanych w <a href="/regulamin-skanera/">regulaminie skanera</a>.
-          Administratorem danych jestem ja, Adrian Turbiński (Adrian Turbiński Software, Wrocław,
-          contact@adrianturbinski.pl).
+          Administratorem danych jestem ja, Adrian Turbiński (ul. Przejazdowa 21C lok. 19, 51-167
+          Wrocław, contact@adrianturbinski.pl).
         </p>
         <h3>Jakie dane zbieram</h3>
         <ul>
@@ -88,8 +89,8 @@ export default function Privacy() {
         </ul>
         <h3>Kto dostaje dane</h3>
         <p>
-          Formularz, baza i raport działają na Cloudflare Workers, D1 i R2 od Cloudflare, Inc.
-          (USA). Maile wysyła Resend, usługa Plus Five Five, Inc. (USA). Sam skan wykonuje mój
+          Formularz, baza i raport działają na Cloudflare Workers, D1 i Workers KV od Cloudflare,
+          Inc. (USA). Maile wysyła Resend, usługa Plus Five Five, Inc. (USA). Sam skan wykonuje mój
           serwer w Polsce. Powiadomienie o nowym skanie trafia do mojego czatu w Telegramie i
           zawiera tylko domenę skanowanej strony, liczbę wykrytych błędów i informację, czy
           wyraziłeś zgodę marketingową; nie zawiera Twojego e-maila ani IP.

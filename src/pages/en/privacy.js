@@ -14,8 +14,8 @@ export default function Privacy() {
       <section className="prose" aria-label="Privacy policy">
         <h2>Who is responsible</h2>
         <p>
-          Adrian Turbiński, a sole proprietor trading as Adrian Turbiński Software, Wrocław, Poland.
-          Contact: contact@adrianturbinski.pl.
+          Adrian Turbiński, a sole proprietor registered in CEIDG, ul. Przejazdowa 21C lok. 19,
+          51-167 Wrocław, Poland, tax ID (NIP) 8952236530. Contact: contact@adrianturbinski.pl.
         </p>
         <h2>This website</h2>
         <p>
@@ -41,7 +41,7 @@ export default function Privacy() {
         <h2 id="scanner">Accessibility scanner</h2>
         <p>
           The free accessibility scanner at /skaner/ is a service governed by its Polish terms at
-          /regulamin-skanera/. I, Adrian Turbiński (Adrian Turbiński Software, Wrocław,
+          /regulamin-skanera/. I, Adrian Turbiński (ul. Przejazdowa 21C lok. 19, 51-167 Wrocław,
           contact@adrianturbinski.pl), am the controller.
         </p>
         <p>
@@ -63,8 +63,8 @@ export default function Privacy() {
           6(1)(f) GDPR).
         </p>
         <p>
-          Recipients: Cloudflare, Inc. (Workers, D1, R2) and Resend, run by Plus Five Five, Inc.,
-          both in the United States and certified under the EU-US Data Privacy Framework, so
+          Recipients: Cloudflare, Inc. (Workers, D1, Workers KV) and Resend, run by Plus Five Five,
+          Inc., both in the United States and certified under the EU-US Data Privacy Framework, so
           transfers rely on the European Commission adequacy decision (Art. 45 GDPR). The scan
           itself runs on my server in Poland. The Telegram notification carries only the scanned
           domain, the number of issues and whether you consented to marketing, never your email or
@@ -155,6 +155,6 @@ export const Head = () => (
     lang="en"
     path="/en/privacy/"
     title="Privacy policy, Adrian Turbiński"
-    description="What this website, the accessibility scanner and the publishing tools of Adrian Turbiński Software do with data."
+    description="What this website, the accessibility scanner and the publishing tools of Adrian Turbiński do with data."
   />
 );

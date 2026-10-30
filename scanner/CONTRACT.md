@@ -16,6 +16,7 @@ GET /scan/jobs/next -> 200 { id, url, lang } or 204
 POST /scan/jobs/<id>/result -> body { status: "done" | "failed", error?, summary, html }
 summary = { pages, violations, critical, serious, moderate, minor, incomplete, engine }
 
-Worker stores html in R2 under reports/<reportKey>.html, serves it at GET /r/<reportKey>
+Worker stores html in Workers KV under reports/<reportKey>.html, serves it at GET /r/<reportKey>
 (noindex, 30 days), mails the link and notifies Telegram.
 The result is stored as done only after the report mail was accepted; a mail failure answers 502 and the job stays running, so the scanner can post the result again.
+When the daily Cloudflare usage guard (80 percent of the free limits) blocks storing the report, the result answers 422 { ok: false, error: "capacity" }, the scan is marked failed with error "capacity" and the user gets the failure mail. POST /scan answers 503 { ok: false, error: "capacity" } under the same guard.

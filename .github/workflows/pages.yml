@@ -22,6 +22,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     env:
       GATSBY_TELEMETRY_DISABLED: 1
+      GATSBY_TURNSTILE_SITEKEY: 0x4AAAAAAFso8R48jtY5x9o_
       HUSKY: 0
     steps:
       - uses: actions/checkout@v7

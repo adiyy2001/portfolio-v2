@@ -17,7 +17,7 @@ const ease = 'cubic-bezier(0.2,0.8,0.2,1)';
 const pinkBottom = 'conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg)';
 
 const controllerLine =
-  'Administrator danych: Adrian Turbiński, Adrian Turbiński Software, Wrocław, contact@adrianturbinski.pl.';
+  'Administrator danych: Adrian Turbiński, ul. Przejazdowa 21C lok. 19, 51-167 Wrocław, contact@adrianturbinski.pl.';
 
 const pageStyles = `
 *{box-sizing:border-box}
@@ -100,6 +100,13 @@ const pageTexts = {
     seam: 'cut',
     lead: 'Link do raportu jest ważny 30 dni. Wypełnij formularz skanera jeszcze raz.',
     actions: 'form',
+  },
+  reportBusy: {
+    title: 'Raport jest chwilowo niedostępny.',
+    seam: 'cut',
+    lead: 'Skaner osiągnął dzienny limit odczytów. Spróbuj jutro.',
+    more: 'Raport nie przepadł, link jest ważny 30 dni od skanu.',
+    actions: 'back',
   },
   reportUnknown: {
     title: 'Nie ma takiego raportu.',
@@ -276,6 +283,7 @@ export function reportMail(row, summary, link, expires, unsubscribeLink) {
 export function failureMail(row) {
   const subject = `Nie udało się przeskanować: ${row.domain}`;
   const reason =
+    row.reason ??
     'Strona mogła być chwilowo niedostępna, blokować automatyczne odwiedziny albo odpowiadać zbyt wolno.';
   const text = [
     `Nie udało się przeskanować strony ${row.domain}.`,
@@ -296,4 +304,171 @@ export function failureMail(row) {
     ].join(''),
   });
   return { subject, text, html };
+}
+
+export const sequenceLength = 4;
+const contactUrl = `${site}/#kontakt`;
+
+const severityLine = summary =>
+  `Krytyczne: ${summary.critical}, poważne: ${summary.serious}, umiarkowane: ${summary.moderate}, drobne: ${summary.minor}.`;
+
+const countsLine = summary =>
+  `Potwierdzone błędy: ${summary.violations}, przeskanowane strony: ${summary.pages}.`;
+
+const sequenceSteps = [
+  ({ host, summary, reportLink }) => ({
+    subject: `Jak przeczytać raport dla ${host}`,
+    preheader: 'Od czego zacząć poprawki.',
+    title: 'Od czego zacząć poprawki.',
+    seam: 'closed',
+    blocks: [
+      ['p', `Raport dla ${host} czeka w linku poniżej. ${countsLine(summary)}`],
+      summary.violations > 0
+        ? [
+            'p',
+            'Zacznij od sekcji „Trzy najważniejsze problemy”. Przy każdym jest opis i przykład poprawki, a pełna lista według kryteriów WCAG jest niżej.',
+          ]
+        : [
+            'p',
+            'Skan nie potwierdził błędów, ale automat widzi tylko część barier, więc strona nadal może je mieć. O reszcie piszę w następnej wiadomości.',
+          ],
+      ...(summary.violations > 0
+        ? [
+            ['p', severityLine(summary)],
+            [
+              'p',
+              'Weź pierwszy problem z listy, popraw go w kodzie albo w panelu strony i sprawdź efekt. Często wystarczy mała zmiana, na przykład etykieta pola formularza, tekst alternatywny obrazka albo ciemniejszy tekst.',
+            ],
+          ]
+        : []),
+    ],
+    button: reportLink
+      ? { href: reportLink, label: 'Otwórz raport' }
+      : { href: formUrl, label: 'Zleć nowy skan' },
+  }),
+  ({ host, summary, reportLink }) => ({
+    subject: `Czego automatyczny skan nie widzi na ${host}`,
+    preheader: 'Część barier da się znaleźć tylko ręcznie.',
+    title: 'Czego automat nie widzi.',
+    seam: 'cut',
+    blocks: [
+      [
+        'p',
+        `Skan strony ${host} sprawdził to, co da się zmierzyć maszynowo, a to zwykle tylko część problemów z dostępnością.`,
+      ],
+      ['p', 'Resztę trzeba sprawdzić ręcznie, na przykład:'],
+      [
+        'list',
+        [
+          'klawiaturę: czy cały proces, na przykład zamówienie, da się przejść samym klawiszem Tab i czy widać, gdzie jest fokus;',
+          'czytnik ekranu: czy kolejność i komunikaty mają sens, gdy strony nie widać;',
+          'kontrast w stanach: po najechaniu, po zaznaczeniu i w komunikatach błędów;',
+          'teksty alternatywne: czy opisują to, co faktycznie jest na obrazku;',
+          'wideo i pliki PDF: napisy, opis dla osób niewidomych i dostępność dokumentów.',
+        ],
+      ],
+      ...(summary.incomplete > 0
+        ? [
+            [
+              'p',
+              `Elementy, których automat nie rozstrzygnął: ${summary.incomplete}. Zacznij od sekcji „Do sprawdzenia ręcznie” w raporcie.`,
+            ],
+          ]
+        : [['p', 'Zacznij od sekcji „Do sprawdzenia ręcznie” w raporcie.']]),
+      ['p', 'Na dziś jeden test: odłóż mysz i przejdź swoją stronę samym klawiszem Tab.'],
+    ],
+    button: reportLink
+      ? { href: `${reportLink}#reczne`, label: 'Do sprawdzenia ręcznie' }
+      : { href: formUrl, label: 'Zleć nowy skan' },
+  }),
+  ({ reportLink }) => ({
+    subject: 'Kogo dotyczy ustawa o dostępności',
+    preheader: 'I kogo nie dotyczy.',
+    title: 'Kogo dotyczy ustawa.',
+    seam: 'closed',
+    blocks: [
+      [
+        'p',
+        'Ustawa z 26 kwietnia 2024 r. o zapewnianiu spełniania wymagań dostępności niektórych produktów i usług przez podmioty gospodarcze (Dz.U. 2024 poz. 731) wdraża Europejski akt o dostępności.',
+      ],
+      [
+        'p',
+        'Od 28 czerwca 2025 r. obejmuje wybrane usługi dla konsumentów, między innymi sklepy internetowe. Nie dotyczy usług świadczonych przez mikroprzedsiębiorców (art. 4 pkt 1).',
+      ],
+      [
+        'p',
+        'Czy obejmuje Twoją firmę, zależy od rodzaju usługi i wielkości firmy. Nawet jeśli ustawa Cię nie obowiązuje, z dostępnej strony skorzysta więcej osób, także te z niepełnosprawnościami.',
+      ],
+      ['note', 'To ogólna informacja, nie porada prawna.'],
+    ],
+    button: reportLink
+      ? { href: `${reportLink}#prawo`, label: 'Kontekst prawny w raporcie' }
+      : { href: formUrl, label: 'Zleć nowy skan' },
+  }),
+  ({ host, summary }) => ({
+    subject: `Ręczny audyt dostępności dla ${host}`,
+    preheader: 'Ostatnia wiadomość z tej serii.',
+    title: 'Co dalej ze stroną.',
+    seam: 'closed',
+    blocks: [
+      [
+        'p',
+        `Skan strony ${host} potwierdził błędy: ${summary.violations}. Całą stronę ocenisz jednak dopiero po audycie, w którym specjalista testuje ją ręcznie.`,
+      ],
+      [
+        'p',
+        'Robię takie audyty: przechodzę stronę klawiaturą i czytnikiem ekranu, sprawdzam kontrast w stanach interfejsu i opisuję, co poprawić. Mogę też wdrożyć poprawki WCAG.',
+      ],
+      [
+        'p',
+        `Audyt jest płatny. Jeśli chcesz porozmawiać, odpowiedz na tę wiadomość albo napisz na ${replyTo}.`,
+      ],
+      ['p', 'To ostatnia wiadomość z tej serii, kolejnych nie wyślę.'],
+      ['p', 'Adrian Turbiński'],
+    ],
+    button: { href: contactUrl, label: 'Umów rozmowę' },
+  }),
+];
+
+const blockHtml = (block, host) => {
+  const rich = text => escapeHtml(text).replaceAll(escapeHtml(host), domainHtml(host));
+  const [kind, value] = block;
+  if (kind === 'list')
+    return `<ul class="ink" style="margin:0 0 14px;padding:0 0 0 20px;font:400 16px/1.55 ${sans};color:#14181f">${value.map(item => `<li style="margin:0 0 6px">${rich(item)}</li>`).join('')}</ul>`;
+  if (kind === 'note') return paragraph(rich(value), 'soft', '#2f3743', 14);
+  return paragraph(rich(value));
+};
+
+const blockText = block =>
+  block[0] === 'list' ? block[1].map(item => `- ${item}`).join('\n') : block[1];
+
+export function sequenceMail(step, row, summary, links) {
+  const host = row.domain;
+  const reportLink = links.report || '';
+  const content = sequenceSteps[step]({ host, summary, reportLink });
+  const position = `Wiadomość ${step + 1} z ${sequenceLength}.`;
+  const reason =
+    'Dostajesz ją, bo przy zleceniu skanu zaznaczono zgodę na informacje handlowe. Zgodę możesz wycofać w każdej chwili.';
+  const text = [
+    ...content.blocks.flatMap(block => [blockText(block), '']),
+    `${content.button.label}: ${content.button.href}`,
+    '',
+    `${position} ${reason}`,
+    '',
+    footerText(links.unsubscribe),
+  ].join('\n');
+  const html = mailPage({
+    subject: content.subject,
+    preheader: content.preheader,
+    title: content.title,
+    seam: content.seam,
+    unsubscribeLink: links.unsubscribe,
+    body: [
+      ...content.blocks.map(block => blockHtml(block, host)),
+      buttonMail(content.button.href, content.button.label),
+      linkFallback(content.button.href),
+      paragraph(`${position} ${reason}`, 'soft', '#2f3743', 14),
+    ].join(''),
+  });
+  return { subject: content.subject, text, html };
 }
