@@ -413,7 +413,9 @@ const sequenceSteps = [
     blocks: [
       [
         'p',
-        `Skan strony ${host} potwierdził błędy: ${summary.violations}. Całą stronę ocenisz jednak dopiero po audycie, w którym specjalista testuje ją ręcznie.`,
+        summary.violations > 0
+          ? `Skan strony ${host} potwierdził błędy: ${summary.violations}. Całą stronę ocenisz jednak dopiero po audycie, w którym specjalista testuje ją ręcznie.`
+          : `Skan strony ${host} nie potwierdził błędów. Całą stronę ocenisz jednak dopiero po audycie, w którym specjalista testuje ją ręcznie.`,
       ],
       [
         'p',

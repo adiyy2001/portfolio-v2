@@ -1616,6 +1616,9 @@ test('sequence mail html escapes the domain and keeps the counts plain', () => {
   assert.match(mail.html, /&lt;b&gt;x&lt;\/b&gt;\.pl/);
   const clean = sequenceMail(0, { domain: 'ok.pl' }, { ...summary, violations: 0 }, links);
   assert.match(clean.text, /Skan nie potwierdził błędów/);
+  const cleanLast = sequenceMail(3, { domain: 'ok.pl' }, { ...summary, violations: 0 }, links);
+  assert.match(cleanLast.text, /Skan strony ok\.pl nie potwierdził błędów\./);
+  assert.doesNotMatch(cleanLast.text, /błędy: 0/);
 });
 
 test('the cron still cleans up and reports an error when the sequence columns are missing', async () => {
