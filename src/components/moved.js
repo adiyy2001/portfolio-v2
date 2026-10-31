@@ -70,9 +70,9 @@ export function MovedHead({ lang, kind = 'client', hash = '' }) {
       <title>{copy[kind][lang].title.replace(' | ', ' ')}</title>
       <meta name="robots" content="noindex" />
       <link rel="canonical" href={href} />
-      <noscript>
-        <meta httpEquiv="refresh" content={`0; url=${href}${hash}`} />
-      </noscript>
+      {/* Gatsby Head zapisuje dzieci noscript jako tekst, wiec meta refresh stoi wprost (31.10.2026).
+          1 s zwloki: z JS wczesniej przekierowuje location.replace i zachowuje hash uzytkownika. */}
+      <meta httpEquiv="refresh" content={`1; url=${href}${hash}`} />
     </>
   );
 }
