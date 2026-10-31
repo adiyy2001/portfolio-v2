@@ -11,6 +11,50 @@ const faces = [
       `@font-face{font-family:'${family}';src:url(${portfolio(`/fonts/${file}.woff2`)}) format('woff2');font-weight:${weight};font-display:swap}`,
   )
   .join('');
+
+const title = 'Wzornik: strony przykładowe, Adrian Turbiński';
+const description =
+  'Dziesięć stron przykładowych dla zmyślonych firm. Projekt i wykonanie: Adrian Turbiński.';
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const canonical = absolute(link('/'));
+// No cover of its own yet: the share card is the portfolio's "for clients" card.
+const ogImage = absolute(portfolio('/og/cli-pl.jpg'));
+const home = absolute(portfolio('/'));
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${canonical}#page`,
+      url: canonical,
+      name: title,
+      description,
+      inLanguage: 'pl',
+      isPartOf: { '@id': `${home}#site` },
+      about: { '@id': `${home}#adrian` },
+      creator: { '@id': `${home}#adrian` },
+      primaryImageOfPage: ogImage,
+      breadcrumb: { '@id': `${canonical}#breadcrumb` },
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: sites.map((site, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: `${site.name}, ${site.trade}`,
+          url: absolute(link(`/${site.slug}/`)),
+        })),
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Strona główna', item: home },
+        { '@type': 'ListItem', position: 2, name: 'Wzornik', item: canonical },
+      ],
+    },
+  ],
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
@@ -18,14 +62,23 @@ const faces = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Wzornik: strony przykładowe, Adrian Turbiński</title>
-    <meta
-      name="description"
-      content="Dziesięć stron przykładowych dla zmyślonych firm. Projekt i wykonanie: Adrian Turbiński."
-    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
     <meta name="theme-color" content="#5a1424" />
-    <link rel="canonical" href={new URL(link('/'), Astro.site)} />
+    <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={portfolio('/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Adrian Turbiński" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" is:inline set:html={jsonLd} />
     <style is:inline set:html={faces} />
   </head>
   <body>
