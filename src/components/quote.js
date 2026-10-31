@@ -118,7 +118,7 @@ export default function Quote({ lang, service = '' }) {
   const start = () => {
     if (opened.current) return;
     opened.current = Date.now();
-    track('form_start', { page: window.location.pathname });
+    track('form_start', { form: 'quote', page: window.location.pathname });
   };
 
   const submit = async event => {
@@ -129,6 +129,7 @@ export default function Quote({ lang, service = '' }) {
     if (!reachable(contact)) {
       setInvalid(true);
       form.elements.contact.focus();
+      track('form_error', { reason: 'contact', form: 'quote', page: window.location.pathname });
       return;
     }
     setInvalid(false);
@@ -154,6 +155,7 @@ export default function Quote({ lang, service = '' }) {
     if (ok) {
       setState('sent');
       track('generate_lead', {
+        form: 'quote',
         service: picked || 'none',
         budget: lead.budget || 'none',
         page: lead.page,
@@ -167,7 +169,7 @@ export default function Quote({ lang, service = '' }) {
       `mailto:${mail}?subject=${encodeURIComponent(t.subject)}&body=${encodeURIComponent(body)}`,
     );
     setState('failed');
-    track('form_error', { reason: 'delivery', page: lead.page });
+    track('form_error', { reason: 'delivery', form: 'quote', page: lead.page });
   };
 
   if (state === 'sent') {
