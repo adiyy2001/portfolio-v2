@@ -9,6 +9,7 @@
   "browserslist": "> 0.25%, not dead",
   "scripts": {
     "build": "gatsby build",
+    "check:seo": "node scripts/check-seo-tags.mjs",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "lint": "eslint .",
