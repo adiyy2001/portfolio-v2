@@ -156,6 +156,7 @@ export default function Scanner() {
 export const Head = () => (
   <Seo
     lang="pl"
+    view="scan"
     path="/skaner/"
     title="Darmowy skan dostępności strony WCAG i EAA, raport mailem, Adrian Turbiński"
     description="Darmowy skan dostępności strony pod WCAG 2.1 i 2.2 oraz EAA: do 10 podstron, desktop i mobile, raport po polsku z przykładami poprawek."

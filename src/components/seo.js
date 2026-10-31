@@ -21,6 +21,7 @@ const crumbLabels = {
     rec: 'Dla rekrutera',
     cli: 'Dla klienta',
     services: 'Usługi',
+    scan: 'Skaner dostępności',
   },
   en: {
     home: 'Home',
@@ -58,7 +59,7 @@ const isOffer = view => ['home', 'cli', 'services'].includes(view) || view?.star
 const ogView = view =>
   !view
     ? 'home'
-    : (isOffer(view) && view !== 'home') || view === 'guide' || view === 'brief'
+    : (isOffer(view) && view !== 'home') || ['guide', 'brief', 'scan'].includes(view)
       ? 'cli'
       : view;
 
@@ -319,13 +320,15 @@ export default function Seo({
   const url = to => site.siteMetadata.siteUrl + withPrefix(to);
   const pair = routes[view];
   const blog = view === 'blog';
-  const shared = Boolean(pair || blog || view === 'guide' || view === 'brief');
+  const shared = Boolean(pair || blog || ['guide', 'brief', 'scan'].includes(view));
   const canonical = pair ? pair[lang] : path;
   const other = lang === 'pl' ? 'en' : 'pl';
   const image = post?.image
     ? site.siteMetadata.siteUrl + post.image
     : shared &&
-      url(`/og/${ogView(pair ? view : ['guide', 'brief'].includes(view) && view)}-${lang}.jpg`);
+      url(
+        `/og/${ogView(pair ? view : ['guide', 'brief', 'scan'].includes(view) && view)}-${lang}.jpg`,
+      );
   const shareTitle = post?.headline ?? title;
   return (
     <>
