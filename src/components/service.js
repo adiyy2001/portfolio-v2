@@ -34,6 +34,8 @@ const copy = {
     excludedTitle: 'Poza ceną',
     measureTitle: 'Co mierzymy.',
     measureLead: 'Przed startem spisujemy liczby, po miesiącu liczymy je drugi raz.',
+    scanLead: 'Masz już stronę? Sprawdź ją najpierw',
+    scanLink: 'darmowym skanem dostępności',
   },
   en: {
     write: 'Get a quote',
@@ -68,6 +70,20 @@ function BriefNote({ lang, className }) {
       {tie(t.briefLead)}{' '}
       <Link className="link" to={briefPath} data-cta="brief-link">
         {t.briefLink}
+      </Link>
+      .
+    </p>
+  );
+}
+
+function ScanNote({ lang, className }) {
+  const t = copy[lang];
+  if (!t.scanLead) return null;
+  return (
+    <p className={className}>
+      {tie(t.scanLead)}{' '}
+      <Link className="link" to={scanPath} data-cta="rack-scan">
+        {tie(t.scanLink)}
       </Link>
       .
     </p>
@@ -152,6 +168,7 @@ export function ServiceRack({ lang }) {
         </Link>
       </p>
       <BriefNote lang={lang} className="rack-svc__brief" />
+      <ScanNote lang={lang} className="rack-svc__brief" />
     </Rack>
   );
 }
