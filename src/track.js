@@ -17,6 +17,18 @@ export function track(name, params = {}) {
   });
 }
 
+// Enhanced measurement does not log a page_view when Gatsby changes the route (checked on
+// production 31.10.2026), so client side navigations send it here. The delay lets the Head
+// API swap the document title first.
+export function trackPage() {
+  window.setTimeout(() => {
+    window.gtag?.('event', 'page_view', {
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  }, 100);
+}
+
 const scrollMarks = [25, 50, 75];
 
 let stopWatching = () => {};

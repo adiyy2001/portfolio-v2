@@ -14,7 +14,7 @@ import './src/styles/quote.css';
 import './src/styles/scan.css';
 import { keepScroll } from './src/components/layout';
 import { captureSource } from './src/source';
-import { trackClicks, watchPage } from './src/track';
+import { trackClicks, trackPage, watchPage } from './src/track';
 
 export { wrapRootElement, wrapPageElement } from './src/wrap';
 
@@ -53,6 +53,12 @@ export const onInitialClientRender = () => {
 
 export const onRouteUpdate = ({ location, prevLocation }) => {
   if (prevLocation) window.goatcounter?.count?.({ path: location.pathname });
+  if (
+    prevLocation &&
+    prevLocation.pathname + prevLocation.search !== location.pathname + location.search
+  ) {
+    trackPage();
+  }
   watchPage();
 };
 
