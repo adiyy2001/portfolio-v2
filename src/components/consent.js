@@ -1,4 +1,4 @@
-import React, { useSyncExternalStore } from 'react';
+import React, { useEffect, useRef, useSyncExternalStore } from 'react';
 import { Link } from 'gatsby';
 import { consentPending, saveConsent, subscribeConsent } from '../consent';
 import { privacyPath, tie } from '../i18n';
@@ -23,22 +23,40 @@ const copy = {
 export default function Consent({ lang }) {
   const t = copy[lang];
   const open = useSyncExternalStore(subscribeConsent, consentPending, () => true);
+  const box = useRef(null);
+  const room = useRef(null);
+
+  // The banner is fixed over the bottom of the page. The spacer keeps the footer links
+  // (scanner, privacy, statistics settings) scrollable above it while no choice is made.
+  useEffect(() => {
+    if (!open || !box.current || !room.current) return undefined;
+    const fit = () => {
+      room.current.style.height = `${box.current.offsetHeight + 24}px`;
+    };
+    fit();
+    const watch = new ResizeObserver(fit);
+    watch.observe(box.current);
+    return () => watch.disconnect();
+  }, [open]);
 
   if (!open) return null;
 
   return (
-    <section className="consent" aria-label={t.aria}>
-      <p className="consent__text">
-        {tie(t.text)} <Link to={privacyPath[lang]}>{t.policy}</Link>
-      </p>
-      <div className="consent__actions">
-        <button type="button" className="btn btn--line" onClick={() => saveConsent('denied')}>
-          {t.reject}
-        </button>
-        <button type="button" className="btn" onClick={() => saveConsent('granted')}>
-          {t.accept}
-        </button>
-      </div>
-    </section>
+    <>
+      <div className="consent-room" ref={room} aria-hidden="true" />
+      <section className="consent" ref={box} aria-label={t.aria}>
+        <p className="consent__text">
+          {tie(t.text)} <Link to={privacyPath[lang]}>{t.policy}</Link>
+        </p>
+        <div className="consent__actions">
+          <button type="button" className="btn btn--line" onClick={() => saveConsent('denied')}>
+            {t.reject}
+          </button>
+          <button type="button" className="btn" onClick={() => saveConsent('granted')}>
+            {t.accept}
+          </button>
+        </div>
+      </section>
+    </>
   );
 }
