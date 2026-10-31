@@ -104,6 +104,7 @@ export default function ScanForm() {
   const started = useRef(0);
   const startedTick = useRef(0);
   const token = useRef('');
+  const broken = useRef(false);
   const widget = useRef(null);
   const slot = useRef(null);
   const statusNode = useRef(null);
@@ -117,22 +118,30 @@ export default function ScanForm() {
     let gone = false;
     loadTurnstile()
       .then(turnstile => {
-        if (gone || !turnstile) return;
+        if (gone) return;
+        if (!turnstile) {
+          broken.current = true;
+          return;
+        }
         widget.current = turnstile.render(slot.current, {
           sitekey: siteKey,
           language: 'pl',
           callback: value => {
             token.current = value;
+            broken.current = false;
           },
           'expired-callback': () => {
             token.current = '';
           },
           'error-callback': () => {
             token.current = '';
+            broken.current = true;
           },
         });
       })
-      .catch(() => {});
+      .catch(() => {
+        broken.current = true;
+      });
     return () => {
       gone = true;
       if (widget.current !== null) window.turnstile?.remove(widget.current);
@@ -187,8 +196,13 @@ export default function ScanForm() {
     }
     if (siteKey && !token.current) {
       setErrors({});
-      setOutcome({ kind: 'turnstile' });
-      track('form_error', { reason: 'turnstile', form: 'scan', page: page() });
+      // A blocked or failed check never produces a token, so waiting would not help: offer the mail.
+      setOutcome({ kind: broken.current ? 'failed' : 'turnstile' });
+      track('form_error', {
+        reason: broken.current ? 'turnstile_failed' : 'turnstile',
+        form: 'scan',
+        page: page(),
+      });
       return;
     }
     setErrors({});
