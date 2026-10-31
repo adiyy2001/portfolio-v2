@@ -48,7 +48,9 @@ const crumbTrail = ({ lang, view, title, canonical, post, code }) => {
   if (view?.startsWith('svc-')) {
     return [home, [labels.services, routes.services[lang]], [title.split(',')[0], canonical]];
   }
-  if (view !== 'home' && canonical) return [home, [labels[view] ?? title, canonical]];
+  if (view !== 'home' && canonical) {
+    return [home, [labels[view] ?? title.split(',')[0], canonical]];
+  }
   return null;
 };
 
@@ -320,7 +322,7 @@ export default function Seo({
   const url = to => site.siteMetadata.siteUrl + withPrefix(to);
   const pair = routes[view];
   const blog = view === 'blog';
-  const shared = Boolean(pair || blog || ['guide', 'brief', 'scan'].includes(view));
+  const shared = !noindex;
   const canonical = pair ? pair[lang] : path;
   const other = lang === 'pl' ? 'en' : 'pl';
   const image = post?.image
