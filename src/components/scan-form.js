@@ -40,6 +40,8 @@ const copy = {
   },
   capacity: 'Skaner jest chwilowo niedostępny, bo osiągnął dzienny limit. Spróbuj jutro.',
   failed: 'Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę albo napisz na',
+  blocked: 'Weryfikacja Cloudflare nie ładuje się w tej przeglądarce. Napisz na',
+  blockedEnd: ', a zrobię skan ręcznie.',
 };
 
 let consentHashPromise;
@@ -70,25 +72,57 @@ export function normalizeUrl(raw) {
 
 const validEmail = value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 
+const turnstileTimeout = 10000;
+
+let turnstilePromise = null;
+
+// One load per page life. A failed or stalled script is removed and the promise cleared, so a
+// later visit to the form (client side navigation) tries again and fails fast instead of
+// listening to a dead script element forever.
 function loadTurnstile() {
   if (window.turnstile) return Promise.resolve(window.turnstile);
-  return new Promise((resolve, reject) => {
-    const existing = document.querySelector(`script[src="${turnstileSrc}"]`);
-    const script = existing ?? document.createElement('script');
-    script.addEventListener('load', () => resolve(window.turnstile), { once: true });
-    script.addEventListener('error', reject, { once: true });
-    if (!existing) {
-      script.src = turnstileSrc;
-      script.async = true;
-      document.head.appendChild(script);
-    }
+  turnstilePromise ??= new Promise((resolve, reject) => {
+    document.querySelectorAll(`script[src="${turnstileSrc}"]`).forEach(old => old.remove());
+    const script = document.createElement('script');
+    const fail = error => {
+      window.clearTimeout(timer);
+      script.remove();
+      turnstilePromise = null;
+      reject(error);
+    };
+    const timer = window.setTimeout(() => fail(new Error('turnstile timeout')), turnstileTimeout);
+    script.addEventListener(
+      'load',
+      () => {
+        window.clearTimeout(timer);
+        if (window.turnstile) resolve(window.turnstile);
+        else fail(new Error('turnstile missing'));
+      },
+      { once: true },
+    );
+    script.addEventListener('error', fail, { once: true });
+    script.src = turnstileSrc;
+    script.async = true;
+    document.head.appendChild(script);
   });
+  return turnstilePromise;
 }
 
 function Failure({ outcome }) {
   if (outcome.kind === 'version') return <>{copy.version}</>;
   if (outcome.kind === 'capacity') return <>{copy.capacity}</>;
   if (outcome.kind === 'rate') return <>{copy.rate[outcome.reason] ?? copy.rate.other}</>;
+  if (outcome.kind === 'blocked') {
+    return (
+      <>
+        {copy.blocked}{' '}
+        <a className="scan__mail" href={`mailto:${mail}`}>
+          {mail}
+        </a>
+        {copy.blockedEnd}
+      </>
+    );
+  }
   return (
     <>
       {copy.failed}{' '}
@@ -197,7 +231,7 @@ export default function ScanForm() {
     if (siteKey && !token.current) {
       setErrors({});
       // A blocked or failed check never produces a token, so waiting would not help: offer the mail.
-      setOutcome({ kind: broken.current ? 'failed' : 'turnstile' });
+      setOutcome({ kind: broken.current ? 'blocked' : 'turnstile' });
       track('form_error', {
         reason: broken.current ? 'turnstile_failed' : 'turnstile',
         form: 'scan',
