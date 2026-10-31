@@ -4,6 +4,7 @@
 //   node scripts/check-seo-tags.mjs [public]
 import { readdirSync, readFileSync, existsSync, openSync, readSync, closeSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const root = process.argv[2] ?? 'public';
 const siteUrl = 'https://adrianturbinski.pl';
@@ -152,6 +153,22 @@ for (const file of files) {
 
 const stale = exceptions.filter(rule => !used.has(rule));
 
+// The site moved off GitHub Pages' project address on 2026-10-03. Scan the built HTML, sitemaps,
+// feeds and llms.txt, and every file in static/og, so the old address cannot come back. Text
+// painted into an image is invisible to this scan: redraw a card when its template changes.
+const oldAddress = 'adiyy2001.github.io';
+const ogDir = fileURLToPath(new URL('../static/og/', import.meta.url));
+const listAll = dir =>
+  readdirSync(dir, { withFileTypes: true }).flatMap(entry =>
+    entry.isDirectory() ? listAll(join(dir, entry.name)) : [join(dir, entry.name)],
+  );
+const textFile = /\.(html|xml|txt|json|webmanifest)$/;
+const leaks = [
+  ...listAll(root).filter(file => textFile.test(file)),
+  ...(existsSync(ogDir) ? listAll(ogDir) : []),
+].filter(file => readFileSync(file).includes(oldAddress));
+leaks.forEach(file => console.error(`${file}\n  contains the old address ${oldAddress}`));
+
 for (const [file, missing, problems] of failures) {
   console.error(file);
   if (missing.length) console.error(`  missing: ${missing.join(', ')}`);
@@ -159,11 +176,14 @@ for (const [file, missing, problems] of failures) {
 }
 stale.forEach(rule => console.error(`exception ${rule.match} matches no file, remove it`));
 
-if (failures.length || stale.length) {
-  console.error(`\ncheck-seo-tags: ${failures.length} of ${checked} checked pages fail`);
+if (failures.length || stale.length || leaks.length) {
+  console.error(
+    `\ncheck-seo-tags: ${failures.length} of ${checked} checked pages fail, ` +
+      `${leaks.length} files carry the old address`,
+  );
   process.exit(1);
 }
 console.log(
   `check-seo-tags: all ${checked} checked pages have og, twitter:card, canonical and JSON-LD` +
-    ` (${files.length - checked} files skipped as listed exceptions)`,
+    ` (${files.length - checked} files skipped as listed exceptions), no ${oldAddress} left`,
 );
