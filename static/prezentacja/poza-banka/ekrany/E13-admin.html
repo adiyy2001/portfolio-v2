@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="pl" data-theme="light">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin: źródła | Poza Bańką</title>
+<link rel="preload" href="fonts/AtkinsonHyperlegibleNext-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/AtkinsonHyperlegibleNext-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Przejdź do treści</a>
+<header>
+<div class="adminbar"><a class="brand" href="E13-admin.html"><span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>Poza Bańką Admin</a><span class="small muted">operator@pozabanka.example</span>
+</div>
+</header>
+<main id="main">
+<div class="container">
+<div class="story-head">
+<p class="axis-label">Panel operacyjny</p>
+<h1>Źródła</h1>
+</div>
+<div class="admin">
+<nav class="admin-nav" aria-label="Nawigacja admina"><a href="#zrodla" aria-current="page">Źródła</a><a href="#">Osie</a><a href="#">Oceny</a><a href="#">Martwe pole</a><a href="#">Właściciele</a><a href="#odwolania">Odwołania</a><a href="#">Streszczenia</a><a href="#">Metryki</a>
+</nav>
+<div>
+<div class="kpi">
+<div class="card">
+<div class="value">10</div>
+<div class="small muted">aktywnych źródeł</div>
+</div>
+<div class="card">
+<div class="value">8 z 10</div>
+<div class="small muted">bramek danych zdanych</div>
+</div>
+<div class="card">
+<div class="value">3</div>
+<div class="small muted">odwołania w kolejce</div>
+</div>
+<div class="card">
+<div class="value">5</div>
+<div class="small muted">streszczeń do przeglądu</div>
+</div>
+</div>
+<div class="stack-lg aside-gap">
+<section id="zrodla" aria-labelledby="h-zrodla">
+<h2 id="h-zrodla">Źródła i bramki danych</h2>
+<div class="table-wrap" tabindex="0">
+<table class="table">
+<caption class="sr-only">Źródła i bramki danych</caption>
+<thead>
+<tr>
+<th scope="col">Źródło</th>
+<th scope="col">Właściciel i kategoria</th>
+<th scope="col">Ocena na osi ton wobec rządu</th>
+<th scope="col">Ostatni import</th>
+<th scope="col">Bramka danych</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dziennik Nadodrzański</strong>
+</td>
+<td>Nadodrze Media S.A., spółka giełdowa</td>
+<td>-2</td>
+<td>30.10.2026 07:10</td>
+<td><span class="gate status-ok">zdana</span>
+</td>
+</tr>
+<tr>
+<td><strong>Portal Ósma</strong>
+</td>
+<td>Ósma Cyfrowa Sp. z o.o., osoba prywatna</td>
+<td>1</td>
+<td>30.10.2026 07:10</td>
+<td><span class="gate status-ok">zdana</span>
+</td>
+</tr>
+<tr>
+<td><strong>Kurier Poranny 24</strong>
+</td>
+<td>Grupa Poranna Holding, kapitał zagraniczny</td>
+<td>0</td>
+<td>30.10.2026 07:10</td>
+<td><span class="gate status-ok">zdana</span>
+</td>
+</tr>
+<tr>
+<td><strong>Głos Regionu</strong>
+</td>
+<td>Fundacja Głos Regionu, fundacja</td>
+<td>-1</td>
+<td>30.10.2026 07:10</td>
+<td><span class="gate status-ok">zdana</span>
+</td>
+</tr>
+<tr>
+<td><strong>Tygodnik Zachodni</strong>
+</td>
+<td>Wydawnictwo Zachodnie sp. z o.o., prywatna</td>
+<td>brak oceny</td>
+<td>30.10.2026 07:10</td>
+<td><span class="gate status-bad">niezdana: za mało obserwacji</span>
+</td>
+</tr>
+<tr>
+<td><strong>Serwis Fakt24.example</strong>
+</td>
+<td>Fakt Dwadzieścia Cztery Sp. z o.o., osoba prywatna</td>
+<td>2</td>
+<td>30.10.2026 07:10</td>
+<td><span class="gate status-ok">zdana</span>
+</td>
+</tr>
+<tr>
+<td><strong>Radio Siódme</strong>
+</td>
+<td>Radio Siódme S.A., Skarb Państwa</td>
+<td>0</td>
+<td>21.10.2026 07:10</td>
+<td><span class="gate status-bad">niezdana: brak importu od 9 dni</span>
+</td>
+</tr>
+<tr>
+<td><strong>Gazeta Środkowa</strong>
+</td>
+<td>Wydawnictwo Środkowe S.A., spółka giełdowa</td>
+<td>brak oceny</td>
+<td>30.10.2026 07:10</td>
+<td><span class="gate status-ok">zdana</span>
+</td>
+</tr>
+<tr>
+<td><strong>Nowiny Wieczorne</strong>
+</td>
+<td>Fundacja Wieczorna, fundacja</td>
+<td>1</td>
+<td>30.10.2026 07:10</td>
+<td><span class="gate status-ok">zdana</span>
+</td>
+</tr>
+<tr>
+<td><strong>Depesza Krajowa (agencja)</strong>
+</td>
+<td>Agencja Depesza Krajowa S.A., Skarb Państwa</td>
+<td>nie dotyczy</td>
+<td>30.10.2026 07:10</td>
+<td><span class="gate status-ok">zdana</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="odwolania" aria-labelledby="h-kolejka">
+<h2 id="h-kolejka">Kolejka odwołań</h2>
+<div class="table-wrap" tabindex="0">
+<table class="table">
+<caption class="sr-only">Kolejka odwołań</caption>
+<thead>
+<tr>
+<th scope="col">Numer sprawy</th>
+<th scope="col">Redakcja</th>
+<th scope="col">Oś</th>
+<th scope="col">Termin odpowiedzi</th>
+<th scope="col">Status</th>
+<th scope="col">Akcja</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OD-0012</td>
+<td>Dziennik Nadodrzański</td>
+<td>ton wobec rządu</td>
+<td>07.11.2026</td>
+<td>czeka na ocenę dowodu</td>
+<td><a class="btn btn-secondary" href="#">Otwórz</a>
+</td>
+</tr>
+<tr>
+<td>OD-0013</td>
+<td>Portal Ósma</td>
+<td>lewica i prawica (od wersji V1)</td>
+<td>09.11.2026</td>
+<td>czeka na drugą osobę zatwierdzającą</td>
+<td><a class="btn btn-secondary" href="#">Otwórz</a>
+</td>
+</tr>
+<tr>
+<td>OD-0014</td>
+<td>Radio Siódme</td>
+<td>ton wobec rządu</td>
+<td>12.11.2026</td>
+<td>nowe</td>
+<td><a class="btn btn-secondary" href="#">Otwórz</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</div>
+</div>
+<section class="section" aria-labelledby="stany">
+<h2 id="stany">Stany</h2>
+<div class="states-grid">
+<div class="state">
+<h3>Brak uprawnień</h3>
+<div class="empty"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+<p>Nie masz dostępu do tej strony. Jeśli to pomyłka, napisz do nas z numerem 403-A91C.</p><a class="btn btn-secondary" href="E02-feed.html">Wróć do historii</a>
+</div>
+</div>
+<div class="state">
+<h3>Bramka niezdana</h3>
+<div class="banner banner-danger" role="status"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+<div><strong>Radio Siódme:</strong> bramka niezdana, brak importu od 9 dni. Oceny tej redakcji są wstrzymane na stronach publicznych do czasu naprawy.</div>
+</div>
+<p><span class="gate status-bad">niezdana: brak importu od 9 dni</span>
+</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer class="footer">
+<div class="container">
+
+<p>Poza Bańką: prototyp koncepcyjny, wszystkie dane są fikcyjne.</p>
+
+</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Poza Bańką: prototyp aplikacji</title>
+<link rel="preload" href="ekrany/fonts/AtkinsonHyperlegibleNext-400.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: "Atkinson"; src: url("ekrany/fonts/AtkinsonHyperlegibleNext-400.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Atkinson"; src: url("ekrany/fonts/AtkinsonHyperlegibleNext-700.woff2") format("woff2"); font-weight: 700; }
+:root { --bg: #14161a; --panel: #1c1f25; --line: #2c3038; --text: #e9eaec; --muted: #9aa0aa; --accent: #f2b544; }
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; grid-template-columns: 280px 1fr; background: var(--bg); color: var(--text); font: 15px/1.45 "Atkinson", system-ui, sans-serif; }
+body.bare { grid-template-columns: 0 1fr; }
+body.bare aside { display: none; }
+aside { display: flex; flex-direction: column; gap: 16px; padding: 22px 18px; border-right: 1px solid var(--line); background: var(--panel); overflow-y: auto; }
+.brand { font-weight: 700; font-size: 20px; letter-spacing: .01em; }
+.brand small { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+nav ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; counter-reset: screen; }
+nav button { width: 100%; text-align: left; border: 0; border-radius: 8px; padding: 8px 10px; background: transparent; color: var(--text); font: inherit; cursor: pointer; display: flex; gap: 10px; }
+nav button span { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 26px; }
+nav button:hover { background: #262a31; }
+nav button[aria-current="true"] { background: var(--accent); color: #17181b; }
+nav button[aria-current="true"] span { color: #17181b; }
+.controls { display: grid; gap: 8px; margin-top: auto; }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { border: 0; padding: 8px; background: transparent; color: var(--text); font: inherit; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: #2f343d; font-weight: 700; }
+.hint { font-size: 12px; color: var(--muted); }
+main { position: relative; display: grid; place-items: center; padding: 20px; overflow: hidden; }
+.frame { width: 100%; height: 100%; border-radius: 12px; overflow: hidden; background: #fff; box-shadow: 0 30px 80px rgba(0, 0, 0, .45); transition: width .35s ease, height .35s ease, border-radius .35s ease; }
+body.phone .frame { width: 390px; height: min(844px, 100%); border-radius: 44px; border: 12px solid #0b0c0e; }
+body.bare main { padding: 0; }
+body.bare .frame { border-radius: 0; box-shadow: none; }
+iframe { width: 100%; height: 100%; border: 0; display: block; }
+.caption { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); padding: 6px 14px; border-radius: 999px; background: rgba(20, 22, 26, .85); color: var(--text); font-size: 13px; pointer-events: none; opacity: 0; transition: opacity .3s; }
+.caption.show { opacity: 1; }
+body.phone .caption { bottom: auto; top: 10px; }
+@media (max-width: 760px) { body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--line); max-height: 40vh; } }
+</style>
+</head>
+<body>
+<aside>
+  <div class="brand">Poza Bańką<small>Prototyp aplikacji, 15 ekranów</small></div>
+  <nav aria-label="Ekrany"><ol id="list"></ol></nav>
+  <div class="controls">
+    <div class="seg" role="group" aria-label="Motyw">
+      <button type="button" data-theme="light" aria-pressed="true">Jasny</button>
+      <button type="button" data-theme="dark" aria-pressed="false">Ciemny</button>
+    </div>
+    <div class="seg" role="group" aria-label="Urządzenie">
+      <button type="button" data-device="desktop" aria-pressed="true">Komputer</button>
+      <button type="button" data-device="phone" aria-pressed="false">Telefon</button>
+    </div>
+    <p class="hint">Strzałki: poprzedni i następny ekran. T: motyw. M: telefon. F: pełny ekran. H: ukryj panel. Linki w ekranach działają.</p>
+  </div>
+</aside>
+<main>
+  <div class="frame"><iframe id="view" title="Ekran prototypu"></iframe></div>
+  <div class="caption" id="caption"></div>
+</main>
+<script>
+const screens = [
+  ["E01-landing.html", "Strona główna"],
+  ["E11-logowanie.html", "Logowanie i rejestracja"],
+  ["E02-feed.html", "Historie"],
+  ["E03-historia.html", "Historia: wszystkie relacje obok siebie"],
+  ["E04-martwe-pole.html", "Martwe pole"],
+  ["E05-profil-medium.html", "Profil medium"],
+  ["E06-temat.html", "Temat"],
+  ["E07-dieta.html", "Dieta informacyjna"],
+  ["E08-szukaj.html", "Szukaj"],
+  ["E09-metodologia.html", "Metodologia"],
+  ["E10-cennik.html", "Cennik"],
+  ["E12-konto.html", "Konto i subskrypcja"],
+  ["E13-admin.html", "Admin: źródła"],
+  ["komponenty.html", "Biblioteka komponentów"],
+  ["index.html", "Mapa ekranów"]
+];
+const view = document.getElementById("view");
+const list = document.getElementById("list");
+const caption = document.getElementById("caption");
+let current = 0;
+let theme = "light";
+let captionTimer = 0;
+
+screens.forEach(([file, name], index) => {
+  const item = document.createElement("li");
+  const button = document.createElement("button");
+  button.type = "button";
+  button.innerHTML = `<span>${String(index + 1).padStart(2, "0")}</span>${name}`;
+  button.addEventListener("click", () => show(index));
+  item.append(button);
+  list.append(item);
+});
+
+function show(index) {
+  current = (index + screens.length) % screens.length;
+  view.src = "ekrany/" + screens[current][0];
+  history.replaceState(null, "", "#" + screens[current][0].replace(".html", ""));
+}
+
+function sync() {
+  const file = view.contentWindow.location.pathname.split("/").pop();
+  const index = screens.findIndex(([name]) => name === file);
+  if (index >= 0) current = index;
+  list.querySelectorAll("button").forEach((button, i) => button.setAttribute("aria-current", String(i === current)));
+  applyTheme();
+  const doc = view.contentDocument;
+  doc.addEventListener("keydown", onKey);
+  caption.textContent = `${current + 1} / ${screens.length}  ${doc.title.replace(" | Poza Bańką", "")}`;
+  caption.classList.add("show");
+  clearTimeout(captionTimer);
+  captionTimer = setTimeout(() => caption.classList.remove("show"), 1800);
+}
+
+function applyTheme() {
+  const doc = view.contentDocument;
+  if (doc) doc.documentElement.setAttribute("data-theme", theme);
+}
+
+function press(group, value) {
+  document.querySelectorAll(`[${group}]`).forEach((button) => button.setAttribute("aria-pressed", String(button.getAttribute(group) === value)));
+}
+
+function setTheme(value) { theme = value; press("data-theme", value); applyTheme(); }
+function setDevice(value) { document.body.classList.toggle("phone", value === "phone"); press("data-device", value); }
+
+document.querySelectorAll("[data-theme]").forEach((button) => button.addEventListener("click", () => setTheme(button.dataset.theme)));
+document.querySelectorAll("[data-device]").forEach((button) => button.addEventListener("click", () => setDevice(button.dataset.device)));
+
+function onKey(event) {
+  if (event.target.closest && event.target.closest("input, textarea, select")) return;
+  if (event.key === "ArrowRight" || event.key === "PageDown") show(current + 1);
+  else if (event.key === "ArrowLeft" || event.key === "PageUp") show(current - 1);
+  else if (event.key === "t") setTheme(theme === "light" ? "dark" : "light");
+  else if (event.key === "m") setDevice(document.body.classList.contains("phone") ? "desktop" : "phone");
+  else if (event.key === "h") document.body.classList.toggle("bare");
+  else if (event.key === "f") document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  else return;
+  event.preventDefault();
+}
+
+document.addEventListener("keydown", onKey);
+view.addEventListener("load", sync);
+const start = screens.findIndex(([file]) => "#" + file.replace(".html", "") === location.hash);
+show(start >= 0 ? start : 0);
+</script>
+</body>
+</html>

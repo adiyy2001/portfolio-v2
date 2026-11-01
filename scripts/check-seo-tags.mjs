@@ -37,6 +37,11 @@ const exceptions = [
     reason: 'Wzornik samples for made-up businesses, kept out of search; the hub is checked',
     noindex: true,
   },
+  {
+    match: /^prezentacja\/.+\.html$/,
+    reason: 'presentation prototypes shared by link, kept out of search',
+    noindex: true,
+  },
 ];
 
 const matches = (rule, file) =>
