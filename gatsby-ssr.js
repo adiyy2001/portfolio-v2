@@ -39,7 +39,7 @@ if(started)return;
 started=true;
 ${JSON.stringify(sources)}.forEach(add);
 }
-addEventListener('load',function(){setTimeout(start,4000)});
+addEventListener('load',function(){setTimeout(start,1500)});
 ['pointerdown','keydown','scroll','touchstart'].forEach(function(name){addEventListener(name,start,{once:true,passive:true})});
 })();
 `;
