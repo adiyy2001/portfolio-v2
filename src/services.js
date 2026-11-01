@@ -27,7 +27,7 @@ export const services = {
         'wdrożenie i kopie',
         'kod i dostępy u ciebie',
       ],
-      foot: 'Rozbudowa istniejącej aplikacji: 140 zł netto za godzinę.',
+      foot: 'Rozbudowa istniejącej aplikacji: 160 zł netto za godzinę.',
       whoLead:
         'Aplikacje robię dla firm z Wrocławia i z całej Polski, najczęściej gdy zespół zaczyna tonąć w arkuszach i mailach.',
       who: [
@@ -101,7 +101,7 @@ export const services = {
         'deployment and backups',
         'code and access are yours',
       ],
-      foot: 'Extending an existing app: PLN 140 net per hour.',
+      foot: 'Extending an existing app: PLN 160 net per hour.',
       whoLead:
         'I build applications for companies in Wrocław and across Poland, usually when a team starts drowning in spreadsheets and email.',
       who: [
@@ -321,7 +321,7 @@ export const services = {
         'raport z priorytetami',
         'ponowny test od 600 zł',
       ],
-      foot: 'Poprawki w kodzie: 140 zł netto za godzinę albo wycena po audycie.',
+      foot: 'Poprawki w kodzie: 160 zł netto za godzinę albo wycena po audycie.',
       whoLead:
         'Audyty robię zdalnie dla firm i instytucji z całej Polski. Z zespołami z Wrocławia mogę omówić raport na miejscu.',
       who: [
@@ -391,7 +391,7 @@ export const services = {
         'report with priorities',
         'retest from PLN 600',
       ],
-      foot: 'Code fixes: PLN 140 net per hour or a quote after the audit.',
+      foot: 'Code fixes: PLN 160 net per hour or a quote after the audit.',
       whoLead:
         'I run audits remotely for companies and institutions across Poland. With teams in Wrocław I can go through the report in person.',
       who: [
@@ -459,7 +459,7 @@ export const services = {
         'drobne zmiany',
         'czas reakcji w umowie',
       ],
-      foot: 'Kolejne godziny: 140 zł netto. Przegląd cudzego kodu wyceniam osobno.',
+      foot: 'Kolejne godziny: 160 zł netto. Przegląd cudzego kodu wyceniam osobno.',
       whoLead: 'Strony i aplikacje utrzymuję zdalnie, dla firm z Wrocławia i z całej Polski.',
       who: [
         'Poprzedni wykonawca przestał odpowiadać, a strona dalej musi działać.',
@@ -488,7 +488,7 @@ export const services = {
       faq: [
         [
           'Ile kosztuje utrzymanie strony internetowej albo aplikacji?',
-          'Od 300 zł netto miesięcznie z dwiema godzinami prac. Kolejne godziny kosztują 140 zł netto.',
+          'Od 300 zł netto miesięcznie z dwiema godzinami prac. Kolejne godziny kosztują 160 zł netto.',
         ],
         [
           'Czy przejmiesz aplikację po innym zespole?',
@@ -520,7 +520,7 @@ export const services = {
         'small changes',
         'response time in the contract',
       ],
-      foot: 'Extra hours: PLN 140 net. A review of existing code is quoted separately.',
+      foot: 'Extra hours: PLN 160 net. A review of existing code is quoted separately.',
       whoLead: 'I maintain websites and apps remotely, for companies in Wrocław and across Poland.',
       who: [
         'The previous contractor stopped answering and the site still has to run.',
@@ -549,7 +549,7 @@ export const services = {
       faq: [
         [
           'How much does maintenance cost?',
-          'From PLN 300 net per month with two hours of work. Extra hours are PLN 140 net.',
+          'From PLN 300 net per month with two hours of work. Extra hours are PLN 160 net.',
         ],
         [
           'Will you take over an app from another team?',
@@ -623,7 +623,7 @@ export const automation = {
           items: ['własny kod i kolejki', 'panel dla pracowników', 'monitoring i dokumentacja'],
         },
       ],
-      care: 'Opieka: od 300 zł netto miesięcznie. Monitoring, poprawki po zmianach w systemach i dwie godziny prac w cenie, kolejne po 140 zł.',
+      care: 'Opieka: od 300 zł netto miesięcznie. Monitoring, poprawki po zmianach w systemach i dwie godziny prac w cenie, kolejne po 160 zł.',
       excluded: [
         'abonamenty narzędzi: n8n cloud, Make, Zapier',
         'tokeny modeli językowych, rozliczane po koszcie',
@@ -739,7 +739,7 @@ export const automation = {
           items: ['custom code and queues', 'a panel for staff', 'monitoring and documentation'],
         },
       ],
-      care: 'Care: from PLN 300 net a month. Monitoring, fixes after changes in your systems and two hours of work included, further hours at PLN 140.',
+      care: 'Care: from PLN 300 net a month. Monitoring, fixes after changes in your systems and two hours of work included, further hours at PLN 160.',
       excluded: [
         'tool subscriptions: n8n cloud, Make, Zapier',
         'language model tokens, billed at cost',
@@ -823,7 +823,7 @@ export const automation = {
         '30 dni poprawek',
         'kod i dostępy u ciebie',
       ],
-      foot: 'Rozbudowa istniejącej integracji albo naprawa cudzej: 140 zł netto za godzinę albo wycena po przeglądzie.',
+      foot: 'Rozbudowa istniejącej integracji albo naprawa cudzej: 160 zł netto za godzinę albo wycena po przeglądzie.',
       measure: [
         'faktury wystawione w miesiącu bez ręcznego przepisywania',
         'faktury odrzucone przez KSeF, cel po pierwszym miesiącu: zero',
@@ -945,7 +945,7 @@ export const automation = {
         '30 days of fixes',
         'code and access are yours',
       ],
-      foot: 'Extending an existing integration or fixing someone else’s: PLN 140 net per hour or a quote after a review.',
+      foot: 'Extending an existing integration or fixing someone else’s: PLN 160 net per hour or a quote after a review.',
       measure: [
         'invoices issued each month without retyping',
         'invoices rejected by KSeF, target after the first month: zero',
@@ -1322,7 +1322,7 @@ export const servicesIndex = {
     description:
       'Usługi programisty freelancera z Wrocławia: aplikacje webowe, strony internetowe, automatyzacja procesów, integracje i KSeF, asystent AI, audyt dostępności WCAG i utrzymanie. Ceny od, netto, faktura B2B.',
     lead: 'Siedem rzeczy, które robię dla firm. Ceny to punkt startowy dla typowego zakresu, dokładną wycenę dostajesz na piśmie po rozmowie.',
-    rate: '140 zł / godz.',
+    rate: '160 zł / godz.',
     rateNote: 'netto, prace rozliczane godzinowo',
     rateMeta: 'faktura B2B, Wrocław i zdalnie',
     rateLabel: 'Stawka godzinowa',
@@ -1335,7 +1335,7 @@ export const servicesIndex = {
     description:
       'Services of a freelance developer from Wrocław: web applications, websites, process automation, integrations and KSeF e-invoicing, AI assistants, WCAG accessibility audits and maintenance. Starting prices, net, B2B invoice.',
     lead: 'Seven things I do for companies. The prices are a starting point for a typical scope, you get an exact written quote after a call.',
-    rate: 'PLN 140 / hour',
+    rate: 'PLN 160 / hour',
     rateNote: 'net, for hourly work',
     rateMeta: 'B2B invoice, Wrocław and remote',
     rateLabel: 'Hourly rate',

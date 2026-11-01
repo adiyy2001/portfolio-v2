@@ -8,7 +8,7 @@
 
 ## Services and prices
 
-Starting prices, net of VAT, for a typical scope; an exact quote is written after a call. Hourly work: PLN 140 net.
+Starting prices, net of VAT, for a typical scope; an exact quote is written after a call. Hourly work: PLN 160 net.
 
 - [Web applications](https://adrianturbinski.pl/en/services/web-applications/): client portals, booking systems, internal tools; front end, back end and deployment; from PLN 18,000 net, 6 to 12 weeks
 - [Websites](https://adrianturbinski.pl/en/services/websites/): fast company sites with SEO basics, Google Business Profile and WCAG AA; from PLN 3,500 net, 2 to 4 weeks

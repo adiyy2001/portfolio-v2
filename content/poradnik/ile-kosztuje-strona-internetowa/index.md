@@ -43,7 +43,7 @@ Sama robota trwa zwykle 2 do 4 tygodni od chwili, gdy mamy treści.
 
 Po starcie strona dalej kosztuje, ale niewiele. Stałe koszty to domena i hosting, razem zwykle kilkaset złotych rocznie. Konta zakładam na Twoją firmę, więc przy przedłużaniu domeny nie zależysz ode mnie.
 
-Możesz dołożyć opiekę. Pakiet kosztuje od 300 zł netto miesięcznie i obejmuje dwie godziny pracy: aktualizacje, kopie zapasowe, monitoring błędów i drobne zmiany. Kolejne godziny to 140 zł netto. Opieka nie jest obowiązkowa. Strona napisana bez wtyczek potrzebuje mniej aktualizacji niż WordPress, a drobne zmiany możesz zamawiać, kiedy akurat są potrzebne, i płacić od godziny.
+Możesz dołożyć opiekę. Pakiet kosztuje od 300 zł netto miesięcznie i obejmuje dwie godziny pracy: aktualizacje, kopie zapasowe, monitoring błędów i drobne zmiany. Kolejne godziny to 160 zł netto. Opieka nie jest obowiązkowa. Strona napisana bez wtyczek potrzebuje mniej aktualizacji niż WordPress, a drobne zmiany możesz zamawiać, kiedy akurat są potrzebne, i płacić od godziny.
 
 Szczegóły pakietu są na stronie [utrzymanie i rozwój](/uslugi/utrzymanie/).
 

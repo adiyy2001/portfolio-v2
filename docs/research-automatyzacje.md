@@ -405,7 +405,7 @@ Decyzja z 8.5 pkt 1 zamknięta danymi z listopada 2026. Wszystkie kwoty netto. P
 
 Limity rozmów asystenta: 500 / 2 000 / 5 000 zmienione na 1 000 / 3 000 / 8 000. FastBot trzyma stałą cenę do około 2 000 rozmów miesięcznie (FastLanding, stan na 8.09.2026), a koszt modelu przy 1 000 rozmów to rząd 100 zł.
 
-Stawka 140 zł/h bez zmian, bo jest spójna z pozostałymi usługami na stronie. Rynek jest wyżej: senior B2B 150 do 220 zł/h (b2b-vs-uop.pl, zweryfikowano 16.10.2026), butikowa agencja 150 do 220, software house 180 do 300 (aiport.pl, 4.09.2026). Do rozważenia podniesienie do 160 zł/h na całej stronie.
+Stawka godzinowa podniesiona ze 140 do 160 zł/h na całej stronie (usługi, poradnik, llms.txt), bo rynek jest wyżej: senior B2B 150 do 220 zł/h (b2b-vs-uop.pl, zweryfikowano 16.10.2026), butikowa agencja 150 do 220, software house 180 do 300 (aiport.pl, 4.09.2026).
 
 ### 9.1 Dane rynkowe
 
