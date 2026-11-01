@@ -392,3 +392,55 @@ Dwie poprawki po przeglądzie: `role="list"` (cofnięte przez lint, patrz wyżej
 5. Case TailorCloth jest podpięty pod stronę integracji (`proof: true`). Jeśli ma zostać tylko przy aplikacjach, wystarczy usunąć flagę.
 6. Listy w nowych sekcjach i Safari: globalny `list-style: none` w `global.css`. Rozwiązanie zgodne z lintem to zmiana resetu na `list-style-type: ''` dla całej strony, co wykracza poza ten zakres.
 7. Demo Docisk ma w stopce notkę, że firma jest zmyślona, a w sekcji asystenta, że odpowiedzi są ze scenariusza. Jeśli ma stanąć prawdziwy model w demie, trzeba backendu (Cloudflare Worker) i klucza, czego brief nie obejmował.
+
+## 9. Korekta cen z 1 listopada 2026
+
+Decyzja z 8.5 pkt 1 zamknięta danymi z listopada 2026. Wszystkie kwoty netto. Przy usługach, których ceny się zmieniły, poprzednie progi z rozdziału 3 są nieaktualne; obowiązują te z `src/services.js`.
+
+| Usługa                 | Pakiety przed          | Pakiety po              | Abonament przed | Abonament po    |
+| ---------------------- | ---------------------- | ----------------------- | --------------- | --------------- |
+| Automatyzacja procesów | 3 500 / 9 000 / 15 000 | bez zmian               | opieka 300      | bez zmian       |
+| Integracje i KSeF      | 4 900 / 9 900 / 18 000 | 6 000 / 12 000 / 20 000 | opieka 300      | bez zmian       |
+| Asystent AI na stronę  | 4 500 / 8 500 / 15 000 | 5 000 / 9 000 / 18 000  | 290 / 490 / 790 | 300 / 500 / 900 |
+
+Limity rozmów asystenta: 500 / 2 000 / 5 000 zmienione na 1 000 / 3 000 / 8 000. FastBot trzyma stałą cenę do około 2 000 rozmów miesięcznie (FastLanding, stan na 8.09.2026), a koszt modelu przy 1 000 rozmów to rząd 100 zł.
+
+Stawka 140 zł/h bez zmian, bo jest spójna z pozostałymi usługami na stronie. Rynek jest wyżej: senior B2B 150 do 220 zł/h (b2b-vs-uop.pl, zweryfikowano 16.10.2026), butikowa agencja 150 do 220, software house 180 do 300 (aiport.pl, 4.09.2026). Do rozważenia podniesienie do 160 zł/h na całej stronie.
+
+### 9.1 Dane rynkowe
+
+Automatyzacja procesów:
+
+- Mankasoft, 33 cenniki, 24.10.2026: wejście za jeden proces, mediana 2 500 zł (22 cenniki, 500 do 7 500 zł); wsparcie miesięczne, mediana 245 zł (190 do 1 900). https://mankasoft.com/poradniki/ceny-chatbotow-i-automatyzacji-ai/
+- aiport.pl, 4.09.2026: pojedynczy scenariusz no-code 1 500 do 4 000 zł, proces z rozgałęzieniami 4 000 do 12 000 zł, typowe wdrożenie dla MŚP 4 000 do 15 000 zł plus 300 do 1 500 zł miesięcznie. https://aiport.pl/poradniki-ai/ile-kosztuje-automatyzacja-procesow-w-firmie-cennik-2026-i-widelki-ktorych-wykonawcy-nie-chca-podawac/
+- devstock.pl, 2.10.2026: proste wdrożenie 2 000 do 8 000 zł, 5 do 15 przepływów 8 000 do 30 000 zł. https://devstock.pl/blog/ai-iot-automatyzacje/wdrozenie-n8n-w-firmie-koszt-2026/
+- PixelAgency, 18.07.2026: jeden proces w n8n lub Make 2 000 do 8 000 zł. https://pixelagency.pl/blog/ile-kosztuje-wdrozenie-ai
+- Nicommerce, 13.10.2026: od 900 zł, opieka od 200 zł. https://www.nicommerce.pl/uslugi/automatyzacje
+- Mankasoft (cenniki): Falcon Works 3 500, UXU 3 900, AITOMATE 3 900, Wdrażaj.AI 4 000 zł za proces.
+
+Integracje i KSeF:
+
+- Codeport, 21.10.2026, 200 zł/h: wysyłka do KSeF 4 800 do 12 000 zł, odbiór 7 600 do 20 000 zł, pełny zakres 15 600 do 40 400 zł. https://codeport.pl/integracje
+- DC House, 8.10.2026: jeden proces z KSeF od 6 500 zł, 3 do 5 procesów od 28 000 zł. https://dchouse.pl/blog/koszt-automatyzacji-faktur-ksef-2026
+- aiport.pl, 4.09.2026: integracja systemów 15 000 do 60 000 zł.
+- Kluczesoft, 16.10.2026: dedykowana integracja API z własnym ERP 15 000 do 80 000 zł; wdrożenie modułu w Symfonii 2 500 do 6 000 zł. https://kluczesoft.pl/wiedza/licencje/symfonia-ksef-cena
+- Dawidweb: integracja jednokierunkowa na zamówienie 8 000 do 25 000 zł, dwukierunkowa z wieloma systemami 20 000 do 60 000 zł. https://dawidweb.com/blog/cennik-integracji-wdrozen-sklep-internetowy/
+- Warstwa AI: import pliku do programu księgowego 890 zł. https://warstwai.pl/rozwiazania/integracja-programu-z-ksef/
+
+Asystent AI na stronę:
+
+- Mankasoft, 24.10.2026: asystent z bazą wiedzy, wejście mediana 5 000 zł (16 cenników, 1 790 do 12 500), abonament mediana 300 zł (99 do 900).
+- CodeScriptum, kwiecień 2026: Starter od 5 900 zł plus 290 zł miesięcznie (50 dokumentów, 1 kanał), Pro od 14 900 zł plus 690 zł. https://codescriptum.pl/wdrozenie-chatbota-ai/
+- aiport.pl, 9.08.2026: RAG 8 000 do 18 000 zł plus 400 do 900 zł miesięcznie, z integracjami 18 000 do 35 000 zł plus 900 do 1 800 zł. https://aiport.pl/poradniki-ai/ile-kosztuje-chatbot-ai-i-voicebot-w-2026-cennik-polskiego-rynku-ukryte-koszty-i-progi-oplacalnosci/
+- PixelAgency, 18.07.2026: RAG 5 000 do 15 000 zł.
+- FastLanding, 8.09.2026: FastBot 1 990 zł plus 190 zł, Pro 3 490 zł plus 290 zł, stała cena do około 2 000 rozmów. https://fastlanding.io/kalkulator-kosztu-chatbota
+- KC Mobile, 12.09.2026: AI Start od 3 000 zł (50 dokumentów), Business od 8 000 zł z utrzymaniem od 1 500 zł. https://kcmobile.pl/artykuly/ile-kosztuje-wdrozenie-chatbota-ai/
+
+Uzasadnienie: automatyzacja Start 3 500 zł leży w skupisku małych studiów (3 000 do 4 000 zł), powyżej mediany wszystkich cenników, więc zostaje. KSeF Start 4 900 zł był równy dolnej granicy Codeportu przy stawce 200 zł/h i poniżej ceny DC House, więc idzie na 6 000 zł, a pakiety wyżej proporcjonalnie. Asystent: mediana rynku to 5 000 zł plus 300 zł miesięcznie, wyższe pakiety ustawione względem aiport.pl i KC Mobile.
+
+### 9.2 Fakty o KSeF sprawdzone w źródłach urzędowych
+
+- Obowiązek wystawiania w KSeF: od 1 lutego 2026 dla podatników, których sprzedaż w 2024 roku przekroczyła 200 mln zł, od 1 kwietnia 2026 dla pozostałych (ksef.podatki.gov.pl, Zakres obowiązkowego KSeF, zmodyfikowano 6.02.2026).
+- Wyjątek do końca 2026 roku: sprzedaż fakturowana do 10 000 zł brutto miesięcznie, nie netto (ta sama strona oraz ksef.podatki.gov.pl/ponizej-10-000-zl/). Od 1 stycznia 2027 obowiązek obejmuje wszystkich.
+- Kary: 2026 jest okresem bez kar. 20.10.2026 Rada Ministrów przyjęła projekt przesuwający kary za błędy w KSeF do 31.12.2027, czyli do 1 stycznia 2028; projekt ma wejść w życie 31.12.2026, dalej idzie do Sejmu. Obowiązek się nie zmienia (komunikat MF z 20.10.2026, https://www.gov.pl/web/finanse/rada-ministrow-za-odroczeniem-kar-za-bledy-w-ksef-i-przedluzeniem-odwrotnego-obciazenia-vat).
+- Poprawka na stronie: limit 10 tys. zł podany wcześniej bez "brutto"; data 200 mln zł doprecyzowana rokiem 2024; stwierdzenie o karach doprecyzowane do projektu przyjętego przez rząd 20.10.2026, jeszcze nie ustawy.

@@ -659,7 +659,7 @@ export const automation = {
       faq: [
         [
           'Ile kosztuje automatyzacja procesu w firmie?',
-          'Jeden proces od 3 500 zł netto, trzy procesy z modelem językowym od 9 000 zł. Agencje w Polsce liczą od 900 do 4 000 zł za proces, mediana to około 2 500 zł. U mnie dostajesz do tego spisany przebieg, tydzień testów równolegle i umowę powierzenia danych. Tam, gdzie wtyczki nie wystarczą, piszę własny kod.',
+          'Jeden proces od 3 500 zł netto, trzy procesy z modelem językowym od 9 000 zł. W polskich cennikach wejście zaczyna się od 900 zł, mediana to około 2 500 zł, a typowe wdrożenie dla małej firmy kosztuje od 4 000 do 15 000 zł. U mnie dostajesz do tego spisany przebieg, tydzień testów równolegle i umowę powierzenia danych. Tam, gdzie wtyczki nie wystarczą, piszę własny kod.',
         ],
         [
           'n8n, Make czy własny kod?',
@@ -775,7 +775,7 @@ export const automation = {
       faq: [
         [
           'How much does process automation cost?',
-          'One process from PLN 3,500 net, three processes with a language model from PLN 9,000. Polish agencies charge PLN 900 to 4,000 per process, with a median of about 2,500. What you get for the difference is the process written down, a week of parallel testing, a data processing agreement and custom code where connectors run out.',
+          'One process from PLN 3,500 net, three processes with a language model from PLN 9,000. In Polish price lists entry prices start at PLN 900 with a median of about 2,500, and a typical build for a small company costs PLN 4,000 to 15,000. What you get for the difference is the process written down, a week of parallel testing, a data processing agreement and custom code where connectors run out.',
         ],
         [
           'n8n, Make or custom code?',
@@ -809,10 +809,10 @@ export const automation = {
       seoTitle:
         'Integracja KSeF z własnym systemem, sklepem i ERP, cena, Wrocław, Adrian Turbiński',
       description:
-        'Integracja KSeF z własnym systemem, sklepem internetowym, ERP albo Odoo oraz integracje między systemami firmy. Wysyłka i odbiór faktur, tryb offline24, kody QR. Od 4 900 zł netto, opieka od 300 zł miesięcznie.',
+        'Integracja KSeF z własnym systemem, sklepem internetowym, ERP albo Odoo oraz integracje między systemami firmy. Wysyłka i odbiór faktur, tryb offline24, kody QR. Od 6 000 zł netto, opieka od 300 zł miesięcznie.',
       lead: 'Faktura wystawiona w twoim systemie sama trafia do KSeF i wraca z numerem i kodem QR. Zamówienie ze sklepu ląduje w magazynie i w księgowości bez przepisywania. Łączę systemy, które już masz, zamiast zmuszać cię do zmiany programu.',
       body: 'Integracje robię od 2019 roku: Node.js, Java, PostgreSQL, Oracle, Odoo. Dla krawieckiej firmy TailorCloth zbudowałem na Odoo obsługę magazynu i faktur. KSeF 2.0 znam od strony API: uwierzytelnienie, schemat FA(3), tryb offline24, obsługa błędów.',
-      price: 'od 4 900 zł',
+      price: 'od 6 000 zł',
       priceNote: 'netto, jedno połączenie',
       time: '2 do 3 tygodni',
       includes: [
@@ -835,7 +835,7 @@ export const automation = {
       packages: [
         {
           name: 'Start',
-          price: 'od 4 900 zł',
+          price: 'od 6 000 zł',
           time: '2 do 3 tygodni',
           text: 'Jedno połączenie w jednym kierunku. Wysyłka faktur z twojego systemu do KSeF z numerem i kodem QR z powrotem, albo przepływ zamówień z jednego systemu do drugiego.',
           items: [
@@ -846,7 +846,7 @@ export const automation = {
         },
         {
           name: 'Standard',
-          price: 'od 9 900 zł',
+          price: 'od 12 000 zł',
           time: '4 do 6 tygodni',
           text: 'KSeF w obie strony: wysyłka, odbiór faktur kosztowych, powiadomienia, obsługa awarii. Albo trzy systemy w jednym przepływie, na przykład sklep, magazyn i księgowość.',
           items: [
@@ -857,7 +857,7 @@ export const automation = {
         },
         {
           name: 'Rozszerzony',
-          price: 'od 18 000 zł',
+          price: 'od 20 000 zł',
           time: '6 do 10 tygodni',
           text: 'ERP, w tym Odoo, połączony z kilkoma systemami. Kolejki i ponawianie, panel błędów dla pracownika, monitoring, dokumentacja i przekazanie zespołowi.',
           items: ['ERP z kilkoma systemami', 'kolejki i panel błędów', 'monitoring i dokumentacja'],
@@ -899,11 +899,11 @@ export const automation = {
       faq: [
         [
           'Ile kosztuje integracja z KSeF?',
-          'Wysyłka faktur z twojego systemu od 4 900 zł netto, wysyłka i odbiór od 9 900 zł. Firmy integratorskie w Polsce liczą od 4 800 do 12 000 zł za wysyłkę i od 7 600 do 20 000 zł za odbiór. Gotowa bramka za 10 do 100 zł miesięcznie wystarczy, jeśli wystawiasz faktury w popularnym programie, który już ma KSeF.',
+          'Wysyłka faktur z twojego systemu od 6 000 zł netto, wysyłka i odbiór od 12 000 zł. Firmy integratorskie w Polsce liczą od 4 800 do 12 000 zł za wysyłkę i od 7 600 do 20 000 zł za odbiór, a pełna integracja z ERP od 15 000 do 60 000 zł. Gotowa bramka za 10 do 100 zł miesięcznie wystarczy, jeśli wystawiasz faktury w popularnym programie, który już ma KSeF.',
         ],
         [
           'Od kiedy KSeF jest obowiązkowy?',
-          'Od 1 lutego 2026 dla firm ze sprzedażą powyżej 200 mln zł, od 1 kwietnia 2026 dla pozostałych czynnych podatników VAT, od 1 stycznia 2027 także dla najmniejszych, do 10 tys. zł sprzedaży miesięcznie. Kary za faktury poza KSeF mają ruszyć 1 stycznia 2027; rządowy projekt z października 2026 przesuwa je na 2028, ale obowiązku nie zmienia.',
+          'Od 1 lutego 2026 dla firm, które w 2024 roku sprzedały za ponad 200 mln zł, od 1 kwietnia 2026 dla pozostałych czynnych podatników VAT. Do końca 2026 roku wyjątek mają firmy, które fakturują nie więcej niż 10 tys. zł brutto miesięcznie: dla nich obowiązek zaczyna się 1 stycznia 2027. Kary za błędy w KSeF miały ruszyć 1 stycznia 2027. Rada Ministrów przyjęła 20 października 2026 projekt, który przesuwa je na 1 stycznia 2028. To na razie projekt, obowiązek się nie zmienia.',
         ],
         [
           'Czy mogę podpiąć KSeF do własnego programu albo sklepu?',
@@ -931,10 +931,10 @@ export const automation = {
       seoTitle:
         'KSeF e-invoicing and system integrations for companies in Poland, Adrian Turbiński',
       description:
-        'Integration of the Polish KSeF e-invoicing system with your own software, online shop, ERP or Odoo, and integrations between company systems. Sending and receiving invoices, offline24 mode, QR codes. From PLN 4,900 net.',
+        'Integration of the Polish KSeF e-invoicing system with your own software, online shop, ERP or Odoo, and integrations between company systems. Sending and receiving invoices, offline24 mode, QR codes. From PLN 6,000 net.',
       lead: 'An invoice issued in your system goes to KSeF on its own and comes back with its number and QR code. An order from the shop lands in the warehouse and in accounting without retyping. I connect the systems you already have instead of making you switch.',
       body: 'I have built integrations since 2019: Node.js, Java, PostgreSQL, Oracle, Odoo. For the tailoring company TailorCloth I built warehouse and invoice handling on Odoo. I know KSeF 2.0 from the API side: authentication, the FA(3) schema, offline24 mode, error handling.',
-      price: 'from PLN 4,900',
+      price: 'from PLN 6,000',
       priceNote: 'net, one connection',
       time: '2 to 3 weeks',
       includes: [
@@ -957,7 +957,7 @@ export const automation = {
       packages: [
         {
           name: 'Start',
-          price: 'from PLN 4,900',
+          price: 'from PLN 6,000',
           time: '2 to 3 weeks',
           text: 'One connection, one direction. Sending invoices from your system to KSeF with the number and QR code coming back, or an order flow from one system to another.',
           items: [
@@ -968,7 +968,7 @@ export const automation = {
         },
         {
           name: 'Standard',
-          price: 'from PLN 9,900',
+          price: 'from PLN 12,000',
           time: '4 to 6 weeks',
           text: 'KSeF both ways: sending, receiving supplier invoices, notifications, outage handling. Or three systems in one flow, for example shop, warehouse and accounting.',
           items: [
@@ -979,7 +979,7 @@ export const automation = {
         },
         {
           name: 'Extended',
-          price: 'from PLN 18,000',
+          price: 'from PLN 20,000',
           time: '6 to 10 weeks',
           text: 'An ERP, Odoo included, connected to several systems. Queues and retries, an error panel for staff, monitoring, documentation and a handover to your team.',
           items: [
@@ -1025,11 +1025,11 @@ export const automation = {
       faq: [
         [
           'What is KSeF?',
-          'Krajowy System e-Faktur, the Polish national e-invoicing system. Since 1 April 2026 almost every VAT payer in Poland has to issue invoices through it, the smallest firms from 1 January 2027. Invoices get a KSeF number and a QR code.',
+          'Krajowy System e-Faktur, the Polish national e-invoicing system. Since 1 February 2026 the largest firms (2024 sales above PLN 200 million) have to issue invoices through it, since 1 April 2026 the other VAT payers, and from 1 January 2027 also firms invoicing up to PLN 10,000 gross a month. Penalties for errors were due on 1 January 2027; on 20 October 2026 the Council of Ministers adopted a bill moving them to 1 January 2028. It is still a bill, and the obligation itself does not change. Invoices get a KSeF number and a QR code.',
         ],
         [
           'How much does a KSeF integration cost?',
-          'Sending invoices from your system from PLN 4,900 net, sending and receiving from PLN 9,900. Polish integrators charge PLN 4,800 to 12,000 for sending and 7,600 to 20,000 for receiving. A ready gateway at PLN 10 to 100 a month is enough if you invoice from popular software that already supports KSeF.',
+          'Sending invoices from your system from PLN 6,000 net, sending and receiving from PLN 12,000. Polish integrators charge PLN 4,800 to 12,000 for sending and 7,600 to 20,000 for receiving, and a full ERP integration PLN 15,000 to 60,000. A ready gateway at PLN 10 to 100 a month is enough if you invoice from popular software that already supports KSeF.',
         ],
         [
           'Can you connect KSeF to our own software or shop?',
@@ -1058,11 +1058,11 @@ export const automation = {
       seoTitle:
         'Asystent AI i chatbot na stronę firmy, zapisy i baza wiedzy, cena, Wrocław, Adrian Turbiński',
       description:
-        'Asystent AI na stronę firmy: odpowiada z bazy wiedzy, zapisuje na termin, zbiera zapytania i przekazuje rozmowę człowiekowi. Przedstawia się jako AI zgodnie z AI Act, dane w Unii, WCAG 2.1 AA. Od 4 500 zł netto plus od 290 zł miesięcznie.',
+        'Asystent AI na stronę firmy: odpowiada z bazy wiedzy, zapisuje na termin, zbiera zapytania i przekazuje rozmowę człowiekowi. Przedstawia się jako AI zgodnie z AI Act, dane w Unii, WCAG 2.1 AA. Od 5 000 zł netto plus od 300 zł miesięcznie.',
       lead: 'Klient pyta o cenę o 22:40 i dostaje odpowiedź z twojego cennika. Zapisuje się na termin bez telefonu. Gdy pytanie wykracza poza bazę wiedzy, asystent mówi to wprost i przekazuje rozmowę tobie. Od pierwszego zdania wiadomo, że to AI.',
       body: 'Asystent odpowiada tylko z treści, które mu dasz: strona, cennik, FAQ, regulamin. Nie zmyśla, bo przy braku odpowiedzi ma oddać głos człowiekowi. Modele działają z rezydencją danych w Unii, umowę powierzenia podpisujemy, a log rozmów zostaje u ciebie. Widget działa z klawiatury i czytnika ekranu.',
-      price: 'od 4 500 zł',
-      priceNote: 'netto, plus od 290 zł / mies.',
+      price: 'od 5 000 zł',
+      priceNote: 'netto, plus od 300 zł / mies.',
       time: '1 do 2 tygodni',
       includes: [
         'baza wiedzy z twoich treści',
@@ -1084,34 +1084,34 @@ export const automation = {
       packages: [
         {
           name: 'Start',
-          price: 'od 4 500 zł',
-          monthly: '290 zł / mies.',
+          price: 'od 5 000 zł',
+          monthly: '300 zł / mies.',
           time: '1 do 2 tygodni',
-          text: 'Asystent na bazie treści strony i dokumentów, do 50 stron. Odpowiada na pytania, zbiera zapytanie i wysyła je mailem do człowieka. Do 500 rozmów miesięcznie.',
+          text: 'Asystent na bazie treści strony i dokumentów, do 50 stron. Odpowiada na pytania, zbiera zapytanie i wysyła je mailem do człowieka. Do 1 000 rozmów miesięcznie.',
           items: [
             'baza wiedzy do 50 stron',
             'zapytanie mailem do ciebie',
-            'do 500 rozmów miesięcznie',
+            'do 1 000 rozmów miesięcznie',
           ],
         },
         {
           name: 'Standard',
-          price: 'od 8 500 zł',
-          monthly: '490 zł / mies.',
+          price: 'od 9 000 zł',
+          monthly: '500 zł / mies.',
           time: '3 do 4 tygodni',
-          text: 'Do tego zapisy na termin w kalendarzu Google albo w twoim systemie, formularz z zapisem do CRM lub arkusza, dwa języki i raport miesięczny z pytań bez odpowiedzi. Do 2 000 rozmów.',
-          items: ['zapisy na termin', 'zapis do CRM albo arkusza', 'dwa języki, do 2 000 rozmów'],
+          text: 'Do tego zapisy na termin w kalendarzu Google albo w twoim systemie, formularz z zapisem do CRM lub arkusza, dwa języki i raport miesięczny z pytań bez odpowiedzi. Do 3 000 rozmów.',
+          items: ['zapisy na termin', 'zapis do CRM albo arkusza', 'dwa języki, do 3 000 rozmów'],
         },
         {
           name: 'Rozszerzony',
-          price: 'od 15 000 zł',
-          monthly: '790 zł / mies.',
+          price: 'od 18 000 zł',
+          monthly: '900 zł / mies.',
           time: '5 do 8 tygodni',
-          text: 'Do tego integracje z systemem rezerwacji, sklepem albo panelem klienta: status zamówienia, dostępność terminów. Własny panel do poprawiania odpowiedzi. Do 5 000 rozmów.',
+          text: 'Do tego integracje z systemem rezerwacji, sklepem albo panelem klienta: status zamówienia, dostępność terminów. Własny panel do poprawiania odpowiedzi. Do 8 000 rozmów.',
           items: [
             'status zamówienia i dostępność',
             'panel do poprawiania odpowiedzi',
-            'do 5 000 rozmów',
+            'do 8 000 rozmów',
           ],
         },
       ],
@@ -1150,7 +1150,7 @@ export const automation = {
       faq: [
         [
           'Ile kosztuje asystent AI na stronę?',
-          'Od 4 500 zł netto za wdrożenie i od 290 zł miesięcznie za hosting, tokeny modelu i opiekę. Gotowe narzędzia zaczynają się od około 100 zł miesięcznie i są dobrym wyborem, gdy masz mniej niż 50 rozmów w miesiącu. Agencje liczą za asystenta z bazą wiedzy od 5 000 do 15 000 zł.',
+          'Od 5 000 zł netto za wdrożenie i od 300 zł miesięcznie za hosting, tokeny modelu i opiekę. Gotowe narzędzia zaczynają się od około 100 zł miesięcznie i są dobrym wyborem, gdy masz mniej niż 50 rozmów w miesiącu. Polskie studia liczą za asystenta z bazą wiedzy od 4 500 do 6 000 zł plus 200 do 500 zł miesięcznie, agencje od 8 000 do 18 000 zł.',
         ],
         [
           'Czy asystent musi mówić, że jest AI?',
@@ -1185,11 +1185,11 @@ export const automation = {
       seoTitle:
         'AI website assistant and chatbot with bookings and a knowledge base, Adrian Turbiński',
       description:
-        'An AI assistant for a company website: answers from your knowledge base, books appointments, collects enquiries and hands the chat to a person. Says it is AI as the EU AI Act requires, data in the EU, WCAG 2.1 AA. From PLN 4,500 net plus from PLN 290 a month.',
+        'An AI assistant for a company website: answers from your knowledge base, books appointments, collects enquiries and hands the chat to a person. Says it is AI as the EU AI Act requires, data in the EU, WCAG 2.1 AA. From PLN 5,000 net plus from PLN 300 a month.',
       lead: 'A customer asks about a price at 10:40 pm and gets an answer from your price list. They book an appointment without a phone call. When a question goes beyond the knowledge base, the assistant says so and hands the chat to you. From the first line it is clear this is AI.',
       body: 'The assistant answers only from the content you give it: the website, price list, FAQ, terms. It does not make things up, because when it has no answer it hands over to a person. Models with EU data residency, a data processing agreement, the chat log stays with you. The widget works with a keyboard and a screen reader.',
-      price: 'from PLN 4,500',
-      priceNote: 'net, plus from PLN 290 / month',
+      price: 'from PLN 5,000',
+      priceNote: 'net, plus from PLN 300 / month',
       time: '1 to 2 weeks',
       includes: [
         'a knowledge base from your content',
@@ -1211,38 +1211,38 @@ export const automation = {
       packages: [
         {
           name: 'Start',
-          price: 'from PLN 4,500',
-          monthly: 'PLN 290 / month',
+          price: 'from PLN 5,000',
+          monthly: 'PLN 300 / month',
           time: '1 to 2 weeks',
-          text: 'An assistant built on your website content and documents, up to 50 pages. It answers questions, collects an enquiry and emails it to a person. Up to 500 chats a month.',
+          text: 'An assistant built on your website content and documents, up to 50 pages. It answers questions, collects an enquiry and emails it to a person. Up to 1,000 chats a month.',
           items: [
             'knowledge base up to 50 pages',
             'enquiries emailed to you',
-            'up to 500 chats a month',
+            'up to 1,000 chats a month',
           ],
         },
         {
           name: 'Standard',
-          price: 'from PLN 8,500',
-          monthly: 'PLN 490 / month',
+          price: 'from PLN 9,000',
+          monthly: 'PLN 500 / month',
           time: '3 to 4 weeks',
-          text: 'Adds bookings into Google Calendar or your own system, a form that writes to the CRM or a spreadsheet, two languages and a monthly report of unanswered questions. Up to 2,000 chats.',
+          text: 'Adds bookings into Google Calendar or your own system, a form that writes to the CRM or a spreadsheet, two languages and a monthly report of unanswered questions. Up to 3,000 chats.',
           items: [
             'appointment booking',
             'writes to the CRM or a sheet',
-            'two languages, up to 2,000 chats',
+            'two languages, up to 3,000 chats',
           ],
         },
         {
           name: 'Extended',
-          price: 'from PLN 15,000',
-          monthly: 'PLN 790 / month',
+          price: 'from PLN 18,000',
+          monthly: 'PLN 900 / month',
           time: '5 to 8 weeks',
-          text: 'Adds integrations with your booking system, shop or client portal: order status, slot availability. A panel of your own for correcting answers. Up to 5,000 chats.',
+          text: 'Adds integrations with your booking system, shop or client portal: order status, slot availability. A panel of your own for correcting answers. Up to 8,000 chats.',
           items: [
             'order status and availability',
             'a panel for correcting answers',
-            'up to 5,000 chats',
+            'up to 8,000 chats',
           ],
         },
       ],
@@ -1281,7 +1281,7 @@ export const automation = {
       faq: [
         [
           'How much does an AI website assistant cost?',
-          'From PLN 4,500 net for the build and from PLN 290 a month for hosting, model tokens and care. Ready-made tools start at about PLN 100 a month and are the right choice below 50 chats a month. Agencies charge PLN 5,000 to 15,000 for an assistant with a knowledge base.',
+          'From PLN 5,000 net for the build and from PLN 300 a month for hosting, model tokens and care. Ready-made tools start at about PLN 100 a month and are the right choice below 50 chats a month. Polish studios charge PLN 4,500 to 6,000 plus PLN 200 to 500 a month for an assistant with a knowledge base, agencies PLN 8,000 to 18,000.',
         ],
         [
           'Does the assistant have to say it is AI?',
