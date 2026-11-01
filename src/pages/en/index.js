@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import Case from '../../components/case';
 import Close from '../../components/close';
 import Fit from '../../components/fit';
@@ -7,19 +8,19 @@ import Magnet from '../../components/magnet';
 import Scene from '../../components/scene';
 import { ServiceRack } from '../../components/service';
 import Seo from '../../components/seo';
-import Steps from '../../components/steps';
 import Tags from '../../components/tags';
 import Wzornik from '../../components/wzornik';
-import { tie } from '../../i18n';
+import { scanPath, tie } from '../../i18n';
 
 const copy = {
-  kicker: 'Websites and web apps for companies, Wrocław and remote',
-  title: 'From the first call | to production.',
+  kicker: 'Freelancer, Wrocław and remote',
+  title: 'Websites and apps | for businesses.',
   lead: 'I build whole web apps for companies: front end, back end and deployment. Usable by everyone, keyboard and screen reader included.',
   lead2:
     'I take on contracts as a freelancer and invoice B2B. From the quote through launch to maintenance, you talk to me.',
   cta: 'Get a quote',
-  link: 'See the project for a tailor',
+  scan: 'Check accessibility for free',
+  scanNote: 'the report is in Polish',
 };
 
 export default function Client() {
@@ -35,24 +36,26 @@ export default function Client() {
         <p className="lead" data-rise style={{ '--r': 0 }}>
           {tie(copy.lead)}
         </p>
-        <p className="lead2" data-rise style={{ '--r': 1 }}>
-          {tie(copy.lead2)}
-        </p>
-        <div className="cta" data-rise style={{ '--r': 2 }}>
+        <div className="cta cta--hero" data-rise style={{ '--r': 1 }}>
           <Magnet className="btn" href="#quote" data-cta="hero-quote">
             {tie(copy.cta)}
           </Magnet>
-          <a className="link" href="#tailorcloth">
-            {tie(copy.link)}
-          </a>
+          <span className="cta__scan">
+            <Link className="btn btn--line" to={scanPath} data-cta="hero-scan" hrefLang="pl">
+              {tie(copy.scan)}
+            </Link>
+            <span className="cta__note">{copy.scanNote}</span>
+          </span>
         </div>
+        <p className="lead2" data-rise style={{ '--r': 2 }}>
+          {tie(copy.lead2)}
+        </p>
       </Hero>
       <Scene lang="en" />
       <Fit lang="en" />
       <ServiceRack lang="en" />
       <Case lang="en" />
       <Wzornik lang="en" />
-      <Steps lang="en" />
       <Close lang="en" edition="cli" />
     </>
   );

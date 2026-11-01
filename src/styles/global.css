@@ -632,6 +632,29 @@ html[lang='en'] .title--home {
   margin-top: 30px;
 }
 
+.cta--hero {
+  align-items: flex-start;
+  gap: 16px 20px;
+  margin-top: 26px;
+}
+
+.cta--hero + .lead2 {
+  margin-top: 26px;
+}
+
+.cta__scan {
+  display: inline-grid;
+  justify-items: end;
+}
+
+.cta__note {
+  margin: 6px 6px -8px 0;
+  font: 400 1.3rem/1 var(--hand);
+  color: var(--chalk-blue);
+  transform: rotate(-3deg);
+  white-space: nowrap;
+}
+
 .btn {
   position: relative;
   display: inline-block;
