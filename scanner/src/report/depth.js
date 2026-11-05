@@ -154,7 +154,7 @@ export function nextStepsSection({ pdfAvailable, bookingUrl, fullScanAvailable }
             </li>`
           : ''
       }
-      <li><a href="${bookingUrl}">Umów 20 minut rozmowy o wynikach</a></li>
+      <li><a href="${bookingUrl}">Umów 30 minut rozmowy o wynikach</a></li>
     </ul>
   </section>`;
 }
