@@ -1,6 +1,9 @@
 export const AGENT_TOKEN = 'AdrianTurbinskiA11yScanner';
 export const AGENT_SUFFIX = `${AGENT_TOKEN} (+https://adrianturbinski.pl/skaner/)`;
 export const TASK_LIMIT_MS = 6 * 60 * 1000;
+export const FULL_SCAN_TASK_LIMIT_MS = 10 * 60 * 1000;
+export const FULL_SCAN_MAX_PAGES = 30;
+export const EXTRAS_LIMIT_MS = 4 * 60 * 1000;
 export const PAGE_LIMIT_MS = 60 * 1000;
 export const GOTO_TIMEOUT_MS = 20 * 1000;
 export const POLL_INTERVAL_MS = 10 * 1000;
@@ -13,6 +16,11 @@ export function loadConfig(env = process.env) {
     token: env.SCANNER_TOKEN || '',
     proxy: env.SCAN_PROXY || '',
     maxPages: Number.isFinite(maxPages) && maxPages > 0 ? maxPages : 10,
+    bookingUrl:
+      (env.SCAN_API || 'https://api.adrianturbinski.pl').replace(/\/+$/, '') +
+      '/scan/book?src=report',
+    pdfCheck: env.SCAN_PDF_CHECK === '1',
+    verapdfCommand: env.VERAPDF_COMMAND || 'verapdf',
     allowPrivate: env.SCAN_ALLOW_PRIVATE === '1',
     consentFile: env.CONSENT_FILE || '',
     taskLimitMs: TASK_LIMIT_MS,

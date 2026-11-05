@@ -14,6 +14,7 @@ const base = 'https://api.adrianturbinski.pl';
 const site = 'https://adrianturbinski.pl';
 const resend = 'https://api.resend.com/emails';
 const turnstile = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+const doh = 'https://cloudflare-dns.com/dns-query';
 const hour = 3600 * 1000;
 const sha = text => createHash('sha256').update(text).digest('hex');
 const ago = ms => new Date(Date.now() - ms).toISOString();
@@ -96,6 +97,12 @@ function setup({ secrets = true, turnstileOk = true, resendOk = true, telegramOk
   const mode = { resendOk };
   globalThis.fetch = async (url, init) => {
     const target = String(url);
+    if (target.startsWith(doh) || target.endsWith('/.well-known/skaner-adrianturbinski.txt')) {
+      calls.push({ url: target, init, body: null });
+      return target.startsWith(doh)
+        ? Response.json({ Answer: mode.txt ? [{ data: `"${mode.txt}"` }] : [] })
+        : new Response(mode.file ?? 'nope', { status: mode.file ? 200 : 404 });
+    }
     const raw = init?.body;
     const body =
       target === turnstile ? Object.fromEntries(new URLSearchParams(raw)) : JSON.parse(raw);
@@ -1944,4 +1951,268 @@ test('a database error while reading usage fails closed for new scans', async ()
   const response = await submit(broken, {});
   assert.equal(response.status, 500);
   assert.equal(rows(ctx.env, 'scans').length, 0);
+});
+
+const pdfBytes = Buffer.from('%PDF-1.7 raport');
+const statsToken = 'test-stats-token';
+
+const pdfRequest = (id, body = pdfBytes, withAuth = true) =>
+  new Request(`${base}/scan/jobs/${id}/pdf`, {
+    method: 'POST',
+    headers: withAuth ? { Authorization: `Bearer ${bearer}` } : {},
+    body,
+  });
+
+async function doneScan({ pdf = false } = {}) {
+  const ctx = setup();
+  ctx.env.SCAN_STATS_TOKEN_SHA256 = sha(statsToken);
+  ctx.env.BOOKING_URL = 'https://calendar.app.google/test';
+  const { id } = await runningJob(ctx, {});
+  if (pdf) assert.equal((await worker.fetch(pdfRequest(id), ctx.env)).status, 200);
+  const response = await worker.fetch(
+    resultRequest(id, {
+      status: 'done',
+      summary,
+      html: '<h1>Raport</h1>',
+      ...(pdf ? { pdfBytes: pdfBytes.length } : {}),
+    }),
+    ctx.env,
+  );
+  assert.equal(response.status, 200);
+  const row = ctx.env.SCANS.db.prepare('SELECT * FROM scans WHERE id = ?').get(id);
+  return { ctx, id, row, key: row.report_key };
+}
+
+const funnelValue = (env, event) =>
+  env.SCANS.db.prepare('SELECT SUM(value) AS n FROM funnel WHERE event = ?').get(event).n ?? 0;
+
+test('a pdf is uploaded as binary, linked in the mail and served as an attachment', async () => {
+  const { ctx, key, row, id } = await doneScan({ pdf: true });
+  assert.ok(ctx.env.REPORTS.objects.has(`pdfs/${id}.pdf`));
+  assert.equal(row.report_bytes, '<h1>Raport</h1>'.length + pdfBytes.length);
+  assert.ok(ctx.mails().at(-1).text.includes(`/r/${key}?format=pdf`));
+  const served = await worker.fetch(new Request(`${base}/r/${key}?format=pdf`), ctx.env);
+  assert.equal(served.status, 200);
+  assert.equal(served.headers.get('Content-Type'), 'application/pdf');
+  assert.match(served.headers.get('Content-Disposition'), /attachment/);
+  assert.equal(served.headers.get('X-Robots-Tag'), 'noindex');
+  assert.deepEqual(Buffer.from(await served.arrayBuffer()), pdfBytes);
+  assert.equal(funnelValue(ctx.env, 'pdf_download'), 1);
+});
+
+test('pdf upload needs the token, a running job, a pdf body and a sane size', async () => {
+  const ctx = setup();
+  const { id } = await runningJob(ctx, {});
+  assert.equal((await worker.fetch(pdfRequest(id, pdfBytes, false), ctx.env)).status, 401);
+  assert.equal((await worker.fetch(pdfRequest(id, Buffer.from('<html>')), ctx.env)).status, 422);
+  const huge = Buffer.concat([Buffer.from('%PDF-'), Buffer.alloc(6 * 1024 * 1024)]);
+  assert.equal((await worker.fetch(pdfRequest(id, huge), ctx.env)).status, 413);
+  assert.equal(ctx.env.REPORTS.objects.size, 0);
+  ctx.env.SCANS.db.prepare("UPDATE scans SET status = 'done' WHERE id = ?").run(id);
+  assert.equal((await worker.fetch(pdfRequest(id), ctx.env)).status, 409);
+});
+
+test('without an uploaded pdf the report arrives and the pdf link is not offered', async () => {
+  const { ctx, key } = await doneScan();
+  assert.equal(ctx.mails().at(-1).text.includes('format=pdf'), false);
+  const served = await worker.fetch(new Request(`${base}/r/${key}?format=pdf`), ctx.env);
+  assert.equal(served.status, 404);
+});
+
+test('an expired report takes its pdf out of service and cleanup deletes both', async () => {
+  const { ctx, key, id } = await doneScan({ pdf: true });
+  ctx.env.SCANS.db.prepare('UPDATE scans SET report_expires = ?').run(ago(hour));
+  const served = await worker.fetch(new Request(`${base}/r/${key}?format=pdf`), ctx.env);
+  assert.equal(served.status, 410);
+  await worker.scheduled({}, ctx.env, null);
+  assert.equal(ctx.env.REPORTS.objects.has(`pdfs/${id}.pdf`), false);
+  assert.equal(ctx.env.REPORTS.objects.has(`reports/${key}.html`), false);
+});
+
+test('the booking link counts the click and redirects to the calendar, or to contact without one', async () => {
+  const { ctx } = await doneScan();
+  const response = await worker.fetch(new Request(`${base}/scan/book?src=report`), ctx.env);
+  assert.equal(response.status, 302);
+  assert.equal(response.headers.get('Location'), 'https://calendar.app.google/test');
+  assert.equal(funnelValue(ctx.env, 'booking_click'), 1);
+  delete ctx.env.BOOKING_URL;
+  const fallback = await worker.fetch(new Request(`${base}/scan/book`), ctx.env);
+  assert.equal(fallback.headers.get('Location'), `${site}/#kontakt`);
+});
+
+test('the last sequence mail books through the counted link', () => {
+  const mail = sequenceMail(3, { domain: 'example.com' }, summary, {
+    reportLink: '',
+    unsubscribeLink: `${base}/scan/unsubscribe?t=x`,
+  });
+  assert.ok(mail.text.includes(`${base}/scan/book?src=mail`));
+});
+
+test('funnel counters stop growing at the daily cap', async () => {
+  const { ctx } = await doneScan();
+  const day = new Date().toISOString().slice(0, 10);
+  ctx.env.SCANS.db
+    .prepare('INSERT INTO funnel (day, event, value) VALUES (?, ?, ?)')
+    .run(day, 'booking_click', 2000);
+  await worker.fetch(new Request(`${base}/scan/book`), ctx.env);
+  assert.equal(funnelValue(ctx.env, 'booking_click'), 2000);
+});
+
+test('full scan needs proof of the domain, then queues one bigger job without a new mail series', async () => {
+  const { ctx, key, row } = await doneScan();
+  const page = await worker.fetch(new Request(`${base}/r/${key}?pelny=1`), ctx.env);
+  assert.equal(page.status, 200);
+  const html = await page.text();
+  assert.match(page.headers.get('Content-Security-Policy'), /form-action 'self'/);
+  const value = html.match(/skaner-weryfikacja=[A-Za-z0-9_-]+/)[0];
+  assert.ok(html.includes(`_skaner.${row.domain}`));
+
+  const post = () =>
+    worker.fetch(new Request(`${base}/r/${key}/pelny`, { method: 'POST' }), ctx.env);
+  const missing = await post();
+  assert.equal(missing.status, 422);
+  assert.equal(ctx.env.SCANS.db.prepare('SELECT COUNT(*) AS n FROM scans').get().n, 1);
+
+  ctx.mode.txt = 'skaner-weryfikacja=wrong';
+  assert.equal((await post()).status, 422);
+
+  ctx.mode.txt = value;
+  const queued = await post();
+  assert.equal(queued.status, 202);
+  const full = ctx.env.SCANS.db.prepare('SELECT * FROM scans WHERE max_pages > 0').get();
+  assert.equal(full.status, 'queued');
+  assert.equal(full.max_pages, 30);
+  assert.equal(full.parent_id, row.id);
+  assert.equal(full.email, row.email);
+  assert.equal(full.marketing, 0);
+  assert.equal(full.sequence_step, 4);
+  assert.ok(full.verified_at);
+
+  const job = await worker.fetch(
+    new Request(`${base}/scan/jobs/next`, { headers: { Authorization: `Bearer ${bearer}` } }),
+    ctx.env,
+  );
+  assert.equal((await job.json()).maxPages, 30);
+  assert.equal((await post()).status, 429);
+});
+
+test('the verification file also proves the domain and the value depends on the requester', async () => {
+  const first = await doneScan();
+  const html = await (
+    await worker.fetch(new Request(`${base}/r/${first.key}?pelny=1`), first.ctx.env)
+  ).text();
+  const value = html.match(/skaner-weryfikacja=[A-Za-z0-9_-]+/)[0];
+  first.ctx.mode.file = `${value}\n`;
+  const queued = await worker.fetch(
+    new Request(`${base}/r/${first.key}/pelny`, { method: 'POST' }),
+    first.ctx.env,
+  );
+  assert.equal(queued.status, 202);
+  const second = await doneScan();
+  const other = await (
+    await worker.fetch(new Request(`${base}/r/${second.key}?pelny=1`), second.ctx.env)
+  ).text();
+  assert.notEqual(other.match(/skaner-weryfikacja=[A-Za-z0-9_-]+/)[0], value);
+});
+
+test('unsubscribing from a full scan mail also stops the series of the first scan', async () => {
+  const { ctx, key, row } = await doneScan();
+  ctx.env.SCANS.db.prepare('UPDATE scans SET marketing = 1 WHERE id = ?').run(row.id);
+  const html = await (await worker.fetch(new Request(`${base}/r/${key}?pelny=1`), ctx.env)).text();
+  ctx.mode.txt = html.match(/skaner-weryfikacja=[A-Za-z0-9_-]+/)[0];
+  await worker.fetch(new Request(`${base}/r/${key}/pelny`, { method: 'POST' }), ctx.env);
+  const job = await worker.fetch(
+    new Request(`${base}/scan/jobs/next`, { headers: { Authorization: `Bearer ${bearer}` } }),
+    ctx.env,
+  );
+  const { id } = await job.json();
+  await worker.fetch(
+    resultRequest(id, { status: 'done', summary, html: '<h1>Pełny</h1>' }),
+    ctx.env,
+  );
+  const withdrawals = () =>
+    ctx.env.SCANS.db
+      .prepare(
+        "SELECT COUNT(*) AS n FROM consents WHERE scan_id = ? AND kind = 'marketing' AND granted = 0",
+      )
+      .get(row.id).n;
+  const withdrawalsBefore = withdrawals();
+  const header = ctx.mails().at(-1).headers['List-Unsubscribe'];
+  const link = header.match(/<([^>]+)>/)[1];
+  const answer = await worker.fetch(new Request(link, { method: 'POST' }), ctx.env);
+  assert.equal(answer.status, 200);
+  const parent = ctx.env.SCANS.db.prepare('SELECT * FROM scans WHERE id = ?').get(row.id);
+  assert.equal(parent.marketing, 0);
+  assert.ok(parent.unsubscribed_at);
+  assert.equal(withdrawals(), withdrawalsBefore + 1);
+});
+
+test('the verification file is found behind an https or www redirect but not on another host', async () => {
+  const run = async redirects => {
+    const { ctx, key } = await doneScan();
+    const html = await (
+      await worker.fetch(new Request(`${base}/r/${key}?pelny=1`), ctx.env)
+    ).text();
+    const value = html.match(/skaner-weryfikacja=[A-Za-z0-9_-]+/)[0];
+    const inner = globalThis.fetch;
+    globalThis.fetch = async (url, init) => {
+      const target = String(url);
+      if (!target.endsWith('/.well-known/skaner-adrianturbinski.txt')) return inner(url, init);
+      const next = redirects(target);
+      return next
+        ? new Response(null, { status: 301, headers: { Location: next } })
+        : new Response(value, { status: 200 });
+    };
+    return (await worker.fetch(new Request(`${base}/r/${key}/pelny`, { method: 'POST' }), ctx.env))
+      .status;
+  };
+  const path = '/.well-known/skaner-adrianturbinski.txt';
+  const www = target => {
+    const url = new URL(target);
+    return url.hostname.startsWith('www.') ? null : `https://www.${url.hostname}${path}`;
+  };
+  assert.equal(await run(www), 202);
+  assert.equal(await run(() => `https://attacker.example${path}`), 422);
+  const toHttp = target => (target.startsWith('https:') ? target.replace('https:', 'http:') : null);
+  assert.equal(await run(toHttp), 422);
+});
+
+test('a full scan report cannot start another full scan and verification attempts are limited', async () => {
+  const { ctx, key, id } = await doneScan();
+  ctx.env.SCANS.db.prepare('UPDATE scans SET verify_attempts = 30 WHERE id = ?').run(id);
+  const blocked = await worker.fetch(
+    new Request(`${base}/r/${key}/pelny`, { method: 'POST' }),
+    ctx.env,
+  );
+  assert.equal(blocked.status, 404);
+  assert.equal(
+    ctx.calls.some(call => call.url.startsWith(doh)),
+    false,
+  );
+  ctx.env.SCANS.db
+    .prepare('UPDATE scans SET verify_attempts = 0, max_pages = 30 WHERE id = ?')
+    .run(id);
+  const page = await worker.fetch(new Request(`${base}/r/${key}?pelny=1`), ctx.env);
+  assert.equal(page.status, 404);
+});
+
+test('stats need their own token and expose no contact data', async () => {
+  const { ctx, key } = await doneScan();
+  await worker.fetch(new Request(`${base}/r/${key}`), ctx.env);
+  const ask = token =>
+    worker.fetch(
+      new Request(`${base}/scan/stats`, { headers: { Authorization: `Bearer ${token}` } }),
+      ctx.env,
+    );
+  assert.equal((await ask(bearer)).status, 401);
+  const response = await ask(statsToken);
+  assert.equal(response.status, 200);
+  const text = await response.text();
+  const stats = JSON.parse(text);
+  assert.equal(stats.totals.report_done, 1);
+  assert.equal(stats.totals.report_view, 1);
+  assert.equal(stats.statuses.done, 1);
+  assert.equal(stats.recent[0].violations, summary.violations);
+  assert.equal(text.includes('@'), false);
+  assert.equal(text.includes(key), false);
 });

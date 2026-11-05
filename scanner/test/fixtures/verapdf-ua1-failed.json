@@ -1,0 +1,132 @@
+{"report":{"buildInformation":{"releaseDetails":[{
+  "id" : "core",
+  "version" : "1.30.3",
+  "buildDate" : 1791367320000
+},{
+  "id" : "validation-model",
+  "version" : "1.30.3",
+  "buildDate" : 1791380640000
+},{
+  "id" : "apps",
+  "version" : "1.30.3",
+  "buildDate" : 1791381120000
+}]},"jobs":[{"itemDetails":{
+  "name" : "/data/s.pdf",
+  "size" : 66887
+},"validationResult":[ {
+  "details" : {
+    "passedRules" : 102,
+    "failedRules" : 4,
+    "passedChecks" : 2652,
+    "failedChecks" : 4,
+    "tags" : [ "metadata", "syntax", "structure", "table" ],
+    "ruleSummaries" : [ {
+      "ruleStatus" : "FAILED",
+      "specification" : "ISO 14289-1:2014",
+      "clause" : "7.1",
+      "testNumber" : 10,
+      "status" : "failed",
+      "failedChecks" : 1,
+      "tags" : [ "syntax" ],
+      "description" : "The document catalog dictionary shall include a ViewerPreferences dictionary containing a DisplayDocTitle key, whose value shall be true",
+      "object" : "CosDocument",
+      "test" : "DisplayDocTitle == true",
+      "checks" : [ {
+        "status" : "failed",
+        "context" : "root",
+        "errorMessage" : "ViewerPreferences dictionary is not present in the document Catalog, or DisplayDocTitle key is set to false or is not present in the ViewerPreferences dictionary (ViewerPreferences = null, DisplayDocTitle = null)",
+        "errorArguments" : [ null, null ]
+      } ]
+    }, {
+      "ruleStatus" : "FAILED",
+      "specification" : "ISO 14289-1:2014",
+      "clause" : "5",
+      "testNumber" : 1,
+      "status" : "failed",
+      "failedChecks" : 1,
+      "tags" : [ "metadata" ],
+      "description" : "The PDF/UA version and conformance level of a file shall be specified using the PDF/UA Identification extension schema",
+      "object" : "MainXMPPackage",
+      "test" : "containsPDFUAIdentification == true",
+      "checks" : [ {
+        "status" : "failed",
+        "context" : "root/document[0]/metadata[0](3 0 obj PDMetadata)/XMPPackage[0]",
+        "errorMessage" : "The document metadata stream doesn't contain PDF/UA Identification Schema",
+        "errorArguments" : [ ]
+      } ]
+    }, {
+      "ruleStatus" : "FAILED",
+      "specification" : "ISO 14289-1:2014",
+      "clause" : "7.2",
+      "testNumber" : 43,
+      "status" : "failed",
+      "failedChecks" : 1,
+      "tags" : [ "structure", "table" ],
+      "description" : "Table rows shall have the same number of columns (taking into account column spans)",
+      "object" : "SETable",
+      "test" : "numberOfRowWithWrongColumnSpan == null || wrongColumnSpan == null",
+      "checks" : [ {
+        "status" : "failed",
+        "context" : "root/document[0]/StructTreeRoot[0](10 0 obj PDStructTreeRoot)/K[0](11 0 obj SESect Sect)/K[3](60 0 obj SETable Table)",
+        "errorMessage" : "Table rows 1 and 2 span different number of columns (6 and 5 respectively)",
+        "errorArguments" : [ "2", "6", "5" ]
+      } ]
+    }, {
+      "ruleStatus" : "FAILED",
+      "specification" : "ISO 14289-1:2014",
+      "clause" : "7.1",
+      "testNumber" : 9,
+      "status" : "failed",
+      "failedChecks" : 1,
+      "tags" : [ "metadata" ],
+      "description" : "The Metadata stream in the document's catalog dictionary shall contain a dc:title entry, where dc is the recommended prefix for the Dublin Core metadata schema as defined in the XMP specification, which clearly identifies the document",
+      "object" : "MainXMPPackage",
+      "test" : "dc_title != null",
+      "checks" : [ {
+        "status" : "failed",
+        "context" : "root/document[0]/metadata[0](3 0 obj PDMetadata)/XMPPackage[0]",
+        "errorMessage" : "Metadata stream does not contain dc:title",
+        "errorArguments" : [ ]
+      } ]
+    } ]
+  },
+  "jobEndStatus" : "normal",
+  "profileName" : "PDF/UA-1 validation profile",
+  "statement" : "PDF file is not compliant with Validation Profile requirements.",
+  "compliant" : false
+} ],"processingTime":{
+  "start" : 1793861176673,
+  "finish" : 1793861177374,
+  "duration" : "00:00:00.701",
+  "difference" : 701
+}}],"batchSummary":{
+  "duration" : {
+    "start" : 1793861176596,
+    "finish" : 1793861177437,
+    "duration" : "00:00:00.841",
+    "difference" : 841
+  },
+  "totalJobs" : 1,
+  "outOfMemory" : 0,
+  "veraExceptions" : 0,
+  "failedEncryptedJobs" : 0,
+  "failedParsingJobs" : 0,
+  "validationSummary" : {
+    "nonCompliantPdfaCount" : 1,
+    "compliantPdfaCount" : 0,
+    "failedJobCount" : 0,
+    "totalJobCount" : 1,
+    "successfulJobCount" : 1
+  },
+  "featuresSummary" : {
+    "failedJobCount" : 0,
+    "totalJobCount" : 0,
+    "successfulJobCount" : 0
+  },
+  "repairSummary" : {
+    "failedJobCount" : 0,
+    "totalJobCount" : 0,
+    "successfulJobCount" : 0
+  },
+  "multiJob" : false
+}}}

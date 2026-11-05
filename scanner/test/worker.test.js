@@ -217,3 +217,81 @@ test('worker does not retry a 4xx answer and gives up after the last 5xx', async
     await api.close();
   }
 });
+
+async function pdfApi(pdfStatus) {
+  const received = { pdf: null, pdfType: null, result: null };
+  let served = false;
+  const server = http.createServer((request, response) => {
+    if (request.url === '/scan/jobs/next') {
+      if (served) {
+        response.writeHead(204);
+        return response.end();
+      }
+      served = true;
+      response.writeHead(200, { 'content-type': 'application/json' });
+      return response.end(
+        JSON.stringify({ id: 'job-pdf', url: 'https://example.com/', lang: 'pl' }),
+      );
+    }
+    const chunks = [];
+    request.on('data', chunk => chunks.push(chunk));
+    request.on('end', () => {
+      const body = Buffer.concat(chunks);
+      if (request.url === '/scan/jobs/job-pdf/pdf') {
+        received.pdf = body;
+        received.pdfType = request.headers['content-type'];
+        response.writeHead(pdfStatus);
+        return response.end();
+      }
+      received.result = JSON.parse(body.toString('utf8'));
+      response.writeHead(200);
+      return response.end('{}');
+    });
+    return undefined;
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  return {
+    api: `http://127.0.0.1:${server.address().port}`,
+    received,
+    close: () => new Promise(resolve => server.close(resolve)),
+  };
+}
+
+async function runPdfJob(pdfStatus) {
+  const fake = await pdfApi(pdfStatus);
+  const pdf = Buffer.concat([Buffer.from('%PDF-1.7\n'), Buffer.from([0, 255, 128, 10])]);
+  const html =
+    '<ul><li class="web-only" data-pdf-link><a href="?format=pdf">PDF</a></li><li>Reszta</li></ul>';
+  const scan = async () => ({ summary: { pages: 1 }, html, pdf });
+  const controller = new AbortController();
+  const config = {
+    ...loadConfig({ SCAN_API: fake.api, SCANNER_TOKEN: 'test-token', SCAN_ALLOW_PRIVATE: '1' }),
+    pollIntervalMs: 50,
+  };
+  const finished = startWorker(config, { scan, signal: controller.signal });
+  const deadline = Date.now() + 10_000;
+  while (!fake.received.result && Date.now() < deadline) {
+    await new Promise(resolve => setTimeout(resolve, 20));
+  }
+  controller.abort();
+  await finished;
+  await fake.close();
+  return { received: fake.received, pdf };
+}
+
+test('the pdf goes up as raw bytes before the result and the result only declares its size', async () => {
+  const { received, pdf } = await runPdfJob(200);
+  assert.deepEqual(received.pdf, pdf);
+  assert.equal(received.pdfType, 'application/pdf');
+  assert.equal(received.result.pdfBytes, pdf.length);
+  assert.equal(received.result.pdf, undefined);
+  assert.match(received.result.html, /format=pdf/);
+});
+
+test('a rejected pdf upload still delivers the report, without the pdf link', async () => {
+  const { received } = await runPdfJob(422);
+  assert.equal(received.result.status, 'done');
+  assert.equal(received.result.pdfBytes, undefined);
+  assert.doesNotMatch(received.result.html, /format=pdf/);
+  assert.match(received.result.html, /Reszta/);
+});

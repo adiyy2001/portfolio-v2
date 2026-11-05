@@ -14,7 +14,12 @@
   "dependencies": {
     "@axe-core/playwright": "4.14.0",
     "@duckduckgo/autoconsent": "17.1.0",
+    "@siteimprove/alfa-act": "0.120.0",
+    "@siteimprove/alfa-playwright": "0.84.3",
+    "@siteimprove/alfa-rules": "0.120.0",
+    "@siteimprove/alfa-web": "0.120.0",
     "axe-core": "4.14.0",
-    "playwright": "1.64.1"
+    "playwright": "1.64.1",
+    "undici": "8.12.3"
   }
 }

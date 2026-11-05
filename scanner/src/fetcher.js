@@ -1,5 +1,6 @@
 import zlib from 'node:zlib';
 import { request } from 'playwright';
+import { ProxyAgent, fetch as undiciFetch } from 'undici';
 import { AGENT_SUFFIX } from './config.js';
 
 const MAX_REDIRECTS = 5;
@@ -92,5 +93,79 @@ export async function createFetcher({ proxy, validator, timeoutMs = 10_000 }) {
     return context.get(url, { headers, timeout: getTimeout, failOnStatusCode: false });
   }
 
-  return { fetchText, resolveRedirects, postJson, get, dispose: () => context.dispose() };
+  const dispatcher = proxy ? new ProxyAgent(proxy) : undefined;
+
+  async function readLimited(response, maxBytes) {
+    const chunks = [];
+    let total = 0;
+    for await (const chunk of response.body ?? []) {
+      total += chunk.length;
+      if (total > maxBytes) return null;
+      chunks.push(chunk);
+    }
+    return Buffer.concat(chunks);
+  }
+
+  async function fetchBytes(startUrl, { maxBytes, guard, deadline = Date.now() + timeoutMs }) {
+    let target = startUrl;
+    for (let hop = 0; hop <= MAX_REDIRECTS; hop += 1) {
+      if (!(await validator.check(target)).ok) return { reason: 'unreachable' };
+      if (hop > 0 && (await guard?.(target))) return { reason: 'unreachable' };
+      const remaining = deadline - Date.now();
+      if (remaining <= 0) return { reason: 'out-of-time' };
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), remaining);
+      try {
+        const response = await undiciFetch(target, {
+          dispatcher,
+          redirect: 'manual',
+          signal: controller.signal,
+          headers: { 'User-Agent': AGENT_SUFFIX },
+        });
+        const location = response.headers.get('location');
+        if (response.status >= 300 && response.status < 400 && location) {
+          await response.body?.cancel().catch(() => {});
+          target = new URL(location, target).toString();
+          continue;
+        }
+        if (response.status !== 200) {
+          await response.body?.cancel().catch(() => {});
+          return { reason: 'unreachable' };
+        }
+        if (Number(response.headers.get('content-length') || 0) > maxBytes) {
+          controller.abort();
+          return { reason: 'too-large' };
+        }
+        const body = await readLimited(response, maxBytes);
+        return body ? { body, url: target } : { reason: 'too-large' };
+      } catch {
+        return { reason: 'unreachable' };
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+    return { reason: 'unreachable' };
+  }
+
+  async function postBinary(url, body, { timeoutMs: postTimeout = 60_000, headers = {} } = {}) {
+    return context.post(url, {
+      data: body,
+      headers,
+      timeout: postTimeout,
+      failOnStatusCode: false,
+    });
+  }
+
+  return {
+    fetchText,
+    fetchBytes,
+    resolveRedirects,
+    postJson,
+    postBinary,
+    get,
+    dispose: async () => {
+      await dispatcher?.close().catch(() => {});
+      await context.dispose();
+    },
+  };
 }

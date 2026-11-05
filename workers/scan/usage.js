@@ -132,7 +132,7 @@ export function createMeter(env, notify) {
   const database = env.SCANS;
   const metered = {
     ...env,
-    ...(database ? { SCANS: meterD1(database, record) } : {}),
+    ...(database ? { SCANS: meterD1(database, record), FUNNEL_DB: database } : {}),
     ...(env.REPORTS ? { REPORTS: meterKv(env.REPORTS, add) } : {}),
   };
 

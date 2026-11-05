@@ -37,17 +37,25 @@ export default function ScannerTerms() {
             formularzu.
           </li>
           <li>
-            Raport: dokument HTML z wynikami automatycznych testów dostępności, dostępny pod
-            indywidualnym linkiem.
+            Raport: dokument HTML i jego wersja PDF z wynikami automatycznych testów dostępności,
+            dostępne pod indywidualnym linkiem.
           </li>
         </ul>
         <h2>3. Co robi skaner</h2>
         <p>
           Po potwierdzeniu zlecenia skaner otwiera stronę skanowaną w odizolowanej przeglądarce na
           moim serwerze w Polsce, sprawdza do 10 publicznie dostępnych podstron w widoku komputera i
-          telefonu silnikiem axe-core, zapisuje raport i wysyła link do niego na podany adres
-          e-mail. Raport zawiera listę wykrytych barier, zrzuty ekranu i fragmenty kodu HTML strony
-          skanowanej.
+          telefonu silnikiem axe-core, do 3 z nich także silnikiem Siteimprove Alfa, pobiera do 3
+          plików PDF linkowanych z tej domeny i sprawdza je narzędziem veraPDF. Pobrane pliki PDF
+          usuwam po sprawdzeniu, w raporcie zostaje ich adres i wynik. Następnie skaner zapisuje
+          raport i wysyła link do niego na podany adres e-mail. Raport zawiera listę wykrytych
+          barier, zrzuty ekranu i fragmenty kodu HTML strony skanowanej.
+        </p>
+        <p>
+          Pełny skan obejmuje do 30 podstron i można go zlecić z raportu raz na 7 dni dla jednej
+          domeny, po potwierdzeniu, że masz do niej uprawnienia: rekordem TXT w DNS albo plikiem na
+          serwerze. Wynik trafia na adres e-mail z pierwszego zlecenia. Pełny skan nie uruchamia
+          informacji handlowych.
         </p>
         <p>
           Skaner nie loguje się na strony, nie wypełnia formularzy kontaktowych ani zakupowych i nie
@@ -191,7 +199,7 @@ export default function ScannerTerms() {
           pozasądowym, chyba że przepis prawa tego wymaga; każdą propozycję rozważę indywidualnie.
           Sądem właściwym jest sąd według przepisów ogólnych.
         </p>
-        <p>Regulamin obowiązuje od 30 października 2026.</p>
+        <p>Regulamin obowiązuje od 5 listopada 2026.</p>
       </section>
     </>
   );

@@ -1,6 +1,7 @@
 import { IMPACT_PL } from '../mapping.js';
 import { WCAG_21_LABEL, WCAG_22_LABEL } from '../wcag-pl.js';
 import { DECLARATION_IDS } from '../extras.js';
+import { nextStepsSection, pdfSection, profilesSection, secondEngineSection } from './depth.js';
 import { loadConsentTexts } from './consent-text.js';
 import { markup, plural, raw, safeBase64 } from './escape.js';
 import { REPORT_CSS } from './styles.js';
@@ -298,7 +299,7 @@ function topSection(model) {
   </section>`;
 }
 
-function fullListSection(model) {
+function fullListSection(model, confirmedIds = new Set()) {
   if (model.groups.length === 0) {
     return markup`<section aria-labelledby="lista">
       <h2 id="lista">Pełna lista błędów</h2>
@@ -313,7 +314,9 @@ function fullListSection(model) {
           ${criterion.id} ${criterion.name}
           <span class="small"
             >(poziom ${criterion.level}, EN 301 549
-            ${criterion.clause}${criterion.isNew22 ? `, ${WCAG_22_LABEL}` : ''})</span
+            ${criterion.clause}${criterion.isNew22 ? `, ${WCAG_22_LABEL}` : ''})${
+              confirmedIds.has(criterion.id) ? ', potwierdzone dwiema metodami' : ''
+            }</span
           >
         </h3>
         ${group.entries.map(
@@ -518,7 +521,7 @@ function limitsSection() {
     'Pełnej obsługi klawiaturą w procesach, takich jak zakup, rejestracja czy formularze wieloetapowe.',
     'Jakości tekstów alternatywnych: skaner wie, że alt istnieje, ale nie ocenia, czy dobrze opisuje obraz.',
     'Treści wideo i audio: napisów, transkrypcji i audiodeskrypcji.',
-    'Dokumentów PDF i innych plików do pobrania.',
+    'Treści plików PDF poza regułami automatycznymi oraz plików do pobrania w innych formatach.',
     'Stron i funkcji za logowaniem.',
     'Zrozumiałości języka, czytelności układu i logiki nawigacji.',
   ];
@@ -667,6 +670,10 @@ export async function buildReport(context) {
               <li><a href="#reczne">Do sprawdzenia ręcznie</a></li>
               <li><a href="#zalecenia">Zalecenia</a></li>
               <li><a href="#deklaracja">Deklaracja dostępności</a></li>
+              ${extras.alfa ? markup`<li><a href="#alfa">Druga metoda</a></li>` : ''}
+              ${extras.pdfs?.length ? markup`<li><a href="#pdf">Pliki PDF</a></li>` : ''}
+              <li><a href="#normy">Wersje normy</a></li>
+              <li><a href="#dalej">Co dalej</a></li>
               <li><a href="#zakres-limity">Czego nie sprawdzono</a></li>
               <li><a href="#prawo">Kontekst prawny</a></li>
             </ol>
@@ -675,8 +682,15 @@ export async function buildReport(context) {
         <main id="tresc">
           <div class="wrap">
             ${summarySection(model)} ${consentSection(extras.consent)} ${topSection(model)}
-            ${fullListSection(model)} ${manualSection(model, pages, extras.keyboard)}
+            ${fullListSection(model, extras.alfa?.confirmedIds)} ${manualSection(model, pages, extras.keyboard)}
             ${recommendationsSection(model)} ${declarationSection(extras.declaration)}
+            ${secondEngineSection(extras.alfa)} ${pdfSection(extras.pdfs)}
+            ${profilesSection(model)}
+            ${nextStepsSection({
+              pdfAvailable: context.pdfAvailable,
+              bookingUrl: context.bookingUrl,
+              fullScanAvailable: context.fullScanAvailable,
+            })}
             ${limitsSection()} ${legalSection(disclaimer)}
           </div>
         </main>

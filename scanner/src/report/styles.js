@@ -590,7 +590,7 @@ main section.sewn::before { display: none; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; animation: none !important; }
   html, body { background: #fff; }
   body { font-size: 10.5pt; }
-  .skip, .toc, .tag-string { display: none; }
+  .skip, .toc, .tag-string, .web-only { display: none; }
   .masthead { background: #fff; color: var(--ink); border-bottom: 3px double var(--wool); padding-top: 0; }
   .masthead a, .masthead h2, .scope, .scope .note, .found, .found .lead { color: var(--ink); }
   .wordmark { display: none; }

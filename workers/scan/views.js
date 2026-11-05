@@ -95,6 +95,25 @@ const pageTexts = {
     more: `Zgodę możesz wycofać, pisząc na ${mailLink}.`,
     actions: 'back',
   },
+  fullScanQueued: {
+    title: 'Domena potwierdzona.',
+    seam: 'closed',
+    lead: 'Pełny skan do 30 podstron jest w kolejce. Link do nowego raportu dostaniesz mailem na adres z pierwszego zlecenia.',
+    more: 'Pełny skan może potrwać do kilkunastu minut.',
+    actions: 'back',
+  },
+  fullScanLimit: {
+    title: 'Pełny skan tej domeny już był.',
+    seam: 'cut',
+    lead: 'Pełny skan jednej domeny można zlecić raz na 7 dni.',
+    actions: 'back',
+  },
+  fullScanUnavailable: {
+    title: 'Pełny skan jest niedostępny.',
+    seam: 'cut',
+    lead: 'Ten raport nie pozwala już zlecić pełnego skanu albo skaner osiągnął dzienny limit. Spróbuj później.',
+    actions: 'back',
+  },
   reportExpired: {
     title: 'Raport wygasł.',
     seam: 'cut',
@@ -123,11 +142,20 @@ const seamHtml = state =>
     : '<div class="seam" aria-hidden="true"><span class="run"><i></i></span></div>';
 
 const actionsHtml = (kind, token) =>
-  kind === 'confirm'
-    ? `<form method="post" action="/scan/confirm"><input type="hidden" name="t" value="${escapeHtml(token)}"><div class="actions"><button class="btn" type="submit">Potwierdzam i zlecam skan</button></div></form>`
-    : kind === 'form'
-      ? `<div class="actions"><a class="btn" href="${formUrl}">Wróć do formularza</a><a class="link" href="${site}/">Wróć na stronę</a></div>`
-      : `<div class="actions"><a class="btn" href="${site}/">Wróć na stronę</a></div>`;
+  kind === 'none'
+    ? ''
+    : kind === 'confirm'
+      ? `<form method="post" action="/scan/confirm"><input type="hidden" name="t" value="${escapeHtml(token)}"><div class="actions"><button class="btn" type="submit">Potwierdzam i zlecam skan</button></div></form>`
+      : kind === 'form'
+        ? `<div class="actions"><a class="btn" href="${formUrl}">Wróć do formularza</a><a class="link" href="${site}/">Wróć na stronę</a></div>`
+        : `<div class="actions"><a class="btn" href="${site}/">Wróć na stronę</a></div>`;
+
+pageTexts.fullScanAsk = {
+  title: 'Potwierdź, że domena jest Twoja.',
+  seam: 'closed',
+  lead: '<!--full-scan-body-->',
+  actions: 'none',
+};
 
 const pageHeaders = {
   'Content-Type': 'text/html; charset=utf-8',
@@ -155,6 +183,30 @@ export function pageHtml(key, token = '') {
 
 export const confirmAskPage = token =>
   new Response(pageHtml('confirmAsk', token), { status: 200, headers: confirmHeaders });
+
+export function fullScanPage({ reportKey, domain, host, txtValue, fileValue, filePath, failed }) {
+  const code = value =>
+    `<code style="display:block;overflow-wrap:anywhere;padding:8px 10px;margin:6px 0 14px;background:rgba(0,0,0,.06);font-size:14px">${escapeHtml(value)}</code>`;
+  const body = [
+    failed
+      ? '<p role="alert"><strong>Nie znaleziono potwierdzenia.</strong> Zmiana w DNS może potrzebować kilku minut, a czasem kilku godzin. Sprawdź wpis i spróbuj ponownie.</p>'
+      : '',
+    `<p>Pełny skan obejmuje do 30 podstron, więc najpierw potwierdź, że domena ${escapeHtml(domain)} jest Twoja. Wystarczy jeden z dwóch sposobów.</p>`,
+    '<h2 style="font-size:18px;margin:18px 0 4px">Rekord DNS</h2>',
+    '<p>Dodaj rekord TXT o nazwie:</p>',
+    code(`_skaner.${domain}`),
+    '<p>i wartości:</p>',
+    code(txtValue),
+    '<h2 style="font-size:18px;margin:18px 0 4px">Plik na serwerze</h2>',
+    '<p>Umieść plik pod adresem:</p>',
+    code(`https://${host}${filePath}`),
+    '<p>z jedną linią:</p>',
+    code(fileValue),
+    `<form method="post" action="/r/${escapeHtml(reportKey)}/pelny"><div class="actions"><button class="btn" type="submit">Sprawdź i zleć pełny skan</button></div></form>`,
+  ].join('');
+  const html = pageHtml('fullScanAsk').replace('<!--full-scan-body-->', body);
+  return new Response(html, { status: failed ? 422 : 200, headers: confirmHeaders });
+}
 
 export const statusPage = (key, status = 200) =>
   new Response(pageHtml(key), { status, headers: pageHeaders });
@@ -245,7 +297,7 @@ const errorsLabel = count => {
 const stubMail = count =>
   `<table role="presentation" class="stub" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#2f3743" style="background:#2f3743;margin:0 0 18px"><tr><td style="padding:7px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px dashed #9dbbe0"><tr><td class="stubnum" style="padding:16px 8px 16px 20px;font:700 64px/1 ${serif};color:#e9eff6;white-space:nowrap;width:1%">${count}</td><td class="stubcap" style="padding:16px 20px 16px 8px;font:700 13px/1.35 ${sans};letter-spacing:0.08em;text-transform:uppercase;color:#e9eff6">${errorsLabel(count)}<br><span style="font:italic 400 17px/1.4 ${serif};letter-spacing:0;text-transform:none;color:#9dbbe0">zmierzone, nie oszacowane</span></td></tr></table></td></tr></table>`;
 
-export function reportMail(row, summary, link, expires, unsubscribeLink) {
+export function reportMail(row, summary, link, expires, unsubscribeLink, pdfLink = '') {
   const subject = `Raport dostępności: ${row.domain}`;
   const counts = `Potwierdzone błędy: ${summary.violations}, przeskanowane strony: ${summary.pages}.`;
   const validity = `Link jest ważny 30 dni, do ${polishDate(expires)}.`;
@@ -255,6 +307,7 @@ export function reportMail(row, summary, link, expires, unsubscribeLink) {
     counts,
     '',
     `Raport: ${link}`,
+    ...(pdfLink ? [`Raport w PDF: ${pdfLink}`] : []),
     validity,
     '',
     consent.pl.disclaimer,
@@ -273,6 +326,7 @@ export function reportMail(row, summary, link, expires, unsubscribeLink) {
       paragraph(`Przeskanowane strony: ${summary.pages}.`),
       buttonMail(link, 'Otwórz raport'),
       linkFallback(link),
+      pdfLink ? paragraph(`<a href="${escapeHtml(pdfLink)}">Pobierz raport jako PDF</a>`) : '',
       paragraph(validity),
       `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:22px 0 0"><tr><td class="rule" style="padding-top:16px;border-top:1px dotted #2f3743">${paragraph(escapeHtml(consent.pl.disclaimer), 'soft', '#2f3743', 14)}</td></tr></table>`,
     ].join(''),
@@ -307,7 +361,8 @@ export function failureMail(row) {
 }
 
 export const sequenceLength = 4;
-const contactUrl = `${site}/#kontakt`;
+export const contactUrl = `${site}/#kontakt`;
+const bookUrl = 'https://api.adrianturbinski.pl/scan/book?src=mail';
 
 const severityLine = summary =>
   `Krytyczne: ${summary.critical}, poważne: ${summary.serious}, umiarkowane: ${summary.moderate}, drobne: ${summary.minor}.`;
@@ -425,10 +480,11 @@ const sequenceSteps = [
         'p',
         `Audyt jest płatny. Jeśli chcesz porozmawiać, odpowiedz na tę wiadomość albo napisz na ${replyTo}.`,
       ],
+      ['p', `Wolisz napisać przez formularz? ${contactUrl}`],
       ['p', 'To ostatnia wiadomość z tej serii, kolejnych nie wyślę.'],
       ['p', 'Adrian Turbiński'],
     ],
-    button: { href: contactUrl, label: 'Umów rozmowę' },
+    button: { href: bookUrl, label: 'Umów rozmowę' },
   }),
 ];
 

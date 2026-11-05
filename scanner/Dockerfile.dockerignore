@@ -3,3 +3,4 @@
 !scanner/package-lock.json
 !scanner/src
 !src/scanner/consent.json
+!scanner/verapdf-auto-install.xml

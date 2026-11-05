@@ -1,13 +1,21 @@
 import { aggregate } from './aggregate.js';
+import { ALFA_PAGE_LIMIT, runAlfaAudits, snapshotWithin, summarizeAlfa } from './alfa-run.js';
 import { captureScreenshots, createScreenshotBudget, runAxe } from './axe-run.js';
 import { createViewContext, launchBrowser } from './browser.js';
-import { GOTO_TIMEOUT_MS } from './config.js';
+import {
+  EXTRAS_LIMIT_MS,
+  FULL_SCAN_MAX_PAGES,
+  FULL_SCAN_TASK_LIMIT_MS,
+  GOTO_TIMEOUT_MS,
+} from './config.js';
 import { acceptConsent } from './consent.js';
 import { checkDeclaration, checkKeyboard, checkReflow } from './extras.js';
 import { createFetcher } from './fetcher.js';
 import { canonicalPage, isSameSite, selectPages } from './pages.js';
+import { checkPdfs, extractPdfLinks, selectPdfs } from './pdf-check.js';
 import { pathWithQuery, policyFromResponse } from './robots.js';
 import { buildReport } from './report/index.js';
+import { renderReportPdf } from './report/render-pdf.js';
 import { collectSitemapUrls } from './sitemap.js';
 import { createUrlValidator } from './ssrf.js';
 import { waitForStableDom } from './stabilize.js';
@@ -55,7 +63,13 @@ async function extractNavLinks(page) {
 
 export async function runScan(job, config, { log = () => {} } = {}) {
   const startedAt = new Date();
-  const deadline = startedAt.getTime() + config.taskLimitMs;
+  const requestedPages = Number.isInteger(job.maxPages) && job.maxPages > 0 ? job.maxPages : 0;
+  const maxPages = Math.min(requestedPages || config.maxPages, FULL_SCAN_MAX_PAGES);
+  const taskLimitMs =
+    maxPages > config.maxPages
+      ? Math.max(FULL_SCAN_TASK_LIMIT_MS, config.taskLimitMs)
+      : config.taskLimitMs;
+  const deadline = startedAt.getTime() + taskLimitMs;
   const validator = createUrlValidator({ allowPrivate: config.allowPrivate });
   const homeInput = normalizeJobUrl(job.url);
   if (!homeInput) throw new ScanFailure('Brak adresu strony.');
@@ -109,6 +123,8 @@ export async function runScan(job, config, { log = () => {} } = {}) {
     const records = [];
     const notes = [];
     const extras = { consent: null, keyboard: null, declaration: null };
+    const alfaSnapshots = [];
+    const pdfLinks = [];
     const sitemapPromise = (async () => {
       const roots = policy.sitemaps.length
         ? policy.sitemaps
@@ -190,7 +206,15 @@ export async function runScan(job, config, { log = () => {} } = {}) {
         } else {
           await collect('after-consent');
         }
-        if (viewName === 'desktop') record.reflow = await checkReflow(page).catch(() => null);
+        if (viewName === 'desktop') {
+          pdfLinks.push(...(await extractPdfLinks(page).catch(() => [])));
+          if (alfaSnapshots.length < ALFA_PAGE_LIMIT) {
+            const slot = { url, snapshot: null };
+            alfaSnapshots.push(slot);
+            slot.snapshot = await snapshotWithin(page);
+          }
+          record.reflow = await checkReflow(page).catch(() => null);
+        }
       })();
       try {
         await withTimeout(work, Math.min(config.pageLimitMs, remaining), () => page.close());
@@ -249,7 +273,7 @@ export async function runScan(job, config, { log = () => {} } = {}) {
       navLinks: primary.navLinks ?? [],
       sitemapUrls,
       seed: job.id ?? siteRoot,
-      maxPages: config.maxPages,
+      maxPages,
       isAllowed: url => originPolicies.get(new URL(url).origin)?.isAllowed(pathWithQuery(url)),
     });
     const subpages = pages.slice(1);
@@ -265,7 +289,29 @@ export async function runScan(job, config, { log = () => {} } = {}) {
     };
     await Promise.all([runView('desktop'), runView('mobile')]);
 
+    await contexts.desktop.close().catch(() => {});
+    await contexts.mobile.close().catch(() => {});
+
+    const extrasDeadline = Date.now() + EXTRAS_LIMIT_MS;
     const model = aggregate(records, budget.items);
+    extras.alfa = summarizeAlfa(
+      await runAlfaAudits(alfaSnapshots, { deadline: extrasDeadline }),
+      model,
+    );
+    const pdfUrls = [];
+    const pdfCandidates = config.pdfCheck
+      ? selectPdfs(pdfLinks, { isSameSite: link => isSameSite(link, siteRoot) })
+      : [];
+    for (const url of pdfCandidates) {
+      if (!(await navigationGuard(url))) pdfUrls.push(url);
+    }
+    extras.pdfs = await checkPdfs(pdfUrls, {
+      fetchBytes: fetcher.fetchBytes,
+      deadline: extrasDeadline,
+      guard: navigationGuard,
+      command: config.verapdfCommand,
+    }).catch(() => []);
+    if (extras.pdfs.every(file => file.status === 'unavailable')) extras.pdfs = [];
     const engineVersion = records.find(record => record.engineVersion)?.engineVersion ?? '';
     const pageSummaries = pages.map(url => {
       const byView = view => records.find(record => record.url === url && record.view === view);
@@ -281,7 +327,7 @@ export async function runScan(job, config, { log = () => {} } = {}) {
         reflow: desktop?.reflow ?? null,
       };
     });
-    const html = await buildReport({
+    const reportContext = {
       model,
       host: new URL(siteRoot).hostname,
       siteUrl: siteRoot,
@@ -292,6 +338,13 @@ export async function runScan(job, config, { log = () => {} } = {}) {
       notes: [...new Set(notes)],
       blocked: [...contexts.desktop.blockedRequests, ...contexts.mobile.blockedRequests].length,
       consentFile: config.consentFile,
+      bookingUrl: config.bookingUrl,
+      fullScanAvailable: maxPages < FULL_SCAN_MAX_PAGES,
+    };
+    const html = await buildReport({ ...reportContext, pdfAvailable: true });
+    const pdf = await renderReportPdf(browser, html).catch(error => {
+      log(`report pdf failed: ${error.message}`);
+      return null;
     });
     const summary = {
       pages: pageSummaries.filter(page => page.desktop || page.mobile).length,
@@ -301,9 +354,15 @@ export async function runScan(job, config, { log = () => {} } = {}) {
       moderate: model.totals.moderate,
       minor: model.totals.minor,
       incomplete: model.totals.incomplete,
-      engine: `axe-core ${engineVersion}`,
+      engine: `axe-core ${engineVersion}${extras.alfa.checked > 0 ? ' + Alfa' : ''}`,
     };
-    return { status: 'done', summary, html, durationMs: Date.now() - startedAt.getTime() };
+    return {
+      status: 'done',
+      summary,
+      html,
+      pdf,
+      durationMs: Date.now() - startedAt.getTime(),
+    };
   } finally {
     await browser?.close().catch(() => {});
     await fetcher.dispose().catch(() => {});

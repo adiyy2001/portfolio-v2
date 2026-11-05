@@ -1,6 +1,7 @@
 import axe from 'axe-core';
 import { RESULT_RETRY_DELAYS_MS } from './config.js';
 import { createFetcher } from './fetcher.js';
+import { withoutPdfLink } from './report/depth.js';
 import { runScan, ScanFailure } from './scan.js';
 import { createUrlValidator } from './ssrf.js';
 
@@ -68,11 +69,32 @@ export async function startWorker(config, { scan = runScan, signal, log = () => 
     return false;
   }
 
+  async function sendPdf(job, pdf) {
+    if (!pdf) return 0;
+    const url = `${config.api}/scan/jobs/${encodeURIComponent(job.id)}/pdf`;
+    try {
+      const response = await client.postBinary(url, pdf, {
+        headers: { ...headers, 'Content-Type': 'application/pdf' },
+      });
+      if (response.ok()) return pdf.length;
+      log(`pdf post returned ${response.status()}`);
+    } catch (error) {
+      log(`pdf post failed: ${error.message}`);
+    }
+    return 0;
+  }
+
   async function handle(job) {
     let body;
     try {
       const result = await scan(job, config, { log });
-      body = { status: 'done', summary: result.summary, html: result.html };
+      const pdfBytes = await sendPdf(job, result.pdf);
+      body = {
+        status: 'done',
+        summary: result.summary,
+        html: pdfBytes ? result.html : withoutPdfLink(result.html),
+        ...(pdfBytes ? { pdfBytes } : {}),
+      };
     } catch (error) {
       const known = error instanceof ScanFailure;
       log(`scan ${job.id} failed: ${error.message}`);

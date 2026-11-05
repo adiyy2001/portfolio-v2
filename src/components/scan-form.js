@@ -265,6 +265,7 @@ export default function ScanForm() {
     if (response?.status === 202) {
       setState('sent');
       track('generate_lead', { form: 'scan', marketing, page: page() });
+      track('scan_requested', { marketing, page: page() });
       return;
     }
     setState('idle');

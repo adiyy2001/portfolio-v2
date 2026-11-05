@@ -10,6 +10,7 @@ services:
     env_file: .env
     environment:
       SCAN_PROXY: http://smokescreen:4750
+      SCAN_PDF_CHECK: '1'
     dns:
       - 172.29.250.53
     networks:

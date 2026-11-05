@@ -4,6 +4,7 @@ const counted = new Set([
   'form_start',
   'generate_lead',
   'form_error',
+  'scan_requested',
 ]);
 
 export function track(name, params = {}) {

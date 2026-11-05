@@ -10,7 +10,9 @@ import {
 import {
   confirmAskPage,
   confirmMail,
+  contactUrl,
   failureMail,
+  fullScanPage,
   reportMail,
   replyTo,
   sequenceLength,
@@ -27,6 +29,28 @@ const resendUrl = 'https://api.resend.com/emails';
 
 const minFillMs = 2500;
 const maxHtmlChars = 5 * 1024 * 1024;
+const maxPdfBytes = 6 * 1024 * 1024;
+const fullScanPages = 30;
+const fullScanEvery = 7 * 24 * 3600 * 1000;
+const maxVerifyAttempts = 30;
+const maxVerifyRedirects = 3;
+const verifyFilePath = '/.well-known/skaner-adrianturbinski.txt';
+const dohUrl = 'https://cloudflare-dns.com/dns-query';
+const statsDays = 30;
+const funnelRetentionDays = 400;
+const funnelDailyCap = 2000;
+const funnelEvents = new Set([
+  'submitted',
+  'confirmed',
+  'report_done',
+  'report_failed',
+  'report_view',
+  'pdf_download',
+  'booking_click',
+  'full_page',
+  'full_verify_failed',
+  'full_queued',
+]);
 const maxAttempts = 2;
 const hour = 3600 * 1000;
 const day = 24 * hour;
@@ -184,6 +208,24 @@ async function authorized(request, env) {
   const expected = String(env.SCANNER_TOKEN_SHA256 || '').toLowerCase();
   if (!token || expected.length !== 64) return false;
   return sameText(await sha256(token), expected);
+}
+
+async function statsAuthorized(request, env) {
+  const header = request.headers.get('Authorization') || '';
+  const token = header.startsWith('Bearer ') ? header.slice(7).trim() : '';
+  const expected = String(env.SCAN_STATS_TOKEN_SHA256 || '').toLowerCase();
+  if (!token || expected.length !== 64) return false;
+  return sameText(await sha256(token), expected);
+}
+
+async function countFunnel(env, event) {
+  if (!funnelEvents.has(event)) return;
+  await env.FUNNEL_DB?.prepare(
+    'INSERT INTO funnel (day, event, value) VALUES (?, ?, 1) ON CONFLICT (day, event) DO UPDATE SET value = value + 1 WHERE value < ?',
+  )
+    .bind(utcDay(Date.now()), event, funnelDailyCap)
+    .run()
+    .catch(() => {});
 }
 
 let consentHashPromise;
@@ -478,6 +520,7 @@ async function handleScan(request, env, origin, meter) {
     ]).catch(() => {});
     return json({ ok: false, error: 'mail' }, 502, origin);
   }
+  await countFunnel(env, 'submitted');
   return json({ ok: true }, 202, origin);
 }
 
@@ -499,51 +542,62 @@ async function handleConfirm(request, url, env) {
   if (!row.confirmed_at && Date.parse(row.at) + confirmTtl < Date.now()) return invalidLink(410);
   if (!posting) return confirmAskPage(token);
   if (!row.confirmed_at) {
-    await env.SCANS.prepare(
+    const updated = await env.SCANS.prepare(
       "UPDATE scans SET confirmed_at = ?, status = 'queued' WHERE id = ? AND confirmed_at IS NULL AND status = 'pending'",
     )
       .bind(new Date().toISOString(), row.id)
       .run();
+    if (updated.meta?.changes > 0) await countFunnel(env, 'confirmed');
   }
   return statusPage('confirmed');
+}
+
+async function withdrawMarketing(request, env, row) {
+  if (row.unsubscribed_at) return;
+  const now = new Date().toISOString();
+  await env.SCANS.prepare('UPDATE scans SET unsubscribed_at = ?, marketing = 0 WHERE id = ?')
+    .bind(now, row.id)
+    .run();
+  if (!row.marketing) return;
+  const original = await env.SCANS.prepare(
+    "SELECT version, text, text_sha256 FROM consents WHERE scan_id = ? AND kind = 'marketing' ORDER BY at LIMIT 1",
+  )
+    .bind(row.id)
+    .first();
+  const text = original?.text ?? consent.pl.marketing;
+  await env.SCANS.prepare(
+    "INSERT INTO consents (id, scan_id, at, kind, version, text, text_sha256, granted, ip, ua, page) VALUES (?, ?, ?, 'marketing', ?, ?, ?, 0, ?, ?, '')",
+  )
+    .bind(
+      crypto.randomUUID(),
+      row.id,
+      now,
+      original?.version ?? String(consent.version),
+      text,
+      original?.text_sha256 ?? (await sha256(text)),
+      request.headers.get('CF-Connecting-IP') || '',
+      clip(request.headers.get('User-Agent'), 300),
+    )
+    .run();
 }
 
 async function handleUnsubscribe(request, url, env) {
   const token = url.searchParams.get('t') || '';
   if (!token || !env.SCANS) return statusPage('unsubscribeInvalid', 404);
   const row = await env.SCANS.prepare(
-    'SELECT id, marketing, unsubscribed_at FROM scans WHERE unsubscribe_token_hash = ?',
+    'SELECT id, marketing, unsubscribed_at, parent_id FROM scans WHERE unsubscribe_token_hash = ?',
   )
     .bind(await sha256(token))
     .first();
   if (!row) return statusPage('unsubscribeInvalid', 404);
-  if (!row.unsubscribed_at) {
-    const now = new Date().toISOString();
-    await env.SCANS.prepare('UPDATE scans SET unsubscribed_at = ?, marketing = 0 WHERE id = ?')
-      .bind(now, row.id)
-      .run();
-    if (row.marketing) {
-      const original = await env.SCANS.prepare(
-        "SELECT version, text, text_sha256 FROM consents WHERE scan_id = ? AND kind = 'marketing' ORDER BY at LIMIT 1",
-      )
-        .bind(row.id)
-        .first();
-      const text = original?.text ?? consent.pl.marketing;
-      await env.SCANS.prepare(
-        "INSERT INTO consents (id, scan_id, at, kind, version, text, text_sha256, granted, ip, ua, page) VALUES (?, ?, ?, 'marketing', ?, ?, ?, 0, ?, ?, '')",
-      )
-        .bind(
-          crypto.randomUUID(),
-          row.id,
-          now,
-          original?.version ?? String(consent.version),
-          text,
-          original?.text_sha256 ?? (await sha256(text)),
-          request.headers.get('CF-Connecting-IP') || '',
-          clip(request.headers.get('User-Agent'), 300),
-        )
-        .run();
-    }
+  await withdrawMarketing(request, env, row);
+  if (row.parent_id) {
+    const parent = await env.SCANS.prepare(
+      'SELECT id, marketing, unsubscribed_at FROM scans WHERE id = ?',
+    )
+      .bind(row.parent_id)
+      .first();
+    if (parent) await withdrawMarketing(request, env, parent);
   }
   return statusPage('unsubscribed');
 }
@@ -579,12 +633,17 @@ async function nextJob(request, env) {
   for (const row of timedOut) await finishFailed(env, row);
 
   const job = await env.SCANS.prepare(
-    "UPDATE scans SET status = 'running', started_at = ?, attempts = attempts + 1 WHERE id = (SELECT id FROM scans WHERE status = 'queued' ORDER BY confirmed_at, at LIMIT 1) AND status = 'queued' RETURNING id, url, lang",
+    "UPDATE scans SET status = 'running', started_at = ?, attempts = attempts + 1 WHERE id = (SELECT id FROM scans WHERE status = 'queued' ORDER BY confirmed_at, at LIMIT 1) AND status = 'queued' RETURNING id, url, lang, max_pages",
   )
     .bind(new Date().toISOString())
     .first();
   if (!job) return new Response(null, { status: 204 });
-  return plainJson({ id: job.id, url: job.url, lang: job.lang });
+  return plainJson({
+    id: job.id,
+    url: job.url,
+    lang: job.lang,
+    ...(job.max_pages > 0 ? { maxPages: job.max_pages } : {}),
+  });
 }
 
 function cleanSummary(raw) {
@@ -627,6 +686,7 @@ async function receiveResult(request, env, id, meter) {
       .bind(clip(body.error, limits.error), id)
       .run();
     await finishFailed(env, row);
+    await countFunnel(env, 'report_failed');
     return plainJson({ ok: true });
   }
 
@@ -636,6 +696,10 @@ async function receiveResult(request, env, id, meter) {
   if (!env.REPORTS) return plainJson({ ok: false, error: 'storage' }, 503);
   const htmlBytes = new TextEncoder().encode(html).length;
   if (htmlBytes > maxReportBytes) return plainJson({ ok: false, error: 'size' }, 413);
+
+  const pdfBytes = Number(body.pdfBytes);
+  const hasPdf = Number.isInteger(pdfBytes) && pdfBytes > 0 && pdfBytes <= maxPdfBytes;
+  const storedBytes = htmlBytes + (hasPdf ? pdfBytes : 0);
 
   let full;
   try {
@@ -668,6 +732,7 @@ async function receiveResult(request, env, id, meter) {
     `${api}/r/${reportKey}`,
     expires,
     unsubscribeLink,
+    hasPdf ? `${api}/r/${reportKey}?format=pdf` : '',
   );
   const mailed = await sendMail(env, {
     to: [row.email],
@@ -681,8 +746,9 @@ async function receiveResult(request, env, id, meter) {
   await env.SCANS.prepare(
     "UPDATE scans SET status = 'done', report_key = ?, report_expires = ?, summary_json = ?, error = NULL, report_bytes = ? WHERE id = ?",
   )
-    .bind(reportKey, expires, JSON.stringify(summary), htmlBytes, id)
+    .bind(reportKey, expires, JSON.stringify(summary), storedBytes, id)
     .run();
+  await countFunnel(env, 'report_done');
   await notifyTelegram(env, [
     `Skaner: ${host}`,
     'Status: done',
@@ -692,7 +758,247 @@ async function receiveResult(request, env, id, meter) {
   return plainJson({ ok: true, mailed: true });
 }
 
-async function serveReport(env, key, meter) {
+async function receivePdf(request, env, id, meter) {
+  if (!(await authorized(request, env))) return new Response('Unauthorized', { status: 401 });
+  if (!env.SCANS || !env.REPORTS) return plainJson({ ok: false, error: 'storage' }, 503);
+  if (!jobIdPattern.test(id)) return plainJson({ ok: false, error: 'id' }, 404);
+  const declared = Number(request.headers.get('Content-Length') || 0);
+  if (declared > maxPdfBytes) return plainJson({ ok: false, error: 'size' }, 413);
+  const row = await env.SCANS.prepare('SELECT status FROM scans WHERE id = ?').bind(id).first();
+  if (row?.status !== 'running') return plainJson({ ok: false, error: 'state' }, 409);
+  const body = await request.arrayBuffer();
+  if (body.byteLength > maxPdfBytes) return plainJson({ ok: false, error: 'size' }, 413);
+  const magic = String.fromCharCode(...new Uint8Array(body, 0, Math.min(5, body.byteLength)));
+  if (magic !== '%PDF-') return plainJson({ ok: false, error: 'body' }, 422);
+  if (await meter.blocked({ kv_writes: 1, kv_bytes: body.byteLength }).catch(() => true))
+    return plainJson({ ok: false, error: 'capacity' }, 422);
+  await env.REPORTS.put(`pdfs/${id}.pdf`, body, {
+    expirationTtl: Math.ceil(reportTtl / 1000) + reportStoreGraceSeconds,
+  });
+  return plainJson({ ok: true, bytes: body.byteLength });
+}
+
+async function servePdf(env, key, meter) {
+  if (!env.REPORTS || !reportKeyPattern.test(key)) return statusPage('reportUnknown', 404);
+  if (await meter.blocked({ kv_reads: 1 }, { maxAgeMs: snapshotMaxAgeMs }).catch(() => true))
+    return statusPage('reportBusy', 503);
+  const row = await env.SCANS?.prepare('SELECT id, report_expires FROM scans WHERE report_key = ?')
+    .bind(key)
+    .first();
+  if (!row) return statusPage('reportUnknown', 404);
+  const expires = Date.parse(row.report_expires || '');
+  if (Number.isFinite(expires) && expires < Date.now()) return statusPage('reportExpired', 410);
+  const { value } = await env.REPORTS.getWithMetadata(`pdfs/${row.id}.pdf`, {
+    type: 'arrayBuffer',
+  });
+  if (value === null) return statusPage('reportUnknown', 404);
+  await countFunnel(env, 'pdf_download');
+  return new Response(value, {
+    headers: {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': 'attachment; filename="raport-dostepnosci.pdf"',
+      'X-Robots-Tag': 'noindex',
+      'Cache-Control': 'private, max-age=300',
+      'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'",
+      'Referrer-Policy': 'no-referrer',
+      'X-Content-Type-Options': 'nosniff',
+    },
+  });
+}
+
+async function verificationValue(env, row) {
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(String(env.IP_SALT || 'dev-salt')),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  );
+  const signature = await crypto.subtle.sign(
+    'HMAC',
+    key,
+    new TextEncoder().encode(`verify:${row.domain}:${row.email_key}`),
+  );
+  return `skaner-weryfikacja=${base64url(signature).slice(0, 32)}`;
+}
+
+async function txtRecordMatches(domain, expected) {
+  const query = `${dohUrl}?name=${encodeURIComponent(`_skaner.${domain}`)}&type=TXT`;
+  const response = await fetch(query, {
+    headers: { Accept: 'application/dns-json' },
+    signal: AbortSignal.timeout(5000),
+  }).catch(() => null);
+  if (!response?.ok) return false;
+  const answer = await response.json().catch(() => null);
+  return (answer?.Answer ?? []).some(
+    record => String(record.data ?? '').replace(/["\s]/g, '') === expected,
+  );
+}
+
+const bareHost = host => host.replace(/^www\./, '');
+
+async function fileAt(start, expected) {
+  let target = new URL(verifyFilePath, start);
+  const home = bareHost(target.hostname);
+  for (let hop = 0; hop <= maxVerifyRedirects; hop += 1) {
+    const response = await fetch(target.href, {
+      redirect: 'manual',
+      signal: AbortSignal.timeout(5000),
+    }).catch(() => null);
+    if (response?.status === 200) {
+      const text = await response.text().catch(() => '');
+      return text.slice(0, 256).trim() === expected;
+    }
+    const location = response?.headers.get('location');
+    if (!location || response.status < 300 || response.status >= 400) return false;
+    let next;
+    try {
+      next = new URL(location, target);
+    } catch {
+      return false;
+    }
+    if (next.protocol !== 'https:' || bareHost(next.hostname) !== home) return false;
+    target = next;
+  }
+  return false;
+}
+
+async function fileMatches(url, expected) {
+  const site = new URL(url);
+  if (await fileAt(`https://${site.host}`, expected)) return true;
+  return site.protocol === 'http:' ? fileAt(site.origin, expected) : false;
+}
+
+async function fullScanRow(env, key) {
+  if (!env.SCANS || !reportKeyPattern.test(key)) return null;
+  const row = await env.SCANS.prepare(
+    "SELECT id, url, domain, email, email_key, ip_hash, ua, page, report_expires, max_pages, verify_attempts FROM scans WHERE report_key = ? AND status = 'done'",
+  )
+    .bind(key)
+    .first();
+  if (!row || row.max_pages > 0) return null;
+  const expires = Date.parse(row.report_expires || '');
+  return Number.isFinite(expires) && expires < Date.now() ? null : row;
+}
+
+async function renderFullScanPage(env, key, row, failed) {
+  const value = await verificationValue(env, row);
+  return fullScanPage({
+    reportKey: key,
+    domain: row.domain,
+    host: new URL(row.url).host,
+    txtValue: value,
+    fileValue: value,
+    filePath: verifyFilePath,
+    failed,
+  });
+}
+
+async function showFullScan(env, key) {
+  const row = await fullScanRow(env, key);
+  if (!row) return statusPage('fullScanUnavailable', 404);
+  await countFunnel(env, 'full_page');
+  return renderFullScanPage(env, key, row, false);
+}
+
+async function requestFullScan(env, key, meter) {
+  const row = await fullScanRow(env, key);
+  if (!row || row.verify_attempts >= maxVerifyAttempts)
+    return statusPage('fullScanUnavailable', 404);
+  if (await meter.blocked(scanCost).catch(() => true))
+    return statusPage('fullScanUnavailable', 503);
+  await env.SCANS.prepare('UPDATE scans SET verify_attempts = verify_attempts + 1 WHERE id = ?')
+    .bind(row.id)
+    .run();
+  const value = await verificationValue(env, row);
+  const verified =
+    (await txtRecordMatches(row.domain, value)) || (await fileMatches(row.url, value));
+  if (!verified) {
+    await countFunnel(env, 'full_verify_failed');
+    return renderFullScanPage(env, key, row, true);
+  }
+  const now = new Date().toISOString();
+  const id = crypto.randomUUID();
+  const inserted = await env.SCANS.prepare(
+    `INSERT INTO scans (id, at, lang, url, domain, email, email_key, ip_hash, ua, status, confirm_token_hash, unsubscribe_token_hash, marketing, page, confirmed_at, sequence_step, max_pages, verified_at, parent_id)
+     SELECT ?, ?, 'pl', ?, ?, ?, ?, ?, ?, 'queued', ?, ?, 0, ?, ?, ?, ?, ?, ?
+     WHERE NOT EXISTS (SELECT 1 FROM scans WHERE domain = ? AND max_pages > 0 AND at > ? AND status != 'failed')`,
+  )
+    .bind(
+      id,
+      now,
+      row.url,
+      row.domain,
+      row.email,
+      row.email_key,
+      row.ip_hash,
+      row.ua,
+      await sha256(randomToken(32)),
+      await sha256(await unsubscribeToken(env, id)),
+      row.page,
+      now,
+      sequenceLength,
+      fullScanPages,
+      now,
+      row.id,
+      row.domain,
+      ago(fullScanEvery),
+    )
+    .run();
+  if (!inserted.meta?.changes) return statusPage('fullScanLimit', 429);
+  await countFunnel(env, 'full_queued');
+  return statusPage('fullScanQueued', 202);
+}
+
+async function bookingRedirect(env) {
+  await countFunnel(env, 'booking_click');
+  const target = /^https:\/\//.test(env.BOOKING_URL || '') ? env.BOOKING_URL : contactUrl;
+  return new Response(null, {
+    status: 302,
+    headers: { Location: target, 'Cache-Control': 'no-store', 'Referrer-Policy': 'no-referrer' },
+  });
+}
+
+async function scanStats(request, env) {
+  if (!(await statsAuthorized(request, env))) return new Response('Unauthorized', { status: 401 });
+  if (!env.SCANS) return new Response('Not configured', { status: 503 });
+  const since = utcDay(Date.now() - statsDays * day);
+  const [funnel, statuses, recent] = await env.SCANS.batch([
+    env.SCANS.prepare(
+      'SELECT day, event, value FROM funnel WHERE day >= ? ORDER BY day, event',
+    ).bind(since),
+    env.SCANS.prepare('SELECT status, COUNT(*) AS n FROM scans GROUP BY status'),
+    env.SCANS.prepare(
+      'SELECT at, domain, status, marketing, max_pages, summary_json FROM scans ORDER BY at DESC LIMIT 20',
+    ),
+  ]);
+  const totals = Object.fromEntries([...funnelEvents].map(event => [event, 0]));
+  for (const row of funnel.results) totals[row.event] = (totals[row.event] ?? 0) + row.value;
+  return plainJson({
+    generatedAt: new Date().toISOString(),
+    days: statsDays,
+    totals,
+    byDay: funnel.results,
+    statuses: Object.fromEntries(statuses.results.map(row => [row.status, row.n])),
+    recent: recent.results.map(row => {
+      const summary = parseSummary(row.summary_json);
+      return {
+        at: row.at,
+        domain: row.domain,
+        status: row.status,
+        marketing: row.marketing === 1,
+        full: row.max_pages > 0,
+        pages: summary?.pages ?? null,
+        violations: summary?.violations ?? null,
+        engine: summary?.engine ?? null,
+      };
+    }),
+  });
+}
+
+async function serveReport(env, key, meter, url) {
+  if (url.searchParams.get('format') === 'pdf') return servePdf(env, key, meter);
+  if (url.searchParams.get('pelny') === '1') return showFullScan(env, key);
   if (!env.REPORTS || !reportKeyPattern.test(key)) return statusPage('reportUnknown', 404);
   try {
     if (await meter.blocked({ kv_reads: 1 }, { maxAgeMs: snapshotMaxAgeMs }))
@@ -717,6 +1023,7 @@ async function serveReport(env, key, meter) {
     }
     return statusPage('reportExpired', 410);
   }
+  await countFunnel(env, 'report_view');
   return new Response(html, {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
@@ -740,8 +1047,9 @@ async function cleanup(env, meter) {
       .bind(now)
       .all();
     for (const row of results) {
-      if (await meter.blocked({ kv_writes: 1 }, { maxAgeMs: snapshotMaxAgeMs })) break;
+      if (await meter.blocked({ kv_writes: 2 }, { maxAgeMs: snapshotMaxAgeMs })) break;
       await env.REPORTS.delete(`reports/${row.report_key}.html`);
+      await env.REPORTS.delete(`pdfs/${row.id}.pdf`);
       await env.SCANS.prepare('UPDATE scans SET report_key = NULL WHERE id = ?').bind(row.id).run();
     }
   }
@@ -768,6 +1076,9 @@ async function cleanup(env, meter) {
     env.SCANS.prepare(`DELETE FROM scans WHERE ${expiredScans}`).bind(lastYear, lastYear, lastYear),
     env.SCANS.prepare('DELETE FROM usage WHERE day < ?').bind(
       utcDay(Date.now() - usageRetentionDays * day),
+    ),
+    env.SCANS.prepare('DELETE FROM funnel WHERE day < ?').bind(
+      utcDay(Date.now() - funnelRetentionDays * day),
     ),
   ]);
 }
@@ -868,11 +1179,17 @@ async function route(request, env, meter) {
     return handleConfirm(request, url, env);
   if (path === '/scan/unsubscribe' && (method === 'GET' || method === 'POST'))
     return handleUnsubscribe(request, url, env);
+  if (path === '/scan/book' && method === 'GET') return bookingRedirect(env);
+  if (path === '/scan/stats' && method === 'GET') return scanStats(request, env);
   if (path === '/scan/jobs/next' && method === 'GET') return nextJob(request, env);
+  const pdfUpload = path.match(/^\/scan\/jobs\/([^/]+)\/pdf$/);
+  if (pdfUpload && method === 'POST') return receivePdf(request, env, pdfUpload[1], meter);
   const result = path.match(/^\/scan\/jobs\/([^/]+)\/result$/);
   if (result && method === 'POST') return receiveResult(request, env, result[1], meter);
   const report = path.match(/^\/r\/([^/]+)$/);
-  if (report && method === 'GET') return serveReport(env, report[1], meter);
+  if (report && method === 'GET') return serveReport(env, report[1], meter, url);
+  const fullScan = path.match(/^\/r\/([^/]+)\/pelny$/);
+  if (fullScan && method === 'POST') return requestFullScan(env, fullScan[1], meter);
   return new Response('Not found', { status: 404 });
 }
 

@@ -23,7 +23,11 @@ CREATE TABLE IF NOT EXISTS scans (
   unsubscribed_at TEXT,
   page TEXT NOT NULL DEFAULT '',
   sequence_step INTEGER NOT NULL DEFAULT 0,
-  sequence_sent_at TEXT
+  sequence_sent_at TEXT,
+  max_pages INTEGER NOT NULL DEFAULT 0,
+  verified_at TEXT,
+  parent_id TEXT,
+  verify_attempts INTEGER NOT NULL DEFAULT 0
 );
 CREATE INDEX IF NOT EXISTS scans_domain_at ON scans (domain, at);
 CREATE INDEX IF NOT EXISTS scans_ip_at ON scans (ip_hash, at);
@@ -53,4 +57,11 @@ CREATE TABLE IF NOT EXISTS usage (
   metric TEXT NOT NULL,
   value INTEGER NOT NULL,
   PRIMARY KEY (day, metric)
+) WITHOUT ROWID;
+
+CREATE TABLE IF NOT EXISTS funnel (
+  day TEXT NOT NULL,
+  event TEXT NOT NULL,
+  value INTEGER NOT NULL,
+  PRIMARY KEY (day, event)
 ) WITHOUT ROWID;
