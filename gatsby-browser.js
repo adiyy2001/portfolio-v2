@@ -12,6 +12,7 @@ import './src/styles/service.css';
 import './src/styles/guide.css';
 import './src/styles/quote.css';
 import './src/styles/scan.css';
+import './src/styles/pattern.css';
 import { keepScroll } from './src/components/layout';
 import { captureSource } from './src/source';
 import { trackClicks, trackPage, watchPage } from './src/track';
