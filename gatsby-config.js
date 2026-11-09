@@ -37,6 +37,7 @@ module.exports = {
           '/en/contact/',
           '/wycena/wyslano/',
           '/en/quote/sent/',
+          '/archive/psi-pawer/',
         ],
         query: `
           {
