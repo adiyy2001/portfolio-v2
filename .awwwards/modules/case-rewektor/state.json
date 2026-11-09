@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "phaseList": [
+    "read",
+    "goal",
+    "idea",
+    "content",
+    "build",
+    "craft",
+    "verify"
+  ],
+  "brief": "case study ReWektor: strona i panel CMS dla stolarza",
+  "mode": "auto",
+  "goal": "portfolio",
+  "level": "standard",
+  "createdAt": "2026-11-09T22:19:19.071Z",
+  "phases": {
+    "read": {
+      "status": "done",
+      "startedAt": "2026-11-09T22:19:19.071Z",
+      "doneAt": "2026-11-09T22:19:19.150Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "goal": {
+      "status": "done",
+      "startedAt": "2026-11-09T22:19:19.150Z",
+      "doneAt": "2026-11-09T22:19:19.169Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "idea": {
+      "status": "done",
+      "startedAt": "2026-11-09T22:19:19.169Z",
+      "doneAt": "2026-11-09T22:33:14.641Z",
+      "score": null,
+      "artifacts": []
+    },
+    "content": {
+      "status": "done",
+      "startedAt": "2026-11-09T22:33:14.642Z",
+      "doneAt": "2026-11-09T22:47:29.735Z",
+      "score": null,
+      "artifacts": []
+    },
+    "build": {
+      "status": "done",
+      "startedAt": "2026-11-09T22:47:29.735Z",
+      "doneAt": "2026-11-09T23:29:43.668Z",
+      "score": 7.9,
+      "artifacts": []
+    },
+    "craft": {
+      "status": "done",
+      "startedAt": "2026-11-09T23:29:43.668Z",
+      "doneAt": "2026-11-09T23:29:43.689Z",
+      "score": 7.9,
+      "artifacts": []
+    },
+    "verify": {
+      "status": "done",
+      "startedAt": "2026-11-09T23:29:43.689Z",
+      "doneAt": "2026-11-09T23:29:43.710Z",
+      "score": null,
+      "artifacts": []
+    }
+  },
+  "decisions": [],
+  "blocked": null,
+  "updatedAt": "2026-11-09T23:29:43.710Z",
+  "ambition": "stage"
+}
