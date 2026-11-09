@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "phaseList": [
+    "read",
+    "goal",
+    "idea",
+    "content",
+    "build",
+    "craft",
+    "verify"
+  ],
+  "brief": "case study Psi Pawer, metamorfoza przed i po: wydajnosc plus krotko SEO",
+  "mode": "auto",
+  "goal": "portfolio",
+  "level": "standard",
+  "createdAt": "2026-11-09T10:16:32.857Z",
+  "phases": {
+    "read": {
+      "status": "done",
+      "startedAt": "2026-11-09T10:16:32.858Z",
+      "doneAt": "2026-11-09T10:23:45.831Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "goal": {
+      "status": "done",
+      "startedAt": "2026-11-09T10:23:45.832Z",
+      "doneAt": "2026-11-09T10:25:19.664Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "idea": {
+      "status": "done",
+      "startedAt": "2026-11-09T10:25:19.664Z",
+      "doneAt": "2026-11-09T22:10:37.562Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "content": {
+      "status": "done",
+      "startedAt": "2026-11-09T22:10:37.563Z",
+      "doneAt": "2026-11-09T22:20:47.342Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "build": {
+      "status": "done",
+      "startedAt": "2026-11-09T22:20:47.342Z",
+      "doneAt": "2026-11-09T22:20:47.360Z",
+      "score": 7.56,
+      "artifacts": []
+    },
+    "craft": {
+      "status": "done",
+      "startedAt": "2026-11-09T22:20:47.360Z",
+      "doneAt": "2026-11-09T22:20:47.378Z",
+      "score": 7.56,
+      "artifacts": []
+    },
+    "verify": {
+      "status": "done",
+      "startedAt": "2026-11-09T22:20:47.378Z",
+      "doneAt": "2026-11-09T22:32:18.928Z",
+      "score": null,
+      "artifacts": []
+    }
+  },
+  "decisions": [
+    {
+      "phase": "idea",
+      "what": "A Przeroebka with critic fixes",
+      "why": "owner order 09.11 23:10 resume prompt: take recommended A",
+      "by": "agent",
+      "at": "2026-11-09T22:10:37.542Z"
+    }
+  ],
+  "blocked": null,
+  "updatedAt": "2026-11-09T22:32:18.928Z",
+  "ambition": "stage"
+}

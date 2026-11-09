@@ -29,6 +29,11 @@ const exceptions = [
   { match: 'wycena/wyslano/index.html', reason: 'thank-you page after the form', noindex: true },
   { match: 'en/quote/sent/index.html', reason: 'thank-you page after the form', noindex: true },
   {
+    match: 'archive/psi-pawer/index.html',
+    reason: 'case study waiting for the client consent, unlinked and kept out of search',
+    noindex: true,
+  },
+  {
     match: /^wzornik\/identyfikacja\/[^/]+\/email\/[^/]+-email-signature\.html$/,
     reason: 'e-mail signature file from the identity downloads, not a page',
   },
