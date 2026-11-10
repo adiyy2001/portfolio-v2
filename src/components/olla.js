@@ -362,7 +362,7 @@ export default function Olla() {
           </h1>
         </div>
         <div className="olla-hero__text">
-          <p className="proj__tag">Prawdziwe wdrożenie, sklep na Shopify</p>
+          <p className="proj__tag">Sklep na Shopify</p>
           <p className="proj__meta">{tie('Olla Bag Ltd, Wielka Brytania')}</p>
           <p className="lead olla-hero__lead">
             {tie(

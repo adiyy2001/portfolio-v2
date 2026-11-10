@@ -332,7 +332,7 @@ export default function Rewektor() {
         </div>
         <Pattern>
           <div className="pat-hero__text">
-            <p className="proj__tag">Prawdziwe wdrożenie, strona i panel</p>
+            <p className="proj__tag">Strona i panel</p>
             <p className="proj__meta">{tie('Rodzinna firma stolarska z Wrocławia')}</p>
             <p className="lead pat-hero__lead">
               {tie(

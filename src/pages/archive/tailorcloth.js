@@ -22,7 +22,7 @@ export default function Case() {
           <span>Wszystkie projekty</span>
         </Link>
         <p className="proj__tag" data-rise style={{ '--r': 1 }}>
-          Prawdziwe wdrożenie
+          Strona i platforma zamówień
         </p>
         <p className="proj__meta" data-rise style={{ '--r': 2 }}>
           Firma krawiecka z Krakowa

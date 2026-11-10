@@ -338,7 +338,7 @@ export default function BudujZdrowo() {
           </figure>
 
           <div className="bz-hero__card">
-            <p className="proj__tag">Prawdziwe wdrożenie, strona wykonawcy domów szkieletowych</p>
+            <p className="proj__tag">Strona wykonawcy domów szkieletowych</p>
             <p className="proj__meta">
               {tie('Zdrowa Budowa, firma budująca domy szkieletowe i murowane, Mazowsze')}
             </p>

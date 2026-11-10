@@ -281,7 +281,7 @@ export default function Alteration() {
           </h1>
         </div>
         <div className="alt-hero__text">
-          <p className="proj__tag">Prawdziwe wdrożenie, przeróbka</p>
+          <p className="proj__tag">Przeróbka strony</p>
           <p className="proj__meta">{tie('Behawiorystka psów z Wrocławia')}</p>
           <p className="lead alt-hero__lead">
             {tie(

@@ -22,7 +22,7 @@ export default function Case() {
           <span>All projects</span>
         </Link>
         <p className="proj__tag" data-rise style={{ '--r': 1 }}>
-          A real project
+          Website and order platform
         </p>
         <p className="proj__meta" data-rise style={{ '--r': 2 }}>
           A tailoring company from Kraków
