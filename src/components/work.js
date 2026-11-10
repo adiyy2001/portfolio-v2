@@ -249,6 +249,44 @@ export default function Work({ lang }) {
             />
           </div>
         )}
+        {lang === 'pl' && (
+          <div className="work__row work__row--also">
+            <img
+              className="work__also"
+              src={withPrefix('/media/psipawer/strona.webp')}
+              width="1200"
+              height="595"
+              loading="lazy"
+              decoding="async"
+              alt="Nowa strona główna Psi Pawer z nagłówkiem Pracuję z wariatami"
+            />
+            <Reveal className="work__text">
+              <p className="work__tag">{tie('Prawdziwe wdrożenie, przeróbka strony')}</p>
+              <h2 className="work__name" id="work-psipawer-h">
+                <Link className="work__link" to="/archive/psi-pawer/">
+                  Psi Pawer
+                </Link>
+              </h2>
+              <p className="work__meta">{tie('Behawiorystka psów z Wrocławia')}</p>
+              <p className="work__desc">
+                {tie(
+                  'Stara strona na Wixie wzięta do przeróbki: nowy krój, czytelna oferta i pomiary przed i po, także te gorsze.',
+                )}
+              </p>
+              <p className="work__tech">Wix Harmony, Lighthouse, schema.org</p>
+              <p className="work__go" aria-hidden="true">
+                <span>{t.go}</span>
+                {arrow}
+              </p>
+            </Reveal>
+            <Link
+              className="work__cover"
+              to="/archive/psi-pawer/"
+              aria-hidden="true"
+              tabIndex={-1}
+            />
+          </div>
+        )}
       </section>
       <Repos lang={lang} id="work-repos" />
       <section className="paper work__swatches" aria-labelledby="work-sw-h">

@@ -18,6 +18,5 @@ export const Head = () => (
     path="/archive/psi-pawer/"
     title="Psi Pawer: przeróbka strony behawiorystki psów, Adrian Turbiński"
     description="Przed i po: nowy krój strony na Wixie, krótsze metki w Google i pomiary Lighthouse, także te, które wyszły gorzej."
-    noindex
   />
 );
