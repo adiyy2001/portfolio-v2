@@ -273,7 +273,7 @@ export default function EnterAuto() {
           </span>
         </h1>
         <div className="ea-hero__text">
-          <p className="proj__tag">Prawdziwe wdrożenie, strona skupu aut z formularzem wyceny</p>
+          <p className="proj__tag">Strona skupu aut z formularzem wyceny</p>
           <p className="proj__meta">
             {tie('Enter Auto, skup i złomowanie aut, Wrocław i Dolny Śląsk')}
           </p>

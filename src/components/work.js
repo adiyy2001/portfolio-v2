@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { Link, withPrefix } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
-import Also from './also';
+import { cases } from './also';
+import Cases from './cases';
 import Repos from './repos';
 import Reveal from './reveal';
 import Shot from './shot';
@@ -100,10 +101,12 @@ const copy = {
   ],
   pl: {
     anchor: 'wzornik',
-    tag: 'Prawdziwe wdrożenie',
+    tag: 'Strona i platforma zamówień',
     meta: 'Firma krawiecka z Krakowa',
     desc: 'Strona na Odoo i własne moduły do zarządzania produktami. Do tego zamawianie bez cen, pod indywidualne oferty.',
     go: 'Zobacz projekt',
+    gridTitle: 'Realizacje dla firm',
+    showMore: 'Pokaż więcej',
     swTitle: 'Wzornik.',
     swLead:
       'Dziesięć przykładowych stron dla zmyślonych firm z różnych branż. Każda skrojona inaczej i każda działa.',
@@ -138,10 +141,12 @@ const copy = {
   },
   en: {
     anchor: 'swatch-book',
-    tag: 'A real project',
+    tag: 'Website and order platform',
     meta: 'A tailoring company from Kraków',
     desc: 'A website on Odoo with custom product management modules. Plus ordering without prices, for individual offers.',
     go: 'See the project',
+    gridTitle: 'Projects for companies',
+    showMore: 'Show more',
     swTitle: 'Swatch book.',
     swLead:
       'Ten sample websites for made-up businesses in different trades. Each one cut differently, and each one works.',
@@ -187,33 +192,32 @@ export default function Work({ lang }) {
   const t = copy[lang];
   const reduce = useReducedMotion();
   const list = useRef(null);
+  const items = [
+    {
+      id: 'work-tailorcloth-h',
+      to: routes.case[lang],
+      name: copy.name,
+      view: 'wide',
+      shot: <Shot lang={lang} sizes={copy.sizes} />,
+      tag: t.tag,
+      meta: t.meta,
+      desc: t.desc,
+      tech: copy.tech,
+    },
+    ...(lang === 'pl' ? cases : []),
+  ];
   const wzornik = `${routes.home[lang]}#${t.anchor}`;
   useFaces(list);
 
   return (
     <>
-      <section className="work__pick" aria-labelledby="work-pick-h">
-        <div className="work__row">
-          <Shot lang={lang} sizes={copy.sizes} />
-          <Reveal className="work__text">
-            <p className="work__tag">{tie(t.tag)}</p>
-            <h2 className="work__name" id="work-pick-h">
-              <Link className="work__link" to={routes.case[lang]}>
-                {copy.name}
-              </Link>
-            </h2>
-            <p className="work__meta">{tie(t.meta)}</p>
-            <p className="work__desc">{tie(t.desc)}</p>
-            <p className="work__tech">{copy.tech}</p>
-            <p className="work__go" aria-hidden="true">
-              <span>{t.go}</span>
-              {arrow}
-            </p>
-          </Reveal>
-          <Link className="work__cover" to={routes.case[lang]} aria-hidden="true" tabIndex={-1} />
-        </div>
-        {lang === 'pl' && <Also go={t.go} />}
-      </section>
+      <Cases
+        items={items}
+        go={t.go}
+        title={t.gridTitle}
+        titleId="work-pick-h"
+        moreLabel={t.showMore}
+      />
       <Repos lang={lang} id="work-repos" />
       <section className="paper work__swatches" aria-labelledby="work-sw-h">
         <div className="sec-head">
