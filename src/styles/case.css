@@ -233,3 +233,7 @@
 html:not(.motion) .sign__stroke {
   animation: settle-sign 0s 6s forwards;
 }
+
+.case__also {
+  margin-top: clamp(50px, 7vw, 100px);
+}
