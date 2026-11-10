@@ -330,3 +330,50 @@
     display: none;
   }
 }
+
+.quote__optional {
+  font: 400 0.95rem/1 var(--text);
+  letter-spacing: 0;
+  color: rgba(47, 55, 67, 0.85);
+}
+
+.quote__more {
+  padding: 18px 0 0;
+}
+
+.quote__more .link {
+  padding: 4px 0;
+  min-height: 24px;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.nudge {
+  padding: 0 var(--pad) clamp(70px, 8vw, 120px);
+}
+
+.nudge__h {
+  font: 700 clamp(1.9rem, 3.4vw, 3.4rem) / 1 var(--display);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.nudge__text {
+  margin-top: 14px;
+  max-width: 30em;
+  font: 400 clamp(1.0625rem, 1.3vw, 1.25rem) / 1.5 var(--text);
+  color: var(--chalk-dim);
+  text-wrap: pretty;
+}
+
+.nudge__call {
+  font: 400 1.0625rem/1.4 var(--text);
+}
+
+.nudge__call a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import Nudge from '../../components/nudge';
 import Case from '../../components/case';
 import Close from '../../components/close';
 import Fit from '../../components/fit';
@@ -51,10 +52,11 @@ export default function Client() {
           {tie(copy.lead2)}
         </p>
       </Hero>
-      <Scene lang="en" />
-      <Fit lang="en" />
       <ServiceRack lang="en" />
       <Case lang="en" />
+      <Nudge lang="en" />
+      <Scene lang="en" />
+      <Fit lang="en" />
       <Wzornik lang="en" />
       <Close lang="en" edition="cli" />
     </>
