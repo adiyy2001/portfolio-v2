@@ -19,6 +19,16 @@
   background-size: 100% 1px;
 }
 
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 4px 24px;
+}
+
+.menu__cv {
+  display: none;
+}
+
 .hero--post {
   min-height: 0;
   padding-bottom: 0;
@@ -415,6 +425,25 @@
 @media (max-width: 899px) {
   .top:has(.top__blog):has(.lang) {
     grid-template-columns: 1fr auto auto;
+  }
+
+  .top--cli .menu {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    flex-wrap: wrap;
+    gap: 2px clamp(10px, 3.6vw, 18px);
+  }
+
+  .top--cli .menu .top__blog {
+    font-size: 0.9rem;
+  }
+
+  .top--cli .ed {
+    display: none;
+  }
+
+  .top--cli .menu__cv {
+    display: inline;
   }
 
   .title--post {

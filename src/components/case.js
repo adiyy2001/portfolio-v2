@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import { m, useReducedMotion, useSpring } from 'framer-motion';
+import Also from './also';
 import Reveal from './reveal';
 import Split from './split';
 import { routes, tie } from '../i18n';
@@ -12,8 +13,8 @@ const copy = {
   tech: 'Odoo, Python, JavaScript, PostgreSQL',
   pl: {
     title: 'Na miarę, dosłownie.',
-    label: 'Realizacja: aplikacja dla firmy krawieckiej',
-    lead: 'Aplikację na miarę zrobiliśmy już dla firmy krawieckiej.',
+    label: 'Realizacje dla firm',
+    lead: 'Aplikacja dla firmy krawieckiej, strona z panelem dla stolarza i przeróbka strony behawiorystki.',
     alt: 'Formularz zamówienia koszuli na miarę w platformie TailorCloth: tkanina główna, tkanina kontrastowa i miejsce kontrastu na kołnierzu',
     caption: 'Formularz zamówienia na miarę, zrzut z tailorcloth.com',
     kind: 'Prawdziwe wdrożenie',
@@ -133,6 +134,11 @@ export default function Case({ lang }) {
           </div>
         </Reveal>
       </article>
+      {lang === 'pl' && (
+        <div className="case__also">
+          <Also go={t.more} as="h3" />
+        </div>
+      )}
     </section>
   );
 }

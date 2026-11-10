@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Link, withPrefix } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
+import Also from './also';
 import Repos from './repos';
 import Reveal from './reveal';
 import Shot from './shot';
@@ -211,82 +212,7 @@ export default function Work({ lang }) {
           </Reveal>
           <Link className="work__cover" to={routes.case[lang]} aria-hidden="true" tabIndex={-1} />
         </div>
-        {lang === 'pl' && (
-          <div className="work__row work__row--also">
-            <img
-              className="work__also"
-              src={withPrefix('/media/rewektor/strona.webp')}
-              width="1200"
-              height="595"
-              loading="lazy"
-              decoding="async"
-              alt="Strona rewektor.com.pl z wpisem Stolik z maszyny"
-            />
-            <Reveal className="work__text">
-              <p className="work__tag">{tie('Prawdziwe wdrożenie, strona i panel')}</p>
-              <h2 className="work__name" id="work-also-h">
-                <Link className="work__link" to="/archive/rewektor/">
-                  ReWektor
-                </Link>
-              </h2>
-              <p className="work__meta">{tie('Rodzinna firma stolarska z Wrocławia')}</p>
-              <p className="work__desc">
-                {tie(
-                  'Strona z wystawą odnowionych mebli i panel, w którym właściciel sam dodaje kolejne. Te same pola w panelu i na stronie.',
-                )}
-              </p>
-              <p className="work__tech">PHP, MySQL, JavaScript, GSAP</p>
-              <p className="work__go" aria-hidden="true">
-                <span>{t.go}</span>
-                {arrow}
-              </p>
-            </Reveal>
-            <Link
-              className="work__cover"
-              to="/archive/rewektor/"
-              aria-hidden="true"
-              tabIndex={-1}
-            />
-          </div>
-        )}
-        {lang === 'pl' && (
-          <div className="work__row work__row--also">
-            <img
-              className="work__also"
-              src={withPrefix('/media/psipawer/strona.webp')}
-              width="1200"
-              height="595"
-              loading="lazy"
-              decoding="async"
-              alt="Nowa strona główna Psi Pawer z nagłówkiem Pracuję z wariatami"
-            />
-            <Reveal className="work__text">
-              <p className="work__tag">{tie('Prawdziwe wdrożenie, przeróbka strony')}</p>
-              <h2 className="work__name" id="work-psipawer-h">
-                <Link className="work__link" to="/archive/psi-pawer/">
-                  Psi Pawer
-                </Link>
-              </h2>
-              <p className="work__meta">{tie('Behawiorystka psów z Wrocławia')}</p>
-              <p className="work__desc">
-                {tie(
-                  'Stara strona na Wixie wzięta do przeróbki: nowy krój, czytelna oferta i pomiary przed i po, także te gorsze.',
-                )}
-              </p>
-              <p className="work__tech">Wix Harmony, Lighthouse, schema.org</p>
-              <p className="work__go" aria-hidden="true">
-                <span>{t.go}</span>
-                {arrow}
-              </p>
-            </Reveal>
-            <Link
-              className="work__cover"
-              to="/archive/psi-pawer/"
-              aria-hidden="true"
-              tabIndex={-1}
-            />
-          </div>
-        )}
+        {lang === 'pl' && <Also go={t.go} />}
       </section>
       <Repos lang={lang} id="work-repos" />
       <section className="paper work__swatches" aria-labelledby="work-sw-h">

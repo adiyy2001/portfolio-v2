@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { useGuides } from './guides';
 import { usePosts } from './posts';
+import { quoteId } from './quote';
 import { blogPath, guidePath, routes, ui } from '../i18n';
 import { letters, needle } from '../wordmark';
 
@@ -9,9 +10,10 @@ export default function Header({ lang, view }) {
   const t = ui[lang];
   const here = routes[view] || routes.home;
   const hasBlog = usePosts().length > 0;
+  const client = view !== 'rec';
   const showGuide = useGuides().length > 0 && lang === 'pl' && view !== 'rec';
   return (
-    <header className="top">
+    <header className={client ? 'top top--cli' : 'top'}>
       <Link className="mark" to={routes.home[lang]} aria-label={t.markAria}>
         <svg className="wm" viewBox="0 60 5000 880" aria-hidden="true" focusable="false">
           <path d={letters} />
@@ -31,23 +33,56 @@ export default function Header({ lang, view }) {
           {t.edCli}
         </Link>
       </nav>
-      {showGuide && (
-        <Link
-          className="top__blog"
-          to={guidePath}
-          aria-current={view === 'guide' ? 'page' : undefined}>
-          Poradnik
-        </Link>
-      )}
-      {hasBlog && !showGuide && (
-        <Link
-          className="top__blog"
-          to={blogPath}
-          hrefLang="en"
-          aria-current={view === 'blog' ? 'page' : undefined}>
-          Blog
-        </Link>
-      )}
+      <nav className="menu" aria-label={t.menuAria}>
+        {client && (
+          <>
+            <Link
+              className="top__blog"
+              to={routes.services[lang]}
+              aria-current={
+                view === 'services' || String(view).startsWith('svc-') ? 'page' : undefined
+              }>
+              {t.menuServices}
+            </Link>
+            <Link
+              className="top__blog"
+              to={routes.work[lang]}
+              aria-current={view === 'work' ? 'page' : undefined}>
+              {t.menuWork}
+            </Link>
+          </>
+        )}
+        {showGuide && (
+          <Link
+            className="top__blog"
+            to={guidePath}
+            aria-current={view === 'guide' ? 'page' : undefined}>
+            Poradnik
+          </Link>
+        )}
+        {hasBlog && !showGuide && (
+          <Link
+            className="top__blog"
+            to={blogPath}
+            hrefLang="en"
+            aria-current={view === 'blog' ? 'page' : undefined}>
+            Blog
+          </Link>
+        )}
+        {client && (
+          <>
+            <a
+              className="top__blog"
+              href={`${routes.home[lang]}#${quoteId[lang]}`}
+              data-cta="nav-quote">
+              {t.menuContact}
+            </a>
+            <Link className="top__blog menu__cv" to={routes.rec[lang]}>
+              CV
+            </Link>
+          </>
+        )}
+      </nav>
       {!['blog', 'guide', 'brief'].includes(view) && (
         <nav className="lang" aria-label={t.langAria}>
           {['pl', 'en'].map(l => (
