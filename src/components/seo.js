@@ -35,14 +35,15 @@ const crumbLabels = {
   },
 };
 
-const crumbTrail = ({ lang, view, title, canonical, post, code }) => {
+const crumbTrail = ({ lang, view, title, canonical, post, code, client }) => {
   const labels = crumbLabels[lang];
   const home = [labels.home, routes.home[lang]];
   const section = view === 'guide' ? [labels.guide, guidePath] : [labels.blog, blogPath];
   if (post && view !== 'brief') return [home, section, [post.headline, canonical]];
   if (view === 'blog' || view === 'guide') return [home, [section[0], canonical]];
-  if (code || view === 'case') {
-    return [home, [labels.work, routes.work[lang]], [code?.name ?? 'TailorCloth', canonical]];
+  if (code || client || view === 'case') {
+    const name = code?.name ?? client?.name ?? 'TailorCloth';
+    return [home, [labels.work, routes.work[lang]], [name, canonical]];
   }
   if (view === 'work') return [home, [labels.work, canonical]];
   if (view?.startsWith('svc-')) {
@@ -53,6 +54,14 @@ const crumbTrail = ({ lang, view, title, canonical, post, code }) => {
   }
   return null;
 };
+
+const profiles = [
+  'https://www.linkedin.com/in/adrianturbinski',
+  'https://www.facebook.com/adrianturbinskipl',
+  'https://www.instagram.com/adrianturbinski.pl/',
+  'https://www.tiktok.com/@adrianturbinski',
+  'https://www.youtube.com/@adrianturbinski',
+];
 
 const amount = price => Number(price.replace(/\D/g, ''));
 
@@ -65,7 +74,19 @@ const ogView = view =>
       ? 'cli'
       : view;
 
-const graph = ({ url, lang, view, title, description, canonical, image, post, code, service }) => {
+const graph = ({
+  url,
+  lang,
+  view,
+  title,
+  description,
+  canonical,
+  image,
+  post,
+  code,
+  service,
+  client,
+}) => {
   const person = {
     '@type': 'Person',
     '@id': url('/#adrian'),
@@ -75,6 +96,10 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
     telephone: phone.intl,
     jobTitle:
       lang === 'pl' ? 'Programista front-end i full-stack' : 'Front-end and full-stack developer',
+    description:
+      lang === 'pl'
+        ? 'Freelancer z Wrocławia. Buduje aplikacje webowe i strony dla firm, automatyzuje procesy, łączy systemy z KSeF, audytuje dostępność WCAG i utrzymuje istniejące aplikacje.'
+        : 'Freelance web developer from Wrocław, Poland. He builds web applications and websites for companies, automates business processes, connects systems to KSeF, audits WCAG accessibility and maintains existing apps.',
     address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
     knowsAbout: [
       'Angular',
@@ -87,11 +112,7 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
       'WCAG',
     ],
     workLocation: { '@type': 'City', name: 'Wrocław' },
-    sameAs: [
-      'https://www.linkedin.com/in/adrianturbinski',
-      'https://github.com/adiyy2001',
-      'https://dev.to/adrianturbinski',
-    ],
+    sameAs: [...profiles, 'https://github.com/adiyy2001', 'https://dev.to/adrianturbinski'],
   };
   const site = {
     '@type': 'WebSite',
@@ -125,6 +146,14 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
       email: 'mailto:adrian.turbinski@gmail.com',
       telephone: phone.intl,
       priceRange: lang === 'pl' ? 'od 300 zł do 80 000 zł' : 'PLN 300 to PLN 80,000',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        email: 'adrian.turbinski@gmail.com',
+        telephone: phone.intl,
+        availableLanguage: ['pl', 'en'],
+        areaServed: 'PL',
+      },
       founder: { '@id': person['@id'] },
       address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
       areaServed: [
@@ -139,14 +168,7 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
         opens: '09:00',
         closes: '18:00',
       },
-      sameAs: [
-        'https://maps.google.com/?cid=14709967096891217800',
-        'https://www.facebook.com/adrianturbinskipl',
-        'https://www.linkedin.com/in/adrianturbinski',
-        'https://www.instagram.com/adrianturbinski.pl/',
-        'https://www.tiktok.com/@adrianturbinski',
-        'https://www.youtube.com/@adrianturbinski',
-      ],
+      sameAs: ['https://maps.google.com/?cid=14709967096891217800', ...profiles],
       serviceType: serviceKeys.map(key => services[key][lang].name),
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
@@ -232,6 +254,34 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
       about: { '@type': 'Organization', name: 'TailorCloth', url: 'https://tailorcloth.com/' },
     });
   }
+  if (client) {
+    page.mainEntity = { '@id': `${url(canonical)}#work` };
+    nodes.push({
+      '@type': 'CreativeWork',
+      '@id': `${url(canonical)}#work`,
+      name: client.name,
+      description,
+      inLanguage: lang,
+      url: url(canonical),
+      creator: { '@id': person['@id'] },
+      about: { '@type': 'Organization', name: client.name, url: client.site },
+    });
+  }
+  if (view === 'scan') {
+    page.mainEntity = { '@id': `${url(canonical)}#app` };
+    nodes.push({
+      '@type': 'WebApplication',
+      '@id': `${url(canonical)}#app`,
+      name: 'Skaner dostępności',
+      description,
+      inLanguage: lang,
+      url: url(canonical),
+      applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'Web',
+      offers: { '@type': 'Offer', price: 0, priceCurrency: 'PLN' },
+      provider: { '@id': person['@id'] },
+    });
+  }
   if (code) {
     const work = `${url(canonical)}#code`;
     page.mainEntity = { '@id': work };
@@ -282,7 +332,7 @@ const graph = ({ url, lang, view, title, description, canonical, image, post, co
       })),
     });
   }
-  const trail = crumbTrail({ lang, view, title, canonical, post, code });
+  const trail = crumbTrail({ lang, view, title, canonical, post, code, client });
   if (trail) {
     page.breadcrumb = { '@id': `${url(canonical)}#breadcrumb` };
     nodes.push({
@@ -309,6 +359,7 @@ export default function Seo({
   post,
   code,
   service,
+  client,
 }) {
   const { site } = useStaticQuery(graphql`
     query {
@@ -375,7 +426,19 @@ export default function Seo({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(
-              graph({ url, lang, view, title, description, canonical, image, post, code, service }),
+              graph({
+                url,
+                lang,
+                view,
+                title,
+                description,
+                canonical,
+                image,
+                post,
+                code,
+                service,
+                client,
+              }),
             ).replace(/</g, '\\u003c'),
           }}
         />

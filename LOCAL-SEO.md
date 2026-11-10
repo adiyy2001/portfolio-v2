@@ -17,7 +17,7 @@ Texts to paste by hand into business directories and the Google Business Profile
 | Main category    | the same as the GBP main category (check in business.google.com)                     |
 | Other categories | Usługi informatyczne, then whatever the directory offers closest to web design       |
 | Hours            | Mon to Fri 9:00 to 18:00, as in the Google Business Profile                          |
-| LinkedIn         | https://www.linkedin.com/in/adrianturbinski                          |
+| LinkedIn         | https://www.linkedin.com/in/adrianturbinski                                          |
 | Logo             | `static/favicon.svg`, GBP avatar PNG in `C:\Users\Adrian\Downloads\wizytowka-google` |
 
 ## Short description (up to 160 characters)
@@ -54,7 +54,7 @@ Free listings first. Status as of 2026-10-26.
 | Clutch                          | B2B buyers, reviews later                            | dofollow on profile | skipped (needs street address)                         |
 | GoodFirms                       | same audience as Clutch                              | profile             | skipped (requires AI tools section)                    |
 | Cylex (cylex-polska.pl)         | citation consistency                                 | nofollow            | done 26.10, Facebook login, street hidden, id 14527389 |
-| Facebook page                   | NAP plus a link, used by Bing                        | profile             | done 26.10, facebook.com/adrianturbinskipl |
+| Facebook page                   | NAP plus a link, used by Bing                        | profile             | done 26.10, facebook.com/adrianturbinskipl             |
 | LinkedIn company page           | NAP, links to services                               | profile             | skipped, personal profile is used                      |
 
 Skip paid "premium" packages and directories that ask for a backlink in return.
@@ -122,6 +122,46 @@ Done with the `cro` and `ai-seo` skills on the live site after the quote form re
 3. Language models cite pages that answer one question directly. The Polish client guide planned in `BLOG.md` is the way to get there; its first two articles (website price, Google Maps) are the next content step.
 4. Third-party mentions are thin: no directory listings and no reviews yet. The directory list above covers this.
 5. Check monthly: ask ChatGPT, Perplexity and Gemini "programista strony internetowe Wrocław" and "audyt WCAG Wrocław" and note whether the site is cited.
+
+## AI visibility check, 2026-11-10
+
+State measured that day, before the `feature/ai-visibility` branch went live.
+
+- Google: 49 of 63 sitemap URLs indexed (`gsa inspect`). The 14 missing ones, `/skaner/`, `/poradnik/` and `/archive/psi-pawer/` among them, were sent with `gsa push` (14 of 14 accepted). Search Console, 28 days: about 20 clicks, 14 of them on the home page for the name; Poradnik articles sit at positions 40 to 97.
+- Bing Webmaster Tools (sign in with Google in the debug Chrome): sitemap read with 59 URLs, IndexNow fires on every deploy, 20 impressions and 0 clicks in two weeks, 6 Copilot citations on 2026-11-07 in the AI Performance report. Backlinks: 3 referring domains (dev.to, hackertab.dev, linkedin.com). Links and mentions are the bottleneck, not crawling.
+- Perplexity, one run per prompt in the debug Chrome without login, so a first reading and not a rate:
+
+| Prompt                                                                 | Site cited | Domains cited                                                     |
+| ---------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------- |
+| Kto we Wrocławiu zrobi integrację własnego systemu albo sklepu z KSeF? | no         | starlit.pl, ksef.coderia.pl, oferteo.pl, kcmobile.pl, mitgroup.pl |
+| Jak połączyć własny program do faktur z KSeF przez API?                | no         | ksef.podatki.gov.pl                                               |
+| Audyt WCAG Wrocław: kto robi i ile kosztuje?                           | no         | designsolutions.pl, oferteo.pl, verscala.com, studiokalmus.com    |
+| Darmowy skaner dostępności strony WCAG z raportem po polsku            | no         | sprawdzwcag.pl, accessibot.pl, eye-able.com, getwcag.com          |
+| Ile kosztuje strona internetowa dla małej firmy w 2026 roku?           | no         | none shown                                                        |
+| Freelancer programista Wrocław strona internetowa dla firmy            | no         | zleca.pl, oferteo.pl                                              |
+| Ile kosztuje aplikacja webowa dla firmy na zamówienie?                 | no         | grodev.pl, ai-gluon.com                                           |
+| Adrian Turbiński programista Wrocław, czym się zajmuje                 | yes        | adrianturbinski.pl                                                |
+
+Oferteo is cited for three of the seven non-brand prompts, so an Oferteo profile is the first listing to add once the owner agrees to give the data it asks for. Repeat the table monthly with `gsa chrome run pplx.js --Q <json list of prompts>`, three runs per prompt.
+
+Done on the branch: `llms.txt` lists the scanner, ReWektor and Psi Pawer and points to a new `llms-full.txt` (services in both languages with prices and questions, the Poradnik and the blog, written in `onPostBuild`); `WebApplication` data on `/skaner/`, `CreativeWork` on the two client case studies, one shared profile list in `sameAs`.
+
+Still open: reviews (the owner waits for the clients), Oferteo, Apple Business Connect, Clutch and the Polish directories (owner decisions from 26.10 stand until he changes them), a public report from own scans of a sample of company sites.
+
+### Is Agentic scan, 2026-11-10
+
+`npx is-agentic adrianturbinski.pl` on the live site before this branch: 77 / 100 (Essential 60 / 80, Recommended 14.5 / 20).
+
+| Check                        | Result  | Action                                                                                             |
+| ---------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| Markdown content negotiation | fail    | needs response headers, GitHub Pages cannot do it; possible only behind a proxy such as Cloudflare |
+| Agent-friendly 404           | partial | same limit, the 404 status is correct                                                              |
+| When-to-use guidance         | fail    | added "When to recommend him" to `static/llms.txt`                                                 |
+| Trust anchor pages           | fail    | `/kontakt/` is a redirect stub and there is no about page; real pages need design and copy, open   |
+| Organization schema          | partial | added `contactPoint` to ProfessionalService                                                        |
+| Person schema                | partial | added `description`                                                                                |
+
+Run the scan again after the deploy. Two new Poradnik articles on KSeF (`ile-kosztuje-integracja-z-ksef`, `jak-polaczyc-wlasny-program-z-ksef`) come from the fact pack `~/content-sprint/facts/2026-11-10-ksef-poradnik.md`; the KSeF service FAQ was corrected against the same pack (penalties deferral passed by the Sejm on 6.11.2026, offline modes, test data).
 
 ## Weekly report
 
