@@ -29,6 +29,8 @@ const copy = {
     messageHint: 'Czym zajmuje się firma, co ma powstać i na kiedy.',
     contact: 'E-mail lub telefon',
     code: 'Kod',
+    codeOpen: 'Mam kod',
+    optional: 'opcjonalnie',
     codeHint: 'Jeśli masz kod od mnie, wpisz go tutaj.',
     contactError: 'Podaj e-mail albo numer telefonu, żebym mógł odpowiedzieć.',
     send: 'Wyślij zapytanie',
@@ -54,6 +56,8 @@ const copy = {
     messageHint: 'What the company does, what should be built and by when.',
     contact: 'Email or phone',
     code: 'Code',
+    codeOpen: 'I have a code',
+    optional: 'optional',
     codeHint: 'If you have a code from me, enter it here.',
     contactError: 'Add an email or a phone number so I can reply.',
     send: 'Send the request',
@@ -72,10 +76,13 @@ const copy = {
 const reachable = contact =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact) || contact.replace(/\D/g, '').length >= 9;
 
-function Chips({ name, legend, options, value, onChange }) {
+function Chips({ name, legend, optional, options, value, onChange }) {
   return (
     <fieldset className="quote__row">
-      <legend className="quote__label">{legend}</legend>
+      <legend className="quote__label">
+        {legend}
+        {optional && <span className="quote__optional"> ({optional})</span>}
+      </legend>
       <div className="quote__chips">
         {options.map(([key, text]) => (
           <label className="quote__chip" key={key}>
@@ -103,11 +110,17 @@ export default function Quote({ lang, service = '' }) {
   const [state, setState] = useState('idle');
   const [invalid, setInvalid] = useState(false);
   const [fallback, setFallback] = useState('');
+  const [coded, setCoded] = useState(false);
   const sourceField = useRef(null);
+  const codeField = useRef(null);
 
   useEffect(() => {
     sourceField.current.value = readSource();
   }, []);
+
+  useEffect(() => {
+    if (coded) codeField.current?.focus();
+  }, [coded]);
 
   const serviceOptions = [
     ...serviceKeys.map(key => [services[key][lang].name, services[key][lang].name]),
@@ -206,26 +219,6 @@ export default function Quote({ lang, service = '' }) {
         value={picked}
         onChange={setPicked}
       />
-      <Chips
-        name="budget"
-        legend={t.budget}
-        options={budgetOptions}
-        value={budget}
-        onChange={setBudget}
-      />
-      <div className="quote__row">
-        <label className="quote__label" htmlFor={`${id}-message`}>
-          {t.message}
-        </label>
-        <textarea
-          className="quote__area"
-          id={`${id}-message`}
-          name="message"
-          rows="4"
-          maxLength="2000"
-          placeholder={t.messageHint}
-        />
-      </div>
       <div className="quote__row">
         <label className="quote__label" htmlFor={`${id}-contact`}>
           {t.contact}
@@ -250,24 +243,55 @@ export default function Quote({ lang, service = '' }) {
         )}
       </div>
       <div className="quote__row">
-        <label className="quote__label" htmlFor={`${id}-code`}>
-          {t.code}
+        <label className="quote__label" htmlFor={`${id}-message`}>
+          {t.message}
+          <span className="quote__optional"> ({t.optional})</span>
         </label>
-        <input
-          className="quote__field quote__field--code"
-          id={`${id}-code`}
-          name="code"
-          type="text"
-          autoComplete="off"
-          autoCapitalize="characters"
-          spellCheck="false"
-          maxLength="20"
-          placeholder={t.codeHint}
-          onInput={event => {
-            event.currentTarget.value = event.currentTarget.value.toUpperCase();
-          }}
+        <textarea
+          className="quote__area"
+          id={`${id}-message`}
+          name="message"
+          rows="4"
+          maxLength="2000"
+          placeholder={t.messageHint}
         />
       </div>
+      <Chips
+        name="budget"
+        legend={t.budget}
+        optional={t.optional}
+        options={budgetOptions}
+        value={budget}
+        onChange={setBudget}
+      />
+      {coded ? (
+        <div className="quote__row">
+          <label className="quote__label" htmlFor={`${id}-code`}>
+            {t.code}
+          </label>
+          <input
+            className="quote__field quote__field--code"
+            id={`${id}-code`}
+            ref={codeField}
+            name="code"
+            type="text"
+            autoComplete="off"
+            autoCapitalize="characters"
+            spellCheck="false"
+            maxLength="20"
+            placeholder={t.codeHint}
+            onInput={event => {
+              event.currentTarget.value = event.currentTarget.value.toUpperCase();
+            }}
+          />
+        </div>
+      ) : (
+        <p className="quote__more">
+          <button className="link" type="button" onClick={() => setCoded(true)}>
+            {t.codeOpen}
+          </button>
+        </p>
+      )}
       <div className="quote__trap" aria-hidden="true">
         <label>
           Website

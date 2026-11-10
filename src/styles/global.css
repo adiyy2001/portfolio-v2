@@ -12,8 +12,8 @@
   --cols: 12;
   color-scheme: dark;
   --display: 'Bespoke Serif', 'Bespoke Serif fallback', Georgia, serif;
-  --text: 'Schibsted Grotesk', 'Schibsted Grotesk fallback', system-ui, 'Segoe UI', Arial,
-    sans-serif;
+  --text:
+    'Schibsted Grotesk', 'Schibsted Grotesk fallback', system-ui, 'Segoe UI', Arial, sans-serif;
   --hand: 'Bradley Hand', 'Segoe Script', cursive;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --spring: linear(
@@ -632,6 +632,29 @@ html[lang='en'] .title--home {
   margin-top: 30px;
 }
 
+.cta--hero {
+  align-items: flex-start;
+  gap: 16px 20px;
+  margin-top: 26px;
+}
+
+.cta--hero + .lead2 {
+  margin-top: 26px;
+}
+
+.cta__scan {
+  display: inline-grid;
+  justify-items: end;
+}
+
+.cta__note {
+  margin: 6px 6px -8px 0;
+  font: 400 1.3rem/1 var(--hand);
+  color: var(--chalk-blue);
+  transform: rotate(-3deg);
+  white-space: nowrap;
+}
+
 .btn {
   position: relative;
   display: inline-block;
@@ -766,11 +789,8 @@ html[lang='en'] .title--home {
 .paper {
   position: relative;
   background-color: var(--paper);
-  background-image: radial-gradient(
-      circle at 1px 1px,
-      rgba(20, 24, 31, 0.26) 1px,
-      transparent 1.3px
-    ),
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(20, 24, 31, 0.26) 1px, transparent 1.3px),
     var(--grain-lite);
   background-size:
     24px 24px,
@@ -1383,6 +1403,17 @@ html[lang='en'] .title--home {
   .consent {
     inset: auto 12px 12px;
     width: auto;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .consent__text {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .consent__actions .btn {
+    padding: 11px 14px;
   }
 }
 
@@ -1400,11 +1431,8 @@ html[lang='en'] .title--home {
   justify-content: center;
   gap: 16px;
   pointer-events: none;
-  background: repeating-linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.035) 0 1px,
-      transparent 1px 3px
-    ),
+  background:
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(-45deg, rgba(0, 0, 0, 0.16) 0 1px, transparent 1px 3px),
     var(--wool-deep);
 }

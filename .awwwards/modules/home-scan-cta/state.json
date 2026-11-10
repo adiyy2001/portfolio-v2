@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "phaseList": [
+    "read",
+    "idea",
+    "content",
+    "build",
+    "craft",
+    "verify"
+  ],
+  "brief": "R7 home first screen: scan CTA, service H1, shorter home",
+  "mode": "auto",
+  "createdAt": "2026-11-01T23:22:09.519Z",
+  "phases": {
+    "read": {
+      "status": "done",
+      "startedAt": "2026-11-01T23:22:09.519Z",
+      "doneAt": "2026-11-01T23:55:37.693Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "idea": {
+      "status": "done",
+      "startedAt": "2026-11-01T23:55:37.693Z",
+      "doneAt": "2026-11-01T23:55:37.716Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "content": {
+      "status": "done",
+      "startedAt": "2026-11-01T23:55:37.717Z",
+      "doneAt": "2026-11-01T23:55:37.738Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "build": {
+      "status": "done",
+      "startedAt": "2026-11-01T23:55:37.738Z",
+      "doneAt": "2026-11-01T23:55:37.758Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "craft": {
+      "status": "done",
+      "startedAt": "2026-11-01T23:55:37.759Z",
+      "doneAt": "2026-11-01T23:55:37.780Z",
+      "score": 0,
+      "artifacts": []
+    },
+    "verify": {
+      "status": "done",
+      "startedAt": "2026-11-01T23:55:37.780Z",
+      "doneAt": "2026-11-01T23:55:37.801Z",
+      "score": 0,
+      "artifacts": []
+    }
+  },
+  "decisions": [],
+  "blocked": null,
+  "updatedAt": "2026-11-01T23:55:37.801Z"
+}

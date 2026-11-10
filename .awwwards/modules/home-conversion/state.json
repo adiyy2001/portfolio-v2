@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "phaseList": [
+    "read",
+    "goal",
+    "idea",
+    "content",
+    "build",
+    "craft",
+    "verify"
+  ],
+  "brief": "homepage conversion rebuild: more CTA clicks and finished quote forms",
+  "mode": "auto",
+  "goal": null,
+  "level": null,
+  "createdAt": "2026-11-10T12:32:28.097Z",
+  "phases": {
+    "read": {
+      "status": "active",
+      "startedAt": "2026-11-10T12:32:28.105Z",
+      "doneAt": null,
+      "score": null,
+      "artifacts": []
+    },
+    "goal": {
+      "status": "pending",
+      "startedAt": null,
+      "doneAt": null,
+      "score": null,
+      "artifacts": []
+    },
+    "idea": {
+      "status": "pending",
+      "startedAt": null,
+      "doneAt": null,
+      "score": null,
+      "artifacts": []
+    },
+    "content": {
+      "status": "pending",
+      "startedAt": null,
+      "doneAt": null,
+      "score": null,
+      "artifacts": []
+    },
+    "build": {
+      "status": "pending",
+      "startedAt": null,
+      "doneAt": null,
+      "score": null,
+      "artifacts": []
+    },
+    "craft": {
+      "status": "pending",
+      "startedAt": null,
+      "doneAt": null,
+      "score": null,
+      "artifacts": []
+    },
+    "verify": {
+      "status": "pending",
+      "startedAt": null,
+      "doneAt": null,
+      "score": null,
+      "artifacts": []
+    }
+  },
+  "decisions": [],
+  "blocked": null,
+  "updatedAt": "2026-11-10T12:32:28.158Z",
+  "ambition": "bold"
+}
