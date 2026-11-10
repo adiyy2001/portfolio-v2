@@ -14,7 +14,7 @@ const copy = {
   pl: {
     title: 'Na miarę, dosłownie.',
     label: 'Realizacje dla firm',
-    lead: 'Aplikacja dla firmy krawieckiej, strona z panelem dla stolarza i przeróbka strony behawiorystki.',
+    lead: 'Aplikacja dla firmy krawieckiej, strona z panelem dla stolarza, przeróbka strony behawiorystki i sklep na Shopify.',
     alt: 'Formularz zamówienia koszuli na miarę w platformie TailorCloth: tkanina główna, tkanina kontrastowa i miejsce kontrastu na kołnierzu',
     caption: 'Formularz zamówienia na miarę, zrzut z tailorcloth.com',
     kind: 'Prawdziwe wdrożenie',

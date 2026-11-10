@@ -30,14 +30,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {
-        excludes: [
-          '/dla-klienta/',
-          '/en/for-clients/',
-          '/kontakt/',
-          '/en/contact/',
-          '/wycena/wyslano/',
-          '/en/quote/sent/',
-        ],
+        excludes: ['/dla-klienta/', '/en/for-clients/', '/wycena/wyslano/', '/en/quote/sent/'],
         query: `
           {
             site {

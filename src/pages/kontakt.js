@@ -1,9 +1,16 @@
 import React from 'react';
-import Moved, { MovedHead } from '../components/moved';
+import Contact from '../components/contact';
+import Seo from '../components/seo';
 
-// /kontakt/ nie istnialo (404, 31.10.2026); kontakt i wycena sa na stronie glownej.
-export default function Contact() {
-  return <Moved lang="pl" kind="contact" hash="#wycena" />;
+export default function ContactPl() {
+  return <Contact lang="pl" />;
 }
 
-export const Head = () => <MovedHead lang="pl" kind="contact" hash="#wycena" />;
+export const Head = () => (
+  <Seo
+    lang="pl"
+    view="contact"
+    title="Kontakt z programistą, Wrocław, Adrian Turbiński"
+    description="Telefon, e-mail, godziny pracy, dane firmy i formularz wyceny. Wrocław, Dolny Śląsk i zdalnie. Wycena na piśmie w dwa dni robocze."
+  />
+);

@@ -1,0 +1,265 @@
+.tc-rail {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  margin-top: clamp(32px, 4vw, 56px);
+  padding: 0;
+  list-style: none;
+}
+
+.tc-rail li {
+  position: relative;
+  min-width: 0;
+  padding: 34px 14px 0 0;
+}
+
+.tc-rail li::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed var(--chalk-dim);
+}
+
+.tc-rail li:last-child::before {
+  right: 50%;
+}
+
+.tc-rail li::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--chalk);
+}
+
+.tc-rail__no {
+  display: block;
+  font: 600 0.875rem/1 var(--text);
+  letter-spacing: 0.08em;
+  color: var(--chalk-blue);
+}
+
+.tc-rail__name {
+  display: block;
+  margin-top: 8px;
+  font: 700 clamp(1.1rem, 1.5vw, 1.5rem) / 1.1 var(--display);
+  overflow-wrap: anywhere;
+}
+
+.proj__label--list {
+  margin-top: 22px;
+}
+
+.proj__points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.proj__points li {
+  padding: 7px 12px;
+  border: 1px dashed var(--chalk-dim);
+  font: 600 0.875rem/1.2 var(--text);
+}
+
+.proj__note > p:not(.proj__label) {
+  max-width: 28em;
+  text-wrap: pretty;
+}
+
+.tc-who__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 48px);
+  margin-top: clamp(36px, 5vw, 64px);
+}
+
+.tc-who__card {
+  min-width: 0;
+  padding: clamp(22px, 2.6vw, 36px);
+  border: 1.5px dashed var(--thread);
+}
+
+.tc-who__h {
+  font: 700 clamp(1.5rem, 2.2vw, 2.2rem) / 1.1 var(--display);
+  letter-spacing: -0.01em;
+}
+
+.tc-who__card ul {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tc-who__card li {
+  padding: 14px 0;
+  border-top: 1.5px solid rgba(20, 24, 31, 0.2);
+  font-size: 1.0625rem;
+  line-height: 1.45;
+}
+
+.tc-map {
+  position: relative;
+  padding: clamp(80px, 9vw, 140px) var(--pad) clamp(56px, 7vw, 100px);
+}
+
+.tc-map__row {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: center;
+  margin-top: clamp(36px, 5vw, 64px);
+}
+
+.tc-map__core {
+  position: relative;
+  justify-self: start;
+  margin: 0;
+  padding: 22px 28px;
+  border: 2px solid var(--chalk);
+  font: 700 clamp(1.6rem, 2.6vw, 2.6rem) / 1.05 var(--display);
+}
+
+.tc-map__core::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: clamp(24px, 4vw, 64px);
+  border-top: 2px dashed var(--chalk-dim);
+}
+
+.tc-map__nodes {
+  margin: 0;
+  padding: 0 0 0 36px;
+  list-style: none;
+  border-left: 2px dashed var(--chalk-dim);
+}
+
+.tc-map__nodes li {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+  gap: 6px 20px;
+  align-items: baseline;
+  padding: 16px 0;
+}
+
+.tc-map__nodes li::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -36px;
+  width: 28px;
+  border-top: 2px dashed var(--chalk-dim);
+}
+
+.tc-map__name {
+  font: 700 clamp(1.3rem, 1.9vw, 1.9rem) / 1.1 var(--display);
+}
+
+.tc-map__text {
+  font-size: 1.125rem;
+  color: var(--chalk);
+  text-wrap: pretty;
+}
+
+.tc-how {
+  position: relative;
+  padding: 0 var(--pad) clamp(80px, 9vw, 140px);
+}
+
+@media (max-width: 899px) {
+  .tc-rail {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tc-rail li {
+    padding: 0 0 20px 38px;
+  }
+
+  .tc-rail li::before {
+    top: 8px;
+    bottom: -8px;
+    left: 7px;
+    right: auto;
+    border-top: 0;
+    border-left: 2px dashed var(--chalk-dim);
+  }
+
+  .tc-rail li:last-child::before {
+    display: none;
+  }
+
+  .tc-rail li::after {
+    top: 0;
+  }
+
+  .tc-rail__name {
+    margin-top: 6px;
+  }
+
+  .tc-who__pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tc-map__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .tc-map__core::after {
+    top: 100%;
+    left: 28px;
+    width: 0;
+    height: 24px;
+    border-top: 0;
+    border-left: 2px dashed var(--chalk-dim);
+  }
+
+  .tc-map__nodes {
+    margin-left: 28px;
+    padding-left: 24px;
+  }
+
+  .tc-map__nodes li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tc-map__nodes li::before {
+    top: 30px;
+    left: -24px;
+    width: 18px;
+  }
+}
+
+@media print {
+  :is(.tc-who, .tc-map, .tc-how) :is(.sec-head, h2) {
+    break-after: avoid;
+  }
+}
+
+.proj__step--text {
+  display: block;
+}
+
+.proj__step--text .proj__note {
+  max-width: 44rem;
+  padding: 0;
+}
+
+.proj__step--text .proj__note > p:not(.proj__label) {
+  max-width: 36em;
+}
+
+.proj__step--text .proj__note > p + p:not(.proj__label) {
+  margin-top: 10px;
+  color: var(--chalk-dim);
+}

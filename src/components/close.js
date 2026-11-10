@@ -10,7 +10,7 @@ import { routes, tie } from '../i18n';
 import { phone } from '../services';
 import { duration, ease, instant } from '../motion';
 
-const mail = 'adrian.turbinski@gmail.com';
+const mail = 'contact@adrianturbinski.pl';
 
 const links = [
   { name: 'LinkedIn', href: 'https://www.linkedin.com/in/adrianturbinski' },

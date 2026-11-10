@@ -41,21 +41,21 @@ I design and build websites and web applications for small and mid-sized compani
 
 ## Directories, in order
 
-Free listings first. Status as of 2026-10-26.
+Free listings first. Status as of 2026-11-10.
 
-| Directory                       | Why                                                  | Link type           | Done                                                   |
-| ------------------------------- | ---------------------------------------------------- | ------------------- | ------------------------------------------------------ |
-| Bing Places                     | feeds Bing Maps and ChatGPT search; import from GBP  | listing             | done 26.10, GBP sync weekly                            |
-| Apple Business Connect          | Apple Maps and Siri                                  | listing             | skipped                                                |
-| Panorama Firm (panoramafirm.pl) | biggest Polish directory, ranks for "firma + miasto" | nofollow            | waiting: the only checkbox bundles marketing calls     |
-| pkt.pl                          | ranks for local queries, free basic listing          | nofollow            | skipped                                                |
-| Aleo (aleo.com)                 | pulls CEIDG data, fix and complete it                | dofollow            | skipped                                                |
-| Oferteo                         | inbound requests for quotes, free profile            | profile             | skipped                                                |
-| Clutch                          | B2B buyers, reviews later                            | dofollow on profile | skipped (needs street address)                         |
-| GoodFirms                       | same audience as Clutch                              | profile             | skipped (requires AI tools section)                    |
-| Cylex (cylex-polska.pl)         | citation consistency                                 | nofollow            | done 26.10, Facebook login, street hidden, id 14527389 |
-| Facebook page                   | NAP plus a link, used by Bing                        | profile             | done 26.10, facebook.com/adrianturbinskipl             |
-| LinkedIn company page           | NAP, links to services                               | profile             | skipped, personal profile is used                      |
+| Directory                       | Why                                                  | Link type           | Done                                                                                                                                           |
+| ------------------------------- | ---------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bing Places                     | feeds Bing Maps and ChatGPT search; import from GBP  | listing             | done 26.10, GBP sync weekly                                                                                                                    |
+| Apple Business Connect          | Apple Maps and Siri                                  | listing             | owner agreed 10.11, waits for his Apple ID login                                                                                               |
+| Panorama Firm (panoramafirm.pl) | biggest Polish directory, ranks for "firma + miasto" | nofollow            | submitted 10.11, owner agreed to the consent, WeNet verifies in 48 h                                                                           |
+| pkt.pl                          | ranks for local queries, free basic listing          | nofollow            | submitted 10.11, WeNet contacts within 24 h                                                                                                    |
+| Aleo (aleo.com)                 | pulls CEIDG data, fix and complete it                | dofollow            | not in the base on 10.11, needs an account made by the owner                                                                                   |
+| Oferteo                         | inbound requests for quotes, free profile            | profile             | account 10.11, description and hours set, area all Poland; photos, SMS and identity check open                                                 |
+| Clutch                          | B2B buyers, reviews later                            | dofollow on profile | free profile created 10.11, status in review (unpublished), https://clutch.co/profile/adrian-turbi-ski; verification e-mail and review pending |
+| GoodFirms                       | same audience as Clutch                              | profile             | skipped (requires AI tools section)                                                                                                            |
+| Cylex (cylex-polska.pl)         | citation consistency                                 | nofollow            | done 26.10, Facebook login, street hidden, id 14527389                                                                                         |
+| Facebook page                   | NAP plus a link, used by Bing                        | profile             | done 26.10, facebook.com/adrianturbinskipl                                                                                                     |
+| LinkedIn company page           | NAP, links to services                               | profile             | skipped, personal profile is used                                                                                                              |
 
 Skip paid "premium" packages and directories that ask for a backlink in return.
 

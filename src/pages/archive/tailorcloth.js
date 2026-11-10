@@ -28,7 +28,9 @@ export default function Case() {
           Firma krawiecka z Krakowa
         </p>
         <p className="lead" data-rise style={{ '--r': 3 }}>
-          {tie('Strona na Odoo i własne moduły do zarządzania produktami.')}
+          {tie(
+            'Strona na Odoo, własne moduły produktów i platforma zamówień koszul na miarę. Skonfigurowałem całość od systemu zamówień po stronę główną.',
+          )}
         </p>
         <div className="cta" data-rise style={{ '--r': 4 }}>
           <a
@@ -50,7 +52,7 @@ export const Head = () => (
   <Seo
     lang="pl"
     view="case"
-    title="TailorCloth: strona i platforma na Odoo, Adrian Turbiński"
-    description="Strona na Odoo i własne moduły do zarządzania produktami dla firmy krawieckiej z Krakowa. Zrobione z zespołem, który prowadziłem w Media Hunters."
+    title="TailorCloth: platforma zamówień koszul na miarę na Odoo, Adrian Turbiński"
+    description="Case study: strona na Odoo, moduły produktów i siedmiokrokowa platforma zamówień koszul na miarę dla firmy krawieckiej z Krakowa. Konfiguracja całości."
   />
 );

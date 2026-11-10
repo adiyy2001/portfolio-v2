@@ -19,7 +19,7 @@ export default function Recruiter() {
         sr="Adrian Turbiński, "
         title="Senior frontend. | Tech lead."
         size="rec"
-        contact="Wrocław, adrian.turbinski@gmail.com, linkedin.com/in/adrianturbinski, github.com/adiyy2001"
+        contact="Wrocław, contact@adrianturbinski.pl, linkedin.com/in/adrianturbinski, github.com/adiyy2001"
         aside={<Card lang="pl" />}>
         <p className="lead" data-rise style={{ '--r': 0 }}>
           {tie(
@@ -32,7 +32,7 @@ export default function Recruiter() {
           )}
         </p>
         <div className="cta" data-rise style={{ '--r': 2 }}>
-          <Magnet className="btn" href="mailto:adrian.turbinski@gmail.com">
+          <Magnet className="btn" href="mailto:contact@adrianturbinski.pl">
             Napisz do mnie
           </Magnet>
           <button type="button" className="btn btn--line" onClick={() => window.print()}>
