@@ -7,6 +7,8 @@ const locales = { pl: 'pl_PL', en: 'en_US' };
 
 const pageTypes = {
   rec: 'ProfilePage',
+  contact: 'ContactPage',
+  about: 'AboutPage',
   work: 'CollectionPage',
   blog: 'CollectionPage',
   guide: 'CollectionPage',
@@ -20,6 +22,8 @@ const crumbLabels = {
     guide: 'Poradnik',
     rec: 'Dla rekrutera',
     cli: 'Dla klienta',
+    contact: 'Kontakt',
+    about: 'O mnie',
     services: 'Usługi',
     scan: 'Skaner dostępności',
   },
@@ -31,6 +35,8 @@ const crumbLabels = {
     guide: 'Guide',
     rec: 'For recruiters',
     cli: 'For clients',
+    contact: 'Contact',
+    about: 'About',
     services: 'Services',
   },
 };
@@ -67,10 +73,13 @@ const amount = price => Number(price.replace(/\D/g, ''));
 
 const isOffer = view => ['home', 'cli', 'services'].includes(view) || view?.startsWith('svc-');
 
+const showsBusiness = view => isOffer(view) || ['contact', 'about'].includes(view);
+
 const ogView = view =>
   !view
     ? 'home'
-    : (isOffer(view) && view !== 'home') || ['guide', 'brief', 'scan'].includes(view)
+    : (isOffer(view) && view !== 'home') ||
+        ['guide', 'brief', 'scan', 'contact', 'about'].includes(view)
       ? 'cli'
       : view;
 
@@ -92,7 +101,7 @@ const graph = ({
     '@id': url('/#adrian'),
     name: 'Adrian Turbiński',
     url: url('/'),
-    email: 'mailto:adrian.turbinski@gmail.com',
+    email: 'mailto:contact@adrianturbinski.pl',
     telephone: phone.intl,
     jobTitle:
       lang === 'pl' ? 'Programista front-end i full-stack' : 'Front-end and full-stack developer',
@@ -133,9 +142,10 @@ const graph = ({
     about: { '@id': person['@id'] },
     primaryImageOfPage: image,
   };
-  if (view === 'rec') page.mainEntity = { '@id': person['@id'] };
+  if (view === 'rec' || view === 'about') page.mainEntity = { '@id': person['@id'] };
+  if (view === 'contact') page.mainEntity = { '@id': url('/#service') };
   const nodes = [person, site, page];
-  if (isOffer(view)) {
+  if (showsBusiness(view)) {
     nodes.push({
       '@type': 'ProfessionalService',
       '@id': url('/#service'),
@@ -143,18 +153,21 @@ const graph = ({
       url: url('/'),
       logo: url('/apple-touch-icon.png'),
       image: url(`/og/cli-${lang}.jpg`),
-      email: 'mailto:adrian.turbinski@gmail.com',
+      email: 'mailto:contact@adrianturbinski.pl',
       telephone: phone.intl,
       priceRange: lang === 'pl' ? 'od 300 zł do 80 000 zł' : 'PLN 300 to PLN 80,000',
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'customer service',
-        email: 'adrian.turbinski@gmail.com',
+        email: 'contact@adrianturbinski.pl',
         telephone: phone.intl,
         availableLanguage: ['pl', 'en'],
         areaServed: 'PL',
       },
       founder: { '@id': person['@id'] },
+      taxID: '8952236530',
+      vatID: 'PL8952236530',
+      foundingDate: '2022-01-03',
       address: { '@type': 'PostalAddress', addressLocality: 'Wrocław', addressCountry: 'PL' },
       areaServed: [
         { '@type': 'City', name: 'Wrocław' },

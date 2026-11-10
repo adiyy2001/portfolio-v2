@@ -63,13 +63,15 @@ export default function Footer({ lang }) {
         <Link to={routes.services[lang]}>{t.footerServices}</Link>
         {t.footerScan && <Link to={scanPath}>{t.footerScan}</Link>}
         <Link to={routes.work[lang]}>{t.footerWork}</Link>
+        <Link to={routes.about[lang]}>{t.footerAbout}</Link>
+        <Link to={routes.contact[lang]}>{t.footerContact}</Link>
         {hasGuide && <Link to={guidePath}>Poradnik</Link>}
         {hasBlog && (
           <Link to={blogPath} hrefLang="en">
             Blog
           </Link>
         )}
-        <a href="mailto:adrian.turbinski@gmail.com">{t.footerMail}</a>
+        <a href="mailto:contact@adrianturbinski.pl">{t.footerMail}</a>
         <a href={phone.href}>{lang === 'pl' ? phone.label : phone.intl}</a>
         <a href="https://www.linkedin.com/in/adrianturbinski" rel="noopener">
           LinkedIn

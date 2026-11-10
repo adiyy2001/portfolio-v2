@@ -6,7 +6,7 @@ import { readSource } from '../source';
 import { track } from '../track';
 
 const endpoint = 'https://api.adrianturbinski.pl/quote';
-const mail = 'adrian.turbinski@gmail.com';
+const mail = 'contact@adrianturbinski.pl';
 
 export const quoteId = { pl: 'wycena', en: 'quote' };
 

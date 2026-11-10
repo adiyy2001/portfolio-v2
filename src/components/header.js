@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'gatsby';
 import { useGuides } from './guides';
 import { usePosts } from './posts';
-import { quoteId } from './quote';
 import { blogPath, guidePath, routes, ui } from '../i18n';
 import { letters, needle } from '../wordmark';
 
@@ -71,12 +70,13 @@ export default function Header({ lang, view }) {
         )}
         {client && (
           <>
-            <a
+            <Link
               className="top__blog"
-              href={`${routes.home[lang]}#${quoteId[lang]}`}
-              data-cta="nav-quote">
+              to={routes.contact[lang]}
+              data-cta="nav-quote"
+              aria-current={view === 'contact' ? 'page' : undefined}>
               {t.menuContact}
-            </a>
+            </Link>
             <Link className="top__blog menu__cv" to={routes.rec[lang]}>
               CV
             </Link>

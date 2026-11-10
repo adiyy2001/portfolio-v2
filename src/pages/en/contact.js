@@ -1,9 +1,16 @@
 import React from 'react';
-import Moved, { MovedHead } from '../../components/moved';
+import Contact from '../../components/contact';
+import Seo from '../../components/seo';
 
-// /en/contact/ did not exist (404, 31.10.2026); contact and quote live on the home page.
-export default function Contact() {
-  return <Moved lang="en" kind="contact" hash="#quote" />;
+export default function ContactEn() {
+  return <Contact lang="en" />;
 }
 
-export const Head = () => <MovedHead lang="en" kind="contact" hash="#quote" />;
+export const Head = () => (
+  <Seo
+    lang="en"
+    view="contact"
+    title="Contact a freelance web developer, Wrocław, Adrian Turbiński"
+    description="Phone, email, working hours, company details and a quote form. Wrocław, Lower Silesia and remote across Poland and the EU. Written quote in two working days."
+  />
+);

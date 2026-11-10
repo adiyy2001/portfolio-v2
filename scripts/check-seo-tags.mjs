@@ -20,12 +20,6 @@ const exceptions = [
   { match: '_gatsby/slices/_gatsby-scripts-1.html', reason: 'Gatsby script slice, not a page' },
   { match: 'dla-klienta/index.html', reason: 'moved, redirects to the home page', noindex: true },
   { match: 'en/for-clients/index.html', reason: 'moved, redirects to /en/', noindex: true },
-  {
-    match: 'kontakt/index.html',
-    reason: 'redirects to the quote form on the home page',
-    noindex: true,
-  },
-  { match: 'en/contact/index.html', reason: 'redirects to the quote form on /en/', noindex: true },
   { match: 'wycena/wyslano/index.html', reason: 'thank-you page after the form', noindex: true },
   { match: 'en/quote/sent/index.html', reason: 'thank-you page after the form', noindex: true },
   {

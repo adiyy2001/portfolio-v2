@@ -4,39 +4,25 @@ import Hero from './hero';
 import { routes, tie } from '../i18n';
 
 const copy = {
-  client: {
-    pl: {
-      title: 'Ta strona | zmieniła adres.',
-      lead: 'Oferta dla klientów jest teraz na stronie głównej.',
-      link: 'Przejdź na stronę główną',
-    },
-    en: {
-      title: 'This page | has moved.',
-      lead: 'The page for clients is now the home page.',
-      link: 'Go to the home page',
-    },
+  pl: {
+    title: 'Ta strona | zmieniła adres.',
+    lead: 'Oferta dla klientów jest teraz na stronie głównej.',
+    link: 'Przejdź na stronę główną',
   },
-  contact: {
-    pl: {
-      title: 'Kontakt | jest na stronie głównej.',
-      lead: 'Formularz wyceny i dane kontaktowe znajdziesz na stronie głównej.',
-      link: 'Przejdź do formularza',
-    },
-    en: {
-      title: 'Contact | is on the home page.',
-      lead: 'The quote form and contact details are on the home page.',
-      link: 'Go to the form',
-    },
+  en: {
+    title: 'This page | has moved.',
+    lead: 'The page for clients is now the home page.',
+    link: 'Go to the home page',
   },
 };
 
-export default function Moved({ lang, kind = 'client', hash = '' }) {
-  const t = copy[kind][lang];
+export default function Moved({ lang }) {
+  const t = copy[lang];
   const target = routes.home[lang];
 
   useEffect(() => {
-    window.location.replace(withPrefix(target) + (window.location.hash || hash));
-  }, [target, hash]);
+    window.location.replace(withPrefix(target) + window.location.hash);
+  }, [target]);
 
   return (
     <Hero id="moved-h" sr="Adrian Turbiński, " title={t.title} size="cli">
@@ -44,7 +30,7 @@ export default function Moved({ lang, kind = 'client', hash = '' }) {
         {tie(t.lead)}
       </p>
       <div className="cta" data-rise style={{ '--r': 1 }}>
-        <Link className="btn" to={target + hash}>
+        <Link className="btn" to={target}>
           {tie(t.link)}
         </Link>
       </div>
@@ -52,7 +38,7 @@ export default function Moved({ lang, kind = 'client', hash = '' }) {
   );
 }
 
-export function MovedHead({ lang, kind = 'client', hash = '' }) {
+export function MovedHead({ lang }) {
   const { site } = useStaticQuery(graphql`
     query {
       site {
@@ -67,12 +53,12 @@ export function MovedHead({ lang, kind = 'client', hash = '' }) {
   return (
     <>
       <html lang={lang} />
-      <title>{copy[kind][lang].title.replace(' | ', ' ')}</title>
+      <title>{copy[lang].title.replace(' | ', ' ')}</title>
       <meta name="robots" content="noindex" />
       <link rel="canonical" href={href} />
       {/* Gatsby Head zapisuje dzieci noscript jako tekst, wiec meta refresh stoi wprost (31.10.2026).
           1 s zwloki: z JS wczesniej przekierowuje location.replace i zachowuje hash uzytkownika. */}
-      <meta httpEquiv="refresh" content={`1; url=${href}${hash}`} />
+      <meta httpEquiv="refresh" content={`1; url=${href}`} />
     </>
   );
 }
