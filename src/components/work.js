@@ -3,6 +3,7 @@ import { Link, withPrefix } from 'gatsby';
 import { m, useReducedMotion } from 'framer-motion';
 import { cases } from './also';
 import Cases from './cases';
+import Repos from './repos';
 import Reveal from './reveal';
 import Shot from './shot';
 import Split from './split';
@@ -217,6 +218,7 @@ export default function Work({ lang }) {
         titleId="work-pick-h"
         moreLabel={t.showMore}
       />
+      <Repos lang={lang} id="work-repos" />
       <section className="paper work__swatches" aria-labelledby="work-sw-h">
         <div className="sec-head">
           <h2 className="h2" id="work-sw-h">
