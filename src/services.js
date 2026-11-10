@@ -885,7 +885,7 @@ export const automation = {
         ],
         [
           'Przymiarki.',
-          'Buduję połączenie na środowisku testowym KSeF, na kopii twoich faktur. Pokazuję, jak wygląda faktura po drodze i co się dzieje przy błędzie.',
+          'Buduję połączenie na środowisku testowym KSeF, na kopii twoich faktur ze zmienionymi danymi. Pokazuję, jak wygląda faktura po drodze i co się dzieje przy błędzie.',
         ],
         [
           'Oddanie.',
@@ -903,15 +903,15 @@ export const automation = {
         ],
         [
           'Od kiedy KSeF jest obowiązkowy?',
-          'Od 1 lutego 2026 dla firm, które w 2024 roku sprzedały za ponad 200 mln zł, od 1 kwietnia 2026 dla pozostałych czynnych podatników VAT. Do końca 2026 roku wyjątek mają firmy, które fakturują nie więcej niż 10 tys. zł brutto miesięcznie: dla nich obowiązek zaczyna się 1 stycznia 2027. Kary za błędy w KSeF miały ruszyć 1 stycznia 2027. Rada Ministrów przyjęła 20 października 2026 projekt, który przesuwa je na 1 stycznia 2028. To na razie projekt, obowiązek się nie zmienia.',
+          'Od 1 lutego 2026 dla firm, które w 2024 roku sprzedały za ponad 200 mln zł, od 1 kwietnia 2026 dla pozostałych czynnych podatników VAT. Do końca 2026 roku wyjątek mają firmy, które fakturują nie więcej niż 10 tys. zł brutto miesięcznie: dla nich obowiązek zaczyna się 1 stycznia 2027. Kary za błędy w KSeF miały ruszyć 1 stycznia 2027. Sejm uchwalił 6 listopada 2026 ustawę, która odracza je do końca 2027 roku. Ustawa czeka na Senat i prezydenta, a sam obowiązek się nie zmienia.',
         ],
         [
           'Czy mogę podpiąć KSeF do własnego programu albo sklepu?',
-          'Tak. KSeF ma publiczne API i środowisko testowe. Potrzebujesz tokena albo certyfikatu KSeF, który nadajesz w swoim koncie podatnika. Ja nie przechowuję twojego certyfikatu.',
+          'Tak. KSeF ma publiczne API i środowisko testowe. Potrzebujesz tokena albo certyfikatu KSeF, który generujesz po zalogowaniu do KSeF. Ja nie przechowuję twojego certyfikatu.',
         ],
         [
           'Co z fakturami, gdy KSeF nie działa?',
-          'Tryb offline24: faktura powstaje z kodem QR, a do KSeF trafia do następnego dnia roboczego. Integracja robi to sama i pokazuje, co jeszcze czeka na wysyłkę.',
+          'Faktura powstaje offline z dwoma kodami QR i trafia do KSeF później: w trybie offline24 do następnego dnia roboczego, po ogłoszonej awarii w ciągu 7 dni roboczych od jej końca. Integracja robi to sama i pokazuje, co jeszcze czeka na wysyłkę.',
         ],
         [
           'Czy łączysz też systemy bez KSeF?',
@@ -1011,7 +1011,7 @@ export const automation = {
         ],
         [
           'Fittings.',
-          'I build the connection on the KSeF test environment with a copy of your invoices. I show what an invoice looks like on the way and what happens on an error.',
+          'I build the connection on the KSeF test environment with a copy of your invoices in which the data has been changed. I show what an invoice looks like on the way and what happens on an error.',
         ],
         [
           'Handover.',
@@ -1025,7 +1025,7 @@ export const automation = {
       faq: [
         [
           'What is KSeF?',
-          'Krajowy System e-Faktur, the Polish national e-invoicing system. Since 1 February 2026 the largest firms (2024 sales above PLN 200 million) have to issue invoices through it, since 1 April 2026 the other VAT payers, and from 1 January 2027 also firms invoicing up to PLN 10,000 gross a month. Penalties for errors were due on 1 January 2027; on 20 October 2026 the Council of Ministers adopted a bill moving them to 1 January 2028. It is still a bill, and the obligation itself does not change. Invoices get a KSeF number and a QR code.',
+          'Krajowy System e-Faktur, the Polish national e-invoicing system. Since 1 February 2026 the largest firms (2024 sales above PLN 200 million) have to issue invoices through it, since 1 April 2026 the other VAT payers, and from 1 January 2027 also firms invoicing up to PLN 10,000 gross a month. Penalties for errors were due on 1 January 2027. On 6 November 2026 the Sejm passed an act that defers them until the end of 2027. The act still needs the Senate and the president, and the obligation itself does not change. Invoices get a KSeF number and a QR code.',
         ],
         [
           'How much does a KSeF integration cost?',
@@ -1033,11 +1033,11 @@ export const automation = {
         ],
         [
           'Can you connect KSeF to our own software or shop?',
-          'Yes. KSeF has a public API and a test environment. You need a token or a KSeF certificate issued in your taxpayer account. I do not store your certificate.',
+          'Yes. KSeF has a public API and a test environment. You need a token or a KSeF certificate, which you generate after signing in to KSeF. I do not store your certificate.',
         ],
         [
           'What happens to invoices when KSeF is down?',
-          'Offline24 mode: the invoice is issued with a QR code and reaches KSeF by the next working day. The integration does it on its own and shows what is still waiting.',
+          'The invoice is issued offline with two QR codes and reaches KSeF later: by the next working day in offline24 mode, and within 7 working days of the end of an announced outage. The integration does it on its own and shows what is still waiting.',
         ],
         [
           'Do you also connect systems without KSeF?',

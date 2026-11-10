@@ -18,5 +18,6 @@ export const Head = () => (
     path="/archive/rewektor/"
     title="ReWektor: strona i panel dla stolarza z Wrocławia, Adrian Turbiński"
     description="Strona i panel dla rodzinnej firmy stolarskiej: te same pola w panelu i na stronie, PHP i MySQL na hostingu klienta, trzy kierunki projektu."
+    client={{ name: 'ReWektor', site: 'https://rewektor.com.pl/' }}
   />
 );

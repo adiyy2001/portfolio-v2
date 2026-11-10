@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { pathToFileURL } = require('url');
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions;
@@ -42,6 +43,7 @@ const postsQuery = folder => `
       nodes {
         id
         html
+        rawMarkdownBody
         fileAbsolutePath
         frontmatter {
           title
@@ -78,7 +80,7 @@ const blogProblems = post => {
   return problems;
 };
 
-const guideServices = ['apps', 'sites', 'wcag', 'care'];
+const guideServices = ['apps', 'sites', 'integ', 'wcag', 'care'];
 
 const guideProblems = post => {
   const { answer, service, faq } = post.frontmatter;
@@ -225,6 +227,78 @@ const writeGuideFiles = ({ posts, siteUrl }) => {
   if (posts.length) appendLlms(llmsGuide(posts, siteUrl));
 };
 
+const fullService = (service, link) =>
+  [
+    `### ${service.name}`,
+    '',
+    `${link}`,
+    '',
+    `${service.price} ${service.priceNote}, ${service.time}.`,
+    '',
+    service.lead,
+    '',
+    service.body,
+    '',
+    ...(service.packages ?? []).map(pack => `- ${pack.name}, ${pack.price}: ${pack.text}`),
+    '',
+    ...service.faq.flatMap(([question, answer]) => [`**${question}**`, '', answer, '']),
+  ].join('\n');
+
+const nested = markdown => {
+  let fenced = false;
+  return markdown
+    .split('\n')
+    .map(line => {
+      if (line.startsWith('```')) fenced = !fenced;
+      return !fenced && /^#{2,4} /.test(line) ? `##${line}` : line;
+    })
+    .join('\n');
+};
+
+const fullPost = (post, link) =>
+  [
+    `### ${post.frontmatter.title}`,
+    '',
+    link,
+    '',
+    `${(post.frontmatter.updated ?? post.frontmatter.date).slice(0, 10)}`,
+    '',
+    nested(post.rawMarkdownBody.trim()),
+    '',
+    ...(post.frontmatter.faq ?? []).flatMap(({ q, a }) => [`**${q}**`, '', a, '']),
+  ].join('\n');
+
+const writeLlmsFull = async ({ guides, posts, siteUrl }) => {
+  const publicDir = path.join(__dirname, 'public');
+  const llms = path.join(publicDir, 'llms.txt');
+  if (!fs.existsSync(llms)) return;
+  const { serviceKeys, services } = await import(
+    pathToFileURL(path.join(__dirname, 'src', 'services.js')).href
+  );
+  const { routes } = await import(pathToFileURL(path.join(__dirname, 'src', 'i18n.js')).href);
+  const serviceText = lang =>
+    serviceKeys.map(key => fullService(services[key][lang], siteUrl + routes[`svc-${key}`][lang]));
+  fs.writeFileSync(
+    path.join(publicDir, 'llms-full.txt'),
+    [
+      fs.readFileSync(llms, 'utf8').trimEnd(),
+      '',
+      '## Usługi, pełna treść',
+      '',
+      ...serviceText('pl'),
+      '## Services, full text',
+      '',
+      ...serviceText('en'),
+      '## Poradnik, pełna treść',
+      '',
+      ...guides.map(post => fullPost(post, `${siteUrl}/poradnik/${post.frontmatter.slug}/`)),
+      '## Blog, full text',
+      '',
+      ...posts.map(post => fullPost(post, `${siteUrl}/blog/${post.frontmatter.slug}/`)),
+    ].join('\n'),
+  );
+};
+
 const writeBlogFiles = ({ posts, siteUrl }) => {
   if (!posts.length) return;
   const publicDir = path.join(__dirname, 'public');
@@ -248,8 +322,11 @@ const htmlFiles = dir =>
 const streamPadding = /\0/g;
 
 exports.onPostBuild = async ({ graphql, reporter }) => {
-  writeGuideFiles(await guidePosts(graphql, reporter));
-  writeBlogFiles(await blogPosts(graphql, reporter));
+  const guides = await guidePosts(graphql, reporter);
+  const blog = await blogPosts(graphql, reporter);
+  writeGuideFiles(guides);
+  writeBlogFiles(blog);
+  await writeLlmsFull({ guides: guides.posts, posts: blog.posts, siteUrl: blog.siteUrl });
   htmlFiles(path.join(__dirname, 'public')).forEach(file => {
     const sources = [];
     const html = fs
