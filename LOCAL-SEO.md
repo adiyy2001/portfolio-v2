@@ -7,14 +7,15 @@ Texts to paste by hand into business directories and the Google Business Profile
 | Field            | Value                                                                                |
 | ---------------- | ------------------------------------------------------------------------------------ |
 | Name             | Adrian Turbiński                                                                     |
-| Business type    | service-area business, no customer address shown                                     |
+| Business type    | local business, address shown publicly in the Google Business Profile                |
+| Address          | Przejazdowa 21c, 51-167 Wrocław                                                      |
 | City             | Wrocław, woj. dolnośląskie, Polska                                                   |
 | Area served      | Wrocław, województwo dolnośląskie, cała Polska zdalnie                               |
 | Phone            | +48 731 985 567                                                                      |
 | E-mail           | contact@adrianturbinski.pl                                                           |
 | Website          | https://adrianturbinski.pl/                                                          |
 | Services page    | https://adrianturbinski.pl/uslugi/                                                   |
-| Main category    | the same as the GBP main category (check in business.google.com)                     |
+| Main category    | Projektowanie stron WWW (the GBP main category)                                      |
 | Other categories | Usługi informatyczne, then whatever the directory offers closest to web design       |
 | Hours            | Mon to Fri 9:00 to 18:00, as in the Google Business Profile                          |
 | LinkedIn         | https://www.linkedin.com/in/adrianturbinski                                          |
@@ -35,9 +36,12 @@ I design and build websites and web applications for small and mid-sized compani
 ## Services (one line each, for directories with a service list)
 
 - Strony internetowe: od 3 500 zł netto. https://adrianturbinski.pl/uslugi/strony-internetowe/
+- Sklepy internetowe: od 4 500 zł netto. https://adrianturbinski.pl/uslugi/sklepy-internetowe/
 - Aplikacje webowe: od 18 000 zł netto. https://adrianturbinski.pl/uslugi/aplikacje-webowe/
 - Dostępność WCAG, audyt i poprawki: od 1 900 zł netto. https://adrianturbinski.pl/uslugi/dostepnosc-wcag/
 - Utrzymanie i rozwój: od 300 zł netto miesięcznie. https://adrianturbinski.pl/uslugi/utrzymanie/
+
+GBP state measured on 2026-11-12: the address above is shown publicly, main category Projektowanie stron WWW, rating 5,0 from 2 reviews. Listings made while the profile hid the street (Cylex, 26.10) carry no street; add it there the next time they are edited, so every listing matches the block above.
 
 ## Directories, in order
 
@@ -83,15 +87,16 @@ Project `z3yqyzew1g`, masking Balanced plus the whole `form` element masked. The
 
 Source: Google Ads API Keyword Planner (`gsa kw`, exact average monthly searches), Poland, Polish. Competition is the planner's ad index from 0 to 100, a rough proxy for organic difficulty.
 
-| Page                          | Main phrase                             | Volume | Comp. | Also                                                                                       |
-| ----------------------------- | --------------------------------------- | ------ | ----- | ------------------------------------------------------------------------------------------ |
-| Poradnik, article 1           | ile kosztuje strona internetowa         | 1000   | 52    | zrobienie (590), stworzenie (480), utrzymanie (210), dla firmy (140), ze sklepem (110)     |
-| `/uslugi/strony-internetowe/` | strony internetowe wrocław              | 720    | 48    | tworzenie stron internetowych wrocław (260), projektowanie (170), strony www wrocław (140) |
-| `/uslugi/aplikacje-webowe/`   | aplikacja webowa                        | 390    | 48    | aplikacja webowa cena (10)                                                                 |
-| `/uslugi/dostepnosc-wcag/`    | audyt wcag                              | 260    | 65    | audyt dostępności (90), audyt dostępności cyfrowej (70), audyt wcag 2.1 (50), cena (40)    |
-| `/uslugi/utrzymanie/`         | opieka nad stroną internetową           | 140    | 59    | ile kosztuje utrzymanie strony internetowej (210, better as a Poradnik section)            |
-| Poradnik, article 2           | aplikacja webowa co to                  | 90     | 3     | aplikacja webowa a strona internetowa (50, comp 9), przykłady (20)                         |
-| Poradnik, industry article    | strona internetowa dla firmy budowlanej | 90     | 49    | firmy transportowej (50), dla małej firmy (40)                                             |
+| Page                          | Main phrase                             | Volume | Comp. | Also                                                                                                                       |
+| ----------------------------- | --------------------------------------- | ------ | ----- | -------------------------------------------------------------------------------------------------------------------------- |
+| Poradnik, article 1           | ile kosztuje strona internetowa         | 1000   | 52    | zrobienie (590), stworzenie (480), utrzymanie (210), dla firmy (140), ze sklepem (110)                                     |
+| `/uslugi/strony-internetowe/` | strony internetowe wrocław              | 720    | 48    | tworzenie stron internetowych wrocław (260), projektowanie (170), strony www wrocław (110)                                 |
+| `/uslugi/sklepy-internetowe/` | sklepy internetowe wrocław              | 140    |       | tworzenie sklepów internetowych wrocław (110), sklep internetowy wrocław (70), tworzenie sklepu internetowego wrocław (40) |
+| `/uslugi/aplikacje-webowe/`   | aplikacja webowa                        | 390    | 48    | aplikacja webowa cena (10), aplikacje webowe wrocław (low volume)                                                          |
+| `/uslugi/dostepnosc-wcag/`    | audyt wcag                              | 260    | 65    | audyt dostępności (90), audyt dostępności cyfrowej (70), audyt wcag 2.1 (50), cena (40)                                    |
+| `/uslugi/utrzymanie/`         | opieka nad stroną internetową           | 140    | 59    | ile kosztuje utrzymanie strony internetowej (210, better as a Poradnik section)                                            |
+| Poradnik, article 2           | aplikacja webowa co to                  | 90     | 3     | aplikacja webowa a strona internetowa (50, comp 9), przykłady (20)                                                         |
+| Poradnik, industry article    | strona internetowa dla firmy budowlanej | 90     | 49    | firmy transportowej (50), dla małej firmy (40)                                                                             |
 
 The broad "projektowanie stron internetowych" (1900, comp 62) and "strona internetowa dla firmy" (480, comp 73) are national agency phrases; the home title carries them, but ranking there is a long-term goal. Titles, meta descriptions and FAQ questions of the home and service pages were changed to these phrases on 2026-10-26. "programista wrocław" is a job search, so the home title no longer leads with it. Recheck positions in Search Console on 2026-11-23.
 
@@ -102,6 +107,16 @@ Second pass the same day, with the Ads API per page (URL plus seed ideas):
 - `/uslugi/dostepnosc-wcag/`: a FAQ answer for "dostępność cyfrowa" (480, comp 17) and "dostępność cyfrowa co to" (70, comp 23).
 - `/uslugi/utrzymanie/`: title uses "opieka nad stroną www" (140, comp 24) instead of "internetową" (140, comp 59); the description keeps the second form.
 - Not used: "opieka nad stroną wordpress" (110 plus 90 for "cena") until WordPress care is part of the offer; "strony internetowe cennik" (390) stays covered by `/uslugi/`; recruiter phrases have 10 to 30 searches.
+
+### Local pass, 2026-11-12
+
+Measured that day in Search Console: `/uslugi/strony-internetowe/` had the right title but no impressions in 28 days, its H1 was "Strony internetowe, Strony skrojone na miarę." and the page had about 1030 words. Competitors for "strony internetowe wrocław" use the phrase as the H1, 1500 to 5800 words, visible prices and a FAQ. Volumes from the same day: strony internetowe wrocław 720, tworzenie stron internetowych wrocław 260, projektowanie stron internetowych wrocław 170, strony www wrocław 110, strona internetowa wrocław 50, strony internetowe wrocław cennik 30, tanie strony internetowe wrocław 30, sklepy internetowe wrocław 140, tworzenie sklepów internetowych wrocław 110, sklep internetowy wrocław 70, tworzenie sklepu internetowego wrocław 40.
+
+- `/uslugi/strony-internetowe/`: H1 "Strony internetowe Wrocław" with the line "skrojone na miarę." under it, price and scope in the lead, a pricing section with the real price points next to market ranges labelled as such (2 500 to 5 000 zł simple, 5 000 to 10 000 zł company, 5 000 to 15 000 zł shop, all net), steps, what stays with the client, a Wrocław section with links to ReWektor, Psi Pawer, Enter Auto and the Google Maps guide, and a FAQ of 12 questions that matches the FAQPage data.
+- `/uslugi/sklepy-internetowe/` (new, with `/en/services/online-stores/`): from 4 500 zł netto, the owner's decision on 2026-11-12, slightly under the market start of about 5 000 zł. Platforms named on the page are only the ones delivered: Shopify (Olla Bag) and Odoo (TailorCloth). No delivery time is stated because the repo has no basis for one.
+- `/uslugi/aplikacje-webowe/`: H1 "Aplikacje webowe Wrocław" with the line "na zamówienie." under it, the price in the lead and three more FAQ answers.
+- `/dla-rekrutera/` is out of the sitemap and carries `noindex,follow`; the page stays reachable by link and by the edition switch in the header. `/en/for-recruiters/` was not touched.
+- Recheck positions and impressions for these pages in Search Console on 2026-12-10.
 
 ## Audits, 2026-10-26
 
