@@ -55,9 +55,9 @@ Jeśli masz już stronę na WordPressie, często sam dodajesz treści i znasz pa
 
 ## Ile kosztuje strona internetowa ze sklepem
 
-Sklep wyceniam osobno, bo rozrzut jest duży. O cenie decydują liczba produktów i ich wariantów, bramka płatności, integracja z kurierami i księgowością oraz to, czy klienci zakładają konta. Prosty sklep z kilkunastoma produktami to inna praca niż katalog z tysiącem pozycji i cenami hurtowymi.
+Sklep wyceniam osobno, od 4 500 zł netto, bo rozrzut jest duży. O cenie decydują liczba produktów i ich wariantów, bramka płatności, integracja z kurierami i księgowością oraz to, czy klienci zakładają konta. Prosty sklep z kilkunastoma produktami to inna praca niż katalog z tysiącem pozycji i cenami hurtowymi.
 
-Przykład możesz obejrzeć we [Wzorniku](/wzornik/). Jest tam sklep palarni kawy, jeden z dziewięciu projektów przykładowych dla zmyślonych firm. Wycenę Twojego sklepu dostajesz na piśmie po rozmowie.
+Przykład możesz obejrzeć we [Wzorniku](/wzornik/). Jest tam sklep palarni kawy, jeden z dziewięciu projektów przykładowych dla zmyślonych firm. Prawdziwy sklep na Shopify to [Olla Bag](/archive/olla-bag/). Zakres i cenę opisuje strona [sklepy internetowe](/uslugi/sklepy-internetowe/), a wycenę Twojego sklepu dostajesz na piśmie po rozmowie.
 
 ## Jak dostać dokładną wycenę
 

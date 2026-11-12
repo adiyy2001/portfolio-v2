@@ -36,6 +36,8 @@ const copy = {
     measureLead: 'Przed startem spisujemy liczby, po miesiącu liczymy je drugi raz.',
     scanLead: 'Masz już stronę? Sprawdź ją najpierw',
     scanLink: 'darmowym skanem dostępności',
+    sitesLead: 'Szukasz strony dla firmy? Zobacz',
+    sitesLink: 'strony internetowe Wrocław, od 3 500 zł netto',
   },
   en: {
     write: 'Get a quote',
@@ -87,6 +89,137 @@ function ScanNote({ lang, className }) {
       </Link>
       .
     </p>
+  );
+}
+
+function SitesNote({ lang, className }) {
+  const t = copy[lang];
+  if (!t.sitesLead) return null;
+  return (
+    <p className={className}>
+      {tie(t.sitesLead)}{' '}
+      <Link className="link" to={routes['svc-sites'][lang]} data-cta="sites-link">
+        {tie(t.sitesLink)}
+      </Link>
+      .
+    </p>
+  );
+}
+
+function LinkLine({ lead, text, to, className }) {
+  return (
+    <p className={className}>
+      {tie(lead)}{' '}
+      <Link className="link" to={to}>
+        {tie(text)}
+      </Link>
+      .
+    </p>
+  );
+}
+
+function Pricing({ data }) {
+  return (
+    <section className="packs" aria-labelledby="price-h">
+      <div className="sec-head">
+        <h2 className="h2" id="price-h">
+          <Split text={data.title} onView />
+          <span className="h2__label">{data.label}</span>
+        </h2>
+        <p className="sec-head__side">{tie(data.lead)}</p>
+      </div>
+      <ol className="packs__list">
+        {data.cards.map((card, i) => (
+          <Reveal as="li" className="packs__item" key={card.name} style={{ '--i': i }}>
+            <h3 className="packs__name">{tie(card.name)}</h3>
+            <p className="packs__price">
+              {tie(card.price)}
+              <small>{tie(card.note)}</small>
+            </p>
+            {card.time && <p className="packs__time">{tie(card.time)}</p>}
+            <p className="packs__text">{tie(card.text)}</p>
+            <ul className="packs__items">
+              {card.items.map(item => (
+                <li key={item}>{tie(item)}</li>
+              ))}
+            </ul>
+          </Reveal>
+        ))}
+      </ol>
+      <p className="packs__care">{tie(data.note)}</p>
+      <div className="packs__out">
+        <h3 className="packs__out-h">{tie(data.marketTitle)}</h3>
+        <ul className="packs__out-list">
+          {data.market.map(([name, range]) => (
+            <li key={name}>
+              {tie(name)}: {tie(range)}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p className="packs__care">{tie(data.marketNote)}</p>
+      {data.links.map(link => (
+        <LinkLine key={link.to} className="packs__care" {...link} />
+      ))}
+    </section>
+  );
+}
+
+function Owns({ data }) {
+  return (
+    <section className="measure" aria-labelledby="owns-h">
+      <div className="sec-head">
+        <h2 className="h2" id="owns-h">
+          <Split text={data.title} onView />
+          <span className="h2__label">{data.label}</span>
+        </h2>
+        <p className="sec-head__side">{tie(data.lead)}</p>
+      </div>
+      <ol className="measure__list">
+        {data.items.map((item, i) => (
+          <Reveal as="li" className="measure__item" key={item} style={{ '--i': i }}>
+            {tie(item)}
+          </Reveal>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+function Local({ data }) {
+  return (
+    <section className="paper fit" aria-labelledby="local-h">
+      <div className="fit__grid">
+        <div className="fit__text">
+          <h2 className="h2" id="local-h">
+            <Split text={data.title} onView />
+          </h2>
+          <p className="fit__lead">{tie(data.lead)}</p>
+          <p className="fit__body">{tie(data.body)}</p>
+          <p className="fit__body">
+            {tie(data.cases.lead)}{' '}
+            {data.cases.items.map(([name, to], i) => (
+              <React.Fragment key={to}>
+                {i > 0 && ', '}
+                <Link className="link" to={to}>
+                  {name}
+                </Link>
+              </React.Fragment>
+            ))}
+            .
+          </p>
+          <LinkLine className="fit__body" {...data.guide} />
+        </div>
+        <Reveal className="care" role="group" aria-label={data.boxLabel}>
+          <p className="care__big">{tie(data.big)}</p>
+          <ul className="care__list">
+            {data.items.map(item => (
+              <li key={item}>{tie(item)}</li>
+            ))}
+          </ul>
+        </Reveal>
+      </div>
+    </section>
   );
 }
 
@@ -169,6 +302,7 @@ export function ServiceRack({ lang }) {
       </p>
       <BriefNote lang={lang} className="rack-svc__brief" />
       <ScanNote lang={lang} className="rack-svc__brief" />
+      <SitesNote lang={lang} className="rack-svc__brief" />
     </Rack>
   );
 }
@@ -199,7 +333,9 @@ export function ServicesIndex({ lang }) {
         </p>
         <Contact lang={lang} />
       </Hero>
-      <Rack lang={lang} headingId="svc-list-h" title={`${t.label}.`} paper />
+      <Rack lang={lang} headingId="svc-list-h" title={`${t.label}.`} paper>
+        <SitesNote lang={lang} className="rack-svc__brief" />
+      </Rack>
       {lang === 'pl' && <GuideShelf />}
       <Close lang={lang} edition="cli" />
     </>
@@ -213,7 +349,8 @@ export default function Service({ id, lang }) {
     <>
       <Hero
         id="svc-h"
-        sr={`${s.name}, `}
+        sr={s.sr ?? `${s.name}, `}
+        kicker={s.kicker}
         title={s.title}
         size="work"
         aside={
@@ -247,6 +384,7 @@ export default function Service({ id, lang }) {
           </Reveal>
         </div>
       </section>
+      {s.pricing && <Pricing data={s.pricing} />}
       {s.packages && (
         <section className="packs" aria-labelledby="packs-h">
           <div className="sec-head">
@@ -315,6 +453,8 @@ export default function Service({ id, lang }) {
         {id === 'apps' && <BriefNote lang={lang} className="who__more" />}
       </section>
       <Steps lang={lang} items={s.steps} title={t.stepsTitle} />
+      {s.owns && <Owns data={s.owns} />}
+      {s.local && <Local data={s.local} />}
       {s.measure && (
         <section className="measure" aria-labelledby="measure-h">
           <div className="sec-head">
