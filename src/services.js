@@ -1,6 +1,6 @@
 export const phone = { href: 'tel:+48731985567', label: '731 985 567', intl: '+48 731 985 567' };
 
-export const serviceKeys = ['apps', 'sites', 'flow', 'integ', 'bot', 'wcag', 'care'];
+export const serviceKeys = ['apps', 'sites', 'shop', 'flow', 'integ', 'bot', 'wcag', 'care'];
 
 export const automationKeys = ['flow', 'integ', 'bot'];
 
@@ -10,11 +10,13 @@ export const services = {
     pl: {
       name: 'Aplikacje webowe',
       short: 'Panele klienta, systemy rezerwacji, narzędzia, które zastąpią arkusz.',
-      title: 'Aplikacje | na zamówienie.',
+      sr: '',
+      kicker: 'Na zamówienie',
+      title: 'Aplikacje webowe | Wrocław.',
       seoTitle: 'Aplikacja webowa dla firmy na zamówienie, cena, Wrocław, Adrian Turbiński',
       description:
         'Aplikacja webowa albo system dla firmy na zamówienie: panel klienta, rezerwacje, narzędzie wewnętrzne. Wrocław i zdalnie, od 18 000 zł netto, całość od jednej osoby.',
-      lead: 'Panel dla klientów, system rezerwacji albo narzędzie, które zastąpi arkusz krążący mailem. Robię całość: interfejs, serwer, bazę danych i wdrożenie.',
+      lead: 'Panel dla klientów, system rezerwacji albo narzędzie, które zastąpi arkusz krążący mailem. Dla firm z Wrocławia i, zdalnie, z całej Polski robię całość: interfejs, serwer, bazę danych i wdrożenie. Pierwsza wersja od 18 000 zł netto.',
       body: 'Piszę w Angularze i TypeScripcie, serwer w Node.js, dane w PostgreSQL. Aplikacje od 2019 roku, także takie, w których jeden ekran rysuje setki elementów.',
       price: 'od 18 000 zł',
       priceNote: 'netto, pierwsza wersja',
@@ -78,6 +80,18 @@ export const services = {
         [
           'Co z aplikacją po wdrożeniu?',
           'Możesz wziąć pakiet utrzymania albo przekazać kod innemu zespołowi. Repozytorium, dokumentacja i dostępy są twoje od pierwszego dnia.',
+        ],
+        [
+          'Czy zrobisz aplikację webową zamiast arkusza w Excelu?',
+          'To najczęstszy początek: zamówienia albo zgłoszenia krążą w arkuszu i w skrzynkach kilku osób. Aplikacja z logowaniem, rolami i panelem administracyjnym trzyma je w jednym miejscu. Zakres ustalamy na rozmowie, a pierwszą wersję sprawdzasz na działającym programie.',
+        ],
+        [
+          'Od czego zacząć zamawianie aplikacji webowej we Wrocławiu?',
+          'Opisz, kto będzie z niej korzystał i co ma w niej zrobić. Spisuję zakres i w ciągu dwóch dni roboczych dostajesz wycenę na piśmie. We Wrocławiu i na Dolnym Śląsku mogę przyjechać na spotkanie.',
+        ],
+        [
+          'Ile kosztuje utrzymanie aplikacji po wdrożeniu?',
+          'Pakiet utrzymania zaczyna się od 300 zł netto miesięcznie i obejmuje dwie godziny pracy. Kolejne godziny kosztują 160 zł netto.',
         ],
       ],
     },
@@ -157,11 +171,13 @@ export const services = {
     pl: {
       name: 'Strony internetowe',
       short: 'Strona firmowa, która ładuje się szybko i da się ją znaleźć.',
-      title: 'Strony | skrojone na miarę.',
+      sr: '',
+      kicker: 'Skrojone na miarę',
+      title: 'Strony internetowe | Wrocław.',
       seoTitle: 'Strony internetowe Wrocław, tworzenie i projektowanie stron, Adrian Turbiński',
       description:
         'Projektuję i tworzę strony www dla firm z Wrocławia, od strony wizytówki po stronę z blogiem. SEO, WCAG i Profil Firmy w Google są w cenie. Od 3 500 zł netto.',
-      lead: 'Strona firmowa, która otwiera się w sekundę, działa z klawiatury i czytnika ekranu i którą da się znaleźć w Google. Projekt, kod i wdrożenie.',
+      lead: 'Strony dla firm z Wrocławia i Dolnego Śląska: do 5 podstron od 3 500 zł netto, gotowe w 2 do 4 tygodni od chwili, gdy mamy treści. W cenie projekt, kod bez szablonów, SEO, wizytówka Google i WCAG 2.1 AA.',
       body: 'Kod piszę od zera, bez ciężkich szablonów, więc strona nie zwalnia po roku. Ta strona, którą czytasz, ma 100 punktów wydajności w Lighthouse.',
       price: 'od 3 500 zł',
       priceNote: 'netto, do 5 podstron',
@@ -183,24 +199,127 @@ export const services = {
         'Firma ze starą stroną na szablonie, która wolno się ładuje i źle wygląda na telefonie.',
         'Firma, którą obejmuje Europejski akt o dostępności.',
       ],
+      pricing: {
+        title: 'Ile to kosztuje.',
+        label: 'Ceny i widełki rynkowe',
+        lead: 'Kwoty netto. Wycenę na piśmie dostajesz w dwa dni robocze.',
+        cards: [
+          {
+            name: 'Strona firmowa',
+            price: 'od 3 500 zł',
+            note: 'netto',
+            time: '2 do 4 tygodni',
+            text: 'Do 5 podstron. Wystarcza większości firm usługowych: strona główna, oferta, cennik, o firmie i kontakt.',
+            items: [
+              'projekt pod twoją markę',
+              'kod bez szablonów',
+              'SEO i dane strukturalne',
+              'wizytówka Google',
+              'WCAG 2.1 AA',
+            ],
+          },
+          {
+            name: 'Blog albo kilka języków',
+            price: 'od 7 000 zł',
+            note: 'netto',
+            text: 'Dochodzi praca przy szablonach wpisów, tłumaczeniach i adresach każdej wersji językowej.',
+            items: [
+              'wszystko ze strony firmowej',
+              'szablon wpisów',
+              'adres dla każdej wersji językowej',
+            ],
+          },
+          {
+            name: 'Opieka po starcie',
+            price: 'od 300 zł',
+            note: 'netto miesięcznie',
+            text: 'Opcjonalna. Pakiet obejmuje dwie godziny pracy, kolejne godziny kosztują 160 zł netto.',
+            items: ['aktualizacje', 'kopie zapasowe', 'monitoring błędów', 'drobne zmiany'],
+          },
+        ],
+        note: 'Domena i hosting kosztują zwykle kilkaset złotych rocznie. Konta zakładam na twoją firmę, więc płacisz dostawcom bezpośrednio.',
+        marketTitle: 'Widełki rynkowe',
+        market: [
+          ['Prosta strona', '2 500 do 5 000 zł netto'],
+          ['Strona firmowa', '5 000 do 10 000 zł netto'],
+          ['Sklep internetowy', '5 000 do 15 000 zł netto'],
+        ],
+        marketNote:
+          'To orientacyjne kwoty z ofert wykonawców w Polsce, podane do porównania. Nie są moją ofertą.',
+        links: [
+          {
+            lead: 'Sklep internetowy ma osobną stronę:',
+            text: 'sklepy internetowe Wrocław, od 4 500 zł netto',
+            to: '/uslugi/sklepy-internetowe/',
+          },
+          {
+            lead: 'Co wpływa na cenę, opisuję w poradniku:',
+            text: 'Ile kosztuje strona internetowa w 2026 roku',
+            to: '/poradnik/ile-kosztuje-strona-internetowa/',
+          },
+        ],
+      },
       steps: [
         [
           'Miara.',
-          'Rozmawiamy o firmie, klientach i o tym, co strona ma załatwić: telefon, zapytanie, zapis. Dostajesz wycenę i plan podstron.',
+          'Rozmawiamy o firmie, klientach i tym, co strona ma załatwić: telefon, zapytanie czy zapis. Możesz zadzwonić, napisać albo wypełnić formularz. Wycenę na piśmie dostajesz w ciągu dwóch dni roboczych.',
+        ],
+        [
+          'Plan.',
+          'Dostajesz plan podstron. Jeśli nie masz jeszcze tekstów, pomogę je napisać i doliczę na to czas. Od chwili, gdy mamy treści, strona powstaje zwykle w 2 do 4 tygodni.',
         ],
         [
           'Przymiarki.',
-          'Najpierw projekt na prawdziwych treściach, potem wersja testowa pod adresem, który możesz pokazać wspólnikowi.',
+          'Najpierw projekt na prawdziwych treściach, potem wersja testowa pod adresem, który możesz pokazać wspólnikowi. Uwagi wprowadzam na bieżąco.',
         ],
         [
           'Oddanie.',
-          'Podpinam domenę, certyfikat, statystyki i Search Console. Konta zakładam na twoją firmę.',
+          'Podpinam domenę, certyfikat, statystyki i Search Console. Konta zakładam na twoją firmę. Zakładam albo porządkuję Profil Firmy w Google i łączę go ze stroną.',
         ],
         [
           'Poprawki.',
           'Drobne zmiany po starcie robię w ramach utrzymania albo od godziny, jak wolisz.',
         ],
       ],
+      owns: {
+        title: 'Co zostaje twoje.',
+        label: 'Po oddaniu strony',
+        lead: 'Konta zakładam na twoją firmę, więc nic nie jest przypisane do mnie.',
+        items: [
+          'Domena i hosting na koncie twojej firmy. Płacisz dostawcom bezpośrednio.',
+          'Kod i dostępy. Po oddaniu zostajesz z jednym i drugim.',
+          'Search Console i statystyki podpięte pod twoje konta.',
+          'Profil Firmy w Google połączony ze stroną.',
+          'Zmiany treści: prosty panel do tekstów i wpisów albo zlecenie ich mnie w ramach utrzymania.',
+        ],
+      },
+      local: {
+        title: 'Wrocław i zdalnie.',
+        lead: 'Jestem freelancerem z Wrocławia. We Wrocławiu i na Dolnym Śląsku przyjadę na spotkanie, z resztą kraju rozmawiamy przez wideo.',
+        body: 'Firma z Wrocławia ma jedną sprawę więcej: klienci szukają jej też w Mapach Google. Dlatego zakładam albo porządkuję Profil Firmy w Google i łączę go ze stroną oraz Search Console. Projekt prowadzę po polsku albo po angielsku.',
+        guide: {
+          lead: 'Jak pojawić się w Mapach Google, opisuję w poradniku:',
+          text: 'Jak pojawić się w Google Maps',
+          to: '/poradnik/wizytowka-google-maps-jak-sie-pojawic-lokalnie/',
+        },
+        cases: {
+          lead: 'Realizacje dla firm z Wrocławia:',
+          items: [
+            ['ReWektor', '/archive/rewektor/'],
+            ['Psi Pawer', '/archive/psi-pawer/'],
+            ['Enter Auto', '/archive/enterauto/'],
+          ],
+        },
+        boxLabel: 'Spotkania i godziny',
+        big: 'Wrocław i zdalnie',
+        items: [
+          'spotkanie we Wrocławiu i na Dolnym Śląsku',
+          'reszta kraju przez wideo',
+          'polski i angielski',
+          'poniedziałek do piątku, 9:00 do 18:00',
+          'faktura VAT B2B',
+        ],
+      },
       faq: [
         [
           'Ile kosztuje strona internetowa dla firmy?',
@@ -225,6 +344,42 @@ export const services = {
         [
           'Czy strona będzie zgodna z WCAG?',
           'Tak, poziom AA jest w cenie. Od czerwca 2025 część firm musi to spełniać według Europejskiego aktu o dostępności.',
+        ],
+        [
+          'Jaki jest cennik stron internetowych we Wrocławiu?',
+          'Strona firmowa do 5 podstron kosztuje od 3 500 zł netto, strona z blogiem albo w kilku językach od 7 000 zł netto. Opieka po starcie to od 300 zł netto miesięcznie, a godzina pracy 160 zł netto. Sklep internetowy wyceniam osobno, od 4 500 zł netto. Na rynku proste strony kosztują orientacyjnie 2 500 do 5 000 zł netto, a firmowe 5 000 do 10 000 zł netto.',
+        ],
+        [
+          'Czy robisz tanie strony internetowe?',
+          'Moja najniższa cena to 3 500 zł netto za stronę do 5 podstron. Jest w niej pełny zakres: projekt pod twoją markę, kod bez szablonów, SEO i zgodność z WCAG. Wycenę na piśmie dostajesz w dwa dni robocze.',
+        ],
+        [
+          'Czy spotkasz się ze mną we Wrocławiu?',
+          'Tak. We Wrocławiu i na Dolnym Śląsku mogę przyjechać na spotkanie, z resztą Polski rozmawiamy przez wideo. Pracuję od poniedziałku do piątku, od 9:00 do 18:00.',
+        ],
+        [
+          'Co będzie moje po oddaniu strony?',
+          'Domena i hosting są na koncie twojej firmy, a po oddaniu zostajesz z kodem i dostępami. Search Console i statystyki podpinam pod twoje konta.',
+        ],
+        [
+          'Czy strona pojawi się w Google na hasło „strony internetowe Wrocław”?',
+          'Tego nie da się obiecać, a gwarantowane pierwsze miejsce w wynikach to obietnica bez pokrycia. Robię to, co zależy od strony: SEO i dane strukturalne, szybkie ładowanie, Profil Firmy w Google połączony ze stroną i Search Console.',
+        ],
+        [
+          'Czy zrobisz też sklep internetowy?',
+          'Tak, sklep ma osobną stronę i cenę od 4 500 zł netto. O cenie decydują liczba produktów i wariantów, płatności, dostawa i księgowość. Przykładem jest sklep Olla Bag na Shopify w realizacjach.',
+        ],
+        [
+          'Mam starą stronę na szablonie. Czy ma sens ją odświeżać?',
+          'Tak, zwłaszcza gdy strona ładuje się wolno albo źle wygląda na telefonie. Nową stronę piszę od zera, bez ciężkich szablonów, żeby nie zwalniała po roku. Konta zakładam na twoją firmę, a po oddaniu zostajesz z kodem i dostępami.',
+        ],
+        [
+          'Od czego zależy cena strony?',
+          'Od liczby podstron, od tego, czy strona ma blog albo kilka języków, i od tego, czy teksty są gotowe. Do 5 podstron cena zaczyna się od 3 500 zł netto, z blogiem albo w kilku językach od 7 000 zł netto. Dokładną kwotę dostajesz na piśmie w ciągu dwóch dni roboczych od rozmowy.',
+        ],
+        [
+          'Jak zacząć?',
+          'Zadzwoń, napisz albo wypełnij formularz wyceny. Opisz firmę, klientów i to, co strona ma załatwić: telefon, zapytanie czy zapis. Na tej podstawie przygotowuję wycenę i plan podstron.',
         ],
       ],
     },
@@ -295,6 +450,268 @@ export const services = {
         [
           'Will the site meet WCAG?',
           'Yes, level AA is included. Since June 2025 some companies must meet it under the European Accessibility Act.',
+        ],
+      ],
+    },
+  },
+  shop: {
+    proof: true,
+    pl: {
+      name: 'Sklepy internetowe',
+      short: 'Sklep od karty produktu po kasę, dla firm z Wrocławia i z całej Polski.',
+      sr: '',
+      kicker: 'Od karty produktu do kasy',
+      title: 'Sklepy internetowe | Wrocław.',
+      seoTitle: 'Sklepy internetowe Wrocław, tworzenie sklepu internetowego, Adrian Turbiński',
+      description:
+        'Tworzenie sklepów internetowych dla firm z Wrocławia i z całej Polski: karta produktu, koszyk, kasa, WCAG 2.1 AA. Od 4 500 zł netto, wycena na piśmie w dwa dni robocze.',
+      lead: 'Sklep dla firm z Wrocławia i z całej Polski, od karty produktu po kasę. Od 4 500 zł netto, a cenę zmieniają liczba produktów i wariantów, płatności, dostawa i księgowość. Wycenę na piśmie masz w dwa dni robocze.',
+      body: 'Sklep Olla Bag zbudowałem sam na Shopify, od A do Z. Dla krawieckiej firmy TailorCloth skonfigurowałem na Odoo stronę i platformę zamówień, z fakturami krajowymi i zagranicznymi oraz procesami magazynowymi.',
+      price: 'od 4 500 zł',
+      priceNote: 'netto, zakres wyceniam na piśmie',
+      time: 'wycena w 2 dni robocze',
+      includes: [
+        'zakres i wycena na piśmie',
+        'projekt pod twoją markę',
+        'karta produktu, koszyk i kasa',
+        'WCAG 2.1 AA',
+        'konta na twoją firmę',
+        'kod i dostępy po oddaniu',
+      ],
+      foot: 'Połączenie sklepu z magazynem, księgowością i KSeF to osobna usługa, od 6 000 zł netto.',
+      whoLead:
+        'Sklepy robię dla firm z Wrocławia i Dolnego Śląska, a zdalnie dla całej Polski. We Wrocławiu mogę przyjechać na spotkanie.',
+      who: [
+        'Firma sprzedaje przez telefon i e-mail i chce przyjmować zamówienia na stronie.',
+        'Sklep jest stary, wolno się ładuje i źle wygląda na telefonie.',
+        'Oferta ma niewiele produktów, ale z wariantami, na przykład z kolorami.',
+        'Firma sprzedaje innym firmom i potrzebuje zamówień bez cen, pod indywidualne oferty.',
+      ],
+      pricing: {
+        title: 'Ile to kosztuje.',
+        label: 'Ceny i widełki rynkowe',
+        lead: 'Kwoty netto. Wycenę na piśmie dostajesz w dwa dni robocze.',
+        cards: [
+          {
+            name: 'Sklep internetowy',
+            price: 'od 4 500 zł',
+            note: 'netto',
+            text: 'Cena rośnie z liczbą produktów i wariantów, bramką płatności, dostawą, księgowością i kontami klientów. Dokładną kwotę dostajesz na piśmie.',
+            items: ['karta produktu, koszyk i kasa', 'projekt pod twoją markę', 'WCAG 2.1 AA'],
+          },
+          {
+            name: 'Integracje',
+            price: 'od 6 000 zł',
+            note: 'netto, osobna usługa',
+            text: 'Zamówienie ze sklepu trafia do magazynu i do księgowości bez przepisywania. Tak samo działa połączenie z KSeF.',
+            items: ['magazyn', 'księgowość', 'KSeF'],
+          },
+          {
+            name: 'Opieka po starcie',
+            price: 'od 300 zł',
+            note: 'netto miesięcznie',
+            text: 'Opcjonalna. Pakiet obejmuje dwie godziny pracy, kolejne godziny kosztują 160 zł netto.',
+            items: ['aktualizacje', 'kopie zapasowe', 'monitoring błędów', 'drobne zmiany'],
+          },
+        ],
+        note: 'Konta zakładam na twoją firmę, więc opłaty za domenę, platformę i płatności idą bezpośrednio do dostawców.',
+        marketTitle: 'Widełki rynkowe',
+        market: [
+          ['Sklep internetowy', 'od około 5 000 do 15 000 zł netto, więcej przy integracjach'],
+          ['Prosta strona', '2 500 do 5 000 zł netto'],
+          ['Strona firmowa', '5 000 do 10 000 zł netto'],
+        ],
+        marketNote:
+          'To orientacyjne kwoty z ofert wykonawców w Polsce, podane do porównania. Nie są moją ofertą.',
+        links: [
+          {
+            lead: 'Sama strona firmowa kosztuje mniej:',
+            text: 'strony internetowe Wrocław, od 3 500 zł netto',
+            to: '/uslugi/strony-internetowe/',
+          },
+          {
+            lead: 'Co wpływa na cenę, opisuję w poradniku:',
+            text: 'Ile kosztuje strona internetowa w 2026 roku',
+            to: '/poradnik/ile-kosztuje-strona-internetowa/',
+          },
+        ],
+      },
+      steps: [
+        [
+          'Miara.',
+          'Rozmawiamy o tym, co sprzedajesz, komu i jak ma wyglądać zamówienie. Spisuję zakres: produkty i warianty, płatności, dostawę, księgowość. Wycenę na piśmie dostajesz w ciągu dwóch dni roboczych.',
+        ],
+        [
+          'Platforma.',
+          'Dobieramy platformę do zakresu. Sklepy i platformy zamówień robiłem na Shopify i na Odoo.',
+        ],
+        [
+          'Przymiarki.',
+          'Najpierw ścieżka zakupu na prawdziwych produktach: karta produktu, koszyk i kasa. Potem wersja testowa pod adresem, który możesz pokazać wspólnikowi.',
+        ],
+        [
+          'Oddanie.',
+          'Podpinam domenę, statystyki i Search Console. Konta zakładam na twoją firmę, a kod i dostępy przekazuję tobie.',
+        ],
+        [
+          'Poprawki.',
+          'Drobne zmiany po starcie robię w ramach utrzymania od 300 zł netto miesięcznie albo od godziny, za 160 zł netto.',
+        ],
+      ],
+      owns: {
+        title: 'Co zostaje twoje.',
+        label: 'Po oddaniu sklepu',
+        lead: 'Konta zakładam na twoją firmę, więc nic nie jest przypisane do mnie.',
+        items: [
+          'Domena, sklep, Search Console i statystyki na kontach twojej firmy.',
+          'Kod i dostępy. Po oddaniu zostajesz z jednym i drugim.',
+          'Zakres i cena na piśmie, ustalone przed startem.',
+          'Wybór, czy bierzesz opiekę po starcie, czy zamawiasz zmiany od godziny.',
+        ],
+      },
+      local: {
+        title: 'Wrocław i zdalnie.',
+        lead: 'Jestem freelancerem z Wrocławia. We Wrocławiu i na Dolnym Śląsku przyjadę na spotkanie, z resztą kraju rozmawiamy przez wideo.',
+        body: 'Od wyceny przez wdrożenie po opiekę rozmawiasz bezpośrednio ze mną, bez pośredników. Projekt prowadzę po polsku albo po angielsku.',
+        guide: {
+          lead: 'Co wpływa na cenę strony i sklepu, opisuję w poradniku:',
+          text: 'Ile kosztuje strona internetowa',
+          to: '/poradnik/ile-kosztuje-strona-internetowa/',
+        },
+        cases: {
+          lead: 'Sklepy i platformy zamówień z realizacji:',
+          items: [
+            ['Olla Bag', '/archive/olla-bag/'],
+            ['TailorCloth', '/archive/tailorcloth/'],
+          ],
+        },
+        boxLabel: 'Spotkania i godziny',
+        big: 'Wrocław i zdalnie',
+        items: [
+          'spotkanie we Wrocławiu i na Dolnym Śląsku',
+          'reszta kraju przez wideo',
+          'polski i angielski',
+          'poniedziałek do piątku, 9:00 do 18:00',
+          'faktura VAT B2B',
+        ],
+      },
+      faq: [
+        [
+          'Ile kosztuje sklep internetowy we Wrocławiu?',
+          'Od 4 500 zł netto. O cenie decydują liczba produktów i wariantów, bramka płatności, dostawa, księgowość i konta klientów. Na rynku sklepy zaczynają się orientacyjnie od 5 000 zł netto i sięgają 15 000 zł i więcej, zależnie od integracji. Wycenę na piśmie dostajesz w dwa dni robocze.',
+        ],
+        [
+          'Na jakiej platformie robisz sklepy internetowe?',
+          'Sklepy i platformy zamówień robiłem na Shopify (Olla Bag) i na Odoo (TailorCloth). Platformę dobieramy na rozmowie, do zakresu sklepu.',
+        ],
+        [
+          'Ile trwa zrobienie sklepu internetowego?',
+          'To zależy od zakresu, więc czas podaję w wycenie na piśmie, po rozmowie o produktach, płatnościach i dostawie.',
+        ],
+        [
+          'Czym sklep różni się od strony firmowej?',
+          'Strona firmowa pokazuje ofertę, cennik i kontakt. Sklep dodaje kartę produktu, koszyk i kasę, czyli płatności i dostawę. Strona do 5 podstron kosztuje od 3 500 zł netto.',
+        ],
+        [
+          'Czy podepniesz sklep do magazynu i księgowości?',
+          'Tak, to osobna usługa, od 6 000 zł netto. Zamówienie ze sklepu trafia do magazynu i do księgowości bez przepisywania. Dla TailorCloth zbudowałem na Odoo obsługę magazynu i faktur.',
+        ],
+        [
+          'Czy sklep będzie zgodny z WCAG?',
+          'Tak, poziom AA jest w zakresie. Od 28 czerwca 2025 sklepy internetowe w UE podlegają Europejskiemu aktowi o dostępności.',
+        ],
+        [
+          'Co będzie moje po oddaniu sklepu?',
+          'Konta zakładam na twoją firmę, a po oddaniu zostajesz z kodem i dostępami.',
+        ],
+        [
+          'Czy muszę być z Wrocławia?',
+          'Nie. We Wrocławiu i na Dolnym Śląsku mogę przyjechać na spotkanie, z resztą Polski pracuję zdalnie.',
+        ],
+      ],
+    },
+    en: {
+      name: 'Online stores',
+      short:
+        'A shop from the product page to the checkout, for companies in Wrocław and across Poland.',
+      sr: '',
+      kicker: 'From product to checkout',
+      title: 'Online stores | in Wrocław.',
+      seoTitle: 'Online stores in Wrocław, building an e-commerce shop, Adrian Turbiński',
+      description:
+        'Online stores for companies in Wrocław and across Poland: product page, cart, checkout, WCAG 2.1 AA. From PLN 4,500 net, written quote in two working days.',
+      lead: 'An online shop for companies in Wrocław and across Poland, from the product page through the cart to the checkout. Prices start at PLN 4,500 net and depend on the number of products and variants, payments, delivery and accounting. You get a written quote in two working days.',
+      body: 'I built the Olla Bag shop on Shopify by myself, from scratch. For the tailoring company TailorCloth I configured the website and the order platform on Odoo, with domestic and foreign invoices and warehouse processes.',
+      price: 'from PLN 4,500',
+      priceNote: 'net, scope quoted in writing',
+      time: 'quote in 2 working days',
+      includes: [
+        'scope and written quote',
+        'design for your brand',
+        'product page, cart and checkout',
+        'WCAG 2.1 AA',
+        'accounts in your company name',
+        'code and access at handover',
+      ],
+      foot: 'Connecting the shop to a warehouse, accounting and KSeF is a separate service, from PLN 6,000 net.',
+      whoLead:
+        'I build shops for companies in Wrocław and Lower Silesia, and remotely for all of Poland. In Wrocław I can come to a meeting.',
+      who: [
+        'A company that sells by phone and email and wants to take orders on its site.',
+        'The shop is old, loads slowly and looks bad on a phone.',
+        'A small range with variants, for example colours.',
+        'A company that sells to other companies and needs orders without prices, for individual offers.',
+      ],
+      steps: [
+        [
+          'Measure.',
+          'We talk about what you sell, to whom, and what an order should look like. I write down the scope: products and variants, payments, delivery, accounting. You get a written quote within two working days.',
+        ],
+        [
+          'Platform.',
+          'We pick the platform to fit the scope. I have built shops and order platforms on Shopify and on Odoo.',
+        ],
+        [
+          'Fittings.',
+          'First the buying path on real products: product page, cart and checkout. Then a test version at an address you can show a partner.',
+        ],
+        [
+          'Handover.',
+          'I connect the domain, analytics and Search Console. The accounts are in your company name, and I hand the code and access over to you.',
+        ],
+        [
+          'Alterations.',
+          'After launch I make small changes under a maintenance plan from PLN 300 net a month, or by the hour at PLN 160 net.',
+        ],
+      ],
+      faq: [
+        [
+          'How much does an online store in Wrocław cost?',
+          'From PLN 4,500 net. The price depends on the number of products and variants, the payment gateway, delivery, accounting and customer accounts. On the market, shops start at about PLN 5,000 net and reach PLN 15,000 and more, depending on integrations. You get a written quote in two working days.',
+        ],
+        [
+          'Which platform do you build shops on?',
+          'I have built shops and order platforms on Shopify (Olla Bag) and on Odoo (TailorCloth). We pick the platform in the first call, to fit the scope.',
+        ],
+        [
+          'How long does it take to build an online store?',
+          'It depends on the scope, so I put the time in the written quote, after we talk about products, payments and delivery.',
+        ],
+        [
+          'Can you connect the shop to a warehouse and accounting?',
+          'Yes, it is a separate service from PLN 6,000 net. An order from the shop reaches the warehouse and accounting without retyping. For TailorCloth I built warehouse and invoice handling on Odoo.',
+        ],
+        [
+          'Will the shop meet WCAG?',
+          'Yes, level AA is in the scope. Since 28 June 2025 online shops in the EU fall under the European Accessibility Act.',
+        ],
+        [
+          'What do I own after handover?',
+          'The accounts are in your company name, and you keep the code and the access.',
+        ],
+        [
+          'Do I have to be from Wrocław?',
+          'No. In Wrocław and Lower Silesia I can come to a meeting, and I work remotely with the rest of Poland.',
         ],
       ],
     },
@@ -1320,8 +1737,8 @@ export const servicesIndex = {
     seoTitle:
       'Cennik usług: strony, aplikacje, automatyzacje, KSeF, WCAG, Wrocław, Adrian Turbiński',
     description:
-      'Usługi programisty freelancera z Wrocławia: aplikacje webowe, strony internetowe, automatyzacja procesów, integracje i KSeF, asystent AI, audyt dostępności WCAG i utrzymanie. Ceny od, netto, faktura B2B.',
-    lead: 'Siedem rzeczy, które robię dla firm. Ceny to punkt startowy dla typowego zakresu, dokładną wycenę dostajesz na piśmie po rozmowie.',
+      'Usługi programisty freelancera z Wrocławia: aplikacje webowe, strony internetowe, sklepy internetowe, automatyzacja procesów, integracje i KSeF, asystent AI, audyt dostępności WCAG i utrzymanie. Ceny od, netto, faktura B2B.',
+    lead: 'Osiem rzeczy, które robię dla firm. Ceny to punkt startowy dla typowego zakresu, dokładną wycenę dostajesz na piśmie po rozmowie.',
     rate: '160 zł / godz.',
     rateNote: 'netto, prace rozliczane godzinowo',
     rateMeta: 'faktura B2B, Wrocław i zdalnie',
@@ -1333,8 +1750,8 @@ export const servicesIndex = {
     title: 'Services | and prices.',
     seoTitle: 'Services and prices: web apps, websites, automation, KSeF, WCAG, Adrian Turbiński',
     description:
-      'Services of a freelance developer from Wrocław: web applications, websites, process automation, integrations and KSeF e-invoicing, AI assistants, WCAG accessibility audits and maintenance. Starting prices, net, B2B invoice.',
-    lead: 'Seven things I do for companies. The prices are a starting point for a typical scope, you get an exact written quote after a call.',
+      'Services of a freelance developer from Wrocław: web applications, websites, online stores, process automation, integrations and KSeF e-invoicing, AI assistants, WCAG accessibility audits and maintenance. Starting prices, net, B2B invoice.',
+    lead: 'Eight things I do for companies. The prices are a starting point for a typical scope, you get an exact written quote after a call.',
     rate: 'PLN 160 / hour',
     rateNote: 'net, for hourly work',
     rateMeta: 'B2B invoice, Wrocław and remote',

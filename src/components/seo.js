@@ -369,6 +369,7 @@ export default function Seo({
   title,
   description,
   noindex,
+  unlisted,
   post,
   code,
   service,
@@ -402,6 +403,7 @@ export default function Seo({
       <title>{title}</title>
       {description && <meta name="description" content={description} />}
       {noindex && <meta name="robots" content="noindex" />}
+      {unlisted && <meta name="robots" content="noindex,follow" />}
       <meta name="theme-color" content="#5a1424" />
       <link rel="icon" href={withPrefix('/favicon.svg')} type="image/svg+xml" />
       <link rel="apple-touch-icon" href={withPrefix('/apple-touch-icon.png')} />

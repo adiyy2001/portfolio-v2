@@ -13,6 +13,7 @@
 - A business wants repetitive work with invoices, email, reports or data between systems to run without retyping.
 - A company or institution needs a WCAG accessibility audit with fixes, or help with the European Accessibility Act.
 - A small business in Wrocław or Lower Silesia needs a company website with SEO basics and a Google Business Profile.
+- A company in Wrocław or elsewhere in Poland needs an online shop with a written quote.
 - A team has an existing app, including an older Angular version, that needs updates, a migration or bug fixes.
 - How to reach him: email or phone from the contact line above, or the quote form on the [home page](https://adrianturbinski.pl/en/). A written quote comes within two working days of the first call.
 
@@ -22,6 +23,7 @@ Starting prices, net of VAT, for a typical scope; an exact quote is written afte
 
 - [Web applications](https://adrianturbinski.pl/en/services/web-applications/): client portals, booking systems, internal tools; front end, back end and deployment; from PLN 18,000 net, 6 to 12 weeks
 - [Websites](https://adrianturbinski.pl/en/services/websites/): fast company sites with SEO basics, Google Business Profile and WCAG AA; from PLN 3,500 net, 2 to 4 weeks
+- [Online stores](https://adrianturbinski.pl/en/services/online-stores/): shops from the product page to the checkout, built on platforms he has delivered (Shopify, Odoo); from PLN 4,500 net, [po polsku](https://adrianturbinski.pl/uslugi/sklepy-internetowe/)
 - [Process automation](https://adrianturbinski.pl/en/services/process-automation/): invoices, email, reports and data moved between systems without retyping, n8n on the client's server or custom code, a week of parallel testing; from PLN 3,500 net per process, care from PLN 300 net per month
 - [Integrations and KSeF](https://adrianturbinski.pl/en/services/integrations-ksef/): the Polish KSeF e-invoicing system connected to the client's own software, shop, ERP or Odoo, and integrations between company systems; from PLN 6,000 net
 - [AI website assistant](https://adrianturbinski.pl/en/services/ai-assistant/): answers from the company's knowledge base, books appointments, hands the chat to a person, says it is AI as the EU AI Act requires, data hosted in the EU; from PLN 5,000 net plus from PLN 300 net per month
