@@ -9,7 +9,7 @@ const clean = value =>
 const fromCampaign = params => {
   const paid = ['gclid', 'gbraid', 'wbraid'].some(name => params.has(name));
   const parts = ['utm_source', 'utm_medium', 'utm_campaign'].map(name => clean(params.get(name)));
-  if (paid && !parts.some(Boolean)) return 'google/cpc';
+  if (paid) return [parts[0] || 'google', parts[1] || 'cpc', parts[2]].join('/');
   return parts.some(Boolean) ? parts.join('/') : '';
 };
 
