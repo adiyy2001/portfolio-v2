@@ -28,7 +28,7 @@ export default function Privacy() {
           The form sends what you type (service, budget, project description and email or phone)
           through Cloudflare Workers to my private Telegram chat. In a Cloudflare D1 database I
           store only the date, language, chosen service, budget, the page the form was sent from,
-          the traffic source and a promo code, to count requests. Your contact details and project
+          and a promo code, to count requests. I also store the traffic source: taken from the page address if you accepted statistics, or the one you pick yourself in the field &ldquo;How did you find my site?&rdquo;. Your contact details and project
           description are not stored in any database. Cloudflare and Telegram process the data as
           providers under their own privacy statements, including outside the European Economic
           Area.
@@ -118,6 +118,31 @@ export default function Privacy() {
           Statistics settings in the footer, the data collection stops and the _clck and _clsk
           cookies are deleted.
         </p>
+        <h2>Visits from Google ads</h2>
+        <p>
+          If you arrive from one of my Google ads (the address carries gclid, gbraid, wbraid or
+          utm_medium=cpc) and you accept statistics in the banner, the page script sends a short
+          visit record to my receiver on Cloudflare Workers. It holds the landing page, the last
+          page you viewed, the device type (phone, tablet or computer), the source and campaign name
+          from the address, the time on the page, the deepest scroll, the number of pages viewed,
+          and whether you clicked the phone, the email or a button, or sent the form. A random visit
+          number lives only in the memory of the tab and disappears when you close it. I do not
+          store the gclid itself, your IP address or the full user agent.
+        </p>
+        <p>
+          I do this to see whether people coming from the paid ad read the pages and get in touch.
+          Google Analytics only sees people who consented, so without this counter I do not know
+          what everyone else does. The legal basis is your consent (Art. 6(1)(a) GDPR and Art. 399
+          of the Polish Electronic Communications Law). The record holds nothing that would let me
+          identify you, but I still treat it as personal data. Cloudflare sees your IP address with
+          each request because it uses it to limit the number of requests; I do not store it.
+          Records are deleted automatically after 180 days.
+        </p>
+        <p>
+          Without consent the script sends nothing. The counter also stores nothing on your device:
+          no cookies, no localStorage and no sessionStorage. Withdrawing consent with the Statistics
+          settings button in the footer stops sending at once.
+        </p>
         <h2>My publishing tools</h2>
         <p>
           I have a personal tool that serves my needs. It pushes my posts to my LinkedIn, my
@@ -144,7 +169,7 @@ export default function Privacy() {
           contact@adrianturbinski.pl. You can also complain to the Polish data protection authority
           (UODO).
         </p>
-        <p>Last updated: 30 October 2026.</p>
+        <p>Last updated: 13 November 2026.</p>
       </section>
     </>
   );

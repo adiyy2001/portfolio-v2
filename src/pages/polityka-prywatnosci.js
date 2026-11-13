@@ -29,7 +29,7 @@ export default function Privacy() {
           Formularz przesyła to, co w nim wpiszesz (usługę, budżet, opis projektu i e-mail lub
           telefon), przez Cloudflare Workers do mojego prywatnego czatu w Telegramie. W bazie
           Cloudflare D1 zapisuję tylko datę, język, wybraną usługę, budżet, stronę, z której wysłano
-          formularz, źródło wejścia i kod promocyjny, żeby liczyć zapytania. Twojego kontaktu ani
+          formularz i kod promocyjny, żeby liczyć zapytania. Zapisuję też źródło wejścia: z adresu strony, jeśli zgodziłeś się na statystyki, albo to, które sam wskażesz w polu „Skąd wiesz o mojej stronie?”. Twojego kontaktu ani
           opisu projektu nie zapisuję w żadnej bazie. Cloudflare i Telegram przetwarzają dane jako
           dostawcy według własnych polityk prywatności, także poza Europejskim Obszarem
           Gospodarczym.
@@ -170,6 +170,32 @@ export default function Privacy() {
           Bez zgody Clarity w ogóle się nie ładuje. Wycofanie zgody przyciskiem Ustawienia statystyk
           w stopce wyłącza nagrywanie i usuwa ciasteczka _clck i _clsk.
         </p>
+        <h2>Wejścia z reklamy Google</h2>
+        <p>
+          Jeśli trafisz na stronę z mojej reklamy w Google (adres zawiera parametr gclid, gbraid,
+          wbraid albo utm_medium=cpc) i zgodzisz się w banerze na statystyki, skrypt strony wyśle do
+          mojego odbiornika na Cloudflare Workers krótki zapis wizyty. Zawiera stronę wejścia,
+          ostatnio oglądaną podstronę, rodzaj urządzenia (telefon, tablet albo komputer), źródło i
+          nazwę kampanii z adresu, czas na stronie, największą głębokość przewinięcia, liczbę
+          obejrzanych podstron oraz informację, czy kliknąłeś telefon, e-mail albo przycisk i czy
+          wysłałeś formularz. Losowy numer wizyty trzymam tylko w pamięci karty, więc znika po jej
+          zamknięciu. Samego identyfikatora gclid nie zapisuję, tak samo jak adresu IP i pełnego
+          user agenta.
+        </p>
+        <p>
+          Robię to, żeby sprawdzić, czy ludzie z płatnej reklamy czytają strony i się odzywają.
+          Google Analytics widzi tylko osoby, które się zgodziły, więc bez tego licznika nie wiem,
+          co robi reszta. Podstawą jest Twoja zgoda (art. 6 ust. 1 lit. a RODO i art. 399 ustawy
+          Prawo komunikacji elektronicznej). Zapis nie zawiera danych, po których mógłbym Cię
+          rozpoznać, ale i tak traktuję go jak dane osobowe. Cloudflare widzi Twój adres IP przy
+          każdym zapytaniu, bo na jego podstawie ogranicza liczbę zapytań, a ja go nie zapisuję.
+          Zapisy kasuję automatycznie po 180 dniach.
+        </p>
+        <p>
+          Bez zgody skrypt niczego nie wysyła. Licznik nie zapisuje też nic na Twoim urządzeniu: ani
+          ciasteczek, ani localStorage, ani sessionStorage. Wycofanie zgody przyciskiem Ustawienia
+          statystyk w stopce zatrzymuje wysyłkę od razu.
+        </p>
         <h2>Moje narzędzia do publikacji</h2>
         <p>
           Używam prywatnego narzędzia do własnej pracy. Publikuje moje posty na moim profilu
@@ -192,7 +218,7 @@ export default function Privacy() {
           Możesz poprosić o jej usunięcie albo o wgląd w to, co o Tobie mam, pisząc na
           contact@adrianturbinski.pl. Możesz też złożyć skargę do Prezesa UODO.
         </p>
-        <p>Ostatnia aktualizacja: 30 października 2026.</p>
+        <p>Ostatnia aktualizacja: 13 listopada 2026.</p>
       </section>
     </>
   );

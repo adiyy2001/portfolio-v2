@@ -6,14 +6,14 @@ import { privacyPath, tie } from '../i18n';
 const copy = {
   pl: {
     aria: 'Zgoda na statystyki',
-    text: 'Za Twoją zgodą Google Analytics i Microsoft Clarity zapiszą ciasteczka, żebym wiedział, które strony są czytane i gdzie ktoś się gubi. Bez zgody liczę tylko anonimowe wejścia, bez ciasteczek.',
+    text: 'Za Twoją zgodą Google Analytics i Microsoft Clarity zapiszą ciasteczka, a po wejściu z reklamy zapiszę też krótki ślad wizyty, bez ciasteczek. Dzięki temu wiem, które strony są czytane i gdzie ktoś się gubi. Bez zgody liczę tylko anonimowe wejścia, bez ciasteczek.',
     policy: 'Polityka prywatności',
     accept: 'Zgadzam się',
     reject: 'Nie zgadzam się',
   },
   en: {
     aria: 'Consent to statistics',
-    text: 'With your consent Google Analytics and Microsoft Clarity set cookies so I can see which pages get read and where people get stuck. Without it I only count anonymous visits, with no cookies.',
+    text: 'With your consent Google Analytics and Microsoft Clarity set cookies, and after a visit from an ad I also keep a short visit record, without cookies. That shows me which pages get read and where people get stuck. Without it I only count anonymous visits, with no cookies.',
     policy: 'Privacy policy',
     accept: 'I agree',
     reject: 'I disagree',
