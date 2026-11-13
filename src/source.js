@@ -1,4 +1,4 @@
-const key = 'lead-source';
+import { storedConsent } from './consent';
 
 const clean = value =>
   String(value ?? '')
@@ -6,39 +6,33 @@ const clean = value =>
     .replace(/[^a-z0-9._-]/g, '')
     .slice(0, 40);
 
-const fromCampaign = params =>
-  ['utm_source', 'utm_medium', 'utm_campaign'].map(name => clean(params.get(name)));
+const fromCampaign = params => {
+  const paid = ['gclid', 'gbraid', 'wbraid'].some(name => params.has(name));
+  const parts = ['utm_source', 'utm_medium', 'utm_campaign'].map(name => clean(params.get(name)));
+  if (paid && !parts.some(Boolean)) return 'google/cpc';
+  return parts.some(Boolean) ? parts.join('/') : '';
+};
 
 const fromReferrer = () => {
   try {
     const host = new URL(document.referrer).hostname;
-    return host && host !== window.location.hostname ? [`referrer:${clean(host)}`] : [];
+    return host && host !== window.location.hostname ? `referrer:${clean(host)}` : '';
   } catch {
-    return [];
+    return '';
   }
 };
 
+let found = '';
+
 export function captureSource() {
-  try {
-    if (window.sessionStorage.getItem(key)) return;
-    const params = new URLSearchParams(window.location.search);
-    const campaign = fromCampaign(params);
-    const ref = clean(params.get('ref'));
-    const found = campaign.some(Boolean)
-      ? campaign.join('/')
-      : ref
-        ? `ref:${ref}`
-        : fromReferrer()[0];
-    if (found) window.sessionStorage.setItem(key, found);
-  } catch {
-    return;
-  }
+  if (found) return;
+  const params = new URLSearchParams(window.location.search);
+  const ref = clean(params.get('ref'));
+  found = fromCampaign(params) || (ref ? `ref:${ref}` : fromReferrer());
 }
 
+export const sourceAllowed = () => storedConsent() === 'granted';
+
 export function readSource() {
-  try {
-    return window.sessionStorage.getItem(key) || 'direct';
-  } catch {
-    return 'direct';
-  }
+  return sourceAllowed() ? found || 'direct' : '';
 }

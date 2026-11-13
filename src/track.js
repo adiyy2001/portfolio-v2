@@ -1,3 +1,5 @@
+import { noteEvent } from './adcount';
+
 const counted = new Set([
   'cta_click',
   'contact_click',
@@ -9,6 +11,7 @@ const counted = new Set([
 
 export function track(name, params = {}) {
   window.gtag?.('event', name, params);
+  noteEvent(name, params);
   if (!counted.has(name)) return;
   const label = params.cta ?? params.method ?? params.service ?? params.reason ?? '';
   window.goatcounter?.count?.({

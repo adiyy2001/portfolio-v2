@@ -19,6 +19,7 @@ import './src/styles/olla.css';
 import './src/styles/trust.css';
 import './src/styles/clientcase.css';
 import { keepScroll } from './src/components/layout';
+import { notePage, startAdCount } from './src/adcount';
 import { captureSource } from './src/source';
 import { trackClicks, trackPage, watchPage } from './src/track';
 
@@ -28,6 +29,7 @@ let popped = false;
 
 export const onClientEntry = () => {
   captureSource();
+  startAdCount();
   window.history.scrollRestoration = 'manual';
   trackClicks();
   window.addEventListener('popstate', () => {
@@ -64,6 +66,7 @@ export const onRouteUpdate = ({ location, prevLocation }) => {
     prevLocation.pathname + prevLocation.search !== location.pathname + location.search
   ) {
     trackPage();
+    notePage();
   }
   watchPage();
 };

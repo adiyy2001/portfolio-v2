@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'gatsby';
 import { privacyPath, tie } from '../i18n';
 import { phone, serviceKeys, services } from '../services';
+import { subscribeConsent } from '../consent';
 import { readSource } from '../source';
 import { track } from '../track';
 
@@ -18,6 +19,14 @@ const copy = {
     service: 'Co szyjemy?',
     other: 'Coś innego',
     budget: 'Budżet netto',
+    heard: 'Skąd wiesz o mojej stronie?',
+    heards: [
+      ['ad', 'Z reklamy w Google'],
+      ['search', 'Z wyszukiwarki'],
+      ['referral', 'Z polecenia'],
+      ['social', 'Z mediów społecznościowych'],
+      ['other', 'Inaczej'],
+    ],
     budgets: [
       'do 5 tys. zł',
       '5 do 15 tys. zł',
@@ -51,6 +60,14 @@ const copy = {
     service: 'What are we making?',
     other: 'Something else',
     budget: 'Budget, net',
+    heard: 'How did you find my site?',
+    heards: [
+      ['ad', 'A Google ad'],
+      ['search', 'Search'],
+      ['referral', 'A recommendation'],
+      ['social', 'Social media'],
+      ['other', 'Something else'],
+    ],
     budgets: ['under 5k PLN', '5k to 15k PLN', '15k to 40k PLN', 'over 40k PLN', 'not sure yet'],
     message: 'A few sentences about the project',
     messageHint: 'What the company does, what should be built and by when.',
@@ -71,6 +88,12 @@ const copy = {
     failOr: 'or call',
     subject: 'Quote request',
   },
+};
+
+const leadSource = heard => {
+  const measured = readSource();
+  if (measured && measured !== 'direct') return measured;
+  return heard ? `declared:${heard}` : measured;
 };
 
 const reachable = contact =>
@@ -107,6 +130,7 @@ export default function Quote({ lang, service = '' }) {
   const opened = useRef(0);
   const [picked, setPicked] = useState(services[service]?.[lang].name ?? '');
   const [budget, setBudget] = useState('');
+  const [heard, setHeard] = useState('');
   const [state, setState] = useState('idle');
   const [invalid, setInvalid] = useState(false);
   const [fallback, setFallback] = useState('');
@@ -115,7 +139,11 @@ export default function Quote({ lang, service = '' }) {
   const codeField = useRef(null);
 
   useEffect(() => {
-    sourceField.current.value = readSource();
+    const sync = () => {
+      sourceField.current.value = readSource();
+    };
+    sync();
+    return subscribeConsent(sync);
   }, []);
 
   useEffect(() => {
@@ -155,7 +183,7 @@ export default function Quote({ lang, service = '' }) {
         .toUpperCase(),
       page: window.location.pathname,
       lang,
-      source: readSource(),
+      source: leadSource(heard),
       elapsed: opened.current ? Date.now() - opened.current : 0,
     };
     const ok = await fetch(endpoint, {
@@ -263,6 +291,14 @@ export default function Quote({ lang, service = '' }) {
         options={budgetOptions}
         value={budget}
         onChange={setBudget}
+      />
+      <Chips
+        name="heard"
+        legend={t.heard}
+        optional={t.optional}
+        options={t.heards}
+        value={heard}
+        onChange={setHeard}
       />
       {coded ? (
         <div className="quote__row">
