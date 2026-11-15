@@ -81,7 +81,7 @@ const en: typeof pl = {
     },
   },
   week: {
-    title: 'Weekly card',
+    title: 'Weekly menu',
     note: 'The set covers soup, a main course, dessert and tea.',
     soup: 'Soup',
     second: 'Main',
@@ -109,10 +109,10 @@ const en: typeof pl = {
   page: {
     title: 'Menu',
     description:
-      'The full menu of Szczypta bistro: breakfast, lunch, dinner, desserts and drinks with prices, allergens and the weekly card. Sample website.',
+      'The full menu of Szczypta bistro: breakfast, lunch, dinner, desserts and drinks with prices, allergens and the weekly menu. Sample website.',
     h1: 'Menu',
     lead: 'Breakfast, lunch and dinner. Every dish has a price and its allergens, and the five daily sets are at the bottom.',
-    weekLink: 'Weekly card',
+    weekLink: 'Weekly menu',
     kitchenBreak:
       'From 16:00 to 17:00 the kitchen takes a break. Drinks and desserts are served throughout.',
   },

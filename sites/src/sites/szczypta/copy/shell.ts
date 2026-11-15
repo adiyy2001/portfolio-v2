@@ -37,7 +37,7 @@ const en: typeof pl = {
   mainNav: 'Main',
   nav: {
     menu: 'Menu',
-    week: 'Weekly card',
+    week: 'Weekly menu',
     events: 'Events',
     about: 'About',
     contact: 'Contact',

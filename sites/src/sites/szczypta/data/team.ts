@@ -12,7 +12,7 @@ export const team: Person[] = [
     role: { pl: 'Szefowa kuchni', en: 'Head chef' },
     bio: {
       pl: 'Układa kartę tygodnia w niedzielę wieczorem, kiedy warzywa są już zamówione.',
-      en: 'Writes the weekly card on Sunday evening, once the vegetable order is in.',
+      en: 'Writes the weekly menu on Sunday evening, once the vegetable order is in.',
     },
   },
   {
@@ -28,7 +28,7 @@ export const team: Person[] = [
     role: { pl: 'Desery i pieczywo', en: 'Desserts and bread' },
     bio: {
       pl: 'Piecze desery do karty tygodnia i odbiera chleb od Piekarni Zakwas.',
-      en: 'Bakes the desserts for the weekly card and collects bread from Zakwas Bakery.',
+      en: 'Bakes the desserts for the weekly menu and collects bread from Zakwas Bakery.',
     },
   },
 ];

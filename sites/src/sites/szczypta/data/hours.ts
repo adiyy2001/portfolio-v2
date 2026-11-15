@@ -79,7 +79,7 @@ export const dinnerHours: ServiceHours = {
 
 export const weekCardHours: ServiceHours = {
   slots: [{ group: 'weekdays', from: 11, to: 16 }],
-  closed: { pl: 'W weekend bez karty tygodnia', en: 'No weekly card at the weekend' },
+  closed: { pl: 'W weekend bez karty tygodnia', en: 'No weekly menu at the weekend' },
 };
 
 export const drinksHours: ServiceHours = {

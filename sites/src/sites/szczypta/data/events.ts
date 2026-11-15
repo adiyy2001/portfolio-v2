@@ -1,6 +1,6 @@
 import type { Localized } from './lang';
 
-export type ImageId = 'poledwiczki' | 'zupa' | 'buraki' | 'sala';
+export type ImageId = 'poledwiczki' | 'zupa' | 'buraki' | 'sala' | 'pierogi' | 'wino' | 'sniadanie';
 
 export interface EventRule {
   weekday: 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -40,7 +40,7 @@ export const events: BistroEvent[] = [
       pl: [
         'Co miesiąc zapraszamy jednego dostawcę. Najczęściej jest to Gospodarstwo Krzyżanowice, od którego bierzemy warzywa w poniedziałki i czwartki.',
         'Kuchnia gotuje cztery dania z tego, co przyjechało rano. Gospodarz opowiada, co rośnie w polu w tym tygodniu i co z tego nie trafi do karty.',
-        'Stół jest wspólny, więc przy kolacji poznasz sąsiadów z Szczepina.',
+        'Stół jest wspólny, więc przy kolacji poznasz sąsiadów ze Szczepina.',
       ],
       en: [
         'Each month we invite one supplier. Most often it is Krzyżanowice Farm, where we collect vegetables on Mondays and Thursdays.',
@@ -63,7 +63,7 @@ export const events: BistroEvent[] = [
     start: '19:00',
     price: 79,
     seats: 16,
-    image: 'sala',
+    image: 'wino',
     title: { pl: 'Wieczór z winem z Moraw', en: 'Moravian wine evening' },
     teaser: {
       pl: 'Pięć lampek z jednej piwnicy na Morawach i deski z serami z Księginic.',
@@ -91,7 +91,7 @@ export const events: BistroEvent[] = [
     start: '17:00',
     price: 42,
     seats: 18,
-    image: 'zupa',
+    image: 'pierogi',
     title: { pl: 'Wieczór pierogowy', en: 'Dumpling night' },
     teaser: {
       pl: 'Pierogi z gęsiną bez limitu porcji, dopóki starcza ciasta.',
@@ -104,7 +104,7 @@ export const events: BistroEvent[] = [
         'Dostajesz pierogi z gęsiną z cebulą smażoną na maśle, a w drugiej rundzie wersję z kapustą i grzybami.',
       ],
       en: [
-        'On the first Saturday of the month we fold dumplings from the morning. In the evening they leave the kitchen in batches and go straight to the tables.',
+        'On the first Saturday of the month we make dumplings all morning. In the evening they leave the kitchen in batches and go straight to the tables.',
         'You get goose dumplings with onion fried in butter, and in the second round a version with cabbage and mushrooms.',
       ],
     },
@@ -156,7 +156,7 @@ export const events: BistroEvent[] = [
     start: '10:30',
     price: 26,
     seats: 12,
-    image: 'sala',
+    image: 'sniadanie',
     title: { pl: 'Śniadanie przy długim stole', en: 'Breakfast at the long table' },
     teaser: {
       pl: 'Jeden stół, jedna taca z jedzeniem i niedzielne tempo.',

@@ -43,7 +43,7 @@ const time = (start: string, end?: string) => (end ? copy.duration(start, end) :
           <p class="ev-teaser">{tie(event.teaser[lang])}</p>
           <p class="ev-facts">
             <span>
-              {event.rhythm[lang]}, {copy.at} {time(event.start, event.end)}
+              {event.rhythm[lang]}, {copy.at(time(event.start, event.end), Boolean(event.end))}
             </span>{' '}
             <span>{copy.price(event.price)}</span> <span>{copy.seats(event.seats)}</span>
           </p>
