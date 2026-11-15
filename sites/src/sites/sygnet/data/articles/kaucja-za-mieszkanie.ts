@@ -74,7 +74,7 @@ export const kaucjaZaMieszkanie: Article = {
     },
     {
       type: 'p',
-      text: 'Zwlekać nie warto. Roszczenia wynajmującego o zwrot rzeczy i naprawienie szkód przedawniają się z upływem roku od zwrotu lokalu, więc spór o stan mieszkania warto zamknąć w tym czasie. Od terminów w konkretnej sprawie zależy też to, jak długo najemca może dochodzić zwrotu kaucji, dlatego daty oddania kluczy i wysłania wezwania warto mieć udokumentowane.',
+      text: 'Zwlekać nie warto. Zgodnie z art. 677 Kodeksu cywilnego roszczenia wynajmującego o naprawienie szkody z powodu uszkodzenia lub pogorszenia lokalu przedawniają się z upływem roku od dnia zwrotu lokalu. Ten sam termin dotyczy roszczeń najemcy o zwrot nakładów na lokal i o zwrot nadpłaconego czynszu. Roszczenie o samą kaucję podlega ogólnym terminom przedawnienia, więc daty oddania kluczy i wysłania wezwania warto mieć udokumentowane, a spór o stan mieszkania zamknąć w ciągu roku od zwrotu.',
     },
     { type: 'h2', text: 'Co zrobić przy podpisywaniu umowy' },
     {
