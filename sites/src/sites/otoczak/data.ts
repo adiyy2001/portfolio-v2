@@ -222,7 +222,7 @@ export const mainHelplines: readonly Helpline[] = [
     dial: '116123',
     name: 'Kryzysowy Telefon Zaufania dla dorosłych',
     detail: 'Dla dorosłych w kryzysie emocjonalnym. Rozmowa jest anonimowa.',
-    hours: 'Codziennie od 14:00 do 22:00, bezpłatnie.',
+    hours: 'Całą dobę, bezpłatnie.',
   },
   {
     number: '116 111',
