@@ -1,0 +1,20 @@
+---
+interface Props {
+  no: number;
+  id: string;
+  intro?: string;
+}
+
+const { no, id, intro } = Astro.props;
+---
+
+<header class="part-head">
+  <span class="part-no">
+    <span class="sr-only">Część {no}</span>
+    <span aria-hidden="true">§&nbsp;{no}</span>
+  </span>
+  <h2 id={id}>
+    <slot />
+  </h2>
+  {intro && <p class="part-intro">{intro}</p>}
+</header>

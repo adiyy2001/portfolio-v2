@@ -1,0 +1,39 @@
+---
+import HoursBlock from '../../../sites/sygnet/components/HoursBlock.astro';
+import PageHead from '../../../sites/sygnet/components/PageHead.astro';
+import PersonCard from '../../../sites/sygnet/components/PersonCard.astro';
+import ReachBlock from '../../../sites/sygnet/components/ReachBlock.astro';
+import { people } from '../../../sites/sygnet/data/people';
+import { firm } from '../../../sites/sygnet/data/site';
+import Layout from '../../../sites/sygnet/Layout.astro';
+---
+
+<Layout
+  title="Kontakt"
+  description={`Zadzwoń pod ${firm.phone.display}, napisz na ${firm.email} albo wypełnij formularz. Kancelaria Sygnet, ${firm.address.street}, ${firm.address.postcode} ${firm.address.city}.`}
+  path="/sygnet/kontakt/"
+  current="kontakt"
+  bundles={['inner']}>
+  <PageHead
+    title="Umów pierwszą rozmowę"
+    lead={`Opisz sprawę w kilku zdaniach albo zadzwoń. Odpowiadamy w ciągu ${firm.replyWorkingDays} dnia roboczego, a pierwsza rozmowa trwa ${firm.firstTalkMinutes} minut i kosztuje ${firm.firstTalkPricePln} zł.`}
+    crumbs={[{ label: 'Strona główna', href: '/sygnet/' }, { label: 'Kontakt' }]}
+  />
+  <div class="contact-page">
+    <ReachBlock />
+  </div>
+  <div class="hours-wide">
+    <HoursBlock />
+  </div>
+  <section class="block" aria-labelledby="h-bezposrednio">
+    <div class="block-head">
+      <h2 id="h-bezposrednio">Bezpośrednio do prawnika</h2>
+      <p>Telefon i e-mail osoby, która prowadzi Twój rodzaj sprawy.</p>
+    </div>
+    <div class="team block-body">
+      {people.map(person => (
+        <PersonCard person={person} />
+      ))}
+    </div>
+  </section>
+</Layout>

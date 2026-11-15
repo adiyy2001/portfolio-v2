@@ -1,0 +1,14 @@
+---
+interface Props {
+  toc?: boolean;
+  contactHref?: string;
+}
+
+const { toc = false, contactHref = '#rozmowa' } = Astro.props;
+---
+
+<p class="part-back">
+  {toc && <a href="#spis">Do spisu treści</a>}
+  <a href={contactHref}>Umów rozmowę</a>
+  <slot />
+</p>

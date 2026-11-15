@@ -1,0 +1,15 @@
+---
+import { processSteps } from '../data/areas';
+import { tie } from '../lib/tie';
+---
+
+<ol class="steps">
+  {processSteps.map(step => (
+    <li class="step">
+      <span class="step-no">{step.no}</span>
+      <h3>{step.title}</h3>
+      <p>{tie(step.text)}</p>
+      <span class="step-meta">{tie(step.meta)}</span>
+    </li>
+  ))}
+</ol>

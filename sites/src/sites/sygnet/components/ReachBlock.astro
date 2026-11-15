@@ -1,0 +1,26 @@
+---
+import ContactForm from '../islands/ContactForm';
+import { firm } from '../data/site';
+import { tie } from '../lib/tie';
+---
+
+<div class="reach">
+  <div class="reach-side">
+    <p class="reach-line">
+      <span class="label">Telefon</span>
+      <a href={firm.phone.href}>{firm.phone.display}</a>
+    </p>
+    <p class="reach-line">
+      <span class="label">E-mail</span>
+      <a href={`mailto:${firm.email}`}>{firm.email}</a>
+    </p>
+    <address class="reach-line">
+      <span class="label">Adres</span>
+      <span class="line">{tie(firm.address.street)}</span>
+      <span class="line">
+        {firm.address.postcode} {firm.address.city}
+      </span>
+    </address>
+  </div>
+  <ContactForm client:load />
+</div>

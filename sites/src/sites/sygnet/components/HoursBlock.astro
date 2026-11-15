@@ -1,0 +1,33 @@
+---
+import { firm } from '../data/site';
+import { tie } from '../lib/tie';
+---
+
+<div class="hours">
+  <p class="hours-live" data-live-block>
+    Rozmawiamy w dni robocze od {firm.hours.weekdaysRange}
+  </p>
+  <h3>Godziny i adres</h3>
+  <dl>
+    <div>
+      <dt>{firm.hours.weekdaysLabel}</dt>
+      <dd>{firm.hours.weekdaysRange}</dd>
+    </div>
+    <div>
+      <dt>Sobota</dt>
+      <dd>{firm.hours.saturday}</dd>
+    </div>
+    <div>
+      <dt>Adres</dt>
+      <dd>
+        <address>
+          <span class="line">{tie(firm.address.street)}</span>
+          <span class="line">
+            {firm.address.postcode} {firm.address.city}
+          </span>
+          <span class="line">{firm.address.district}</span>
+        </address>
+      </dd>
+    </div>
+  </dl>
+</div>

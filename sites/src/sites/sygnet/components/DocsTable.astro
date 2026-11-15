@@ -1,0 +1,43 @@
+---
+import { areas } from '../data/areas';
+import { documentsLabel } from '../lib/plural';
+import { tie } from '../lib/tie';
+
+const heads: Record<string, string> = {
+  rodzina: 'Rodzina',
+  spolki: 'Spółka',
+  spadki: 'Spadek',
+  umowy: 'Umowa',
+};
+---
+
+<table class="docs">
+  <caption>Dokumenty na pierwsze spotkanie</caption>
+  <thead>
+    <tr>
+      {areas.map((area, index) => (
+        <th class={`c${index + 1}`} scope="col">
+          <span>{heads[area.slug]}</span>
+          <small>{documentsLabel(area.documents.length)}</small>
+        </th>
+      ))}
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {areas.map((area, index) => (
+        <td class={`c${index + 1}`}>
+          <p class="cell-head" aria-hidden="true">
+            <span>{heads[area.slug]}</span>
+            <small>{documentsLabel(area.documents.length)}</small>
+          </p>
+          <ul>
+            {area.documents.map(item => (
+              <li>{tie(item)}</li>
+            ))}
+          </ul>
+        </td>
+      ))}
+    </tr>
+  </tbody>
+</table>
