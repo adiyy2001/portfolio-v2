@@ -152,4 +152,3 @@ export const describeBooking = (booking: Booking): string => {
   const label = `${weekdayLong[day.getUTCDay()]}, ${day.getUTCDate()} ${monthGenitive[day.getUTCMonth()]}`;
   return `${label}, godz. ${formatHour(booking.hour)}`;
 };
-

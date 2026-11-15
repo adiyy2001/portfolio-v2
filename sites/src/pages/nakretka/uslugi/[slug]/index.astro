@@ -1,0 +1,104 @@
+---
+import { link } from '../../../../shared/link';
+import Layout from '../../../../sites/nakretka/Layout.astro';
+import PageHead from '../../../../sites/nakretka/components/PageHead.astro';
+import { services } from '../../../../sites/nakretka/data/services';
+import { business } from '../../../../sites/nakretka/data/site';
+import { imageUrl } from '../../../../sites/nakretka/lib/assets';
+import { formatNm, formatZl } from '../../../../sites/nakretka/lib/format';
+
+export function getStaticPaths() {
+  return services.map((service, index) => ({
+    params: { slug: service.slug },
+    props: {
+      service,
+      previous: services[(index + services.length - 1) % services.length],
+      next: services[(index + 1) % services.length],
+    },
+  }));
+}
+
+const { service, previous, next } = Astro.props;
+const path = `/nakretka/uslugi/${service.slug}/`;
+---
+
+<Layout
+  title={service.name}
+  description={`${service.name} w warsztacie Nakrętka na Fabrycznej we Wrocławiu: od ${formatZl(service.price)} ${service.priceNote}, czas pracy ${service.duration}, ${service.torque.label.toLowerCase()} dokręcamy do ${formatNm(service.torque.nm)}.`}
+  path={path}
+  current="uslugi"
+  bundles={['pages']}>
+  <PageHead
+    title={service.name}
+    kicker={`Usługa, od ${formatZl(service.price)}`}
+    lead={service.scope}
+    crumbs={[{ label: 'Usługi', path: '/nakretka/uslugi/' }]}
+  />
+  <section class="paper" aria-labelledby="opis-uslugi">
+    <div class="wrap detail">
+      <figure class="detail-ph">
+        <img
+          src={imageUrl(service.image)}
+          alt={service.alt}
+          width={service.width}
+          height={service.height}
+          decoding="async"
+        />
+      </figure>
+      <div>
+        <h2 id="opis-uslugi" class="sr-only">
+          Opis usługi {service.name}
+        </h2>
+        <dl class="facts">
+          <div>
+            <dt>Cena od</dt>
+            <dd>
+              {formatZl(service.price)}
+              <small>{service.priceNote}</small>
+            </dd>
+          </div>
+          <div>
+            <dt>Czas pracy</dt>
+            <dd>{service.duration}</dd>
+          </div>
+          <div>
+            <dt>{service.torque.label}</dt>
+            <dd>{formatNm(service.torque.nm)}</dd>
+          </div>
+        </dl>
+        <div class="prose">
+          <p>{service.lead}</p>
+          <p>{service.torqueNote}</p>
+        </div>
+        <h3 class="h2 pad-top">Co wchodzi w cenę</h3>
+        <ul class="checks">
+          {service.includes.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <div class="note-box">
+          <h3 class="h2">Przed wizytą</h3>
+          <p>{service.prepare}</p>
+        </div>
+        <div class="cta-row">
+          <a class="cta" href={link(`/nakretka/umow-wizyte/?usluga=${service.slug}`)}>
+            Umów {service.name.toLowerCase()}
+          </a>
+          <a href={business.phoneHref}>Wolisz zadzwonić? {business.phone}</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <nav class="pager" aria-label="Pozostałe usługi">
+        <a href={link(`/nakretka/uslugi/${previous.slug}/`)}>
+          <span class="pager-label s">Poprzednia usługa</span>
+          <span class="pager-name">{previous.name}</span>
+        </a>
+        <a class="pager-next" href={link(`/nakretka/uslugi/${next.slug}/`)}>
+          <span class="pager-label s">Następna usługa</span>
+          <span class="pager-name">{next.name}</span>
+        </a>
+      </nav>
+    </div>
+  </section>
+</Layout>

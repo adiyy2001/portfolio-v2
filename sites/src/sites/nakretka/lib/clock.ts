@@ -29,7 +29,9 @@ const formatter = new Intl.DateTimeFormat('en-GB', {
 });
 
 export const warsawClock = (date: Date): WallClock => {
-  const parts = Object.fromEntries(formatter.formatToParts(date).map(part => [part.type, part.value]));
+  const parts = Object.fromEntries(
+    formatter.formatToParts(date).map(part => [part.type, part.value]),
+  );
   return {
     year: Number(parts.year),
     month: Number(parts.month),

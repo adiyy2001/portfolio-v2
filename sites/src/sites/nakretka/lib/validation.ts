@@ -24,7 +24,8 @@ export const normalizePhone = (value: string): string => {
 
 export const isPolishPhone = (value: string): boolean => /^[1-9]\d{8}$/.test(normalizePhone(value));
 
-export const isEmail = (value: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
+export const isEmail = (value: string): boolean =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
 
 export const messages = {
   name: 'Wpisz imię, co najmniej dwie litery.',
@@ -61,5 +62,7 @@ export const validateContact = (values: ContactValues): ContactErrors => {
   return errors;
 };
 
-export const firstErrorKey = <T extends string>(errors: Partial<Record<T, string>>, order: T[]): T | null =>
-  order.find(key => errors[key]) ?? null;
+export const firstErrorKey = <T extends string>(
+  errors: Partial<Record<T, string>>,
+  order: T[],
+): T | null => order.find(key => errors[key]) ?? null;

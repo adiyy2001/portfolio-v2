@@ -1,0 +1,63 @@
+---
+import Layout from '../../../sites/nakretka/Layout.astro';
+import PageHead from '../../../sites/nakretka/components/PageHead.astro';
+import { addressLines, business, hoursRows } from '../../../sites/nakretka/data/site';
+import ContactForm from '../../../sites/nakretka/islands/ContactForm';
+---
+
+<Layout
+  title="Kontakt"
+  description={`Kontakt z warsztatem Nakrętka: ${business.street}, ${business.postcode} ${business.city}, telefon ${business.phone}. Godziny przyjęć i formularz wiadomości.`}
+  path="/nakretka/kontakt/"
+  current="kontakt"
+  bundles={['sheet', 'pages']}>
+  <PageHead
+    title="Kontakt"
+    kicker="Fabryczna, Wrocław"
+    lead="Najszybciej odbieramy telefon w godzinach przyjęć. Poza nimi napisz, a odpowiemy następnego dnia roboczego."
+  />
+  <section class="band" aria-labelledby="dane">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 id="dane" class="h2-big">
+          Jak nas znaleźć
+        </h2>
+        <address class="contact-card">
+          <a class="k" href={business.phoneHref}>
+            {business.phone}
+          </a>
+          <span>{addressLines[0]}</span>
+          <span>{addressLines[1]}</span>
+          <a class="foot-mail" href={`mailto:${business.email}`}>
+            {business.email}
+          </a>
+        </address>
+        <table class="contact-hours">
+          <caption>Godziny pracy warsztatu</caption>
+          <tbody>
+            {hoursRows.map(([day, hours]) => (
+              <tr>
+                <th scope="row">{day}</th>
+                <td>{hours}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <ul class="how-list">
+          <li>Dzielnica Fabryczna we Wrocławiu.</li>
+          <li>Przyjęcie odbywa się na podnośniku: spisujemy usterki razem z Tobą.</li>
+        </ul>
+      </div>
+      <div class="sheet sheet--page">
+        <h2 class="part-h s">Napisz do nas</h2>
+        <ContactForm client:load />
+        <noscript>
+          <p class="form-note s">
+            Formularz działa z włączonym JavaScriptem. Bez niego zadzwoń lub napisz na
+            <a href={`mailto:${business.email}`}>{business.email}</a>.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+</Layout>

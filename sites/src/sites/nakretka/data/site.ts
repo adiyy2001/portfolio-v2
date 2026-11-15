@@ -36,6 +36,8 @@ export const hoursRows = [
   ['Niedziela', 'bez przyjęć'],
 ] as const;
 
+export const hoursShort = ['pn do pt 8:00 do 17:00', 'sob 8:00 do 12:00'] as const;
+
 export const hoursFallback = 'Pn do pt 8:00 do 17:00, sob 8:00 do 12:00';
 
 export interface Fastener {
@@ -111,3 +113,6 @@ export const processSteps = [
 
 export const sampleNotice =
   'To strona przykładowa, więc nic nie zostało wysłane. Zapis został tylko w tej przeglądarce.';
+
+export const contactNotice =
+  'To strona przykładowa, więc wiadomość nie została nigdzie wysłana. Niczego nie zapisaliśmy.';

@@ -1,0 +1,24 @@
+---
+import { processSteps } from '../data/site';
+import { imageUrl } from '../lib/assets';
+---
+
+<ul class="steps">
+  {processSteps.map((step, index) => (
+    <li class={`step step-${index + 1}`}>
+      <img
+        class="step-ph"
+        src={imageUrl(step.image)}
+        alt={step.alt}
+        width={step.width}
+        height={step.height}
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="step-col s">
+        <h3>{step.title}</h3>
+        <p>{step.text}</p>
+      </div>
+    </li>
+  ))}
+</ul>

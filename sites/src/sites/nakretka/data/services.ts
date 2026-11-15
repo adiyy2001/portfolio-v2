@@ -82,7 +82,8 @@ export const services: Service[] = [
       'Pomiar siły hamowania na rolkach',
       'Dokręcenie zacisków i kół kluczem',
     ],
-    prepare: 'Jeśli auto ściąga przy hamowaniu albo piszczy, napisz o tym przy zapisie. Przyspieszy to diagnozę.',
+    prepare:
+      'Jeśli auto ściąga przy hamowaniu albo piszczy, napisz o tym przy zapisie. Przyspieszy to diagnozę.',
     image: 'brakes',
     alt: 'Tarcza hamulcowa z zaciskiem przy kole',
     width: 900,
@@ -91,7 +92,8 @@ export const services: Service[] = [
   {
     slug: 'opony',
     name: 'Opony',
-    scope: 'Zmiana kompletu, wyważanie i dokręcenie kół kluczem. Sezonowe przechowanie na zapytanie.',
+    scope:
+      'Zmiana kompletu, wyważanie i dokręcenie kół kluczem. Sezonowe przechowanie na zapytanie.',
     lead: 'Zmieniamy komplet kół, wyważamy go i dokręcamy kluczem do 110 Nm. Śruby idą po kolei, na krzyż, żeby tarcza siadła równo na piaście.',
     price: 140,
     priceNote: 'za komplet czterech kół',
@@ -105,7 +107,8 @@ export const services: Service[] = [
       'Dokręcenie kół kluczem do 110 Nm',
       'Przechowanie sezonowe na zapytanie, cenę podajemy przez telefon',
     ],
-    prepare: 'Przywieź koła z oponami, które chcesz założyć. Napisz, jeśli masz śruby zabezpieczające.',
+    prepare:
+      'Przywieź koła z oponami, które chcesz założyć. Napisz, jeśli masz śruby zabezpieczające.',
     image: 'tyres',
     alt: 'Mechanik klęczy przy kole auta w hali',
     width: 1100,
@@ -128,7 +131,8 @@ export const services: Service[] = [
       'Ustawienie zbieżności po naprawie',
       'Jazda próbna z opisem w karcie auta',
     ],
-    prepare: 'Opisz, kiedy stuka: na progach, na zakręcie czy przy ruszaniu. Wiemy wtedy, gdzie patrzeć najpierw.',
+    prepare:
+      'Opisz, kiedy stuka: na progach, na zakręcie czy przy ruszaniu. Wiemy wtedy, gdzie patrzeć najpierw.',
     image: 'suspension',
     alt: 'Koło auta uniesionego na podnośniku, obok pompa hydrauliczna',
     width: 900,
@@ -151,7 +155,8 @@ export const services: Service[] = [
       'Kontrola szczelności i wycieków przy głowicy',
       'Opis usterek w karcie auta',
     ],
-    prepare: 'Zapisz, kiedy silnik pracuje nierówno: na zimno, na ciepło czy pod obciążeniem. To skraca diagnozę.',
+    prepare:
+      'Zapisz, kiedy silnik pracuje nierówno: na zimno, na ciepło czy pod obciążeniem. To skraca diagnozę.',
     image: 'ignition',
     alt: 'Dłonie przy starym silniku, w kadrze gaźnik i przewody',
     width: 900,
