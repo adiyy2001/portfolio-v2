@@ -103,7 +103,7 @@ export default function BookingWizard() {
 
   const cancel = (booking: Booking): void => {
     setSaved(deleteBooking(booking.id));
-    setRemoved(`Zlecenie ${booking.id} zostało usunięte z tej przeglądarki.`);
+    setRemoved(`Usunęliśmy zlecenie ${booking.id} z tej przeglądarki.`);
     window.setTimeout(() => document.getElementById('wiz-removed')?.focus(), 0);
   };
 
@@ -319,7 +319,7 @@ export default function BookingWizard() {
           <p class="confirm-sample">
             {result.stored
               ? sampleNotice
-              : `To strona przykładowa, więc nic nie zostało wysłane. Przeglądarka nie pozwoliła też zapisać wizyty, więc zadzwoń: ${business.phone}.`}
+              : `To strona przykładowa, więc nic nie wysłaliśmy. Przeglądarka nie pozwoliła też zapisać wizyty, więc zadzwoń: ${business.phone}.`}
           </p>
           <div class="send-row">
             <button type="button" class="send" onClick={restart}>

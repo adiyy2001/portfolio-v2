@@ -71,7 +71,7 @@ export default function QuickOrder() {
         <p class="confirm-sample">
           {done.stored
             ? sampleNotice
-            : `To strona przykładowa, więc nic nie zostało wysłane. Przeglądarka nie pozwoliła też zapisać zlecenia, więc zadzwoń: ${business.phone}.`}
+            : `To strona przykładowa, więc nic nie wysłaliśmy. Przeglądarka nie pozwoliła też zapisać zlecenia, więc zadzwoń: ${business.phone}.`}
         </p>
         <div class="send-row">
           <button type="button" class="send" onClick={() => setDone(null)}>
