@@ -1,0 +1,118 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/ziarnik/Layout.astro';
+
+const rows: Array<{
+  use: string;
+  title: string;
+  url: string;
+  author: string;
+  license: string;
+  licenseUrl: string;
+}> = [
+  {
+    use: 'Ziarna kawy, napis i skala palenia',
+    title: 'CoffeeBeansWhiteBackground',
+    url: 'https://commons.wikimedia.org/wiki/File:CoffeeBeansWhiteBackground.jpg',
+    author: 'Raysonho @ Open Grid Scheduler / Grid Engine',
+    license: 'CC0 1.0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+  },
+  {
+    use: 'Tło papierowe',
+    title: 'Brown paper bag texture',
+    url: 'https://commons.wikimedia.org/wiki/File:Brown_paper_bag_texture.jpg',
+    author: 'Matt Edward',
+    license: 'CC BY 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
+  },
+  {
+    use: 'Ślad po filiżance',
+    title: 'Coffee ring. makro',
+    url: 'https://commons.wikimedia.org/wiki/File:Coffee_ring._makro.JPG',
+    author: 'De-okin',
+    license: 'CC BY 3.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/3.0/',
+  },
+  {
+    use: 'Półki ze słojami, zdjęcie poglądowe obcej palarni (Summit, New Jersey, USA), nie lokalu Ziarnika',
+    title: "Ahrre's Coffee Roastery in Summit NJ interior view",
+    url: 'https://commons.wikimedia.org/wiki/File:Ahrre%27s_Coffee_Roastery_in_Summit_NJ_interior_view.jpg',
+    author: 'Tomwsulcer',
+    license: 'CC0 1.0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+  },
+  {
+    use: 'Papierowy worek z okienkiem, zdjęcie poglądowe, bez etykiety Ziarnika',
+    title: 'A bag of coffee J1',
+    url: 'https://commons.wikimedia.org/wiki/File:A_bag_of_coffee_J1.jpg',
+    author: 'Jamain',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  },
+];
+---
+
+<Layout
+  title="Źródła zdjęć i fontu"
+  description="Autorzy, tytuły, źródła i licencje zdjęć oraz fontu strony Ziarnik. Zdjęcia pochodzą z Wikimedia Commons na wolnych licencjach."
+  path="/ziarnik/credits/"
+  bundles={['info']}>
+  <div class="page-head">
+    <h1 class="hand" data-hand="Źródła" data-read="Źródła zdjęć">
+      Źródła
+    </h1>
+  </div>
+  <div class="info info--single">
+    <div class="info__main">
+      <div class="prose">
+        <p>
+          Zdjęcia pochodzą z Wikimedia Commons na wolnych licencjach. Zmieniono ich kolory,
+          przycięto je i zmniejszono. Ziarnik jest zmyśloną firmą, a zdjęcia półek i worka są
+          poglądowe: nie pokazują prawdziwej palarni ani prawdziwych worków tej marki.
+        </p>
+      </div>
+      <div class="table-wrap">
+        <table class="credits-table">
+          <caption class="sr-only">
+            Zdjęcia i tekstury: zastosowanie, tytuł i źródło, autor, licencja
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Zastosowanie</th>
+              <th scope="col">Tytuł i źródło</th>
+              <th scope="col">Autor</th>
+              <th scope="col">Licencja</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(row => (
+              <tr>
+                <th scope="row">{row.use}</th>
+                <td>
+                  <a href={row.url}>{row.title}</a>
+                </td>
+                <td>{row.author}</td>
+                <td>
+                  <a href={row.licenseUrl}>{row.license}</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="prose">
+        <p>
+          Font Special Elite (Astigmatic, licencja Apache 2.0) leży na tym samym serwerze. Pismo
+          odręczne jest rysowane w przeglądarce jako kreski SVG i nie jest fontem. Krzywa palenia i
+          plan okolicy są rysunkami SVG.
+        </p>
+        <p>
+          <a class="credits-link" href={link('/ziarnik/')}>
+            Wróć do strony głównej
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

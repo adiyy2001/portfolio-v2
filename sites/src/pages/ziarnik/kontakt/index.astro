@@ -1,0 +1,85 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/ziarnik/Layout.astro';
+import NeighbourhoodMap from '../../../sites/ziarnik/components/NeighbourhoodMap.astro';
+import ContactForm from '../../../sites/ziarnik/islands/ContactForm';
+import { business, openingRows } from '../../../sites/ziarnik/data/site';
+---
+
+<Layout
+  title="Kontakt"
+  description="Palarnia Ziarnik, ul. Jedności Narodowej 65, 50-262 Wrocław. Godziny otwarcia, telefon, mail, plan okolicy i formularz. To strona przykładowa."
+  path="/ziarnik/kontakt/"
+  current="kontakt"
+  bundles={['info', 'home', 'map']}>
+  <div class="page-head">
+    <h1 class="hand" data-hand="Kontakt">
+      Kontakt
+    </h1>
+    <p class="typed page-head__lead">Napisz, zadzwoń albo wpadnij po worek.</p>
+  </div>
+  <div class="info">
+    <div class="info__main">
+      <section class="prose" aria-labelledby="form-title">
+        <h2 id="form-title">Napisz do mnie</h2>
+        <p>Odpowiadam w godzinach otwarcia palarni. Formularz jest przykładowy i nic nie wysyła.</p>
+      </section>
+      <ContactForm client:load />
+      <noscript>
+        <p class="prose">
+          Formularz potrzebuje JavaScriptu. Napisz na{' '}
+          <a href={`mailto:${business.email}`}>{business.email}</a>.
+        </p>
+      </noscript>
+    </div>
+    <div class="info__aside">
+      <div class="card card--tilt hours-card">
+        <h2>Godziny otwarcia</h2>
+        <p class="status hand" id="chip-text" role="status" data-hand="Godziny otwarcia">
+          Godziny otwarcia
+        </p>
+        <dl class="facts">
+          {openingRows.map(([day, hours]) => (
+            <div>
+              <dt>{day}</dt>
+              <dd>{hours}</dd>
+            </div>
+          ))}
+        </dl>
+        <p class="cart__small">W święta palarnia jest zamknięta.</p>
+      </div>
+      <div class="card">
+        <h2>Dane</h2>
+        <dl class="facts facts--stack">
+          <div>
+            <dt>Adres</dt>
+            <dd>
+              {business.street}
+              <br />
+              {business.postcode} {business.city}
+            </dd>
+          </div>
+          <div>
+            <dt>Telefon</dt>
+            <dd>
+              <a href={business.phoneHref}>{business.phone}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>E-mail</dt>
+            <dd>
+              <a href={`mailto:${business.email}`}>{business.email}</a>
+            </dd>
+          </div>
+        </dl>
+        <p class="cart__small">
+          Odbiór zamówień ze sklepu:{' '}
+          <a href={link('/ziarnik/dostawa-i-zwroty/')}>zasady i okna odbioru</a>.
+        </p>
+      </div>
+      <div class="map-page">
+        <NeighbourhoodMap />
+      </div>
+    </div>
+  </div>
+</Layout>

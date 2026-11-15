@@ -1,0 +1,173 @@
+---
+import { link } from '../../shared/link';
+import SampleNote from '../../shared/SampleNote.astro';
+import { business, openingRows } from './data/site';
+import { preloadedFonts } from './fonts';
+import { navItems } from './nav';
+import type { NavKey } from './nav';
+import CartHeader from './islands/CartHeader';
+import { styleBundles } from './styles';
+import type { StyleBundle } from './styles';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: NavKey;
+  bundles?: StyleBundle[];
+}
+
+const { title, description, path, current, bundles = [] } = Astro.props;
+const home = '/ziarnik/';
+const canonical = new URL(link(path), Astro.site).href;
+const ogImage = new URL(link('/ziarnik/og.png'), Astro.site).href;
+const fullTitle = path === home ? title : `${title} | Ziarnik`;
+const css = ['core', ...bundles].map(name => styleBundles[name as StyleBundle]).join('');
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#e9dcc7" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={link('/ziarnik/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ziarnik" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Napis Kawa ułożony z prawdziwych ziaren kawy na papierze."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    {preloadedFonts.map(href => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin="anonymous" />
+    ))}
+    <style set:html={css}></style>
+    <noscript>
+      <style>
+        .menu-btn {
+          display: none;
+        }
+        .nav__links {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: row;
+        }
+        .filters {
+          display: none;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Przejdź do treści
+    </a>
+    <header class="site-head">
+      <nav class="nav" aria-label="Główna">
+        <a
+          class="logo brand hand"
+          href={link(home)}
+          data-hand="Ziarnik"
+          aria-label="Ziarnik, strona główna">
+          Ziarnik
+        </a>
+        <ul class="nav__links" id="site-nav">
+          {navItems.map(item => (
+            <li>
+              <a
+                class="hand"
+                href={link(item.path)}
+                data-hand={item.label}
+                aria-current={current === item.key ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="nav__tools">
+          <CartHeader client:idle />
+          <button
+            type="button"
+            class="menu-btn"
+            id="menu-btn"
+            aria-expanded="false"
+            aria-controls="site-nav">
+            menu
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="foot kraft">
+      <div class="foot-top">
+        <a
+          class="logo brand hand"
+          href={link(home)}
+          data-hand="Ziarnik"
+          aria-label="Ziarnik, strona główna">
+          Ziarnik
+        </a>
+        <nav aria-label="Stopka">
+          {navItems.map(item => (
+            <a class="hand" href={link(item.path)} data-hand={item.label}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+      <div class="foot-info">
+        <div>
+          <h2>Palarnia</h2>
+          <address>
+            {business.street}
+            <br />
+            {business.postcode} {business.city}
+          </address>
+        </div>
+        <div>
+          <h2>Godziny</h2>
+          <p>
+            {openingRows.map(([day, hours]) => (
+              <span>
+                {day}: {hours}
+                <br />
+              </span>
+            ))}
+            <span>W święta nieczynne.</span>
+          </p>
+        </div>
+        <div>
+          <h2>Kontakt</h2>
+          <p>
+            <a href={business.phoneHref}>{business.phone}</a>
+            <br />
+            <a href={`mailto:${business.email}`}>{business.email}</a>
+          </p>
+        </div>
+      </div>
+      <p class="foot-src">
+        <a class="credits-link" href={link('/ziarnik/credits/')}>
+          Zdjęcia, licencje i źródła
+        </a>
+      </p>
+      <SampleNote name="Ziarnik" lang="pl" />
+    </footer>
+    <script>
+      import './scripts/chrome';
+    </script>
+  </body>
+</html>

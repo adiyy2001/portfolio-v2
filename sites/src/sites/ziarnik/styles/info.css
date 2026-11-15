@@ -1,0 +1,251 @@
+.info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 30px 64px;
+  align-items: start;
+  padding: 10px var(--pad) 70px;
+}
+.info--single {
+  grid-template-columns: minmax(0, 720px);
+}
+.info__main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-width: 0;
+}
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 640px;
+  font-size: 18px;
+}
+.prose h2 {
+  margin-top: 4px;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+.prose h3 {
+  font-size: 22px;
+  font-weight: 400;
+}
+.prose a {
+  border-bottom: 2px solid var(--ink);
+}
+.prose ul,
+.prose ol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 0;
+}
+.prose ul li {
+  position: relative;
+  padding-left: 26px;
+}
+.prose ul li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.62em;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+.steps {
+  counter-reset: step;
+}
+.steps li {
+  position: relative;
+  min-height: 40px;
+  padding-left: 54px;
+  counter-increment: step;
+}
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  font-size: 18px;
+}
+.card {
+  padding: 24px 24px 22px;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  background: var(--card) var(--paper-light) center / 900px auto;
+  box-shadow: 6px 9px 0 rgba(36, 22, 13, 0.24);
+}
+.card h2 {
+  margin-bottom: 12px;
+  font-size: 26px;
+  font-weight: 400;
+}
+.card--tilt {
+  transform: rotate(0.6deg);
+}
+.info__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.facts {
+  display: flex;
+  flex-direction: column;
+}
+.facts div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 2px dashed rgba(36, 22, 13, 0.45);
+}
+.facts dt {
+  color: var(--ink-soft);
+}
+.facts dd {
+  text-align: right;
+}
+.facts a {
+  display: inline-block;
+  padding: 10px 0;
+  border-bottom: 2px solid var(--ink);
+  line-height: 24px;
+}
+.facts--stack div {
+  flex-direction: column;
+  gap: 2px;
+}
+.facts--stack dd {
+  text-align: left;
+}
+.hours-card dd.hand {
+  font-size: 24px;
+}
+.hours-card .status {
+  min-height: 40px;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+.table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.credits-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+.credits-table th,
+.credits-table td {
+  padding: 12px 14px 12px 0;
+  border-bottom: 2px dashed rgba(36, 22, 13, 0.45);
+  text-align: left;
+  font-weight: 400;
+  vertical-align: top;
+}
+.credits-table thead th {
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+.credits-table a {
+  display: inline-block;
+  padding: 10px 0;
+  border-bottom: 2px solid var(--ink);
+  line-height: 24px;
+}
+.map-page {
+  max-width: 540px;
+}
+.map-page .map {
+  grid-column: auto;
+  grid-row: auto;
+  max-width: none;
+}
+.notice-card {
+  padding: 18px 20px;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  background: var(--card);
+}
+.sub-terms {
+  margin-top: 4px;
+}
+.sub-terms h2 {
+  font-size: 26px;
+  font-weight: 400;
+}
+.about-figure {
+  max-width: 480px;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 28px;
+}
+.about-stats div {
+  padding: 12px 0;
+  border-bottom: 2px dashed rgba(36, 22, 13, 0.45);
+}
+.about-stats dt {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.about-stats dd {
+  font-size: 26px;
+}
+@media (max-width: 1100px) {
+  .info {
+    grid-template-columns: 1fr;
+  }
+  .card--tilt {
+    max-width: 520px;
+  }
+}
+@media (max-width: 699px) {
+  .prose {
+    font-size: 17px;
+  }
+  .card {
+    padding: 20px 16px;
+  }
+  .card--tilt {
+    transform: none;
+  }
+  .facts div {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .facts dd {
+    text-align: left;
+  }
+  .credits-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .credits-table tr {
+    display: block;
+    padding: 12px 0;
+    border-bottom: 2px dashed rgba(36, 22, 13, 0.45);
+  }
+  .credits-table th,
+  .credits-table td {
+    display: block;
+    padding: 2px 0;
+    border: 0;
+  }
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+}
