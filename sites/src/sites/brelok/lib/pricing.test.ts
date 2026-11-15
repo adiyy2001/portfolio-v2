@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { clampGuests, clampNights, packageFits, quoteStay } from './pricing';
+import { breakfastStatus, clampGuests, clampNights, packageFits, quoteStay } from './pricing';
 
 describe('quoteStay', () => {
   it('multiplies the rate by the nights', () => {
@@ -72,5 +72,25 @@ describe('limits', () => {
     expect(clampNights(12)).toBe(7);
     expect(clampGuests(5, 'cichy')).toBe(2);
     expect(clampGuests(0, 'apartament')).toBe(1);
+  });
+});
+
+describe('breakfastStatus', () => {
+  const base = { roomId: 'cichy', nights: 2, guests: 2 } as const;
+
+  it('says included for a package that contains breakfast', () => {
+    expect(breakfastStatus({ ...base, packageId: 'weekend', breakfast: true })).toBe('included');
+  });
+
+  it('says paid for the evening package with breakfast added', () => {
+    expect(breakfastStatus({ ...base, packageId: 'evening', breakfast: true })).toBe('paid');
+  });
+
+  it('says paid for breakfast without a package', () => {
+    expect(breakfastStatus({ ...base, packageId: null, breakfast: true })).toBe('paid');
+  });
+
+  it('says none when breakfast is not chosen and the package has none', () => {
+    expect(breakfastStatus({ ...base, packageId: 'evening', breakfast: false })).toBe('none');
   });
 });

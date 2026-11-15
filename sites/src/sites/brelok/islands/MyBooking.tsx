@@ -11,6 +11,7 @@ import type { StoredBooking } from '../lib/booking';
 import { formatDate } from '../lib/dates';
 import { formatMoney, guestsLabel, nightsLabel } from '../lib/format';
 import { findBooking } from '../lib/lookup';
+import { breakfastStatus } from '../lib/pricing';
 import { browserStore, readBookings, removeBooking } from '../lib/storage';
 import { Field } from './Field';
 
@@ -102,8 +103,9 @@ export const MyBooking = ({ lang }: Props) => {
     text.stayValue(formatDate(booking.arrival, lang), formatDate(departureOf(booking), lang));
 
   const breakfastOf = (booking: StoredBooking): string => {
-    if (booking.packageId && booking.breakfast) return text.breakfastIncluded;
-    return booking.breakfast ? text.breakfastYes : text.breakfastNo;
+    const status = breakfastStatus(booking);
+    if (status === 'included') return text.breakfastIncluded;
+    return status === 'paid' ? text.breakfastYes : text.breakfastNo;
   };
 
   return (

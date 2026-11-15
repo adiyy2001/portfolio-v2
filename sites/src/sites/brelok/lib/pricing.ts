@@ -31,6 +31,13 @@ export const breakfastIncluded = (choice: StayChoice): boolean =>
   packageFits(choice.packageId, choice.nights, choice.guests) &&
   packageById(choice.packageId).includesBreakfast;
 
+export type BreakfastStatus = 'included' | 'paid' | 'none';
+
+export const breakfastStatus = (choice: StayChoice): BreakfastStatus => {
+  if (breakfastIncluded(choice)) return 'included';
+  return choice.breakfast ? 'paid' : 'none';
+};
+
 export const quoteStay = (choice: StayChoice): Quote => {
   const lines: QuoteLine[] = [
     { kind: 'room', amount: roomTypeById(choice.roomId).rate * choice.nights },
