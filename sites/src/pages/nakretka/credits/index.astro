@@ -1,0 +1,114 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/nakretka/Layout.astro';
+import PageHead from '../../../sites/nakretka/components/PageHead.astro';
+
+const commons = 'https://commons.wikimedia.org/wiki/File:';
+---
+
+<Layout
+  title="Zdjęcia, autorzy i licencje"
+  description="Źródła zdjęć i fontów użytych na stronie przykładowego warsztatu Nakrętka: autorzy, licencje i linki do plików."
+  path="/nakretka/credits/"
+  current="credits"
+  bundles={['pages']}>
+  <PageHead
+    title="Źródła"
+    kicker="Zdjęcia i fonty"
+    lead="Wszystkie zdjęcia pochodzą z wolnych licencji i zostały przycięte, zmniejszone oraz przerobione na kontrastowe odbitki."
+  />
+  <section class="paper" aria-labelledby="lista-zrodel">
+    <div class="wrap">
+      <h2 id="lista-zrodel" class="sr-only">
+        Lista źródeł
+      </h2>
+      <ul class="credit-list prose">
+        <li>
+          <p>
+            <strong>Zdjęcia z hali.</strong> Autor Shixart1985 (Wikimedia Commons), licencja CC BY
+            2.0.
+          </p>
+          <p>
+            <a
+              href={`${commons}Man_repairing_engine_with_wrench_under_the_hood_of_an_old_car_in_a_garage_during_the_day.jpg`}>
+              Mechanik przy silniku starego auta
+            </a>{' '}
+            (pierwszy ekran i usługa olej i filtry)
+          </p>
+          <p>
+            <a href={`${commons}Old_car_raised_on_car_lift_for_diagnostics_in_workshop.jpg`}>
+              Stare auto na podnośniku
+            </a>{' '}
+            (usługa przegląd)
+          </p>
+          <p>
+            <a href={`${commons}Mechanic_works_in_garage_with_car_on_lift.jpg`}>
+              Mechanik przy aucie na podnośniku
+            </a>{' '}
+            (etap przyjęcie)
+          </p>
+          <p>
+            <a href={`${commons}Old_man_repairing_engine_of_car_in_garage_setting.jpg`}>
+              Mechanik przy silniku
+            </a>{' '}
+            (etap naprawa i usługa silnik i zapłon)
+          </p>
+          <p>
+            <a
+              href={`${commons}Rusty_tools_and_metal_parts_on_a_workshop_floor_in_an_industrial_setting.jpg`}>
+              Stare części i narzędzia na podłodze
+            </a>{' '}
+            (etap odbiór)
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Hala warsztatu.</strong> „Car Restoration Workshop”, autor Igor Ovsyannykov
+            (Unsplash, Wikimedia Commons), CC0. Kadry z tego zdjęcia: strona o warsztacie, etap
+            diagnoza i usługa opony.
+          </p>
+          <p>
+            <a href={`${commons}Car_Restoration_Workshop_(Unsplash).jpg`}>
+              commons.wikimedia.org, strona pliku
+            </a>
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Hamulce.</strong> „2020 Chevrolet Bolt EV front disc brake 1”, autor
+            4300streetcar (Wikimedia Commons), licencja CC BY 4.0. Zdjęcie zostało przycięte i
+            zmniejszone.
+          </p>
+          <p>
+            <a href={`${commons}2020_Chevrolet_Bolt_EV_front_disc_brake_1.jpg`}>
+              commons.wikimedia.org, strona pliku
+            </a>
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Zawieszenie.</strong> „Federbein.JPG”, autor Bukk (Wikimedia Commons), domena
+            publiczna. Zdjęcie zostało przycięte, zmniejszone i przerobione na kontrastową odbitkę.
+          </p>
+          <p>
+            <a href={`${commons}Federbein.JPG`}>commons.wikimedia.org, strona pliku</a>
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Fonty.</strong> Anton, Playfair Display (900), Archivo Black i Courier Prime,
+            hostowane na stronie jako woff2. Licencja SIL Open Font License 1.1.
+          </p>
+          <p>
+            <a href="https://openfontlicense.org">openfontlicense.org</a>
+          </p>
+        </li>
+      </ul>
+      <div class="cta-row">
+        <a class="cta" href={link('/nakretka/')}>
+          Wróć na stronę główną
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

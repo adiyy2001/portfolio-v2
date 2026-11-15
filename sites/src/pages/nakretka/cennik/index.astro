@@ -1,0 +1,72 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/nakretka/Layout.astro';
+import PageHead from '../../../sites/nakretka/components/PageHead.astro';
+import PriceTable from '../../../sites/nakretka/components/PriceTable.astro';
+import { otherRepair, priceRange } from '../../../sites/nakretka/data/services';
+import { business } from '../../../sites/nakretka/data/site';
+import Estimator from '../../../sites/nakretka/islands/Estimator';
+import TorqueWidget from '../../../sites/nakretka/islands/TorqueWidget';
+import { formatZl } from '../../../sites/nakretka/lib/format';
+---
+
+<Layout
+  title="Cennik"
+  description={`Cennik warsztatu Nakrętka we Wrocławiu: usługi od ${formatZl(priceRange.min)} do ${formatZl(priceRange.max)}. Ceny brutto, z robocizną. Poniżej policzysz sumę dla kilku prac naraz.`}
+  path="/nakretka/cennik/"
+  current="cennik"
+  bundles={['sheet', 'pages', 'booking']}>
+  <PageHead
+    title="Cennik"
+    kicker="Ceny brutto"
+    lead="Każda pozycja ma cenę od, czas pracy i moment, do którego dokręcamy śruby. Robocizna i części eksploatacyjne są w cenie."
+  />
+  <section class="band" aria-labelledby="tabela-cen">
+    <div class="wrap">
+      <h2 id="tabela-cen" class="h2-big">
+        Tabela cen
+      </h2>
+      <div class="sheet sheet--page">
+        <PriceTable />
+        <p class="form-note s">
+          {otherRepair.name}: {otherRepair.note.toLowerCase()}. Opisz usterkę przy zapisie albo
+          zadzwoń: <a href={business.phoneHref}>{business.phone}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="paper" aria-labelledby="kalkulator">
+    <div class="wrap cols-2">
+      <div>
+        <h2 id="kalkulator" class="h2-big">
+          Policz sumę
+        </h2>
+        <div class="prose">
+          <p>
+            Zaznacz prace, które planujesz, a pokażemy sumę cen od i łączny czas. To wartości
+            orientacyjne. Dokładną cenę podajemy po obejrzeniu auta na podnośniku.
+          </p>
+        </div>
+      </div>
+      <Estimator client:load />
+    </div>
+  </section>
+  <section class="band torque-band" aria-labelledby="klucz-nm">
+    <div class="wrap">
+      <h2 id="klucz-nm" class="h2-big">
+        Sprawdź moment
+      </h2>
+      <div class="sheet sheet--page klucz">
+        <TorqueWidget client:load />
+        <p class="nojs-torque s">
+          Znane momenty z naszej hali: świeca 25 Nm, odpływ oleju 35 Nm, głowica 90 Nm, koło 110 Nm.
+        </p>
+      </div>
+      <div class="cta-row">
+        <a class="cta cta--acid" href={link('/nakretka/umow-wizyte/')}>
+          Umów wizytę
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,60 @@
+---
+import { link } from '../../../shared/link';
+import { services } from '../data/services';
+import { formatNm, formatZl } from '../lib/format';
+import { imageUrl } from '../lib/assets';
+
+interface Props {
+  caption?: string;
+}
+
+const { caption = 'Cennik usług: cena od i moment dokręcenia' } = Astro.props;
+---
+
+<table class="sheet-table s">
+  <caption>{caption}</caption>
+  <thead>
+    <tr>
+      <th scope="col">
+        <span class="sr-only">Zdjęcie</span>
+      </th>
+      <th scope="col">Usługa</th>
+      <th scope="col">Zakres</th>
+      <th scope="col">Cena od</th>
+      <th scope="col">Moment dokręcenia</th>
+    </tr>
+  </thead>
+  <tbody>
+    {services.map(service => (
+      <tr>
+        <td class="job-ph">
+          <img
+            src={imageUrl(service.image)}
+            alt={service.alt}
+            width={service.width}
+            height={service.height}
+            loading="lazy"
+            decoding="async"
+          />
+        </td>
+        <th scope="row" class="job-name">
+          <a href={link(`/nakretka/uslugi/${service.slug}/`)}>{service.name}</a>
+        </th>
+        <td class="job-desc">
+          {service.scope}
+          <span class="job-time">
+            Czas: {service.duration}. Cena {service.priceNote}.
+          </span>
+        </td>
+        <td class="job-price" data-label="Cena od">
+          {formatZl(service.price)}
+        </td>
+        <td class="job-nm" data-label="Moment dokręcenia">
+          <span>
+            {service.torque.label} {formatNm(service.torque.nm)}
+          </span>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>

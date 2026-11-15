@@ -1,0 +1,88 @@
+.proces {
+  position: relative;
+  padding: 4vw 3vw 8vw;
+  color: var(--ink);
+  background: var(--paper);
+}
+.pr-title {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 2vw 3vw;
+}
+.pr-title .g {
+  font-size: 14vw;
+}
+.steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5vw;
+  margin-top: 3vw;
+  padding-top: 2vw;
+  border-top: 3px solid var(--ink);
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+.step-ph {
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+.step-col h3 {
+  margin-bottom: 0.4vw;
+  font-family: var(--f-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+}
+.step-1 {
+  width: 20vw;
+}
+.step-2 {
+  width: 26vw;
+  margin-top: 4vw;
+}
+.step-3 {
+  width: 26vw;
+  margin-top: 1vw;
+}
+.step-4 {
+  width: 15vw;
+  margin-top: 5vw;
+}
+@media (max-width: 760px) {
+  .proces {
+    padding: 10vw 4vw 14vw;
+  }
+  .pr-title .g {
+    font-size: 15vw;
+  }
+  .steps {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8vw;
+    margin-top: 8vw;
+    padding-top: 6vw;
+  }
+  .step,
+  .step-1,
+  .step-2,
+  .step-3,
+  .step-4 {
+    width: 100%;
+    margin-top: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 4vw;
+  }
+  .step-ph {
+    width: 44vw;
+    flex: none;
+  }
+  .step-col {
+    flex: 1;
+  }
+}
