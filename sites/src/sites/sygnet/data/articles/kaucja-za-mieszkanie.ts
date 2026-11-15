@@ -5,7 +5,7 @@ export const kaucjaZaMieszkanie: Article = {
   title: 'Kaucja za wynajmowane mieszkanie: ile, kiedy zwrot i co można potrącić',
   metaTitle: 'Kaucja za mieszkanie: zwrot i potrącenia',
   description:
-    'Ile może wynosić kaucja przy najmie mieszkania, w jakim terminie wynajmujący ma ją zwrócić i na jakie należności może ją zaliczyć. Ogólne zasady dla najemców i właścicieli.',
+    'Ile może wynosić kaucja przy najmie mieszkania, kiedy wynajmujący musi ją zwrócić i na jakie należności może ją zaliczyć. Zasady dla najemców i właścicieli.',
   lead: 'Kaucja jest zabezpieczeniem dla wynajmującego, ale należy do najemcy, dopóki nie pokryje długu. Opisujemy, ile może wynosić, kiedy trzeba ją oddać i co zrobić, gdy wynajmujący jej nie zwraca.',
   published: '2026-11-11',
   authorSlug: 'marek-zawada',

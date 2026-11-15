@@ -211,7 +211,7 @@ export const areas: Area[] = [
     ],
     leaderSlug: 'marek-zawada',
     closing:
-      'Przyjdź przed podpisem, nie po nim. Przed podpisem można zmienić prawie każdy zapis, po podpisie zostaje spór.',
+      'Najlepiej przyjść przed podpisem, bo wtedy da się zmienić prawie każdy zapis. Po podpisie zostaje spór.',
     articleSlugs: ['kaucja-za-mieszkanie'],
   },
 ];
