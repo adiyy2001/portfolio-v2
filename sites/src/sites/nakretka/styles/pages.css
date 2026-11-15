@@ -30,7 +30,7 @@
   color: var(--acid);
 }
 .kicker {
-  margin-bottom: 14px;
+  margin-bottom: clamp(24px, 3.4vw, 48px);
   font-family: var(--f-bold);
   font-size: 14px;
   letter-spacing: 0.3em;
@@ -40,7 +40,7 @@
 .pt {
   max-width: 100%;
   font-family: var(--f-giant);
-  font-size: clamp(56px, 12vw, 190px);
+  font-size: clamp(56px, 11vw, 168px);
   line-height: 0.88;
   text-transform: uppercase;
   letter-spacing: -0.01em;
@@ -48,13 +48,16 @@
   overflow-wrap: anywhere;
 }
 .pt .face-field {
+  font-size: inherit;
+  line-height: inherit;
+  white-space: normal;
   color: var(--ink);
   padding: 0 0.12em 0 0.16em;
 }
 .pt .face-field::before {
   left: -0.06em;
-  top: -0.1em;
-  bottom: -0.04em;
+  top: -0.2em;
+  bottom: -0.26em;
 }
 .pt-serif {
   font-family: var(--f-serif);
@@ -64,7 +67,7 @@
 }
 .lead {
   max-width: 60ch;
-  margin-top: clamp(20px, 3vw, 36px);
+  margin-top: clamp(28px, 4vw, 48px);
   font-size: 18px;
   line-height: 1.55;
   color: var(--paper);
@@ -142,26 +145,26 @@
   object-fit: cover;
   mix-blend-mode: multiply;
 }
-.svc h2 {
+.svc h3 {
   font-family: var(--f-bold);
   font-size: 20px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
-.svc h2 a::after {
+.svc h3 a::after {
   content: '';
   position: absolute;
   inset: 0;
 }
-.svc:hover h2 a,
-.svc:focus-within h2 a {
+.svc:hover h3 a,
+.svc:focus-within h3 a {
   background: var(--acid);
 }
-.svc:has(h2 a:focus-visible) {
+.svc:has(h3 a:focus-visible) {
   outline: 3px solid var(--ink);
   outline-offset: 6px;
 }
-.svc h2 a:focus-visible {
+.svc h3 a:focus-visible {
   outline: none;
 }
 .svc-price {
@@ -533,4 +536,9 @@
 .band .note-box a,
 .band .form-note a {
   color: var(--acid);
+}
+.band .sheet .form-note a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }

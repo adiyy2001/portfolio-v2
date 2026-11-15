@@ -376,7 +376,7 @@ html.js .nojs-torque {
   }
   .sheet-table tbody tr {
     display: grid;
-    grid-template-columns: 34vw 1fr;
+    grid-template-columns: minmax(0, 34vw) minmax(0, 1fr);
     grid-template-areas: 'ph name' 'ph desc' 'price nm';
     gap: 2vw 4vw;
     padding: 4vw 0;
@@ -389,8 +389,8 @@ html.js .nojs-torque {
     grid-area: ph;
   }
   .job-ph img {
-    height: 100%;
-    min-height: 26vw;
+    height: 30vw;
+    min-height: 0;
   }
   .job-name {
     grid-area: name;
@@ -575,31 +575,6 @@ html.js .nojs-torque {
 .confirm .send {
   background: var(--ink);
   color: var(--acid);
-}
-.cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 12px 26px;
-  font-family: var(--f-bold);
-  font-size: var(--s);
-  text-transform: uppercase;
-  letter-spacing: 0.25em;
-  color: var(--acid);
-  background: var(--ink);
-  border: 0;
-  cursor: pointer;
-}
-.cta:hover {
-  background: #2a2a26;
-}
-.cta--acid {
-  color: var(--ink);
-  background: var(--acid);
-}
-.cta--acid:hover {
-  background: var(--paper);
 }
 .back {
   display: inline-flex;

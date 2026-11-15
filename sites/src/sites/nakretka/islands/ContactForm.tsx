@@ -46,7 +46,7 @@ export default function ContactForm() {
             Nowa wiadomość
           </button>
           <a class="call-alt" href={business.phoneHref}>
-            Wolisz zadzwonić? {business.phone}
+            Wolisz zadzwonić? <span class="nowrap">{business.phone}</span>
           </a>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function ContactForm() {
           Wyślij wiadomość
         </button>
         <a class="call-alt" href={business.phoneHref}>
-          Wolisz zadzwonić? {business.phone}
+          Wolisz zadzwonić? <span class="nowrap">{business.phone}</span>
         </a>
       </div>
       <p class="form-note">{hasErrors ? 'Popraw zaznaczone pola i wyślij jeszcze raz.' : ''}</p>

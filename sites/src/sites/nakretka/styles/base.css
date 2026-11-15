@@ -172,3 +172,62 @@ select {
     transform: translate(1.6vw, 1vw);
   }
 }
+.face-field {
+  position: relative;
+  display: inline-block;
+  padding: 0 1.4vw 0 2vw;
+  color: var(--ink);
+  filter: url(#rough);
+}
+.face-field::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -1vw;
+  right: 0;
+  top: -1.6vw;
+  bottom: -0.8vw;
+  background: var(--acid);
+}
+@media (max-width: 760px) {
+  .face-field {
+    padding: 0 3vw 0 4vw;
+  }
+}
+.k {
+  font-family: var(--f-giant);
+  font-weight: 400;
+  font-size: var(--k);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 26px;
+  font-family: var(--f-bold);
+  font-size: var(--s);
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: var(--acid);
+  background: var(--ink);
+  border: 0;
+  cursor: pointer;
+}
+.cta:hover {
+  background: #2a2a26;
+}
+.cta--acid {
+  color: var(--ink);
+  background: var(--acid);
+}
+.cta--acid:hover {
+  background: var(--paper);
+}
+.nowrap {
+  white-space: nowrap;
+}
