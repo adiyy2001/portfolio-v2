@@ -1,0 +1,14 @@
+---
+import dial1 from '../art/dial-1.svg?raw';
+import dial2 from '../art/dial-2.svg?raw';
+import dial3 from '../art/dial-3.svg?raw';
+import dial4 from '../art/dial-4.svg?raw';
+
+interface Props {
+  index: 0 | 1 | 2 | 3;
+}
+
+const dials = [dial1, dial2, dial3, dial4];
+---
+
+<Fragment set:html={dials[Astro.props.index]} />

@@ -1,0 +1,20 @@
+---
+import Corners from './Corners.astro';
+
+interface Props {
+  id?: string;
+  labelledby: string;
+  first?: boolean;
+}
+
+const { id, labelledby, first = false } = Astro.props;
+---
+
+<section class:list={['sec rev-sec', { first }]} id={id} aria-labelledby={labelledby}>
+  <div class="frame-rev">
+    <div class="in">
+      <Corners />
+      <slot />
+    </div>
+  </div>
+</section>

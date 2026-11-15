@@ -1,0 +1,111 @@
+---
+import { link } from '../../../shared/link';
+import Dial from '../components/Dial.astro';
+import Facade from '../components/Facade.astro';
+import InkPanel from '../components/InkPanel.astro';
+import Nav from '../components/Nav.astro';
+import Panel from '../components/Panel.astro';
+import RouteMap from '../components/RouteMap.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Ticket from '../components/Ticket.astro';
+import heroDesktop from '../art/hero-d.svg?raw';
+import heroMobile from '../art/hero-m.svg?raw';
+import { homeText } from '../content/home';
+import { hotel } from '../data/hotel';
+import { pagePath } from '../i18n/lang';
+import type { Lang } from '../i18n/lang';
+import { HomeBooking } from '../islands/HomeBooking';
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = homeText[lang];
+const street = lang === 'pl' ? hotel.street : hotel.streetEn;
+const switchPath = { pl: pagePath('home', 'pl'), en: pagePath('home', 'en') };
+const times = [hotel.checkIn, hotel.salonHour, hotel.breakfastFrom, hotel.checkOut];
+const padTime = (value: string): string => value.padStart(5, '0');
+---
+
+<Layout lang={lang} pageKey="home" title={text.metaTitle} description={text.metaDescription}>
+  <header class="hero" id="start">
+    <Nav lang={lang} pageKey="home" switchPath={switchPath} />
+    <div class="cart">
+      <Fragment set:html={heroDesktop} />
+      <Fragment set:html={heroMobile} />
+      <h1 class="sr">{text.heroTitle}</h1>
+      <p class="t motto">{text.motto[0]}<br />{text.motto[1]}</p>
+      <p class="t go"><Ticket href="#karta">{text.checkDates}</Ticket></p>
+    </div>
+  </header>
+
+  <Panel id="kamienica" labelledby="kamienica-h">
+    <SectionHead id="kamienica-h">{text.house.heading}</SectionHead>
+    <p class="lead">{text.house.lead}</p>
+    <p class="lead numbering">{text.house.numbering}</p>
+    <figure class="engr">
+      <Facade title={text.house.facadeTitle} />
+      <figcaption>{text.house.facadeCaption}</figcaption>
+    </figure>
+    <p class="actions">
+      <a class="ticket" href={link(pagePath('rooms', lang))}>{text.house.more}</a>
+    </p>
+  </Panel>
+
+  <Panel id="pokoje" labelledby="pokoje-h">
+    <SectionHead id="pokoje-h">{text.rooms.heading}</SectionHead>
+    <p class="lead">{text.rooms.lead}</p>
+    <HomeBooking client:load lang={lang} />
+    <p class="actions">
+      <a class="ticket" href={link(pagePath('rooms', lang))}>{text.rooms.more}</a>
+    </p>
+  </Panel>
+
+  <InkPanel id="doba" labelledby="doba-h">
+    <SectionHead id="doba-h">{text.day.heading}</SectionHead>
+    <ol class="dials">
+      {text.day.steps.map((step, index) => (
+        <li>
+          <Dial index={index as 0 | 1 | 2 | 3} />
+          <span class="at">
+            <time datetime={padTime(times[index] ?? '')}>
+              <span aria-hidden="true">{times[index]}</span>
+              <span class="sr">{step.spoken}</span>
+            </time>
+          </span>
+          <span class="when">{step.when}</span>
+          <span class="what">{step.what}</span>
+        </li>
+      ))}
+    </ol>
+    <p class="actions">
+      <a class="ticket rev" href={link(pagePath('breakfast', lang))}>{text.day.breakfast}</a>
+      <a class="ticket rev" href={link(pagePath('packages', lang))}>{text.day.packages}</a>
+    </p>
+  </InkPanel>
+
+  <Panel id="kontakt" labelledby="kontakt-h" innerClass="place-grid">
+    <div class="place-copy">
+      <SectionHead id="kontakt-h">{text.contact.heading}</SectionHead>
+      <p class="phone-big"><a href={hotel.phoneHref}>{hotel.phone}</a></p>
+      <p class="open"><i class="lamp" aria-hidden="true"></i>{text.contact.open}</p>
+      <address class="addr">
+        <span class="addr-name">{hotel.fullName}</span>
+        <span class="addr-street">{street}</span>
+        <span class="addr-city"><span class="addr-zip">{hotel.postalCode}</span> <span>{hotel.city}</span></span>
+      </address>
+      <p class="lead">{text.contact.lead}</p>
+      <p class="mail-alt">{text.contact.mailLead} <a href={hotel.emailHref}>{hotel.email}</a></p>
+      <p class="actions">
+        <a class="ticket" href={link(pagePath('contact', lang))}>{text.contact.more}</a>
+        <a class="ticket" href={link(pagePath('neighbourhood', lang))}>{text.contact.neighbourhood}</a>
+      </p>
+    </div>
+    <figure class="map">
+      <RouteMap label={text.contact.mapLabel} market={text.contact.market} />
+      <figcaption>{text.contact.mapCaption}</figcaption>
+    </figure>
+  </Panel>
+</Layout>
