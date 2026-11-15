@@ -1,0 +1,150 @@
+---
+import ContactForm from '../../../sites/cegielnia-14/components/ContactForm.astro';
+import PageHead from '../../../sites/cegielnia-14/components/PageHead.astro';
+import PlanFigure from '../../../sites/cegielnia-14/components/PlanFigure.astro';
+import { detail, interiorCaption, sun } from '../../../sites/cegielnia-14/copy';
+import {
+  roomsLabel,
+  statusLabel,
+  typeByKey,
+  unitBySlug,
+  units,
+  unitsOfType,
+} from '../../../sites/cegielnia-14/data';
+import { comma, floorInline, m2, pricePerM2, zl } from '../../../sites/cegielnia-14/format';
+import { frameOf, interiorSrc } from '../../../sites/cegielnia-14/images';
+import Layout from '../../../sites/cegielnia-14/Layout.astro';
+import { path, url } from '../../../sites/cegielnia-14/site';
+import { dayHours, dayKeys, days } from '../../../sites/cegielnia-14/sun';
+
+export function getStaticPaths() {
+  return units.map(unit => ({ params: { slug: unit.slug } }));
+}
+
+const { slug } = Astro.params;
+const unit = unitBySlug(slug ?? '');
+if (!unit) throw new Error(`Unknown unit: ${slug}`);
+const type = typeByKey(unit.type);
+const similar = unitsOfType(type.key).filter(
+  item => item.status === 'dostepny' && item.slug !== unit.slug,
+);
+const title = `Loft ${unit.code}, ${m2(type.area)}`;
+const description = `Loft ${unit.code} w Cegielni 14: ${floorInline(type.floor)}, ${m2(type.area)}, ${roomsLabel(type.rooms)}, ${zl(unit.price)}. Rzut, tabela pomieszczeń i godziny słońca w salonie.`;
+const note =
+  unit.status === 'sprzedany'
+    ? detail.soldNote
+    : unit.status === 'zarezerwowany'
+      ? detail.reservedNote
+      : '';
+---
+
+<Layout
+  title={`${title}. Cegielnia 14`}
+  description={description}
+  path={path(`mieszkania/${unit.slug}/`)}
+  current="mieszkania">
+  <PageHead
+    crumbs={[{ label: 'Lofty', href: url('mieszkania/') }, { label: unit.code }]}
+    mark={`${type.floor}, ${roomsLabel(type.rooms)}`}
+    title={title}
+    photo={frameOf(type.key)}
+  />
+  <ul class="detail-row wrap" aria-label={detail.paramsLabel}>
+    <li>{type.floor}</li>
+    <li>{m2(type.area)}</li>
+    <li>{roomsLabel(type.rooms)}</li>
+    <li>{statusLabel[unit.status]}</li>
+  </ul>
+  <section class="dossier flush" aria-labelledby={`plan-${type.key}-h`}>
+    <div class="dos-in">
+      <PlanFigure
+        type={type}
+        heading={`Rzut ${type.floorPlan}, ${m2(type.area)}`}
+        headingLevel="h2"
+      />
+      <div class="dos-side" data-reveal>
+        <figure class="shot">
+          <img
+            src={interiorSrc(type.key)}
+            alt={type.interiorAlt}
+            width="1200"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption>{interiorCaption}</figcaption>
+        </figure>
+        <dl class="price">
+          <div>
+            <dt>Cena</dt>
+            <dd>{zl(unit.price)}</dd>
+          </div>
+          <div>
+            <dt>Za metr kwadratowy</dt>
+            <dd>{zl(pricePerM2(unit.price, type.area))}</dd>
+          </div>
+          <div>
+            <dt>Stan</dt>
+            <dd>{statusLabel[unit.status]}</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+  <section class="wrap" aria-labelledby="slonce-h">
+    <h2 class="mark" id="slonce-h">
+      {detail.sunHeading}
+    </h2>
+    <p class="body">{detail.sunLead}</p>
+    <table class="sun-table">
+      <caption class="sr">{sun.tableCaption}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{detail.sunDay}</th>
+          <th scope="col">{detail.sunHours}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {dayKeys.map(key => (
+          <tr>
+            <th scope="row">{days[key].label}</th>
+            <td>{comma(dayHours(type.key, key), 1)} godz.</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="body">
+      <a class="link" href={`${url()}?loft=${type.key}#slonce`}>
+        <span>{detail.sunOwn}</span>
+        <i aria-hidden="true"></i>
+      </a>
+    </p>
+  </section>
+  <section class="wrap wrap-sep split" aria-labelledby="pokaz-h">
+    <div>
+      {note && <p class="body">{note}</p>}
+      <h2 class="mark avail-h">{detail.similarHeading}</h2>
+      {similar.length > 0 ? (
+        <ul class="similar">
+          {similar.map(item => (
+            <li>
+              <a href={url(`mieszkania/${item.slug}/`)}>{item.code}</a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="body">{detail.similarEmpty}</p>
+      )}
+    </div>
+    <ContactForm
+      variant="quick"
+      id="pokaz"
+      heading={detail.formHeading}
+      lead={detail.formIntro}
+      headingLevel="h2"
+      unitCode={unit.code}
+    />
+  </section>
+  <script>
+    import '../../../sites/cegielnia-14/scripts/contact';
+  </script>
+</Layout>

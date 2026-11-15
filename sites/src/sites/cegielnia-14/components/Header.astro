@@ -1,0 +1,33 @@
+---
+import { navItems, type NavKey } from '../nav';
+import { site, url } from '../site';
+
+interface Props {
+  current?: NavKey;
+}
+
+const { current } = Astro.props;
+---
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="bar-brand" href={url()}>
+      {site.name}
+    </a>
+    <button
+      type="button"
+      class="bar-toggle"
+      aria-expanded="false"
+      aria-controls="menu"
+      data-menu-toggle>
+      Menu
+    </button>
+    <nav class="bar-nav" id="menu" aria-label="Główna" data-menu>
+      {navItems.map(item => (
+        <a href={url(item.path)} aria-current={current === item.key ? 'page' : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</header>

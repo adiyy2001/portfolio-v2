@@ -1,0 +1,29 @@
+---
+import SampleNote from '../../../shared/SampleNote.astro';
+import { footer } from '../copy';
+import { navItems } from '../nav';
+import { site, url } from '../site';
+---
+
+<footer class="foot">
+  <div class="foot-row">
+    <a class="brand" href={url()}>
+      {site.name}
+    </a>
+    <nav aria-label="Stopka">
+      {navItems.map(item => (
+        <a href={url(item.path)}>{item.label}</a>
+      ))}
+      <a href={url('zrodla-zdjec/')}>{footer.credits}</a>
+      <button type="button" class="stop" aria-pressed="false" data-motion>
+        {footer.stopOn}
+      </button>
+    </nav>
+  </div>
+  <p class="foot-contact">
+    <a href={site.phoneHref}>{site.phone}</a>
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+  <p class="seller">{footer.seller}</p>
+  <SampleNote name={site.name} lang="pl" />
+</footer>
