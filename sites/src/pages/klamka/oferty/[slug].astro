@@ -1,0 +1,171 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/klamka/Layout.astro';
+import Crumbs from '../../../sites/klamka/components/Crumbs.astro';
+import OfferCard from '../../../sites/klamka/components/OfferCard.astro';
+import { agents } from '../../../sites/klamka/data/agents';
+import { offers } from '../../../sites/klamka/data/offers';
+import type { Offer } from '../../../sites/klamka/data/offers';
+import {
+  factsLine,
+  floorLabel,
+  formatPrice,
+  formatPricePerM2,
+  offerPath,
+  placeLine,
+  roomsLabel,
+} from '../../../sites/klamka/lib/format';
+import { offerImageSet } from '../../../sites/klamka/lib/images';
+import EnquiryForm from '../../../sites/klamka/islands/EnquiryForm';
+import OfferFavourite from '../../../sites/klamka/islands/OfferFavourite';
+
+export const getStaticPaths = (() =>
+  offers.map(offer => ({
+    params: { slug: offer.slug },
+    props: { offer },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  offer: Offer;
+}
+
+const { offer } = Astro.props;
+const agent = agents[offer.agent];
+const images = offerImageSet(offer.image);
+const others = offers.filter(item => item.slug !== offer.slug).slice(0, 3);
+const floor = floorLabel(offer.floor);
+const facts: Array<{ label: string; value: string }> = [
+  { label: 'Powierzchnia', value: `${offer.areaM2} m²` },
+  { label: 'Pokoje', value: roomsLabel(offer.rooms) },
+  ...(floor ? [{ label: 'Piętro', value: floor }] : []),
+  ...(offer.kind ? [{ label: 'Typ', value: offer.kind }] : []),
+  ...offer.extras.map(extra => ({ label: 'Dodatkowo', value: extra })),
+];
+const description = `${placeLine(offer)}: ${factsLine(offer)}, ${formatPrice(offer.priceZl)}. ${offer.lead}`;
+---
+
+<Layout
+  title={`${placeLine(offer)}, ${offer.areaM2} m²`}
+  description={description}
+  path={offerPath(offer)}
+  current="oferty"
+  bundles={['catalog', 'offer']}>
+  <Crumbs
+    items={[
+      { label: 'Klamka', href: '/klamka/' },
+      { label: 'Oferty', href: '/klamka/oferty/' },
+      { label: `Nr ${offer.number}` },
+    ]}
+  />
+  <header class="offer-head">
+    <div class="offer-head-in">
+      <span class="no">Nr {offer.number} z numeru 11</span>
+      <h1>{placeLine(offer)}</h1>
+      <p class="offer-lead">{offer.lead}</p>
+    </div>
+  </header>
+  <div class="sec offer-main">
+    <figure class="offer-photo">
+      <img
+        src={images.src}
+        srcset={images.srcset}
+        sizes="(max-width: 899px) 100vw, 58vw"
+        width={offer.image.width}
+        height={offer.image.height}
+        alt={offer.image.alt}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        style={offer.image.position ? `object-position:${offer.image.position}` : undefined}
+      />
+      <figcaption>Zdjęcie z oferty Nr {offer.number}.</figcaption>
+    </figure>
+    <section class="offer-side" aria-labelledby="price-h">
+      <h2 class="vh" id="price-h">
+        Cena i parametry
+      </h2>
+      <p class="offer-price">
+        <strong>{formatPrice(offer.priceZl)}</strong>
+        <span>{formatPricePerM2(offer)}</span>
+      </p>
+      <dl class="offer-facts">
+        {facts.map(fact => (
+          <div>
+            <dt>{fact.label}</dt>
+            <dd>{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div class="offer-actions">
+        <a href={agent.phoneHref}>Zadzwoń: {agent.phone}</a>
+        <OfferFavourite client:load slug={offer.slug} street={offer.street} />
+      </div>
+      <div class="offer-agent">
+        <h2>{agent.name}</h2>
+        <p>Prowadzi tę ofertę. {agent.area}.</p>
+      </div>
+    </section>
+    <section class="offer-text" aria-labelledby="desc-h">
+      <h2 id="desc-h">Opis mieszkania</h2>
+      {offer.description.map(paragraph => (
+        <p>{paragraph}</p>
+      ))}
+      <ul>
+        {offer.features.map(feature => (
+          <li>{feature}</li>
+        ))}
+      </ul>
+    </section>
+    <section class="offer-details-box" aria-labelledby="details-h">
+      <h2 id="details-h">Szczegóły</h2>
+      <dl class="offer-details">
+        {offer.details.map(detail => (
+          <div>
+            <dt>{detail.label}</dt>
+            <dd>{detail.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+    <div class="offer-ask">
+      <h2>Zapytaj o tę ofertę</h2>
+      <p>
+        Zostaw numer telefonu i wybierz porę. {agent.name} zadzwoni i umówi oglądanie przy{' '}
+        {offer.streetLocative}. Możesz też zadzwonić od razu pod{' '}
+        <a class="u-link" href={agent.phoneHref}>
+          {agent.phone}
+        </a>
+        .
+      </p>
+    </div>
+    <div class="offer-ask-form">
+      <h2 class="vh">Formularz zapytania</h2>
+      <div class="js-form">
+        <EnquiryForm client:load street={offer.streetLocative} agentName={agent.name} />
+      </div>
+      <noscript>
+        <p class="noscript-note">
+          Formularz wymaga JavaScriptu. Zadzwoń pod <a href={agent.phoneHref}>{agent.phone}</a> albo
+          napisz na <a href={`mailto:${agent.email}`}>{agent.email}</a>.
+        </p>
+      </noscript>
+    </div>
+  </div>
+  <section class="sec more-offers" aria-labelledby="more-h">
+    <header class="sec-head">
+      <h2 id="more-h">Zobacz też</h2>
+      <p>
+        Trzy inne mieszkania z tego numeru.{' '}
+        <a class="u-link" href={link('/klamka/oferty/')}>
+          Cały katalog
+        </a>
+      </p>
+    </header>
+    <ul class="index">
+      {others.map(item => (
+        <OfferCard offer={item} />
+      ))}
+    </ul>
+  </section>
+</Layout>

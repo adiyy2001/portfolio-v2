@@ -1,0 +1,190 @@
+---
+import { link } from '../../shared/link';
+import Layout from '../../sites/klamka/Layout.astro';
+import Lot from '../../sites/klamka/components/Lot.astro';
+import Picture from '../../sites/klamka/components/Picture.astro';
+import ValuationBlock from '../../sites/klamka/components/ValuationBlock.astro';
+import { agentList } from '../../sites/klamka/data/agents';
+import { business, figuresSentence, hoursSentence } from '../../sites/klamka/data/business';
+import { marketPhoto, processSteps } from '../../sites/klamka/data/content';
+import { districts, offerBySlug } from '../../sites/klamka/data/offers';
+import type { Offer } from '../../sites/klamka/data/offers';
+import { groupThousands } from '../../sites/klamka/lib/format';
+import OffersBrowser from '../../sites/klamka/islands/OffersBrowser';
+
+const pick = (slug: string): Offer => {
+  const found = offerBySlug(slug);
+  if (!found) throw new Error(`Missing offer ${slug}`);
+  return found;
+};
+
+const sredzka = pick('sredzka');
+const czajkowskiego = pick('czajkowskiego');
+const gorlicka = pick('gorlicka');
+const soltysowicka = pick('soltysowicka');
+const wroblewskiego = pick('wroblewskiego');
+
+const tocItems = [
+  { href: '#katalog', label: 'Katalog ofert' },
+  { href: '#proces', label: 'Reportaż: od wyceny do kluczy' },
+  { href: '#osiedla', label: 'Rynek: ceny z osiedli' },
+  { href: '#kontakt', label: 'Biuro i wycena' },
+];
+---
+
+<Layout
+  title="Klamka. Magazyn ofert, Wrocław, listopad 2026"
+  description="Klamka to biuro nieruchomości z Psiego Pola. Magazyn ofert na listopad 2026: sprzedaż, kupno i wycena mieszkań we Wrocławiu, od pierwszej rozmowy do przekazania kluczy."
+  path="/klamka/"
+  bundles={['home', 'catalog']}>
+  <section class="sheet" aria-label="Okładka numeru">
+    <div class="col col-a">
+      <Lot offer={sredzka} eager sizes="(max-width: 899px) 50vw, 26vw" />
+      <div class="note">
+        <p class="standfirst">
+          Klamka to biuro z Psiego Pola. Sprzedajemy, kupujemy i wyceniamy mieszkania we Wrocławiu,
+          od pierwszej rozmowy do przekazania kluczy.
+        </p>
+        <p class="actions">
+          <a href="#katalog">Zobacz katalog ofert</a>{' '}
+          <a href="#wycena">Poproś o wycenę mieszkania</a>
+        </p>
+      </div>
+    </div>
+    <div class="col col-b">
+      <Lot offer={czajkowskiego} eager sizes="(max-width: 899px) 100vw, 42vw" />
+      <div class="pair">
+        <Lot offer={gorlicka} sizes="(max-width: 899px) 60vw, 25vw" />
+        <Lot offer={soltysowicka} sizes="(max-width: 899px) 40vw, 17vw" />
+      </div>
+    </div>
+    <div class="col col-c">
+      <Lot offer={wroblewskiego} sizes="(max-width: 899px) 50vw, 33vw" />
+      <nav class="toc" id="spis" aria-label="Spis treści">
+        <h2>W numerze</h2>
+        <ul>
+          {tocItems.map(item => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section class="sec sec-match" id="katalog" aria-labelledby="match-h">
+    <header class="sec-head">
+      <h2 id="match-h">Katalog ofert</h2>
+      <p>
+        Wszystkie oferty tego numeru. Wybierz pokoje, osiedle i cenę, a lista zmieni się od razu.
+      </p>
+    </header>
+    <OffersBrowser client:load />
+    <p class="sec-more">
+      <a class="u-link-btn" href={link('/klamka/oferty/')}>
+        Cały katalog z sortowaniem
+      </a>
+    </p>
+  </section>
+
+  <section class="sec sec-process" id="proces" aria-labelledby="process-h">
+    <header class="sec-head">
+      <h2 id="process-h">Reportaż: od wyceny do kluczy</h2>
+      <p>Trzy kadry z jednej sprzedaży, od miarki po klucze.</p>
+    </header>
+    <ol class="steps" role="list">
+      {processSteps.map((step, index) => (
+        <li class:list={['step', `step-${'abc'[index]}`]}>
+          <figure>
+            <Picture
+              photoKey={step.photo.key}
+              widths={step.photo.widths}
+              width={step.photo.width}
+              height={step.photo.height}
+              alt={step.photo.alt}
+              sizes={
+                index === 1 ? '(max-width: 899px) 100vw, 42vw' : '(max-width: 899px) 100vw, 32vw'
+              }
+            />
+            <figcaption>
+              <span class="no">{step.frame}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="sec sec-districts" id="osiedla" aria-labelledby="districts-h">
+    <div class="market">
+      <header class="sec-head">
+        <h2 id="districts-h">Rynek: ceny z osiedli</h2>
+        <p class="lead">{figuresSentence}</p>
+        <p>Średnia cena za metr kwadratowy w czterech osiedlach, w których mamy oferty.</p>
+      </header>
+      <figure class="market-photo">
+        <Picture
+          photoKey={marketPhoto.key}
+          widths={marketPhoto.widths}
+          width={marketPhoto.width}
+          height={marketPhoto.height}
+          alt={marketPhoto.alt}
+          sizes="(max-width: 899px) 100vw, 42vw"
+        />
+        <figcaption>Mieszkanie przed pokazem, zdjęcie poglądowe.</figcaption>
+      </figure>
+    </div>
+    <ul class="district-list">
+      {districts.map(district => (
+        <li>
+          <h3>{district.name}</h3>
+          <p>
+            Średnio <strong>{groupThousands(district.averageZlPerM2)}&nbsp;zł</strong> za m².{' '}
+            {district.text}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="sec sec-contact" id="kontakt" aria-labelledby="contact-h">
+    <div class="contact-office">
+      <header class="sec-head">
+        <h2 id="contact-h">Biuro i wycena</h2>
+        <address class="office">
+          <span class="office-name">Biuro Klamka</span>
+          <br />
+          <span>{business.street}</span>
+          <br />
+          <span>
+            {business.postcode} {business.city}
+          </span>
+          <br />
+          <span>{business.district}</span>
+        </address>
+        <p class="hours-line">{hoursSentence}</p>
+        <p class="open-now" data-open-status hidden></p>
+      </header>
+      <ul class="agents">
+        {agentList.map(agent => (
+          <li>
+            <span class="no">{agent.area}</span>
+            <h3>{agent.name}</h3>
+            <p class="cred">{agent.credential}</p>
+            <p>
+              <a href={agent.phoneHref}>{agent.phone}</a>
+              {agent.id === 'karolina' ? ', numer biura' : ''}
+            </p>
+            <p>
+              <a href={`mailto:${agent.email}`}>{agent.email}</a>
+            </p>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <ValuationBlock />
+  </section>
+</Layout>

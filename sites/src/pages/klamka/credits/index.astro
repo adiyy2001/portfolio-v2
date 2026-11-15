@@ -1,0 +1,79 @@
+---
+import Layout from '../../../sites/klamka/Layout.astro';
+import PageHead from '../../../sites/klamka/components/PageHead.astro';
+import { credits } from '../../../sites/klamka/data/content';
+---
+
+<Layout
+  title="Źródła zdjęć i czcionek"
+  description="Autorzy i licencje zdjęć oraz czcionki użytych na stronie przykładowej Klamka: Unsplash, Pexels i Newsreader Variable."
+  path="/klamka/credits/"
+  bundles={['info']}>
+  <PageHead
+    kicker="Przypisy"
+    title="Źródła zdjęć i czcionek"
+    lead="Zdjęcia pochodzą z Unsplash i Pexels i mają wolne licencje. Czcionka jest na licencji SIL Open Font License."
+  />
+  <section class="sec" aria-labelledby="photos-h">
+    <div class="sec-full">
+      <table class="credits-table">
+        <caption id="photos-h">Zdjęcia</caption>
+        <thead>
+          <tr>
+            <th scope="col">Użycie</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Licencja</th>
+            <th scope="col">Źródło</th>
+          </tr>
+        </thead>
+        <tbody>
+          {credits.map(item => (
+            <tr>
+              <th scope="row" data-label="Użycie">
+                {item.use}
+              </th>
+              <td data-label="Autor">{item.author}</td>
+              <td data-label="Licencja">{item.licence}</td>
+              <td data-label="Źródło">
+                <a href={item.source} rel="noopener">
+                  {item.source.replace('https://', '').replace(/\/$/, '')}
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="sec" aria-labelledby="font-h">
+    <div class="sec-full">
+      <table class="credits-table">
+        <caption id="font-h">Czcionka</caption>
+        <thead>
+          <tr>
+            <th scope="col">Krój</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Licencja</th>
+            <th scope="col">Źródło</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" data-label="Krój">
+              Newsreader Variable
+            </th>
+            <td data-label="Autor">Production Type</td>
+            <td data-label="Licencja">SIL Open Font License 1.1</td>
+            <td data-label="Źródło">
+              <a
+                href="https://www.npmjs.com/package/@fontsource-variable/newsreader"
+                rel="noopener">
+                npmjs.com/package/@fontsource-variable/newsreader
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</Layout>
