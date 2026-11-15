@@ -79,7 +79,7 @@ export const fasteners: Fastener[] = [
 export const processSteps = [
   {
     title: 'Przyjęcie',
-    text: 'Spisujemy usterki i oglądamy auto razem z Tobą na podnośniku.',
+    text: 'Spisujemy usterki i oglądamy auto razem z tobą na podnośniku.',
     image: 'shed',
     alt: 'Mechanik w kombinezonie przy aucie stojącym na podnośniku',
     width: 700,
@@ -112,7 +112,7 @@ export const processSteps = [
 ] as const;
 
 export const sampleNotice =
-  'To strona przykładowa, więc nic nie zostało wysłane. Zapis został tylko w tej przeglądarce.';
+  'To strona przykładowa, więc nic nie wysłaliśmy. Zapis jest tylko w tej przeglądarce.';
 
 export const contactNotice =
-  'To strona przykładowa, więc wiadomość nie została nigdzie wysłana. Niczego nie zapisaliśmy.';
+  'To strona przykładowa, więc wiadomość nigdzie nie poszła. Niczego nie zapisaliśmy.';
