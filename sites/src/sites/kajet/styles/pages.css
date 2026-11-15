@@ -157,6 +157,9 @@
 .tbl .c-who {
   width: 30%;
 }
+.tbl th.c-mode {
+  width: 30%;
+}
 .tbl .c-price {
   width: 120px;
   text-align: right;
@@ -164,6 +167,21 @@
 .tbl td.c-price {
   font-weight: 700;
   white-space: nowrap;
+}
+.tbl td.c-price .c-sub {
+  white-space: normal;
+}
+.tbl th.c-price {
+  text-align: right;
+}
+.tbl tbody th {
+  vertical-align: top;
+  padding: 10px 12px 10px 24px;
+  font-weight: 700;
+  color: var(--fg);
+}
+.js .static-start {
+  display: none;
 }
 .tbl .c-sub {
   display: block;
@@ -249,6 +267,10 @@
   font-size: var(--fl);
   font-weight: 800;
   margin-bottom: 8px;
+}
+.tl {
+  padding: 0;
+  list-style: none;
 }
 .tl li {
   display: grid;
@@ -442,7 +464,7 @@
   min-width: 0;
   align-content: start;
 }
-.qf-field:nth-child(odd) {
+.qf-field:nth-child(even) {
   border-right: 1px solid var(--line);
 }
 .qf-field.wide {
@@ -489,7 +511,9 @@
   border-right: 0;
   border-bottom: 1px solid var(--line);
 }
-.qf-consent input {
+.qf-field.qf-consent input {
+  min-height: 0;
+  padding: 0;
   appearance: none;
   -webkit-appearance: none;
   width: 22px;
@@ -622,6 +646,8 @@
   border-left: 1px solid var(--line);
 }
 .credits-list a {
+  display: block;
+  margin-bottom: 6px;
   text-decoration: underline;
   text-underline-offset: 3px;
   font-weight: 700;
@@ -712,19 +738,24 @@
   }
   .tbl th:last-child,
   .tbl td:last-child {
-    padding-right: 16px;
+    padding-right: 12px;
+    font-size: 12px;
   }
   .tbl .c-day {
     width: 68px;
   }
   .tbl .c-when {
-    width: 96px;
+    width: 126px;
+    white-space: nowrap;
   }
   .tbl .c-who {
     width: auto;
   }
+  .tbl th.c-mode {
+    width: 128px;
+  }
   .tbl .c-price {
-    width: 84px;
+    width: 108px;
   }
   .item {
     grid-template-columns: 1fr;
@@ -807,7 +838,7 @@
     border-right: 0;
     padding: 12px 16px 14px;
   }
-  .qf-field:nth-child(odd) {
+  .qf-field:nth-child(even) {
     border-right: 0;
   }
   .qf-consent label {
@@ -832,4 +863,13 @@
   .cal-nav button {
     min-height: 44px;
   }
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
 }

@@ -116,7 +116,7 @@ export const extras = [
     id: 'przejecie',
     label: 'Przejęcie ksiąg od innego biura',
     price: facts.takeoverFee,
-    unit: 'jednorazowo, zł netto',
+    unit: 'jednorazowo, netto',
     note: 'W planie Duży bez opłaty. Zwykle trwa dwa tygodnie.',
   },
   {
