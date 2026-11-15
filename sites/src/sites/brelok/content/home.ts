@@ -18,7 +18,7 @@ const pl = {
   },
   rooms: {
     heading: 'Prosimy wybrać pokój',
-    lead: 'Pokoje są czterech rodzajów. Na tabliczce stoi numer pokoju, który pokazuje zdjęcie poglądowe.',
+    lead: 'Pokoje są czterech rodzajów. Na tabliczce stoi numer pokoju.',
     legend: 'Pokój',
     roomNumber: 'Pokój numer ',
     area: 'Metraż',
@@ -26,6 +26,7 @@ const pl = {
     view: 'Widok',
     room: 'Pokój',
     photoCaption: 'Zdjęcie poglądowe, pokój',
+    photoNote: 'Zdjęcia są poglądowe i pokazują standard pokoju danego rodzaju.',
     no: 'nr',
     more: 'Wszystkie pokoje i opisy',
   },
@@ -117,7 +118,7 @@ const en: typeof pl = {
   },
   rooms: {
     heading: 'Please choose a room',
-    lead: 'There are four kinds of rooms. The plate shows a room number, and the photo shows that kind of room.',
+    lead: 'There are four kinds of rooms. The plate shows a room number.',
     legend: 'Room',
     roomNumber: 'Room number ',
     area: 'Size',
@@ -125,6 +126,7 @@ const en: typeof pl = {
     view: 'View',
     room: 'Room',
     photoCaption: 'Illustrative photo, room',
+    photoNote: 'The photos are illustrative and show the standard of a room of that kind.',
     no: 'no.',
     more: 'All rooms and descriptions',
   },

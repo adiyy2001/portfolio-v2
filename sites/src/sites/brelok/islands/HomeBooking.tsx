@@ -142,6 +142,7 @@ export const HomeBooking = ({ lang }: Props) => {
           );
         })}
       </fieldset>
+      <p class="notice">{text.rooms.photoNote}</p>
       <div class="karta" id="karta" aria-labelledby="karta-h" role="group">
         <div class="karta-in">
           <figure class="karta-pic">

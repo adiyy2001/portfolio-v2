@@ -19,7 +19,7 @@ const pl: Record<RoomId, RoomCopy> = {
     name: 'Cichy',
     card: 'Okna na oficynę, grube mury i łóżko na 160 cm. W środku jest cicho.',
     view: 'Oficyna, cisza',
-    alt: 'Pokój Cichy: drewniane łóżko, lampa podłogowa i biurko pod jasną ścianą',
+    alt: 'Drewniane łóżko, lampa podłogowa i biurko pod jasną ścianą',
     bed: width => `Jedno łóżko, ${width} cm`,
     intro: 'Cztery pokoje od strony oficyny, z murami grubymi na pół metra.',
     paragraphs: [
@@ -35,7 +35,7 @@ const pl: Record<RoomId, RoomCopy> = {
     name: 'Dziedziniec',
     card: 'Widok na kasztan w podwórku i poranne światło od wschodu.',
     view: 'Kasztan w podwórku',
-    alt: 'Pokój Dziedziniec: dwa łóżka pod wezgłowiem z jasnego drewna i firanka w oknie',
+    alt: 'Dwa łóżka pod wezgłowiem z jasnego drewna i firanka w oknie',
     bed: width => `Dwa łóżka, po ${width} cm`,
     intro: 'Pięć pokoi od podwórka, z kasztanem pod oknami.',
     paragraphs: [
@@ -51,7 +51,7 @@ const pl: Record<RoomId, RoomCopy> = {
     name: 'Poddasze',
     card: 'Najwyżej w kamienicy, z ciężką zasłoną w oknie i stolikiem do śniadania.',
     view: 'Okno z ciężką zasłoną',
-    alt: 'Pokój Poddasze: łóżko, okrągły stolik z krzesłami i ciężka zasłona w oknie',
+    alt: 'Łóżko, okrągły stolik z krzesłami i ciężka zasłona w oknie',
     bed: width => `Łóżko ${width} cm i rozkładana sofa`,
     intro: 'Cztery pokoje pod dachem, z skosami i ciężką zasłoną w oknie.',
     paragraphs: [
@@ -67,7 +67,7 @@ const pl: Record<RoomId, RoomCopy> = {
     name: 'Apartament',
     card: 'Dwa pokoje, wysokie okna i widok na wieże kościołów.',
     view: 'Wieże kościołów',
-    alt: 'Pokój Apartament: sala z dwoma wysokimi oknami, żyrandolem i łóżkiem w głębi',
+    alt: 'Sala z dwoma wysokimi oknami, żyrandolem i łóżkiem w głębi',
     bed: width => `Łóżko ${width} cm i sofa w salonie`,
     intro: 'Salon i sypialnia, razem 75 metrów. Drugiego takiego apartamentu w kamienicy nie ma.',
     paragraphs: [
@@ -86,7 +86,7 @@ const en: Record<RoomId, RoomCopy> = {
     name: 'Quiet',
     card: 'Windows onto the back wing, thick walls and a 160 cm bed. It is quiet inside.',
     view: 'Back wing, silence',
-    alt: 'The Quiet room: a wooden bed, a floor lamp and a desk against a pale wall',
+    alt: 'A wooden bed, a floor lamp and a desk against a pale wall',
     bed: width => `One bed, ${width} cm`,
     intro: 'Four rooms on the back wing, behind walls half a metre thick.',
     paragraphs: [
@@ -107,7 +107,7 @@ const en: Record<RoomId, RoomCopy> = {
     name: 'Courtyard',
     card: 'A view of the chestnut tree in the yard and early light from the east.',
     view: 'Chestnut in the yard',
-    alt: 'The Courtyard room: two beds under a pale wooden headboard and a net curtain at the window',
+    alt: 'Two beds under a pale wooden headboard and a net curtain at the window',
     bed: width => `Two beds, ${width} cm each`,
     intro: 'Five rooms on the yard side, with a chestnut tree under the windows.',
     paragraphs: [
@@ -123,7 +123,7 @@ const en: Record<RoomId, RoomCopy> = {
     name: 'Attic',
     card: 'The highest rooms in the house, with a heavy curtain at the window and a table for breakfast.',
     view: 'Window with a heavy curtain',
-    alt: 'The Attic room: a bed, a round table with chairs and a heavy curtain at the window',
+    alt: 'A bed, a round table with chairs and a heavy curtain at the window',
     bed: width => `A ${width} cm bed and a sofa bed`,
     intro: 'Four rooms under the roof, with sloping ceilings and a heavy curtain at the window.',
     paragraphs: [
@@ -139,7 +139,7 @@ const en: Record<RoomId, RoomCopy> = {
     name: 'Apartment',
     card: 'Two rooms, tall windows and a view of the church towers.',
     view: 'Church towers',
-    alt: 'The Apartment: a drawing room with two tall windows, a chandelier and a bed in the far corner',
+    alt: 'A drawing room with two tall windows, a chandelier and a bed in the far corner',
     bed: width => `A ${width} cm bed and a sofa bed in the sitting room`,
     intro:
       'A sitting room and a bedroom, 75 square metres in all. The house has no second apartment like it.',
@@ -166,7 +166,7 @@ const listPl = {
   metaDescription:
     'Cztery rodzaje pokoi w kamienicy z 1912 roku: Cichy, Dziedziniec, Poddasze i Apartament. Czternaście pokoi, numery od 1 do 15 bez trzynastki.',
   heading: 'Prosimy wybrać pokój',
-  lead: 'Pokoje są czterech rodzajów. Każdy ma swój numer na tabliczce, a zdjęcie pokazuje jeden pokój danego rodzaju.',
+  lead: 'Pokoje są czterech rodzajów. Każdy ma swój numer na tabliczce.',
   numbering:
     'W kamienicy jest czternaście pokoi, ponumerowanych od 1 do 15. Numeru 13 nie ma: po dwunastce od razu zaczyna się czternastka, jak w wielu starych hotelach. Dlatego pokoi jest czternaście, choć ostatni ma numer piętnasty.',
   leaders: {
@@ -185,7 +185,7 @@ const listPl = {
   includedHeading: 'W pokoju',
   includedBreakfast:
     'Śniadanie nie jest wliczone w cenę doby. Można je dokupić przy rezerwacji albo wybrać pakiet, który je zawiera.',
-  photoNote: 'Zdjęcie poglądowe: pokazuje ten rodzaj pokoju, nie konkretny numer.',
+  photoNote: 'Zdjęcia są poglądowe i pokazują standard pokoju danego rodzaju.',
   roomHeading: (name: string) => `Pokój ${name}`,
   numbersSentence: (list: string) => `Numery pokoi: ${list}.`,
 };
@@ -195,7 +195,7 @@ const listEn: typeof listPl = {
   metaDescription:
     'Four kinds of rooms in a 1912 townhouse: Quiet, Courtyard, Attic and Apartment. Fourteen rooms, numbered 1 to 15 with no thirteen.',
   heading: 'Please choose a room',
-  lead: 'There are four kinds of rooms. Each has its number on a plate, and the photo shows one room of that kind.',
+  lead: 'There are four kinds of rooms. Each has its number on a plate.',
   numbering:
     'The house has fourteen rooms, numbered from 1 to 15. There is no number 13: after twelve comes fourteen, as in many old hotels. That is why there are fourteen rooms although the last one is numbered fifteen.',
   leaders: {
@@ -214,7 +214,7 @@ const listEn: typeof listPl = {
   includedHeading: 'In the room',
   includedBreakfast:
     'Breakfast is not included in the nightly rate. You can add it when you book, or choose a package that includes it.',
-  photoNote: 'Illustrative photo: it shows this kind of room, not a particular number.',
+  photoNote: 'The photos are illustrative and show the standard of a room of that kind.',
   roomHeading: (name: string) => (name === 'Apartment' ? 'The Apartment' : `The ${name} room`),
   numbersSentence: (list: string) => `Room numbers: ${list}.`,
 };

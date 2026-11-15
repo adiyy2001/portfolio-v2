@@ -135,6 +135,7 @@ const photo = (id: string, small = false): string =>
         );
       })}
     </ul>
+    <p class="notice">{text.photoNote}</p>
     <p class="actions">
       <a class="ticket rev" href={link(pagePath('rooms', lang))}>
         {text.allRooms}
