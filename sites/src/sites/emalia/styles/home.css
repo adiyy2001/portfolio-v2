@@ -292,6 +292,9 @@
   line-height: 1.15;
 }
 .price-card h3 a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   text-decoration: none;
 }
 .price-card h3 a::after {
