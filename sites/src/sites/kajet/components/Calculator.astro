@@ -1,6 +1,7 @@
 ---
 import { link } from '../../../shared/link';
 import { maxInvoices } from '../data/plans';
+import { maxTypedInvoices } from '../lib/picker';
 import { business } from '../data/site';
 import PlansTable from './PlansTable.astro';
 
@@ -50,7 +51,7 @@ const quoteBase = link('/kajet/kontakt/');
           type="number"
           inputmode="numeric"
           min="0"
-          max={maxInvoices}
+          max={maxTypedInvoices}
           step="1"
           value={initialInvoices}
         />
@@ -114,7 +115,12 @@ const quoteBase = link('/kajet/kontakt/');
       </div>
     </dl>
     <div class="cta js-only">
-      <a id="calc-quote" class="quote-btn" href={`${quoteBase}#wycena`} data-base={quoteBase}>
+      <a
+        id="calc-quote"
+        class="quote-btn"
+        href={`${quoteBase}#wycena`}
+        data-base={quoteBase}
+        data-label="Wyślij wycenę z tym planem">
         Wyślij wycenę z tym planem
       </a>
       <a class="quote-btn alt" href={link('/kajet/uslugi/')}>

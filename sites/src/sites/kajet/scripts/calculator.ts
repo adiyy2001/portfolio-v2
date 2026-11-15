@@ -1,4 +1,4 @@
-import { grossFrom, maxInvoices, type CompanyForm } from '../data/plans';
+import { grossFrom, type CompanyForm } from '../data/plans';
 import { formatGrosze, formatPrice, invoicesLabel } from '../lib/format';
 import { clampInvoices, recommendPlan } from '../lib/picker';
 import { find, findAll, findOptional, groupKeys } from './dom';
@@ -58,15 +58,27 @@ export const setupCalculator = (): void => {
     if (document.activeElement !== number) number.value = String(invoices);
     range.setAttribute('aria-valuetext', `${invoicesLabel(invoices)}, plan ${result.plan.name}`);
     for (const cell of planCells) {
-      cell.classList.toggle('pick', Number(cell.dataset.plan) === result.index);
+      cell.classList.toggle(
+        'pick',
+        !result.overLimit && Number(cell.dataset.plan) === result.index,
+      );
     }
     for (const row of priceRows) row.classList.toggle('dim', row.dataset.form !== form);
     const unit = invoices > 0 ? formatGrosze(Math.round((result.price * 100) / invoices)) : '0,00';
-    summary.textContent = `${invoicesLabel(invoices)}, ${form === 'osoba' ? 'osoba fizyczna' : 'spółka'}, plan ${result.plan.name}: ${formatPrice(result.price)} zł netto miesięcznie, ${unit} zł za fakturę.`;
-    if (outPlan) outPlan.textContent = result.plan.name;
-    if (outPrice) outPrice.textContent = `${formatPrice(result.price)} zł`;
-    if (outUnit) outUnit.textContent = `${unit} zł`;
-    if (outGross) outGross.textContent = `${formatPrice(grossFrom(result.price))} zł`;
+    const formName = form === 'osoba' ? 'osoba fizyczna' : 'spółka';
+    summary.textContent = result.overLimit
+      ? `${invoicesLabel(invoices)}, ${formName}: to więcej niż limit abonamentu (${result.plan.limit} faktur), więc cenę ustalamy indywidualnie.`
+      : `${invoicesLabel(invoices)}, ${formName}, plan ${result.plan.name}: ${formatPrice(result.price)} zł netto miesięcznie, ${unit} zł za fakturę.`;
+    if (outPlan) outPlan.textContent = result.overLimit ? 'poza abonamentem' : result.plan.name;
+    if (outPrice)
+      outPrice.textContent = result.overLimit
+        ? 'wycena indywidualna'
+        : `${formatPrice(result.price)} zł`;
+    if (outUnit) outUnit.textContent = result.overLimit ? 'wycena indywidualna' : `${unit} zł`;
+    if (outGross)
+      outGross.textContent = result.overLimit
+        ? 'wycena indywidualna'
+        : `${formatPrice(grossFrom(result.price))} zł`;
     if (reasons) {
       reasons.textContent = '';
       for (const text of result.reasons) {
@@ -77,11 +89,11 @@ export const setupCalculator = (): void => {
     }
     if (quoteLink) {
       const base = quoteLink.dataset.base ?? '';
-      const params = new URLSearchParams({
-        forma: form,
-        faktur: String(invoices),
-        plan: result.plan.id,
-      });
+      const params = new URLSearchParams({ forma: form, faktur: String(invoices) });
+      if (!result.overLimit) params.set('plan', result.plan.id);
+      quoteLink.textContent = result.overLimit
+        ? 'Poproś o wycenę indywidualną'
+        : (quoteLink.dataset.label ?? '');
       quoteLink.href = `${base}?${params.toString()}#wycena`;
     }
     if (touched) {
@@ -108,7 +120,7 @@ export const setupCalculator = (): void => {
   number.addEventListener('input', () => {
     if (number.value === '') return;
     markManual();
-    state.invoices = Math.max(0, Math.min(maxInvoices, Math.round(Number(number.value))));
+    state.invoices = clampInvoices(Number(number.value));
     render();
   });
   number.addEventListener('blur', () => {

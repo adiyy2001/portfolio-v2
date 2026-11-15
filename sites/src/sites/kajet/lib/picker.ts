@@ -19,9 +19,11 @@ export interface PickerResult {
   overLimit: boolean;
 }
 
+export const maxTypedInvoices = 999;
+
 export const clampInvoices = (value: number): number => {
   if (!Number.isFinite(value)) return 0;
-  return Math.max(0, Math.min(maxInvoices, Math.round(value)));
+  return Math.max(0, Math.min(maxTypedInvoices, Math.round(value)));
 };
 
 const indexForInvoices = (invoices: number): number => {
@@ -34,8 +36,11 @@ export const recommendPlan = (input: PickerInput): PickerResult => {
   const reasons: string[] = [];
   const byInvoices = indexForInvoices(invoices);
   let index = byInvoices;
+  const overLimit = invoices > maxInvoices;
   reasons.push(
-    `${invoicesLabel(invoices)} w miesiącu mieści się w limicie planu ${plans[byInvoices]!.name} (do ${plans[byInvoices]!.limit})`,
+    overLimit
+      ? `${invoicesLabel(invoices)} w miesiącu to więcej niż limit planu ${plans[byInvoices]!.name} (do ${plans[byInvoices]!.limit}), więc cenę ustalamy indywidualnie`
+      : `${invoicesLabel(invoices)} w miesiącu mieści się w limicie planu ${plans[byInvoices]!.name} (do ${plans[byInvoices]!.limit})`,
   );
   const needs: Array<[boolean, number, string]> = [
     [input.payroll, 1, 'listy płac i rozliczenia ZUS pracowników są od planu Średni'],
@@ -56,6 +61,6 @@ export const recommendPlan = (input: PickerInput): PickerResult => {
     price,
     perInvoice: invoices > 0 ? price / invoices : 0,
     reasons,
-    overLimit: invoices > maxInvoices,
+    overLimit,
   };
 };

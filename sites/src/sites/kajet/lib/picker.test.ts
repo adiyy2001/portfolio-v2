@@ -35,6 +35,11 @@ describe('recommendPlan', () => {
     const result = recommendPlan({ ...base, invoices: 240 });
     expect(result.plan.name).toBe('Duży');
     expect(result.overLimit).toBe(true);
+    expect(result.reasons[0]).toContain('indywidualnie');
+  });
+
+  it('does not flag the limit itself', () => {
+    expect(recommendPlan({ ...base, invoices: 200 }).overLimit).toBe(false);
   });
 
   it('computes the price per invoice', () => {
@@ -47,7 +52,8 @@ describe('clampInvoices', () => {
   it('keeps the value in range', () => {
     expect(clampInvoices(-4)).toBe(0);
     expect(clampInvoices(85.4)).toBe(85);
-    expect(clampInvoices(900)).toBe(200);
+    expect(clampInvoices(900)).toBe(900);
+    expect(clampInvoices(20000)).toBe(999);
     expect(clampInvoices(Number.NaN)).toBe(0);
   });
 });
