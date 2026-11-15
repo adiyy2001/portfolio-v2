@@ -71,7 +71,7 @@ One post a week, Tuesday morning, button "Więcej informacji" to the linked page
 2. Od 28 czerwca 2025 sklepy internetowe w UE podlegają Europejskiemu aktowi o dostępności. Przechodzę Twoją stronę klawiaturą i czytnikiem ekranu, spisuję błędy i poprawiam je w kodzie. Audyt kosztuje od 1 900 zł netto. Link: /uslugi/dostepnosc-wcag/
 3. Jeśli pół firmy edytuje naraz jeden arkusz Excela, prosta aplikacja webowa z logowaniem, rolami i panelem administracyjnym zwykle się zwraca. Pierwsza wersja kosztuje od 18 000 zł netto, płacisz po etapach. Link: /uslugi/aplikacje-webowe/
 4. Biorę pod opiekę strony i aplikacje, także napisane przez kogoś innego. Aktualizuję zależności, robię kopie zapasowe, pilnuję błędów i wprowadzam drobne zmiany, a czas reakcji zapisujemy w umowie. Pakiet od 300 zł netto miesięcznie. Link: /uslugi/utrzymanie/
-5. We Wzorniku jest dziewięć przykładowych stron dla zmyślonych firm, między innymi kancelarii, kliniki stomatologicznej i palarni kawy. Każda ma własny krój i paletę. Możesz je przejrzeć, zanim zamówisz swoją. Link: /wzornik/
+5. We Wzorniku jest dziesięć przykładowych stron dla zmyślonych firm, między innymi kancelarii, gabinetu stomatologicznego i palarni kawy. Każda ma własny krój i paletę. Możesz je przejrzeć, zanim zamówisz swoją. Link: /wzornik/
 
 Post 1 went out on 2026-10-25. Posts 2 to 5 are scheduled in the profile for 27.10, 3.11, 10.11 and 17.11 at 09:00. The opening date (3 January 2022) and the Facebook link were added on 2026-10-26 and wait for Google's review.
 
