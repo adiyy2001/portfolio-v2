@@ -948,7 +948,7 @@ video.wk__video {
   --on: #0e1747;
   --mt: var(--wz-manrope);
   --ml: 800 2.1cqw/1 var(--wz-manrope);
-  --mh: 600 5.4cqw/1.04 var(--wz-manrope);
+  --mh: 600 5.4cqw/1.14 var(--wz-manrope);
 }
 
 .mk--den .mk {
@@ -1560,7 +1560,7 @@ video.wk__video {
 }
 
 .mk--stay .mk {
-  padding-top: 1.4cqw;
+  padding-top: 3cqw;
 }
 
 .mk--stay .mk__nav {
@@ -1667,8 +1667,8 @@ video.wk__video {
 
 .mk--car .mk__logo {
   align-self: flex-start;
-  margin: -3.6cqw 0 0 -5cqw;
-  padding: 1cqw 2cqw 1cqw 5cqw;
+  margin: -3.6cqw 0 0 4cqw;
+  padding: 1cqw 2cqw;
   background: #000;
   letter-spacing: 0.02em;
   text-transform: uppercase;
