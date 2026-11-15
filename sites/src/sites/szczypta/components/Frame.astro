@@ -1,0 +1,29 @@
+---
+import { images, imagePath } from '../data/images';
+import type { ImageId } from '../data/events';
+import { link } from '../../../shared/link';
+import { tie } from '../logic/typography';
+
+interface Props {
+  id: ImageId;
+  alt: string;
+  caption: string;
+  class?: string;
+  eager?: boolean;
+}
+
+const { id, alt, caption, class: className, eager = false } = Astro.props;
+const image = images[id];
+---
+
+<figure class:list={['frame', className]}>
+  <img
+    src={link(imagePath(id))}
+    width={image.width}
+    height={image.height}
+    alt={alt}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+  />
+  <figcaption>{tie(caption)}</figcaption>
+</figure>

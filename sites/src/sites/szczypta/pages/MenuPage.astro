@@ -1,0 +1,81 @@
+---
+import type { Lang } from '../data/lang';
+import { allergenIds, allergenNames } from '../data/allergens';
+import { allergensOf, chapterOrder, dishes } from '../data/menu';
+import { week } from '../data/week';
+import { menuCopy } from '../copy/menu';
+import { tie } from '../logic/typography';
+import Layout from '../components/Layout.astro';
+import Chapter from '../components/Chapter.astro';
+import WeekList from '../components/WeekList.astro';
+import Footnotes from '../components/Footnotes.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = menuCopy[lang];
+const used = new Set<string>([
+  ...dishes.flatMap(dish => allergensOf(dish)),
+  ...week.flatMap(day => [
+    ...day.soup.allergens,
+    ...day.second.allergens,
+    ...day.dessert.allergens,
+  ]),
+]);
+const filterAllergens = allergenIds.filter(id => used.has(id));
+---
+
+<Layout lang={lang} page="menu" title={copy.page.title} description={copy.page.description}>
+  <section class="page-head">
+    <h1>{copy.page.h1}</h1>
+    <p class="page-lead">{tie(copy.page.lead)}</p>
+    <p class="page-note">{tie(copy.page.kitchenBreak)}</p>
+    <p class="page-links">
+      <a class="link-line" href="#tydzien">
+        {copy.page.weekLink}
+      </a>
+    </p>
+  </section>
+
+  <div class="filters" data-filters hidden>
+    <fieldset class="filters-box">
+      <legend>{copy.filters.title}</legend>
+      <div class="filter-row">
+        <label class="check">
+          <input type="checkbox" data-filter="vegetarian" />
+          <span>{copy.filters.vegetarian}</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" data-filter="vegan" />
+          <span>{copy.filters.vegan}</span>
+        </label>
+      </div>
+      <p class="filter-hint">
+        {copy.filters.without}. {copy.filters.withoutHint}.
+      </p>
+      <div class="filter-row">
+        {filterAllergens.map(id => (
+          <label class="check">
+            <input type="checkbox" data-allergen={id} />
+            <span>{allergenNames[id][lang]}</span>
+          </label>
+        ))}
+      </div>
+      <p class="filter-status" data-filter-status role="status" aria-live="polite"></p>
+      <button class="filter-reset" type="button" data-filter-reset hidden>
+        {copy.filters.reset}
+      </button>
+    </fieldset>
+  </div>
+
+  {chapterOrder.map(chapter => (
+    <Chapter chapter={chapter} lang={lang} meta />
+  ))}
+  <WeekList lang={lang} full />
+  <Footnotes lang={lang} />
+  <div class="allergen-note">
+    <p>{tie(copy.allergenNote)}</p>
+  </div>
+</Layout>

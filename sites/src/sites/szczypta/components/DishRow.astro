@@ -1,0 +1,49 @@
+---
+import type { Lang } from '../data/lang';
+import { allergenNames } from '../data/allergens';
+import { allergensOf, priceLabel } from '../data/menu';
+import type { Dish } from '../data/menu';
+import { menuCopy } from '../copy/menu';
+import { capitalize } from '../logic/format';
+import { tie } from '../logic/typography';
+import Mark from './Mark.astro';
+
+interface Props {
+  dish: Dish;
+  lang: Lang;
+  meta?: boolean;
+}
+
+const { dish, lang, meta = false } = Astro.props;
+const copy = menuCopy[lang];
+const allergens = allergensOf(dish);
+const dietLabel =
+  dish.diet === 'vegan' ? copy.tags.vegan : dish.diet === 'vegetarian' ? copy.tags.vegetarian : '';
+const allergenText = allergens.length
+  ? `${copy.tags.allergens}: ${allergens.map(id => allergenNames[id][lang]).join(', ')}.`
+  : `${capitalize(copy.tags.noAllergens)}.`;
+---
+
+<li class="dish" data-diet={dish.diet} data-allergens={allergens.join(' ')}>
+  <p class="row">
+    <span class="nm">
+      {tie(dish.name[lang])}
+      {dish.notes.map(id => (
+        <Mark id={id} lang={lang} />
+      ))}
+    </span>{' '}
+    <i class="lead" aria-hidden="true"></i> <b class="pr">{priceLabel(dish, lang)}</b>
+  </p>
+  {dish.desc && <p class="ds">{tie(dish.desc[lang])}</p>}
+  {meta && (
+    <p class="dish-meta">
+      {dietLabel && (
+        <>
+          <b>{dietLabel}</b>
+          {'. '}
+        </>
+      )}
+      {allergenText}
+    </p>
+  )}
+</li>

@@ -1,0 +1,25 @@
+---
+import type { Lang } from '../data/lang';
+import { openingRows } from '../data/hours';
+import { homeCopy } from '../copy/home';
+
+interface Props {
+  lang: Lang;
+  class?: string;
+}
+
+const { lang, class: className } = Astro.props;
+const rows = openingRows(lang);
+---
+
+<table class:list={['hours', className]}>
+  <caption>{homeCopy[lang].booking.hoursCaption}</caption>
+  <tbody>
+    {rows.map(row => (
+      <tr>
+        <th scope="row">{row.label}</th>
+        <td>{row.value}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>

@@ -1,0 +1,37 @@
+---
+import type { Lang } from '../data/lang';
+import { footnotes } from '../data/suppliers';
+import { menuCopy } from '../copy/menu';
+import { tie } from '../logic/typography';
+import Frame from './Frame.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = menuCopy[lang].notes;
+---
+
+<section class="notes" id="przypisy">
+  <Frame id="buraki" alt={copy.beetsAlt} caption={copy.beetsCaption} class="frame-beets" />
+  <div class="notes-body">
+    <div class="chap-head">
+      <h2 id="h-przypisy">{copy.title}</h2>
+      <p class="chap-note">{tie(copy.intro)}</p>
+    </div>
+    <dl class="fn">
+      {footnotes.map(note => (
+        <div>
+          <dt data-glyph={note.mark}>
+            <span class="sr">{copy.mark} </span>
+            <span class="glyph">{note.mark}</span>
+          </dt>
+          <dd>
+            <b>{note.product[lang]}.</b> {tie(`${note.supplier[lang]}, ${note.when[lang]}.`)}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

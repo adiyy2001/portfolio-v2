@@ -1,0 +1,43 @@
+---
+import type { Lang } from '../data/lang';
+import { place } from '../data/place';
+
+interface Props {
+  lang: Lang;
+  name?: boolean;
+  note?: boolean;
+  email?: boolean;
+  id?: string;
+  class?: string;
+}
+
+const { lang, name = false, note = false, email = true, id, class: className } = Astro.props;
+---
+
+<address class={className ?? 'contact'} id={id}>
+  <p class="addr">
+    {name && (
+      <>
+        <span class="addr-name">{place.name}</span>{' '}
+      </>
+    )}
+    <span class="addr-street">{place.street}</span>{' '}
+    <span class="addr-city">
+      {place.postcode} {place.city}
+    </span>
+    {note && (
+      <>
+        {' '}
+        <span class="addr-note">{place.entry[lang]}</span>
+      </>
+    )}
+  </p>
+  <p>
+    <a href={`tel:${place.phone.href}`}>{place.phone.display}</a>
+  </p>
+  {email && (
+    <p>
+      <a href={`mailto:${place.email}`}>{place.email}</a>
+    </p>
+  )}
+</address>

@@ -1,0 +1,120 @@
+---
+import type { Lang } from '../data/lang';
+import { dishById } from '../data/menu';
+import { week } from '../data/week';
+import { place } from '../data/place';
+import { paths, switchTarget } from '../data/routes';
+import { images, imagePath } from '../data/images';
+import { homeCopy } from '../copy/home';
+import { menuCopy } from '../copy/menu';
+import { link } from '../../../shared/link';
+import { inlineName } from '../logic/format';
+import { tie } from '../logic/typography';
+import Layout from '../components/Layout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Chapter from '../components/Chapter.astro';
+import Frame from '../components/Frame.astro';
+import WeekList from '../components/WeekList.astro';
+import Footnotes from '../components/Footnotes.astro';
+import Address from '../components/Address.astro';
+import HoursTable from '../components/HoursTable.astro';
+import TicketSlot from '../components/TicketSlot.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = homeCopy[lang];
+const menu = menuCopy[lang];
+const route = paths[lang];
+const hero = dishById('poledwiczki');
+const second = dishById('drugie-dnia');
+const monday = week[0];
+const photo = images.poledwiczki;
+const switchHref = link(switchTarget(lang, 'home'));
+---
+
+<Layout lang={lang} page="home" title={copy.title} description={copy.description} variant="hero">
+  <header class="hero" id="top" slot="hero">
+    <div class="hero-text">
+      <SiteHeader lang={lang} page="home" variant="hero" switchHref={switchHref} />
+      <div class="hero-main">
+        <p class="kicker">{tie(copy.hero.kicker)}</p>
+        <h1>{tie(hero.name[lang])}</h1>
+        <p class="hero-desc">{tie(hero.desc![lang])}</p>
+        <p class="hero-price">
+          <span>{copy.hero.price}</span> <i class="lead" aria-hidden="true"></i>{' '}
+          <b>{hero.price} zł</b>
+        </p>
+        <div class="hero-cta">
+          <a class="cta" href="#stolik">
+            {copy.hero.cta}
+          </a>
+          <a class="cta-tel" href={`tel:${place.phone.href}`}>
+            {place.phone.display}
+          </a>
+        </div>
+      </div>
+      <aside class="today">
+        <p class="kicker">
+          {copy.today.kicker}{' '}
+          <span id="today-day" data-today={copy.today.dayToday}>
+            {copy.today.dayFallback}
+          </span>
+        </p>
+        <p class="today-dish" id="today-second">
+          {tie(monday.second.name[lang])}
+        </p>
+        <p class="today-set">
+          {copy.today.setPrefix}{' '}
+          <span id="today-soup">{tie(inlineName(monday.soup.name[lang], lang))}</span>{' '}
+          {copy.today.and}{' '}
+          <span id="today-dessert">{tie(inlineName(monday.dessert.name[lang], lang))}</span>.
+        </p>
+        <p class="today-prices">
+          <span>
+            {copy.today.secondPrice} {second.price} zł
+          </span>{' '}
+          <b>
+            {copy.today.setPrice} <span id="today-price">{monday.price} zł</span>
+          </b>
+        </p>
+      </aside>
+    </div>
+    <figure class="hero-photo">
+      <img
+        src={link(imagePath('poledwiczki'))}
+        width={photo.width}
+        height={photo.height}
+        alt={copy.hero.photoAlt}
+        fetchpriority="high"
+        decoding="async"
+      />
+    </figure>
+  </header>
+
+  <Chapter chapter="breakfast" lang={lang} onlyHome />
+  <Chapter chapter="lunch" lang={lang} onlyHome />
+  <Frame id="zupa" alt={menu.images.soupAlt} caption={menu.images.soupCaption} class="frame-soup" />
+  <Chapter chapter="dinner" lang={lang} onlyHome />
+  <p class="home-more">
+    <a class="link-line" href={link(route.menu!)}>
+      {menu.moreMenu}
+    </a>
+  </p>
+  <WeekList lang={lang} />
+  <Footnotes lang={lang} />
+  <Frame id="sala" alt={menu.images.roomAlt} caption={menu.images.roomCaption} class="frame-room" />
+
+  <section class="booking" id="stolik">
+    <div class="booking-info">
+      <h2>{copy.booking.title}</h2>
+      <p class="booking-lead">{tie(copy.booking.lead)}</p>
+      <Address lang={lang} name note />
+      <HoursTable lang={lang} />
+      <p class="seats">{tie(copy.booking.seats)}</p>
+    </div>
+    <TicketSlot lang={lang} variant="home" />
+  </section>
+</Layout>

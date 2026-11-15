@@ -1,0 +1,40 @@
+---
+import type { Lang } from '../data/lang';
+import { bookingCopy } from '../copy/booking';
+import { tie } from '../logic/typography';
+import Layout from '../components/Layout.astro';
+import TicketSlot from '../components/TicketSlot.astro';
+import HoursTable from '../components/HoursTable.astro';
+import Address from '../components/Address.astro';
+import MyRequests from '../islands/MyRequests';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = bookingCopy[lang];
+---
+
+<Layout lang={lang} page="booking" title={copy.title} description={copy.description}>
+  <section class="page-head">
+    <h1>{copy.h1}</h1>
+    <p class="page-lead">{tie(copy.lead)}</p>
+  </section>
+  <div class="page-ticket">
+    <div class="page-ticket-main">
+      <TicketSlot lang={lang} variant="page" />
+      <MyRequests client:only="preact" lang={lang} />
+    </div>
+    <div class="contact-info">
+      <h2 class="section-title">{copy.rules.title}</h2>
+      <ul class="rules">
+        {copy.rules.items.map(item => (
+          <li>{tie(item)}</li>
+        ))}
+      </ul>
+      <HoursTable lang={lang} />
+      <Address lang={lang} note />
+    </div>
+  </div>
+</Layout>
