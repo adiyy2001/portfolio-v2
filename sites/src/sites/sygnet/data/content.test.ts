@@ -41,12 +41,12 @@ const ownSources = [...sourceFiles(siteRoot), ...sourceFiles(pagesRoot)].filter(
 
 describe('typography and tone', () => {
   it('has no en or em dashes in any source file', () => {
-    const offenders = ownSources.filter(path => /[–—]/.test(readFileSync(path, 'utf8')));
+    const offenders = ownSources.filter(path => /[\u2013\u2014]/.test(readFileSync(path, 'utf8')));
     expect(offenders).toEqual([]);
   });
 
   it('has no dashes in the copy data', () => {
-    expect(everyText.filter(text => /[–—]/.test(text))).toEqual([]);
+    expect(everyText.filter(text => /[\u2013\u2014]/.test(text))).toEqual([]);
   });
 
   it('does not mention AI or reviews', () => {

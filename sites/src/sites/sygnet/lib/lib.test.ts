@@ -73,7 +73,7 @@ describe('inline', () => {
 
 describe('reading', () => {
   it('counts words and rounds minutes up to one', () => {
-    expect(countWords('Ala ma kota, 2 psy i —')).toBe(6);
+    expect(countWords('Ala ma kota, 2 psy i \u2014')).toBe(6);
     expect(readingMinutes(10)).toBe(1);
     expect(readingMinutes(600)).toBe(3);
   });
