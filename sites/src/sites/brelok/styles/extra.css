@@ -154,7 +154,7 @@
   border: 1px solid var(--paper);
   pointer-events: none;
 }
-@media (max-width: 1240px) {
+@media (max-width: 1360px) {
   .nav {
     padding: 0 18px;
   }
@@ -1325,4 +1325,15 @@ html.js .noscript-note {
 }
 .credits-wrap + .lead {
   margin-top: 30px;
+}
+
+.karta-in > * {
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .tel-alt {
+    white-space: normal;
+    text-align: center;
+  }
 }
