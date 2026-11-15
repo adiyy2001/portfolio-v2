@@ -1,0 +1,47 @@
+---
+import type { Lang } from '../data/lang';
+import type { ChapterId } from '../data/menu';
+import { dishesOf } from '../data/menu';
+import { breakfastHours, drinksHours, dinnerHours, lunchHours, serviceLines } from '../data/hours';
+import { menuCopy } from '../copy/menu';
+import { tie } from '../logic/typography';
+import DishRow from './DishRow.astro';
+
+interface Props {
+  chapter: ChapterId;
+  lang: Lang;
+  onlyHome?: boolean;
+  meta?: boolean;
+}
+
+const { chapter, lang, onlyHome = false, meta = false } = Astro.props;
+const hours = {
+  breakfast: breakfastHours,
+  lunch: lunchHours,
+  dinner: dinnerHours,
+  drinks: drinksHours,
+};
+const copy = menuCopy[lang].chapters[chapter];
+const lines = serviceLines(hours[chapter], lang);
+const items = dishesOf(chapter, onlyHome);
+---
+
+<section class="chapter" data-chapter={chapter}>
+  <div class="chap-head">
+    <h2 id={`h-${chapter}`}>{copy.title}</h2>
+    <p class="chap-hours">
+      {lines.map((line, index) => (
+        <>
+          <span>{tie(line)}</span>
+          {index < lines.length - 1 && <span class="sr">; </span>}
+        </>
+      ))}
+    </p>
+    <p class="chap-note">{tie(copy.note)}</p>
+  </div>
+  <ul class="items">
+    {items.map(dish => (
+      <DishRow dish={dish} lang={lang} meta={meta} />
+    ))}
+  </ul>
+</section>

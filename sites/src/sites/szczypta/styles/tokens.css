@@ -1,0 +1,16 @@
+:root {
+  --paper: #f3ead8;
+  --paper-deep: #e9dcc2;
+  --ink: #1d140e;
+  --ink-soft: #4d3f33;
+  --oxblood: #6b1d22;
+  --oxblood-deep: #541519;
+  --brass: #7a5a22;
+  --brass-light: #d9b873;
+  --panel: #0b0601;
+  --rose: #dca89f;
+  --cream: #fbf3e2;
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --pad: clamp(20px, 4.6vw, 72px);
+}

@@ -1,0 +1,68 @@
+---
+import type { Lang } from '../data/lang';
+import { events } from '../data/events';
+import { paths, eventPath } from '../data/routes';
+import { imagePath, images } from '../data/images';
+import { eventsCopy } from '../copy/events';
+import { link } from '../../../shared/link';
+import { imageAlt } from '../logic/alt';
+import { tie } from '../logic/typography';
+import Layout from '../components/Layout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = eventsCopy[lang];
+const time = (start: string, end?: string) => (end ? copy.duration(start, end) : start);
+---
+
+<Layout lang={lang} page="events" title={copy.title} description={copy.description}>
+  <section class="page-head">
+    <h1>{copy.h1}</h1>
+    <p class="page-lead">{tie(copy.lead)}</p>
+  </section>
+  <ol class="events">
+    {events.map((event, index) => (
+      <li class="ev">
+        <div class="ev-photo">
+          <img
+            src={link(imagePath(event.image))}
+            width={images[event.image].width}
+            height={images[event.image].height}
+            alt={imageAlt(event.image, lang)}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        </div>
+        <div class="ev-body">
+          <h2>
+            <a href={link(eventPath(lang, event.slug))}>{tie(event.title[lang])}</a>
+          </h2>
+          <p class="ev-teaser">{tie(event.teaser[lang])}</p>
+          <p class="ev-facts">
+            <span>
+              {event.rhythm[lang]}, {copy.at(time(event.start, event.end), Boolean(event.end))}
+            </span>{' '}
+            <span>{copy.price(event.price)}</span> <span>{copy.seats(event.seats)}</span>
+          </p>
+          <p class="ev-next" data-ev-next={event.slug}>
+            <span data-ev-label></span> <b data-ev-value></b>
+          </p>
+          <p class="ev-actions">
+            <a
+              class="link-line"
+              href={link(eventPath(lang, event.slug))}
+              aria-label={copy.detailsLabel(event.title[lang])}>
+              {copy.details}
+            </a>{' '}
+            <a class="link-line" href={`${link(paths[lang].booking!)}?wydarzenie=${event.slug}`}>
+              {copy.book}
+            </a>
+          </p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</Layout>

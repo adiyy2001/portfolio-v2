@@ -1,0 +1,104 @@
+---
+import type { Lang } from '../data/lang';
+import { events, eventBySlug } from '../data/events';
+import { paths, eventPath } from '../data/routes';
+import { imagePath, images } from '../data/images';
+import { eventsCopy } from '../copy/events';
+import { link } from '../../../shared/link';
+import { imageAlt } from '../logic/alt';
+import { tie } from '../logic/typography';
+import Layout from '../components/Layout.astro';
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const event = eventBySlug(slug);
+const copy = eventsCopy[lang];
+const others = events.filter(item => item.slug !== slug);
+const pair = { pl: eventPath('pl', slug), en: eventPath('en', slug) };
+const time = event.end ? copy.duration(event.start, event.end) : event.start;
+---
+
+<Layout
+  lang={lang}
+  page="events"
+  title={copy.detailTitle(event.title[lang])}
+  description={copy.detailDescription(event.title[lang], event.teaser[lang])}
+  pair={pair}>
+  <section class="page-head">
+    <p class="page-links">
+      <a class="link-line" href={link(paths[lang].events!)}>
+        {copy.back}
+      </a>
+    </p>
+    <h1>{tie(event.title[lang])}</h1>
+    <p class="page-lead">{tie(event.teaser[lang])}</p>
+  </section>
+  <div class="ev-detail">
+    <div class="ev-main">
+      <div class="ev-photo">
+        <img
+          src={link(imagePath(event.image))}
+          width={images[event.image].width}
+          height={images[event.image].height}
+          alt={imageAlt(event.image, lang)}
+          decoding="async"
+        />
+      </div>
+      <div class="prose">
+        {event.paragraphs[lang].map(text => (
+          <p>{tie(text)}</p>
+        ))}
+      </div>
+    </div>
+    <div class="ev-side">
+      <div class="ev-card">
+        <h2 class="sub-title">{copy.facts}</h2>
+        <dl>
+          <div data-ev-next={event.slug} data-ev-date-only>
+            <dt data-ev-label>{copy.labels.when}</dt>
+            <dd data-ev-value>{event.rhythm[lang]}</dd>
+          </div>
+          <div>
+            <dt>{copy.labels.time}</dt>
+            <dd>{time}</dd>
+          </div>
+          <div>
+            <dt>{copy.labels.price}</dt>
+            <dd>{copy.price(event.price)}</dd>
+          </div>
+          <div>
+            <dt>{copy.labels.seats}</dt>
+            <dd>{copy.seats(event.seats)}</dd>
+          </div>
+        </dl>
+        <h3 class="sub-title">{copy.included}</h3>
+        <ul class="ev-included">
+          {event.included[lang].map(item => (
+            <li>{tie(item)}</li>
+          ))}
+        </ul>
+        <p>
+          <a class="cta" href={`${link(paths[lang].booking!)}?wydarzenie=${event.slug}`}>
+            {copy.book}
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <section class="section">
+    <h2 class="section-title">{copy.otherTitle}</h2>
+    <ul class="ev-others">
+      {others.map(item => (
+        <li>
+          <a href={link(eventPath(lang, item.slug))}>
+            <span>{tie(item.title[lang])}</span> <small>{item.rhythm[lang]}</small>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

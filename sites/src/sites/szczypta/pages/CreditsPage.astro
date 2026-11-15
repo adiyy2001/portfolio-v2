@@ -1,0 +1,68 @@
+---
+import type { Lang } from '../data/lang';
+import { paths } from '../data/routes';
+import { creditsCopy } from '../copy/credits';
+import { link } from '../../../shared/link';
+import Layout from '../components/Layout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const copy = creditsCopy[lang];
+---
+
+<Layout lang={lang} page="credits" title={copy.title} description={copy.description}>
+  <section class="sub">
+    <h1>{copy.h1}</h1>
+    <p class="sub-text">{copy.intro}</p>
+    <table class="credits">
+      <caption>{copy.photos.caption}</caption>
+      <thead>
+        <tr>
+          {copy.photos.head.map(label => (
+            <th scope="col">{label}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {copy.photos.rows.map(([description, author, id]) => (
+          <tr>
+            <th scope="row">{description}</th>
+            <td>{author}</td>
+            <td>
+              <a href={`https://www.pexels.com/photo/${id}/`} rel="noopener">
+                pexels.com/photo/{id}
+              </a>
+            </td>
+            <td>{copy.photos.licence}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <table class="credits">
+      <caption>{copy.fonts.caption}</caption>
+      <thead>
+        <tr>
+          {copy.fonts.head.map(label => (
+            <th scope="col">{label}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {copy.fonts.rows.map(([family, authors]) => (
+          <tr>
+            <th scope="row">{family}</th>
+            <td>{authors}</td>
+            <td>{copy.fonts.licence}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="sub-text-small">{copy.og}</p>
+    <a class="cta" href={link(paths[lang].menu!)}>
+      {copy.back}
+    </a>
+  </section>
+</Layout>

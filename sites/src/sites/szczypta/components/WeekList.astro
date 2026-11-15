@@ -1,0 +1,74 @@
+---
+import type { Lang } from '../data/lang';
+import { allergenNames } from '../data/allergens';
+import { dayNames, week } from '../data/week';
+import { weekCardHours, serviceLines } from '../data/hours';
+import { menuCopy } from '../copy/menu';
+import { capitalize } from '../logic/format';
+import { tie } from '../logic/typography';
+
+interface Props {
+  lang: Lang;
+  full?: boolean;
+}
+
+const { lang, full = false } = Astro.props;
+const copy = menuCopy[lang];
+const lines = serviceLines(weekCardHours, lang);
+const meals = [
+  { key: 'soup', label: copy.week.soup },
+  { key: 'second', label: copy.week.second },
+  { key: 'dessert', label: copy.week.dessert },
+] as const;
+const allergenLine = (ids: readonly (keyof typeof allergenNames)[]) =>
+  ids.length ? ids.map(id => allergenNames[id][lang]).join(', ') : '';
+---
+
+<section class="week" id="tydzien">
+  <div class="week-inner">
+    <div class="chap-head">
+      <h2 id="h-tydzien">{copy.week.title}</h2>
+      <p class="chap-hours">
+        {lines.map((line, index) => (
+          <>
+            <span>{tie(line)}</span>
+            {index < lines.length - 1 && <span class="sr">; </span>}
+          </>
+        ))}
+      </p>
+      <p class="chap-note">{tie(copy.week.note)}</p>
+    </div>
+    <ol class="wlist" aria-label={copy.week.listLabel}>
+      {week.map(entry => (
+        <li class="wrow" data-day={entry.day}>
+          <h3 class="wday">{capitalize(dayNames[lang][entry.day])}</h3>
+          <div class="wmeals">
+            {meals.map(meal => (
+              <p>
+                <small>{meal.label}</small>{' '}
+                <span class={`w-${meal.key}`}>{tie(entry[meal.key].name[lang])}</span>
+              </p>
+            ))}
+            {full && (
+              <p class="w-allergens">
+                {copy.week.allergens}:{' '}
+                {allergenLine([
+                  ...new Set([
+                    ...entry.soup.allergens,
+                    ...entry.second.allergens,
+                    ...entry.dessert.allergens,
+                  ]),
+                ])}
+                .
+              </p>
+            )}
+          </div>
+          <p class="wprice">
+            <span class="sr">{copy.week.setPrice}: </span>
+            <span class="num">{entry.price} zł</span>
+          </p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

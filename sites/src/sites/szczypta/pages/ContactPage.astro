@@ -1,0 +1,40 @@
+---
+import type { Lang } from '../data/lang';
+import { place } from '../data/place';
+import { contactCopy } from '../copy/contact';
+import { tie } from '../logic/typography';
+import Layout from '../components/Layout.astro';
+import Address from '../components/Address.astro';
+import HoursTable from '../components/HoursTable.astro';
+import ContactForm from '../islands/ContactForm';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'pl' } = Astro.props;
+const copy = contactCopy[lang];
+---
+
+<Layout lang={lang} page="contact" title={copy.title} description={copy.description}>
+  <section class="page-head">
+    <h1>{copy.h1}</h1>
+    <p class="page-lead">{tie(copy.lead)}</p>
+  </section>
+  <div class="contact-page">
+    <div class="contact-info">
+      <Address lang={lang} name note id="contact-address" />
+      <HoursTable lang={lang} />
+      <p class="page-note">{tie(copy.kitchenBreak)}</p>
+      <p class="page-note">{copy.mapNote}</p>
+    </div>
+    <div class="contact-main">
+      <ContactForm lang={lang} client:only="preact" />
+      <noscript>
+        <p>
+          {copy.noscript} <a href={`mailto:${place.email}`}>{place.email}</a>.
+        </p>
+      </noscript>
+    </div>
+  </div>
+</Layout>

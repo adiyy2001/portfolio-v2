@@ -1,0 +1,205 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: inherit;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+dl,
+dd,
+dt,
+ul,
+ol,
+figure,
+address,
+table,
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+fieldset {
+  border: 0;
+  min-width: 0;
+}
+ul,
+ol {
+  list-style: none;
+}
+address {
+  font-style: normal;
+}
+main {
+  display: block;
+}
+main:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 3px solid var(--oxblood);
+  outline-offset: 3px;
+}
+.booking :focus-visible,
+.foot :focus-visible {
+  outline-color: var(--brass-light);
+}
+.ticket :focus-visible {
+  outline-color: var(--oxblood);
+}
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 10px 16px;
+  z-index: 50;
+  text-decoration: none;
+}
+.skip:focus {
+  top: 12px;
+}
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.lead {
+  flex: 1 1 auto;
+  min-width: 24px;
+  border-bottom: 1.5px dotted currentColor;
+  opacity: 0.55;
+  transform: translateY(-0.32em);
+}
+.brand {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(26px, 2.2vw, 34px);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+}
+h1 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(46px, 5.5vw, 92px);
+  line-height: 0.94;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(44px, 4.8vw, 76px);
+  line-height: 0.98;
+  color: var(--ink);
+}
+.kicker {
+  font-size: 13px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--oxblood);
+}
+.cta {
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--cream);
+  background: var(--oxblood);
+  padding: 15px 28px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+.cta:hover {
+  background: var(--oxblood-deep);
+}
+.cta--ghost {
+  background: transparent;
+  color: var(--oxblood);
+  border: 1.5px solid var(--oxblood);
+}
+.cta--ghost:hover {
+  background: var(--oxblood);
+  color: var(--cream);
+}
+.mark {
+  font-family: var(--sans);
+  font-weight: 500;
+  color: var(--oxblood);
+  display: inline-block;
+  font-size: 0.5em;
+  line-height: 0;
+  vertical-align: 0.95em;
+  margin-left: 3px;
+  min-width: 0.9em;
+  text-align: center;
+}
+.mark[data-glyph='*'] {
+  font-size: 0.78em;
+  vertical-align: 0.5em;
+}
+.mark[data-glyph='†'] {
+  font-size: 0.48em;
+}
+.mark[data-glyph='‡'] {
+  font-size: 0.74em;
+  vertical-align: 0.58em;
+}
+.mark[data-glyph='§'] {
+  font-size: 0.55em;
+}
+@media (max-width: 860px) {
+  body {
+    font-size: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

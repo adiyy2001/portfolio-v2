@@ -1,0 +1,32 @@
+---
+import type { Lang } from '../data/lang';
+import { place } from '../data/place';
+import { ticketCopy } from '../copy/ticket';
+import Ticket from '../islands/Ticket';
+
+interface Props {
+  lang: Lang;
+  variant: 'home' | 'page';
+}
+
+const { lang, variant } = Astro.props;
+const copy = ticketCopy[lang];
+---
+
+<div class="ticket-slot">
+  <Ticket client:only="preact" lang={lang} variant={variant} />
+  <noscript>
+    <div class:list={['ticket', variant === 'page' && 'ticket--page']}>
+      <div class="ticket-main">
+        <p class="ticket-kicker">{copy.kicker}</p>
+        <h3>{copy.title}</h3>
+        <p class="ticket-noscript">
+          {copy.noscript} <a href={`tel:${place.phone.href}`}>{place.phone.display}</a>
+        </p>
+      </div>
+      <div class="ticket-stub" aria-hidden="true">
+        <span>{copy.stub}</span>
+      </div>
+    </div>
+  </noscript>
+</div>

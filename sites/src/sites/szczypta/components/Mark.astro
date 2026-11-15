@@ -1,0 +1,20 @@
+---
+import type { Lang } from '../data/lang';
+import { footnoteById } from '../data/suppliers';
+import type { FootnoteId } from '../data/suppliers';
+import { menuCopy } from '../copy/menu';
+
+interface Props {
+  id: FootnoteId;
+  lang: Lang;
+}
+
+const { id, lang } = Astro.props;
+const glyph = footnoteById(id).mark;
+const word = menuCopy[lang].notes.mark;
+---
+
+<sup class="mark" data-glyph={glyph}>
+  <span class="sr"> {word} </span>
+  {glyph}
+</sup>

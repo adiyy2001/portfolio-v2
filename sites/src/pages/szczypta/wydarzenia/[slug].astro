@@ -1,0 +1,10 @@
+---
+import EventDetailPage from '../../../sites/szczypta/pages/EventDetailPage.astro';
+import { events } from '../../../sites/szczypta/data/events';
+
+export const getStaticPaths = () => events.map(event => ({ params: { slug: event.slug } }));
+
+const { slug } = Astro.params;
+---
+
+<EventDetailPage lang="pl" slug={slug!} />
