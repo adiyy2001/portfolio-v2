@@ -91,7 +91,7 @@ export const statutoryRules: readonly StatutoryRule[] = [
     day: 25,
     title: 'VAT i plik JPK_V7',
     audience: ['osoba', 'spolka'],
-    note: 'JPK_V7M co miesiąc. Przy JPK_V7K podatek płacisz co miesiąc, plik wysyłasz co kwartał.',
+    note: 'Przy JPK_V7K plik (część ewidencyjna) wysyłasz co miesiąc, a deklarację i VAT płacisz co kwartał, do 25. dnia po kwartale. Przy JPK_V7M plik z deklaracją idzie co miesiąc.',
   },
 ];
 
