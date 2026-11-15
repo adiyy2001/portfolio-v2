@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'preact/hooks';
+import type { Lang } from '../data/lang';
 import { contactCopy } from '../copy/contact';
 
 type Field = 'name' | 'email' | 'message';
@@ -11,8 +12,8 @@ interface Values {
 
 const fieldOrder: Field[] = ['name', 'email', 'message'];
 
-const validate = (values: Values): Partial<Record<Field, string>> => {
-  const errors = contactCopy.form.errors;
+const validate = (values: Values, lang: Lang): Partial<Record<Field, string>> => {
+  const errors = contactCopy[lang].form.errors;
   const found: Partial<Record<Field, string>> = {};
   if (values.name.trim().length < 2) found.name = errors.name;
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email.trim())) found.email = errors.email;
@@ -20,8 +21,12 @@ const validate = (values: Values): Partial<Record<Field, string>> => {
   return found;
 };
 
-export const ContactForm = () => {
-  const copy = contactCopy.form;
+interface Props {
+  lang?: Lang;
+}
+
+export const ContactForm = ({ lang = 'pl' }: Props) => {
+  const copy = contactCopy[lang].form;
   const [values, setValues] = useState<Values>({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [attempt, setAttempt] = useState(0);
@@ -45,7 +50,7 @@ export const ContactForm = () => {
 
   const submit = (event: Event) => {
     event.preventDefault();
-    const found = validate(values);
+    const found = validate(values, lang);
     setErrors(found);
     if (Object.keys(found).length === 0) {
       setAttempt(0);

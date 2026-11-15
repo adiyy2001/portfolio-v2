@@ -12,7 +12,15 @@ export const pageIds = [
 
 export type PageId = (typeof pageIds)[number];
 
-export const bilingualPages = ['home', 'menu', 'booking', 'events', 'about', 'credits'] as const;
+export const bilingualPages = [
+  'home',
+  'menu',
+  'booking',
+  'events',
+  'about',
+  'contact',
+  'credits',
+] as const;
 
 export const paths: Record<Lang, Partial<Record<PageId, string>>> = {
   pl: {
@@ -30,6 +38,7 @@ export const paths: Record<Lang, Partial<Record<PageId, string>>> = {
     booking: '/szczypta/en/booking/',
     events: '/szczypta/en/events/',
     about: '/szczypta/en/about/',
+    contact: '/szczypta/en/contact/',
     credits: '/szczypta/en/credits/',
   },
 };
