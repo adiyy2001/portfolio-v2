@@ -1,0 +1,67 @@
+---
+import { link } from '../../../shared/link';
+import Panel from '../components/Panel.astro';
+import RouteMap from '../components/RouteMap.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { neighbourhoodText, sortedPlaces } from '../content/neighbourhood';
+import { pagePath } from '../i18n/lang';
+import type { Lang } from '../i18n/lang';
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = neighbourhoodText[lang];
+---
+
+<Layout
+  lang={lang}
+  pageKey="neighbourhood"
+  title={text.metaTitle}
+  description={text.metaDescription}>
+  <Panel labelledby="neighbourhood-h" first>
+    <SectionHead id="neighbourhood-h" level="h1">
+      {text.heading}
+    </SectionHead>
+    <p class="lead">{text.lead}</p>
+    <figure class="map map-wide">
+      <RouteMap label={text.mapLabel} market={text.market} />
+      <figcaption>{text.mapCaption}</figcaption>
+    </figure>
+    <h2 class="sub">{text.walksHeading}</h2>
+    <ul class="walks">
+      {sortedPlaces.map(item => {
+        const copy = text.places[item.id];
+        return (
+          <li>
+            <span class="ov">
+              <b>{item.minutes}</b>
+              <small aria-hidden="true">{text.minutesUnit}</small>
+              <span class="sr">{text.minutesSpoken(item.minutes)}</span>
+            </span>
+            <div>
+              <h3>{copy.name}</h3>
+              <p>{copy.note}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+    <h2 class="sub">{text.transportHeading}</h2>
+    <div class="prose">
+      {text.transport.map(paragraph => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+    <p class="actions">
+      <a class="ticket" href={link(pagePath('contact', lang))}>
+        {text.ctaContact}
+      </a>
+      <a class="ticket" href={link(pagePath('rooms', lang))}>
+        {text.ctaRooms}
+      </a>
+    </p>
+  </Panel>
+</Layout>
