@@ -81,7 +81,7 @@
   left: 0;
   top: 0.7em;
   width: 10px;
-  height: 1.5px;
+  height: 2px;
   background: var(--oxblood);
 }
 
@@ -303,7 +303,7 @@
   left: 0;
   top: 0.75em;
   width: 10px;
-  height: 1.5px;
+  height: 2px;
   background: var(--oxblood);
 }
 .ev-others {
