@@ -1,0 +1,28 @@
+---
+import { link } from '../../../shared/link';
+import { firm } from '../data/site';
+import { tie } from '../lib/tie';
+
+interface Props {
+  title?: string;
+  text?: string;
+}
+
+const {
+  title = 'Opisz sprawę w kilku zdaniach.',
+  text = `Odpowiadamy w ciągu ${firm.replyWorkingDays} dnia roboczego. Pierwsza rozmowa trwa ${firm.firstTalkMinutes} minut i kosztuje ${firm.firstTalkPricePln} zł.`,
+} = Astro.props;
+---
+
+<section class="cta" aria-labelledby="cta-title">
+  <h2 id="cta-title">{title}</h2>
+  <p>{tie(text)}</p>
+  <div class="cta-acts">
+    <a class="cta-btn" href={link('/sygnet/kontakt/')}>
+      Umów rozmowę
+    </a>
+    <a class="cta-phone" href={firm.phone.href}>
+      {firm.phone.display}
+    </a>
+  </div>
+</section>

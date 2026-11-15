@@ -1,0 +1,56 @@
+---
+import { link } from '../../../shared/link';
+import Cta from '../../../sites/sygnet/components/Cta.astro';
+import PageHead from '../../../sites/sygnet/components/PageHead.astro';
+import { areas } from '../../../sites/sygnet/data/areas';
+import { feesForArea, grossOf } from '../../../sites/sygnet/data/fees';
+import { personBySlug } from '../../../sites/sygnet/data/people';
+import Layout from '../../../sites/sygnet/Layout.astro';
+import { formatPln } from '../../../sites/sygnet/lib/money';
+import { tie } from '../../../sites/sygnet/lib/tie';
+
+const cheapest = (slug: string) => {
+  const fees = feesForArea(slug);
+  return fees.length ? Math.min(...fees.map(fee => fee.netPln)) : undefined;
+};
+---
+
+<Layout
+  title="Specjalizacje"
+  description="Sygnet prowadzi sprawy rodzinne, spółek, spadkowe i umowy. Przy każdym obszarze: kto prowadzi, jak wygląda sprawa i ile kosztuje."
+  path="/sygnet/specjalizacje/"
+  current="specjalizacje"
+  bundles={['inner']}>
+  <PageHead
+    title="Cztery obszary, w których prowadzimy sprawy"
+    lead="Rodzina, spółki, spadki i umowy. Przy każdym obszarze opisaliśmy, czym się zajmujemy, kto prowadzi sprawę i ile kosztują typowe czynności."
+    crumbs={[{ label: 'Strona główna', href: '/sygnet/' }, { label: 'Specjalizacje' }]}
+  />
+  <div class="block">
+    <ol class="area-list">
+      {areas.map(area => {
+        const from = cheapest(area.slug);
+        return (
+          <li class="area-row">
+            <span class="no" aria-hidden="true">
+              {area.no}
+            </span>
+            <h2>
+              <a href={link(`/sygnet/specjalizacje/${area.slug}/`)}>{area.name}</a>
+            </h2>
+            <p class="text">{tie(area.tableText)}</p>
+            <p class="facts-line">
+              Prowadzi {personBySlug(area.leaderSlug)?.name}.
+              {from !== undefined &&
+                ` Ryczałty od ${formatPln(from)} netto (${formatPln(grossOf(from))} brutto).`}
+            </p>
+            <a class="go" href={link(`/sygnet/specjalizacje/${area.slug}/`)}>
+              Czytaj o obszarze<span class="sr-only">: {area.name}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+  <Cta />
+</Layout>

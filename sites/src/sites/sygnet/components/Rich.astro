@@ -1,0 +1,22 @@
+---
+import { link } from '../../../shared/link';
+import { parseInline } from '../lib/inline';
+import { tie } from '../lib/tie';
+
+interface Props {
+  text: string;
+}
+
+const parts = parseInline(Astro.props.text);
+const resolve = (href: string) => (href.startsWith('/') ? link(href) : href);
+---
+
+{parts.map(part =>
+  part.kind === 'strong' ? (
+    <strong>{tie(part.text)}</strong>
+  ) : part.kind === 'link' ? (
+    <a href={resolve(part.href)}>{tie(part.text)}</a>
+  ) : (
+    tie(part.text)
+  ),
+)}

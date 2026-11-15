@@ -1,0 +1,97 @@
+---
+import { link } from '../../../shared/link';
+import ArticleBody from '../../../sites/sygnet/components/ArticleBody.astro';
+import Cta from '../../../sites/sygnet/components/Cta.astro';
+import PageHead from '../../../sites/sygnet/components/PageHead.astro';
+import { areaBySlug } from '../../../sites/sygnet/data/areas';
+import { articles } from '../../../sites/sygnet/data/articles';
+import { articleMinutes } from '../../../sites/sygnet/data/articles/stats';
+import { personBySlug } from '../../../sites/sygnet/data/people';
+import Layout from '../../../sites/sygnet/Layout.astro';
+import { formatLongDate } from '../../../sites/sygnet/lib/dates';
+import { plainText } from '../../../sites/sygnet/lib/inline';
+import { uniqueSlugs } from '../../../sites/sygnet/lib/slug';
+import { tie } from '../../../sites/sygnet/lib/tie';
+
+export function getStaticPaths() {
+  return articles.map(article => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const author = personBySlug(article.authorSlug);
+const area = areaBySlug(article.areaSlug);
+const headings = article.blocks.flatMap(block =>
+  block.type === 'h2' ? [plainText(block.text)] : [],
+);
+const headingIds = uniqueSlugs(headings);
+const others = articles.filter(other => other.slug !== article.slug);
+---
+
+<Layout
+  title={article.metaTitle}
+  description={article.description}
+  path={`/sygnet/artykuly/${article.slug}/`}
+  current="artykuly"
+  bundles={['inner']}>
+  <PageHead
+    title={article.title}
+    lead={article.lead}
+    crumbs={[
+      { label: 'Strona główna', href: '/sygnet/' },
+      { label: 'Artykuły', href: '/sygnet/artykuly/' },
+      { label: area?.name ?? 'Artykuł' },
+    ]}
+  />
+  <div class="article">
+    <aside class="article-side" aria-label="O artykule">
+      <dl class="article-meta">
+        <div>
+          <dt>Autor</dt>
+          <dd>
+            {author?.name}, {author?.title}
+          </dd>
+        </div>
+        <div>
+          <dt>Opublikowano</dt>
+          <dd>
+            <time datetime={article.published}>{tie(formatLongDate(article.published))}</time>
+          </dd>
+        </div>
+        <div>
+          <dt>Czas czytania</dt>
+          <dd>{articleMinutes(article)} min</dd>
+        </div>
+        <div>
+          <dt>Obszar</dt>
+          <dd>
+            <a href={link(`/sygnet/specjalizacje/${article.areaSlug}/`)}>{area?.name}</a>
+          </dd>
+        </div>
+      </dl>
+      <nav class="contents" aria-label="Spis treści artykułu">
+        <h2>Spis treści</h2>
+        <ol>
+          {headings.map((text, index) => (
+            <li>
+              <a href={`#${headingIds[index]}`}>{text}</a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </aside>
+    <div class="article-main">
+      <ArticleBody blocks={article.blocks} headingIds={headingIds} />
+      <section class="article-end" aria-labelledby="h-inne">
+        <h2 id="h-inne">Inne artykuły</h2>
+        <ul>
+          {others.map(other => (
+            <li>
+              <a href={link(`/sygnet/artykuly/${other.slug}/`)}>{other.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  </div>
+  <Cta title="Masz podobną sprawę?" />
+</Layout>

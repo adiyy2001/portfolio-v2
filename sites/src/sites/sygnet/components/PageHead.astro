@@ -1,0 +1,37 @@
+---
+import { link } from '../../../shared/link';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  title: string;
+  lead?: string;
+  crumbs: Crumb[];
+}
+
+const { title, lead, crumbs } = Astro.props;
+---
+
+<header class="page-head">
+  <nav class="crumbs" aria-label="Okruszki">
+    <ol>
+      {crumbs.map((crumb, index) => (
+        <li>
+          {crumb.href ? (
+            <a href={link(crumb.href)}>{crumb.label}</a>
+          ) : (
+            <span aria-current={index === crumbs.length - 1 ? 'page' : undefined}>
+              {crumb.label}
+            </span>
+          )}
+        </li>
+      ))}
+    </ol>
+  </nav>
+  <h1>{title}</h1>
+  {lead && <p class="page-lead">{lead}</p>}
+  <slot />
+</header>

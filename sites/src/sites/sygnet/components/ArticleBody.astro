@@ -1,0 +1,90 @@
+---
+import type { Block } from '../data/articles/types';
+import { plainText } from '../lib/inline';
+import Rich from './Rich.astro';
+
+interface Props {
+  blocks: Block[];
+  headingIds: string[];
+}
+
+const { blocks, headingIds } = Astro.props;
+let headingIndex = -1;
+const items = blocks.map(block => {
+  if (block.type === 'h2') {
+    headingIndex += 1;
+    return { block, id: headingIds[headingIndex] };
+  }
+  return { block, id: undefined };
+});
+---
+
+<div class="prose">
+  {items.map(({ block, id }) => {
+    if (block.type === 'h2') return <h2 id={id}>{plainText(block.text)}</h2>;
+    if (block.type === 'p')
+      return (
+        <p>
+          <Rich text={block.text} />
+        </p>
+      );
+    if (block.type === 'ul')
+      return (
+        <ul>
+          {block.items.map(item => (
+            <li>
+              <Rich text={item} />
+            </li>
+          ))}
+        </ul>
+      );
+    if (block.type === 'ol')
+      return (
+        <ol>
+          {block.items.map(item => (
+            <li>
+              <Rich text={item} />
+            </li>
+          ))}
+        </ol>
+      );
+    if (block.type === 'note')
+      return (
+        <aside class="note">
+          <p class="note-title">{block.title}</p>
+          <p>
+            <Rich text={block.text} />
+          </p>
+        </aside>
+      );
+    return (
+      <table class="prose-table">
+        <caption>{block.caption}</caption>
+        <thead>
+          <tr>
+            {block.head.map(cell => (
+              <th scope="col">{cell}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {block.rows.map(row => (
+            <tr>
+              {row.map((cell, index) =>
+                index === 0 ? (
+                  <th scope="row">
+                    <Rich text={cell} />
+                  </th>
+                ) : (
+                  <td data-label={block.head[index]}>
+                    <Rich text={cell} />
+                  </td>
+                ),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  })}
+</div>

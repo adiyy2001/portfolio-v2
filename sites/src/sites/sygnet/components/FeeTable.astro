@@ -1,0 +1,44 @@
+---
+import { grossOf } from '../data/fees';
+import type { FixedFee } from '../data/fees';
+import { formatPln } from '../lib/money';
+import { tie } from '../lib/tie';
+
+interface Props {
+  fees: FixedFee[];
+  caption: string;
+  showArea?: boolean;
+}
+
+const { fees, caption } = Astro.props;
+---
+
+<table class="fees">
+  <caption>{caption}</caption>
+  <thead>
+    <tr>
+      <th scope="col">Czynność</th>
+      <th scope="col">Zakres</th>
+      <th scope="col" class="num">
+        Netto, jednorazowo
+      </th>
+      <th scope="col" class="num">
+        Brutto, jednorazowo
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {fees.map(fee => (
+      <tr>
+        <th scope="row">{fee.title}</th>
+        <td data-label="Zakres">{tie(fee.scope)}</td>
+        <td class="num" data-label="Netto, jednorazowo">
+          {formatPln(fee.netPln)}
+        </td>
+        <td class="num" data-label="Brutto, jednorazowo">
+          {formatPln(grossOf(fee.netPln))}
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>

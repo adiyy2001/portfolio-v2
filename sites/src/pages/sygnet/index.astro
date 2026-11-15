@@ -1,0 +1,194 @@
+---
+import { link } from '../../shared/link';
+import DocsTable from '../../sites/sygnet/components/DocsTable.astro';
+import HoursBlock from '../../sites/sygnet/components/HoursBlock.astro';
+import PartBack from '../../sites/sygnet/components/PartBack.astro';
+import PartHead from '../../sites/sygnet/components/PartHead.astro';
+import PersonCard from '../../sites/sygnet/components/PersonCard.astro';
+import ReachBlock from '../../sites/sygnet/components/ReachBlock.astro';
+import Steps from '../../sites/sygnet/components/Steps.astro';
+import { areas } from '../../sites/sygnet/data/areas';
+import { people, personBySlug } from '../../sites/sygnet/data/people';
+import { firm } from '../../sites/sygnet/data/site';
+import Layout from '../../sites/sygnet/Layout.astro';
+import { documentsLabel } from '../../sites/sygnet/lib/plural';
+import { tie } from '../../sites/sygnet/lib/tie';
+
+const firstTalk = `Pierwsza rozmowa: ${firm.firstTalkMinutes} minut, ${firm.firstTalkPricePln} zł.`;
+---
+
+<Layout
+  title="Sygnet. Kancelaria prawna, Wrocław, Śródmieście"
+  description={`Kancelaria prawna Sygnet we Wrocławiu: rodzina, spółki, spadki, umowy. Od ${firm.foundedYear} roku w jednym biurze w Śródmieściu.`}
+  path="/sygnet/"
+  bundles={['home']}>
+  <div class="sheet">
+    <div class="title">
+      <h1 class="sentence">
+        Prowadzimy sprawy rodzinne, spadkowe, spółek i umów. Każdy zapis tłumaczymy zwykłym
+        językiem, zanim go podpiszesz.
+      </h1>
+      <nav class="toc" id="spis" aria-label="Spis treści">
+        <p class="toc-label" aria-hidden="true">
+          Spis treści
+        </p>
+        <ol>
+          <li>
+            <a href="#zakres">
+              <span class="toc-no" aria-hidden="true">
+                §&nbsp;1
+              </span>
+              <span>Rodzina, spółki, spadki, umowy</span>
+            </a>
+          </li>
+          <li>
+            <a href="#przebieg">
+              <span class="toc-no" aria-hidden="true">
+                §&nbsp;2
+              </span>
+              <span>Zgłoszenie, dokumenty, opinia, sprawa</span>
+            </a>
+          </li>
+          <li>
+            <a href="#dokumenty">
+              <span class="toc-no" aria-hidden="true">
+                §&nbsp;3
+              </span>
+              <span>Co zabrać na spotkanie</span>
+            </a>
+          </li>
+          <li>
+            <a href="#zespol">
+              <span class="toc-no" aria-hidden="true">
+                §&nbsp;4
+              </span>
+              <span>Anna Wierzbicka i Marek Zawada</span>
+            </a>
+          </li>
+          <li>
+            <a href="#rozmowa">
+              <span class="toc-no" aria-hidden="true">
+                §&nbsp;5
+              </span>
+              <span>
+                Telefon, <span class="nb">e-mail</span>, formularz
+              </span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="contact">
+      <a class="contact-act" href="#rozmowa">
+        Umów rozmowę
+      </a>
+      <p class="contact-price">
+        {firstTalk} <a href={link('/sygnet/honorarium/')}>Jak liczymy honorarium</a>
+      </p>
+      <p class="contact-line">
+        <a class="contact-num" href={firm.phone.href}>
+          {firm.phone.display}
+        </a>
+      </p>
+      <address class="contact-hours">
+        <span>
+          {firm.hours.weekdaysLabel} {firm.hours.weekdaysRange}
+        </span>
+        <span>{tie(firm.address.street)}</span>
+        <span>
+          {firm.address.postcode} {firm.address.city}
+        </span>
+      </address>
+    </div>
+  </div>
+
+  <div class="parts">
+    <section class="part" id="zakres" aria-labelledby="h-zakres">
+      <PartHead
+        no={1}
+        id="h-zakres"
+        intro="Cztery obszary, jeden stół. Przy każdym zapisaliśmy, kto prowadzi sprawę i co zabrać na pierwsze spotkanie.">
+        Rodzina, spółki, spadki, umowy.
+      </PartHead>
+      <table class="index">
+        <caption>Obszary spraw</caption>
+        <thead>
+          <tr>
+            <th scope="col">Nr</th>
+            <th scope="col">Obszar</th>
+            <th scope="col">Czym się zajmujemy</th>
+            <th scope="col">Prowadzi</th>
+            <th scope="col">Co zabrać</th>
+          </tr>
+        </thead>
+        <tbody>
+          {areas.map(area => (
+            <tr>
+              <td class="ix-no" data-label="Nr">
+                {area.no}
+              </td>
+              <th scope="row">
+                <a href={link(`/sygnet/specjalizacje/${area.slug}/`)}>{area.name}</a>
+              </th>
+              <td data-label="Czym się zajmujemy">{tie(area.tableText)}</td>
+              <td data-label="Prowadzi">{personBySlug(area.leaderSlug)?.name}</td>
+              <td data-label="Co zabrać">
+                <a href="#dokumenty">{documentsLabel(area.documents.length)}</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <PartBack toc>
+        <a href={link('/sygnet/specjalizacje/')}>Wszystkie specjalizacje</a>
+      </PartBack>
+    </section>
+
+    <section class="part" id="przebieg" aria-labelledby="h-przebieg">
+      <PartHead
+        no={2}
+        id="h-przebieg"
+        intro="Cztery etapy. Po każdym wiesz, co już zrobiliśmy i co będzie dalej.">
+        Zgłoszenie, dokumenty, opinia, sprawa.
+      </PartHead>
+      <Steps />
+      <PartBack toc>
+        <a href={link('/sygnet/honorarium/')}>Honorarium</a>
+      </PartBack>
+    </section>
+
+    <section class="part" id="dokumenty" aria-labelledby="h-dokumenty">
+      <PartHead
+        no={3}
+        id="h-dokumenty"
+        intro="Dokumenty, o które zapytamy na pierwszej rozmowie, w podziale na rodzaj sprawy. Wydrukuj albo zrób zdjęcie.">
+        Co zabrać na spotkanie.
+      </PartHead>
+      <DocsTable />
+      <p class="docs-note">Oryginały i kopie. Jeśli czegoś brakuje, przyjdź mimo to.</p>
+      <PartBack toc />
+    </section>
+
+    <section class="part" id="zespol" aria-labelledby="h-zespol">
+      <PartHead no={4} id="h-zespol" intro="Dwie osoby, które odbierają telefon.">
+        Anna Wierzbicka i Marek Zawada.
+      </PartHead>
+      <div class="team">
+        {people.map(person => (
+          <PersonCard person={person} />
+        ))}
+        <HoursBlock />
+      </div>
+      <PartBack toc>
+        <a href={link('/sygnet/zespol/')}>Zespół i izby zawodowe</a>
+      </PartBack>
+    </section>
+
+    <section class="part" id="rozmowa" aria-labelledby="h-rozmowa">
+      <PartHead no={5} id="h-rozmowa" intro={`Odpowiadamy w ciągu jednego dnia roboczego.`}>
+        Telefon, <span class="nb">e-mail</span>, formularz.
+      </PartHead>
+      <ReachBlock />
+    </section>
+  </div>
+</Layout>
