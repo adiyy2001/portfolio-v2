@@ -14,7 +14,7 @@ const pl: Record<PackageId, PackageCopy> = {
   weekend: {
     name: 'Weekend we dwoje',
     tagline: 'Dwie doby i dwa śniadania przy długim stole.',
-    text: 'Dla dwojga, którzy chcą wyjechać na dwie noce i o niczym nie myśleć. Pakiet kosztuje tyle, ile śniadania dla dwóch osób przez dwa poranki, a miejsce w garażu przy placu Solnym i butelkę wina dokładamy.',
+    text: 'Dla dwojga na dwie noce. Pakiet kosztuje tyle, co śniadania dla dwóch osób przez dwa poranki. Miejsce w garażu przy placu Solnym i butelkę wina dokładamy.',
     includes: [
       'Śniadanie dla dwóch osób w obie doby',
       'Miejsce w garażu przy placu Solnym',
@@ -34,7 +34,7 @@ const pl: Record<PackageId, PackageCopy> = {
   week: {
     name: 'Tydzień w mieście',
     tagline: 'Od pięciu do siedmiu dób, śniadanie każdego ranka.',
-    text: 'Dla tych, którzy chcą poznać miasto wolno. Śniadanie dla dwóch osób czeka każdego ranka, a rzeczy do prania wracają w ciągu doby. Pakiet kosztuje mniej niż osobne śniadania za cały pobyt.',
+    text: 'Dla tych, którzy wolą poznawać miasto powoli. Śniadanie dla dwóch osób czeka każdego ranka, a rzeczy do prania wracają w ciągu doby. Pakiet kosztuje mniej niż osobne śniadania za cały pobyt.',
     includes: [
       'Śniadanie dla dwóch osób każdego ranka',
       'Jeden kosz prania, zwrot w ciągu doby',
@@ -47,10 +47,10 @@ const en: typeof pl = {
   weekend: {
     name: 'Weekend for two',
     tagline: 'Two nights and two breakfasts at the long table.',
-    text: 'For two people who want to go away for two nights and think about nothing. The package costs the same as breakfast for two on both mornings, and we add a parking place in the Salt Square garage and a bottle of wine.',
+    text: 'For two people, for two nights. The package costs the same as breakfast for two on both mornings. The parking place in the Plac Solny garage and a bottle of wine are on us.',
     includes: [
       'Breakfast for two on both mornings',
-      'A parking place in the Salt Square garage',
+      'A parking place in the Plac Solny garage',
       'A bottle of wine in the room on arrival',
     ],
   },
@@ -67,7 +67,7 @@ const en: typeof pl = {
   week: {
     name: 'A week in the city',
     tagline: 'Five to seven nights, breakfast every morning.',
-    text: 'For those who want to get to know the city slowly. Breakfast for two waits every morning, and your laundry comes back within a day. The package costs less than buying the breakfasts separately for the whole stay.',
+    text: 'For those who prefer to see the city slowly. Breakfast for two waits every morning, and your laundry comes back within a day. The package costs less than buying the breakfasts separately for the whole stay.',
     includes: [
       'Breakfast for two every morning',
       'One bag of laundry, returned within a day',

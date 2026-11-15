@@ -17,7 +17,7 @@ interface RoomCopy {
 const pl: Record<RoomId, RoomCopy> = {
   cichy: {
     name: 'Cichy',
-    card: 'Okna na oficynę, grube mury i łóżko na 160 cm. Do spania bez budzika.',
+    card: 'Okna na oficynę, grube mury i łóżko na 160 cm. W środku jest cicho.',
     view: 'Oficyna, cisza',
     alt: 'Pokój Cichy: drewniane łóżko, lampa podłogowa i biurko pod jasną ścianą',
     bed: width => `Jedno łóżko, ${width} cm`,
@@ -40,7 +40,7 @@ const pl: Record<RoomId, RoomCopy> = {
     intro: 'Pięć pokoi od podwórka, z kasztanem pod oknami.',
     paragraphs: [
       'Rano słońce wchodzi tu pierwsze, bo okna patrzą na wschód. Wieczorem w kasztanie pali się lampion, który powiesiła pani Halina z recepcji.',
-      'Dwa łóżka można przysunąć do siebie albo zostawić osobno. W pokoju jest stolik, dwa krzesła i szafa z prawdziwymi wieszakami, nie hakami przy drzwiach.',
+      'Dwa łóżka można przysunąć do siebie albo zostawić osobno. W pokoju jest stolik, dwa krzesła i szafa z wieszakami zamiast haków przy drzwiach.',
     ],
     features: ['Dwa łóżka, do złączenia', 'Prysznic', 'Stolik i dwa krzesła', 'Okna na wschód'],
     metaTitle: 'Pokój Dziedziniec. Brelok 1912, hotel butikowy we Wrocławiu',
@@ -69,7 +69,7 @@ const pl: Record<RoomId, RoomCopy> = {
     view: 'Wieże kościołów',
     alt: 'Pokój Apartament: sala z dwoma wysokimi oknami, żyrandolem i łóżkiem w głębi',
     bed: width => `Łóżko ${width} cm i sofa w salonie`,
-    intro: 'Jedyny taki w kamienicy: salon i sypialnia, razem 75 metrów.',
+    intro: 'Salon i sypialnia, razem 75 metrów. Drugiego takiego apartamentu w kamienicy nie ma.',
     paragraphs: [
       'Salon ma dwa wysokie okna, żyrandol i stół, przy którym zmieści się cztery osoby. Z okien widać wieże kościołów, a po południu na ścianie leży światło odbite od dachów.',
       'Sypialnia jest osobno, za drzwiami z szybą. Sofa w salonie rozkłada się dla trzeciej osoby, a dla czwartej jest dostawka.',
@@ -84,7 +84,7 @@ const pl: Record<RoomId, RoomCopy> = {
 const en: Record<RoomId, RoomCopy> = {
   cichy: {
     name: 'Quiet',
-    card: 'Windows onto the back wing, thick walls and a 160 cm bed. Made for sleeping without an alarm.',
+    card: 'Windows onto the back wing, thick walls and a 160 cm bed. It is quiet inside.',
     view: 'Back wing, silence',
     alt: 'The Quiet room: a wooden bed, a floor lamp and a desk against a pale wall',
     bed: width => `One bed, ${width} cm`,
@@ -112,7 +112,7 @@ const en: Record<RoomId, RoomCopy> = {
     intro: 'Five rooms on the yard side, with a chestnut tree under the windows.',
     paragraphs: [
       'The sun reaches these rooms first, because the windows face east. In the evening a lantern burns in the chestnut tree, hung there by Halina from reception.',
-      'The two beds can be pushed together or left apart. The room has a small table, two chairs and a wardrobe with real hangers instead of hooks by the door.',
+      'The two beds can be pushed together or left apart. The room has a small table, two chairs and a wardrobe with hangers instead of hooks by the door.',
     ],
     features: ['Two beds, can be joined', 'Shower', 'Table and two chairs', 'East-facing windows'],
     metaTitle: 'The Courtyard room. Brelok 1912, boutique hotel in Wrocław',
@@ -142,7 +142,7 @@ const en: Record<RoomId, RoomCopy> = {
     alt: 'The Apartment: a drawing room with two tall windows, a chandelier and a bed in the far corner',
     bed: width => `A ${width} cm bed and a sofa bed in the sitting room`,
     intro:
-      'The only one of its kind in the house: a sitting room and a bedroom, 75 square metres together.',
+      'A sitting room and a bedroom, 75 square metres in all. The house has no second apartment like it.',
     paragraphs: [
       'The sitting room has two tall windows, a chandelier and a table that seats four. You can see the church towers from the windows, and in the afternoon light bounced off the roofs lies on the wall.',
       'The bedroom is separate, behind a glazed door. The sofa in the sitting room opens into a bed for a third guest, and a fourth can have an extra bed.',
