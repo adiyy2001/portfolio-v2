@@ -1,0 +1,252 @@
+.cart,
+.checkout,
+.sub {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 30px 56px;
+  align-items: start;
+  padding: 10px var(--pad) 70px;
+}
+.cart-loading {
+  padding: 30px var(--pad);
+  font-size: 20px;
+}
+.cart__side,
+.checkout__side,
+.sub__side {
+  padding: 24px 24px 22px;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  background: var(--card) var(--paper-light) center / 900px auto;
+  box-shadow: 6px 9px 0 rgba(36, 22, 13, 0.24);
+}
+.cart__side h2,
+.checkout__side h2,
+.sub__side h2 {
+  margin-bottom: 14px;
+  font-size: 26px;
+  font-weight: 400;
+}
+.cart__small {
+  margin: 14px 0 16px;
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.cart__small a {
+  border-bottom: 1px solid var(--ink);
+}
+.cart__back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 8px;
+  border-bottom: 2px solid var(--ink);
+}
+.lines {
+  display: flex;
+  flex-direction: column;
+}
+.line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 18px;
+  padding: 20px 0;
+  border-bottom: 2px dashed rgba(36, 22, 13, 0.5);
+}
+.line:first-child {
+  padding-top: 0;
+}
+.line__dots {
+  grid-column: 1 / -1;
+}
+.line__dots .dots {
+  width: 120px;
+}
+.line__name {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+.line__name a {
+  display: inline-block;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+.line__name a:hover {
+  border-bottom-color: var(--ink);
+}
+.line__opts {
+  font-size: 16px;
+}
+.line__unit {
+  font-size: 15px;
+  color: var(--ink-soft);
+}
+.line__ctl {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 20px;
+  margin-top: 10px;
+}
+.line__total {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  font-size: 24px;
+  white-space: nowrap;
+}
+.lines--compact .line {
+  padding: 14px 0;
+}
+.lines--compact .line__name {
+  font-size: 22px;
+}
+.lines--compact .line__total {
+  font-size: 19px;
+}
+.lines--compact .line__ctl,
+.lines--compact .line__dots {
+  display: none;
+}
+.totals {
+  display: flex;
+  flex-direction: column;
+}
+.totals div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(36, 22, 13, 0.4);
+  font-size: 16px;
+}
+.totals dd {
+  text-align: right;
+}
+.totals .totals__sum {
+  padding-top: 14px;
+  border-bottom: 0;
+  font-size: 19px;
+}
+.totals .totals__sum dd {
+  font-size: 26px;
+}
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 30px var(--pad) 80px;
+  font-size: 18px;
+}
+.cart-empty__big {
+  font-size: 34px;
+}
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-top: 8px;
+}
+.checkout__go {
+  margin-top: 6px;
+}
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 640px;
+}
+.contact-form .btn {
+  align-self: flex-start;
+}
+.sub-done {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 640px;
+}
+.sub-done .notice {
+  width: 100%;
+}
+.receipt {
+  max-width: 680px;
+  margin: 10px var(--pad) 80px;
+  padding: 34px 38px 30px;
+  background: var(--card) var(--paper-light) center / 1000px auto;
+  filter: drop-shadow(6px 10px 8px rgba(40, 20, 6, 0.38));
+  clip-path: polygon(
+    0.5% 1%,
+    18% 0%,
+    44% 1%,
+    72% 0%,
+    99.5% 1%,
+    100% 34%,
+    99% 66%,
+    100% 99%,
+    78% 100%,
+    52% 99%,
+    26% 100%,
+    0.6% 99%,
+    0% 64%,
+    0.5% 32%
+  );
+}
+.receipt h2 {
+  margin-bottom: 18px;
+  font-size: 26px;
+  font-weight: 400;
+}
+.receipt__ref {
+  display: inline-block;
+  padding: 2px 10px;
+  border: 2px solid var(--ink);
+  letter-spacing: 1px;
+}
+.receipt__facts div {
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(36, 22, 13, 0.5);
+}
+.receipt__facts dt {
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+.receipt__lines {
+  margin: 18px 0 8px;
+}
+.receipt__lines li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+}
+.receipt__sum {
+  margin: 10px 0 22px;
+  font-size: 20px;
+}
+.receipt__sum strong {
+  font-size: 28px;
+  font-weight: 400;
+}
+@media (max-width: 1100px) {
+  .cart,
+  .checkout,
+  .sub {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 699px) {
+  .cart__side,
+  .checkout__side,
+  .sub__side {
+    padding: 20px 16px;
+  }
+  .line__name {
+    font-size: 24px;
+  }
+  .receipt {
+    padding: 28px 20px 26px;
+  }
+}
