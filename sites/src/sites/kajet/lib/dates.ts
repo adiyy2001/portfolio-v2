@@ -122,8 +122,14 @@ export const isWorkday = (date: Date): boolean => {
 };
 
 export const nextWorkday = (date: Date): Date => {
-  let cursor = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59);
-  while (!isWorkday(cursor)) cursor = addDays(cursor, 1);
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  let cursor = new Date(date);
+  while (!isWorkday(cursor)) {
+    const next = addDays(cursor, 1);
+    cursor = new Date(next.getFullYear(), next.getMonth(), next.getDate(), hours, minutes, seconds);
+  }
   return cursor;
 };
 

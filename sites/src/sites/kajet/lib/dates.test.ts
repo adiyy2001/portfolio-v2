@@ -37,6 +37,23 @@ describe('deadlines', () => {
     expect(dayMonthYear(date)).toBe('pn 16.11.2026');
   });
 
+  it('keeps the end of the day after shifting a deadline', () => {
+    const date = deadlineDate(2026, 10, 15);
+    expect([date.getHours(), date.getMinutes(), date.getSeconds()]).toEqual([23, 59, 59]);
+  });
+
+  it('shows a shifted deadline as one day ahead on the day before', () => {
+    const date = deadlineDate(2026, 10, 15);
+    expect(inDaysLabel(date, new Date(2026, 10, 15, 10, 0))).toBe('za 1 dzień');
+  });
+
+  it('shows a shifted deadline as today and still ahead at 10:00 on the due day', () => {
+    const date = deadlineDate(2026, 10, 15);
+    const now = new Date(2026, 10, 16, 10, 0);
+    expect(inDaysLabel(date, now)).toBe('dziś');
+    expect(date.getTime()).toBeGreaterThan(now.getTime());
+  });
+
   it('keeps a working day as it is', () => {
     expect(deadlineDate(2026, 10, 20).getDate()).toBe(20);
   });
