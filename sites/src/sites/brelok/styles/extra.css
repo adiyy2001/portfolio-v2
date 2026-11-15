@@ -1323,3 +1323,6 @@ html.js .noscript-note {
 .contact-list .prose {
   margin-top: 26px;
 }
+.credits-wrap + .lead {
+  margin-top: 30px;
+}

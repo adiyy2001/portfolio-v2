@@ -1,0 +1,59 @@
+---
+import { link } from '../../../shared/link';
+import Panel from '../components/Panel.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { creditsText, photoCredits } from '../content/credits';
+import { roomCopy } from '../content/rooms';
+import { pagePath } from '../i18n/lang';
+import type { Lang } from '../i18n/lang';
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = creditsText[lang];
+---
+
+<Layout lang={lang} pageKey="credits" title={text.metaTitle} description={text.metaDescription}>
+  <Panel labelledby="credits-h" first>
+    <SectionHead id="credits-h" level="h1">
+      {text.heading}
+    </SectionHead>
+    <p class="lead">{text.lead}</p>
+    <div class="credits-wrap">
+      <table class="credits">
+        <caption class="sr">{text.caption}</caption>
+        <thead>
+          <tr>
+            <th scope="col">{text.columns.room}</th>
+            <th scope="col">{text.columns.source}</th>
+            <th scope="col">{text.columns.author}</th>
+            <th scope="col">{text.columns.licence}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {photoCredits.map(item => (
+            <tr>
+              <th scope="row">{roomCopy[lang][item.id].name}</th>
+              <td>
+                <a href={item.source}>{item.title}</a>
+              </td>
+              <td>{item.author}</td>
+              <td>
+                <a href={item.licenceUrl}>{item.licence}</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="lead">{text.rest}</p>
+    <p class="actions">
+      <a class="ticket" href={link(pagePath('home', lang))}>
+        {text.back}
+      </a>
+    </p>
+  </Panel>
+</Layout>
