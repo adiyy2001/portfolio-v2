@@ -73,11 +73,6 @@
   border-radius: 0;
   cursor: pointer;
 }
-.hdr__tools {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
 
 main:focus {
   outline: none;
