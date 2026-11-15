@@ -1,0 +1,36 @@
+---
+import { link } from '../../shared/link';
+import { navItems, site } from './data';
+
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+---
+
+<header class="site-header">
+  <a class="brand" href={link(site.home)} aria-current={path === site.home ? 'page' : undefined}>
+    {site.name}
+  </a>
+  <details class="menu" data-menu>
+    <summary>Menu</summary>
+    <nav class="menu__panel" aria-label="Główna">
+      <ul>
+        {navItems.map(item => (
+          <li>
+            <a href={link(item.path)} aria-current={item.path === path ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </details>
+</header>
+
+<script>
+  import { initMenu } from './menu';
+
+  initMenu();
+</script>

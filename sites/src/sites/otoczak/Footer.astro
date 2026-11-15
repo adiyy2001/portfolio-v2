@@ -1,0 +1,36 @@
+---
+import SampleNote from '../../shared/SampleNote.astro';
+import { link } from '../../shared/link';
+import { footerItems, hours, site } from './data';
+---
+
+<footer class="site-footer">
+  <div class="site-footer__grid">
+    <div class="site-footer__where">
+      <p class="site-footer__name">{site.name}</p>
+      <address>
+        {site.practice}
+        <br />
+        {site.street}
+        <br />
+        {site.postalCity}, {site.district}
+      </address>
+      <p>
+        <a href={site.phoneHref}>{site.phone}</a>
+        <br />
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      <p>{hours.prose}</p>
+    </div>
+    <nav class="site-footer__nav" aria-label="Wszystkie strony">
+      <ul>
+        {footerItems.map(item => (
+          <li>
+            <a href={link(item.path)}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+  <SampleNote name={site.name} lang="pl" />
+</footer>

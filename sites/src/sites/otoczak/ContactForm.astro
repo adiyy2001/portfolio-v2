@@ -1,0 +1,122 @@
+---
+import { link } from '../../shared/link';
+import { contactPlaces, contactWho, site } from './data';
+---
+
+<form class="form" method="post" action="#formularz" novalidate data-form>
+  <p class="form__status" role="status" data-form-status></p>
+
+  <div class="field">
+    <label class="field__label" for="contact-name">
+      Imię albo pseudonim
+    </label>
+    <input
+      id="contact-name"
+      name="name"
+      type="text"
+      autocomplete="given-name"
+      required
+      aria-describedby="contact-name-error"
+    />
+    <p class="field__error" id="contact-name-error" data-error="name" hidden></p>
+  </div>
+
+  <div class="field">
+    <label class="field__label" for="contact-email">
+      E-mail
+    </label>
+    <input
+      id="contact-email"
+      name="email"
+      type="email"
+      autocomplete="email"
+      inputmode="email"
+      spellcheck="false"
+      required
+      aria-describedby="contact-email-hint contact-email-error"
+    />
+    <p class="field__hint" id="contact-email-hint">
+      Na ten adres odpiszę.
+    </p>
+    <p class="field__error" id="contact-email-error" data-error="email" hidden></p>
+  </div>
+
+  <fieldset class="field">
+    <legend class="field__label">Dla kogo szukasz spotkania?</legend>
+    <div class="choices">
+      {contactWho.map((option, index) => (
+        <label class="choice">
+          <input type="radio" name="who" value={option.value} checked={index === 0} />
+          <span>{option.label}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <fieldset class="field">
+    <legend class="field__label">Gdzie wolisz się spotkać?</legend>
+    <div class="choices">
+      {contactPlaces.map((option, index) => (
+        <label class="choice">
+          <input type="radio" name="place" value={option.value} checked={index === 0} />
+          <span>{option.label}</span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+
+  <div class="field">
+    <label class="field__label" for="contact-message">
+      Kilka zdań o tym, z czym przychodzisz
+    </label>
+    <textarea
+      id="contact-message"
+      name="message"
+      rows="5"
+      required
+      aria-describedby="contact-message-hint contact-message-error"></textarea>
+    <p class="field__hint" id="contact-message-hint">
+      Nie musisz opisywać wszystkiego. Resztę zostawmy na spotkanie.
+    </p>
+    <p class="field__error" id="contact-message-error" data-error="message" hidden></p>
+  </div>
+
+  <div class="field">
+    <label class="check" for="contact-consent">
+      <input
+        id="contact-consent"
+        name="consent"
+        type="checkbox"
+        required
+        aria-describedby="contact-consent-error"
+      />
+      <span>
+        Zgadzam się na przetwarzanie moich danych, także tych o zdrowiu, jeśli o nich napiszę, żeby
+        odpowiedzieć na tę wiadomość.{' '}
+        <a href={link(site.privacy)} target="_blank" rel="noopener">
+          Co dzieje się z danymi<span class="visually-hidden"> (otwiera się w nowej karcie)</span>
+        </a>
+      </span>
+    </label>
+    <p class="field__error" id="contact-consent-error" data-error="consent" hidden></p>
+  </div>
+
+  <button class="button" type="submit">
+    Wyślij wiadomość
+  </button>
+</form>
+
+<div class="sent" tabindex="-1" hidden data-form-success>
+  <h2 class="sent__title">Wiadomość jest gotowa, ale nie została wysłana</h2>
+  <p>To strona przykładowa, więc nic nie zostało wysłane i żadne dane nigdzie nie trafiły.</p>
+  <p>W prawdziwym gabinecie odpowiedź przychodzi w ciągu {site.replyDays}.</p>
+  <button class="button button--quiet" type="button" data-form-reset>
+    Wypełnij formularz ponownie
+  </button>
+</div>
+
+<script>
+  import { initForm } from './form';
+
+  initForm();
+</script>

@@ -1,0 +1,104 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/otoczak/Layout.astro';
+import PageHead from '../../../sites/otoczak/PageHead.astro';
+import Section from '../../../sites/otoczak/Section.astro';
+import {
+  cancellation,
+  hours,
+  lateFee,
+  meetingLine,
+  payment,
+  services,
+  site,
+} from '../../../sites/otoczak/data';
+import { capitalize, formatPrice } from '../../../sites/otoczak/format';
+---
+
+<Layout
+  title="Cennik | Otoczak"
+  description="Ceny spotkań w gabinecie Otoczak: terapia indywidualna, dla par, dla młodzieży i konsultacje dla rodziców. Zasady płatności i odwoływania terminów."
+  path="/otoczak/cennik/">
+  <PageHead
+    title="Ile to kosztuje?"
+    lead="Jedna lista cen dla wszystkich. Pierwsze spotkanie kosztuje tyle samo, co każde kolejne w tej samej formie."
+  />
+
+  <Section id="ceny" title="Ile kosztuje spotkanie?">
+    <div class="table-wrap">
+      <table class="price-table">
+        <caption>Cena za jedno spotkanie</caption>
+        <thead>
+          <tr>
+            <th scope="col">Forma</th>
+            <th scope="col">Dla kogo</th>
+            <th scope="col">Czas</th>
+            <th scope="col">Cena</th>
+          </tr>
+        </thead>
+        <tbody>
+          {services.map(service => (
+            <tr>
+              <th scope="row">{service.name}</th>
+              <td data-label="Dla kogo">{capitalize(service.audience)}</td>
+              <td data-label="Czas">{service.minutes} min</td>
+              <td data-label="Cena" class="num">
+                {formatPrice(service.price)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <Section id="pierwsze" title="Ile kosztuje pierwsze spotkanie?">
+    <p>
+      Tyle, co każde następne w tej samej formie. Nie ma osobnej opłaty za pierwszą rozmowę ani za
+      rozmowę telefoniczną, na której umawiamy termin.
+    </p>
+    <ul>
+      {services.map(service => (
+        <li>
+          {service.name}: {meetingLine(service)}
+        </li>
+      ))}
+    </ul>
+    <p>
+      W terapii młodzieży pierwsze spotkanie zaczyna się od kilku minut z rodzicem. Te minuty
+      mieszczą się w czasie spotkania i nie kosztują dodatkowo.
+    </p>
+  </Section>
+
+  <Section id="platnosc" title="Jak się płaci?">
+    <p>
+      Płacisz po spotkaniu, {payment.methods}. Rachunek wystawiamy na prośbę. Przy spotkaniach
+      online płacisz {payment.online}.
+    </p>
+    <p>
+      Gabinet jest prywatny i nie ma umowy z NFZ. Skierowanie nie jest potrzebne, ale NFZ też nie
+      zwraca kosztów spotkań.
+    </p>
+  </Section>
+
+  <Section id="odwolanie" title="A jeśli nie mogę przyjść?">
+    <p>
+      Termin można odwołać bez opłaty {cancellation.freeProse}. Jeśli odwołujesz później albo nie
+      przychodzisz, pobieramy połowę ceny spotkania:
+    </p>
+    <ul>
+      {services.map(service => (
+        <li>
+          {service.name}: {formatPrice(lateFee(service))}
+        </li>
+      ))}
+    </ul>
+    <p>
+      Gdy zachorujesz nagle, napisz albo zadzwoń, jak tylko możesz, a opłaty nie będzie. Telefon
+      odbieramy {hours.inline}.
+    </p>
+    <p>
+      <a href={link(site.contact)}>Umów termin</a>
+    </p>
+  </Section>
+</Layout>

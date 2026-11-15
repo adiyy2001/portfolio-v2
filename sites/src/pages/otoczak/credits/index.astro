@@ -1,0 +1,54 @@
+---
+import Layout from '../../../sites/otoczak/Layout.astro';
+import PageHead from '../../../sites/otoczak/PageHead.astro';
+import Section from '../../../sites/otoczak/Section.astro';
+import { site } from '../../../sites/otoczak/data';
+---
+
+<Layout
+  title="Skąd kamień i litery | Otoczak"
+  description="Źródła, autorzy i licencje zdjęcia kamienia, kroju pisma Newsreader oraz pozostałych elementów strony Otoczak."
+  path={site.credits}>
+  <PageHead
+    title="Skąd pochodzą kamień i litery?"
+    lead="Wszystko, co na tej stronie nie jest tekstem, ma tu swoje źródło i licencję."
+  />
+
+  <Section id="kamien" title="Skąd jest kamień?">
+    <p>
+      Zdjęcie wapienia na stronie głównej pochodzi z pliku „Sawn limestone texture” w Wikimedia
+      Commons. Autor: Titus Tscharntke. Licencja: domena publiczna.
+    </p>
+    <p>
+      <a href="https://commons.wikimedia.org/wiki/File:Sawn_limestone_texture.jpg">
+        Strona pliku w Wikimedia Commons
+      </a>
+    </p>
+    <p>
+      Zmiany: kadr, tonacja zmieniona na jasną, ciepłą szarość, rozmiar 1000 na 1260 pikseli,
+      nieregularna maska z miękkim cieniem i format WebP.
+    </p>
+  </Section>
+
+  <Section id="litery" title="Jakim krojem jest to napisane?">
+    <p>
+      Krój Newsreader, licencja SIL Open Font License 1.1. Pliki WOFF2 leżą na tej samej stronie,
+      nie są pobierane od zewnętrznej firmy.
+    </p>
+    <p>
+      <a href="https://fonts.google.com/specimen/Newsreader">Newsreader w Google Fonts</a>
+    </p>
+  </Section>
+
+  <Section id="reszta" title="A co jest własne?">
+    <p>
+      Delikatna faktura tła to filtr SVG napisany na potrzeby tej strony. Ikona karty i obraz
+      pokazywany przy udostępnianiu strony też są własne, złożone z kamiennego koloru i tego samego
+      kroju.
+    </p>
+    <p>
+      Otoczak to zmyślona firma, a Zofia Olszewska i Paweł Gajewski to zmyślone osoby. Adres,
+      telefon i adres e-mail są przykładowe.
+    </p>
+  </Section>
+</Layout>
