@@ -1,0 +1,41 @@
+---
+import { link } from '../../../shared/link';
+import type { Offer } from '../data/offers';
+import { factsLine, formatPrice, formatPricePerM2, offerPath, placeLine } from '../lib/format';
+import { offerImageSet } from '../lib/images';
+
+interface Props {
+  offer: Offer;
+  sizes: string;
+  eager?: boolean;
+}
+
+const { offer, sizes, eager = false } = Astro.props;
+const images = offerImageSet(offer.image);
+---
+
+<figure class:list={['lot', `lot-${offer.slug}`]}>
+  <div class="shot">
+    <img
+      src={images.src}
+      srcset={images.srcset}
+      sizes={sizes}
+      width={offer.image.width}
+      height={offer.image.height}
+      alt=""
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
+      decoding={eager ? 'sync' : 'async'}
+      style={offer.image.position ? `object-position:${offer.image.position}` : undefined}
+    />
+  </div>
+  <figcaption>
+    <span class="price">{formatPrice(offer.priceZl)}</span>
+    <span class="addr">
+      <a href={link(offerPath(offer))}>{placeLine(offer)}</a>
+    </span>
+    <span class="info">
+      Nr {offer.number}. {factsLine(offer)}. {formatPricePerM2(offer)}
+    </span>
+  </figcaption>
+</figure>

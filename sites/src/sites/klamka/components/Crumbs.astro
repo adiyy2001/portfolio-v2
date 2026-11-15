@@ -1,0 +1,28 @@
+---
+import { link } from '../../../shared/link';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="crumbs" aria-label="Ścieżka">
+  <ol>
+    {items.map(item => (
+      <li>
+        {item.href ? (
+          <a href={link(item.href)}>{item.label}</a>
+        ) : (
+          <span aria-current="page">{item.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
