@@ -1,0 +1,73 @@
+---
+import { link } from '../../../shared/link';
+import Panel from '../components/Panel.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { breakfastText } from '../content/breakfast';
+import { pagePath } from '../i18n/lang';
+import type { Lang } from '../i18n/lang';
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = breakfastText[lang];
+---
+
+<Layout lang={lang} pageKey="breakfast" title={text.metaTitle} description={text.metaDescription}>
+  <Panel labelledby="breakfast-h" first>
+    <SectionHead id="breakfast-h" level="h1">
+      {text.heading}
+    </SectionHead>
+    <p class="lead">{text.lead}</p>
+    <div class="menu-board">
+      <dl class="leaders">
+        <div>
+          <dt>{text.leaders.hours}</dt>
+          <dd>{text.hoursValue}</dd>
+        </div>
+        <div>
+          <dt>{text.leaders.price}</dt>
+          <dd>{text.priceValue}</dd>
+        </div>
+        <div>
+          <dt>{text.leaders.place}</dt>
+          <dd>{text.placeValue}</dd>
+        </div>
+      </dl>
+    </div>
+    <h2 class="sub">{text.menuHeading}</h2>
+    <div class="menu-board">
+      <dl class="leaders">
+        {text.menu.map(item => (
+          <div>
+            <dt>{item.dish}</dt>
+            <dd>{item.note}</dd>
+          </div>
+        ))}
+      </dl>
+      <p class="prose-center">{text.menuNote}</p>
+    </div>
+    <h2 class="sub">{text.roomHeading}</h2>
+    <div class="prose">
+      <p>{text.roomText}</p>
+    </div>
+    <h2 class="sub">{text.dietHeading}</h2>
+    <div class="prose">
+      <p>{text.dietText}</p>
+    </div>
+    <h2 class="sub">{text.includedHeading}</h2>
+    <div class="prose">
+      <p>{text.includedText}</p>
+    </div>
+    <p class="actions">
+      <a class="ticket" href={link(pagePath('packages', lang))}>
+        {text.ctaPackages}
+      </a>
+      <a class="ticket" href={link(pagePath('booking', lang))}>
+        {text.ctaBooking}
+      </a>
+    </p>
+  </Panel>
+</Layout>

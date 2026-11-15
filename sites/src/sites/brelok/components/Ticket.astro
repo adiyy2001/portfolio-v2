@@ -1,0 +1,19 @@
+---
+interface Props {
+  href: string;
+  rev?: boolean;
+  class?: string;
+}
+
+const { href, rev = false, class: className } = Astro.props;
+---
+
+<a class:list={['ticket', { rev }, className]} href={href}>
+  <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+    <use href="#fz"></use>
+  </svg>
+  <slot />
+  <svg viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+    <use href="#fz"></use>
+  </svg>
+</a>

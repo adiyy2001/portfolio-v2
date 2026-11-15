@@ -1,0 +1,12 @@
+---
+import facade from '../art/facade.svg?raw';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const markup = facade.replace('{{TITLE}}', title);
+---
+
+<Fragment set:html={markup} />

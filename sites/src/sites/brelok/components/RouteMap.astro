@@ -1,0 +1,13 @@
+---
+import route from '../art/route.svg?raw';
+
+interface Props {
+  label: string;
+  market: string;
+}
+
+const { label, market } = Astro.props;
+const markup = route.replace('{{LABEL}}', label).replace('{{MARKET}}', market);
+---
+
+<Fragment set:html={markup} />

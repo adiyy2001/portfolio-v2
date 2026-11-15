@@ -1,0 +1,21 @@
+---
+interface Props {
+  id: string;
+  level?: 'h1' | 'h2';
+}
+
+const { id, level = 'h2' } = Astro.props;
+const Heading = level;
+---
+
+<div class="head">
+  <span class="mono brand" aria-hidden="true">
+    B
+  </span>
+  <Heading id={id}>
+    <slot />
+  </Heading>
+  <svg class="flo" viewBox="0 0 260 36" aria-hidden="true" focusable="false">
+    <use href="#fl"></use>
+  </svg>
+</div>

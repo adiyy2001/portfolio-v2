@@ -1,0 +1,21 @@
+---
+import Corners from './Corners.astro';
+
+interface Props {
+  id?: string;
+  labelledby: string;
+  first?: boolean;
+  innerClass?: string;
+}
+
+const { id, labelledby, first = false, innerClass } = Astro.props;
+---
+
+<section class:list={['sec', { first }]} id={id} aria-labelledby={labelledby}>
+  <div class="panel">
+    <Corners />
+    <div class:list={['panel-in', innerClass]}>
+      <slot />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+---
+import Panel from '../components/Panel.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { bookingText } from '../content/booking';
+import type { Lang } from '../i18n/lang';
+import { BookingFlow } from '../islands/BookingFlow';
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = bookingText[lang];
+---
+
+<Layout lang={lang} pageKey="booking" title={text.metaTitle} description={text.metaDescription}>
+  <Panel labelledby="booking-h" first>
+    <SectionHead id="booking-h" level="h1">
+      {text.heading}
+    </SectionHead>
+    <p class="lead">{text.lead}</p>
+    <p class="noscript-note">{text.noScript}</p>
+    <BookingFlow client:only="preact" lang={lang} />
+  </Panel>
+</Layout>
