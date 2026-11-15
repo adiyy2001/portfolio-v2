@@ -84,7 +84,7 @@ export const coffees: Coffee[] = [
       'Rodzina Cabrera uprawia kawę na zboczach nad Pitalito i suszy ją na tarasach za domem. Wracam do niej trzeci rok z rzędu.',
       'Stopień 6 to środek skali. Jest już słodycz karmelu, a jasna kwasowość jeszcze nie zniknęła.',
     ],
-    tip: 'W kawiarce mielimy trochę grubiej niż na espresso i zdejmujemy z ognia, gdy tylko zacznie bulgotać.',
+    tip: 'W kawiarce mielę trochę grubiej niż na espresso i zdejmuję z ognia, gdy tylko zacznie bulgotać.',
   },
   {
     id: 'kolumbia-narino',

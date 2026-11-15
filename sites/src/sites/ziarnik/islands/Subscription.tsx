@@ -75,7 +75,7 @@ export const Subscription = () => {
           </p>
           <p>
             Tak wyglądałby abonament: {done.bags} {pluralPl(done.bags, 'worek', 'worki', 'worków')}{' '}
-            tygodniowo, {subscriptionCoffeeLabel(done.coffee).toLowerCase()}, mielenie:{' '}
+            tygodniowo, kawa: {subscriptionCoffeeLabel(done.coffee)}, mielenie:{' '}
             {grindLabels[done.grind as keyof typeof grindLabels].toLowerCase()}, odbiór w {day} w{' '}
             {business.street}, {formatPln(finalQuote.weeklyGr, true)} tygodniowo, płatne przy
             odbiorze.

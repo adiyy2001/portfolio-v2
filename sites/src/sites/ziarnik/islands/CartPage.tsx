@@ -1,13 +1,14 @@
 import { link } from '../../../shared/link';
 import { CartLineRow, EmptyCart, TotalsList } from '../components/CartParts';
-import { cartLines, cartReady, cartTotals, useCartInit } from '../store/cart-store';
+import { cartLines, cartReady, cartTotals, useCartInit, useHydrated } from '../store/cart-store';
 
 export const CartPage = () => {
   useCartInit();
+  const hydrated = useHydrated();
   const totals = cartTotals.value;
   const lines = cartLines.value;
 
-  if (!cartReady.value) return <p class="cart-loading">Wczytuję koszyk.</p>;
+  if (!hydrated || !cartReady.value) return <p class="cart-loading">Wczytuję koszyk.</p>;
 
   if (totals.itemCount === 0) {
     return (

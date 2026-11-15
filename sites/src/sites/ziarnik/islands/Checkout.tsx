@@ -17,12 +17,20 @@ import {
 import type { CheckoutErrors, CheckoutField, CheckoutValues } from '../lib/validation';
 import { CartLineRow, EmptyCart, TotalsList } from '../components/CartParts';
 import { ErrorSummary, SelectField, TextAreaField, TextField } from '../components/FormParts';
-import { cart, cartLines, cartReady, cartTotals, useCartInit } from '../store/cart-store';
+import {
+  cart,
+  cartLines,
+  cartReady,
+  cartTotals,
+  useCartInit,
+  useHydrated,
+} from '../store/cart-store';
 
 const noChoice = { value: '', label: 'Wybierz' };
 
 export const Checkout = () => {
   useCartInit();
+  const hydrated = useHydrated();
   const [values, setValues] = useState<CheckoutValues>(emptyCheckout);
   const [errors, setErrors] = useState<CheckoutErrors>({});
   const [attempt, setAttempt] = useState(0);
@@ -32,7 +40,7 @@ export const Checkout = () => {
     setDays(pickupDays(warsawClock(new Date())));
   }, []);
 
-  if (!cartReady.value) return <p class="cart-loading">Wczytuję koszyk.</p>;
+  if (!hydrated || !cartReady.value) return <p class="cart-loading">Wczytuję koszyk.</p>;
 
   const totals = cartTotals.value;
   if (totals.itemCount === 0) {

@@ -1,10 +1,11 @@
 import { link } from '../../../shared/link';
 import { pluralPl } from '../lib/plural';
-import { cartTotals, useCartInit } from '../store/cart-store';
+import { cartTotals, useCartInit, useHydrated } from '../store/cart-store';
 
 export const CartHeader = () => {
   useCartInit();
-  const count = cartTotals.value.itemCount;
+  const hydrated = useHydrated();
+  const count = hydrated ? cartTotals.value.itemCount : 0;
   const label = `${count} ${pluralPl(count, 'worek', 'worki', 'worków')}`;
   return (
     <a class="cart-btn" href={link('/ziarnik/koszyk/')} aria-label={`Koszyk, ${label}`}>

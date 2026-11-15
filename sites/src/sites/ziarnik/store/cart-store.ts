@@ -1,5 +1,5 @@
 import { computed, signal } from '@preact/signals';
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 import {
   addLine,
   cartStorageKey,
@@ -46,6 +46,14 @@ export const useCartInit = (): void => {
   useEffect(() => {
     initCart();
   }, []);
+};
+
+export const useHydrated = (): boolean => {
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
+    setHydrated(true);
+  }, []);
+  return hydrated;
 };
 
 export const addToCart = (line: CartLine): void => {

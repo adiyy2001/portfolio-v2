@@ -170,7 +170,19 @@ const build = (element: HTMLElement, text: string): void => {
       if (!word) return;
       const holder = document.createElement('span');
       holder.className = 'hand-word';
-      holder.appendChild(wordSvg(word, seed + lineIndex * 131 + wordIndex * 17, wobble));
+      const parts = word.split('\u00a0').filter(Boolean);
+      parts.forEach((part, partIndex) => {
+        const seedShift = lineIndex * 131 + wordIndex * 17 + partIndex * 7;
+        if (parts.length === 1) {
+          holder.appendChild(wordSvg(part, seed + seedShift, wobble));
+          return;
+        }
+        const piece = document.createElement('span');
+        piece.className = 'hand-part';
+        piece.appendChild(wordSvg(part, seed + seedShift, wobble));
+        holder.appendChild(piece);
+        if (partIndex < parts.length - 1) holder.appendChild(document.createTextNode(' '));
+      });
       run.appendChild(holder);
       if (wordIndex < words.length - 1) run.appendChild(document.createTextNode(' '));
     });
