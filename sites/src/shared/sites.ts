@@ -1,14 +1,14 @@
 export const sites = [
-  { slug: 'rozwaga', name: 'Rozwaga', trade: 'kancelaria radcy prawnego' },
-  { slug: 'rubryka', name: 'Rubryka', trade: 'biuro rachunkowe' },
-  { slug: 'szkliwo', name: 'Szkliwo', trade: 'klinika stomatologiczna' },
-  { slug: 'tafla', name: 'Tafla', trade: 'gabinet psychoterapii' },
-  { slug: 'przedza', name: 'Przędza', trade: 'mieszkania w dawnej przędzalni' },
-  { slug: 'kminek', name: 'Kminek', trade: 'bistro' },
-  { slug: 'trzask', name: 'Trzask', trade: 'palarnia kawy ze sklepem' },
-  { slug: 'prog', name: 'Próg', trade: 'biuro nieruchomości' },
-  { slug: 'przeslo', name: 'Przęsło', trade: 'hotel z rezerwacją online' },
-  { slug: 'docisk', name: 'Docisk', trade: 'serwis samochodowy z asystentem AI' },
+  { slug: 'sygnet', name: 'Sygnet', trade: 'kancelaria prawna' },
+  { slug: 'kajet', name: 'Kajet', trade: 'biuro rachunkowe' },
+  { slug: 'emalia', name: 'Emalia', trade: 'gabinet stomatologiczny' },
+  { slug: 'otoczak', name: 'Otoczak', trade: 'gabinet psychoterapii' },
+  { slug: 'cegielnia-14', name: 'Cegielnia 14', trade: 'lofty w dawnej cegielni' },
+  { slug: 'szczypta', name: 'Szczypta', trade: 'bistro' },
+  { slug: 'ziarnik', name: 'Ziarnik', trade: 'palarnia kawy ze sklepem' },
+  { slug: 'klamka', name: 'Klamka', trade: 'biuro nieruchomości' },
+  { slug: 'brelok', name: 'Brelok 1912', trade: 'hotel butikowy' },
+  { slug: 'nakretka', name: 'Nakrętka', trade: 'warsztat samochodowy' },
 ] as const;
 
 export const identityBrands = [

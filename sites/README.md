@@ -4,18 +4,20 @@ Sample websites for made-up businesses. Every business here is invented: the nam
 
 Each site has its own typeface, palette and one signature element, so the ten look like ten different studios made them.
 
-| Site    | Trade                                 | Path        |
-| ------- | ------------------------------------- | ----------- |
-| Rozwaga | legal adviser                         | `/rozwaga/` |
-| Rubryka | accounting office                     | `/rubryka/` |
-| Szkliwo | dental clinic                         | `/szkliwo/` |
-| Tafla   | psychotherapy practice                | `/tafla/`   |
-| Przędza | flats in a converted mill             | `/przedza/` |
-| Kminek  | bistro, Polish and English            | `/kminek/`  |
-| Trzask  | coffee roastery with a shop           | `/trzask/`  |
-| Próg    | real estate agency                    | `/prog/`    |
-| Przęsło | hotel with online booking             | `/przeslo/` |
-| Docisk  | car service with an AI assistant demo | `/docisk/`  |
+| Site         | Trade                               | Path             |
+| ------------ | ----------------------------------- | ---------------- |
+| Sygnet       | law firm                            | `/sygnet/`       |
+| Kajet        | accounting office                   | `/kajet/`        |
+| Emalia       | dental practice                     | `/emalia/`       |
+| Otoczak      | psychotherapy practice              | `/otoczak/`      |
+| Cegielnia 14 | lofts in a former brickworks        | `/cegielnia-14/` |
+| Szczypta     | bistro, Polish and English          | `/szczypta/`     |
+| Ziarnik      | coffee roastery with a shop         | `/ziarnik/`      |
+| Klamka       | estate agency, a listings magazine  | `/klamka/`       |
+| Brelok 1912  | boutique hotel, Polish and English  | `/brelok/`       |
+| Nakrętka     | car repair shop with a price widget | `/nakretka/`     |
+
+The ten sites that came before them (Rozwaga, Rubryka, Szkliwo, Tafla, Przędza, Kminek, Trzask, Próg, Przęsło, Docisk) were removed. Their old addresses stay as small noindex pages in `public/<old>/` that send the visitor to the site that took the same trade.
 
 ## Run it
 
@@ -29,7 +31,7 @@ yarn build
 
 ## How it is built
 
-One Astro project, ten sites. Each site keeps its pages in `src/pages/<slug>/`, its components, styles and data in `src/sites/<slug>/` and its fonts in `public/<slug>/fonts/`. Nothing is shared between sites except the sample note in the footer and the link helper. The sites ship no JavaScript unless a page needs it; the shop, the agency, the hotel and the car service use small Preact islands for the cart, the filters, the booking flow and the assistant.
+One Astro project, ten sites. Each site keeps its pages in `src/pages/<slug>/`, its components, styles and data in `src/sites/<slug>/` and its fonts in `public/<slug>/fonts/`. Nothing is shared between sites except the sample note in the footer and the link helper. The sites ship no JavaScript unless a page needs it; interactive parts such as the cart, the listing filters, the booking flow and the price widget run as small Preact islands.
 
 There is no back end. Forms validate in the browser and end with a message that nothing was sent. Carts and bookings live in `localStorage`.
 
