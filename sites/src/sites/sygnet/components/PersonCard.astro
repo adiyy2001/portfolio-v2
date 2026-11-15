@@ -26,7 +26,10 @@ const Heading = headingLevel;
       <a href={person.phone.href}>{person.phone.display}</a>
     </p>
     <p class="person-line">
-      <a href={`mailto:${person.email}`}>{person.email}</a>
+      <a href={`mailto:${person.email}`}>
+        {person.email.split('@')[0]}@<wbr />
+        {person.email.split('@')[1]}
+      </a>
     </p>
   </div>
 </article>

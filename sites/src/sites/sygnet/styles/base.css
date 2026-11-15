@@ -1167,6 +1167,9 @@ caption {
     padding-left: var(--margin);
     font-size: 28px;
   }
+  .person-line {
+    font-size: 14px;
+  }
   .person-line a,
   .reach-line a,
   .foot-contact a {

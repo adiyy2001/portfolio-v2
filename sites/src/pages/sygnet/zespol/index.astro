@@ -76,7 +76,10 @@ import { tie } from '../../../sites/sygnet/lib/tie';
             <div>
               <dt>E-mail</dt>
               <dd>
-                <a href={`mailto:${person.email}`}>{person.email}</a>
+                <a href={`mailto:${person.email}`}>
+                  {person.email.split('@')[0]}@<wbr />
+                  {person.email.split('@')[1]}
+                </a>
               </dd>
             </div>
           </dl>
