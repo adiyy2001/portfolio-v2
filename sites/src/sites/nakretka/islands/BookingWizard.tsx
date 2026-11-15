@@ -12,7 +12,7 @@ import {
 } from '../lib/booking';
 import type { Booking, BookingDay } from '../lib/booking';
 import { warsawClock } from '../lib/clock';
-import { sumFrom } from '../lib/estimate';
+import { describeEstimate } from '../lib/estimate';
 import { formatZl } from '../lib/format';
 import { deleteBooking, loadBookings, saveBooking } from '../lib/saved';
 import { firstErrorKey, normalizePhone, validateContactDetails } from '../lib/validation';
@@ -59,7 +59,6 @@ export default function BookingWizard() {
   }, [state.step]);
 
   const day = days.find(item => item.iso === state.date);
-  const total = sumFrom(state.services);
   const hasOther = state.services.includes(otherRepair.slug);
 
   const finish = (event: Event): void => {
@@ -170,7 +169,7 @@ export default function BookingWizard() {
           <p class="wiz-sum">
             {state.services.length === 0
               ? 'Zaznacz co najmniej jedną usługę.'
-              : `Orientacyjnie od ${formatZl(total)}${hasOther ? ', bez wyceny innej naprawy' : ''}.`}
+              : describeEstimate(state.services)}
           </p>
           <div class="send-row">
             <button
@@ -313,8 +312,11 @@ export default function BookingWizard() {
             Numer zlecenia: <strong>{result.booking.id}</strong>
           </p>
           <p>
-            {result.booking.serviceName}. {describeBooking(result.booking)}. Auto:{' '}
-            {result.booking.car}.
+            Usługa: {result.booking.serviceName}
+            <br />
+            Termin: {describeBooking(result.booking)}
+            <br />
+            Auto: {result.booking.car}
           </p>
           <p class="confirm-sample">
             {result.stored

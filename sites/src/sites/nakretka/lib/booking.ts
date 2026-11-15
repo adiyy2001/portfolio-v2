@@ -147,7 +147,7 @@ export const removeBooking = (list: Booking[], id: string): Booking[] =>
   list.filter(item => item.id !== id);
 
 export const describeBooking = (booking: Booking): string => {
-  if (!booking.date || booking.hour === null) return 'Termin ustalimy telefonicznie';
+  if (!booking.date || booking.hour === null) return 'do ustalenia telefonicznie';
   const day = new Date(`${booking.date}T12:00:00Z`);
   const label = `${weekdayLong[day.getUTCDay()]}, ${day.getUTCDate()} ${monthGenitive[day.getUTCMonth()]}`;
   return `${label}, godz. ${formatHour(booking.hour)}`;

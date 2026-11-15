@@ -156,7 +156,7 @@ describe('describeBooking', () => {
 
   it('says the term is agreed by phone when there is no date', () => {
     expect(describeBooking({ ...sample, date: null, hour: null })).toBe(
-      'Termin ustalimy telefonicznie',
+      'do ustalenia telefonicznie',
     );
   });
 });

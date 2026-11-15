@@ -1,13 +1,41 @@
 import { describe, expect, it } from 'vitest';
 import { services } from '../data/services';
 import { business } from '../data/site';
-import { sumFrom } from './estimate';
+import { describeEstimate, hoursFrom, sumFrom } from './estimate';
 
 describe('sumFrom', () => {
   it('adds the from prices of the chosen services', () => {
     expect(sumFrom(['przeglad', 'opony'])).toBe(329);
     expect(sumFrom([])).toBe(0);
     expect(sumFrom(['nie-ma'])).toBe(0);
+  });
+});
+
+describe('hoursFrom', () => {
+  it('adds the hours of the chosen services', () => {
+    expect(hoursFrom(['przeglad', 'opony'])).toBe(3);
+    expect(hoursFrom(['zawieszenie', 'silnik-i-zaplon'])).toBe(16);
+    expect(hoursFrom(['inna-naprawa'])).toBe(0);
+    expect(hoursFrom([])).toBe(0);
+  });
+});
+
+describe('describeEstimate', () => {
+  it('shows the from price for priced services', () => {
+    expect(describeEstimate(['przeglad', 'opony'])).toBe('Orientacyjnie od 329\u00a0zł.');
+  });
+
+  it('never shows zero when only the unpriced repair is chosen', () => {
+    const text = describeEstimate(['inna-naprawa']);
+    expect(text).toBe('Cenę podamy po diagnozie, przed rozpoczęciem pracy.');
+    expect(text).not.toContain('0\u00a0zł');
+    expect(describeEstimate([])).toBe(text);
+  });
+
+  it('adds the diagnosis note when the unpriced repair joins priced ones', () => {
+    expect(describeEstimate(['przeglad', 'inna-naprawa'])).toBe(
+      'Orientacyjnie od 189\u00a0zł, a cenę innej naprawy podamy po diagnozie.',
+    );
   });
 });
 
