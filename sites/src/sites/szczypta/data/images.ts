@@ -1,0 +1,16 @@
+import type { ImageId } from './events';
+
+export interface SiteImage {
+  file: string;
+  width: number;
+  height: number;
+}
+
+export const images: Record<ImageId, SiteImage> = {
+  poledwiczki: { file: 'poledwiczki.webp', width: 2000, height: 1333 },
+  zupa: { file: 'zupa.webp', width: 1800, height: 1328 },
+  buraki: { file: 'buraki.webp', width: 1800, height: 1200 },
+  sala: { file: 'sala.webp', width: 1500, height: 1000 },
+};
+
+export const imagePath = (id: ImageId) => `/szczypta/img/${images[id].file}`;
