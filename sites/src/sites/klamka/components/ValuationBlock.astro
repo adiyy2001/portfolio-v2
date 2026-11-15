@@ -1,0 +1,27 @@
+---
+import { business, figures } from '../data/business';
+import ValuationForm from '../islands/ValuationForm';
+
+interface Props {
+  idPrefix?: string;
+  anchor?: string;
+}
+
+const { idPrefix = 'v', anchor = 'wycena' } = Astro.props;
+---
+
+<div class="valuation" id={anchor}>
+  <h3>Poproś o wycenę mieszkania</h3>
+  <p class="val-note">
+    Wycenę masz w {figures.valuationHours} godzin od oględzin. Nic nie płacisz.
+  </p>
+  <div class="js-form">
+    <ValuationForm client:load idPrefix={idPrefix} />
+  </div>
+  <noscript>
+    <p class="noscript-note">
+      Formularz wymaga JavaScriptu. Zadzwoń pod <a href={business.phoneHref}>{business.phone}</a>{' '}
+      albo napisz na <a href={`mailto:${business.email}`}>{business.email}</a>.
+    </p>
+  </noscript>
+</div>

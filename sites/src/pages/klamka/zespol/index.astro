@@ -1,0 +1,89 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/klamka/Layout.astro';
+import PageHead from '../../../sites/klamka/components/PageHead.astro';
+import { agentList } from '../../../sites/klamka/data/agents';
+import { business } from '../../../sites/klamka/data/business';
+import { principles } from '../../../sites/klamka/data/content';
+import { offers } from '../../../sites/klamka/data/offers';
+import { formatPrice, offerPath, placeLine } from '../../../sites/klamka/lib/format';
+---
+
+<Layout
+  title="Zespół biura"
+  description="Karolina Mazur i Adam Wolny prowadzą oferty Klamki na Psim Polu, w Leśnicy, Karłowicach i na Dąbiu. Poznaj agentów, ich zakres i oferty."
+  path="/klamka/zespol/"
+  current="zespol"
+  bundles={['info']}>
+  <PageHead
+    kicker="Biuro na Psim Polu"
+    title="Dwoje agentów, każda oferta pod jedną opieką"
+    lead="Karolina Mazur i Adam Wolny dzielą Wrocław na dwie części. Kto prowadzi Twoją ofertę, wiesz od pierwszej rozmowy."
+  />
+  <section class="sec" aria-label="Agenci">
+    <div class="sec-full">
+      {agentList.map(agent => (
+        <article class="team-person" aria-labelledby={`agent-${agent.id}`}>
+          <div class="team-id">
+            <span class="no">{agent.area}</span>
+            <h2 id={`agent-${agent.id}`}>{agent.name}</h2>
+            <p class="role">{agent.role}</p>
+          </div>
+          <div class="team-bio">
+            {agent.bio.map(paragraph => (
+              <p>{paragraph}</p>
+            ))}
+            <p class="cred">{agent.credential}</p>
+            <div class="team-contact">
+              <a href={agent.phoneHref}>{agent.phone}</a>
+              <a href={`mailto:${agent.email}`}>{agent.email}</a>
+            </div>
+            <div class="team-lots">
+              <h3>Oferty prowadzone przez {agent.name}</h3>
+              <ul>
+                {offers
+                  .filter(offer => offer.agent === agent.id)
+                  .map(offer => (
+                    <li>
+                      <a href={link(offerPath(offer))}>
+                        <span>{placeLine(offer)}</span>
+                        <span>{formatPrice(offer.priceZl)}</span>
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <section class="sec info-grid" aria-labelledby="rules-h">
+    <div class="info-wide info-main">
+      <h2 id="rules-h">Jak pracujemy</h2>
+      <ul class="principles">
+        {principles.map(item => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="info-side info-main">
+      <h2 id="join-h">Masz mieszkanie do sprzedania?</h2>
+      <p class="text">
+        Zacznij od bezpłatnej wyceny albo zadzwoń:{' '}
+        <a class="u-link" href={business.phoneHref}>
+          {business.phone}
+        </a>
+        .
+      </p>
+      <p class="text">
+        <a class="u-link" href={link('/klamka/sprzedaj-z-nami/')}>
+          Jak wygląda sprzedaż z nami
+        </a>
+      </p>
+    </div>
+  </section>
+</Layout>
