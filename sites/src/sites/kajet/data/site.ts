@@ -20,7 +20,7 @@ export const business = {
 
 export const facts = {
   firms: 240,
-  firmsFromGajowice: 91,
+  firmsFromGajowice: 85,
   replyHours: 4,
   paperPickupEvery: 'raz w tygodniu',
   onboardingWeeks: 2,
