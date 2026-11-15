@@ -1,0 +1,93 @@
+---
+import { link } from '../../../shared/link';
+import Panel from '../components/Panel.astro';
+import RouteMap from '../components/RouteMap.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { contactText } from '../content/contact';
+import { hotel } from '../data/hotel';
+import { pagePath } from '../i18n/lang';
+import type { Lang } from '../i18n/lang';
+import { ContactForm } from '../islands/ContactForm';
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = contactText[lang];
+const street = lang === 'pl' ? hotel.street : hotel.streetEn;
+---
+
+<Layout lang={lang} pageKey="contact" title={text.metaTitle} description={text.metaDescription}>
+  <Panel labelledby="contact-h" first>
+    <SectionHead id="contact-h" level="h1">
+      {text.heading}
+    </SectionHead>
+    <p class="lead">{text.lead}</p>
+    <div class="contact-grid">
+      <div class="contact-list">
+        <h2 class="sub">{text.detailsHeading}</h2>
+        <dl class="leaders">
+          <div>
+            <dt>{text.rows.address}</dt>
+            <dd class="text">
+              <address class="addr-block">
+                {hotel.fullName}
+                <br />
+                {street}
+                <br />
+                {`${hotel.postalCode} ${hotel.city}`}
+              </address>
+            </dd>
+          </div>
+          <div>
+            <dt>{text.rows.phone}</dt>
+            <dd>
+              <a href={hotel.phoneHref}>{hotel.phone}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>{text.rows.email}</dt>
+            <dd class="text">
+              <a href={hotel.emailHref}>{hotel.email}</a>
+            </dd>
+          </div>
+          <div>
+            <dt>{text.rows.reception}</dt>
+            <dd class="text">{text.receptionValue}</dd>
+          </div>
+          <div>
+            <dt>{text.rows.checkIn}</dt>
+            <dd>{text.checkInValue(hotel.checkIn)}</dd>
+          </div>
+          <div>
+            <dt>{text.rows.checkOut}</dt>
+            <dd>{text.checkOutValue(hotel.checkOut)}</dd>
+          </div>
+        </dl>
+        <div class="prose">
+          {text.arrival.map(paragraph => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </div>
+      <figure class="map map-wide">
+        <RouteMap label={text.mapLabel} market={text.market} />
+        <figcaption>{text.mapCaption}</figcaption>
+      </figure>
+    </div>
+    <p class="noscript-note">{text.noScript}</p>
+    <div class="contact-below">
+      <ContactForm client:load lang={lang} />
+    </div>
+    <p class="actions">
+      <a class="ticket" href={link(pagePath('booking', lang))}>
+        {text.ctaBooking}
+      </a>
+      <a class="ticket" href={link(pagePath('neighbourhood', lang))}>
+        {text.ctaNeighbourhood}
+      </a>
+    </p>
+  </Panel>
+</Layout>
