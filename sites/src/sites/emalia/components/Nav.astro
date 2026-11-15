@@ -1,0 +1,47 @@
+---
+import { link } from '../../../shared/link';
+import { bookingPath } from '../data/site';
+import { navItems } from '../nav';
+import type { NavKey } from '../nav';
+
+interface Props {
+  current?: NavKey;
+}
+
+const { current } = Astro.props;
+---
+
+<nav class="nav" aria-label="Główna nawigacja">
+  <a class="logo brand" href={link('/emalia/')} aria-label="Emalia, strona główna">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M7 3c2-.9 3.500.4 5 .4S15 2.100 17 3c2.600 1.300 2.600 4.800 1.600 7.800-.9 2.700-.6 6.200-1.500 9.200-.5 1.700-2.100 1.700-2.600 0-.6-2.300-.8-4-2.500-4s-1.900 1.700-2.500 4c-.5 1.700-2.100 1.700-2.600 0-.9-3-.6-6.500-1.500-9.200C4.400 7.800 4.400 4.300 7 3z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linejoin="round"></path>
+    </svg>
+    Emalia
+  </a>
+  <ul class="nav-links">
+    {navItems.map(item => (
+      <li>
+        <a href={link(item.path)} aria-current={current === item.key ? 'page' : undefined}>
+          {item.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+  <a class="pill pill-out nav-pill" href={link(bookingPath)}>
+    Rejestracja
+    <svg viewBox="0 0 18 18" aria-hidden="true">
+      <path
+        d="M2 9h13M10 4l5 5-5 5"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </a>
+</nav>
