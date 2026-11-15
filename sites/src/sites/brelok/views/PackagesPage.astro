@@ -1,0 +1,78 @@
+---
+import { link } from '../../../shared/link';
+import Panel from '../components/Panel.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { packageCopy, packageRule, packagesText } from '../content/packages';
+import { packages } from '../data/hotel';
+import { pagePath } from '../i18n/lang';
+import type { Lang } from '../i18n/lang';
+import Layout from '../layouts/Layout.astro';
+import { formatMoney } from '../lib/format';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = packagesText[lang];
+---
+
+<Layout lang={lang} pageKey="packages" title={text.metaTitle} description={text.metaDescription}>
+  <Panel labelledby="packages-h" first>
+    <SectionHead id="packages-h" level="h1">
+      {text.heading}
+    </SectionHead>
+    <p class="lead">{text.lead}</p>
+    <ul class="tickets">
+      {packages.map(item => {
+        const copy = packageCopy[lang][item.id];
+        return (
+          <li class="pack">
+            <h2>{copy.name}</h2>
+            <p class="price">{formatMoney(item.price, lang)}</p>
+            <p class="per">{text.priceUnit}</p>
+            <p class="pk-text">{copy.tagline}</p>
+            <p>{copy.text}</p>
+            <ul class="bullets">
+              {copy.includes.map(entry => (
+                <li>{entry}</li>
+              ))}
+            </ul>
+            <dl class="leaders">
+              <div>
+                <dt>{text.leaders.stay}</dt>
+                <dd class="text">{packageRule(item, lang)}</dd>
+              </div>
+              <div>
+                <dt>{text.leaders.breakfast}</dt>
+                <dd class="text">
+                  {item.includesBreakfast ? text.breakfastIncluded : text.breakfastNot}
+                </dd>
+              </div>
+            </dl>
+            <p class="actions">
+              <a class="ticket" href={`${link(pagePath('booking', lang))}?package=${item.id}`}>
+                {text.book}
+                <span class="sr">: {copy.name}</span>
+              </a>
+            </p>
+          </li>
+        );
+      })}
+    </ul>
+    <h2 class="sub">{text.howHeading}</h2>
+    <div class="prose">
+      {text.how.map(paragraph => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+    <p class="actions">
+      <a class="ticket" href={link(pagePath('breakfast', lang))}>
+        {text.ctaBreakfast}
+      </a>
+      <a class="ticket" href={link(pagePath('booking', lang))}>
+        {text.ctaBooking}
+      </a>
+    </p>
+  </Panel>
+</Layout>
