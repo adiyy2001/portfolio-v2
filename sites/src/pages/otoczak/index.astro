@@ -1,0 +1,155 @@
+---
+import { link } from '../../shared/link';
+import Layout from '../../sites/otoczak/Layout.astro';
+import Prices from '../../sites/otoczak/Prices.astro';
+import { cancellation, hours, individual, site } from '../../sites/otoczak/data';
+import { formatPrice } from '../../sites/otoczak/format';
+---
+
+<Layout
+  home
+  title="Otoczak. Psychoterapia we Wrocławiu, Biskupin"
+  description="Gabinet psychoterapii na Biskupinie we Wrocławiu. Terapia indywidualna, dla par i młodzieży. Pierwsze spotkanie kosztuje tyle samo, co każde kolejne."
+  path={site.home}>
+  <div class="hero">
+    <figure class="stone">
+      <img
+        src={link('/otoczak/limestone.webp')}
+        width="1000"
+        height="1260"
+        alt="Jasny wapienny kamień w kształcie otoczaka na białym tle, z drobną porowatą fakturą"
+      />
+    </figure>
+    <div class="ask">
+      <h1>Od czego chcesz zacząć?</h1>
+      <a class="cta" href={site.phoneHref}>
+        <span class="l">Umów pierwsze spotkanie</span>
+        <span class="n">{site.phone}</span>
+      </a>
+    </div>
+    <p class="place">{site.tagline}</p>
+  </div>
+
+  <section class="sec s-first" aria-labelledby="h-spotkanie">
+    <h2 id="h-spotkanie" class="q">
+      Jak wygląda pierwsze spotkanie?
+    </h2>
+    <div class="steps">
+      <p class="step st1">
+        Mówisz, z czym przychodzisz, i nie musisz mieć gotowej historii ani wiedzieć, od czego
+        zacząć. Dla jednej osoby spotkanie trwa {individual.minutesWords} i kosztuje{' '}
+        {formatPrice(individual.price)}, tyle co każde kolejne. Pary i młodzież mają inny czas i
+        inną cenę, są niżej.
+      </p>
+      <p class="step st2">
+        Potem sprawdzamy, czy do siebie pasujemy. Mówię, jak pracuję, a Ty mówisz, co jest dla
+        Ciebie ważne. To Ty decydujesz o kolejnych spotkaniach.
+      </p>
+      <p class="step st3">
+        Na koniec ustalamy, co dalej: stały dzień i godzinę albo przerwę na zastanowienie. Jeśli
+        uznam, że lepiej pomoże Ci inny specjalista, powiem to wprost.
+      </p>
+    </div>
+    <p class="more more--step">
+      <a href={link('/otoczak/pierwsza-wizyta/')}>
+        Co jeszcze warto wiedzieć przed pierwszą wizytą
+      </a>
+    </p>
+    <div class="breath" data-breath>
+      <span class="disc" aria-hidden="true" data-breath-disc></span>
+      <p class="lede">Tak zaczynamy wiele spotkań.</p>
+      <p class="words" aria-hidden="true">
+        <span class="w-in">wdech</span>
+        <span class="w-out">wydech</span>
+      </p>
+      <button class="stop" type="button" hidden data-breath-control>
+        Zatrzymaj animację
+      </button>
+    </div>
+  </section>
+
+  <section class="sec s-forms" aria-labelledby="h-formy">
+    <h2 id="h-formy" class="q">
+      Z kim chcesz porozmawiać?
+    </h2>
+    <Prices />
+    <p class="first-note">
+      Pierwsze spotkanie trwa tyle samo i kosztuje tyle samo, co każde kolejne w tej samej formie.
+    </p>
+    <p class="more">
+      <a href={link('/otoczak/cennik/')}>Cennik z zasadami płatności</a>
+    </p>
+    <p class="more">
+      <a href={link('/otoczak/terapia/')}>Jak wygląda terapia w każdej z form</a>
+    </p>
+  </section>
+
+  <section class="sec s-room" aria-labelledby="h-gabinet">
+    <h2 id="h-gabinet" class="q">
+      Gdzie się spotkamy?
+    </h2>
+    <address class="where">
+      {site.practice}
+      <br />
+      {site.street}
+      <br />
+      {site.postalCity}
+      <br />
+      {site.district}
+    </address>
+    <div class="prose">
+      <p>
+        Nazywam się Zofia Olszewska. Jestem magistrem psychologii i psychoterapeutką, ukończyłam
+        czteroletnie Studium Psychoterapii Integracyjnej we Wrocławiu i mam certyfikat
+        psychoterapeuty. Pracuję w nurcie integracyjnym, z dorosłymi, parami i młodzieżą, pod stałą
+        superwizją.
+      </p>
+      <p>
+        Prowadzę gabinet na Biskupinie od {site.practiceYears} lat. Pokój jest mały, jasny i bez
+        telefonu na stole. Na miejscu jest woda, koc i chusteczki.
+      </p>
+      <p>
+        Obowiązuje mnie tajemnica zawodowa. Można też spotkać się online, w wybranych terminach. Od
+        trzech lat w gabinecie przyjmuje także Paweł Gajewski.
+      </p>
+    </div>
+    <p class="more">
+      <a href={link('/otoczak/terapeuci/')}>Poznaj nas oboje</a>
+    </p>
+  </section>
+
+  <section class="sec s-call" id="telefon" aria-labelledby="h-telefon">
+    <h2 id="h-telefon" class="q">
+      Chcesz zadzwonić?
+    </h2>
+    <p class="reach">
+      <a href={site.phoneHref}>{site.phone}</a>
+    </p>
+    <p class="note">
+      {hours.prose} Poza tymi godzinami zostaw wiadomość. Umawiamy termin w rozmowie, a jeśli nie
+      odbieram, oddzwonię.
+    </p>
+  </section>
+
+  <section class="sec s-mail" id="napisz" aria-labelledby="h-kontakt">
+    <h2 id="h-kontakt" class="q">
+      Wolisz napisać?
+    </h2>
+    <p class="reach">
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+    <p class="note">
+      Odpisuję między spotkaniami. Termin można odwołać do {cancellation.freeUntil} przed
+      spotkaniem, bez opłaty.
+    </p>
+    <p class="more">
+      <a href={link(site.contact)}>Albo wypełnij formularz</a>
+    </p>
+  </section>
+
+  <script>
+    import { initBreath } from '../../sites/otoczak/breath';
+
+    initBreath();
+  </script>
+</Layout>

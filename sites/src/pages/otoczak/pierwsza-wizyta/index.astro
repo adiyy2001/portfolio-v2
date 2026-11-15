@@ -1,0 +1,98 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/otoczak/Layout.astro';
+import PageHead from '../../../sites/otoczak/PageHead.astro';
+import Section from '../../../sites/otoczak/Section.astro';
+import {
+  firstMeetingQuestions,
+  hours,
+  meetingLine,
+  services,
+  site,
+} from '../../../sites/otoczak/data';
+---
+
+<Layout
+  title="Pierwsza wizyta | Otoczak"
+  description="Co dzieje się na pierwszym spotkaniu w gabinecie Otoczak: jak umówić termin, jak trafić, ile trwa i o co możesz zapytać."
+  path="/otoczak/pierwsza-wizyta/">
+  <PageHead
+    title="Co się wydarzy na pierwszym spotkaniu?"
+    lead="Nic, do czego trzeba by się przygotowywać. Możesz przyjść z jednym zdaniem albo z całą historią."
+  />
+
+  <Section id="przed" title="Co zrobić przed wizytą?">
+    <ol>
+      <li>
+        <a href={link(site.contact)}>Napisz</a> albo zadzwoń, że chcesz się umówić. Wystarczy imię i
+        informacja, czy chodzi o Ciebie, o parę, o nastolatka czy o rodzica.
+      </li>
+      <li>
+        Wybierz, czy wolisz gabinet, czy spotkanie online. Online jest możliwe w wybranych
+        terminach.
+      </li>
+      <li>
+        Przy nastolatku przed osiemnastymi urodzinami przygotuj pisemną zgodę rodzica albo opiekuna
+        prawnego. Wzór wyślemy mailem.
+      </li>
+    </ol>
+  </Section>
+
+  <Section id="dojscie" title="Jak do nas trafić?">
+    <address class="where">
+      {site.practice}
+      <br />
+      {site.street}
+      <br />
+      {site.postalCity}, {site.district}
+    </address>
+    <p>
+      {site.entrance} Możesz przyjść kilka minut wcześniej i usiąść w poczekalni. Ostatnie spotkanie
+      w dniu zaczyna się o {hours.lastStart}.
+    </p>
+  </Section>
+
+  <Section id="spotkanie" title="Co dzieje się podczas spotkania?">
+    <p>
+      Zaczynasz od tego, co jest teraz najważniejsze, a terapeuta pyta, czego potrzebujesz od
+      spotkań. Może robić krótkie notatki, które są objęte tajemnicą zawodową. Pod koniec ustalamy,
+      czy spotykamy się znowu i kiedy. Możesz zdecydować od razu albo po kilku dniach.
+    </p>
+    <p>
+      Czas i cena pierwszego spotkania zależą od formy, ale są takie same jak każdego kolejnego:
+    </p>
+    <ul>
+      {services.map(service => (
+        <li>
+          {service.name}: {meetingLine(service)}
+        </li>
+      ))}
+    </ul>
+    <p>
+      Pierwsze spotkanie z nastolatkiem zaczyna się od kilku minut z rodzicem, które mieszczą się w
+      podanym czasie.
+    </p>
+    <p>
+      <a href={link('/otoczak/cennik/')}>Cennik z zasadami płatności</a>
+    </p>
+  </Section>
+
+  <Section id="pytania" title="O co mogę zapytać?">
+    <div class="faqs">
+      {firstMeetingQuestions.map(item => (
+        <details class="faq">
+          <summary>{item.question}</summary>
+          <p>{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </Section>
+
+  <Section id="kryzys" title="A jeśli nie wytrzymam do terminu?">
+    <p>
+      Jeśli czujesz, że nie dotrwasz do spotkania, zadzwoń pod jeden z numerów w zakładce{' '}
+      <a href={link(site.crisis)}>W kryzysie</a>. Telefon do gabinetu nie jest numerem alarmowym.
+      Odbieramy go {hours.inline}.
+    </p>
+  </Section>
+</Layout>

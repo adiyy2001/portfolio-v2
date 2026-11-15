@@ -1,0 +1,66 @@
+---
+import Helplines from '../../../sites/otoczak/Helplines.astro';
+import Layout from '../../../sites/otoczak/Layout.astro';
+import PageHead from '../../../sites/otoczak/PageHead.astro';
+import Section from '../../../sites/otoczak/Section.astro';
+import { hours, mainHelplines, otherHelplines, site } from '../../../sites/otoczak/data';
+
+const [emergency, support] = mainHelplines;
+const numbers = mainHelplines.map(line => line.number).join(', ');
+---
+
+<Layout
+  title="W kryzysie | Otoczak"
+  description={`Numery telefonów, pod które możesz zadzwonić w kryzysie psychicznym: ${numbers}. Sprawdzone ${site.checkedOn}.`}
+  path="/otoczak/w-kryzysie/">
+  <PageHead
+    title="Potrzebujesz pomocy teraz?"
+    lead={`Jeśli ktoś jest w niebezpieczeństwie albo myślisz o odebraniu sobie życia, zadzwoń pod ${emergency?.number} albo ${support?.number}. Nie czekaj na odpowiedź od nas.`}
+  />
+
+  <Section id="zadzwon" title="Do kogo zadzwonić?">
+    <p class="stamp">Numery sprawdzone {site.checkedOn}.</p>
+    <p>
+      Rozmowa jest bezpłatna. Nie musisz wiedzieć, co powiedzieć. Wystarczy, że powiesz, jak się
+      czujesz. Godziny działania są przy każdym numerze.
+    </p>
+    <Helplines items={mainHelplines} />
+  </Section>
+
+  <Section id="zanim" title="Co zrobić, zanim ktoś odbierze?">
+    <ul>
+      <li>
+        Nie zostawaj z tym sam lub sama. Napisz albo zadzwoń do kogoś bliskiego i powiedz wprost, że
+        jest Ci bardzo źle.
+      </li>
+      <li>
+        Oddal od siebie to, czym możesz sobie zrobić krzywdę: tabletki, ostre przedmioty, alkohol.
+        Poproś kogoś, żeby je zabrał, albo wyjdź z domu.
+      </li>
+      <li>
+        Jeśli już zrobiłeś lub zrobiłaś sobie krzywdę, zadzwoń pod {emergency?.number} albo jedź na
+        szpitalny oddział ratunkowy. Przyjmą Cię bez skierowania.
+      </li>
+      <li>
+        Jeśli to ktoś inny jest w niebezpieczeństwie, zostań przy nim i zadzwoń pod{' '}
+        {emergency?.number}.
+      </li>
+    </ul>
+  </Section>
+
+  <Section id="inne" title="Jakie są inne numery?">
+    <p>Dla dzieci, osób doświadczających przemocy i do znalezienia opieki w Twojej okolicy.</p>
+    <Helplines items={otherHelplines} />
+  </Section>
+
+  <Section id="gabinet" title="Czym jest ta strona?">
+    <p>
+      Otoczak to gabinet psychoterapii, nie ośrodek interwencji kryzysowej. Nie odbieramy telefonów
+      w nocy ani w weekendy, a termin spotkania nie zawsze jest od ręki.
+    </p>
+    <p>
+      Jeśli jesteś już w terapii u nas, możesz zadzwonić {hours.inline}. Pod numerem {site.phone}{' '}
+      umówisz się także na pierwsze spotkanie, gdy minie najgorsze.
+    </p>
+  </Section>
+</Layout>

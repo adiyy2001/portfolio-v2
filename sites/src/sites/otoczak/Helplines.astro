@@ -1,0 +1,24 @@
+---
+import type { Helpline } from './data';
+
+interface Props {
+  items: readonly Helpline[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="helplines">
+  {items.map(item => (
+    <li class="helpline">
+      <a class="helpline__number" href={`tel:${item.dial}`}>
+        {item.number}
+      </a>
+      <div class="helpline__text">
+        <p class="helpline__name">{item.name}</p>
+        <p>{item.detail}</p>
+        <p class="helpline__hours">{item.hours}</p>
+      </div>
+    </li>
+  ))}
+</ul>

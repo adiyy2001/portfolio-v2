@@ -1,0 +1,18 @@
+---
+import { formatPrice } from './format';
+import { durationSentence, services } from './data';
+---
+
+<dl class="forms">
+  {services.map(service => (
+    <div>
+      <dt>{service.name}</dt>
+      <dd>
+        {service.summary} {durationSentence(service)}
+      </dd>
+      <dd class="price">
+        {formatPrice(service.price)} <span>za spotkanie</span>
+      </dd>
+    </div>
+  ))}
+</dl>

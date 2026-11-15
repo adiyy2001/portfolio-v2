@@ -1,0 +1,91 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/otoczak/Layout.astro';
+import PageHead from '../../../sites/otoczak/PageHead.astro';
+import Section from '../../../sites/otoczak/Section.astro';
+import { meetingLine, serviceById, site } from '../../../sites/otoczak/data';
+
+const individual = serviceById('indywidualna');
+const couples = serviceById('pary');
+const youth = serviceById('mlodziez');
+const parents = serviceById('rodzice');
+---
+
+<Layout
+  title="Terapia | Otoczak"
+  description="Jak wygląda terapia indywidualna, dla par i młodzieży w gabinecie Otoczak na Biskupinie. Bez obietnic wyniku, w tempie, które możesz udźwignąć."
+  path="/otoczak/terapia/">
+  <PageHead
+    title="Jak wygląda terapia?"
+    lead="Spotykamy się zwykle raz w tygodniu, w gabinecie albo online. Nikt uczciwy nie obieca z góry, jak to się skończy, więc takich obietnic tu nie ma."
+  />
+
+  <Section id="indywidualna" title="Przychodzisz sam lub sama?">
+    <p>
+      Mówisz o tym, co Cię w tej chwili zajmuje. Czasem to jedna sprawa, na przykład praca albo
+      żałoba po kimś bliskim. Czasem coś, co wraca od lat i trudno to nazwać.
+    </p>
+    <p>
+      Pracujemy w nurcie integracyjnym albo poznawczo-behawioralnym, zależnie od tego, z kim się
+      spotkasz. Na początku ustalamy, o co Ci chodzi i jak często chcesz się widywać. Zwykle jest to
+      raz w tygodniu, bo wtedy łatwiej o ciągłość.
+    </p>
+    <p>Jedno spotkanie: {meetingLine(individual)}. Pierwsze kosztuje tyle samo.</p>
+    <p>
+      <a href={link('/otoczak/terapeuci/')}>Kto z kim pracuje</a>
+    </p>
+  </Section>
+
+  <Section id="pary" title="Przychodzicie we dwoje?">
+    <p>
+      Na terapię dla par przychodzicie razem, na dłuższe spotkanie. Prowadzi ją Zofia Olszewska. Nie
+      rozstrzyga, kto ma rację. Pilnuje, żeby każde z Was mogło dokończyć zdanie i usłyszeć
+      odpowiedź, zanim zacznie się następne.
+    </p>
+    <p>
+      Zdarza się, że jedna osoba chce przyjść, a druga jeszcze się waha. Można zacząć od rozmowy w
+      pojedynkę i dopiero potem zdecydować o wspólnych spotkaniach.
+    </p>
+    <p>Jedno spotkanie: {meetingLine(couples)}. Pierwsze kosztuje tyle samo.</p>
+  </Section>
+
+  <Section id="mlodziez" title="Szukasz pomocy dla nastolatka?">
+    <p>
+      Od piętnastego roku życia młodzi ludzie przychodzą na własne spotkania. Pierwsze zaczyna się
+      od kilku minut z rodzicem lub opiekunem, potem rodzic wychodzi. Te minuty mieszczą się w
+      czasie spotkania.
+    </p>
+    <p>
+      Rodzic wie, jak pracujemy, ale nie wie, o czym rozmawiamy. Wyjątkiem jest sytuacja, w której
+      ktoś jest w niebezpieczeństwie. Wtedy najpierw mówimy o tym młodej osobie.
+    </p>
+    <p>
+      Przed osiemnastymi urodzinami potrzebna jest pisemna zgoda rodzica albo opiekuna prawnego.
+      Dzieci poniżej piętnastu lat nie przyjmujemy. Jeśli Twoje dziecko jest młodsze, zadzwoń, a
+      podpowiemy, gdzie szukać pomocy.
+    </p>
+    <p>Jedno spotkanie: {meetingLine(youth)}. Pierwsze kosztuje tyle samo.</p>
+  </Section>
+
+  <Section id="rodzice" title="Jesteś rodzicem i jest Wam trudno?">
+    <p>
+      Konsultacje dla rodziców to spotkania bez dziecka. Rozmawiamy o tym, co dzieje się w domu, i
+      szukamy tego, co da się zmienić w codziennych sprawach: porannych wyjściach, ekranach,
+      wieczornych kłótniach.
+    </p>
+    <p>Nikt tu nie ocenia, jakim jesteś rodzicem. Pytamy o to, czego potrzebujesz.</p>
+    <p>Jedno spotkanie: {meetingLine(parents)}. Pierwsze kosztuje tyle samo.</p>
+  </Section>
+
+  <Section id="granice" title="A jeśli terapia nie jest dla Ciebie?">
+    <p>
+      Nie każdy potrzebuje psychoterapii i nie zawsze jest na nią dobry moment. Tu nie stawiamy
+      diagnoz medycznych i nie wypisujemy recept. Jeśli po kilku spotkaniach uznamy, że lepiej
+      pomoże Ci psychiatra albo inna forma pomocy, powiemy to wprost.
+    </p>
+    <p>
+      Gdy myślisz o odebraniu sobie życia albo ktoś jest w niebezpieczeństwie, nie czekaj na termin.{' '}
+      <a href={link(site.crisis)}>Numery, pod które możesz zadzwonić od razu</a>, są osobno.
+    </p>
+  </Section>
+</Layout>

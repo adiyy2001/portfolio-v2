@@ -1,0 +1,65 @@
+---
+import { link } from '../../../shared/link';
+import ContactForm from '../../../sites/otoczak/ContactForm.astro';
+import Layout from '../../../sites/otoczak/Layout.astro';
+import PageHead from '../../../sites/otoczak/PageHead.astro';
+import Section from '../../../sites/otoczak/Section.astro';
+import { hours, site } from '../../../sites/otoczak/data';
+---
+
+<Layout
+  title="Kontakt | Otoczak"
+  description={`Zadzwoń, napisz albo wypełnij formularz. Gabinet Otoczak na Biskupinie, ${site.street}, Wrocław. Odpowiedź w ciągu ${site.replyDays}.`}
+  path={site.contact}>
+  <PageHead
+    title="Jak chcesz się odezwać?"
+    lead="Telefon, e-mail albo formularz. Nie ma tu złego wyboru, a wiadomość do niczego Cię nie zobowiązuje."
+  />
+
+  <Section id="dane" title="Gdzie dzwonić i pisać?">
+    <dl class="contact-lines">
+      <div>
+        <dt>Telefon</dt>
+        <dd>
+          <a href={site.phoneHref}>{site.phone}</a>
+        </dd>
+        <dd class="quiet">{hours.prose}</dd>
+      </div>
+      <div>
+        <dt>E-mail</dt>
+        <dd>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </dd>
+        <dd class="quiet">Odpisuję między spotkaniami, najpóźniej w ciągu {site.replyDays}.</dd>
+      </div>
+      <div>
+        <dt>Adres</dt>
+        <dd>
+          <address>
+            {site.practice}
+            <br />
+            {site.street}
+            <br />
+            {site.postalCity}, {site.district}
+          </address>
+        </dd>
+        <dd class="quiet">{site.entrance}</dd>
+      </div>
+    </dl>
+  </Section>
+
+  <Section id="formularz" title="Wolisz formularz?">
+    <p>
+      Wystarczy kilka zdań. Nie musisz opisywać wszystkiego, resztę zostawmy na spotkanie. Odpiszę w
+      ciągu {site.replyDays}.
+    </p>
+    <ContactForm />
+  </Section>
+
+  <Section id="pilne" title="A jeśli to nie może czekać?">
+    <p>
+      Formularz i e-mail nie nadają się na sytuacje, w których jest bardzo źle teraz. W takiej
+      chwili zadzwoń pod numer z listy <a href={link(site.crisis)}>W kryzysie</a>.
+    </p>
+  </Section>
+</Layout>

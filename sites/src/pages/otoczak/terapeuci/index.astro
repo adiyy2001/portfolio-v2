@@ -1,0 +1,73 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/otoczak/Layout.astro';
+import PageHead from '../../../sites/otoczak/PageHead.astro';
+import Section from '../../../sites/otoczak/Section.astro';
+import { serviceById, site, therapistById } from '../../../sites/otoczak/data';
+
+const zofia = therapistById('zofia');
+const pawel = therapistById('pawel');
+---
+
+<Layout
+  title="Terapeuci | Otoczak"
+  description="Zofia Olszewska i Paweł Gajewski: wykształcenie, nurt pracy i dni przyjęć w gabinecie Otoczak na Biskupinie we Wrocławiu."
+  path="/otoczak/terapeuci/">
+  <PageHead
+    title="Kto z Tobą porozmawia?"
+    lead="W gabinecie pracują dwie osoby. Obie mają certyfikat psychoterapeuty i obie pracują pod stałą superwizją."
+  />
+
+  <Section id="zofia" title="Kim jest Zofia Olszewska?">
+    <p class="quiet">{zofia.role}</p>
+    {zofia.paragraphs.map(paragraph => (
+      <p>{paragraph}</p>
+    ))}
+    <p>Przyjmuje {zofia.days}.</p>
+    <h3>Prowadzi</h3>
+    <ul>
+      {zofia.services.map(id => (
+        <li>{serviceById(id).name}</li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section id="pawel" title="Kim jest Paweł Gajewski?">
+    <p class="quiet">{pawel.role}</p>
+    {pawel.paragraphs.map(paragraph => (
+      <p>{paragraph}</p>
+    ))}
+    <p>Przyjmuje {pawel.days}.</p>
+    <h3>Prowadzi</h3>
+    <ul>
+      {pawel.services.map(id => (
+        <li>{serviceById(id).name}</li>
+      ))}
+    </ul>
+  </Section>
+
+  <Section id="wybor" title="Z kim się umówić?">
+    <p>
+      Pary i konsultacje dla rodziców prowadzi Zofia. Dorośli i młodzież mogą umówić się z każdym z
+      dwojga. Jeśli nie masz preferencji, napisz, kiedy możesz przyjść, a dopasujemy termin.
+    </p>
+    <p>
+      Wybór nie jest ostateczny. Po pierwszym spotkaniu możesz uznać, że wolisz drugą osobę, i nie
+      musisz się z tego tłumaczyć.
+    </p>
+    <p>
+      <a href={link(site.contact)}>Napisz albo zadzwoń</a>
+    </p>
+  </Section>
+
+  <Section id="kwalifikacje" title="Skąd wiadomo, że to prawdziwe kwalifikacje?">
+    <p>
+      Superwizja to regularne omawianie własnych spotkań z bardziej doświadczoną osobą. Odbywa się
+      bez danych, po których dałoby się rozpoznać klienta.
+    </p>
+    <p>
+      Nazwę ośrodka, który wydał certyfikat, i jego numer podamy na prośbę, jeszcze przed pierwszym
+      spotkaniem. Wystarczy o to zapytać.
+    </p>
+  </Section>
+</Layout>
