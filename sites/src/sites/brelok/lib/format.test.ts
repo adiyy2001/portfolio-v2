@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { formatMoney, guestsLabel, nightsLabel, numberList, numberWord } from './format';
+import {
+  formatMoney,
+  guestsGenitive,
+  guestsLabel,
+  minutesLabel,
+  nightsLabel,
+  numberList,
+  numberWord,
+} from './format';
 
 describe('format', () => {
   it('formats money', () => {
@@ -30,5 +38,32 @@ describe('format', () => {
   it('spells the numbers the copy needs', () => {
     expect(numberWord(14, 'pl')).toBe('czternaście');
     expect(numberWord(13, 'en')).toBe('thirteen');
+  });
+});
+
+describe('polish numerals after a preposition', () => {
+  it('uses the genitive for guests', () => {
+    expect([1, 2, 3, 4, 5, 12, 22].map(count => guestsGenitive(count, 'pl'))).toEqual([
+      '1 osoby',
+      '2 osób',
+      '3 osób',
+      '4 osób',
+      '5 osób',
+      '12 osób',
+      '22 osób',
+    ]);
+  });
+
+  it('declines minutes', () => {
+    expect([1, 2, 5, 8, 12, 22, 25].map(count => minutesLabel(count, 'pl'))).toEqual([
+      '1 minuta',
+      '2 minuty',
+      '5 minut',
+      '8 minut',
+      '12 minut',
+      '22 minuty',
+      '25 minut',
+    ]);
+    expect(minutesLabel(22, 'en')).toBe('22 minutes');
   });
 });

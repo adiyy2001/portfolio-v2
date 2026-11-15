@@ -1,5 +1,6 @@
 import { hotel, places } from '../data/hotel';
 import type { PlaceId } from '../data/hotel';
+import { minutesLabel } from '../lib/format';
 import type { Lang } from '../i18n/lang';
 
 interface PlaceCopy {
@@ -11,19 +12,19 @@ const saltMinutes = places.find(item => item.id === 'salt')?.minutes ?? 0;
 
 const pl = {
   metaTitle: 'Okolica. Brelok 1912, hotel butikowy we Wrocławiu',
-  metaDescription: `Co leży blisko hotelu Brelok: Rynek ${hotel.minutesToSquare} minut pieszo, plac Solny, Opera, Hala Targowa, Uniwersytet i Ostrów Tumski. Dojazd tramwajem i samochodem.`,
+  metaDescription: `Co leży blisko hotelu Brelok: Rynek ${minutesLabel(hotel.minutesToSquare, 'pl')} pieszo, plac Solny, Opera, Hala Targowa, Uniwersytet i Ostrów Tumski. Dojazd tramwajem i samochodem.`,
   heading: 'Okolica pieszo od bramy',
-  lead: `Kamienica stoi ${hotel.minutesToSquare} minut od Rynku, więc większość miasta załatwia się na własnych nogach. Poniżej miejsca, do których chodzą nasi goście, od najbliższego.`,
-  mapLabel: `Schemat trasy z hotelu Brelok na Rynek, ${hotel.minutesToSquare} minut pieszo`,
-  mapCaption: `Trasa pieszo na Rynek, ${hotel.minutesToSquare} minut`,
+  lead: `Kamienica stoi ${minutesLabel(hotel.minutesToSquare, 'pl')} od Rynku, więc większość miasta załatwia się na własnych nogach. Poniżej miejsca, do których chodzą nasi goście, od najbliższego.`,
+  mapLabel: `Schemat trasy z hotelu Brelok na Rynek, ${minutesLabel(hotel.minutesToSquare, 'pl')} pieszo`,
+  mapCaption: `Trasa pieszo na Rynek, ${minutesLabel(hotel.minutesToSquare, 'pl')}`,
   market: 'Rynek',
   walksHeading: 'Pieszo z Breloka',
   minutesUnit: 'min',
-  minutesSpoken: (count: number) => `${count} minut pieszo`,
+  minutesSpoken: (count: number) => `${minutesLabel(count, 'pl')} pieszo`,
   transportHeading: 'Tramwajem i samochodem',
   transport: [
     'Tramwaj zatrzymuje się pod bramą kamienicy. Z dworca kolejowego dojedzie się nim albo taksówką.',
-    `Samochód można zostawić w garażu przy placu Solnym, ${saltMinutes} minut od hotelu. Miejsce w garażu wlicza pakiet Weekend we dwoje, w innych pobytach można je zamówić w recepcji.`,
+    `Samochód można zostawić w garażu przy placu Solnym, ${minutesLabel(saltMinutes, 'pl')} od hotelu. Miejsce w garażu wlicza pakiet Weekend we dwoje, w innych pobytach można je zamówić w recepcji.`,
     'Z lotniska jedzie się taksówką albo autobusem i tramwajem. Przy rezerwacji można zostawić uwagę, a recepcja podpowie dojazd.',
   ],
   ctaContact: 'Kontakt i dojazd',
@@ -60,19 +61,19 @@ const pl = {
 
 const en: typeof pl = {
   metaTitle: 'Neighbourhood. Brelok 1912, boutique hotel in Wrocław',
-  metaDescription: `What is close to Brelok: the Market Square ${hotel.minutesToSquare} minutes on foot, Plac Solny, the Opera, the Market Hall, the University and Ostrów Tumski. How to arrive by tram and car.`,
+  metaDescription: `What is close to Brelok: the Market Square ${minutesLabel(hotel.minutesToSquare, 'en')} on foot, Plac Solny, the Opera, the Market Hall, the University and Ostrów Tumski. How to arrive by tram and car.`,
   heading: 'The neighbourhood on foot',
-  lead: `The house stands ${hotel.minutesToSquare} minutes from the Market Square, so you can do most of the city on your own feet. Below are the places our guests walk to, starting with the nearest.`,
-  mapLabel: `Route map from the Brelok hotel to the Market Square, ${hotel.minutesToSquare} minutes on foot`,
-  mapCaption: `Walking route to the Market Square, ${hotel.minutesToSquare} minutes`,
+  lead: `The house stands ${minutesLabel(hotel.minutesToSquare, 'en')} from the Market Square, so you can do most of the city on your own feet. Below are the places our guests walk to, starting with the nearest.`,
+  mapLabel: `Route map from the Brelok hotel to the Market Square, ${minutesLabel(hotel.minutesToSquare, 'en')} on foot`,
+  mapCaption: `Walking route to the Market Square, ${minutesLabel(hotel.minutesToSquare, 'en')}`,
   market: 'Market Square',
   walksHeading: 'On foot from Brelok',
   minutesUnit: 'min',
-  minutesSpoken: (count: number) => `${count} minutes on foot`,
+  minutesSpoken: (count: number) => `${minutesLabel(count, 'en')} on foot`,
   transportHeading: 'By tram and by car',
   transport: [
     'The tram stops at the gate of the house. From the railway station you can take it or a taxi.',
-    `You can leave a car in the garage by Plac Solny, ${saltMinutes} minutes from the hotel. The Weekend for two package includes a place in the garage, and for other stays you can book one at reception.`,
+    `You can leave a car in the garage by Plac Solny, ${minutesLabel(saltMinutes, 'en')} from the hotel. The Weekend for two package includes a place in the garage, and for other stays you can book one at reception.`,
     'From the airport you can take a taxi, or a bus and a tram. Leave a note with your booking and reception will suggest the way.',
   ],
   ctaContact: 'Contact and directions',

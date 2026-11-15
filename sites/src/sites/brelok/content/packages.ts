@@ -1,7 +1,7 @@
 import { hotel, packageById, packages, roomTypeById } from '../data/hotel';
 import type { PackageId, StayPackage } from '../data/hotel';
 import type { Lang } from '../i18n/lang';
-import { formatMoney, guestsLabel, nightsLabel } from '../lib/format';
+import { formatMoney, guestsGenitive, guestsLabel, nightsLabel } from '../lib/format';
 
 interface PackageCopy {
   name: string;
@@ -87,7 +87,7 @@ const nightsRange = (item: StayPackage, lang: Lang): string => {
 
 export const packageRule = (item: StayPackage, lang: Lang): string =>
   lang === 'pl'
-    ? `${nightsRange(item, lang)}, do ${guestsLabel(item.maxGuests, lang)}`
+    ? `${nightsRange(item, lang)}, do ${guestsGenitive(item.maxGuests, lang)}`
     : `${nightsRange(item, lang)}, up to ${guestsLabel(item.maxGuests, lang)}`;
 
 const exampleRoom = roomTypeById('dziedziniec').rate * 2;

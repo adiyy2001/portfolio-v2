@@ -1,11 +1,12 @@
 import { hotel, places } from '../data/hotel';
+import { minutesLabel } from '../lib/format';
 import type { Lang } from '../i18n/lang';
 
 const saltMinutes = places.find(item => item.id === 'salt')?.minutes ?? 0;
 
 const pl = {
   metaTitle: 'Kontakt i dojazd. Brelok 1912, hotel butikowy we Wrocławiu',
-  metaDescription: `Adres, telefon i godziny recepcji hotelu Brelok przy ${hotel.street} we Wrocławiu. Dojazd z Rynku zajmuje ${hotel.minutesToSquare} minut pieszo. Formularz jest przykładowy.`,
+  metaDescription: `Adres, telefon i godziny recepcji hotelu Brelok przy ${hotel.street} we Wrocławiu. Dojazd z Rynku zajmuje ${minutesLabel(hotel.minutesToSquare, 'pl')} pieszo. Formularz jest przykładowy.`,
   heading: 'Kontakt i dojazd',
   lead: 'Recepcja odbiera telefon o każdej porze. Na wiadomość odpowiadamy w ciągu jednego dnia roboczego.',
   detailsHeading: 'Jak nas znaleźć',
@@ -21,11 +22,11 @@ const pl = {
   checkInValue: (time: string) => `od ${time}`,
   checkOutValue: (time: string) => `do ${time}`,
   arrival: [
-    `Pieszo z Rynku idzie się do nas ${hotel.minutesToSquare} minut. Tramwaj zatrzymuje się pod bramą kamienicy.`,
-    `Samochód można zostawić w garażu przy placu Solnym, ${saltMinutes} minut od hotelu. Miejsce w garażu wlicza pakiet Weekend we dwoje, w innych pobytach można je zamówić w recepcji.`,
+    `Pieszo z Rynku idzie się do nas ${minutesLabel(hotel.minutesToSquare, 'pl')}. Tramwaj zatrzymuje się pod bramą kamienicy.`,
+    `Samochód można zostawić w garażu przy placu Solnym, ${minutesLabel(saltMinutes, 'pl')} od hotelu. Miejsce w garażu wlicza pakiet Weekend we dwoje, w innych pobytach można je zamówić w recepcji.`,
   ],
-  mapLabel: `Schemat trasy z hotelu Brelok na Rynek, ${hotel.minutesToSquare} minut pieszo`,
-  mapCaption: `Trasa pieszo, ${hotel.minutesToSquare} minut`,
+  mapLabel: `Schemat trasy z hotelu Brelok na Rynek, ${minutesLabel(hotel.minutesToSquare, 'pl')} pieszo`,
+  mapCaption: `Trasa pieszo, ${minutesLabel(hotel.minutesToSquare, 'pl')}`,
   market: 'Rynek',
   formHeading: 'Napisz do recepcji',
   formLead: 'Wiadomość trafi tylko do tej przeglądarki, bo to strona przykładowa.',
@@ -48,7 +49,7 @@ const pl = {
 
 const en: typeof pl = {
   metaTitle: 'Contact and directions. Brelok 1912, boutique hotel in Wrocław',
-  metaDescription: `Address, phone and reception hours of the Brelok hotel at ${hotel.streetEn} in Wrocław. It is ${hotel.minutesToSquare} minutes on foot from the Market Square. The form is a sample.`,
+  metaDescription: `Address, phone and reception hours of the Brelok hotel at ${hotel.streetEn} in Wrocław. It is ${minutesLabel(hotel.minutesToSquare, 'en')} on foot from the Market Square. The form is a sample.`,
   heading: 'Contact and directions',
   lead: 'Reception answers the phone at any hour. We reply to messages within one working day.',
   detailsHeading: 'How to find us',
@@ -64,11 +65,11 @@ const en: typeof pl = {
   checkInValue: (time: string) => `from ${time}`,
   checkOutValue: (time: string) => `until ${time}`,
   arrival: [
-    `From the Market Square it is ${hotel.minutesToSquare} minutes on foot. The tram stops at the gate of the townhouse.`,
-    `You can leave a car in the garage by Plac Solny, ${saltMinutes} minutes from the hotel. The Weekend for two package includes a place in the garage, and for other stays you can book one at reception.`,
+    `From the Market Square it is ${minutesLabel(hotel.minutesToSquare, 'en')} on foot. The tram stops at the gate of the townhouse.`,
+    `You can leave a car in the garage by Plac Solny, ${minutesLabel(saltMinutes, 'en')} from the hotel. The Weekend for two package includes a place in the garage, and for other stays you can book one at reception.`,
   ],
-  mapLabel: `Route map from the Brelok hotel to the Market Square, ${hotel.minutesToSquare} minutes on foot`,
-  mapCaption: `Walking route, ${hotel.minutesToSquare} minutes`,
+  mapLabel: `Route map from the Brelok hotel to the Market Square, ${minutesLabel(hotel.minutesToSquare, 'en')} on foot`,
+  mapCaption: `Walking route, ${minutesLabel(hotel.minutesToSquare, 'en')}`,
   market: 'Market',
   formHeading: 'Write to reception',
   formLead: 'The message stays in this browser only, because this is a sample site.',

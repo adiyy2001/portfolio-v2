@@ -23,6 +23,19 @@ export const guestsLabel = (count: number, lang: Lang): string => {
   return last >= 2 && last <= 4 && (tens < 12 || tens > 14) ? `${count} osoby` : `${count} osób`;
 };
 
+export const guestsGenitive = (count: number, lang: Lang): string => {
+  if (lang === 'en') return guestsLabel(count, lang);
+  return count === 1 ? '1 osoby' : guestsLabel(count, lang).replace(/ osoby$/, ' osób');
+};
+
+export const minutesLabel = (count: number, lang: Lang): string => {
+  if (lang === 'en') return count === 1 ? '1 minute' : `${count} minutes`;
+  if (count === 1) return '1 minuta';
+  const last = count % 10;
+  const tens = count % 100;
+  return last >= 2 && last <= 4 && (tens < 12 || tens > 14) ? `${count} minuty` : `${count} minut`;
+};
+
 export const numberList = (numbers: readonly number[], lang: Lang): string => {
   const labels = numbers.map(padNumber);
   if (labels.length <= 1) return labels.join('');

@@ -53,7 +53,7 @@ const pl: Record<RoomId, RoomCopy> = {
     view: 'Okno z ciężką zasłoną',
     alt: 'Łóżko, okrągły stolik z krzesłami i ciężka zasłona w oknie',
     bed: width => `Łóżko ${width} cm i rozkładana sofa`,
-    intro: 'Cztery pokoje pod dachem, z skosami i ciężką zasłoną w oknie.',
+    intro: 'Cztery pokoje pod dachem, ze skosami i ciężką zasłoną w oknie.',
     paragraphs: [
       'Skosy sprawiają, że przy ścianie trzeba uważać na głowę, ale środek pokoju jest wysoki i widny. Ciężka zasłona zamyka okno do końca, więc można spać do południa.',
       'Przy oknie stoi okrągły stolik. Jeśli zamówią Państwo śniadanie do pokoju, podamy je właśnie tam. Sofa rozkłada się dla trzeciej osoby.',
@@ -71,7 +71,7 @@ const pl: Record<RoomId, RoomCopy> = {
     bed: width => `Łóżko ${width} cm i sofa w salonie`,
     intro: 'Salon i sypialnia, razem 75 metrów. Drugiego takiego apartamentu w kamienicy nie ma.',
     paragraphs: [
-      'Salon ma dwa wysokie okna, żyrandol i stół, przy którym zmieści się cztery osoby. Z okien widać wieże kościołów, a po południu na ścianie leży światło odbite od dachów.',
+      'Salon ma dwa wysokie okna, żyrandol i stół, przy którym zmieszczą się cztery osoby. Z okien widać wieże kościołów, a po południu na ścianie leży światło odbite od dachów.',
       'Sypialnia jest osobno, za drzwiami z szybą. Sofa w salonie rozkłada się dla trzeciej osoby, a dla czwartej jest dostawka.',
     ],
     features: ['Salon i sypialnia', 'Łazienka z wanną', 'Stół na cztery osoby', 'Dwa wysokie okna'],

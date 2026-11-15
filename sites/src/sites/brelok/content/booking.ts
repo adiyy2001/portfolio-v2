@@ -1,6 +1,6 @@
 import { hotel } from '../data/hotel';
 import type { Lang } from '../i18n/lang';
-import { formatMoney, guestsLabel } from '../lib/format';
+import { formatMoney, guestsGenitive, guestsLabel } from '../lib/format';
 
 const pl = {
   metaTitle: 'Rezerwacja. Brelok 1912, hotel butikowy we Wrocławiu',
@@ -17,11 +17,11 @@ const pl = {
     'Prosimy sprawdzić',
   ],
   departure: (date: string) => `Wyjazd: ${date}`,
-  guestsHint: (max: number) => `Do ${guestsLabel(max, 'pl')} w największym apartamencie`,
+  guestsHint: (max: number) => `Do ${guestsGenitive(max, 'pl')} w największym apartamencie`,
   roomLegend: 'Pokój',
   roomRate: (rate: number) => `${formatMoney(rate, 'pl')} za dobę`,
-  roomSub: (area: number, guests: number) => `${area} m², do ${guestsLabel(guests, 'pl')}`,
-  roomTooSmall: (guests: number) => `Za mało miejsca dla ${guestsLabel(guests, 'pl')}`,
+  roomSub: (area: number, guests: number) => `${area} m², do ${guestsGenitive(guests, 'pl')}`,
+  roomTooSmall: (guests: number) => `Za mało miejsca dla ${guestsGenitive(guests, 'pl')}`,
   packageLegend: 'Pakiet',
   noPackage: 'Bez pakietu',
   noPackageSub: 'Sam pokój. Śniadanie można dodać poniżej.',
