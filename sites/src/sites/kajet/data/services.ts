@@ -68,7 +68,8 @@ export const services: readonly Service[] = [
   {
     id: 'raport',
     title: 'Raport miesięczny dla właściciela',
-    summary: 'Jedna strona: przychody, koszty, zobowiązania i wynik firmy. Bez żargonu księgowego.',
+    summary:
+      'Jedna strona z przychodami, kosztami, zobowiązaniami i wynikiem firmy, napisana bez żargonu księgowego.',
     covers: [
       'przychody i koszty miesiąca na tle poprzednich',
       'zobowiązania wobec urzędu i ZUS z terminami',
@@ -129,7 +130,7 @@ export const processSteps: readonly ProcessStep[] = [
   {
     no: '01',
     title: 'Wycena',
-    text: `Wysyłasz e-mail, forma firmy i liczba faktur wystarczą. Odpowiadamy w ciągu ${facts.replyHours} godzin w dni robocze.`,
+    text: `Wysyłasz e-mail z formą firmy i liczbą faktur. Odpowiadamy w ciągu ${facts.replyHours} godzin w dni robocze.`,
   },
   {
     no: '02',
