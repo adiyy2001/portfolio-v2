@@ -335,6 +335,7 @@ html.js .nojs-torque {
 .call-alt {
   display: inline-flex;
   align-items: center;
+  gap: 0.4em;
   min-height: 44px;
   border-bottom: 2px solid var(--ink);
 }
