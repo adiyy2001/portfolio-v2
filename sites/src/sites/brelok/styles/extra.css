@@ -546,14 +546,15 @@ html:not(.js) .top .nav {
 
 .tickets {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
   align-items: stretch;
 }
 .pack {
   display: flex;
   flex-direction: column;
-  padding: 34px 24px 26px;
+  min-width: 0;
+  padding: 34px 16px 26px;
   text-align: center;
   border: 3px solid var(--ink);
   box-shadow:
@@ -581,10 +582,11 @@ html:not(.js) .top .nav {
 .pack h3 {
   font-family: var(--caps);
   font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 0.14em;
-  padding-left: 0.14em;
+  font-size: 19px;
+  letter-spacing: 0.1em;
+  padding-left: 0.1em;
   margin-top: 6px;
+  overflow-wrap: anywhere;
 }
 .pack .price {
   font-family: var(--num);
@@ -607,12 +609,17 @@ html:not(.js) .top .nav {
 .pack .leaders {
   margin-top: auto;
 }
+.pack .leaders dd.text {
+  font-size: 16px;
+  white-space: normal;
+  text-align: right;
+}
 .pack .actions {
   margin-top: 20px;
 }
 .pack .bullets {
   font-size: 17px;
-  margin: 0 0 8px;
+  margin: 14px 0 8px;
 }
 
 .walks {
@@ -1206,4 +1213,15 @@ html.js .noscript-note {
   .ghost {
     justify-content: center;
   }
+}
+
+.karta-in.single {
+  display: block;
+}
+
+.flow .choices + .choices {
+  margin-top: 30px;
+}
+.choice input:disabled:checked + label {
+  opacity: 0.85;
 }
