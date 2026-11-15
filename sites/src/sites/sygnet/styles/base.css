@@ -1159,6 +1159,9 @@ caption {
     border-top: var(--rule-minor) solid var(--black);
     padding: 0 var(--margin) 24px 0;
   }
+  .form-done:focus {
+    outline-offset: 0;
+  }
   .form-done dl div {
     grid-template-columns: 110px 1fr;
   }

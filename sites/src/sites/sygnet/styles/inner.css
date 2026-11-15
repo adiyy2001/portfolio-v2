@@ -721,7 +721,7 @@
   font-size: clamp(30px, 3.6vw, 54px);
   font-weight: 900;
   font-variation-settings: 'opsz' 14;
-  line-height: 1;
+  line-height: 1.1;
   letter-spacing: -0.015em;
 }
 .cta p {
@@ -1008,6 +1008,10 @@
   .prose h2 {
     margin-top: 32px;
   }
+  .prose-table caption {
+    display: block;
+    width: 100%;
+  }
   .prose-table,
   .prose-table tbody,
   .prose-table tr,
@@ -1060,6 +1064,9 @@
   }
   .hours-wide {
     display: block;
+  }
+  .hours-wide .hours {
+    margin-left: 0;
   }
   .cta {
     display: block;
