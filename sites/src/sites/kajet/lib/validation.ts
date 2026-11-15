@@ -60,19 +60,27 @@ export const firstInvalidField = (errors: QuoteErrors): QuoteField | null =>
   quoteFieldOrder.find(field => errors[field]) ?? null;
 
 export interface QuotePrefill {
+  email: string | null;
   forma: 'osoba' | 'spolka' | null;
   faktur: number | null;
   plan: string | null;
 }
 
+const formaFromParam = (value: string | null): 'osoba' | 'spolka' | null => {
+  if (value === 'osoba' || value === 'osoba fizyczna') return 'osoba';
+  if (value === 'spolka' || value === 'spółka z o.o.') return 'spolka';
+  return null;
+};
+
 export const parseQuoteParams = (search: string): QuotePrefill => {
   const params = new URLSearchParams(search);
-  const forma = params.get('forma');
+  const email = params.get('email');
   const faktur = params.get('faktur');
   const plan = params.get('plan');
   const count = faktur === null ? null : parseInvoiceCount(faktur);
   return {
-    forma: forma === 'osoba' || forma === 'spolka' ? forma : null,
+    email: email !== null && isValidEmail(email) ? email.trim() : null,
+    forma: formaFromParam(params.get('forma')),
     faktur: count,
     plan: plan === 'maly' || plan === 'sredni' || plan === 'duzy' ? plan : null,
   };

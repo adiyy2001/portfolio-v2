@@ -154,5 +154,4 @@ export const annualDeadlines: readonly AnnualDeadline[] = [
 export const annualDate = (item: AnnualDeadline): Date =>
   deadlineDate(annualYear, item.month, item.day);
 
-export const monthWindowStart = { year: 2026, month: 10 } as const;
 export const monthWindowLength = 12;

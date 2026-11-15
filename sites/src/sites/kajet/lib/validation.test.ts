@@ -76,15 +76,24 @@ describe('helpers', () => {
 describe('parseQuoteParams', () => {
   it('reads valid params and drops the rest', () => {
     expect(parseQuoteParams('?forma=spolka&faktur=85&plan=sredni')).toEqual({
+      email: null,
       forma: 'spolka',
       faktur: 85,
       plan: 'sredni',
     });
     expect(parseQuoteParams('?forma=x&faktur=-1&plan=huge')).toEqual({
+      email: null,
       forma: null,
       faktur: null,
       plan: null,
     });
-    expect(parseQuoteParams('')).toEqual({ forma: null, faktur: null, plan: null });
+    expect(parseQuoteParams('')).toEqual({ email: null, forma: null, faktur: null, plan: null });
+  });
+
+  it('reads the labels and the email sent by the short form', () => {
+    expect(
+      parseQuoteParams('?email=ewa%40firma.example&forma=sp%C3%B3%C5%82ka%20z%20o.o.&faktur=12'),
+    ).toEqual({ email: 'ewa@firma.example', forma: 'spolka', faktur: 12, plan: null });
+    expect(parseQuoteParams('?email=nie-adres').email).toBeNull();
   });
 });

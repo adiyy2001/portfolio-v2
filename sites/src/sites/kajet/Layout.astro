@@ -1,0 +1,92 @@
+---
+import { link } from '../../shared/link';
+import Footer from './components/Footer.astro';
+import Header from './components/Header.astro';
+import { business, type NavKey } from './data/site';
+import { fontFaceCss, fontUrl } from './fonts';
+import './styles/kajet.css';
+import './styles/pages.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: NavKey;
+}
+
+const { title, description, path, current } = Astro.props;
+const canonical = new URL(link(path), Astro.site).href;
+const image = new URL(link('/kajet/og.png'), Astro.site).href;
+const imageAlt = 'Kajet, biuro rachunkowe z Gajowic: panel klienta z kwotą do zapłaty, terminem i podstawą wyliczenia';
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content={business.themeColor} />
+    <link rel="icon" type="image/svg+xml" href={link('/kajet/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={business.name} />
+    <meta property="og:locale" content={business.locale} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href={fontUrl} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaceCss}></style>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      try {
+        var keys = localStorage.getItem('kajet-keys');
+        var coarse = window.matchMedia('(pointer: coarse)').matches;
+        if (keys === 'off' || (keys === null && coarse)) document.documentElement.classList.add('keys-off');
+      } catch (e) {}
+    </script>
+    <noscript>
+      <style>
+        .js-only {
+          display: none !important;
+        }
+        .nojs-note {
+          display: block !important;
+        }
+        .hero {
+          height: auto !important;
+          min-height: 0 !important;
+          display: block !important;
+        }
+        .hero-grid {
+          grid-template-columns: minmax(0, 1fr) !important;
+        }
+        .col-a {
+          border-right: 0 !important;
+          max-width: 60ch;
+        }
+        .legend,
+        .kb {
+          display: none !important;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <a class="skip" href="#glowny">Przejdź do treści</a>
+    <Header current={current} />
+    <main id="glowny" tabindex="-1">
+      <slot />
+    </main>
+    <Footer current={current} />
+    <slot name="scripts" />
+  </body>
+</html>
