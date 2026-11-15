@@ -596,10 +596,10 @@
 }
 @media (max-width: 700px) {
   .types {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .gallery {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .gallery li.wide img {
     aspect-ratio: 3/2;
