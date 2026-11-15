@@ -1154,6 +1154,11 @@ main:focus {
     clip-path: inset(50%);
   }
 
+  .price-table caption {
+    display: block;
+    width: 100%;
+  }
+
   .price-table,
   .price-table tbody,
   .price-table tr,
