@@ -46,6 +46,7 @@ export const ContactForm = () => {
     setValues(emptyContact);
     setErrors({});
     setSent(null);
+    requestAnimationFrame(() => document.getElementById(fieldIds.name)?.focus());
   };
 
   if (sent) {

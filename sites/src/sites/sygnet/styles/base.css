@@ -532,6 +532,7 @@ caption {
   margin: 0 calc(var(--margin) * -1) 0 -24px;
   line-height: 1.1;
 }
+.hours h2,
 .hours h3 {
   font-size: 30px;
   font-weight: 900;

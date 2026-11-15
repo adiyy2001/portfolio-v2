@@ -542,9 +542,11 @@
   letter-spacing: -0.015em;
   margin-top: 6px;
 }
-.fact p {
+.fact .fact-note {
   font-size: 16px;
   font-weight: 600;
+  font-variation-settings: normal;
+  letter-spacing: normal;
   line-height: 1.35;
   margin-top: 8px;
   max-width: 34ch;

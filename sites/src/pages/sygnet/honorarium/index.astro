@@ -45,20 +45,24 @@ const groups = areas.map(area => ({
       <div class="fact">
         <dt>Pierwsza rozmowa</dt>
         <dd>{formatPln(firm.firstTalkPricePln)}</dd>
-        <p>{firm.firstTalkMinutes} minut, raz na sprawę. Po niej wiesz, czy i jak możemy pomóc.</p>
+        <dd class="fact-note">
+          {firm.firstTalkMinutes} minut, raz na sprawę. Po niej wiesz, czy i jak możemy pomóc.
+        </dd>
       </div>
       <div class="fact">
         <dt>Praca według godzin</dt>
         <dd>{formatPln(hourlyNetPln)}</dd>
-        <p>
+        <dd class="fact-note">
           Netto za godzinę pracy, czyli {formatPln(hourlyGrossPln)} brutto. Czas liczymy co{' '}
           {billingStepMinutes} minut.
-        </p>
+        </dd>
       </div>
       <div class="fact">
         <dt>Ryczałt</dt>
         <dd>od {formatPln(lowestFee)}</dd>
-        <p>Netto, jednorazowo za opisaną czynność, od {formatPln(grossOf(lowestFee))} brutto.</p>
+        <dd class="fact-note">
+          Netto, jednorazowo za opisaną czynność, od {formatPln(grossOf(lowestFee))} brutto.
+        </dd>
       </div>
     </dl>
   </section>

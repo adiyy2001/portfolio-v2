@@ -1,13 +1,20 @@
 ---
 import { firm } from '../data/site';
 import { tie } from '../lib/tie';
+
+interface Props {
+  level?: 'h2' | 'h3';
+}
+
+const { level = 'h3' } = Astro.props;
+const Heading = level;
 ---
 
 <div class="hours">
   <p class="hours-live" data-live-block>
     Rozmawiamy w dni robocze od {firm.hours.weekdaysRange}
   </p>
-  <h3>Godziny i adres</h3>
+  <Heading>Godziny i adres</Heading>
   <dl>
     <div>
       <dt>{firm.hours.weekdaysLabel}</dt>
