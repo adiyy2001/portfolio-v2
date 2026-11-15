@@ -1,0 +1,43 @@
+---
+import { link } from '../../../shared/link';
+import Panel from '../components/Panel.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { voucherText } from '../content/voucher';
+import { hotel } from '../data/hotel';
+import { pagePath } from '../i18n/lang';
+import type { Lang } from '../i18n/lang';
+import { VoucherBuilder } from '../islands/VoucherBuilder';
+import Layout from '../layouts/Layout.astro';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = voucherText[lang];
+---
+
+<Layout lang={lang} pageKey="voucher" title={text.metaTitle} description={text.metaDescription}>
+  <Panel labelledby="voucher-h" first>
+    <SectionHead id="voucher-h" level="h1">
+      {text.heading}
+    </SectionHead>
+    <p class="lead">{text.lead}</p>
+    <p class="noscript-note">{text.noScript}</p>
+    <VoucherBuilder client:only="preact" lang={lang} />
+    <h2 class="sub">{text.howHeading}</h2>
+    <div class="prose">
+      {text.how.map(paragraph => (
+        <p>{paragraph}</p>
+      ))}
+    </div>
+    <p class="actions">
+      <a class="ticket" href={link(pagePath('rooms', lang))}>
+        {text.ctaRooms}
+      </a>
+      <a class="ticket" href={hotel.phoneHref}>
+        {text.ctaContact}
+      </a>
+    </p>
+  </Panel>
+</Layout>
