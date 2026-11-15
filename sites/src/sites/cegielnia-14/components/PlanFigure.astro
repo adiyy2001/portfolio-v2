@@ -1,0 +1,56 @@
+---
+import { type LoftType, roomsTotal } from '../data';
+import { m2 } from '../format';
+import { planNote } from '../copy';
+import { buildPlan } from '../plan';
+
+interface Props {
+  type: LoftType;
+  heading?: string;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { type, heading, headingLevel = 'h3' } = Astro.props;
+const plan = buildPlan(type);
+const note = [planNote.base, planNote.extra[type.key]].filter(Boolean).join(' ');
+const Heading = headingLevel;
+const description = `Rzut z góry, północ u góry, okna od południa na dole.${type.key === '37' ? ' W salonie oznaczono piec.' : ''} Pomieszczenia i ich powierzchnie są w tabeli obok.`;
+---
+
+<div class="dos-plan" data-reveal>
+  {heading && (
+    <Heading class="mark" id={`plan-${type.key}-h`}>
+      {heading}
+    </Heading>
+  )}
+  <svg
+    class="plan"
+    viewBox={plan.viewBox}
+    role="img"
+    aria-labelledby={`pt-${type.key} pd-${type.key}`}
+    style={`--vw:${plan.width}`}>
+    <title id={`pt-${type.key}`}>{plan.title}</title>
+    <desc id={`pd-${type.key}`}>{description}</desc>
+    <Fragment set:html={plan.markup} />
+  </svg>
+  <table class="rooms">
+    <caption class="sr">Pomieszczenia lofta{type.area}&nbsp;m²</caption>
+    <tbody>
+      {type.roomList.map((room, i) => (
+        <tr>
+          <td>{i + 1}</td>
+          <th scope="row">{room.name}</th>
+          <td>{m2(room.area, 1)}</td>
+        </tr>
+      ))}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <th scope="row">Razem</th>
+        <td>{m2(roomsTotal(type), 1)}</td>
+      </tr>
+    </tfoot>
+  </table>
+  <p class="plan-note">{note}</p>
+</div>

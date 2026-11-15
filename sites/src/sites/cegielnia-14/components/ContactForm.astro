@@ -1,0 +1,169 @@
+---
+import { form } from '../copy';
+import { types } from '../data';
+import { m2 } from '../format';
+import { site } from '../site';
+
+interface Props {
+  variant: 'quick' | 'full';
+  id?: string;
+  scene?: boolean;
+  heading?: string;
+  lead?: string;
+  headingLevel?: 'h2' | 'h3';
+  unitCode?: string;
+}
+
+const {
+  variant,
+  id = 'pokaz',
+  scene = false,
+  heading,
+  lead,
+  headingLevel = 'h3',
+  unitCode,
+} = Astro.props;
+const Heading = headingLevel;
+const full = variant === 'full';
+const fid = (name: string) => `${id}-${name}`;
+---
+
+<div
+  class:list={[scene ? 'block' : 'contact-form', 'contact']}
+  data-reveal={scene ? '' : undefined}>
+  {heading && (
+    <Heading class="mark" id={fid('h')}>
+      {heading}
+    </Heading>
+  )}
+  {lead && <p class="body">{lead}</p>}
+  <form
+    id={id}
+    novalidate
+    data-form={variant}
+    data-unit={unitCode}
+    aria-labelledby={heading ? fid('h') : undefined}
+    class="form">
+    <div class="summary" role="alert" hidden data-summary>
+      <p data-summary-title></p>
+      <ul data-summary-list></ul>
+    </div>
+    <div class="f" data-field="name">
+      <label class="mark" for={fid('name')}>
+        {form.name}
+      </label>
+      <input
+        id={fid('name')}
+        type="text"
+        name="name"
+        autocomplete="given-name"
+        required
+        aria-describedby={fid('name-err')}
+      />
+      <p class="err" id={fid('name-err')} hidden data-error></p>
+    </div>
+    <div class="f" data-field="phone">
+      <label class="mark" for={fid('phone')}>
+        {form.phone}
+      </label>
+      <input
+        id={fid('phone')}
+        type="tel"
+        name="phone"
+        autocomplete="tel"
+        inputmode="tel"
+        required
+        aria-describedby={fid('phone-err')}
+      />
+      <p class="err" id={fid('phone-err')} hidden data-error></p>
+    </div>
+    {full && (
+      <>
+        <div class="f" data-field="email">
+          <label class="mark" for={fid('email')}>
+            {form.email}
+          </label>
+          <input
+            id={fid('email')}
+            type="email"
+            name="email"
+            autocomplete="email"
+            aria-describedby={`${fid('email-hint')} ${fid('email-err')}`}
+          />
+          <p class="hint" id={fid('email-hint')}>
+            {form.emailHint}
+          </p>
+          <p class="err" id={fid('email-err')} hidden data-error></p>
+        </div>
+        {unitCode ? (
+          <input type="hidden" name="loft" value={unitCode} />
+        ) : (
+          <div class="f" data-field="loft">
+            <label class="mark" for={fid('loft')}>
+              {form.loft}
+            </label>
+            <select id={fid('loft')} name="loft">
+              <option value="">{form.loftAny}</option>
+              {types.map(type => (
+                <option value={type.key}>
+                  {m2(type.area)}, {type.floor.toLowerCase()}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+        <div class="f" data-field="message">
+          <label class="mark" for={fid('message')}>
+            {form.message}
+          </label>
+          <textarea
+            id={fid('message')}
+            name="message"
+            rows="4"
+            aria-describedby={`${fid('message-hint')} ${fid('message-err')}`}></textarea>
+          <p class="hint" id={fid('message-hint')}>
+            {form.messageHint}
+          </p>
+          <p class="err" id={fid('message-err')} hidden data-error></p>
+        </div>
+        <div class="consent-field" data-field="consent">
+          <label class="consent" for={fid('consent')}>
+            <input
+              id={fid('consent')}
+              type="checkbox"
+              name="consent"
+              aria-describedby={fid('consent-err')}
+            />
+            <span>{form.consent}</span>
+          </label>
+          <p class="err" id={fid('consent-err')} hidden data-error></p>
+        </div>
+      </>
+    )}
+    {!full && unitCode && <input type="hidden" name="loft" value={unitCode} />}
+    <button type="submit" class="link">
+      <span>{full ? form.submitFull : form.submit}</span>
+      <i aria-hidden="true"></i>
+    </button>
+    {!full && <p class="note">{form.quickNote}</p>}
+    <div class="done" tabindex="-1" hidden data-done>
+      <h3 data-done-title></h3>
+      <p class="body">{form.doneText}</p>
+      <button type="button" class="link" data-again>
+        <span>{form.again}</span>
+        <i aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+  <p class="note no-js-note">
+    {form.noScriptLead}
+    <a class="tel" href={site.phoneHref}>
+      {site.phone}
+    </a>
+    {form.noScriptOr}
+    <a class="tel" href={`mailto:${site.email}`}>
+      {site.email}
+    </a>
+    .
+  </p>
+</div>

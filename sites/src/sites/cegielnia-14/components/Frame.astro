@@ -1,0 +1,35 @@
+---
+import { lowestPrice, type LoftType } from '../data';
+import { m2, zl } from '../format';
+import { frameOf } from '../images';
+import Pic from './Pic.astro';
+
+interface Props {
+  type: LoftType;
+}
+
+const { type } = Astro.props;
+const photo = frameOf(type.key);
+const mirrored = type.key === '112';
+---
+
+<section
+  class:list={['scene', 'frame', mirrored && 'right']}
+  id={type.frameId}
+  aria-labelledby={`${type.frameId}-h`}>
+  <Pic photo={photo} class="bg" />
+  <div class="shade" aria-hidden="true"></div>
+  <div class="block cap" data-reveal>
+    <p class="row">
+      <span>{type.floor}</span>
+      <span>{m2(type.area)}</span>
+      <span>od {zl(lowestPrice(type.key))}</span>
+    </p>
+    <h2 id={`${type.frameId}-h`}>{type.headline}</h2>
+    <p class="body">{type.summary}</p>
+    <a class="link" href={`#plan-${type.key}`}>
+      <span>Rzut i wnętrze</span>
+      <i aria-hidden="true"></i>
+    </a>
+  </div>
+</section>

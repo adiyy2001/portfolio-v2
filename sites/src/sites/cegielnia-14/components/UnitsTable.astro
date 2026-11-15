@@ -1,0 +1,136 @@
+---
+import { unitsPage } from '../copy';
+import {
+  availableOf,
+  floorOptions,
+  lowestPrice,
+  roomsLabel,
+  statusLabel,
+  type Status,
+  typeByKey,
+  types,
+  units,
+} from '../data';
+import { m2, zl } from '../format';
+import { rowOf } from '../filter';
+import { url } from '../site';
+
+const roomValues = [...new Set(types.map(type => type.rooms))].sort((a, b) => a - b);
+const statuses = Object.keys(statusLabel) as Status[];
+---
+
+<section class="wrap" aria-labelledby="uklady-h">
+  <h2 id="uklady-h" class="mark">
+    {unitsPage.summaryLabel}
+  </h2>
+  <ul class="types">
+    {types.map(type => (
+      <li>
+        <span class="area">{m2(type.area)}</span>
+        <span class="meta">
+          {type.floor}, {roomsLabel(type.rooms)}
+          <br />
+          {unitsPage.typeFree(availableOf(type.key), type.count)}
+        </span>
+        <span class="from">od {zl(lowestPrice(type.key))}</span>
+        <a class="link" href={`${url('mieszkania/')}?pietro=${type.floorKey}`}>
+          <span>{unitsPage.typeLink}</span>
+          <i aria-hidden="true"></i>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <form class="filters" role="search" aria-label={unitsPage.filterLabel} data-filters novalidate>
+    <div class="filters-row">
+      <fieldset>
+        <legend class="mark">{unitsPage.legend.rooms}</legend>
+        <div class="chips">
+          {roomValues.map(value => (
+            <label>
+              <input type="checkbox" name="pokoje" value={value} />
+              <span>{roomsLabel(value)}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend class="mark">{unitsPage.legend.floor}</legend>
+        <div class="chips">
+          {floorOptions.map(option => (
+            <label>
+              <input type="checkbox" name="pietro" value={option.key} />
+              <span>{option.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend class="mark">{unitsPage.legend.status}</legend>
+        <div class="chips">
+          {statuses.map(status => (
+            <label>
+              <input type="checkbox" name="status" value={status} />
+              <span>{statusLabel[status]}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    </div>
+    <div class="filters-bar">
+      <p class="count" role="status" data-count>
+        {unitsPage.count(units.length, units.length)}
+      </p>
+      <button type="reset" class="link" data-reset hidden>
+        <span>{unitsPage.reset}</span>
+        <i aria-hidden="true"></i>
+      </button>
+    </div>
+  </form>
+  <p class="note no-js-note">{unitsPage.noScript}</p>
+
+  <div class="units-wrap">
+    <table class="units">
+      <caption class="sr">{unitsPage.tableLabel}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{unitsPage.cols.loft}</th>
+          <th scope="col">{unitsPage.cols.floor}</th>
+          <th scope="col">{unitsPage.cols.rooms}</th>
+          <th scope="col" class="num">
+            {unitsPage.cols.area}
+          </th>
+          <th scope="col" class="num">
+            {unitsPage.cols.price}
+          </th>
+          <th scope="col">{unitsPage.cols.status}</th>
+        </tr>
+      </thead>
+      <tbody data-rows>
+        {units.map(unit => {
+          const type = typeByKey(unit.type);
+          const row = rowOf(unit);
+          return (
+            <tr data-rooms={row.rooms} data-floor={row.floor} data-status={row.status}>
+              <th scope="row">
+                <a href={url(`mieszkania/${unit.slug}/`)}>{unit.code}</a>
+              </th>
+              <td class="cell-floor">{type.floor}</td>
+              <td class="cell-rooms">{roomsLabel(type.rooms)}</td>
+              <td class="num cell-area">{m2(type.area)}</td>
+              <td class="num cell-price">{zl(unit.price)}</td>
+              <td class={`state ${unit.status}`}>{statusLabel[unit.status]}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+    <div class="empty" data-empty>
+      <p>{unitsPage.empty}</p>
+      <button type="button" class="link" data-reset-empty>
+        <span>{unitsPage.reset}</span>
+        <i aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</section>

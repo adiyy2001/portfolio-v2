@@ -1,0 +1,110 @@
+---
+import { sun } from '../copy';
+import { types } from '../data';
+import { comma, m2 } from '../format';
+import { photos } from '../images';
+import { dayHours, dayKeys, days } from '../sun';
+
+const defaultLoft = '64';
+---
+
+<section class="scene sun" id="slonce" aria-labelledby="slonce-h" data-sun>
+  <img
+    class="bg"
+    src={photos.sunDark.src}
+    alt=""
+    width={photos.sunDark.width}
+    height={photos.sunDark.height}
+    loading="lazy"
+    decoding="async"
+  />
+  <img
+    class="bg lit"
+    id="lit"
+    src={photos.sunLit.src}
+    alt={photos.sunLit.alt}
+    width={photos.sunLit.width}
+    height={photos.sunLit.height}
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="shade" aria-hidden="true"></div>
+  <div class="block left" data-reveal>
+    <p class="mark">{sun.mark}</p>
+    <h2 id="slonce-h">{sun.headline}</h2>
+    <p class="body">{sun.intro}</p>
+    <fieldset class="picks">
+      <legend class="mark">Loft</legend>
+      {types.map(type => (
+        <label>
+          <input type="radio" name="loft" value={type.key} checked={type.key === defaultLoft} />
+          <span>{m2(type.area)}</span>
+        </label>
+      ))}
+    </fieldset>
+    <fieldset class="days">
+      <legend class="mark">Dzień roku</legend>
+      {dayKeys.map(key => (
+        <label>
+          <input type="radio" name="day" value={key} checked={key === 'jun'} />
+          <span>{days[key].label}</span>
+          <b data-hours={key}></b>
+        </label>
+      ))}
+    </fieldset>
+    <div class="clockline">
+      <label class="mark" for="time">
+        Godzina
+      </label>
+      <span class="time-out" id="time-out" aria-hidden="true">
+        13:00
+      </span>
+    </div>
+    <input
+      id="time"
+      class="range"
+      type="range"
+      min="8"
+      max="18"
+      step="0.25"
+      value="13"
+      aria-label={sun.rangeLabel}
+      aria-valuetext="13:00"
+    />
+    <div class="scale mark" aria-hidden="true">
+      <span>8:00</span>
+      <span>18:00</span>
+    </div>
+    <div class="daybar" id="daybar" aria-hidden="true"></div>
+    <button type="button" class="link" id="play">
+      <span id="play-text">{sun.play}</span>
+      <i aria-hidden="true"></i>
+    </button>
+    <p class="body readout" id="sun-caption" aria-hidden="true"></p>
+    <p class="sr" id="sun-status" role="status"></p>
+    <div class="sun-static">
+      <table>
+        <caption class="mark">{sun.tableCaption}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Loft</th>
+            {dayKeys.map(key => (
+              <th scope="col">{days[key].label}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {types.map(type => (
+            <tr>
+              <th scope="row">{m2(type.area)}</th>
+              {dayKeys.map(key => (
+                <td>{comma(dayHours(type.key, key))}&nbsp;godz.</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="plan-note">{sun.note}</p>
+  </div>
+</section>

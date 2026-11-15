@@ -1,0 +1,26 @@
+---
+import type { Photo } from '../images';
+
+interface Props {
+  photo: Photo;
+  class?: string;
+  lazy?: boolean;
+  priority?: boolean;
+  decorative?: boolean;
+}
+
+const { photo, class: className, lazy = true, priority = false, decorative = false } = Astro.props;
+---
+
+<picture class={className}>
+  {photo.tall && <source media="(max-width: 700px)" srcset={photo.tall} />}
+  <img
+    src={photo.src}
+    alt={decorative ? '' : photo.alt}
+    width={photo.width}
+    height={photo.height}
+    loading={priority || !lazy ? undefined : 'lazy'}
+    fetchpriority={priority ? 'high' : undefined}
+    decoding={priority ? undefined : 'async'}
+  />
+</picture>

@@ -1,0 +1,43 @@
+---
+import type { Photo } from '../images';
+import { url } from '../site';
+import Pic from './Pic.astro';
+
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  crumbs: Crumb[];
+  mark: string;
+  title: string;
+  lead?: string;
+  photo: Photo;
+}
+
+const { crumbs, mark, title, lead, photo } = Astro.props;
+const trail = [{ label: 'Strona główna', href: url() }, ...crumbs];
+---
+
+<header class="page-head">
+  <Pic photo={photo} decorative />
+  <div class="page-head-in">
+    <nav aria-label="Ścieżka">
+      <ol class="crumbs">
+        {trail.map((crumb, i) => (
+          <li>
+            {crumb.href && i < trail.length - 1 ? (
+              <a href={crumb.href}>{crumb.label}</a>
+            ) : (
+              <span aria-current="page">{crumb.label}</span>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <p class="mark">{mark}</p>
+    <h1>{title}</h1>
+    {lead && <p class="body">{lead}</p>}
+  </div>
+</header>

@@ -1,0 +1,65 @@
+---
+import { availableOf, basePerM2, lowestPrice, type LoftType } from '../data';
+import { interiorSrc } from '../images';
+import { interiorCaption } from '../copy';
+import { m2, zl } from '../format';
+import { url } from '../site';
+import PlanFigure from './PlanFigure.astro';
+
+interface Props {
+  type: LoftType;
+}
+
+const { type } = Astro.props;
+const planHeading = `Rzut ${type.floorPlan}, ${m2(type.area)}`;
+const available = availableOf(type.key);
+---
+
+<section class="dossier" id={`plan-${type.key}`} aria-labelledby={`plan-${type.key}-h`}>
+  <div class="dos-in">
+    <PlanFigure type={type} heading={planHeading} headingLevel="h3" />
+    <div class="dos-side" data-reveal>
+      <figure class="shot">
+        <img
+          src={interiorSrc(type.key)}
+          alt={type.interiorAlt}
+          width="1200"
+          height="800"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption>{interiorCaption}</figcaption>
+      </figure>
+      <dl class="price">
+        <div>
+          <dt>Cena</dt>
+          <dd>od {zl(lowestPrice(type.key))}</dd>
+        </div>
+        <div>
+          <dt>Za metr kwadratowy</dt>
+          <dd>{zl(basePerM2(type))}</dd>
+        </div>
+        <div>
+          <dt>Wolne lofty</dt>
+          <dd>
+            {available} z {type.count}
+          </dd>
+        </div>
+      </dl>
+      <div class="acts">
+        <a class="link" href="#slonce" data-pick={type.key}>
+          <span>Sprawdź słońce</span>
+          <i aria-hidden="true"></i>
+        </a>
+        <a class="link" href="#pokaz">
+          <span>Umów pokaz</span>
+          <i aria-hidden="true"></i>
+        </a>
+        <a class="link" href={`${url('mieszkania/')}?pietro=${type.floorKey}`}>
+          <span>Lista tego układu</span>
+          <i aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

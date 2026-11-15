@@ -1,0 +1,65 @@
+---
+import { where } from '../copy';
+
+const cx = 210;
+const cy = 220;
+const scale = 20;
+const angles = [215, 325, 40, 145];
+const rad = (deg: number) => (deg * Math.PI) / 180;
+const clamp = (value: number, low: number, high: number) => Math.min(high, Math.max(low, value));
+
+const splitLines = (text: string) => {
+  if (text.length <= 16) return [text];
+  const words = text.split(' ');
+  let best = 1;
+  let gap = Infinity;
+  for (let i = 1; i < words.length; i++) {
+    const left = words.slice(0, i).join(' ').length;
+    const right = words.slice(i).join(' ').length;
+    if (Math.abs(left - right) < gap) {
+      gap = Math.abs(left - right);
+      best = i;
+    }
+  }
+  return [words.slice(0, best).join(' '), words.slice(best).join(' ')];
+};
+
+const points = where.near.map((item, i) => {
+  const r = item.minutes * scale;
+  const x = cx + r * Math.cos(rad(angles[i]));
+  const y = cy + r * Math.sin(rad(angles[i]));
+  const above = Math.sin(rad(angles[i])) < 0;
+  const lines = splitLines(item.place);
+  const labelX = clamp(x, 70, 350);
+  const firstY = above ? y - 14 - (lines.length - 1) * 16 - 16 : y + 20;
+  return { ...item, r, x, y, lines, labelX, firstY };
+});
+---
+
+<svg class="diagram" viewBox="0 0 420 440" aria-hidden="true" focusable="false">
+  {points.map(point => (
+    <>
+      <circle class={point.minutes === 10 ? 'ring outer' : 'ring'} cx={cx} cy={cy} r={point.r} />
+      <line class="spoke" x1={cx} y1={cy} x2={point.x.toFixed(1)} y2={point.y.toFixed(1)} />
+    </>
+  ))}
+  {points.map(point => (
+    <>
+      <circle class="dot" cx={point.x.toFixed(1)} cy={point.y.toFixed(1)} r="4" />
+      <text x={point.labelX.toFixed(1)} y={point.firstY.toFixed(1)} text-anchor="middle">
+        {point.lines.map((line, i) => (
+          <tspan x={point.labelX.toFixed(1)} dy={i === 0 ? 0 : 16}>
+            {line}
+          </tspan>
+        ))}
+        <tspan class="min" x={point.labelX.toFixed(1)} dy="16">
+          {point.minutes} min pieszo
+        </tspan>
+      </text>
+    </>
+  ))}
+  <circle class="core" cx={cx} cy={cy} r="9" />
+  <text class="self" x={cx} y={cy + 28} text-anchor="middle">
+    Cegielnia 14
+  </text>
+</svg>
