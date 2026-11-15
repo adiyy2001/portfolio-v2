@@ -42,7 +42,8 @@ const pl = {
     callNote: 'Recepcja oddzwoni na podany numer.',
     callAlt: 'albo zadzwoń',
     fullBooking: 'Rezerwacja z pakietem i śniadaniem',
-    noScript: 'Karta meldunkowa wymaga JavaScriptu. Prosimy zadzwonić do recepcji albo przejść do pełnej rezerwacji.',
+    noScript:
+      'Karta meldunkowa wymaga JavaScriptu. Prosimy zadzwonić do recepcji albo przejść do pełnej rezerwacji.',
     doneHeading: 'Zapytanie przyjęte',
     doneLead: (name: string, phone: string) =>
       `Dziękujemy, ${name}. Recepcja oddzwoniłaby na numer ${phone}, żeby potwierdzić termin.`,
@@ -55,15 +56,32 @@ const pl = {
     urgent: 'Gdy termin jest pilny, recepcja czynna całą dobę:',
     seeBooking: 'Zobacz w Mojej rezerwacji',
     again: 'Nowe zapytanie',
-    saveFailed: 'Przeglądarka nie pozwoliła zapisać zapytania. Prosimy spróbować jeszcze raz albo zadzwonić do recepcji.',
+    saveFailed:
+      'Przeglądarka nie pozwoliła zapisać zapytania. Prosimy spróbować jeszcze raz albo zadzwonić do recepcji.',
   },
   day: {
     heading: 'Oto jak mija doba',
     steps: [
-      { spoken: 'godzina piętnasta', when: 'Dzień pierwszy', what: 'Zameldowanie. Klucz dostają Państwo do ręki, nie na karcie.' },
-      { spoken: 'godzina dziewiętnasta', when: 'Wieczór', what: 'Szklanka wina czeka w salonie na parterze.' },
-      { spoken: 'godzina ósma', when: 'Dzień drugi', what: 'Śniadanie podajemy przy długim stole w dawnej sieni.' },
-      { spoken: 'godzina dwunasta', when: 'Wyjazd', what: 'Wymeldowanie. Bagaż może zostać w recepcji do wieczora.' },
+      {
+        spoken: 'godzina piętnasta',
+        when: 'Dzień pierwszy',
+        what: 'Zameldowanie. Klucz dostają Państwo do ręki, nie na karcie.',
+      },
+      {
+        spoken: 'godzina dziewiętnasta',
+        when: 'Wieczór',
+        what: 'Szklanka wina czeka w salonie na parterze.',
+      },
+      {
+        spoken: 'godzina ósma',
+        when: 'Dzień drugi',
+        what: 'Śniadanie podajemy przy długim stole w dawnej sieni.',
+      },
+      {
+        spoken: 'godzina dwunasta',
+        when: 'Wyjazd',
+        what: 'Wymeldowanie. Bagaż może zostać w recepcji do wieczora.',
+      },
     ],
     breakfast: 'Śniadanie',
     packages: 'Pakiety',
@@ -123,7 +141,8 @@ const en: typeof pl = {
     callNote: 'Reception will call you back on this number.',
     callAlt: 'or call',
     fullBooking: 'Booking with a package and breakfast',
-    noScript: 'The registration card needs JavaScript. Please call reception or go to the full booking page.',
+    noScript:
+      'The registration card needs JavaScript. Please call reception or go to the full booking page.',
     doneHeading: 'Enquiry received',
     doneLead: (name: string, phone: string) =>
       `Thank you, ${name}. Reception would call you back on ${phone} to confirm the dates.`,
@@ -141,10 +160,26 @@ const en: typeof pl = {
   day: {
     heading: 'How a night goes',
     steps: [
-      { spoken: 'three in the afternoon', when: 'Day one', what: 'Check-in. The key is handed to you, not left on a card.' },
-      { spoken: 'seven in the evening', when: 'Evening', what: 'A glass of wine waits in the ground floor salon.' },
-      { spoken: 'eight in the morning', when: 'Day two', what: 'Breakfast is served at the long table in the old entrance hall.' },
-      { spoken: 'twelve noon', when: 'Departure', what: 'Check-out. Your luggage can stay at reception until evening.' },
+      {
+        spoken: 'three in the afternoon',
+        when: 'Day one',
+        what: 'Check-in. The key is handed to you, not left on a card.',
+      },
+      {
+        spoken: 'seven in the evening',
+        when: 'Evening',
+        what: 'A glass of wine waits in the ground floor salon.',
+      },
+      {
+        spoken: 'eight in the morning',
+        when: 'Day two',
+        what: 'Breakfast is served at the long table in the old entrance hall.',
+      },
+      {
+        spoken: 'twelve noon',
+        when: 'Departure',
+        what: 'Check-out. Your luggage can stay at reception until evening.',
+      },
     ],
     breakfast: 'Breakfast',
     packages: 'Packages',

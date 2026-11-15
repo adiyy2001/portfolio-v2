@@ -15,7 +15,8 @@ const pl = {
   note: 'Uwagi do pobytu (nieobowiązkowe)',
   message: 'Wiadomość',
   errorsHeading: 'Prosimy poprawić pola',
-  sampleNothingSent: 'To strona przykładowa: nic nie zostało wysłane ani zapisane poza tą przeglądarką.',
+  sampleNothingSent:
+    'To strona przykładowa: nic nie zostało wysłane ani zapisane poza tą przeglądarką.',
   errors: {
     name: {
       required: 'Proszę podać imię i nazwisko.',
@@ -56,7 +57,8 @@ const en: typeof pl = {
   note: 'Notes for your stay (optional)',
   message: 'Message',
   errorsHeading: 'Please correct these fields',
-  sampleNothingSent: 'This is a sample website: nothing was sent, and nothing is stored outside this browser.',
+  sampleNothingSent:
+    'This is a sample website: nothing was sent, and nothing is stored outside this browser.',
   errors: {
     name: {
       required: 'Please enter your full name.',

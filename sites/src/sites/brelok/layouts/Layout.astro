@@ -69,14 +69,24 @@ const current = (key: PageKey): 'page' | undefined => (key === pageKey ? 'page' 
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" type="image/svg+xml" href={link('/brelok/favicon.svg')} />
     {preloaded.map(name => (
-      <link rel="preload" href={`${fontBase}${name}.woff2`} as="font" type="font/woff2" crossorigin />
+      <link
+        rel="preload"
+        href={`${fontBase}${name}.woff2`}
+        as="font"
+        type="font/woff2"
+        crossorigin
+      />
     ))}
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
     <style is:inline set:html={stylesheet}></style>
   </head>
   <body>
     <Defs />
-    <a class="skip" href="#main">{text.skip}</a>
+    <a class="skip" href="#main">
+      {text.skip}
+    </a>
     {!isHome && (
       <header class="top">
         <Nav lang={lang} pageKey={pageKey} switchPath={switchPath} />
@@ -87,21 +97,29 @@ const current = (key: PageKey): 'page' | undefined => (key === pageKey ? 'page' 
     </main>
     <footer class="foot">
       <div class="mark brand">{hotel.name}</div>
-      <svg class="flo" viewBox="0 0 260 36" aria-hidden="true" focusable="false"><use href="#fl"></use></svg>
+      <svg class="flo" viewBox="0 0 260 36" aria-hidden="true" focusable="false">
+        <use href="#fl"></use>
+      </svg>
       <address class="foot-address" aria-label={text.footer.addressLabel}>
-        {hotel.fullName}<br />
-        {lang === 'pl' ? hotel.street : hotel.streetEn}, {hotel.postalCode} {hotel.city}<br />
+        {hotel.fullName}
+        <br />
+        {lang === 'pl' ? hotel.street : hotel.streetEn}, {hotel.postalCode} {hotel.city}
+        <br />
         <a href={hotel.phoneHref}>{hotel.phone}</a>
       </address>
       <p class="foot-hours">{text.footer.reception}</p>
       <nav class="foot-nav" aria-label={text.footerNav}>
         {footerKeys.map(key => (
-          <a href={link(pagePath(key, lang))} aria-current={current(key)}>{text.nav[key]}</a>
+          <a href={link(pagePath(key, lang))} aria-current={current(key)}>
+            {text.nav[key]}
+          </a>
         ))}
       </nav>
       <SampleNote name={text.sampleName} lang={lang} />
       <p class="foot-links">
-        <a href={link(pagePath('credits', lang))} aria-current={current('credits')}>{text.footer.credits}</a>
+        <a href={link(pagePath('credits', lang))} aria-current={current('credits')}>
+          {text.footer.credits}
+        </a>
       </p>
     </footer>
     <script is:inline>

@@ -93,7 +93,12 @@ const en: Record<RoomId, RoomCopy> = {
       'The windows face an enclosed yard, so nothing reaches you from the street. In the morning you hear pigeons, and after rain the gutter.',
       'There is a lamp by the bed, an armchair by the window and a desk with a reading light for the evening. The shower room keeps its tiles from the 1920s, which survived the renovation.',
     ],
-    features: ['Shower', 'Desk with a reading light', 'Armchair by the window', 'Windows onto the back wing'],
+    features: [
+      'Shower',
+      'Desk with a reading light',
+      'Armchair by the window',
+      'Windows onto the back wing',
+    ],
     metaTitle: 'The Quiet room. Brelok 1912, boutique hotel in Wrocław',
     metaDescription:
       'The Quiet room at Brelok: 18 m², a 160 cm bed, windows onto the back wing and thick walls. PLN 410 a night, rooms 1 to 4.',
@@ -136,12 +141,18 @@ const en: Record<RoomId, RoomCopy> = {
     view: 'Church towers',
     alt: 'The Apartment: a drawing room with two tall windows, a chandelier and a bed in the far corner',
     bed: width => `A ${width} cm bed and a sofa bed in the sitting room`,
-    intro: 'The only one of its kind in the house: a sitting room and a bedroom, 75 square metres together.',
+    intro:
+      'The only one of its kind in the house: a sitting room and a bedroom, 75 square metres together.',
     paragraphs: [
       'The sitting room has two tall windows, a chandelier and a table that seats four. You can see the church towers from the windows, and in the afternoon light bounced off the roofs lies on the wall.',
       'The bedroom is separate, behind a glazed door. The sofa in the sitting room opens into a bed for a third guest, and a fourth can have an extra bed.',
     ],
-    features: ['Sitting room and bedroom', 'Bathroom with a bath', 'Table for four', 'Two tall windows'],
+    features: [
+      'Sitting room and bedroom',
+      'Bathroom with a bath',
+      'Table for four',
+      'Two tall windows',
+    ],
     metaTitle: 'The Apartment. Brelok 1912, boutique hotel in Wrocław',
     metaDescription:
       'The Apartment at Brelok: 75 m², a sitting room and a bedroom, a 180 cm bed and a view of the church towers. PLN 740 a night, room 15.',
@@ -172,7 +183,8 @@ const listPl = {
   allRooms: 'Wszystkie pokoje',
   otherRooms: 'Pozostałe pokoje',
   includedHeading: 'W pokoju',
-  includedBreakfast: 'Śniadanie nie jest wliczone w cenę doby. Można je dokupić przy rezerwacji albo wybrać pakiet, który je zawiera.',
+  includedBreakfast:
+    'Śniadanie nie jest wliczone w cenę doby. Można je dokupić przy rezerwacji albo wybrać pakiet, który je zawiera.',
   photoNote: 'Zdjęcie poglądowe: pokazuje ten rodzaj pokoju, nie konkretny numer.',
   roomHeading: (name: string) => `Pokój ${name}`,
   numbersSentence: (list: string) => `Numery pokoi: ${list}.`,
@@ -200,7 +212,8 @@ const listEn: typeof listPl = {
   allRooms: 'All rooms',
   otherRooms: 'The other rooms',
   includedHeading: 'In the room',
-  includedBreakfast: 'Breakfast is not included in the nightly rate. You can add it when you book, or choose a package that includes it.',
+  includedBreakfast:
+    'Breakfast is not included in the nightly rate. You can add it when you book, or choose a package that includes it.',
   photoNote: 'Illustrative photo: it shows this kind of room, not a particular number.',
   roomHeading: (name: string) => (name === 'Apartment' ? 'The Apartment' : `The ${name} room`),
   numbersSentence: (list: string) => `Room numbers: ${list}.`,

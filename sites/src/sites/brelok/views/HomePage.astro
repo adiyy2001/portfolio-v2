@@ -36,8 +36,14 @@ const padTime = (value: string): string => value.padStart(5, '0');
       <Fragment set:html={heroDesktop} />
       <Fragment set:html={heroMobile} />
       <h1 class="sr">{text.heroTitle}</h1>
-      <p class="t motto">{text.motto[0]}<br />{text.motto[1]}</p>
-      <p class="t go"><Ticket href="#karta">{text.checkDates}</Ticket></p>
+      <p class="t motto">
+        {text.motto[0]}
+        <br />
+        {text.motto[1]}
+      </p>
+      <p class="t go">
+        <Ticket href="#karta">{text.checkDates}</Ticket>
+      </p>
     </div>
   </header>
 
@@ -50,7 +56,9 @@ const padTime = (value: string): string => value.padStart(5, '0');
       <figcaption>{text.house.facadeCaption}</figcaption>
     </figure>
     <p class="actions">
-      <a class="ticket" href={link(pagePath('rooms', lang))}>{text.house.more}</a>
+      <a class="ticket" href={link(pagePath('rooms', lang))}>
+        {text.house.more}
+      </a>
     </p>
   </Panel>
 
@@ -59,7 +67,9 @@ const padTime = (value: string): string => value.padStart(5, '0');
     <p class="lead">{text.rooms.lead}</p>
     <HomeBooking client:load lang={lang} />
     <p class="actions">
-      <a class="ticket" href={link(pagePath('rooms', lang))}>{text.rooms.more}</a>
+      <a class="ticket" href={link(pagePath('rooms', lang))}>
+        {text.rooms.more}
+      </a>
     </p>
   </Panel>
 
@@ -81,26 +91,43 @@ const padTime = (value: string): string => value.padStart(5, '0');
       ))}
     </ol>
     <p class="actions">
-      <a class="ticket rev" href={link(pagePath('breakfast', lang))}>{text.day.breakfast}</a>
-      <a class="ticket rev" href={link(pagePath('packages', lang))}>{text.day.packages}</a>
+      <a class="ticket rev" href={link(pagePath('breakfast', lang))}>
+        {text.day.breakfast}
+      </a>
+      <a class="ticket rev" href={link(pagePath('packages', lang))}>
+        {text.day.packages}
+      </a>
     </p>
   </InkPanel>
 
   <Panel id="kontakt" labelledby="kontakt-h" innerClass="place-grid">
     <div class="place-copy">
       <SectionHead id="kontakt-h">{text.contact.heading}</SectionHead>
-      <p class="phone-big"><a href={hotel.phoneHref}>{hotel.phone}</a></p>
-      <p class="open"><i class="lamp" aria-hidden="true"></i>{text.contact.open}</p>
+      <p class="phone-big">
+        <a href={hotel.phoneHref}>{hotel.phone}</a>
+      </p>
+      <p class="open">
+        <i class="lamp" aria-hidden="true"></i>
+        {text.contact.open}
+      </p>
       <address class="addr">
         <span class="addr-name">{hotel.fullName}</span>
         <span class="addr-street">{street}</span>
-        <span class="addr-city"><span class="addr-zip">{hotel.postalCode}</span> <span>{hotel.city}</span></span>
+        <span class="addr-city">
+          <span class="addr-zip">{hotel.postalCode}</span> <span>{hotel.city}</span>
+        </span>
       </address>
       <p class="lead">{text.contact.lead}</p>
-      <p class="mail-alt">{text.contact.mailLead} <a href={hotel.emailHref}>{hotel.email}</a></p>
+      <p class="mail-alt">
+        {text.contact.mailLead} <a href={hotel.emailHref}>{hotel.email}</a>
+      </p>
       <p class="actions">
-        <a class="ticket" href={link(pagePath('contact', lang))}>{text.contact.more}</a>
-        <a class="ticket" href={link(pagePath('neighbourhood', lang))}>{text.contact.neighbourhood}</a>
+        <a class="ticket" href={link(pagePath('contact', lang))}>
+          {text.contact.more}
+        </a>
+        <a class="ticket" href={link(pagePath('neighbourhood', lang))}>
+          {text.contact.neighbourhood}
+        </a>
       </p>
     </div>
     <figure class="map">

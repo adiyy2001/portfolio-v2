@@ -27,14 +27,18 @@ const current = (key: PageKey): 'page' | undefined => (key === pageKey ? 'page' 
     {menuKeys.map((key, index) => (
       <li>
         <a href={link(pagePath(key, lang))} aria-current={current(key)}>
-          <span class="rn" aria-hidden="true">{romanNumerals[index]}</span>
+          <span class="rn" aria-hidden="true">
+            {romanNumerals[index]}
+          </span>
           {text.nav[key]}
         </a>
       </li>
     ))}
     <li class="only-menu">
       <a href={link(pagePath('myBooking', lang))} aria-current={current('myBooking')}>
-        <span class="rn" aria-hidden="true">VII</span>
+        <span class="rn" aria-hidden="true">
+          VII
+        </span>
         {text.nav.myBooking}
       </a>
     </li>
@@ -42,7 +46,9 @@ const current = (key: PageKey): 'page' | undefined => (key === pageKey ? 'page' 
   <div class="nav-end">
     <a class="nav-res" href={link(pagePath('booking', lang))} aria-current={current('booking')}>
       {text.reserve}
-      <svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true" focusable="false"><use href="#un"></use></svg>
+      <svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <use href="#un"></use>
+      </svg>
     </a>
     <div class="lang" role="group" aria-label={text.languageLabel}>
       {languages.map(code => (

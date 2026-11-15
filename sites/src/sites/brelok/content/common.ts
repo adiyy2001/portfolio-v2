@@ -26,7 +26,8 @@ const pl = {
     credits: 'Źródła zdjęć i fontów',
     addressLabel: 'Adres i kontakt',
   },
-  ogAlt: 'Brelok 1912, hotel butikowy we Wrocławiu: kamienica z mosiężnym brelokiem i napisem Czternaście pokoi i jeden klucz do miasta',
+  ogAlt:
+    'Brelok 1912, hotel butikowy we Wrocławiu: kamienica z mosiężnym brelokiem i napisem Czternaście pokoi i jeden klucz do miasta',
   sampleName: 'Brelok',
   photoNote: 'Zdjęcie poglądowe',
 };
@@ -57,7 +58,8 @@ const en: typeof pl = {
     credits: 'Photo and font credits',
     addressLabel: 'Address and contact',
   },
-  ogAlt: 'Brelok 1912, a boutique hotel in Wrocław: a townhouse with a brass key fob and the words Fourteen rooms and one key to the city',
+  ogAlt:
+    'Brelok 1912, a boutique hotel in Wrocław: a townhouse with a brass key fob and the words Fourteen rooms and one key to the city',
   sampleName: 'Brelok',
   photoNote: 'Illustrative photo',
 };
