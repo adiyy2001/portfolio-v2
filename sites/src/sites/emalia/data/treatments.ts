@@ -74,7 +74,7 @@ export const treatments: readonly Treatment[] = [
       {
         question: 'Czy przegląd boli?',
         answer:
-          'Nie. Lekarz ogląda zęby lusterkiem i sondą, a zdjęcie robimy na stojąco. Jeśli coś zacznie przeszkadzać, podnieś rękę, a przerwiemy.',
+          'Zwykle nie. Lekarz ogląda zęby lusterkiem i sondą, a zdjęcie robimy na stojąco. Jeśli coś zacznie przeszkadzać, podnieś rękę, a przerwiemy.',
       },
       {
         question: 'Jak często robić przegląd?',
@@ -226,7 +226,7 @@ export const treatments: readonly Treatment[] = [
     },
     intro: [
       'Leczenie kanałowe prowadzi lekarz Jan Wrona. Mikroskop powiększa pole pracy tak, że widać ujścia kanałów, które gołym okiem łatwo przeoczyć.',
-      'Ząb po leczeniu nie boli, ale jest osłabiony, więc zwykle potrzebuje odbudowy. Opisujemy ją w planie jeszcze przed zabiegiem, razem z ceną.',
+      'Ząb po leczeniu jest osłabiony, więc zwykle potrzebuje odbudowy. Opisujemy ją w planie jeszcze przed zabiegiem, razem z ceną.',
     ],
     steps: [
       {
@@ -256,7 +256,7 @@ export const treatments: readonly Treatment[] = [
       {
         question: 'Czy leczenie kanałowe boli?',
         answer:
-          'Podczas zabiegu nie, bo ząb jest znieczulony. Po znieczuleniu może przez kilka dni boleć przy nagryzaniu, ale to mija.',
+          'Leczymy w znieczuleniu, więc podczas zabiegu zwykle nie czuć bólu. Potem ząb może przez kilka dni boleć przy nagryzaniu. Jeśli ból nie słabnie, zadzwoń.',
       },
       {
         question: 'Dlaczego cena zależy od zęba?',
