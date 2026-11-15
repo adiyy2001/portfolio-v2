@@ -1,0 +1,26 @@
+---
+import type { FaqItem } from '../data/faq';
+
+interface Props {
+  items: readonly FaqItem[];
+  label?: string;
+}
+
+const { items, label = 'najczęstsze pytania' } = Astro.props;
+---
+
+<div class="blk-head">
+  <span>{label}</span>
+  <span class="muted kb">↑↓ przechodzi, enter otwiera</span>
+</div>
+<div class="faq" id="faq">
+  {items.map(item => (
+    <details>
+      <summary>
+        <span class="q-t">{item.q}</span>
+        <span class="q-s" aria-hidden="true" />
+      </summary>
+      <p>{item.a}</p>
+    </details>
+  ))}
+</div>

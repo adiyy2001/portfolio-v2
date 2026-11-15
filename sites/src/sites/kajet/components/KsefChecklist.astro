@@ -1,0 +1,25 @@
+---
+import { ksefChecklist } from '../data/ksef';
+---
+
+<div class="blk-head">
+  <span id="ksef-progress" aria-live="polite">
+    0 z {ksefChecklist.length} gotowe
+  </span>
+  <button type="button" id="ksef-reset" class="link js-only">
+    wyczyść listę
+  </button>
+</div>
+<ul id="ksef-check" class="check">
+  {ksefChecklist.map(item => (
+    <li>
+      <label>
+        <input type="checkbox" value={item.id} />
+        <span class="ck-t">
+          <b>{item.label}</b>
+          <span class="ck-h">{item.hint}</span>
+        </span>
+      </label>
+    </li>
+  ))}
+</ul>

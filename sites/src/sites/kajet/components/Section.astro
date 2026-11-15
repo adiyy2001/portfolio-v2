@@ -1,0 +1,32 @@
+---
+interface Props {
+  id: string;
+  path: string;
+  title: string;
+  lede?: string;
+  level?: 1 | 2;
+  wide?: boolean;
+}
+
+const { id, path, title, lede, level = 2, wide = true } = Astro.props;
+const Heading = level === 1 ? 'h1' : 'h2';
+const hasAside = Astro.slots.has('aside');
+---
+
+<section class="sec" id={id} aria-labelledby={`h-${id}`}>
+  <div class="sec-head">
+    <p class="path">{path}</p>
+    <Heading id={`h-${id}`}>{title}</Heading>
+    {lede && <p>{lede}</p>}
+    <slot name="lede" />
+  </div>
+  <div class:list={['sec-body', wide && !hasAside && 'span2']}>
+    <slot />
+  </div>
+  {hasAside && (
+    <aside class="sec-aside">
+      <slot name="aside" />
+    </aside>
+  )}
+  <slot name="after" />
+</section>

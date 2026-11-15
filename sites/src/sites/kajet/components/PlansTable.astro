@@ -1,0 +1,71 @@
+---
+import { features, plans } from '../data/plans';
+import { formatPrice } from '../lib/format';
+
+const yesNo = (value: boolean): string => (value ? 'tak' : 'nie');
+---
+
+<div class="plans" id="plans" role="table" aria-label="Porównanie planów">
+  <div class="p-row p-head" role="row">
+    <div class="p-label" role="columnheader">
+      plan
+    </div>
+    {plans.map((plan, index) => (
+      <div class="p-cell" role="columnheader" data-plan={index}>
+        {plan.name}
+      </div>
+    ))}
+  </div>
+  <div class="p-row" role="row">
+    <div class="p-label" role="rowheader">
+      klient z panelu o takiej skali
+    </div>
+    {plans.map((plan, index) => (
+      <div class="p-cell" role="cell" data-plan={index}>
+        {plan.example}
+      </div>
+    ))}
+  </div>
+  <div class="p-row" role="row">
+    <div class="p-label" role="rowheader">
+      faktur w miesiącu
+    </div>
+    {plans.map((plan, index) => (
+      <div class="p-cell" role="cell" data-plan={index}>
+        do {plan.limit}
+      </div>
+    ))}
+  </div>
+  <div class="p-row p-price" data-form="osoba" role="row">
+    <div class="p-label" role="rowheader">
+      osoba fizyczna, zł netto miesięcznie
+    </div>
+    {plans.map((plan, index) => (
+      <div class="p-cell" role="cell" data-plan={index}>
+        {formatPrice(plan.price.osoba)}
+      </div>
+    ))}
+  </div>
+  <div class="p-row p-price" data-form="spolka" role="row">
+    <div class="p-label" role="rowheader">
+      spółka, zł netto miesięcznie
+    </div>
+    {plans.map((plan, index) => (
+      <div class="p-cell" role="cell" data-plan={index}>
+        {formatPrice(plan.price.spolka)}
+      </div>
+    ))}
+  </div>
+  {features.map(feature => (
+    <div class="p-row" role="row">
+      <div class="p-label" role="rowheader">
+        {feature.label}
+      </div>
+      {feature.inPlan.map((included, index) => (
+        <div class:list={['p-cell', included ? 'yes' : 'no']} role="cell" data-plan={index}>
+          <span class="yn">{yesNo(included)}</span>
+        </div>
+      ))}
+    </div>
+  ))}
+</div>

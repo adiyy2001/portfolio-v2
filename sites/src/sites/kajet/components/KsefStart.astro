@@ -1,0 +1,46 @@
+---
+import { ksefCheckedOn, startOptions } from '../data/ksef';
+---
+
+<div class="blk-head">
+  <span>od kiedy wystawiasz w KSeF</span>
+  <span class="muted">sprawdzone {ksefCheckedOn}</span>
+</div>
+<table class="tbl static-start">
+  <caption>Trzy sytuacje i ich daty startu</caption>
+  <thead>
+    <tr>
+      <th scope="col" class="c-who">
+        sytuacja
+      </th>
+      <th scope="col">kiedy zaczynasz</th>
+    </tr>
+  </thead>
+  <tbody>
+    {startOptions.map(option => (
+      <tr>
+        <td class="c-who">
+          {option.label}
+          <span class="c-sub">{option.hint}</span>
+        </td>
+        <td>
+          <b>{option.verdict}</b>
+          <span class="c-sub">{option.detail}</span>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+<fieldset class="opts js-only" id="ksef-start">
+  <legend>Wybierz opis najbliższy Twojej firmie</legend>
+  {startOptions.map(option => (
+    <label class="opt">
+      <input type="radio" name="ksef-start" value={option.id} />
+      <span class="ck-t">
+        <b>{option.label}</b>
+        <span class="ck-h">{option.hint}</span>
+      </span>
+    </label>
+  ))}
+</fieldset>
+<div id="ksef-verdict" class="verdict js-only" aria-live="polite"></div>

@@ -1,0 +1,57 @@
+---
+import { link } from '../../../shared/link';
+import { facts } from '../data/site';
+
+const action = link('/kajet/kontakt/');
+---
+
+<form class="cmd" id="cmd" method="get" action={`${action}#wycena`}>
+  <p id="cmd-log" class="cmd-log muted" aria-live="polite">
+    Wycena jest bezpłatna. Odpowiedź w ciągu {facts.replyHours} godzin w dni robocze.
+  </p>
+  <div class="cmd-fields">
+    <label class="cmd-field cmd-mail">
+      <span class="cmd-prompt" aria-hidden="true">
+        &gt;
+      </span>
+      <span class="sr">Adres e-mail do wyceny</span>
+      <input
+        id="cmd-mail"
+        name="email"
+        type="email"
+        inputmode="email"
+        autocomplete="email"
+        spellcheck="false"
+        placeholder="twój e-mail"
+        required
+      />
+    </label>
+    <label class="cmd-field">
+      <span class="sr">Forma firmy</span>
+      <select id="cmd-forma" name="forma">
+        <option value="">forma firmy</option>
+        <option value="osoba fizyczna">osoba fizyczna</option>
+        <option value="spółka z o.o.">spółka z o.o.</option>
+      </select>
+    </label>
+    <label class="cmd-field">
+      <span class="sr">Liczba faktur w miesiącu</span>
+      <input
+        id="cmd-faktur"
+        name="faktur"
+        type="number"
+        inputmode="numeric"
+        min="0"
+        max="999"
+        step="1"
+        placeholder="faktur w miesiącu"
+      />
+    </label>
+  </div>
+  <button class="cmd-go" type="submit">
+    <kbd class="kb" aria-hidden="true">
+      ↵
+    </kbd>
+    <span>E-mail do wyceny</span>
+  </button>
+</form>

@@ -1,0 +1,70 @@
+---
+import Calculator from '../../sites/kajet/components/Calculator.astro';
+import Faq from '../../sites/kajet/components/Faq.astro';
+import Section from '../../sites/kajet/components/Section.astro';
+import { planFaq } from '../../sites/kajet/data/faq';
+import { extras } from '../../sites/kajet/data/plans';
+import { formatPrice } from '../../sites/kajet/lib/format';
+import Layout from '../../sites/kajet/Layout.astro';
+---
+
+<Layout
+  title="Pakiety i cennik biura rachunkowego | Kajet"
+  description="Trzy plany abonamentowe z cenami netto dla osób fizycznych i spółek. Kalkulator dobiera plan do liczby faktur i potrzeb, a tabela pokazuje, co wchodzi w każdy z nich."
+  path="/kajet/pakiety/"
+  current="pakiety">
+  <Section
+    id="cennik"
+    path="kajet / pakiety"
+    title="Pakiety i ceny, abonament miesięczny netto"
+    lede="Wpisz liczbę faktur w miesiącu i zaznacz, czego potrzebujesz. Plan dobiera się sam, a pod spodem widać pełną tabelę."
+    level={1}>
+    <Calculator needs initialInvoices={40} />
+  </Section>
+  <Section
+    id="dodatki"
+    path="kajet / dodatki"
+    title="Poza abonamentem"
+    lede="Dwie rzeczy, o które klienci pytają przed podpisaniem umowy.">
+    <table class="tbl">
+      <caption>Opłaty i zasady poza planami</caption>
+      <thead>
+        <tr>
+          <th scope="col">pozycja</th>
+          <th scope="col" class="c-price">
+            kwota
+          </th>
+          <th scope="col">uwagi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {extras.map(extra => (
+          <tr>
+            <td>{extra.label}</td>
+            <td class="c-price">
+              {extra.price === 0 ? '0' : formatPrice(extra.price)} zł
+              <span class="c-sub">{extra.unit}</span>
+            </td>
+            <td>{extra.note}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </Section>
+  <Section
+    id="pytania"
+    path="kajet / pytania o ceny"
+    title="Pomoc: pytania o plany i rozliczenia"
+    lede="VAT, limity, zmiana planu i wypowiedzenie.">
+    <Faq items={planFaq} />
+  </Section>
+</Layout>
+
+<script>
+  import { setupBase } from '../../sites/kajet/scripts/base';
+  import { setupCalculator } from '../../sites/kajet/scripts/calculator';
+  import { setupFaq } from '../../sites/kajet/scripts/faq';
+  setupBase();
+  setupCalculator();
+  setupFaq();
+</script>

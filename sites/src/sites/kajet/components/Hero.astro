@@ -1,0 +1,177 @@
+---
+import { facts } from '../data/site';
+
+const quoteHref = '#kontakt';
+---
+
+<section class="hero" id="rozliczenie" aria-label="Przykładowy panel klienta">
+  <div class="hero-grid">
+    <aside class="col-a">
+      <h1 class="lead">Biuro rachunkowe, Wrocław, Gajowice</h1>
+      <a class="quote-btn quote-m" href={quoteHref}>
+        E-mail do wyceny
+      </a>
+      <div class="intro">
+        <p>
+          Prowadzimy księgowość i kadry małych firm. Co miesiąc klient dostaje taki panel: kwota do
+          zapłaty, termin i podstawa wyliczenia.
+        </p>
+        <p class="sample-note data-note">
+          Dane przykładowe: klienci i kwoty są zmyślone.
+          <span class="js-only"> Zmień klienta i miesiąc.</span>
+        </p>
+        <p class="muted nojs-note">
+          Panel klienta wymaga JavaScriptu. Usługi, cennik, przewodnik po KSeF i terminy działają
+          bez niego.
+        </p>
+      </div>
+
+      <div class="sel-mobile js-only">
+        <label for="client-select">klient</label>
+        <select id="client-select"></select>
+      </div>
+
+      <div class="blk clients js-only">
+        <div class="blk-head">
+          <span>przykładowi klienci</span>
+          <span id="client-count" class="muted"></span>
+        </div>
+        <label class="search">
+          <span aria-hidden="true">/</span>
+          <span class="sr">Szukaj klienta</span>
+          <input
+            id="client-q"
+            type="search"
+            placeholder="szukaj klienta"
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </label>
+        <div id="clients" class="list" role="listbox" aria-label="Klienci"></div>
+      </div>
+    </aside>
+
+    <div class="col-b js-only">
+      <div class="b-head">
+        <div>
+          <span id="client-title" class="b-title"></span>
+        </div>
+        <div id="client-meta" class="muted"></div>
+      </div>
+
+      <div class="figure">
+        <p id="fig-label" class="figure-label"></p>
+        <output id="fig-total" class="figure-num" aria-live="polite"></output>
+      </div>
+      <p id="countdown" class="countdown"></p>
+      <div id="ruler" class="ruler" aria-hidden="true"></div>
+
+      <table class="ledger" aria-label="Rozliczenie miesiąca">
+        <thead>
+          <tr>
+            <th scope="col">pozycja</th>
+            <th scope="col">podstawa</th>
+            <th scope="col" class="num">
+              kwota
+            </th>
+            <th scope="col" class="num">
+              termin
+            </th>
+          </tr>
+        </thead>
+        <tbody id="ledger"></tbody>
+      </table>
+
+      <div class="blk history">
+        <div class="blk-head">
+          <span>ostatnie 6 miesięcy, razem do zapłaty</span>
+          <span class="muted kb" aria-hidden="true">
+            ←→
+          </span>
+        </div>
+        <div id="history" class="list" role="listbox" aria-label="Miesiące"></div>
+      </div>
+    </div>
+
+    <aside class="col-c js-only">
+      <div class="blk deadlines">
+        <div class="blk-head">
+          <span>terminy</span>
+          <span id="dl-month" class="muted"></span>
+        </div>
+        <ul id="deadlines" class="dl"></ul>
+      </div>
+
+      <div class="blk invoices">
+        <div class="blk-head">
+          <span>faktury sprzedaży, netto</span>
+          <span id="inv-count" class="muted"></span>
+        </div>
+        <div id="inv-filter" class="seg" role="tablist" aria-label="Filtr faktur">
+          <button type="button" role="tab" data-f="all" aria-selected="true" tabindex="0">
+            <span>wszystkie</span>
+            <span class="n"></span>
+          </button>
+          <button type="button" role="tab" data-f="pending" aria-selected="false" tabindex="-1">
+            <span>oczekuje</span>
+            <span class="n"></span>
+          </button>
+          <button type="button" role="tab" data-f="late" aria-selected="false" tabindex="-1">
+            <span>po terminie</span>
+            <span class="n"></span>
+          </button>
+        </div>
+        <div
+          id="invoices"
+          class="list inv-list"
+          role="listbox"
+          aria-label="Faktury sprzedaży"></div>
+        <div id="inv-sum" class="inv-sum"></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="status">
+    <dl class="facts">
+      <div>
+        <dt>firm w księgach</dt>
+        <dd>{facts.firms}</dd>
+      </div>
+      <div>
+        <dt>z tego z Gajowic</dt>
+        <dd>{facts.firmsFromGajowice}</dd>
+      </div>
+      <div>
+        <dt>godz. odpowiedzi</dt>
+        <dd>{facts.replyHours}</dd>
+      </div>
+    </dl>
+    <ul class="legend kb" aria-label="Skróty klawiszowe">
+      <li>
+        <kbd>j</kbd>
+        <kbd>k</kbd>
+        <span>klient</span>
+      </li>
+      <li>
+        <kbd>←</kbd>
+        <kbd>→</kbd>
+        <span>miesiąc</span>
+      </li>
+      <li>
+        <kbd>f</kbd>
+        <span>filtr</span>
+      </li>
+      <li>
+        <kbd>1</kbd>
+        <kbd>5</kbd>
+        <span>widoki</span>
+      </li>
+    </ul>
+    <a class="quote-btn quote-d" href={quoteHref}>
+      <span>E-mail do wyceny</span>
+      <kbd class="kb" aria-hidden="true">
+        w
+      </kbd>
+    </a>
+  </div>
+</section>

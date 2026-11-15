@@ -1,0 +1,62 @@
+---
+import { monthlyRows } from '../data/calendar';
+
+interface Props {
+  id: string;
+  path: string;
+  title: string;
+  lede: string;
+  level?: 1 | 2;
+  nav?: boolean;
+}
+
+const { id, path, title, lede, level = 2, nav = false } = Astro.props;
+const Heading = level === 1 ? 'h1' : 'h2';
+---
+
+<section class="sec" id={id} aria-labelledby={`h-${id}`}>
+  <div class="sec-head">
+    <p class="path">{path}</p>
+    <Heading id={`h-${id}`}>{title}</Heading>
+    <p>{lede}</p>
+  </div>
+  <div class="sec-body cal-body">
+    {nav ? (
+      <div class="cal-head">
+        <div class="blk-head">
+          <span id="cal-month">miesiąc</span>
+          <span id="cal-today" class="muted" />
+        </div>
+        <div class="cal-nav">
+          <button type="button" id="cal-prev" aria-label="Poprzedni miesiąc">
+            &larr;
+          </button>
+          <button type="button" id="cal-next" aria-label="Następny miesiąc">
+            &rarr;
+          </button>
+        </div>
+      </div>
+    ) : (
+      <div class="blk-head">
+        <span id="cal-month">miesiąc</span>
+        <span id="cal-today" class="muted" />
+      </div>
+    )}
+    <table id="cal" class="cal js-only" aria-label="Kalendarz terminów"></table>
+    <p id="cal-detail" class="detail js-only" aria-live="polite"></p>
+  </div>
+  <aside class="sec-aside cal-aside">
+    <div class="blk-head">
+      <span>czynności i terminy</span>
+      <span class="muted js-only">kliknij, by zaznaczyć</span>
+    </div>
+    <ul id="cal-list" class="dl cal-list">
+      {monthlyRows.map(row => (
+        <li class={row.legal ? 'legal' : undefined}>
+          <span class="nm">{row.title}</span>
+          <span class="amt">{row.label}</span>
+        </li>
+      ))}
+    </ul>
+  </aside>
+</section>
