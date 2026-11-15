@@ -373,19 +373,20 @@ main[data-glide] + .mini {
 }
 
 .ws--law {
-  --sn: 500 clamp(2rem, 3.6vw, 3.4rem) / 0.95 var(--wz-bodoni);
-}
-
-.ws--law .ws__name {
-  font-variation-settings: 'opsz' 18;
+  --sn: 700 clamp(2rem, 3.6vw, 3.4rem) / 0.95 var(--wz-bodoni);
 }
 
 .ws--acc {
-  --sn: 700 clamp(1.9rem, 3.4vw, 3.2rem) / 0.95 var(--wz-bricolage);
+  --sn: 700 clamp(1.7rem, 3vw, 2.8rem) / 0.95 var(--wz-mono);
+}
+
+.ws--acc .ws__name {
+  letter-spacing: -0.04em;
+  text-transform: lowercase;
 }
 
 .ws--den {
-  --sn: 500 clamp(1.9rem, 3.4vw, 3.2rem) / 0.95 var(--wz-outfit);
+  --sn: 800 clamp(1.9rem, 3.4vw, 3.2rem) / 0.95 var(--wz-manrope);
 }
 
 .ws--psy {
@@ -393,28 +394,42 @@ main[data-glide] + .mini {
 }
 
 .ws--est {
-  --sn: 600 clamp(1.5rem, 2.7vw, 2.55rem) / 0.95 var(--wz-unbounded);
+  --sn: 400 clamp(1.2rem, 2.1vw, 2rem) / 0.95 var(--wz-archivo);
 }
 
 .ws--bis {
-  --sn: 400 clamp(2rem, 3.6vw, 3.4rem) / 0.95 var(--wz-gloock);
+  --sn: 500 clamp(1.7rem, 3vw, 2.8rem) / 0.95 var(--wz-cormorant);
+}
+
+.ws--est .ws__name,
+.ws--bis .ws__name,
+.ws--car .ws__name {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ws--bis .ws__name {
+  letter-spacing: 0.2em;
 }
 
 .ws--shop {
-  --sn: 800 clamp(2.3rem, 4vw, 3.8rem) / 0.9 var(--wz-shoulders);
-}
-
-.ws--shop .ws__name {
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
+  --sn: 400 clamp(1.8rem, 3.2vw, 3rem) / 0.95 var(--wz-typewriter);
 }
 
 .ws--flat {
-  --sn: 800 clamp(2rem, 3.6vw, 3.4rem) / 0.95 var(--wz-archivo);
+  --sn: 700 clamp(2rem, 3.6vw, 3.4rem) / 0.95 var(--wz-newsreader);
 }
 
 .ws--stay {
-  --sn: 800 clamp(1.8rem, 3.2vw, 3rem) / 0.95 var(--wz-besley);
+  --sn: 700 clamp(1.5rem, 2.7vw, 2.55rem) / 0.95 var(--wz-cinzel);
+}
+
+.ws--car {
+  --sn: 400 clamp(2rem, 3.6vw, 3.4rem) / 0.95 var(--wz-anton);
+}
+
+.ws--car .ws__name {
+  letter-spacing: 0.02em;
 }
 
 .ws__what {

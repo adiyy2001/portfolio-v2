@@ -1,42 +1,71 @@
 import React from 'react';
+import { tie } from '../../i18n';
 
-const links = ['Sklep', 'Subskrypcja', 'O palarni'];
-const labels = [
-  { origin: 'Etiopia', notes: 'Brzoskwinia, jaśmin', roast: 'Jasne', tone: 'light' },
-  { origin: 'Kolumbia', notes: 'Karmel, jabłko', roast: 'Średnie', tone: 'medium' },
-];
+const hand = {
+  logo: {
+    width: 371.5,
+    d: 'M60.7 0L10.7 75M10.7 0L60.7 0M10.7 75L60.7 75M82.1 0L85.7 3.6L89.3 0L85.7 -3.6L82.1 0M85.7 25L85.7 75M153.6 25L153.6 75M153.6 35.7L146.4 28.6L139.3 25L128.6 25L121.4 28.6L114.3 35.7L110.7 46.4L110.7 53.6L114.3 64.3L121.4 71.4L128.6 75L139.3 75L146.4 71.4L153.6 64.3M182.2 25L182.2 75M182.2 46.4L185.8 35.7L192.9 28.6L200 25L210.8 25M228.6 25L228.6 75M228.6 39.3L239.3 28.6L246.4 25L257.2 25L264.3 28.6L267.9 39.3L267.9 75M292.9 0L296.5 3.6L300.1 0L296.5 -3.6L292.9 0M296.5 25L296.5 75M325.1 0L325.1 75M360.8 25L325.1 60.7M339.4 46.4L364.4 75',
+  },
+  word: {
+    width: 289.3,
+    d: 'M14.3 0L14.3 75M64.3 0L14.3 50M32.1 32.1L64.3 75M107.1 0L78.6 75M107.1 0L135.7 75M89.3 50L125 50M146.4 0L164.3 75M182.2 0L164.3 75M182.2 0L200 75M217.9 0L200 75M257.1 0L228.6 75M257.1 0L285.7 75M239.3 50L275 50',
+  },
+  cta: {
+    width: 710.8,
+    d: 'M50 25L10.7 75M10.7 25L50 25M10.7 75L50 75M89.3 25L82.1 28.6L75 35.7L71.4 46.4L71.4 53.6L75 64.3L82.1 71.4L89.3 75L100 75L107.1 71.4L114.3 64.3L117.8 53.6L117.8 46.4L114.3 35.7L107.1 28.6L100 25L89.3 25M142.9 0L142.9 75M142.9 35.7L150 28.6L157.2 25L167.9 25L175 28.6L182.2 35.7L185.7 46.4L185.7 53.6L182.2 64.3L175 71.4L167.9 75L157.2 75L150 71.4L142.9 64.3M250.1 25L250.1 75M250.1 35.7L242.9 28.6L235.8 25L225.1 25L217.9 28.6L210.8 35.7L207.2 46.4L207.2 53.6L210.8 64.3L217.9 71.4L225.1 75L235.8 75L242.9 71.4L250.1 64.3M318 35.7L310.8 28.6L303.7 25L293 25L285.8 28.6L278.7 35.7L275.1 46.4L275.1 53.6L278.7 64.3L285.8 71.4L293 75L303.7 75L310.8 71.4L318 64.3M378.7 25L339.4 75M339.4 25L378.7 25M339.4 75L378.7 75M460.8 0L460.8 75M496.5 25L460.8 60.7M475.1 46.4L500.1 75M560.8 25L560.8 75M560.8 35.7L553.6 28.6L546.5 25L535.8 25L528.6 28.6L521.5 35.7L517.9 46.4L517.9 53.6L521.5 64.3L528.6 71.4L535.8 75L546.5 75L553.6 71.4L560.8 64.3M585.8 25L600.1 75M614.4 25L600.1 75M614.4 25L628.7 75M643 25L628.7 75M660.8 25L682.3 75M703.7 25L682.3 75L675.1 89.3L668 96.4L660.8 100L657.3 100',
+  },
+  small: {
+    width: 771.7,
+    d: 'M14.3 25L14.3 75M14.3 39.3L25 28.6L32.1 25L42.9 25L50 28.6L53.6 39.3L53.6 75M53.6 39.3L64.3 28.6L71.4 25L82.1 25L89.3 28.6L92.9 39.3L92.9 75M160.7 25L160.7 75M160.7 35.7L153.5 28.6L146.4 25L135.7 25L128.5 28.6L121.4 35.7L117.8 46.4L117.8 53.6L121.4 64.3L128.5 71.4L135.7 75L146.4 75L153.5 71.4L160.7 64.3M189.3 0L189.3 75M177.3 62L199.3 30M257.2 25L257.2 75M257.2 35.7L250 28.6L242.9 25L232.2 25L225 28.6L217.9 35.7L214.3 46.4L214.3 53.6L217.9 64.3L225 71.4L232.2 75L242.9 75L250 71.4L257.2 64.3M342.9 25L342.9 100M342.9 35.7L350 28.6L357.2 25L367.9 25L375 28.6L382.2 35.7L385.7 46.4L385.7 53.6L382.2 64.3L375 71.4L367.9 75L357.2 75L350 71.4L342.9 64.3M450.1 25L450.1 75M450.1 35.7L442.9 28.6L435.8 25L425.1 25L417.9 28.6L410.8 35.7L407.2 46.4L407.2 53.6L410.8 64.3L417.9 71.4L425.1 75L435.8 75L442.9 71.4L450.1 64.3M478.7 0L478.7 75M546.6 25L546.6 75M546.6 35.7L539.4 28.6L532.3 25L521.6 25L514.4 28.6L507.3 35.7L503.7 46.4L503.7 53.6L507.3 64.3L514.4 71.4L521.6 75L532.3 75L539.4 71.4L546.6 64.3M575.2 25L575.2 75M575.2 46.4L578.8 35.7L585.9 28.6L593 25L603.8 25M621.6 25L621.6 75M621.6 39.3L632.3 28.6L639.4 25L650.2 25L657.3 28.6L660.9 39.3L660.9 75M685.9 0L689.5 3.6L693.1 0L689.5 -3.6L685.9 0M689.5 25L689.5 75M757.4 25L757.4 75M757.4 35.7L750.2 28.6L743.1 25L732.4 25L725.2 28.6L718.1 35.7L714.5 46.4L714.5 53.6L718.1 64.3L725.2 71.4L732.4 75L743.1 75L750.2 71.4L757.4 64.3',
+  },
+  river: {
+    width: 521.6,
+    d: 'M14.3 25L14.3 75M14.3 39.3L25 28.6L32.1 25L42.9 25L50 28.6L53.6 39.3L53.6 75M121.5 25L121.5 75M121.5 35.7L114.3 28.6L107.2 25L96.5 25L89.3 28.6L82.2 35.7L78.6 46.4L78.6 53.6L82.2 64.3L89.3 71.4L96.5 75L107.2 75L114.3 71.4L121.5 64.3M189.4 0L189.4 75M189.4 35.7L182.2 28.6L175.1 25L164.4 25L157.2 28.6L150.1 35.7L146.5 46.4L146.5 53.6L150.1 64.3L157.2 71.4L164.4 75L175.1 75L182.2 71.4L189.4 64.3M292.9 0L285.8 3.6L278.7 10.7L275.1 17.9L271.5 28.6L271.5 46.4L275.1 57.1L278.7 64.3L285.8 71.4L292.9 75L307.2 75L314.4 71.4L321.5 64.3L325.1 57.1L328.7 46.4L328.7 28.6L325.1 17.9L321.5 10.7L314.4 3.6L307.2 0L292.9 0M393 0L393 75M393 35.7L385.8 28.6L378.7 25L368 25L360.8 28.6L353.7 35.7L350.1 46.4L350.1 53.6L353.7 64.3L360.8 71.4L368 75L378.7 75L385.8 71.4L393 64.3M421.6 25L421.6 75M421.6 46.4L425.2 35.7L432.3 28.6L439.4 25L450.2 25M507.3 25L507.3 75M507.3 35.7L500.1 28.6L493 25L482.3 25L475.1 28.6L468 35.7L464.4 46.4L464.4 53.6L468 64.3L475.1 71.4L482.3 75L493 75L500.1 71.4L507.3 64.3M499.3 75L501.3 92L513.3 104L523.3 100',
+  },
+};
+
+const links = ['kawy', 'palarnia', 'przepis', 'kontakt'];
+
+function Hand({ word, className }) {
+  const { width, d } = hand[word];
+  return (
+    <svg className={className} viewBox={`0 -24 ${width} 130`} aria-hidden="true">
+      <path d={d} />
+    </svg>
+  );
+}
 
 export default function Shop() {
   return (
     <>
       <div className="mk__nav">
-        <span className="mk__logo">Trzask</span>
+        <span className="mk__logo">
+          <Hand word="logo" className="mk-shop__hand" />
+        </span>
         <span className="mk__links">
           {links.map(link => (
             <span key={link}>{link}</span>
           ))}
-          <b className="mk-shop__cart">Koszyk 0</b>
         </span>
       </div>
-      <p className="mk-shop__mark">Trzask</p>
-      <div className="mk-shop__labels">
-        {labels.map(label => (
-          <div key={label.origin} className={`mk-shop__label mk-shop__label--${label.tone}`}>
-            <b>{label.origin}</b>
-            <svg viewBox="0 0 100 32" aria-hidden="true">
-              <path d="M2 6C10 28 22 27 42 20S78 11 98 9" />
-              <circle cx="80" cy="11" r="3" />
-            </svg>
-            <span>{label.notes}</span>
-            <small>{label.roast}</small>
-          </div>
-        ))}
-      </div>
-      <p className="mk__h">
-        Palimy we wtorki
-        <br />i czwartki.
+      <svg className="mk-shop__beans" viewBox={`0 -12 ${hand.word.width} 100`} aria-hidden="true">
+        <path className="mk-shop__bean" d={hand.word.d} />
+        <path className="mk-shop__bean mk-shop__bean--dark" d={hand.word.d} />
+        <path className="mk-shop__crease" d={hand.word.d} />
+      </svg>
+      <span className="mk-shop__batch">partia 31, filtr</span>
+      <p className="mk-shop__where">
+        <Hand word="small" className="mk-shop__hand" />
+        <Hand word="river" className="mk-shop__hand" />
       </p>
-      <span className="mk__btn">Zobacz kawy</span>
+      <p className="mk__p">
+        {tie(
+          'Palę małe partie, od jasnego po ciemne palenie. Każdy worek ma numer partii i datę palenia.',
+        )}
+      </p>
+      <span className="mk__btn">
+        <Hand word="cta" className="mk-shop__hand" />
+      </span>
     </>
   );
 }

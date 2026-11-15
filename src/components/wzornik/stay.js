@@ -1,49 +1,41 @@
 import React from 'react';
-import { tie } from '../../i18n';
 
-const links = ['Start', 'Pokoje', 'Rezerwacja', 'Pakiety', 'Okolica'];
-const board = [
-  ['Podwórzowy', [105, 106, 205, 206], [106]],
-  ['Klasyczny', [103, 104, 204, 304], [104, 204, 304]],
-  ['Z widokiem', [101, 102, 201, 202], [202]],
+const links = [
+  ['I', 'Pokoje'],
+  ['II', 'Doba'],
+  ['III', 'Adres'],
 ];
 
 export default function Stay() {
   return (
     <>
-      <div className="mk-stay__rail">
-        <span className="mk__logo">Przęsło</span>
-        <ul>
-          {links.map((link, i) => (
-            <li key={link} className={i === 0 ? 'is-on' : undefined}>
+      <div className="mk__nav">
+        <span className="mk__links">
+          {links.map(([number, link]) => (
+            <span key={link}>
+              <small>{number}</small>
               {link}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <p className="mk__h">
-        Dwadzieścia cztery
-        <br />
-        klucze nad Odrą.
-      </p>
-      <p className="mk__p">
-        {tie('Hotel w odnowionej kamienicy przy Grodzkiej. Rezerwujesz u nas, bez portalu.')}
-      </p>
-      <span className="mk__btn">Zarezerwuj pobyt</span>
-      <div className="mk-stay__board">
-        <b>Tablica recepcji</b>
-        {board.map(([room, keys, free]) => (
-          <div key={room} className="mk-stay__row">
-            <span>{room}</span>
-            <span className="mk-stay__hooks">
-              {keys.map(key => (
-                <i key={key} className={free.includes(key) ? 'is-free' : undefined}>
-                  {key}
-                </i>
-              ))}
             </span>
-          </div>
-        ))}
+          ))}
+        </span>
+        <span className="mk-stay__book">Rezerwacja</span>
+      </div>
+      <div className="mk-stay__label">
+        <svg className="mk-stay__fob" viewBox="0 0 40 56" aria-hidden="true">
+          <circle cx="20" cy="5" r="3.4" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          <ellipse cx="20" cy="31" rx="16" ry="22" fill="currentColor" />
+          <ellipse cx="20" cy="31" rx="13" ry="19" fill="none" stroke="#f1e7cf" strokeWidth="0.8" />
+          <text x="20" y="40" textAnchor="middle" fill="#f1e7cf" fontSize="24">
+            B
+          </text>
+        </svg>
+        <p className="mk__logo">Brelok</p>
+        <span className="mk-stay__year">1912</span>
+        <p className="mk__h">
+          Czternaście pokoi
+          <br />i jeden klucz do miasta.
+        </p>
+        <span className="mk__btn">Sprawdź termin</span>
       </div>
     </>
   );
