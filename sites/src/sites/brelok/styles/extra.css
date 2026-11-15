@@ -1246,3 +1246,63 @@ html.js .noscript-note {
 .choice input:disabled:checked + label {
   opacity: 0.85;
 }
+
+.my-lookup {
+  max-width: 34em;
+  margin: 0 auto;
+}
+.my-lookup .field + .field {
+  margin-top: 22px;
+}
+.my-lookup .actions {
+  margin-top: 26px;
+}
+.my-saved,
+.my-empty,
+.my-details,
+.karta .notice {
+  max-width: 34em;
+  margin-left: auto;
+  margin-right: auto;
+}
+.my-saved,
+.my-empty {
+  margin-top: 42px;
+}
+.my-empty {
+  text-align: center;
+}
+.my-hint {
+  margin-top: 10px;
+  font-size: 17px;
+  font-style: italic;
+  text-align: center;
+}
+.my-details {
+  margin-top: 42px;
+  padding-top: 34px;
+  border-top: 2px dotted var(--paper);
+}
+.my-ask {
+  margin-top: 20px;
+  text-align: center;
+}
+.my-ask .actions,
+.my-details .actions {
+  margin-top: 16px;
+}
+.bookings-list {
+  list-style: none;
+  padding: 0;
+}
+.bookings-list li {
+  min-width: 0;
+}
+.my-lookup .eyebrow,
+.my-saved .eyebrow,
+.my-empty .eyebrow {
+  margin-bottom: 18px;
+}
+.my-saved .my-hint {
+  margin-top: -8px;
+}
