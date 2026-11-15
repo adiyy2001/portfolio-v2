@@ -1,5 +1,5 @@
 import type { LoftType, TypeKey } from './data';
-import { comma } from './format';
+import { comma, floorInline } from './format';
 
 interface InnerDoor {
   x: number;
@@ -137,7 +137,7 @@ export interface PlanModel {
 }
 
 export const planTitle = (type: LoftType) =>
-  `Rzut lofta ${type.area} m², ${type.floor === 'Parter' ? 'parter' : type.floor}`;
+  `Rzut lofta ${type.area} m², ${floorInline(type.floor)}`;
 
 const roomLabels = (spec: PlanSpec, type: LoftType) => {
   const out: string[] = [];

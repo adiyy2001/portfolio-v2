@@ -66,6 +66,14 @@ const image = new URL(asset('og.png'), Astro.site).href;
     </main>
     <Footer />
     <div class="grain" aria-hidden="true"></div>
+    <script is:inline>
+      if (location.hash.length > 1) {
+        try {
+          const anchor = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+          if (anchor) anchor.scrollIntoView({ behavior: 'instant', block: 'start' });
+        } catch (error) {}
+      }
+    </script>
     <script>
       import './scripts/chrome';
     </script>

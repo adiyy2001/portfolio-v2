@@ -83,7 +83,7 @@ export const sun = {
 
 export const where = {
   mark: 'Adres i pokazy',
-  headline: `Pokazy ${hoursText}.`,
+  headline: `Pokazy po umówieniu, ${hoursText}.`,
   formHeading: 'Umów pokaz',
   formLead: 'Zostaw imię i telefon. Oddzwonimy i ustalimy godzinę pokazu.',
   nearLabel: 'Odległości pieszo',
@@ -155,7 +155,7 @@ export const location = {
   diagramHeading: 'Co jest w zasięgu spaceru',
   diagramNote: 'Schemat odległości w minutach marszu, nie mapa. Kierunki są umowne.',
   officeHeading: 'Biuro sprzedaży',
-  officeText: `Biuro mieści się w dawnej bramie cegielni pod adresem ${addressLine}. Pokazy ${hoursText}, bez wcześniejszego zapisu.`,
+  officeText: `Biuro mieści się w dawnej bramie cegielni pod adresem ${addressLine}. Pokazy odbywają się ${hoursText}, po wcześniejszym umówieniu. Zadzwoń albo zostaw dane w formularzu.`,
 };
 
 export const office = {
@@ -180,13 +180,11 @@ export const form = {
   loftAny: 'Jeszcze nie wiem',
   message: 'Wiadomość',
   messageHint: 'Nieobowiązkowo.',
-  consent:
-    'Zgadzam się, żeby biuro oddzwoniło w sprawie pokazu. To strona przykładowa, więc moje dane nigdzie nie trafią.',
+  consent: 'Zgadzam się, żeby biuro oddzwoniło w sprawie pokazu.',
   submit: 'Wyślij',
   submitFull: 'Umów pokaz',
   summary: (count: number) => `Do poprawy: ${count} ${plural(count, 'pole', 'pola', 'pól')}.`,
-  doneTitle: (ref: string) => `Zgłoszenie ${ref}: to tylko próba, nic nie wysłano.`,
-  doneText: `To strona przykładowa, więc nic nie zostało wysłane. Prawdziwe biuro oddzwoniłoby i umówiło pokaz. Pokazy odbywają się ${hoursText}.`,
+  doneTitle: (ref: string) => `Zgłoszenie ${ref} nie zostało nigdzie wysłane.`,
   again: 'Wypełnij ponownie',
   noScriptLead: 'Formularz działa z JavaScriptem. Zadzwoń pod numer',
   noScriptOr: 'albo napisz na',
@@ -218,14 +216,14 @@ export const credits = {
     'Zmiany: usunięto słup i kable sprzed elewacji, fotografię pocięto na kadry poziome i pionowe, odbarwiono, przyciemniono, nałożono sepię i jednolite ziarno filmowe, zapisano jako WebP. Warstwa podświetlona w narzędziu słońca to ten sam kadr co warstwa ciemna, rozjaśniony.',
   framesHeading: 'Kadry',
   frames: [
-    ['hero', 'środkowe okna z łukami i okrągłe okno'],
-    ['historia', 'lewy komin i szczyt'],
-    ['loft 37 m²', 'prawe okno z łukiem'],
-    ['loft 52 m²', 'okno środkowe z gzymsem'],
-    ['loft 64 m²', 'ściana szczytowa'],
-    ['loft 112 m²', 'cała elewacja o zmierzchu'],
+    ['hero', 'ściana szczytowa z trzema oknami z łukami i okrągłym oknem'],
+    ['historia', 'komin po lewej i skośny dach hali, nad nim drzewko'],
+    ['loft 37 m²', 'okno z ceglanym łukiem i gzymsem'],
+    ['loft 52 m²', 'komin z brzozami na tle ciemnego nieba'],
+    ['loft 64 m²', 'cały szczyt hali o zmierzchu'],
+    ['loft 112 m²', 'boczna ściana z arkadami okien'],
     ['słońce', 'okno z łukiem i arkady ściany bocznej'],
-    ['adres', 'prawy komin z brzozami'],
+    ['adres', 'okno z łukiem i kratą szyb, obok fragment drugiego okna'],
   ],
   typeHeading: 'Rysunki i krój pisma',
   typeText:

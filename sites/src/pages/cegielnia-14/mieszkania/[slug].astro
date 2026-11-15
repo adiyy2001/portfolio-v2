@@ -11,7 +11,7 @@ import {
   units,
   unitsOfType,
 } from '../../../sites/cegielnia-14/data';
-import { comma, m2, pricePerM2, zl } from '../../../sites/cegielnia-14/format';
+import { comma, floorInline, m2, pricePerM2, zl } from '../../../sites/cegielnia-14/format';
 import { frameOf, interiorSrc } from '../../../sites/cegielnia-14/images';
 import Layout from '../../../sites/cegielnia-14/Layout.astro';
 import { path, url } from '../../../sites/cegielnia-14/site';
@@ -29,7 +29,7 @@ const similar = unitsOfType(type.key).filter(
   item => item.status === 'dostepny' && item.slug !== unit.slug,
 );
 const title = `Loft ${unit.code}, ${m2(type.area)}`;
-const description = `Loft ${unit.code} w Cegielni 14: ${type.floor.toLowerCase()}, ${m2(type.area)}, ${roomsLabel(type.rooms)}, ${zl(unit.price)}. Rzut, tabela pomieszczeń i godziny słońca w salonie.`;
+const description = `Loft ${unit.code} w Cegielni 14: ${floorInline(type.floor)}, ${m2(type.area)}, ${roomsLabel(type.rooms)}, ${zl(unit.price)}. Rzut, tabela pomieszczeń i godziny słońca w salonie.`;
 const note =
   unit.status === 'sprzedany'
     ? detail.soldNote

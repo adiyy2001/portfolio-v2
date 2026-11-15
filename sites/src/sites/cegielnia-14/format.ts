@@ -11,6 +11,8 @@ export const m2 = (value: number, digits = 0) => `${comma(value, digits)}${nbsp}
 
 export const pricePerM2 = (price: number, area: number) => Math.round(price / area);
 
+export const floorInline = (floor: string) => (floor === 'Parter' ? 'parter' : floor);
+
 export const plural = (n: number, one: string, few: string, many: string) => {
   if (n === 1) return one;
   const tail = n % 10;

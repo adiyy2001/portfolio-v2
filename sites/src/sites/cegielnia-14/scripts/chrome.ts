@@ -69,6 +69,35 @@ const initMotion = () => {
   paint();
 };
 
+const interactionEvents = ['pointerdown', 'keydown', 'wheel', 'touchstart'] as const;
+
+const enableSmoothScroll = () => {
+  if (prefersReducedMotion()) return;
+  const enable = () => {
+    document.documentElement.classList.add('smooth-scroll');
+    interactionEvents.forEach(name => window.removeEventListener(name, enable));
+  };
+  interactionEvents.forEach(name => window.addEventListener(name, enable, { passive: true }));
+};
+
+const landOnHash = () => {
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  const target = id ? document.getElementById(id) : null;
+  if (!target) return;
+  let touched = false;
+  const markTouched = () => {
+    touched = true;
+  };
+  interactionEvents.forEach(name => window.addEventListener(name, markTouched, { once: true }));
+  const align = () => {
+    if (!touched) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+  };
+  align();
+  window.addEventListener('load', align, { once: true });
+};
+
+landOnHash();
 initReveal();
 initMenu();
 initMotion();
+enableSmoothScroll();

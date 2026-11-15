@@ -1,7 +1,7 @@
 ---
 import { form } from '../copy';
 import { types } from '../data';
-import { m2 } from '../format';
+import { floorInline, m2 } from '../format';
 import { site } from '../site';
 
 interface Props {
@@ -106,7 +106,7 @@ const fid = (name: string) => `${id}-${name}`;
               <option value="">{form.loftAny}</option>
               {types.map(type => (
                 <option value={type.key}>
-                  {m2(type.area)}, {type.floor.toLowerCase()}
+                  {m2(type.area)}, {floorInline(type.floor)}
                 </option>
               ))}
             </select>
@@ -145,10 +145,9 @@ const fid = (name: string) => `${id}-${name}`;
       <span>{full ? form.submitFull : form.submit}</span>
       <i aria-hidden="true"></i>
     </button>
-    {!full && <p class="note">{form.quickNote}</p>}
+    <p class="note">{form.quickNote}</p>
     <div class="done" tabindex="-1" hidden data-done>
       <h3 data-done-title></h3>
-      <p class="body">{form.doneText}</p>
       <button type="button" class="link" data-again>
         <span>{form.again}</span>
         <i aria-hidden="true"></i>
