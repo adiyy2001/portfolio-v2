@@ -1,0 +1,159 @@
+---
+import { link } from '../../../shared/link';
+import Crumbs from '../../../sites/emalia/components/Crumbs.astro';
+import Cta from '../../../sites/emalia/components/Cta.astro';
+import PageHead from '../../../sites/emalia/components/PageHead.astro';
+import PriceRows from '../../../sites/emalia/components/PriceRows.astro';
+import { findPrice, formatPrice, pricesOfGroup } from '../../../sites/emalia/data/prices';
+import { findMember } from '../../../sites/emalia/data/team';
+import { treatments } from '../../../sites/emalia/data/treatments';
+import type { Treatment } from '../../../sites/emalia/data/treatments';
+import Layout from '../../../sites/emalia/Layout.astro';
+import { nbsp } from '../../../sites/emalia/lib/typography';
+
+interface Props {
+  treatment: Treatment;
+  previous: Treatment;
+  next: Treatment;
+}
+
+export function getStaticPaths() {
+  return treatments.map((treatment, index) => ({
+    params: { slug: treatment.slug },
+    props: {
+      treatment,
+      previous: treatments[(index + treatments.length - 1) % treatments.length],
+      next: treatments[(index + 1) % treatments.length],
+    },
+  }));
+}
+
+const topics: Record<string, string> = {
+  przeglad: 'Przegląd',
+  higienizacja: 'Higienizacja',
+  wybielanie: 'Wybielanie',
+  'leczenie-kanalowe': 'Leczenie kanałowe',
+  'bol-zeba': 'Ból zęba',
+  wypelnienia: 'Inna sprawa',
+};
+
+const { treatment, previous, next } = Astro.props;
+const price = findPrice(treatment.priceId);
+const doctors = treatment.doctors.map(findMember);
+const rows = pricesOfGroup(treatment.slug);
+---
+
+<Layout
+  title={treatment.name}
+  description={treatment.description}
+  path={`/emalia/zabiegi/${treatment.slug}/`}
+  current="zabiegi"
+  bundles={['inner']}>
+  <Crumbs trail={[{ label: 'Zabiegi', path: '/emalia/zabiegi/' }, { label: treatment.name }]} />
+  <PageHead label="Zabieg" title={treatment.name} lead={treatment.lead} />
+  <section class="wrap" aria-label="Najważniejsze informacje">
+    <dl class="facts">
+      <div>
+        <dt>Czas</dt>
+        <dd>{treatment.time}</dd>
+      </div>
+      <div>
+        <dt>Wizyty</dt>
+        <dd>{treatment.visits}</dd>
+      </div>
+      <div>
+        <dt>Cena</dt>
+        <dd>
+          {formatPrice(price)}
+          <small>{price.unit}</small>
+        </dd>
+      </div>
+      <div>
+        <dt>Prowadzi</dt>
+        <dd>{doctors.map(doctor => doctor.name).join(', ')}</dd>
+      </div>
+    </dl>
+  </section>
+  <section class="wrap sec-in" aria-labelledby="opis">
+    <h2 id="opis">Na czym polega</h2>
+    <div class="prose">
+      {treatment.intro.map(paragraph => (
+        <p>{nbsp(paragraph)}</p>
+      ))}
+    </div>
+  </section>
+  <section class="wrap sec-in" aria-labelledby="przebieg">
+    <h2 id="przebieg">Przebieg wizyty</h2>
+    <ol class="steps">
+      {treatment.steps.map(step => (
+        <li>
+          <h3>{step.name}</h3>
+          <p>{nbsp(step.text)}</p>
+        </li>
+      ))}
+    </ol>
+  </section>
+  <div class="sec-tint">
+    <section class="wrap sec-in" aria-labelledby="ceny">
+      <h2 id="ceny">Ile to kosztuje</h2>
+      <PriceRows items={rows} />
+      <p class="more-row">
+        <a class="text-link" href={link('/emalia/cennik/')}>
+          Pełny cennik
+        </a>
+      </p>
+    </section>
+  </div>
+  <section class="wrap sec-in" aria-labelledby="po">
+    <h2 id="po">{treatment.afterHeading}</h2>
+    <ul class="after-list">
+      {treatment.after.map(item => (
+        <li>{nbsp(item)}</li>
+      ))}
+    </ul>
+  </section>
+  <section class="wrap sec-in" aria-labelledby="lekarze">
+    <h2 id="lekarze">Kto prowadzi zabieg</h2>
+    <ul class="doctors">
+      {doctors.map(doctor => (
+        <li class="doctor">
+          <span class="monogram" aria-hidden="true">
+            {doctor.initials}
+          </span>
+          <div>
+            <a href={link(`/emalia/zespol/#${doctor.id}`)}>{doctor.name}</a>
+            <span class="doctor-focus">{doctor.focus}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section class="wrap sec-in" aria-labelledby="pytania">
+    <h2 id="pytania">Pytania i odpowiedzi</h2>
+    <div class="faq">
+      {treatment.faq.map(entry => (
+        <details>
+          <summary>{entry.question}</summary>
+          <p>{nbsp(entry.answer)}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+  <section class="wrap sec-in" aria-label="Pozostałe zabiegi">
+    <nav class="pager" aria-label="Sąsiednie zabiegi">
+      <a href={link(`/emalia/zabiegi/${previous.slug}/`)} rel="prev">
+        <span class="label">Poprzedni zabieg</span>
+        <strong>{previous.name}</strong>
+      </a>
+      <a class="pager-next" href={link(`/emalia/zabiegi/${next.slug}/`)} rel="next">
+        <span class="label">Następny zabieg</span>
+        <strong>{next.name}</strong>
+      </a>
+    </nav>
+  </section>
+  <Cta
+    title="Chcesz umówić wizytę?"
+    text="Zostaw imię i numer, oddzwonimy w godzinach przyjęć i ustalimy termin."
+    topic={topics[treatment.slug]}
+  />
+</Layout>

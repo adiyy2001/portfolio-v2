@@ -1,0 +1,58 @@
+---
+import { link } from '../../../shared/link';
+import Crumbs from '../../../sites/emalia/components/Crumbs.astro';
+import PageHead from '../../../sites/emalia/components/PageHead.astro';
+import Layout from '../../../sites/emalia/Layout.astro';
+
+const photoUrl =
+  'https://commons.wikimedia.org/wiki/File:A_dental_chair_in_a_dentist_clinic_in_North_Carolina,_United_States.jpg';
+---
+
+<Layout
+  title="Źródła zdjęcia, fontów i grafik"
+  description="Autorzy, licencje i źródła zdjęcia gabinetu, fontów Manrope i Fraunces oraz grafik 3D użytych na stronie przykładowej Emalii."
+  path="/emalia/credits/"
+  bundles={['inner']}>
+  <Crumbs trail={[{ label: 'Źródła' }]} />
+  <PageHead label="Źródła" title="Źródła zdjęcia, fontów i grafik" />
+  <section class="wrap sec-in" aria-label="Lista źródeł">
+    <ul class="credit-list">
+      <li>
+        <h2>Zdjęcie gabinetu</h2>
+        <p>
+          „A dental chair in a dentist clinic in North Carolina, United States”, autor Harrison
+          Keely (Wikimedia Commons, użytkownik Hkeely). Licencja CC BY 4.0. Zdjęcie zostało
+          przycięte i zmniejszone. To zdjęcie poglądowe, nie pokazuje gabinetu Emalii.
+        </p>
+        <p>
+          <a href={photoUrl}>commons.wikimedia.org, strona pliku</a>
+        </p>
+      </li>
+      <li>
+        <h2>Fonty</h2>
+        <p>
+          Manrope (autor Mikhail Sharanda, wagi 400 do 800) i Fraunces italic (Undercase Type, wagi
+          400 do 600), hostowane na stronie jako woff2. Licencja SIL Open Font License 1.1.
+        </p>
+        <p>
+          <a href="https://openfontlicense.org">openfontlicense.org</a>
+        </p>
+      </li>
+      <li>
+        <h2>Ząb i perły</h2>
+        <p>Grafiki 3D wyrenderowane na potrzeby tej strony, w pięciu wariantach koloru.</p>
+      </li>
+      <li>
+        <h2>Logo i rysowane kreski</h2>
+        <p>
+          Znak w kształcie zęba, podkreślenia i strzałki zostały narysowane na potrzeby tej strony.
+        </p>
+      </li>
+    </ul>
+    <p class="more-row">
+      <a class="pill pill-navy" href={link('/emalia/')}>
+        Wróć na stronę główną
+      </a>
+    </p>
+  </section>
+</Layout>

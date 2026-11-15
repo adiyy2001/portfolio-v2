@@ -1,0 +1,118 @@
+---
+import { link } from '../../../shared/link';
+import Crumbs from '../../../sites/emalia/components/Crumbs.astro';
+import Cta from '../../../sites/emalia/components/Cta.astro';
+import PageHead from '../../../sites/emalia/components/PageHead.astro';
+import VisitBar from '../../../sites/emalia/components/VisitBar.astro';
+import { findPrice, formatPrice } from '../../../sites/emalia/data/prices';
+import { facts } from '../../../sites/emalia/data/site';
+import Layout from '../../../sites/emalia/Layout.astro';
+import { nbsp } from '../../../sites/emalia/lib/typography';
+
+const bring = [
+  'Dokument tożsamości.',
+  'Listę leków, które przyjmujesz, i informację o alergiach.',
+  'Stare zdjęcia rentgenowskie, jeśli je masz.',
+  'Wyniki badań, jeśli leczysz się przewlekle.',
+];
+const faq = [
+  {
+    question: 'Czy podczas pierwszej wizyty coś mnie zaboli?',
+    answer:
+      'Badanie i zdjęcie zwykle nie bolą. Jeśli lekarz zobaczy ubytek, leczenie zaczynamy dopiero na kolejnej wizycie, po twojej decyzji.',
+  },
+  {
+    question: 'Ile kosztuje pierwsza wizyta?',
+    answer: `Przegląd z planem leczenia kosztuje ${formatPrice(findPrice('przeglad'))} ${findPrice('przeglad').unit}. Dodatkowe zdjęcie punktowe to ${formatPrice(findPrice('zdjecie-punktowe'))} ${findPrice('zdjecie-punktowe').unit}.`,
+  },
+  {
+    question: 'Czy muszę od razu się leczyć?',
+    answer:
+      'Nie. Plan i kosztorys zabierasz do domu, a o terminie następnej wizyty decydujesz sam.',
+  },
+  {
+    question: 'Co, jeśli boli mnie ząb?',
+    answer: `Powiedz o tym przy zapisie. Z bólem zęba przyjmujemy ${facts.painPromise}, a wizyta bólowa kosztuje ${formatPrice(findPrice('wizyta-bolowa'))}.`,
+  },
+  {
+    question: 'Czy kolejne wizyty też trwają godzinę?',
+    answer:
+      'Nie zawsze. Pierwsza trwa 60 minut, a dalsze tyle, ile wymaga zabieg. Czas podajemy przy zapisie.',
+  },
+];
+---
+
+<Layout
+  title="Pierwsza wizyta"
+  description="Jak wygląda pierwsza wizyta w Emalii: godzina podzielona na rozmowę, badanie i plan leczenia, lista rzeczy do zabrania i odpowiedzi na pytania pacjentów."
+  path="/emalia/pierwsza-wizyta/"
+  current="pierwsza-wizyta"
+  bundles={['visit', 'inner']}>
+  <Crumbs trail={[{ label: 'Pierwsza wizyta' }]} />
+  <PageHead
+    label="Pierwsza wizyta"
+    title="Pierwsza wizyta trwa godzinę"
+    lead="Nic się nie dzieje bez twojej zgody. Plan i ceny dostajesz na kartce, a decyzję podejmujesz w domu."
+  />
+  <section class="wrap sec-in" aria-labelledby="godzina">
+    <h2 id="godzina">Jak mija ta godzina</h2>
+    <VisitBar />
+  </section>
+  <div class="sec-tint">
+    <section class="wrap sec-in two-col" aria-label="Przygotowanie do wizyty">
+      <div>
+        <h2>Co zabrać</h2>
+        <ul class="bring-list">
+          {bring.map(item => (
+            <li>{nbsp(item)}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>Na miejscu</h2>
+        <div class="prose">
+          <p>
+            {nbsp(
+              'Przyjdź kilka minut wcześniej, żeby wypełnić krótką kartę zdrowia. Zapytamy w niej o choroby, leki i uczulenia.',
+            )}
+          </p>
+          <p>{nbsp('Gabinet jest na parterze, wejście od ulicy jest bez schodów.')}</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <section class="wrap sec-in" aria-labelledby="gabinet">
+    <h2 id="gabinet">Tak wygląda gabinet zabiegowy</h2>
+    <figure class="photo">
+      <img
+        src={link('/emalia/img/gabinet.webp')}
+        srcset={`${link('/emalia/img/gabinet-720.webp')} 720w, ${link('/emalia/img/gabinet.webp')} 1200w`}
+        sizes="(max-width: 820px) 100vw, 760px"
+        alt="Gabinet stomatologiczny: fotel zabiegowy z lampą, szafki i monitor na ścianie"
+        width="1200"
+        height="900"
+        loading="lazy"
+      />
+      <figcaption>
+        Zdjęcie poglądowe gabinetu zabiegowego. Autor i licencja na stronie{' '}
+        <a href={link('/emalia/credits/')}>ze źródłami</a>.
+      </figcaption>
+    </figure>
+  </section>
+  <section class="wrap sec-in" aria-labelledby="pytania">
+    <h2 id="pytania">Pytania przed pierwszą wizytą</h2>
+    <div class="faq">
+      {faq.map(entry => (
+        <details>
+          <summary>{entry.question}</summary>
+          <p>{nbsp(entry.answer)}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+  <Cta
+    title="Umów pierwszą wizytę"
+    text="Zostaw imię i numer, a oddzwonimy w godzinach przyjęć."
+    topic="Przegląd"
+  />
+</Layout>

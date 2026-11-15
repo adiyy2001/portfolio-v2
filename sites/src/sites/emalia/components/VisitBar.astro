@@ -1,0 +1,30 @@
+---
+import { visitMinutes, visitSegments } from '../data/site';
+import { nbsp } from '../lib/typography';
+
+const barLabel = `Pierwsza wizyta trwa ${visitMinutes} minut`;
+---
+
+<div class="hour" data-reveal>
+  <p class="sr-only">{barLabel}.</p>
+  <div class="hour-bar" aria-hidden="true">
+    {visitSegments.map(segment => (
+      <span class={`seg seg-${segment.id}`} style={`--m:${segment.minutes}`}>
+        {segment.minutes} min
+      </span>
+    ))}
+  </div>
+  <div class="hour-scale" aria-hidden="true">
+    <span>0</span>
+    <span>{visitMinutes} min</span>
+  </div>
+  <ul class="hour-legend">
+    {visitSegments.map(segment => (
+      <li>
+        <h3>{segment.name}</h3>
+        <span class="label hour-min">{segment.minutes} min</span>
+        <p>{nbsp(segment.text)}</p>
+      </li>
+    ))}
+  </ul>
+</div>

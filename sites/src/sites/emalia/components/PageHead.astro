@@ -1,0 +1,17 @@
+---
+import { nbsp } from '../lib/typography';
+
+interface Props {
+  label: string;
+  title: string;
+  lead?: string;
+}
+
+const { label, title, lead } = Astro.props;
+---
+
+<header class="page-head wrap">
+  <span class="label">{label}</span>
+  <h1>{nbsp(title)}</h1>
+  {lead && <p class="lead">{nbsp(lead)}</p>}
+</header>
