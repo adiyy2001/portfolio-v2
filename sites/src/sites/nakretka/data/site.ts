@@ -1,6 +1,7 @@
 export const business = {
   name: 'Nakrętka',
   street: 'ul. Szybowcowa 91',
+  streetLocative: 'ul. Szybowcowej 91',
   postcode: '54-130',
   city: 'Wrocław',
   district: 'Fabryczna',

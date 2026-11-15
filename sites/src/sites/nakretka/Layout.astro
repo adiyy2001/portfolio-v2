@@ -3,6 +3,7 @@ import { link } from '../../shared/link';
 import SampleNote from '../../shared/SampleNote.astro';
 import { addressLines, business, hoursRows } from './data/site';
 import { preloadedFonts } from './fonts';
+import { pluralPl } from './lib/format';
 import { navItems } from './nav';
 import type { NavKey } from './nav';
 import HoursChip from './islands/HoursChip';
@@ -112,6 +113,14 @@ const skipLabel = home ? 'Przejdź do ceny i telefonu' : 'Przejdź do treści';
           <a class="brand-sub" href={link('/nakretka/')} aria-label="Nakrętka, strona główna">
             Nakrętka
           </a>
+          <button
+            type="button"
+            class="menu-btn"
+            id="menu-btn"
+            aria-expanded="false"
+            aria-controls="site-nav">
+            Menu
+          </button>
           <nav class="nav" id="site-nav" aria-label="Główna">
             {navItems.map(item => (
               <a href={link(item.path)} aria-current={current === item.key ? 'page' : undefined}>
@@ -119,19 +128,9 @@ const skipLabel = home ? 'Przejdź do ceny i telefonu' : 'Przejdź do treści';
               </a>
             ))}
           </nav>
-          <div class="hdr__tools">
-            <a class="hdr__tel" href={business.phoneHref} aria-label={`Zadzwoń: ${business.phone}`}>
-              {business.phone}
-            </a>
-            <button
-              type="button"
-              class="menu-btn"
-              id="menu-btn"
-              aria-expanded="false"
-              aria-controls="site-nav">
-              Menu
-            </button>
-          </div>
+          <a class="hdr__tel" href={business.phoneHref} aria-label={`Zadzwoń: ${business.phone}`}>
+            {business.phone}
+          </a>
         </div>
       </header>
     )}
@@ -175,7 +174,7 @@ const skipLabel = home ? 'Przejdź do ceny i telefonu' : 'Przejdź do treści';
           </ul>
         </nav>
         <p class="foot-facts">
-          {`Na Fabrycznej mamy ${business.stations} stanowisk i tabelę momentów dla ${business.torqueModels} modeli aut, a typowa naprawa trwa do ${business.maxRepairHours} godzin.`}
+          {`Na Fabrycznej mamy ${business.stations} stanowisk, a tabela momentów obejmuje ${business.torqueModels} ${pluralPl(business.torqueModels, 'model', 'modele', 'modeli')} aut. Typowa naprawa trwa do ${business.maxRepairHours} godzin.`}
         </p>
       </div>
       <div class="foot-legal">

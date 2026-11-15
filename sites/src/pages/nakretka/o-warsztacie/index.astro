@@ -5,12 +5,19 @@ import PageHead from '../../../sites/nakretka/components/PageHead.astro';
 import ProcessSteps from '../../../sites/nakretka/components/ProcessSteps.astro';
 import { business, torqueRange } from '../../../sites/nakretka/data/site';
 import { imageUrl } from '../../../sites/nakretka/lib/assets';
+import { pluralPl } from '../../../sites/nakretka/lib/format';
 
 const numbers = [
   { value: business.stations, label: 'stanowisk w hali na Fabrycznej' },
-  { value: business.torqueModels, label: 'modeli aut w tabeli momentów' },
+  {
+    value: business.torqueModels,
+    label: `${pluralPl(business.torqueModels, 'model', 'modele', 'modeli')} aut w tabeli momentów`,
+  },
   { value: business.inspectionPoints, label: 'punktów kontroli w przeglądzie' },
-  { value: business.maxRepairHours, label: 'godzin to najdłuższa typowa naprawa' },
+  {
+    value: business.maxRepairHours,
+    label: `${pluralPl(business.maxRepairHours, 'godzina', 'godziny', 'godzin')} to najdłuższa typowa naprawa`,
+  },
 ];
 
 const promises = [
@@ -35,7 +42,7 @@ const promises = [
 
 <Layout
   title="O warsztacie"
-  description={`Nakrętka to warsztat z Fabrycznej we Wrocławiu: ${business.stations} stanowisk, tabela momentów dla ${business.torqueModels} modeli aut i karta każdego samochodu. Zobacz, jak pracujemy.`}
+  description={`Nakrętka to warsztat z Fabrycznej we Wrocławiu: ${business.stations} stanowisk i tabela momentów, która obejmuje ${business.torqueModels} ${pluralPl(business.torqueModels, 'model', 'modele', 'modeli')} aut. Zobacz, jak pracujemy.`}
   path="/nakretka/o-warsztacie/"
   current="o-warsztacie"
   bundles={['process', 'pages']}>
@@ -56,9 +63,9 @@ const promises = [
           my zapisujemy go w karcie auta.
         </p>
         <p>
-          Hala przy {business.street} ma {business.stations} stanowisk. Przed pracą oglądamy auto
-          razem z tobą, po pracy oddajemy je z protokołem i starymi częściami. Najdłuższa typowa
-          naprawa trwa do {business.maxRepairHours} godzin.
+          Hala przy {business.streetLocative} ma {business.stations} stanowisk. Przed pracą oglądamy
+          auto razem z tobą, po pracy oddajemy je z protokołem i starymi częściami. Najdłuższa
+          typowa naprawa trwa do {business.maxRepairHours} godzin.
         </p>
         <div class="cta-row">
           <a class="cta" href={link('/nakretka/umow-wizyte/')}>
