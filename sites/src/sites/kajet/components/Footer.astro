@@ -12,30 +12,39 @@ const { current } = Astro.props;
 
 <footer class="foot">
   <div class="foot-cell">
-    <a class="brand" href={link(homePath)}>kajet</a>
+    <a class="brand" href={link(homePath)}>
+      kajet
+    </a>
     <span class="muted">{business.tagline.toLowerCase()}</span>
   </div>
   <nav class="foot-cell foot-nav" aria-label="Stopka">
-    {
-      navItems.map(item => (
-        <a href={link(item.path)} aria-current={item.key === current ? 'page' : undefined}>
-          {item.label}
-        </a>
-      ))
-    }
+    {navItems.map(item => (
+      <a href={link(item.path)} aria-current={item.key === current ? 'page' : undefined}>
+        {item.label}
+      </a>
+    ))}
     <a href={link(creditsPath)}>credits</a>
   </nav>
   <div class="foot-cell foot-note">
     <SampleNote name="Kajet" lang="pl" />
   </div>
   <div class="foot-meta">
-    <span>{business.street}, {business.postalCity}</span>
+    <span>
+      {business.street}, {business.postalCity}
+    </span>
     <a href={business.phoneHref}>{business.phone}</a>
     <a href={`mailto:${business.email}`}>{business.email}</a>
     <div class="keys-sw js-only">
-      <button type="button" id="keys-sw" role="switch" aria-checked="true" aria-label="Skróty klawiszowe">
+      <button
+        type="button"
+        id="keys-sw"
+        role="switch"
+        aria-checked="true"
+        aria-label="Skróty klawiszowe">
         <span aria-hidden="true">skróty</span>
-        <span class="sw-state" aria-hidden="true">wł.</span>
+        <span class="sw-state" aria-hidden="true">
+          wł.
+        </span>
       </button>
     </div>
   </div>

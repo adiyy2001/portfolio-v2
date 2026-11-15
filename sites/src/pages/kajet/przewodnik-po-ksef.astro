@@ -1,0 +1,124 @@
+---
+import { link } from '../../shared/link';
+import Faq from '../../sites/kajet/components/Faq.astro';
+import KsefChecklist from '../../sites/kajet/components/KsefChecklist.astro';
+import KsefStart from '../../sites/kajet/components/KsefStart.astro';
+import Section from '../../sites/kajet/components/Section.astro';
+import { ksefFaq } from '../../sites/kajet/data/faq';
+import { ksefCheckedOn, ksefModes, ksefTimeline, penaltyStatus } from '../../sites/kajet/data/ksef';
+import { quotePath } from '../../sites/kajet/data/site';
+import Layout from '../../sites/kajet/Layout.astro';
+
+const currentStepId = 'koniec-2026';
+---
+
+<Layout
+  title="Przewodnik po KSeF dla małych firm | Kajet"
+  description="Terminy wejścia KSeF, cztery tryby wystawiania faktur, kalkulator daty startu, lista kontrolna i stan kar. Sprawdzone 15 listopada 2026."
+  path="/kajet/przewodnik-po-ksef/"
+  current="ksef">
+  <Section
+    id="ksef"
+    path="kajet / przewodnik po ksef"
+    title="Przewodnik po KSeF"
+    lede={`Krajowy System e-Faktur to państwowa platforma, przez którą przechodzą faktury ustrukturyzowane. Przewodnik opisuje stan prawny sprawdzony ${ksefCheckedOn}.`}
+    level={1}>
+    <div class="blk-head">
+      <span>terminy</span>
+      <span class="muted">sprawdzone {ksefCheckedOn}</span>
+    </div>
+    <ol class="tl">
+      {ksefTimeline.map(step => (
+        <li
+          class={step.id === currentStepId ? 'now' : undefined}
+          aria-current={step.id === currentStepId ? 'step' : undefined}>
+          <span class="tl-d">{step.date}</span>
+          <div class="tl-b">
+            <strong>{step.title}</strong>
+            <span>{step.text}</span>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Section>
+  <Section
+    id="tryby"
+    path="kajet / ksef / tryby"
+    title="Cztery tryby wystawiania faktur"
+    lede="Na co dzień wystawiasz fakturę w trybie online. Pozostałe trzy włączają się, gdy coś nie działa albo gdy wybierzesz offline24.">
+    <table class="tbl">
+      <caption>Tryby wystawiania faktur w KSeF i terminy wysyłki</caption>
+      <thead>
+        <tr>
+          <th scope="col">tryb</th>
+          <th scope="col">kiedy</th>
+          <th scope="col">termin wysyłki</th>
+        </tr>
+      </thead>
+      <tbody>
+        {ksefModes.map(mode => (
+          <tr>
+            <th scope="row" class="c-who">
+              {mode.name}
+            </th>
+            <td>{mode.when}</td>
+            <td>{mode.deadline}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </Section>
+  <Section
+    id="start"
+    path="kajet / ksef / start"
+    title="Od kiedy wystawiasz w KSeF"
+    lede="Wybierz opis najbliższy Twojej firmie. Wybór zostaje w przeglądarce.">
+    <KsefStart />
+  </Section>
+  <Section
+    id="lista"
+    path="kajet / ksef / lista kontrolna"
+    title="Lista kontrolna przed startem"
+    lede="Osiem rzeczy do odhaczenia. Stan listy zapisuje się w tej przeglądarce.">
+    <KsefChecklist />
+  </Section>
+  <Section
+    id="kary"
+    path="kajet / ksef / kary"
+    title={penaltyStatus.title}
+    lede={penaltyStatus.checked}>
+    <div class="prose">
+      <p>{penaltyStatus.text}</p>
+      <p>
+        Jeśli nie wiesz, czy Twoja firma jest gotowa, napisz do nas. Sprawdzimy to razem z Tobą przy
+        wycenie.
+      </p>
+    </div>
+  </Section>
+  <Section
+    id="pytania"
+    path="kajet / ksef / pytania"
+    title="Pomoc: pytania o KSeF"
+    lede="Najczęstsze pytania od klientów biura.">
+    <Faq items={ksefFaq} />
+    <div class="cta">
+      <a class="quote-btn" href={link(quotePath)}>
+        Poproś o wycenę z obsługą KSeF
+      </a>
+      <a class="quote-btn alt" href={link('/kajet/terminy/')}>
+        Kalendarz terminów
+      </a>
+    </div>
+  </Section>
+</Layout>
+
+<script>
+  import { setupBase } from '../../sites/kajet/scripts/base';
+  import { setupFaq } from '../../sites/kajet/scripts/faq';
+  import { setupKsefChecklist } from '../../sites/kajet/scripts/ksef-checklist';
+  import { setupKsefStart } from '../../sites/kajet/scripts/ksef-start';
+  setupBase();
+  setupKsefStart();
+  setupKsefChecklist();
+  setupFaq();
+</script>

@@ -59,9 +59,24 @@ export const clientDeadlines = (
 ): ClientDeadline[] => {
   const nextMonth = month.m + 1;
   return [
-    { key: 'zus', name: 'ZUS', amount: result.zus, date: deadlineDate(month.y, nextMonth, zusDayFor(client)) },
-    { key: 'tax', name: client.taxName, amount: result.tax, date: deadlineDate(month.y, nextMonth, 20) },
-    { key: 'vat', name: 'VAT i JPK_V7', amount: result.vat, date: deadlineDate(month.y, nextMonth, 25) },
+    {
+      key: 'zus',
+      name: 'ZUS',
+      amount: result.zus,
+      date: deadlineDate(month.y, nextMonth, zusDayFor(client)),
+    },
+    {
+      key: 'tax',
+      name: client.taxName,
+      amount: result.tax,
+      date: deadlineDate(month.y, nextMonth, 20),
+    },
+    {
+      key: 'vat',
+      name: 'VAT i JPK_V7',
+      amount: result.vat,
+      date: deadlineDate(month.y, nextMonth, 25),
+    },
   ];
 };
 

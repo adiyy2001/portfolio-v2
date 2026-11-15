@@ -1,0 +1,89 @@
+---
+import { facts } from '../data/site';
+---
+
+<p class="muted nojs-note detail">
+  Formularz wymaga JavaScriptu. Bez niego napisz na adres e-mail z danych biura obok.
+</p>
+<form id="wycena-form" class="qf js-only" method="get" action="#wycena" novalidate>
+  <div class="qf-field wide">
+    <label for="qf-email">E-mail do odpowiedzi</label>
+    <input
+      id="qf-email"
+      name="email"
+      type="email"
+      inputmode="email"
+      autocomplete="email"
+      spellcheck="false"
+      aria-describedby="qf-err-email"
+    />
+    <p id="qf-err-email" class="qf-err" role="alert"></p>
+  </div>
+  <div class="qf-field">
+    <label for="qf-forma">Forma firmy</label>
+    <select id="qf-forma" name="forma" aria-describedby="qf-err-forma">
+      <option value="">nie wiem jeszcze</option>
+      <option value="osoba fizyczna">osoba fizyczna</option>
+      <option value="spółka z o.o.">spółka z o.o.</option>
+    </select>
+    <p id="qf-err-forma" class="qf-err" role="alert"></p>
+  </div>
+  <div class="qf-field">
+    <label for="qf-faktur">Faktur w miesiącu</label>
+    <input
+      id="qf-faktur"
+      name="faktur"
+      type="number"
+      inputmode="numeric"
+      min="0"
+      max="999"
+      step="1"
+      aria-describedby="qf-err-faktur"
+    />
+    <p id="qf-err-faktur" class="qf-err" role="alert"></p>
+  </div>
+  <div class="qf-field">
+    <label for="qf-name">Imię i nazwisko albo nazwa firmy</label>
+    <input
+      id="qf-name"
+      name="name"
+      type="text"
+      autocomplete="name"
+      aria-describedby="qf-err-name"
+    />
+    <p id="qf-err-name" class="qf-err" role="alert"></p>
+  </div>
+  <div class="qf-field">
+    <label for="qf-phone">Telefon, jeśli wolisz rozmowę</label>
+    <input
+      id="qf-phone"
+      name="phone"
+      type="tel"
+      inputmode="tel"
+      autocomplete="tel"
+      aria-describedby="qf-err-phone"
+    />
+    <p id="qf-err-phone" class="qf-err" role="alert"></p>
+  </div>
+  <p id="qf-plan" class="qf-field wide" hidden></p>
+  <div class="qf-field qf-consent">
+    <input id="qf-consent" name="consent" type="checkbox" aria-describedby="qf-err-consent" />
+    <label for="qf-consent">Zgadzam się, żeby biuro odpisało na ten e-mail w sprawie wyceny.</label>
+    <p id="qf-err-consent" class="qf-err" role="alert"></p>
+  </div>
+  <div class="qf-actions">
+    <button class="quote-btn" type="submit">
+      Wyślij zapytanie o wycenę
+    </button>
+    <p class="qf-hint">
+      Wycena jest bezpłatna. To strona przykładowa, więc nic nie zostanie wysłane. Prawdziwe biuro
+      odpisuje w ciągu {facts.replyHours} godzin w dni robocze.
+    </p>
+  </div>
+</form>
+<div id="qf-done" class="qf-done" tabindex="-1" hidden>
+  <b>To jest strona przykładowa, nic nie zostało wysłane.</b>
+  <span id="qf-done-reply"></span>
+  <dl></dl>
+  <button type="button">Wyczyść i wypełnij jeszcze raz</button>
+</div>

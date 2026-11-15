@@ -156,7 +156,8 @@ export const startOptions: readonly StartOption[] = [
     label: 'Sprzedaż w 2024 roku powyżej 200 mln zł',
     hint: 'Dotyczy dużych firm.',
     verdict: 'Wystawiasz w KSeF od 1 lutego 2026.',
-    detail: 'Ten termin już minął. Jeśli Twoje faktury jeszcze nie wychodzą z KSeF, zrób to od razu.',
+    detail:
+      'Ten termin już minął. Jeśli Twoje faktury jeszcze nie wychodzą z KSeF, zrób to od razu.',
   },
   {
     id: 'srednia',
@@ -170,7 +171,8 @@ export const startOptions: readonly StartOption[] = [
     label: 'Faktury w miesiącu do 10 000 zł brutto',
     hint: 'Mała sprzedaż, na przykład jedna osoba z kilkoma klientami.',
     verdict: 'Wystawiasz w KSeF najpóźniej od 1 stycznia 2027.',
-    detail: 'Do 31 grudnia 2026 możesz wystawiać faktury poza KSeF. Zacznij wcześniej, żeby 1 stycznia nie robić tego pierwszy raz.',
+    detail:
+      'Do 31 grudnia 2026 możesz wystawiać faktury poza KSeF. Zacznij wcześniej, żeby 1 stycznia nie robić tego pierwszy raz.',
   },
 ];
 

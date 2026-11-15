@@ -9,7 +9,13 @@ export interface MonthlyRow {
 }
 
 export const monthlyRows: readonly MonthlyRow[] = [
-  { title: 'Księgowanie faktur i kosztów', short: 'faktury', day: 5, label: 'do 5. dnia', legal: false },
+  {
+    title: 'Księgowanie faktur i kosztów',
+    short: 'faktury',
+    day: 5,
+    label: 'do 5. dnia',
+    legal: false,
+  },
   { title: 'Listy płac i kadry', short: 'listy płac', day: 10, label: 'do 10. dnia', legal: false },
   {
     title: 'Raport miesięczny dla właściciela',

@@ -17,7 +17,8 @@ interface Props {
 const { title, description, path, current } = Astro.props;
 const canonical = new URL(link(path), Astro.site).href;
 const image = new URL(link('/kajet/og.png'), Astro.site).href;
-const imageAlt = 'Kajet, biuro rachunkowe z Gajowic: panel klienta z kwotą do zapłaty, terminem i podstawą wyliczenia';
+const imageAlt =
+  'Kajet, biuro rachunkowe z Gajowic: panel klienta z kwotą do zapłaty, terminem i podstawą wyliczenia';
 ---
 
 <!doctype html>
@@ -50,7 +51,8 @@ const imageAlt = 'Kajet, biuro rachunkowe z Gajowic: panel klienta z kwotą do z
       try {
         var keys = localStorage.getItem('kajet-keys');
         var coarse = window.matchMedia('(pointer: coarse)').matches;
-        if (keys === 'off' || (keys === null && coarse)) document.documentElement.classList.add('keys-off');
+        if (keys === 'off' || (keys === null && coarse))
+          document.documentElement.classList.add('keys-off');
       } catch (e) {}
     </script>
     <noscript>
@@ -73,6 +75,12 @@ const imageAlt = 'Kajet, biuro rachunkowe z Gajowic: panel klienta z kwotą do z
           border-right: 0 !important;
           max-width: 60ch;
         }
+        .cal-body {
+          display: none !important;
+        }
+        .cal-aside {
+          grid-column: 2 / 4;
+        }
         .legend,
         .kb {
           display: none !important;
@@ -81,12 +89,13 @@ const imageAlt = 'Kajet, biuro rachunkowe z Gajowic: panel klienta z kwotą do z
     </noscript>
   </head>
   <body>
-    <a class="skip" href="#glowny">Przejdź do treści</a>
+    <a class="skip" href="#glowny">
+      Przejdź do treści
+    </a>
     <Header current={current} />
     <main id="glowny" tabindex="-1">
       <slot />
     </main>
     <Footer current={current} />
-    <slot name="scripts" />
   </body>
 </html>

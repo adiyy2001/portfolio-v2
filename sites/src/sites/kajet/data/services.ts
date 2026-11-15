@@ -13,7 +13,8 @@ export const services: readonly Service[] = [
   {
     id: 'ksiegowosc',
     title: 'Księgowość',
-    summary: 'Prowadzimy księgi tak, jak wymaga tego forma firmy. Ty wysyłasz dokumenty, my je księgujemy i pilnujemy kompletu.',
+    summary:
+      'Prowadzimy księgi tak, jak wymaga tego forma firmy. Ty wysyłasz dokumenty, my je księgujemy i pilnujemy kompletu.',
     covers: [
       'księga przychodów i rozchodów, ryczałt ewidencjonowany',
       'księgi handlowe dla spółek z o.o.',
@@ -39,7 +40,8 @@ export const services: readonly Service[] = [
   {
     id: 'zus-podatki',
     title: 'ZUS i zaliczki podatkowe',
-    summary: 'Wyliczamy składki i zaliczki na PIT lub CIT. Dostajesz kwoty, terminy i numery rachunków do przelewów.',
+    summary:
+      'Wyliczamy składki i zaliczki na PIT lub CIT. Dostajesz kwoty, terminy i numery rachunków do przelewów.',
     covers: [
       'składki społeczne i zdrowotna właściciela',
       'zaliczki na PIT według skali, podatku liniowego lub ryczałtu',
@@ -52,7 +54,8 @@ export const services: readonly Service[] = [
   {
     id: 'kadry',
     title: 'Kadry i płace',
-    summary: 'Przygotowujemy listy płac, deklaracje ZUS i dokumenty pracownicze. W planie Mały tej usługi nie ma.',
+    summary:
+      'Przygotowujemy listy płac, deklaracje ZUS i dokumenty pracownicze. W planie Mały tej usługi nie ma.',
     covers: [
       'umowy o pracę i umowy zlecenia',
       'listy płac, PIT-11 i PIT-4R',
@@ -78,7 +81,8 @@ export const services: readonly Service[] = [
   {
     id: 'sprawozdania',
     title: 'Roczne rozliczenia i sprawozdania',
-    summary: 'Zeznania roczne i sprawozdania finansowe są w abonamencie. Nie dopłacasz za nie w marcu ani w kwietniu.',
+    summary:
+      'Zeznania roczne i sprawozdania finansowe są w abonamencie. Nie dopłacasz za nie w marcu ani w kwietniu.',
     covers: [
       'PIT-36, PIT-36L, PIT-28 i PIT-37 osób fizycznych',
       'CIT-8 i sprawozdanie finansowe spółek z o.o.',
@@ -91,7 +95,8 @@ export const services: readonly Service[] = [
   {
     id: 'urzad',
     title: 'Reprezentacja przed urzędem',
-    summary: 'Na podstawie pełnomocnictwa rozmawiamy z urzędem skarbowym i ZUS. W planach Mały i Średni dostajesz gotowe pisma.',
+    summary:
+      'Na podstawie pełnomocnictwa rozmawiamy z urzędem skarbowym i ZUS. W planach Mały i Średni dostajesz gotowe pisma.',
     covers: [
       'pisma, wyjaśnienia i korekty deklaracji',
       'kontakt z urzędem skarbowym i ZUS w Twoim imieniu',

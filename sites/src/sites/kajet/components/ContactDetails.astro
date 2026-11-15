@@ -1,0 +1,55 @@
+---
+import { business, openHours } from '../data/site';
+---
+
+<div class="blk-head">
+  <span>dane biura</span>
+  <span class="muted">{business.legalName}</span>
+</div>
+<dl class="contact" id="contact">
+  <div>
+    <dt>telefon</dt>
+    <dd>
+      <a href={business.phoneHref}>{business.phone}</a>
+    </dd>
+  </div>
+  <div>
+    <dt>e-mail</dt>
+    <dd>
+      <a href={`mailto:${business.email}?subject=Wycena`}>{business.email}</a>
+    </dd>
+  </div>
+  <div>
+    <dt>adres</dt>
+    <dd>
+      <span class="line">{business.street}</span>
+      <span class="line">{business.postalCity}</span>
+    </dd>
+  </div>
+  <div>
+    <dt>prowadząca</dt>
+    <dd>
+      <span class="line">{business.owner}</span>
+      <span class="line sub">{business.ownerRole}</span>
+    </dd>
+  </div>
+  <div>
+    <dt>NIP biura</dt>
+    <dd>
+      <span class="static">{business.nip}</span>
+    </dd>
+  </div>
+  <div>
+    <dt>OC biura</dt>
+    <dd>
+      <span class="line">{business.insurance}</span>
+      <span class="line sub">{business.insuranceNote}</span>
+    </dd>
+  </div>
+  <div>
+    <dt>godziny</dt>
+    <dd>
+      <span class="static">{openHours.label}</span>
+    </dd>
+  </div>
+</dl>

@@ -24,7 +24,14 @@ describe('validateQuote', () => {
   });
 
   it('needs only an e-mail in the short form', () => {
-    const short: QuoteValues = { ...valid, forma: '', faktur: '', name: '', phone: '', consent: false };
+    const short: QuoteValues = {
+      ...valid,
+      forma: '',
+      faktur: '',
+      name: '',
+      phone: '',
+      consent: false,
+    };
     expect(validateQuote(short, false)).toEqual({});
   });
 

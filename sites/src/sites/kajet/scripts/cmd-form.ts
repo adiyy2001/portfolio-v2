@@ -13,7 +13,14 @@ export const setupCmdForm = (): void => {
   form.addEventListener('submit', event => {
     event.preventDefault();
     const errors = validateQuote(
-      { email: mail.value, forma: forma.value, faktur: faktur.value, name: '', phone: '', consent: false },
+      {
+        email: mail.value,
+        forma: forma.value,
+        faktur: faktur.value,
+        name: '',
+        phone: '',
+        consent: false,
+      },
       false,
     );
     const invalid = firstInvalidField(errors);

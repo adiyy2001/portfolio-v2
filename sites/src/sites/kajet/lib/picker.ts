@@ -1,4 +1,5 @@
 import { maxInvoices, plans, type CompanyForm, type Plan } from '../data/plans';
+import { invoicesLabel } from './format';
 
 export interface PickerInput {
   form: CompanyForm;
@@ -33,7 +34,9 @@ export const recommendPlan = (input: PickerInput): PickerResult => {
   const reasons: string[] = [];
   const byInvoices = indexForInvoices(invoices);
   let index = byInvoices;
-  reasons.push(`${invoices} faktur w miesiącu mieści się w limicie planu ${plans[byInvoices]!.name} (do ${plans[byInvoices]!.limit})`);
+  reasons.push(
+    `${invoicesLabel(invoices)} w miesiącu mieści się w limicie planu ${plans[byInvoices]!.name} (do ${plans[byInvoices]!.limit})`,
+  );
   const needs: Array<[boolean, number, string]> = [
     [input.payroll, 1, 'listy płac i rozliczenia ZUS pracowników są od planu Średni'],
     [input.phone, 1, 'telefon w godzinach pracy biura jest od planu Średni'],

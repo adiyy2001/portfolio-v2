@@ -15,7 +15,9 @@ export const findAll = <T extends Element>(
   selector: string,
   type: ElementType<T>,
 ): T[] =>
-  Array.from(root.querySelectorAll(selector)).filter((element): element is T => element instanceof type);
+  Array.from(root.querySelectorAll(selector)).filter(
+    (element): element is T => element instanceof type,
+  );
 
 export const findOptional = <T extends Element>(
   root: ParentNode,
@@ -79,7 +81,8 @@ export const groupKeys = (
     const index = current instanceof HTMLElement ? buttons.indexOf(current) : -1;
     if (index < 0) return;
     let next = index;
-    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % buttons.length;
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown')
+      next = (index + 1) % buttons.length;
     else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp')
       next = (index - 1 + buttons.length) % buttons.length;
     else if (event.key === 'Home') next = 0;

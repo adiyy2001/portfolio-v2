@@ -131,7 +131,9 @@ export const setupPanel = (): {
       .map((client, index) => ({ client, index }))
       .filter(
         ({ client }) =>
-          !text || client.name.toLowerCase().includes(text) || client.id.toLowerCase().includes(text),
+          !text ||
+          client.name.toLowerCase().includes(text) ||
+          client.id.toLowerCase().includes(text),
       );
   };
 
@@ -227,7 +229,9 @@ export const setupPanel = (): {
       );
       tick.style.setProperty('--x', `${((day - 0.5) / daysInMonth) * 100}%`);
       if (isMark || day === todayDay) {
-        tick.append(make('span', 'rl-l', day === todayDay && !isMark ? `dziś ${day}` : String(day)));
+        tick.append(
+          make('span', 'rl-l', day === todayDay && !isMark ? `dziś ${day}` : String(day)),
+        );
       }
       ruler.append(tick);
     }
@@ -289,9 +293,13 @@ export const setupPanel = (): {
     const result = calcMonth(client, month);
     const deadlines = clientDeadlines(client, month, result);
     const byKey = new Map(deadlines.map(item => [item.key, item]));
-    const costPercent = String(Math.round((result.costs / result.sales) * 1000) / 10).replace('.', ',');
+    const costPercent = String(Math.round((result.costs / result.sales) * 1000) / 10).replace(
+      '.',
+      ',',
+    );
     const basis: Record<keyof MonthResult, string> = {
       sales: invoicesLabel(invoiceData.length),
+      vatBase: '',
       costs: `${costPercent}% przychodów`,
       out: `${Math.round(client.vatOut * 100)}% od ${formatGrosze(result.sales)}`,
       inn:
@@ -346,7 +354,9 @@ export const setupPanel = (): {
       const filter = button.dataset.f;
       if (isFilter(filter)) find(button, '.n', HTMLElement).textContent = String(counts[filter]);
     }
-    const shown = invoiceData.filter(item => state.filter === 'all' || item.status === state.filter);
+    const shown = invoiceData.filter(
+      item => state.filter === 'all' || item.status === state.filter,
+    );
     invoicesBox.textContent = '';
     invoiceCount.textContent = `${monthNamesShort[month.m]} ${month.y}`;
     if (!shown.length) invoicesBox.append(make('p', 'empty', 'brak faktur w tym filtrze'));
@@ -372,7 +382,9 @@ export const setupPanel = (): {
       make(
         'span',
         '',
-        state.filter === 'all' ? 'suma netto = przychody' : `suma netto, ${invoicesLabel(shown.length)}`,
+        state.filter === 'all'
+          ? 'suma netto = przychody'
+          : `suma netto, ${invoicesLabel(shown.length)}`,
       ),
       make('span', '', formatGrosze(shownSum)),
     );

@@ -18,13 +18,14 @@ export const setupQuoteForm = (): void => {
   const doneList = find(done, 'dl', HTMLElement);
   const reset = find(done, 'button', HTMLButtonElement);
   const submit = find(form, 'button[type="submit"]', HTMLButtonElement);
+  const consentField = find(form, '#qf-consent', HTMLInputElement);
   const fields: Record<QuoteField, FieldElement> = {
     email: find(form, '#qf-email', HTMLInputElement),
     forma: find(form, '#qf-forma', HTMLSelectElement),
     faktur: find(form, '#qf-faktur', HTMLInputElement),
     name: find(form, '#qf-name', HTMLInputElement),
     phone: find(form, '#qf-phone', HTMLInputElement),
-    consent: find(form, '#qf-consent', HTMLInputElement),
+    consent: consentField,
   };
   const messages: Record<QuoteField, HTMLElement> = {
     email: find(form, '#qf-err-email', HTMLElement),
@@ -38,7 +39,8 @@ export const setupQuoteForm = (): void => {
 
   const prefill = parseQuoteParams(window.location.search);
   if (prefill.email) fields.email.value = prefill.email;
-  if (prefill.forma) fields.forma.value = prefill.forma === 'osoba' ? 'osoba fizyczna' : 'spółka z o.o.';
+  if (prefill.forma)
+    fields.forma.value = prefill.forma === 'osoba' ? 'osoba fizyczna' : 'spółka z o.o.';
   if (prefill.faktur !== null) fields.faktur.value = String(prefill.faktur);
 
   const values = (): QuoteValues => ({
@@ -47,7 +49,7 @@ export const setupQuoteForm = (): void => {
     faktur: fields.faktur.value,
     name: fields.name.value,
     phone: fields.phone.value,
-    consent: fields.consent.checked,
+    consent: consentField.checked,
   });
 
   const clearError = (field: QuoteField): void => {

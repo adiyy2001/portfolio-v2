@@ -1,0 +1,73 @@
+---
+import { link } from '../../shared/link';
+import Section from '../../sites/kajet/components/Section.astro';
+import Layout from '../../sites/kajet/Layout.astro';
+
+const fontLicense = link('/kajet/fonts/OFL-JetBrainsMono.txt');
+---
+
+<Layout
+  title="Źródła i licencje | Kajet"
+  description="Czcionka JetBrains Mono na licencji SIL OFL 1.1 i informacja, że strona Kajet nie używa zdjęć. Dane klientów i kwoty w panelu są zmyślone."
+  path="/kajet/credits/">
+  <Section
+    id="credits"
+    path="kajet / credits"
+    title="Źródła i licencje"
+    lede="Wszystko, co na tej stronie pochodzi z zewnątrz."
+    level={1}>
+    <ul class="credits-list">
+      <li>
+        <div>
+          <b>Czcionka JetBrains Mono</b>
+          <p class="muted">
+            Wariant zmienny, podzbiory latin i latin-ext, hostowana na tej stronie. Autor:
+            JetBrains. Licencja: SIL Open Font License 1.1.
+          </p>
+        </div>
+        <div>
+          <a href="https://github.com/JetBrains/JetBrainsMono">Źródło na GitHubie</a>
+          <a href={fontLicense}>Tekst licencji</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Pliki czcionki</b>
+          <p class="muted">Pobrane z paczki @fontsource-variable/jetbrains-mono.</p>
+        </div>
+        <div>
+          <a href="https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono">jsDelivr</a>
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Zdjęcia i grafiki</b>
+          <p class="muted">
+            Strona nie używa zdjęć ani obrazów rastrowych. Panel, kalendarz i tabele to HTML, CSS i
+            JavaScript.
+          </p>
+        </div>
+        <div>
+          <span class="muted">brak</span>
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Dane w panelu</b>
+          <p class="muted">
+            Nazwy klientów, numery faktur i kwoty są zmyślone i generowane w przeglądarce. Biuro
+            Kajet, jego adres i osoby nie istnieją.
+          </p>
+        </div>
+        <div>
+          <span class="muted">fikcja</span>
+        </div>
+      </li>
+    </ul>
+  </Section>
+</Layout>
+
+<script>
+  import { setupBase } from '../../sites/kajet/scripts/base';
+  setupBase();
+</script>

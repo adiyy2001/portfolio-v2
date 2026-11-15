@@ -31,7 +31,8 @@ describe('monthly rows', () => {
 
   it('agrees with the statutory rules', () => {
     const days = new Set(statutoryRules.map(rule => rule.day));
-    for (const row of monthlyRows.filter(entry => entry.legal)) expect(days.has(row.day)).toBe(true);
+    for (const row of monthlyRows.filter(entry => entry.legal))
+      expect(days.has(row.day)).toBe(true);
   });
 });
 

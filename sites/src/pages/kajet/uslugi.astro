@@ -1,0 +1,109 @@
+---
+import { link } from '../../shared/link';
+import Faq from '../../sites/kajet/components/Faq.astro';
+import Section from '../../sites/kajet/components/Section.astro';
+import { serviceFaq } from '../../sites/kajet/data/faq';
+import { plans } from '../../sites/kajet/data/plans';
+import { outOfScope, processSteps, services } from '../../sites/kajet/data/services';
+import { quotePath } from '../../sites/kajet/data/site';
+import Layout from '../../sites/kajet/Layout.astro';
+
+const planName = (id: string): string => plans.find(plan => plan.id === id)?.name ?? '';
+---
+
+<Layout
+  title="Usługi biura rachunkowego | Kajet"
+  description="Księgowość, VAT i JPK_V7, ZUS, kadry i płace, raport miesięczny, roczne rozliczenia i przejęcie ksiąg. Co robimy, od którego planu i do którego dnia miesiąca."
+  path="/kajet/uslugi/"
+  current="uslugi">
+  <Section
+    id="uslugi"
+    path="kajet / usługi"
+    title="Co robimy, a co zostaje Tobie"
+    lede="Osiem usług w abonamencie. Przy każdej widać, od którego planu jest dostępna i do którego dnia miesiąca ją wykonujemy."
+    level={1}>
+    {services.map((service, index) => (
+      <article class="item" id={service.id}>
+        <span class="item-no" aria-hidden="true">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <div class="item-body">
+          <h2>{service.title}</h2>
+          <p>{service.summary}</p>
+          <ul class="ticks">
+            {service.covers.map(cover => (
+              <li>{cover}</li>
+            ))}
+          </ul>
+        </div>
+        <dl class="item-meta">
+          <div>
+            <dt>od planu</dt>
+            <dd>{planName(service.fromPlan)}</dd>
+          </div>
+          <div>
+            <dt>termin</dt>
+            <dd>{service.when}</dd>
+          </div>
+        </dl>
+      </article>
+    ))}
+  </Section>
+  <Section
+    id="jak-zaczynamy"
+    path="kajet / jak zaczynamy"
+    title="Od wyceny do pierwszego raportu"
+    lede="Cztery kroki. Pierwszy zajmuje jeden e-mail.">
+    <ol class="tl">
+      {processSteps.map(step => (
+        <li>
+          <span class="tl-d">{step.no}</span>
+          <div class="tl-b">
+            <strong>{step.title}</strong>
+            <span>{step.text}</span>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <div class="cols">
+      <div>
+        <h3>Czego nie robimy</h3>
+        <ul class="ticks">
+          {outOfScope.map(entry => (
+            <li>{entry}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3>Co zostaje po Twojej stronie</h3>
+        <ul class="ticks">
+          <li>wystawianie faktur sprzedaży</li>
+          <li>wysyłka dokumentów kosztowych do 5. dnia miesiąca</li>
+          <li>przelewy do urzędu i ZUS według kwot z panelu</li>
+        </ul>
+      </div>
+    </div>
+    <div class="cta">
+      <a class="quote-btn" href={link(quotePath)}>
+        Poproś o wycenę
+      </a>
+      <a class="quote-btn alt" href={link('/kajet/pakiety/')}>
+        Zobacz pakiety i ceny
+      </a>
+    </div>
+  </Section>
+  <Section
+    id="pytania"
+    path="kajet / pytania o usługi"
+    title="Pomoc: pytania o zakres usług"
+    lede="To, o co klienci pytają przed podpisaniem umowy.">
+    <Faq items={serviceFaq} />
+  </Section>
+</Layout>
+
+<script>
+  import { setupBase } from '../../sites/kajet/scripts/base';
+  import { setupFaq } from '../../sites/kajet/scripts/faq';
+  setupBase();
+  setupFaq();
+</script>

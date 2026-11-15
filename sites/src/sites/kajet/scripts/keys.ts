@@ -51,8 +51,7 @@ export const setupKeys = (options: KeysOptions = {}): void => {
   document.addEventListener('keydown', event => {
     if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey || !on) return;
     const target = event.target;
-    const inField =
-      target instanceof HTMLElement && target.matches('input,select,textarea');
+    const inField = target instanceof HTMLElement && target.matches('input,select,textarea');
     if (inField) {
       if (options.onKey) options.onKey(event);
       return;

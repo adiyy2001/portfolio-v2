@@ -124,7 +124,8 @@ export const setupCalendar = (): void => {
         button.dataset.day = String(day);
         button.setAttribute('aria-label', dayLabel(day) + (isToday ? ', dziś' : ''));
         button.append(make('span', 'cd-n', String(day)));
-        if (events.length) button.append(make('span', 'cd-t', events.map(row => row.short).join(', ')));
+        if (events.length)
+          button.append(make('span', 'cd-t', events.map(row => row.short).join(', ')));
         td.append(button);
         tr.append(td);
         cells.set(day, button);
@@ -140,8 +141,12 @@ export const setupCalendar = (): void => {
       li.dataset.day = String(date.getDate());
       li.append(
         make('span', 'nm', row.title),
-        make('span', 'amt', rowLabel(row)),
-        make('span', 'when', dayMonthYear(date)),
+        make('span', 'amt', row.label),
+        make(
+          'span',
+          'when',
+          dayMonthYear(date) + (isShifted(row) ? ', przesunięte na dzień roboczy' : ''),
+        ),
         make('span', 'st', date < now ? 'wykonane' : inDaysLabel(date, now)),
       );
       list.append(li);
@@ -150,7 +155,9 @@ export const setupCalendar = (): void => {
     if (next) next.disabled = offset === monthWindowLength - 1;
     const preferred = isCurrentMonth()
       ? now.getDate()
-      : (monthlyRows[0] ? eventDate(monthlyRows[0], year, month).getDate() : 1);
+      : monthlyRows[0]
+        ? eventDate(monthlyRows[0], year, month).getDate()
+        : 1;
     select(preferred, false);
   };
 
@@ -170,7 +177,12 @@ export const setupCalendar = (): void => {
     const target = event.target;
     if (!(target instanceof HTMLElement) || !target.classList.contains('cal-day')) return;
     const { days } = view();
-    const steps: Record<string, number> = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 };
+    const steps: Record<string, number> = {
+      ArrowLeft: -1,
+      ArrowRight: 1,
+      ArrowUp: -7,
+      ArrowDown: 7,
+    };
     let step = steps[event.key];
     if (event.key === 'Home') step = 1 - selectedDay;
     if (event.key === 'End') step = days - selectedDay;
