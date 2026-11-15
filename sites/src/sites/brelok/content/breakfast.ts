@@ -21,13 +21,13 @@ const pl = {
     { dish: 'Sery i wędliny', note: 'kilka rodzajów, z domowym ogórkiem i musztardą' },
     { dish: 'Kasza jaglana', note: 'z duszonym jabłkiem i cynamonem' },
     { dish: 'Dżemy', note: 'domowe, ze śliwek i z czarnej porzeczki' },
-    { dish: 'Kawa i herbata', note: 'bez ograniczeń, kawę parzymy w kolbie' },
+    { dish: 'Kawa i herbata', note: 'bez ograniczeń, kawę parzymy w dzbankach' },
     { dish: 'Sok', note: 'wyciskany z pomarańczy po zamówieniu' },
   ],
   menuNote: 'Karta zmienia się z porami roku, ale chleb, jajka i kasza są zawsze.',
   roomHeading: 'Do pokoju',
   roomText:
-    'Pokoje Poddasze i Apartament mają stolik przy oknie. Śniadanie do pokoju podajemy w tych samych godzinach, jeśli zamówią je Państwo wieczorem w recepcji. Dopłaty nie ma.',
+    'W pokoju Poddasze stoi okrągły stolik przy oknie, a w Apartamencie stół w salonie. Śniadanie do pokoju podajemy w tych samych godzinach, jeśli zamówią je Państwo wieczorem w recepcji. Dopłaty nie ma.',
   dietHeading: 'Dla gości z wymaganiami',
   dietText:
     'Bez glutenu, bez laktozy, wegetariańsko albo bez jajek: prosimy o wzmiankę w uwagach do rezerwacji, a kuchnia przygotuje osobny talerz. Szczegóły ustalamy przy zameldowaniu.',
@@ -36,15 +36,13 @@ const pl = {
     'Śniadanie wliczamy w pakiety Weekend we dwoje i Tydzień w mieście. Do innych pobytów można je dodać w rezerwacji, osobno za każdą osobę i każdą dobę.',
   ctaPackages: 'Pakiety',
   ctaBooking: 'Rezerwacja ze śniadaniem',
-  tableAlt:
-    'Długi stół nakryty na śniadanie w dawnej sieni kamienicy, z koszem pieczywa i dzbankiem kawy',
 };
 
 const en: typeof pl = {
   metaTitle: 'Breakfast. Brelok 1912, boutique hotel in Wrocław',
-  metaDescription: `Breakfast at Brelok is served every day from ${hotel.breakfastFrom} to ${hotel.breakfastTo} at the long table in the old carriage entrance. PLN ${hotel.breakfastPrice} a person, included in two packages.`,
+  metaDescription: `Breakfast at Brelok is served every day from ${hotel.breakfastFrom} to ${hotel.breakfastTo} at the long table in the old entrance hall. PLN ${hotel.breakfastPrice} a person, included in two packages.`,
   heading: 'Breakfast at the long table',
-  lead: 'The table stands in the old carriage entrance of the townhouse, where wagons once drove in. It smells of bread and coffee, and the window looks onto the yard with the chestnut tree.',
+  lead: 'The table stands in the old entrance hall of the townhouse, where wagons once drove in. It smells of bread and coffee, and the window looks onto the yard with the chestnut tree.',
   leaders: {
     hours: 'Hours',
     price: 'Price',
@@ -52,7 +50,7 @@ const en: typeof pl = {
   },
   hoursValue: `${hotel.breakfastFrom} to ${hotel.breakfastTo}`,
   priceValue: `PLN ${hotel.breakfastPrice} a person`,
-  placeValue: 'Old carriage entrance, ground floor',
+  placeValue: 'Old entrance hall, ground floor',
   menuHeading: 'What is on the table',
   menu: [
     {
@@ -63,13 +61,13 @@ const en: typeof pl = {
     { dish: 'Cheese and cold cuts', note: 'several kinds, with home pickled cucumber and mustard' },
     { dish: 'Millet porridge', note: 'with stewed apple and cinnamon' },
     { dish: 'Jams', note: 'made in the house, plum and blackcurrant' },
-    { dish: 'Coffee and tea', note: 'as much as you like, the coffee brewed in a glass flask' },
+    { dish: 'Coffee and tea', note: 'as much as you like, the coffee brewed in pots' },
     { dish: 'Juice', note: 'squeezed from oranges to order' },
   ],
   menuNote: 'The menu changes with the seasons, but bread, eggs and porridge are always there.',
   roomHeading: 'To your room',
   roomText:
-    'The Attic and Apartment rooms have a table by the window. We serve breakfast to the room at the same hours if you order it at reception the evening before. There is no extra charge.',
+    'The Attic room has a round table by the window, and the Apartment has a table in the salon. We serve breakfast to the room at the same hours if you order it at reception the evening before. There is no extra charge.',
   dietHeading: 'For guests with requirements',
   dietText:
     'Gluten free, lactose free, vegetarian or egg free: please mention it in the notes to your booking, and the kitchen will prepare a separate plate. We settle the details at check-in.',
@@ -78,8 +76,6 @@ const en: typeof pl = {
     'Breakfast is included in the Weekend for two and A week in the city packages. For other stays you can add it in the booking, charged per person and per night.',
   ctaPackages: 'Packages',
   ctaBooking: 'Book with breakfast',
-  tableAlt:
-    'A long table laid for breakfast in the old carriage entrance of the townhouse, with a basket of bread and a pot of coffee',
 };
 
 export const breakfastText: Record<Lang, typeof pl> = { pl, en };

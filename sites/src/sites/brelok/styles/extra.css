@@ -680,6 +680,27 @@ html:not(.js) .top .nav {
   flex: none;
   max-width: 48%;
 }
+.menu-board .prose-center {
+  margin-top: 18px;
+}
+@media (max-width: 640px) {
+  .menu-board .leaders div {
+    display: block;
+    padding: 8px 0;
+  }
+  .menu-board .leaders dt {
+    display: block;
+    max-width: none;
+    white-space: normal;
+  }
+  .menu-board .leaders dt::after {
+    display: none;
+  }
+  .menu-board .leaders dd {
+    text-align: left;
+    margin-top: 2px;
+  }
+}
 
 .field {
   display: block;
