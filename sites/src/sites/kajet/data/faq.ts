@@ -74,7 +74,7 @@ export const ksefFaq: readonly FaqItem[] = [
   },
   {
     q: 'Co robię, gdy KSeF nie działa?',
-    a: 'Wystawiasz fakturę w trybie offline24 albo zgodnie z komunikatem Ministerstwa Finansów o niedostępności lub awarii. Do systemu wysyłasz ją w terminie opisanym w tabeli trybów.',
+    a: 'Wystawiasz fakturę w trybie offline24 albo zgodnie z komunikatem Ministerstwa Finansów. Przy awarii (art. 106nf) wystawiasz fakturę elektroniczną z kodami QR i wysyłasz ją do KSeF w ciągu 7 dni roboczych od końca awarii. Przy awarii całkowitej (art. 106ng) wystawiasz ją papierowo albo elektronicznie i nie wysyłasz do KSeF.',
   },
   {
     q: 'Czy muszę wpisywać numer KSeF w przelewie?',

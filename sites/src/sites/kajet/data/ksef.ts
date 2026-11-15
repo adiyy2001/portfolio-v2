@@ -30,7 +30,7 @@ export const ksefTimeline: readonly KsefStep[] = [
     date: 'do 31 grudnia 2026',
     sortKey: '2026-12-31',
     title: 'Ulga dla małej sprzedaży',
-    text: 'Firmy, których faktury w danym miesiącu nie przekraczają 10 000 zł brutto, mogą jeszcze wystawiać je poza KSeF. Faktury do paragonów z kasy do 450 zł brutto też zostają poza systemem.',
+    text: 'Faktury wystawiane z kasy rejestrującej zostają poza KSeF do końca 2026 roku, bez limitu kwoty. Paragon z numerem NIP do 450 zł brutto też jest wtedy fakturą uproszczoną.',
   },
   {
     id: 'styczen-2027',
@@ -70,8 +70,15 @@ export const ksefModes: readonly KsefMode[] = [
   {
     id: 'awaria',
     name: 'Tryb awarii',
-    when: 'Ministerstwo ogłasza awarię całkowitą. Fakturę wystawiasz w formie papierowej albo elektronicznej poza KSeF.',
-    deadline: 'Wysyłasz ją do 7 dni roboczych od dnia, w którym awaria się zakończyła.',
+    when: 'Ministerstwo ogłasza awarię w Biuletynie Informacji Publicznej MF i w oprogramowaniu interfejsowym (art. 106nf). Wystawiasz fakturę elektroniczną z kodami QR.',
+    deadline:
+      'Wysyłasz ją do KSeF w ciągu 7 dni roboczych od dnia, w którym awaria się zakończyła.',
+  },
+  {
+    id: 'awaria-calkowita',
+    name: 'Tryb awarii całkowitej',
+    when: 'Ministerstwo ogłasza awarię całkowitą w mediach (art. 106ng). Fakturę wystawiasz w formie papierowej albo elektronicznej.',
+    deadline: 'Nie wysyłasz jej później do KSeF.',
   },
 ];
 
