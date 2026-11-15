@@ -31,6 +31,18 @@ export const breakfastIncluded = (choice: StayChoice): boolean =>
   packageFits(choice.packageId, choice.nights, choice.guests) &&
   packageById(choice.packageId).includesBreakfast;
 
+export const fitToPackage = (
+  packageId: PackageId,
+  nights: number,
+  guests: number,
+): { nights: number; guests: number } => {
+  const item = packageById(packageId);
+  return {
+    nights: Math.min(item.maxNights, Math.max(item.minNights, nights)),
+    guests: Math.min(item.maxGuests, Math.max(1, guests)),
+  };
+};
+
 export type BreakfastStatus = 'included' | 'paid' | 'none';
 
 export const breakfastStatus = (choice: StayChoice): BreakfastStatus => {

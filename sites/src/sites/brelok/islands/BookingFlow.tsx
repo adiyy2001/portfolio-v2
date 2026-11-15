@@ -31,6 +31,7 @@ import {
   breakfastIncluded,
   clampGuests,
   clampNights,
+  fitToPackage,
   packageFits,
   quoteStay,
 } from '../lib/pricing';
@@ -95,13 +96,23 @@ const startingDraft = (): Draft => {
   const nights = Number(query.get('nights'));
   const guests = Number(query.get('guests'));
   const today = todayIso();
+  const packageId = isPackageId(pack) ? pack : null;
+  const wantedNights = Number.isFinite(nights) && nights > 0 ? nights : 2;
+  const wantedGuests = Number.isFinite(guests) && guests > 0 ? guests : 2;
+  const fitted = packageId
+    ? fitToPackage(
+        packageId,
+        Number.isFinite(nights) && nights > 0 ? nights : packageById(packageId).minNights,
+        wantedGuests,
+      )
+    : { nights: wantedNights, guests: wantedGuests };
   return settle({
     arrival:
       arrival !== null && parseIso(arrival) && arrival >= today ? arrival : nearestFriday(today),
-    nights: Number.isFinite(nights) && nights > 0 ? nights : 2,
-    guests: Number.isFinite(guests) && guests > 0 ? guests : 2,
+    nights: fitted.nights,
+    guests: fitted.guests,
     roomId: isRoomId(room) ? room : 'dziedziniec',
-    packageId: isPackageId(pack) ? pack : null,
+    packageId,
     breakfast: false,
     name: '',
     phone: '',

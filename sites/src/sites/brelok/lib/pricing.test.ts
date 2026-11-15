@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { breakfastStatus, clampGuests, clampNights, packageFits, quoteStay } from './pricing';
+import {
+  breakfastStatus,
+  clampGuests,
+  fitToPackage,
+  clampNights,
+  packageFits,
+  quoteStay,
+} from './pricing';
 
 describe('quoteStay', () => {
   it('multiplies the rate by the nights', () => {
@@ -92,5 +99,19 @@ describe('breakfastStatus', () => {
 
   it('says none when breakfast is not chosen and the package has none', () => {
     expect(breakfastStatus({ ...base, packageId: 'evening', breakfast: false })).toBe('none');
+  });
+});
+
+describe('fitToPackage', () => {
+  it('raises the nights to the package minimum', () => {
+    expect(fitToPackage('week', 2, 2)).toEqual({ nights: 5, guests: 2 });
+  });
+
+  it('keeps nights already inside the range', () => {
+    expect(fitToPackage('week', 6, 1)).toEqual({ nights: 6, guests: 1 });
+  });
+
+  it('lowers nights and guests to the package maximum', () => {
+    expect(fitToPackage('weekend', 4, 3)).toEqual({ nights: 2, guests: 2 });
   });
 });
