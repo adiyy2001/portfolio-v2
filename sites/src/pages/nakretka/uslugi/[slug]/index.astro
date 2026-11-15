@@ -76,6 +76,7 @@ const path = `/nakretka/uslugi/${service.slug}/`;
             <li>{item}</li>
           ))}
         </ul>
+        {service.separate && <p class="separate">{service.separate}</p>}
         <div class="note-box">
           <h3 class="h2">Przed wizytą</h3>
           <p>{service.prepare}</p>

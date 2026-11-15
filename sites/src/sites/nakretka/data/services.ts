@@ -6,9 +6,11 @@ export interface Service {
   price: number;
   priceNote: string;
   duration: string;
+  hours: number;
   torque: { label: string; nm: number };
   torqueNote: string;
   includes: string[];
+  separate?: string;
   prepare: string;
   image: string;
   alt: string;
@@ -25,6 +27,7 @@ export const services: Service[] = [
     price: 189,
     priceNote: 'za całe auto osobowe',
     duration: '2 godziny',
+    hours: 2,
     torque: { label: 'Koła', nm: 110 },
     torqueNote: 'Po zdjęciu kół do oceny hamulców dokręcamy je kluczem do 110 Nm.',
     includes: [
@@ -50,6 +53,7 @@ export const services: Service[] = [
     price: 249,
     priceNote: 'z olejem do pięciu litrów',
     duration: '1 godzina',
+    hours: 1,
     torque: { label: 'Korek', nm: 35 },
     torqueNote: 'Korek odpływu i nowa uszczelka idą pod klucz nastawiony na 35 Nm.',
     includes: [
@@ -73,6 +77,7 @@ export const services: Service[] = [
     price: 420,
     priceNote: 'za jedną oś',
     duration: '3 godziny',
+    hours: 3,
     torque: { label: 'Zaciski', nm: 35 },
     torqueNote: 'Śruby zacisków dokręcamy do 35 Nm, a potem koła do 110 Nm.',
     includes: [
@@ -98,6 +103,7 @@ export const services: Service[] = [
     price: 140,
     priceNote: 'za komplet czterech kół',
     duration: '1 godzina',
+    hours: 1,
     torque: { label: 'Koła', nm: 110 },
     torqueNote: 'Każda śruba koła idzie pod klucz nastawiony na 110 Nm.',
     includes: [
@@ -117,26 +123,28 @@ export const services: Service[] = [
   {
     slug: 'zawieszenie',
     name: 'Zawieszenie',
-    scope: 'Luzy, amortyzatory, tuleje i łączniki. Ustawienie zbieżności po naprawie.',
-    lead: 'Najpierw szukamy luzu na podnośniku, potem wymieniamy to, co go robi: amortyzatory, tuleje wahaczy albo łączniki stabilizatora. Po naprawie ustawiamy zbieżność i jedziemy na próbę.',
+    scope:
+      'Szukanie luzów i wymiana amortyzatorów na jednej osi. Tuleje, łączniki i zbieżność wyceniamy osobno.',
+    lead: 'Najpierw szukamy luzu na podnośniku i wymieniamy amortyzatory na jednej osi. Jeśli luz robią też tuleje wahaczy, łączniki stabilizatora albo sprężyny, mówimy o tym przed pracą i wyceniamy je osobno.',
     price: 380,
     priceNote: 'za amortyzatory na jednej osi',
     duration: '1 dzień roboczy',
+    hours: 8,
     torque: { label: 'Koła', nm: 110 },
     torqueNote: 'Śruby wahaczy dokręcamy, gdy koła stoją na ziemi, a koła do 110 Nm.',
     includes: [
       'Szukanie luzów na podnośniku',
-      'Wymiana amortyzatorów i sprężyn na jednej osi',
-      'Tuleje wahaczy i łączniki stabilizatora',
-      'Ustawienie zbieżności po naprawie',
+      'Wymiana amortyzatorów na jednej osi',
       'Jazda próbna z opisem w karcie auta',
     ],
+    separate:
+      'Sprężyny, tuleje wahaczy, łączniki stabilizatora i ustawienie zbieżności wyceniamy osobno, po diagnozie i przed rozpoczęciem pracy.',
     prepare:
       'Opisz, kiedy stuka: na progach, na zakręcie czy przy ruszaniu. Wiemy wtedy, gdzie patrzeć najpierw.',
     image: 'suspension',
-    alt: 'Koło auta uniesionego na podnośniku, obok pompa hydrauliczna',
+    alt: 'Kolumna zawieszenia ze sprężyną i amortyzatorem, zdjęta z auta',
     width: 900,
-    height: 872,
+    height: 426,
   },
   {
     slug: 'silnik-i-zaplon',
@@ -146,6 +154,7 @@ export const services: Service[] = [
     price: 280,
     priceNote: 'za komplet świec z diagnostyką',
     duration: 'do 1 dnia roboczego',
+    hours: 8,
     torque: { label: 'Świece', nm: 25 },
     torqueNote: 'Gdy trzeba zdjąć głowicę, dokręcamy ją etapami, a pierwszy stopień to 90 Nm.',
     includes: [

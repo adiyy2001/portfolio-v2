@@ -198,6 +198,11 @@
 .note-box p + p {
   margin-top: 8px;
 }
+.separate {
+  margin-top: 16px;
+  padding-left: 14px;
+  border-left: 4px solid var(--ink);
+}
 .detail {
   display: grid;
   grid-template-columns: 5fr 7fr;
@@ -440,6 +445,14 @@
   line-height: 1.05;
   letter-spacing: 0.02em;
   text-transform: uppercase;
+}
+.est-time {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--f-type);
+  font-size: 16px;
+  letter-spacing: 0;
+  text-transform: none;
 }
 .choices {
   margin: 0;
