@@ -8,7 +8,7 @@ export const initNav = () => {
     mast.toggleAttribute('data-open', open);
   };
   toggle.addEventListener('click', () => setOpen(!isOpen()));
-  mast.addEventListener('keydown', event => {
+  document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && isOpen()) {
       setOpen(false);
       toggle.focus();

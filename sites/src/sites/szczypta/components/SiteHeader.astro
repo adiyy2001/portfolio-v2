@@ -36,6 +36,15 @@ const items = [
   <a class="brand" href={link(route.home!)} aria-label={copy.brandLabel}>
     Szczypta
   </a>
+  <button
+    class="mast-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="site-nav"
+    aria-label={copy.menuButtonLabel}
+    data-mast-toggle>
+    {copy.menuButton}
+  </button>
   <nav class="mast-nav" id="site-nav" aria-label={copy.mainNav}>
     {items.map(item => (
       <>
@@ -56,13 +65,4 @@ const items = [
   <a class="mast-stolik" href={stolikHref} aria-current={page === 'booking' ? 'page' : undefined}>
     {copy.reserve}
   </a>
-  <button
-    class="mast-toggle"
-    type="button"
-    aria-expanded="false"
-    aria-controls="site-nav"
-    aria-label={copy.menuButtonLabel}
-    data-mast-toggle>
-    {copy.menuButton}
-  </button>
 </div>
