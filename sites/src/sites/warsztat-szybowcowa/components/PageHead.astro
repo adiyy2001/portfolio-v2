@@ -1,0 +1,36 @@
+---
+import { link } from '../../../shared/link';
+
+interface Crumb {
+  label: string;
+  path: string;
+}
+
+interface Props {
+  title: string;
+  kicker: string;
+  lead: string;
+  crumbs?: Crumb[];
+}
+
+const { title, kicker, lead, crumbs = [] } = Astro.props;
+---
+
+<section class="pagehead">
+  <i class="dust dust-light" aria-hidden="true"></i>
+  <div class="wrap">
+    {crumbs.length > 0 && (
+      <nav class="crumbs s" aria-label="Okruszki">
+        <a href={link('/warsztat-szybowcowa/')}>Start</a>
+        {crumbs.map(crumb => (
+          <a href={link(crumb.path)}>{crumb.label}</a>
+        ))}
+      </nav>
+    )}
+    <p class="kicker">{kicker}</p>
+    <h1 class="pt">
+      <span class="g face-field">{title}</span>
+    </h1>
+    <p class="lead">{lead}</p>
+  </div>
+</section>

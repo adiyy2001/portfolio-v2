@@ -1,0 +1,99 @@
+---
+import Layout from '../../../sites/nieruchomosci-psie-pole/Layout.astro';
+import PageHead from '../../../sites/nieruchomosci-psie-pole/components/PageHead.astro';
+import Picture from '../../../sites/nieruchomosci-psie-pole/components/Picture.astro';
+import ValuationBlock from '../../../sites/nieruchomosci-psie-pole/components/ValuationBlock.astro';
+import {
+  business,
+  figures,
+  hoursSentence,
+} from '../../../sites/nieruchomosci-psie-pole/data/business';
+import {
+  sellCosts,
+  sellFaq,
+  sellPhoto,
+  sellSteps,
+} from '../../../sites/nieruchomosci-psie-pole/data/content';
+---
+
+<Layout
+  title="Sprzedaj mieszkanie z nami"
+  description="Bezpłatna wycena mieszkania we Wrocławiu w 48 godzin od oględzin. Prowizja 2,5% plus VAT płatna dopiero przy akcie notarialnym. Poproś o wycenę."
+  path="/nieruchomosci-psie-pole/sprzedaj-z-nami/"
+  current="sprzedaj"
+  bundles={['info']}>
+  <PageHead
+    kicker="Dla sprzedających"
+    title="Sprzedaj mieszkanie z nami"
+    lead={`Zaczynamy od oględzin i bezpłatnej wyceny. Wycenę z uzasadnieniem masz w ${figures.valuationHours} godzin, a o umowie decydujesz dopiero potem.`}
+  />
+  <section class="sec info-grid" aria-labelledby="steps-h">
+    <div class="info-wide info-main">
+      <h2 id="steps-h">Od wyceny do kluczy w pięciu krokach</h2>
+      <ol class="sell-steps" role="list">
+        {sellSteps.map(step => (
+          <li>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <figure class="info-side sell-photo">
+      <Picture
+        photoKey={sellPhoto.key}
+        widths={sellPhoto.widths}
+        width={sellPhoto.width}
+        height={sellPhoto.height}
+        alt={sellPhoto.alt}
+        sizes="(max-width: 899px) 100vw, 30vw"
+      />
+      <figcaption>Oględziny: agent mierzy mieszkanie, zanim policzy wycenę.</figcaption>
+    </figure>
+  </section>
+  <section class="sec info-grid" aria-labelledby="costs-h">
+    <div class="info-wide info-main">
+      <h2 id="costs-h">Ile to kosztuje</h2>
+      <dl class="cost-list">
+        {sellCosts.map(cost => (
+          <div>
+            <dt>{cost.label}</dt>
+            <dd>{cost.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+    <div class="info-side info-main">
+      <h2 id="faq-h">Pytania sprzedających</h2>
+      <div class="faq">
+        {sellFaq.map(item => (
+          <details>
+            <summary>{item.question}</summary>
+            <p>{item.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="sec info-grid" aria-labelledby="start-h">
+    <div class="info-narrow info-main">
+      <h2 id="start-h">Zacznij od wyceny</h2>
+      <p>
+        Zostaw telefon i adres mieszkania. Agent oddzwoni w godzinach pracy biura i umówi oględziny.
+      </p>
+      <p>{hoursSentence}</p>
+      <p>
+        Wolisz zadzwonić od razu?{' '}
+        <a class="u-link" href={business.phoneHref}>
+          {business.phone}
+        </a>
+        .
+      </p>
+    </div>
+    <div class="info-form">
+      <ValuationBlock idPrefix="sv" anchor="wycena" />
+    </div>
+  </section>
+</Layout>

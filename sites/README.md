@@ -4,18 +4,18 @@ Sample websites for made-up businesses. Every business here is invented: the nam
 
 Each site has its own typeface, palette and one signature element, so the ten look like ten different studios made them.
 
-| Site         | Trade                               | Path             |
-| ------------ | ----------------------------------- | ---------------- |
-| Sygnet       | law firm                            | `/sygnet/`       |
-| Kajet        | accounting office                   | `/kajet/`        |
-| Emalia       | dental practice                     | `/emalia/`       |
-| Otoczak      | psychotherapy practice              | `/otoczak/`      |
-| Cegielnia 14 | lofts in a former brickworks        | `/cegielnia-14/` |
-| Szczypta     | bistro, Polish and English          | `/szczypta/`     |
-| Ziarnik      | coffee roastery with a shop         | `/ziarnik/`      |
-| Klamka       | estate agency, a listings magazine  | `/klamka/`       |
-| Brelok 1912  | boutique hotel, Polish and English  | `/brelok/`       |
-| Nakrętka     | car repair shop with a price widget | `/nakretka/`     |
+| Site                      | Trade                               | Path                          |
+| ------------------------- | ----------------------------------- | ----------------------------- |
+| Kancelaria Świdnicka      | law firm                            | `/kancelaria-swidnicka/`      |
+| Biuro Rachunkowe Gajowice | accounting office                   | `/biuro-rachunkowe-gajowice/` |
+| Stomatologia Krzyki       | dental practice                     | `/stomatologia-krzyki/`       |
+| Psychoterapia Biskupin    | psychotherapy practice              | `/psychoterapia-biskupin/`    |
+| Lofty Cegielniane         | lofts in a former brickworks        | `/lofty-cegielniane/`         |
+| Bistro na Szczepinie      | bistro, Polish and English          | `/bistro-na-szczepinie/`      |
+| Palarnia Kawy Nadodrze    | coffee roastery with a shop         | `/palarnia-kawy-nadodrze/`    |
+| Nieruchomości Psie Pole   | estate agency, a listings magazine  | `/nieruchomosci-psie-pole/`   |
+| Hotel Kamienica 1912      | boutique hotel, Polish and English  | `/hotel-kamienica-1912/`      |
+| Warsztat Szybowcowa       | car repair shop with a price widget | `/warsztat-szybowcowa/`       |
 
 The ten sites that came before them (Rozwaga, Rubryka, Szkliwo, Tafla, Przędza, Kminek, Trzask, Próg, Przęsło, Docisk) were removed. Their old addresses stay as small noindex pages in `public/<old>/` that send the visitor to the site that took the same trade.
 

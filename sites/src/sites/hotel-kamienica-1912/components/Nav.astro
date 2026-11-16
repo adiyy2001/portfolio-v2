@@ -1,0 +1,66 @@
+---
+import { link } from '../../../shared/link';
+import { common, menuKeys, romanNumerals } from '../content/common';
+import { languages, pagePath } from '../i18n/lang';
+import type { Lang, PageKey } from '../i18n/lang';
+
+interface Props {
+  lang: Lang;
+  pageKey: PageKey;
+  switchPath: Record<Lang, string>;
+}
+
+const { lang, pageKey, switchPath } = Astro.props;
+const text = common[lang];
+const current = (key: PageKey): 'page' | undefined => (key === pageKey ? 'page' : undefined);
+---
+
+<nav class="nav" aria-label={text.mainNav} data-menu="closed">
+  <a class="nav-home" href={link(pagePath('home', lang))} aria-label={text.homeLabel}>
+    <span aria-hidden="true">K</span>
+  </a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+    <span class="bars" aria-hidden="true"></span>
+    <span class="label">{text.menu}</span>
+  </button>
+  <ul class="nav-links" id="site-menu">
+    {menuKeys.map((key, index) => (
+      <li>
+        <a href={link(pagePath(key, lang))} aria-current={current(key)}>
+          <span class="rn" aria-hidden="true">
+            {romanNumerals[index]}
+          </span>
+          {text.nav[key]}
+        </a>
+      </li>
+    ))}
+    <li class="only-menu">
+      <a href={link(pagePath('myBooking', lang))} aria-current={current('myBooking')}>
+        <span class="rn" aria-hidden="true">
+          VII
+        </span>
+        {text.nav.myBooking}
+      </a>
+    </li>
+  </ul>
+  <div class="nav-end">
+    <a class="nav-res" href={link(pagePath('booking', lang))} aria-current={current('booking')}>
+      {text.reserve}
+      <svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <use href="#un"></use>
+      </svg>
+    </a>
+    <div class="lang" role="group" aria-label={text.languageLabel}>
+      {languages.map(code => (
+        <a
+          href={link(switchPath[code])}
+          hreflang={code}
+          lang={code}
+          aria-current={code === lang ? 'true' : undefined}>
+          {code.toUpperCase()}
+          <span class="sr"> ({text.languageNames[code]})</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>

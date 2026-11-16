@@ -8,7 +8,7 @@ export default function Car() {
   return (
     <>
       <div className="mk__nav">
-        <span className="mk__logo">Nakrętka</span>
+        <span className="mk__logo">Warsztat Szybowcowa</span>
       </div>
       <div className="mk-car__tag">
         <small>Koło, moment dokręcenia</small>

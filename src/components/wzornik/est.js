@@ -55,7 +55,7 @@ export default function Est() {
         <rect width="800" height="500" fill="url(#wz-dusk)" />
         <rect width="800" height="500" fill="url(#wz-fade)" />
       </svg>
-      <span className="mk-est__kicker">Cegielnia 14</span>
+      <span className="mk-est__kicker">Lofty Cegielniane</span>
       <p className="mk__h">{tie('W 1894 roku wypalono tu pierwszą cegłę.')}</p>
       <p className="mk__p">{tie('67 loftów w dawnej cegielni na Ołbinie, od 37 do 112 m².')}</p>
       <span className="mk__btn">Umów pokaz</span>

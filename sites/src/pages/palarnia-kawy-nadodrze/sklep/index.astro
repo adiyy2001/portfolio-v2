@@ -1,0 +1,29 @@
+---
+import Layout from '../../../sites/palarnia-kawy-nadodrze/Layout.astro';
+import ShopList from '../../../sites/palarnia-kawy-nadodrze/islands/ShopList';
+import { numbers } from '../../../sites/palarnia-kawy-nadodrze/data/site';
+---
+
+<Layout
+  title="Kawy"
+  description="Dziewięć kaw z małej palarni na Nadodrzu, od jasnego do ciemniejszego palenia. Zamów w sklepie, odbierz w palarni i zapłać przy odbiorze."
+  path="/palarnia-kawy-nadodrze/sklep/"
+  current="sklep"
+  bundles={['shop']}>
+  <div class="page-head">
+    <h1 class="hand" data-hand="Kawy">
+      Kawy
+    </h1>
+    <p class="typed page-head__lead">
+      Dziewięć kaw na trzech stopniach palenia. Worek ma {numbers.bagGrams} g, odbierasz go w
+      palarni.
+    </p>
+  </div>
+  <ShopList client:load />
+  <noscript>
+    <p class="cart-loading">
+      Filtry i koszyk potrzebują JavaScriptu. Wszystkie kawy są opisane na swoich stronach, a
+      zamówić możesz też telefonem albo mailem.
+    </p>
+  </noscript>
+</Layout>

@@ -1,0 +1,26 @@
+---
+import { link } from '../../../shared/link';
+
+interface Props {
+  trail: Array<{ label: string; path?: string }>;
+}
+
+const { trail } = Astro.props;
+---
+
+<nav class="crumbs wrap" aria-label="Ścieżka">
+  <ol>
+    <li>
+      <a href={link('/stomatologia-krzyki/')}>Strona główna</a>
+    </li>
+    {trail.map((step, index) => (
+      <li>
+        {step.path && index < trail.length - 1 ? (
+          <a href={link(step.path)}>{step.label}</a>
+        ) : (
+          <span aria-current="page">{step.label}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

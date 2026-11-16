@@ -5,7 +5,7 @@ export default function Psy() {
   return (
     <>
       <div className="mk__nav">
-        <span className="mk__logo">Otoczak</span>
+        <span className="mk__logo">Psychoterapia Biskupin</span>
       </div>
       <img
         className="mk-psy__stone"

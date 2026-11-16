@@ -14,7 +14,7 @@ On 2026-10-02 Adrian replaced the six recruiter concepts that stood here with fu
 
 ## Client sample websites
 
-Replaced on 2026-11-15. The ten sites described below (the first six, the three that follow and Docisk) were removed from `sites/`; their old addresses are noindex redirects to the new ten: Sygnet, Kajet, Emalia, Otoczak, Cegielnia 14, Szczypta, Ziarnik, Klamka, Brelok 1912 and Nakrętka (registry in `sites/src/shared/sites.ts`). The briefs below are kept as history.
+Replaced on 2026-11-15. The ten sites described below (the first six, the three that follow and Docisk) were removed from `sites/`; their old addresses are noindex redirects to the new ten, renamed on 2026-11-16 to Kancelaria Świdnicka, Biuro Rachunkowe Gajowice, Stomatologia Krzyki, Psychoterapia Biskupin, Lofty Cegielniane, Bistro na Szczepinie, Palarnia Kawy Nadodrze, Nieruchomości Psie Pole, Hotel Kamienica 1912 and Warsztat Szybowcowa (registry in `sites/src/shared/sites.ts`). The briefs below are kept as history.
 
 All six: high UI and UX, no business logic (no accounts, no payments, no back-end; forms are front-end only or go to an email service). Static sites, fast (Lighthouse Performance 90 and up on mobile), WCAG AA, Polish first. Each one gets its own typeface, palette and one signature element, so the six look like six different studios made them. The Wzornik on the client edition shows each one as a swatch and links the live site.
 

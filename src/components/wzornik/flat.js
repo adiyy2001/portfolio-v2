@@ -30,7 +30,7 @@ export default function Flat() {
   return (
     <>
       <div className="mk__nav">
-        <span className="mk__logo">Klamka</span>
+        <span className="mk__logo">Nieruchomości Psie Pole</span>
         <span className="mk-flat__issue">
           <small>Magazyn ofert, Wrocław</small>
           Numer 11, listopad 2026

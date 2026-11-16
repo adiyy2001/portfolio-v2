@@ -1,0 +1,69 @@
+---
+import type { Lang } from '../data/lang';
+import type { PageId } from '../data/routes';
+import { paths } from '../data/routes';
+import { shellCopy } from '../copy/shell';
+import { link } from '../../../shared/link';
+
+interface Props {
+  lang: Lang;
+  page: PageId;
+  variant: 'hero' | 'sub';
+  switchHref: string;
+}
+
+const { lang, page, variant, switchHref } = Astro.props;
+const copy = shellCopy[lang];
+const route = paths[lang];
+const home = page === 'home';
+const weekHref = home ? '#tydzien' : `${link(route.menu!)}#tydzien`;
+const stolikHref = home ? '#stolik' : link(route.booking!);
+const items = [
+  { id: 'menu', label: copy.nav.menu, href: link(route.menu!), current: page === 'menu' },
+  { id: 'week', label: copy.nav.week, href: weekHref, current: false },
+  { id: 'events', label: copy.nav.events, href: link(route.events!), current: page === 'events' },
+  { id: 'about', label: copy.nav.about, href: link(route.about!), current: page === 'about' },
+  {
+    id: 'contact',
+    label: copy.nav.contact,
+    href: link(route.contact!),
+    current: page === 'contact',
+  },
+];
+---
+
+<div class:list={['mast', variant === 'sub' && 'mast--sub']} data-mast>
+  <a class="brand" href={link(route.home!)} aria-label={copy.brandLabel}>
+    <span class="brand-main">Bistro</span>
+    <span class="brand-sub">na Szczepinie</span>
+  </a>
+  <button
+    class="mast-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="site-nav"
+    aria-label={copy.menuButtonLabel}
+    data-mast-toggle>
+    {copy.menuButton}
+  </button>
+  <nav class="mast-nav" id="site-nav" aria-label={copy.mainNav}>
+    {items.map(item => (
+      <>
+        <a href={item.href} aria-current={item.current ? 'page' : undefined}>
+          {item.label}
+        </a>{' '}
+      </>
+    ))}
+    <a
+      class="mast-lang"
+      href={switchHref}
+      lang={copy.langSwitch.lang}
+      hreflang={copy.langSwitch.lang}
+      aria-label={copy.langSwitch.label}>
+      {copy.langSwitch.short}
+    </a>
+  </nav>
+  <a class="mast-stolik" href={stolikHref} aria-current={page === 'booking' ? 'page' : undefined}>
+    {copy.reserve}
+  </a>
+</div>

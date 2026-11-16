@@ -1,0 +1,61 @@
+---
+import Layout from '../../../sites/palarnia-kawy-nadodrze/Layout.astro';
+import Subscription from '../../../sites/palarnia-kawy-nadodrze/islands/Subscription';
+import {
+  degreePriceZl,
+  numbers,
+  subscriptionTerms,
+} from '../../../sites/palarnia-kawy-nadodrze/data/site';
+
+const nbsp = '\u00a0';
+const price = degreePriceZl[subscriptionTerms.degree];
+---
+
+<Layout
+  title="Abonament"
+  description={`Co tydzień świeży worek kawy ze stopnia ${subscriptionTerms.degree} za ${price} zł, odbiór w palarni na Nadodrzu. Bez minimalnego okresu, rezygnujesz ${subscriptionTerms.cutoff}.`}
+  path="/palarnia-kawy-nadodrze/subskrypcja/"
+  current="subskrypcja"
+  bundles={['cart', 'info']}>
+  <div class="page-head">
+    <h1 class="hand" data-hand="Abonament">
+      Abonament
+    </h1>
+    <p class="typed page-head__lead">
+      Świeży worek raz w tygodniu, {price}
+      {nbsp}zł za worek {numbers.bagGrams}
+      {nbsp}g.
+    </p>
+  </div>
+  <div class="info info--single">
+    <div class="info__main">
+      <div class="prose sub-terms" id="zasady">
+        <h2>Zasady abonamentu</h2>
+        <ul>
+          <li>
+            Kawa pochodzi ze stopnia {subscriptionTerms.degree} z {numbers.scaleSteps}. Możesz
+            wskazać jedną z trzech kaw albo zostawić dobór mnie.
+          </li>
+          <li>
+            Co {subscriptionTerms.everyDays} dni przygotowuję od 1 do {subscriptionTerms.maxBags}{' '}
+            worków. Odbierasz je w palarni i płacisz przy odbiorze. Wysyłki nie robię.
+          </li>
+          <li>
+            Zmianę kawy, mielenia albo liczby worków zgłaszasz {subscriptionTerms.cutoff}, żeby
+            weszła od następnego tygodnia.
+          </li>
+          <li>
+            Nie ma minimalnego okresu. Rezygnujesz telefonem albo mailem {subscriptionTerms.cutoff},
+            bez opłat i bez podawania powodu. Tydzień, którego nie odbierzesz, nie jest naliczany.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <Subscription client:load />
+  <noscript>
+    <p class="cart-loading">
+      Formularz potrzebuje JavaScriptu. Zapisać się na abonament możesz też telefonem albo mailem.
+    </p>
+  </noscript>
+</Layout>

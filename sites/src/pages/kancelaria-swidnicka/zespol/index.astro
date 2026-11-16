@@ -1,0 +1,96 @@
+---
+import { link } from '../../../shared/link';
+import Cta from '../../../sites/kancelaria-swidnicka/components/Cta.astro';
+import HoursBlock from '../../../sites/kancelaria-swidnicka/components/HoursBlock.astro';
+import PageHead from '../../../sites/kancelaria-swidnicka/components/PageHead.astro';
+import { areaBySlug } from '../../../sites/kancelaria-swidnicka/data/areas';
+import { people } from '../../../sites/kancelaria-swidnicka/data/people';
+import { firm } from '../../../sites/kancelaria-swidnicka/data/site';
+import Layout from '../../../sites/kancelaria-swidnicka/Layout.astro';
+import { tie } from '../../../sites/kancelaria-swidnicka/lib/tie';
+---
+
+<Layout
+  title="Zespół"
+  description="Anna Wierzbicka, radca prawny, i Marek Zawada, adwokat. Kto prowadzi którą sprawę, jak pracują i jak się z nimi skontaktować."
+  path="/kancelaria-swidnicka/zespol/"
+  current="zespol"
+  bundles={['inner']}>
+  <PageHead
+    title="Dwie osoby prowadzą wszystkie sprawy"
+    lead={`Kancelaria działa od ${firm.foundedYear} roku i ma dwie osoby prawne. Dzięki temu zawsze wiesz, kto odbierze telefon i kto napisze pismo.`}
+    crumbs={[{ label: 'Strona główna', href: '/kancelaria-swidnicka/' }, { label: 'Zespół' }]}
+  />
+  <div class="block">
+    {people.map(person => (
+      <article class="profile" id={person.slug} aria-labelledby={`h-${person.slug}`}>
+        <div class="profile-id">
+          <p class="profile-mono" aria-hidden="true">
+            {person.monogram}
+          </p>
+          <h2 id={`h-${person.slug}`}>{person.name}</h2>
+          <p class="profile-role">{person.role}</p>
+        </div>
+        <div class="profile-data">
+          {person.bio.map(paragraph => (
+            <p>{tie(paragraph)}</p>
+          ))}
+          <h3>Jak pracuje</h3>
+          <ul>
+            {person.workingStyle.map(item => (
+              <li>{tie(item)}</li>
+            ))}
+          </ul>
+          <dl>
+            <div>
+              <dt>Tytuł</dt>
+              <dd>
+                {person.title}, w zawodzie od {person.since} roku
+              </dd>
+            </div>
+            <div>
+              <dt>Samorząd</dt>
+              <dd>{tie(person.chamber)}</dd>
+            </div>
+            <div>
+              <dt>Obszary</dt>
+              <dd>
+                {person.areaSlugs.map((slug, index) => (
+                  <>
+                    {index > 0 && ', '}
+                    <a href={link(`/kancelaria-swidnicka/specjalizacje/${slug}/`)}>
+                      {areaBySlug(slug)?.name}
+                    </a>
+                  </>
+                ))}
+              </dd>
+            </div>
+            <div>
+              <dt>Języki</dt>
+              <dd>{person.languages}</dd>
+            </div>
+            <div>
+              <dt>Telefon</dt>
+              <dd>
+                <a href={person.phone.href}>{person.phone.display}</a>
+              </dd>
+            </div>
+            <div>
+              <dt>E-mail</dt>
+              <dd>
+                <a href={`mailto:${person.email}`}>
+                  {person.email.split('@')[0]}@<wbr />
+                  {person.email.split('@')[1]}
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+    ))}
+  </div>
+  <div class="hours-wide">
+    <HoursBlock />
+  </div>
+  <Cta />
+</Layout>

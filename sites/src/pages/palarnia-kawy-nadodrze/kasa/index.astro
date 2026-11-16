@@ -1,0 +1,25 @@
+---
+import Layout from '../../../sites/palarnia-kawy-nadodrze/Layout.astro';
+import Checkout from '../../../sites/palarnia-kawy-nadodrze/islands/Checkout';
+import { orderStatement } from '../../../sites/palarnia-kawy-nadodrze/data/site';
+---
+
+<Layout
+  title="Kasa"
+  description="Podaj dane i wybierz termin odbioru worków w palarni. Płacisz przy odbiorze, wysyłki nie ma. To strona przykładowa, nic nie jest wysyłane."
+  path="/palarnia-kawy-nadodrze/kasa/"
+  current="kasa"
+  bundles={['cart']}>
+  <div class="page-head">
+    <h1 class="hand" data-hand="Kasa">
+      Kasa
+    </h1>
+    <p class="typed page-head__lead">{orderStatement}</p>
+  </div>
+  <Checkout client:load />
+  <noscript>
+    <p class="cart-loading">
+      Kasa potrzebuje JavaScriptu. Zamówić możesz też telefonem albo mailem.
+    </p>
+  </noscript>
+</Layout>

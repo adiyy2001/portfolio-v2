@@ -1,0 +1,68 @@
+---
+import { link } from '../../../shared/link';
+import Crumbs from '../../../sites/stomatologia-krzyki/components/Crumbs.astro';
+import Cta from '../../../sites/stomatologia-krzyki/components/Cta.astro';
+import PageHead from '../../../sites/stomatologia-krzyki/components/PageHead.astro';
+import { team } from '../../../sites/stomatologia-krzyki/data/team';
+import { findTreatment } from '../../../sites/stomatologia-krzyki/data/treatments';
+import Layout from '../../../sites/stomatologia-krzyki/Layout.astro';
+import { nbsp } from '../../../sites/stomatologia-krzyki/lib/typography';
+---
+
+<Layout
+  title="Zespół"
+  description="Zespół gabinetu na Krzykach: lek. dent. Marta Kowal, lek. dent. Jan Wrona i higienistka Alicja Nowicka. Kto czym się zajmuje i w które dni przyjmuje."
+  path="/stomatologia-krzyki/zespol/"
+  current="zespol"
+  bundles={['inner']}>
+  <Crumbs trail={[{ label: 'Zespół' }]} />
+  <PageHead
+    label="Zespół"
+    title="Kto cię leczy"
+    lead="Dwoje lekarzy i higienistka. Przy każdej osobie piszemy, czym się zajmuje i w które dni przyjmuje, żebyś mógł umówić się do konkretnego człowieka."
+  />
+  <section class="wrap sec-in" aria-labelledby="osoby">
+    <h2 id="osoby" class="sr-only">
+      Osoby w zespole
+    </h2>
+    <div class="team-grid">
+      {team.map(member => (
+        <article class="member" id={member.id}>
+          <span class="monogram" aria-hidden="true">
+            {member.initials}
+          </span>
+          <h3>{member.name}</h3>
+          <p class="role">
+            {member.role}, {member.focus}
+          </p>
+          {member.bio.map(paragraph => (
+            <p>{nbsp(paragraph)}</p>
+          ))}
+          <dl>
+            <div>
+              <dt>Przyjmuje</dt>
+              <dd>{member.days}</dd>
+            </div>
+            <div>
+              <dt>Zabiegi</dt>
+              <dd>
+                <span class="link-list">
+                  {member.treatments.map(slug => (
+                    <a href={link(`/stomatologia-krzyki/zabiegi/${slug}/`)}>
+                      {findTreatment(slug).name}
+                    </a>
+                  ))}
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </article>
+      ))}
+    </div>
+  </section>
+  <Cta
+    title="Chcesz poznać lekarza przed leczeniem?"
+    text="Pierwsza wizyta to godzina rozmowy i badania, bez decyzji o leczeniu."
+    topic="Przegląd"
+  />
+</Layout>

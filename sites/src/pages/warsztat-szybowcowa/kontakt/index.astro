@@ -1,0 +1,63 @@
+---
+import Layout from '../../../sites/warsztat-szybowcowa/Layout.astro';
+import PageHead from '../../../sites/warsztat-szybowcowa/components/PageHead.astro';
+import { addressLines, business, hoursRows } from '../../../sites/warsztat-szybowcowa/data/site';
+import ContactForm from '../../../sites/warsztat-szybowcowa/islands/ContactForm';
+---
+
+<Layout
+  title="Kontakt"
+  description={`Kontakt z warsztatem: ${business.street}, ${business.postcode} ${business.city}, telefon ${business.phone}. Godziny przyjęć i formularz wiadomości.`}
+  path="/warsztat-szybowcowa/kontakt/"
+  current="kontakt"
+  bundles={['sheet', 'pages']}>
+  <PageHead
+    title="Kontakt"
+    kicker="Fabryczna, Wrocław"
+    lead="Najszybciej odbieramy telefon w godzinach przyjęć. Poza nimi napisz, a odpowiemy następnego dnia roboczego."
+  />
+  <section class="band" aria-labelledby="dane">
+    <div class="wrap contact-grid">
+      <div>
+        <h2 id="dane" class="h2-big">
+          Jak nas znaleźć
+        </h2>
+        <address class="contact-card">
+          <a class="k" href={business.phoneHref}>
+            {business.phone}
+          </a>
+          <span>{addressLines[0]}</span>
+          <span>{addressLines[1]}</span>
+          <a class="foot-mail" href={`mailto:${business.email}`}>
+            {business.email}
+          </a>
+        </address>
+        <table class="contact-hours">
+          <caption>Godziny pracy warsztatu</caption>
+          <tbody>
+            {hoursRows.map(([day, hours]) => (
+              <tr>
+                <th scope="row">{day}</th>
+                <td>{hours}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <ul class="how-list">
+          <li>Dzielnica Fabryczna we Wrocławiu.</li>
+          <li>Auto oglądamy z tobą na podnośniku i spisujemy usterki.</li>
+        </ul>
+      </div>
+      <div class="sheet sheet--page">
+        <h2 class="part-h s">Napisz do nas</h2>
+        <ContactForm client:load />
+        <noscript>
+          <p class="form-note s">
+            Formularz działa z włączonym JavaScriptem. Bez niego zadzwoń lub napisz na
+            <a href={`mailto:${business.email}`}>{business.email}</a>.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+</Layout>

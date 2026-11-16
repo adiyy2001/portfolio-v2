@@ -13,7 +13,7 @@ export default function Den() {
           <svg className="mk-den__mark" viewBox="0 0 20 22" aria-hidden="true">
             <path d="M4 2C1 2 1 7 2 10C3 13 4 20 6 20C8 20 8 13 10 13C12 13 12 20 14 20C16 20 17 13 18 10C19 7 19 2 16 2C13 2 12 4 10 4C8 4 7 2 4 2Z" />
           </svg>
-          Emalia
+          Stomatologia Krzyki
         </span>
         <span className="mk__links">
           {links.map(link => (
@@ -27,7 +27,7 @@ export default function Den() {
         Zęby, o których możesz <mark>zapomnieć.</mark>
       </p>
       <div className="mk-den__arc" aria-hidden="true">
-        <span className="mk-den__word">Emalia</span>
+        <span className="mk-den__word">Krzyki</span>
       </div>
       <img
         className="mk-den__tooth"

@@ -1,0 +1,38 @@
+---
+import PageHead from '../../../sites/kancelaria-swidnicka/components/PageHead.astro';
+import Layout from '../../../sites/kancelaria-swidnicka/Layout.astro';
+---
+
+<Layout
+  title="Licencje i źródła"
+  description="Krój pisma użyty na stronie kancelarii i jego licencja. Strona nie używa fotografii."
+  path="/kancelaria-swidnicka/licencje/"
+  bundles={['inner']}>
+  <PageHead
+    title="Licencje i źródła"
+    lead="Krój pisma jest jedynym cudzym elementem tej strony. Nie używamy fotografii ani grafik z zewnątrz."
+    crumbs={[{ label: 'Strona główna', href: '/kancelaria-swidnicka/' }, { label: 'Licencje' }]}
+  />
+  <div class="block block-body">
+    <ul class="legal-list">
+      <li>
+        <h2>Bodoni Moda</h2>
+        <p>
+          Autor: Owen Earl, Indestructible Type. Licencja SIL Open Font License 1.1, która pozwala
+          używać i osadzać krój także w projektach komercyjnych. Pliki fontu w formacie woff2 są na
+          tej stronie hostowane lokalnie, tekst licencji leży obok nich.
+        </p>
+        <p>
+          <a href="https://fonts.google.com/specimen/Bodoni+Moda">Bodoni Moda w Google Fonts</a>
+        </p>
+      </li>
+      <li>
+        <h2>Ikony i grafiki</h2>
+        <p>
+          Znak kancelarii, ikona karty i monogramy w sekcji zespołu są składane z tego samego kroju
+          i kolorów, więc nie mają osobnej licencji. Żadne zdjęcia nie zostały użyte.
+        </p>
+      </li>
+    </ul>
+  </div>
+</Layout>

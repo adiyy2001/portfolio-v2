@@ -12,7 +12,7 @@ export default function Law() {
   return (
     <>
       <div className="mk__nav">
-        <span className="mk__logo">Sygnet</span>
+        <span className="mk__logo">Kancelaria Świdnicka</span>
         <span className="mk-law__since">
           Kancelaria prawna
           <br />

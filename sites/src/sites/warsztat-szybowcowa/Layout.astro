@@ -1,0 +1,197 @@
+---
+import { link } from '../../shared/link';
+import SampleNote from '../../shared/SampleNote.astro';
+import { addressLines, business, hoursRows } from './data/site';
+import { preloadedFonts } from './fonts';
+import { pluralPl } from './lib/format';
+import { navItems } from './nav';
+import type { NavKey } from './nav';
+import HoursChip from './islands/HoursChip';
+import { styleBundles } from './styles';
+import type { StyleBundle } from './styles';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: NavKey;
+  bundles?: StyleBundle[];
+  home?: boolean;
+}
+
+const { title, description, path, current, bundles = [], home = false } = Astro.props;
+const canonical = new URL(link(path), Astro.site).href;
+const ogImage = new URL(link('/warsztat-szybowcowa/og.png'), Astro.site).href;
+const fullTitle = home ? title : `${title} | Warsztat Szybowcowa`;
+const css = ['core', ...bundles].map(name => styleBundles[name as StyleBundle]).join('');
+const skipHref = home ? '#deal' : '#main';
+const skipLabel = home ? 'Przejdź do ceny i telefonu' : 'Przejdź do treści';
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b0b0a" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={link('/warsztat-szybowcowa/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Warsztat Szybowcowa" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Żółte pole z liczbą 110 Nm i napis Warsztat Szybowcowa na czarnym tle."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    {preloadedFonts.map(href => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin="anonymous" />
+    ))}
+    {home && <link rel="preload" as="image" href={link('/warsztat-szybowcowa/img/hero.webp')} />}
+    <style set:html={css}></style>
+    <noscript>
+      <style>
+        .menu-btn {
+          display: none;
+        }
+        .nav {
+          position: static;
+          display: flex;
+          flex-wrap: wrap;
+          border: 0;
+          padding: 0;
+        }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.045"
+          numOctaves="3"
+          seed="7"
+          result="n"
+        />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="n"
+          scale="9"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+      <filter id="rough-fine" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.12" numOctaves="2" seed="3" result="n" />
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="n"
+          scale="4"
+          xChannelSelector="R"
+          yChannelSelector="G"
+        />
+      </filter>
+    </svg>
+    <a class="skip" href={skipHref}>
+      {skipLabel}
+    </a>
+    {home ? (
+      <slot name="hero" />
+    ) : (
+      <header class="hdr">
+        <div class="wrap hdr__bar">
+          <a
+            class="brand-sub"
+            href={link('/warsztat-szybowcowa/')}
+            aria-label="Warsztat Szybowcowa, strona główna">
+            <span class="brand-trade">Warsztat</span>
+            <span class="brand-place">Szybowcowa</span>
+          </a>
+          <button
+            type="button"
+            class="menu-btn"
+            id="menu-btn"
+            aria-expanded="false"
+            aria-controls="site-nav">
+            Menu
+          </button>
+          <nav class="nav" id="site-nav" aria-label="Główna">
+            {navItems.map(item => (
+              <a href={link(item.path)} aria-current={current === item.key ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <a class="hdr__tel" href={business.phoneHref} aria-label={`Zadzwoń: ${business.phone}`}>
+            {business.phone}
+          </a>
+        </div>
+      </header>
+    )}
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer class="foot s" id="kontakt">
+      <div class="foot-grid">
+        <address class="foot-addr">
+          <a class="foot-tel k" href={business.phoneHref}>
+            {business.phone}
+          </a>
+          <span class="foot-street">{addressLines[0]}</span>
+          <span class="foot-city">{addressLines[1]}</span>
+          <a class="foot-mail" href={`mailto:${business.email}`}>
+            {business.email}
+          </a>
+        </address>
+        <div class="foot-hours">
+          <HoursChip client:idle />
+          <table>
+            <caption>Godziny pracy warsztatu</caption>
+            <tbody>
+              {hoursRows.map(([day, hours]) => (
+                <tr>
+                  <th scope="row">{day}</th>
+                  <td>{hours}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <nav class="foot-nav" aria-label="Skróty">
+          <h2>Strony</h2>
+          <ul>
+            {navItems.map(item => (
+              <li>
+                <a href={link(item.path)}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <p class="foot-facts">
+          {`Na Fabrycznej mamy ${business.stations} stanowisk, a tabela momentów obejmuje ${business.torqueModels} ${pluralPl(business.torqueModels, 'model', 'modele', 'modeli')} aut. Typowa naprawa trwa do ${business.maxRepairHours} godzin.`}
+        </p>
+      </div>
+      <div class="foot-legal">
+        <SampleNote name="Warsztat Szybowcowa" lang="pl" />
+        <p>
+          <a class="credits-link" href={link('/warsztat-szybowcowa/credits/')}>
+            Zdjęcia, autorzy i licencje
+          </a>
+        </p>
+      </div>
+    </footer>
+    <script>
+      import './scripts/chrome';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+---
+import { link } from '../../../shared/link';
+import Crumbs from '../../../sites/stomatologia-krzyki/components/Crumbs.astro';
+import Cta from '../../../sites/stomatologia-krzyki/components/Cta.astro';
+import PageHead from '../../../sites/stomatologia-krzyki/components/PageHead.astro';
+import PriceRows from '../../../sites/stomatologia-krzyki/components/PriceRows.astro';
+import {
+  findPrice,
+  formatPrice,
+  priceGroups,
+  pricesOfGroup,
+} from '../../../sites/stomatologia-krzyki/data/prices';
+import { priceLead } from '../../../sites/stomatologia-krzyki/data/site';
+import { findTreatment } from '../../../sites/stomatologia-krzyki/data/treatments';
+import Layout from '../../../sites/stomatologia-krzyki/Layout.astro';
+import { nbsp } from '../../../sites/stomatologia-krzyki/lib/typography';
+
+const quote = (id: string) => formatPrice(findPrice(id));
+const description = `Cennik gabinetu na Krzykach: przegląd ${quote('przeglad')}, higienizacja ${quote('higienizacja')}, wybielanie ${quote('wybielanie')}, leczenie kanałowe ${quote('kanal-jeden')}. Cenę podajemy na kartce przed zabiegiem.`;
+const promises = [
+  {
+    title: 'Cena przed zabiegiem',
+    text: 'Po przeglądzie dostajesz kosztorys na kartce. Bez twojej zgody nic nie zaczynamy.',
+  },
+  {
+    title: 'Dlaczego „od”',
+    text: 'Końcowa kwota zależy od liczby zębów i stopnia zniszczenia. Wpisujemy ją na kartkę, zanim zaczniemy leczyć.',
+  },
+  {
+    title: 'Kartka się nie zmienia',
+    text: 'Kwoty z kartki obowiązują do końca leczenia. Płacisz po każdej wizycie, kartą albo gotówką.',
+  },
+];
+---
+
+<Layout
+  title="Cennik"
+  description={description}
+  path="/stomatologia-krzyki/cennik/"
+  current="cennik"
+  bundles={['inner']}>
+  <Crumbs trail={[{ label: 'Cennik' }]} />
+  <PageHead label="Cennik" title="Ile kosztuje leczenie" lead={priceLead} />
+  <section class="wrap sec-in" aria-label="Ceny zabiegów">
+    {priceGroups.map(group => {
+      const treatment = findTreatment(group.treatment);
+      return (
+        <div class="price-group">
+          <h2 id={`cennik-${group.id}`}>
+            <a href={link(`/stomatologia-krzyki/zabiegi/${group.treatment}/`)}>{group.name}</a>
+          </h2>
+          <p class="group-note">{nbsp(treatment.short)}</p>
+          <PriceRows items={pricesOfGroup(group.id)} />
+        </div>
+      );
+    })}
+  </section>
+  <div class="sec-tint">
+    <section class="wrap sec-in" aria-labelledby="zasady">
+      <h2 id="zasady">Zasady cennika</h2>
+      <ul class="promise">
+        {promises.map(item => (
+          <li>
+            <h3>{item.title}</h3>
+            <p>{nbsp(item.text)}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+  <Cta
+    title="Wolisz poznać swoją cenę?"
+    text="Przegląd kończy się planem leczenia i kosztorysem, które zabierasz do domu."
+    topic="Przegląd"
+  />
+</Layout>

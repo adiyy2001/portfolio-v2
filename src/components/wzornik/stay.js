@@ -26,10 +26,10 @@ export default function Stay() {
           <ellipse cx="20" cy="31" rx="16" ry="22" fill="currentColor" />
           <ellipse cx="20" cy="31" rx="13" ry="19" fill="none" stroke="#f1e7cf" strokeWidth="0.8" />
           <text x="20" y="40" textAnchor="middle" fill="#f1e7cf" fontSize="24">
-            B
+            K
           </text>
         </svg>
-        <p className="mk__logo">Brelok</p>
+        <p className="mk__logo">Kamienica</p>
         <span className="mk-stay__year">1912</span>
         <p className="mk__h">
           Czternaście pokoi

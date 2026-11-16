@@ -1,0 +1,27 @@
+---
+import Layout from '../../../sites/nieruchomosci-psie-pole/Layout.astro';
+import PageHead from '../../../sites/nieruchomosci-psie-pole/components/PageHead.astro';
+import FavouritesList from '../../../sites/nieruchomosci-psie-pole/islands/FavouritesList';
+---
+
+<Layout
+  title="Ulubione oferty"
+  description="Oferty zapisane przyciskiem Ulubione w magazynie ofert. Lista zostaje w Twojej przeglądarce, nic nie jest wysyłane do biura."
+  path="/nieruchomosci-psie-pole/ulubione/"
+  current="ulubione"
+  bundles={['catalog']}>
+  <PageHead
+    kicker="Zapisane na tym urządzeniu"
+    title="Ulubione oferty"
+    lead="Oferty, przy których kliknięto „Ulubione”. Lista zostaje w tej przeglądarce i nic z niej nie trafia do biura."
+  />
+  <section class="sec sec-match sec-match--page" aria-labelledby="fav-h">
+    <h2 class="vh" id="fav-h">
+      Zapisane oferty
+    </h2>
+    <FavouritesList client:load />
+    <noscript>
+      <p class="fav-state">Lista ulubionych działa tylko z włączonym JavaScriptem.</p>
+    </noscript>
+  </section>
+</Layout>

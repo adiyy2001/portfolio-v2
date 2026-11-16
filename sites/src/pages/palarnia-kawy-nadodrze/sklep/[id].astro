@@ -1,0 +1,140 @@
+---
+import { link } from '../../../shared/link';
+import { holdUnits } from '../../../sites/palarnia-kawy-nadodrze/lib/typography';
+import Layout from '../../../sites/palarnia-kawy-nadodrze/Layout.astro';
+import ProductBuy from '../../../sites/palarnia-kawy-nadodrze/islands/ProductBuy';
+import { ProductTile } from '../../../sites/palarnia-kawy-nadodrze/components/ProductTile';
+import { RoastDots } from '../../../sites/palarnia-kawy-nadodrze/components/RoastDots';
+import {
+  coffees,
+  getCoffee,
+  relatedCoffees,
+} from '../../../sites/palarnia-kawy-nadodrze/data/catalog';
+import {
+  brewLabels,
+  countryLabels,
+  degreeShortLabels,
+  processLabels,
+  processNotes,
+} from '../../../sites/palarnia-kawy-nadodrze/data/facets';
+import { recipes } from '../../../sites/palarnia-kawy-nadodrze/data/recipes';
+import { numbers } from '../../../sites/palarnia-kawy-nadodrze/data/site';
+
+export function getStaticPaths() {
+  return coffees.map(coffee => ({ params: { id: coffee.id } }));
+}
+
+const { id } = Astro.params;
+const coffee = getCoffee(id ?? '');
+if (!coffee) throw new Error(`Unknown coffee ${id}`);
+
+const related = relatedCoffees(coffee.id, 3);
+const handName = coffee.name.replace(' ', '|');
+const specs: Array<[string, string]> = [
+  ['Region', coffee.region],
+  ['Plantacja', coffee.producer],
+  ['Wysokość', holdUnits(coffee.altitude)],
+  ['Odmiana', coffee.variety],
+  ['Zbiór', coffee.harvest],
+  ['Obróbka', processLabels[coffee.process]],
+];
+---
+
+<Layout
+  title={coffee.name}
+  description={`${coffee.name}, ${degreeShortLabels[coffee.degree]}, stopień ${coffee.degree} z ${numbers.scaleSteps}. ${coffee.summary}`}
+  path={`/palarnia-kawy-nadodrze/sklep/${coffee.id}/`}
+  current="sklep"
+  bundles={['product', 'shop', 'info']}>
+  <nav class="crumbs" aria-label="Okruszki">
+    <ol>
+      <li>
+        <a href={link('/palarnia-kawy-nadodrze/sklep/')}>Kawy</a>
+      </li>
+      <li>
+        <span aria-current="page">{coffee.name}</span>
+      </li>
+    </ol>
+  </nav>
+  <div class="pdp">
+    <div class="pdp__main">
+      <p class="pdp__deg">
+        stopień {coffee.degree} z {numbers.scaleSteps}, {degreeShortLabels[coffee.degree]}
+      </p>
+      <RoastDots
+        degree={coffee.degree}
+        label={`Stopień ${coffee.degree} z ${numbers.scaleSteps}`}
+      />
+      <h1 class="hand" data-hand={handName} data-read={coffee.name}>
+        {coffee.name}
+      </h1>
+      <p class="pdp__origin">
+        {countryLabels[coffee.country]}, {processLabels[coffee.process].toLowerCase()}. W filiżance:{' '}
+        {coffee.notes.join(', ')}.
+      </p>
+      <p class="pdp__lead">{coffee.summary}</p>
+      <dl class="specs">
+        {specs.map(([label, value]) => (
+          <div>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+        <div>
+          <dt>Partia</dt>
+          <dd>numer {coffee.batch}</dd>
+        </div>
+      </dl>
+    </div>
+    <div class="pdp__buy">
+      <ProductBuy client:load coffeeId={coffee.id} />
+      <noscript>
+        <p class="buy__note">
+          Koszyk potrzebuje JavaScriptu. Zamów telefonem albo mailem, adres jest w stopce.
+        </p>
+      </noscript>
+    </div>
+  </div>
+
+  <div class="info info--single">
+    <div class="info__main">
+      <div class="prose">
+        <h2>O tej kawie</h2>
+        {coffee.story.map(paragraph => (
+          <p>{holdUnits(paragraph)}</p>
+        ))}
+        <p>{processNotes[coffee.process]}</p>
+        <p>{holdUnits(coffee.tip)}</p>
+      </div>
+      <div class="prose">
+        <h2>Jak ją zaparzyć</h2>
+        {coffee.brew.map(method => {
+          const recipe = recipes[method];
+          return (
+            <section class="brew" aria-label={brewLabels[method]}>
+              <h3>{recipe.title}</h3>
+              <p class="brew__line">{recipe.line}</p>
+              <p class="brew__note">{recipe.grind}</p>
+              <ol class="steps">
+                {recipe.steps.map(step => (
+                  <li>{holdUnits(step)}</li>
+                ))}
+              </ol>
+            </section>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+
+  <section class="related" aria-labelledby="related-title">
+    <h2 id="related-title">Zobacz też</h2>
+    <ul class="wall">
+      {related.map(item => (
+        <li>
+          <ProductTile coffee={item} />
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

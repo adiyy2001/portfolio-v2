@@ -1,0 +1,81 @@
+---
+import { link } from '../../shared/link';
+import Footer from './components/Footer.astro';
+import Header from './components/Header.astro';
+import { fontFaceCss, latinHref } from './fonts';
+import { photos } from './images';
+import type { NavKey } from './nav';
+import { asset, site } from './site';
+import './styles/global.css';
+import './styles/pages.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: NavKey;
+}
+
+const { title, description, path, current } = Astro.props;
+const canonical = new URL(link(path), Astro.site).href;
+const image = new URL(asset('og.png'), Astro.site).href;
+---
+
+<!doctype html>
+<html lang="pl" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#080504" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="icon" href={asset('favicon.svg')} type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={photos.hero.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href={latinHref} as="font" type="font/woff2" crossorigin />
+    <style is:inline set:html={fontFaceCss}></style>
+    <script is:inline>
+      document.documentElement.classList.remove('no-js');
+      try {
+        if (localStorage.getItem('lofty-cegielniane:still') === '1') {
+          document.documentElement.classList.add('still');
+        }
+      } catch (error) {}
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#tresc">
+      Przejdź do treści
+    </a>
+    <Header current={current} />
+    <main id="tresc" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <div class="grain" aria-hidden="true"></div>
+    <script is:inline>
+      if (location.hash.length > 1) {
+        try {
+          const anchor = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+          if (anchor) anchor.scrollIntoView({ behavior: 'instant', block: 'start' });
+        } catch (error) {}
+      }
+    </script>
+    <script>
+      import './scripts/chrome';
+    </script>
+  </body>
+</html>

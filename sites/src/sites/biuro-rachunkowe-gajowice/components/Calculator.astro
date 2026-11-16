@@ -1,0 +1,131 @@
+---
+import { link } from '../../../shared/link';
+import { maxInvoices } from '../data/plans';
+import { maxTypedInvoices } from '../lib/picker';
+import PlansTable from './PlansTable.astro';
+
+interface Props {
+  needs?: boolean;
+  initialInvoices?: number;
+}
+
+const { needs = false, initialInvoices = 40 } = Astro.props;
+const scale = [0, 50, 100, 150, 200];
+const needItems = [
+  { id: 'payroll', title: 'Pracownicy lub zleceniobiorcy', hint: 'Listy płac i rozliczenia ZUS' },
+  { id: 'phone', title: 'Rozmowa przez telefon', hint: 'W godzinach pracy biura' },
+  {
+    id: 'office',
+    title: 'Kontakt z urzędem w moim imieniu',
+    hint: 'Pełnomocnictwo i reprezentacja',
+  },
+  { id: 'partners', title: 'Rozliczenia z kontrahentami', hint: 'Salda, wezwania, noty odsetkowe' },
+];
+const quoteBase = link('/biuro-rachunkowe-gajowice/kontakt/');
+---
+
+<div class="blk-head">
+  <span>kalkulator</span>
+  <span id="plan-note" class="muted"></span>
+</div>
+<div class="calc-in js-only">
+  <fieldset class="field">
+    <legend>forma firmy</legend>
+    <div class="seg two" role="radiogroup" aria-label="Forma firmy">
+      <button type="button" role="radio" data-form="osoba" aria-checked="true" tabindex="0">
+        osoba fizyczna
+      </button>
+      <button type="button" role="radio" data-form="spolka" aria-checked="false" tabindex="-1">
+        spółka
+      </button>
+    </div>
+  </fieldset>
+  <div class="field">
+    <div class="field-row">
+      <label for="inv-range">faktur w miesiącu</label>
+      <label class="num-in">
+        <span class="sr">Liczba faktur, wpis ręczny</span>
+        <input
+          id="inv-num"
+          type="number"
+          inputmode="numeric"
+          min="0"
+          max={maxTypedInvoices}
+          step="1"
+          value={initialInvoices}
+        />
+      </label>
+    </div>
+    <input
+      id="inv-range"
+      class="range"
+      type="range"
+      min="0"
+      max={maxInvoices}
+      step="1"
+      value={initialInvoices}
+    />
+    <div class="scale" aria-hidden="true">
+      {scale.map(value => (
+        <span>{value}</span>
+      ))}
+    </div>
+  </div>
+</div>
+{needs && (
+  <div class="calc-needs js-only">
+    {[needItems.slice(0, 2), needItems.slice(2)].map(group => (
+      <ul class="check">
+        {group.map(item => (
+          <li>
+            <label>
+              <input type="checkbox" data-need={item.id} />
+              <span class="ck-t">
+                <b>{item.title}</b>
+                <span class="ck-h">{item.hint}</span>
+              </span>
+            </label>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+)}
+<p id="calc-sum" class="detail calc-line js-only" aria-live="polite"></p>
+{needs && (
+  <>
+    <ul id="calc-reasons" class="reasons js-only" aria-label="Dlaczego ten plan" />
+    <dl class="calc-out js-only">
+      <div>
+        <dt>plan</dt>
+        <dd id="out-plan" />
+      </div>
+      <div>
+        <dt>netto miesięcznie</dt>
+        <dd id="out-price" />
+      </div>
+      <div>
+        <dt>brutto miesięcznie</dt>
+        <dd id="out-gross" />
+      </div>
+      <div>
+        <dt>za jedną fakturę</dt>
+        <dd id="out-unit" />
+      </div>
+    </dl>
+    <div class="cta js-only">
+      <a
+        id="calc-quote"
+        class="quote-btn"
+        href={`${quoteBase}#wycena`}
+        data-base={quoteBase}
+        data-label="Wyślij wycenę z tym planem">
+        Wyślij wycenę z tym planem
+      </a>
+      <a class="quote-btn alt" href={link('/biuro-rachunkowe-gajowice/uslugi/')}>
+        Co obejmują nasze usługi
+      </a>
+    </div>
+  </>
+)}
+<PlansTable />

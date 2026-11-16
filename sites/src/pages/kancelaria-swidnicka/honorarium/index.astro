@@ -1,0 +1,189 @@
+---
+import { link } from '../../../shared/link';
+import Cta from '../../../sites/kancelaria-swidnicka/components/Cta.astro';
+import FeeTable from '../../../sites/kancelaria-swidnicka/components/FeeTable.astro';
+import PageHead from '../../../sites/kancelaria-swidnicka/components/PageHead.astro';
+import { areas } from '../../../sites/kancelaria-swidnicka/data/areas';
+import {
+  advanceSharePercent,
+  billingStepMinutes,
+  fixedFees,
+  grossOf,
+  hourlyGrossPln,
+  hourlyNetPln,
+  invoiceDueDays,
+} from '../../../sites/kancelaria-swidnicka/data/fees';
+import { firm } from '../../../sites/kancelaria-swidnicka/data/site';
+import Layout from '../../../sites/kancelaria-swidnicka/Layout.astro';
+import { formatPln } from '../../../sites/kancelaria-swidnicka/lib/money';
+
+const lowestFee = Math.min(...fixedFees.map(fee => fee.netPln));
+const groups = areas.map(area => ({
+  area,
+  fees: fixedFees.filter(fee => fee.areaSlug === area.slug),
+}));
+---
+
+<Layout
+  title="Honorarium"
+  description={`Jak liczymy honorarium w naszej kancelarii: ryczałt za opisaną czynność albo ${formatPln(hourlyNetPln)} netto za godzinę pracy. Pierwsza rozmowa ${firm.firstTalkMinutes} minut bez opłaty.`}
+  path="/kancelaria-swidnicka/honorarium/"
+  current="honorarium"
+  bundles={['inner']}>
+  <PageHead
+    title="Honorarium liczymy na dwa sposoby"
+    lead="Ryczałtem za z góry opisaną czynność albo według godzin pracy. Którą drogę wybrać, mówimy na pierwszej rozmowie, bo zależy to od tego, czy da się przewidzieć, ile pracy zajmie sprawa."
+    crumbs={[{ label: 'Strona główna', href: '/kancelaria-swidnicka/' }, { label: 'Honorarium' }]}
+  />
+
+  <section class="block" aria-labelledby="h-liczby">
+    <div class="block-head">
+      <h2 id="h-liczby">Najważniejsze liczby</h2>
+      <p>Wszystkie kwoty podajemy netto i brutto, z VAT {firm.vatPercent}%.</p>
+    </div>
+    <dl class="facts block-body">
+      <div class="fact">
+        <dt>Pierwsza rozmowa</dt>
+        <dd>{formatPln(firm.firstTalkPricePln)}</dd>
+        <dd class="fact-note">
+          {firm.firstTalkMinutes} minut, raz na sprawę. Po niej wiesz, czy i jak możemy pomóc.
+        </dd>
+      </div>
+      <div class="fact">
+        <dt>Praca według godzin</dt>
+        <dd>{formatPln(hourlyNetPln)}</dd>
+        <dd class="fact-note">
+          Netto za godzinę pracy, czyli {formatPln(hourlyGrossPln)} brutto. Czas liczymy co{' '}
+          {billingStepMinutes} minut.
+        </dd>
+      </div>
+      <div class="fact">
+        <dt>Ryczałt</dt>
+        <dd>od {formatPln(lowestFee)}</dd>
+        <dd class="fact-note">
+          Netto, jednorazowo za opisaną czynność, od {formatPln(grossOf(lowestFee))} brutto.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section class="block" aria-labelledby="h-sposoby">
+    <div class="block-head">
+      <h2 id="h-sposoby">Ryczałt albo godziny</h2>
+      <p>Ten sam zakres pracy można rozliczyć na dwa sposoby. Wybór zapisujemy w umowie.</p>
+    </div>
+    <div class="two-col block-body">
+      <div>
+        <h3>Ryczałt</h3>
+        <p>
+          Dla czynności, które znamy z praktyki: projekt umowy, wniosek o stwierdzenie nabycia
+          spadku, założenie spółki, pozew o alimenty. Zakres opisujemy w umowie o obsługę, więc
+          wiesz, co wchodzi w cenę, a co byłoby pracą dodatkową.
+        </p>
+        <p>
+          Jeśli sprawa okaże się większa niż w opisie, uzgadniamy dopłatę. Jeśli mniejsza, ryczałt
+          się nie zmienia.
+        </p>
+      </div>
+      <div>
+        <h3>Godziny</h3>
+        <p>
+          Dla spraw, w których nie da się przewidzieć liczby rozpraw, pism i rozmów, na przykład
+          sporu między wspólnikami albo sprawy o podział majątku z wieloma składnikami.
+        </p>
+        <p>
+          Liczymy czas pracy nad sprawą, także rozmowy telefoniczne i wiadomości, w krokach co{' '}
+          {billingStepMinutes} minut. Raz w miesiącu dostajesz zestawienie z opisem, co zrobiliśmy i
+          ile to zajęło.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="h-ryczalty">
+    <div class="block-head">
+      <h2 id="h-ryczalty">Ryczałty za typowe czynności</h2>
+      <p>Kwoty są jednorazowe i dotyczą jednej czynności w jednej sprawie.</p>
+    </div>
+    <div class="block-body">
+      {groups.map(group => (
+        <div class="fee-group">
+          <h3>
+            <a href={link(`/kancelaria-swidnicka/specjalizacje/${group.area.slug}/`)}>
+              {group.area.name}
+            </a>
+          </h3>
+          <FeeTable fees={group.fees} caption={`Ryczałty: ${group.area.name}`} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="h-platnosc">
+    <div class="block-head">
+      <h2 id="h-platnosc">Jak i kiedy płacisz</h2>
+      <p>Faktura z VAT, przelew na konto kancelarii.</p>
+    </div>
+    <div class="two-col block-body">
+      <div>
+        <h3>Zaliczka</h3>
+        <p>
+          Przy ryczałcie prosimy o {advanceSharePercent}% kwoty na początku pracy, resztę po
+          wykonaniu czynności. Przy rozliczeniu godzinowym zaliczki nie ma.
+        </p>
+      </div>
+      <div>
+        <h3>Termin</h3>
+        <p>
+          Faktury płacisz w ciągu {invoiceDueDays} dni od otrzymania. Zmiana ryczałtu wymaga aneksu
+          do umowy, a nowa stawka godzinowa obowiązuje najwcześniej od następnego miesiąca
+          rozliczeniowego.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="h-poza">
+    <div class="block-head">
+      <h2 id="h-poza">Czego honorarium nie obejmuje</h2>
+      <p>Te kwoty ustalają sądy, urzędy i osoby spoza kancelarii, więc podajemy je osobno.</p>
+    </div>
+    <ul class="checklist block-body">
+      <li>Opłaty sądowe, na przykład od pozwu albo wniosku.</li>
+      <li>Taksa notarialna i opłaty za wpis do rejestru.</li>
+      <li>Wynagrodzenie biegłych, tłumaczy i rzeczoznawców.</li>
+      <li>Koszty dojazdu poza Wrocław, jeśli sprawa wymaga obecności w innym mieście.</li>
+    </ul>
+    <p class="fees-note block-body">
+      Jeśli sąd zasądzi zwrot kosztów procesu od drugiej strony, kwota zwrotu jest osobna od naszego
+      honorarium. Koszty zastępstwa prawnego sąd liczy według stawek minimalnych z przepisów (art.
+      98 KPC), więc zwykle są niższe niż umówione honorarium.
+    </p>
+  </section>
+
+  <section class="block" aria-labelledby="h-nie">
+    <div class="block-head">
+      <h2 id="h-nie">Czego nie robimy</h2>
+      <p>Trzy zasady, które zapisujemy w umowie o obsługę.</p>
+    </div>
+    <ul class="matters block-body">
+      <li>
+        <h3>Nie bierzemy procentu od wygranej</h3>
+        <p>Honorarium nie zależy od wyniku sprawy, a wyroku nie obiecujemy nikomu.</p>
+      </li>
+      <li>
+        <h3>Nie doliczamy ukrytych opłat</h3>
+        <p>
+          Nie ma opłaty za założenie teczki ani za kopie dokumentów. Dodatkowe są tylko koszty z
+          poprzedniej sekcji.
+        </p>
+      </li>
+      <li>
+        <h3>Pomagamy ocenić, czy sprawa ma sens</h3>
+        <p>Jeśli koszty przewyższałyby to, o co się spierasz, mówimy to na pierwszej rozmowie.</p>
+      </li>
+    </ul>
+  </section>
+
+  <Cta title="Policzymy to na pierwszej rozmowie." />
+</Layout>

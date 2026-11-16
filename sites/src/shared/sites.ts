@@ -1,14 +1,30 @@
 export const sites = [
-  { slug: 'sygnet', name: 'Sygnet', trade: 'kancelaria prawna' },
-  { slug: 'kajet', name: 'Kajet', trade: 'biuro rachunkowe' },
-  { slug: 'emalia', name: 'Emalia', trade: 'gabinet stomatologiczny' },
-  { slug: 'otoczak', name: 'Otoczak', trade: 'gabinet psychoterapii' },
-  { slug: 'cegielnia-14', name: 'Cegielnia 14', trade: 'lofty w dawnej cegielni' },
-  { slug: 'szczypta', name: 'Szczypta', trade: 'bistro' },
-  { slug: 'ziarnik', name: 'Ziarnik', trade: 'palarnia kawy ze sklepem' },
-  { slug: 'klamka', name: 'Klamka', trade: 'biuro nieruchomości' },
-  { slug: 'brelok', name: 'Brelok 1912', trade: 'hotel butikowy' },
-  { slug: 'nakretka', name: 'Nakrętka', trade: 'warsztat samochodowy' },
+  { slug: 'kancelaria-swidnicka', name: 'Kancelaria Świdnicka', trade: 'kancelaria prawna' },
+  {
+    slug: 'biuro-rachunkowe-gajowice',
+    name: 'Biuro Rachunkowe Gajowice',
+    trade: 'biuro rachunkowe',
+  },
+  { slug: 'stomatologia-krzyki', name: 'Stomatologia Krzyki', trade: 'gabinet stomatologiczny' },
+  {
+    slug: 'psychoterapia-biskupin',
+    name: 'Psychoterapia Biskupin',
+    trade: 'gabinet psychoterapii',
+  },
+  { slug: 'lofty-cegielniane', name: 'Lofty Cegielniane', trade: 'lofty w dawnej cegielni' },
+  { slug: 'bistro-na-szczepinie', name: 'Bistro na Szczepinie', trade: 'bistro' },
+  {
+    slug: 'palarnia-kawy-nadodrze',
+    name: 'Palarnia Kawy Nadodrze',
+    trade: 'palarnia kawy ze sklepem',
+  },
+  {
+    slug: 'nieruchomosci-psie-pole',
+    name: 'Nieruchomości Psie Pole',
+    trade: 'biuro nieruchomości',
+  },
+  { slug: 'hotel-kamienica-1912', name: 'Hotel Kamienica 1912', trade: 'hotel butikowy' },
+  { slug: 'warsztat-szybowcowa', name: 'Warsztat Szybowcowa', trade: 'warsztat samochodowy' },
 ] as const;
 
 export const identityBrands = [

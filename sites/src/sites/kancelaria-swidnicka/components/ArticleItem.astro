@@ -1,0 +1,34 @@
+---
+import { link } from '../../../shared/link';
+import { areaBySlug } from '../data/areas';
+import { articleMinutes } from '../data/articles/stats';
+import type { Article } from '../data/articles/types';
+import { personBySlug } from '../data/people';
+import { formatLongDate } from '../lib/dates';
+import { tie } from '../lib/tie';
+
+interface Props {
+  article: Article;
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { article, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+const area = areaBySlug(article.areaSlug);
+const author = personBySlug(article.authorSlug);
+const href = link(`/kancelaria-swidnicka/artykuly/${article.slug}/`);
+---
+
+<li class="article-item">
+  <p class="meta">
+    {area?.name}
+    <span>{tie(formatLongDate(article.published))}</span>
+    <span>
+      {author?.name}, {articleMinutes(article)} min czytania
+    </span>
+  </p>
+  <Heading>
+    <a href={href}>{article.title}</a>
+  </Heading>
+  <p class="excerpt">{tie(article.lead)}</p>
+</li>

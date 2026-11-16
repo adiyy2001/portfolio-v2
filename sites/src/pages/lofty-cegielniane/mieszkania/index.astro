@@ -1,0 +1,26 @@
+---
+import PageHead from '../../../sites/lofty-cegielniane/components/PageHead.astro';
+import UnitsTable from '../../../sites/lofty-cegielniane/components/UnitsTable.astro';
+import { meta, unitsPage } from '../../../sites/lofty-cegielniane/copy';
+import { photos } from '../../../sites/lofty-cegielniane/images';
+import Layout from '../../../sites/lofty-cegielniane/Layout.astro';
+import { path } from '../../../sites/lofty-cegielniane/site';
+---
+
+<Layout
+  title={meta.units.title}
+  description={meta.units.description}
+  path={path('mieszkania/')}
+  current="mieszkania">
+  <PageHead
+    crumbs={[{ label: 'Lofty' }]}
+    mark={unitsPage.mark}
+    title={unitsPage.headline}
+    lead={unitsPage.lead}
+    photo={photos.komin}
+  />
+  <UnitsTable />
+  <script>
+    import '../../../sites/lofty-cegielniane/scripts/filters';
+  </script>
+</Layout>

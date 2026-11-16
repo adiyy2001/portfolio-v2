@@ -1,0 +1,126 @@
+---
+import ContactForm from '../../sites/lofty-cegielniane/components/ContactForm.astro';
+import Dossier from '../../sites/lofty-cegielniane/components/Dossier.astro';
+import Frame from '../../sites/lofty-cegielniane/components/Frame.astro';
+import Pic from '../../sites/lofty-cegielniane/components/Pic.astro';
+import SunWidget from '../../sites/lofty-cegielniane/components/SunWidget.astro';
+import { footer, hero, history, meta, where } from '../../sites/lofty-cegielniane/copy';
+import { typeByKey } from '../../sites/lofty-cegielniane/data';
+import { photos } from '../../sites/lofty-cegielniane/images';
+import Layout from '../../sites/lofty-cegielniane/Layout.astro';
+import { addressLine, path, site, url } from '../../sites/lofty-cegielniane/site';
+
+const before = ['37', '52'] as const;
+---
+
+<Layout title={meta.home.title} description={meta.home.description} path={path()}>
+  <section class="hero" id="top">
+    <Pic photo={photos.hero} class="plate" priority />
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <h1>{hero.headline}</h1>
+      <p class="caption">{hero.caption}</p>
+      <div class="hero-links">
+        <a class="link hero-link" href={url('mieszkania/')}>
+          <span>Zobacz lofty</span>
+          <i aria-hidden="true"></i>
+        </a>
+        <a class="link hero-link" href="#pokaz">
+          <span>{hero.link}</span>
+          <i aria-hidden="true"></i>
+        </a>
+        <button type="button" class="stop" aria-pressed="false" data-motion>
+          {footer.stopOn}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene history" id="cegla" aria-labelledby="cegla-h">
+    <Pic photo={photos.history} class="bg" />
+    <div class="shade" aria-hidden="true"></div>
+    <div class="block right" data-reveal>
+      <p class="mark">{history.mark}</p>
+      <h2 id="cegla-h">{history.headline}</h2>
+      <p class="body">{history.first}</p>
+      <p class="body">{history.second}</p>
+      <ol class="reel">
+        {history.reel.map(item => (
+          <li>
+            <span>{item.year}</span>
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {before.map(key => (
+    <>
+      <Frame type={typeByKey(key)} />
+      <Dossier type={typeByKey(key)} />
+    </>
+  ))}
+
+  <SunWidget />
+
+  {(['64', '112'] as const).map(key => (
+    <>
+      <Frame type={typeByKey(key)} />
+      <Dossier type={typeByKey(key)} />
+    </>
+  ))}
+
+  <section class="scene where" id="adres" aria-labelledby="adres-h">
+    <Pic photo={photos.adres} class="bg" />
+    <div class="shade" aria-hidden="true"></div>
+    <div class="cols">
+      <div class="block" data-reveal>
+        <p class="mark">{where.mark}</p>
+        <h2 id="adres-h">{where.headline}</h2>
+        <dl class="facts">
+          <div>
+            <dt>Sprzedaje</dt>
+            <dd>{site.seller}</dd>
+          </div>
+          <div>
+            <dt>Biuro sprzedaży</dt>
+            <dd>{addressLine}</dd>
+          </div>
+          <div>
+            <dt>Dzielnica</dt>
+            <dd>{site.district}</dd>
+          </div>
+          <div>
+            <dt>Telefon</dt>
+            <dd>
+              <a class="tel" href={site.phoneHref}>
+                {site.phone}
+              </a>
+            </dd>
+          </div>
+        </dl>
+        <ul class="near" aria-label={where.nearLabel}>
+          {where.near.map(item => (
+            <li>
+              <span>{item.minutes} min pieszo</span>
+              <span>{item.place}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <ContactForm
+        variant="quick"
+        scene
+        id="pokaz"
+        heading={where.formHeading}
+        lead={where.formLead}
+      />
+    </div>
+  </section>
+
+  <script>
+    import '../../sites/lofty-cegielniane/scripts/sun-widget';
+    import '../../sites/lofty-cegielniane/scripts/contact';
+  </script>
+</Layout>

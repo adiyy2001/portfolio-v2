@@ -1,0 +1,63 @@
+---
+import { link } from '../../shared/link';
+import Calculator from '../../sites/biuro-rachunkowe-gajowice/components/Calculator.astro';
+import CalendarSection from '../../sites/biuro-rachunkowe-gajowice/components/CalendarSection.astro';
+import CmdForm from '../../sites/biuro-rachunkowe-gajowice/components/CmdForm.astro';
+import ContactDetails from '../../sites/biuro-rachunkowe-gajowice/components/ContactDetails.astro';
+import Faq from '../../sites/biuro-rachunkowe-gajowice/components/Faq.astro';
+import Hero from '../../sites/biuro-rachunkowe-gajowice/components/Hero.astro';
+import Section from '../../sites/biuro-rachunkowe-gajowice/components/Section.astro';
+import { homeFaq } from '../../sites/biuro-rachunkowe-gajowice/data/faq';
+import { openHours } from '../../sites/biuro-rachunkowe-gajowice/data/site';
+import Layout from '../../sites/biuro-rachunkowe-gajowice/Layout.astro';
+---
+
+<Layout
+  title="Biuro Rachunkowe Gajowice, Wrocław"
+  description="Prowadzimy księgowość i kadry małych firm z Gajowic. Co miesiąc klient dostaje panel: kwota do zapłaty, termin i podstawa wyliczenia."
+  path="/biuro-rachunkowe-gajowice/">
+  <Hero />
+  <CalendarSection
+    id="kalendarz"
+    path="gajowice / kalendarz"
+    title="Kalendarz terminów biura"
+    lede="Czynności w stałych dniach miesiąca. Czarne pola to terminy ustawowe."
+  />
+  <Section
+    id="cennik"
+    path="gajowice / cennik"
+    title="Cennik, abonament miesięczny netto"
+    lede="Wpisz liczbę faktur w miesiącu. Plan dobiera się sam.">
+    <Calculator initialInvoices={85} />
+    <div class="cta">
+      <a class="quote-btn alt" href={link('/biuro-rachunkowe-gajowice/pakiety/')}>
+        Pełny cennik i dobór planu
+      </a>
+      <a class="quote-btn alt" href={link('/biuro-rachunkowe-gajowice/uslugi/')}>
+        Co wchodzi w abonament
+      </a>
+    </div>
+  </Section>
+  <Section
+    id="pytania"
+    path="gajowice / pytania"
+    title="Pomoc: najczęstsze pytania"
+    lede="Ryczałt, dokumenty, przejęcie ksiąg i urząd skarbowy.">
+    <Faq items={homeFaq} />
+  </Section>
+  <Section
+    id="kontakt"
+    path="gajowice / kontakt, Wrocław, Gajowice"
+    title="Zgłoszenie wyceny i dane biura">
+    <p slot="lede" id="contact-open" class="open-line">
+      Biuro czynne {openHours.label}.
+    </p>
+    <ContactDetails />
+    <CmdForm slot="after" />
+  </Section>
+</Layout>
+
+<script>
+  import { setupHome } from '../../sites/biuro-rachunkowe-gajowice/scripts/home';
+  setupHome();
+</script>

@@ -1,0 +1,85 @@
+---
+import { link } from '../../../shared/link';
+import SampleNote from '../../../shared/SampleNote.astro';
+import { firm, navItems } from '../data/site';
+import { tie } from '../lib/tie';
+---
+
+<footer class="foot">
+  <div class="foot-main">
+    <p class="brand foot-brand" aria-label={firm.name}>
+      {firm.nameLines.map(line => (
+        <span class="name-line" aria-hidden="true">
+          {line}
+        </span>
+      ))}
+    </p>
+    <section class="colophon" aria-labelledby="h-kolofon">
+      <h2 id="h-kolofon">Kolofon</h2>
+      <dl>
+        <div>
+          <dt>Na rynku</dt>
+          <dd>od {firm.foundedYear} roku, w tym samym biurze w Śródmieściu Wrocławia</dd>
+        </div>
+        <div>
+          <dt>Sprawy</dt>
+          <dd>
+            {tie(
+              `${firm.casesHandled.toLocaleString('pl-PL')} prowadzonych od otwarcia kancelarii do dziś`,
+            )}
+          </dd>
+        </div>
+        <div>
+          <dt>Pierwsza odpowiedź</dt>
+          <dd>w ciągu {firm.replyWorkingDays}&nbsp;dnia roboczego, konkretna i w Twojej sprawie</dd>
+        </div>
+        <div>
+          <dt>Godziny</dt>
+          <dd>
+            {firm.hours.weekdaysLabel.toLowerCase()} {firm.hours.weekdaysRange}, sobota{' '}
+            {firm.hours.saturday}
+          </dd>
+        </div>
+        <div>
+          <dt>Adres</dt>
+          <dd>
+            <address>
+              <span class="line">{tie(firm.address.street)}</span>
+              <span class="line">
+                {firm.address.postcode} {firm.address.city}
+              </span>
+              <span class="line">{firm.address.district}</span>
+            </address>
+          </dd>
+        </div>
+        <div>
+          <dt>Skład</dt>
+          <dd>
+            <a href={link('/kancelaria-swidnicka/licencje/')}>Bodoni Moda, licencja SIL OFL 1.1</a>
+          </dd>
+        </div>
+      </dl>
+    </section>
+    <p class="foot-contact">
+      <a href={`mailto:${firm.email}`}>{firm.email}</a>
+      <br />
+      <a href={firm.phone.href}>{firm.phone.display}</a>
+    </p>
+  </div>
+  <nav class="foot-nav" aria-label="Stopka">
+    <ul>
+      <li>
+        <a href={link('/kancelaria-swidnicka/')}>Strona główna</a>
+      </li>
+      {navItems.map(item => (
+        <li>
+          <a href={link(item.path)}>{item.label}</a>
+        </li>
+      ))}
+      <li>
+        <a href={link('/kancelaria-swidnicka/licencje/')}>Licencje</a>
+      </li>
+    </ul>
+  </nav>
+  <SampleNote name="Kancelaria Świdnicka" lang="pl" />
+</footer>

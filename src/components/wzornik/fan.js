@@ -187,8 +187,12 @@ export default function Fan({ sites, mocks, t, lang }) {
                   animate={{ rotate: reduce ? 0 : riffle(i, hover), x: out }}
                   transition={reduce ? instant : { type: 'spring', ...spring.blade }}>
                   <span className="blade__face">
-                    <span className="blade__name">{site.name}</span>
-                    <span className="sr">, {tie(t[site.id].trade)}</span>
+                    <span className="blade__name" aria-hidden="true">
+                      {site.blade}
+                    </span>
+                    <span className="sr">
+                      {site.name}, {tie(t[site.id].trade)}
+                    </span>
                     <span className="blade__chips" aria-hidden="true">
                       {site.chips.map(chip => (
                         <i key={chip} style={{ '--c': chip }} />

@@ -1,0 +1,11 @@
+---
+import { roomTypes } from '../../../../sites/hotel-kamienica-1912/data/hotel';
+import RoomPage from '../../../../sites/hotel-kamienica-1912/views/RoomPage.astro';
+
+export const getStaticPaths = () =>
+  roomTypes.map(type => ({ params: { room: type.slug.en }, props: { roomId: type.id } }));
+
+const { roomId } = Astro.props;
+---
+
+<RoomPage lang="en" roomId={roomId} />

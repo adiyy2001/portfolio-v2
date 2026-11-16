@@ -1,0 +1,111 @@
+---
+import { link } from '../../../shared/link';
+import ArticleItem from '../../../sites/kancelaria-swidnicka/components/ArticleItem.astro';
+import Cta from '../../../sites/kancelaria-swidnicka/components/Cta.astro';
+import FeeTable from '../../../sites/kancelaria-swidnicka/components/FeeTable.astro';
+import PageHead from '../../../sites/kancelaria-swidnicka/components/PageHead.astro';
+import PersonCard from '../../../sites/kancelaria-swidnicka/components/PersonCard.astro';
+import { areas } from '../../../sites/kancelaria-swidnicka/data/areas';
+import { articleBySlug } from '../../../sites/kancelaria-swidnicka/data/articles';
+import { feesForArea } from '../../../sites/kancelaria-swidnicka/data/fees';
+import { personBySlug } from '../../../sites/kancelaria-swidnicka/data/people';
+import Layout from '../../../sites/kancelaria-swidnicka/Layout.astro';
+import { tie } from '../../../sites/kancelaria-swidnicka/lib/tie';
+
+export function getStaticPaths() {
+  return areas.map(area => ({ params: { slug: area.slug }, props: { area } }));
+}
+
+const { area } = Astro.props;
+const leader = personBySlug(area.leaderSlug);
+const fees = feesForArea(area.slug);
+const related = area.articleSlugs.flatMap(slug => {
+  const article = articleBySlug(slug);
+  return article ? [article] : [];
+});
+---
+
+<Layout
+  title={`${area.name}: sprawy i honorarium`}
+  description={area.metaDescription}
+  path={`/kancelaria-swidnicka/specjalizacje/${area.slug}/`}
+  current="specjalizacje"
+  bundles={['inner']}>
+  <PageHead
+    title={area.name}
+    lead={area.lead}
+    crumbs={[
+      { label: 'Strona główna', href: '/kancelaria-swidnicka/' },
+      { label: 'Specjalizacje', href: '/kancelaria-swidnicka/specjalizacje/' },
+      { label: area.name },
+    ]}
+  />
+
+  <section class="block" aria-labelledby="h-sprawy">
+    <div class="block-head">
+      <h2 id="h-sprawy">Czym się zajmujemy</h2>
+      <p>Najczęstsze sprawy, z którymi przychodzą do nas klienci w tym obszarze.</p>
+    </div>
+    <ul class="matters block-body">
+      {area.matters.map(matter => (
+        <li>
+          <h3>{matter.title}</h3>
+          <p>{tie(matter.text)}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="block" aria-labelledby="h-dokumenty">
+    <div class="block-head">
+      <h2 id="h-dokumenty">{area.documentsTitle}</h2>
+      <p>Jeśli czegoś brakuje, przyjdź mimo to. Brakujące dokumenty często da się odtworzyć.</p>
+    </div>
+    <ul class="checklist block-body">
+      {area.documents.map(item => (
+        <li>{tie(item)}</li>
+      ))}
+    </ul>
+  </section>
+
+  {fees.length > 0 && (
+    <section class="block" aria-labelledby="h-koszt">
+      <div class="block-head">
+        <h2 id="h-koszt">Ile to kosztuje</h2>
+        <p>
+          Typowe czynności rozliczamy ryczałtem. Pozostałe według godzin, zgodnie z
+          <a href={link('/kancelaria-swidnicka/honorarium/')}> opisem honorarium</a>.
+        </p>
+      </div>
+      <div class="block-body">
+        <FeeTable fees={fees} caption={`Ryczałty w obszarze: ${area.name}`} />
+      </div>
+    </section>
+  )}
+
+  <section class="block" aria-labelledby="h-prowadzi">
+    <div class="block-head">
+      <h2 id="h-prowadzi">Kto prowadzi sprawę</h2>
+      <p>{tie(area.closing)}</p>
+    </div>
+    <div class="block-body leader">
+      {leader && <PersonCard person={leader} headingLevel="h3" />}
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="block" aria-labelledby="h-artykuly">
+      <div class="block-head">
+        <h2 id="h-artykuly">Przeczytaj, zanim zadzwonisz</h2>
+        <p>Ogólne informacje bez porady w konkretnej sprawie.</p>
+      </div>
+      <ul class="article-list block-body">
+        {related.map(article => (
+          <ArticleItem article={article} headingLevel="h3" />
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <Cta />
+</Layout>

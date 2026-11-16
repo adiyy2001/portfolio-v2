@@ -1,0 +1,36 @@
+---
+import { link } from '../../../shared/link';
+import { business, homePath, navItems, openHours, quotePath, type NavKey } from '../data/site';
+
+interface Props {
+  current?: NavKey;
+}
+
+const { current } = Astro.props;
+---
+
+<header class="bar" id="gora">
+  <div class="bar-cell bar-brand">
+    <a class="brand" href={link(homePath)} aria-label={`${business.name}, strona główna`}>
+      <span class="brand-main">gajowice</span>
+      <span class="brand-sub">biuro rachunkowe</span>
+    </a>
+  </div>
+  <nav class="bar-cell bar-nav" aria-label="Główna" data-quote={link(quotePath)}>
+    {navItems.map((item, index) => (
+      <a href={link(item.path)} aria-current={item.key === current ? 'page' : undefined}>
+        <i class="tk" aria-hidden="true" />
+        <span class="lb">{item.label}</span>
+        <kbd class="kb" aria-hidden="true">
+          {index + 1}
+        </kbd>
+      </a>
+    ))}
+  </nav>
+  <div class="bar-cell bar-clock">
+    <span id="open-state" class="muted">
+      {openHours.short}
+    </span>
+    <time id="clock"></time>
+  </div>
+</header>

@@ -1,0 +1,54 @@
+---
+import ContactDetails from '../../sites/biuro-rachunkowe-gajowice/components/ContactDetails.astro';
+import QuoteForm from '../../sites/biuro-rachunkowe-gajowice/components/QuoteForm.astro';
+import Section from '../../sites/biuro-rachunkowe-gajowice/components/Section.astro';
+import { processSteps } from '../../sites/biuro-rachunkowe-gajowice/data/services';
+import { facts, openHours } from '../../sites/biuro-rachunkowe-gajowice/data/site';
+import Layout from '../../sites/biuro-rachunkowe-gajowice/Layout.astro';
+---
+
+<Layout
+  title="Kontakt i wycena | Biuro Rachunkowe Gajowice, Wrocław"
+  description="Adres, telefon, e-mail i godziny biura w Gajowicach oraz formularz wyceny. Odpowiadamy w ciągu czterech godzin w dni robocze."
+  path="/biuro-rachunkowe-gajowice/kontakt/"
+  current="kontakt">
+  <Section
+    id="kontakt"
+    path="gajowice / kontakt, Wrocław, Gajowice"
+    title="Kontakt z biurem"
+    lede={`Biuro czynne ${openHours.label}. Na e-mail odpowiadamy w ciągu ${facts.replyHours} godzin w dni robocze.`}
+    level={1}>
+    <ContactDetails />
+  </Section>
+  <Section
+    id="wycena"
+    path="gajowice / wycena"
+    title="Zgłoszenie wyceny"
+    lede="Do wyceny wystarczy e-mail, forma firmy i liczba faktur w miesiącu. Resztę ustalamy w rozmowie.">
+    <QuoteForm />
+  </Section>
+  <Section
+    id="po-wysylce"
+    path="gajowice / wycena / co dalej"
+    title="Co dzieje się po wycenie"
+    lede="Cztery kroki od pierwszego e-maila do pierwszego raportu.">
+    <ol class="tl">
+      {processSteps.map(step => (
+        <li>
+          <span class="tl-d">{step.no}</span>
+          <div class="tl-b">
+            <strong>{step.title}</strong>
+            <span>{step.text}</span>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </Section>
+</Layout>
+
+<script>
+  import { setupBase } from '../../sites/biuro-rachunkowe-gajowice/scripts/base';
+  import { setupQuoteForm } from '../../sites/biuro-rachunkowe-gajowice/scripts/quote-form';
+  setupBase();
+  setupQuoteForm();
+</script>

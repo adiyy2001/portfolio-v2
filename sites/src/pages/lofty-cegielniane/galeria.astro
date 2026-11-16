@@ -1,0 +1,76 @@
+---
+import PageHead from '../../sites/lofty-cegielniane/components/PageHead.astro';
+import Pic from '../../sites/lofty-cegielniane/components/Pic.astro';
+import { gallery, meta } from '../../sites/lofty-cegielniane/copy';
+import { types } from '../../sites/lofty-cegielniane/data';
+import { interiorSrc, photos } from '../../sites/lofty-cegielniane/images';
+import Layout from '../../sites/lofty-cegielniane/Layout.astro';
+import { m2 } from '../../sites/lofty-cegielniane/format';
+import { path } from '../../sites/lofty-cegielniane/site';
+
+const shots = [
+  photos.hero,
+  photos.history,
+  photos.piec,
+  photos.komin,
+  photos.suszarnia,
+  photos.hala,
+  photos.adres,
+  photos.sunLit,
+];
+---
+
+<Layout
+  title={meta.gallery.title}
+  description={meta.gallery.description}
+  path={path('galeria/')}
+  current="galeria">
+  <PageHead
+    crumbs={[{ label: 'Galeria' }]}
+    mark={gallery.mark}
+    title={gallery.headline}
+    lead={gallery.lead}
+    photo={photos.hero}
+  />
+  <section class="wrap" aria-labelledby="elewacja-h">
+    <h2 class="mark" id="elewacja-h">
+      {gallery.photosHeading}
+    </h2>
+    <p class="body">{gallery.note}</p>
+    <ul class="gallery">
+      {shots.map((photo, index) => (
+        <li class:list={[index === 0 && 'wide']}>
+          <figure>
+            <Pic photo={photo} />
+            <figcaption>{photo.caption}</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section class="wrap wrap-sep" aria-labelledby="rysunki-h">
+    <h2 class="mark" id="rysunki-h">
+      {gallery.drawingsHeading}
+    </h2>
+    <p class="body">{gallery.drawingsLead}</p>
+    <ul class="gallery drawings">
+      {types.map(type => (
+        <li>
+          <figure>
+            <img
+              src={interiorSrc(type.key)}
+              alt={type.interiorAlt}
+              width="1200"
+              height="800"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              {type.floor}, {m2(type.area)}
+            </figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

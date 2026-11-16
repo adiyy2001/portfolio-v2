@@ -1,0 +1,36 @@
+---
+import Layout from '../../../sites/warsztat-szybowcowa/Layout.astro';
+import PageHead from '../../../sites/warsztat-szybowcowa/components/PageHead.astro';
+import { business } from '../../../sites/warsztat-szybowcowa/data/site';
+import BookingWizard from '../../../sites/warsztat-szybowcowa/islands/BookingWizard';
+---
+
+<Layout
+  title="Umów wizytę"
+  description="Zarezerwuj termin w naszym warsztacie we Wrocławiu w trzech krokach: wybierz usługi, dzień z godziną i zostaw telefon. Rezerwacja na tej stronie jest przykładowa."
+  path="/warsztat-szybowcowa/umow-wizyte/"
+  current="umow-wizyte"
+  bundles={['sheet', 'pages', 'booking']}>
+  <PageHead
+    title="Umów wizytę"
+    kicker="Trzy kroki, bez konta"
+    lead="Wybierz usługi, dzień i godzinę, potem zostaw telefon. Oddzwonimy, żeby potwierdzić termin."
+    crumbs={[]}
+  />
+  <section class="band" aria-labelledby="rezerwacja">
+    <div class="wrap">
+      <h2 id="rezerwacja" class="sr-only">
+        Formularz rezerwacji
+      </h2>
+      <BookingWizard client:load />
+      <noscript>
+        <div class="note-box">
+          <p>
+            Rezerwacja potrzebuje JavaScriptu. Bez niego zadzwoń:{' '}
+            <a href={business.phoneHref}>{business.phone}</a>.
+          </p>
+        </div>
+      </noscript>
+    </div>
+  </section>
+</Layout>

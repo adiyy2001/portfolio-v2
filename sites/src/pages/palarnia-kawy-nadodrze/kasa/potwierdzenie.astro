@@ -1,0 +1,31 @@
+---
+import { link } from '../../../shared/link';
+import Layout from '../../../sites/palarnia-kawy-nadodrze/Layout.astro';
+import Confirmation from '../../../sites/palarnia-kawy-nadodrze/islands/Confirmation';
+import { sampleNotice } from '../../../sites/palarnia-kawy-nadodrze/data/site';
+---
+
+<Layout
+  title="Potwierdzenie zamówienia"
+  description="Podsumowanie zamówienia w palarni: worki, termin odbioru w palarni i kwota do zapłaty przy odbiorze. To strona przykładowa."
+  path="/palarnia-kawy-nadodrze/kasa/potwierdzenie/"
+  current="kasa"
+  bundles={['cart']}>
+  <div class="page-head">
+    <h1 class="hand" data-hand="Zamówione" data-read="Zamówienie przyjęte">
+      Zamówione
+    </h1>
+  </div>
+  <Confirmation client:load />
+  <noscript>
+    <div class="cart-empty">
+      <p>
+        Podsumowanie zamówienia pokazuje się w przeglądarce z włączonym JavaScriptem, zaraz po
+        wysłaniu formularza z kasy. {sampleNotice}
+      </p>
+      <a class="btn" href={link('/palarnia-kawy-nadodrze/sklep/')}>
+        Do sklepu
+      </a>
+    </div>
+  </noscript>
+</Layout>

@@ -1,0 +1,81 @@
+---
+import ContactForm from '../../sites/lofty-cegielniane/components/ContactForm.astro';
+import PageHead from '../../sites/lofty-cegielniane/components/PageHead.astro';
+import { meta, office } from '../../sites/lofty-cegielniane/copy';
+import { photos } from '../../sites/lofty-cegielniane/images';
+import Layout from '../../sites/lofty-cegielniane/Layout.astro';
+import { addressLine, hoursText, path, site } from '../../sites/lofty-cegielniane/site';
+---
+
+<Layout
+  title={meta.office.title}
+  description={meta.office.description}
+  path={path('biuro-sprzedazy/')}
+  current="biuro">
+  <PageHead
+    crumbs={[{ label: 'Biuro sprzedaży' }]}
+    mark={office.mark}
+    title={office.headline}
+    lead={office.lead}
+    photo={photos.piec}
+  />
+  <section class="wrap split" aria-labelledby="dane-h">
+    <div>
+      <h2 class="mark" id="dane-h">
+        {office.factsLabel}
+      </h2>
+      <dl class="facts">
+        <div>
+          <dt>Sprzedaje</dt>
+          <dd>{site.seller}</dd>
+        </div>
+        <div>
+          <dt>Adres</dt>
+          <dd>{addressLine}</dd>
+        </div>
+        <div>
+          <dt>Pokazy</dt>
+          <dd>{hoursText}</dd>
+        </div>
+        <div>
+          <dt>Telefon</dt>
+          <dd>
+            <a class="tel" href={site.phoneHref}>
+              {site.phone}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt>E-mail</dt>
+          <dd>
+            <a class="tel" href={`mailto:${site.email}`}>
+              {site.email}
+            </a>
+          </dd>
+        </div>
+      </dl>
+      <div class="stored-block" data-stored>
+        <h2 class="mark">{office.storedHeading}</h2>
+        <p class="body">{office.storedLead}</p>
+        <ul class="stored" data-stored-list hidden></ul>
+        <p class="stored-empty" data-stored-empty>
+          {office.storedEmpty}
+        </p>
+        <button type="button" class="link" data-stored-clear hidden>
+          <span>{office.storedClear}</span>
+          <i aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+    <ContactForm
+      variant="full"
+      id="pokaz"
+      heading={office.formHeading}
+      lead={office.formLead}
+      headingLevel="h2"
+    />
+  </section>
+  <script>
+    import '../../sites/lofty-cegielniane/scripts/contact';
+  </script>
+</Layout>

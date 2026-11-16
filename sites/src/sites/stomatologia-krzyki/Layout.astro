@@ -1,0 +1,178 @@
+---
+import { link } from '../../shared/link';
+import SampleNote from '../../shared/SampleNote.astro';
+import Nav from './components/Nav.astro';
+import { clinic, openingHours } from './data/site';
+import { treatments } from './data/treatments';
+import { preloadedFonts } from './fonts';
+import { navItems } from './nav';
+import type { NavKey } from './nav';
+import { styleBundles } from './styles';
+import type { StyleBundle } from './styles';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: NavKey;
+  bundles?: StyleBundle[];
+}
+
+const { title, description, path, current, bundles = [] } = Astro.props;
+const canonical = new URL(link(path), Astro.site).href;
+const ogImage = new URL(link('/stomatologia-krzyki/og.png'), Astro.site).href;
+const fullTitle = path === '/stomatologia-krzyki/' ? title : `${title} | Stomatologia Krzyki`;
+const css = ['core', ...bundles].map(name => styleBundles[name as StyleBundle]).join('');
+const hasHero = Astro.slots.has('hero');
+const guideImages = ['a1', 'a2', 'b1', 'b2', 'c1'].map(shade => ({
+  shade,
+  src: link(`/stomatologia-krzyki/img/tooth-${shade}.webp`),
+}));
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#E6E9FB" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={link('/stomatologia-krzyki/favicon.svg')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Stomatologia Krzyki" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Biały ząb nad napisem Stomatologia Krzyki na kobaltowym tle."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    {preloadedFonts.map(href => (
+      <link rel="preload" as="font" type="font/woff2" href={href} crossorigin="anonymous" />
+    ))}
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <style set:html={css}></style>
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      Przejdź do treści
+    </a>
+    {hasHero ? (
+      <slot name="hero" />
+    ) : (
+      <header class="top">
+        <Nav current={current} />
+      </header>
+    )}
+    <div class="journey">
+      <aside class="guide" aria-hidden="true">
+        <div class="guide-stick">
+          <div class="guide-body">
+            <svg class="guide-ring" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="49" vector-effect="non-scaling-stroke"></circle>
+            </svg>
+            <div class="guide-tooth tooth-stack">
+              {guideImages.map((image, index) => (
+                <img
+                  class={index === 0 ? 'is-on' : undefined}
+                  src={index === 0 ? image.src : undefined}
+                  data-src={image.src}
+                  alt=""
+                  width="720"
+                  height="1120"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+            <img
+              class="guide-pearls"
+              src={link('/stomatologia-krzyki/img/pearls.webp')}
+              alt=""
+              width="900"
+              height="450"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </aside>
+      <main id="main" tabindex="-1">
+        <slot />
+      </main>
+    </div>
+    <footer class="foot">
+      <div class="wrap">
+        <div class="foot-top">
+          <span class="foot-logo brand">
+            <span>Stomatologia</span> <span>Krzyki</span>
+          </span>
+          <p class="label">Gabinet stomatologiczny na Krzykach</p>
+        </div>
+        <div class="foot-cols">
+          <div>
+            <h2>Zabiegi</h2>
+            <ul>
+              {treatments.map(treatment => (
+                <li>
+                  <a href={link(`/stomatologia-krzyki/zabiegi/${treatment.slug}/`)}>
+                    {treatment.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h2>Gabinet</h2>
+            <ul>
+              {navItems
+                .filter(item => item.key !== 'zabiegi')
+                .map(item => (
+                  <li>
+                    <a href={link(item.path)}>
+                      {item.key === 'pierwsza-wizyta' ? 'Pierwsza wizyta' : item.label}
+                    </a>
+                  </li>
+                ))}
+              <li>
+                <a href={link('/stomatologia-krzyki/credits/')}>Źródła zdjęcia, fontów i grafik</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2>Przyjęcia</h2>
+            <address>
+              {clinic.street}
+              <br />
+              {clinic.postalCode} {clinic.city}
+              <br />
+              <a href={clinic.phoneHref}>{clinic.phoneDisplay}</a>
+              <br />
+              <a href={clinic.emailHref}>{clinic.email}</a>
+            </address>
+            <p class="foot-hours">
+              {openingHours.map(row => (
+                <span>
+                  {row.days}: {row.hours}
+                  <br />
+                </span>
+              ))}
+            </p>
+          </div>
+        </div>
+        <SampleNote name="Stomatologia Krzyki" lang="pl" />
+      </div>
+    </footer>
+    <script>
+      import './scripts/chrome';
+    </script>
+  </body>
+</html>
