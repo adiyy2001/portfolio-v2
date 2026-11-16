@@ -83,6 +83,14 @@ const css = ['core', ...bundles].map(name => styleBundles[name as StyleBundle]).
           aria-label="Ziarnik, strona główna">
           Ziarnik
         </a>
+        <button
+          type="button"
+          class="menu-btn"
+          id="menu-btn"
+          aria-expanded="false"
+          aria-controls="site-nav">
+          menu
+        </button>
         <ul class="nav__links" id="site-nav">
           {navItems.map(item => (
             <li>
@@ -98,14 +106,6 @@ const css = ['core', ...bundles].map(name => styleBundles[name as StyleBundle]).
         </ul>
         <div class="nav__tools">
           <CartHeader client:idle />
-          <button
-            type="button"
-            class="menu-btn"
-            id="menu-btn"
-            aria-expanded="false"
-            aria-controls="site-nav">
-            menu
-          </button>
         </div>
       </nav>
     </header>
