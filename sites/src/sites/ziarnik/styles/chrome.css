@@ -28,11 +28,15 @@
 .nav__links a[aria-current='page'] {
   border-bottom: 3px solid var(--ink);
 }
+.nav__links {
+  order: 1;
+}
 .nav__tools {
   display: flex;
   align-items: center;
   gap: 14px;
   padding-top: 6px;
+  order: 2;
 }
 .cart-btn {
   display: inline-flex;
@@ -158,6 +162,8 @@
   .menu-btn {
     display: inline-flex;
     align-items: center;
+    order: 2;
+    margin-top: 6px;
   }
   .nav {
     padding-top: 14px;
@@ -176,10 +182,35 @@
     padding: 10px 2px;
   }
   .nav__tools {
+    order: 1;
     margin-left: auto;
   }
   .logo {
     font-size: 40px;
+  }
+}
+@media (max-width: 480px) {
+  .nav {
+    column-gap: 10px;
+  }
+  .nav .logo {
+    font-size: 34px;
+  }
+  .nav__tools {
+    gap: 8px;
+  }
+  .cart-btn {
+    font-size: 16px;
+    gap: 6px;
+  }
+  .menu-btn {
+    padding: 4px 10px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 380px) {
+  .nav .logo {
+    font-size: 30px;
   }
 }
 @media (max-width: 699px) {
