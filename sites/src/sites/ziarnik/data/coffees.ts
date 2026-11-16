@@ -103,7 +103,6 @@ export const coffees: Coffee[] = [
     summary: 'Honey z południa Kolumbii. Kakao i skórka pomarańczy, miękka i okrągła.',
     story: [
       'Nariño leży tuż przy granicy z Ekwadorem. Dni są tam krótkie i chłodne, więc wiśnie dojrzewają wolno.',
-      'Część miąższu zostaje na ziarnie podczas suszenia. Dzięki temu kawa jest słodka bez ciężkiego ciała.',
     ],
     tip: 'Świetna do przelewu na 250 ml. Jeśli wolisz mocniejszą, dodaj gram kawy, nie zmieniaj mielenia.',
   },
