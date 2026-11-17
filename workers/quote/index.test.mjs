@@ -214,16 +214,20 @@ test('the suspect review list returns only suspect rows and the normal list leav
     new Request(`${base}/leads?since=2000-01-01T00:00:00Z`, { headers }),
     env,
   );
+  const normalBody = await normal.json();
   assert.deepEqual(
-    (await normal.json()).leads.map(lead => lead.source),
+    normalBody.leads.map(lead => lead.source),
     ['ref:ig'],
   );
+  assert.equal('review' in normalBody, false);
   const review = await worker.fetch(
     new Request(`${base}/leads?review=suspect&since=2000-01-01T00:00:00Z`, { headers }),
     env,
   );
+  const reviewBody = await review.json();
+  assert.equal(reviewBody.review, 'suspect');
   assert.deepEqual(
-    (await review.json()).leads.map(lead => lead.source),
+    reviewBody.leads.map(lead => lead.source),
     ['ref:fb'],
   );
   const anonymous = await worker.fetch(new Request(`${base}/leads?review=suspect`), env);

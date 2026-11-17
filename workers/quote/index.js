@@ -124,9 +124,12 @@ async function listLeads(request, env, url) {
   )
     .bind(since)
     .all();
-  return new Response(JSON.stringify({ leads: results }), {
-    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
-  });
+  return new Response(
+    JSON.stringify({ ...(review ? { review: 'suspect' } : {}), leads: results }),
+    {
+      headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' },
+    },
+  );
 }
 
 const suspectReason = elapsed => {
