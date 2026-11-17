@@ -2,6 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'gatsby';
 import consent from '../scanner/consent.json';
 import { scanPrivacyPath, scanTermsPath, tie } from '../i18n';
+import { phone } from '../services';
+import {
+  buttonLabel,
+  checkAfter,
+  checkTimeoutMs,
+  initialCheck,
+  shouldSendQueued,
+  submitAction,
+} from '../scan-check';
 import { track } from '../track';
 
 const endpoint = process.env.GATSBY_SCAN_ENDPOINT || 'https://api.adrianturbinski.pl/scan';
@@ -18,6 +27,10 @@ const copy = {
   emailHint: 'Na ten adres przyślę link potwierdzający i raport.',
   send: 'Zleć skan',
   sending: 'Wysyłam…',
+  verifying: 'Weryfikuję zabezpieczenie…',
+  queued: 'Wyślę zaraz po weryfikacji…',
+  waiting:
+    'Trwa weryfikacja zabezpieczenia, zwykle kilka sekund. Wyślę formularz sam, gdy się skończy.',
   readTerms: 'Przeczytaj regulamin skanera',
   newTab: '(otwiera się w nowej karcie)',
   privacyLink: 'Polityka prywatności, część o skanerze',
@@ -26,7 +39,6 @@ const copy = {
     url: 'Podaj adres strony, na przykład sklep.pl.',
     email: 'Podaj poprawny adres e-mail, na przykład jan@firma.pl.',
     terms: 'Żeby zlecić skan, zaznacz zgodę na regulamin.',
-    turnstile: 'Poczekaj chwilę na weryfikację zabezpieczenia i spróbuj jeszcze raz.',
   },
   sent: 'Sprawdź skrzynkę i kliknij link potwierdzający. Skan ruszy po potwierdzeniu, raport przyjdzie w ciągu kilkunastu minut.',
   version:
@@ -40,7 +52,8 @@ const copy = {
   },
   capacity: 'Skaner jest chwilowo niedostępny, bo osiągnął dzienny limit. Spróbuj jutro.',
   failed: 'Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę albo napisz na',
-  blocked: 'Weryfikacja Cloudflare nie ładuje się w tej przeglądarce. Napisz na',
+  blocked: 'Weryfikacja zabezpieczenia nie działa w tej przeglądarce. Napisz na',
+  blockedMiddle: 'albo zadzwoń:',
   blockedEnd: ', a zrobię skan ręcznie.',
 };
 
@@ -118,6 +131,10 @@ function Failure({ outcome }) {
         {copy.blocked}{' '}
         <a className="scan__mail" href={`mailto:${mail}`}>
           {mail}
+        </a>{' '}
+        {copy.blockedMiddle}{' '}
+        <a className="scan__mail" href={phone.href}>
+          {phone.intl}
         </a>
         {copy.blockedEnd}
       </>
@@ -144,17 +161,25 @@ export default function ScanForm() {
   const statusNode = useRef(null);
   const formNode = useRef(null);
   const [state, setState] = useState('idle');
+  const [check, setCheck] = useState('ready');
+  const [queued, setQueued] = useState(false);
   const [errors, setErrors] = useState({});
   const [outcome, setOutcome] = useState(null);
 
   useEffect(() => {
     if (!siteKey || !slot.current) return undefined;
     let gone = false;
+    const giveUp = () => {
+      setQueued(false);
+      setCheck(current => checkAfter(current, 'failed'));
+    };
+    setCheck(initialCheck(true));
     loadTurnstile()
       .then(turnstile => {
         if (gone) return;
         if (!turnstile) {
           broken.current = true;
+          giveUp();
           return;
         }
         widget.current = turnstile.render(slot.current, {
@@ -163,18 +188,23 @@ export default function ScanForm() {
           callback: value => {
             token.current = value;
             broken.current = false;
+            setOutcome(current => (current?.kind === 'blocked' ? null : current));
+            setCheck(current => checkAfter(current, 'token'));
           },
           'expired-callback': () => {
             token.current = '';
+            setCheck(current => checkAfter(current, 'expired'));
           },
           'error-callback': () => {
             token.current = '';
             broken.current = true;
+            giveUp();
           },
         });
       })
       .catch(() => {
         broken.current = true;
+        giveUp();
       });
     return () => {
       gone = true;
@@ -184,8 +214,23 @@ export default function ScanForm() {
   }, []);
 
   useEffect(() => {
+    if (check !== 'waiting') return undefined;
+    const timer = window.setTimeout(() => {
+      setQueued(false);
+      setCheck(current => checkAfter(current, 'timeout'));
+    }, checkTimeoutMs);
+    return () => window.clearTimeout(timer);
+  }, [check]);
+
+  useEffect(() => {
     if (state === 'sent') statusNode.current?.focus();
   }, [state]);
+
+  useEffect(() => {
+    if (shouldSendQueued({ check, queued, sending: state === 'sending' })) {
+      formNode.current?.requestSubmit();
+    }
+  }, [check, queued, state]);
 
   const page = () => window.location.pathname;
 
@@ -198,6 +243,7 @@ export default function ScanForm() {
 
   const refreshWidget = () => {
     token.current = '';
+    if (siteKey) setCheck('waiting');
     if (widget.current !== null) window.turnstile?.reset(widget.current);
   };
 
@@ -230,17 +276,26 @@ export default function ScanForm() {
     }
     if (siteKey && !token.current) {
       setErrors({});
-      // A blocked or failed check never produces a token, so waiting would not help: offer the mail.
-      setOutcome({ kind: broken.current ? 'blocked' : 'turnstile' });
-      track('form_error', {
-        reason: broken.current ? 'turnstile_failed' : 'turnstile',
-        form: 'scan',
-        page: page(),
+      if (check === 'ready') setCheck('waiting');
+      const action = submitAction({
+        check: check === 'ready' ? 'waiting' : check,
+        queued,
+        sending: false,
       });
+      if (action === 'queue') {
+        setOutcome(null);
+        setQueued(true);
+        return;
+      }
+      if (action === 'blocked') {
+        setOutcome({ kind: 'blocked' });
+        track('form_error', { reason: 'turnstile_failed', form: 'scan', page: page() });
+      }
       return;
     }
     setErrors({});
     setOutcome(null);
+    setQueued(false);
     setState('sending');
     const fillMs = startedTick.current ? Math.round(performance.now() - startedTick.current) : 0;
     const hash = await consentHash().catch(() => '');
@@ -299,6 +354,8 @@ export default function ScanForm() {
 
   const sending = state === 'sending';
   const sent = state === 'sent';
+  const waiting = check === 'waiting' && !sent;
+  const notice = outcome ?? (check === 'failed' ? { kind: 'blocked' } : null);
 
   return (
     <form
@@ -414,13 +471,23 @@ export default function ScanForm() {
         </fieldset>
         {siteKey && <div className="scan__turnstile" ref={slot} />}
         <div className="scan__foot">
-          <button className="btn btn--wool scan__send" type="submit" disabled={sending}>
-            {sending ? copy.sending : tie(copy.send)}
+          <button
+            className="btn btn--wool scan__send"
+            type="submit"
+            disabled={sending}
+            aria-disabled={waiting ? 'true' : undefined}
+            data-waiting={waiting ? 'true' : undefined}>
+            {waiting || sending ? buttonLabel({ check, queued, sending }, copy) : tie(copy.send)}
           </button>
         </div>
-        {outcome && (
+        {queued && waiting && (
+          <p className="scan__hint scan__wait" role="status">
+            {copy.waiting}
+          </p>
+        )}
+        {notice && (
           <p className="scan__fail" role="alert">
-            {outcome.kind === 'turnstile' ? copy.errors.turnstile : <Failure outcome={outcome} />}
+            <Failure outcome={notice} />
           </p>
         )}
         <div className="scan__legal">

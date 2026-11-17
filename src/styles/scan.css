@@ -633,3 +633,12 @@
     display: none;
   }
 }
+
+.scan__send[data-waiting='true'] {
+  cursor: progress;
+  opacity: 0.75;
+}
+
+.scan__wait {
+  margin-top: 12px;
+}
