@@ -228,7 +228,9 @@ export default function ScanForm() {
 
   useEffect(() => {
     if (shouldSendQueued({ check, queued, sending: state === 'sending' })) {
-      formNode.current?.requestSubmit();
+      const form = formNode.current;
+      if (form?.requestSubmit) form.requestSubmit();
+      else form?.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
     }
   }, [check, queued, state]);
 
@@ -271,6 +273,7 @@ export default function ScanForm() {
     };
     const firstInvalid = ['url', 'email', 'terms'].find(name => found[name]);
     if (firstInvalid) {
+      setQueued(false);
       reject(found, firstInvalid);
       return;
     }
