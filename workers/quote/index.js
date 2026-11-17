@@ -2,6 +2,7 @@ const site = 'https://adrianturbinski.pl';
 const origins = new Set([site, 'https://www.adrianturbinski.pl']);
 const mail = 'adrian.turbinski@gmail.com';
 const minFillMs = 2500;
+const verdict = { human: 0, honeypot: 1, suspect: 2 };
 
 const limits = {
   service: 40,
@@ -95,7 +96,7 @@ async function authorized(request, env) {
   return sameText(await sha256(token), expected);
 }
 
-async function store(env, lead, bot) {
+async function store(env, lead, verdictCode) {
   if (!env.LEADS) return;
   await env.LEADS.prepare(
     'INSERT INTO leads (at, lang, service, budget, page, source, code, bot) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
@@ -108,7 +109,7 @@ async function store(env, lead, bot) {
       lead.page,
       lead.source,
       lead.code,
-      bot ? 1 : 0,
+      verdictCode,
     )
     .run();
 }
@@ -117,8 +118,9 @@ async function listLeads(request, env, url) {
   if (!(await authorized(request, env))) return new Response('Unauthorized', { status: 401 });
   if (!env.LEADS) return new Response('Not configured', { status: 503 });
   const since = url.searchParams.get('since') || '1970-01-01T00:00:00Z';
+  const review = url.searchParams.get('review') === 'suspect';
   const { results } = await env.LEADS.prepare(
-    'SELECT id, at, lang, service, budget, page, source, code FROM leads WHERE bot = 0 AND at > ? ORDER BY at',
+    `SELECT id, at, lang, service, budget, page, source, code FROM leads WHERE bot = ${review ? verdict.suspect : verdict.human} AND at > ? ORDER BY at`,
   )
     .bind(since)
     .all();
@@ -127,9 +129,17 @@ async function listLeads(request, env, url) {
   });
 }
 
-async function notify(env, lead) {
+const suspectReason = elapsed => {
+  if (!Number.isFinite(elapsed)) return '';
+  if (elapsed <= 0) return 'brak pomiaru czasu wypełnienia';
+  if (elapsed < minFillMs) return `formularz wypełniony w ${elapsed} ms, próg ${minFillMs} ms`;
+  return '';
+};
+
+async function notify(env, lead, reason) {
   const lines = [
     `Nowe zapytanie o wycenę (${lead.lang.toUpperCase()})`,
+    ...(reason ? [`MOŻLIWY BOT: ${reason}. Treść przeszła pozostałe kontrole, sprawdź ją.`] : []),
     `Usługa: ${lead.service || 'nie wybrano'}`,
     `Budżet: ${lead.budget || 'nie podano'}`,
     `Kontakt: ${lead.contact}`,
@@ -180,16 +190,21 @@ export default {
       code: cleanCode(fields.code),
       source: cleanSource(fields.source),
     };
-    const elapsed = Number(fields.elapsed);
-    const bot = Boolean(fields.website) || (Number.isFinite(elapsed) && elapsed < minFillMs);
 
-    if (!bot && !reachable(lead.contact)) {
+    if (fields.website) {
+      await store(env, lead, verdict.honeypot).catch(() => {});
+      if (html) return Response.redirect(sentPage[lang], 303);
+      return json({ ok: true }, 200, origin);
+    }
+
+    if (!reachable(lead.contact)) {
       if (html) return failPage(lang);
       return json({ ok: false, error: 'contact' }, 422, origin);
     }
 
-    await store(env, lead, bot).catch(() => {});
-    const delivered = bot ? true : await notify(env, lead).catch(() => false);
+    const reason = suspectReason(Number(fields.elapsed));
+    await store(env, lead, reason ? verdict.suspect : verdict.human).catch(() => {});
+    const delivered = await notify(env, lead, reason).catch(() => false);
     if (!delivered)
       return html ? failPage(lang) : json({ ok: false, error: 'delivery' }, 502, origin);
     if (html) return Response.redirect(sentPage[lang], 303);
