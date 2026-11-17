@@ -2216,3 +2216,44 @@ test('stats need their own token and expose no contact data', async () => {
   assert.equal(text.includes('@'), false);
   assert.equal(text.includes(key), false);
 });
+
+test('the scan lead list needs its own token, shows confirmed and unconfirmed scans and exposes no contact data', async () => {
+  const ctx = setup();
+  const leadsToken = 'test-leads-token';
+  ctx.env.LEADS_TOKEN_SHA256 = sha(leadsToken);
+  const unconfirmedFields = unique();
+  assert.equal((await submit(ctx.env, unconfirmedFields)).status, 202);
+  const confirmedFields = unique();
+  await confirmed(ctx, confirmedFields);
+  const ask = (token, query = '') =>
+    worker.fetch(
+      new Request(`${base}/scan/leads${query}`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      }),
+      ctx.env,
+    );
+  assert.equal((await ask(null)).status, 401);
+  assert.equal((await ask(bearer)).status, 401);
+  const response = await ask(leadsToken);
+  assert.equal(response.status, 200);
+  const text = await response.text();
+  const { leads } = JSON.parse(text);
+  assert.equal(leads.length, 2);
+  assert.deepEqual(
+    leads.map(lead => lead.confirmed),
+    [false, true],
+  );
+  assert.equal(text.includes('@'), false);
+  assert.equal(text.includes('example.com/'), false);
+  const none = await (await ask(leadsToken, '?since=2999-01-01T00:00:00Z')).json();
+  assert.deepEqual(none.leads, []);
+});
+
+test('the scan lead list is closed when no leads token is configured', async () => {
+  const ctx = setup();
+  const response = await worker.fetch(
+    new Request(`${base}/scan/leads`, { headers: { Authorization: `Bearer ${bearer}` } }),
+    ctx.env,
+  );
+  assert.equal(response.status, 401);
+});

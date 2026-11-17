@@ -218,6 +218,14 @@ async function statsAuthorized(request, env) {
   return sameText(await sha256(token), expected);
 }
 
+async function leadsAuthorized(request, env) {
+  const header = request.headers.get('Authorization') || '';
+  const token = header.startsWith('Bearer ') ? header.slice(7).trim() : '';
+  const expected = String(env.LEADS_TOKEN_SHA256 || '').toLowerCase();
+  if (!token || expected.length !== 64) return false;
+  return sameText(await sha256(token), expected);
+}
+
 async function countFunnel(env, event) {
   if (!funnelEvents.has(event)) return;
   await env.FUNNEL_DB?.prepare(
@@ -959,6 +967,30 @@ async function bookingRedirect(env) {
   });
 }
 
+async function listScanLeads(request, url, env) {
+  if (!(await leadsAuthorized(request, env))) return new Response('Unauthorized', { status: 401 });
+  if (!env.SCANS) return new Response('Not configured', { status: 503 });
+  const since = url.searchParams.get('since') || '1970-01-01T00:00:00Z';
+  const { results } = await env.SCANS.prepare(
+    'SELECT id, at, lang, domain, status, confirmed_at, marketing, max_pages, page FROM scans WHERE at > ? AND parent_id IS NULL ORDER BY at LIMIT 200',
+  )
+    .bind(since)
+    .all();
+  return plainJson({
+    leads: results.map(row => ({
+      id: row.id,
+      at: row.at,
+      lang: row.lang,
+      domain: row.domain,
+      status: row.status,
+      confirmed: Boolean(row.confirmed_at),
+      marketing: row.marketing === 1,
+      full: row.max_pages > 0,
+      page: row.page,
+    })),
+  });
+}
+
 async function scanStats(request, env) {
   if (!(await statsAuthorized(request, env))) return new Response('Unauthorized', { status: 401 });
   if (!env.SCANS) return new Response('Not configured', { status: 503 });
@@ -1181,6 +1213,7 @@ async function route(request, env, meter) {
     return handleUnsubscribe(request, url, env);
   if (path === '/scan/book' && method === 'GET') return bookingRedirect(env);
   if (path === '/scan/stats' && method === 'GET') return scanStats(request, env);
+  if (path === '/scan/leads' && method === 'GET') return listScanLeads(request, url, env);
   if (path === '/scan/jobs/next' && method === 'GET') return nextJob(request, env);
   const pdfUpload = path.match(/^\/scan\/jobs\/([^/]+)\/pdf$/);
   if (pdfUpload && method === 'POST') return receivePdf(request, env, pdfUpload[1], meter);
