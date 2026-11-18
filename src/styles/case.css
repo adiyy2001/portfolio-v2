@@ -237,3 +237,8 @@ html:not(.motion) .sign__stroke {
 .case__also {
   margin-top: clamp(50px, 7vw, 100px);
 }
+
+.case__also .work__pick {
+  padding-inline: 0;
+  padding-bottom: 0;
+}

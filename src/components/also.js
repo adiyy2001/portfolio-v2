@@ -1,8 +1,3 @@
-import React from 'react';
-import { Link, withPrefix } from 'gatsby';
-import Reveal from './reveal';
-import { tie } from '../i18n';
-
 export const cases = [
   {
     id: 'work-also-h',
@@ -81,41 +76,3 @@ export const cases = [
     tech: 'WordPress, Elementor',
   },
 ];
-
-const arrow = (
-  <svg viewBox="0 0 40 18" aria-hidden="true">
-    <path className="stroke" strokeWidth="1.8" d="M1 9H38M30 1L38 9L30 17" />
-  </svg>
-);
-
-export default function Also({ go, as: Name = 'h2' }) {
-  return cases.map(item => (
-    <div className="work__row work__row--also" key={item.to}>
-      <img
-        className="work__also"
-        src={withPrefix(item.image)}
-        width="1200"
-        height="595"
-        loading="lazy"
-        decoding="async"
-        alt={item.alt}
-      />
-      <Reveal className="work__text">
-        <p className="work__tag">{tie(item.tag)}</p>
-        <Name className="work__name" id={item.id}>
-          <Link className="work__link" to={item.to}>
-            {item.name}
-          </Link>
-        </Name>
-        <p className="work__meta">{tie(item.meta)}</p>
-        <p className="work__desc">{tie(item.desc)}</p>
-        <p className="work__tech">{item.tech}</p>
-        <p className="work__go" aria-hidden="true">
-          <span>{go}</span>
-          {arrow}
-        </p>
-      </Reveal>
-      <Link className="work__cover" to={item.to} aria-hidden="true" tabIndex={-1} />
-    </div>
-  ));
-}

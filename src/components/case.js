@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import { m, useReducedMotion, useSpring } from 'framer-motion';
-import Also from './also';
+import { cases } from './also';
+import Cases from './cases';
 import Reveal from './reveal';
 import Split from './split';
 import { routes, tie } from '../i18n';
@@ -22,6 +23,9 @@ const copy = {
     desc: 'Strona na Odoo i własne moduły do zarządzania produktami. Bezpieczna platforma dla zaufanych użytkowników, faktury krajowe i zagraniczne, zautomatyzowane procesy magazynowe. Do tego zamawianie bez cen, pod indywidualne oferty.',
     team: 'Zrobione z zespołem, który prowadziłem w Media Hunters. Dziś stronę utrzymuje inna agencja.',
     more: 'Więcej o projekcie',
+    go: 'Zobacz projekt',
+    gridTitle: 'Pozostałe realizacje dla firm',
+    showMore: 'Pokaż więcej',
   },
   en: {
     title: 'Made to measure, literally.',
@@ -136,7 +140,13 @@ export default function Case({ lang }) {
       </article>
       {lang === 'pl' && (
         <div className="case__also">
-          <Also go={t.more} as="h3" />
+          <Cases
+            items={cases}
+            go={t.go}
+            title={t.gridTitle}
+            titleId="case-more-h"
+            moreLabel={t.showMore}
+          />
         </div>
       )}
     </section>
